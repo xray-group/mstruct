@@ -1,0 +1,191 @@
+\subsection{ObjCryst::ScatteringPowerSphere Class Reference}
+\label{a00091}\index{ObjCryst::ScatteringPowerSphere@{ObjCryst::ScatteringPowerSphere}}
+
+
+$\backslash$ brief \doxyref{ScatteringPower}{p.}{a00089} for a spherical particule  
+Inheritance diagram for ObjCryst::ScatteringPowerSphere::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3cm]{a00091}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf ScatteringPowerSphere} ()\label{a00091_a2d28cd4a75be9b4f9f784329ed2401d6}
+
+\begin{DoxyCompactList}\small\item\em Default constructor. \item\end{DoxyCompactList}\item 
+{\bf ScatteringPowerSphere} (const string \&name, const REAL radius, const REAL bIso=1.0)
+\begin{DoxyCompactList}\small\item\em constructor \item\end{DoxyCompactList}\item 
+{\bfseries ScatteringPowerSphere} (const {\bf ScatteringPowerSphere} \&old)\label{a00091_ad5b2d4703250ae10fb27f8929a904d47}
+
+\item 
+void {\bfseries Init} (const string \&name, const REAL radius, const REAL bIso=1.0)\label{a00091_aa6795f9a244597425863c410e40153f5}
+
+\item 
+virtual const string \& {\bf GetClassName} () const 
+\begin{DoxyCompactList}\small\item\em Name for this class (\char`\"{}RefinableObj\char`\"{}, \char`\"{}Crystal\char`\"{},. \item\end{DoxyCompactList}\item 
+virtual CrystVector\_\-REAL {\bf GetScatteringFactor} (const {\bf ScatteringData} \&data, const int spgSymPosIndex=0) const 
+\begin{DoxyCompactList}\small\item\em Get the Scattering factor for all reflections of a given \doxyref{ScatteringData}{p.}{a00088} object. \item\end{DoxyCompactList}\item 
+virtual REAL {\bf GetForwardScatteringFactor} (const {\bf RadiationType}) const 
+\begin{DoxyCompactList}\small\item\em Get the scattering factor at (0,0,0). \item\end{DoxyCompactList}\item 
+virtual CrystVector\_\-REAL {\bf GetTemperatureFactor} (const {\bf ScatteringData} \&data, const int spgSymPosIndex=0) const 
+\begin{DoxyCompactList}\small\item\em Get the temperature factor for all reflections of a given \doxyref{ScatteringData}{p.}{a00088} object. \item\end{DoxyCompactList}\item 
+virtual CrystMatrix\_\-REAL {\bf GetResonantScattFactReal} (const {\bf ScatteringData} \&data, const int spgSymPosIndex=0) const 
+\begin{DoxyCompactList}\small\item\em Get the real part of the resonant scattering factor. \item\end{DoxyCompactList}\item 
+virtual CrystMatrix\_\-REAL {\bf GetResonantScattFactImag} (const {\bf ScatteringData} \&data, const int spgSymPosIndex=0) const 
+\begin{DoxyCompactList}\small\item\em Get the imaginary part of the resonant scattering factor. \item\end{DoxyCompactList}\item 
+REAL {\bf GetRadius} () const 
+\begin{DoxyCompactList}\small\item\em Return the physical radius of this type of scatterer (for 3D display purposes). \item\end{DoxyCompactList}\item 
+virtual void {\bfseries Print} () const \label{a00091_a7e57e15bff5886955532dcacae65cf6c}
+
+\item 
+virtual void {\bf XMLOutput} (ostream \&os, int indent=0) const 
+\begin{DoxyCompactList}\small\item\em Output to stream in well-\/formed XML. \item\end{DoxyCompactList}\item 
+virtual void {\bf XMLInput} (istream \&is, const {\bf XMLCrystTag} \&tag)
+\begin{DoxyCompactList}\small\item\em Input From stream. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void {\bfseries InitRefParList} ()\label{a00091_ab586ccb9566d5bc1d2d952eded4e1979}
+
+\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+REAL {\bf mBiso}\label{a00091_a258a4384486392c2019a1e0ee83c1408}
+
+\begin{DoxyCompactList}\small\item\em Isotropic temperature B-\/factor. \item\end{DoxyCompactList}\item 
+REAL {\bf mRadius}\label{a00091_a21d5b0449cb5c76b90f224cdacf3dc0d}
+
+\begin{DoxyCompactList}\small\item\em Radius of the sphere. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+$\backslash$ brief \doxyref{ScatteringPower}{p.}{a00089} for a spherical particule This can be used to modelize the form factor of disordered (or low-\/resolution) of fullerene-\/type compounds, where all atoms are located on a sphere.
+
+This actually modelizes a spherical distribution of a {\itshape single\/} electron, so to modelize C60 the occupancy must be set to 60$\ast$6. 
+
+\subsubsection{Constructor \& Destructor Documentation}
+\index{ObjCryst::ScatteringPowerSphere@{ObjCryst::ScatteringPowerSphere}!ScatteringPowerSphere@{ScatteringPowerSphere}}
+\index{ScatteringPowerSphere@{ScatteringPowerSphere}!ObjCryst::ScatteringPowerSphere@{ObjCryst::ScatteringPowerSphere}}
+\paragraph[{ScatteringPowerSphere}]{\setlength{\rightskip}{0pt plus 5cm}ObjCryst::ScatteringPowerSphere::ScatteringPowerSphere (const string \& {\em name}, \/  const REAL {\em radius}, \/  const REAL {\em bIso} = {\ttfamily 1.0})}\hfill\label{a00091_a2d50cba1b4405f52f1dd4148907a88c5}
+
+
+constructor 
+\begin{DoxyParams}{Parameters}
+\item[{\em name}]: name of the \doxyref{ScatteringPower}{p.}{a00089} ('C60','France 98'...). The name can have {\itshape any\/} format \item[{\em nbAtom,:}]the number of atoms \item[{\em biso}]: Isotropic thermic coefficient \item[{\em AxisLengthX,AxisLengthY,AxisLengthZ,:}]length of the different main axis of the ellipsoid \item[{\em symbol,:}]the symbol of the element associated to this fullerene. By default it is assumed to be carbon \end{DoxyParams}
+
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::ScatteringPowerSphere@{ObjCryst::ScatteringPowerSphere}!GetClassName@{GetClassName}}
+\index{GetClassName@{GetClassName}!ObjCryst::ScatteringPowerSphere@{ObjCryst::ScatteringPowerSphere}}
+\paragraph[{GetClassName}]{\setlength{\rightskip}{0pt plus 5cm}virtual const string\& ObjCryst::ScatteringPowerSphere::GetClassName () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00091_a57e85d29926fe93da66041a43583e893}
+
+
+Name for this class (\char`\"{}RefinableObj\char`\"{}, \char`\"{}Crystal\char`\"{},. ..). This is only useful to distinguish different classes when picking up objects from the \doxyref{RefinableObj}{p.}{a00070} Global Registry 
+
+Reimplemented from {\bf ObjCryst::ScatteringPower} \doxyref{}{p.}{a00089_ac31cc4135011046f93d49f4173aee3ee}.\index{ObjCryst::ScatteringPowerSphere@{ObjCryst::ScatteringPowerSphere}!GetForwardScatteringFactor@{GetForwardScatteringFactor}}
+\index{GetForwardScatteringFactor@{GetForwardScatteringFactor}!ObjCryst::ScatteringPowerSphere@{ObjCryst::ScatteringPowerSphere}}
+\paragraph[{GetForwardScatteringFactor}]{\setlength{\rightskip}{0pt plus 5cm}virtual REAL ObjCryst::ScatteringPowerSphere::GetForwardScatteringFactor (const  {\em RadiationType}) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00091_a9bd142cc8112495d41393b4faffc4fcd}
+
+
+Get the scattering factor at (0,0,0). Used for scatterer (electron, nucleus) density generation. 
+
+Implements {\bf ObjCryst::ScatteringPower} \doxyref{}{p.}{a00089_a854b51b9b08e96af0fe7986fe372c50c}.\index{ObjCryst::ScatteringPowerSphere@{ObjCryst::ScatteringPowerSphere}!GetRadius@{GetRadius}}
+\index{GetRadius@{GetRadius}!ObjCryst::ScatteringPowerSphere@{ObjCryst::ScatteringPowerSphere}}
+\paragraph[{GetRadius}]{\setlength{\rightskip}{0pt plus 5cm}REAL ObjCryst::ScatteringPowerSphere::GetRadius () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00091_a1f4b091f0990b959acb0645fd575a080}
+
+
+Return the physical radius of this type of scatterer (for 3D display purposes). \begin{DoxyWarning}{Warning}
+this may be removed later. 
+\end{DoxyWarning}
+
+
+Implements {\bf ObjCryst::ScatteringPower} \doxyref{}{p.}{a00089_ac44860aca21734844379ddec87622f7b}.\index{ObjCryst::ScatteringPowerSphere@{ObjCryst::ScatteringPowerSphere}!GetResonantScattFactImag@{GetResonantScattFactImag}}
+\index{GetResonantScattFactImag@{GetResonantScattFactImag}!ObjCryst::ScatteringPowerSphere@{ObjCryst::ScatteringPowerSphere}}
+\paragraph[{GetResonantScattFactImag}]{\setlength{\rightskip}{0pt plus 5cm}virtual CrystMatrix\_\-REAL ObjCryst::ScatteringPowerSphere::GetResonantScattFactImag (const {\bf ScatteringData} \& {\em data}, \/  const int {\em spgSymPosIndex} = {\ttfamily 0}) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00091_aee221744487a1c29023399b71e855c06}
+
+
+Get the imaginary part of the resonant scattering factor. \begin{DoxyReturn}{Returns}
+a matrix where each row corresponds to each wavelength (currently only monochromatic experiments are made so there is only one row), and each column corresponds to each reflection {\itshape only\/} if the scattering term is anisotropic, which is not the case so far... 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em data,:}]the \doxyref{ScatteringData}{p.}{a00088} object, giving access to all the reflections, and a list of wavelengths. \item[{\em spgSymPosIndex,:}]if the \doxyref{ScatteringPower}{p.}{a00089} is anisotropic, then the different symmetrics will not have the same scattering power for all reflections. This parameter is the index of the symmetric position in the Spacegroup. If spgSymPosIndex=-\/1, the isotropic values are returned. \end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+There is no anisotropic code yet, so spgSymPosIndex is simply ignored so far , but the design of this function is general for any anisotropic scattering. 
+\end{DoxyWarning}
+
+
+Implements {\bf ObjCryst::ScatteringPower} \doxyref{}{p.}{a00089_a9bc5d86bf76116f645b43d46f2a9771c}.\index{ObjCryst::ScatteringPowerSphere@{ObjCryst::ScatteringPowerSphere}!GetResonantScattFactReal@{GetResonantScattFactReal}}
+\index{GetResonantScattFactReal@{GetResonantScattFactReal}!ObjCryst::ScatteringPowerSphere@{ObjCryst::ScatteringPowerSphere}}
+\paragraph[{GetResonantScattFactReal}]{\setlength{\rightskip}{0pt plus 5cm}virtual CrystMatrix\_\-REAL ObjCryst::ScatteringPowerSphere::GetResonantScattFactReal (const {\bf ScatteringData} \& {\em data}, \/  const int {\em spgSymPosIndex} = {\ttfamily 0}) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00091_a064671bfd711ef108be7a1528e52cd46}
+
+
+Get the real part of the resonant scattering factor. \begin{DoxyReturn}{Returns}
+a matrix where each row corresponds to each wavelength (currently only monochromatic experiments are made so there is only one row), and each column corresponds to each reflection {\itshape only\/} if the scattering term is anisotropic, which is not the case so far... 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em data,:}]the \doxyref{ScatteringData}{p.}{a00088} object, giving access to all the reflections and a list of wavelengths). \item[{\em spgSymPosIndex,:}]if the \doxyref{ScatteringPower}{p.}{a00089} is anisotropic, then the different symmetrics will not have the same scattering power for all reflections. This parameter is the index of the symmetric position in the Spacegroup. If spgSymPosIndex=-\/1, the isotropic values are returned. \end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+There is no anisotropic code yet, so spgSymPosIndex is simply ignored so far , but the design of this function is general for any anisotropic scattering. 
+\end{DoxyWarning}
+
+
+Implements {\bf ObjCryst::ScatteringPower} \doxyref{}{p.}{a00089_a42c1302254787d13b9e0f2210315291a}.\index{ObjCryst::ScatteringPowerSphere@{ObjCryst::ScatteringPowerSphere}!GetScatteringFactor@{GetScatteringFactor}}
+\index{GetScatteringFactor@{GetScatteringFactor}!ObjCryst::ScatteringPowerSphere@{ObjCryst::ScatteringPowerSphere}}
+\paragraph[{GetScatteringFactor}]{\setlength{\rightskip}{0pt plus 5cm}virtual CrystVector\_\-REAL ObjCryst::ScatteringPowerSphere::GetScatteringFactor (const {\bf ScatteringData} \& {\em data}, \/  const int {\em spgSymPosIndex} = {\ttfamily 0}) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00091_a073f08b17ba89e0ac5ed8e1a61cb04fe}
+
+
+Get the Scattering factor for all reflections of a given \doxyref{ScatteringData}{p.}{a00088} object. \begin{DoxyReturn}{Returns}
+a vector with the scattering factor for all reflections, in the same order as in the \doxyref{ScatteringData}{p.}{a00088} object. This format is independent of the radiation type (X-\/Ray, neutron..). 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em data,:}]the \doxyref{ScatteringData}{p.}{a00088} object, giving access to all the reflections. \item[{\em spgSymPosIndex,:}]if the \doxyref{ScatteringPower}{p.}{a00089} is anisotropic, then the different symmetrics will not have the same scattering power for all reflections. This parameter is the index of the symmetric position in the Spacegroup. If spgSymPosIndex=-\/1, the isotropic values are returned. \end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+There is no anisotropic code yet, so spgSymPosIndex is simply ignored so far , but the design of this function is general for any anisotropic scattering. 
+\end{DoxyWarning}
+
+
+Implements {\bf ObjCryst::ScatteringPower} \doxyref{}{p.}{a00089_af18f3eaaf45af87bc3a2a0ff21bc34b6}.\index{ObjCryst::ScatteringPowerSphere@{ObjCryst::ScatteringPowerSphere}!GetTemperatureFactor@{GetTemperatureFactor}}
+\index{GetTemperatureFactor@{GetTemperatureFactor}!ObjCryst::ScatteringPowerSphere@{ObjCryst::ScatteringPowerSphere}}
+\paragraph[{GetTemperatureFactor}]{\setlength{\rightskip}{0pt plus 5cm}virtual CrystVector\_\-REAL ObjCryst::ScatteringPowerSphere::GetTemperatureFactor (const {\bf ScatteringData} \& {\em data}, \/  const int {\em spgSymPosIndex} = {\ttfamily 0}) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00091_a3927291a20f5807c2ec6a9ae3627005d}
+
+
+Get the temperature factor for all reflections of a given \doxyref{ScatteringData}{p.}{a00088} object. \begin{DoxyReturn}{Returns}
+a vector with the temperature factor for all reflections, in the same order as in the \doxyref{ScatteringData}{p.}{a00088} object. 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em data,:}]the \doxyref{ScatteringData}{p.}{a00088} object, giving access to all the reflections. \item[{\em spgSymPosIndex,:}]if the \doxyref{ScatteringPower}{p.}{a00089} is anisotropic, then the different symmetrics will not have the same scattering power for all reflections. This parameter is the index of the symmetric position in the Spacegroup. If spgSymPosIndex=-\/1, the isotropic values are returned. \end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+There is no anisotropic code yet, so spgSymPosIndex is simply ignored so far , but the design of this function is general for any anisotropic scattering. 
+\end{DoxyWarning}
+
+
+Implements {\bf ObjCryst::ScatteringPower} \doxyref{}{p.}{a00089_a3df723db77380c82ecff5f7050490255}.\index{ObjCryst::ScatteringPowerSphere@{ObjCryst::ScatteringPowerSphere}!XMLInput@{XMLInput}}
+\index{XMLInput@{XMLInput}!ObjCryst::ScatteringPowerSphere@{ObjCryst::ScatteringPowerSphere}}
+\paragraph[{XMLInput}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::ScatteringPowerSphere::XMLInput (istream \& {\em is}, \/  const {\bf XMLCrystTag} \& {\em tag})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00091_aaaf687a105e65c6522521a0f01a98acf}
+
+
+Input From stream. \begin{Desc}
+\item[{\bf Todo}]Add an bool XMLInputTag(is,tag) function to recognize all the tags from the stream. So that each inherited class can use the XMLInputTag function from its parent (ie take advantage of inheritance). The children class would first try to interpret the tag, then if unsuccessful would pass it to its parent (thus allowing overloading), etc... \end{Desc}
+
+
+Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_ac13a4045c3f187879443c8615c38d623}.\index{ObjCryst::ScatteringPowerSphere@{ObjCryst::ScatteringPowerSphere}!XMLOutput@{XMLOutput}}
+\index{XMLOutput@{XMLOutput}!ObjCryst::ScatteringPowerSphere@{ObjCryst::ScatteringPowerSphere}}
+\paragraph[{XMLOutput}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::ScatteringPowerSphere::XMLOutput (ostream \& {\em os}, \/  int {\em indent} = {\ttfamily 0}) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00091_a050e8e8b21857ec0593bbb41fd123e39}
+
+
+Output to stream in well-\/formed XML. \begin{Desc}
+\item[{\bf Todo}]Use inheritance.. as for XMLInputTag()... \end{Desc}
+
+
+Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_a7b9b6ed0f8dcf753d398c35e073de973}.
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+ScatteringPowerSphere.h\end{DoxyCompactItemize}

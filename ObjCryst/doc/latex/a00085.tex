@@ -1,0 +1,58 @@
+\subsection{ObjCryst::ScatteringComponent Struct Reference}
+\label{a00085}\index{ObjCryst::ScatteringComponent@{ObjCryst::ScatteringComponent}}
+
+
+A scattering position in a crystal, associated with the corresponding occupancy and a pointer to the \doxyref{ScatteringPower}{p.}{a00089}.  
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool {\bfseries operator==} (const {\bf ScatteringComponent} \&rhs) const \label{a00085_a3c90ac5f4f15fd8ab4e1272a542ce4a9}
+
+\item 
+bool {\bfseries operator!=} (const {\bf ScatteringComponent} \&rhs) const \label{a00085_a7a2f4b968cc15b1adbfb0dda7e8b3452}
+
+\item 
+void {\bf Print} () const \label{a00085_ae539b046ae25fba220ef58881c2fe9b7}
+
+\begin{DoxyCompactList}\small\item\em Print one line oabout this component. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+REAL {\bf mX}\label{a00085_a5e298bbfa80dc72cbf666bd8007c1a58}
+
+\begin{DoxyCompactList}\small\item\em Coordinates of scattering positions i the crystal with the corresponding occupancy. \item\end{DoxyCompactList}\item 
+REAL {\bfseries mY}\label{a00085_a0ad9f5614c3240d3b97310da61180a48}
+
+\item 
+REAL {\bfseries mZ}\label{a00085_a6e3cf2fb825a1a6912bf9cebc62d4cf7}
+
+\item 
+REAL {\bfseries mOccupancy}\label{a00085_a845b921b1d5945619b5bfcb87264c125}
+
+\item 
+const {\bf ScatteringPower} $\ast$ {\bf mpScattPow}\label{a00085_a1aa0c754e20ac3a0489ed57c0cb31bd3}
+
+\begin{DoxyCompactList}\small\item\em The \doxyref{ScatteringPower}{p.}{a00089} associated with this position. \item\end{DoxyCompactList}\item 
+REAL {\bf mDynPopCorr}
+\begin{DoxyCompactList}\small\item\em Dynamical Population Correction. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+A scattering position in a crystal, associated with the corresponding occupancy and a pointer to the \doxyref{ScatteringPower}{p.}{a00089}. Also given is the 
+
+\subsubsection{Member Data Documentation}
+\index{ObjCryst::ScatteringComponent@{ObjCryst::ScatteringComponent}!mDynPopCorr@{mDynPopCorr}}
+\index{mDynPopCorr@{mDynPopCorr}!ObjCryst::ScatteringComponent@{ObjCryst::ScatteringComponent}}
+\paragraph[{mDynPopCorr}]{\setlength{\rightskip}{0pt plus 5cm}REAL {\bf ObjCryst::ScatteringComponent::mDynPopCorr}\hspace{0.3cm}{\ttfamily  [mutable]}}\hfill\label{a00085_a33af12bb3f340af259a8b8450f837efd}
+
+
+Dynamical Population Correction. The population of any atom is given by mOccupancy$\ast$mDynPopCorr. mPopu is the {\itshape real\/} mOccupancy (0$<$.$<$1), and should be the only one used during a refinement. However during a {\itshape model\/} {\itshape search\/} for the structure, atoms may fall unexpectedly in a special position or with an overlap of two atoms (the shared oxygen between two polyhedras, for example). In these cases it is necessary to dynamically correct the population during the generation of structural models. See also \doxyref{Crystal::CalcDynPopCorr}{p.}{a00020_a69975008974c9603ebb794bb6bb20fe8}
+
+\begin{DoxyNote}{Note}
+this parameter is mutable, and is computed by the \doxyref{Crystal}{p.}{a00020} object 
+\end{DoxyNote}
+
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+ScatteringPower.h\end{DoxyCompactItemize}

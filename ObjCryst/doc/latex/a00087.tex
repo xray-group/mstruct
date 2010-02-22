@@ -1,0 +1,66 @@
+\subsection{ObjCryst::ScatteringCorr Class Reference}
+\label{a00087}\index{ObjCryst::ScatteringCorr@{ObjCryst::ScatteringCorr}}
+
+
+Base class to compute all kind of corrections to intensities: Lorentz, Polar, absorption, texcture, extinction, etc.  
+Inheritance diagram for ObjCryst::ScatteringCorr::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.0566cm]{a00087}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf ScatteringCorr} (const {\bf ScatteringData} \&data)\label{a00087_ac1e37a73b0a107f66d1b1d75b9db9c47}
+
+\begin{DoxyCompactList}\small\item\em Constructor, with the associated \doxyref{ScatteringData}{p.}{a00088} object. \item\end{DoxyCompactList}\item 
+virtual const string \& {\bf GetName} () const =0\label{a00087_adb2782d4e32cbcb89e2e69b3c8ad66fb}
+
+\begin{DoxyCompactList}\small\item\em Get the name of this object. \item\end{DoxyCompactList}\item 
+virtual const string \& {\bf GetClassName} () const =0\label{a00087_a6d72e7a6ffff0c16d86930d9e72c6673}
+
+\begin{DoxyCompactList}\small\item\em Get the name of the class. \item\end{DoxyCompactList}\item 
+const CrystVector\_\-REAL \& {\bf GetCorr} () const 
+\begin{DoxyCompactList}\small\item\em Get the vector of corrections for all reflections. \item\end{DoxyCompactList}\item 
+const {\bf RefinableObjClock} \& {\bf GetClockCorr} () const \label{a00087_a4c5bead3a47202db88495e3d123c5927}
+
+\begin{DoxyCompactList}\small\item\em Get the value of the clock corresponding to the last time the correction was actually computed. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void {\bf CalcCorr} () const =0\label{a00087_a437a916156f6d88c76cb01ca4c748c89}
+
+\begin{DoxyCompactList}\small\item\em Do the computation of corrected intensities. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const {\bf ScatteringData} $\ast$ {\bf mpData}\label{a00087_a0fa066328104835ff72ddf98687c8513}
+
+\begin{DoxyCompactList}\small\item\em The associated \doxyref{ScatteringData}{p.}{a00088} object. \item\end{DoxyCompactList}\item 
+CrystVector\_\-REAL {\bf mCorr}\label{a00087_a7669922ac4bbdfb826748148d4016088}
+
+\begin{DoxyCompactList}\small\item\em The vector of correction to intensities. \item\end{DoxyCompactList}\item 
+{\bf RefinableObjClock} {\bf mClockCorrCalc}\label{a00087_aa969418138a9d1867797857318d6f303}
+
+\begin{DoxyCompactList}\small\item\em The clock marking the last time the correction was calculated. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+Base class to compute all kind of corrections to intensities: Lorentz, Polar, absorption, texcture, extinction, etc. ..
+
+The computed intensities are to be multiplied by all the \doxyref{ScatteringCorr}{p.}{a00087} calculated.
+
+This is an abstract base class. 
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::ScatteringCorr@{ObjCryst::ScatteringCorr}!GetCorr@{GetCorr}}
+\index{GetCorr@{GetCorr}!ObjCryst::ScatteringCorr@{ObjCryst::ScatteringCorr}}
+\paragraph[{GetCorr}]{\setlength{\rightskip}{0pt plus 5cm}const CrystVector\_\-REAL\& ObjCryst::ScatteringCorr::GetCorr () const}\hfill\label{a00087_a50395369eb93155bf278453ba158f8cb}
+
+
+Get the vector of corrections for all reflections. Calculated values must be multiplied by these values. 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+ScatteringCorr.h\end{DoxyCompactItemize}

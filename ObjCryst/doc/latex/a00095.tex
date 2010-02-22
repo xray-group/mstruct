@@ -1,0 +1,43 @@
+\subsection{ObjCryst::SpeedTestReport Struct Reference}
+\label{a00095}\index{ObjCryst::SpeedTestReport@{ObjCryst::SpeedTestReport}}
+
+
+Structure to hold the results of a speedtest (see \doxyref{ObjCryst::SpeedTest()}{p.}{a00170_a775b62d07c596365d2f2d021dca408db}).  
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned int {\bf mNbAtom}\label{a00095_a584ea20a9991658acac8f15ea6d2a670}
+
+\begin{DoxyCompactList}\small\item\em Total number of unique atoms in the test structure. \item\end{DoxyCompactList}\item 
+int {\bf mNbAtomType}\label{a00095_a755747dca57629b616b12341c110ff7e}
+
+\begin{DoxyCompactList}\small\item\em Total number of atom types in the test structure. \item\end{DoxyCompactList}\item 
+string {\bf mSpacegroup}\label{a00095_a73ae4759ba51ae06a745af9040398ccf}
+
+\begin{DoxyCompactList}\small\item\em The symbol for the spacegroup. \item\end{DoxyCompactList}\item 
+{\bf RadiationType} {\bf mRadiation}\label{a00095_a9407361e047413bd993828c9cfca4cdf}
+
+\begin{DoxyCompactList}\small\item\em The type of radiation used. \item\end{DoxyCompactList}\item 
+unsigned long {\bf mNbReflections}\label{a00095_a4fde54cf3f02e5f564df92cc8eabd36e}
+
+\begin{DoxyCompactList}\small\item\em The total number of reflections used for the tests. \item\end{DoxyCompactList}\item 
+unsigned int {\bf mDataType}\label{a00095_af3bb170b1d4ae3e1b484704b6c3d923c}
+
+\begin{DoxyCompactList}\small\item\em dataType: 0= single crystal, 1= powder pattern (1 background + 1 crystal phase) \item\end{DoxyCompactList}\item 
+REAL {\bf mBogoMRAPS}\label{a00095_ac7497f01fce186e1370bffdbc2f6433c}
+
+\begin{DoxyCompactList}\small\item\em Million of Reflections-\/Atoms computed Per Second (considering all atoms in the unit cell). \item\end{DoxyCompactList}\item 
+REAL {\bf mBogoMRAPS\_\-reduced}\label{a00095_a76d9645d24f787e53856512fbb918603}
+
+\begin{DoxyCompactList}\small\item\em Million of Reflections-\/Atoms computed Per Second (considering all atoms in the unit cell, except those deduced by a center of symmetry or a lattice translation). \item\end{DoxyCompactList}\item 
+REAL {\bf mBogoSPS}\label{a00095_ab45c0262f0cad316b2f3e8e74a8a5fd4}
+
+\begin{DoxyCompactList}\small\item\em Number of Structures evaluated Per Second. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+Structure to hold the results of a speedtest (see \doxyref{ObjCryst::SpeedTest()}{p.}{a00170_a775b62d07c596365d2f2d021dca408db}). 
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+test.h\end{DoxyCompactItemize}

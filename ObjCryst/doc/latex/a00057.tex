@@ -1,0 +1,60 @@
+\subsection{ObjCryst::PDFCrystal Class Reference}
+\label{a00057}\index{ObjCryst::PDFCrystal@{ObjCryst::PDFCrystal}}
+
+
+Class for Pair Distribution Function calculations for a single \doxyref{Crystal}{p.}{a00020} object.  
+Inheritance diagram for ObjCryst::PDFCrystal::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3cm]{a00057}
+\end{center}
+\end{figure}
+\subsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf pdfAtom}
+\begin{DoxyCompactList}\small\item\em Container of temp data for each atom. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf PDFCrystal} (const {\bf PDF} \&pdf, const {\bf Crystal} \&cryst)\label{a00057_a00392955dc22562f102b5161201df88e}
+
+\begin{DoxyCompactList}\small\item\em Constructor. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf Init} (const {\bf PDF} \&pdf, const {\bf Crystal} \&cryst)\label{a00057_a5e7fb06483b4aadc0228e12a5b276c73}
+
+\begin{DoxyCompactList}\small\item\em Initialize all parameters. \item\end{DoxyCompactList}\item 
+virtual void {\bf CalcPDF} () const \label{a00057_ae946de60882c4a7280846eb93c2352ad}
+
+\begin{DoxyCompactList}\small\item\em Calculate the pdf. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const {\bf Crystal} $\ast$ {\bf mpCrystal}\label{a00057_a553166f4ad640d508ef772957df10152}
+
+\begin{DoxyCompactList}\small\item\em The \doxyref{Crystal}{p.}{a00020}. \item\end{DoxyCompactList}\item 
+REAL {\bf mDelta1}\label{a00057_a66b186679e2698a45ce157a8d09c3467}
+
+\begin{DoxyCompactList}\small\item\em Parameters affecting the width \& intensity of peaks. \item\end{DoxyCompactList}\item 
+REAL {\bfseries mDelta2}\label{a00057_a5ebeca9d72162fee9243dea5c6b850ab}
+
+\item 
+REAL {\bfseries mQbroad}\label{a00057_ae7f15c23f3c9e5709613168abb0225ac}
+
+\item 
+REAL {\bfseries mQdamp}\label{a00057_a1137bb1d85ea2fa6829d1e839d01333c}
+
+\item 
+std::vector$<$ {\bf pdfAtom} $>$ {\bf mvPDFAtom}\label{a00057_a54a3a6f101577914637d33727b770d37}
+
+\begin{DoxyCompactList}\small\item\em List of all temp data. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+Class for Pair Distribution Function calculations for a single \doxyref{Crystal}{p.}{a00020} object. 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+PDF.h\end{DoxyCompactItemize}

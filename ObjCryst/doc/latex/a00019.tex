@@ -1,0 +1,176 @@
+\subsection{ObjCryst::CIFData Class Reference}
+\label{a00019}\index{ObjCryst::CIFData@{ObjCryst::CIFData}}
+
+
+The \doxyref{CIFData}{p.}{a00019} class holds all the information from a {\itshape single\/} data\_\- block from a cif file.  
+\subsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf CIFAtom}
+\begin{DoxyCompactList}\small\item\em \doxyref{Atom}{p.}{a00008} record. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf ExtractAll} (const bool verbose=false)
+\begin{DoxyCompactList}\small\item\em Extract lattice parameters, spacegroup (symbol or number), atomic positions, chemical name and formula if available. \item\end{DoxyCompactList}\item 
+void {\bf ExtractName} (const bool verbose=false)\label{a00019_a57e9ec3f37cfe8c272cc102280f08d66}
+
+\begin{DoxyCompactList}\small\item\em Extract name \& formula for the crystal. \item\end{DoxyCompactList}\item 
+void {\bf ExtractUnitCell} (const bool verbose=false)\label{a00019_ab0ea11e45199961a3af2981a5ba335c5}
+
+\begin{DoxyCompactList}\small\item\em Extract unit cell. \item\end{DoxyCompactList}\item 
+void {\bf ExtractSpacegroup} (const bool verbose=false)\label{a00019_a9aa5afcbe90a074c4ace30ac5149526d}
+
+\begin{DoxyCompactList}\small\item\em Extract spacegroup number or symbol. \item\end{DoxyCompactList}\item 
+void {\bf ExtractAtomicPositions} (const bool verbose=false)
+\begin{DoxyCompactList}\small\item\em Extract all atomic positions. \item\end{DoxyCompactList}\item 
+void {\bf ExtractPowderPattern} (const bool verbose=false)
+\begin{DoxyCompactList}\small\item\em Extract Powder Diffraction data, with Iobs, sigma(Iobs) and either 2theta or time-\/of-\/flight position. \item\end{DoxyCompactList}\item 
+void {\bf ExtractSingleCrystalData} (const bool verbose=false)\label{a00019_aafcf8bbd95432172cca533d4a713729e}
+
+\begin{DoxyCompactList}\small\item\em Extract single crystal data, with Iobs, sigma(Iobs) and h,k,l. \item\end{DoxyCompactList}\item 
+void {\bf Cartesian2FractionalCoord} ()\label{a00019_abe437ee4b2bbda8bf7a2861f9207a8ee}
+
+\begin{DoxyCompactList}\small\item\em Generate fractional coordinates from cartesian ones for all atoms \doxyref{CIFData::CalcMatrices()}{p.}{a00019_a51e099b2881e73eb776855177aed4ca9} must be called first. \item\end{DoxyCompactList}\item 
+void {\bf Fractional2CartesianCoord} ()\label{a00019_a8217fa94ba5f6291b566d43123162d9c}
+
+\begin{DoxyCompactList}\small\item\em Generate cartesian coordinates from fractional ones for all atoms \doxyref{CIFData::CalcMatrices()}{p.}{a00019_a51e099b2881e73eb776855177aed4ca9} must be called first. \item\end{DoxyCompactList}\item 
+void {\bf f2c} (float \&x, float \&y, float \&z)\label{a00019_af3944cb99e637a65eda526c469c04ece}
+
+\begin{DoxyCompactList}\small\item\em Convert from fractional to cartesian coordinates \doxyref{CIFData::CalcMatrices()}{p.}{a00019_a51e099b2881e73eb776855177aed4ca9} must be called first. \item\end{DoxyCompactList}\item 
+void {\bf c2f} (float \&x, float \&y, float \&z)\label{a00019_a980aafed986df9367c94a5731d215645}
+
+\begin{DoxyCompactList}\small\item\em Convert from cartesia to fractional coordinates \doxyref{CIFData::CalcMatrices()}{p.}{a00019_a51e099b2881e73eb776855177aed4ca9} must be called first. \item\end{DoxyCompactList}\item 
+void {\bf CalcMatrices} (const bool verbose=false)\label{a00019_a51e099b2881e73eb776855177aed4ca9}
+
+\begin{DoxyCompactList}\small\item\em Calculate real space transformation matrices requires unit cell parameters. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std::list$<$ std::string $>$ {\bf mvComment}\label{a00019_a9408fb91caf78518c74b0de53a7c4d38}
+
+\begin{DoxyCompactList}\small\item\em Comments from \doxyref{CIF}{p.}{a00017} file, in the order they were read. \item\end{DoxyCompactList}\item 
+std::map$<$ ci\_\-string, std::string $>$ {\bf mvItem}\label{a00019_a50f7e91571f28b3a3a66675a564496a6}
+
+\begin{DoxyCompactList}\small\item\em Individual \doxyref{CIF}{p.}{a00017} items. \item\end{DoxyCompactList}\item 
+std::map$<$ std::set$<$ ci\_\-string $>$, std::map$<$ ci\_\-string, std::vector$<$ std::string $>$ $>$ $>$ {\bf mvLoop}\label{a00019_aebd5e242b7771f184f29647527fcab5a}
+
+\begin{DoxyCompactList}\small\item\em \doxyref{CIF}{p.}{a00017} Loop data. \item\end{DoxyCompactList}\item 
+std::vector$<$ float $>$ {\bf mvLatticePar}
+\begin{DoxyCompactList}\small\item\em Lattice parameters, in ansgtroem and degrees -\/ vector size is 0 if no parameters have been obtained yet. \item\end{DoxyCompactList}\item 
+std::string {\bf mSpacegroupNumberIT}\label{a00019_a3ee9d402a5d06f95e06851d9975aa079}
+
+\begin{DoxyCompactList}\small\item\em Spacegroup number from International Tables (\_\-space\_\-group\_\-IT\_\-number), or -\/1. \item\end{DoxyCompactList}\item 
+std::string {\bf mSpacegroupSymbolHall}\label{a00019_aa7e1eb93e694dc809a925e2abfb50700}
+
+\begin{DoxyCompactList}\small\item\em Spacegroup Hall symbol (or empty string) (\_\-space\_\-group\_\-name\_\-Hall). \item\end{DoxyCompactList}\item 
+std::string {\bf mSpacegroupHermannMauguin}\label{a00019_aa76770c71d42d48e8d6a83468acd341b}
+
+\begin{DoxyCompactList}\small\item\em Spacegroup Hermann-\/Mauguin symbol (or empty string) (\_\-space\_\-group\_\-name\_\-H-\/M\_\-alt). \item\end{DoxyCompactList}\item 
+std::set$<$ string $>$ {\bf mvSymmetry\_\-equiv\_\-pos\_\-as\_\-xyz}\label{a00019_a2946588a8b6408e51393ac42f7a84193}
+
+\begin{DoxyCompactList}\small\item\em Map of \_\-symmetry\_\-equiv\_\-pos\_\-as\_\-xyz strings. \item\end{DoxyCompactList}\item 
+std::string {\bf mName}\label{a00019_a89e040b33c74bb6f95a5e5f34ff04117}
+
+\begin{DoxyCompactList}\small\item\em \doxyref{Crystal}{p.}{a00020} name. Or empty string if none is available. \item\end{DoxyCompactList}\item 
+std::string {\bf mFormula}\label{a00019_a128df79c59d0506958f49ae4ceab71f6}
+
+\begin{DoxyCompactList}\small\item\em Formula. Or empty string if none is available. \item\end{DoxyCompactList}\item 
+std::vector$<$ {\bf CIFAtom} $>$ {\bf mvAtom}\label{a00019_a7319626ead0beb560cdd5e2f6429692a}
+
+\begin{DoxyCompactList}\small\item\em Atoms, if any are found. \item\end{DoxyCompactList}\item 
+float {\bf mOrthMatrix} [3][3]\label{a00019_a6d680299792c5a5be2f9123f8eeac5a3}
+
+\begin{DoxyCompactList}\small\item\em Fractionnal2Cartesian matrix. \item\end{DoxyCompactList}\item 
+float {\bf mOrthMatrixInvert} [3][3]\label{a00019_ab34517457046873079c27b468ca9eb14}
+
+\begin{DoxyCompactList}\small\item\em Cartesian2Fractionnal matrix. \item\end{DoxyCompactList}\item 
+std::vector$<$ float $>$ {\bf mPowderPatternObs}\label{a00019_a3698447e71c48990af7313ab8fc19f6b}
+
+\begin{DoxyCompactList}\small\item\em Powder pattern data. \item\end{DoxyCompactList}\item 
+std::vector$<$ float $>$ {\bfseries mPowderPatternX}\label{a00019_a227ae97aa4442a7f579bc0f23bd64181}
+
+\item 
+std::vector$<$ float $>$ {\bfseries mPowderPatternSigma}\label{a00019_ad6ae3c67de0030819a3eeea861e4ba99}
+
+\item 
+CrystVector\_\-long {\bf mH}\label{a00019_a49fa1a8ae167c7c96822fbae5d8af9e8}
+
+\begin{DoxyCompactList}\small\item\em Single crystal data. \item\end{DoxyCompactList}\item 
+CrystVector\_\-long {\bfseries mK}\label{a00019_acd4fd8612a1b0c7a53d0b1b09ef56b71}
+
+\item 
+CrystVector\_\-long {\bfseries mL}\label{a00019_ad4adc3dc03d37e9a7ee0a224edb69929}
+
+\item 
+CrystVector\_\-REAL {\bf mIobs}\label{a00019_a1834128eaf7946e021a05461e3f37a7f}
+
+\begin{DoxyCompactList}\small\item\em Single crystal data. \item\end{DoxyCompactList}\item 
+CrystVector\_\-REAL {\bfseries mSigma}\label{a00019_a4fd94532ba94bec1910dd1c3335c2fa6}
+
+\item 
+{\bf WavelengthType} {\bf mDataType}\label{a00019_a0f9d41853a8805a2ef1730271d71f65f}
+
+\begin{DoxyCompactList}\small\item\em Is this X-\/Ray 2theta, time-\/of-\/flight ? \item\end{DoxyCompactList}\item 
+float {\bf mWavelength}\label{a00019_ac0fdaf92f8599951e0ba5dd3bf5d4b3a}
+
+\begin{DoxyCompactList}\small\item\em Wavelength. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+The \doxyref{CIFData}{p.}{a00019} class holds all the information from a {\itshape single\/} data\_\- block from a cif file. It is a placeholder for all comments, item and loop data, as raw strings copied from a cif file.
+
+It is also used to interpret this data to extract parts of the cif data, i.e. only part of the core cif dictionnary are recognized. \doxyref{CIF}{p.}{a00017} tags currently recognized include (\char`\"{}tag1 $>$ tag2\char`\"{} means tag1 is preferred to tag2 when extracting the info, only one is reported):
+\begin{DoxyItemize}
+\item crystal name: \_\-chemical\_\-name\_\-systematic $>$ \_\-chemical\_\-name\_\-mineral $>$ \_\-chemical\_\-name\_\-structure\_\-type $>$ \_\-chemical\_\-name\_\-common
+\item crystal formula: \_\-chemical\_\-formula\_\-analytical $>$ \_\-chemical\_\-formula\_\-structural $>$ \_\-chemical\_\-formula\_\-iupac $>$ \_\-chemical\_\-formula\_\-moiety
+\item unit cell: \_\-cell\_\-length\_\-\{a,b,c\} ; \_\-cell\_\-angle\_\-\{alpha,beta,gamma\}
+\item spacegroup number: \_\-space\_\-group\_\-IT\_\-number $>$ \_\-symmetry\_\-Int\_\-Tables\_\-number
+\item spacegroup Hall symbol: \_\-space\_\-group\_\-name\_\-Hall $>$ \_\-symmetry\_\-space\_\-group\_\-name\_\-Hall
+\item spacegroup Hermann-\/Mauguin symbol:\_\-space\_\-group\_\-name\_\-H-\/M\_\-alt $>$ \_\-symmetry\_\-space\_\-group\_\-name\_\-H-\/M
+\item atom coordinates: \_\-atom\_\-site\_\-fract\_\-\{x\} ; \_\-atom\_\-site\_\-Cartn\_\-\{x,y,z\}
+\item atom occupancy: \_\-atom\_\-site\_\-occupancy
+\item atom label \& symbol: \_\-atom\_\-site\_\-type\_\-symbol ; \_\-atom\_\-site\_\-label
+\end{DoxyItemize}
+
+Cartesian coordinates are stored in Angstroems, angles in radians.
+
+To import \doxyref{PowderPattern}{p.}{a00061} data, the following tags are used:
+\begin{DoxyItemize}
+\item observed intensity: \_\-pd\_\-meas\_\-counts\_\-total $>$ \_\-pd\_\-meas\_\-intensity\_\-total $>$ \_\-pd\_\-proc\_\-intensity\_\-total $>$ \_\-pd\_\-proc\_\-intensity\_\-net
+\item uncertainty on intensity: deducted from \_\-pd\_\-proc\_\-ls\_\-weight or square root of intensity
+\item coordinates: \_\-pd\_\-proc\_\-2theta\_\-corrected $>$ \_\-pd\_\-meas\_\-angle\_\-2theta $>$ \_\-pd\_\-meas\_\-time\_\-of\_\-flight $>$ \_\-pd\_\-proc\_\-2theta\_\-range\_\-\{min,max,inc\}
+\item intensity normalizer (optional): \_\-pd\_\-meas\_\-intensity\_\-monitor $>$ \_\-pd\_\-meas\_\-step\_\-count\_\-time
+\end{DoxyItemize}
+
+If another data field is needed, it is possible to directly access the string data (\doxyref{CIFData::mvComment}{p.}{a00019_a9408fb91caf78518c74b0de53a7c4d38} , \doxyref{CIFData::mvItem}{p.}{a00019_a50f7e91571f28b3a3a66675a564496a6} and \doxyref{CIFData::mvLoop}{p.}{a00019_aebd5e242b7771f184f29647527fcab5a}) to search for the correct tags. 
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::CIFData@{ObjCryst::CIFData}!ExtractAll@{ExtractAll}}
+\index{ExtractAll@{ExtractAll}!ObjCryst::CIFData@{ObjCryst::CIFData}}
+\paragraph[{ExtractAll}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::CIFData::ExtractAll (const bool {\em verbose} = {\ttfamily false})}\hfill\label{a00019_a406e1448ca864b4d679edde83c6351ab}
+
+
+Extract lattice parameters, spacegroup (symbol or number), atomic positions, chemical name and formula if available. All other data is ignored \index{ObjCryst::CIFData@{ObjCryst::CIFData}!ExtractAtomicPositions@{ExtractAtomicPositions}}
+\index{ExtractAtomicPositions@{ExtractAtomicPositions}!ObjCryst::CIFData@{ObjCryst::CIFData}}
+\paragraph[{ExtractAtomicPositions}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::CIFData::ExtractAtomicPositions (const bool {\em verbose} = {\ttfamily false})}\hfill\label{a00019_ada558a6f28454cae868aef9710a785d7}
+
+
+Extract all atomic positions. Will generate cartesian from fractional coordinates or vice-\/versa if only cartesian coordinates are available. \index{ObjCryst::CIFData@{ObjCryst::CIFData}!ExtractPowderPattern@{ExtractPowderPattern}}
+\index{ExtractPowderPattern@{ExtractPowderPattern}!ObjCryst::CIFData@{ObjCryst::CIFData}}
+\paragraph[{ExtractPowderPattern}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::CIFData::ExtractPowderPattern (const bool {\em verbose} = {\ttfamily false})}\hfill\label{a00019_a10ae5869370e46547334730a1daabe5e}
+
+
+Extract Powder Diffraction data, with Iobs, sigma(Iobs) and either 2theta or time-\/of-\/flight position. 
+
+\subsubsection{Member Data Documentation}
+\index{ObjCryst::CIFData@{ObjCryst::CIFData}!mvLatticePar@{mvLatticePar}}
+\index{mvLatticePar@{mvLatticePar}!ObjCryst::CIFData@{ObjCryst::CIFData}}
+\paragraph[{mvLatticePar}]{\setlength{\rightskip}{0pt plus 5cm}std::vector$<$float$>$ {\bf ObjCryst::CIFData::mvLatticePar}}\hfill\label{a00019_a4ac7768cf84a45cd6dd9f2d9eb43cc83}
+
+
+Lattice parameters, in ansgtroem and degrees -\/ vector size is 0 if no parameters have been obtained yet. 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+CIF.h\end{DoxyCompactItemize}

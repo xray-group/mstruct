@@ -1,0 +1,24 @@
+mstruct_am.o: mstruct_am.cpp MStruct.h \
+ /home/zdenek/tmp/Fox/MStruct/../ObjCryst/RefinableObj/LSQNumObj.h \
+ /home/zdenek/tmp/Fox/MStruct/../ObjCryst/CrystVector/CrystVector.h \
+ /home/zdenek/tmp/Fox/MStruct/../ObjCryst/ObjCryst/General.h \
+ /home/zdenek/tmp/Fox/MStruct/../ObjCryst/Quirks/VFNDebug.h \
+ /home/zdenek/tmp/Fox/MStruct/../ObjCryst/RefinableObj/RefinableObj.h \
+ /home/zdenek/tmp/Fox/MStruct/../ObjCryst/RefinableObj/IO.h \
+ /home/zdenek/tmp/Fox/MStruct/../ObjCryst/RefinableObj/GlobalOptimObj.h \
+ /home/zdenek/tmp/Fox/MStruct/../ObjCryst/RefinableObj/Tracker.h \
+ /home/zdenek/tmp/Fox/MStruct/../ObjCryst/ObjCryst/PowderPattern.h \
+ /home/zdenek/tmp/Fox/MStruct/../ObjCryst/ObjCryst/Crystal.h \
+ /home/zdenek/tmp/Fox/MStruct/../ObjCryst/ObjCryst/UnitCell.h \
+ /home/zdenek/tmp/Fox/MStruct/../ObjCryst/ObjCryst/SpaceGroup.h \
+ /home/zdenek/tmp/Fox/MStruct/../ObjCryst/ObjCryst/ScatteringPower.h \
+ /home/zdenek/tmp/Fox/MStruct/../ObjCryst/ObjCryst/ScatteringData.h \
+ /home/zdenek/tmp/Fox/MStruct/../ObjCryst/ObjCryst/Scatterer.h \
+ /home/zdenek/tmp/Fox/MStruct/../ObjCryst/ObjCryst/ScatteringCorr.h \
+ /home/zdenek/tmp/Fox/MStruct/../ObjCryst/ObjCryst/ReflectionProfile.h \
+ /home/zdenek/tmp/Fox/MStruct/../ObjCryst/ObjCryst/CIF.h \
+ /home/zdenek/tmp/Fox/MStruct/../ObjCryst/Quirks/ci_string.h \
+ /home/zdenek/tmp/Fox/MStruct/../ObjCryst/ObjCryst/DiffractionDataSingleCrystal.h \
+ /home/zdenek/tmp/Fox/MStruct/../ObjCryst/ObjCryst/Indexing.h \
+ mstruct_tests.h /home/zdenek/tmp/Fox/MStruct/../ObjCryst/ObjCryst/Atom.h \
+ /home/zdenek/tmp/Fox/MStruct/../ObjCryst/ObjCryst/IO.h

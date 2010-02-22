@@ -1,0 +1,47 @@
+\form#0:$ R_{w}= \sqrt {\frac{\sum_i w_i\left( I_i^{obs}-I_i^{calc} \right)^2} {\sum_i w_i (I_i^{obs})^2} }$
+\form#1:$ R= \sqrt {\frac{\sum_i \left( I_i^{obs}-I_i^{calc} \right)^2} {\sum_i (I_i^{obs})^2} }$
+\form#2:$ \chi^2 = \sum_i w_i \left(I_i^{obs}-I_i^{calc} \right)^2 $
+\form#3:$[length_{0}-\delta;length_{0}+\delta]$
+\form#4:$ -\log(likelihood)= \log\left(2\delta+\sqrt{2\pi\sigma^2}\right)$
+\form#5:$length > length_{0}+\delta$
+\form#6:$ -\log(likelihood)= \log\left(2\delta+\sqrt{2\pi\sigma^2}\right) + \left(\frac{(length-\delta)-length_{0}}{\sigma} \right)^2$
+\form#7:$length < length_{0}-\delta$
+\form#8:$ -\log(likelihood)= \log\left(2\delta+\sqrt{2\pi\sigma^2}\right) + \left(\frac{(length+\delta)-length_{0}}{\sigma} \right)^2$
+\form#9:$ mDerivLLKCoeff = \frac{L-L_0}{\sigma^2} $
+\form#10:$ fwhm^2= U \tan^2(\theta) + V \tan(\theta) +W $
+\form#11:$ I_{hkl} = L \times P \times SlitAp \times F_{hkl}^2 $
+\form#12:$ L = \frac{1}{\sin(2\theta)} $
+\form#13:$ P = \frac{1}{1+A}\left(1+A\cos^2(2\theta)\right) $
+\form#14:$ A = \frac{1-f}{1+f} $
+\form#15:$ A = \cos^2(2\theta_{mono}) $
+\form#16:$ SlitAp = \frac{1}{\sin(\theta)} $
+\form#17:$ (2\theta)_{obs} = (2\theta)_{real} + a\cos(\theta) $
+\form#18:$ (2\theta)_{obs} = (2\theta)_{real} + b\sin(2\theta) $
+\form#19:$ (2\theta)_{obs} = (2\theta)_{real} +(2\theta)_{0}$
+\form#20:$ (2\theta)_{obs} = (2\theta)_{real} + \frac{a}{\cos(\theta)} $
+\form#21:$ t = DIFC*\frac{\sin(\theta)}{\lambda} + DIFA*\left(\frac{\sin(\theta)}{\lambda}\right)^2 + mXZero$
+\form#22:$ L(t) = \frac{\left(y^{calc}_{Background}-y^{obs}\right)^2}{2\sigma^2}$
+\form#23:$ L(t) = A-\log{\int_\epsilon^{\infty} {\frac{1}{u} e^{-(t-u)^2} du}}$
+\form#24:$\epsilon = 1e-6$
+\form#25:$ t = \frac{y^{calc}_{Background}-y^{obs}}{\sigma\sqrt{2}}$
+\form#26:$ \log{\frac{\sqrt{\pi}}{t}}$
+\form#27:$\epsilon=0$
+\form#28:$\epsilon$
+\form#29:$A-\log{\frac{\sqrt{\pi}}{t}}$
+\form#30:$ T = d^4\sin(\theta) $
+\form#31:$ \frac{sin(\theta)}{\lambda} = \frac{1}{2d_{hkl}}$
+\form#32:$ \left[ \begin {array}{ccc} 0 & 0 & 0 \end{array} \right] $
+\form#33:$ \left[ \begin {array}{ccc} 0 & 0 & 0 \\ \frac{1}{2} & \frac{1}{2} & \frac{1}{2} \\ \end{array} \right] $
+\form#34:$ \left[ \begin {array}{ccc} 0 & 0 & 0 \\ \frac{1}{2} & \frac{1}{2} & 0 \\ \frac{1}{2} & 0 & \frac{1}{2} \\ 0 & \frac{1}{2} & \frac{1}{2} \\ \end{array} \right] $
+\form#35:\[ B= \left[ \begin {array}{ccc} a^* & b^*\cos(\gamma^*) & c^*\cos(\beta^*) \\ 0 & b^*\sin(\gamma^*) & -c^*\sin(\beta^*)\cos(\alpha) \\ 0 & 0 & \frac{1}{c}\end{array} \right]\]
+\form#36:\[ \left[ \begin{array}{c} k_x \\ k_y \\ k_z \end{array} \right]_{orthonormal} = B \times \left[ \begin{array}{c} h \\ k \\ l \end{array}\right]_{integer} \]
+\form#37:\[ M_{orth}= \left[ \begin {array}{ccc} a & b\cos(\gamma) & c\cos(\beta) \\ 0 & b\sin(\gamma) & -c\sin(\beta)\cos(\alpha^*) \\ 0 & 0 & \frac{1}{c^*}\end{array} \right]\]
+\form#38:\[ \left[ \begin{array}{c} x \\ y \\ z \end{array} \right]_{orthonormal} = M_{orth} \times \left[ \begin{array}{c} x \\ y \\ z \end{array} \right]_{fractional coords}\]
+\form#39:\[ \left[ \begin{array}{c} x(i) \\ y(i) \\ z(i) \end{array} \right]_{orthonormal} = \left[ \begin{array}{ccc} \cos(\chi) & 0 & -\sin(\chi) \\ 0 & 1 & 0 \\ \sin(\chi) & 0 & \cos(\chi) \end{array} \right] \times \left[ \begin{array}{ccc} \cos(\phi) & -\sin(\phi) & 0 \\ \sin(\phi) & \cos(\phi) & 0 \\ 0 & 0 & 1 \end{array} \right] \times \left[ \begin{array}{ccc} 1 & 0 & 0 \\ 0 & \cos(\psi) & -\sin(\psi) \\ 0 & \sin(\psi) & \cos(\psi) \end{array} \right] \times \left[ \begin{array}{c} x_0(i) \\ y_0(i) \\ z_0(i) \end{array} \right] \]
+\form#40:\[ A_{constant} = A_{min}\]
+\form#41:\[ A_{Boltzmann} = A_{min} \frac{\ln(NbStep)}{\ln(step)} \]
+\form#42:\[ A_{Cauchy} = A_{min} \frac{NbStep}{step} \]
+\form#43:\[ A_{exponential} = A_{max} (\frac{T_{min}}{T_{max}})^{\frac{step}{NbStep}} \]
+\form#44:\[ A_{\gamma} = A_{max} +(A_{min}-A_{max}*(\frac{step}{NbStep})^{\gamma} \]
+\form#45:$ P=\frac{1}{\sqrt{2\pi\sigma^2}}e^{\frac{-(calc-expected)^2}{\sigma^2}}$
+\form#46:$ -\log(P)= \log\left(\sqrt{2\pi\sigma^2}\right) + \left(\frac{calc-expected}{\sigma} \right)^2$

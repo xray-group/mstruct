@@ -1,0 +1,72 @@
+\subsection{ObjCryst::WXCrystObjBasicList Class Reference}
+\label{a00116}\index{ObjCryst::WXCrystObjBasicList@{ObjCryst::WXCrystObjBasicList}}
+
+
+A List of \doxyref{WXCrystObjBasic}{p.}{a00115}.  
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf WXCrystObjBasicList} ()\label{a00116_a6edc1d707ffb35590035bb647be2c1bf}
+
+\begin{DoxyCompactList}\small\item\em Constructor. \item\end{DoxyCompactList}\item 
+{\bf $\sim$WXCrystObjBasicList} ()\label{a00116_ae5ccf60380e8e4ad48653c5665c04e98}
+
+\begin{DoxyCompactList}\small\item\em Destructor. \item\end{DoxyCompactList}\item 
+unsigned int {\bf GetNb} () const \label{a00116_a3d7cc4d7ec8aa8935439cc79ce4183df}
+
+\begin{DoxyCompactList}\small\item\em Number of objects. \item\end{DoxyCompactList}\item 
+void {\bf Add} ({\bf WXCrystObjBasic} $\ast$)
+\begin{DoxyCompactList}\small\item\em Add an object to the list. \item\end{DoxyCompactList}\item 
+void {\bf Remove} ({\bf WXCrystObjBasic} $\ast$)\label{a00116_a11342e29e02b99702d7d7f98a7bb5fc6}
+
+\begin{DoxyCompactList}\small\item\em remove an object from the list \item\end{DoxyCompactList}\item 
+bool {\bf Show} (bool)\label{a00116_aa24e24922003988412c55e65f2fd669b}
+
+\begin{DoxyCompactList}\small\item\em Show or hide all of the windows. \item\end{DoxyCompactList}\item 
+void {\bf CrystUpdate} (const bool updateUI=false, const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em Forces all objects in the list to update. \item\end{DoxyCompactList}\item 
+void {\bf UpdateUI} (const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em Forces all objects in the list to update. \item\end{DoxyCompactList}\item 
+void {\bfseries Enable} (bool enable)\label{a00116_ae2988879821cb917b2a9ae19ceba6557}
+
+\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std::set$<$ {\bf WXCrystObjBasic} $\ast$ $>$ {\bf mvpWXCrystObj}\label{a00116_a67d25fb64bc6ffce448d76db889a2361}
+
+\begin{DoxyCompactList}\small\item\em List of pointers to the objects. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+A List of \doxyref{WXCrystObjBasic}{p.}{a00115}. 
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::WXCrystObjBasicList@{ObjCryst::WXCrystObjBasicList}!Add@{Add}}
+\index{Add@{Add}!ObjCryst::WXCrystObjBasicList@{ObjCryst::WXCrystObjBasicList}}
+\paragraph[{Add}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::WXCrystObjBasicList::Add ({\bf WXCrystObjBasic} $\ast$)}\hfill\label{a00116_a6630481e8f5e943935a8b1e8ebb826ea}
+
+
+Add an object to the list. The object is just referenced, not copied. \index{ObjCryst::WXCrystObjBasicList@{ObjCryst::WXCrystObjBasicList}!CrystUpdate@{CrystUpdate}}
+\index{CrystUpdate@{CrystUpdate}!ObjCryst::WXCrystObjBasicList@{ObjCryst::WXCrystObjBasicList}}
+\paragraph[{CrystUpdate}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::WXCrystObjBasicList::CrystUpdate (const bool {\em updateUI} = {\ttfamily false}, \/  const bool {\em mutexlock} = {\ttfamily false})}\hfill\label{a00116_a96cbd9c8341467f21a38964c2838a9c2}
+
+
+Forces all objects in the list to update. See \doxyref{WXCrystObjBasic::CrystUpdate()}{p.}{a00115_a7ac00ae2ae28f1a6fa26e6fa571186b6}
+
+see \doxyref{WXCrystObjBasic::CrystUpdate()}{p.}{a00115_a7ac00ae2ae28f1a6fa26e6fa571186b6} on the use of updateUI and mutexlock
+
+Normally \doxyref{WXCrystObjBasicList::CrystUpdate()}{p.}{a00116_a96cbd9c8341467f21a38964c2838a9c2} should never be used with mutexlock=true, as the mutex locking should be done from the calling object. \index{ObjCryst::WXCrystObjBasicList@{ObjCryst::WXCrystObjBasicList}!UpdateUI@{UpdateUI}}
+\index{UpdateUI@{UpdateUI}!ObjCryst::WXCrystObjBasicList@{ObjCryst::WXCrystObjBasicList}}
+\paragraph[{UpdateUI}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::WXCrystObjBasicList::UpdateUI (const bool {\em mutexlock} = {\ttfamily false})}\hfill\label{a00116_a64a74ecbcfb7a7066e73f0ffdfad2a98}
+
+
+Forces all objects in the list to update. See \doxyref{WXCrystObjBasic::CrystUpdate()}{p.}{a00115_a7ac00ae2ae28f1a6fa26e6fa571186b6}
+
+see \doxyref{WXCrystObjBasic::UpdateUI()}{p.}{a00115_a3818940b7031ff7e45cf2178c4a99c90} on the use of updateUI and mutexlock.
+
+Normally \doxyref{WXCrystObjBasicList::UpdateUI()}{p.}{a00116_a64a74ecbcfb7a7066e73f0ffdfad2a98} should never be used with mutexlock=true, as the mutex locking should be done from the calling object. 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+wxCryst.h\end{DoxyCompactItemize}

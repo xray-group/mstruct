@@ -1,0 +1,160 @@
+\subsection{ObjCryst::ReflectionProfilePseudoVoigt Class Reference}
+\label{a00075}\index{ObjCryst::ReflectionProfilePseudoVoigt@{ObjCryst::ReflectionProfilePseudoVoigt}}
+
+
+Pseudo-\/Voigt reflection profile.  
+Inheritance diagram for ObjCryst::ReflectionProfilePseudoVoigt::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3cm]{a00075}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries ReflectionProfilePseudoVoigt} (const {\bf ReflectionProfilePseudoVoigt} \&old)\label{a00075_a00e4ab294a17b1cf082567eccad9807f}
+
+\item 
+virtual {\bf ReflectionProfilePseudoVoigt} $\ast$ {\bfseries CreateCopy} () const \label{a00075_a76d51b0e7499eb3c2e1adf6a3f8ecede}
+
+\item 
+virtual const string \& {\bf GetClassName} () const 
+\begin{DoxyCompactList}\small\item\em Name for this class (\char`\"{}RefinableObj\char`\"{}, \char`\"{}Crystal\char`\"{},. \item\end{DoxyCompactList}\item 
+CrystVector\_\-REAL {\bf GetProfile} (const CrystVector\_\-REAL \&x, const REAL xcenter, const REAL h, const REAL k, const REAL l) const 
+\begin{DoxyCompactList}\small\item\em Get the reflection profile. \item\end{DoxyCompactList}\item 
+void {\bf SetProfilePar} (const REAL fwhmCagliotiW, const REAL fwhmCagliotiU=0, const REAL fwhmCagliotiV=0, const REAL eta0=0.5, const REAL eta1=0.)
+\begin{DoxyCompactList}\small\item\em Set reflection profile parameters. \item\end{DoxyCompactList}\item 
+virtual REAL {\bf GetFullProfileWidth} (const REAL relativeIntensity, const REAL xcenter, const REAL h, const REAL k, const REAL l)
+\begin{DoxyCompactList}\small\item\em Get the (approximate) full profile width at a given percentage of the profile maximum (e.g. \item\end{DoxyCompactList}\item 
+bool {\bf IsAnisotropic} () const \label{a00075_ad8b48ea19ac65f866340435d0bb803a8}
+
+\begin{DoxyCompactList}\small\item\em Is the profile anisotropic ? \item\end{DoxyCompactList}\item 
+virtual void {\bf XMLOutput} (ostream \&os, int indent=0) const 
+\begin{DoxyCompactList}\small\item\em Output to stream in well-\/formed XML. \item\end{DoxyCompactList}\item 
+virtual void {\bf XMLInput} (istream \&is, const {\bf XMLCrystTag} \&tag)
+\begin{DoxyCompactList}\small\item\em Input From stream. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf InitParameters} ()\label{a00075_a25cbe274ffdb207497ab0b35572b6b1c}
+
+\begin{DoxyCompactList}\small\item\em Initialize parameters. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+REAL {\bf mCagliotiU}\label{a00075_a673b093480af5c202c6885a7381ab209}
+
+\begin{DoxyCompactList}\small\item\em FWHM parameters, following Caglioti's law. \item\end{DoxyCompactList}\item 
+REAL {\bfseries mCagliotiV}\label{a00075_a727ceb0ddc156c759feae234a8e85361}
+
+\item 
+REAL {\bfseries mCagliotiW}\label{a00075_ac1ec2efab75fc0c90da3adc059808f5d}
+
+\item 
+REAL {\bf mPseudoVoigtEta0}\label{a00075_ad7823645fa4e2a23b827a2c2ac6e9d41}
+
+\begin{DoxyCompactList}\small\item\em Pseudo-\/Voigt mixing parameter : eta=eta0 +2$\ast$theta$\ast$eta1 eta=1 -\/$>$ pure Lorentzian ; eta=0 -\/$>$ pure Gaussian. \item\end{DoxyCompactList}\item 
+REAL {\bfseries mPseudoVoigtEta1}\label{a00075_a7065eed2c8989cb1e868388a47623fbc}
+
+\item 
+REAL {\bf mAsymBerarBaldinozziA0}
+\begin{DoxyCompactList}\small\item\em Asymmetry parameters, following the B�ar \& Baldinozzi approach ( B�ar \& baldinozzi, J. \item\end{DoxyCompactList}\item 
+REAL {\bfseries mAsymBerarBaldinozziA1}\label{a00075_aaffc4c0aad8121b584d0c2c52cc88d02}
+
+\item 
+REAL {\bfseries mAsymBerarBaldinozziB0}\label{a00075_a26bf261e7225525149cde98f80a54003}
+
+\item 
+REAL {\bfseries mAsymBerarBaldinozziB1}\label{a00075_a8fb40fba7f7e3bfcb5da9cf018bda761}
+
+\item 
+REAL {\bf mAsym0}
+\begin{DoxyCompactList}\small\item\em Asymmetry parameters, following the analytical function for asymmetric pseudo-\/voigt given by (e.g. \item\end{DoxyCompactList}\item 
+REAL {\bfseries mAsym1}\label{a00075_ac76b3e06b3b75864775fb7a149044b1f}
+
+\item 
+REAL {\bfseries mAsym2}\label{a00075_a81c1c2a4a5a064c4a21027364f340eb2}
+
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+Pseudo-\/Voigt reflection profile. 
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::ReflectionProfilePseudoVoigt@{ObjCryst::ReflectionProfilePseudoVoigt}!GetClassName@{GetClassName}}
+\index{GetClassName@{GetClassName}!ObjCryst::ReflectionProfilePseudoVoigt@{ObjCryst::ReflectionProfilePseudoVoigt}}
+\paragraph[{GetClassName}]{\setlength{\rightskip}{0pt plus 5cm}virtual const string\& ObjCryst::ReflectionProfilePseudoVoigt::GetClassName () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00075_a55628cdadc249b7973f2a6471d478e76}
+
+
+Name for this class (\char`\"{}RefinableObj\char`\"{}, \char`\"{}Crystal\char`\"{},. ..). This is only useful to distinguish different classes when picking up objects from the \doxyref{RefinableObj}{p.}{a00070} Global Registry 
+
+Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_a62968d90a7a3080738b363934616c019}.\index{ObjCryst::ReflectionProfilePseudoVoigt@{ObjCryst::ReflectionProfilePseudoVoigt}!GetFullProfileWidth@{GetFullProfileWidth}}
+\index{GetFullProfileWidth@{GetFullProfileWidth}!ObjCryst::ReflectionProfilePseudoVoigt@{ObjCryst::ReflectionProfilePseudoVoigt}}
+\paragraph[{GetFullProfileWidth}]{\setlength{\rightskip}{0pt plus 5cm}virtual REAL ObjCryst::ReflectionProfilePseudoVoigt::GetFullProfileWidth (const REAL {\em relativeIntensity}, \/  const REAL {\em xcenter}, \/  const REAL {\em h}, \/  const REAL {\em k}, \/  const REAL {\em l})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00075_abacd734b6ff73b4fc5e6c4a5cba62eb6}
+
+
+Get the (approximate) full profile width at a given percentage of the profile maximum (e.g. FWHM=GetFullProfileWidth(0.5)). 
+
+Implements {\bf ObjCryst::ReflectionProfile} \doxyref{}{p.}{a00073_ac6d2a69e63c3efd06f30ab134062bbc0}.\index{ObjCryst::ReflectionProfilePseudoVoigt@{ObjCryst::ReflectionProfilePseudoVoigt}!GetProfile@{GetProfile}}
+\index{GetProfile@{GetProfile}!ObjCryst::ReflectionProfilePseudoVoigt@{ObjCryst::ReflectionProfilePseudoVoigt}}
+\paragraph[{GetProfile}]{\setlength{\rightskip}{0pt plus 5cm}CrystVector\_\-REAL ObjCryst::ReflectionProfilePseudoVoigt::GetProfile (const CrystVector\_\-REAL \& {\em x}, \/  const REAL {\em xcenter}, \/  const REAL {\em h}, \/  const REAL {\em k}, \/  const REAL {\em l}) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00075_a56d805e09604a00eb86ca95dab674fc1}
+
+
+Get the reflection profile. 
+\begin{DoxyParams}{Parameters}
+\item[{\em x,:}]the vector of x coordinates (i.e. either 2theta or time-\/of-\/flight) \item[{\em xcenter,:}]coordinate (2theta, tof) of the center of the peak \item[{\em h,k,l,:}]reflection Miller indices \end{DoxyParams}
+\begin{DoxyNote}{Note}
+: derived classes who need either d\_\-hkl or the orthonormal coordinates of the scattering vector should be passed a \doxyref{ObjCryst::UnitCell}{p.}{a00109} object in the constructor so that they can use \doxyref{ObjCryst::UnitCell::MillerToOrthonormalCoords()}{p.}{a00109_af6efcbafcd761c6f8f4953190e7024d0} 
+\end{DoxyNote}
+
+
+Implements {\bf ObjCryst::ReflectionProfile} \doxyref{}{p.}{a00073_a0c71ddbfb976e320ccedf907b741b4d5}.\index{ObjCryst::ReflectionProfilePseudoVoigt@{ObjCryst::ReflectionProfilePseudoVoigt}!SetProfilePar@{SetProfilePar}}
+\index{SetProfilePar@{SetProfilePar}!ObjCryst::ReflectionProfilePseudoVoigt@{ObjCryst::ReflectionProfilePseudoVoigt}}
+\paragraph[{SetProfilePar}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::ReflectionProfilePseudoVoigt::SetProfilePar (const REAL {\em fwhmCagliotiW}, \/  const REAL {\em fwhmCagliotiU} = {\ttfamily 0}, \/  const REAL {\em fwhmCagliotiV} = {\ttfamily 0}, \/  const REAL {\em eta0} = {\ttfamily 0.5}, \/  const REAL {\em eta1} = {\ttfamily 0.})}\hfill\label{a00075_a41d53cb9c852d564d06c5ccb3ddfbcca}
+
+
+Set reflection profile parameters. 
+\begin{DoxyParams}{Parameters}
+\item[{\em fwhmCagliotiW,fwhmCagliotiU,fwhmCagliotiV}]: these are the U,V and W parameters in the Caglioti's law : $ fwhm^2= U \tan^2(\theta) + V \tan(\theta) +W $ if only W is given, the width is constant \item[{\em eta0,eta1,:}]these are the mixing parameters. \end{DoxyParams}
+\index{ObjCryst::ReflectionProfilePseudoVoigt@{ObjCryst::ReflectionProfilePseudoVoigt}!XMLInput@{XMLInput}}
+\index{XMLInput@{XMLInput}!ObjCryst::ReflectionProfilePseudoVoigt@{ObjCryst::ReflectionProfilePseudoVoigt}}
+\paragraph[{XMLInput}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::ReflectionProfilePseudoVoigt::XMLInput (istream \& {\em is}, \/  const {\bf XMLCrystTag} \& {\em tag})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00075_a8c63700610f511503eae297c8161f311}
+
+
+Input From stream. \begin{Desc}
+\item[{\bf Todo}]Add an bool XMLInputTag(is,tag) function to recognize all the tags from the stream. So that each inherited class can use the XMLInputTag function from its parent (ie take advantage of inheritance). The children class would first try to interpret the tag, then if unsuccessful would pass it to its parent (thus allowing overloading), etc... \end{Desc}
+
+
+Implements {\bf ObjCryst::ReflectionProfile} \doxyref{}{p.}{a00073_a7ad38593ddb4601632beb0a6bcae50f3}.\index{ObjCryst::ReflectionProfilePseudoVoigt@{ObjCryst::ReflectionProfilePseudoVoigt}!XMLOutput@{XMLOutput}}
+\index{XMLOutput@{XMLOutput}!ObjCryst::ReflectionProfilePseudoVoigt@{ObjCryst::ReflectionProfilePseudoVoigt}}
+\paragraph[{XMLOutput}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::ReflectionProfilePseudoVoigt::XMLOutput (ostream \& {\em os}, \/  int {\em indent} = {\ttfamily 0}) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00075_ac0438d3a1827accbdf2375e7355f18e5}
+
+
+Output to stream in well-\/formed XML. \begin{Desc}
+\item[{\bf Todo}]Use inheritance.. as for XMLInputTag()... \end{Desc}
+
+
+Implements {\bf ObjCryst::ReflectionProfile} \doxyref{}{p.}{a00073_a60e429bb999a8b39f09ef14cdaf5ad0c}.
+
+\subsubsection{Member Data Documentation}
+\index{ObjCryst::ReflectionProfilePseudoVoigt@{ObjCryst::ReflectionProfilePseudoVoigt}!mAsym0@{mAsym0}}
+\index{mAsym0@{mAsym0}!ObjCryst::ReflectionProfilePseudoVoigt@{ObjCryst::ReflectionProfilePseudoVoigt}}
+\paragraph[{mAsym0}]{\setlength{\rightskip}{0pt plus 5cm}REAL {\bf ObjCryst::ReflectionProfilePseudoVoigt::mAsym0}\hspace{0.3cm}{\ttfamily  [private]}}\hfill\label{a00075_a7f9d8d69ac06851dfb5c5006bd89ba1e}
+
+
+Asymmetry parameters, following the analytical function for asymmetric pseudo-\/voigt given by (e.g. ) Toraya in J. Appl. Cryst 23(1990),485-\/491 \index{ObjCryst::ReflectionProfilePseudoVoigt@{ObjCryst::ReflectionProfilePseudoVoigt}!mAsymBerarBaldinozziA0@{mAsymBerarBaldinozziA0}}
+\index{mAsymBerarBaldinozziA0@{mAsymBerarBaldinozziA0}!ObjCryst::ReflectionProfilePseudoVoigt@{ObjCryst::ReflectionProfilePseudoVoigt}}
+\paragraph[{mAsymBerarBaldinozziA0}]{\setlength{\rightskip}{0pt plus 5cm}REAL {\bf ObjCryst::ReflectionProfilePseudoVoigt::mAsymBerarBaldinozziA0}\hspace{0.3cm}{\ttfamily  [private]}}\hfill\label{a00075_ad9ddcfe78550879029ad31e62b63374d}
+
+
+Asymmetry parameters, following the B�ar \& Baldinozzi approach ( B�ar \& baldinozzi, J. Appl. Cryst 26 (1993), 128-\/129)
+
+\begin{DoxyNote}{Note}
+: these are not used right now. 
+\end{DoxyNote}
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+ReflectionProfile.h\end{DoxyCompactItemize}

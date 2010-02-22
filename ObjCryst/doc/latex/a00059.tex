@@ -1,0 +1,98 @@
+\subsection{ObjCryst::PeakList Class Reference}
+\label{a00059}\index{ObjCryst::PeakList@{ObjCryst::PeakList}}
+
+
+Class to store positions of observed reflections.  
+\subsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf hkl}
+\begin{DoxyCompactList}\small\item\em One observed diffraction line, to be indexed. \item\end{DoxyCompactList}\item 
+struct {\bf hkl0}
+\begin{DoxyCompactList}\small\item\em One set of Miller indices, a possible indexation for a reflection. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries PeakList} (const {\bf PeakList} \&old)\label{a00059_a61c463b62f2ef45451dc873e2903e9c8}
+
+\item 
+void {\bfseries operator=} (const {\bf PeakList} \&rhs)\label{a00059_a47e535574bdbcf7017b24b5154cf6251}
+
+\item 
+void {\bfseries ImportDhklDSigmaIntensity} (std::istream \&is, float defaultsigma=.001)\label{a00059_ac4373f4302ba0767cc957e64da9d9c00}
+
+\item 
+void {\bfseries ImportDhklIntensity} (std::istream \&is)\label{a00059_a10fba158184bcfd1b19a7ec524641123}
+
+\item 
+void {\bfseries ImportDhkl} (std::istream \&is)\label{a00059_a50cad4f19639264f93f153775824dcdd}
+
+\item 
+void {\bfseries Import2ThetaIntensity} (std::istream \&is, const float wavelength=1.5418)\label{a00059_a84f1e73d15c57b5e0cabd543b1b340c4}
+
+\item 
+float {\bf Simulate} (float zero, float a, float b, float c, float alpha, float beta, float gamma, bool deg, unsigned int nb=20, unsigned int nbspurious=0, float sigma=0, float percentMissing=0, const bool verbose=false)
+\begin{DoxyCompactList}\small\item\em Generate a list of simulated peak positions, from given lattice parameters. \item\end{DoxyCompactList}\item 
+void {\bfseries ExportDhklDSigmaIntensity} (std::ostream \&out) const \label{a00059_acb479606e89d9b6c4ec830d491d56ea6}
+
+\item 
+void {\bf AddPeak} (const float d, const float iobs=1.0, const float dobssigma=0.0, const float iobssigma=0.0, const int h=0, const int k=0, const int l=0, const float d2calc=0)
+\begin{DoxyCompactList}\small\item\em Add one peak. \item\end{DoxyCompactList}\item 
+void {\bfseries RemovePeak} (unsigned int i)\label{a00059_a1b87305d81488c71ea877c9ccf182cc4}
+
+\item 
+void {\bfseries Print} (std::ostream \&os) const \label{a00059_ab57bd49f08c438474f69c48f6bd36719}
+
+\item 
+vector$<$ {\bf hkl} $>$ \& {\bf GetPeakList} ()\label{a00059_af03dbe751fc2fa8a22add4713e725136}
+
+\begin{DoxyCompactList}\small\item\em Get peak list. \item\end{DoxyCompactList}\item 
+const vector$<$ {\bf hkl} $>$ \& {\bf GetPeakList} () const \label{a00059_a9ff6862efaf4bac8467034303ab438a7}
+
+\begin{DoxyCompactList}\small\item\em Get peak list. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ {\bf hkl} $>$ {\bf mvHKL}
+\begin{DoxyCompactList}\small\item\em Predict peak positions Best h,k,l for each observed peak (for least-\/squares refinement) This is stored by the Score function, optionnally. \item\end{DoxyCompactList}\item 
+list$<$ {\bf hkl} $>$ {\bf mvPredictedHKL}\label{a00059_a7e3d44332948bcd9565089aa8172c009}
+
+\begin{DoxyCompactList}\small\item\em Full list of calculated HKL positions for a given solution, up to a given resolution After finding a candidate solution, use score with pPredictedHKL=\&mvPredictedHKL. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+Class to store positions of observed reflections. 
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::PeakList@{ObjCryst::PeakList}!AddPeak@{AddPeak}}
+\index{AddPeak@{AddPeak}!ObjCryst::PeakList@{ObjCryst::PeakList}}
+\paragraph[{AddPeak}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::PeakList::AddPeak (const float {\em d}, \/  const float {\em iobs} = {\ttfamily 1.0}, \/  const float {\em dobssigma} = {\ttfamily 0.0}, \/  const float {\em iobssigma} = {\ttfamily 0.0}, \/  const int {\em h} = {\ttfamily 0}, \/  const int {\em k} = {\ttfamily 0}, \/  const int {\em l} = {\ttfamily 0}, \/  const float {\em d2calc} = {\ttfamily 0})}\hfill\label{a00059_a825e83f775144bdbe0d558789af02d97}
+
+
+Add one peak. 
+\begin{DoxyParams}{Parameters}
+\item[{\em d,:}]1/d for this peak (Angstroem) \end{DoxyParams}
+\index{ObjCryst::PeakList@{ObjCryst::PeakList}!Simulate@{Simulate}}
+\index{Simulate@{Simulate}!ObjCryst::PeakList@{ObjCryst::PeakList}}
+\paragraph[{Simulate}]{\setlength{\rightskip}{0pt plus 5cm}float ObjCryst::PeakList::Simulate (float {\em zero}, \/  float {\em a}, \/  float {\em b}, \/  float {\em c}, \/  float {\em alpha}, \/  float {\em beta}, \/  float {\em gamma}, \/  bool {\em deg}, \/  unsigned int {\em nb} = {\ttfamily 20}, \/  unsigned int {\em nbspurious} = {\ttfamily 0}, \/  float {\em sigma} = {\ttfamily 0}, \/  float {\em percentMissing} = {\ttfamily 0}, \/  const bool {\em verbose} = {\ttfamily false})}\hfill\label{a00059_a88b5e22d20e07c1392b7b3916a9f58fe}
+
+
+Generate a list of simulated peak positions, from given lattice parameters. 
+\begin{DoxyParams}{Parameters}
+\item[{\em zero,:}]the zero, given for d$\ast$$^\wedge$2 (in Angstroems$^\wedge$-\/2) \item[{\em a,b,c,alpha,beta,gamma,:}]lattice parameters \item[{\em deg,:}]if true, angles are in degrees instead of radians \item[{\em nb,:}]the number of peak positions to generate \item[{\em nbspurious,:}]number of spurious lines to be included in the list \item[{\em sigma,:}]the maximum relative error for d$\ast$ -\/ the d$\ast$ values will be within [d\_\-calc$\ast$(1-\/sigma) ;d\_\-calc$\ast$(1+sigma)] \item[{\em percentMissing,:}]percentage (between 0 and 1) of missing reflections -\/ maximum allowed 0.9 \item[{\em verbose,:}]print some info \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+: the volume of the simulated unit cell 
+\end{DoxyReturn}
+
+
+\subsubsection{Member Data Documentation}
+\index{ObjCryst::PeakList@{ObjCryst::PeakList}!mvHKL@{mvHKL}}
+\index{mvHKL@{mvHKL}!ObjCryst::PeakList@{ObjCryst::PeakList}}
+\paragraph[{mvHKL}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf hkl}$>$ {\bf ObjCryst::PeakList::mvHKL}\hspace{0.3cm}{\ttfamily  [mutable]}}\hfill\label{a00059_a810ed3eb6c76a08488ace8b530529631}
+
+
+Predict peak positions Best h,k,l for each observed peak (for least-\/squares refinement) This is stored by the Score function, optionnally. 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Indexing.h\end{DoxyCompactItemize}

@@ -1,0 +1,91 @@
+\subsection{ObjCryst::PowderPatternBackgroundBayesianMinimiser Class Reference}
+\label{a00063}\index{ObjCryst::PowderPatternBackgroundBayesianMinimiser@{ObjCryst::PowderPatternBackgroundBayesianMinimiser}}
+
+
+This object is used to estimate the background in a powder pattern, using a Bayesian approach (David \& Sivia, Acta Cryst A50 (1994), 703).  
+Inheritance diagram for ObjCryst::PowderPatternBackgroundBayesianMinimiser::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2cm]{a00063}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries PowderPatternBackgroundBayesianMinimiser} ({\bf PowderPatternBackground} \&backgd)\label{a00063_a38fecc6393f5feed3dd22e585d2fd708}
+
+\item 
+virtual const string \& {\bf GetClassName} () const 
+\begin{DoxyCompactList}\small\item\em Name for this class (\char`\"{}RefinableObj\char`\"{}, \char`\"{}Crystal\char`\"{},. \item\end{DoxyCompactList}\item 
+virtual REAL {\bf GetLogLikelihood} () const 
+\begin{DoxyCompactList}\small\item\em Get -\/log(likelihood) of the current configuration for the object. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static REAL {\bf BayesianBackgroundLogLikelihood} (const REAL t)
+\begin{DoxyCompactList}\small\item\em Returns the log(likelihood) of a background by marginalizing the effect of Bragg peaks, following the method described by David and Sivia ({\itshape J.Appl.Cryst\/}. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf PowderPatternBackground} $\ast$ {\bfseries mpBackground}\label{a00063_ab87e1261cd1824365908c4d67e9d696e}
+
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+This object is used to estimate the background in a powder pattern, using a Bayesian approach (David \& Sivia, Acta Cryst A50 (1994), 703). 
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::PowderPatternBackgroundBayesianMinimiser@{ObjCryst::PowderPatternBackgroundBayesianMinimiser}!BayesianBackgroundLogLikelihood@{BayesianBackgroundLogLikelihood}}
+\index{BayesianBackgroundLogLikelihood@{BayesianBackgroundLogLikelihood}!ObjCryst::PowderPatternBackgroundBayesianMinimiser@{ObjCryst::PowderPatternBackgroundBayesianMinimiser}}
+\paragraph[{BayesianBackgroundLogLikelihood}]{\setlength{\rightskip}{0pt plus 5cm}static REAL ObjCryst::PowderPatternBackgroundBayesianMinimiser::BayesianBackgroundLogLikelihood (const REAL {\em t})\hspace{0.3cm}{\ttfamily  [static]}}\hfill\label{a00063_ade871cf6919b2b3fa572d6a073b4c664}
+
+
+Returns the log(likelihood) of a background by marginalizing the effect of Bragg peaks, following the method described by David and Sivia ({\itshape J.Appl.Cryst\/}. {\bfseries 34}(2001), 318).
+
+\begin{DoxyReturn}{Returns}
+
+\begin{DoxyItemize}
+\item $ L(t) = \frac{\left(y^{calc}_{Background}-y^{obs}\right)^2}{2\sigma^2}$ for $<$0
+\item $ L(t) = A-\log{\int_\epsilon^{\infty} {\frac{1}{u} e^{-(t-u)^2} du}}$ for t$>$0, with: $\epsilon = 1e-6$, $ t = \frac{y^{calc}_{Background}-y^{obs}}{\sigma\sqrt{2}}$ and A a normalizing constant so that the function is continuous for t=0 (i.e. {\itshape L(0)=0\/}).
+\end{DoxyItemize}
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em $\backslash$form::25}]For small {\itshape t$>$0\/} values, {\itshape L(t)\/} behaves like a quadratic function, and for large positive values it is equivalent to $ \log{\frac{\sqrt{\pi}}{t}}$.\end{DoxyParams}
+As the integral diverges for $\epsilon=0$, it is necessary to use a small, non-\/null $\epsilon$. The use of a smaller $\epsilon$ changes the range over which the function behaves quadratically, as well as the maximum value (at {\itshape t=0\/}), but does not affect the asymptotic value.
+
+See tabulated values in the source code. The function is approximated with a cubic spline until {\itshape t=8\/}, and then uses the asymptotic$A-\log{\frac{\sqrt{\pi}}{t}}$ value.
+
+\begin{DoxyNote}{Note}
+For a more strict calculation, we should include a normalizing constant (?) 
+\end{DoxyNote}
+\index{ObjCryst::PowderPatternBackgroundBayesianMinimiser@{ObjCryst::PowderPatternBackgroundBayesianMinimiser}!GetClassName@{GetClassName}}
+\index{GetClassName@{GetClassName}!ObjCryst::PowderPatternBackgroundBayesianMinimiser@{ObjCryst::PowderPatternBackgroundBayesianMinimiser}}
+\paragraph[{GetClassName}]{\setlength{\rightskip}{0pt plus 5cm}virtual const string\& ObjCryst::PowderPatternBackgroundBayesianMinimiser::GetClassName () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00063_a7f39f799fafc12a3bdb937b5cc9545ad}
+
+
+Name for this class (\char`\"{}RefinableObj\char`\"{}, \char`\"{}Crystal\char`\"{},. ..). This is only useful to distinguish different classes when picking up objects from the \doxyref{RefinableObj}{p.}{a00070} Global Registry 
+
+Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_a62968d90a7a3080738b363934616c019}.\index{ObjCryst::PowderPatternBackgroundBayesianMinimiser@{ObjCryst::PowderPatternBackgroundBayesianMinimiser}!GetLogLikelihood@{GetLogLikelihood}}
+\index{GetLogLikelihood@{GetLogLikelihood}!ObjCryst::PowderPatternBackgroundBayesianMinimiser@{ObjCryst::PowderPatternBackgroundBayesianMinimiser}}
+\paragraph[{GetLogLikelihood}]{\setlength{\rightskip}{0pt plus 5cm}virtual REAL ObjCryst::PowderPatternBackgroundBayesianMinimiser::GetLogLikelihood () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00063_a515e6c16b8900dd4360bcae023ebbd38}
+
+
+Get -\/log(likelihood) of the current configuration for the object. By default (no likelihood evaluation available), this is equal to 0.
+
+This call should not be recursive, it is the task of the algorithm to get the sum of likelihoods for all objects invlolved.
+
+\begin{DoxyNote}{Note}
+contrary to the old \char`\"{}Cost Function\char`\"{} approach, with log(Likelihood) there is no 'choice' of cost function, so that it is the task of the object to give the optimized likelihood (possibly with user options).
+\end{DoxyNote}
+\begin{DoxyWarning}{Warning}
+: this is in under heavy development, so expect changes... 
+\end{DoxyWarning}
+
+
+Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_a9a9a5ea2b997cd36b44ed35c2bab3245}.
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+PowderPatternBackgroundBayesianMinimiser.h\end{DoxyCompactItemize}

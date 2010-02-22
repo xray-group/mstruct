@@ -1,0 +1,89 @@
+\subsection{ObjCryst::WXPowderPatternBackground Class Reference}
+\label{a00136}\index{ObjCryst::WXPowderPatternBackground@{ObjCryst::WXPowderPatternBackground}}
+
+
+Class to display a Powder Pattern Background.  
+Inheritance diagram for ObjCryst::WXPowderPatternBackground::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4cm]{a00136}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries WXPowderPatternBackground} (wxWindow $\ast$parent, {\bf PowderPatternBackground} $\ast$)\label{a00136_a75d6621b4edd89af642fddf686ab6ed0}
+
+\item 
+void {\bfseries OnMenuImportUserBackground} (wxCommandEvent \&WXUNUSED(event))\label{a00136_a443d015900a9454dd455d453368ebbaf}
+
+\item 
+void {\bfseries OnMenuOptimizeBayesianBackground} (wxCommandEvent \&WXUNUSED(event))\label{a00136_a4b6467ecf5d9582dec4e38aa823a70b5}
+
+\item 
+void {\bfseries OnMenuAutomaticBayesianBackground} (wxCommandEvent \&WXUNUSED(event))\label{a00136_ab820827154f0613b00a5c1b33c8205d1}
+
+\item 
+void {\bfseries OnEditGridBackgroundPoint} (wxGridEvent \&e)\label{a00136_af656d56a926a2526d9b9f8519e5edc78}
+
+\item 
+virtual void {\bf CrystUpdate} (const bool updateUI=false, const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em Get new values to be displayed from the underlying object, and raise flag if an UI update is necessary. \item\end{DoxyCompactList}\item 
+virtual void {\bf UpdateUI} (const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em Update the User Interface, if necessary. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf PowderPatternBackground} $\ast$ {\bfseries mpPowderPatternBackground}\label{a00136_a763609dc37e69f322a75eeee246ee49f}
+
+\item 
+wxGrid $\ast$ {\bfseries mpGridBackgroundPoint}\label{a00136_a88985aa8ebff10bc60a822f6bf352607}
+
+\item 
+CrystVector\_\-REAL {\bf mBackgroundInterpPointX}\label{a00136_acfb1f1e382f886e7e8ac6062ea7bf830}
+
+\begin{DoxyCompactList}\small\item\em Copy of the list of points and intensity. \item\end{DoxyCompactList}\item 
+CrystVector\_\-REAL {\bfseries mBackgroundInterpPointIntensity}\label{a00136_aaddd0bcfdc07983d4755ef6727eeba66}
+
+\item 
+bool {\bf mNeedUpdateUI}\label{a00136_ab6d7da4726dd8cb53c788c70d9b10857}
+
+\begin{DoxyCompactList}\small\item\em True if the list of points has changed since last displayed. \item\end{DoxyCompactList}\item 
+bool {\bfseries mIsSelfUpdating}\label{a00136_a66cae7ce9c25d632699f8b8bfcdf5554}
+
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+Class to display a Powder Pattern Background. Still very limited ! Only allows to import a list of background points... \begin{Desc}
+\item[{\bf Todo}]Display the list of background points with the refinable intensity. Add th possibility to change the points. \end{Desc}
+
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::WXPowderPatternBackground@{ObjCryst::WXPowderPatternBackground}!CrystUpdate@{CrystUpdate}}
+\index{CrystUpdate@{CrystUpdate}!ObjCryst::WXPowderPatternBackground@{ObjCryst::WXPowderPatternBackground}}
+\paragraph[{CrystUpdate}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::WXPowderPatternBackground::CrystUpdate (const bool {\em updateUI} = {\ttfamily false}, \/  const bool {\em mutexlock} = {\ttfamily false})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00136_adacc1d5b1efe6eaf6a7a6a2d544c5e81}
+
+
+Get new values to be displayed from the underlying object, and raise flag if an UI update is necessary. The actual GUI update is not made here. \doxyref{UpdateUI()}{p.}{a00136_a11c6de5af2d72bcfc276838a2d62c32e} should be called separately, from the main thread.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em updateUI,:}]if true, this will call UpdateUI, either directly (if in the main thread), or by sending a message. \item[{\em mutexlock,:}]if true, a Mutex will be used to lock the data shared between main and background thread. The idea is to only use a few Mutexes to lock data from the top objects (wxRefinableObj,...), when calling \doxyref{CrystUpdate()}{p.}{a00136_adacc1d5b1efe6eaf6a7a6a2d544c5e81} and \doxyref{UpdateUI()}{p.}{a00136_a11c6de5af2d72bcfc276838a2d62c32e}. As sub-\/objects (\doxyref{WXField}{p.}{a00118},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. \end{DoxyParams}
+
+
+Reimplemented from {\bf ObjCryst::WXRefinableObj} \doxyref{}{p.}{a00142_a13e4f37ac098de756b27cdb91d6a0551}.\index{ObjCryst::WXPowderPatternBackground@{ObjCryst::WXPowderPatternBackground}!UpdateUI@{UpdateUI}}
+\index{UpdateUI@{UpdateUI}!ObjCryst::WXPowderPatternBackground@{ObjCryst::WXPowderPatternBackground}}
+\paragraph[{UpdateUI}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::WXPowderPatternBackground::UpdateUI (const bool {\em mutexlock} = {\ttfamily false})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00136_a11c6de5af2d72bcfc276838a2d62c32e}
+
+
+Update the User Interface, if necessary. 
+\begin{DoxyParams}{Parameters}
+\item[{\em mutexlock,:}]if true, a Mutex will be used to lock the data shared between main and background thread.\end{DoxyParams}
+The idea is to only use a few Mutexes to lock data from the top objects (wxRefinableObj,...), when calling \doxyref{CrystUpdate()}{p.}{a00136_adacc1d5b1efe6eaf6a7a6a2d544c5e81} and \doxyref{UpdateUI()}{p.}{a00136_a11c6de5af2d72bcfc276838a2d62c32e}. As sub-\/objects (\doxyref{WXField}{p.}{a00118},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
+
+Reimplemented from {\bf ObjCryst::WXRefinableObj} \doxyref{}{p.}{a00142_a19a1d057eecafd48710d9a3b770c1b28}.
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+wxPowderPattern.h\end{DoxyCompactItemize}

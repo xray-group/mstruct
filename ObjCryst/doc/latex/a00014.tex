@@ -1,0 +1,245 @@
+\subsection{ObjCryst::CellExplorer Class Reference}
+\label{a00014}\index{ObjCryst::CellExplorer@{ObjCryst::CellExplorer}}
+
+
+Algorithm class to find the correct indexing from observed peak positions.  
+Inheritance diagram for ObjCryst::CellExplorer::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2cm]{a00014}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries CellExplorer} (const {\bf PeakList} \&dhkl, const {\bf CrystalSystem} lattice, const unsigned int nbSpurious)\label{a00014_ab5812858db181b2da7793d50a0adf257}
+
+\item 
+void {\bfseries Evolution} (unsigned int ng, const bool randomize=true, const float f=0.7, const float cr=0.5, unsigned int np=100)\label{a00014_acef356378502e9c69fe03f92b02c0f36}
+
+\item 
+void {\bfseries SetLengthMinMax} (const float min, const float max)\label{a00014_a637ca3e27ed5991e56e31c34e675bda3}
+
+\item 
+void {\bfseries SetAngleMinMax} (const float min, const float max)\label{a00014_a25a18c19322a421c3161b48330260e42}
+
+\item 
+void {\bfseries SetVolumeMinMax} (const float min, const float max)\label{a00014_a6c729ec9156a394c54880470076e45b5}
+
+\item 
+void {\bfseries SetNbSpurious} (const unsigned int nb)\label{a00014_a58cb7aaf7195b6263e4f950a810c0800}
+
+\item 
+void {\bf SetD2Error} (const float err)\label{a00014_a9f700330603affae619486c0b0a052d5}
+
+\begin{DoxyCompactList}\small\item\em Allowed error on 1/d (squared!), used for dicvol. \item\end{DoxyCompactList}\item 
+void {\bfseries SetMinMaxZeroShift} (const float min, const float max)\label{a00014_a91d0eedc650c3b4c2f062011b101fbd1}
+
+\item 
+void {\bfseries SetCrystalSystem} (const {\bf CrystalSystem} system)\label{a00014_a7b1dbaf22380e1ac581be1827930c9ba}
+
+\item 
+void {\bfseries SetCrystalCentering} (const CrystalCentering cent)\label{a00014_a37548d6bf7f5ff9b6908e097a830dc2c}
+
+\item 
+virtual const string \& {\bf GetClassName} () const 
+\begin{DoxyCompactList}\small\item\em Name for this class (\char`\"{}RefinableObj\char`\"{}, \char`\"{}Crystal\char`\"{},. \item\end{DoxyCompactList}\item 
+virtual const string \& {\bf GetName} () const \label{a00014_a5d36f314bc0090493f29099eab7ce5ef}
+
+\begin{DoxyCompactList}\small\item\em Name of the object. \item\end{DoxyCompactList}\item 
+virtual void {\bfseries Print} () const \label{a00014_a87a517d92f81cd0ba5a92b0e1643c72c}
+
+\item 
+virtual unsigned int {\bf GetNbLSQFunction} () const \label{a00014_a56aecc6855396e7377d6f346ed079661}
+
+\begin{DoxyCompactList}\small\item\em Number of LSQ functions. \item\end{DoxyCompactList}\item 
+virtual const CrystVector\_\-REAL \& {\bf GetLSQCalc} (const unsigned int) const \label{a00014_ac6c61fd4c10e37c0e7fa1850c3aaeeab}
+
+\begin{DoxyCompactList}\small\item\em Get the current calculated value for the LSQ function. \item\end{DoxyCompactList}\item 
+virtual const CrystVector\_\-REAL \& {\bf GetLSQObs} (const unsigned int) const \label{a00014_aee7d3ae4beb8eefab9135a7232acc168}
+
+\begin{DoxyCompactList}\small\item\em Get the observed values for the LSQ function. \item\end{DoxyCompactList}\item 
+virtual const CrystVector\_\-REAL \& {\bf GetLSQWeight} (const unsigned int) const \label{a00014_a9609a2fc939138b683eb5897527710b8}
+
+\begin{DoxyCompactList}\small\item\em Get the weight values for the LSQ function. \item\end{DoxyCompactList}\item 
+virtual const CrystVector\_\-REAL \& {\bf GetLSQDeriv} (const unsigned int, {\bf RefinablePar} \&)
+\begin{DoxyCompactList}\small\item\em Get the first derivative values for the LSQ function, for a given parameter. \item\end{DoxyCompactList}\item 
+virtual void {\bf BeginOptimization} (const bool allowApproximations=false, const bool enableRestraints=false)
+\begin{DoxyCompactList}\small\item\em This should be called by any optimization class at the begining of an optimization. \item\end{DoxyCompactList}\item 
+void {\bfseries LSQRefine} (int nbCycle=1, bool useLevenbergMarquardt=true, const bool silent=false)\label{a00014_a08259c076c61fef7e81fb69f7fc046dc}
+
+\item 
+void {\bf DicVol} (const float minScore=10, const unsigned int minDepth=3, const float stopOnScore=50.0, const unsigned int stopOnDepth=6)
+\begin{DoxyCompactList}\small\item\em Run DicVOl algorithm, store only solutions with score $>$minScore or depth$>$=minDepth, stop at the end of one volume interval ($\sim$400 A$^\wedge$3) if best score$>$stopOnScore, or if one solution was found at depth$>$=stopOnDepth. \item\end{DoxyCompactList}\item 
+void {\bf ReduceSolutions} (const bool updateReportThreshold=false)
+\begin{DoxyCompactList}\small\item\em Sort all solutions by score, remove duplicates. \item\end{DoxyCompactList}\item 
+float {\bfseries GetBestScore} () const \label{a00014_accd55684af9cc89c39066160181227b5}
+
+\item 
+const std::list$<$ std::pair$<$ {\bf RecUnitCell}, float $>$ $>$ \& {\bfseries GetSolutions} () const \label{a00014_a41c02ecb44040167fbd0e30525bc6907}
+
+\item 
+std::list$<$ std::pair$<$ {\bf RecUnitCell}, float $>$ $>$ \& {\bfseries GetSolutions} ()\label{a00014_ab2f61cb3f32e9cee000e5a59f616a905}
+
+\end{DoxyCompactItemize}
+\subsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+unsigned int {\bfseries RDicVol} ({\bf RecUnitCell} uc0, {\bf RecUnitCell} uc1, unsigned int depth, unsigned long \&nbCalc, const float minV, const float maxV, vector$<$ unsigned int $>$ vdepth=vector$<$ unsigned int $>$())\label{a00014_a1fecb1e47c97a9d2b84a1e0183bb4fc9}
+
+\item 
+void {\bfseries Init} ()\label{a00014_ae4eeab6d7eff28c864fbb0fab58db600}
+
+\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std::list$<$ std::pair$<$ {\bf RecUnitCell}, float $>$ $>$ {\bf mvSolution}\label{a00014_ac693e7aab9144b6758a7075faac67784}
+
+\begin{DoxyCompactList}\small\item\em Max number of obs reflections to use. \item\end{DoxyCompactList}\item 
+unsigned int {\bfseries mnpar}\label{a00014_aeded3ad11ac3eeebe6bb933995afd18a}
+
+\item 
+const {\bf PeakList} $\ast$ {\bfseries mpPeakList}\label{a00014_a77fcf4eec69d2a8fd1ac116e5b12cda6}
+
+\item 
+float {\bfseries mLengthMin}\label{a00014_a70dc866b2aa3596f385dac228a7db100}
+
+\item 
+float {\bfseries mLengthMax}\label{a00014_aedafc84b343e6bfb2942f5dc89b8cca0}
+
+\item 
+float {\bfseries mAngleMin}\label{a00014_ae430676622ff99e2e43f927b42069851}
+
+\item 
+float {\bfseries mAngleMax}\label{a00014_a0e4c7045d31b3dc7cc25613b7df862f0}
+
+\item 
+float {\bfseries mVolumeMin}\label{a00014_ab16212bb24aea7b02997e1f80b0ab761}
+
+\item 
+float {\bfseries mVolumeMax}\label{a00014_a870dd0600b26bee464e363a3d18d89f9}
+
+\item 
+float {\bfseries mZeroShiftMin}\label{a00014_afe0d6c6fb6aebd8d0779830b2b35bcbc}
+
+\item 
+float {\bfseries mZeroShiftMax}\label{a00014_adace9c5795be5c546b820c775cd44caf}
+
+\item 
+float {\bf mMin} [7]\label{a00014_acca81c2311cc37670e70339d6ebd3984}
+
+\begin{DoxyCompactList}\small\item\em Min values for all parameters (7=unit cell +zero). \item\end{DoxyCompactList}\item 
+float {\bf mAmp} [7]\label{a00014_ad90b6220e838b2b6cc1f56a962301be3}
+
+\begin{DoxyCompactList}\small\item\em Max amplitude (max=min+amplitude) for all parameters All parameters are treated as periodic for DE (??). \item\end{DoxyCompactList}\item 
+{\bf CrystalSystem} {\bf mlattice}\label{a00014_a47fb489ee2fa1c6a1048893162411ec8}
+
+\begin{DoxyCompactList}\small\item\em Lattice type for which we search. \item\end{DoxyCompactList}\item 
+CrystalCentering {\bf mCentering}\label{a00014_a172a07f56757cb8fc2a8fb65fd8c3173}
+
+\begin{DoxyCompactList}\small\item\em Centering type. \item\end{DoxyCompactList}\item 
+unsigned int {\bfseries mNbSpurious}\label{a00014_a50ba121b9d3ed4254992cb912e34b9c4}
+
+\item 
+float {\bfseries mD2Error}\label{a00014_a9b003761e823017903fb0f40b0924bc4}
+
+\item 
+{\bf LSQNumObj} {\bfseries mLSQObj}\label{a00014_a0d09ee2601d1159fad51218bfb67a5c7}
+
+\item 
+CrystVector\_\-REAL {\bfseries mObs}\label{a00014_ad255b0637307a261c8a492e7f345cc68}
+
+\item 
+CrystVector\_\-REAL {\bfseries mCalc}\label{a00014_a487e252a8948812d7c71d9307dec2508}
+
+\item 
+CrystVector\_\-REAL {\bfseries mWeight}\label{a00014_adaeb301383b51a7e6607f0d3d8b51539}
+
+\item 
+CrystVector\_\-REAL {\bfseries mDeriv}\label{a00014_ac1dc395b436c64770fb25f562668e3dc}
+
+\item 
+{\bf RecUnitCell} {\bf mRecUnitCell}\label{a00014_ad1d07024afde6d58f4e17cf58c0a9365}
+
+\begin{DoxyCompactList}\small\item\em Reciprocal unit cell used for least squares refinement. \item\end{DoxyCompactList}\item 
+float {\bf mBestScore}\label{a00014_a354958f672e8c88b48eb1ebe9930be32}
+
+\begin{DoxyCompactList}\small\item\em Current best score. \item\end{DoxyCompactList}\item 
+std::vector$<$ unsigned int $>$ {\bf mvNbSolutionDepth}\label{a00014_ad0312849ee35af2f354e60f7ff5d951b}
+
+\begin{DoxyCompactList}\small\item\em Number of solutions found during dicvol search, at each depth. \item\end{DoxyCompactList}\item 
+float {\bfseries mMinScoreReport}\label{a00014_a7bfdecf37010628aedc6cb0af0087f4c}
+
+\item 
+unsigned int {\bfseries mMaxDicVolDepth}\label{a00014_ad0ccf6d8ce86f646b1e73ff35758e0a7}
+
+\item 
+unsigned int {\bfseries mDicVolDepthReport}\label{a00014_aba033e4b7608d69f9028524ecd3e62c6}
+
+\item 
+float {\bf mCosAngMax}\label{a00014_a42f12f0da01d8bb98d90369bf745dce4}
+
+\begin{DoxyCompactList}\small\item\em Stored value of cos(max ang) for tricilinic search -\/ we do not want to recompute the cos at every dicvol iteration. \item\end{DoxyCompactList}\item 
+unsigned int {\bf mNbLSQExcept}\label{a00014_a11c5a5dd196a163c5e04e4115462e8f8}
+
+\begin{DoxyCompactList}\small\item\em Number of exceptions caught during LSQ, in a given search -\/ above 20 LSQ is disabled. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+Algorithm class to find the correct indexing from observed peak positions. 
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::CellExplorer@{ObjCryst::CellExplorer}!BeginOptimization@{BeginOptimization}}
+\index{BeginOptimization@{BeginOptimization}!ObjCryst::CellExplorer@{ObjCryst::CellExplorer}}
+\paragraph[{BeginOptimization}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::CellExplorer::BeginOptimization (const bool {\em allowApproximations} = {\ttfamily false}, \/  const bool {\em enableRestraints} = {\ttfamily false})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00014_ae75ee0eb6652d5d43404b7205ec3cb94}
+
+
+This should be called by any optimization class at the begining of an optimization. This will also check that everything is ready, eg call the \doxyref{RefinableObj::Prepare()}{p.}{a00070_a48d11671e7f8699f7bc24077585c5e0f} function. This also affects all sub-\/objects. \begin{DoxyNote}{Note}
+this may be called several time for some objects which are used by several other objects, or for nested optimizations (e.g. least-\/squares optimizations inside a global one).
+
+\doxyref{EndOptimization()}{p.}{a00070_ab0035f6164cb24ace67b51b11993a851} must be called at the end of the optimization, the same number of time \doxyref{BeginOptimization()}{p.}{a00014_ae75ee0eb6652d5d43404b7205ec3cb94} was called !
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em allowApproximations,:}]if true, then the object can use faster but less precise functions during the optimization. This is useful for global optimization not using derivatives. \item[{\em enableRestraints,:}]\end{DoxyParams}
+\begin{Desc}
+\item[{\bf Deprecated}]if true, then restrained parameters will be allowed to go beyond theur hard limits. This implies that the algorithm will take into account the cost (penalty) related to the restraints. Objects which do not use restraints will simply ignore this. WARNING: this parameter may be removed with the new likelihood scheme. \end{Desc}
+
+
+Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_ababd8f2916e41a20d2c1b21f6ffefe96}.\index{ObjCryst::CellExplorer@{ObjCryst::CellExplorer}!DicVol@{DicVol}}
+\index{DicVol@{DicVol}!ObjCryst::CellExplorer@{ObjCryst::CellExplorer}}
+\paragraph[{DicVol}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::CellExplorer::DicVol (const float {\em minScore} = {\ttfamily 10}, \/  const unsigned int {\em minDepth} = {\ttfamily 3}, \/  const float {\em stopOnScore} = {\ttfamily 50.0}, \/  const unsigned int {\em stopOnDepth} = {\ttfamily 6})}\hfill\label{a00014_adba0983c3b1dc6846ccf0d9ee7dbfa98}
+
+
+Run DicVOl algorithm, store only solutions with score $>$minScore or depth$>$=minDepth, stop at the end of one volume interval ($\sim$400 A$^\wedge$3) if best score$>$stopOnScore, or if one solution was found at depth$>$=stopOnDepth. If stopOnDepth==0, do not stop for any depth \index{ObjCryst::CellExplorer@{ObjCryst::CellExplorer}!GetClassName@{GetClassName}}
+\index{GetClassName@{GetClassName}!ObjCryst::CellExplorer@{ObjCryst::CellExplorer}}
+\paragraph[{GetClassName}]{\setlength{\rightskip}{0pt plus 5cm}virtual const string\& ObjCryst::CellExplorer::GetClassName () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00014_a67ec6642b2a93030878764091178a0fb}
+
+
+Name for this class (\char`\"{}RefinableObj\char`\"{}, \char`\"{}Crystal\char`\"{},. ..). This is only useful to distinguish different classes when picking up objects from the \doxyref{RefinableObj}{p.}{a00070} Global Registry 
+
+Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_a62968d90a7a3080738b363934616c019}.\index{ObjCryst::CellExplorer@{ObjCryst::CellExplorer}!GetLSQDeriv@{GetLSQDeriv}}
+\index{GetLSQDeriv@{GetLSQDeriv}!ObjCryst::CellExplorer@{ObjCryst::CellExplorer}}
+\paragraph[{GetLSQDeriv}]{\setlength{\rightskip}{0pt plus 5cm}virtual const CrystVector\_\-REAL\& ObjCryst::CellExplorer::GetLSQDeriv (const unsigned {\em int}, \/  {\bf RefinablePar} \&)\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00014_a6e4e1e3300bbf3e5f23900fccb135da3}
+
+
+Get the first derivative values for the LSQ function, for a given parameter. Note that the default method in the base \doxyref{RefinableObj}{p.}{a00070} class is to use numerical derivatives, so it should be overridden for better precision.
+
+\begin{Desc}
+\item[{\bf Todo}]This should be a const method, and the given RefPar should be const too... \end{Desc}
+
+
+Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_a24bfb12849c7733a7034928fbb0b14a8}.\index{ObjCryst::CellExplorer@{ObjCryst::CellExplorer}!ReduceSolutions@{ReduceSolutions}}
+\index{ReduceSolutions@{ReduceSolutions}!ObjCryst::CellExplorer@{ObjCryst::CellExplorer}}
+\paragraph[{ReduceSolutions}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::CellExplorer::ReduceSolutions (const bool {\em updateReportThreshold} = {\ttfamily false})}\hfill\label{a00014_ae32d743e1e6df33e09243cd7bb9a8c52}
+
+
+Sort all solutions by score, remove duplicates. 
+\begin{DoxyParams}{Parameters}
+\item[{\em updateReportThreshold,:}]if true, when too many solutions are produced, the threshold above which solutions are reported will be updated to get less solutions. \end{DoxyParams}
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Indexing.h\end{DoxyCompactItemize}

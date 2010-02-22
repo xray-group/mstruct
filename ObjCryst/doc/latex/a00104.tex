@@ -1,0 +1,80 @@
+\subsection{ObjCryst::TexturePhaseMarchDollase Struct Reference}
+\label{a00104}\index{ObjCryst::TexturePhaseMarchDollase@{ObjCryst::TexturePhaseMarchDollase}}
+
+
+One texture phase for the March-\/Dollase model.  
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries TexturePhaseMarchDollase} (const REAL f, const REAL c, const REAL h, const REAL k, const REAL l, {\bf TextureMarchDollase} \&)\label{a00104_a7a17886446b42d17ba97c5f9752fd3f4}
+
+\item 
+const string \& {\bfseries GetClassName} () const \label{a00104_a79ab7a2e0e08bfa79e056ad5e790bf80}
+
+\item 
+const string \& {\bfseries GetName} () const \label{a00104_abc2b62f55a51617adef8bc3cc40e9e34}
+
+\item 
+void {\bfseries SetPar} (const REAL f, const REAL c, const REAL h, const REAL k, const REAL l)\label{a00104_aab4457580c005e68901acb9ce34d5090}
+
+\item 
+void {\bfseries XMLOutput} (ostream \&os, int indent=0) const \label{a00104_a126f46830b9bfcf6932526f5909e8655}
+
+\item 
+void {\bfseries XMLInput} (istream \&is, const {\bf XMLCrystTag} \&tag)\label{a00104_a8163897408ab5d08ccaf5ddb9ffd4254}
+
+\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+REAL {\bfseries mFraction}\label{a00104_a9059c8d95baeb8bba194188167fd6ba3}
+
+\item 
+REAL {\bfseries mMarchCoeff}\label{a00104_af54a682c4bea01ad89bf09c234e25f92}
+
+\item 
+REAL {\bfseries mH}\label{a00104_ad22aba0c945d8bbcb3238f1059410b5a}
+
+\item 
+REAL {\bfseries mK}\label{a00104_ad06c88aedc5968653bc895601c6d5754}
+
+\item 
+REAL {\bfseries mL}\label{a00104_ae20d183c75da02534d4ef887166ed99d}
+
+\item 
+REAL {\bf mNorm}\label{a00104_a3affb0c886c88243f76a7d38f30e10f3}
+
+\begin{DoxyCompactList}\small\item\em Norm of the (HKL) vector, to keep it constant during optimization. \item\end{DoxyCompactList}\item 
+{\bf TextureMarchDollase} $\ast$ {\bf mpTextureMarchDollase}\label{a00104_acf640da43b88a1955cd490fb64f1d1c6}
+
+\begin{DoxyCompactList}\small\item\em The parent \doxyref{TextureMarchDollase}{p.}{a00103} object. \item\end{DoxyCompactList}\item 
+REAL {\bf mBiasFraction}
+\begin{DoxyCompactList}\small\item\em Values of parameters towards which the optimization is biased (if biasing is used). \item\end{DoxyCompactList}\item 
+REAL {\bfseries mBiasMarchCoeff}\label{a00104_a0dd475c57d0188d354bc25c5778b0172}
+
+\item 
+REAL {\bfseries mBiasH}\label{a00104_adc4211e8726249e9a4ea1fecbdd3d00d}
+
+\item 
+REAL {\bfseries mBiasK}\label{a00104_a55bf867c3441f8732c8d39f7f3c506cd}
+
+\item 
+REAL {\bfseries mBiasL}\label{a00104_acccb771167b38f058b2b5f409023ee55}
+
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+One texture phase for the March-\/Dollase model. 
+
+\subsubsection{Member Data Documentation}
+\index{ObjCryst::TexturePhaseMarchDollase@{ObjCryst::TexturePhaseMarchDollase}!mBiasFraction@{mBiasFraction}}
+\index{mBiasFraction@{mBiasFraction}!ObjCryst::TexturePhaseMarchDollase@{ObjCryst::TexturePhaseMarchDollase}}
+\paragraph[{mBiasFraction}]{\setlength{\rightskip}{0pt plus 5cm}REAL {\bf ObjCryst::TexturePhaseMarchDollase::mBiasFraction}\hspace{0.3cm}{\ttfamily  [mutable]}}\hfill\label{a00104_a0d17e8aa20d149c741c1afd95edf56da}
+
+
+Values of parameters towards which the optimization is biased (if biasing is used). These are normally dynamically updated to the last \char`\"{}best\char`\"{} values found. 
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+ScatteringCorr.h\end{DoxyCompactItemize}

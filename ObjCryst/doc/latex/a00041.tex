@@ -1,0 +1,50 @@
+\subsection{ObjCryst::MDAtomGroup Struct Reference}
+\label{a00041}\index{ObjCryst::MDAtomGroup@{ObjCryst::MDAtomGroup}}
+
+
+Groups of atoms that can be moved using molecular dynamics principles, taking a list of restraints as ptential.  
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf MDAtomGroup} ()\label{a00041_a078c9456f28fc82789a4d98e91ef0599}
+
+\begin{DoxyCompactList}\small\item\em Default constructor. \item\end{DoxyCompactList}\item 
+{\bf MDAtomGroup} (std::set$<$ {\bf MolAtom} $\ast$ $>$ \&vat, std::set$<$ {\bf MolBond} $\ast$ $>$ \&vb, std::set$<$ {\bf MolBondAngle} $\ast$ $>$ \&va, std::set$<$ {\bf MolDihedralAngle} $\ast$ $>$ \&vd)
+\begin{DoxyCompactList}\small\item\em Constructor. \item\end{DoxyCompactList}\item 
+void {\bf Print} (ostream \&os, bool full=true) const \label{a00041_a99919d489dabf1beae35630069018f4f}
+
+\begin{DoxyCompactList}\small\item\em Print one-\/line list of atoms moved. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std::set$<$ {\bf MolAtom} $\ast$ $>$ {\bfseries mvpAtom}\label{a00041_a300e382447655a3533cb830bb3c4cee3}
+
+\item 
+std::vector$<$ {\bf MolBond} $\ast$ $>$ {\bfseries mvpBond}\label{a00041_a6d16a774b6b57b964e37f890a89edac0}
+
+\item 
+std::vector$<$ {\bf MolBondAngle} $\ast$ $>$ {\bfseries mvpBondAngle}\label{a00041_a68f73aaab1156d32bc79f368e237eaac}
+
+\item 
+std::vector$<$ {\bf MolDihedralAngle} $\ast$ $>$ {\bfseries mvpDihedralAngle}\label{a00041_a274d11d65f45f72eb38d83d589852bf9}
+
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+Groups of atoms that can be moved using molecular dynamics principles, taking a list of restraints as ptential. This is used to move group of atoms for which no adequate stretch mode can be used, such as inside flexible rings. 
+
+\subsubsection{Constructor \& Destructor Documentation}
+\index{ObjCryst::MDAtomGroup@{ObjCryst::MDAtomGroup}!MDAtomGroup@{MDAtomGroup}}
+\index{MDAtomGroup@{MDAtomGroup}!ObjCryst::MDAtomGroup@{ObjCryst::MDAtomGroup}}
+\paragraph[{MDAtomGroup}]{\setlength{\rightskip}{0pt plus 5cm}ObjCryst::MDAtomGroup::MDAtomGroup (std::set$<$ {\bf MolAtom} $\ast$ $>$ \& {\em vat}, \/  std::set$<$ {\bf MolBond} $\ast$ $>$ \& {\em vb}, \/  std::set$<$ {\bf MolBondAngle} $\ast$ $>$ \& {\em va}, \/  std::set$<$ {\bf MolDihedralAngle} $\ast$ $>$ \& {\em vd})}\hfill\label{a00041_a86dd6c6277666fa607685736bdffbedc}
+
+
+Constructor. 
+\begin{DoxyParams}{Parameters}
+\item[{\em vat,:}]list of atoms inside the group \item[{\em vb,va,vd,:}]list of bond, bond angle and dihedral angle restraints \end{DoxyParams}
+
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Molecule.h\end{DoxyCompactItemize}

@@ -1,0 +1,80 @@
+\subsection{ObjCryst::SimplexObj Class Reference}
+\label{a00092}\index{ObjCryst::SimplexObj@{ObjCryst::SimplexObj}}
+
+
+Conjugate Gradient Algorithm object.  
+Inheritance diagram for ObjCryst::SimplexObj::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2cm]{a00092}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf SimplexObj} (const string name=\char`\"{}Unnamed Simplex Object\char`\"{})\label{a00092_a8af9110ac672b9b932adf838a853b90b}
+
+\begin{DoxyCompactList}\small\item\em Constructor. \item\end{DoxyCompactList}\item 
+virtual void {\bf Optimize} (long \&nbSteps, const bool silent=false, const REAL finalcost=0, const REAL maxTime=-\/1)
+\begin{DoxyCompactList}\small\item\em Launch optimization (a single run) for N steps. \item\end{DoxyCompactList}\item 
+virtual void {\bf MultiRunOptimize} (long \&nbCycle, long \&nbSteps, const bool silent=false, const REAL finalcost=0, const REAL maxTime=-\/1)
+\begin{DoxyCompactList}\small\item\em Launch optimization for multiple runs of N steps. \item\end{DoxyCompactList}\item 
+virtual void {\bf XMLOutput} (ostream \&os, int indent=0) const 
+\begin{DoxyCompactList}\small\item\em Output a description of the object in XML format to a stream. \item\end{DoxyCompactList}\item 
+virtual void {\bf XMLInput} (istream \&is, const {\bf XMLCrystTag} \&tag)
+\begin{DoxyCompactList}\small\item\em Input in XML format from a stream, restoring the set of refined objects and the associated cost functions. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+REAL {\bf GenerateNewSimplexConfiguration} (CrystVector\_\-REAL \&vLLK, CrystVector\_\-long \&vIndex, unsigned long worst, REAL f)
+\begin{DoxyCompactList}\small\item\em Try a new configuration by expanding the worst vertex from the center by a factor f. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+Conjugate Gradient Algorithm object. currently does not handle parameters hitting limits, and is not very efficient (uses numerical derivatives) 
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::SimplexObj@{ObjCryst::SimplexObj}!GenerateNewSimplexConfiguration@{GenerateNewSimplexConfiguration}}
+\index{GenerateNewSimplexConfiguration@{GenerateNewSimplexConfiguration}!ObjCryst::SimplexObj@{ObjCryst::SimplexObj}}
+\paragraph[{GenerateNewSimplexConfiguration}]{\setlength{\rightskip}{0pt plus 5cm}REAL ObjCryst::SimplexObj::GenerateNewSimplexConfiguration (CrystVector\_\-REAL \& {\em vLLK}, \/  CrystVector\_\-long \& {\em vIndex}, \/  unsigned long {\em worst}, \/  REAL {\em f})\hspace{0.3cm}{\ttfamily  [private]}}\hfill\label{a00092_a5dbafc28130ee7db84587b8288c01830}
+
+
+Try a new configuration by expanding the worst vertex from the center by a factor f. If it is better, store it as new worst. Return the new obtained llk \index{ObjCryst::SimplexObj@{ObjCryst::SimplexObj}!MultiRunOptimize@{MultiRunOptimize}}
+\index{MultiRunOptimize@{MultiRunOptimize}!ObjCryst::SimplexObj@{ObjCryst::SimplexObj}}
+\paragraph[{MultiRunOptimize}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::SimplexObj::MultiRunOptimize (long \& {\em nbCycle}, \/  long \& {\em nbSteps}, \/  const bool {\em silent} = {\ttfamily false}, \/  const REAL {\em finalcost} = {\ttfamily 0}, \/  const REAL {\em maxTime} = {\ttfamily -\/1})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00092_a1c7ae823f9e31169b453f36d15c049b8}
+
+
+Launch optimization for multiple runs of N steps. 
+\begin{DoxyParams}{Parameters}
+\item[{\em nbCycle,:}]the number of runs (cycles) to perform. The structure is randomized at the beginning of each cycle. If nbCycle==-\/1, this will run indefinitely. The nbCycle parameter is decreased after each run. \item[{\em nbSteps,:}]the number of steps to go. This number is modified (decreases!) as the refinement goes on. \item[{\em silent}]: if true, absolutely no message should be printed (except debugging) \item[{\em finalcost,:}]the optimization will stop if overall cost fallse below this value \item[{\em maxTime,:}]the optimization will stop after the given number of seconds has been spent optimizing (ignored if $<$0). \end{DoxyParams}
+
+
+Implements {\bf ObjCryst::OptimizationObj} \doxyref{}{p.}{a00054_aa53575dbda2ec3f561bed934beb4ca6f}.\index{ObjCryst::SimplexObj@{ObjCryst::SimplexObj}!Optimize@{Optimize}}
+\index{Optimize@{Optimize}!ObjCryst::SimplexObj@{ObjCryst::SimplexObj}}
+\paragraph[{Optimize}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::SimplexObj::Optimize (long \& {\em nbSteps}, \/  const bool {\em silent} = {\ttfamily false}, \/  const REAL {\em finalcost} = {\ttfamily 0}, \/  const REAL {\em maxTime} = {\ttfamily -\/1})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00092_aa8bf4b209e2ce6229722b18ec9911010}
+
+
+Launch optimization (a single run) for N steps. 
+\begin{DoxyParams}{Parameters}
+\item[{\em nbSteps,:}]the number of steps to go. This number is modified (decreases!) as the refinement goes on. \item[{\em silent}]: if true, absolutely no message should be printed (except debugging) \item[{\em finalcost,:}]the optimization will stop if overall cost fallse below this value \item[{\em maxTime,:}]the optimization will stop after the given number of seconds has been spent optimizing (ignored if $<$0). \end{DoxyParams}
+
+
+Implements {\bf ObjCryst::OptimizationObj} \doxyref{}{p.}{a00054_a08c77dc6ec80f63bf067ef2968a0b6dc}.\index{ObjCryst::SimplexObj@{ObjCryst::SimplexObj}!XMLInput@{XMLInput}}
+\index{XMLInput@{XMLInput}!ObjCryst::SimplexObj@{ObjCryst::SimplexObj}}
+\paragraph[{XMLInput}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::SimplexObj::XMLInput (istream \& {\em is}, \/  const {\bf XMLCrystTag} \& {\em tag})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00092_ae6ed0602ffdd2db1a10be80820a0a285}
+
+
+Input in XML format from a stream, restoring the set of refined objects and the associated cost functions. Note that the corresponding objects must have been loaded in memory before, else shit happens. 
+
+Implements {\bf ObjCryst::OptimizationObj} \doxyref{}{p.}{a00054_aa07aee60f56780e2c56fb20f4a5f48a8}.\index{ObjCryst::SimplexObj@{ObjCryst::SimplexObj}!XMLOutput@{XMLOutput}}
+\index{XMLOutput@{XMLOutput}!ObjCryst::SimplexObj@{ObjCryst::SimplexObj}}
+\paragraph[{XMLOutput}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::SimplexObj::XMLOutput (ostream \& {\em os}, \/  int {\em indent} = {\ttfamily 0}) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00092_a7111042ca3a7201039a25fe548cb524c}
+
+
+Output a description of the object in XML format to a stream. This saves the list of refined object and the cost functions, as well as options for the refinement. The refined objects are {\bfseries not} saved, so this must be done somewhere else (they must be reloaded before this object). 
+
+Implements {\bf ObjCryst::OptimizationObj} \doxyref{}{p.}{a00054_a6b7726159bb0d5dad1c7eebaee78f53a}.
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Simplex.h\end{DoxyCompactItemize}

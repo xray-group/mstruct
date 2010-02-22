@@ -1,0 +1,992 @@
+\subsection{ObjCryst::Molecule Class Reference}
+\label{a00046}\index{ObjCryst::Molecule@{ObjCryst::Molecule}}
+
+
+\doxyref{Molecule}{p.}{a00046} : class for complex scatterer descriptions using cartesian coordinates with bond length/angle restraints, and moves either of individual atoms or using torsion bonds.  
+Inheritance diagram for ObjCryst::Molecule::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3cm]{a00046}
+\end{center}
+\end{figure}
+\subsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf FlipGroup}
+\begin{DoxyCompactList}\small\item\em When 3(A1..1n) or more atoms are connected to a same atom A, it defines a 'flip' group, where it is possible to rotate bonds to their symmetric with respect to one plane defined by atoms Ai-\/A-\/Aj. \item\end{DoxyCompactList}\item 
+struct {\bf RotorGroup}
+\begin{DoxyCompactList}\small\item\em Defines a group of atoms which can be rotated around an axis defined by two other atoms. \item\end{DoxyCompactList}\item 
+struct {\bf StretchModeGroup}
+\begin{DoxyCompactList}\small\item\em Group of concurrent StretchModes (affecting common restraints) A given stretch mode can only belong to one group. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Molecule} ({\bf Crystal} \&cryst, const string \&name=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Constructor. \item\end{DoxyCompactList}\item 
+{\bf Molecule} (const {\bf Molecule} \&old)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \item\end{DoxyCompactList}\item 
+{\bf $\sim$Molecule} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \item\end{DoxyCompactList}\item 
+virtual {\bf Molecule} $\ast$ {\bf CreateCopy} () const 
+\item 
+virtual const string \& {\bf GetClassName} () const 
+\begin{DoxyCompactList}\small\item\em Name for this class (\char`\"{}RefinableObj\char`\"{}, \char`\"{}Crystal\char`\"{},. \item\end{DoxyCompactList}\item 
+virtual void {\bf Print} () const \label{a00046_a5c4fde55689b7e76705d1f04005802c6}
+
+\begin{DoxyCompactList}\small\item\em Print some info about the scatterer (ideally this should be one line...). \item\end{DoxyCompactList}\item 
+virtual void {\bf XMLOutput} (ostream \&os, int indent=0) const 
+\begin{DoxyCompactList}\small\item\em Output to stream in well-\/formed XML. \item\end{DoxyCompactList}\item 
+virtual void {\bf XMLInput} (istream \&is, const {\bf XMLCrystTag} \&tag)
+\begin{DoxyCompactList}\small\item\em Input From stream. \item\end{DoxyCompactList}\item 
+virtual void {\bf UpdateDisplay} () const 
+\begin{DoxyCompactList}\small\item\em If there is an interface, this should be automatically be called each time there is a 'new, significant' configuration to report. \item\end{DoxyCompactList}\item 
+virtual void {\bf BeginOptimization} (const bool allowApproximations=false, const bool enableRestraints=false)
+\begin{DoxyCompactList}\small\item\em This should be called by any optimization class at the begining of an optimization. \item\end{DoxyCompactList}\item 
+virtual void {\bf EndOptimization} ()
+\begin{DoxyCompactList}\small\item\em This should be called by any optimization class at the end of an optimization. \item\end{DoxyCompactList}\item 
+virtual void {\bf RandomizeConfiguration} ()
+\begin{DoxyCompactList}\small\item\em Randomize Configuration (before a global optimization). \item\end{DoxyCompactList}\item 
+virtual void {\bf GlobalOptRandomMove} (const REAL mutationAmplitude, const {\bf RefParType} $\ast$type)
+\begin{DoxyCompactList}\small\item\em Make a random move of the current configuration. \item\end{DoxyCompactList}\item 
+virtual REAL {\bf GetLogLikelihood} () const 
+\begin{DoxyCompactList}\small\item\em Get -\/log(likelihood) of the current configuration for the object. \item\end{DoxyCompactList}\item 
+virtual unsigned int {\bf GetNbLSQFunction} () const \label{a00046_a1496167f3d3eae46a1f1eb49110808ce}
+
+\begin{DoxyCompactList}\small\item\em Number of LSQ functions. \item\end{DoxyCompactList}\item 
+virtual const CrystVector\_\-REAL \& {\bf GetLSQCalc} (const unsigned int) const \label{a00046_ab9b0b6172128e4aae0aa4a26e9024550}
+
+\begin{DoxyCompactList}\small\item\em Get the current calculated value for the LSQ function. \item\end{DoxyCompactList}\item 
+virtual const CrystVector\_\-REAL \& {\bf GetLSQObs} (const unsigned int) const \label{a00046_a044e12d7bd85fc13552ce3ef24776af5}
+
+\begin{DoxyCompactList}\small\item\em Get the observed values for the LSQ function. \item\end{DoxyCompactList}\item 
+virtual const CrystVector\_\-REAL \& {\bf GetLSQWeight} (const unsigned int) const \label{a00046_ac4c7e12b5f9ed0ddfeddd68e85291a17}
+
+\begin{DoxyCompactList}\small\item\em Get the weight values for the LSQ function. \item\end{DoxyCompactList}\item 
+virtual const CrystVector\_\-REAL \& {\bf GetLSQDeriv} (const unsigned int n, {\bf RefinablePar} \&par)
+\begin{DoxyCompactList}\small\item\em Get the first derivative values for the LSQ function, for a given parameter. \item\end{DoxyCompactList}\item 
+virtual void {\bf TagNewBestConfig} () const 
+\begin{DoxyCompactList}\small\item\em During a global optimization, tells the object that the current config is the latest \char`\"{}best\char`\"{} config. \item\end{DoxyCompactList}\item 
+virtual int {\bf GetNbComponent} () const \label{a00046_a8787cb87d65117d40a595162cdab141e}
+
+\begin{DoxyCompactList}\small\item\em Number of components in the scatterer (eg number of point scatterers). \item\end{DoxyCompactList}\item 
+virtual const {\bf ScatteringComponentList} \& {\bf GetScatteringComponentList} () const 
+\begin{DoxyCompactList}\small\item\em Get the list of all scattering components for this scatterer. \item\end{DoxyCompactList}\item 
+virtual string {\bf GetComponentName} (const int i) const 
+\begin{DoxyCompactList}\small\item\em Name for the i-\/th component of this scatterer. \item\end{DoxyCompactList}\item 
+virtual ostream \& {\bf POVRayDescription} (ostream \&os, const {\bf CrystalPOVRayOptions} \&options) const 
+\item 
+virtual void {\bf GLInitDisplayList} (const bool onlyIndependentAtoms=false, const REAL xMin=-\/.1, const REAL xMax=1.1, const REAL yMin=-\/.1, const REAL yMax=1.1, const REAL zMin=-\/.1, const REAL zMax=1.1, const bool displayEnantiomer=false, const bool displayNames=false) const 
+\item 
+void {\bf AddAtom} (const REAL x, const REAL y, const REAL z, const {\bf ScatteringPower} $\ast$pPow, const string \&name, const bool updateDisplay=true)
+\begin{DoxyCompactList}\small\item\em Add an atom. \item\end{DoxyCompactList}\item 
+vector$<$ {\bf MolAtom} $\ast$ $>$::iterator {\bf RemoveAtom} ({\bf MolAtom} \&, const bool del=true)
+\begin{DoxyCompactList}\small\item\em Remove an atom. \item\end{DoxyCompactList}\item 
+void {\bf AddBond} ({\bf MolAtom} \&atom1, {\bf MolAtom} \&atom2, const REAL length, const REAL sigma, const REAL delta, const REAL bondOrder=1., const bool updateDisplay=true)
+\begin{DoxyCompactList}\small\item\em Add a bond. \item\end{DoxyCompactList}\item 
+vector$<$ {\bf MolBond} $\ast$ $>$::iterator {\bf RemoveBond} (const {\bf MolBond} \&, const bool del=true)
+\begin{DoxyCompactList}\small\item\em Remove a bond. \item\end{DoxyCompactList}\item 
+vector$<$ {\bf MolBond} $\ast$ $>$::const\_\-iterator {\bf FindBond} (const {\bf MolAtom} \&, const {\bf MolAtom} \&) const 
+\begin{DoxyCompactList}\small\item\em Searches whether a bond between two atoms already exists. \item\end{DoxyCompactList}\item 
+vector$<$ {\bf MolBond} $\ast$ $>$::iterator {\bf FindBond} (const {\bf MolAtom} \&, const {\bf MolAtom} \&)
+\begin{DoxyCompactList}\small\item\em Searches whether a bond between two atoms already exists. \item\end{DoxyCompactList}\item 
+void {\bf AddBondAngle} ({\bf MolAtom} \&atom1, {\bf MolAtom} \&atom2, {\bf MolAtom} \&atom3, const REAL angle, const REAL sigma, const REAL delta, const bool updateDisplay=true)
+\begin{DoxyCompactList}\small\item\em Add a bond angle restraint. \item\end{DoxyCompactList}\item 
+vector$<$ {\bf MolBondAngle} $\ast$ $>$::iterator {\bf RemoveBondAngle} (const {\bf MolBondAngle} \&, const bool del=true)
+\begin{DoxyCompactList}\small\item\em Remove a BondAngle. \item\end{DoxyCompactList}\item 
+vector$<$ {\bf MolBondAngle} $\ast$ $>$::const\_\-iterator {\bf FindBondAngle} (const {\bf MolAtom} \&at1, const {\bf MolAtom} \&at0, const {\bf MolAtom} \&at2) const 
+\begin{DoxyCompactList}\small\item\em Searches whether a bond between three atoms already exists, searching for either (at1,at2,at3) and (at3,at2,at1), as these are equivalent. \item\end{DoxyCompactList}\item 
+void {\bf AddDihedralAngle} ({\bf MolAtom} \&atom1, {\bf MolAtom} \&atom2, {\bf MolAtom} \&atom3, {\bf MolAtom} \&atom4, const REAL angle, const REAL sigma, const REAL delta, const bool updateDisplay=true)
+\begin{DoxyCompactList}\small\item\em Add a dihedral angle restraint. \item\end{DoxyCompactList}\item 
+vector$<$ {\bf MolDihedralAngle} $\ast$ $>$::iterator {\bf RemoveDihedralAngle} (const {\bf MolDihedralAngle} \&, const bool del=true)
+\begin{DoxyCompactList}\small\item\em Remove a dihedral angle. \item\end{DoxyCompactList}\item 
+vector$<$ {\bf MolDihedralAngle} $\ast$ $>$::const\_\-iterator {\bf FindDihedralAngle} (const {\bf MolAtom} \&at1, const {\bf MolAtom} \&at2, const {\bf MolAtom} \&at3, const {\bf MolAtom} \&at4) const 
+\begin{DoxyCompactList}\small\item\em Searches whether a dihedral between four atoms already exists, searching for either (at1,at2,at3,at4) and (at4,at3,at2,at1), as these are equivalent. \item\end{DoxyCompactList}\item 
+void {\bf AddRigidGroup} (const {\bf RigidGroup} \&, const bool updateDisplay=true)
+\begin{DoxyCompactList}\small\item\em Add a rigid group of atoms. \item\end{DoxyCompactList}\item 
+std::vector$<$ {\bf RigidGroup} $\ast$ $>$::iterator {\bf RemoveRigidGroup} (const {\bf RigidGroup} \&group, const bool updateDisplay=true, const bool del=true)
+\begin{DoxyCompactList}\small\item\em Remove a rigid group of atoms. \item\end{DoxyCompactList}\item 
+{\bf MolAtom} \& {\bfseries GetAtom} (unsigned int i)\label{a00046_a0fc6f489b5ca70ec72f0968068c409d7}
+
+\item 
+const {\bf MolAtom} \& {\bfseries GetAtom} (unsigned int i) const \label{a00046_a73cd31a5e84043b21878c8e6131f528a}
+
+\item 
+{\bf MolAtom} \& {\bfseries GetAtom} (const string \&name)\label{a00046_a7532113b6b8d93659e319883bd709cbc}
+
+\item 
+const {\bf MolAtom} \& {\bfseries GetAtom} (const string \&name) const \label{a00046_ace9ed3d2234a31be6f44d560e99edd14}
+
+\item 
+vector$<$ {\bf MolAtom} $\ast$ $>$::reverse\_\-iterator {\bf FindAtom} (const string \&name)
+\begin{DoxyCompactList}\small\item\em Search a \doxyref{MolAtom}{p.}{a00042} from its name. \item\end{DoxyCompactList}\item 
+vector$<$ {\bf MolAtom} $\ast$ $>$::const\_\-reverse\_\-iterator {\bf FindAtom} (const string \&name) const 
+\begin{DoxyCompactList}\small\item\em Search a \doxyref{MolAtom}{p.}{a00042} from its name. \item\end{DoxyCompactList}\item 
+void {\bf OptimizeConformation} (const long nbTrial=10000, const REAL stopCost=0.)
+\begin{DoxyCompactList}\small\item\em Minimize configuration from internal restraints (bond lengths, angles and dihedral angles). \item\end{DoxyCompactList}\item 
+void {\bf OptimizeConformationSteepestDescent} (const REAL maxStep=0.1, const unsigned nbStep=1)
+\begin{DoxyCompactList}\small\item\em Optimize the conformation from internal restraints (bond lengths, angles and dihedral angles), using a steepest descent algorithm. \item\end{DoxyCompactList}\item 
+void {\bf MolecularDynamicsEvolve} (std::map$<$ {\bf MolAtom} $\ast$, {\bf XYZ} $>$ \&v0, const unsigned nbStep, const REAL dt, const std::vector$<$ {\bf MolBond} $\ast$ $>$ \&vb, const std::vector$<$ {\bf MolBondAngle} $\ast$ $>$ \&va, const std::vector$<$ {\bf MolDihedralAngle} $\ast$ $>$ \&vd, std::map$<$ {\bf RigidGroup} $\ast$, std::pair$<$ {\bf XYZ}, {\bf XYZ} $>$ $>$ \&vr, REAL nrj0=0)
+\begin{DoxyCompactList}\small\item\em Change the conformation of the molecule using molecular dynamics principles. \item\end{DoxyCompactList}\item 
+const std::vector$<$ {\bf MolAtom} $\ast$ $>$ \& {\bfseries GetAtomList} () const \label{a00046_a61a315fb7ee03b2a96864342fe4600c5}
+
+\item 
+const std::vector$<$ {\bf MolBond} $\ast$ $>$ \& {\bfseries GetBondList} () const \label{a00046_a275e909fe6ba8357e29b979f6840005c}
+
+\item 
+const std::vector$<$ {\bf MolBondAngle} $\ast$ $>$ \& {\bfseries GetBondAngleList} () const \label{a00046_a3282f5961beef5a6369f4aa70d6272b7}
+
+\item 
+const std::vector$<$ {\bf MolDihedralAngle} $\ast$ $>$ \& {\bfseries GetDihedralAngleList} () const \label{a00046_a95389aeb48405b4b4772c69e5edd9499}
+
+\item 
+std::vector$<$ {\bf MolAtom} $\ast$ $>$ \& {\bfseries GetAtomList} ()\label{a00046_af437a692e431372f8bdb37d23baf97f4}
+
+\item 
+std::vector$<$ {\bf MolBond} $\ast$ $>$ \& {\bfseries GetBondList} ()\label{a00046_a900e3d7d54b7d8481f5c24665a3dda3b}
+
+\item 
+std::vector$<$ {\bf MolBondAngle} $\ast$ $>$ \& {\bfseries GetBondAngleList} ()\label{a00046_a66bce84293ff7457a68878281dea862a}
+
+\item 
+std::vector$<$ {\bf MolDihedralAngle} $\ast$ $>$ \& {\bfseries GetDihedralAngleList} ()\label{a00046_a145da462c88c4859e3656872427dbdd4}
+
+\item 
+std::list$<$ {\bf StretchModeBondLength} $>$ \& {\bfseries GetStretchModeBondLengthList} ()\label{a00046_a2bde766df8213037d92110e1d61404e5}
+
+\item 
+std::list$<$ {\bf StretchModeBondAngle} $>$ \& {\bfseries GetStretchModeBondAngleList} ()\label{a00046_a3c84c2ee25cd4207b3b0033421382d5d}
+
+\item 
+std::list$<$ {\bf StretchModeTorsion} $>$ \& {\bfseries GetStretchModeTorsionList} ()\label{a00046_aef5aa02c67aef3248c36c86719dd0f75}
+
+\item 
+const std::list$<$ {\bf StretchModeBondLength} $>$ \& {\bfseries GetStretchModeBondLengthList} () const \label{a00046_a07fa91c73992177983dc99bab7acd61c}
+
+\item 
+const std::list$<$ {\bf StretchModeBondAngle} $>$ \& {\bfseries GetStretchModeBondAngleList} () const \label{a00046_a60e4c6791d3f45cb18e9895ac272a673}
+
+\item 
+const std::list$<$ {\bf StretchModeTorsion} $>$ \& {\bfseries GetStretchModeTorsionList} () const \label{a00046_a5b08fa7fb5aff3a909e9c836cce6e8ad}
+
+\item 
+const std::vector$<$ {\bf RigidGroup} $\ast$ $>$ \& {\bf GetRigidGroupList} () const 
+\begin{DoxyCompactList}\small\item\em List of rigid group of atoms. \item\end{DoxyCompactList}\item 
+std::vector$<$ {\bf RigidGroup} $\ast$ $>$ \& {\bf GetRigidGroupList} ()
+\begin{DoxyCompactList}\small\item\em List of rigid group of atoms. \item\end{DoxyCompactList}\item 
+void {\bf RotateAtomGroup} (const {\bf MolAtom} \&at1, const {\bf MolAtom} \&at2, const set$<$ {\bf MolAtom} $\ast$ $>$ \&atoms, const REAL angle, const bool keepCenter=true)
+\begin{DoxyCompactList}\small\item\em Rotate a group of atoms around an axis defined by two atoms. \item\end{DoxyCompactList}\item 
+void {\bf RotateAtomGroup} (const {\bf MolAtom} \&at, const REAL vx, const REAL vy, const REAL vz, const set$<$ {\bf MolAtom} $\ast$ $>$ \&atoms, const REAL angle, const bool keepCenter=true)
+\begin{DoxyCompactList}\small\item\em Rotate a group of atoms around an axis defined by one atom and a vector. \item\end{DoxyCompactList}\item 
+void {\bf TranslateAtomGroup} (const set$<$ {\bf MolAtom} $\ast$ $>$ \&atoms, const REAL dx, const REAL dy, const REAL dz, const bool keepCenter=true)
+\begin{DoxyCompactList}\small\item\em Translate a group of atoms in a given direction. \item\end{DoxyCompactList}\item 
+void {\bf RestraintStatus} (ostream \&os) const \label{a00046_ae7311bdcb3ce15284228bfa2ab140e86}
+
+\begin{DoxyCompactList}\small\item\em Print the status of all restraints (bond length, angles...). \item\end{DoxyCompactList}\item 
+const map$<$ {\bf MolAtom} $\ast$, set$<$ {\bf MolAtom} $\ast$ $>$ $>$ \& {\bf GetConnectivityTable} ()\label{a00046_ac558aa9940aec9e33ae710fb45b3d156}
+
+\begin{DoxyCompactList}\small\item\em Get the connectivity table. \item\end{DoxyCompactList}\item 
+{\bf RefinableObjClock} \& {\bf GetBondListClock} ()\label{a00046_a5ab539b95ffd60978ae7545ec10cc85b}
+
+\begin{DoxyCompactList}\small\item\em get the clock associated to the list of bonds \item\end{DoxyCompactList}\item 
+const {\bf RefinableObjClock} \& {\bf GetBondListClock} () const \label{a00046_ac754cabe98638a6f9efd0bf63a667c03}
+
+\begin{DoxyCompactList}\small\item\em get the clock associated to the list of bonds \item\end{DoxyCompactList}\item 
+{\bf RefinableObjClock} \& {\bf GetAtomPositionClock} ()\label{a00046_a46f35ddb18b731cfbb104d45ed96cdc7}
+
+\begin{DoxyCompactList}\small\item\em Get the clock associated to the atomic positions. \item\end{DoxyCompactList}\item 
+const {\bf RefinableObjClock} \& {\bf GetAtomPositionClock} () const \label{a00046_a8c0a4e5e8fbdd2190c2838be9d4ea42e}
+
+\begin{DoxyCompactList}\small\item\em Get the clock associated to the atomic positions. \item\end{DoxyCompactList}\item 
+{\bf RefinableObjClock} \& {\bf GetRigidGroupClock} ()\label{a00046_a5d5be56a81d49a3e067957b6e959b477}
+
+\begin{DoxyCompactList}\small\item\em Get the clock associated to the list of rigid groups (clicked also whenever a rigid group is modified). \item\end{DoxyCompactList}\item 
+const {\bf RefinableObjClock} \& {\bf GetRigidGroupClock} () const \label{a00046_ae6b950305c66f518df22e52eb6e1661a}
+
+\begin{DoxyCompactList}\small\item\em Get the clock associated to the list of rigid groups (clicked also whenever a rigid group is modified). \item\end{DoxyCompactList}\item 
+void {\bf RigidifyWithDihedralAngles} ()
+\begin{DoxyCompactList}\small\item\em Add dihedral angles so as to rigidify the \doxyref{Molecule}{p.}{a00046}. \item\end{DoxyCompactList}\item 
+REAL {\bf BondLengthRandomChange} (const {\bf StretchModeBondLength} \&mode, const REAL amplitude, const bool respectRestraint=true)
+\begin{DoxyCompactList}\small\item\em Stretch a bond, while respecting the \doxyref{Restraint}{p.}{a00080} (if any). \item\end{DoxyCompactList}\item 
+REAL {\bf BondAngleRandomChange} (const {\bf StretchModeBondAngle} \&mode, const REAL amplitude, const bool respectRestraint=true)
+\begin{DoxyCompactList}\small\item\em change a bond angle, while respecting the \doxyref{Restraint}{p.}{a00080} (if any). \item\end{DoxyCompactList}\item 
+REAL {\bf DihedralAngleRandomChange} (const {\bf StretchModeTorsion} \&mode, const REAL amplitude, const bool respectRestraint=true)
+\begin{DoxyCompactList}\small\item\em Change a dihedral angle, while respecting the \doxyref{Restraint}{p.}{a00080} (if any). \item\end{DoxyCompactList}\item 
+const {\bf MolAtom} $\ast$ {\bf GetCenterAtom} () const 
+\begin{DoxyCompactList}\small\item\em Get the atom defining the origin of the \doxyref{Molecule}{p.}{a00046} Equal to 0 if no atom as been set. \item\end{DoxyCompactList}\item 
+void {\bf SetCenterAtom} (const {\bf MolAtom} \&at)
+\begin{DoxyCompactList}\small\item\em Get the atom defining the origin of the \doxyref{Molecule}{p.}{a00046} Equal to 0 if no atom as been set. \item\end{DoxyCompactList}\item 
+const std::vector$<$ {\bf MolZAtom} $>$ \& {\bf AsZMatrix} (const bool keeporder) const 
+\begin{DoxyCompactList}\small\item\em \doxyref{Molecule}{p.}{a00046} as Z-\/matrix. \item\end{DoxyCompactList}\item 
+void {\bf SetDeleteSubObjInDestructor} (const bool b)
+\begin{DoxyCompactList}\small\item\em Set whether to delete the MolAtoms, MolBonds, MolBondAngles and MolDihedralAngles in the destructor. \item\end{DoxyCompactList}\item 
+virtual void {\bf InitRefParList} ()
+\item 
+void {\bf BuildRingList} ()
+\begin{DoxyCompactList}\small\item\em Build the list of rings in the molecule. \item\end{DoxyCompactList}\item 
+void {\bf BuildConnectivityTable} () const 
+\begin{DoxyCompactList}\small\item\em Build the Connectivity table. \item\end{DoxyCompactList}\item 
+void {\bf BuildRotorGroup} ()
+\begin{DoxyCompactList}\small\item\em Build the groups of atoms that will be rotated during global optimization. \item\end{DoxyCompactList}\item 
+void {\bf TuneGlobalOptimRotationAmplitude} ()
+\begin{DoxyCompactList}\small\item\em Tune the rotation amplitude for free torsions and for the overall \doxyref{Molecule}{p.}{a00046} Rotation. \item\end{DoxyCompactList}\item 
+void {\bf BuildFlipGroup} ()
+\begin{DoxyCompactList}\small\item\em Build the groups of atoms that can be flipped. \item\end{DoxyCompactList}\item 
+void {\bf BuildStretchModeBondLength} ()\label{a00046_abb51819a0eae8b612fb4007ffa16d2b7}
+
+\begin{DoxyCompactList}\small\item\em Build the groups of atoms moved when stretching a bond length, while respecting the \doxyref{Molecule}{p.}{a00046} restraints. \item\end{DoxyCompactList}\item 
+void {\bf BuildStretchModeBondAngle} ()\label{a00046_a3d507a4e25612a7412cbcc84b5a831ae}
+
+\begin{DoxyCompactList}\small\item\em Build the groups of atoms moved when changing a bond angle, while respecting the \doxyref{Molecule}{p.}{a00046} restraints. \item\end{DoxyCompactList}\item 
+void {\bf BuildStretchModeTorsion} ()\label{a00046_a18d44782b4141dfab334250967d202ad}
+
+\begin{DoxyCompactList}\small\item\em Build the groups of atoms moved when changing a dihedral angle, while respecting the \doxyref{Molecule}{p.}{a00046} restraints. \item\end{DoxyCompactList}\item 
+void {\bf BuildStretchModeTwist} ()
+\begin{DoxyCompactList}\small\item\em Build the groups of atoms used to twist internally the \doxyref{Molecule}{p.}{a00046}, e.g. \item\end{DoxyCompactList}\item 
+void {\bf BuildStretchModeGroups} ()
+\begin{DoxyCompactList}\small\item\em Separate \doxyref{StretchMode}{p.}{a00096} that break more than their assigned restraint from others. \item\end{DoxyCompactList}\item 
+void {\bf BuildMDAtomGroups} ()
+\begin{DoxyCompactList}\small\item\em Find groups of atoms that cannot be moved relatively to each other using the free or non-\/free stretch modes. \item\end{DoxyCompactList}\item 
+void {\bf UpdateScattCompList} () const \label{a00046_a2807a35e4746ca9762c009bedb9d02ef}
+
+\begin{DoxyCompactList}\small\item\em Update the \doxyref{Molecule::mScattCompList}{p.}{a00046_ae681f50b04c32c7139727c675dc04b67} from the cartesian coordinates of all atoms, and the orientation parameters. \item\end{DoxyCompactList}\item 
+void {\bf InitOptions} ()\label{a00046_a15f72c789ad6e4cdae3a667d3d81e7eb}
+
+\begin{DoxyCompactList}\small\item\em Build options for this object. \item\end{DoxyCompactList}\item 
+void {\bf ResetRigidGroupsPar} () const 
+\begin{DoxyCompactList}\small\item\em Set the orientation \& translation parameters of all rigid groups to 0, after correcting the atomic positions. \item\end{DoxyCompactList}\item 
+void {\bf FlipAtomGroup} (const {\bf FlipGroup} \&)\label{a00046_a69fa14ccb89d13905370e0a75b1e83ff}
+
+\begin{DoxyCompactList}\small\item\em Flip a group of atom. See \doxyref{Molecule::FlipGroup}{p.}{a00027}. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf ScatteringComponentList} {\bf mScattCompList}
+\begin{DoxyCompactList}\small\item\em The list of scattering components. \item\end{DoxyCompactList}\item 
+vector$<$ {\bf MolAtom} $\ast$ $>$ {\bf mvpAtom}
+\begin{DoxyCompactList}\small\item\em The list of atoms. \item\end{DoxyCompactList}\item 
+vector$<$ {\bf MolBond} $\ast$ $>$ {\bf mvpBond}
+\begin{DoxyCompactList}\small\item\em The list of bonds. \item\end{DoxyCompactList}\item 
+vector$<$ {\bf MolBondAngle} $\ast$ $>$ {\bf mvpBondAngle}
+\begin{DoxyCompactList}\small\item\em The list of bond angles. \item\end{DoxyCompactList}\item 
+vector$<$ {\bf MolDihedralAngle} $\ast$ $>$ {\bf mvpDihedralAngle}
+\begin{DoxyCompactList}\small\item\em The list of dihedral angles. \item\end{DoxyCompactList}\item 
+map$<$ {\bf MolAtom} $\ast$, std::vector$<$ {\bf MolBond} $\ast$ $>$ $>$ {\bf mvAtomBond}
+\begin{DoxyCompactList}\small\item\em List of Bonds for each atom. \item\end{DoxyCompactList}\item 
+std::vector$<$ {\bf RigidGroup} $\ast$ $>$ {\bf mvRigidGroup}
+\begin{DoxyCompactList}\small\item\em Rigid groups of atoms. \item\end{DoxyCompactList}\item 
+list$<$ {\bf MolRing} $>$ {\bf mvRing}
+\begin{DoxyCompactList}\small\item\em The list of rings. \item\end{DoxyCompactList}\item 
+{\bf Quaternion} {\bf mQuat}
+\begin{DoxyCompactList}\small\item\em The unit quaternion defining the orientation. \item\end{DoxyCompactList}\item 
+bool {\bf mDeleteSubObjInDestructor}
+\begin{DoxyCompactList}\small\item\em Base Rotation amplitude (in radians) for the \doxyref{Molecule}{p.}{a00046}, so that the average atomic displacement is equal to 0.1 A. \item\end{DoxyCompactList}\item 
+REAL {\bfseries mBaseRotationAmplitude}\label{a00046_a1c0fdb65e11dc8c46c525b18826e013c}
+
+\item 
+{\bf RefinableObjClock} {\bfseries mClockAtomList}\label{a00046_a813452a36a4706a6590ec8be5e50d691}
+
+\item 
+{\bf RefinableObjClock} {\bfseries mClockBondList}\label{a00046_a4276d3c873b3b0a0c86fbaef9f362403}
+
+\item 
+{\bf RefinableObjClock} {\bfseries mClockBondAngleList}\label{a00046_a89305fe20d24689db9cef6165300cb3c}
+
+\item 
+{\bf RefinableObjClock} {\bfseries mClockDihedralAngleList}\label{a00046_a52cdc04f8a7e0b60f86c1ec6e1dd9c00}
+
+\item 
+{\bf RefinableObjClock} {\bfseries mClockRigidGroup}\label{a00046_a031fb163482a63573aa2c0abb721a40c}
+
+\item 
+{\bf RefinableObjClock} {\bfseries mClockAtomPosition}\label{a00046_a779328aa75fbd492d25d8f1e78ba3120}
+
+\item 
+{\bf RefinableObjClock} {\bfseries mClockAtomScattPow}\label{a00046_aaa968c9d6b66e7f43784b6373333939d}
+
+\item 
+{\bf RefinableObjClock} {\bfseries mClockOrientation}\label{a00046_a9bd4e0dabed314962e489a29ed20a33c}
+
+\item 
+{\bf RefinableObjClock} {\bfseries mClockLogLikelihood}\label{a00046_a853e81d1fd9916d2a8e6cfee07415f7a}
+
+\item 
+{\bf RefinableObjClock} {\bfseries mClockConnectivityTable}\label{a00046_a5ab45bcd6837946dde8ef134874ae02b}
+
+\item 
+{\bf RefinableObjClock} {\bfseries mClockRingList}\label{a00046_ab19b748ec7e4ead2947027b2f38b60e2}
+
+\item 
+{\bf RefinableObjClock} {\bfseries mClockRotorGroup}\label{a00046_abdfb80e948dc91137f5c568c99b1554a}
+
+\item 
+{\bf RefinableObjClock} {\bfseries mClockFlipGroup}\label{a00046_a9654156a7376a5265c6555c23fa7316c}
+
+\item 
+{\bf RefinableObjClock} {\bfseries mClockStretchModeBondLength}\label{a00046_a0320d6fc63fdd2d3454f6c93e21fb82d}
+
+\item 
+{\bf RefinableObjClock} {\bfseries mClockStretchModeBondAngle}\label{a00046_ae641b2ae58267ce842c21e9e2c631a7e}
+
+\item 
+{\bf RefinableObjClock} {\bfseries mClockStretchModeTorsion}\label{a00046_ae932e4a8a69c7fb3422b703854478fc2}
+
+\item 
+{\bf RefinableObjClock} {\bfseries mClockStretchModeTwist}\label{a00046_a83e297fa4cd4f1bebe17b9cf26838b7f}
+
+\item 
+{\bf RefinableObjClock} {\bfseries mClockMDAtomGroup}\label{a00046_acaeac88a7cea8c699fecb137337e9f2d}
+
+\item 
+unsigned long {\bfseries mLocalParamSet}\label{a00046_ad176581e146e508869e67776f0e2e3d2}
+
+\item 
+unsigned long {\bfseries mRandomConformChangeNbTest}\label{a00046_a6fe920696fe0d0f811e35fe677c7b664}
+
+\item 
+unsigned long {\bfseries mRandomConformChangeNbAccept}\label{a00046_a3a52a7e8ab51acbe58c21e5f2fac2f21}
+
+\item 
+REAL {\bfseries mRandomConformChangeTemp}\label{a00046_a78242220a03384972970306eab3c84cc}
+
+\item 
+REAL {\bfseries mLastLogLike}\label{a00046_ae424310a32f3ed915c33524e9c325549}
+
+\item 
+bool {\bfseries mIsSelfOptimizing}\label{a00046_a3a266d6dc8d55ee94717b0f2137f20ad}
+
+\item 
+{\bf RefObjOpt} {\bf mFlexModel}
+\begin{DoxyCompactList}\small\item\em OPtion for the different types of flexibility possible for this molecule: rigid body, free atoms + restraints, torsion angles. \item\end{DoxyCompactList}\item 
+{\bf RefObjOpt} {\bf mAutoOptimizeConformation}
+\begin{DoxyCompactList}\small\item\em Option to automatically optimize the starting conformation, if the total restraint cost is too high. \item\end{DoxyCompactList}\item 
+{\bf RefObjOpt} {\bf mOptimizeOrientation}
+\begin{DoxyCompactList}\small\item\em Option to optimize the Molecule's orientation. \item\end{DoxyCompactList}\item 
+{\bf RefObjOpt} {\bf mMoleculeCenter}\label{a00046_a4ac986f017f968e59af58297b4a50d7f}
+
+\begin{DoxyCompactList}\small\item\em Option to choose the center of rotation of the \doxyref{Molecule}{p.}{a00046} for the global orientation either as the geometrical center, or as a given atom. \item\end{DoxyCompactList}\item 
+const {\bf MolAtom} $\ast$ {\bf mpCenterAtom}\label{a00046_a924f7062c1e35790e152a35166121266}
+
+\begin{DoxyCompactList}\small\item\em \doxyref{Atom}{p.}{a00008} chosen as center of rotation, if mRotationCenter is set to use an atom rather than the geometrical center. \item\end{DoxyCompactList}\item 
+map$<$ {\bf MolAtom} $\ast$, set$<$ {\bf MolAtom} $\ast$ $>$ $>$ {\bf mConnectivityTable}
+\begin{DoxyCompactList}\small\item\em Connectivity table: for each atom, keep the list of atoms bonded to it. \item\end{DoxyCompactList}\item 
+list$<$ {\bf RotorGroup} $>$ {\bf mvRotorGroupTorsion}
+\begin{DoxyCompactList}\small\item\em List of RotorGroups corresponding to free torsion bonds. \item\end{DoxyCompactList}\item 
+list$<$ {\bf RotorGroup} $>$ {\bf mvRotorGroupTorsionSingleChain}
+\begin{DoxyCompactList}\small\item\em List of RotorGroups corresponding to free torsion bonds, but with only one chain of atoms listed. \item\end{DoxyCompactList}\item 
+list$<$ {\bf RotorGroup} $>$ {\bf mvRotorGroupInternal}
+\begin{DoxyCompactList}\small\item\em List of RotorGroups for internal rotations. \item\end{DoxyCompactList}\item 
+list$<$ {\bf FlipGroup} $>$ {\bf mvFlipGroup}\label{a00046_a79ffe8ba3222a5f4a56fd9f2447c8fd7}
+
+\begin{DoxyCompactList}\small\item\em The list of FlipGroups. \item\end{DoxyCompactList}\item 
+list$<$ {\bf StretchModeBondLength} $>$ {\bf mvStretchModeBondLength}\label{a00046_aa3e38a39a6a392456c03f320e1bdaffa}
+
+\begin{DoxyCompactList}\small\item\em List of \doxyref{StretchModeBondLength}{p.}{a00098}. \item\end{DoxyCompactList}\item 
+list$<$ {\bf StretchModeBondAngle} $>$ {\bf mvStretchModeBondAngle}\label{a00046_a5673efb9ae9ffc238f25c62805825c63}
+
+\begin{DoxyCompactList}\small\item\em List of \doxyref{StretchModeBondLength}{p.}{a00098}. \item\end{DoxyCompactList}\item 
+list$<$ {\bf StretchModeTorsion} $>$ {\bf mvStretchModeTorsion}\label{a00046_a878336f175d85a68d55804ad43a453dc}
+
+\begin{DoxyCompactList}\small\item\em List of \doxyref{StretchModeBondLength}{p.}{a00098}. \item\end{DoxyCompactList}\item 
+list$<$ {\bf StretchModeTwist} $>$ {\bf mvStretchModeTwist}\label{a00046_a53def8e47e265fc3dd62af4b07997bd1}
+
+\begin{DoxyCompactList}\small\item\em List of \doxyref{StretchModeTwist}{p.}{a00101}. \item\end{DoxyCompactList}\item 
+std::list$<$ {\bf StretchMode} $\ast$ $>$ {\bf mvpStretchModeFree}\label{a00046_a215591f48317322bb1b9203ebad4a011}
+
+\begin{DoxyCompactList}\small\item\em Groups of \doxyref{StretchMode}{p.}{a00096} not breaking any restraint (unless the one they are associated to). \item\end{DoxyCompactList}\item 
+std::list$<$ {\bf StretchMode} $\ast$ $>$ {\bf mvpStretchModeNotFree}\label{a00046_ae87a1cece989dc3d433eb7fad925c5de}
+
+\begin{DoxyCompactList}\small\item\em Groups of \doxyref{StretchMode}{p.}{a00096} breaking restraints (beyond the one they are associated to). \item\end{DoxyCompactList}\item 
+list$<$ {\bf MDAtomGroup} $>$ {\bf mvMDAtomGroup}\label{a00046_a4a3a91c91753e90de67341701df7e081}
+
+\begin{DoxyCompactList}\small\item\em Groups of atoms that should be moved according to molecular dynamics principles. \item\end{DoxyCompactList}\item 
+std::set$<$ {\bf MolAtom} $\ast$ $>$ {\bf mvMDFullAtomGroup}\label{a00046_af3e1420d9c1c4cc3be0e58c5834130e7}
+
+\begin{DoxyCompactList}\small\item\em Full list of atoms that can be moved using molecular dynamics This excludes any atom part of a rigid group. \item\end{DoxyCompactList}\item 
+REAL {\bf mMDMoveFreq}\label{a00046_aee36f14d21f12d10581eaaf689136304}
+
+\begin{DoxyCompactList}\small\item\em Frequency of using molecular dynamics move during \doxyref{GlobalOptRandomMove()}{p.}{a00046_a11e623f6482b468f6dd05fc0ab2bbb24}. \item\end{DoxyCompactList}\item 
+REAL {\bf mMDMoveEnergy}\label{a00046_a600a62199c1e9297d39a53848a155310}
+
+\begin{DoxyCompactList}\small\item\em Relative energy of molecule during molecular dynamics move Default: 40, 10 (slow conformation change), 200 (large changes). \item\end{DoxyCompactList}\item 
+std::vector$<$ {\bf MolZAtom} $>$ {\bf mAsZMatrix}\label{a00046_a45e0d1e1d54f4474158f270571957d4a}
+
+\begin{DoxyCompactList}\small\item\em The \doxyref{Molecule}{p.}{a00046}, as a lightweight ZMatrix, for export purposes. \item\end{DoxyCompactList}\item 
+REAL {\bf mLogLikelihood}\label{a00046_aca5a25791960a8aa011c1cfa902c589a}
+
+\begin{DoxyCompactList}\small\item\em The current log(likelihood). \item\end{DoxyCompactList}\item 
+REAL {\bf mLogLikelihoodScale}
+\begin{DoxyCompactList}\small\item\em Scale (multiplier) for the log(likelihood). \item\end{DoxyCompactList}\item 
+CrystVector\_\-REAL {\bf mLSQCalc}\label{a00046_a9e9be5fe3d3037cdf690df16235e370d}
+
+\begin{DoxyCompactList}\small\item\em Current LSQ Calc -\/ one value for each restraint (bond distance, angle or dihedral angle). \item\end{DoxyCompactList}\item 
+CrystVector\_\-REAL {\bf mLSQObs}\label{a00046_a6202acc4d02c90999f008c089bf1b21e}
+
+\begin{DoxyCompactList}\small\item\em Current LSQ Calc -\/ one value for each restraint (bond distance, angle or dihedral angle ideal values). \item\end{DoxyCompactList}\item 
+CrystVector\_\-REAL {\bf mLSQWeight}\label{a00046_a7305a71a61c7ceedaf09b28a0d1ed64d}
+
+\begin{DoxyCompactList}\small\item\em Current LSQ Calc -\/ one value for each restraint(bond distance, angle or dihedral angle sigmas). \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+\doxyref{Molecule}{p.}{a00046} : class for complex scatterer descriptions using cartesian coordinates with bond length/angle restraints, and moves either of individual atoms or using torsion bonds. This can also be used for non-\/organic compounds (polyhedras etc...) \begin{DoxyNote}{Note}
+the parametrization is very different from \doxyref{ZScatterer}{p.}{a00155}: we keep a list of x,y,z which do not use limits (they must not), but the coordinates must be restrained or constrained from the expected bond lengths, angles and dihedral angles. The list of parameters is re-\/created in \doxyref{BeginOptimization()}{p.}{a00046_a5fbdadb37966f382a6e33150285819dc} (except for the global x y z parameters for the global position of the \doxyref{Molecule}{p.}{a00046}, in fractionnal coordinates).
+
+: all atoms must be somehow connected 
+\end{DoxyNote}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\index{ObjCryst::Molecule@{ObjCryst::Molecule}!Molecule@{Molecule}}
+\index{Molecule@{Molecule}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{Molecule}]{\setlength{\rightskip}{0pt plus 5cm}ObjCryst::Molecule::Molecule ({\bf Crystal} \& {\em cryst}, \/  const string \& {\em name} = {\ttfamily \char`\"{}\char`\"{}})}\hfill\label{a00046_ad4132a293e7f253c730676ed3720f961}
+
+
+Constructor. \index{ObjCryst::Molecule@{ObjCryst::Molecule}!Molecule@{Molecule}}
+\index{Molecule@{Molecule}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{Molecule}]{\setlength{\rightskip}{0pt plus 5cm}ObjCryst::Molecule::Molecule (const {\bf Molecule} \& {\em old})}\hfill\label{a00046_a896c80a621aa990de3d36e214965cd49}
+
+
+Copy constructor. \index{ObjCryst::Molecule@{ObjCryst::Molecule}!$\sim$Molecule@{$\sim$Molecule}}
+\index{$\sim$Molecule@{$\sim$Molecule}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{$\sim$Molecule}]{\setlength{\rightskip}{0pt plus 5cm}ObjCryst::Molecule::$\sim$Molecule ()}\hfill\label{a00046_ae61d3a9a72c73cd087e330b3c4cdf0be}
+
+
+Destructor. 
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::Molecule@{ObjCryst::Molecule}!AddAtom@{AddAtom}}
+\index{AddAtom@{AddAtom}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{AddAtom}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::Molecule::AddAtom (const REAL {\em x}, \/  const REAL {\em y}, \/  const REAL {\em z}, \/  const {\bf ScatteringPower} $\ast$ {\em pPow}, \/  const string \& {\em name}, \/  const bool {\em updateDisplay} = {\ttfamily true})}\hfill\label{a00046_a7b193eac062233b758887cba671706f7}
+
+
+Add an atom. \index{ObjCryst::Molecule@{ObjCryst::Molecule}!AddBond@{AddBond}}
+\index{AddBond@{AddBond}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{AddBond}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::Molecule::AddBond ({\bf MolAtom} \& {\em atom1}, \/  {\bf MolAtom} \& {\em atom2}, \/  const REAL {\em length}, \/  const REAL {\em sigma}, \/  const REAL {\em delta}, \/  const REAL {\em bondOrder} = {\ttfamily 1.}, \/  const bool {\em updateDisplay} = {\ttfamily true})}\hfill\label{a00046_aa37feb3abde7ca0ff6453b97d910800f}
+
+
+Add a bond. \index{ObjCryst::Molecule@{ObjCryst::Molecule}!AddBondAngle@{AddBondAngle}}
+\index{AddBondAngle@{AddBondAngle}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{AddBondAngle}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::Molecule::AddBondAngle ({\bf MolAtom} \& {\em atom1}, \/  {\bf MolAtom} \& {\em atom2}, \/  {\bf MolAtom} \& {\em atom3}, \/  const REAL {\em angle}, \/  const REAL {\em sigma}, \/  const REAL {\em delta}, \/  const bool {\em updateDisplay} = {\ttfamily true})}\hfill\label{a00046_a25132c259da4d0bd739ff0ffc008575e}
+
+
+Add a bond angle restraint. \index{ObjCryst::Molecule@{ObjCryst::Molecule}!AddDihedralAngle@{AddDihedralAngle}}
+\index{AddDihedralAngle@{AddDihedralAngle}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{AddDihedralAngle}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::Molecule::AddDihedralAngle ({\bf MolAtom} \& {\em atom1}, \/  {\bf MolAtom} \& {\em atom2}, \/  {\bf MolAtom} \& {\em atom3}, \/  {\bf MolAtom} \& {\em atom4}, \/  const REAL {\em angle}, \/  const REAL {\em sigma}, \/  const REAL {\em delta}, \/  const bool {\em updateDisplay} = {\ttfamily true})}\hfill\label{a00046_aae30adce9fdd16e42cab4f8e434f01cf}
+
+
+Add a dihedral angle restraint. \index{ObjCryst::Molecule@{ObjCryst::Molecule}!AddRigidGroup@{AddRigidGroup}}
+\index{AddRigidGroup@{AddRigidGroup}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{AddRigidGroup}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::Molecule::AddRigidGroup (const {\bf RigidGroup} \&, \/  const bool {\em updateDisplay} = {\ttfamily true})}\hfill\label{a00046_a8c61827ad3303aca5c0db6698a5f9e06}
+
+
+Add a rigid group of atoms. See \doxyref{Molecule::mvRigidGroup}{p.}{a00046_a43939b3e3ad83065cf7ccb6065a53a12} \index{ObjCryst::Molecule@{ObjCryst::Molecule}!AsZMatrix@{AsZMatrix}}
+\index{AsZMatrix@{AsZMatrix}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{AsZMatrix}]{\setlength{\rightskip}{0pt plus 5cm}const std::vector$<${\bf MolZAtom}$>$\& ObjCryst::Molecule::AsZMatrix (const bool {\em keeporder}) const}\hfill\label{a00046_a3ce93bef9ea4da4d5e0cd47e62418a97}
+
+
+\doxyref{Molecule}{p.}{a00046} as Z-\/matrix. 
+\begin{DoxyParams}{Parameters}
+\item[{\em keeporder,:}]if true, the order of the atoms is exactly the same as in the \doxyref{Molecule}{p.}{a00046}. \end{DoxyParams}
+\index{ObjCryst::Molecule@{ObjCryst::Molecule}!BeginOptimization@{BeginOptimization}}
+\index{BeginOptimization@{BeginOptimization}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{BeginOptimization}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::Molecule::BeginOptimization (const bool {\em allowApproximations} = {\ttfamily false}, \/  const bool {\em enableRestraints} = {\ttfamily false})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00046_a5fbdadb37966f382a6e33150285819dc}
+
+
+This should be called by any optimization class at the begining of an optimization. This will also check that everything is ready, eg call the \doxyref{RefinableObj::Prepare()}{p.}{a00070_a48d11671e7f8699f7bc24077585c5e0f} function. This also affects all sub-\/objects. \begin{DoxyNote}{Note}
+this may be called several time for some objects which are used by several other objects, or for nested optimizations (e.g. least-\/squares optimizations inside a global one).
+
+\doxyref{EndOptimization()}{p.}{a00046_aec0a3ba0d08fdfed38cc757efb635ffb} must be called at the end of the optimization, the same number of time \doxyref{BeginOptimization()}{p.}{a00046_a5fbdadb37966f382a6e33150285819dc} was called !
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em allowApproximations,:}]if true, then the object can use faster but less precise functions during the optimization. This is useful for global optimization not using derivatives. \item[{\em enableRestraints,:}]\end{DoxyParams}
+\begin{Desc}
+\item[{\bf Deprecated}]if true, then restrained parameters will be allowed to go beyond theur hard limits. This implies that the algorithm will take into account the cost (penalty) related to the restraints. Objects which do not use restraints will simply ignore this. WARNING: this parameter may be removed with the new likelihood scheme. \end{Desc}
+
+
+Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_ababd8f2916e41a20d2c1b21f6ffefe96}.\index{ObjCryst::Molecule@{ObjCryst::Molecule}!BondAngleRandomChange@{BondAngleRandomChange}}
+\index{BondAngleRandomChange@{BondAngleRandomChange}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{BondAngleRandomChange}]{\setlength{\rightskip}{0pt plus 5cm}REAL ObjCryst::Molecule::BondAngleRandomChange (const {\bf StretchModeBondAngle} \& {\em mode}, \/  const REAL {\em amplitude}, \/  const bool {\em respectRestraint} = {\ttfamily true})}\hfill\label{a00046_ad6e27c1557962b32355eeadf1bf155d3}
+
+
+change a bond angle, while respecting the \doxyref{Restraint}{p.}{a00080} (if any). \begin{DoxyReturn}{Returns}
+the {\itshape actual\/} change in bond angle. 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em }]the desired angular change. This will be the actual change {\itshape if\/} there is no restraint {\itshape or\/} if the restraint is constant in this range. \end{DoxyParams}
+\index{ObjCryst::Molecule@{ObjCryst::Molecule}!BondLengthRandomChange@{BondLengthRandomChange}}
+\index{BondLengthRandomChange@{BondLengthRandomChange}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{BondLengthRandomChange}]{\setlength{\rightskip}{0pt plus 5cm}REAL ObjCryst::Molecule::BondLengthRandomChange (const {\bf StretchModeBondLength} \& {\em mode}, \/  const REAL {\em amplitude}, \/  const bool {\em respectRestraint} = {\ttfamily true})}\hfill\label{a00046_ad7bfddcdf21c1214c5a70c84fc54cdb0}
+
+
+Stretch a bond, while respecting the \doxyref{Restraint}{p.}{a00080} (if any). \begin{DoxyReturn}{Returns}
+the {\itshape actual\/} change in bond length. 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em }]the desired change in bond length. This will be the actual change {\itshape if\/} there is no restraint {\itshape or\/} if the restraint is constant in this range. \end{DoxyParams}
+\index{ObjCryst::Molecule@{ObjCryst::Molecule}!BuildConnectivityTable@{BuildConnectivityTable}}
+\index{BuildConnectivityTable@{BuildConnectivityTable}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{BuildConnectivityTable}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::Molecule::BuildConnectivityTable () const}\hfill\label{a00046_ac52190dc78f14df37e9bc5b3c9d713c2}
+
+
+Build the Connectivity table. \index{ObjCryst::Molecule@{ObjCryst::Molecule}!BuildFlipGroup@{BuildFlipGroup}}
+\index{BuildFlipGroup@{BuildFlipGroup}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{BuildFlipGroup}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::Molecule::BuildFlipGroup ()}\hfill\label{a00046_aca2ed46d26209807d587722d131c6315}
+
+
+Build the groups of atoms that can be flipped. This is not const because we temporarily modify the molecule conformation to test which FlipGroups are forbidden by restraints (but it should be const). \index{ObjCryst::Molecule@{ObjCryst::Molecule}!BuildMDAtomGroups@{BuildMDAtomGroups}}
+\index{BuildMDAtomGroups@{BuildMDAtomGroups}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{BuildMDAtomGroups}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::Molecule::BuildMDAtomGroups ()}\hfill\label{a00046_a0944a68727d85bee4ec0cce453cb451c}
+
+
+Find groups of atoms that cannot be moved relatively to each other using the free or non-\/free stretch modes. Usually these will correspond to atoms inside a flexible ring.
+
+These atoms (if they are not in a rigid group) are stored in a \doxyref{MDAtomGroup}{p.}{a00041} so that they can still move using molecular dynamics.
+
+{\bfseries this} should be called after \doxyref{BuildStretchModeGroups()}{p.}{a00046_a83b7b9bac2ce9fe7b310b5267232b1ca}, to make sure the list of free/non-\/free stretch mode has been built. \index{ObjCryst::Molecule@{ObjCryst::Molecule}!BuildRingList@{BuildRingList}}
+\index{BuildRingList@{BuildRingList}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{BuildRingList}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::Molecule::BuildRingList ()}\hfill\label{a00046_a9623bff2259d45c162ed28af73974f5a}
+
+
+Build the list of rings in the molecule. The list is {\itshape only\/} rebuilt if the bond or atom list has changed,so it should be safe to call again this function.
+
+\begin{DoxyNote}{Note}
+So far this is a const method as the ring list just reflects the bond list and therefore is mutable (see \doxyref{Molecule::mvRing}{p.}{a00046_a35cb61305129b6bbda4a0bb014b2c90e})... but maybe this could change... 
+\end{DoxyNote}
+\index{ObjCryst::Molecule@{ObjCryst::Molecule}!BuildRotorGroup@{BuildRotorGroup}}
+\index{BuildRotorGroup@{BuildRotorGroup}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{BuildRotorGroup}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::Molecule::BuildRotorGroup ()}\hfill\label{a00046_a3642fa8104faa1ce84a977600f9d1aeb}
+
+
+Build the groups of atoms that will be rotated during global optimization. This is not const because we temporarily modify the molecule conformation to test which RotorGroups are forbidden by restraints (but it should be const). \index{ObjCryst::Molecule@{ObjCryst::Molecule}!BuildStretchModeGroups@{BuildStretchModeGroups}}
+\index{BuildStretchModeGroups@{BuildStretchModeGroups}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{BuildStretchModeGroups}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::Molecule::BuildStretchModeGroups ()}\hfill\label{a00046_a83b7b9bac2ce9fe7b310b5267232b1ca}
+
+
+Separate \doxyref{StretchMode}{p.}{a00096} that break more than their assigned restraint from others. See \doxyref{Molecule::mvpStretchModeFree}{p.}{a00046_a215591f48317322bb1b9203ebad4a011} and \doxyref{Molecule::mvpStretchModeNotFree}{p.}{a00046_ae87a1cece989dc3d433eb7fad925c5de} \index{ObjCryst::Molecule@{ObjCryst::Molecule}!BuildStretchModeTwist@{BuildStretchModeTwist}}
+\index{BuildStretchModeTwist@{BuildStretchModeTwist}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{BuildStretchModeTwist}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::Molecule::BuildStretchModeTwist ()}\hfill\label{a00046_a7f4c6bf6e5be59780cb7844e53711fb3}
+
+
+Build the groups of atoms used to twist internally the \doxyref{Molecule}{p.}{a00046}, e.g. by rotating one chain of atoms between 2 given atoms. \index{ObjCryst::Molecule@{ObjCryst::Molecule}!CreateCopy@{CreateCopy}}
+\index{CreateCopy@{CreateCopy}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{CreateCopy}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf Molecule}$\ast$ ObjCryst::Molecule::CreateCopy () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00046_a96728865d25881151b7010d3eaf4ec0f}
+\begin{DoxyInternal}{For internal use only.}
+so-\/called Virtual copy constructor, needed to make copies of arrays of Scatterers \end{DoxyInternal}
+
+
+Implements {\bf ObjCryst::Scatterer} \doxyref{}{p.}{a00084_a4d374adcff97163a24492d362f6def73}.\index{ObjCryst::Molecule@{ObjCryst::Molecule}!DihedralAngleRandomChange@{DihedralAngleRandomChange}}
+\index{DihedralAngleRandomChange@{DihedralAngleRandomChange}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{DihedralAngleRandomChange}]{\setlength{\rightskip}{0pt plus 5cm}REAL ObjCryst::Molecule::DihedralAngleRandomChange (const {\bf StretchModeTorsion} \& {\em mode}, \/  const REAL {\em amplitude}, \/  const bool {\em respectRestraint} = {\ttfamily true})}\hfill\label{a00046_afd88ae76ab528b5dc37f9d2527353904}
+
+
+Change a dihedral angle, while respecting the \doxyref{Restraint}{p.}{a00080} (if any). \begin{DoxyReturn}{Returns}
+the {\itshape actual\/} change in bond angle. 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em }]the desired angular change. This will be the actual change {\itshape if\/} there is no restraint {\itshape or\/} if the restraint is constant in this range. \end{DoxyParams}
+\index{ObjCryst::Molecule@{ObjCryst::Molecule}!EndOptimization@{EndOptimization}}
+\index{EndOptimization@{EndOptimization}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{EndOptimization}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::Molecule::EndOptimization ()\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00046_aec0a3ba0d08fdfed38cc757efb635ffb}
+
+
+This should be called by any optimization class at the end of an optimization. This also affects all sub-\/objects. \begin{DoxyNote}{Note}
+this may be called several time for some objects which are used by several other objects. 
+\end{DoxyNote}
+
+
+Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_ab0035f6164cb24ace67b51b11993a851}.\index{ObjCryst::Molecule@{ObjCryst::Molecule}!FindAtom@{FindAtom}}
+\index{FindAtom@{FindAtom}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{FindAtom}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf MolAtom}$\ast$$>$::const\_\-reverse\_\-iterator ObjCryst::Molecule::FindAtom (const string \& {\em name}) const}\hfill\label{a00046_a10cb2cff89dd623e288cfa3376acfcfa}
+
+
+Search a \doxyref{MolAtom}{p.}{a00042} from its name. Search begins at the end, and the first match is returned. returns mvAtom.rend() if no atom matches \index{ObjCryst::Molecule@{ObjCryst::Molecule}!FindAtom@{FindAtom}}
+\index{FindAtom@{FindAtom}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{FindAtom}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf MolAtom}$\ast$$>$::reverse\_\-iterator ObjCryst::Molecule::FindAtom (const string \& {\em name})}\hfill\label{a00046_a20b6239624acf37e771e29c002f63618}
+
+
+Search a \doxyref{MolAtom}{p.}{a00042} from its name. Search begins at the end, and the first match is returned. returns mvAtom.rend() if no atom matches \index{ObjCryst::Molecule@{ObjCryst::Molecule}!FindBond@{FindBond}}
+\index{FindBond@{FindBond}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{FindBond}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf MolBond}$\ast$$>$::iterator ObjCryst::Molecule::FindBond (const {\bf MolAtom} \&, \/  const {\bf MolAtom} \&)}\hfill\label{a00046_a099aadd8edb91f148a174333b1636fb5}
+
+
+Searches whether a bond between two atoms already exists. If no bond is found, returns Molecule::mvpAtom.end(). \index{ObjCryst::Molecule@{ObjCryst::Molecule}!FindBond@{FindBond}}
+\index{FindBond@{FindBond}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{FindBond}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf MolBond}$\ast$$>$::const\_\-iterator ObjCryst::Molecule::FindBond (const {\bf MolAtom} \&, \/  const {\bf MolAtom} \&) const}\hfill\label{a00046_ac121a84c148439786581a103eef4d958}
+
+
+Searches whether a bond between two atoms already exists. If no bond is found, returns Molecule::mvpAtom.end(). \index{ObjCryst::Molecule@{ObjCryst::Molecule}!FindBondAngle@{FindBondAngle}}
+\index{FindBondAngle@{FindBondAngle}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{FindBondAngle}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf MolBondAngle}$\ast$$>$::const\_\-iterator ObjCryst::Molecule::FindBondAngle (const {\bf MolAtom} \& {\em at1}, \/  const {\bf MolAtom} \& {\em at0}, \/  const {\bf MolAtom} \& {\em at2}) const}\hfill\label{a00046_aa94113e3d0ca15f5a3acbc573198fd59}
+
+
+Searches whether a bond between three atoms already exists, searching for either (at1,at2,at3) and (at3,at2,at1), as these are equivalent. If no bond angle is found, returns Molecule::mvpBondAngle.end(). \index{ObjCryst::Molecule@{ObjCryst::Molecule}!FindDihedralAngle@{FindDihedralAngle}}
+\index{FindDihedralAngle@{FindDihedralAngle}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{FindDihedralAngle}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf MolDihedralAngle}$\ast$$>$::const\_\-iterator ObjCryst::Molecule::FindDihedralAngle (const {\bf MolAtom} \& {\em at1}, \/  const {\bf MolAtom} \& {\em at2}, \/  const {\bf MolAtom} \& {\em at3}, \/  const {\bf MolAtom} \& {\em at4}) const}\hfill\label{a00046_adb251aaa9a4f9e4e1b7e949e2fab73e4}
+
+
+Searches whether a dihedral between four atoms already exists, searching for either (at1,at2,at3,at4) and (at4,at3,at2,at1), as these are equivalent. If no dihedral angle is found, returns Molecule::mvpDihedralAngle.end(). \index{ObjCryst::Molecule@{ObjCryst::Molecule}!GetCenterAtom@{GetCenterAtom}}
+\index{GetCenterAtom@{GetCenterAtom}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{GetCenterAtom}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf MolAtom}$\ast$ ObjCryst::Molecule::GetCenterAtom () const}\hfill\label{a00046_a58e298d1cefcf677748b9c6807956f4a}
+
+
+Get the atom defining the origin of the \doxyref{Molecule}{p.}{a00046} Equal to 0 if no atom as been set. \index{ObjCryst::Molecule@{ObjCryst::Molecule}!GetClassName@{GetClassName}}
+\index{GetClassName@{GetClassName}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{GetClassName}]{\setlength{\rightskip}{0pt plus 5cm}virtual const string\& ObjCryst::Molecule::GetClassName () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00046_a7f0f1ae6670032f5afc9ccf65d45f8c4}
+
+
+Name for this class (\char`\"{}RefinableObj\char`\"{}, \char`\"{}Crystal\char`\"{},. ..). This is only useful to distinguish different classes when picking up objects from the \doxyref{RefinableObj}{p.}{a00070} Global Registry 
+
+Reimplemented from {\bf ObjCryst::Scatterer} \doxyref{}{p.}{a00084_a374fc1bb2887ab1f61d456326d97c05f}.\index{ObjCryst::Molecule@{ObjCryst::Molecule}!GetComponentName@{GetComponentName}}
+\index{GetComponentName@{GetComponentName}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{GetComponentName}]{\setlength{\rightskip}{0pt plus 5cm}virtual string ObjCryst::Molecule::GetComponentName (const int {\em i}) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00046_a8dae19447740afaa1780e39a61f625c9}
+
+
+Name for the i-\/th component of this scatterer. If the component is an \doxyref{Atom}{p.}{a00008}, Then the name is that of the atom. Else, it is the name of the scatterer plus the component number in the scatterer plus the name of the \doxyref{ScatteringPower}{p.}{a00089}. \begin{DoxyNote}{Note}
+It would be better to return a reference, but we don't want to keep a name for all components... Weeelll, needs some more thinking... see what performance hit results (if any).
+\end{DoxyNote}
+\begin{Desc}
+\item[{\bf Bug}]does not take into account dummy atoms !! \end{Desc}
+
+
+Implements {\bf ObjCryst::Scatterer} \doxyref{}{p.}{a00084_a42bdf508da6a90859a5a61e16c27d47e}.\index{ObjCryst::Molecule@{ObjCryst::Molecule}!GetLogLikelihood@{GetLogLikelihood}}
+\index{GetLogLikelihood@{GetLogLikelihood}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{GetLogLikelihood}]{\setlength{\rightskip}{0pt plus 5cm}virtual REAL ObjCryst::Molecule::GetLogLikelihood () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00046_a1c0e8ad2410035c07c4be88315554f3f}
+
+
+Get -\/log(likelihood) of the current configuration for the object. By default (no likelihood evaluation available), this is equal to 0.
+
+This call should not be recursive, it is the task of the algorithm to get the sum of likelihoods for all objects invlolved.
+
+\begin{DoxyNote}{Note}
+contrary to the old \char`\"{}Cost Function\char`\"{} approach, with log(Likelihood) there is no 'choice' of cost function, so that it is the task of the object to give the optimized likelihood (possibly with user options).
+\end{DoxyNote}
+\begin{DoxyWarning}{Warning}
+: this is in under heavy development, so expect changes... 
+\end{DoxyWarning}
+
+
+Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_a9a9a5ea2b997cd36b44ed35c2bab3245}.\index{ObjCryst::Molecule@{ObjCryst::Molecule}!GetLSQDeriv@{GetLSQDeriv}}
+\index{GetLSQDeriv@{GetLSQDeriv}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{GetLSQDeriv}]{\setlength{\rightskip}{0pt plus 5cm}virtual const CrystVector\_\-REAL\& ObjCryst::Molecule::GetLSQDeriv (const unsigned int {\em int}, \/  {\bf RefinablePar} \&)\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00046_adef00ca72bec0e4553bbfba0852e1ba1}
+
+
+Get the first derivative values for the LSQ function, for a given parameter. Note that the default method in the base \doxyref{RefinableObj}{p.}{a00070} class is to use numerical derivatives, so it should be overridden for better precision.
+
+\begin{Desc}
+\item[{\bf Todo}]This should be a const method, and the given RefPar should be const too... \end{Desc}
+
+
+Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_a24bfb12849c7733a7034928fbb0b14a8}.\index{ObjCryst::Molecule@{ObjCryst::Molecule}!GetRigidGroupList@{GetRigidGroupList}}
+\index{GetRigidGroupList@{GetRigidGroupList}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{GetRigidGroupList}]{\setlength{\rightskip}{0pt plus 5cm}std::vector$<${\bf RigidGroup} $\ast$$>$\& ObjCryst::Molecule::GetRigidGroupList ()}\hfill\label{a00046_afab17b6b5416c25a1a89b492017a590c}
+
+
+List of rigid group of atoms. See \doxyref{Molecule::mvRigidGroup}{p.}{a00046_a43939b3e3ad83065cf7ccb6065a53a12} \index{ObjCryst::Molecule@{ObjCryst::Molecule}!GetRigidGroupList@{GetRigidGroupList}}
+\index{GetRigidGroupList@{GetRigidGroupList}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{GetRigidGroupList}]{\setlength{\rightskip}{0pt plus 5cm}const std::vector$<${\bf RigidGroup} $\ast$$>$\& ObjCryst::Molecule::GetRigidGroupList () const}\hfill\label{a00046_aa0e2192321dc993ba78fb84d7502e2eb}
+
+
+List of rigid group of atoms. See \doxyref{Molecule::mvRigidGroup}{p.}{a00046_a43939b3e3ad83065cf7ccb6065a53a12} \index{ObjCryst::Molecule@{ObjCryst::Molecule}!GetScatteringComponentList@{GetScatteringComponentList}}
+\index{GetScatteringComponentList@{GetScatteringComponentList}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{GetScatteringComponentList}]{\setlength{\rightskip}{0pt plus 5cm}virtual const {\bf ScatteringComponentList}\& ObjCryst::Molecule::GetScatteringComponentList () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00046_a3ac17bd45a709c82d9a4d304fde09b88}
+
+
+Get the list of all scattering components for this scatterer. This is the most important function of this class, giving the list of scattering positions along with the associated \doxyref{ScatteringPower}{p.}{a00089}. 
+
+Implements {\bf ObjCryst::Scatterer} \doxyref{}{p.}{a00084_aca0e08e3793cc69d31fce53e481c2a67}.\index{ObjCryst::Molecule@{ObjCryst::Molecule}!GLInitDisplayList@{GLInitDisplayList}}
+\index{GLInitDisplayList@{GLInitDisplayList}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{GLInitDisplayList}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::Molecule::GLInitDisplayList (const bool {\em noSymmetrics} = {\ttfamily false}, \/  const REAL {\em xMin} = {\ttfamily -\/.1}, \/  const REAL {\em xMax} = {\ttfamily 1.1}, \/  const REAL {\em yMin} = {\ttfamily -\/.1}, \/  const REAL {\em yMax} = {\ttfamily 1.1}, \/  const REAL {\em zMin} = {\ttfamily -\/.1}, \/  const REAL {\em zMax} = {\ttfamily 1.1}, \/  const bool {\em displayEnantiomer} = {\ttfamily false}, \/  const bool {\em displayNames} = {\ttfamily false}) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00046_a00aa7620326d8663b1f4e1bd9237ffb8}
+\begin{DoxyInternal}{For internal use only.}
+Create an OpenGL Display List of the scatterer. This should only be called by a \doxyref{Crystal}{p.}{a00020} object.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em noSymmetrics,:}]if false (the default), then all symmetrics are shown in the 3D display, within the limits defined by the min/max parameters $\backslash$ param xMin,xMax,yMin,yMax,zMin,zMax: in fractionnal coordinates, the region in which we want scaterrer to be displayed. The test is made on the center of the scatterer (eg a \doxyref{ZScatterer}{p.}{a00155} (molecule) will not be 'cut' on the border). \item[{\em displayNames,:}]if true, only the names of the scatterers will be displayed, at the position of the scatterers (to actually see them, they will have to be translated with respect to the drawing of the scatterers). \end{DoxyParams}
+\end{DoxyInternal}
+
+
+Implements {\bf ObjCryst::Scatterer} \doxyref{}{p.}{a00084_a4eaf9cf9780bef83e40155810db120a0}.\index{ObjCryst::Molecule@{ObjCryst::Molecule}!GlobalOptRandomMove@{GlobalOptRandomMove}}
+\index{GlobalOptRandomMove@{GlobalOptRandomMove}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{GlobalOptRandomMove}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::Molecule::GlobalOptRandomMove (const REAL {\em mutationAmplitude}, \/  const {\bf RefParType} $\ast$ {\em type})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00046_a11e623f6482b468f6dd05fc0ab2bbb24}
+
+
+Make a random move of the current configuration. This is for global optimization algorithms. the moves for each parameter are less than their global optimization step, multiplied by the mutation amplitude.
+
+\begin{DoxyWarning}{Warning}
+: this makes a random move for the parameter declared for this object, and it is the duty of the object to decide whether the included objects should be moved and how. (eg an algorithm should only call for a move with the top object, and this object decides how he and his sub-\/objects moves). By default (\doxyref{RefinableObj}{p.}{a00070} implementation) all included objects are moved recursively.
+\end{DoxyWarning}
+\doxyref{RefinableObj}{p.}{a00070}:: 
+\begin{DoxyParams}{Parameters}
+\item[{\em mutationAmplitude,:}]multiplier for the maximum move amplitude, for all parameters \item[{\em type,:}]restrain the change exclusively to parameters of a given type (same type or descendant from this \doxyref{RefParType}{p.}{a00079}). \end{DoxyParams}
+
+
+Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_a18375c8525ae38c481ba77e9cf9d67c1}.\index{ObjCryst::Molecule@{ObjCryst::Molecule}!InitRefParList@{InitRefParList}}
+\index{InitRefParList@{InitRefParList}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{InitRefParList}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::Molecule::InitRefParList ()\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00046_ad96fe78688ce898dc9aeffcc23523967}
+\begin{DoxyInternal}{For internal use only.}
+Prepare refinable parameters for the scatterer object \end{DoxyInternal}
+
+
+Implements {\bf ObjCryst::Scatterer} \doxyref{}{p.}{a00084_a45ef328b68a0a68c0228beefc25cda7f}.\index{ObjCryst::Molecule@{ObjCryst::Molecule}!MolecularDynamicsEvolve@{MolecularDynamicsEvolve}}
+\index{MolecularDynamicsEvolve@{MolecularDynamicsEvolve}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{MolecularDynamicsEvolve}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::Molecule::MolecularDynamicsEvolve (std::map$<$ {\bf MolAtom} $\ast$, {\bf XYZ} $>$ \& {\em v0}, \/  const unsigned {\em nbStep}, \/  const REAL {\em dt}, \/  const std::vector$<$ {\bf MolBond} $\ast$ $>$ \& {\em vb}, \/  const std::vector$<$ {\bf MolBondAngle} $\ast$ $>$ \& {\em va}, \/  const std::vector$<$ {\bf MolDihedralAngle} $\ast$ $>$ \& {\em vd}, \/  std::map$<$ {\bf RigidGroup} $\ast$, std::pair$<$ {\bf XYZ}, {\bf XYZ} $>$ $>$ \& {\em vr}, \/  REAL {\em nrj0} = {\ttfamily 0})}\hfill\label{a00046_a9a43c803d62dc4f5f3b7852bbd75c939}
+
+
+Change the conformation of the molecule using molecular dynamics principles. Optionnally, move only a subgroup of atoms and only take into account some restraints.
+
+The atoms actually moved are those included as keys in v0, and those part of the rigid bodies in vr.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em v0,:}]initial speed of all atoms. On return, includes the new speed coordinates. Only the atoms used as keys in v0 will be moved, so this should be used to work only on a subgroup of atoms. \item[{\em nbStep,:}]number of steps to perform. \item[{\em dt,:}]time step. Recommended value are such that v0[].xyz $\ast$ dt = 0.001 \item[{\em vb,va,vd,:}]vector of bond, bond angle and dihedral angle restraints to be taken into account. If these are empty, the full list of restraints of the \doxyref{Molecule}{p.}{a00046} are taken into account, including rigid groups. If they are not empty, then it is assumed that no atom moved belongs to a rigid group. \item[{\em vr,:}]initial speed for the angular and translation parameters of rigid groups included in the evolution. For each entry of the map the first \doxyref{XYZ}{p.}{a00151} coordinates are the speed for \doxyref{RigidGroup::mX}{p.}{a00081_abda5125459a21cc5534c90d9516312e9},mY,mZ, and the second are the speed for the angular coordinates of the quaternion Q1,Q2,Q3 \item[{\em nrj0,:}]the total energy the system should try to maintain. If equal to 0, the initial energy will be used. The speed will be de/increased to compensate any energy change. \end{DoxyParams}
+\index{ObjCryst::Molecule@{ObjCryst::Molecule}!OptimizeConformation@{OptimizeConformation}}
+\index{OptimizeConformation@{OptimizeConformation}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{OptimizeConformation}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::Molecule::OptimizeConformation (const long {\em nbTrial} = {\ttfamily 10000}, \/  const REAL {\em stopCost} = {\ttfamily 0.})}\hfill\label{a00046_a8e070563a06e9c375b3b26d2e5828c54}
+
+
+Minimize configuration from internal restraints (bond lengths, angles and dihedral angles). Useful when adding manually atoms to get an initial reasonable configuration. \index{ObjCryst::Molecule@{ObjCryst::Molecule}!OptimizeConformationSteepestDescent@{OptimizeConformationSteepestDescent}}
+\index{OptimizeConformationSteepestDescent@{OptimizeConformationSteepestDescent}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{OptimizeConformationSteepestDescent}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::Molecule::OptimizeConformationSteepestDescent (const REAL {\em maxStep} = {\ttfamily 0.1}, \/  const unsigned {\em nbStep} = {\ttfamily 1})}\hfill\label{a00046_ac275665ed11daea220ef37154b39bf0d}
+
+
+Optimize the conformation from internal restraints (bond lengths, angles and dihedral angles), using a steepest descent algorithm. 
+\begin{DoxyParams}{Parameters}
+\item[{\em maxStep,:}]maximum displacement allowed along any coordinate for all atoms. \item[{\em nbStep,:}]number of steps -\/ the gradient is re-\/calculated after each step. \end{DoxyParams}
+\index{ObjCryst::Molecule@{ObjCryst::Molecule}!POVRayDescription@{POVRayDescription}}
+\index{POVRayDescription@{POVRayDescription}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{POVRayDescription}]{\setlength{\rightskip}{0pt plus 5cm}virtual ostream\& ObjCryst::Molecule::POVRayDescription (ostream \& {\em os}, \/  const {\bf CrystalPOVRayOptions} \& {\em options}) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00046_a98bd83a14b359c994be9ab1bf4b8453b}
+\begin{DoxyInternal}{For internal use only.}
+Output a description of the scatterer for POVRay. This should only be called by the \doxyref{Crystal}{p.}{a00020} Object to which belongs this scatterer. \end{DoxyInternal}
+
+
+Implements {\bf ObjCryst::Scatterer} \doxyref{}{p.}{a00084_a708cc857f82c9af4cbdf4d9334449d0f}.\index{ObjCryst::Molecule@{ObjCryst::Molecule}!RandomizeConfiguration@{RandomizeConfiguration}}
+\index{RandomizeConfiguration@{RandomizeConfiguration}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{RandomizeConfiguration}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::Molecule::RandomizeConfiguration ()\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00046_aaa76da93619174b17db73de9d2374ac7}
+
+
+Randomize Configuration (before a global optimization). This Affects only parameters which are limited and not fixed. The randomization also affects all sub-\/objects (recursive). 
+
+Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_a01b02e566db9aebfd0f9ed2647441f40}.\index{ObjCryst::Molecule@{ObjCryst::Molecule}!RemoveAtom@{RemoveAtom}}
+\index{RemoveAtom@{RemoveAtom}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{RemoveAtom}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf MolAtom}$\ast$$>$::iterator ObjCryst::Molecule::RemoveAtom ({\bf MolAtom} \&, \/  const bool {\em del} = {\ttfamily true})}\hfill\label{a00046_a7d3d1e583bc7d4beb1a8a6c7f74b4811}
+
+
+Remove an atom. Returns the iterator to the next atom in the list.
+
+This also removes all corresponding bonds, bond angles, etc... If del is true (default), then the \doxyref{MolAtom}{p.}{a00042} object is deleted. The del flag gets sent to the RemoveXXX functions for the corresponding objects. \index{ObjCryst::Molecule@{ObjCryst::Molecule}!RemoveBond@{RemoveBond}}
+\index{RemoveBond@{RemoveBond}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{RemoveBond}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf MolBond}$\ast$$>$::iterator ObjCryst::Molecule::RemoveBond (const {\bf MolBond} \&, \/  const bool {\em del} = {\ttfamily true})}\hfill\label{a00046_ad7cc4b6b9eec26f396fc30c517f37e24}
+
+
+Remove a bond. Returns the iterator to the next bond in the list.
+
+If del is true (default), then the \doxyref{MolBond}{p.}{a00043} object is deleted. \index{ObjCryst::Molecule@{ObjCryst::Molecule}!RemoveBondAngle@{RemoveBondAngle}}
+\index{RemoveBondAngle@{RemoveBondAngle}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{RemoveBondAngle}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf MolBondAngle}$\ast$$>$::iterator ObjCryst::Molecule::RemoveBondAngle (const {\bf MolBondAngle} \&, \/  const bool {\em del} = {\ttfamily true})}\hfill\label{a00046_a113af00d52a1cc225803865a82f35512}
+
+
+Remove a BondAngle. If del is true (default), then the \doxyref{MolBondAngle}{p.}{a00044} object is deleted. \index{ObjCryst::Molecule@{ObjCryst::Molecule}!RemoveDihedralAngle@{RemoveDihedralAngle}}
+\index{RemoveDihedralAngle@{RemoveDihedralAngle}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{RemoveDihedralAngle}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf MolDihedralAngle}$\ast$$>$::iterator ObjCryst::Molecule::RemoveDihedralAngle (const {\bf MolDihedralAngle} \&, \/  const bool {\em del} = {\ttfamily true})}\hfill\label{a00046_a3f95dc9df0a1547b07854773179d28be}
+
+
+Remove a dihedral angle. If del is true (default), then the \doxyref{MolDihedralAngle}{p.}{a00045} object is deleted. \index{ObjCryst::Molecule@{ObjCryst::Molecule}!RemoveRigidGroup@{RemoveRigidGroup}}
+\index{RemoveRigidGroup@{RemoveRigidGroup}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{RemoveRigidGroup}]{\setlength{\rightskip}{0pt plus 5cm}std::vector$<${\bf RigidGroup}$\ast$$>$::iterator ObjCryst::Molecule::RemoveRigidGroup (const {\bf RigidGroup} \& {\em group}, \/  const bool {\em updateDisplay} = {\ttfamily true}, \/  const bool {\em del} = {\ttfamily true})}\hfill\label{a00046_a0a2c86a36111f22e07356cac6364632a}
+
+
+Remove a rigid group of atoms. See \doxyref{Molecule::mvRigidGroup}{p.}{a00046_a43939b3e3ad83065cf7ccb6065a53a12}
+
+If del is true (default), then the \doxyref{RigidGroup}{p.}{a00081} object is deleted. \index{ObjCryst::Molecule@{ObjCryst::Molecule}!ResetRigidGroupsPar@{ResetRigidGroupsPar}}
+\index{ResetRigidGroupsPar@{ResetRigidGroupsPar}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{ResetRigidGroupsPar}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::Molecule::ResetRigidGroupsPar () const}\hfill\label{a00046_a9daa98a9b4a992d56e0dba41b104b291}
+
+
+Set the orientation \& translation parameters of all rigid groups to 0, after correcting the atomic positions. This is {\bfseries required} before saving the structure, as these parameters are not saved. \index{ObjCryst::Molecule@{ObjCryst::Molecule}!RigidifyWithDihedralAngles@{RigidifyWithDihedralAngles}}
+\index{RigidifyWithDihedralAngles@{RigidifyWithDihedralAngles}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{RigidifyWithDihedralAngles}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::Molecule::RigidifyWithDihedralAngles ()}\hfill\label{a00046_a560c9ffc36d4874b99eb26c198ee485f}
+
+
+Add dihedral angles so as to rigidify the \doxyref{Molecule}{p.}{a00046}. In practice, for every sequence of atoms A-\/B-\/C-\/D, add the dihedral angle defined by these 4 atoms, unless either ABC or BCD are aligned (angle below 10�).
+
+No duplicate dihedral angle is generated. \index{ObjCryst::Molecule@{ObjCryst::Molecule}!RotateAtomGroup@{RotateAtomGroup}}
+\index{RotateAtomGroup@{RotateAtomGroup}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{RotateAtomGroup}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::Molecule::RotateAtomGroup (const {\bf MolAtom} \& {\em at}, \/  const REAL {\em vx}, \/  const REAL {\em vy}, \/  const REAL {\em vz}, \/  const set$<$ {\bf MolAtom} $\ast$ $>$ \& {\em atoms}, \/  const REAL {\em angle}, \/  const bool {\em keepCenter} = {\ttfamily true})}\hfill\label{a00046_a84e93db5b81b90fd5befa22caaf8691c}
+
+
+Rotate a group of atoms around an axis defined by one atom and a vector. 
+\begin{DoxyParams}{Parameters}
+\item[{\em keepCenter,:}]if true, the coordinates of the molecule are modified so that only the rotated atoms are moved. \end{DoxyParams}
+\index{ObjCryst::Molecule@{ObjCryst::Molecule}!RotateAtomGroup@{RotateAtomGroup}}
+\index{RotateAtomGroup@{RotateAtomGroup}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{RotateAtomGroup}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::Molecule::RotateAtomGroup (const {\bf MolAtom} \& {\em at1}, \/  const {\bf MolAtom} \& {\em at2}, \/  const set$<$ {\bf MolAtom} $\ast$ $>$ \& {\em atoms}, \/  const REAL {\em angle}, \/  const bool {\em keepCenter} = {\ttfamily true})}\hfill\label{a00046_a9bd595a0ad88d6832718f3bffb452866}
+
+
+Rotate a group of atoms around an axis defined by two atoms. 
+\begin{DoxyParams}{Parameters}
+\item[{\em keepCenter,:}]if true, the coordinates of the molecule are modified so that only the rotated atoms are moved. \end{DoxyParams}
+\index{ObjCryst::Molecule@{ObjCryst::Molecule}!SetCenterAtom@{SetCenterAtom}}
+\index{SetCenterAtom@{SetCenterAtom}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{SetCenterAtom}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::Molecule::SetCenterAtom (const {\bf MolAtom} \& {\em at})}\hfill\label{a00046_a24043736cd4323a31b7bc0fa6fa166da}
+
+
+Get the atom defining the origin of the \doxyref{Molecule}{p.}{a00046} Equal to 0 if no atom as been set. \index{ObjCryst::Molecule@{ObjCryst::Molecule}!SetDeleteSubObjInDestructor@{SetDeleteSubObjInDestructor}}
+\index{SetDeleteSubObjInDestructor@{SetDeleteSubObjInDestructor}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{SetDeleteSubObjInDestructor}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::Molecule::SetDeleteSubObjInDestructor (const bool {\em b})}\hfill\label{a00046_a19afb1f15773fed7a2d9dff35820bafd}
+
+
+Set whether to delete the MolAtoms, MolBonds, MolBondAngles and MolDihedralAngles in the destructor. By default these sub-\/objects are deleted. \index{ObjCryst::Molecule@{ObjCryst::Molecule}!TagNewBestConfig@{TagNewBestConfig}}
+\index{TagNewBestConfig@{TagNewBestConfig}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{TagNewBestConfig}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::Molecule::TagNewBestConfig () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00046_a91e2f80f1e4526fbb6cd99f5b229db9e}
+
+
+During a global optimization, tells the object that the current config is the latest \char`\"{}best\char`\"{} config. This can be used by the object to make more intellingent random moves (use with caution: highly experimental !). 
+
+Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_a3cb4cc924d39576618184eccd4321cf6}.\index{ObjCryst::Molecule@{ObjCryst::Molecule}!TranslateAtomGroup@{TranslateAtomGroup}}
+\index{TranslateAtomGroup@{TranslateAtomGroup}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{TranslateAtomGroup}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::Molecule::TranslateAtomGroup (const set$<$ {\bf MolAtom} $\ast$ $>$ \& {\em atoms}, \/  const REAL {\em dx}, \/  const REAL {\em dy}, \/  const REAL {\em dz}, \/  const bool {\em keepCenter} = {\ttfamily true})}\hfill\label{a00046_a0d3122b53dd81aa23d2aaa2427e6291e}
+
+
+Translate a group of atoms in a given direction. 
+\begin{DoxyParams}{Parameters}
+\item[{\em keepCenter,:}]if true, the coordinates of the molecule are modified so that only the translated atoms are moved. \end{DoxyParams}
+\index{ObjCryst::Molecule@{ObjCryst::Molecule}!TuneGlobalOptimRotationAmplitude@{TuneGlobalOptimRotationAmplitude}}
+\index{TuneGlobalOptimRotationAmplitude@{TuneGlobalOptimRotationAmplitude}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{TuneGlobalOptimRotationAmplitude}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::Molecule::TuneGlobalOptimRotationAmplitude ()}\hfill\label{a00046_a9cc198b9cb896d28c7bd90a775db4ec2}
+
+
+Tune the rotation amplitude for free torsions and for the overall \doxyref{Molecule}{p.}{a00046} Rotation. This should be done after \doxyref{Molecule::BuildRotorGroup()}{p.}{a00046_a3642fa8104faa1ce84a977600f9d1aeb}; \index{ObjCryst::Molecule@{ObjCryst::Molecule}!UpdateDisplay@{UpdateDisplay}}
+\index{UpdateDisplay@{UpdateDisplay}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{UpdateDisplay}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::Molecule::UpdateDisplay () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00046_af1ae2c4f9febbe16019987f807271b58}
+
+
+If there is an interface, this should be automatically be called each time there is a 'new, significant' configuration to report. 
+
+Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_ab74e2cead734fe1e652c5add46c5e116}.\index{ObjCryst::Molecule@{ObjCryst::Molecule}!XMLInput@{XMLInput}}
+\index{XMLInput@{XMLInput}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{XMLInput}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::Molecule::XMLInput (istream \& {\em is}, \/  const {\bf XMLCrystTag} \& {\em tag})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00046_a701f78d93d495d1102d0bd26700c4a3d}
+
+
+Input From stream. \begin{Desc}
+\item[{\bf Todo}]Add an bool XMLInputTag(is,tag) function to recognize all the tags from the stream. So that each inherited class can use the XMLInputTag function from its parent (ie take advantage of inheritance). The children class would first try to interpret the tag, then if unsuccessful would pass it to its parent (thus allowing overloading), etc... \end{Desc}
+
+
+Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_ac13a4045c3f187879443c8615c38d623}.\index{ObjCryst::Molecule@{ObjCryst::Molecule}!XMLOutput@{XMLOutput}}
+\index{XMLOutput@{XMLOutput}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{XMLOutput}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::Molecule::XMLOutput (ostream \& {\em os}, \/  int {\em indent} = {\ttfamily 0}) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00046_a47762abe37f3e8f7378b7210916e71ea}
+
+
+Output to stream in well-\/formed XML. \begin{Desc}
+\item[{\bf Todo}]Use inheritance.. as for XMLInputTag()... \end{Desc}
+
+
+Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_a7b9b6ed0f8dcf753d398c35e073de973}.
+
+\subsubsection{Member Data Documentation}
+\index{ObjCryst::Molecule@{ObjCryst::Molecule}!mAutoOptimizeConformation@{mAutoOptimizeConformation}}
+\index{mAutoOptimizeConformation@{mAutoOptimizeConformation}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{mAutoOptimizeConformation}]{\setlength{\rightskip}{0pt plus 5cm}{\bf RefObjOpt} {\bf ObjCryst::Molecule::mAutoOptimizeConformation}}\hfill\label{a00046_ae8459b9f767b0d8bc27b05140c604e0c}
+
+
+Option to automatically optimize the starting conformation, if the total restraint cost is too high. This is done in \doxyref{BeginOptimization()}{p.}{a00046_a5fbdadb37966f382a6e33150285819dc}.
+
+This is enabled by default, and should be disabled by people who already supply a good starting conformation for their molecule. \index{ObjCryst::Molecule@{ObjCryst::Molecule}!mConnectivityTable@{mConnectivityTable}}
+\index{mConnectivityTable@{mConnectivityTable}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{mConnectivityTable}]{\setlength{\rightskip}{0pt plus 5cm}map$<${\bf MolAtom} $\ast$,set$<${\bf MolAtom} $\ast$$>$ $>$ {\bf ObjCryst::Molecule::mConnectivityTable}\hspace{0.3cm}{\ttfamily  [mutable]}}\hfill\label{a00046_a13cffa530711a868859cfcfc17bce069}
+
+
+Connectivity table: for each atom, keep the list of atoms bonded to it. All atoms are referenced from their index. \index{ObjCryst::Molecule@{ObjCryst::Molecule}!mDeleteSubObjInDestructor@{mDeleteSubObjInDestructor}}
+\index{mDeleteSubObjInDestructor@{mDeleteSubObjInDestructor}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{mDeleteSubObjInDestructor}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf ObjCryst::Molecule::mDeleteSubObjInDestructor}}\hfill\label{a00046_a5b35796cbf31728b39b82c36badaa97b}
+
+
+Base Rotation amplitude (in radians) for the \doxyref{Molecule}{p.}{a00046}, so that the average atomic displacement is equal to 0.1 A. Default=0.02$\ast$pi \index{ObjCryst::Molecule@{ObjCryst::Molecule}!mFlexModel@{mFlexModel}}
+\index{mFlexModel@{mFlexModel}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{mFlexModel}]{\setlength{\rightskip}{0pt plus 5cm}{\bf RefObjOpt} {\bf ObjCryst::Molecule::mFlexModel}}\hfill\label{a00046_a35881bfb20092d0dcc424553f5671245}
+
+
+OPtion for the different types of flexibility possible for this molecule: rigid body, free atoms + restraints, torsion angles. .. \begin{DoxyWarning}{Warning}
+still EXPERIMENTAL ! 
+\end{DoxyWarning}
+\index{ObjCryst::Molecule@{ObjCryst::Molecule}!mLogLikelihoodScale@{mLogLikelihoodScale}}
+\index{mLogLikelihoodScale@{mLogLikelihoodScale}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{mLogLikelihoodScale}]{\setlength{\rightskip}{0pt plus 5cm}REAL {\bf ObjCryst::Molecule::mLogLikelihoodScale}}\hfill\label{a00046_a7e69eecc5aa10a9908c3a6450cc2540b}
+
+
+Scale (multiplier) for the log(likelihood). Changing this scale is equivalent to changing the sigma values of all bonds, bond angles and dihedral angles -\/ but it allows a simple global scaling for the user. \index{ObjCryst::Molecule@{ObjCryst::Molecule}!mOptimizeOrientation@{mOptimizeOrientation}}
+\index{mOptimizeOrientation@{mOptimizeOrientation}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{mOptimizeOrientation}]{\setlength{\rightskip}{0pt plus 5cm}{\bf RefObjOpt} {\bf ObjCryst::Molecule::mOptimizeOrientation}}\hfill\label{a00046_a8c82ea548f4c0f29e868776c88c5eab8}
+
+
+Option to optimize the Molecule's orientation. Useful to completely fix the \doxyref{Molecule}{p.}{a00046}. \index{ObjCryst::Molecule@{ObjCryst::Molecule}!mQuat@{mQuat}}
+\index{mQuat@{mQuat}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{mQuat}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Quaternion} {\bf ObjCryst::Molecule::mQuat}}\hfill\label{a00046_a61b83701b288c4fdbcda97b14608af7d}
+
+
+The unit quaternion defining the orientation. \index{ObjCryst::Molecule@{ObjCryst::Molecule}!mScattCompList@{mScattCompList}}
+\index{mScattCompList@{mScattCompList}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{mScattCompList}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ScatteringComponentList} {\bf ObjCryst::Molecule::mScattCompList}\hspace{0.3cm}{\ttfamily  [mutable]}}\hfill\label{a00046_ae681f50b04c32c7139727c675dc04b67}
+
+
+The list of scattering components. this is mutable since it only reflects the list of atoms. \index{ObjCryst::Molecule@{ObjCryst::Molecule}!mvAtomBond@{mvAtomBond}}
+\index{mvAtomBond@{mvAtomBond}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{mvAtomBond}]{\setlength{\rightskip}{0pt plus 5cm}map$<${\bf MolAtom}$\ast$ , std::vector$<${\bf MolBond}$\ast$$>$ $>$ {\bf ObjCryst::Molecule::mvAtomBond}}\hfill\label{a00046_ad67f767fe62aeef49aef1c5760d69294}
+
+
+List of Bonds for each atom. This duplicates the information in Molecule::mvBond \index{ObjCryst::Molecule@{ObjCryst::Molecule}!mvpAtom@{mvpAtom}}
+\index{mvpAtom@{mvpAtom}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{mvpAtom}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf MolAtom}$\ast$$>$ {\bf ObjCryst::Molecule::mvpAtom}}\hfill\label{a00046_ad498c51ecf4ee0b4482e5fe41cd52be7}
+
+
+The list of atoms. \index{ObjCryst::Molecule@{ObjCryst::Molecule}!mvpBond@{mvpBond}}
+\index{mvpBond@{mvpBond}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{mvpBond}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf MolBond}$\ast$$>$ {\bf ObjCryst::Molecule::mvpBond}}\hfill\label{a00046_aabf6e0daf6f90f4052a44888f2bc3d7b}
+
+
+The list of bonds. \index{ObjCryst::Molecule@{ObjCryst::Molecule}!mvpBondAngle@{mvpBondAngle}}
+\index{mvpBondAngle@{mvpBondAngle}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{mvpBondAngle}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf MolBondAngle}$\ast$$>$ {\bf ObjCryst::Molecule::mvpBondAngle}}\hfill\label{a00046_a9c195054308e17604a24a3127e0cb307}
+
+
+The list of bond angles. \index{ObjCryst::Molecule@{ObjCryst::Molecule}!mvpDihedralAngle@{mvpDihedralAngle}}
+\index{mvpDihedralAngle@{mvpDihedralAngle}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{mvpDihedralAngle}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf MolDihedralAngle}$\ast$$>$ {\bf ObjCryst::Molecule::mvpDihedralAngle}}\hfill\label{a00046_a21384a0b8be7bf3fc539c57d90d5c9a2}
+
+
+The list of dihedral angles. \index{ObjCryst::Molecule@{ObjCryst::Molecule}!mvRigidGroup@{mvRigidGroup}}
+\index{mvRigidGroup@{mvRigidGroup}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{mvRigidGroup}]{\setlength{\rightskip}{0pt plus 5cm}std::vector$<${\bf RigidGroup}$\ast$$>$ {\bf ObjCryst::Molecule::mvRigidGroup}}\hfill\label{a00046_a43939b3e3ad83065cf7ccb6065a53a12}
+
+
+Rigid groups of atoms. This group will be kept {\itshape strictly\/} rigid, preventing the use of any stretch mode altering their relative position. The entire group of atoms can however be rotated or translated. \index{ObjCryst::Molecule@{ObjCryst::Molecule}!mvRing@{mvRing}}
+\index{mvRing@{mvRing}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{mvRing}]{\setlength{\rightskip}{0pt plus 5cm}list$<${\bf MolRing}$>$ {\bf ObjCryst::Molecule::mvRing}\hspace{0.3cm}{\ttfamily  [mutable]}}\hfill\label{a00046_a35cb61305129b6bbda4a0bb014b2c90e}
+
+
+The list of rings. \begin{DoxyNote}{Note}
+this only reflects the bond list, so it is mutable. 
+\end{DoxyNote}
+\index{ObjCryst::Molecule@{ObjCryst::Molecule}!mvRotorGroupInternal@{mvRotorGroupInternal}}
+\index{mvRotorGroupInternal@{mvRotorGroupInternal}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{mvRotorGroupInternal}]{\setlength{\rightskip}{0pt plus 5cm}list$<${\bf RotorGroup}$>$ {\bf ObjCryst::Molecule::mvRotorGroupInternal}\hspace{0.3cm}{\ttfamily  [mutable]}}\hfill\label{a00046_ac54d8a074549f7710a1823b0ecefcde8}
+
+
+List of RotorGroups for internal rotations. This lists groups of atoms that can be rotated {\itshape between\/} two given atoms. This is useful to alter the conformation of large rings, where no free torsion bonds exists, and also for long flexible chains. \index{ObjCryst::Molecule@{ObjCryst::Molecule}!mvRotorGroupTorsion@{mvRotorGroupTorsion}}
+\index{mvRotorGroupTorsion@{mvRotorGroupTorsion}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{mvRotorGroupTorsion}]{\setlength{\rightskip}{0pt plus 5cm}list$<${\bf RotorGroup}$>$ {\bf ObjCryst::Molecule::mvRotorGroupTorsion}\hspace{0.3cm}{\ttfamily  [mutable]}}\hfill\label{a00046_afc51d36109a8d96a626f3c2251345c13}
+
+
+List of RotorGroups corresponding to free torsion bonds. In this list are list of atoms on one side of a bond, that can be rotated freely around this bond. Each bond is listed only once, with the side which has the smallest number of atoms. \index{ObjCryst::Molecule@{ObjCryst::Molecule}!mvRotorGroupTorsionSingleChain@{mvRotorGroupTorsionSingleChain}}
+\index{mvRotorGroupTorsionSingleChain@{mvRotorGroupTorsionSingleChain}!ObjCryst::Molecule@{ObjCryst::Molecule}}
+\paragraph[{mvRotorGroupTorsionSingleChain}]{\setlength{\rightskip}{0pt plus 5cm}list$<${\bf RotorGroup}$>$ {\bf ObjCryst::Molecule::mvRotorGroupTorsionSingleChain}\hspace{0.3cm}{\ttfamily  [mutable]}}\hfill\label{a00046_a22a07ddc2dbfeb90238b29bcca1e915d}
+
+
+List of RotorGroups corresponding to free torsion bonds, but with only one chain of atoms listed. The difference with Molecule::mRotorGroupTorsion is that if the bond is A-\/B, with atom A linked with atoms A1,A2,A3, in this list only one chain (starting either from A1, A2 or A3) will be rotated, instead of the 3 chains. This is useful when searching for the absolute configuration of atoms. 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Molecule.h\end{DoxyCompactItemize}

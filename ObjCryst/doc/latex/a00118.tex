@@ -1,0 +1,67 @@
+\subsection{ObjCryst::WXField Class Reference}
+\label{a00118}\index{ObjCryst::WXField@{ObjCryst::WXField}}
+
+
+This is the abstract base class for all fields, wether they contain a floating-\/point parameter, or a string,.  
+Inheritance diagram for ObjCryst::WXField::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.10923cm]{a00118}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf WXField} (wxWindow $\ast$parent, const string \&label, const int field\_\-id)\label{a00118_a750b0a756fd49172806fd5af020a1e07}
+
+\begin{DoxyCompactList}\small\item\em Constructor, specifying the label of the field. \item\end{DoxyCompactList}\item 
+void {\bf SetLabel} (const string \&)\label{a00118_a0092c7a134e627a4c9b975c339f6d54e}
+
+\begin{DoxyCompactList}\small\item\em Change the field's label. \item\end{DoxyCompactList}\item 
+virtual void {\bf Revert} ()=0
+\begin{DoxyCompactList}\small\item\em After a user entry, this allows to go back to the last value, if for some reason the entry was rejected (because the object is currently busy, . \item\end{DoxyCompactList}\item 
+virtual bool {\bf SetForegroundColour} (const wxColour \&colour)
+\begin{DoxyCompactList}\small\item\em Change the colour of the field's title. \item\end{DoxyCompactList}\item 
+virtual void {\bf ValidateUserInput} ()=0\label{a00118_aa0a7701e04c91832e8fda19b5b2c147a}
+
+\begin{DoxyCompactList}\small\item\em This function shall be called when a new value has been entered. \item\end{DoxyCompactList}\item 
+virtual void {\bf SetSize} (int width, int height)\label{a00118_a9a77acbfeaa049019e788521bf8e0b50}
+
+\begin{DoxyCompactList}\small\item\em Change the size of the field (excluding the title). \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+wxBoxSizer $\ast$ {\bf mpSizer}\label{a00118_a7853a2d4f8b99e97c9959c01e8cce686}
+
+\begin{DoxyCompactList}\small\item\em The horizontal sizer in which the title, button, fields, are put. \item\end{DoxyCompactList}\item 
+wxStaticText $\ast$ {\bf mpLabel}\label{a00118_a0823abc300be21229f94eb44fc8acfc3}
+
+\begin{DoxyCompactList}\small\item\em The label. \item\end{DoxyCompactList}\item 
+const int {\bf mId}\label{a00118_aa34f4178c0b17434cbdf757d7997afa9}
+
+\begin{DoxyCompactList}\small\item\em The Id of this field. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+This is the abstract base class for all fields, wether they contain a floating-\/point parameter, or a string,. .. All \doxyref{WXField}{p.}{a00118} have a title and an entry field.
+
+Note that \doxyref{WXField::CrystUpdate()}{p.}{a00115_a7ac00ae2ae28f1a6fa26e6fa571186b6} and \doxyref{WXField::UpdateUI()}{p.}{a00115_a3818940b7031ff7e45cf2178c4a99c90} should be done from the parent object. Notably using \doxyref{WXField::CrystUpdate}{p.}{a00115_a7ac00ae2ae28f1a6fa26e6fa571186b6}(updateui=true) will not trigger an update of the UI. 
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::WXField@{ObjCryst::WXField}!Revert@{Revert}}
+\index{Revert@{Revert}!ObjCryst::WXField@{ObjCryst::WXField}}
+\paragraph[{Revert}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::WXField::Revert ()\hspace{0.3cm}{\ttfamily  [pure virtual]}}\hfill\label{a00118_a178d6d770d1e3adfa02e27da94b2dffa}
+
+
+After a user entry, this allows to go back to the last value, if for some reason the entry was rejected (because the object is currently busy, . ..) 
+
+Implemented in {\bf ObjCryst::WXFieldString} \doxyref{}{p.}{a00125_a0372d3d98cad5236fc2ebb628c881600}, {\bf ObjCryst::WXFieldName} \doxyref{}{p.}{a00120_a59ce32e9b9860b6cc6a0833f9d96b753}, {\bf ObjCryst::WXFieldParBase} \doxyref{}{p.}{a00123_a27fd5066d2f6b6e87e213439fd8f7311}, {\bf ObjCryst::WXFieldPar$<$ T $>$} \doxyref{}{p.}{a00122_a8896b1a3ba9b901c83d990ac5e0bd6d1}, {\bf ObjCryst::WXFieldChoice} \doxyref{}{p.}{a00119_a3b923575bb9d616bd9c80a7929d0a388}, {\bf ObjCryst::WXFieldRefPar} \doxyref{}{p.}{a00124_acc2b6724451be954f41a64e09d6cf082}, {\bf ObjCryst::WXFieldOption} \doxyref{}{p.}{a00121_a8caf4ac439d8c702583ceda0612618ab}, and {\bf ObjCryst::WXFieldPar$<$ long $>$} \doxyref{}{p.}{a00122_a8896b1a3ba9b901c83d990ac5e0bd6d1}.\index{ObjCryst::WXField@{ObjCryst::WXField}!SetForegroundColour@{SetForegroundColour}}
+\index{SetForegroundColour@{SetForegroundColour}!ObjCryst::WXField@{ObjCryst::WXField}}
+\paragraph[{SetForegroundColour}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool ObjCryst::WXField::SetForegroundColour (const wxColour \& {\em colour})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00118_a2fd615e41430e4a1ab05e7507ac686c2}
+
+
+Change the colour of the field's title. Can be used (with parcimony) to clarify the interface. 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+wxCryst.h\end{DoxyCompactItemize}

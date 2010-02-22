@@ -1,0 +1,55 @@
+\subsection{ObjCryst::MainTracker Class Reference}
+\label{a00040}\index{ObjCryst::MainTracker@{ObjCryst::MainTracker}}
+
+
+A class to hold all trackers.  
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries AddTracker} ({\bf Tracker} $\ast$t)\label{a00040_a57cc485e6071733b882ff451d0e4b0c2}
+
+\item 
+void {\bfseries AppendValues} (const long trial)\label{a00040_a364936085e098d0db6241e1ea618e8ad}
+
+\item 
+void {\bf ClearTrackers} ()\label{a00040_a90300f3395141e9245483f0fef1bba33}
+
+\begin{DoxyCompactList}\small\item\em Removes all Trackers. \item\end{DoxyCompactList}\item 
+void {\bf ClearValues} ()\label{a00040_aa641363dfd39e038e091979911d001a8}
+
+\begin{DoxyCompactList}\small\item\em Removes all stored values. \item\end{DoxyCompactList}\item 
+void {\bf SaveAll} (std::ostream \&out) const \label{a00040_a6331f74dd05d975521f7ec5963eed020}
+
+\begin{DoxyCompactList}\small\item\em Will save to a single file if all recorded trial numbers are the same Otherwise ? \item\end{DoxyCompactList}\item 
+const std::set$<$ {\bf Tracker} $\ast$ $>$ \& {\bfseries GetTrackerList} () const \label{a00040_aa2bc994d1d0c9512b00e6de5d5dd228a}
+
+\item 
+void {\bf UpdateDisplay} () const \label{a00040_a8f3f9069cc1957663fcddb52376c2f07}
+
+\begin{DoxyCompactList}\small\item\em Update display, if any. \item\end{DoxyCompactList}\item 
+const {\bf RefinableObjClock} \& {\bf GetClockTrackerList} () const \label{a00040_a1ed9dc3f6f4e7fae6ce7da58f0a78fc1}
+
+\begin{DoxyCompactList}\small\item\em Get last time a tracker was added. \item\end{DoxyCompactList}\item 
+const {\bf RefinableObjClock} \& {\bf GetClockValues} () const \label{a00040_aa7da65b819f1ba0ec180ee5374eddcf2}
+
+\begin{DoxyCompactList}\small\item\em Get last time values were whanged. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std::set$<$ {\bf Tracker} $\ast$ $>$ {\bfseries mvpTracker}\label{a00040_a888837e8412f072986a6d3307d1c95a9}
+
+\item 
+{\bf RefinableObjClock} {\bf mClockTrackerList}\label{a00040_a06750efaa9482ebb71a043744fb9c6a6}
+
+\begin{DoxyCompactList}\small\item\em Last time a tracker was added. \item\end{DoxyCompactList}\item 
+{\bf RefinableObjClock} {\bf mClockValues}\label{a00040_a83a5fd9e84a64342b2c10e57e3c85df9}
+
+\begin{DoxyCompactList}\small\item\em Last time values were whanged. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+A class to hold all trackers. All trackers need not have the same 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Tracker.h\end{DoxyCompactItemize}

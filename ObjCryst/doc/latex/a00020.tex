@@ -1,0 +1,629 @@
+\subsection{ObjCryst::Crystal Class Reference}
+\label{a00020}\index{ObjCryst::Crystal@{ObjCryst::Crystal}}
+
+
+\doxyref{Crystal}{p.}{a00020} class: Unit cell, spacegroup, scatterers.  
+Inheritance diagram for ObjCryst::Crystal::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3cm]{a00020}
+\end{center}
+\end{figure}
+\subsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf BumpMergePar}
+\begin{DoxyCompactList}\small\item\em Storage for anti-\/bump/merge parameters. \item\end{DoxyCompactList}\item 
+struct {\bf Neighbour}
+\begin{DoxyCompactList}\small\item\em Interatomic distance for a given neighbour. \item\end{DoxyCompactList}\item 
+struct {\bf NeighbourHood}
+\begin{DoxyCompactList}\small\item\em Table of neighbours for a given unique atom. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef std::map$<$ pair$<$ const {\bf ScatteringPower} $\ast$, const {\bf ScatteringPower} $\ast$ $>$, {\bf Crystal::BumpMergePar} $>$ {\bf VBumpMergePar}
+\begin{DoxyCompactList}\small\item\em Anti-\/bump parameters. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Crystal} ()\label{a00020_a4d9c152db2dfcea3c849d0a7ae547a2e}
+
+\begin{DoxyCompactList}\small\item\em Default Constructor. \item\end{DoxyCompactList}\item 
+{\bf Crystal} (const REAL a, const REAL b, const REAL c, const string \&SpaceGroupId)
+\begin{DoxyCompactList}\small\item\em \doxyref{Crystal}{p.}{a00020} Constructor (orthorombic). \item\end{DoxyCompactList}\item 
+{\bf Crystal} (const REAL a, const REAL b, const REAL c, const REAL alpha, const REAL beta, const REAL gamma, const string \&SpaceGroupId)
+\begin{DoxyCompactList}\small\item\em \doxyref{Crystal}{p.}{a00020} Constructor (triclinic). \item\end{DoxyCompactList}\item 
+{\bf Crystal} (const {\bf Crystal} \&oldCryst)\label{a00020_a4fd1bac8dbb8c119077f3b1f3d19153f}
+
+\begin{DoxyCompactList}\small\item\em \doxyref{Crystal}{p.}{a00020} copy constructor. \item\end{DoxyCompactList}\item 
+{\bf $\sim$Crystal} ()\label{a00020_a13a9e007a57aeb11a5d808099c56c2b5}
+
+\begin{DoxyCompactList}\small\item\em \doxyref{Crystal}{p.}{a00020} destructor. \item\end{DoxyCompactList}\item 
+virtual const string \& {\bf GetClassName} () const 
+\begin{DoxyCompactList}\small\item\em Name for this class (\char`\"{}RefinableObj\char`\"{}, \char`\"{}Crystal\char`\"{},. \item\end{DoxyCompactList}\item 
+void {\bf AddScatterer} ({\bf Scatterer} $\ast$scatt)
+\begin{DoxyCompactList}\small\item\em Add a scatterer to the crystal. \item\end{DoxyCompactList}\item 
+void {\bf RemoveScatterer} ({\bf Scatterer} $\ast$scatt, const bool del=true)\label{a00020_ac2755d27280cfa572aa334e6e596da98}
+
+\begin{DoxyCompactList}\small\item\em Remove a \doxyref{Scatterer}{p.}{a00084}. This also deletes the scatterer unless del=false. \item\end{DoxyCompactList}\item 
+long {\bf GetNbScatterer} () const \label{a00020_a5fb1f327104bd5cf5550265b1453a639}
+
+\begin{DoxyCompactList}\small\item\em Number of scatterers in the crystal. \item\end{DoxyCompactList}\item 
+{\bf Scatterer} \& {\bf GetScatt} (const string \&scattName)
+\begin{DoxyCompactList}\small\item\em Provides an access to the scatterers. \item\end{DoxyCompactList}\item 
+const {\bf Scatterer} \& {\bf GetScatt} (const string \&scattName) const 
+\begin{DoxyCompactList}\small\item\em Provides a const access to the scatterers. \item\end{DoxyCompactList}\item 
+{\bf Scatterer} \& {\bf GetScatt} (const long scattIndex)
+\begin{DoxyCompactList}\small\item\em Provides an access to the scatterers. \item\end{DoxyCompactList}\item 
+const {\bf Scatterer} \& {\bf GetScatt} (const long scattIndex) const 
+\begin{DoxyCompactList}\small\item\em Provides a const access to the scatterers. \item\end{DoxyCompactList}\item 
+{\bf ObjRegistry}$<$ {\bf Scatterer} $>$ \& {\bf GetScattererRegistry} ()\label{a00020_ad2e15e119a2cfc4104efd46672c63b64}
+
+\begin{DoxyCompactList}\small\item\em Get the registry of scatterers. \item\end{DoxyCompactList}\item 
+const {\bf ObjRegistry}$<$ {\bf Scatterer} $>$ \& {\bf GetScattererRegistry} () const \label{a00020_ac93eb73b0194e1550a0d6eb5b313ab44}
+
+\begin{DoxyCompactList}\small\item\em Get the registry of scatterers. \item\end{DoxyCompactList}\item 
+{\bf ObjRegistry}$<$ {\bf ScatteringPower} $>$ \& {\bf GetScatteringPowerRegistry} ()\label{a00020_a53d6f239dbfae0040c900e4d4e120e73}
+
+\begin{DoxyCompactList}\small\item\em Get the registry of \doxyref{ScatteringPower}{p.}{a00089} included in this \doxyref{Crystal}{p.}{a00020}. \item\end{DoxyCompactList}\item 
+const {\bf ObjRegistry}$<$ {\bf ScatteringPower} $>$ \& {\bf GetScatteringPowerRegistry} () const \label{a00020_abcc623c63dfe1085d28e7d73811fff16}
+
+\begin{DoxyCompactList}\small\item\em Get the registry of \doxyref{ScatteringPower}{p.}{a00089} included in this \doxyref{Crystal}{p.}{a00020}. \item\end{DoxyCompactList}\item 
+void {\bf AddScatteringPower} ({\bf ScatteringPower} $\ast$scattPow)
+\begin{DoxyCompactList}\small\item\em Add a \doxyref{ScatteringPower}{p.}{a00089} for this \doxyref{Crystal}{p.}{a00020}. \item\end{DoxyCompactList}\item 
+void {\bf RemoveScatteringPower} ({\bf ScatteringPower} $\ast$scattPow, const bool del=true)
+\begin{DoxyCompactList}\small\item\em Remove a \doxyref{ScatteringPower}{p.}{a00089} for this \doxyref{Crystal}{p.}{a00020}. \item\end{DoxyCompactList}\item 
+{\bf ScatteringPower} \& {\bf GetScatteringPower} (const string \&name)\label{a00020_a3a71094a078502bbb73f811f895cb438}
+
+\begin{DoxyCompactList}\small\item\em Find a \doxyref{ScatteringPower}{p.}{a00089} from its name. Names must be unique in a given \doxyref{Crystal}{p.}{a00020}. \item\end{DoxyCompactList}\item 
+const {\bf ScatteringPower} \& {\bf GetScatteringPower} (const string \&name) const \label{a00020_a5622a2ef63f40084527626c94085f90a}
+
+\begin{DoxyCompactList}\small\item\em Find a \doxyref{ScatteringPower}{p.}{a00089} from its name. Names must be unique in a given \doxyref{Crystal}{p.}{a00020}. \item\end{DoxyCompactList}\item 
+const {\bf RefinableObjClock} \& {\bf GetMasterClockScatteringPower} () const \label{a00020_a3b583a9655a174de9c21e139eea709dc}
+
+\begin{DoxyCompactList}\small\item\em Get the clock which reports all changes in ScatteringPowers. \item\end{DoxyCompactList}\item 
+virtual const {\bf ScatteringComponentList} \& {\bf GetScatteringComponentList} () const \label{a00020_a748d335480c372c5ef6cdf8716d9dd1a}
+
+\begin{DoxyCompactList}\small\item\em Get the list of all scattering components. \item\end{DoxyCompactList}\item 
+const {\bf RefinableObjClock} \& {\bf GetClockScattCompList} () const \label{a00020_a1deb673a7f01f6a71c659f28ddf5cd21}
+
+\begin{DoxyCompactList}\small\item\em Get the list of all scattering components. \item\end{DoxyCompactList}\item 
+void {\bf Print} (ostream \&os=cout) const 
+\begin{DoxyCompactList}\small\item\em Prints some info about the crystal. \item\end{DoxyCompactList}\item 
+CrystMatrix\_\-REAL {\bf GetMinDistanceTable} (const REAL minDistance=0.1) const 
+\begin{DoxyCompactList}\small\item\em Minimum interatomic distance between all scattering components (atoms) in the crystal. \item\end{DoxyCompactList}\item 
+void {\bf PrintMinDistanceTable} (const REAL minDistance=0.1, ostream \&os=cout) const 
+\begin{DoxyCompactList}\small\item\em Print the minimum distance table between all scattering centers (atoms) in the crystal. \item\end{DoxyCompactList}\item 
+ostream \& {\bf POVRayDescription} (ostream \&os, const {\bf CrystalPOVRayOptions} \&options) const 
+\begin{DoxyCompactList}\small\item\em XMLOutput POV-\/Ray Description for this \doxyref{Crystal}{p.}{a00020}. \item\end{DoxyCompactList}\item 
+virtual void {\bf GLInitDisplayList} (const bool onlyIndependentAtoms=false, const REAL xMin=-\/.1, const REAL xMax=1.1, const REAL yMin=-\/.1, const REAL yMax=1.1, const REAL zMin=-\/.1, const REAL zMax=1.1, const bool displayNames=false) const 
+\begin{DoxyCompactList}\small\item\em Create an OpenGL DisplayList of the crystal. \item\end{DoxyCompactList}\item 
+void {\bf CalcDynPopCorr} (const REAL overlapDist=1., const REAL mergeDist=.0) const 
+\begin{DoxyCompactList}\small\item\em Compute the 'Dynamical population correction for all atoms. Atoms which are considered \char`\"{}equivalent\char`\"{} (ie currently with the same Z number) and which are overlapping see their Dynamical occupancy changed so that when they fully overlap, they are equivalent to 1 atom. \item\end{DoxyCompactList}\item 
+void {\bf ResetDynPopCorr} () const \label{a00020_a9230b222fe2cde018c6b08fab6d5da8b}
+
+\begin{DoxyCompactList}\small\item\em Reset Dynamical Population Correction factors (ie set it to 1). \item\end{DoxyCompactList}\item 
+void {\bf SetUseDynPopCorr} (const int use)
+\begin{DoxyCompactList}\small\item\em Set the use of dynamical population correction (\doxyref{Crystal::mUseDynPopCorr}{p.}{a00020_aa75ade2fea9a50b3e6fb08773f607a13}). \item\end{DoxyCompactList}\item 
+REAL {\bf GetBumpMergeCost} () const 
+\begin{DoxyCompactList}\small\item\em Get the Anti-\/bumping/pro-\/Merging cost function. \item\end{DoxyCompactList}\item 
+void {\bf SetBumpMergeDistance} (const {\bf ScatteringPower} \&scatt1, const {\bf ScatteringPower} \&scatt2, const REAL dist=1.5)
+\begin{DoxyCompactList}\small\item\em Set the Anti-\/bumping distance between two scattering types. \item\end{DoxyCompactList}\item 
+void {\bf SetBumpMergeDistance} (const {\bf ScatteringPower} \&scatt1, const {\bf ScatteringPower} \&scatt2, const REAL dist, const bool allowMerge)\label{a00020_a74a095efbf1f414a0707532cb51f78ca}
+
+\begin{DoxyCompactList}\small\item\em Set the Anti-\/bumping distance between two scattering types. \item\end{DoxyCompactList}\item 
+void {\bf RemoveBumpMergeDistance} (const {\bf ScatteringPower} \&scatt1, const {\bf ScatteringPower} \&scatt2)\label{a00020_ac098ff50897a0afdec066d5f3872a5a1}
+
+\begin{DoxyCompactList}\small\item\em Remove an Anti-\/bumping distance between two scattering types. \item\end{DoxyCompactList}\item 
+const {\bf VBumpMergePar} \& {\bfseries GetBumpMergeParList} () const \label{a00020_a0e1cfe79846330b06619619a51af34d6}
+
+\item 
+{\bf VBumpMergePar} \& {\bfseries GetBumpMergeParList} ()\label{a00020_a454da6faa3699da08af3ed99f2193d9a}
+
+\item 
+const {\bf RefinableObjClock} \& {\bf GetClockScattererList} () const \label{a00020_a656dd25b9a62224144142fff3eba1627}
+
+\begin{DoxyCompactList}\small\item\em When was the list of scatterers last changed ? \item\end{DoxyCompactList}\item 
+virtual void {\bf XMLOutput} (ostream \&os, int indent=0) const 
+\begin{DoxyCompactList}\small\item\em Output to stream in well-\/formed XML. \item\end{DoxyCompactList}\item 
+virtual void {\bf XMLInput} (istream \&is, const {\bf XMLCrystTag} \&tag)
+\begin{DoxyCompactList}\small\item\em Input From stream. \item\end{DoxyCompactList}\item 
+virtual void {\bf GlobalOptRandomMove} (const REAL mutationAmplitude, const {\bf RefParType} $\ast$type={\bf gpRefParTypeObjCryst})
+\begin{DoxyCompactList}\small\item\em Make a random move of the current configuration. \item\end{DoxyCompactList}\item 
+virtual REAL {\bf GetLogLikelihood} () const 
+\begin{DoxyCompactList}\small\item\em Get -\/log(likelihood) of the current configuration for the object. \item\end{DoxyCompactList}\item 
+virtual void {\bf CIFOutput} (ostream \&os) const 
+\begin{DoxyCompactList}\small\item\em output \doxyref{Crystal}{p.}{a00020} structure as a cif file (EXPERIMENTAL !) \item\end{DoxyCompactList}\item 
+virtual void {\bf GetGeneGroup} (const {\bf RefinableObj} \&obj, CrystVector\_\-uint \&groupIndex, unsigned int \&firstGroup) const 
+\begin{DoxyCompactList}\small\item\em Get the gene group assigned to each parameter. \item\end{DoxyCompactList}\item 
+virtual void {\bf BeginOptimization} (const bool allowApproximations=false, const bool enableRestraints=false)
+\begin{DoxyCompactList}\small\item\em This should be called by any optimization class at the begining of an optimization. \item\end{DoxyCompactList}\item 
+void {\bfseries AddBondValenceRo} (const {\bf ScatteringPower} \&, const {\bf ScatteringPower} \&, const REAL ro)\label{a00020_a8b12fd9aae0c485bcdb17ac4fa4a17fc}
+
+\item 
+void {\bfseries RemoveBondValenceRo} (const {\bf ScatteringPower} \&, const {\bf ScatteringPower} \&)\label{a00020_aca3dd86f521af211c6057c547fa907a6}
+
+\item 
+REAL {\bf GetBondValenceCost} () const \label{a00020_afb63f1cd68bef00efde221449a0471db}
+
+\begin{DoxyCompactList}\small\item\em Get the Bond-\/Valence cost function, which compares the expected valence to the one computed from Bond-\/Valence Ro parameters. \item\end{DoxyCompactList}\item 
+std::map$<$ pair$<$ const {\bf ScatteringPower} $\ast$, const {\bf ScatteringPower} $\ast$ $>$, REAL $>$ \& {\bfseries GetBondValenceRoList} ()\label{a00020_a98cd544cd8bdee0e2be4564eb74d43f3}
+
+\item 
+const std::map$<$ pair$<$ const {\bf ScatteringPower} $\ast$, const {\bf ScatteringPower} $\ast$ $>$, REAL $>$ \& {\bfseries GetBondValenceRoList} () const \label{a00020_af6fd92d99e5b95195fbfac86551f37b3}
+
+\item 
+void {\bf Init} (const REAL a, const REAL b, const REAL c, const REAL alpha, const REAL beta, const REAL gamma, const string \&SpaceGroupId, const string \&name)
+\begin{DoxyCompactList}\small\item\em Init all \doxyref{Crystal}{p.}{a00020} parameters. \item\end{DoxyCompactList}\item 
+void {\bf SetDeleteSubObjInDestructor} (const bool b)
+\begin{DoxyCompactList}\small\item\em Set whether to delete the Scatterers and ScatteringPowers in the destructor. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf InitOptions} ()
+\begin{DoxyCompactList}\small\item\em Init options. \item\end{DoxyCompactList}\item 
+int {\bf FindScatterer} (const string \&scattName) const 
+\begin{DoxyCompactList}\small\item\em Find a scatterer (its index \# in mpScatterrer[]) with a given name. \item\end{DoxyCompactList}\item 
+void {\bf CalcDistTable} (const bool fast) const 
+\begin{DoxyCompactList}\small\item\em Compute the distance Table (mDistTable) for all scattering components. \item\end{DoxyCompactList}\item 
+void {\bf CalcBondValenceSum} () const \label{a00020_a9e38da0889a3509dda6ca1ad39f07106}
+
+\begin{DoxyCompactList}\small\item\em Calculate all Bond Valences. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf ObjRegistry}$<$ {\bf Scatterer} $>$ {\bf mScattererRegistry}\label{a00020_a95b53923f17cc84cfdd2eab1c028b646}
+
+\begin{DoxyCompactList}\small\item\em The registry of scatterers for this \doxyref{UnitCell}{p.}{a00109}. \item\end{DoxyCompactList}\item 
+{\bf VBumpMergePar} {\bf mvBumpMergePar}\label{a00020_a96fa4e0d7548e2da3aceae44223acb9a}
+
+\begin{DoxyCompactList}\small\item\em Anti-\/bump parameters map. \item\end{DoxyCompactList}\item 
+{\bf RefinableObjClock} {\bf mBumpMergeParClock}\label{a00020_aa56df3d4cc3021b24e3d521de5fba508}
+
+\begin{DoxyCompactList}\small\item\em Last Time Anti-\/bump parameters were changed. \item\end{DoxyCompactList}\item 
+{\bf RefinableObjClock} {\bf mBumpMergeCostClock}\label{a00020_a53766d304020a6eec3db2c789ff08cf5}
+
+\begin{DoxyCompactList}\small\item\em Last Time Anti-\/bump parameters were changed. \item\end{DoxyCompactList}\item 
+REAL {\bf mBumpMergeCost}\label{a00020_ad57883557f407dd8c7da778432217fb2}
+
+\begin{DoxyCompactList}\small\item\em Current bump-\/merge cost. \item\end{DoxyCompactList}\item 
+REAL {\bf mBumpMergeScale}\label{a00020_aea7ce861440b7f71140d577532c8d8ee}
+
+\begin{DoxyCompactList}\small\item\em Bump-\/merge scale factor. \item\end{DoxyCompactList}\item 
+std::vector$<$ {\bf NeighbourHood} $>$ {\bf mvDistTableSq}
+\begin{DoxyCompactList}\small\item\em Interatomic distance table for all unique atoms. \item\end{DoxyCompactList}\item 
+{\bf RefinableObjClock} {\bf mDistTableClock}\label{a00020_ad76e9124e15045be67edd402e10769a7}
+
+\begin{DoxyCompactList}\small\item\em The time when the distance table was last calculated. \item\end{DoxyCompactList}\item 
+REAL {\bf mDistTableMaxDistance}\label{a00020_a92bee4d000d1d634308d5686d8ae5f42}
+
+\begin{DoxyCompactList}\small\item\em The distance up to which the distance table \& neighbours needs to be calculated. \item\end{DoxyCompactList}\item 
+{\bf ScatteringComponentList} {\bf mScattCompList}\label{a00020_a2f45b59533a1a3114391aa04e7017bf8}
+
+\begin{DoxyCompactList}\small\item\em The list of all scattering components in the crystal. \item\end{DoxyCompactList}\item 
+{\bf RefinableObjClock} {\bf mLatticeClock}\label{a00020_ae46dd6f236625d70b696253bb81b75c5}
+
+\begin{DoxyCompactList}\small\item\em Clock for lattice paramaters. \item\end{DoxyCompactList}\item 
+{\bf RefObjOpt} {\bf mUseDynPopCorr}\label{a00020_aa75ade2fea9a50b3e6fb08773f607a13}
+
+\begin{DoxyCompactList}\small\item\em Use Dynamical population correction (\doxyref{ScatteringComponent::mDynPopCorr}{p.}{a00085_a33af12bb3f340af259a8b8450f837efd}) during Structure factor calculation ? \item\end{DoxyCompactList}\item 
+{\bf ObjRegistry}$<$ {\bf ScatteringPower} $>$ {\bf mScatteringPowerRegistry}\label{a00020_a85f96fb904d5cd1f368c977f1653f509}
+
+\begin{DoxyCompactList}\small\item\em The registry of \doxyref{ScatteringPower}{p.}{a00089} for this \doxyref{Crystal}{p.}{a00020}. \item\end{DoxyCompactList}\item 
+{\bf RefinableObjClock} {\bf mClockScattererList}\label{a00020_a8042bd11e0b5054f21d4e72bc1966e05}
+
+\begin{DoxyCompactList}\small\item\em Last time the list of Scatterers was changed. \item\end{DoxyCompactList}\item 
+{\bf RefinableObjClock} {\bf mClockScattCompList}
+\item 
+{\bf RefinableObjClock} {\bf mClockNeighborTable}
+\item 
+{\bf RefinableObjClock} {\bf mClockDynPopCorr}
+\item 
+{\bf RefinableObjClock} {\bf mMasterClockScatteringPower}\label{a00020_a0c0317433ca0e745094835e165f4e5e7}
+
+\begin{DoxyCompactList}\small\item\em master clock recording every change in Scattering Powers \item\end{DoxyCompactList}\item 
+{\bf RefObjOpt} {\bf mDisplayEnantiomer}
+\begin{DoxyCompactList}\small\item\em Display the enantiomeric (mirror along x) structure in 3D? This can be helpful for non-\/centrosymmetric structure which have been solved using powder diffraction (which only gives the relative configuration). \item\end{DoxyCompactList}\item 
+map$<$ pair$<$ const {\bf ScatteringPower} $\ast$, const {\bf ScatteringPower} $\ast$ $>$, REAL $>$ {\bf mvBondValenceRo}\label{a00020_a861db7aad30d32436ff7f7d41efef5c5}
+
+\begin{DoxyCompactList}\small\item\em Map of Bond Valence \char`\"{}Ro\char`\"{} parameters for each couple of \doxyref{ScatteringPower}{p.}{a00089}. \item\end{DoxyCompactList}\item 
+{\bf RefinableObjClock} {\bf mBondValenceParClock}\label{a00020_a30556d5f1daeff997ff562f7bd70298e}
+
+\begin{DoxyCompactList}\small\item\em Last Time Bond Valence parameters were changed. \item\end{DoxyCompactList}\item 
+{\bf RefinableObjClock} {\bf mBondValenceCalcClock}\label{a00020_a31d557a0f85089e9bc978b2d22c66fe6}
+
+\begin{DoxyCompactList}\small\item\em Last time Bond Valences were calculated. \item\end{DoxyCompactList}\item 
+{\bf RefinableObjClock} {\bf mBondValenceCostClock}\label{a00020_ae83ac26a84c2e72d6e088b80ea134079}
+
+\begin{DoxyCompactList}\small\item\em Last time the Bond Valence cost was calculated. \item\end{DoxyCompactList}\item 
+REAL {\bf mBondValenceCost}\label{a00020_afcec48187cc76f08f1d925540268a648}
+
+\begin{DoxyCompactList}\small\item\em Current Bond Valence cost. \item\end{DoxyCompactList}\item 
+REAL {\bf mBondValenceCostScale}\label{a00020_a310b5fa7d00c874c84d4d72a03b147a0}
+
+\begin{DoxyCompactList}\small\item\em Bond Valence cost scale factor. \item\end{DoxyCompactList}\item 
+std::map$<$ long, REAL $>$ {\bf mvBondValenceCalc}
+\begin{DoxyCompactList}\small\item\em List of calculated bond valences, as a map, the key being the index of the atom in \doxyref{Crystal::mScattCompList}{p.}{a00020_a2f45b59533a1a3114391aa04e7017bf8}. \item\end{DoxyCompactList}\item 
+bool {\bfseries mDeleteSubObjInDestructor}\label{a00020_a721474f86d405f3cef5eb6756ae3bb36}
+
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+\doxyref{Crystal}{p.}{a00020} class: Unit cell, spacegroup, scatterers. A \doxyref{Crystal}{p.}{a00020} object has several main characteristics : (1) a unit cell, (2) a Spacegroup and (3) a list of \doxyref{Scatterer}{p.}{a00084}. Also stored in the \doxyref{Crystal}{p.}{a00020} is a list of the ScttaringPower used by all the scatterers of this crystal.
+
+The crystal is capable of giving a list of all scattering components (ie the list of all unique scattering 'points' (\doxyref{ScatteringComponent}{p.}{a00085}, ie atoms) in the unit cell, each associated to a \doxyref{ScatteringPower}{p.}{a00089}).
+
+When those scattering components are on a special position or overlapping with another component of the same type, it is possible to correct dynamically the occupancy of this/these components to effectively have only one component instead of several due to the overlapping. This method is interesting for global optimization where atoms must not be \char`\"{}locked\char`\"{} on a special position. If this \char`\"{}Dynamical Occupancy Correction\char`\"{} is used then no occupancy should be corrected for special positions, since this will be done dynamically.
+
+A crystal structure can be viewed in 3D using OpenGL.
+
+\begin{Desc}
+\item[{\bf Todo}]exporting (and importing) crystal structures to/from other files format than ObjCryst's XML (eg \doxyref{CIF}{p.}{a00017}, and format used by refinement software)\end{Desc}
+Currently only 3D crystal structures can be handled, with no magnetic structure (that may be done later) and no incommensurate structure. 
+
+\subsubsection{Member Typedef Documentation}
+\index{ObjCryst::Crystal@{ObjCryst::Crystal}!VBumpMergePar@{VBumpMergePar}}
+\index{VBumpMergePar@{VBumpMergePar}!ObjCryst::Crystal@{ObjCryst::Crystal}}
+\paragraph[{VBumpMergePar}]{\setlength{\rightskip}{0pt plus 5cm}typedef std::map$<$pair$<$const {\bf ScatteringPower}$\ast$, const {\bf ScatteringPower}$\ast$$>$,{\bf Crystal::BumpMergePar} $>$ {\bf ObjCryst::Crystal::VBumpMergePar}}\hfill\label{a00020_af57b44b799f164dbc86227f555a5eee5}
+
+
+Anti-\/bump parameters. Each atom type (\doxyref{ScatteringPower}{p.}{a00089} is referenced using a reference number) 
+
+\subsubsection{Constructor \& Destructor Documentation}
+\index{ObjCryst::Crystal@{ObjCryst::Crystal}!Crystal@{Crystal}}
+\index{Crystal@{Crystal}!ObjCryst::Crystal@{ObjCryst::Crystal}}
+\paragraph[{Crystal}]{\setlength{\rightskip}{0pt plus 5cm}ObjCryst::Crystal::Crystal (const REAL {\em a}, \/  const REAL {\em b}, \/  const REAL {\em c}, \/  const string \& {\em SpaceGroupId})}\hfill\label{a00020_af4476f2fa29985667c19dc14dcc1efc9}
+
+
+\doxyref{Crystal}{p.}{a00020} Constructor (orthorombic). 
+\begin{DoxyParams}{Parameters}
+\item[{\em a,b,c}]: unit cell dimension, in angstroems \item[{\em SpaceGroupId,:}]space group symbol or number \end{DoxyParams}
+\index{ObjCryst::Crystal@{ObjCryst::Crystal}!Crystal@{Crystal}}
+\index{Crystal@{Crystal}!ObjCryst::Crystal@{ObjCryst::Crystal}}
+\paragraph[{Crystal}]{\setlength{\rightskip}{0pt plus 5cm}ObjCryst::Crystal::Crystal (const REAL {\em a}, \/  const REAL {\em b}, \/  const REAL {\em c}, \/  const REAL {\em alpha}, \/  const REAL {\em beta}, \/  const REAL {\em gamma}, \/  const string \& {\em SpaceGroupId})}\hfill\label{a00020_a5bb224d9b91463fb5748d76a2bcd6949}
+
+
+\doxyref{Crystal}{p.}{a00020} Constructor (triclinic). 
+\begin{DoxyParams}{Parameters}
+\item[{\em a,b,c}]: unit cell dimension, in angstroems \item[{\em alpha,beta,gamma}]: unit cell angles, in radians. \item[{\em SpaceGroupId,:}]space group symbol or number \end{DoxyParams}
+
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::Crystal@{ObjCryst::Crystal}!AddScatterer@{AddScatterer}}
+\index{AddScatterer@{AddScatterer}!ObjCryst::Crystal@{ObjCryst::Crystal}}
+\paragraph[{AddScatterer}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::Crystal::AddScatterer ({\bf Scatterer} $\ast$ {\em scatt})}\hfill\label{a00020_acee480ad824aa0eedf78a4fa414cf347}
+
+
+Add a scatterer to the crystal. \begin{DoxyWarning}{Warning}
+the scatterer {\itshape must\/} be allocated in the heap, since the scatterer will {\itshape not\/} be copied but used directly. A \doxyref{Scatterer}{p.}{a00084} can only belong to one \doxyref{Crystal}{p.}{a00020}. It will be detroyed when removed or when the \doxyref{Crystal}{p.}{a00020} is destroyed. 
+\end{DoxyWarning}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em scatt}]: the address of the scatterer to be included in the crystal scatterer names {\bfseries must} be unique in a given crystal. \end{DoxyParams}
+\begin{DoxyNote}{Note}
+that the \doxyref{ScatteringPower}{p.}{a00089} used in the \doxyref{Scatterer}{p.}{a00084} should be one of the \doxyref{Crystal}{p.}{a00020} (see \doxyref{Crystal::AddScatteringPower()}{p.}{a00020_a76d2d19234fbc5733f5c565a4bf9a1c7}) 
+\end{DoxyNote}
+\index{ObjCryst::Crystal@{ObjCryst::Crystal}!AddScatteringPower@{AddScatteringPower}}
+\index{AddScatteringPower@{AddScatteringPower}!ObjCryst::Crystal@{ObjCryst::Crystal}}
+\paragraph[{AddScatteringPower}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::Crystal::AddScatteringPower ({\bf ScatteringPower} $\ast$ {\em scattPow})}\hfill\label{a00020_a76d2d19234fbc5733f5c565a4bf9a1c7}
+
+
+Add a \doxyref{ScatteringPower}{p.}{a00089} for this \doxyref{Crystal}{p.}{a00020}. It must be allocated in the heap, and not used by any other \doxyref{Crystal}{p.}{a00020}. \index{ObjCryst::Crystal@{ObjCryst::Crystal}!BeginOptimization@{BeginOptimization}}
+\index{BeginOptimization@{BeginOptimization}!ObjCryst::Crystal@{ObjCryst::Crystal}}
+\paragraph[{BeginOptimization}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::Crystal::BeginOptimization (const bool {\em allowApproximations} = {\ttfamily false}, \/  const bool {\em enableRestraints} = {\ttfamily false})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00020_afe25ea6d287d6dd9cd0a03aed3798525}
+
+
+This should be called by any optimization class at the begining of an optimization. This will also check that everything is ready, eg call the \doxyref{RefinableObj::Prepare()}{p.}{a00070_a48d11671e7f8699f7bc24077585c5e0f} function. This also affects all sub-\/objects. \begin{DoxyNote}{Note}
+this may be called several time for some objects which are used by several other objects, or for nested optimizations (e.g. least-\/squares optimizations inside a global one).
+
+\doxyref{EndOptimization()}{p.}{a00070_ab0035f6164cb24ace67b51b11993a851} must be called at the end of the optimization, the same number of time \doxyref{BeginOptimization()}{p.}{a00020_afe25ea6d287d6dd9cd0a03aed3798525} was called !
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em allowApproximations,:}]if true, then the object can use faster but less precise functions during the optimization. This is useful for global optimization not using derivatives. \item[{\em enableRestraints,:}]\end{DoxyParams}
+\begin{Desc}
+\item[{\bf Deprecated}]if true, then restrained parameters will be allowed to go beyond theur hard limits. This implies that the algorithm will take into account the cost (penalty) related to the restraints. Objects which do not use restraints will simply ignore this. WARNING: this parameter may be removed with the new likelihood scheme. \end{Desc}
+
+
+Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_ababd8f2916e41a20d2c1b21f6ffefe96}.\index{ObjCryst::Crystal@{ObjCryst::Crystal}!CalcDistTable@{CalcDistTable}}
+\index{CalcDistTable@{CalcDistTable}!ObjCryst::Crystal@{ObjCryst::Crystal}}
+\paragraph[{CalcDistTable}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::Crystal::CalcDistTable (const bool {\em fast}) const\hspace{0.3cm}{\ttfamily  [private]}}\hfill\label{a00020_a1d59955724fb598fbba3ff4c0bd125e3}
+
+
+Compute the distance Table (mDistTable) for all scattering components. \begin{DoxyInternal}{For internal use only.}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em fast}]: if true, the distance calculations will be made using integers, thus with a lower precision but faster. Less atoms will also be involved (using the \doxyref{AsymmetricUnit}{p.}{a00007} and mDistTableMaxDistance2) to make it even faster.\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+\doxyref{Crystal::GetScatteringComponentList()}{p.}{a00020_a748d335480c372c5ef6cdf8716d9dd1a} {\bfseries must} be called beforehand, since this will not be done here.
+\end{DoxyWarning}
+\begin{DoxyReturn}{Returns}
+see Crystal::mDistTableSq and Crystal::mDistTableIndex 
+\end{DoxyReturn}
+\begin{Desc}
+\item[{\bf Todo}]sanitize the result distance table in a more usable structure than the currently used Crystal::mDistTableSq and Crystal::mDistTableIndex. \end{Desc}
+\begin{DoxyWarning}{Warning}
+{\itshape not\/} using the fast option has not been very much tested... 
+\end{DoxyWarning}
+\begin{Desc}
+\item[{\bf Todo}]optimize again. Test if recomputation is needed using Clocks. Use a global option instead of asymUnitMargin. \end{Desc}
+\end{DoxyInternal}
+\index{ObjCryst::Crystal@{ObjCryst::Crystal}!CalcDynPopCorr@{CalcDynPopCorr}}
+\index{CalcDynPopCorr@{CalcDynPopCorr}!ObjCryst::Crystal@{ObjCryst::Crystal}}
+\paragraph[{CalcDynPopCorr}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::Crystal::CalcDynPopCorr (const REAL {\em overlapDist} = {\ttfamily 1.}, \/  const REAL {\em mergeDist} = {\ttfamily .0}) const}\hfill\label{a00020_a69975008974c9603ebb794bb6bb20fe8}
+
+
+Compute the 'Dynamical population correction for all atoms. Atoms which are considered \char`\"{}equivalent\char`\"{} (ie currently with the same Z number) and which are overlapping see their Dynamical occupancy changed so that when they fully overlap, they are equivalent to 1 atom. \begin{DoxyInternal}{For internal use only.}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em overlapDist}]: distance below which atoms (ScatteringComponents, to be more precise) are considered overlapping and should be corrected. The correction changes the dynamical occupancy from 1 to 1/nbAtomOverlapping, progressively as the distance falls from {\itshape overlapDist\/} to {\itshape mergeDist\/}. \item[{\em mergeDist}]: distance below which atoms are considered fully overlapping. If 3 atoms are 'fully' overlapping, then all have a dynamical population correction equal to 1/3\end{DoxyParams}
+This is const since \doxyref{ScatteringComponent::mDynPopCorr}{p.}{a00085_a33af12bb3f340af259a8b8450f837efd} is mutable.
+
+\begin{DoxyWarning}{Warning}
+. Do not call this function, which will turn private. This is called by {\itshape only\/} \doxyref{Crystal::GetScatteringComponentList()}{p.}{a00020_a748d335480c372c5ef6cdf8716d9dd1a} 
+\end{DoxyWarning}
+\end{DoxyInternal}
+\index{ObjCryst::Crystal@{ObjCryst::Crystal}!CIFOutput@{CIFOutput}}
+\index{CIFOutput@{CIFOutput}!ObjCryst::Crystal@{ObjCryst::Crystal}}
+\paragraph[{CIFOutput}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::Crystal::CIFOutput (ostream \& {\em os}) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00020_a7ed712a9735043d4c7a279e9779d563a}
+
+
+output \doxyref{Crystal}{p.}{a00020} structure as a cif file (EXPERIMENTAL !) \begin{DoxyWarning}{Warning}
+This is very crude and EXPERIMENTAL so far: only isotropic scattering power are supported, and there is not much information beside atom positions... 
+\end{DoxyWarning}
+\index{ObjCryst::Crystal@{ObjCryst::Crystal}!FindScatterer@{FindScatterer}}
+\index{FindScatterer@{FindScatterer}!ObjCryst::Crystal@{ObjCryst::Crystal}}
+\paragraph[{FindScatterer}]{\setlength{\rightskip}{0pt plus 5cm}int ObjCryst::Crystal::FindScatterer (const string \& {\em scattName}) const\hspace{0.3cm}{\ttfamily  [private]}}\hfill\label{a00020_a2e2b2c9b9bdf29de21fc885c8d25931a}
+
+
+Find a scatterer (its index \# in mpScatterrer[]) with a given name. \begin{DoxyWarning}{Warning}
+There should be no duplicate names !!! :TODO: test in \doxyref{AddScatterer()}{p.}{a00020_acee480ad824aa0eedf78a4fa414cf347} 
+\end{DoxyWarning}
+\index{ObjCryst::Crystal@{ObjCryst::Crystal}!GetBumpMergeCost@{GetBumpMergeCost}}
+\index{GetBumpMergeCost@{GetBumpMergeCost}!ObjCryst::Crystal@{ObjCryst::Crystal}}
+\paragraph[{GetBumpMergeCost}]{\setlength{\rightskip}{0pt plus 5cm}REAL ObjCryst::Crystal::GetBumpMergeCost () const}\hfill\label{a00020_a4206c09ce323f74534fec77eb29dc246}
+
+
+Get the Anti-\/bumping/pro-\/Merging cost function. Only works (ie returnes a non-\/null value) if you have added antibump distances using \doxyref{Crystal::SetBumpMergeDistance()}{p.}{a00020_ad77bfe72588a64e306a5514535ed7404}. \index{ObjCryst::Crystal@{ObjCryst::Crystal}!GetClassName@{GetClassName}}
+\index{GetClassName@{GetClassName}!ObjCryst::Crystal@{ObjCryst::Crystal}}
+\paragraph[{GetClassName}]{\setlength{\rightskip}{0pt plus 5cm}virtual const string\& ObjCryst::Crystal::GetClassName () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00020_ad1f69a5fb8981a2cf0eeb6245728af6d}
+
+
+Name for this class (\char`\"{}RefinableObj\char`\"{}, \char`\"{}Crystal\char`\"{},. ..). This is only useful to distinguish different classes when picking up objects from the \doxyref{RefinableObj}{p.}{a00070} Global Registry 
+
+Reimplemented from {\bf ObjCryst::UnitCell} \doxyref{}{p.}{a00109_ac3b3c2e007083bf6f329eb11a6b610d1}.\index{ObjCryst::Crystal@{ObjCryst::Crystal}!GetGeneGroup@{GetGeneGroup}}
+\index{GetGeneGroup@{GetGeneGroup}!ObjCryst::Crystal@{ObjCryst::Crystal}}
+\paragraph[{GetGeneGroup}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::Crystal::GetGeneGroup (const {\bf RefinableObj} \& {\em obj}, \/  CrystVector\_\-uint \& {\em groupIndex}, \/  unsigned int \& {\em firstGroup}) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00020_afcef6e251265ddf23657fe10b0cd4912}
+
+
+Get the gene group assigned to each parameter. Each parameter (a {\itshape gene\/} in terms of genetic algorithms) can be assigned to a gene group. Thus when mating two configurations, genes will be exchanged by groups. By default (in the base RefinabeObj class), each parameter is alone in its group. Derived classes can group genes for a better s$\ast$$\ast$ life.
+
+The number identifying a gene group only has a meaning in a given object. It can also change on subsequent calls, and thus is not unique.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em obj}]the , supplied by an algorithm class (\doxyref{OptimizationObj}{p.}{a00054},..), which contains a list of parameters, some of which (but possibly all or none) are parameters belonging to this object. \item[{\em groupIndex}]a vector of unsigned integers, one for each parameter in the input object, giving an unsigned integer value as gene group index. At the beginning this vector should contain only zeros (no group assigned). \item[{\em firstGroup}]this is the number of groups which have already been assigned, plus one. The gene groups returned by this object will start from this value, and increment {\bfseries firstGroup} for each gene group used, so that different \doxyref{RefinableObj}{p.}{a00070} cannot share a gene group. \end{DoxyParams}
+\begin{DoxyNote}{Note}
+this function is not optimized, and should only be called at the beginning of a refinement. 
+\end{DoxyNote}
+
+
+Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_ad59c8ad2b0d7ee59fa3f399a54f05e54}.\index{ObjCryst::Crystal@{ObjCryst::Crystal}!GetLogLikelihood@{GetLogLikelihood}}
+\index{GetLogLikelihood@{GetLogLikelihood}!ObjCryst::Crystal@{ObjCryst::Crystal}}
+\paragraph[{GetLogLikelihood}]{\setlength{\rightskip}{0pt plus 5cm}virtual REAL ObjCryst::Crystal::GetLogLikelihood () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00020_a6f10c5a30864b9699b313f90b646138f}
+
+
+Get -\/log(likelihood) of the current configuration for the object. By default (no likelihood evaluation available), this is equal to 0.
+
+This call should not be recursive, it is the task of the algorithm to get the sum of likelihoods for all objects invlolved.
+
+\begin{DoxyNote}{Note}
+contrary to the old \char`\"{}Cost Function\char`\"{} approach, with log(Likelihood) there is no 'choice' of cost function, so that it is the task of the object to give the optimized likelihood (possibly with user options).
+\end{DoxyNote}
+\begin{DoxyWarning}{Warning}
+: this is in under heavy development, so expect changes... 
+\end{DoxyWarning}
+
+
+Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_a9a9a5ea2b997cd36b44ed35c2bab3245}.\index{ObjCryst::Crystal@{ObjCryst::Crystal}!GetMinDistanceTable@{GetMinDistanceTable}}
+\index{GetMinDistanceTable@{GetMinDistanceTable}!ObjCryst::Crystal@{ObjCryst::Crystal}}
+\paragraph[{GetMinDistanceTable}]{\setlength{\rightskip}{0pt plus 5cm}CrystMatrix\_\-REAL ObjCryst::Crystal::GetMinDistanceTable (const REAL {\em minDistance} = {\ttfamily 0.1}) const}\hfill\label{a00020_ae9f3f6ba4945942bda42af5150ed2948}
+
+
+Minimum interatomic distance between all scattering components (atoms) in the crystal. This will return a symmetrical matrix with NbComp rows and cols, where NbComp is the number of independent scattering components in the unit cell. All distances are given in Angstroems.
+
+Note that the distance of a given atom with 'itself' is not generally equal to 0 (except full special position), but equal to the min distance with its symmetrics.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em minDistance}]: atoms who are less distant than (minDistance,in Angstroems) are considered equivalent. So the smallest distance between any atoms will be at least minDistance. \end{DoxyParams}
+\index{ObjCryst::Crystal@{ObjCryst::Crystal}!GetScatt@{GetScatt}}
+\index{GetScatt@{GetScatt}!ObjCryst::Crystal@{ObjCryst::Crystal}}
+\paragraph[{GetScatt}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Scatterer}\& ObjCryst::Crystal::GetScatt (const long {\em scattIndex}) const}\hfill\label{a00020_a2c5648ab7734b0d865869ea2ee3a8256}
+
+
+Provides a const access to the scatterers. 
+\begin{DoxyParams}{Parameters}
+\item[{\em scattIndex}]the number of the scatterer to access \end{DoxyParams}
+\index{ObjCryst::Crystal@{ObjCryst::Crystal}!GetScatt@{GetScatt}}
+\index{GetScatt@{GetScatt}!ObjCryst::Crystal@{ObjCryst::Crystal}}
+\paragraph[{GetScatt}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Scatterer}\& ObjCryst::Crystal::GetScatt (const long {\em scattIndex})}\hfill\label{a00020_a4cebd2f318d525d2850c713a43d4dc4d}
+
+
+Provides an access to the scatterers. 
+\begin{DoxyParams}{Parameters}
+\item[{\em scattIndex}]the number of the scatterer to access \end{DoxyParams}
+\index{ObjCryst::Crystal@{ObjCryst::Crystal}!GetScatt@{GetScatt}}
+\index{GetScatt@{GetScatt}!ObjCryst::Crystal@{ObjCryst::Crystal}}
+\paragraph[{GetScatt}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Scatterer}\& ObjCryst::Crystal::GetScatt (const string \& {\em scattName}) const}\hfill\label{a00020_aaf80c4ddd329baf30d4391e37e8b40f5}
+
+
+Provides a const access to the scatterers. 
+\begin{DoxyParams}{Parameters}
+\item[{\em scattName}]the name of the scatterer to access \end{DoxyParams}
+\index{ObjCryst::Crystal@{ObjCryst::Crystal}!GetScatt@{GetScatt}}
+\index{GetScatt@{GetScatt}!ObjCryst::Crystal@{ObjCryst::Crystal}}
+\paragraph[{GetScatt}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Scatterer}\& ObjCryst::Crystal::GetScatt (const string \& {\em scattName})}\hfill\label{a00020_a19bb22e923b0155d6de0f7585d467e51}
+
+
+Provides an access to the scatterers. 
+\begin{DoxyParams}{Parameters}
+\item[{\em scattName}]the name of the scatterer to access \end{DoxyParams}
+\index{ObjCryst::Crystal@{ObjCryst::Crystal}!GLInitDisplayList@{GLInitDisplayList}}
+\index{GLInitDisplayList@{GLInitDisplayList}!ObjCryst::Crystal@{ObjCryst::Crystal}}
+\paragraph[{GLInitDisplayList}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::Crystal::GLInitDisplayList (const bool {\em onlyIndependentAtoms} = {\ttfamily false}, \/  const REAL {\em xMin} = {\ttfamily -\/.1}, \/  const REAL {\em xMax} = {\ttfamily 1.1}, \/  const REAL {\em yMin} = {\ttfamily -\/.1}, \/  const REAL {\em yMax} = {\ttfamily 1.1}, \/  const REAL {\em zMin} = {\ttfamily -\/.1}, \/  const REAL {\em zMax} = {\ttfamily 1.1}, \/  const bool {\em displayNames} = {\ttfamily false}) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00020_af63e9925212657a2912d59c2f8c2d34c}
+
+
+Create an OpenGL DisplayList of the crystal. 
+\begin{DoxyParams}{Parameters}
+\item[{\em onlyIndependentAtoms}]if false (the default), then all symmetrics are displayed within the given limits $\backslash$ param xMin,xMax,yMin,yMax,zMin,zMax: in fractionnal coordinates, the region in which we want scaterrers to be displayed. The test is made on the center of the scatterer (eg a \doxyref{ZScatterer}{p.}{a00155} (molecule) will not be 'cut' on the border). \item[{\em displayNames,:}]if true, only the names of the scatterers will be displayed, at the position of the scatterers (to actually see them, they will have to be translated with respect to the drawing of the scatterers). \end{DoxyParams}
+\index{ObjCryst::Crystal@{ObjCryst::Crystal}!GlobalOptRandomMove@{GlobalOptRandomMove}}
+\index{GlobalOptRandomMove@{GlobalOptRandomMove}!ObjCryst::Crystal@{ObjCryst::Crystal}}
+\paragraph[{GlobalOptRandomMove}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::Crystal::GlobalOptRandomMove (const REAL {\em mutationAmplitude}, \/  const {\bf RefParType} $\ast$ {\em type} = {\ttfamily {\bf gpRefParTypeObjCryst}})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00020_ab6a8a2cc28f3b1cde012754a19c279de}
+
+
+Make a random move of the current configuration. This is for global optimization algorithms. the moves for each parameter are less than their global optimization step, multiplied by the mutation amplitude.
+
+\begin{DoxyWarning}{Warning}
+: this makes a random move for the parameter declared for this object, and it is the duty of the object to decide whether the included objects should be moved and how. (eg an algorithm should only call for a move with the top object, and this object decides how he and his sub-\/objects moves). By default (\doxyref{RefinableObj}{p.}{a00070} implementation) all included objects are moved recursively.
+\end{DoxyWarning}
+\doxyref{RefinableObj}{p.}{a00070}:: 
+\begin{DoxyParams}{Parameters}
+\item[{\em mutationAmplitude,:}]multiplier for the maximum move amplitude, for all parameters \item[{\em type,:}]restrain the change exclusively to parameters of a given type (same type or descendant from this \doxyref{RefParType}{p.}{a00079}). \end{DoxyParams}
+
+
+Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_a18375c8525ae38c481ba77e9cf9d67c1}.\index{ObjCryst::Crystal@{ObjCryst::Crystal}!Init@{Init}}
+\index{Init@{Init}!ObjCryst::Crystal@{ObjCryst::Crystal}}
+\paragraph[{Init}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::Crystal::Init (const REAL {\em a}, \/  const REAL {\em b}, \/  const REAL {\em c}, \/  const REAL {\em alpha}, \/  const REAL {\em beta}, \/  const REAL {\em gamma}, \/  const string \& {\em SpaceGroupId}, \/  const string \& {\em name})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00020_aefcd0d1032e5b93de47b4b93d530ed5b}
+
+
+Init all \doxyref{Crystal}{p.}{a00020} parameters. 
+\begin{DoxyParams}{Parameters}
+\item[{\em a,b,c}]: unit cell dimension, in angstroems \item[{\em alpha,beta,gamma}]: unit cell angles \item[{\em SpcGroup,:}]space group number (1..230) \item[{\em name,:}]name for the crystal, : '(TaSe4)2I' \end{DoxyParams}
+
+
+Reimplemented from {\bf ObjCryst::UnitCell} \doxyref{}{p.}{a00109_a6a98cc147e6b4471d30ff6b736c95e42}.\index{ObjCryst::Crystal@{ObjCryst::Crystal}!InitOptions@{InitOptions}}
+\index{InitOptions@{InitOptions}!ObjCryst::Crystal@{ObjCryst::Crystal}}
+\paragraph[{InitOptions}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::Crystal::InitOptions ()\hspace{0.3cm}{\ttfamily  [private, virtual]}}\hfill\label{a00020_a6f824ecc64553f3b3d15d0db9bf5982d}
+
+
+Init options. Need only be done once per \doxyref{Crystal}{p.}{a00020}. 
+
+Reimplemented from {\bf ObjCryst::UnitCell} \doxyref{}{p.}{a00109_a12460955ce7bb73812c3f3f798d8bfd8}.\index{ObjCryst::Crystal@{ObjCryst::Crystal}!POVRayDescription@{POVRayDescription}}
+\index{POVRayDescription@{POVRayDescription}!ObjCryst::Crystal@{ObjCryst::Crystal}}
+\paragraph[{POVRayDescription}]{\setlength{\rightskip}{0pt plus 5cm}ostream\& ObjCryst::Crystal::POVRayDescription (ostream \& {\em os}, \/  const {\bf CrystalPOVRayOptions} \& {\em options}) const}\hfill\label{a00020_a925f91bd3da4c189bc288047454bb864}
+
+
+XMLOutput POV-\/Ray Description for this \doxyref{Crystal}{p.}{a00020}. 
+\begin{DoxyParams}{Parameters}
+\item[{\em onlyIndependentAtoms}]if false, all symmetrics are showed in the drawing.\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+This currently needs some fixing (\doxyref{ZScatterer}{p.}{a00155} does not work ?) Use rather the OpenGL 3D display which is more useful.
+\end{DoxyWarning}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em os}]the stream to which the information is outputed (default=cout) \end{DoxyParams}
+\index{ObjCryst::Crystal@{ObjCryst::Crystal}!Print@{Print}}
+\index{Print@{Print}!ObjCryst::Crystal@{ObjCryst::Crystal}}
+\paragraph[{Print}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::Crystal::Print (ostream \& {\em os} = {\ttfamily cout}) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00020_ac4a7086d3757be4bbe2484f549a1b0fc}
+
+
+Prints some info about the crystal. \begin{Desc}
+\item[{\bf Todo}]one function to print on one line and a PrintLong() function \end{Desc}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em os}]the stream to which the information is outputed (default=cout) \end{DoxyParams}
+
+
+Reimplemented from {\bf ObjCryst::UnitCell} \doxyref{}{p.}{a00109_adf564cd9521473be30d073d1660fa3ee}.\index{ObjCryst::Crystal@{ObjCryst::Crystal}!PrintMinDistanceTable@{PrintMinDistanceTable}}
+\index{PrintMinDistanceTable@{PrintMinDistanceTable}!ObjCryst::Crystal@{ObjCryst::Crystal}}
+\paragraph[{PrintMinDistanceTable}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::Crystal::PrintMinDistanceTable (const REAL {\em minDistance} = {\ttfamily 0.1}, \/  ostream \& {\em os} = {\ttfamily cout}) const}\hfill\label{a00020_a152d60cb30353b9a54ad34e291f4b6f3}
+
+
+Print the minimum distance table between all scattering centers (atoms) in the crystal. 
+\begin{DoxyParams}{Parameters}
+\item[{\em os}]the stream to which the information is outputed (default=cout) \end{DoxyParams}
+\index{ObjCryst::Crystal@{ObjCryst::Crystal}!RemoveScatteringPower@{RemoveScatteringPower}}
+\index{RemoveScatteringPower@{RemoveScatteringPower}!ObjCryst::Crystal@{ObjCryst::Crystal}}
+\paragraph[{RemoveScatteringPower}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::Crystal::RemoveScatteringPower ({\bf ScatteringPower} $\ast$ {\em scattPow}, \/  const bool {\em del} = {\ttfamily true})}\hfill\label{a00020_aba839003a614634d7d6d9217379ae692}
+
+
+Remove a \doxyref{ScatteringPower}{p.}{a00089} for this \doxyref{Crystal}{p.}{a00020}. (the Scattering power is deleted unless del=false). This function should check that it is not used any more before removing it. \index{ObjCryst::Crystal@{ObjCryst::Crystal}!SetBumpMergeDistance@{SetBumpMergeDistance}}
+\index{SetBumpMergeDistance@{SetBumpMergeDistance}!ObjCryst::Crystal@{ObjCryst::Crystal}}
+\paragraph[{SetBumpMergeDistance}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::Crystal::SetBumpMergeDistance (const {\bf ScatteringPower} \& {\em scatt1}, \/  const {\bf ScatteringPower} \& {\em scatt2}, \/  const REAL {\em dist} = {\ttfamily 1.5})}\hfill\label{a00020_ad77bfe72588a64e306a5514535ed7404}
+
+
+Set the Anti-\/bumping distance between two scattering types. \index{ObjCryst::Crystal@{ObjCryst::Crystal}!SetDeleteSubObjInDestructor@{SetDeleteSubObjInDestructor}}
+\index{SetDeleteSubObjInDestructor@{SetDeleteSubObjInDestructor}!ObjCryst::Crystal@{ObjCryst::Crystal}}
+\paragraph[{SetDeleteSubObjInDestructor}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::Crystal::SetDeleteSubObjInDestructor (const bool {\em b})}\hfill\label{a00020_ae976f94ba642aa81cb7b23fcc1a56028}
+
+
+Set whether to delete the Scatterers and ScatteringPowers in the destructor. By default these sub-\/objects are deleted. \index{ObjCryst::Crystal@{ObjCryst::Crystal}!SetUseDynPopCorr@{SetUseDynPopCorr}}
+\index{SetUseDynPopCorr@{SetUseDynPopCorr}!ObjCryst::Crystal@{ObjCryst::Crystal}}
+\paragraph[{SetUseDynPopCorr}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::Crystal::SetUseDynPopCorr (const int {\em use})}\hfill\label{a00020_a511c3fcea43446634232eb6df345db9d}
+
+
+Set the use of dynamical population correction (\doxyref{Crystal::mUseDynPopCorr}{p.}{a00020_aa75ade2fea9a50b3e6fb08773f607a13}). Atoms which are considered \char`\"{}equivalent\char`\"{} (ie currently with the same Z number) and which are overlapping see their Dynamical occupancy changed so that when they fully overlap, they are equivalent to 1 atom.
+
+The Dynamical Occupancy correction will be performed in \doxyref{Crystal::GetScatteringComponentList()}{p.}{a00020_a748d335480c372c5ef6cdf8716d9dd1a} automatically.
+
+This {\itshape seriously\/} affects the speed of the calculation, since computing interatomic distances is lenghty. 
+\begin{DoxyParams}{Parameters}
+\item[{\em use}]set to 1 to use, 0 not to use it. \end{DoxyParams}
+\index{ObjCryst::Crystal@{ObjCryst::Crystal}!XMLInput@{XMLInput}}
+\index{XMLInput@{XMLInput}!ObjCryst::Crystal@{ObjCryst::Crystal}}
+\paragraph[{XMLInput}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::Crystal::XMLInput (istream \& {\em is}, \/  const {\bf XMLCrystTag} \& {\em tag})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00020_accc77bfc6df977685c01a43d150a8ba7}
+
+
+Input From stream. \begin{Desc}
+\item[{\bf Todo}]Add an bool XMLInputTag(is,tag) function to recognize all the tags from the stream. So that each inherited class can use the XMLInputTag function from its parent (ie take advantage of inheritance). The children class would first try to interpret the tag, then if unsuccessful would pass it to its parent (thus allowing overloading), etc... \end{Desc}
+
+
+Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_ac13a4045c3f187879443c8615c38d623}.\index{ObjCryst::Crystal@{ObjCryst::Crystal}!XMLOutput@{XMLOutput}}
+\index{XMLOutput@{XMLOutput}!ObjCryst::Crystal@{ObjCryst::Crystal}}
+\paragraph[{XMLOutput}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::Crystal::XMLOutput (ostream \& {\em os}, \/  int {\em indent} = {\ttfamily 0}) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00020_a037f8ea8c5dceece1044ce73d542a0e4}
+
+
+Output to stream in well-\/formed XML. \begin{Desc}
+\item[{\bf Todo}]Use inheritance.. as for XMLInputTag()... \end{Desc}
+
+
+Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_a7b9b6ed0f8dcf753d398c35e073de973}.
+
+\subsubsection{Member Data Documentation}
+\index{ObjCryst::Crystal@{ObjCryst::Crystal}!mClockDynPopCorr@{mClockDynPopCorr}}
+\index{mClockDynPopCorr@{mClockDynPopCorr}!ObjCryst::Crystal@{ObjCryst::Crystal}}
+\paragraph[{mClockDynPopCorr}]{\setlength{\rightskip}{0pt plus 5cm}{\bf RefinableObjClock} {\bf ObjCryst::Crystal::mClockDynPopCorr}\hspace{0.3cm}{\ttfamily  [mutable, private]}}\hfill\label{a00020_a23a42c8aacd3c5525d92dfddf4dff73d}
+\begin{DoxyInternal}{For internal use only.}
+Last time the dynamical population correction was computed \end{DoxyInternal}
+\index{ObjCryst::Crystal@{ObjCryst::Crystal}!mClockNeighborTable@{mClockNeighborTable}}
+\index{mClockNeighborTable@{mClockNeighborTable}!ObjCryst::Crystal@{ObjCryst::Crystal}}
+\paragraph[{mClockNeighborTable}]{\setlength{\rightskip}{0pt plus 5cm}{\bf RefinableObjClock} {\bf ObjCryst::Crystal::mClockNeighborTable}\hspace{0.3cm}{\ttfamily  [mutable, private]}}\hfill\label{a00020_a87859e98018e0e7a0d71a8e69419d687}
+\begin{DoxyInternal}{For internal use only.}
+Last time the Neighbor Table was generated \end{DoxyInternal}
+\index{ObjCryst::Crystal@{ObjCryst::Crystal}!mClockScattCompList@{mClockScattCompList}}
+\index{mClockScattCompList@{mClockScattCompList}!ObjCryst::Crystal@{ObjCryst::Crystal}}
+\paragraph[{mClockScattCompList}]{\setlength{\rightskip}{0pt plus 5cm}{\bf RefinableObjClock} {\bf ObjCryst::Crystal::mClockScattCompList}\hspace{0.3cm}{\ttfamily  [mutable, private]}}\hfill\label{a00020_ac2a8728c253bf1a5f1f9dfa0b8fd1cc5}
+\begin{DoxyInternal}{For internal use only.}
+Last time the \doxyref{ScatteringComponentList}{p.}{a00086} was generated \end{DoxyInternal}
+\index{ObjCryst::Crystal@{ObjCryst::Crystal}!mDisplayEnantiomer@{mDisplayEnantiomer}}
+\index{mDisplayEnantiomer@{mDisplayEnantiomer}!ObjCryst::Crystal@{ObjCryst::Crystal}}
+\paragraph[{mDisplayEnantiomer}]{\setlength{\rightskip}{0pt plus 5cm}{\bf RefObjOpt} {\bf ObjCryst::Crystal::mDisplayEnantiomer}\hspace{0.3cm}{\ttfamily  [private]}}\hfill\label{a00020_ab0bedeb759e922842d3b2cd1eda9d688}
+
+
+Display the enantiomeric (mirror along x) structure in 3D? This can be helpful for non-\/centrosymmetric structure which have been solved using powder diffraction (which only gives the relative configuration). \index{ObjCryst::Crystal@{ObjCryst::Crystal}!mvBondValenceCalc@{mvBondValenceCalc}}
+\index{mvBondValenceCalc@{mvBondValenceCalc}!ObjCryst::Crystal@{ObjCryst::Crystal}}
+\paragraph[{mvBondValenceCalc}]{\setlength{\rightskip}{0pt plus 5cm}std::map$<$long, REAL$>$ {\bf ObjCryst::Crystal::mvBondValenceCalc}\hspace{0.3cm}{\ttfamily  [mutable, private]}}\hfill\label{a00020_a4be1212d5e9145c9e16cb8e4b9f3501a}
+
+
+List of calculated bond valences, as a map, the key being the index of the atom in \doxyref{Crystal::mScattCompList}{p.}{a00020_a2f45b59533a1a3114391aa04e7017bf8}. \index{ObjCryst::Crystal@{ObjCryst::Crystal}!mvDistTableSq@{mvDistTableSq}}
+\index{mvDistTableSq@{mvDistTableSq}!ObjCryst::Crystal@{ObjCryst::Crystal}}
+\paragraph[{mvDistTableSq}]{\setlength{\rightskip}{0pt plus 5cm}std::vector$<${\bf NeighbourHood}$>$ {\bf ObjCryst::Crystal::mvDistTableSq}\hspace{0.3cm}{\ttfamily  [mutable, private]}}\hfill\label{a00020_a91cbd823da6f8d82a693b24b5f4b42f0}
+
+
+Interatomic distance table for all unique atoms. 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Crystal.h\end{DoxyCompactItemize}

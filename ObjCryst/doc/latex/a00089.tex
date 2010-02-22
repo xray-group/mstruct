@@ -1,0 +1,354 @@
+\subsection{ObjCryst::ScatteringPower Class Reference}
+\label{a00089}\index{ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}}
+
+
+Abstract Base Class to describe the scattering power of any \doxyref{Scatterer}{p.}{a00084} component in a crystal.  
+Inheritance diagram for ObjCryst::ScatteringPower::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.66667cm]{a00089}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries ScatteringPower} (const {\bf ScatteringPower} \&old)\label{a00089_a40d392b01f277a90affc2825ffa2e28d}
+
+\item 
+virtual const string \& {\bf GetClassName} () const 
+\begin{DoxyCompactList}\small\item\em Name for this class (\char`\"{}RefinableObj\char`\"{}, \char`\"{}Crystal\char`\"{},. \item\end{DoxyCompactList}\item 
+virtual void {\bfseries operator=} (const {\bf ScatteringPower} \&rhs)\label{a00089_a1db56ac3b61b4f5d1f70dbf65fff114a}
+
+\item 
+virtual CrystVector\_\-REAL {\bf GetScatteringFactor} (const {\bf ScatteringData} \&data, const int spgSymPosIndex=-\/1) const =0
+\begin{DoxyCompactList}\small\item\em Get the Scattering factor for all reflections of a given \doxyref{ScatteringData}{p.}{a00088} object. \item\end{DoxyCompactList}\item 
+virtual REAL {\bf GetForwardScatteringFactor} (const {\bf RadiationType}) const =0
+\begin{DoxyCompactList}\small\item\em Get the scattering factor at (0,0,0). \item\end{DoxyCompactList}\item 
+virtual CrystVector\_\-REAL {\bf GetTemperatureFactor} (const {\bf ScatteringData} \&data, const int spgSymPosIndex=-\/1) const =0
+\begin{DoxyCompactList}\small\item\em Get the temperature factor for all reflections of a given \doxyref{ScatteringData}{p.}{a00088} object. \item\end{DoxyCompactList}\item 
+virtual CrystMatrix\_\-REAL {\bf GetResonantScattFactReal} (const {\bf ScatteringData} \&data, const int spgSymPosIndex=-\/1) const =0
+\begin{DoxyCompactList}\small\item\em Get the real part of the resonant scattering factor. \item\end{DoxyCompactList}\item 
+virtual CrystMatrix\_\-REAL {\bf GetResonantScattFactImag} (const {\bf ScatteringData} \&data, const int spgSymPosIndex=-\/1) const =0
+\begin{DoxyCompactList}\small\item\em Get the imaginary part of the resonant scattering factor. \item\end{DoxyCompactList}\item 
+virtual bool {\bf IsScatteringFactorAnisotropic} () const \label{a00089_a0d099ca049eebbf23a31fb32b4229d4a}
+
+\begin{DoxyCompactList}\small\item\em Is the scattering factor anisotropic ? \item\end{DoxyCompactList}\item 
+virtual bool {\bf IsTemperatureFactorAnisotropic} () const \label{a00089_a602947d2e968b88f208d3507bd8a093d}
+
+\begin{DoxyCompactList}\small\item\em Is the thermic factor anisotropic ? \item\end{DoxyCompactList}\item 
+virtual bool {\bf IsResonantScatteringAnisotropic} () const \label{a00089_ac8f88b96383b0b97812913427d0c65f1}
+
+\begin{DoxyCompactList}\small\item\em Are the resonant scattering terms anisotropic ? \item\end{DoxyCompactList}\item 
+virtual const string \& {\bf GetSymbol} () const 
+\begin{DoxyCompactList}\small\item\em Symbol for this Scattering power (the atom name for atoms). \item\end{DoxyCompactList}\item 
+REAL {\bf GetBiso} () const 
+\begin{DoxyCompactList}\small\item\em Returns the isotropic temperature B factor. \item\end{DoxyCompactList}\item 
+REAL \& {\bf GetBiso} ()
+\begin{DoxyCompactList}\small\item\em Returns the isotropic temperature B factor. \item\end{DoxyCompactList}\item 
+virtual void {\bf SetBiso} (const REAL newB)
+\begin{DoxyCompactList}\small\item\em Sets the isotropic temperature B factor. \item\end{DoxyCompactList}\item 
+REAL {\bf GetBij} (const size\_\-t \&i, const size\_\-t \&j) const \label{a00089_aab538c7888aa57c38236bd01c9252965}
+
+\begin{DoxyCompactList}\small\item\em Returns the anisotropic temperature B factor for (i, j) pair. \item\end{DoxyCompactList}\item 
+REAL {\bf GetBij} (const size\_\-t \&idx) const 
+\begin{DoxyCompactList}\small\item\em Returns the anisotropic temperature B factor for given index. \item\end{DoxyCompactList}\item 
+virtual void {\bf SetBij} (const size\_\-t \&i, const size\_\-t \&j, const REAL newB)\label{a00089_a8c947f00897876d91f68617772a20dad}
+
+\begin{DoxyCompactList}\small\item\em Sets the anisotropic temperature B factor for (i, j) pair. \item\end{DoxyCompactList}\item 
+virtual void {\bf SetBij} (const size\_\-t \&idx, const REAL newB)
+\begin{DoxyCompactList}\small\item\em Sets the anisotropic temperature B factor for given index. \item\end{DoxyCompactList}\item 
+bool {\bf IsIsotropic} () const \label{a00089_a05909fe082739c6be397299813418618}
+
+\begin{DoxyCompactList}\small\item\em Returns true if the scattering power is isotropic, else false. \item\end{DoxyCompactList}\item 
+long {\bf GetDynPopCorrIndex} () const 
+\begin{DoxyCompactList}\small\item\em Get the number identifying this kind of scatterer, used to decide whether two scatterers are equivalent, for the dynamical occupancy correction. \item\end{DoxyCompactList}\item 
+long {\bf GetNbScatteringPower} () const \label{a00089_af7cf02d1229e45220953b345a6f6d427}
+
+\begin{DoxyCompactList}\small\item\em Total number of \doxyref{ScatteringPower}{p.}{a00089} object. \item\end{DoxyCompactList}\item 
+const {\bf RefinableObjClock} \& {\bf GetLastChangeClock} () const \label{a00089_aac5f03782e5b08b3e60254b1fe0aad4a}
+
+\begin{DoxyCompactList}\small\item\em ObjCrystClock time when the last modification was made to the object. \item\end{DoxyCompactList}\item 
+const string \& {\bf GetColourName} () const \label{a00089_acbe6442c66fcb7760b2684ec4d9456cd}
+
+\begin{DoxyCompactList}\small\item\em Get the (POV-\/Ray) name associated to the color (if any). \item\end{DoxyCompactList}\item 
+const float $\ast$ {\bf GetColourRGB} () const \label{a00089_a5a992fe0ab82ddc79f184bbb12d6aaa0}
+
+\begin{DoxyCompactList}\small\item\em Get the float[3] array of RGB components defining the colour of this scattering power. \item\end{DoxyCompactList}\item 
+void {\bf SetColour} (const string \&colorName)\label{a00089_ac48cb91ee4361a14d829227023479514}
+
+\begin{DoxyCompactList}\small\item\em Set the colour from the associated POV-\/Ray name. \item\end{DoxyCompactList}\item 
+void {\bf SetColour} (const float r, const float g, const float b)\label{a00089_a312da0ad4d8229baf7d6ab7ff9c45a3c}
+
+\begin{DoxyCompactList}\small\item\em Set the colour from RGB components (all between 0 and 1.). \item\end{DoxyCompactList}\item 
+virtual REAL {\bf GetRadius} () const =0
+\begin{DoxyCompactList}\small\item\em Return the physical radius of this type of scatterer (for 3D display purposes). \item\end{DoxyCompactList}\item 
+virtual void {\bf GetGeneGroup} (const {\bf RefinableObj} \&obj, CrystVector\_\-uint \&groupIndex, unsigned int \&firstGroup) const 
+\begin{DoxyCompactList}\small\item\em Get the gene group assigned to each parameter. \item\end{DoxyCompactList}\item 
+REAL {\bf GetMaximumLikelihoodPositionError} () const 
+\begin{DoxyCompactList}\small\item\em Maximum Likelihood: get the estimated error (sigma) on the positions for this kind of element. \item\end{DoxyCompactList}\item 
+void {\bf SetMaximumLikelihoodPositionError} (const REAL mle)
+\begin{DoxyCompactList}\small\item\em Maximum Likelihood: set the estimated error (sigma) on the positions for this kind of element. \item\end{DoxyCompactList}\item 
+REAL {\bf GetMaximumLikelihoodNbGhostAtom} () const \label{a00089_a23031fcb8c8c79d0e086da6aaadcd40c}
+
+\begin{DoxyCompactList}\small\item\em Maximum Likelihood: get the number of ghost elements per asymmetric unit. \item\end{DoxyCompactList}\item 
+void {\bf SetMaximumLikelihoodNbGhostAtom} (const REAL nb)\label{a00089_aa3343885c4b3b9d41c386f7d8aaacd63}
+
+\begin{DoxyCompactList}\small\item\em Maximum Likelihood: set the number of ghost elements per asymmetric unit. \item\end{DoxyCompactList}\item 
+const {\bf RefinableObjClock} \& {\bf GetMaximumLikelihoodParClock} () const 
+\begin{DoxyCompactList}\small\item\em Get the clock value for the last change on the maximum likelihood parameters (positionnal error, number of ghost atoms). \item\end{DoxyCompactList}\item 
+virtual REAL {\bfseries GetFormalCharge} () const \label{a00089_a04f10b6898e5242548a6980b99a55bb9}
+
+\item 
+virtual void {\bfseries SetFormalCharge} (const REAL charge)\label{a00089_a98c9fe3af63a4093a354bb814730aa76}
+
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void {\bfseries InitRefParList} ()=0\label{a00089_a963cfe56b67286007bb93c7962e72b5c}
+
+\item 
+virtual void {\bf Init} ()\label{a00089_ac39b1294c085edac4c7180b4373a73c0}
+
+\begin{DoxyCompactList}\small\item\em Initialization of the object, used by all constructors, and operator=. \item\end{DoxyCompactList}\item 
+virtual void {\bf InitRGBColour} ()\label{a00089_a24c0c49adab2efe6af63c4915d861577}
+
+\begin{DoxyCompactList}\small\item\em Get RGB Colour coordinates from Colour Name. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+long {\bf mDynPopCorrIndex}
+\begin{DoxyCompactList}\small\item\em number identifying this kind of scatterer, for the dynamical occupancy correction. \item\end{DoxyCompactList}\item 
+REAL {\bf mBiso}\label{a00089_aad32a210a13475061a2cda7525e05501}
+
+\begin{DoxyCompactList}\small\item\em Temperature isotropic B factor. \item\end{DoxyCompactList}\item 
+bool {\bf mIsIsotropic}\label{a00089_a312928a0ead2f2bff84156e772752fe1}
+
+\begin{DoxyCompactList}\small\item\em Is the scattering isotropic ? \item\end{DoxyCompactList}\item 
+CrystVector\_\-REAL {\bf mBeta}\label{a00089_a02a4524640e2d23805df26b114be680f}
+
+\begin{DoxyCompactList}\small\item\em Anisotropic Beta(ij). \item\end{DoxyCompactList}\item 
+{\bf RefinableObjClock} {\bf mClock}\label{a00089_a7b2e1854b0799312da38819cebf13672}
+
+\begin{DoxyCompactList}\small\item\em Clock. \item\end{DoxyCompactList}\item 
+string {\bf mColourName}\label{a00089_a0726f45b1f31f338326a28345b57738e}
+
+\begin{DoxyCompactList}\small\item\em Colour for this \doxyref{ScatteringPower}{p.}{a00089} (from POVRay). \item\end{DoxyCompactList}\item 
+float {\bf mColourRGB} [3]\label{a00089_a00cf7e1fbe362a96be4a22c8b454fd29}
+
+\begin{DoxyCompactList}\small\item\em Colour for this \doxyref{ScatteringPower}{p.}{a00089} using RGB. \item\end{DoxyCompactList}\item 
+REAL {\bf mMaximumLikelihoodPositionError}\label{a00089_a20aa001aad26734367838792eff09682}
+
+\begin{DoxyCompactList}\small\item\em estimated error (sigma) on the positions for this type of element. \item\end{DoxyCompactList}\item 
+{\bf RefinableObjClock} {\bfseries mMaximumLikelihoodParClock}\label{a00089_a727c82cdb03968dba28c5f7549860093}
+
+\item 
+REAL {\bf mMaximumLikelihoodNbGhost}
+\begin{DoxyCompactList}\small\item\em Number of ghost atoms in the asymmetric unit. \item\end{DoxyCompactList}\item 
+REAL {\bf mFormalCharge}
+\begin{DoxyCompactList}\small\item\em Formal Charge. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+Abstract Base Class to describe the scattering power of any \doxyref{Scatterer}{p.}{a00084} component in a crystal. This includes:
+\begin{DoxyItemize}
+\item the scattering factor,
+\item the temperature factor
+\item real and imaginary parts of the resonant scattering factor.
+\end{DoxyItemize}
+
+The interface is independent of the radiation type.
+
+This base class is designed to handle both isotropic and anisotropic versions of scattering, temperature and anomalous factors.
+
+\begin{Desc}
+\item[{\bf Todo}]Anisotropic scattering (temperature factor especially) code, using derived classes 
+
+Clarify organization by removing any 'real' data from the top, abstract base class (eg remove Biso and Betaij), and by creating derived classes. Optionnaly 3 classes (used as members of \doxyref{ScatteringPower}{p.}{a00089}) could be created, TemperatureFactor, ScatteringFactor, and ResonantScatteringFactor. In any way the design of this class should not evolve, so that code using the \doxyref{ScatteringPower}{p.}{a00089} interface will remain compatible whatever modifications are made. \end{Desc}
+
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}!GetBij@{GetBij}}
+\index{GetBij@{GetBij}!ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}}
+\paragraph[{GetBij}]{\setlength{\rightskip}{0pt plus 5cm}REAL ObjCryst::ScatteringPower::GetBij (const size\_\-t \& {\em idx}) const}\hfill\label{a00089_abc78b680e9cd6a38b875731363978477}
+
+
+Returns the anisotropic temperature B factor for given index. 0 -\/$>$ (1, 1) 1 -\/$>$ (2, 2) 2 -\/$>$ (3, 3) 3 -\/$>$ (1, 2) 4 -\/$>$ (1, 3) 5 -\/$>$ (2, 3) \index{ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}!GetBiso@{GetBiso}}
+\index{GetBiso@{GetBiso}!ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}}
+\paragraph[{GetBiso}]{\setlength{\rightskip}{0pt plus 5cm}REAL\& ObjCryst::ScatteringPower::GetBiso ()}\hfill\label{a00089_ace567e5b32673e14521ae262388dfed6}
+
+
+Returns the isotropic temperature B factor. \index{ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}!GetBiso@{GetBiso}}
+\index{GetBiso@{GetBiso}!ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}}
+\paragraph[{GetBiso}]{\setlength{\rightskip}{0pt plus 5cm}REAL ObjCryst::ScatteringPower::GetBiso () const}\hfill\label{a00089_ac3e116b2d956c229b11c98c837e042d8}
+
+
+Returns the isotropic temperature B factor. \index{ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}!GetClassName@{GetClassName}}
+\index{GetClassName@{GetClassName}!ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}}
+\paragraph[{GetClassName}]{\setlength{\rightskip}{0pt plus 5cm}virtual const string\& ObjCryst::ScatteringPower::GetClassName () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00089_ac31cc4135011046f93d49f4173aee3ee}
+
+
+Name for this class (\char`\"{}RefinableObj\char`\"{}, \char`\"{}Crystal\char`\"{},. ..). This is only useful to distinguish different classes when picking up objects from the \doxyref{RefinableObj}{p.}{a00070} Global Registry 
+
+Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_a62968d90a7a3080738b363934616c019}.
+
+Reimplemented in {\bf ObjCryst::ScatteringPowerAtom} \doxyref{}{p.}{a00090_a87fcc8fe4871d1b9b6ec08af5f353657}, and {\bf ObjCryst::ScatteringPowerSphere} \doxyref{}{p.}{a00091_a57e85d29926fe93da66041a43583e893}.\index{ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}!GetDynPopCorrIndex@{GetDynPopCorrIndex}}
+\index{GetDynPopCorrIndex@{GetDynPopCorrIndex}!ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}}
+\paragraph[{GetDynPopCorrIndex}]{\setlength{\rightskip}{0pt plus 5cm}long ObjCryst::ScatteringPower::GetDynPopCorrIndex () const}\hfill\label{a00089_ae3d48856abf5c8ef9dea6204309897bc}
+
+
+Get the number identifying this kind of scatterer, used to decide whether two scatterers are equivalent, for the dynamical occupancy correction. \index{ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}!GetForwardScatteringFactor@{GetForwardScatteringFactor}}
+\index{GetForwardScatteringFactor@{GetForwardScatteringFactor}!ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}}
+\paragraph[{GetForwardScatteringFactor}]{\setlength{\rightskip}{0pt plus 5cm}virtual REAL ObjCryst::ScatteringPower::GetForwardScatteringFactor (const  {\em RadiationType}) const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\hfill\label{a00089_a854b51b9b08e96af0fe7986fe372c50c}
+
+
+Get the scattering factor at (0,0,0). Used for scatterer (electron, nucleus) density generation. 
+
+Implemented in {\bf ObjCryst::ScatteringPowerAtom} \doxyref{}{p.}{a00090_ab979c1f31fd03b0f10f0afd625be722e}, {\bf ObjCryst::ScatteringPowerSphere} \doxyref{}{p.}{a00091_a9bd142cc8112495d41393b4faffc4fcd}, and {\bf ObjCryst::GlobalScatteringPower} \doxyref{}{p.}{a00034_a33c01c7512929a947e6489df41edf7b3}.\index{ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}!GetGeneGroup@{GetGeneGroup}}
+\index{GetGeneGroup@{GetGeneGroup}!ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}}
+\paragraph[{GetGeneGroup}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::ScatteringPower::GetGeneGroup (const {\bf RefinableObj} \& {\em obj}, \/  CrystVector\_\-uint \& {\em groupIndex}, \/  unsigned int \& {\em firstGroup}) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00089_aae98160e01ecb2098cf4777126860aa5}
+
+
+Get the gene group assigned to each parameter. Each parameter (a {\itshape gene\/} in terms of genetic algorithms) can be assigned to a gene group. Thus when mating two configurations, genes will be exchanged by groups. By default (in the base RefinabeObj class), each parameter is alone in its group. Derived classes can group genes for a better s$\ast$$\ast$ life.
+
+The number identifying a gene group only has a meaning in a given object. It can also change on subsequent calls, and thus is not unique.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em obj}]the , supplied by an algorithm class (\doxyref{OptimizationObj}{p.}{a00054},..), which contains a list of parameters, some of which (but possibly all or none) are parameters belonging to this object. \item[{\em groupIndex}]a vector of unsigned integers, one for each parameter in the input object, giving an unsigned integer value as gene group index. At the beginning this vector should contain only zeros (no group assigned). \item[{\em firstGroup}]this is the number of groups which have already been assigned, plus one. The gene groups returned by this object will start from this value, and increment {\bfseries firstGroup} for each gene group used, so that different \doxyref{RefinableObj}{p.}{a00070} cannot share a gene group. \end{DoxyParams}
+\begin{DoxyNote}{Note}
+this function is not optimized, and should only be called at the beginning of a refinement. 
+\end{DoxyNote}
+
+
+Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_ad59c8ad2b0d7ee59fa3f399a54f05e54}.\index{ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}!GetMaximumLikelihoodParClock@{GetMaximumLikelihoodParClock}}
+\index{GetMaximumLikelihoodParClock@{GetMaximumLikelihoodParClock}!ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}}
+\paragraph[{GetMaximumLikelihoodParClock}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf RefinableObjClock}\& ObjCryst::ScatteringPower::GetMaximumLikelihoodParClock () const}\hfill\label{a00089_a63af7f309f1d9e03245f84ba21b1dc4e}
+
+
+Get the clock value for the last change on the maximum likelihood parameters (positionnal error, number of ghost atoms). \index{ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}!GetMaximumLikelihoodPositionError@{GetMaximumLikelihoodPositionError}}
+\index{GetMaximumLikelihoodPositionError@{GetMaximumLikelihoodPositionError}!ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}}
+\paragraph[{GetMaximumLikelihoodPositionError}]{\setlength{\rightskip}{0pt plus 5cm}REAL ObjCryst::ScatteringPower::GetMaximumLikelihoodPositionError () const}\hfill\label{a00089_a34a36179228e07e92a85da9d17376649}
+
+
+Maximum Likelihood: get the estimated error (sigma) on the positions for this kind of element. \index{ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}!GetRadius@{GetRadius}}
+\index{GetRadius@{GetRadius}!ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}}
+\paragraph[{GetRadius}]{\setlength{\rightskip}{0pt plus 5cm}virtual REAL ObjCryst::ScatteringPower::GetRadius () const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\hfill\label{a00089_ac44860aca21734844379ddec87622f7b}
+
+
+Return the physical radius of this type of scatterer (for 3D display purposes). \begin{DoxyWarning}{Warning}
+this may be removed later. 
+\end{DoxyWarning}
+
+
+Implemented in {\bf ObjCryst::ScatteringPowerAtom} \doxyref{}{p.}{a00090_a38cdad845523d408f473cdea050841a0}, {\bf ObjCryst::ScatteringPowerSphere} \doxyref{}{p.}{a00091_a1f4b091f0990b959acb0645fd575a080}, and {\bf ObjCryst::GlobalScatteringPower} \doxyref{}{p.}{a00034_aadef1e0a463f70f4f70dba3d12dba9ed}.\index{ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}!GetResonantScattFactImag@{GetResonantScattFactImag}}
+\index{GetResonantScattFactImag@{GetResonantScattFactImag}!ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}}
+\paragraph[{GetResonantScattFactImag}]{\setlength{\rightskip}{0pt plus 5cm}virtual CrystMatrix\_\-REAL ObjCryst::ScatteringPower::GetResonantScattFactImag (const {\bf ScatteringData} \& {\em data}, \/  const int {\em spgSymPosIndex} = {\ttfamily -\/1}) const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\hfill\label{a00089_a9bc5d86bf76116f645b43d46f2a9771c}
+
+
+Get the imaginary part of the resonant scattering factor. \begin{DoxyReturn}{Returns}
+a matrix where each row corresponds to each wavelength (currently only monochromatic experiments are made so there is only one row), and each column corresponds to each reflection {\itshape only\/} if the scattering term is anisotropic, which is not the case so far... 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em data,:}]the \doxyref{ScatteringData}{p.}{a00088} object, giving access to all the reflections, and a list of wavelengths. \item[{\em spgSymPosIndex,:}]if the \doxyref{ScatteringPower}{p.}{a00089} is anisotropic, then the different symmetrics will not have the same scattering power for all reflections. This parameter is the index of the symmetric position in the Spacegroup. If spgSymPosIndex=-\/1, the isotropic values are returned. \end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+There is no anisotropic code yet, so spgSymPosIndex is simply ignored so far , but the design of this function is general for any anisotropic scattering. 
+\end{DoxyWarning}
+
+
+Implemented in {\bf ObjCryst::ScatteringPowerAtom} \doxyref{}{p.}{a00090_a18e0f4ec2008406f6b6f770abada9b88}, {\bf ObjCryst::ScatteringPowerSphere} \doxyref{}{p.}{a00091_aee221744487a1c29023399b71e855c06}, and {\bf ObjCryst::GlobalScatteringPower} \doxyref{}{p.}{a00034_af3b5eefc24e2c60843793cdfbc240a11}.\index{ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}!GetResonantScattFactReal@{GetResonantScattFactReal}}
+\index{GetResonantScattFactReal@{GetResonantScattFactReal}!ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}}
+\paragraph[{GetResonantScattFactReal}]{\setlength{\rightskip}{0pt plus 5cm}virtual CrystMatrix\_\-REAL ObjCryst::ScatteringPower::GetResonantScattFactReal (const {\bf ScatteringData} \& {\em data}, \/  const int {\em spgSymPosIndex} = {\ttfamily -\/1}) const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\hfill\label{a00089_a42c1302254787d13b9e0f2210315291a}
+
+
+Get the real part of the resonant scattering factor. \begin{DoxyReturn}{Returns}
+a matrix where each row corresponds to each wavelength (currently only monochromatic experiments are made so there is only one row), and each column corresponds to each reflection {\itshape only\/} if the scattering term is anisotropic, which is not the case so far... 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em data,:}]the \doxyref{ScatteringData}{p.}{a00088} object, giving access to all the reflections and a list of wavelengths). \item[{\em spgSymPosIndex,:}]if the \doxyref{ScatteringPower}{p.}{a00089} is anisotropic, then the different symmetrics will not have the same scattering power for all reflections. This parameter is the index of the symmetric position in the Spacegroup. If spgSymPosIndex=-\/1, the isotropic values are returned. \end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+There is no anisotropic code yet, so spgSymPosIndex is simply ignored so far , but the design of this function is general for any anisotropic scattering. 
+\end{DoxyWarning}
+
+
+Implemented in {\bf ObjCryst::ScatteringPowerAtom} \doxyref{}{p.}{a00090_a538841350c5a7147f7be607dd3ef5b72}, {\bf ObjCryst::ScatteringPowerSphere} \doxyref{}{p.}{a00091_a064671bfd711ef108be7a1528e52cd46}, and {\bf ObjCryst::GlobalScatteringPower} \doxyref{}{p.}{a00034_a9ddb16c057b744df58473fd2880baa3c}.\index{ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}!GetScatteringFactor@{GetScatteringFactor}}
+\index{GetScatteringFactor@{GetScatteringFactor}!ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}}
+\paragraph[{GetScatteringFactor}]{\setlength{\rightskip}{0pt plus 5cm}virtual CrystVector\_\-REAL ObjCryst::ScatteringPower::GetScatteringFactor (const {\bf ScatteringData} \& {\em data}, \/  const int {\em spgSymPosIndex} = {\ttfamily -\/1}) const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\hfill\label{a00089_af18f3eaaf45af87bc3a2a0ff21bc34b6}
+
+
+Get the Scattering factor for all reflections of a given \doxyref{ScatteringData}{p.}{a00088} object. \begin{DoxyReturn}{Returns}
+a vector with the scattering factor for all reflections, in the same order as in the \doxyref{ScatteringData}{p.}{a00088} object. This format is independent of the radiation type (X-\/Ray, neutron..). 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em data,:}]the \doxyref{ScatteringData}{p.}{a00088} object, giving access to all the reflections. \item[{\em spgSymPosIndex,:}]if the \doxyref{ScatteringPower}{p.}{a00089} is anisotropic, then the different symmetrics will not have the same scattering power for all reflections. This parameter is the index of the symmetric position in the Spacegroup. If spgSymPosIndex=-\/1, the isotropic values are returned. \end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+There is no anisotropic code yet, so spgSymPosIndex is simply ignored so far , but the design of this function is general for any anisotropic scattering. 
+\end{DoxyWarning}
+
+
+Implemented in {\bf ObjCryst::ScatteringPowerAtom} \doxyref{}{p.}{a00090_a1c1733e6f6aab65fbe033b877cac5ae8}, {\bf ObjCryst::ScatteringPowerSphere} \doxyref{}{p.}{a00091_a073f08b17ba89e0ac5ed8e1a61cb04fe}, and {\bf ObjCryst::GlobalScatteringPower} \doxyref{}{p.}{a00034_acd525a54e45dc3c70fb5445b8b9b5a8c}.\index{ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}!GetSymbol@{GetSymbol}}
+\index{GetSymbol@{GetSymbol}!ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}}
+\paragraph[{GetSymbol}]{\setlength{\rightskip}{0pt plus 5cm}virtual const string\& ObjCryst::ScatteringPower::GetSymbol () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00089_a5cdd13d241974a6e6f0d3803256a3d10}
+
+
+Symbol for this Scattering power (the atom name for atoms). 
+
+Reimplemented in {\bf ObjCryst::ScatteringPowerAtom} \doxyref{}{p.}{a00090_a0b21c0253564cb40353171b182f50ecf}.\index{ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}!GetTemperatureFactor@{GetTemperatureFactor}}
+\index{GetTemperatureFactor@{GetTemperatureFactor}!ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}}
+\paragraph[{GetTemperatureFactor}]{\setlength{\rightskip}{0pt plus 5cm}virtual CrystVector\_\-REAL ObjCryst::ScatteringPower::GetTemperatureFactor (const {\bf ScatteringData} \& {\em data}, \/  const int {\em spgSymPosIndex} = {\ttfamily -\/1}) const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\hfill\label{a00089_a3df723db77380c82ecff5f7050490255}
+
+
+Get the temperature factor for all reflections of a given \doxyref{ScatteringData}{p.}{a00088} object. \begin{DoxyReturn}{Returns}
+a vector with the temperature factor for all reflections, in the same order as in the \doxyref{ScatteringData}{p.}{a00088} object. 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em data,:}]the \doxyref{ScatteringData}{p.}{a00088} object, giving access to all the reflections. \item[{\em spgSymPosIndex,:}]if the \doxyref{ScatteringPower}{p.}{a00089} is anisotropic, then the different symmetrics will not have the same scattering power for all reflections. This parameter is the index of the symmetric position in the Spacegroup. If spgSymPosIndex=-\/1, the isotropic values are returned. \end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+There is no anisotropic code yet, so spgSymPosIndex is simply ignored so far , but the design of this function is general for any anisotropic scattering. 
+\end{DoxyWarning}
+
+
+Implemented in {\bf ObjCryst::ScatteringPowerAtom} \doxyref{}{p.}{a00090_aefe7a8b036c3f5a4a2b781b527dfa8c3}, {\bf ObjCryst::ScatteringPowerSphere} \doxyref{}{p.}{a00091_a3927291a20f5807c2ec6a9ae3627005d}, and {\bf ObjCryst::GlobalScatteringPower} \doxyref{}{p.}{a00034_a48da59604bb5a35fdac09087bc0fcff4}.\index{ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}!SetBij@{SetBij}}
+\index{SetBij@{SetBij}!ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}}
+\paragraph[{SetBij}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::ScatteringPower::SetBij (const size\_\-t \& {\em idx}, \/  const REAL {\em newB})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00089_a50b648d97ebb1ab97b39195b098eff50}
+
+
+Sets the anisotropic temperature B factor for given index. 0 -\/$>$ (1, 1) 1 -\/$>$ (2, 2) 2 -\/$>$ (3, 3) 3 -\/$>$ (1, 2) 4 -\/$>$ (1, 3) 5 -\/$>$ (2, 3) \index{ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}!SetBiso@{SetBiso}}
+\index{SetBiso@{SetBiso}!ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}}
+\paragraph[{SetBiso}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::ScatteringPower::SetBiso (const REAL {\em newB})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00089_a179266106b89bcbb4885f9f20ce315c3}
+
+
+Sets the isotropic temperature B factor. \index{ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}!SetMaximumLikelihoodPositionError@{SetMaximumLikelihoodPositionError}}
+\index{SetMaximumLikelihoodPositionError@{SetMaximumLikelihoodPositionError}!ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}}
+\paragraph[{SetMaximumLikelihoodPositionError}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::ScatteringPower::SetMaximumLikelihoodPositionError (const REAL {\em mle})}\hfill\label{a00089_aeba30efe61155572ffdada1121578bc9}
+
+
+Maximum Likelihood: set the estimated error (sigma) on the positions for this kind of element. 
+
+\subsubsection{Member Data Documentation}
+\index{ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}!mDynPopCorrIndex@{mDynPopCorrIndex}}
+\index{mDynPopCorrIndex@{mDynPopCorrIndex}!ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}}
+\paragraph[{mDynPopCorrIndex}]{\setlength{\rightskip}{0pt plus 5cm}long {\bf ObjCryst::ScatteringPower::mDynPopCorrIndex}\hspace{0.3cm}{\ttfamily  [protected]}}\hfill\label{a00089_a0266da1d92ec3d14989a2d4047710c4b}
+
+
+number identifying this kind of scatterer, for the dynamical occupancy correction. Right now it is the atomic number. \index{ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}!mFormalCharge@{mFormalCharge}}
+\index{mFormalCharge@{mFormalCharge}!ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}}
+\paragraph[{mFormalCharge}]{\setlength{\rightskip}{0pt plus 5cm}REAL {\bf ObjCryst::ScatteringPower::mFormalCharge}\hspace{0.3cm}{\ttfamily  [protected]}}\hfill\label{a00089_a030be52e5ba5540bf068e6be4ccb190e}
+
+
+Formal Charge. This can be used for bond valence analysis, or energy calculations.
+
+Default value is 0. \index{ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}!mMaximumLikelihoodNbGhost@{mMaximumLikelihoodNbGhost}}
+\index{mMaximumLikelihoodNbGhost@{mMaximumLikelihoodNbGhost}!ObjCryst::ScatteringPower@{ObjCryst::ScatteringPower}}
+\paragraph[{mMaximumLikelihoodNbGhost}]{\setlength{\rightskip}{0pt plus 5cm}REAL {\bf ObjCryst::ScatteringPower::mMaximumLikelihoodNbGhost}\hspace{0.3cm}{\ttfamily  [protected]}}\hfill\label{a00089_a53eeb0a26003df0bcf604817e2fbadf7}
+
+
+Number of ghost atoms in the asymmetric unit. These contribute to the variance of the structure factor, but not to the structure factor as the uncertainty on their position is infinite. 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+ScatteringPower.h\end{DoxyCompactItemize}

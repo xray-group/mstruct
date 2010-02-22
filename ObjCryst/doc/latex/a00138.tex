@@ -1,0 +1,206 @@
+\subsection{ObjCryst::WXPowderPatternGraph Class Reference}
+\label{a00138}\index{ObjCryst::WXPowderPatternGraph@{ObjCryst::WXPowderPatternGraph}}
+
+
+Class to display a Powder Pattern (calc,obs) in a graphic window.  
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf WXPowderPatternGraph} (wxFrame $\ast$frame, {\bf WXPowderPattern} $\ast$parent)\label{a00138_af3cafd773b977799e463c5e86267a9ac}
+
+\begin{DoxyCompactList}\small\item\em Constructor. The top frame should have a Status bar with two fields (at least). \item\end{DoxyCompactList}\item 
+void {\bf OnPaint} (wxPaintEvent \&WXUNUSED(event))\label{a00138_a7d0e648db65d7ce2657e23bbc699399b}
+
+\begin{DoxyCompactList}\small\item\em Redraw the spectrum. \item\end{DoxyCompactList}\item 
+void {\bf OnMouse} (wxMouseEvent \&event)\label{a00138_a5834ca4f7461f6094c61fa566bf2214e}
+
+\begin{DoxyCompactList}\small\item\em Display the Theta and intensity values at the mouse position, in the status bar. \item\end{DoxyCompactList}\item 
+void {\bf OnMouseWheel} (wxMouseEvent \&event)\label{a00138_af3da54e21ca379363feaf67facf3f55c}
+
+\begin{DoxyCompactList}\small\item\em Wheel wan be used to scroll the pattern. \item\end{DoxyCompactList}\item 
+void {\bf OnUpdate} (wxCommandEvent \&WXUNUSED(event))
+\begin{DoxyCompactList}\small\item\em Update the powder spectrum, at the user's request. \item\end{DoxyCompactList}\item 
+void {\bf SetPattern} (const CrystVector\_\-REAL \&obs, const CrystVector\_\-REAL \&calc, const REAL tthetaMin, const REAL tthetaStep, const CrystVector\_\-REAL \&sigma, const CrystVector\_\-REAL \&chi2Cumul)
+\begin{DoxyCompactList}\small\item\em Update the pattern. \item\end{DoxyCompactList}\item 
+void {\bf SetPattern} (const CrystVector\_\-REAL \&x, const CrystVector\_\-REAL \&obs, const CrystVector\_\-REAL \&calc, const CrystVector\_\-REAL \&sigma, const CrystVector\_\-REAL \&chi2Cumul)
+\begin{DoxyCompactList}\small\item\em Update the pattern. \item\end{DoxyCompactList}\item 
+void {\bf OnRedrawNewPattern} (wxUpdateUIEvent \&WXUNUSED(event))\label{a00138_ac15e3c9c014c8213eb368393f29ccefd}
+
+\begin{DoxyCompactList}\small\item\em Redraw the pattern (special function to ensure complete redrawing under windows...). \item\end{DoxyCompactList}\item 
+void {\bfseries OnToggleLabel} (wxCommandEvent \&WXUNUSED(event))\label{a00138_aa7a732762311a3b0f7f96c5eefda859c}
+
+\item 
+void {\bfseries OnFindPeaks} (wxCommandEvent \&WXUNUSED(event))\label{a00138_ae1f0d5362783460a37fd83c7fb85b548}
+
+\item 
+void {\bfseries OnLoadPeaks} (wxCommandEvent \&WXUNUSED(event))\label{a00138_a52682cde801fa2ff54d2e20323f7fa0c}
+
+\item 
+void {\bfseries OnSavePeaks} (wxCommandEvent \&WXUNUSED(event))\label{a00138_adec77e69c18a7db9b6f72ae3d5b5a5d3}
+
+\item 
+void {\bf OnChangePeak} (wxCommandEvent \&WXUNUSED(event))\label{a00138_a5d57b3210273cd01e39294b92e09288e}
+
+\begin{DoxyCompactList}\small\item\em Add or remove peak. \item\end{DoxyCompactList}\item 
+void {\bfseries OnIndex} (wxCommandEvent \&WXUNUSED(event))\label{a00138_ad23e59a23f5fcd0fc0969bbbed88505d}
+
+\item 
+void {\bfseries OnChangeScale} (wxCommandEvent \&event)\label{a00138_a7519dff1a7d09067ea54ccbef94a6f49}
+
+\item 
+void {\bf OnLeBail} (wxCommandEvent \&event)\label{a00138_a909ce5f24733f476ab284a0e90920896}
+
+\begin{DoxyCompactList}\small\item\em Profile fitting \& Le Bail intensity extraction. \item\end{DoxyCompactList}\item 
+void {\bfseries OnKeyDown} (wxKeyEvent \&event)\label{a00138_a98a2e3ca8c8056219a1e038b4ba4e82e}
+
+\item 
+void {\bfseries OnSize} (wxSizeEvent \&event)\label{a00138_a81db7a517c4b47bed982eb714ca0cc32}
+
+\item 
+{\bf WXPowderPattern} \& {\bfseries GetWXPowderPattern} ()\label{a00138_aba890a3f62cef16608d213a0c4e40815}
+
+\item 
+const {\bf WXPowderPattern} \& {\bfseries GetWXPowderPattern} () const \label{a00138_a26c6bbd53d27f75a761beef34a623a0b}
+
+\end{DoxyCompactItemize}
+\subsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf ResetAxisLimits} ()\label{a00138_addc3ae52db58c5d2e9fcfa43cefab938}
+
+\begin{DoxyCompactList}\small\item\em Reset the limits of the axis to full range. \item\end{DoxyCompactList}\item 
+long {\bf Data2ScreenX} (const REAL x) const \label{a00138_a1398197dd808d8cc6604e745f471679d}
+
+\begin{DoxyCompactList}\small\item\em Convert X data (2theta) coordinate to screen coordinate (pixel). \item\end{DoxyCompactList}\item 
+long {\bf Point2ScreenX} (const long x) const \label{a00138_ab8331b71e3ae7d070cbdc86ad8dfdaf3}
+
+\begin{DoxyCompactList}\small\item\em Convert X data (as data point index) to screen coordinate (pixel). \item\end{DoxyCompactList}\item 
+long {\bf Data2ScreenY} (const REAL y) const \label{a00138_a0e71c7c9c575145f2e5cd89cc6d15eec}
+
+\begin{DoxyCompactList}\small\item\em Convert Y data (intensity) coordinate to screen coordinate (pixel). \item\end{DoxyCompactList}\item 
+REAL {\bf Screen2DataX} (const long x) const \label{a00138_af051bd2e6d24d3cffd82a00349a3f230}
+
+\begin{DoxyCompactList}\small\item\em Convert X screen coordinate (pixel) to data (2theta) coordinate. \item\end{DoxyCompactList}\item 
+REAL {\bf Screen2DataY} (const long y) const \label{a00138_ac647e1eff7a2c9912143a759258b6ef0}
+
+\begin{DoxyCompactList}\small\item\em Convert Y screen coordinate (pixel) to data (intensity) coordinate. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf WXPowderPattern} $\ast$ {\bfseries mpPattern}\label{a00138_a90eb1ad3adee1c7c807a472469c8f7b0}
+
+\item 
+CrystVector\_\-REAL {\bf mX}\label{a00138_af95fb5a801b6f725fcabdaf859d37790}
+
+\begin{DoxyCompactList}\small\item\em Data vectors (Note that when x coordinates are 2theta, they are stored in degrees here). \item\end{DoxyCompactList}\item 
+CrystVector\_\-REAL {\bfseries mObs}\label{a00138_aed3480ca6d3feca95cea4fb7fedc149c}
+
+\item 
+CrystVector\_\-REAL {\bfseries mCalc}\label{a00138_abf0beaf237c7586e9aa515ee88e4a60f}
+
+\item 
+CrystVector\_\-REAL {\bfseries m2theta}\label{a00138_a3ef1357a0f11831d727b769351b35d77}
+
+\item 
+CrystVector\_\-REAL {\bfseries mSigma}\label{a00138_a949a67abc84a79f74ca7226db60bb810}
+
+\item 
+CrystVector\_\-REAL {\bfseries mChi2Cumul}\label{a00138_afc26e874ba706e5f71a172f9a68731ac}
+
+\item 
+const long {\bfseries mMargin}\label{a00138_a78db004349f8de2d9025270cb90ac0d3}
+
+\item 
+const REAL {\bfseries mDiffPercentShift}\label{a00138_a156731f6a5d70076777cdf9ee7d66358}
+
+\item 
+REAL {\bfseries mMaxIntensity}\label{a00138_af1431cd070dfbb3c2c87f757ec439834}
+
+\item 
+REAL {\bfseries mMinIntensity}\label{a00138_a87a8536b3cb13226c1aba836a5505c58}
+
+\item 
+REAL {\bfseries mMinX}\label{a00138_a6d76e10825f8db18816b76b239f9ed22}
+
+\item 
+REAL {\bfseries mMaxX}\label{a00138_a61a38be5e972d1847f35435bdb503d52}
+
+\item 
+wxFrame $\ast$ {\bfseries mpParentFrame}\label{a00138_a056cd4771b8806ea0f4aa00c2dfa08a4}
+
+\item 
+CrystMutex {\bf mMutex}\label{a00138_a223ea690caa93e1a75a071265d1ebca4}
+
+\begin{DoxyCompactList}\small\item\em Mutex to lock the pattern and associated data. \item\end{DoxyCompactList}\item 
+wxMenu $\ast$ {\bf mpPopUpMenu}\label{a00138_ae8dda5031ccf0ed3bebb665c4ed88d63}
+
+\begin{DoxyCompactList}\small\item\em Pop-\/up menu. \item\end{DoxyCompactList}\item 
+bool {\bf mIsDragging}\label{a00138_a53082fc8e1b71916817f6b2615f03ac6}
+
+\begin{DoxyCompactList}\small\item\em Are we within a dragging event ? \item\end{DoxyCompactList}\item 
+REAL {\bf mDraggingX0}\label{a00138_a2a3316244eebd91990218eec7f4f8501}
+
+\begin{DoxyCompactList}\small\item\em Remember coordinates at the beginning of the dragging. \item\end{DoxyCompactList}\item 
+REAL {\bfseries mDraggingIntensity0}\label{a00138_a16d736b05e10a8d81e68f367563d07f9}
+
+\item 
+{\bf RefinableObjClock} {\bf mClockAxisLimits}
+\begin{DoxyCompactList}\small\item\em Clock corresponding to when the graph limits where last changed. \item\end{DoxyCompactList}\item 
+bool {\bf mDisplayLabel}\label{a00138_acd3a3f08c92f4dacf13ac5f482292ea5}
+
+\begin{DoxyCompactList}\small\item\em Display labels ? \item\end{DoxyCompactList}\item 
+bool {\bf mDisplayPeak}\label{a00138_a157e0b86a16b5dd1d1cb83aa5678d524}
+
+\begin{DoxyCompactList}\small\item\em Display peaks ? \item\end{DoxyCompactList}\item 
+list$<$ list$<$ pair$<$ const REAL,const string $>$ $>$ $>$ {\bf mvLabelList}\label{a00138_a3c84db457bf7b0b3a1ee554adf9fef46}
+
+\begin{DoxyCompactList}\small\item\em The lists of labels for all components of the powder pattern. \item\end{DoxyCompactList}\item 
+{\bf PeakList} {\bf mPeakList}\label{a00138_a2769d6403af18c004cce19ef7f3d0b76}
+
+\begin{DoxyCompactList}\small\item\em List of observed peak positions. \item\end{DoxyCompactList}\item 
+long {\bf mXScale}\label{a00138_ac83aa432bf671b1a9392b762b88a4e25}
+
+\begin{DoxyCompactList}\small\item\em Scaling options for x and y axis x: 0 data (2theta, tof) ; 1: 1/d ; 2: 2pi/d y: 0 linear ; 1: sqrt(I) ; 2: log10(I). \item\end{DoxyCompactList}\item 
+long {\bfseries mYScale}\label{a00138_aad7118ced0af0e324bd2434ef4b45150}
+
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+Class to display a Powder Pattern (calc,obs) in a graphic window. So far only displays calc and obs patterns. \begin{Desc}
+\item[{\bf Todo}]display the difference pattern. Allow to zoom. Display reflection positions for crystalline phases. \end{Desc}
+
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::WXPowderPatternGraph@{ObjCryst::WXPowderPatternGraph}!OnUpdate@{OnUpdate}}
+\index{OnUpdate@{OnUpdate}!ObjCryst::WXPowderPatternGraph@{ObjCryst::WXPowderPatternGraph}}
+\paragraph[{OnUpdate}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::WXPowderPatternGraph::OnUpdate (wxCommandEvent \& {\em WXUNUSED}event)}\hfill\label{a00138_a89fe469c2774080b89e5fe43ded2e412}
+
+
+Update the powder spectrum, at the user's request. This calls the \doxyref{WXPowderPattern::CrystUpdate()}{p.}{a00135_a90f999b4aab7ed134db388c532b1d63e}. \index{ObjCryst::WXPowderPatternGraph@{ObjCryst::WXPowderPatternGraph}!SetPattern@{SetPattern}}
+\index{SetPattern@{SetPattern}!ObjCryst::WXPowderPatternGraph@{ObjCryst::WXPowderPatternGraph}}
+\paragraph[{SetPattern}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::WXPowderPatternGraph::SetPattern (const CrystVector\_\-REAL \& {\em x}, \/  const CrystVector\_\-REAL \& {\em obs}, \/  const CrystVector\_\-REAL \& {\em calc}, \/  const CrystVector\_\-REAL \& {\em sigma}, \/  const CrystVector\_\-REAL \& {\em chi2Cumul})}\hfill\label{a00138_af74825c7f7b2c132b9942a684b0311fe}
+
+
+Update the pattern. This is called by the \doxyref{WXPowderPattern}{p.}{a00135} parent. \index{ObjCryst::WXPowderPatternGraph@{ObjCryst::WXPowderPatternGraph}!SetPattern@{SetPattern}}
+\index{SetPattern@{SetPattern}!ObjCryst::WXPowderPatternGraph@{ObjCryst::WXPowderPatternGraph}}
+\paragraph[{SetPattern}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::WXPowderPatternGraph::SetPattern (const CrystVector\_\-REAL \& {\em obs}, \/  const CrystVector\_\-REAL \& {\em calc}, \/  const REAL {\em tthetaMin}, \/  const REAL {\em tthetaStep}, \/  const CrystVector\_\-REAL \& {\em sigma}, \/  const CrystVector\_\-REAL \& {\em chi2Cumul})}\hfill\label{a00138_a6a35318893c5a0f03d2d05b0bab9f1a8}
+
+
+Update the pattern. This is called by the \doxyref{WXPowderPattern}{p.}{a00135} parent.
+
+\begin{Desc}
+\item[{\bf Deprecated}]Rather, use the new \doxyref{WXPowderPatternGraph::SetPattern()}{p.}{a00138_a6a35318893c5a0f03d2d05b0bab9f1a8} which takes a full vector of x coordinates rather than min \& step \end{Desc}
+
+
+\subsubsection{Member Data Documentation}
+\index{ObjCryst::WXPowderPatternGraph@{ObjCryst::WXPowderPatternGraph}!mClockAxisLimits@{mClockAxisLimits}}
+\index{mClockAxisLimits@{mClockAxisLimits}!ObjCryst::WXPowderPatternGraph@{ObjCryst::WXPowderPatternGraph}}
+\paragraph[{mClockAxisLimits}]{\setlength{\rightskip}{0pt plus 5cm}{\bf RefinableObjClock} {\bf ObjCryst::WXPowderPatternGraph::mClockAxisLimits}\hspace{0.3cm}{\ttfamily  [private]}}\hfill\label{a00138_aca612848cb3be006e7cae23d5909e425}
+
+
+Clock corresponding to when the graph limits where last changed. This is compared to \doxyref{PowderPattern::GetClockPowderPatternPar()}{p.}{a00061_a5d6d5ba62523890c5481473814110109} to know if these parameter need to be reset. 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+wxPowderPattern.h\end{DoxyCompactItemize}

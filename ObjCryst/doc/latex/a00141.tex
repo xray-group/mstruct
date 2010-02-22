@@ -1,0 +1,75 @@
+\subsection{ObjCryst::WXRadiation Class Reference}
+\label{a00141}\index{ObjCryst::WXRadiation@{ObjCryst::WXRadiation}}
+
+
+WX Class for \doxyref{Radiation}{p.}{a00068}.  
+Inheritance diagram for ObjCryst::WXRadiation::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2cm]{a00141}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries WXRadiation} (wxWindow $\ast$parent, {\bf Radiation} $\ast$)\label{a00141_ac437d3e356a2abf0fde3a1c7f0d1a7b9}
+
+\item 
+virtual void {\bf CrystUpdate} (const bool updateUI=false, const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em Get new values to be displayed from the underlying object, and raise flag if an UI update is necessary. \item\end{DoxyCompactList}\item 
+virtual void {\bf UpdateUI} (const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em Update the User Interface, if necessary. \item\end{DoxyCompactList}\item 
+virtual void {\bfseries OnUpdateUI} (wxUpdateUIEvent \&WXUNUSED(event))\label{a00141_a7482c20d73e2034b03e766b716ed679d}
+
+\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Radiation} $\ast$ {\bfseries mpRadiation}\label{a00141_a0795a6c0f8b969e1081701da5e120a80}
+
+\item 
+{\bf WXFieldOption} $\ast$ {\bfseries mpFieldRadType}\label{a00141_a939f654b38e382113d7bac2bfa277a36}
+
+\item 
+{\bf WXFieldOption} $\ast$ {\bfseries mpFieldWavelengthType}\label{a00141_a3574e203b7a6f86e02de67377373449f}
+
+\item 
+wxBoxSizer $\ast$ {\bfseries mpSizer}\label{a00141_a44960ff17154f4252879fcf9e38e6efa}
+
+\item 
+{\bf WXCrystObjBasicList} {\bfseries mList}\label{a00141_addc5245e6a03fa1cc32f07ea25530d7b}
+
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+WX Class for \doxyref{Radiation}{p.}{a00068}. 
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::WXRadiation@{ObjCryst::WXRadiation}!CrystUpdate@{CrystUpdate}}
+\index{CrystUpdate@{CrystUpdate}!ObjCryst::WXRadiation@{ObjCryst::WXRadiation}}
+\paragraph[{CrystUpdate}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::WXRadiation::CrystUpdate (const bool {\em updateUI} = {\ttfamily false}, \/  const bool {\em mutexlock} = {\ttfamily false})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00141_a4322f775f359d04aa5db2288a40f6de5}
+
+
+Get new values to be displayed from the underlying object, and raise flag if an UI update is necessary. The actual GUI update is not made here. \doxyref{UpdateUI()}{p.}{a00141_a993c35c331f833bb5f049d536747779b} should be called separately, from the main thread.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em updateUI,:}]if true, this will call UpdateUI, either directly (if in the main thread), or by sending a message. \item[{\em mutexlock,:}]if true, a Mutex will be used to lock the data shared between main and background thread. The idea is to only use a few Mutexes to lock data from the top objects (wxRefinableObj,...), when calling \doxyref{CrystUpdate()}{p.}{a00141_a4322f775f359d04aa5db2288a40f6de5} and \doxyref{UpdateUI()}{p.}{a00141_a993c35c331f833bb5f049d536747779b}. As sub-\/objects (\doxyref{WXField}{p.}{a00118},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. \end{DoxyParams}
+
+
+Implements {\bf ObjCryst::WXCrystObjBasic} \doxyref{}{p.}{a00115_a7ac00ae2ae28f1a6fa26e6fa571186b6}.\index{ObjCryst::WXRadiation@{ObjCryst::WXRadiation}!UpdateUI@{UpdateUI}}
+\index{UpdateUI@{UpdateUI}!ObjCryst::WXRadiation@{ObjCryst::WXRadiation}}
+\paragraph[{UpdateUI}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::WXRadiation::UpdateUI (const bool {\em mutexlock} = {\ttfamily false})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00141_a993c35c331f833bb5f049d536747779b}
+
+
+Update the User Interface, if necessary. 
+\begin{DoxyParams}{Parameters}
+\item[{\em mutexlock,:}]if true, a Mutex will be used to lock the data shared between main and background thread.\end{DoxyParams}
+The idea is to only use a few Mutexes to lock data from the top objects (wxRefinableObj,...), when calling \doxyref{CrystUpdate()}{p.}{a00141_a4322f775f359d04aa5db2288a40f6de5} and \doxyref{UpdateUI()}{p.}{a00141_a993c35c331f833bb5f049d536747779b}. As sub-\/objects (\doxyref{WXField}{p.}{a00118},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
+
+Implements {\bf ObjCryst::WXCrystObjBasic} \doxyref{}{p.}{a00115_a3818940b7031ff7e45cf2178c4a99c90}.
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+wxRadiation.h\end{DoxyCompactItemize}

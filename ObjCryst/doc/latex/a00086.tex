@@ -1,0 +1,68 @@
+\subsection{ObjCryst::ScatteringComponentList Class Reference}
+\label{a00086}\index{ObjCryst::ScatteringComponentList@{ObjCryst::ScatteringComponentList}}
+
+
+list of scattering positions in a crystal, associated with the corresponding occupancy and a pointer to the \doxyref{ScatteringPower}{p.}{a00089}.  
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries ScatteringComponentList} (const long nbComponent)\label{a00086_a5d75cfe634f123de9c84c928dfea1eaa}
+
+\item 
+{\bfseries ScatteringComponentList} (const {\bf ScatteringComponentList} \&old)\label{a00086_ac1b58052220493fab0712ebc9d8bc481}
+
+\item 
+void {\bf Reset} ()
+\begin{DoxyCompactList}\small\item\em Reset the list. \item\end{DoxyCompactList}\item 
+const {\bf ScatteringComponent} \& {\bf operator()} (const long i) const \label{a00086_ac5245c446a41fd40ee1e312480023536}
+
+\begin{DoxyCompactList}\small\item\em Access to a component. \item\end{DoxyCompactList}\item 
+{\bf ScatteringComponent} \& {\bfseries operator()} (const long i)\label{a00086_a414a8c4bfcdc598826ca04720ce576a5}
+
+\item 
+long {\bf GetNbComponent} () const \label{a00086_a94c1375420b97a79594af7859cb968a6}
+
+\begin{DoxyCompactList}\small\item\em Number of components. \item\end{DoxyCompactList}\item 
+void {\bf operator=} (const {\bf ScatteringComponentList} \&rhs)\label{a00086_a93c5514484bd8d32a346e1c4a155a4a3}
+
+\begin{DoxyCompactList}\small\item\em Assignement operator. \item\end{DoxyCompactList}\item 
+bool {\bf operator==} (const {\bf ScatteringComponentList} \&rhs) const \label{a00086_ada4b582d2e62c807e99417c5cee4a8ce}
+
+\begin{DoxyCompactList}\small\item\em Compare two lists. \item\end{DoxyCompactList}\item 
+void {\bf operator+=} (const {\bf ScatteringComponentList} \&rhs)\label{a00086_a423df65157ec66cda8f5542116bc63f8}
+
+\begin{DoxyCompactList}\small\item\em Add another list of components. \item\end{DoxyCompactList}\item 
+void {\bf operator+=} (const {\bf ScatteringComponent} \&rhs)\label{a00086_a36ea90b4b48c473af0bee85402479f82}
+
+\begin{DoxyCompactList}\small\item\em Add component. \item\end{DoxyCompactList}\item 
+void {\bf operator++} ()\label{a00086_a8524c2bc3633441b2a808b2908ce99ec}
+
+\begin{DoxyCompactList}\small\item\em Add component (the whole list should be updated after that). \item\end{DoxyCompactList}\item 
+void {\bf operator-\/-\/} ()\label{a00086_afb399786cc9031db1cbf95df2868831b}
+
+\begin{DoxyCompactList}\small\item\em Remove component (the whole list should be updated after that). \item\end{DoxyCompactList}\item 
+void {\bf Print} () const \label{a00086_a3e7855dd6cbc411de63cbe14feef70cf}
+
+\begin{DoxyCompactList}\small\item\em Print the list of Scattering components. For debugging. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ {\bf ScatteringComponent} $>$ {\bf mvScattComp}\label{a00086_a191cb4df412bb4294a4e300313e35c3f}
+
+\begin{DoxyCompactList}\small\item\em The vector of components. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+list of scattering positions in a crystal, associated with the corresponding occupancy and a pointer to the \doxyref{ScatteringPower}{p.}{a00089}. 
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::ScatteringComponentList@{ObjCryst::ScatteringComponentList}!Reset@{Reset}}
+\index{Reset@{Reset}!ObjCryst::ScatteringComponentList@{ObjCryst::ScatteringComponentList}}
+\paragraph[{Reset}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::ScatteringComponentList::Reset ()}\hfill\label{a00086_a512dcd4870c53b3f98ad6e7b04be9801}
+
+
+Reset the list. This does {\bfseries not} free the memory, but simply forgets that there already are some entries. 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+ScatteringPower.h\end{DoxyCompactItemize}

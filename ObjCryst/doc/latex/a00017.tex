@@ -1,0 +1,48 @@
+\subsection{ObjCryst::CIF Class Reference}
+\label{a00017}\index{ObjCryst::CIF@{ObjCryst::CIF}}
+
+
+Main \doxyref{CIF}{p.}{a00017} class -\/ parses the stream and separates data blocks, comments, items, loops.  
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf CIF} (std::istream \&in, const bool interpret=true, const bool verbose=false)
+\begin{DoxyCompactList}\small\item\em Creates the \doxyref{CIF}{p.}{a00017} object from a stream. \item\end{DoxyCompactList}\item 
+void {\bf Parse} (std::stringstream \&in)
+\begin{DoxyCompactList}\small\item\em Separate the file in data blocks and parse them to sort tags, loops and comments. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std::map$<$ std::string, {\bf CIFData} $>$ {\bf mvData}\label{a00017_adc6341fa5bbfaf7257752959317a2b57}
+
+\begin{DoxyCompactList}\small\item\em The data blocks, after parsing. The key is the name of the data block. \item\end{DoxyCompactList}\item 
+std::list$<$ std::string $>$ {\bf mvComment}\label{a00017_ac0cd3903198ad04595488047a046e470}
+
+\begin{DoxyCompactList}\small\item\em Global comments, outside and data block. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+Main \doxyref{CIF}{p.}{a00017} class -\/ parses the stream and separates data blocks, comments, items, loops. All values are stored as string, and Each \doxyref{CIF}{p.}{a00017} block is stored in a separate \doxyref{CIFData}{p.}{a00019} object. No interpretaion is made here -\/ this must be done from all \doxyref{CIFData}{p.}{a00019} objects. 
+
+\subsubsection{Constructor \& Destructor Documentation}
+\index{ObjCryst::CIF@{ObjCryst::CIF}!CIF@{CIF}}
+\index{CIF@{CIF}!ObjCryst::CIF@{ObjCryst::CIF}}
+\paragraph[{CIF}]{\setlength{\rightskip}{0pt plus 5cm}ObjCryst::CIF::CIF (std::istream \& {\em in}, \/  const bool {\em interpret} = {\ttfamily true}, \/  const bool {\em verbose} = {\ttfamily false})}\hfill\label{a00017_ad570039a62026b01b0fdbcd9f9480d7a}
+
+
+Creates the \doxyref{CIF}{p.}{a00017} object from a stream. 
+\begin{DoxyParams}{Parameters}
+\item[{\em interpret,:}]if true, interpret all data blocks. See \doxyref{CIFData::ExtractAll()}{p.}{a00019_a406e1448ca864b4d679edde83c6351ab} \end{DoxyParams}
+
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::CIF@{ObjCryst::CIF}!Parse@{Parse}}
+\index{Parse@{Parse}!ObjCryst::CIF@{ObjCryst::CIF}}
+\paragraph[{Parse}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::CIF::Parse (std::stringstream \& {\em in})}\hfill\label{a00017_ad3d151ac993f8afcf4e5f22773df2e0c}
+
+
+Separate the file in data blocks and parse them to sort tags, loops and comments. All is stored in the original strings. 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+CIF.h\end{DoxyCompactItemize}

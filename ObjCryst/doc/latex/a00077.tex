@@ -1,0 +1,108 @@
+\subsection{ObjCryst::RefObjOpt Class Reference}
+\label{a00077}\index{ObjCryst::RefObjOpt@{ObjCryst::RefObjOpt}}
+
+
+Base class for options.  
+Inheritance diagram for ObjCryst::RefObjOpt::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2cm]{a00077}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf RefObjOpt} ()
+\begin{DoxyCompactList}\small\item\em Constructor for the option. \item\end{DoxyCompactList}\item 
+void {\bfseries Init} (const int nbChoice, const string $\ast$name, const string $\ast$choiceNames)\label{a00077_acb2124833f426224863027d1f3f0e9d6}
+
+\item 
+int {\bfseries GetNbChoice} () const \label{a00077_aeee7a18a06caf2e9de43f195c7ecee00}
+
+\item 
+int {\bfseries GetChoice} () const \label{a00077_a9c4ccafc994514e39266a1b6d91e1f42}
+
+\item 
+virtual void {\bfseries SetChoice} (const int choice)\label{a00077_a0333cbcd6ff10a2ee9aae0bafd3770c5}
+
+\item 
+void {\bfseries SetChoice} (const string \&choiceName)\label{a00077_a9a92c1a5543e46119687462a1b7e706e}
+
+\item 
+const string \& {\bfseries GetName} () const \label{a00077_ab0bd1fc64b59914f2b8596f5537ecd67}
+
+\item 
+const string \& {\bfseries GetClassName} () const \label{a00077_ad2d43141d9d301527bf134ff5c4f34f0}
+
+\item 
+const string \& {\bfseries GetChoiceName} (const int i) const \label{a00077_ae00a732dceaa596d2129805a44bcdddc}
+
+\item 
+const {\bf RefinableObjClock} \& {\bfseries GetClock} () const \label{a00077_a6c019a9936024016dc5704f93c117424}
+
+\item 
+void {\bf XMLOutput} (ostream \&os, int indent=0) const 
+\begin{DoxyCompactList}\small\item\em XMLOutput to stream in well-\/formed XML. \item\end{DoxyCompactList}\item 
+void {\bf XMLInput} (istream \&is, const {\bf XMLCrystTag} \&tag)
+\begin{DoxyCompactList}\small\item\em XMLInput From stream. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf mNbChoice}\label{a00077_a54ae7b002c156671d5b2176a46cf95d5}
+
+\begin{DoxyCompactList}\small\item\em Number of different choice possible for this option. \item\end{DoxyCompactList}\item 
+int {\bf mChoice}\label{a00077_a34f40080b3adac88e5ab7e290dc951ae}
+
+\begin{DoxyCompactList}\small\item\em Current value. \item\end{DoxyCompactList}\item 
+const string $\ast$ {\bf mpName}
+\begin{DoxyCompactList}\small\item\em (short) Name for this option. \item\end{DoxyCompactList}\item 
+const string $\ast$ {\bf mpChoiceName}
+\begin{DoxyCompactList}\small\item\em Names corresponding to each possible value of this option (Human-\/understandable). \item\end{DoxyCompactList}\item 
+{\bf RefinableObjClock} {\bf mClock}\label{a00077_ace306a0100bbb1678c9b8683a009dc81}
+
+\begin{DoxyCompactList}\small\item\em The clock associated to this option. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+Base class for options. 
+
+\subsubsection{Constructor \& Destructor Documentation}
+\index{ObjCryst::RefObjOpt@{ObjCryst::RefObjOpt}!RefObjOpt@{RefObjOpt}}
+\index{RefObjOpt@{RefObjOpt}!ObjCryst::RefObjOpt@{ObjCryst::RefObjOpt}}
+\paragraph[{RefObjOpt}]{\setlength{\rightskip}{0pt plus 5cm}ObjCryst::RefObjOpt::RefObjOpt ()}\hfill\label{a00077_ad4fd60241264e22179c9ab33fc58867f}
+
+
+Constructor for the option. 
+\begin{DoxyParams}{Parameters}
+\item[{\em obj,:}]the \end{DoxyParams}
+
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::RefObjOpt@{ObjCryst::RefObjOpt}!XMLInput@{XMLInput}}
+\index{XMLInput@{XMLInput}!ObjCryst::RefObjOpt@{ObjCryst::RefObjOpt}}
+\paragraph[{XMLInput}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::RefObjOpt::XMLInput (istream \& {\em is}, \/  const {\bf XMLCrystTag} \& {\em tag})}\hfill\label{a00077_a9562e469ee61a710e535594fe58f0744}
+
+
+XMLInput From stream. \index{ObjCryst::RefObjOpt@{ObjCryst::RefObjOpt}!XMLOutput@{XMLOutput}}
+\index{XMLOutput@{XMLOutput}!ObjCryst::RefObjOpt@{ObjCryst::RefObjOpt}}
+\paragraph[{XMLOutput}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::RefObjOpt::XMLOutput (ostream \& {\em os}, \/  int {\em indent} = {\ttfamily 0}) const}\hfill\label{a00077_a5758abdb2557b2b2a2621e015fd8ad75}
+
+
+XMLOutput to stream in well-\/formed XML. In this function the name used is that of the Option. 
+
+\subsubsection{Member Data Documentation}
+\index{ObjCryst::RefObjOpt@{ObjCryst::RefObjOpt}!mpChoiceName@{mpChoiceName}}
+\index{mpChoiceName@{mpChoiceName}!ObjCryst::RefObjOpt@{ObjCryst::RefObjOpt}}
+\paragraph[{mpChoiceName}]{\setlength{\rightskip}{0pt plus 5cm}const string$\ast$ {\bf ObjCryst::RefObjOpt::mpChoiceName}\hspace{0.3cm}{\ttfamily  [protected]}}\hfill\label{a00077_abc47d0f345c4121b6492e754b30f4fef}
+
+
+Names corresponding to each possible value of this option (Human-\/understandable). Should be statically stored in the class using the option. \index{ObjCryst::RefObjOpt@{ObjCryst::RefObjOpt}!mpName@{mpName}}
+\index{mpName@{mpName}!ObjCryst::RefObjOpt@{ObjCryst::RefObjOpt}}
+\paragraph[{mpName}]{\setlength{\rightskip}{0pt plus 5cm}const string$\ast$ {\bf ObjCryst::RefObjOpt::mpName}\hspace{0.3cm}{\ttfamily  [protected]}}\hfill\label{a00077_a45eb6eed7f6578f438433acddb2f1eb2}
+
+
+(short) Name for this option. Should be statically stored in the class using the option 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+RefinableObj.h\end{DoxyCompactItemize}

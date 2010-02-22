@@ -1,0 +1,417 @@
+\subsection{ObjCryst::PowderPatternDiffraction Class Reference}
+\label{a00065}\index{ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}}
+
+
+Class to compute the contribution to a powder pattern from a crystalline phase.  
+Inheritance diagram for ObjCryst::PowderPatternDiffraction::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3cm]{a00065}
+\end{center}
+\end{figure}
+\subsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf ReflProfile}
+\begin{DoxyCompactList}\small\item\em Profile of a single reflection. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries PowderPatternDiffraction} (const {\bf PowderPatternDiffraction} \&)\label{a00065_a66a5dbb3c4a169bea2fd738b8e2ad4b1}
+
+\item 
+virtual {\bf PowderPatternDiffraction} $\ast$ {\bf CreateCopy} () const \label{a00065_ab288a964d5259f2b239c49eb3efdd5bb}
+
+\begin{DoxyCompactList}\small\item\em So-\/called virtual copy constructor. \item\end{DoxyCompactList}\item 
+virtual const string \& {\bf GetClassName} () const 
+\begin{DoxyCompactList}\small\item\em Name for this class (\char`\"{}RefinableObj\char`\"{}, \char`\"{}Crystal\char`\"{},. \item\end{DoxyCompactList}\item 
+virtual void {\bf SetParentPowderPattern} ({\bf PowderPattern} \&)
+\begin{DoxyCompactList}\small\item\em Set the \doxyref{PowderPattern}{p.}{a00061} object which uses this component. \item\end{DoxyCompactList}\item 
+virtual const CrystVector\_\-REAL \& {\bf GetPowderPatternCalc} () const 
+\begin{DoxyCompactList}\small\item\em Get the calculated powder pattern for this component. \item\end{DoxyCompactList}\item 
+virtual pair$<$ const CrystVector\_\-REAL $\ast$, const {\bf RefinableObjClock} $\ast$ $>$ {\bf GetPowderPatternIntegratedCalc} () const 
+\begin{DoxyCompactList}\small\item\em Get the integrated values of the powder pattern. \item\end{DoxyCompactList}\item 
+void {\bf SetReflectionProfilePar} (const {\bf ReflectionProfileType} prof, const REAL fwhmCagliotiW, const REAL fwhmCagliotiU=0, const REAL fwhmCagliotiV=0, const REAL eta0=0.5, const REAL eta1=0.)
+\begin{DoxyCompactList}\small\item\em Set reflection profile parameters. \item\end{DoxyCompactList}\item 
+void {\bf SetProfile} ({\bf ReflectionProfile} $\ast$prof)
+\begin{DoxyCompactList}\small\item\em Assign a new profile. \item\end{DoxyCompactList}\item 
+const {\bf ReflectionProfile} \& {\bf GetProfile} () const \label{a00065_a36737a2dbb8be2af46f5c314171b419a}
+
+\begin{DoxyCompactList}\small\item\em Get reflection profile. \item\end{DoxyCompactList}\item 
+{\bf ReflectionProfile} \& {\bf GetProfile} ()\label{a00065_a8f82b16e1d676f468475317afaddfdd8}
+
+\begin{DoxyCompactList}\small\item\em Get reflection profile. \item\end{DoxyCompactList}\item 
+virtual void {\bfseries GenHKLFullSpace} ()\label{a00065_a8d40f85ebf29e8f57c369ec2111650a4}
+
+\item 
+virtual void {\bf XMLOutput} (ostream \&os, int indent=0) const 
+\begin{DoxyCompactList}\small\item\em Output to stream in well-\/formed XML. \item\end{DoxyCompactList}\item 
+virtual void {\bf XMLInput} (istream \&is, const {\bf XMLCrystTag} \&tag)
+\begin{DoxyCompactList}\small\item\em Input From stream. \item\end{DoxyCompactList}\item 
+virtual void {\bf GetGeneGroup} (const {\bf RefinableObj} \&obj, CrystVector\_\-uint \&groupIndex, unsigned int \&firstGroup) const 
+\begin{DoxyCompactList}\small\item\em Get the gene group assigned to each parameter. \item\end{DoxyCompactList}\item 
+virtual void {\bf BeginOptimization} (const bool allowApproximations=false, const bool enableRestraints=false)
+\begin{DoxyCompactList}\small\item\em This should be called by any optimization class at the begining of an optimization. \item\end{DoxyCompactList}\item 
+virtual void {\bf EndOptimization} ()
+\begin{DoxyCompactList}\small\item\em This should be called by any optimization class at the end of an optimization. \item\end{DoxyCompactList}\item 
+virtual void {\bf SetApproximationFlag} (const bool allow)
+\begin{DoxyCompactList}\small\item\em Enable or disable numerical approximations. \item\end{DoxyCompactList}\item 
+virtual const {\bf Radiation} \& {\bf GetRadiation} () const \label{a00065_a56744e8d8a61966b2acdc7c4ad9d4e85}
+
+\begin{DoxyCompactList}\small\item\em Get the radiation object for this data. \item\end{DoxyCompactList}\item 
+virtual const CrystVector\_\-REAL \& {\bf GetPowderPatternCalcVariance} () const 
+\begin{DoxyCompactList}\small\item\em Get the variance associated to each point of the calculated powder pattern, for this component. \item\end{DoxyCompactList}\item 
+virtual pair$<$ const CrystVector\_\-REAL $\ast$, const {\bf RefinableObjClock} $\ast$ $>$ {\bf GetPowderPatternIntegratedCalcVariance} () const 
+\begin{DoxyCompactList}\small\item\em Get the variance associated to each point of the calculated powder pattern, for this component (integrated version). \item\end{DoxyCompactList}\item 
+virtual bool {\bf HasPowderPatternCalcVariance} () const \label{a00065_ad0c57e0e2664e498e887d29698875cf0}
+
+\begin{DoxyCompactList}\small\item\em Does this component have a variance associated with each calculated point ? i.e., do we use maximum likelihood to take into account incomplete models ? \item\end{DoxyCompactList}\item 
+virtual void {\bf SetCrystal} ({\bf Crystal} \&crystal)
+\begin{DoxyCompactList}\small\item\em Set the crystal for this experiment. \item\end{DoxyCompactList}\item 
+void {\bf SetExtractionMode} (const bool extract=true, const bool init=false)
+\begin{DoxyCompactList}\small\item\em Prepare intensity extraction (Le Bail or Pawley). \item\end{DoxyCompactList}\item 
+bool {\bf GetExtractionMode} () const \label{a00065_add445d5800c4728a43c3c8a8bbea085d}
+
+\begin{DoxyCompactList}\small\item\em Return true if in extraction mode, i.e. using extracted intensities instead of computed structure factors. \item\end{DoxyCompactList}\item 
+void {\bf ExtractLeBail} (unsigned int nbcycle=1)
+\begin{DoxyCompactList}\small\item\em Extract intensities using Le Bail method. \item\end{DoxyCompactList}\item 
+virtual long {\bf GetNbReflBelowMaxSinThetaOvLambda} () const 
+\begin{DoxyCompactList}\small\item\em Recalc, and get the number of reflections which should be actually used, due to the maximuml sin(theta)/lambda value set. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void {\bf CalcPowderPattern} () const 
+\begin{DoxyCompactList}\small\item\em Calc the powder pattern. \item\end{DoxyCompactList}\item 
+virtual void {\bf CalcPowderPatternIntegrated} () const 
+\begin{DoxyCompactList}\small\item\em Calc the integrated powder pattern. \item\end{DoxyCompactList}\item 
+void {\bf CalcPowderReflProfile} () const 
+\item 
+void {\bf CalcIntensityCorr} () const 
+\item 
+virtual void {\bf CalcIhkl} () const 
+\item 
+virtual void {\bf Prepare} ()
+\item 
+virtual void {\bfseries InitOptions} ()\label{a00065_a734b53af6b0427541fa3ee852eb091f0}
+
+\item 
+virtual const CrystVector\_\-long \& {\bf GetBraggLimits} () const 
+\begin{DoxyCompactList}\small\item\em Get the pixel positions separating the integration intervals around reflections. \item\end{DoxyCompactList}\item 
+virtual void {\bf SetMaxSinThetaOvLambda} (const REAL max)
+\begin{DoxyCompactList}\small\item\em Set the maximum value for sin(theta)/lambda. \item\end{DoxyCompactList}\item 
+void {\bfseries PrepareIntegratedProfile} () const \label{a00065_aacd4efcac37189dc542545563982f10e}
+
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf RefinableObjClock} {\bf mClockProfilePar}\label{a00065_a509b94e52b44aed53752cdf92be7603c}
+
+\begin{DoxyCompactList}\small\item\em Last time the reflection parameters were changed. \item\end{DoxyCompactList}\item 
+{\bf RefinableObjClock} {\bf mClockLorentzPolarSlitCorrPar}\label{a00065_a1381bf49f3c4900f0e280f8bcbff172f}
+
+\begin{DoxyCompactList}\small\item\em Last time the. \item\end{DoxyCompactList}\item 
+{\bf RefinableObjClock} {\bf mClockIntensityCorr}\label{a00065_ad963323e1ffbdadc9c7bd1cdbf9539dc}
+
+\begin{DoxyCompactList}\small\item\em Last time the Lorentz-\/Polar-\/Slit correction was computed. \item\end{DoxyCompactList}\item 
+{\bf RefinableObjClock} {\bf mClockProfileCalc}\label{a00065_a39aa20a66d5c032083f96b96fe3f10d3}
+
+\begin{DoxyCompactList}\small\item\em Last time the reflection profiles were computed. \item\end{DoxyCompactList}\item 
+{\bf RefinableObjClock} {\bf mClockIhklCalc}\label{a00065_a4b583c1ab76b3b39b891050f85e7d1f5}
+
+\begin{DoxyCompactList}\small\item\em Last time intensities were computed. \item\end{DoxyCompactList}\item 
+{\bf ReflectionProfile} $\ast$ {\bf mpReflectionProfile}\label{a00065_ac7f248f736457fe513193865d2e154ad}
+
+\begin{DoxyCompactList}\small\item\em Profile. \item\end{DoxyCompactList}\item 
+CrystVector\_\-REAL {\bf mIntensityCorr}
+\begin{DoxyCompactList}\small\item\em Calculated corrections for all reflections. \item\end{DoxyCompactList}\item 
+{\bf LorentzCorr} {\bf mCorrLorentz}\label{a00065_a7f83c3a22d2784ae9394ddd64e695088}
+
+\begin{DoxyCompactList}\small\item\em Lorentz correction. \item\end{DoxyCompactList}\item 
+{\bf PolarizationCorr} {\bf mCorrPolar}\label{a00065_a38474f1c77cbc2b08c2d4354f8f439d1}
+
+\begin{DoxyCompactList}\small\item\em Polarization correction. \item\end{DoxyCompactList}\item 
+{\bf PowderSlitApertureCorr} {\bf mCorrSlitAperture}\label{a00065_ab2147524769083aaf24c8518ae4c6aab}
+
+\begin{DoxyCompactList}\small\item\em Slit aperture correction. \item\end{DoxyCompactList}\item 
+{\bf TextureMarchDollase} {\bf mCorrTextureMarchDollase}\label{a00065_aa2b7ce1dd0f5b396d9cbf86dcbe96b30}
+
+\begin{DoxyCompactList}\small\item\em Preferred orientation (texture) correction following the March-\/Dollase model. \item\end{DoxyCompactList}\item 
+{\bf TOFCorr} {\bf mCorrTOF}\label{a00065_a6a4defa4d63105fb531871c7460ac9b9}
+
+\begin{DoxyCompactList}\small\item\em Time-\/Of-\/Flight intensity correction. \item\end{DoxyCompactList}\item 
+CrystVector\_\-REAL {\bf mIhklCalc}\label{a00065_aa312a4468b704f0bad83f5d06d4f470e}
+
+\begin{DoxyCompactList}\small\item\em Computed intensities for all reflections. \item\end{DoxyCompactList}\item 
+CrystVector\_\-REAL {\bf mIhklCalcVariance}\label{a00065_ac74d96cb164d11c48fa24acb73b28008}
+
+\begin{DoxyCompactList}\small\item\em Variance on computed intensities for all reflections. \item\end{DoxyCompactList}\item 
+vector$<$ {\bf ReflProfile} $>$ {\bf mvReflProfile}\label{a00065_aaff1e7365e403358c95ffb916b5914e8}
+
+\begin{DoxyCompactList}\small\item\em Reflection profiles for ALL reflections during the last powder pattern generation. \item\end{DoxyCompactList}\item 
+vector$<$ pair$<$ unsigned long, CrystVector\_\-REAL $>$ $>$ {\bf mIntegratedProfileFactor}
+\begin{DoxyCompactList}\small\item\em For each reflection, store the integrated value of the normalized profile over all integration intervals. \item\end{DoxyCompactList}\item 
+{\bf RefinableObjClock} {\bf mClockIntegratedProfileFactor}\label{a00065_a4abbf16a758485daab6392a875678abf}
+
+\begin{DoxyCompactList}\small\item\em Last time the integrated values of normalized profiles was calculated. \item\end{DoxyCompactList}\item 
+bool {\bfseries mExtractionMode}\label{a00065_a3f0954b0ecb5786f8ca52ebb811c2ac0}
+
+\item 
+{\bf DiffractionDataSingleCrystal} $\ast$ {\bf mpLeBailData}\label{a00065_ae03f55a0f790918e2ba366943f95b60d}
+
+\begin{DoxyCompactList}\small\item\em Single crystal data extracted from the powder pattern. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+Class to compute the contribution to a powder pattern from a crystalline phase. 
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}!BeginOptimization@{BeginOptimization}}
+\index{BeginOptimization@{BeginOptimization}!ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}}
+\paragraph[{BeginOptimization}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::PowderPatternDiffraction::BeginOptimization (const bool {\em allowApproximations} = {\ttfamily false}, \/  const bool {\em enableRestraints} = {\ttfamily false})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00065_a44d10a7c3404153fe4513c8944629c45}
+
+
+This should be called by any optimization class at the begining of an optimization. This will also check that everything is ready, eg call the \doxyref{RefinableObj::Prepare()}{p.}{a00070_a48d11671e7f8699f7bc24077585c5e0f} function. This also affects all sub-\/objects. \begin{DoxyNote}{Note}
+this may be called several time for some objects which are used by several other objects, or for nested optimizations (e.g. least-\/squares optimizations inside a global one).
+
+\doxyref{EndOptimization()}{p.}{a00065_a11f7690878a07983de3abb839b087798} must be called at the end of the optimization, the same number of time \doxyref{BeginOptimization()}{p.}{a00065_a44d10a7c3404153fe4513c8944629c45} was called !
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em allowApproximations,:}]if true, then the object can use faster but less precise functions during the optimization. This is useful for global optimization not using derivatives. \item[{\em enableRestraints,:}]\end{DoxyParams}
+\begin{Desc}
+\item[{\bf Deprecated}]if true, then restrained parameters will be allowed to go beyond theur hard limits. This implies that the algorithm will take into account the cost (penalty) related to the restraints. Objects which do not use restraints will simply ignore this. WARNING: this parameter may be removed with the new likelihood scheme. \end{Desc}
+
+
+Reimplemented from {\bf ObjCryst::ScatteringData} \doxyref{}{p.}{a00088_a6b0f18996edafa21a03bf9550dcf8981}.\index{ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}!CalcIhkl@{CalcIhkl}}
+\index{CalcIhkl@{CalcIhkl}!ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}}
+\paragraph[{CalcIhkl}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::PowderPatternDiffraction::CalcIhkl () const\hspace{0.3cm}{\ttfamily  [protected, virtual]}}\hfill\label{a00065_a56dce436cf171bd33e8adc50d3c40fb8}
+\begin{DoxyInternal}{For internal use only.}
+Compute the intensity for all reflections (taking into account corrections, but not the multiplicity) \end{DoxyInternal}
+\index{ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}!CalcIntensityCorr@{CalcIntensityCorr}}
+\index{CalcIntensityCorr@{CalcIntensityCorr}!ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}}
+\paragraph[{CalcIntensityCorr}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::PowderPatternDiffraction::CalcIntensityCorr () const\hspace{0.3cm}{\ttfamily  [protected]}}\hfill\label{a00065_aba4bd0909a623af96bf66cff0491bd32}
+\begin{DoxyInternal}{For internal use only.}
+Calc Lorentz-\/Polarisation-\/APerture correction \end{DoxyInternal}
+\index{ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}!CalcPowderPattern@{CalcPowderPattern}}
+\index{CalcPowderPattern@{CalcPowderPattern}!ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}}
+\paragraph[{CalcPowderPattern}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::PowderPatternDiffraction::CalcPowderPattern () const\hspace{0.3cm}{\ttfamily  [protected, virtual]}}\hfill\label{a00065_a1f37b1e47c8bef989931fac08cf18849}
+
+
+Calc the powder pattern. As always, recomputation is only done if necessary (ie if a parameter has changed since the last computation) 
+
+Implements {\bf ObjCryst::PowderPatternComponent} \doxyref{}{p.}{a00064_a8417ecb93009a9b7b9fccf074a9438d9}.\index{ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}!CalcPowderPatternIntegrated@{CalcPowderPatternIntegrated}}
+\index{CalcPowderPatternIntegrated@{CalcPowderPatternIntegrated}!ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}}
+\paragraph[{CalcPowderPatternIntegrated}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::PowderPatternDiffraction::CalcPowderPatternIntegrated () const\hspace{0.3cm}{\ttfamily  [protected, virtual]}}\hfill\label{a00065_ae9e715bb230da8a3683adfee296288ad}
+
+
+Calc the integrated powder pattern. This should be optimized so that the full powder pattern is not explicitely computed. 
+
+Implements {\bf ObjCryst::PowderPatternComponent} \doxyref{}{p.}{a00064_a24c4fb58e500cd669f3298475a31f72f}.\index{ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}!CalcPowderReflProfile@{CalcPowderReflProfile}}
+\index{CalcPowderReflProfile@{CalcPowderReflProfile}!ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}}
+\paragraph[{CalcPowderReflProfile}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::PowderPatternDiffraction::CalcPowderReflProfile () const\hspace{0.3cm}{\ttfamily  [protected]}}\hfill\label{a00065_add8efa98500f554fd35bf672a999d949}
+\begin{DoxyInternal}{For internal use only.}
+Calc reflection profiles for ALL reflections (powder diffraction) \end{DoxyInternal}
+\index{ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}!EndOptimization@{EndOptimization}}
+\index{EndOptimization@{EndOptimization}!ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}}
+\paragraph[{EndOptimization}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::PowderPatternDiffraction::EndOptimization ()\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00065_a11f7690878a07983de3abb839b087798}
+
+
+This should be called by any optimization class at the end of an optimization. This also affects all sub-\/objects. \begin{DoxyNote}{Note}
+this may be called several time for some objects which are used by several other objects. 
+\end{DoxyNote}
+
+
+Reimplemented from {\bf ObjCryst::ScatteringData} \doxyref{}{p.}{a00088_a782e0caf5c6f2941ca64d17293b1e8b4}.\index{ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}!ExtractLeBail@{ExtractLeBail}}
+\index{ExtractLeBail@{ExtractLeBail}!ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}}
+\paragraph[{ExtractLeBail}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::PowderPatternDiffraction::ExtractLeBail (unsigned int {\em nbcycle} = {\ttfamily 1})}\hfill\label{a00065_aa86150b55c39275e7d076afb2b43513d}
+
+
+Extract intensities using Le Bail method. 
+\begin{DoxyParams}{Parameters}
+\item[{\em nbcycle,:}]number of cycles \end{DoxyParams}
+\index{ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}!GetBraggLimits@{GetBraggLimits}}
+\index{GetBraggLimits@{GetBraggLimits}!ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}}
+\paragraph[{GetBraggLimits}]{\setlength{\rightskip}{0pt plus 5cm}virtual const CrystVector\_\-long\& ObjCryst::PowderPatternDiffraction::GetBraggLimits () const\hspace{0.3cm}{\ttfamily  [protected, virtual]}}\hfill\label{a00065_ab9e21f6f16d77e96e4b5bed47db82dca}
+
+
+Get the pixel positions separating the integration intervals around reflections. \begin{DoxyReturn}{Returns}
+: an array with the pixel positions, empty if this component has no peaks. The positions should be in increasing order, but could go beyond the pattern limits. 
+\end{DoxyReturn}
+
+
+Implements {\bf ObjCryst::PowderPatternComponent} \doxyref{}{p.}{a00064_a727488f859528b0a9b5da47973804e01}.\index{ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}!GetClassName@{GetClassName}}
+\index{GetClassName@{GetClassName}!ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}}
+\paragraph[{GetClassName}]{\setlength{\rightskip}{0pt plus 5cm}virtual const string\& ObjCryst::PowderPatternDiffraction::GetClassName () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00065_a74b02e35219c6bc18521e66719778881}
+
+
+Name for this class (\char`\"{}RefinableObj\char`\"{}, \char`\"{}Crystal\char`\"{},. ..). This is only useful to distinguish different classes when picking up objects from the \doxyref{RefinableObj}{p.}{a00070} Global Registry 
+
+Reimplemented from {\bf ObjCryst::PowderPatternComponent} \doxyref{}{p.}{a00064_a5e797476d8d76ef797e1e8b51db9e8fb}.\index{ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}!GetGeneGroup@{GetGeneGroup}}
+\index{GetGeneGroup@{GetGeneGroup}!ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}}
+\paragraph[{GetGeneGroup}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::PowderPatternDiffraction::GetGeneGroup (const {\bf RefinableObj} \& {\em obj}, \/  CrystVector\_\-uint \& {\em groupIndex}, \/  unsigned int \& {\em firstGroup}) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00065_a7c6a94f74a6010abdb9ba4d5a8653d3f}
+
+
+Get the gene group assigned to each parameter. Each parameter (a {\itshape gene\/} in terms of genetic algorithms) can be assigned to a gene group. Thus when mating two configurations, genes will be exchanged by groups. By default (in the base RefinabeObj class), each parameter is alone in its group. Derived classes can group genes for a better s$\ast$$\ast$ life.
+
+The number identifying a gene group only has a meaning in a given object. It can also change on subsequent calls, and thus is not unique.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em obj}]the , supplied by an algorithm class (\doxyref{OptimizationObj}{p.}{a00054},..), which contains a list of parameters, some of which (but possibly all or none) are parameters belonging to this object. \item[{\em groupIndex}]a vector of unsigned integers, one for each parameter in the input object, giving an unsigned integer value as gene group index. At the beginning this vector should contain only zeros (no group assigned). \item[{\em firstGroup}]this is the number of groups which have already been assigned, plus one. The gene groups returned by this object will start from this value, and increment {\bfseries firstGroup} for each gene group used, so that different \doxyref{RefinableObj}{p.}{a00070} cannot share a gene group. \end{DoxyParams}
+\begin{DoxyNote}{Note}
+this function is not optimized, and should only be called at the beginning of a refinement. 
+\end{DoxyNote}
+
+
+Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_ad59c8ad2b0d7ee59fa3f399a54f05e54}.\index{ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}!GetNbReflBelowMaxSinThetaOvLambda@{GetNbReflBelowMaxSinThetaOvLambda}}
+\index{GetNbReflBelowMaxSinThetaOvLambda@{GetNbReflBelowMaxSinThetaOvLambda}!ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}}
+\paragraph[{GetNbReflBelowMaxSinThetaOvLambda}]{\setlength{\rightskip}{0pt plus 5cm}virtual long ObjCryst::PowderPatternDiffraction::GetNbReflBelowMaxSinThetaOvLambda () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00065_a2793f8d2df13e5a1e9a5efc527771b3a}
+
+
+Recalc, and get the number of reflections which should be actually used, due to the maximuml sin(theta)/lambda value set. 
+
+Reimplemented from {\bf ObjCryst::ScatteringData} \doxyref{}{p.}{a00088_aac8034f8b0f6980c619e595ce6ba1d65}.\index{ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}!GetPowderPatternCalc@{GetPowderPatternCalc}}
+\index{GetPowderPatternCalc@{GetPowderPatternCalc}!ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}}
+\paragraph[{GetPowderPatternCalc}]{\setlength{\rightskip}{0pt plus 5cm}virtual const CrystVector\_\-REAL\& ObjCryst::PowderPatternDiffraction::GetPowderPatternCalc () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00065_a8003dc9bbaf67b5d95e443c20166b742}
+
+
+Get the calculated powder pattern for this component. Note that the pattern is {\itshape not\/} scaled. 
+
+Implements {\bf ObjCryst::PowderPatternComponent} \doxyref{}{p.}{a00064_a45258e9f9b44ff019bf53aa3dfb1a305}.\index{ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}!GetPowderPatternCalcVariance@{GetPowderPatternCalcVariance}}
+\index{GetPowderPatternCalcVariance@{GetPowderPatternCalcVariance}!ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}}
+\paragraph[{GetPowderPatternCalcVariance}]{\setlength{\rightskip}{0pt plus 5cm}virtual const CrystVector\_\-REAL\& ObjCryst::PowderPatternDiffraction::GetPowderPatternCalcVariance () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00065_a664e1f47391720d06ffaa2b10b0aaf49}
+
+
+Get the variance associated to each point of the calculated powder pattern, for this component. \begin{DoxyWarning}{Warning}
+: this is experimental, with the aim of using Maximum Likelihood to improve structure determination. 
+\end{DoxyWarning}
+
+
+Implements {\bf ObjCryst::PowderPatternComponent} \doxyref{}{p.}{a00064_ad67b39669fd0d336b01937ee81a59ddc}.\index{ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}!GetPowderPatternIntegratedCalc@{GetPowderPatternIntegratedCalc}}
+\index{GetPowderPatternIntegratedCalc@{GetPowderPatternIntegratedCalc}!ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}}
+\paragraph[{GetPowderPatternIntegratedCalc}]{\setlength{\rightskip}{0pt plus 5cm}virtual pair$<$const CrystVector\_\-REAL$\ast$,const {\bf RefinableObjClock}$\ast$$>$ ObjCryst::PowderPatternDiffraction::GetPowderPatternIntegratedCalc () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00065_a2f2a745dcfa6cb7b7af4523b268827fe}
+
+
+Get the integrated values of the powder pattern. \begin{DoxyNote}{Note}
+: the integration intervals are those given by the parent \doxyref{PowderPattern}{p.}{a00061}, so that all PowderPatternComponent's intervals are taken into account
+\end{DoxyNote}
+This avoids explicitely calculating the full profile powder pattern. 
+
+Implements {\bf ObjCryst::PowderPatternComponent} \doxyref{}{p.}{a00064_ac54b7ae5a177492de681afc2cbed72eb}.\index{ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}!GetPowderPatternIntegratedCalcVariance@{GetPowderPatternIntegratedCalcVariance}}
+\index{GetPowderPatternIntegratedCalcVariance@{GetPowderPatternIntegratedCalcVariance}!ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}}
+\paragraph[{GetPowderPatternIntegratedCalcVariance}]{\setlength{\rightskip}{0pt plus 5cm}virtual pair$<$const CrystVector\_\-REAL$\ast$,const {\bf RefinableObjClock}$\ast$$>$ ObjCryst::PowderPatternDiffraction::GetPowderPatternIntegratedCalcVariance () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00065_ae529ea1dab34388e88ba4a818ed48ca1}
+
+
+Get the variance associated to each point of the calculated powder pattern, for this component (integrated version). \begin{DoxyWarning}{Warning}
+: this is experimental, with the aim of using Maximum Likelihood to improve structure determination. 
+\end{DoxyWarning}
+
+
+Implements {\bf ObjCryst::PowderPatternComponent} \doxyref{}{p.}{a00064_ae721bd290b50aa9503bac419616a21c6}.\index{ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}!Prepare@{Prepare}}
+\index{Prepare@{Prepare}!ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}}
+\paragraph[{Prepare}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::PowderPatternDiffraction::Prepare ()\hspace{0.3cm}{\ttfamily  [protected, virtual]}}\hfill\label{a00065_ae19852383674ae3ab673748a30a8432a}
+\begin{DoxyInternal}{For internal use only.}
+This will be called by the parent \doxyref{PowderPattern}{p.}{a00061} object, before calculating the first powder pattern. Or maybe it should be called automatically by the object itself... \end{DoxyInternal}
+
+
+Implements {\bf ObjCryst::PowderPatternComponent} \doxyref{}{p.}{a00064_a6a99877f0f9dec09fd5f596a7ddeb6f6}.\index{ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}!SetApproximationFlag@{SetApproximationFlag}}
+\index{SetApproximationFlag@{SetApproximationFlag}!ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}}
+\paragraph[{SetApproximationFlag}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::PowderPatternDiffraction::SetApproximationFlag (const bool {\em allow})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00065_a0e7b4a6f4b3a7b783ebed15230a1c45f}
+
+
+Enable or disable numerical approximations. This can be used for global optimization to get faster calculations. Depending on the type of object, this may do something or not (it does not do anything in a base \doxyref{RefinableObj}{p.}{a00070}, except calling this function for all sub-\/objects).
+
+\begin{DoxyNote}{Note}
+Currently there is no mApproximationFlag in the base class, but maybe there should...
+\end{DoxyNote}
+Also see: 
+
+Reimplemented from {\bf ObjCryst::ScatteringData} \doxyref{}{p.}{a00088_a109ed8c2e8dc676e77aa80feafa91071}.\index{ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}!SetCrystal@{SetCrystal}}
+\index{SetCrystal@{SetCrystal}!ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}}
+\paragraph[{SetCrystal}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::PowderPatternDiffraction::SetCrystal ({\bf Crystal} \& {\em crystal})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00065_a855f114ce585410a354b56a6ea336eaf}
+
+
+Set the crystal for this experiment. 
+
+Reimplemented from {\bf ObjCryst::ScatteringData} \doxyref{}{p.}{a00088_a75ea37efc16db856fff9b8832b524284}.\index{ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}!SetExtractionMode@{SetExtractionMode}}
+\index{SetExtractionMode@{SetExtractionMode}!ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}}
+\paragraph[{SetExtractionMode}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::PowderPatternDiffraction::SetExtractionMode (const bool {\em extract} = {\ttfamily true}, \/  const bool {\em init} = {\ttfamily false})}\hfill\label{a00065_a02f1293bc57c472a85741a328521d95f}
+
+
+Prepare intensity extraction (Le Bail or Pawley). 
+\begin{DoxyParams}{Parameters}
+\item[{\em extract,:}]if true, begin extraction mode, else enable structure factor calculations \item[{\em init,:}]if true and extract=true, intensities are set to 100 \end{DoxyParams}
+\index{ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}!SetMaxSinThetaOvLambda@{SetMaxSinThetaOvLambda}}
+\index{SetMaxSinThetaOvLambda@{SetMaxSinThetaOvLambda}!ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}}
+\paragraph[{SetMaxSinThetaOvLambda}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::PowderPatternDiffraction::SetMaxSinThetaOvLambda (const REAL {\em max})\hspace{0.3cm}{\ttfamily  [protected, virtual]}}\hfill\label{a00065_a699af7ea523fca128032384b548ceef1}
+
+
+Set the maximum value for sin(theta)/lambda. All data above still exist but are ignored for all calculations. 
+
+Implements {\bf ObjCryst::PowderPatternComponent} \doxyref{}{p.}{a00064_a4731b5a64ee9aab6779e2ef323242fe5}.\index{ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}!SetParentPowderPattern@{SetParentPowderPattern}}
+\index{SetParentPowderPattern@{SetParentPowderPattern}!ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}}
+\paragraph[{SetParentPowderPattern}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::PowderPatternDiffraction::SetParentPowderPattern ({\bf PowderPattern} \&)\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00065_ab67953ad7f27c37334a6b557c2da1d73}
+
+
+Set the \doxyref{PowderPattern}{p.}{a00061} object which uses this component. This sets all necessary pattern parameters (2theta/tof range, wavelength, radiation type...) accordingly. 
+
+Implements {\bf ObjCryst::PowderPatternComponent} \doxyref{}{p.}{a00064_a6b3dc911118c280dbbdcb7fb97acf980}.\index{ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}!SetProfile@{SetProfile}}
+\index{SetProfile@{SetProfile}!ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}}
+\paragraph[{SetProfile}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::PowderPatternDiffraction::SetProfile ({\bf ReflectionProfile} $\ast$ {\em prof})}\hfill\label{a00065_abf4e4d356004068fc2ae2faaaf40c336}
+
+
+Assign a new profile. \index{ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}!SetReflectionProfilePar@{SetReflectionProfilePar}}
+\index{SetReflectionProfilePar@{SetReflectionProfilePar}!ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}}
+\paragraph[{SetReflectionProfilePar}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::PowderPatternDiffraction::SetReflectionProfilePar (const {\bf ReflectionProfileType} {\em prof}, \/  const REAL {\em fwhmCagliotiW}, \/  const REAL {\em fwhmCagliotiU} = {\ttfamily 0}, \/  const REAL {\em fwhmCagliotiV} = {\ttfamily 0}, \/  const REAL {\em eta0} = {\ttfamily 0.5}, \/  const REAL {\em eta1} = {\ttfamily 0.})}\hfill\label{a00065_a7e75337a21cc715aefb78ed70d30dba7}
+
+
+Set reflection profile parameters. :TODO: assymmetric profiles 
+\begin{DoxyParams}{Parameters}
+\item[{\em fwhmCagliotiW,fwhmCagliotiU,fwhmCagliotiV}]: these are the U,V and W parameters in the Caglioti's law : $ fwhm^2= U \tan^2(\theta) + V \tan(\theta) +W $ if only W is given, the width is constant \item[{\em eta0,eta1,:}]these are the mixing parameters in the case of a pseudo-\/Voigt function. \end{DoxyParams}
+\index{ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}!XMLInput@{XMLInput}}
+\index{XMLInput@{XMLInput}!ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}}
+\paragraph[{XMLInput}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::PowderPatternDiffraction::XMLInput (istream \& {\em is}, \/  const {\bf XMLCrystTag} \& {\em tag})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00065_af350a4a95ddac5f15812bf35015f83fb}
+
+
+Input From stream. \begin{Desc}
+\item[{\bf Todo}]Add an bool XMLInputTag(is,tag) function to recognize all the tags from the stream. So that each inherited class can use the XMLInputTag function from its parent (ie take advantage of inheritance). The children class would first try to interpret the tag, then if unsuccessful would pass it to its parent (thus allowing overloading), etc... \end{Desc}
+
+
+Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_ac13a4045c3f187879443c8615c38d623}.\index{ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}!XMLOutput@{XMLOutput}}
+\index{XMLOutput@{XMLOutput}!ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}}
+\paragraph[{XMLOutput}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::PowderPatternDiffraction::XMLOutput (ostream \& {\em os}, \/  int {\em indent} = {\ttfamily 0}) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00065_af4a2a4dbdbc9eb85274835a4b3d10be9}
+
+
+Output to stream in well-\/formed XML. \begin{Desc}
+\item[{\bf Todo}]Use inheritance.. as for XMLInputTag()... \end{Desc}
+
+
+Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_a7b9b6ed0f8dcf753d398c35e073de973}.
+
+\subsubsection{Member Data Documentation}
+\index{ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}!mIntegratedProfileFactor@{mIntegratedProfileFactor}}
+\index{mIntegratedProfileFactor@{mIntegratedProfileFactor}!ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}}
+\paragraph[{mIntegratedProfileFactor}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$ pair$<$unsigned long, CrystVector\_\-REAL$>$ $>$ {\bf ObjCryst::PowderPatternDiffraction::mIntegratedProfileFactor}\hspace{0.3cm}{\ttfamily  [mutable, protected]}}\hfill\label{a00065_a551115d02944f3e0d360cc92f8084c99}
+
+
+For each reflection, store the integrated value of the normalized profile over all integration intervals. The first field is the first integration interval to which the reflection contributes, and the second field is a vector with all the integrated values for the intervals, listed in ascending 2theta(tof) order. \index{ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}!mIntensityCorr@{mIntensityCorr}}
+\index{mIntensityCorr@{mIntensityCorr}!ObjCryst::PowderPatternDiffraction@{ObjCryst::PowderPatternDiffraction}}
+\paragraph[{mIntensityCorr}]{\setlength{\rightskip}{0pt plus 5cm}CrystVector\_\-REAL {\bf ObjCryst::PowderPatternDiffraction::mIntensityCorr}\hspace{0.3cm}{\ttfamily  [mutable, protected]}}\hfill\label{a00065_addc10ae4a02801eb441e38b4beae2e9a}
+
+
+Calculated corrections for all reflections. Calc F$^\wedge$2 must be multiplied by this factor to yield intensities.
+
+Thus we have : $ I_{hkl} = L \times P \times SlitAp \times F_{hkl}^2 $
+
+with $ L = \frac{1}{\sin(2\theta)} $ (Lorentz factor). $ P = \frac{1}{1+A}\left(1+A\cos^2(2\theta)\right) $ (Polarization factor), with $ A = \frac{1-f}{1+f} $, where f is the polarization rate of the incident beam in the plane which (i) includes the incident beam, and (ii) is perpendicular to the diffracting plane. For an X-\/Ray Tube without monochromator, A=1, and if there is a monochromator : $ A = \cos^2(2\theta_{mono}) $ The factor $ SlitAp = \frac{1}{\sin(\theta)} $ takes into account the fraction of the diffracted cone which falls in the detector slit.
+
+If there is prefereed orientation, this also holds the associated correction.
+
+\begin{Desc}
+\item[{\bf Todo}]: store all corrections in a registry, so that other corrections can more easily be added (? Maybe not that useful, especially since these correction do not need to be displayed to the user ?). \end{Desc}
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+PowderPattern.h\end{DoxyCompactItemize}

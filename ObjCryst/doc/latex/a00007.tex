@@ -1,0 +1,71 @@
+\subsection{ObjCryst::AsymmetricUnit Class Reference}
+\label{a00007}\index{ObjCryst::AsymmetricUnit@{ObjCryst::AsymmetricUnit}}
+
+
+The basic description of spacegroup asymmetric unit.  
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf AsymmetricUnit} ()\label{a00007_a747085c4da803b7653cc94d5f80a08e9}
+
+\begin{DoxyCompactList}\small\item\em Default Constructor. \item\end{DoxyCompactList}\item 
+{\bf AsymmetricUnit} (const {\bf SpaceGroup} \&spg)\label{a00007_a382cdbb29b31cb1069cedfda111a7b52}
+
+\begin{DoxyCompactList}\small\item\em Constructor, for a given spacegroup. \item\end{DoxyCompactList}\item 
+void {\bf SetSpaceGroup} (const {\bf SpaceGroup} \&spg)\label{a00007_a74250a6135b809e1e5d4263babf7b78f}
+
+\begin{DoxyCompactList}\small\item\em Assign a \doxyref{SpaceGroup}{p.}{a00094} and generate the corrsponding Xmax, Ymax, ZMax. \item\end{DoxyCompactList}\item 
+bool {\bf IsInAsymmetricUnit} (const REAL x, const REAL y, const REAL z) const \label{a00007_ab26cfff8df342576588d8c1e596d798d}
+
+\begin{DoxyCompactList}\small\item\em Test if (x,y,z) is in the asymmetric unit. \item\end{DoxyCompactList}\item 
+REAL {\bfseries Xmin} () const \label{a00007_aa1a173d76e22a5b5e3307eeb387d06e2}
+
+\item 
+REAL {\bfseries Xmax} () const \label{a00007_ab36119d8cbfbd52a09b05fe496e7996e}
+
+\item 
+REAL {\bfseries Ymin} () const \label{a00007_ad63119e6016299cbd4873993ec17b0bf}
+
+\item 
+REAL {\bfseries Ymax} () const \label{a00007_aa930d927d75990e4f53d5da2a1059b02}
+
+\item 
+REAL {\bfseries Zmin} () const \label{a00007_a915b56044308379b1abd4b1e5ebdb23c}
+
+\item 
+REAL {\bfseries Zmax} () const \label{a00007_afd02b1b1f7cc00cc11e1256b37370323}
+
+\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+REAL {\bfseries mXmin}\label{a00007_a9025f8a94eb90f7e2524b41883ce8832}
+
+\item 
+REAL {\bfseries mXmax}\label{a00007_ab0319b59f351ab5b32a662cbeae38c3f}
+
+\item 
+REAL {\bfseries mYmin}\label{a00007_ad8e5996eed39b315fa053891dba6f5e7}
+
+\item 
+REAL {\bfseries mYmax}\label{a00007_a27b10b52feee5444c3da22ef18296c68}
+
+\item 
+REAL {\bfseries mZmin}\label{a00007_a5934edfddac9044e5a1141cb6f7e44cb}
+
+\item 
+REAL {\bfseries mZmax}\label{a00007_afc54949f8a81288f1fee2742e0388029}
+
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+The basic description of spacegroup asymmetric unit. Only xmin,xmax,ymin,ymax and zmin,zmax are recorded, thus resulting in a parallelepipedic unit with one (0,0,0) corner. It is not really 'asymmetric' since more than the crystallographic asymmetric unit can be included in it.
+
+\begin{Desc}
+\item[{\bf Todo}]Currently the initialization of the asymmetric unit is done numerically, slowly. A faster algorithm should be used (using dichotomy), or we could switch to using a table of asymmetric units. \end{Desc}
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+SpaceGroup.h\end{DoxyCompactItemize}

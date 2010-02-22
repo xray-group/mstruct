@@ -1,0 +1,192 @@
+\subsection{ObjCryst::MolDihedralAngle Class Reference}
+\label{a00045}\index{ObjCryst::MolDihedralAngle@{ObjCryst::MolDihedralAngle}}
+
+
+Dihedral angle restraint between 4 atoms.  
+Inheritance diagram for ObjCryst::MolDihedralAngle::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2cm]{a00045}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf MolDihedralAngle} ({\bf MolAtom} \&atom1, {\bf MolAtom} \&atom2, {\bf MolAtom} \&atom3, {\bf MolAtom} \&atom4, const REAL angle, const REAL sigma, const REAL delta, {\bf Molecule} \&parent)
+\begin{DoxyCompactList}\small\item\em Constructor. \item\end{DoxyCompactList}\item 
+virtual {\bf $\sim$MolDihedralAngle} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \item\end{DoxyCompactList}\item 
+const {\bf Molecule} \& {\bfseries GetMolecule} () const \label{a00045_ad5f61fbcba3100690a870cc7361c1a3f}
+
+\item 
+{\bf Molecule} \& {\bfseries GetMolecule} ()\label{a00045_a9136884f0e4f98cc402b562bb8ba446b}
+
+\item 
+string {\bfseries GetName} () const \label{a00045_a868f9fa628a113171273a042221c1f65}
+
+\item 
+virtual void {\bfseries XMLOutput} (ostream \&os, int indent=0) const \label{a00045_a749bedd921d4741be9c7af7a75da65dd}
+
+\item 
+virtual void {\bfseries XMLInput} (istream \&is, const {\bf XMLCrystTag} \&tag)\label{a00045_a3a74eb1d46283fa113842144fc158aa0}
+
+\item 
+virtual REAL {\bf GetLogLikelihood} () const \label{a00045_a0d8c1d85dd38fbf36ecd00c409e5aaab}
+
+\begin{DoxyCompactList}\small\item\em Get -\/ln(likelihood) for this restraint. \item\end{DoxyCompactList}\item 
+REAL {\bfseries GetLogLikelihood} (const bool calcDeriv, const bool recalc) const \label{a00045_a504d88460fe3f8bca88258b141266d3d}
+
+\item 
+REAL {\bf GetDeriv} (const std::map$<$ const {\bf MolAtom} $\ast$, {\bf XYZ} $>$ \&m, const bool llk=false) const \label{a00045_a4b119654a47f7d118b047e03437dbd11}
+
+\begin{DoxyCompactList}\small\item\em Get the derivative of the Angle, given the derivatives of the atom positions This requires that GetLogLikelihood(calcDeriv=true) be called first If llk=true, this will return the derivative of the llk rather than the derivative of the length or angle. \item\end{DoxyCompactList}\item 
+void {\bf CalcGradient} (std::map$<$ {\bf MolAtom} $\ast$, {\bf XYZ} $>$ \&m) const 
+\begin{DoxyCompactList}\small\item\em Calc log(likelihood) gradient -\/ versus all atomic coordinates. \item\end{DoxyCompactList}\item 
+REAL {\bfseries GetAngle} () const \label{a00045_a4fa68f0be5408bb5ee7865b7f95253cd}
+
+\item 
+REAL \& {\bfseries Angle0} ()\label{a00045_a72e0e74b227370b52bac26983372257a}
+
+\item 
+REAL \& {\bfseries AngleDelta} ()\label{a00045_a996abbb18dd76139093cb75cfd239f76}
+
+\item 
+REAL \& {\bfseries AngleSigma} ()\label{a00045_ad78f46045465b28e1af4fe2e65c04b48}
+
+\item 
+REAL {\bfseries GetAngle0} () const \label{a00045_a95d96a71ed5067b4bf941cec8a131c8c}
+
+\item 
+REAL {\bfseries GetAngleDelta} () const \label{a00045_a8746d298bcc22448201f247ade1a97b4}
+
+\item 
+REAL {\bfseries GetAngleSigma} () const \label{a00045_af9b583663211d3e980fc7178bcb33105}
+
+\item 
+void {\bfseries SetAngle0} (const REAL angle)\label{a00045_ae19635b29a4ec5d729f8696607f89243}
+
+\item 
+void {\bfseries SetAngleDelta} (const REAL delta)\label{a00045_a9541dec64bd326efe43302b4afd094bd}
+
+\item 
+void {\bfseries SetAngleSigma} (const REAL sigma)\label{a00045_aac5a7f2bd4f068b4cc923122d0786691}
+
+\item 
+const {\bf MolAtom} \& {\bfseries GetAtom1} () const \label{a00045_afdf62c0030dd851fd07cceab5dfb32fc}
+
+\item 
+const {\bf MolAtom} \& {\bfseries GetAtom2} () const \label{a00045_a28c2545dd2134c92265b7c6905aac6aa}
+
+\item 
+const {\bf MolAtom} \& {\bfseries GetAtom3} () const \label{a00045_a8f6ea9045a55a6bafb6851a2e51556ef}
+
+\item 
+const {\bf MolAtom} \& {\bfseries GetAtom4} () const \label{a00045_aff12b88be29c1fa5a54a7d0995541d18}
+
+\item 
+void {\bfseries SetAtom1} ({\bf MolAtom} \&at)\label{a00045_aef8143e58caf0778123277c633497e37}
+
+\item 
+void {\bfseries SetAtom2} ({\bf MolAtom} \&at)\label{a00045_abfd911db850ae2b50a8e23efb82597fc}
+
+\item 
+void {\bfseries SetAtom3} ({\bf MolAtom} \&at)\label{a00045_aa012bfe98cca9eb980511eb5a86cb954}
+
+\item 
+void {\bfseries SetAtom4} ({\bf MolAtom} \&at)\label{a00045_a46547a5dd324aefb35cf6a5e2e62470b}
+
+\item 
+{\bf MolAtom} \& {\bfseries GetAtom1} ()\label{a00045_a1ab0e70c3261b4343733301b57cd81aa}
+
+\item 
+{\bf MolAtom} \& {\bfseries GetAtom2} ()\label{a00045_a82397160d836818156d4873d043c557d}
+
+\item 
+{\bf MolAtom} \& {\bfseries GetAtom3} ()\label{a00045_a354b7cf11406e4d87c093f806f511f3d}
+
+\item 
+{\bf MolAtom} \& {\bfseries GetAtom4} ()\label{a00045_a3af2cef4acab08beeb37cc79225facaf}
+
+\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ {\bf MolAtom} $\ast$ $>$ {\bf mvpAtom}\label{a00045_a3ddc8d845096a39d5a221f604c44a12f}
+
+\begin{DoxyCompactList}\small\item\em The vector of the 4 atoms involved in the bond angle. \item\end{DoxyCompactList}\item 
+REAL {\bfseries mAngle}\label{a00045_af8ea22654d24cc870935fda6ad403377}
+
+\item 
+REAL {\bfseries mAngle0}\label{a00045_add6880191b242e840c421a395a997180}
+
+\item 
+REAL {\bfseries mDelta}\label{a00045_abc66fff16b96392a697d9ccd85acf981}
+
+\item 
+REAL {\bfseries mSigma}\label{a00045_a8617c882c6ad6091941b67e16c04bd5d}
+
+\item 
+{\bf Molecule} $\ast$ {\bf mpMol}\label{a00045_ae1f6372deab24335b40e30c75cec45ff}
+
+\begin{DoxyCompactList}\small\item\em Parent \doxyref{Molecule}{p.}{a00046}. \item\end{DoxyCompactList}\item 
+REAL {\bf mLLK}\label{a00045_aa63257b780c1be99e0d1ca76614ece75}
+
+\begin{DoxyCompactList}\small\item\em Stored log(likelihood). \item\end{DoxyCompactList}\item 
+{\bf XYZ} {\bf mDerivAtom1}
+\begin{DoxyCompactList}\small\item\em Partial derivatives of the angle with respect to the coordinates of the atoms. \item\end{DoxyCompactList}\item 
+{\bf XYZ} {\bfseries mDerivAtom2}\label{a00045_a401496e678bef830456b487823f91cc9}
+
+\item 
+{\bf XYZ} {\bfseries mDerivAtom3}\label{a00045_a365655f2815a61f9aab7b96e19d1100d}
+
+\item 
+{\bf XYZ} {\bfseries mDerivAtom4}\label{a00045_a5d00985870acb4eddcb7b33d6104683a}
+
+\item 
+REAL {\bf mDerivLLKCoeff}
+\begin{DoxyCompactList}\small\item\em The factor used to change the derivative of the length/angle, to the derivative of the log(likelihood). \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+Dihedral angle restraint between 4 atoms. The atoms involved need not be bonded. 
+
+\subsubsection{Constructor \& Destructor Documentation}
+\index{ObjCryst::MolDihedralAngle@{ObjCryst::MolDihedralAngle}!MolDihedralAngle@{MolDihedralAngle}}
+\index{MolDihedralAngle@{MolDihedralAngle}!ObjCryst::MolDihedralAngle@{ObjCryst::MolDihedralAngle}}
+\paragraph[{MolDihedralAngle}]{\setlength{\rightskip}{0pt plus 5cm}ObjCryst::MolDihedralAngle::MolDihedralAngle ({\bf MolAtom} \& {\em atom1}, \/  {\bf MolAtom} \& {\em atom2}, \/  {\bf MolAtom} \& {\em atom3}, \/  {\bf MolAtom} \& {\em atom4}, \/  const REAL {\em angle}, \/  const REAL {\em sigma}, \/  const REAL {\em delta}, \/  {\bf Molecule} \& {\em parent})}\hfill\label{a00045_abae4150558beac4a71498f471c22465e}
+
+
+Constructor. \index{ObjCryst::MolDihedralAngle@{ObjCryst::MolDihedralAngle}!$\sim$MolDihedralAngle@{$\sim$MolDihedralAngle}}
+\index{$\sim$MolDihedralAngle@{$\sim$MolDihedralAngle}!ObjCryst::MolDihedralAngle@{ObjCryst::MolDihedralAngle}}
+\paragraph[{$\sim$MolDihedralAngle}]{\setlength{\rightskip}{0pt plus 5cm}virtual ObjCryst::MolDihedralAngle::$\sim$MolDihedralAngle ()\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00045_acfb5913b15dd25e9d3292d6d84ce2119}
+
+
+Destructor. 
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::MolDihedralAngle@{ObjCryst::MolDihedralAngle}!CalcGradient@{CalcGradient}}
+\index{CalcGradient@{CalcGradient}!ObjCryst::MolDihedralAngle@{ObjCryst::MolDihedralAngle}}
+\paragraph[{CalcGradient}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::MolDihedralAngle::CalcGradient (std::map$<$ {\bf MolAtom} $\ast$, {\bf XYZ} $>$ \& {\em m}) const}\hfill\label{a00045_a48bec869f9649c8bcaae2a3d3b3a058c}
+
+
+Calc log(likelihood) gradient -\/ versus all atomic coordinates. 
+\begin{DoxyParams}{Parameters}
+\item[{\em m,:}]this map should have been initialized by adding all possible atom pointers as keys, with all \doxyref{XYZ}{p.}{a00151} values equal to zeros. On return, the derivative of the log(likelihood) vs each atomic coordinates will {\bfseries added} to each coordinate of the corresponding atoms. \end{DoxyParams}
+
+
+\subsubsection{Member Data Documentation}
+\index{ObjCryst::MolDihedralAngle@{ObjCryst::MolDihedralAngle}!mDerivAtom1@{mDerivAtom1}}
+\index{mDerivAtom1@{mDerivAtom1}!ObjCryst::MolDihedralAngle@{ObjCryst::MolDihedralAngle}}
+\paragraph[{mDerivAtom1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf XYZ} {\bf ObjCryst::MolDihedralAngle::mDerivAtom1}\hspace{0.3cm}{\ttfamily  [mutable, private]}}\hfill\label{a00045_a07870483da55a6a442dfa0a4de991d39}
+
+
+Partial derivatives of the angle with respect to the coordinates of the atoms. The derivatives are calculated in MolBondAngle::GetLogLikelihood(true) \index{ObjCryst::MolDihedralAngle@{ObjCryst::MolDihedralAngle}!mDerivLLKCoeff@{mDerivLLKCoeff}}
+\index{mDerivLLKCoeff@{mDerivLLKCoeff}!ObjCryst::MolDihedralAngle@{ObjCryst::MolDihedralAngle}}
+\paragraph[{mDerivLLKCoeff}]{\setlength{\rightskip}{0pt plus 5cm}REAL {\bf ObjCryst::MolDihedralAngle::mDerivLLKCoeff}\hspace{0.3cm}{\ttfamily  [mutable, private]}}\hfill\label{a00045_a5bb6dd773dd28cf90d0c34a5f4eb2a73}
+
+
+The factor used to change the derivative of the length/angle, to the derivative of the log(likelihood). e.g. (for mDelta=0) $ mDerivLLKCoeff = \frac{L-L_0}{\sigma^2} $ 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Molecule.h\end{DoxyCompactItemize}

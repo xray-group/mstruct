@@ -1,0 +1,129 @@
+\subsection{ObjCryst::WXPowderPattern Class Reference}
+\label{a00135}\index{ObjCryst::WXPowderPattern@{ObjCryst::WXPowderPattern}}
+
+
+WX Class for \doxyref{PowderPattern}{p.}{a00061} objects.  
+Inheritance diagram for ObjCryst::WXPowderPattern::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4cm]{a00135}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries WXPowderPattern} (wxWindow $\ast$parent, {\bf PowderPattern} $\ast$)\label{a00135_aa84a3d15103e9bfb3a8bbaf4d7d18541}
+
+\item 
+virtual void {\bf CrystUpdate} (const bool updateUI=false, const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em Get new values to be displayed from the underlying object, and raise flag if an UI update is necessary. \item\end{DoxyCompactList}\item 
+void {\bfseries OnMenuAddCompBackgd} (wxCommandEvent \&WXUNUSED(event))\label{a00135_aeeb49071800492bca8286681aec4465a}
+
+\item 
+void {\bfseries OnMenuAddCompBackgdBayesian} (wxCommandEvent \&WXUNUSED(event))\label{a00135_ad309b6409eadc6ca6b85f7fa44092670}
+
+\item 
+void {\bfseries OnMenuAddCompCryst} (wxCommandEvent \&WXUNUSED(event))\label{a00135_ada39e690a67bce38f9f851c0b460b7c2}
+
+\item 
+void {\bfseries OnMenuShowGraph} (wxCommandEvent \&WXUNUSED(event))\label{a00135_afe312fd6e5c1055baf98a0694aa6ffa6}
+
+\item 
+void {\bfseries OnMenuSaveText} (wxCommandEvent \&WXUNUSED(event))\label{a00135_a61d5da5025b35aca843f773a15947dac}
+
+\item 
+void {\bfseries OnMenuSimulate} (wxCommandEvent \&WXUNUSED(event))\label{a00135_a767f1581a45dd9996118a4f60018b010}
+
+\item 
+void {\bfseries OnMenuImportPattern} (wxCommandEvent \&WXUNUSED(event))\label{a00135_ac609ed08d513b5cdc1857049d9f25497}
+
+\item 
+void {\bfseries OnMenuFitScaleForR} (wxCommandEvent \&WXUNUSED(event))\label{a00135_a66b7e00877826d4e086c350c61304ca6}
+
+\item 
+void {\bfseries OnMenuFitScaleForRw} (wxCommandEvent \&WXUNUSED(event))\label{a00135_a0f618a59e11bfe9f9aa57c83177fd88d}
+
+\item 
+void {\bfseries OnMenuSavePattern} (wxCommandEvent \&WXUNUSED(event))\label{a00135_ad0a78347d2d45eadaada1ed051b494f4}
+
+\item 
+void {\bfseries OnMenuSetWavelength} (wxCommandEvent \&event)\label{a00135_a87f543f1c4a281bcfc130e795c2f09ba}
+
+\item 
+void {\bfseries OnMenuAddExclude} (wxCommandEvent \&WXUNUSED(event))\label{a00135_ade963add8345d6f87c3500861e42a16d}
+
+\item 
+void {\bf OnMenuLeBail} (wxCommandEvent \&event)\label{a00135_a1522bb5027652f4362eaee24e8bc2ac5}
+
+\begin{DoxyCompactList}\small\item\em Profile fitting \& Le Bail intensity extraction. \item\end{DoxyCompactList}\item 
+void {\bfseries OnMenuExport} (wxCommandEvent \&event)\label{a00135_a521d4953382adcc4909399d6485c004b}
+
+\item 
+void {\bfseries NotifyDeleteGraph} ()\label{a00135_a5ff2abf78afc1cf9b9b44f056e9b1a1c}
+
+\item 
+const {\bf PowderPattern} \& {\bfseries GetPowderPattern} () const \label{a00135_a4ece3213b76d2642d52c60b7b3a78b40}
+
+\item 
+{\bf PowderPattern} \& {\bfseries GetPowderPattern} ()\label{a00135_a6694d2816b4181f90f30eed927557470}
+
+\item 
+void {\bf UpdateUI} (const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em Update the User Interface, if necessary. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf PowderPattern} $\ast$ {\bfseries mpPowderPattern}\label{a00135_a7e22a0831044e7f25a95c7941ba023b5}
+
+\item 
+{\bf WXRegistry}$<$ {\bf PowderPatternComponent} $>$ $\ast$ {\bfseries mpWXComponent}\label{a00135_acaa0161319e3bf9e3278675d1a746fc4}
+
+\item 
+{\bf WXPowderPatternGraph} $\ast$ {\bfseries mpGraph}\label{a00135_a7a0333083a9b56dca0e538e2aa2e86d7}
+
+\item 
+REAL {\bfseries mChi2}\label{a00135_ad0d1af77edf32f825526995d34495bb4}
+
+\item 
+REAL {\bfseries mGoF}\label{a00135_a66db340895119396665c4de11eaf3f0c}
+
+\item 
+REAL {\bfseries mRwp}\label{a00135_afd82876daaac5ae2ad2c3fdb172307b7}
+
+\item 
+REAL {\bfseries mRp}\label{a00135_a773efdb94503622ae527e5596486e93b}
+
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+WX Class for \doxyref{PowderPattern}{p.}{a00061} objects. 
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::WXPowderPattern@{ObjCryst::WXPowderPattern}!CrystUpdate@{CrystUpdate}}
+\index{CrystUpdate@{CrystUpdate}!ObjCryst::WXPowderPattern@{ObjCryst::WXPowderPattern}}
+\paragraph[{CrystUpdate}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::WXPowderPattern::CrystUpdate (const bool {\em updateUI} = {\ttfamily false}, \/  const bool {\em mutexlock} = {\ttfamily false})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00135_a90f999b4aab7ed134db388c532b1d63e}
+
+
+Get new values to be displayed from the underlying object, and raise flag if an UI update is necessary. The actual GUI update is not made here. \doxyref{UpdateUI()}{p.}{a00135_aaeace05033eaea9499398825fc8244da} should be called separately, from the main thread.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em updateUI,:}]if true, this will call UpdateUI, either directly (if in the main thread), or by sending a message. \item[{\em mutexlock,:}]if true, a Mutex will be used to lock the data shared between main and background thread. The idea is to only use a few Mutexes to lock data from the top objects (wxRefinableObj,...), when calling \doxyref{CrystUpdate()}{p.}{a00135_a90f999b4aab7ed134db388c532b1d63e} and \doxyref{UpdateUI()}{p.}{a00135_aaeace05033eaea9499398825fc8244da}. As sub-\/objects (\doxyref{WXField}{p.}{a00118},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. \end{DoxyParams}
+
+
+Reimplemented from {\bf ObjCryst::WXRefinableObj} \doxyref{}{p.}{a00142_a13e4f37ac098de756b27cdb91d6a0551}.\index{ObjCryst::WXPowderPattern@{ObjCryst::WXPowderPattern}!UpdateUI@{UpdateUI}}
+\index{UpdateUI@{UpdateUI}!ObjCryst::WXPowderPattern@{ObjCryst::WXPowderPattern}}
+\paragraph[{UpdateUI}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::WXPowderPattern::UpdateUI (const bool {\em mutexlock} = {\ttfamily false})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00135_aaeace05033eaea9499398825fc8244da}
+
+
+Update the User Interface, if necessary. 
+\begin{DoxyParams}{Parameters}
+\item[{\em mutexlock,:}]if true, a Mutex will be used to lock the data shared between main and background thread.\end{DoxyParams}
+The idea is to only use a few Mutexes to lock data from the top objects (wxRefinableObj,...), when calling \doxyref{CrystUpdate()}{p.}{a00135_a90f999b4aab7ed134db388c532b1d63e} and \doxyref{UpdateUI()}{p.}{a00135_aaeace05033eaea9499398825fc8244da}. As sub-\/objects (\doxyref{WXField}{p.}{a00118},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
+
+Reimplemented from {\bf ObjCryst::WXRefinableObj} \doxyref{}{p.}{a00142_a19a1d057eecafd48710d9a3b770c1b28}.
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+wxPowderPattern.h\end{DoxyCompactItemize}

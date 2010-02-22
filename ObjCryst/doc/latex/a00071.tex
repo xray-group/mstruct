@@ -1,0 +1,109 @@
+\subsection{ObjCryst::RefinableObjClock Class Reference}
+\label{a00071}\index{ObjCryst::RefinableObjClock@{ObjCryst::RefinableObjClock}}
+
+
+We need to record exactly when refinable objects have been modified for the last time (to avoid re-\/computation), and to do that we need a precise time.  
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool {\bfseries operator$<$} (const {\bf RefinableObjClock} \&rhs) const \label{a00071_af203aa15b04bbbf9e926858b0ebfd559}
+
+\item 
+bool {\bfseries operator$<$=} (const {\bf RefinableObjClock} \&rhs) const \label{a00071_a26ef3758051252268530a9c06a9a3ae2}
+
+\item 
+bool {\bfseries operator$>$} (const {\bf RefinableObjClock} \&rhs) const \label{a00071_aba92f5f5e5f64ff526171f86d25ff26e}
+
+\item 
+bool {\bfseries operator$>$=} (const {\bf RefinableObjClock} \&rhs) const \label{a00071_ae81def7c84ec054c569779f097e94b09}
+
+\item 
+void {\bf Click} ()\label{a00071_a980b7dc70decc75c58eba0a55d73fc6d}
+
+\begin{DoxyCompactList}\small\item\em Record an event for this clock (generally, the 'time' an object has been modified, or some computation has been made). \item\end{DoxyCompactList}\item 
+void {\bf Reset} ()\label{a00071_a0b0c15d465647c470eb120d6d6ee54d6}
+
+\begin{DoxyCompactList}\small\item\em Reset a Clock to 0, to force an update. \item\end{DoxyCompactList}\item 
+void {\bf Print} () const \label{a00071_a59c97c073a2e39b22663d4c2d6f15ad7}
+
+\begin{DoxyCompactList}\small\item\em Print clock value. Only for debugging purposes. \item\end{DoxyCompactList}\item 
+void {\bf PrintStatic} () const \label{a00071_a8e91505568e04e47acb6e160337bad8d}
+
+\begin{DoxyCompactList}\small\item\em Print current general clock value. Only for debugging purposes. \item\end{DoxyCompactList}\item 
+void {\bf AddChild} (const {\bf RefinableObjClock} \&)
+\begin{DoxyCompactList}\small\item\em Add a 'child' clock. \item\end{DoxyCompactList}\item 
+void {\bf RemoveChild} (const {\bf RefinableObjClock} \&)\label{a00071_a7aff0bea53eea6500afa4ff153deb8ca}
+
+\begin{DoxyCompactList}\small\item\em remove a child clock. This also tells the child clock to remove the parent. \item\end{DoxyCompactList}\item 
+void {\bf AddParent} ({\bf RefinableObjClock} \&) const 
+\begin{DoxyCompactList}\small\item\em Add a 'parent' clock. \item\end{DoxyCompactList}\item 
+void {\bf RemoveParent} ({\bf RefinableObjClock} \&) const \label{a00071_a839dd63acca71853d58abff6a2268248}
+
+\begin{DoxyCompactList}\small\item\em remove a parent clock \item\end{DoxyCompactList}\item 
+void {\bf operator=} (const {\bf RefinableObjClock} \&rhs)
+\begin{DoxyCompactList}\small\item\em This will (i) set the clock to the same values as the rhs clock, but will not change the list of children and parent clocks. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool {\bfseries HasParent} (const {\bf RefinableObjClock} \&) const \label{a00071_a357ae3038e8868f0859b8a19eaa7ca74}
+
+\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned long {\bfseries mTick0}\label{a00071_afb3155736116dcfa92fb60fc5149c4b3}
+
+\item 
+unsigned long {\bfseries mTick1}\label{a00071_a1e9c5e13f97fbdf208d9737f3f97e13e}
+
+\item 
+std::set$<$ const {\bf RefinableObjClock} $\ast$ $>$ {\bf mvChild}\label{a00071_a21c9b5772bf58885ab48168b381fd9b5}
+
+\begin{DoxyCompactList}\small\item\em List of 'child' clocks, which will click this clock whenever they are clicked. \item\end{DoxyCompactList}\item 
+std::set$<$ {\bf RefinableObjClock} $\ast$ $>$ {\bf mvParent}
+\begin{DoxyCompactList}\small\item\em List of parent clocks, which will be clicked whenever this one is. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static unsigned long {\bfseries msTick0}\label{a00071_a1e892e36ab9383e7fed98f7dc1cabfe3}
+
+\item 
+static unsigned long {\bfseries msTick1}\label{a00071_a08f28d7209740d0649d69d2d6b5602f1}
+
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+We need to record exactly when refinable objects have been modified for the last time (to avoid re-\/computation), and to do that we need a precise time. Since the clock() function is not precise enough (and is architecture-\/dependant), we use a custom time, which records the number of events in the program which uses the library. This is purely internal, so don't worry about it...
+
+The clock values have nothing to do with 'time' as any normal person undertands it. 
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::RefinableObjClock@{ObjCryst::RefinableObjClock}!AddChild@{AddChild}}
+\index{AddChild@{AddChild}!ObjCryst::RefinableObjClock@{ObjCryst::RefinableObjClock}}
+\paragraph[{AddChild}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::RefinableObjClock::AddChild (const {\bf RefinableObjClock} \&)}\hfill\label{a00071_a4be5b7b2f802d67000098a89939ffaf1}
+
+
+Add a 'child' clock. Whenever a child clock is clicked, it will also click its parent. This function takes care of adding itself to the list of parent in the children clock. \index{ObjCryst::RefinableObjClock@{ObjCryst::RefinableObjClock}!AddParent@{AddParent}}
+\index{AddParent@{AddParent}!ObjCryst::RefinableObjClock@{ObjCryst::RefinableObjClock}}
+\paragraph[{AddParent}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::RefinableObjClock::AddParent ({\bf RefinableObjClock} \&) const}\hfill\label{a00071_acf4669fb94666b357004617f0c41a6d2}
+
+
+Add a 'parent' clock. Whenever a clock is clicked, all parent clocks also are. \index{ObjCryst::RefinableObjClock@{ObjCryst::RefinableObjClock}!operator=@{operator=}}
+\index{operator=@{operator=}!ObjCryst::RefinableObjClock@{ObjCryst::RefinableObjClock}}
+\paragraph[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::RefinableObjClock::operator= (const {\bf RefinableObjClock} \& {\em rhs})}\hfill\label{a00071_a91eda9a56505c36e5f060672e4959a58}
+
+
+This will (i) set the clock to the same values as the rhs clock, but will not change the list of children and parent clocks. This will afterwards \doxyref{Click()}{p.}{a00071_a980b7dc70decc75c58eba0a55d73fc6d} the clock to notify parents. 
+
+\subsubsection{Member Data Documentation}
+\index{ObjCryst::RefinableObjClock@{ObjCryst::RefinableObjClock}!mvParent@{mvParent}}
+\index{mvParent@{mvParent}!ObjCryst::RefinableObjClock@{ObjCryst::RefinableObjClock}}
+\paragraph[{mvParent}]{\setlength{\rightskip}{0pt plus 5cm}std::set$<${\bf RefinableObjClock}$\ast$$>$ {\bf ObjCryst::RefinableObjClock::mvParent}\hspace{0.3cm}{\ttfamily  [mutable, private]}}\hfill\label{a00071_a0804f9b1555db8ee4be7353f268035ca}
+
+
+List of parent clocks, which will be clicked whenever this one is. This is a mutable list since reporting to parent clocks does not change the vlaue of the clock. 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+RefinableObj.h\end{DoxyCompactItemize}

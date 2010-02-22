@@ -1,0 +1,1021 @@
+\subsection{ObjCryst Namespace Reference}
+\label{a00170}\index{ObjCryst@{ObjCryst}}
+
+
+The namespace which includes all objects (crystallographic and algorithmic) in ObjCryst++.  
+\subsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf Atom}
+\begin{DoxyCompactList}\small\item\em The basic atom scatterer, in a crystal. \item\end{DoxyCompactList}\item 
+class {\bf CIFData}
+\begin{DoxyCompactList}\small\item\em The \doxyref{CIFData}{p.}{a00019} class holds all the information from a {\itshape single\/} data\_\- block from a cif file. \item\end{DoxyCompactList}\item 
+class {\bf CIF}
+\begin{DoxyCompactList}\small\item\em Main \doxyref{CIF}{p.}{a00017} class -\/ parses the stream and separates data blocks, comments, items, loops. \item\end{DoxyCompactList}\item 
+class {\bf Crystal}
+\begin{DoxyCompactList}\small\item\em \doxyref{Crystal}{p.}{a00020} class: Unit cell, spacegroup, scatterers. \item\end{DoxyCompactList}\item 
+class {\bf DiffractionDataSingleCrystal}
+\begin{DoxyCompactList}\small\item\em DiffractionData object for Single \doxyref{Crystal}{p.}{a00020} analysis. \item\end{DoxyCompactList}\item 
+class {\bf ObjCrystException}
+\begin{DoxyCompactList}\small\item\em Exception class for ObjCryst++ library. \item\end{DoxyCompactList}\item 
+class {\bf SymmetricPairCompare}
+\begin{DoxyCompactList}\small\item\em Class to compare pairs of objects, with the two objects playing a symmetric role. \item\end{DoxyCompactList}\item 
+struct {\bf CrystalPOVRayOptions}
+\begin{DoxyCompactList}\small\item\em Class to store POV-\/Ray output options. \item\end{DoxyCompactList}\item 
+class {\bf RecUnitCell}
+\begin{DoxyCompactList}\small\item\em Lightweight class describing the reciprocal unit cell, for the fast computation of d$\ast$\_\-hkl$^\wedge$2. \item\end{DoxyCompactList}\item 
+class {\bf PeakList}
+\begin{DoxyCompactList}\small\item\em Class to store positions of observed reflections. \item\end{DoxyCompactList}\item 
+class {\bf CellExplorer}
+\begin{DoxyCompactList}\small\item\em Algorithm class to find the correct indexing from observed peak positions. \item\end{DoxyCompactList}\item 
+struct {\bf XYZ}
+\begin{DoxyCompactList}\small\item\em Structure holding 3 coordinates, or deriviatives with respect to each of these coordinates. \item\end{DoxyCompactList}\item 
+class {\bf MolAtom}
+\begin{DoxyCompactList}\small\item\em \doxyref{MolAtom}{p.}{a00042} : atom inside a \doxyref{Molecule}{p.}{a00046}. \item\end{DoxyCompactList}\item 
+class {\bf MolBond}
+\begin{DoxyCompactList}\small\item\em Bond between two atoms, also a restraint on the associated bond length. \item\end{DoxyCompactList}\item 
+class {\bf MolBondAngle}
+\begin{DoxyCompactList}\small\item\em Bond angle restraint between 3 atoms. \item\end{DoxyCompactList}\item 
+class {\bf MolDihedralAngle}
+\begin{DoxyCompactList}\small\item\em Dihedral angle restraint between 4 atoms. \item\end{DoxyCompactList}\item 
+class {\bf MolRing}
+\begin{DoxyCompactList}\small\item\em Ring class. \item\end{DoxyCompactList}\item 
+class {\bf Quaternion}
+\begin{DoxyCompactList}\small\item\em A quaternion class, used to represent the orientation of the molecule. \item\end{DoxyCompactList}\item 
+class {\bf RigidGroup}
+\begin{DoxyCompactList}\small\item\em Rigid groups of atoms inside a molecule. \item\end{DoxyCompactList}\item 
+struct {\bf StretchMode}
+\begin{DoxyCompactList}\small\item\em Abstract base Stretch Mode for \doxyref{Molecule}{p.}{a00046} objects. \item\end{DoxyCompactList}\item 
+struct {\bf StretchModeBondLength}
+\begin{DoxyCompactList}\small\item\em Group of atoms for random moves changing a bond length. \item\end{DoxyCompactList}\item 
+struct {\bf StretchModeBondAngle}
+\begin{DoxyCompactList}\small\item\em Atoms moved when changing a bond angle. \item\end{DoxyCompactList}\item 
+struct {\bf StretchModeTorsion}
+\begin{DoxyCompactList}\small\item\em Atoms moved when rotated around a bond at0-\/at1-\/at2-\/at3. \item\end{DoxyCompactList}\item 
+struct {\bf StretchModeTwist}
+\begin{DoxyCompactList}\small\item\em Atoms moved $\ast$between$\ast$ two other atoms, using a \char`\"{}twist\char`\"{} of their positions -\/ only small twists of their positions are allowed to avoid breaking restraints too much. \item\end{DoxyCompactList}\item 
+struct {\bf MDAtomGroup}
+\begin{DoxyCompactList}\small\item\em Groups of atoms that can be moved using molecular dynamics principles, taking a list of restraints as ptential. \item\end{DoxyCompactList}\item 
+struct {\bf MolZAtom}
+\begin{DoxyCompactList}\small\item\em Light-\/weight representation of an atom in the molecule, as a part of a Z-\/matrix. \item\end{DoxyCompactList}\item 
+class {\bf Molecule}
+\begin{DoxyCompactList}\small\item\em \doxyref{Molecule}{p.}{a00046} : class for complex scatterer descriptions using cartesian coordinates with bond length/angle restraints, and moves either of individual atoms or using torsion bonds. \item\end{DoxyCompactList}\item 
+class {\bf PDF}
+\begin{DoxyCompactList}\small\item\em Main class for Pair distribution function calculations and comparison to observed one. \item\end{DoxyCompactList}\item 
+class {\bf PDFPhase}
+\begin{DoxyCompactList}\small\item\em Contribution to a \doxyref{PDF}{p.}{a00055}. \item\end{DoxyCompactList}\item 
+class {\bf PDFCrystal}
+\begin{DoxyCompactList}\small\item\em Class for Pair Distribution Function calculations for a single \doxyref{Crystal}{p.}{a00020} object. \item\end{DoxyCompactList}\item 
+class {\bf PowderPatternComponent}
+\begin{DoxyCompactList}\small\item\em Generic class to compute components (eg the contribution of a given phase, or background) of a powder pattern. \item\end{DoxyCompactList}\item 
+class {\bf PowderPatternBackground}
+\begin{DoxyCompactList}\small\item\em Phase to compute a background contribution to a powder pattern using an interpolation. \item\end{DoxyCompactList}\item 
+class {\bf PowderPatternDiffraction}
+\begin{DoxyCompactList}\small\item\em Class to compute the contribution to a powder pattern from a crystalline phase. \item\end{DoxyCompactList}\item 
+class {\bf PowderPattern}
+\begin{DoxyCompactList}\small\item\em Powder pattern class, with an observed pattern and several calculated components to modelize the pattern. \item\end{DoxyCompactList}\item 
+class {\bf PowderPatternBackgroundBayesianMinimiser}
+\begin{DoxyCompactList}\small\item\em This object is used to estimate the background in a powder pattern, using a Bayesian approach (David \& Sivia, Acta Cryst A50 (1994), 703). \item\end{DoxyCompactList}\item 
+class {\bf ReflectionProfile}
+\begin{DoxyCompactList}\small\item\em Abstract base class for reflection profiles. \item\end{DoxyCompactList}\item 
+class {\bf ReflectionProfilePseudoVoigt}
+\begin{DoxyCompactList}\small\item\em Pseudo-\/Voigt reflection profile. \item\end{DoxyCompactList}\item 
+class {\bf ReflectionProfileDoubleExponentialPseudoVoigt}
+\begin{DoxyCompactList}\small\item\em Double-\/Exponential Pseudo-\/Voigt profile for TOF. \item\end{DoxyCompactList}\item 
+class {\bf Scatterer}
+\begin{DoxyCompactList}\small\item\em Generic type of scatterer: can be an atom, or a more complex assembly of atoms. \item\end{DoxyCompactList}\item 
+class {\bf ScatteringCorr}
+\begin{DoxyCompactList}\small\item\em Base class to compute all kind of corrections to intensities: Lorentz, Polar, absorption, texcture, extinction, etc. \item\end{DoxyCompactList}\item 
+class {\bf LorentzCorr}
+\begin{DoxyCompactList}\small\item\em Lorentz Correction. \item\end{DoxyCompactList}\item 
+class {\bf PolarizationCorr}
+\begin{DoxyCompactList}\small\item\em Polarization Correction. \item\end{DoxyCompactList}\item 
+class {\bf PowderSlitApertureCorr}
+\begin{DoxyCompactList}\small\item\em Slit aperture correction (for powder). \item\end{DoxyCompactList}\item 
+struct {\bf TexturePhaseMarchDollase}
+\begin{DoxyCompactList}\small\item\em One texture phase for the March-\/Dollase model. \item\end{DoxyCompactList}\item 
+class {\bf TextureMarchDollase}
+\begin{DoxyCompactList}\small\item\em Texture correction using the March-\/Dollase model. \item\end{DoxyCompactList}\item 
+class {\bf TOFCorr}
+\begin{DoxyCompactList}\small\item\em Time-\/Of-\/Flight Correction. \item\end{DoxyCompactList}\item 
+class {\bf Radiation}
+\begin{DoxyCompactList}\small\item\em Class to define the radiation (type, monochromaticity, wavelength(s)) of an experiment. \item\end{DoxyCompactList}\item 
+class {\bf ScatteringData}
+\begin{DoxyCompactList}\small\item\em Class to compute structure factors for a set of reflections and a \doxyref{Crystal}{p.}{a00020}. \item\end{DoxyCompactList}\item 
+class {\bf ScatteringPower}
+\begin{DoxyCompactList}\small\item\em Abstract Base Class to describe the scattering power of any \doxyref{Scatterer}{p.}{a00084} component in a crystal. \item\end{DoxyCompactList}\item 
+class {\bf ScatteringPowerAtom}
+\begin{DoxyCompactList}\small\item\em The Scattering Power for an \doxyref{Atom}{p.}{a00008}. \item\end{DoxyCompactList}\item 
+struct {\bf ScatteringComponent}
+\begin{DoxyCompactList}\small\item\em A scattering position in a crystal, associated with the corresponding occupancy and a pointer to the \doxyref{ScatteringPower}{p.}{a00089}. \item\end{DoxyCompactList}\item 
+class {\bf ScatteringComponentList}
+\begin{DoxyCompactList}\small\item\em list of scattering positions in a crystal, associated with the corresponding occupancy and a pointer to the \doxyref{ScatteringPower}{p.}{a00089}. \item\end{DoxyCompactList}\item 
+class {\bf ScatteringPowerSphere}
+\begin{DoxyCompactList}\small\item\em $\backslash$ brief \doxyref{ScatteringPower}{p.}{a00089} for a spherical particule \item\end{DoxyCompactList}\item 
+class {\bf AsymmetricUnit}
+\begin{DoxyCompactList}\small\item\em The basic description of spacegroup asymmetric unit. \item\end{DoxyCompactList}\item 
+class {\bf SpaceGroup}
+\begin{DoxyCompactList}\small\item\em The crystallographic space group, and the cell choice. \item\end{DoxyCompactList}\item 
+struct {\bf SpeedTestReport}
+\begin{DoxyCompactList}\small\item\em Structure to hold the results of a speedtest (see \doxyref{ObjCryst::SpeedTest()}{p.}{a00170_a775b62d07c596365d2f2d021dca408db}). \item\end{DoxyCompactList}\item 
+class {\bf UnitCell}
+\begin{DoxyCompactList}\small\item\em Unit Cell class: Unit cell with spacegroup information. \item\end{DoxyCompactList}\item 
+class {\bf GlobalScatteringPower}
+\begin{DoxyCompactList}\small\item\em Global Scattering Power. \item\end{DoxyCompactList}\item 
+class {\bf ZAtom}
+\begin{DoxyCompactList}\small\item\em Class for individual atoms in a \doxyref{ZScatterer}{p.}{a00155} Object. \item\end{DoxyCompactList}\item 
+class {\bf ZMoveMinimizer}
+\begin{DoxyCompactList}\small\item\em Class to minimize conformation changes for random moves. \item\end{DoxyCompactList}\item 
+class {\bf ZScatterer}
+\begin{DoxyCompactList}\small\item\em \doxyref{ZScatterer}{p.}{a00155}: the basic type of complex scatterers, where atom positions are defined using a standard \char`\"{}Z-\/Matrix\char`\"{} description. \item\end{DoxyCompactList}\item 
+class {\bf ZPolyhedron}
+\begin{DoxyCompactList}\small\item\em \doxyref{ZPolyhedron}{p.}{a00154}: a \doxyref{Scatterer}{p.}{a00084} to describe polyhedras such as octahedron, tetrahedron, square plane, etc. \item\end{DoxyCompactList}\item 
+class {\bf OptimizationObj}
+\begin{DoxyCompactList}\small\item\em Base object for Optimization methods. \item\end{DoxyCompactList}\item 
+class {\bf MonteCarloObj}
+\begin{DoxyCompactList}\small\item\em Base object for Monte-\/Carlo Global Optimization methods. \item\end{DoxyCompactList}\item 
+class {\bf XMLCrystTag}
+\begin{DoxyCompactList}\small\item\em class to input or output a well-\/formatted xml beginning or ending tag. \item\end{DoxyCompactList}\item 
+class {\bf LSQNumObj}
+\begin{DoxyCompactList}\small\item\em (Quick \& dirty) Least-\/Squares Refinement Object with Numerical derivatives \item\end{DoxyCompactList}\item 
+class {\bf RefParType}
+\begin{DoxyCompactList}\small\item\em class of refinable parameter types. \item\end{DoxyCompactList}\item 
+class {\bf RefinableObjClock}
+\begin{DoxyCompactList}\small\item\em We need to record exactly when refinable objects have been modified for the last time (to avoid re-\/computation), and to do that we need a precise time. \item\end{DoxyCompactList}\item 
+class {\bf Restraint}
+\begin{DoxyCompactList}\small\item\em \doxyref{Restraint}{p.}{a00080}: generic class for a restraint of a given model. \item\end{DoxyCompactList}\item 
+class {\bf RefinablePar}
+\begin{DoxyCompactList}\small\item\em Generic class for parameters of refinable objects. \item\end{DoxyCompactList}\item 
+class {\bf RefObjOpt}
+\begin{DoxyCompactList}\small\item\em Base class for options. \item\end{DoxyCompactList}\item 
+class {\bf RefObjOption}
+\begin{DoxyCompactList}\small\item\em Class for options of \doxyref{RefinableObj}{p.}{a00070}, templated so that we can warn the object that something has been changed. \item\end{DoxyCompactList}\item 
+class {\bf ObjRegistry}
+\begin{DoxyCompactList}\small\item\em Object Registry. \item\end{DoxyCompactList}\item 
+class {\bf RefinableObj}
+\begin{DoxyCompactList}\small\item\em Generic Refinable Object. \item\end{DoxyCompactList}\item 
+class {\bf SimplexObj}
+\begin{DoxyCompactList}\small\item\em Conjugate Gradient Algorithm object. \item\end{DoxyCompactList}\item 
+class {\bf Tracker}
+\begin{DoxyCompactList}\small\item\em A class to track the variation of parameters as a function of a number of cycles/trials. \item\end{DoxyCompactList}\item 
+class {\bf MainTracker}
+\begin{DoxyCompactList}\small\item\em A class to hold all trackers. \item\end{DoxyCompactList}\item 
+class {\bf TrackerObject}
+\begin{DoxyCompactList}\small\item\em \doxyref{Tracker}{p.}{a00106} for objects (\doxyref{RefinableObj}{p.}{a00070}, \doxyref{Crystal}{p.}{a00020}, \doxyref{PowderPattern}{p.}{a00061}, RefPar,. \item\end{DoxyCompactList}\item 
+class {\bf WXAtom}
+\begin{DoxyCompactList}\small\item\em wxCryst class for Atoms \item\end{DoxyCompactList}\item 
+class {\bf wxMultiChoiceDialog\_\-ListBox}
+\begin{DoxyCompactList}\small\item\em Provides the same functionnality as wxMultiChoiceDialog, but always using a wxListBox, which is much easier when selecting a large number of successive choices (using shift-\/click). \item\end{DoxyCompactList}\item 
+class {\bf WXCRYST\_\-ID}
+\begin{DoxyCompactList}\small\item\em Class to automatically assign a unique wxID to each window. \item\end{DoxyCompactList}\item 
+class {\bf WXCrystObjBasic}
+\begin{DoxyCompactList}\small\item\em Abstract base class for all objects in wxCryst. \item\end{DoxyCompactList}\item 
+class {\bf WXCrystObjBasicList}
+\begin{DoxyCompactList}\small\item\em A List of \doxyref{WXCrystObjBasic}{p.}{a00115}. \item\end{DoxyCompactList}\item 
+class {\bf WXCrystObj}
+\begin{DoxyCompactList}\small\item\em Base class for all displayed \doxyref{ObjCryst}{p.}{a00170} objects (with a title, and a sizer to stack objects). \item\end{DoxyCompactList}\item 
+class {\bf WXField}
+\begin{DoxyCompactList}\small\item\em This is the abstract base class for all fields, wether they contain a floating-\/point parameter, or a string,. \item\end{DoxyCompactList}\item 
+class {\bf WXFieldString}
+\begin{DoxyCompactList}\small\item\em A field which directly links to a string. \item\end{DoxyCompactList}\item 
+class {\bf WXFieldName}
+\begin{DoxyCompactList}\small\item\em A field with the name of a \doxyref{WXCrystObj}{p.}{a00114}. \item\end{DoxyCompactList}\item 
+class {\bf WXFieldParBase}
+\begin{DoxyCompactList}\small\item\em A field for a parameter. \item\end{DoxyCompactList}\item 
+class {\bf WXFieldPar}
+\begin{DoxyCompactList}\small\item\em A field for a parameter. \item\end{DoxyCompactList}\item 
+class {\bf WXFieldChoice}
+\begin{DoxyCompactList}\small\item\em Class to pick one choice. \item\end{DoxyCompactList}\item 
+class {\bf WXCrystMenuBar}
+\begin{DoxyCompactList}\small\item\em Our own local menu bar, using buttons and Popup menus. \item\end{DoxyCompactList}\item 
+class {\bf WXCrystal}
+\begin{DoxyCompactList}\small\item\em wxCryst class for Crystals \item\end{DoxyCompactList}\item 
+class {\bf WXDiffractionSingleCrystal}
+\begin{DoxyCompactList}\small\item\em WX Class for \doxyref{DiffractionDataSingleCrystal}{p.}{a00026} objects. \item\end{DoxyCompactList}\item 
+class {\bf WXOptimizationObj}
+\begin{DoxyCompactList}\small\item\em WX Class for a Global Optimization objects. \item\end{DoxyCompactList}\item 
+class {\bf WXGlobalOptimRunThread}
+\begin{DoxyCompactList}\small\item\em Class for a GlobalOptimization thread. \item\end{DoxyCompactList}\item 
+class {\bf WXMonteCarloObj}
+\begin{DoxyCompactList}\small\item\em Class for Graphical interface to Monte-\/Carlo objects (Simulated Annealing, Parallel Tempering). \item\end{DoxyCompactList}\item 
+class {\bf WXMolAtom}
+\begin{DoxyCompactList}\small\item\em wx class for \doxyref{MolAtom}{p.}{a00042} objects \item\end{DoxyCompactList}\item 
+class {\bf WXMolBond}
+\begin{DoxyCompactList}\small\item\em wx class for \doxyref{MolBond}{p.}{a00043} objects \item\end{DoxyCompactList}\item 
+class {\bf WXMolBondAngle}
+\begin{DoxyCompactList}\small\item\em wx class for \doxyref{MolBondAngle}{p.}{a00044} objects \item\end{DoxyCompactList}\item 
+class {\bf WXMolDihedralAngle}
+\begin{DoxyCompactList}\small\item\em wx class for \doxyref{MolDihedralAngle}{p.}{a00045} objects \item\end{DoxyCompactList}\item 
+class {\bf WXMolecule}
+\begin{DoxyCompactList}\small\item\em wxCryst class for \doxyref{Molecule}{p.}{a00046} objects \item\end{DoxyCompactList}\item 
+class {\bf WXPowderPattern}
+\begin{DoxyCompactList}\small\item\em WX Class for \doxyref{PowderPattern}{p.}{a00061} objects. \item\end{DoxyCompactList}\item 
+class {\bf WXPowderPatternGraph}
+\begin{DoxyCompactList}\small\item\em Class to display a Powder Pattern (calc,obs) in a graphic window. \item\end{DoxyCompactList}\item 
+class {\bf WXPowderPatternBackground}
+\begin{DoxyCompactList}\small\item\em Class to display a Powder Pattern Background. \item\end{DoxyCompactList}\item 
+class {\bf WXTexturePhaseMarchDollase}
+\begin{DoxyCompactList}\small\item\em Class to display one Preferred Orientation phase using the March-\/Dollase parametrization. \item\end{DoxyCompactList}\item 
+class {\bf WXTextureMarchDollase}
+\begin{DoxyCompactList}\small\item\em Class to display the Preferred Orientation Correction using the March-\/Dollase parametrization. \item\end{DoxyCompactList}\item 
+class {\bf WXPowderPatternDiffraction}
+\begin{DoxyCompactList}\small\item\em Class to display a Powder Pattern for a crystalline phase. \item\end{DoxyCompactList}\item 
+class {\bf WXProfilePseudoVoigt}
+\begin{DoxyCompactList}\small\item\em Class to display a Powder Pattern Pseudo-\/Voigt Profile. \item\end{DoxyCompactList}\item 
+class {\bf WXProfileDoubleExponentialPseudoVoigt}
+\begin{DoxyCompactList}\small\item\em Class to display a Powder Pattern Pseudo-\/Voigt Profile. \item\end{DoxyCompactList}\item 
+class {\bf WXRadiation}
+\begin{DoxyCompactList}\small\item\em WX Class for \doxyref{Radiation}{p.}{a00068}. \item\end{DoxyCompactList}\item 
+class {\bf WXFieldRefPar}
+\begin{DoxyCompactList}\small\item\em A field for a \doxyref{RefinablePar}{p.}{a00072}. \item\end{DoxyCompactList}\item 
+class {\bf WXFieldOption}
+\begin{DoxyCompactList}\small\item\em WX representation of a RefObj option. This displays the names of the different choices. \item\end{DoxyCompactList}\item 
+class {\bf WXRegistry}
+\begin{DoxyCompactList}\small\item\em This displays all components of a ObjCryst++ Registry. \item\end{DoxyCompactList}\item 
+class {\bf WXRefinableObj}
+\begin{DoxyCompactList}\small\item\em The base wxCryst class for all \doxyref{RefinableObj}{p.}{a00070} objects. \item\end{DoxyCompactList}\item 
+class {\bf WXScatterer}
+\begin{DoxyCompactList}\small\item\em base wxCryst class for Scatterers \item\end{DoxyCompactList}\item 
+class {\bf WXScatteringPowerAtom}
+\begin{DoxyCompactList}\small\item\em wxCryst class for \doxyref{ScatteringPowerAtom}{p.}{a00090} \item\end{DoxyCompactList}\item 
+class {\bf WXScatteringPowerSphere}
+\begin{DoxyCompactList}\small\item\em wxCryst class for \doxyref{ScatteringPowerSphere}{p.}{a00091} \item\end{DoxyCompactList}\item 
+class {\bf WXZScatterer}
+\begin{DoxyCompactList}\small\item\em wxCryst class for \doxyref{ZScatterer}{p.}{a00155} objects \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bf RadiationType} \{ {\bfseries RAD\_\-NEUTRON}, 
+{\bfseries RAD\_\-XRAY}, 
+{\bfseries RAD\_\-ELECTRON}
+ \}
+\begin{DoxyCompactList}\small\item\em Type of radiation used. \item\end{DoxyCompactList}\item 
+enum {\bf SampleType} \{ {\bfseries SAMPLE\_\-SINGLE\_\-CRYSTAL}, 
+{\bfseries SAMPLE\_\-POWDER}
+ \}
+\begin{DoxyCompactList}\small\item\em Sample type (not used yet). \item\end{DoxyCompactList}\item 
+enum {\bf WavelengthType} \{ \par
+{\bfseries WAVELENGTH\_\-MONOCHROMATIC}, 
+{\bfseries WAVELENGTH\_\-ALPHA12}, 
+{\bfseries WAVELENGTH\_\-TOF}, 
+{\bfseries WAVELENGTH\_\-MAD}, 
+\par
+{\bfseries WAVELENGTH\_\-DAFS}, 
+{\bfseries WAVELENGTH\_\-LAUE}
+ \}
+\begin{DoxyCompactList}\small\item\em Incident beam characteristics : monochromatic, X-\/Ray tube with Alpha1 and alpha2, MAD (a few wavelengths-\/UNUSED YET), DAFS (continuous wavelength range-\/UNUSED YET) LAUE (UNUSED YET), WAVELENGTH\_\-TOF (neutron Time Of Flight). \item\end{DoxyCompactList}\item 
+enum {\bf ReflectionProfileType} \{ \par
+{\bfseries PROFILE\_\-GAUSSIAN}, 
+{\bfseries PROFILE\_\-LORENTZIAN}, 
+{\bfseries PROFILE\_\-PSEUDO\_\-VOIGT}, 
+{\bfseries PROFILE\_\-PSEUDO\_\-VOIGT\_\-FINGER\_\-COX\_\-JEPHCOAT}, 
+\par
+{\bfseries PROFILE\_\-PEARSON\_\-VII}
+ \}
+\begin{DoxyCompactList}\small\item\em Profile type for powder (could it be used fopr single crystals on 2D detectors ?). \item\end{DoxyCompactList}\item 
+enum {\bfseries PowderBackgroundInterpType} \{ {\bfseries POWDER\_\-BACKGROUND\_\-LINEAR}, 
+{\bfseries POWDER\_\-BACKGROUND\_\-CUBIC\_\-SPLINE}
+ \}
+\item 
+enum {\bf CrystalSystem} \{ \par
+{\bfseries TRICLINIC}, 
+{\bfseries MONOCLINIC}, 
+{\bfseries ORTHOROMBIC}, 
+{\bfseries HEXAGONAL}, 
+\par
+{\bfseries RHOMBOEDRAL}, 
+{\bfseries TETRAGONAL}, 
+{\bfseries CUBIC}
+ \}
+\begin{DoxyCompactList}\small\item\em Different lattice types. \item\end{DoxyCompactList}\item 
+enum {\bfseries CrystalCentering} \{ \par
+{\bfseries LATTICE\_\-P}, 
+{\bfseries LATTICE\_\-I}, 
+{\bfseries LATTICE\_\-A}, 
+{\bfseries LATTICE\_\-B}, 
+\par
+{\bfseries LATTICE\_\-C}, 
+{\bfseries LATTICE\_\-F}
+ \}
+\item 
+enum {\bfseries RegularPolyhedraType} \{ \par
+{\bfseries TETRAHEDRON}, 
+{\bfseries OCTAHEDRON}, 
+{\bfseries SQUARE\_\-PLANE}, 
+{\bfseries CUBE}, 
+\par
+{\bfseries ANTIPRISM\_\-TETRAGONAL}, 
+{\bfseries PRISM\_\-TETRAGONAL\_\-MONOCAP}, 
+{\bfseries PRISM\_\-TETRAGONAL\_\-DICAP}, 
+{\bfseries PRISM\_\-TRIGONAL}, 
+\par
+{\bfseries PRISM\_\-TRIGONAL\_\-TRICAPPED}, 
+{\bfseries ICOSAHEDRON}, 
+{\bfseries TRIANGLE\_\-PLANE}
+ \}
+\item 
+enum {\bf AnnealingSchedule} \{ \par
+{\bfseries ANNEALING\_\-CONSTANT}, 
+{\bfseries ANNEALING\_\-BOLTZMANN}, 
+{\bfseries ANNEALING\_\-CAUCHY}, 
+{\bfseries ANNEALING\_\-EXPONENTIAL}, 
+\par
+{\bfseries ANNEALING\_\-SMART}, 
+{\bfseries ANNEALING\_\-GAMMA}
+ \}
+\begin{DoxyCompactList}\small\item\em Annealing schedule type. \item\end{DoxyCompactList}\item 
+enum {\bf GlobalOptimType} \{ \par
+{\bfseries GLOBAL\_\-OPTIM\_\-SIMULATED\_\-ANNEALING}, 
+{\bfseries GLOBAL\_\-OPTIM\_\-PARALLEL\_\-TEMPERING}, 
+{\bfseries GLOBAL\_\-OPTIM\_\-GENETIC}, 
+{\bfseries GLOBAL\_\-OPTIM\_\-SIMULATED\_\-ANNEALING\_\-MULTI}, 
+\par
+{\bfseries GLOBAL\_\-OPTIM\_\-PARALLEL\_\-TEMPERING\_\-MULTI}
+ \}
+\begin{DoxyCompactList}\small\item\em Global optimization type. \item\end{DoxyCompactList}\item 
+enum {\bf RefParDerivStepModel} \{ {\bfseries REFPAR\_\-DERIV\_\-STEP\_\-ABSOLUTE}, 
+{\bfseries REFPAR\_\-DERIV\_\-STEP\_\-RELATIVE}
+ \}
+\begin{DoxyCompactList}\small\item\em How do we compute steps h for numerical derivative calculation : d=f(x+h)-\/f(x-\/h)/h/2 either h is fixed (absolute), or relative h=x$\ast$derivFactor. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+float {\bf CIFNumeric2Float} (const std::string \&s)
+\begin{DoxyCompactList}\small\item\em Convert one \doxyref{CIF}{p.}{a00017} value to a floating-\/point value Return 0 if no value can be converted (e.g. \item\end{DoxyCompactList}\item 
+int {\bf CIFNumeric2Int} (const std::string \&s)
+\begin{DoxyCompactList}\small\item\em Convert one \doxyref{CIF}{p.}{a00017} value to a floating-\/point value Return 0 if no value can be converted (e.g. \item\end{DoxyCompactList}\item 
+{\bf Crystal} $\ast$ {\bf CreateCrystalFromCIF} ({\bf CIF} \&cif, const bool verbose=true, const bool checkSymAsXYZ=true)
+\begin{DoxyCompactList}\small\item\em Extract \doxyref{Crystal}{p.}{a00020} object(s) from a \doxyref{CIF}{p.}{a00017}, if possible. \item\end{DoxyCompactList}\item 
+{\bf PowderPattern} $\ast$ {\bf CreatePowderPatternFromCIF} ({\bf CIF} \&cif)
+\begin{DoxyCompactList}\small\item\em Create \doxyref{PowderPattern}{p.}{a00061} object(s) from a \doxyref{CIF}{p.}{a00017}, if possible. \item\end{DoxyCompactList}\item 
+{\bf DiffractionDataSingleCrystal} $\ast$ {\bf CreateSingleCrystalDataFromCIF} ({\bf CIF} \&cif, {\bf Crystal} $\ast$pryst=0)
+\begin{DoxyCompactList}\small\item\em Create \doxyref{DiffractionDataSingleCrystal}{p.}{a00026} object(s) from a \doxyref{CIF}{p.}{a00017}, if possible. \item\end{DoxyCompactList}\item 
+void {\bf ObjCrystInformUserStdOut} (const string \&)\label{a00170_a8639613ba2d1f8575508edbfbae0419b}
+
+\begin{DoxyCompactList}\small\item\em Print some information for the user during long processes. \item\end{DoxyCompactList}\item 
+void {\bf RealGeomStructFactor} (const REAL x, const REAL y, const REAL z, const CrystVector\_\-REAL \&h, const CrystVector\_\-REAL \&k, const CrystVector\_\-REAL \&l, CrystVector\_\-REAL \&rsf)
+\item 
+void {\bf ImagGeomStructFactor} (const REAL x, const REAL y, const REAL z, const CrystVector\_\-REAL \&h, const CrystVector\_\-REAL \&k, const CrystVector\_\-REAL \&l, CrystVector\_\-REAL \&rsf)
+\item 
+void {\bf RealGeomStructFactor\_\-1} (const REAL x, const REAL y, const REAL z, const CrystVector\_\-REAL \&h, const CrystVector\_\-REAL \&k, const CrystVector\_\-REAL \&l, CrystVector\_\-REAL \&rsf)
+\item 
+void {\bf RealGeomStructFactor\_\-2} (const REAL x, const REAL y, const REAL z, const CrystVector\_\-REAL \&h, const CrystVector\_\-REAL \&k, const CrystVector\_\-REAL \&l, CrystVector\_\-REAL \&rsf)
+\item 
+void {\bf RealGeomStructFactor\_\-67} (const REAL x, const REAL y, const REAL z, const CrystVector\_\-REAL \&h, const CrystVector\_\-REAL \&k, const CrystVector\_\-REAL \&l, CrystVector\_\-REAL \&rsf)
+\item 
+void {\bf RealGeomStructFactor\_\-67ba\_\-c} (const REAL x, const REAL y, const REAL z, const CrystVector\_\-REAL \&h, const CrystVector\_\-REAL \&k, const CrystVector\_\-REAL \&l, CrystVector\_\-REAL \&rsf)
+\item 
+void {\bf RealGeomStructFactor\_\-67cab} (const REAL x, const REAL y, const REAL z, const CrystVector\_\-REAL \&h, const CrystVector\_\-REAL \&k, const CrystVector\_\-REAL \&l, CrystVector\_\-REAL \&rsf)
+\item 
+void {\bf RealGeomStructFactor\_\-67\_\-cba} (const REAL x, const REAL y, const REAL z, const CrystVector\_\-REAL \&h, const CrystVector\_\-REAL \&k, const CrystVector\_\-REAL \&l, CrystVector\_\-REAL \&rsf)
+\item 
+void {\bf RealGeomStructFactor\_\-67bca} (const REAL x, const REAL y, const REAL z, const CrystVector\_\-REAL \&h, const CrystVector\_\-REAL \&k, const CrystVector\_\-REAL \&l, CrystVector\_\-REAL \&rsf)
+\item 
+void {\bf RealGeomStructFactor\_\-67a\_\-cb} (const REAL x, const REAL y, const REAL z, const CrystVector\_\-REAL \&h, const CrystVector\_\-REAL \&k, const CrystVector\_\-REAL \&l, CrystVector\_\-REAL \&rsf)
+\item 
+void {\bf RealGeomStructFactor\_\-97} (const REAL x, const REAL y, const REAL z, const CrystVector\_\-REAL \&h, const CrystVector\_\-REAL \&k, const CrystVector\_\-REAL \&l, CrystVector\_\-REAL \&rsf)
+\item 
+void {\bf RealGeomStructFactor\_\-230} (const REAL x, const REAL y, const REAL z, const CrystVector\_\-REAL \&h, const CrystVector\_\-REAL \&k, const CrystVector\_\-REAL \&l, CrystVector\_\-REAL \&rsf)
+\item 
+void {\bf ImagGeomStructFactor\_\-centro} (const REAL x, const REAL y, const REAL z, const CrystVector\_\-REAL \&h, const CrystVector\_\-REAL \&k, const CrystVector\_\-REAL \&l, CrystVector\_\-REAL \&isf)
+\item 
+void {\bf ImagGeomStructFactor\_\-1} (const REAL x, const REAL y, const REAL z, const CrystVector\_\-REAL \&h, const CrystVector\_\-REAL \&k, const CrystVector\_\-REAL \&l, CrystVector\_\-REAL \&isf)
+\item 
+void {\bf ImagGeomStructFactor\_\-2} (const REAL x, const REAL y, const REAL z, const CrystVector\_\-REAL \&h, const CrystVector\_\-REAL \&k, const CrystVector\_\-REAL \&l, CrystVector\_\-REAL \&isf)
+\item 
+void {\bf ImagGeomStructFactor\_\-67} (const REAL x, const REAL y, const REAL z, const CrystVector\_\-REAL \&h, const CrystVector\_\-REAL \&k, const CrystVector\_\-REAL \&l, CrystVector\_\-REAL \&isf)
+\item 
+void {\bf ImagGeomStructFactor\_\-67ba\_\-c} (const REAL x, const REAL y, const REAL z, const CrystVector\_\-REAL \&h, const CrystVector\_\-REAL \&k, const CrystVector\_\-REAL \&l, CrystVector\_\-REAL \&rsf)
+\item 
+void {\bf ImagGeomStructFactor\_\-67cab} (const REAL x, const REAL y, const REAL z, const CrystVector\_\-REAL \&h, const CrystVector\_\-REAL \&k, const CrystVector\_\-REAL \&l, CrystVector\_\-REAL \&rsf)
+\item 
+void {\bf ImagGeomStructFactor\_\-67\_\-cba} (const REAL x, const REAL y, const REAL z, const CrystVector\_\-REAL \&h, const CrystVector\_\-REAL \&k, const CrystVector\_\-REAL \&l, CrystVector\_\-REAL \&rsf)
+\item 
+void {\bf ImagGeomStructFactor\_\-67bca} (const REAL x, const REAL y, const REAL z, const CrystVector\_\-REAL \&h, const CrystVector\_\-REAL \&k, const CrystVector\_\-REAL \&l, CrystVector\_\-REAL \&rsf)
+\item 
+void {\bf ImagGeomStructFactor\_\-67a\_\-cb} (const REAL x, const REAL y, const REAL z, const CrystVector\_\-REAL \&h, const CrystVector\_\-REAL \&k, const CrystVector\_\-REAL \&l, CrystVector\_\-REAL \&rsf)
+\item 
+void {\bf ImagGeomStructFactor\_\-97} (const REAL x, const REAL y, const REAL z, const CrystVector\_\-REAL \&h, const CrystVector\_\-REAL \&k, const CrystVector\_\-REAL \&l, CrystVector\_\-REAL \&isf)
+\item 
+void {\bf ImagGeomStructFactor\_\-230} (const REAL x, const REAL y, const REAL z, const CrystVector\_\-REAL \&h, const CrystVector\_\-REAL \&k, const CrystVector\_\-REAL \&l, CrystVector\_\-REAL \&isf)
+\item 
+float {\bf EstimateCellVolume} (const float dmin, const float dmax, const float nbrefl, const {\bf CrystalSystem} system, const CrystalCentering centering, const float kappa=1)
+\begin{DoxyCompactList}\small\item\em Estimate volume from number of peaks at a given dmin See J. \item\end{DoxyCompactList}\item 
+float {\bf Score} (const {\bf PeakList} \&dhkl, const {\bf RecUnitCell} \&ruc, const unsigned int nbSpurious=0, const bool verbose=false, const bool storehkl=false, const bool storePredictedHKL=false)\label{a00170_a5a702febb46b199ca5a4fd5a05372ab2}
+
+\begin{DoxyCompactList}\small\item\em Compute score for a candidate \doxyref{RecUnitCell}{p.}{a00069} and a \doxyref{PeakList}{p.}{a00059}. \item\end{DoxyCompactList}\item 
+void {\bf XMLCrystFileSaveGlobal} (const string \&filename)
+\begin{DoxyCompactList}\small\item\em Save all Objcryst++ objects. \item\end{DoxyCompactList}\item 
+void {\bf XMLCrystFileSaveGlobal} (std::ostream \&out)
+\begin{DoxyCompactList}\small\item\em Save all Objcryst++ objects. \item\end{DoxyCompactList}\item 
+{\bf ObjRegistry}$<$ {\bf XMLCrystTag} $>$ {\bf XMLCrystFileLoadObjectList} (const string \&filename)
+\begin{DoxyCompactList}\small\item\em Get the list (tags) of \doxyref{ObjCryst}{p.}{a00170} objects in a file. \item\end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\void {\bf XMLCrystFileLoadObject} (const string \&file, const string \&tagName, const string \&name, T $\ast$obj)
+\begin{DoxyCompactList}\small\item\em Load an object from a file, identifying it from its tag. \item\end{DoxyCompactList}\item 
+void {\bf XMLCrystFileLoadAllObject} (const string \&file)
+\begin{DoxyCompactList}\small\item\em Load all 'top' objects from a file (\doxyref{Crystal}{p.}{a00020}, \doxyref{PowderPattern}{p.}{a00061}, DiffDataSingleCrystal and GlobalOptimObj objects). \item\end{DoxyCompactList}\item 
+void {\bf XMLCrystFileLoadAllObject} (std::istream \&is)
+\begin{DoxyCompactList}\small\item\em Load all 'top' objects from a file (\doxyref{Crystal}{p.}{a00020}, \doxyref{PowderPattern}{p.}{a00061}, DiffDataSingleCrystal and GlobalOptimObj objects). \item\end{DoxyCompactList}\item 
+REAL {\bf GetBondLength} (const {\bf MolAtom} \&, const {\bf MolAtom} \&)\label{a00170_a1b8ee4ed3717968278182983f8a8a7b9}
+
+\begin{DoxyCompactList}\small\item\em Get The Bond Length between two atoms. \item\end{DoxyCompactList}\item 
+REAL {\bf GetBondAngle} (const {\bf MolAtom} \&, const {\bf MolAtom} \&, const {\bf MolAtom} \&)\label{a00170_ad378f55096180bcac292460ddc816935}
+
+\begin{DoxyCompactList}\small\item\em Get The Bond Angle of 3 atoms. \item\end{DoxyCompactList}\item 
+REAL {\bf GetDihedralAngle} (const {\bf MolAtom} \&, const {\bf MolAtom} \&, const {\bf MolAtom} \&, const {\bf MolAtom} \&)\label{a00170_ad0dfebbddb95d5a57eceb1c7484d223d}
+
+\begin{DoxyCompactList}\small\item\em Get The dihedral angle defined by 4 atoms. \item\end{DoxyCompactList}\item 
+void {\bf ExpandAtomGroupRecursive} ({\bf MolAtom} $\ast$atom, const map$<$ {\bf MolAtom} $\ast$, set$<$ {\bf MolAtom} $\ast$ $>$ $>$ \&connect, set$<$ {\bf MolAtom} $\ast$ $>$ \&atomlist, const {\bf MolAtom} $\ast$finalAtom=0)
+\begin{DoxyCompactList}\small\item\em Build recursively a list of atoms, starting from a one atom, and given a connectivity table. \item\end{DoxyCompactList}\item 
+{\bf Molecule} $\ast$ {\bfseries MakeTetrahedron} ({\bf Crystal} \&cryst, const string \&name, const {\bf ScatteringPower} $\ast$centralAtom, const {\bf ScatteringPower} $\ast$peripheralAtom, const REAL dist)\label{a00170_a0978aa3a7b3df059fd46acae3861f481}
+
+\item 
+{\bf Molecule} $\ast$ {\bfseries MakeOctahedron} ({\bf Crystal} \&cryst, const string \&name, const {\bf ScatteringPower} $\ast$centralAtom, const {\bf ScatteringPower} $\ast$peripheralAtom, const REAL dist)\label{a00170_a211331ac692dccc8317f710d120dc1ee}
+
+\item 
+{\bf Molecule} $\ast$ {\bfseries MakeSquarePlane} ({\bf Crystal} \&cryst, const string \&name, const {\bf ScatteringPower} $\ast$centralAtom, const {\bf ScatteringPower} $\ast$peripheralAtom, const REAL dist)\label{a00170_ab0f90d6aebf19953b93db2ee1bdd08be}
+
+\item 
+{\bf Molecule} $\ast$ {\bfseries MakeCube} ({\bf Crystal} \&cryst, const string \&name, const {\bf ScatteringPower} $\ast$centralAtom, const {\bf ScatteringPower} $\ast$peripheralAtom, const REAL dist)\label{a00170_a2cb8b708fd53183e515fec959fb06d6b}
+
+\item 
+{\bf Molecule} $\ast$ {\bfseries MakeAntiPrismTetragonal} ({\bf Crystal} \&cryst, const string \&name, const {\bf ScatteringPower} $\ast$centralAtom, const {\bf ScatteringPower} $\ast$peripheralAtom, const REAL dist)\label{a00170_aa2889316b8b84e459fe712bbe9e55c36}
+
+\item 
+{\bf Molecule} $\ast$ {\bfseries MakePrismTrigonal} ({\bf Crystal} \&cryst, const string \&name, const {\bf ScatteringPower} $\ast$centralAtom, const {\bf ScatteringPower} $\ast$peripheralAtom, const REAL dist)\label{a00170_a071a02bf215ea472e2ad56a02d9e2002}
+
+\item 
+{\bf Molecule} $\ast$ {\bfseries MakeIcosahedron} ({\bf Crystal} \&cryst, const string \&name, const {\bf ScatteringPower} $\ast$centralAtom, const {\bf ScatteringPower} $\ast$peripheralAtom, const REAL dist)\label{a00170_af3385b64529f82905c7b07482d1ed325}
+
+\item 
+{\bf Molecule} $\ast$ {\bfseries MakeTriangle} ({\bf Crystal} \&cryst, const string \&name, const {\bf ScatteringPower} $\ast$centralAtom, const {\bf ScatteringPower} $\ast$peripheralAtom, const REAL dist)\label{a00170_acc98e88bd711ac27c52fb8d3619d36c7}
+
+\item 
+CrystVector\_\-REAL {\bf PowderProfileGauss} (const CrystVector\_\-REAL theta, const REAL fwhm, const REAL asymmetryPar=1.)\label{a00170_acf083e78a3c55287f0a45857a188248d}
+
+\begin{DoxyCompactList}\small\item\em Gaussian, normalized (ie integral is equal to 1), as a function of theta and of the FWHM. The input is an array of the theta values. The maximum of the function is in theta=0. If asymmetry is used, negative tth values must be first. \item\end{DoxyCompactList}\item 
+CrystVector\_\-REAL {\bf PowderProfileLorentz} (const CrystVector\_\-REAL theta, const REAL fwhm, const REAL asymmetryPar=1.)\label{a00170_a4bd53f187e92b53934122040bc2a8fe5}
+
+\begin{DoxyCompactList}\small\item\em Lorentzian, normalized (ie integral is equal to 1), as a function of theta and of the FWHM. The input is an array of the theta values. The maximum of the function is in theta=0. If asymmetry is used, negative tth values must be first. \item\end{DoxyCompactList}\item 
+CrystVector\_\-REAL {\bf PowderProfileGauss} (const CrystVector\_\-REAL theta, const REAL fwhm, const REAL center, const REAL asym=1.0)
+\begin{DoxyCompactList}\small\item\em Gaussian, normalized (ie integral is equal to 1), as a function of theta and of the FWHM. \item\end{DoxyCompactList}\item 
+CrystVector\_\-REAL {\bf PowderProfileLorentz} (const CrystVector\_\-REAL theta, const REAL fwhm, const REAL center, const REAL asym=1.0)
+\begin{DoxyCompactList}\small\item\em Lorentzian, normalized (ie integral is equal to 1), as a function of theta and of the FWHM. \item\end{DoxyCompactList}\item 
+CrystVector\_\-REAL {\bf AsymmetryBerarBaldinozzi} (const CrystVector\_\-REAL theta, const REAL fwhm, const REAL center, const REAL A0, const REAL A1, const REAL B0, const REAL B1)\label{a00170_aba8471b6bd60a1f8762e11ce13f030dc}
+
+\begin{DoxyCompactList}\small\item\em Asymmetry function [Ref J. Appl. Cryst 26 (1993), 128-\/129. \item\end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\std::complex$<$ T $>$ {\bf ExponentialIntegral1} (const complex$<$ T $>$ z)
+\begin{DoxyCompactList}\small\item\em Complex exponential integral E1(z) (Abramowitz \& Stegun, chap. \item\end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\std::complex$<$ T $>$ {\bf ExponentialIntegral1\_\-ExpZ} (const complex$<$ T $>$ z)
+\begin{DoxyCompactList}\small\item\em E1(z)$\ast$exp(z). \item\end{DoxyCompactList}\item 
+void {\bfseries InitLibCrystTabulCosine} ()\label{a00170_ab36e933d4f424fa228972eadb98f2491}
+
+\item 
+void {\bfseries DeleteLibCrystTabulCosine} ()\label{a00170_a493b2bc1841b1ccccec63bf416bae9e9}
+
+\item 
+void {\bfseries InitLibCrystTabulExp} ()\label{a00170_ae850cb956265bbb049c68c6a59717b66}
+
+\item 
+void {\bfseries DeleteLibCrystTabulExp} ()\label{a00170_a31a50fbd13f45db32d73dc1170d2abc3}
+
+\item 
+{\bf SpeedTestReport} {\bf SpeedTest} (const unsigned int nbAtom, const int nbAtomType, const string spacegroup, const {\bf RadiationType} radiation, const unsigned long nbReflections, const unsigned int dataType, const REAL time)
+\item 
+float {\bf InputFloat} (istream \&is, const char endchar=' ')
+\begin{DoxyCompactList}\small\item\em Safely read a floating-\/point value from a stream. \item\end{DoxyCompactList}\item 
+bool {\bf ISNAN\_\-OR\_\-INF} (REAL r)\label{a00170_a6c80e3e42093f5f02d7a31e0119bed24}
+
+\begin{DoxyCompactList}\small\item\em Test if the value is a NaN. \item\end{DoxyCompactList}\item 
+ostream \& {\bf operator$<$$<$} (ostream \&, const {\bf XMLCrystTag} \&)\label{a00170_a57b685fd892c6acd289c10fdb2858499}
+
+\begin{DoxyCompactList}\small\item\em Output an \doxyref{XMLCrystTag}{p.}{a00150} to a stream. \item\end{DoxyCompactList}\item 
+istream \& {\bf operator$>$$>$} (istream \&, {\bf XMLCrystTag} \&)\label{a00170_a585ef3170c0ee7c61c908ca1220279ce}
+
+\begin{DoxyCompactList}\small\item\em Input an \doxyref{XMLCrystTag}{p.}{a00150} from a stream. \item\end{DoxyCompactList}\item 
+void {\bf GetRefParListClockRecursive} ({\bf ObjRegistry}$<$ {\bf RefinableObj} $>$ \&reg, {\bf RefinableObjClock} \&clock)\label{a00170_aa58435da8087e59f07106578c0d8afb6}
+
+\begin{DoxyCompactList}\small\item\em Get the last time any \doxyref{RefinablePar}{p.}{a00072} was added in a recursive list of objects. \item\end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\void {\bf RefObjRegisterRecursive} (T \&obj, {\bf ObjRegistry}$<$ T $>$ \&reg)
+\begin{DoxyCompactList}\small\item\em Register a new object in a registry, and recursively include all included (sub)objects. \item\end{DoxyCompactList}\item 
+void {\bf GetSubRefObjListClockRecursive} ({\bf ObjRegistry}$<$ {\bf RefinableObj} $>$ \&reg, {\bf RefinableObjClock} \&clock)\label{a00170_a7b72a15a0b8dd9794f9249606969cc8a}
+
+\begin{DoxyCompactList}\small\item\em Get the last time any object was added in the recursive list of objects. \item\end{DoxyCompactList}\item 
+void {\bf WXCrystValidateAllUserInput} ()
+\begin{DoxyCompactList}\small\item\em This function validates all user input (in a \doxyref{WXField}{p.}{a00118}) not yet taken into account, if needs be. \item\end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\T $\ast$ {\bf WXDialogChooseFromRegistry} ({\bf ObjRegistry}$<$ T $>$ \&reg, wxWindow $\ast$parent, const string \&message, int \&)
+\begin{DoxyCompactList}\small\item\em This function allows to pick up one object in a registry. \item\end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\const T $\ast$ {\bf WXDialogChooseFromRegistry} (const {\bf ObjRegistry}$<$ T $>$ \&reg, wxWindow $\ast$parent, const string \&message, int \&)
+\begin{DoxyCompactList}\small\item\em This function allows to pick up one object in a registry. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const {\bf RefParType} $\ast$ {\bfseries gpRefParTypeCrystal}\label{a00170_a2a89798b5b78c5cec8aac600614bb2a5}
+
+\item 
+static NiftyStaticGlobalObjectsInitializer\_\-Crystal {\bfseries NiftyStaticGlobalObjectsInitializer\_\-Crystal\_\-counter}\label{a00170_a0a6979cf3e0093a8f83b49fed17ab57c}
+
+\item 
+{\bf ObjRegistry}$<$ {\bf Crystal} $>$ {\bf gCrystalRegistry}\label{a00170_a850db0671ee4526ab68f0a7ec4146a93}
+
+\begin{DoxyCompactList}\small\item\em Global registry for all \doxyref{Crystal}{p.}{a00020} objects. \item\end{DoxyCompactList}\item 
+{\bf ObjRegistry}$<$ {\bf DiffractionDataSingleCrystal} $>$ {\bf gDiffractionDataSingleCrystalRegistry}\label{a00170_a7245404a75c2da190009679af0614f5e}
+
+\begin{DoxyCompactList}\small\item\em Global registry for all \doxyref{PowderPattern}{p.}{a00061} objects. \item\end{DoxyCompactList}\item 
+void($\ast$ {\bf fpObjCrystInformUser} )(const string \&)
+\begin{DoxyCompactList}\small\item\em Pointer to a function for passing info to the user during or after long/important processes (use scarcely!). \item\end{DoxyCompactList}\item 
+const {\bf RefParType} $\ast$ {\bfseries gpRefParTypePDF}\label{a00170_aa4f243fd56bb6d9fcd6bbe3c97283cbf}
+
+\item 
+{\bf ObjRegistry}$<$ {\bf PDF} $>$ {\bf gPDFRegistry}\label{a00170_a935e2d4172697e1a66a047fcaa7c05bb}
+
+\begin{DoxyCompactList}\small\item\em Global registry for all \doxyref{PDF}{p.}{a00055} objects. \item\end{DoxyCompactList}\item 
+{\bf ObjRegistry}$<$ {\bf PowderPatternComponent} $>$ {\bf gPowderPatternComponentRegistry}\label{a00170_a25a605005bfdd2528b04543f7c4f5908}
+
+\begin{DoxyCompactList}\small\item\em Global registry for all \doxyref{PowderPatternComponent}{p.}{a00064} objects. \item\end{DoxyCompactList}\item 
+{\bf ObjRegistry}$<$ {\bf PowderPattern} $>$ {\bf gPowderPatternRegistry}\label{a00170_a23de876fd9ce8318b4dc802767aa9c03}
+
+\begin{DoxyCompactList}\small\item\em Global registry for all \doxyref{PowderPattern}{p.}{a00061} objects. \item\end{DoxyCompactList}\item 
+{\bf ObjRegistry}$<$ {\bf ReflectionProfile} $>$ {\bf gReflectionProfileRegistry}\label{a00170_aa3d65d7163c076e698eb0f3eaeeef8b4}
+
+\begin{DoxyCompactList}\small\item\em Global registry for all \doxyref{ReflectionProfile}{p.}{a00073} objects. \item\end{DoxyCompactList}\item 
+const {\bf RefParType} $\ast$ {\bfseries gpRefParTypeScatt}\label{a00170_a0ed427f2a29cf9c47e67f15a767a654a}
+
+\item 
+const {\bf RefParType} $\ast$ {\bfseries gpRefParTypeScattTransl}\label{a00170_acbbe6359bc802afc1b920754570bae1a}
+
+\item 
+const {\bf RefParType} $\ast$ {\bfseries gpRefParTypeScattTranslX}\label{a00170_a6943fb9452989c94fa118811f8ad36dd}
+
+\item 
+const {\bf RefParType} $\ast$ {\bfseries gpRefParTypeScattTranslY}\label{a00170_a70970e9050898bb9de8e848a38f3d2ed}
+
+\item 
+const {\bf RefParType} $\ast$ {\bfseries gpRefParTypeScattTranslZ}\label{a00170_a41e4d5720369b3d9274a3ffe24ff64e2}
+
+\item 
+const {\bf RefParType} $\ast$ {\bfseries gpRefParTypeScattOrient}\label{a00170_a13b74eb5868dc1338bd04f9fc7f32e1f}
+
+\item 
+const {\bf RefParType} $\ast$ {\bfseries gpRefParTypeScattConform}\label{a00170_aff0fe376f661d63b0a7067eefbf086f2}
+
+\item 
+const {\bf RefParType} $\ast$ {\bfseries gpRefParTypeScattConformBondLength}\label{a00170_ab0e3593233bdcc7f921b53d51e4b891e}
+
+\item 
+const {\bf RefParType} $\ast$ {\bfseries gpRefParTypeScattConformBondAngle}\label{a00170_a11c83776027dd41f08b223b5758318da}
+
+\item 
+const {\bf RefParType} $\ast$ {\bfseries gpRefParTypeScattConformDihedAngle}\label{a00170_a5966a5d1e550d7cb4ed0d1eed5bae713}
+
+\item 
+const {\bf RefParType} $\ast$ {\bfseries gpRefParTypeScattConformX}\label{a00170_aad4e67e6f5c587717e59524181077309}
+
+\item 
+const {\bf RefParType} $\ast$ {\bfseries gpRefParTypeScattConformY}\label{a00170_aeab73a12fa691a1ad8fdd0543d697045}
+
+\item 
+const {\bf RefParType} $\ast$ {\bfseries gpRefParTypeScattConformZ}\label{a00170_a38f8084cd2964578bbaf35c4dccfd651}
+
+\item 
+const {\bf RefParType} $\ast$ {\bfseries gpRefParTypeScattOccup}\label{a00170_afaea8e8160a09d910d55f031995826f8}
+
+\item 
+static NiftyStaticGlobalObjectsInitializer\_\-Scatterer {\bfseries NiftyStaticGlobalObjectsInitializer\_\-Scatterer\_\-counter}\label{a00170_a47e2019fa12cab60527380b9a95b9c34}
+
+\item 
+{\bf ObjRegistry}$<$ {\bf Scatterer} $>$ {\bf gScattererRegistry}\label{a00170_abbb707441f0fa4a0143a841b12d9ed24}
+
+\begin{DoxyCompactList}\small\item\em Global registry for all \doxyref{Scatterer}{p.}{a00084} objects. \item\end{DoxyCompactList}\item 
+const {\bf RefParType} $\ast$ {\bf gpRefParTypeScattData}\label{a00170_aa7b16d74781c811668e89486b08818b5}
+
+\begin{DoxyCompactList}\small\item\em Generic type for scattering data. \item\end{DoxyCompactList}\item 
+const {\bf RefParType} $\ast$ {\bf gpRefParTypeScattDataScale}\label{a00170_a8cf44bf966027a464a76d415650d258b}
+
+\begin{DoxyCompactList}\small\item\em Type for scattering data scale factors. \item\end{DoxyCompactList}\item 
+const {\bf RefParType} $\ast$ {\bf gpRefParTypeScattDataProfile}\label{a00170_abb37bd0cde96f29737d1c72cbc9bacc5}
+
+\begin{DoxyCompactList}\small\item\em Type for reflection profile. \item\end{DoxyCompactList}\item 
+const {\bf RefParType} $\ast$ {\bf gpRefParTypeScattDataProfileType}\label{a00170_a1d2e84008470478c508a00b729b8b332}
+
+\begin{DoxyCompactList}\small\item\em Type for reflection profiles type (e.g. gaussian/lorentzian mix). \item\end{DoxyCompactList}\item 
+const {\bf RefParType} $\ast$ {\bf gpRefParTypeScattDataProfileWidth}\label{a00170_a8e9af8809152ebad24dfe048933ae19c}
+
+\begin{DoxyCompactList}\small\item\em Type for reflection profile width. \item\end{DoxyCompactList}\item 
+const {\bf RefParType} $\ast$ {\bf gpRefParTypeScattDataProfileAsym}\label{a00170_a3c5a82906e223343bbb438c0799c2ef3}
+
+\begin{DoxyCompactList}\small\item\em Type for reflection profile asymmetry. \item\end{DoxyCompactList}\item 
+const {\bf RefParType} $\ast$ {\bf gpRefParTypeScattDataCorr}\label{a00170_af14cdd0a4ccbd5a9e1fe927bd3749b1e}
+
+\begin{DoxyCompactList}\small\item\em Generic type for scattering data correction parameter. \item\end{DoxyCompactList}\item 
+const {\bf RefParType} $\ast$ {\bf gpRefParTypeScattDataCorrInt}\label{a00170_ad88f07ed86d36c5807530dbf515c8d57}
+
+\begin{DoxyCompactList}\small\item\em Generic type for correction to calculated intensities. \item\end{DoxyCompactList}\item 
+const {\bf RefParType} $\ast$ {\bf gpRefParTypeScattDataCorrIntPO\_\-Direction}\label{a00170_af91fd6856a65e16cae3187d5e01f44e9}
+
+\begin{DoxyCompactList}\small\item\em Parameter type for preferred orientation direction. \item\end{DoxyCompactList}\item 
+const {\bf RefParType} $\ast$ {\bf gpRefParTypeScattDataCorrIntPO\_\-Fraction}\label{a00170_a089f667d2d0af6365a089e7e7d92bb94}
+
+\begin{DoxyCompactList}\small\item\em Parameter type for fraction of preferred orientation. \item\end{DoxyCompactList}\item 
+const {\bf RefParType} $\ast$ {\bf gpRefParTypeScattDataCorrIntPO\_\-Amplitude}\label{a00170_acb49a1aa5a591201904e5e3588cf6904}
+
+\begin{DoxyCompactList}\small\item\em Parameter type for the amplitude of preferred orientation. \item\end{DoxyCompactList}\item 
+const {\bf RefParType} $\ast$ {\bf gpRefParTypeScattDataCorrIntAbsorp}\label{a00170_a2582f7843e568d0780aa5a6bb7e3ca20}
+
+\begin{DoxyCompactList}\small\item\em Parameter type for absorption correction. \item\end{DoxyCompactList}\item 
+const {\bf RefParType} $\ast$ {\bf gpRefParTypeScattDataCorrIntPolar}\label{a00170_a390206c4e3a488c5ae6c29d67b93dc30}
+
+\begin{DoxyCompactList}\small\item\em Parameter type for polarization correction. \item\end{DoxyCompactList}\item 
+const {\bf RefParType} $\ast$ {\bf gpRefParTypeScattDataCorrIntExtinc}\label{a00170_a9d1da8a01a026cfa746d61d1b4d8a0e9}
+
+\begin{DoxyCompactList}\small\item\em Parameter type for extinction correction. \item\end{DoxyCompactList}\item 
+const {\bf RefParType} $\ast$ {\bf gpRefParTypeScattDataCorrPos}\label{a00170_a9680cd5d8f80efe999a1ac6408e530a4}
+
+\begin{DoxyCompactList}\small\item\em Parameter type for correction to peak positions. \item\end{DoxyCompactList}\item 
+const {\bf RefParType} $\ast$ {\bf gpRefParTypeScattDataBackground}\label{a00170_a370519cc9687b25f93d974f803e2be9f}
+
+\begin{DoxyCompactList}\small\item\em Parameter type for background intensity. \item\end{DoxyCompactList}\item 
+const {\bf RefParType} $\ast$ {\bfseries gpRefParTypeRadiation}\label{a00170_a651ecb76b3b835a7a6cdb96a5e754ae1}
+
+\item 
+const {\bf RefParType} $\ast$ {\bfseries gpRefParTypeRadiationWavelength}\label{a00170_a1a876881b31ba7e662271138cef9d431}
+
+\item 
+static NiftyStaticGlobalObjectsInitializer\_\-ScatteringData {\bfseries NiftyStaticGlobalObjectsInitializer\_\-ScatteringData\_\-counter}\label{a00170_aed7a30136ee25581ffcd2601aef6fc5d}
+
+\item 
+const {\bf RefParType} $\ast$ {\bfseries gpRefParTypeScattPow}\label{a00170_a43083d0664a310165e2502a8db58f454}
+
+\item 
+const {\bf RefParType} $\ast$ {\bfseries gpRefParTypeScattPowResonant}\label{a00170_a46bacdd513981f3b7736b0e1f08b3a99}
+
+\item 
+const {\bf RefParType} $\ast$ {\bfseries gpRefParTypeScattPowTemperature}\label{a00170_a74eae5e02347eb4a970351bca6fa783c}
+
+\item 
+const {\bf RefParType} $\ast$ {\bfseries gpRefParTypeScattPowTemperatureIso}\label{a00170_a296b112853fd39d363e46044444f2a61}
+
+\item 
+const {\bf RefParType} $\ast$ {\bfseries gpRefParTypeScattPowTemperatureAniso}\label{a00170_ab14d67088f5b2e532bb7ea209894f557}
+
+\item 
+static NiftyStaticGlobalObjectsInitializer\_\-ScatteringPower {\bfseries NiftyStaticGlobalObjectsInitializer\_\-ScatteringPower\_\-counter}\label{a00170_aa8cbfd4bfe688ca73e7c2c06c185267c}
+
+\item 
+{\bf ObjRegistry}$<$ {\bf ScatteringPower} $>$ {\bf gScatteringPowerRegistry}\label{a00170_aa9595035adc64da0a4f98423bf5e6892}
+
+\begin{DoxyCompactList}\small\item\em Global registry for all \doxyref{ScatteringPower}{p.}{a00089} objects. \item\end{DoxyCompactList}\item 
+{\bf ObjRegistry}$<$ {\bf ScatteringPowerAtom} $>$ {\bf gScatteringPowerAtomRegistry}\label{a00170_af959ee7b087e59dce5acf3b688b4c47f}
+
+\begin{DoxyCompactList}\small\item\em Global registry for all \doxyref{ScatteringPowerAtom}{p.}{a00090} objects. \item\end{DoxyCompactList}\item 
+const {\bf RefParType} $\ast$ {\bfseries gpRefParTypeUnitCell}\label{a00170_a9b4fec9b28483547f0f30553ecc8ebef}
+
+\item 
+const {\bf RefParType} $\ast$ {\bfseries gpRefParTypeUnitCellLength}\label{a00170_aa111c19b24366851c519d1d13b67d3da}
+
+\item 
+const {\bf RefParType} $\ast$ {\bfseries gpRefParTypeUnitCellAngle}\label{a00170_a3cc6de0b8f148d61a60085e82a554342}
+
+\item 
+static NiftyStaticGlobalObjectsInitializer\_\-UnitCell {\bfseries NiftyStaticGlobalObjectsInitializer\_\-UnitCell\_\-counter}\label{a00170_aaa1a5c06e3fc630f935ff711cfd45122}
+
+\item 
+{\bf ObjRegistry}$<$ {\bf OptimizationObj} $>$ {\bf gOptimizationObjRegistry}\label{a00170_a47f1f819891b952503229db633952de0}
+
+\begin{DoxyCompactList}\small\item\em Global Registry for all \doxyref{OptimizationObj}{p.}{a00054}. \item\end{DoxyCompactList}\item 
+const {\bf RefParType} $\ast$ {\bf gpRefParTypeObjCryst}\label{a00170_a92ed37a804903dfb302d70309b7bc474}
+
+\begin{DoxyCompactList}\small\item\em Top \doxyref{RefParType}{p.}{a00079} for the ObjCryst++ library. \item\end{DoxyCompactList}\item 
+static NiftyStaticGlobalObjectsInitializer\_\-RefinableObj {\bfseries NiftyStaticGlobalObjectsInitializer\_\-RefinableObj\_\-counter}\label{a00170_ad4a2a34fc6e112d16dc155bde19fb897}
+
+\item 
+{\bf ObjRegistry}$<$ {\bf RefinableObj} $>$ {\bf gRefinableObjRegistry}\label{a00170_a9dc590befa36202a5b0c7df7921d0357}
+
+\begin{DoxyCompactList}\small\item\em Global Registry for all \doxyref{RefinableObj}{p.}{a00070}. \item\end{DoxyCompactList}\item 
+{\bf ObjRegistry}$<$ {\bf RefinableObj} $>$ {\bf gTopRefinableObjRegistry}
+\begin{DoxyCompactList}\small\item\em This is a special registry for 'top' object for an optimization. \item\end{DoxyCompactList}\item 
+const long {\bfseries ID\_\-WXOBJ\_\-ENABLE}\label{a00170_a519d97ff81fb3a88a24e4a9b05a25361}
+
+\item 
+const long {\bfseries ID\_\-WXOBJ\_\-DISABLE}\label{a00170_aed82fff1d3c33dab3965d49cc79c664a}
+
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+The namespace which includes all objects (crystallographic and algorithmic) in ObjCryst++. \begin{DoxyNote}{Note}
+It may be a good idea to separate in 3 namespaces for \doxyref{ObjCryst}{p.}{a00170}, WXObjCryst, and \doxyref{RefinableObj}{p.}{a00070} 
+\end{DoxyNote}
+
+
+\subsubsection{Enumeration Type Documentation}
+\index{ObjCryst@{ObjCryst}!AnnealingSchedule@{AnnealingSchedule}}
+\index{AnnealingSchedule@{AnnealingSchedule}!ObjCryst@{ObjCryst}}
+\paragraph[{AnnealingSchedule}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf ObjCryst::AnnealingSchedule}}\hfill\label{a00170_a6ad2a3db75ca198897ce05b6e561eeca}
+
+
+Annealing schedule type. Used to determine the variation of the temperature and the mutation amplitude
+
+With A=Temperature or A=MutationAMplitude, and the corresponding , min and max values supplied (the latter is ignored for constant, Cauchy and Boltzmann), with 'step' being the current step, and NbStep the total number of steps. (In the Parallel Tempering algorithm, a 'step' denotes one of the parallel refinement). \[ A_{constant} = A_{min}\] \[ A_{Boltzmann} = A_{min} \frac{\ln(NbStep)}{\ln(step)} \] \[ A_{Cauchy} = A_{min} \frac{NbStep}{step} \] \[ A_{exponential} = A_{max} (\frac{T_{min}}{T_{max}})^{\frac{step}{NbStep}} \] \[ A_{\gamma} = A_{max} +(A_{min}-A_{max}*(\frac{step}{NbStep})^{\gamma} \]
+
+For the 'smart' schedule, it is only supported so far for the mutation amplitude: it is modulated so that for each temperature between 30 and 70\% of trial configurations are accepted, within the limits for the mutation. \index{ObjCryst@{ObjCryst}!GlobalOptimType@{GlobalOptimType}}
+\index{GlobalOptimType@{GlobalOptimType}!ObjCryst@{ObjCryst}}
+\paragraph[{GlobalOptimType}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf ObjCryst::GlobalOptimType}}\hfill\label{a00170_aabb11cb3e72d3cda4d991584cc678d01}
+
+
+Global optimization type. Eventually it would be better to build a base Global Optimization (or even Optimization) object, and to derive it in different classes for Simulated Annealing, Parallel Tempering, Genetic Algorithm,... \index{ObjCryst@{ObjCryst}!RadiationType@{RadiationType}}
+\index{RadiationType@{RadiationType}!ObjCryst@{ObjCryst}}
+\paragraph[{RadiationType}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf ObjCryst::RadiationType}}\hfill\label{a00170_a48fe50a094c607f8897378934d3d73ef}
+
+
+Type of radiation used. Only neutrons and X-\/Rays are used so far, electrons would require a very different treatment. 
+
+\subsubsection{Function Documentation}
+\index{ObjCryst@{ObjCryst}!CIFNumeric2Float@{CIFNumeric2Float}}
+\index{CIFNumeric2Float@{CIFNumeric2Float}!ObjCryst@{ObjCryst}}
+\paragraph[{CIFNumeric2Float}]{\setlength{\rightskip}{0pt plus 5cm}float ObjCryst::CIFNumeric2Float (const std::string \& {\em s})}\hfill\label{a00170_ad1e82e90f80ae780dfb8cbe229189887}
+
+
+Convert one \doxyref{CIF}{p.}{a00017} value to a floating-\/point value Return 0 if no value can be converted (e.g. if '.' or '?' is encountered) \index{ObjCryst@{ObjCryst}!CIFNumeric2Int@{CIFNumeric2Int}}
+\index{CIFNumeric2Int@{CIFNumeric2Int}!ObjCryst@{ObjCryst}}
+\paragraph[{CIFNumeric2Int}]{\setlength{\rightskip}{0pt plus 5cm}int ObjCryst::CIFNumeric2Int (const std::string \& {\em s})}\hfill\label{a00170_a9c498cb6e7dfbb2de295c6d0462ee67b}
+
+
+Convert one \doxyref{CIF}{p.}{a00017} value to a floating-\/point value Return 0 if no value can be converted (e.g. if '.' or '?' is encountered) \index{ObjCryst@{ObjCryst}!CreateCrystalFromCIF@{CreateCrystalFromCIF}}
+\index{CreateCrystalFromCIF@{CreateCrystalFromCIF}!ObjCryst@{ObjCryst}}
+\paragraph[{CreateCrystalFromCIF}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Crystal}$\ast$ ObjCryst::CreateCrystalFromCIF (CIF \& {\em cif}, \/  const bool {\em verbose} = {\ttfamily true}, \/  const bool {\em checkSymAsXYZ} = {\ttfamily true})}\hfill\label{a00170_a666d174d77e858c8a4f41db33a694308}
+
+
+Extract \doxyref{Crystal}{p.}{a00020} object(s) from a \doxyref{CIF}{p.}{a00017}, if possible. Returns a null pointer if no crystal structure could be extracted (the minimum data is the unit cell parameters).
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em checkSymAsXYZ,:}]if true, and the \doxyref{CIF}{p.}{a00017} file does not have a Hall symbol but has a list of symmetry\_\-equiv\_\-pos\_\-as\_\-xyz, check we have the correct setting by trying different ones using cctbx \end{DoxyParams}
+\index{ObjCryst@{ObjCryst}!CreatePowderPatternFromCIF@{CreatePowderPatternFromCIF}}
+\index{CreatePowderPatternFromCIF@{CreatePowderPatternFromCIF}!ObjCryst@{ObjCryst}}
+\paragraph[{CreatePowderPatternFromCIF}]{\setlength{\rightskip}{0pt plus 5cm}{\bf PowderPattern}$\ast$ ObjCryst::CreatePowderPatternFromCIF (CIF \& {\em cif})}\hfill\label{a00170_a7faddc520a4f57ed8c7807d811d4d29a}
+
+
+Create \doxyref{PowderPattern}{p.}{a00061} object(s) from a \doxyref{CIF}{p.}{a00017}, if possible. Returns a null pointer if no pattern could be extracted. No components (background, crystal data) are created. \index{ObjCryst@{ObjCryst}!CreateSingleCrystalDataFromCIF@{CreateSingleCrystalDataFromCIF}}
+\index{CreateSingleCrystalDataFromCIF@{CreateSingleCrystalDataFromCIF}!ObjCryst@{ObjCryst}}
+\paragraph[{CreateSingleCrystalDataFromCIF}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DiffractionDataSingleCrystal}$\ast$ ObjCryst::CreateSingleCrystalDataFromCIF (CIF \& {\em cif}, \/  Crystal $\ast$ {\em pryst} = {\ttfamily 0})}\hfill\label{a00170_ad4833be356158ae44ecd536b2f3c0229}
+
+
+Create \doxyref{DiffractionDataSingleCrystal}{p.}{a00026} object(s) from a \doxyref{CIF}{p.}{a00017}, if possible. Returns a null pointer if no data could be extracted. A \doxyref{Crystal}{p.}{a00020} object must be supplied -\/ if none is given, the last \doxyref{Crystal}{p.}{a00020} object will be used. If no Cyrstal data exists, a new one will be created. \index{ObjCryst@{ObjCryst}!EstimateCellVolume@{EstimateCellVolume}}
+\index{EstimateCellVolume@{EstimateCellVolume}!ObjCryst@{ObjCryst}}
+\paragraph[{EstimateCellVolume}]{\setlength{\rightskip}{0pt plus 5cm}float ObjCryst::EstimateCellVolume (const float {\em dmin}, \/  const float {\em dmax}, \/  const float {\em nbrefl}, \/  const CrystalSystem {\em system}, \/  const CrystalCentering {\em centering}, \/  const float {\em kappa} = {\ttfamily 1})}\hfill\label{a00170_a04f338cf7bd978e9c1d264752701a519}
+
+
+Estimate volume from number of peaks at a given dmin See J. Appl. Cryst. 20 (1987), 161
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dmin,dmax,:}]1/d limits between which the number of reflections has been observed \item[{\em nbrefl,:}]number of observed reflections \item[{\em kappa,:}]estimated percentage of reflections actually observed (default=1.0) \end{DoxyParams}
+\index{ObjCryst@{ObjCryst}!ExpandAtomGroupRecursive@{ExpandAtomGroupRecursive}}
+\index{ExpandAtomGroupRecursive@{ExpandAtomGroupRecursive}!ObjCryst@{ObjCryst}}
+\paragraph[{ExpandAtomGroupRecursive}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::ExpandAtomGroupRecursive (MolAtom $\ast$ {\em atom}, \/  const map$<$ MolAtom $\ast$, set$<$ MolAtom $\ast$ $>$ $>$ \& {\em connect}, \/  set$<$ MolAtom $\ast$ $>$ \& {\em atomlist}, \/  const MolAtom $\ast$ {\em finalAtom} = {\ttfamily 0})}\hfill\label{a00170_a834b8ef4e68d3a56774439510ed83ba0}
+
+
+Build recursively a list of atoms, starting from a one atom, and given a connectivity table. 
+\begin{DoxyParams}{Parameters}
+\item[{\em atom,:}]the starting atom \item[{\em connect,:}]the connectivity table \item[{\em atomlist,:}]the list of atoms to which will be appended the atoms newly found. \item[{\em finalAtom,:}]if specified, the list buildin will stop after finding this atom. This can be used to build the list of atoms between two given atoms. Otherwise, the list is expanded until the end of the chain(s), or until an atom already in the list is encountered (i.e. a ring has been found). \end{DoxyParams}
+\index{ObjCryst@{ObjCryst}!ExponentialIntegral1@{ExponentialIntegral1}}
+\index{ExponentialIntegral1@{ExponentialIntegral1}!ObjCryst@{ObjCryst}}
+\paragraph[{ExponentialIntegral1}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ std::complex$<$T$>$ ObjCryst::ExponentialIntegral1 (const complex$<$ T $>$ {\em z})}\hfill\label{a00170_a66be765a90a9e5859607aafa06027b52}
+
+
+Complex exponential integral E1(z) (Abramowitz \& Stegun, chap. 5)
+
+Using A\&S 5.1.11 (series) and 5.1.51 (asymptotic) expansions \index{ObjCryst@{ObjCryst}!ExponentialIntegral1\_\-ExpZ@{ExponentialIntegral1\_\-ExpZ}}
+\index{ExponentialIntegral1\_\-ExpZ@{ExponentialIntegral1\_\-ExpZ}!ObjCryst@{ObjCryst}}
+\paragraph[{ExponentialIntegral1\_\-ExpZ}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ std::complex$<$T$>$ ObjCryst::ExponentialIntegral1\_\-ExpZ (const complex$<$ T $>$ {\em z})}\hfill\label{a00170_aaea2c03fea414061ad770457d4eb26b5}
+
+
+E1(z)$\ast$exp(z). This can be computed for large z values to avoid floating-\/point exceptions. \index{ObjCryst@{ObjCryst}!ImagGeomStructFactor@{ImagGeomStructFactor}}
+\index{ImagGeomStructFactor@{ImagGeomStructFactor}!ObjCryst@{ObjCryst}}
+\paragraph[{ImagGeomStructFactor}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::ImagGeomStructFactor (const REAL {\em x}, \/  const REAL {\em y}, \/  const REAL {\em z}, \/  const CrystVector\_\-REAL \& {\em h}, \/  const CrystVector\_\-REAL \& {\em k}, \/  const CrystVector\_\-REAL \& {\em l}, \/  CrystVector\_\-REAL \& {\em rsf})}\hfill\label{a00170_ad27e2c584c80e4bd36097354a49e4742}
+\begin{Desc}
+\item[{\bf Deprecated}]\end{Desc}
+\index{ObjCryst@{ObjCryst}!ImagGeomStructFactor\_\-1@{ImagGeomStructFactor\_\-1}}
+\index{ImagGeomStructFactor\_\-1@{ImagGeomStructFactor\_\-1}!ObjCryst@{ObjCryst}}
+\paragraph[{ImagGeomStructFactor\_\-1}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::ImagGeomStructFactor\_\-1 (const REAL {\em x}, \/  const REAL {\em y}, \/  const REAL {\em z}, \/  const CrystVector\_\-REAL \& {\em h}, \/  const CrystVector\_\-REAL \& {\em k}, \/  const CrystVector\_\-REAL \& {\em l}, \/  CrystVector\_\-REAL \& {\em isf})}\hfill\label{a00170_aed0db0afe1df8a2e8879aac4ac466ac0}
+\begin{Desc}
+\item[{\bf Deprecated}]\end{Desc}
+\index{ObjCryst@{ObjCryst}!ImagGeomStructFactor\_\-2@{ImagGeomStructFactor\_\-2}}
+\index{ImagGeomStructFactor\_\-2@{ImagGeomStructFactor\_\-2}!ObjCryst@{ObjCryst}}
+\paragraph[{ImagGeomStructFactor\_\-2}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::ImagGeomStructFactor\_\-2 (const REAL {\em x}, \/  const REAL {\em y}, \/  const REAL {\em z}, \/  const CrystVector\_\-REAL \& {\em h}, \/  const CrystVector\_\-REAL \& {\em k}, \/  const CrystVector\_\-REAL \& {\em l}, \/  CrystVector\_\-REAL \& {\em isf})}\hfill\label{a00170_a4e32a246a42fea8ebfcc20236c8565a5}
+\begin{Desc}
+\item[{\bf Deprecated}]\end{Desc}
+\index{ObjCryst@{ObjCryst}!ImagGeomStructFactor\_\-230@{ImagGeomStructFactor\_\-230}}
+\index{ImagGeomStructFactor\_\-230@{ImagGeomStructFactor\_\-230}!ObjCryst@{ObjCryst}}
+\paragraph[{ImagGeomStructFactor\_\-230}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::ImagGeomStructFactor\_\-230 (const REAL {\em x}, \/  const REAL {\em y}, \/  const REAL {\em z}, \/  const CrystVector\_\-REAL \& {\em h}, \/  const CrystVector\_\-REAL \& {\em k}, \/  const CrystVector\_\-REAL \& {\em l}, \/  CrystVector\_\-REAL \& {\em isf})}\hfill\label{a00170_a016c95a5ff6be845576d07ce118b59ef}
+\begin{Desc}
+\item[{\bf Deprecated}]\end{Desc}
+\index{ObjCryst@{ObjCryst}!ImagGeomStructFactor\_\-67@{ImagGeomStructFactor\_\-67}}
+\index{ImagGeomStructFactor\_\-67@{ImagGeomStructFactor\_\-67}!ObjCryst@{ObjCryst}}
+\paragraph[{ImagGeomStructFactor\_\-67}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::ImagGeomStructFactor\_\-67 (const REAL {\em x}, \/  const REAL {\em y}, \/  const REAL {\em z}, \/  const CrystVector\_\-REAL \& {\em h}, \/  const CrystVector\_\-REAL \& {\em k}, \/  const CrystVector\_\-REAL \& {\em l}, \/  CrystVector\_\-REAL \& {\em isf})}\hfill\label{a00170_a69521b92e103823ab8b1ec2170e635f6}
+\begin{Desc}
+\item[{\bf Deprecated}]\end{Desc}
+\index{ObjCryst@{ObjCryst}!ImagGeomStructFactor\_\-67\_\-cba@{ImagGeomStructFactor\_\-67\_\-cba}}
+\index{ImagGeomStructFactor\_\-67\_\-cba@{ImagGeomStructFactor\_\-67\_\-cba}!ObjCryst@{ObjCryst}}
+\paragraph[{ImagGeomStructFactor\_\-67\_\-cba}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::ImagGeomStructFactor\_\-67\_\-cba (const REAL {\em x}, \/  const REAL {\em y}, \/  const REAL {\em z}, \/  const CrystVector\_\-REAL \& {\em h}, \/  const CrystVector\_\-REAL \& {\em k}, \/  const CrystVector\_\-REAL \& {\em l}, \/  CrystVector\_\-REAL \& {\em rsf})}\hfill\label{a00170_a3efc70018737c3fa09174b5888240953}
+\begin{Desc}
+\item[{\bf Deprecated}]\end{Desc}
+\index{ObjCryst@{ObjCryst}!ImagGeomStructFactor\_\-67a\_\-cb@{ImagGeomStructFactor\_\-67a\_\-cb}}
+\index{ImagGeomStructFactor\_\-67a\_\-cb@{ImagGeomStructFactor\_\-67a\_\-cb}!ObjCryst@{ObjCryst}}
+\paragraph[{ImagGeomStructFactor\_\-67a\_\-cb}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::ImagGeomStructFactor\_\-67a\_\-cb (const REAL {\em x}, \/  const REAL {\em y}, \/  const REAL {\em z}, \/  const CrystVector\_\-REAL \& {\em h}, \/  const CrystVector\_\-REAL \& {\em k}, \/  const CrystVector\_\-REAL \& {\em l}, \/  CrystVector\_\-REAL \& {\em rsf})}\hfill\label{a00170_a4b2352507c09881913ff909efae05c6f}
+\begin{Desc}
+\item[{\bf Deprecated}]\end{Desc}
+\index{ObjCryst@{ObjCryst}!ImagGeomStructFactor\_\-67ba\_\-c@{ImagGeomStructFactor\_\-67ba\_\-c}}
+\index{ImagGeomStructFactor\_\-67ba\_\-c@{ImagGeomStructFactor\_\-67ba\_\-c}!ObjCryst@{ObjCryst}}
+\paragraph[{ImagGeomStructFactor\_\-67ba\_\-c}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::ImagGeomStructFactor\_\-67ba\_\-c (const REAL {\em x}, \/  const REAL {\em y}, \/  const REAL {\em z}, \/  const CrystVector\_\-REAL \& {\em h}, \/  const CrystVector\_\-REAL \& {\em k}, \/  const CrystVector\_\-REAL \& {\em l}, \/  CrystVector\_\-REAL \& {\em rsf})}\hfill\label{a00170_af4ed93881a6e70073c45ed8b27e7dd30}
+\begin{Desc}
+\item[{\bf Deprecated}]\end{Desc}
+\index{ObjCryst@{ObjCryst}!ImagGeomStructFactor\_\-67bca@{ImagGeomStructFactor\_\-67bca}}
+\index{ImagGeomStructFactor\_\-67bca@{ImagGeomStructFactor\_\-67bca}!ObjCryst@{ObjCryst}}
+\paragraph[{ImagGeomStructFactor\_\-67bca}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::ImagGeomStructFactor\_\-67bca (const REAL {\em x}, \/  const REAL {\em y}, \/  const REAL {\em z}, \/  const CrystVector\_\-REAL \& {\em h}, \/  const CrystVector\_\-REAL \& {\em k}, \/  const CrystVector\_\-REAL \& {\em l}, \/  CrystVector\_\-REAL \& {\em rsf})}\hfill\label{a00170_ad4298011033a997b83029986f46d30e2}
+\begin{Desc}
+\item[{\bf Deprecated}]\end{Desc}
+\index{ObjCryst@{ObjCryst}!ImagGeomStructFactor\_\-67cab@{ImagGeomStructFactor\_\-67cab}}
+\index{ImagGeomStructFactor\_\-67cab@{ImagGeomStructFactor\_\-67cab}!ObjCryst@{ObjCryst}}
+\paragraph[{ImagGeomStructFactor\_\-67cab}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::ImagGeomStructFactor\_\-67cab (const REAL {\em x}, \/  const REAL {\em y}, \/  const REAL {\em z}, \/  const CrystVector\_\-REAL \& {\em h}, \/  const CrystVector\_\-REAL \& {\em k}, \/  const CrystVector\_\-REAL \& {\em l}, \/  CrystVector\_\-REAL \& {\em rsf})}\hfill\label{a00170_acdc196b114308b48ca273817f04da705}
+\begin{Desc}
+\item[{\bf Deprecated}]\end{Desc}
+\index{ObjCryst@{ObjCryst}!ImagGeomStructFactor\_\-97@{ImagGeomStructFactor\_\-97}}
+\index{ImagGeomStructFactor\_\-97@{ImagGeomStructFactor\_\-97}!ObjCryst@{ObjCryst}}
+\paragraph[{ImagGeomStructFactor\_\-97}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::ImagGeomStructFactor\_\-97 (const REAL {\em x}, \/  const REAL {\em y}, \/  const REAL {\em z}, \/  const CrystVector\_\-REAL \& {\em h}, \/  const CrystVector\_\-REAL \& {\em k}, \/  const CrystVector\_\-REAL \& {\em l}, \/  CrystVector\_\-REAL \& {\em isf})}\hfill\label{a00170_a1ba7e310cee99bb6d2463ab8f73d3357}
+\begin{Desc}
+\item[{\bf Deprecated}]\end{Desc}
+\index{ObjCryst@{ObjCryst}!ImagGeomStructFactor\_\-centro@{ImagGeomStructFactor\_\-centro}}
+\index{ImagGeomStructFactor\_\-centro@{ImagGeomStructFactor\_\-centro}!ObjCryst@{ObjCryst}}
+\paragraph[{ImagGeomStructFactor\_\-centro}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::ImagGeomStructFactor\_\-centro (const REAL {\em x}, \/  const REAL {\em y}, \/  const REAL {\em z}, \/  const CrystVector\_\-REAL \& {\em h}, \/  const CrystVector\_\-REAL \& {\em k}, \/  const CrystVector\_\-REAL \& {\em l}, \/  CrystVector\_\-REAL \& {\em isf})}\hfill\label{a00170_a44411e82576a5105e9ea4a1d14444d2d}
+\begin{Desc}
+\item[{\bf Deprecated}]\end{Desc}
+\index{ObjCryst@{ObjCryst}!InputFloat@{InputFloat}}
+\index{InputFloat@{InputFloat}!ObjCryst@{ObjCryst}}
+\paragraph[{InputFloat}]{\setlength{\rightskip}{0pt plus 5cm}float ObjCryst::InputFloat (istream \& {\em is}, \/  const char {\em endchar} = {\ttfamily '~'})}\hfill\label{a00170_ac07dca815f3161a0b8632a9ce2d97e96}
+
+
+Safely read a floating-\/point value from a stream. 
+\begin{DoxyParams}{Parameters}
+\item[{\em endchar,:}]the character ending the input. On return, the stream will be placed at this character (i.e. it will be the next to be read). Note that the input will stop when encoutering a space character, even if the endchar has not been found. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+: the value -\/ NaN will be returned as NaN, but probably only if the value was written on the same platform 
+\end{DoxyReturn}
+\index{ObjCryst@{ObjCryst}!PowderProfileGauss@{PowderProfileGauss}}
+\index{PowderProfileGauss@{PowderProfileGauss}!ObjCryst@{ObjCryst}}
+\paragraph[{PowderProfileGauss}]{\setlength{\rightskip}{0pt plus 5cm}CrystVector\_\-REAL ObjCryst::PowderProfileGauss (const CrystVector\_\-REAL {\em theta}, \/  const REAL {\em fwhm}, \/  const REAL {\em center}, \/  const REAL {\em asym} = {\ttfamily 1.0})}\hfill\label{a00170_a710c47411093cbb4bb22b53ab5b01672}
+
+
+Gaussian, normalized (ie integral is equal to 1), as a function of theta and of the FWHM. The input is an array of the theta values. The maximum of the function is in theta=center. If asymmetry is used, negative tth values must be first. \index{ObjCryst@{ObjCryst}!PowderProfileLorentz@{PowderProfileLorentz}}
+\index{PowderProfileLorentz@{PowderProfileLorentz}!ObjCryst@{ObjCryst}}
+\paragraph[{PowderProfileLorentz}]{\setlength{\rightskip}{0pt plus 5cm}CrystVector\_\-REAL ObjCryst::PowderProfileLorentz (const CrystVector\_\-REAL {\em theta}, \/  const REAL {\em fwhm}, \/  const REAL {\em center}, \/  const REAL {\em asym} = {\ttfamily 1.0})}\hfill\label{a00170_a36a20d68867ad399a58bab3380ed4319}
+
+
+Lorentzian, normalized (ie integral is equal to 1), as a function of theta and of the FWHM. The input is an array of the theta values. The maximum of the function is in theta=center. If asymmetry is used, negative tth values must be first. \index{ObjCryst@{ObjCryst}!RealGeomStructFactor@{RealGeomStructFactor}}
+\index{RealGeomStructFactor@{RealGeomStructFactor}!ObjCryst@{ObjCryst}}
+\paragraph[{RealGeomStructFactor}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::RealGeomStructFactor (const REAL {\em x}, \/  const REAL {\em y}, \/  const REAL {\em z}, \/  const CrystVector\_\-REAL \& {\em h}, \/  const CrystVector\_\-REAL \& {\em k}, \/  const CrystVector\_\-REAL \& {\em l}, \/  CrystVector\_\-REAL \& {\em rsf})}\hfill\label{a00170_a7156318988075f0da9afae54c0b6342b}
+\begin{Desc}
+\item[{\bf Deprecated}]\end{Desc}
+\index{ObjCryst@{ObjCryst}!RealGeomStructFactor\_\-1@{RealGeomStructFactor\_\-1}}
+\index{RealGeomStructFactor\_\-1@{RealGeomStructFactor\_\-1}!ObjCryst@{ObjCryst}}
+\paragraph[{RealGeomStructFactor\_\-1}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::RealGeomStructFactor\_\-1 (const REAL {\em x}, \/  const REAL {\em y}, \/  const REAL {\em z}, \/  const CrystVector\_\-REAL \& {\em h}, \/  const CrystVector\_\-REAL \& {\em k}, \/  const CrystVector\_\-REAL \& {\em l}, \/  CrystVector\_\-REAL \& {\em rsf})}\hfill\label{a00170_acba26788bc095d3f25b8583191e3cef6}
+\begin{Desc}
+\item[{\bf Deprecated}]\end{Desc}
+\index{ObjCryst@{ObjCryst}!RealGeomStructFactor\_\-2@{RealGeomStructFactor\_\-2}}
+\index{RealGeomStructFactor\_\-2@{RealGeomStructFactor\_\-2}!ObjCryst@{ObjCryst}}
+\paragraph[{RealGeomStructFactor\_\-2}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::RealGeomStructFactor\_\-2 (const REAL {\em x}, \/  const REAL {\em y}, \/  const REAL {\em z}, \/  const CrystVector\_\-REAL \& {\em h}, \/  const CrystVector\_\-REAL \& {\em k}, \/  const CrystVector\_\-REAL \& {\em l}, \/  CrystVector\_\-REAL \& {\em rsf})}\hfill\label{a00170_aab08fdfd88756fd3658b5aac00d56b71}
+\begin{Desc}
+\item[{\bf Deprecated}]\end{Desc}
+\index{ObjCryst@{ObjCryst}!RealGeomStructFactor\_\-230@{RealGeomStructFactor\_\-230}}
+\index{RealGeomStructFactor\_\-230@{RealGeomStructFactor\_\-230}!ObjCryst@{ObjCryst}}
+\paragraph[{RealGeomStructFactor\_\-230}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::RealGeomStructFactor\_\-230 (const REAL {\em x}, \/  const REAL {\em y}, \/  const REAL {\em z}, \/  const CrystVector\_\-REAL \& {\em h}, \/  const CrystVector\_\-REAL \& {\em k}, \/  const CrystVector\_\-REAL \& {\em l}, \/  CrystVector\_\-REAL \& {\em rsf})}\hfill\label{a00170_a7b0e5b88e8b8b47365391339b31ae08d}
+\begin{Desc}
+\item[{\bf Deprecated}]\end{Desc}
+\index{ObjCryst@{ObjCryst}!RealGeomStructFactor\_\-67@{RealGeomStructFactor\_\-67}}
+\index{RealGeomStructFactor\_\-67@{RealGeomStructFactor\_\-67}!ObjCryst@{ObjCryst}}
+\paragraph[{RealGeomStructFactor\_\-67}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::RealGeomStructFactor\_\-67 (const REAL {\em x}, \/  const REAL {\em y}, \/  const REAL {\em z}, \/  const CrystVector\_\-REAL \& {\em h}, \/  const CrystVector\_\-REAL \& {\em k}, \/  const CrystVector\_\-REAL \& {\em l}, \/  CrystVector\_\-REAL \& {\em rsf})}\hfill\label{a00170_ab0dc330256ace18153a3344146e97da8}
+\begin{Desc}
+\item[{\bf Deprecated}]\end{Desc}
+\index{ObjCryst@{ObjCryst}!RealGeomStructFactor\_\-67\_\-cba@{RealGeomStructFactor\_\-67\_\-cba}}
+\index{RealGeomStructFactor\_\-67\_\-cba@{RealGeomStructFactor\_\-67\_\-cba}!ObjCryst@{ObjCryst}}
+\paragraph[{RealGeomStructFactor\_\-67\_\-cba}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::RealGeomStructFactor\_\-67\_\-cba (const REAL {\em x}, \/  const REAL {\em y}, \/  const REAL {\em z}, \/  const CrystVector\_\-REAL \& {\em h}, \/  const CrystVector\_\-REAL \& {\em k}, \/  const CrystVector\_\-REAL \& {\em l}, \/  CrystVector\_\-REAL \& {\em rsf})}\hfill\label{a00170_a7a4f122c474f2e0c78797deeb453a7c2}
+\begin{Desc}
+\item[{\bf Deprecated}]\end{Desc}
+\index{ObjCryst@{ObjCryst}!RealGeomStructFactor\_\-67a\_\-cb@{RealGeomStructFactor\_\-67a\_\-cb}}
+\index{RealGeomStructFactor\_\-67a\_\-cb@{RealGeomStructFactor\_\-67a\_\-cb}!ObjCryst@{ObjCryst}}
+\paragraph[{RealGeomStructFactor\_\-67a\_\-cb}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::RealGeomStructFactor\_\-67a\_\-cb (const REAL {\em x}, \/  const REAL {\em y}, \/  const REAL {\em z}, \/  const CrystVector\_\-REAL \& {\em h}, \/  const CrystVector\_\-REAL \& {\em k}, \/  const CrystVector\_\-REAL \& {\em l}, \/  CrystVector\_\-REAL \& {\em rsf})}\hfill\label{a00170_a07e46df75b4fd4d12e5daf4519abf4ae}
+\begin{Desc}
+\item[{\bf Deprecated}]\end{Desc}
+\index{ObjCryst@{ObjCryst}!RealGeomStructFactor\_\-67ba\_\-c@{RealGeomStructFactor\_\-67ba\_\-c}}
+\index{RealGeomStructFactor\_\-67ba\_\-c@{RealGeomStructFactor\_\-67ba\_\-c}!ObjCryst@{ObjCryst}}
+\paragraph[{RealGeomStructFactor\_\-67ba\_\-c}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::RealGeomStructFactor\_\-67ba\_\-c (const REAL {\em x}, \/  const REAL {\em y}, \/  const REAL {\em z}, \/  const CrystVector\_\-REAL \& {\em h}, \/  const CrystVector\_\-REAL \& {\em k}, \/  const CrystVector\_\-REAL \& {\em l}, \/  CrystVector\_\-REAL \& {\em rsf})}\hfill\label{a00170_a5cc947568ed264bc5c846e590e41d071}
+\begin{Desc}
+\item[{\bf Deprecated}]\end{Desc}
+\index{ObjCryst@{ObjCryst}!RealGeomStructFactor\_\-67bca@{RealGeomStructFactor\_\-67bca}}
+\index{RealGeomStructFactor\_\-67bca@{RealGeomStructFactor\_\-67bca}!ObjCryst@{ObjCryst}}
+\paragraph[{RealGeomStructFactor\_\-67bca}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::RealGeomStructFactor\_\-67bca (const REAL {\em x}, \/  const REAL {\em y}, \/  const REAL {\em z}, \/  const CrystVector\_\-REAL \& {\em h}, \/  const CrystVector\_\-REAL \& {\em k}, \/  const CrystVector\_\-REAL \& {\em l}, \/  CrystVector\_\-REAL \& {\em rsf})}\hfill\label{a00170_a5838f57e66d4218cf94c2654970e4b44}
+\begin{Desc}
+\item[{\bf Deprecated}]\end{Desc}
+\index{ObjCryst@{ObjCryst}!RealGeomStructFactor\_\-67cab@{RealGeomStructFactor\_\-67cab}}
+\index{RealGeomStructFactor\_\-67cab@{RealGeomStructFactor\_\-67cab}!ObjCryst@{ObjCryst}}
+\paragraph[{RealGeomStructFactor\_\-67cab}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::RealGeomStructFactor\_\-67cab (const REAL {\em x}, \/  const REAL {\em y}, \/  const REAL {\em z}, \/  const CrystVector\_\-REAL \& {\em h}, \/  const CrystVector\_\-REAL \& {\em k}, \/  const CrystVector\_\-REAL \& {\em l}, \/  CrystVector\_\-REAL \& {\em rsf})}\hfill\label{a00170_ab7b9de18fea72394b7bd491927039d0d}
+\begin{Desc}
+\item[{\bf Deprecated}]\end{Desc}
+\index{ObjCryst@{ObjCryst}!RealGeomStructFactor\_\-97@{RealGeomStructFactor\_\-97}}
+\index{RealGeomStructFactor\_\-97@{RealGeomStructFactor\_\-97}!ObjCryst@{ObjCryst}}
+\paragraph[{RealGeomStructFactor\_\-97}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::RealGeomStructFactor\_\-97 (const REAL {\em x}, \/  const REAL {\em y}, \/  const REAL {\em z}, \/  const CrystVector\_\-REAL \& {\em h}, \/  const CrystVector\_\-REAL \& {\em k}, \/  const CrystVector\_\-REAL \& {\em l}, \/  CrystVector\_\-REAL \& {\em rsf})}\hfill\label{a00170_a285e4956720497c97bf24cd3886bb6fa}
+\begin{Desc}
+\item[{\bf Deprecated}]\end{Desc}
+\index{ObjCryst@{ObjCryst}!RefObjRegisterRecursive@{RefObjRegisterRecursive}}
+\index{RefObjRegisterRecursive@{RefObjRegisterRecursive}!ObjCryst@{ObjCryst}}
+\paragraph[{RefObjRegisterRecursive}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ void ObjCryst::RefObjRegisterRecursive (T \& {\em obj}, \/  ObjRegistry$<$ T $>$ \& {\em reg})}\hfill\label{a00170_ae25c5e1071a3dceba81b48bde41b5134}
+
+
+Register a new object in a registry, and recursively include all included (sub)objects. \index{ObjCryst@{ObjCryst}!SpeedTest@{SpeedTest}}
+\index{SpeedTest@{SpeedTest}!ObjCryst@{ObjCryst}}
+\paragraph[{SpeedTest}]{\setlength{\rightskip}{0pt plus 5cm}{\bf SpeedTestReport} ObjCryst::SpeedTest (const unsigned int {\em nbAtom}, \/  const int {\em nbAtomType}, \/  const string {\em spacegroup}, \/  const RadiationType {\em radiation}, \/  const unsigned long {\em nbReflections}, \/  const unsigned int {\em dataType}, \/  const REAL {\em time})}\hfill\label{a00170_a775b62d07c596365d2f2d021dca408db}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em nbAtom,:}]total number of unique atoms. \item[{\em nbAtomType,:}]total number of atom types. Must be smaller than nbAtom. \item[{\em spacegroup,:}]the symbol or spacegroup number for the spacegroup to be tested. \item[{\em radiation,:}]the type of radiation to do the test with (neutron, x-\/ray). \item[{\em nbReflections,:}]total number of reflections to use. \item[{\em time,:}]duration of the test (10s is usually enough). \item[{\em dataType,:}]0= single crystal, 1= powder pattern (1 background + 1 crystal phase) \end{DoxyParams}
+\index{ObjCryst@{ObjCryst}!WXCrystValidateAllUserInput@{WXCrystValidateAllUserInput}}
+\index{WXCrystValidateAllUserInput@{WXCrystValidateAllUserInput}!ObjCryst@{ObjCryst}}
+\paragraph[{WXCrystValidateAllUserInput}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::WXCrystValidateAllUserInput ()}\hfill\label{a00170_a2a7db10a52bc5041eb5dec63b04f9c6b}
+
+
+This function validates all user input (in a \doxyref{WXField}{p.}{a00118}) not yet taken into account, if needs be. This should be called by {\bfseries ALL} functions using data stored in fields (basically all functions !) \index{ObjCryst@{ObjCryst}!WXDialogChooseFromRegistry@{WXDialogChooseFromRegistry}}
+\index{WXDialogChooseFromRegistry@{WXDialogChooseFromRegistry}!ObjCryst@{ObjCryst}}
+\paragraph[{WXDialogChooseFromRegistry}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ const T$\ast$ ObjCryst::WXDialogChooseFromRegistry (const ObjRegistry$<$ T $>$ \& {\em reg}, \/  wxWindow $\ast$ {\em parent}, \/  const string \& {\em message}, \/  int \&)}\hfill\label{a00170_aaadad04f1e1b514c5766b1293ab20df2}
+
+
+This function allows to pick up one object in a registry. Shows a modal dialog with a list of objects. This is a const access. \index{ObjCryst@{ObjCryst}!WXDialogChooseFromRegistry@{WXDialogChooseFromRegistry}}
+\index{WXDialogChooseFromRegistry@{WXDialogChooseFromRegistry}!ObjCryst@{ObjCryst}}
+\paragraph[{WXDialogChooseFromRegistry}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ T$\ast$ ObjCryst::WXDialogChooseFromRegistry (ObjRegistry$<$ T $>$ \& {\em reg}, \/  wxWindow $\ast$ {\em parent}, \/  const string \& {\em message}, \/  int \&)}\hfill\label{a00170_a5fb1d23bc7cb6acf4f95d8b47a2758fd}
+
+
+This function allows to pick up one object in a registry. Shows a modal dialog with a list of objects \index{ObjCryst@{ObjCryst}!XMLCrystFileLoadAllObject@{XMLCrystFileLoadAllObject}}
+\index{XMLCrystFileLoadAllObject@{XMLCrystFileLoadAllObject}!ObjCryst@{ObjCryst}}
+\paragraph[{XMLCrystFileLoadAllObject}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::XMLCrystFileLoadAllObject (std::istream \& {\em is})}\hfill\label{a00170_a43fd80ec699bfaa352ac950dd95a7c78}
+
+
+Load all 'top' objects from a file (\doxyref{Crystal}{p.}{a00020}, \doxyref{PowderPattern}{p.}{a00061}, DiffDataSingleCrystal and GlobalOptimObj objects). All objects are directly allocated, and can be accessed through their respective global registry (eg gCrystalRegistry fro a Crysta, etc...)
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em file,:}]the filename from which the objects will be loaded. \end{DoxyParams}
+\index{ObjCryst@{ObjCryst}!XMLCrystFileLoadAllObject@{XMLCrystFileLoadAllObject}}
+\index{XMLCrystFileLoadAllObject@{XMLCrystFileLoadAllObject}!ObjCryst@{ObjCryst}}
+\paragraph[{XMLCrystFileLoadAllObject}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::XMLCrystFileLoadAllObject (const string \& {\em file})}\hfill\label{a00170_a9190567cd56ccba47cc6ce8e1336a6df}
+
+
+Load all 'top' objects from a file (\doxyref{Crystal}{p.}{a00020}, \doxyref{PowderPattern}{p.}{a00061}, DiffDataSingleCrystal and GlobalOptimObj objects). All objects are directly allocated, and can be accessed through their respective global registry (eg gCrystalRegistry fro a Crysta, etc...)
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em file,:}]the filename from which the objects will be loaded. \end{DoxyParams}
+\index{ObjCryst@{ObjCryst}!XMLCrystFileLoadObject@{XMLCrystFileLoadObject}}
+\index{XMLCrystFileLoadObject@{XMLCrystFileLoadObject}!ObjCryst@{ObjCryst}}
+\paragraph[{XMLCrystFileLoadObject}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ void ObjCryst::XMLCrystFileLoadObject (const string \& {\em file}, \/  const string \& {\em tagName}, \/  const string \& {\em name}, \/  T $\ast$ {\em obj})}\hfill\label{a00170_a4be85f3fc4873df142c16d146b8c8b09}
+
+
+Load an object from a file, identifying it from its tag. 
+\begin{DoxyParams}{Parameters}
+\item[{\em file,:}]the filename from which the object will be loaded. \item[{\em tagName,:}]the name of the tag \item[{\em name,:}]the name of the object to be found (in a 'Name' attribute) \item[{\em obj,:}]the pointer to the object to be loaded. The allocation will be done by the function, and the pointer changed accordingly.\end{DoxyParams}
+NOT TESTED YET ! \index{ObjCryst@{ObjCryst}!XMLCrystFileLoadObjectList@{XMLCrystFileLoadObjectList}}
+\index{XMLCrystFileLoadObjectList@{XMLCrystFileLoadObjectList}!ObjCryst@{ObjCryst}}
+\paragraph[{XMLCrystFileLoadObjectList}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ObjRegistry}$<${\bf XMLCrystTag}$>$ ObjCryst::XMLCrystFileLoadObjectList (const string \& {\em filename})}\hfill\label{a00170_a71b2e0f557a886ca160f14eb646034a2}
+
+
+Get the list (tags) of \doxyref{ObjCryst}{p.}{a00170} objects in a file. This will recognize only certain tags in the file (\doxyref{Crystal}{p.}{a00020},\doxyref{PowderPattern}{p.}{a00061}, DiffDataSingleCrystal, GlobalOptimObj). Eventually it should include also the \doxyref{ZScatterer}{p.}{a00155} objects.
+
+\begin{DoxyNote}{Note}
+It will be the duty of the caller to destroy all the tags which have been allocated.
+\end{DoxyNote}
+NOT TESTED YET ! \index{ObjCryst@{ObjCryst}!XMLCrystFileSaveGlobal@{XMLCrystFileSaveGlobal}}
+\index{XMLCrystFileSaveGlobal@{XMLCrystFileSaveGlobal}!ObjCryst@{ObjCryst}}
+\paragraph[{XMLCrystFileSaveGlobal}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::XMLCrystFileSaveGlobal (std::ostream \& {\em out})}\hfill\label{a00170_a924609aaf5852df641479745d5482747}
+
+
+Save all Objcryst++ objects. This saves all \doxyref{Crystal}{p.}{a00020}, \doxyref{PowderPattern}{p.}{a00061}, DiffDataSingleCrystal and GlobalOptimObj objects, using the global registries for these classes. All other objects (\doxyref{Scatterer}{p.}{a00084}, \doxyref{ScatteringPower}{p.}{a00089}, \doxyref{PowderPatternComponent}{p.}{a00064} are saved as well since they are sub-\/objects of \doxyref{Crystal}{p.}{a00020} or \doxyref{PowderPattern}{p.}{a00061} objects).
+
+Saving is done in well-\/formed xml format. \index{ObjCryst@{ObjCryst}!XMLCrystFileSaveGlobal@{XMLCrystFileSaveGlobal}}
+\index{XMLCrystFileSaveGlobal@{XMLCrystFileSaveGlobal}!ObjCryst@{ObjCryst}}
+\paragraph[{XMLCrystFileSaveGlobal}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::XMLCrystFileSaveGlobal (const string \& {\em filename})}\hfill\label{a00170_af1f43834dd8e606cefe6f8fdc0f79a13}
+
+
+Save all Objcryst++ objects. This saves all \doxyref{Crystal}{p.}{a00020}, \doxyref{PowderPattern}{p.}{a00061}, DiffDataSingleCrystal and GlobalOptimObj objects, using the global registries for these classes. All other objects (\doxyref{Scatterer}{p.}{a00084}, \doxyref{ScatteringPower}{p.}{a00089}, \doxyref{PowderPatternComponent}{p.}{a00064} are saved as well since they are sub-\/objects of \doxyref{Crystal}{p.}{a00020} or \doxyref{PowderPattern}{p.}{a00061} objects).
+
+Saving is done in well-\/formed xml format. 
+
+\subsubsection{Variable Documentation}
+\index{ObjCryst@{ObjCryst}!fpObjCrystInformUser@{fpObjCrystInformUser}}
+\index{fpObjCrystInformUser@{fpObjCrystInformUser}!ObjCryst@{ObjCryst}}
+\paragraph[{fpObjCrystInformUser}]{\setlength{\rightskip}{0pt plus 5cm}void($\ast$ {\bf ObjCryst::fpObjCrystInformUser})(const string \&)}\hfill\label{a00170_a3af5335bb0e1f8decd5f33c59fe4f1e2}
+
+
+Pointer to a function for passing info to the user during or after long/important processes (use scarcely!). This function pointer is by default assigned to ObjCrystInformUserStdOut, which outputs the message to the standard output. If a user interface is used (eg in Fox), this pointer should be reassigned at the beginning of the application to a more user-\/suitable function. \index{ObjCryst@{ObjCryst}!gTopRefinableObjRegistry@{gTopRefinableObjRegistry}}
+\index{gTopRefinableObjRegistry@{gTopRefinableObjRegistry}!ObjCryst@{ObjCryst}}
+\paragraph[{gTopRefinableObjRegistry}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ObjRegistry}$<${\bf RefinableObj}$>$ {\bf ObjCryst::gTopRefinableObjRegistry}}\hfill\label{a00170_ab15e4e6308633a252b7997ec3bead661}
+
+
+This is a special registry for 'top' object for an optimization. In the ObjCryst++ class, this currently includes \doxyref{Crystal}{p.}{a00020}, \doxyref{PowderPattern}{p.}{a00061} and \doxyref{DiffractionDataSingleCrystal}{p.}{a00026}. 

@@ -1,0 +1,81 @@
+\subsection{ObjCryst::WXMolBondAngle Class Reference}
+\label{a00129}\index{ObjCryst::WXMolBondAngle@{ObjCryst::WXMolBondAngle}}
+
+
+wx class for \doxyref{MolBondAngle}{p.}{a00044} objects  
+Inheritance diagram for ObjCryst::WXMolBondAngle::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2cm]{a00129}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries WXMolBondAngle} (wxWindow $\ast$parent, {\bf MolBondAngle} $\ast$)\label{a00129_a68ea190cdd44105bee5c9d26ddb2c0a8}
+
+\item 
+virtual void {\bf CrystUpdate} (const bool updateUI=false, const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em Get new values to be displayed from the underlying object, and raise flag if an UI update is necessary. \item\end{DoxyCompactList}\item 
+virtual void {\bf UpdateUI} (const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em Update the User Interface, if necessary. \item\end{DoxyCompactList}\item 
+void {\bfseries OnChangeAtom} (wxCommandEvent \&)\label{a00129_a141dd6f68b5cab06aae7c396b77bdfd9}
+
+\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf MolBondAngle} $\ast$ {\bfseries mpMolBondAngle}\label{a00129_a5ba15d091ff39b2db4ca69a8c859ba2d}
+
+\item 
+wxBoxSizer $\ast$ {\bfseries mpSizer}\label{a00129_a2ed7ebbecc37d06bf8da9ab7465b910e}
+
+\item 
+{\bf WXCrystObjBasicList} {\bfseries mList}\label{a00129_a4f0f9c258f765d1a831a374414b1df09}
+
+\item 
+{\bf WXFieldChoice} $\ast$ {\bfseries mpFieldAtom1}\label{a00129_a90d48cdaa71d68304fcb02c143a2b9bc}
+
+\item 
+{\bf WXFieldChoice} $\ast$ {\bfseries mpFieldAtom2}\label{a00129_a7933d2b25396118a5d828ef3edb6a79a}
+
+\item 
+{\bf WXFieldChoice} $\ast$ {\bfseries mpFieldAtom3}\label{a00129_a90963c75baa1188be11eb7e895c85594}
+
+\item 
+REAL {\bf mValue}\label{a00129_afe256320c1c3332413a6e2bc2257c814}
+
+\begin{DoxyCompactList}\small\item\em The current value. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+wx class for \doxyref{MolBondAngle}{p.}{a00044} objects 
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::WXMolBondAngle@{ObjCryst::WXMolBondAngle}!CrystUpdate@{CrystUpdate}}
+\index{CrystUpdate@{CrystUpdate}!ObjCryst::WXMolBondAngle@{ObjCryst::WXMolBondAngle}}
+\paragraph[{CrystUpdate}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::WXMolBondAngle::CrystUpdate (const bool {\em updateUI} = {\ttfamily false}, \/  const bool {\em mutexlock} = {\ttfamily false})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00129_a7ba667b5bb85405b69265a51492c8f4c}
+
+
+Get new values to be displayed from the underlying object, and raise flag if an UI update is necessary. The actual GUI update is not made here. \doxyref{UpdateUI()}{p.}{a00129_aff45dee9e236b37fd2013937afbb71b9} should be called separately, from the main thread.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em updateUI,:}]if true, this will call UpdateUI, either directly (if in the main thread), or by sending a message. \item[{\em mutexlock,:}]if true, a Mutex will be used to lock the data shared between main and background thread. The idea is to only use a few Mutexes to lock data from the top objects (wxRefinableObj,...), when calling \doxyref{CrystUpdate()}{p.}{a00129_a7ba667b5bb85405b69265a51492c8f4c} and \doxyref{UpdateUI()}{p.}{a00129_aff45dee9e236b37fd2013937afbb71b9}. As sub-\/objects (\doxyref{WXField}{p.}{a00118},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. \end{DoxyParams}
+
+
+Implements {\bf ObjCryst::WXCrystObjBasic} \doxyref{}{p.}{a00115_a7ac00ae2ae28f1a6fa26e6fa571186b6}.\index{ObjCryst::WXMolBondAngle@{ObjCryst::WXMolBondAngle}!UpdateUI@{UpdateUI}}
+\index{UpdateUI@{UpdateUI}!ObjCryst::WXMolBondAngle@{ObjCryst::WXMolBondAngle}}
+\paragraph[{UpdateUI}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::WXMolBondAngle::UpdateUI (const bool {\em mutexlock} = {\ttfamily false})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00129_aff45dee9e236b37fd2013937afbb71b9}
+
+
+Update the User Interface, if necessary. 
+\begin{DoxyParams}{Parameters}
+\item[{\em mutexlock,:}]if true, a Mutex will be used to lock the data shared between main and background thread.\end{DoxyParams}
+The idea is to only use a few Mutexes to lock data from the top objects (wxRefinableObj,...), when calling \doxyref{CrystUpdate()}{p.}{a00129_a7ba667b5bb85405b69265a51492c8f4c} and \doxyref{UpdateUI()}{p.}{a00129_aff45dee9e236b37fd2013937afbb71b9}. As sub-\/objects (\doxyref{WXField}{p.}{a00118},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
+
+Implements {\bf ObjCryst::WXCrystObjBasic} \doxyref{}{p.}{a00115_a3818940b7031ff7e45cf2178c4a99c90}.
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+wxMolecule.h\end{DoxyCompactItemize}

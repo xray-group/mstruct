@@ -1,0 +1,84 @@
+\subsection{ObjCryst::ReflectionProfile Class Reference}
+\label{a00073}\index{ObjCryst::ReflectionProfile@{ObjCryst::ReflectionProfile}}
+
+
+Abstract base class for reflection profiles.  
+Inheritance diagram for ObjCryst::ReflectionProfile::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.43478cm]{a00073}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries ReflectionProfile} (const {\bf ReflectionProfile} \&old)\label{a00073_a4647aa58d8e98429b10c54499b9b050e}
+
+\item 
+virtual {\bf ReflectionProfile} $\ast$ {\bfseries CreateCopy} () const =0\label{a00073_a620f88c536f3c13881262efd155cc504}
+
+\item 
+virtual CrystVector\_\-REAL {\bf GetProfile} (const CrystVector\_\-REAL \&x, const REAL xcenter, const REAL h, const REAL k, const REAL l) const =0
+\begin{DoxyCompactList}\small\item\em Get the reflection profile. \item\end{DoxyCompactList}\item 
+virtual REAL {\bf GetFullProfileWidth} (const REAL relativeIntensity, const REAL xcenter, const REAL h, const REAL k, const REAL l)=0
+\begin{DoxyCompactList}\small\item\em Get the (approximate) full profile width at a given percentage of the profile maximum (e.g. \item\end{DoxyCompactList}\item 
+virtual bool {\bf IsAnisotropic} () const \label{a00073_ad1c2083adc170bc0d84b44f17b79d008}
+
+\begin{DoxyCompactList}\small\item\em Is the profile anisotropic ? \item\end{DoxyCompactList}\item 
+virtual void {\bf XMLOutput} (ostream \&os, int indent=0) const =0
+\begin{DoxyCompactList}\small\item\em Output to stream in well-\/formed XML. \item\end{DoxyCompactList}\item 
+virtual void {\bf XMLInput} (istream \&is, const {\bf XMLCrystTag} \&tag)=0
+\begin{DoxyCompactList}\small\item\em Input From stream. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+Abstract base class for reflection profiles. 
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::ReflectionProfile@{ObjCryst::ReflectionProfile}!GetFullProfileWidth@{GetFullProfileWidth}}
+\index{GetFullProfileWidth@{GetFullProfileWidth}!ObjCryst::ReflectionProfile@{ObjCryst::ReflectionProfile}}
+\paragraph[{GetFullProfileWidth}]{\setlength{\rightskip}{0pt plus 5cm}virtual REAL ObjCryst::ReflectionProfile::GetFullProfileWidth (const REAL {\em relativeIntensity}, \/  const REAL {\em xcenter}, \/  const REAL {\em h}, \/  const REAL {\em k}, \/  const REAL {\em l})\hspace{0.3cm}{\ttfamily  [pure virtual]}}\hfill\label{a00073_ac6d2a69e63c3efd06f30ab134062bbc0}
+
+
+Get the (approximate) full profile width at a given percentage of the profile maximum (e.g. FWHM=GetFullProfileWidth(0.5)). 
+
+Implemented in {\bf ObjCryst::ReflectionProfilePseudoVoigt} \doxyref{}{p.}{a00075_abacd734b6ff73b4fc5e6c4a5cba62eb6}, and {\bf ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt} \doxyref{}{p.}{a00074_ac1c2c1f3673f4558eca2c7bee8c3fdea}.\index{ObjCryst::ReflectionProfile@{ObjCryst::ReflectionProfile}!GetProfile@{GetProfile}}
+\index{GetProfile@{GetProfile}!ObjCryst::ReflectionProfile@{ObjCryst::ReflectionProfile}}
+\paragraph[{GetProfile}]{\setlength{\rightskip}{0pt plus 5cm}virtual CrystVector\_\-REAL ObjCryst::ReflectionProfile::GetProfile (const CrystVector\_\-REAL \& {\em x}, \/  const REAL {\em xcenter}, \/  const REAL {\em h}, \/  const REAL {\em k}, \/  const REAL {\em l}) const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\hfill\label{a00073_a0c71ddbfb976e320ccedf907b741b4d5}
+
+
+Get the reflection profile. 
+\begin{DoxyParams}{Parameters}
+\item[{\em x,:}]the vector of x coordinates (i.e. either 2theta or time-\/of-\/flight) \item[{\em xcenter,:}]coordinate (2theta, tof) of the center of the peak \item[{\em h,k,l,:}]reflection Miller indices \end{DoxyParams}
+\begin{DoxyNote}{Note}
+: derived classes who need either d\_\-hkl or the orthonormal coordinates of the scattering vector should be passed a \doxyref{ObjCryst::UnitCell}{p.}{a00109} object in the constructor so that they can use \doxyref{ObjCryst::UnitCell::MillerToOrthonormalCoords()}{p.}{a00109_af6efcbafcd761c6f8f4953190e7024d0} 
+\end{DoxyNote}
+
+
+Implemented in {\bf ObjCryst::ReflectionProfilePseudoVoigt} \doxyref{}{p.}{a00075_a56d805e09604a00eb86ca95dab674fc1}, and {\bf ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt} \doxyref{}{p.}{a00074_a2037750549dbf610823ddd354d73a107}.\index{ObjCryst::ReflectionProfile@{ObjCryst::ReflectionProfile}!XMLInput@{XMLInput}}
+\index{XMLInput@{XMLInput}!ObjCryst::ReflectionProfile@{ObjCryst::ReflectionProfile}}
+\paragraph[{XMLInput}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::ReflectionProfile::XMLInput (istream \& {\em is}, \/  const {\bf XMLCrystTag} \& {\em tag})\hspace{0.3cm}{\ttfamily  [pure virtual]}}\hfill\label{a00073_a7ad38593ddb4601632beb0a6bcae50f3}
+
+
+Input From stream. \begin{Desc}
+\item[{\bf Todo}]Add an bool XMLInputTag(is,tag) function to recognize all the tags from the stream. So that each inherited class can use the XMLInputTag function from its parent (ie take advantage of inheritance). The children class would first try to interpret the tag, then if unsuccessful would pass it to its parent (thus allowing overloading), etc... \end{Desc}
+
+
+Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_ac13a4045c3f187879443c8615c38d623}.
+
+Implemented in {\bf ObjCryst::ReflectionProfilePseudoVoigt} \doxyref{}{p.}{a00075_a8c63700610f511503eae297c8161f311}, and {\bf ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt} \doxyref{}{p.}{a00074_a4965f2a8994475187423a7afd6943031}.\index{ObjCryst::ReflectionProfile@{ObjCryst::ReflectionProfile}!XMLOutput@{XMLOutput}}
+\index{XMLOutput@{XMLOutput}!ObjCryst::ReflectionProfile@{ObjCryst::ReflectionProfile}}
+\paragraph[{XMLOutput}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::ReflectionProfile::XMLOutput (ostream \& {\em os}, \/  int {\em indent} = {\ttfamily 0}) const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\hfill\label{a00073_a60e429bb999a8b39f09ef14cdaf5ad0c}
+
+
+Output to stream in well-\/formed XML. \begin{Desc}
+\item[{\bf Todo}]Use inheritance.. as for XMLInputTag()... \end{Desc}
+
+
+Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_a7b9b6ed0f8dcf753d398c35e073de973}.
+
+Implemented in {\bf ObjCryst::ReflectionProfilePseudoVoigt} \doxyref{}{p.}{a00075_ac0438d3a1827accbdf2375e7355f18e5}, and {\bf ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt} \doxyref{}{p.}{a00074_a6ec9818370703767da5362960c5b310a}.
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+ReflectionProfile.h\end{DoxyCompactItemize}

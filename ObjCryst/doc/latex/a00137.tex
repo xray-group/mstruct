@@ -1,0 +1,64 @@
+\subsection{ObjCryst::WXPowderPatternDiffraction Class Reference}
+\label{a00137}\index{ObjCryst::WXPowderPatternDiffraction@{ObjCryst::WXPowderPatternDiffraction}}
+
+
+Class to display a Powder Pattern for a crystalline phase.  
+Inheritance diagram for ObjCryst::WXPowderPatternDiffraction::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4cm]{a00137}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries WXPowderPatternDiffraction} (wxWindow $\ast$parent, {\bf PowderPatternDiffraction} $\ast$)\label{a00137_a80b93a4fef92bd7d220c4ef68e7b2b96}
+
+\item 
+void {\bfseries OnChangeCrystal} (wxCommandEvent \&WXUNUSED(event))\label{a00137_a06cb78cb0b2baabcfea21e033aa9b883}
+
+\item 
+void {\bfseries OnMenuSaveHKLFcalc} (wxCommandEvent \&WXUNUSED(event))\label{a00137_ae1d383b5f8652c8afc532b6cda85b028}
+
+\item 
+void {\bfseries OnChangeProfile} (wxCommandEvent \&event)\label{a00137_af5fc36c337651fa01199564e25ef0e58}
+
+\item 
+virtual void {\bf UpdateUI} (const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em Update the User Interface, if necessary. \item\end{DoxyCompactList}\item 
+void {\bf OnLeBail} (wxCommandEvent \&event)\label{a00137_a1908f947ba675ae16a6b620286c0b0ae}
+
+\begin{DoxyCompactList}\small\item\em Perform Le Bail extraction. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf PowderPatternDiffraction} $\ast$ {\bfseries mpPowderPatternDiffraction}\label{a00137_a7c91a1822f644938a2dba6c0445990fd}
+
+\item 
+{\bf WXFieldChoice} $\ast$ {\bfseries mpFieldCrystal}\label{a00137_ad469625fbbe001edf69218142eb28a2a}
+
+\item 
+wxCheckBox $\ast$ {\bfseries mpProfileFittingMode}\label{a00137_ac1592170999a9b2151d1f316e97adc1f}
+
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+Class to display a Powder Pattern for a crystalline phase. Allows to choose the \doxyref{Crystal}{p.}{a00020}, as well as the profile associated to this crystalline phase. 
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::WXPowderPatternDiffraction@{ObjCryst::WXPowderPatternDiffraction}!UpdateUI@{UpdateUI}}
+\index{UpdateUI@{UpdateUI}!ObjCryst::WXPowderPatternDiffraction@{ObjCryst::WXPowderPatternDiffraction}}
+\paragraph[{UpdateUI}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::WXPowderPatternDiffraction::UpdateUI (const bool {\em mutexlock} = {\ttfamily false})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00137_a0f7d965eea526ddce53d5bda8487b3fa}
+
+
+Update the User Interface, if necessary. 
+\begin{DoxyParams}{Parameters}
+\item[{\em mutexlock,:}]if true, a Mutex will be used to lock the data shared between main and background thread.\end{DoxyParams}
+The idea is to only use a few Mutexes to lock data from the top objects (wxRefinableObj,...), when calling \doxyref{CrystUpdate()}{p.}{a00142_a13e4f37ac098de756b27cdb91d6a0551} and \doxyref{UpdateUI()}{p.}{a00137_a0f7d965eea526ddce53d5bda8487b3fa}. As sub-\/objects (\doxyref{WXField}{p.}{a00118},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
+
+Reimplemented from {\bf ObjCryst::WXRefinableObj} \doxyref{}{p.}{a00142_a19a1d057eecafd48710d9a3b770c1b28}.
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+wxPowderPattern.h\end{DoxyCompactItemize}

@@ -1,0 +1,132 @@
+\subsection{ObjCryst::WXCrystObjBasic Class Reference}
+\label{a00115}\index{ObjCryst::WXCrystObjBasic@{ObjCryst::WXCrystObjBasic}}
+
+
+Abstract base class for all objects in wxCryst.  
+Inheritance diagram for ObjCryst::WXCrystObjBasic::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=10cm]{a00115}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf WXCrystObjBasic} (wxWindow $\ast$parent)\label{a00115_a8a3a509d68db6e80af6912e4b03b340b}
+
+\begin{DoxyCompactList}\small\item\em Constructor. \item\end{DoxyCompactList}\item 
+virtual {\bf $\sim$WXCrystObjBasic} ()\label{a00115_a76b4be87181a287db2a8d83f5d830a40}
+
+\begin{DoxyCompactList}\small\item\em Destructor. \item\end{DoxyCompactList}\item 
+virtual void {\bf CrystUpdate} (const bool updateUI=false, const bool mutexlock=false)=0
+\begin{DoxyCompactList}\small\item\em Get new values to be displayed from the underlying object, and raise flag if an UI update is necessary. \item\end{DoxyCompactList}\item 
+virtual void {\bf UpdateUI} (const bool mutexlock=false)=0
+\begin{DoxyCompactList}\small\item\em Update the User Interface, if necessary. \item\end{DoxyCompactList}\item 
+virtual void {\bf BottomLayout} ({\bf WXCrystObjBasic} $\ast$pChild)
+\begin{DoxyCompactList}\small\item\em Ask for a new Layout with recalculated size hints, because a child has been changed or added. \item\end{DoxyCompactList}\item 
+virtual void {\bf AddChild} ({\bf WXCrystObjBasic} $\ast$pChild, bool doBottomLayout=true)
+\begin{DoxyCompactList}\small\item\em Notify that a new children has been added, also adding it to the correct sizer (which can be the top sizer or not). \item\end{DoxyCompactList}\item 
+void {\bf AddedToList} ({\bf WXCrystObjBasicList} $\ast$list)
+\item 
+void {\bf RemovedFromList} ({\bf WXCrystObjBasicList} $\ast$list)
+\item 
+virtual bool {\bfseries Layout} ()\label{a00115_a60a5f9aa3c58a77e6ee05ec2ce556743}
+
+\item 
+virtual void {\bf SetToolTip} (const wxString \&tip)
+\begin{DoxyCompactList}\small\item\em Set tooltip for this window. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf WXCrystObjBasic} $\ast$ {\bf mWXCrystParent}\label{a00115_a88dcbf30ebdba0af900ddb96f6656d35}
+
+\begin{DoxyCompactList}\small\item\em Parent, if a \doxyref{WXCrystObjBasic}{p.}{a00115} itself. \item\end{DoxyCompactList}\item 
+bool {\bf mIsShown}\label{a00115_a30748880e83e6fdad8c02b259230bb38}
+
+\begin{DoxyCompactList}\small\item\em Is the the window currently shown ? \item\end{DoxyCompactList}\item 
+bool {\bf mNeedUpdateUI}\label{a00115_a9d51a7d7bab34f36355f9a42bab0a128}
+
+\begin{DoxyCompactList}\small\item\em Do we need to update the display ? \item\end{DoxyCompactList}\item 
+CrystMutex {\bf mMutex}\label{a00115_a3e67ef5a254b9d6a2b766708e0942828}
+
+\begin{DoxyCompactList}\small\item\em Mutex used to lock data when preparing to update the UI in non-\/main thread. \item\end{DoxyCompactList}\item 
+std::set$<$ {\bf WXCrystObjBasicList} $\ast$ $>$ {\bf mvpList}
+\begin{DoxyCompactList}\small\item\em \doxyref{WXCrystObjBasicList}{p.}{a00116} which are aware of this object, and which should be told on destruction. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+Abstract base class for all objects in wxCryst. 
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::WXCrystObjBasic@{ObjCryst::WXCrystObjBasic}!AddChild@{AddChild}}
+\index{AddChild@{AddChild}!ObjCryst::WXCrystObjBasic@{ObjCryst::WXCrystObjBasic}}
+\paragraph[{AddChild}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::WXCrystObjBasic::AddChild ({\bf WXCrystObjBasic} $\ast$ {\em pChild}, \/  bool {\em doBottomLayout} = {\ttfamily true})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00115_ae346606a6dbb6aeffe89fc16de380b81}
+
+
+Notify that a new children has been added, also adding it to the correct sizer (which can be the top sizer or not). 
+\begin{DoxyParams}{Parameters}
+\item[{\em doBottomLayout}]ask for a new Layout of the window and of its parents. \end{DoxyParams}
+
+
+Reimplemented in {\bf ObjCryst::WXCrystObj} \doxyref{}{p.}{a00114_a0e0790010b9be47e533998a61f27fa1a}.\index{ObjCryst::WXCrystObjBasic@{ObjCryst::WXCrystObjBasic}!AddedToList@{AddedToList}}
+\index{AddedToList@{AddedToList}!ObjCryst::WXCrystObjBasic@{ObjCryst::WXCrystObjBasic}}
+\paragraph[{AddedToList}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::WXCrystObjBasic::AddedToList ({\bf WXCrystObjBasicList} $\ast$ {\em list})}\hfill\label{a00115_a817b44f6ddcd899435c24d7bb18182f4}
+\begin{DoxyInternal}{For internal use only.}
+Tell the object it has been added to a list \end{DoxyInternal}
+\index{ObjCryst::WXCrystObjBasic@{ObjCryst::WXCrystObjBasic}!BottomLayout@{BottomLayout}}
+\index{BottomLayout@{BottomLayout}!ObjCryst::WXCrystObjBasic@{ObjCryst::WXCrystObjBasic}}
+\paragraph[{BottomLayout}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::WXCrystObjBasic::BottomLayout ({\bf WXCrystObjBasic} $\ast$ {\em pChild})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00115_afbd0ece297950eda664fa819c240a318}
+
+
+Ask for a new Layout with recalculated size hints, because a child has been changed or added. 
+\begin{DoxyParams}{Parameters}
+\item[{\em pChild,:}]the modified child. If null, this will mean we are asking for a new layout of the window itself (useful when a sub-\/window is deleted). \end{DoxyParams}
+
+
+Reimplemented in {\bf ObjCryst::WXCrystObj} \doxyref{}{p.}{a00114_a8fcadf77f9216819c62384d0c03bd710}.\index{ObjCryst::WXCrystObjBasic@{ObjCryst::WXCrystObjBasic}!CrystUpdate@{CrystUpdate}}
+\index{CrystUpdate@{CrystUpdate}!ObjCryst::WXCrystObjBasic@{ObjCryst::WXCrystObjBasic}}
+\paragraph[{CrystUpdate}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::WXCrystObjBasic::CrystUpdate (const bool {\em updateUI} = {\ttfamily false}, \/  const bool {\em mutexlock} = {\ttfamily false})\hspace{0.3cm}{\ttfamily  [pure virtual]}}\hfill\label{a00115_a7ac00ae2ae28f1a6fa26e6fa571186b6}
+
+
+Get new values to be displayed from the underlying object, and raise flag if an UI update is necessary. The actual GUI update is not made here. \doxyref{UpdateUI()}{p.}{a00115_a3818940b7031ff7e45cf2178c4a99c90} should be called separately, from the main thread.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em updateUI,:}]if true, this will call UpdateUI, either directly (if in the main thread), or by sending a message. \item[{\em mutexlock,:}]if true, a Mutex will be used to lock the data shared between main and background thread. The idea is to only use a few Mutexes to lock data from the top objects (wxRefinableObj,...), when calling \doxyref{CrystUpdate()}{p.}{a00115_a7ac00ae2ae28f1a6fa26e6fa571186b6} and \doxyref{UpdateUI()}{p.}{a00115_a3818940b7031ff7e45cf2178c4a99c90}. As sub-\/objects (\doxyref{WXField}{p.}{a00118},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. \end{DoxyParams}
+
+
+Implemented in {\bf ObjCryst::WXCrystObj} \doxyref{}{p.}{a00114_a2e5de90ae4d1ca8feb65b88debf6d3cb}, {\bf ObjCryst::WXFieldString} \doxyref{}{p.}{a00125_af10eb2c5beb34a1bae3175b04149e39d}, {\bf ObjCryst::WXFieldName} \doxyref{}{p.}{a00120_a538a45567f480e1716ca3b593a1d0ed2}, {\bf ObjCryst::WXFieldParBase} \doxyref{}{p.}{a00123_a25b17ac92c4e3c618a6184c1c86a411a}, {\bf ObjCryst::WXFieldPar$<$ T $>$} \doxyref{}{p.}{a00122_a119a3152a4ab675522341f3d83ff88f0}, {\bf ObjCryst::WXFieldChoice} \doxyref{}{p.}{a00119_ade00cc3852045daceaab7f0eacba296a}, {\bf ObjCryst::WXCrystMenuBar} \doxyref{}{p.}{a00113_ac0c3dead0da352d0c7e439508bc40303}, {\bf ObjCryst::WXCrystal} \doxyref{}{p.}{a00112_a55d7dc41da5c6d4360609d2eac91f39b}, {\bf ObjCryst::WXDiffractionSingleCrystal} \doxyref{}{p.}{a00117_a79a9bb91f352c12bfb3a1ebd60267cbc}, {\bf ObjCryst::WXOptimizationObj} \doxyref{}{p.}{a00134_a440befb33ae526a51eb9a7f3d9739d3e}, {\bf ObjCryst::WXMolAtom} \doxyref{}{p.}{a00127_aaca6492a7c5382d07946ebb88e051f7f}, {\bf ObjCryst::WXMolBond} \doxyref{}{p.}{a00128_aafd526e2bc24ec749c191a2b8e717a0f}, {\bf ObjCryst::WXMolBondAngle} \doxyref{}{p.}{a00129_a7ba667b5bb85405b69265a51492c8f4c}, {\bf ObjCryst::WXMolDihedralAngle} \doxyref{}{p.}{a00130_a48fa57f12c56fd9fb065bff5c31fe954}, {\bf ObjCryst::WXMolecule} \doxyref{}{p.}{a00131_a4d8fe8698ddc741c34b613643dec87b0}, {\bf ObjCryst::WXPowderPattern} \doxyref{}{p.}{a00135_a90f999b4aab7ed134db388c532b1d63e}, {\bf ObjCryst::WXPowderPatternBackground} \doxyref{}{p.}{a00136_adacc1d5b1efe6eaf6a7a6a2d544c5e81}, {\bf ObjCryst::WXTexturePhaseMarchDollase} \doxyref{}{p.}{a00148_a451ab85e51319c9700e125a6274fec47}, {\bf ObjCryst::WXRadiation} \doxyref{}{p.}{a00141_a4322f775f359d04aa5db2288a40f6de5}, {\bf ObjCryst::WXFieldRefPar} \doxyref{}{p.}{a00124_a8443129e52c24a9ab3e36222ddc552af}, {\bf ObjCryst::WXFieldOption} \doxyref{}{p.}{a00121_a146ec591b9da6df9ea68fe7f80144ef0}, {\bf ObjCryst::WXRefinableObj} \doxyref{}{p.}{a00142_a13e4f37ac098de756b27cdb91d6a0551}, and {\bf ObjCryst::WXFieldPar$<$ long $>$} \doxyref{}{p.}{a00122_a119a3152a4ab675522341f3d83ff88f0}.\index{ObjCryst::WXCrystObjBasic@{ObjCryst::WXCrystObjBasic}!RemovedFromList@{RemovedFromList}}
+\index{RemovedFromList@{RemovedFromList}!ObjCryst::WXCrystObjBasic@{ObjCryst::WXCrystObjBasic}}
+\paragraph[{RemovedFromList}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::WXCrystObjBasic::RemovedFromList ({\bf WXCrystObjBasicList} $\ast$ {\em list})}\hfill\label{a00115_a87cdcff02c930ba9aaaf68569c22b26c}
+\begin{DoxyInternal}{For internal use only.}
+Tell the object it has been removed from a list \end{DoxyInternal}
+\index{ObjCryst::WXCrystObjBasic@{ObjCryst::WXCrystObjBasic}!SetToolTip@{SetToolTip}}
+\index{SetToolTip@{SetToolTip}!ObjCryst::WXCrystObjBasic@{ObjCryst::WXCrystObjBasic}}
+\paragraph[{SetToolTip}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::WXCrystObjBasic::SetToolTip (const wxString \& {\em tip})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00115_af77b6872b129931ae148fa1fb4df84e3}
+
+
+Set tooltip for this window. The WXCrystObjBasicList::SetToolTip() will just call wxWindow::SetToolTip(), but is virtual and will correctly call specialized derived function. This is needed to avoid settin a tooltip on widgets not receiving motion events (e.g. static text under windows). 
+
+Reimplemented in {\bf ObjCryst::WXFieldString} \doxyref{}{p.}{a00125_a861f4019069a28ab6d70c87157d832f1}, {\bf ObjCryst::WXFieldName} \doxyref{}{p.}{a00120_a81816b854a98c0a0b41f5e8ddb4f6ddc}, {\bf ObjCryst::WXFieldParBase} \doxyref{}{p.}{a00123_a9e4f9e8147d522bb2d4dd9903d8aa376}, {\bf ObjCryst::WXFieldRefPar} \doxyref{}{p.}{a00124_a20bce7667ddb5d546f4f588f51eb28aa}, and {\bf ObjCryst::WXFieldOption} \doxyref{}{p.}{a00121_ae867012ac2cbe29152197495a31b07a2}.\index{ObjCryst::WXCrystObjBasic@{ObjCryst::WXCrystObjBasic}!UpdateUI@{UpdateUI}}
+\index{UpdateUI@{UpdateUI}!ObjCryst::WXCrystObjBasic@{ObjCryst::WXCrystObjBasic}}
+\paragraph[{UpdateUI}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::WXCrystObjBasic::UpdateUI (const bool {\em mutexlock} = {\ttfamily false})\hspace{0.3cm}{\ttfamily  [pure virtual]}}\hfill\label{a00115_a3818940b7031ff7e45cf2178c4a99c90}
+
+
+Update the User Interface, if necessary. 
+\begin{DoxyParams}{Parameters}
+\item[{\em mutexlock,:}]if true, a Mutex will be used to lock the data shared between main and background thread.\end{DoxyParams}
+The idea is to only use a few Mutexes to lock data from the top objects (wxRefinableObj,...), when calling \doxyref{CrystUpdate()}{p.}{a00115_a7ac00ae2ae28f1a6fa26e6fa571186b6} and \doxyref{UpdateUI()}{p.}{a00115_a3818940b7031ff7e45cf2178c4a99c90}. As sub-\/objects (\doxyref{WXField}{p.}{a00118},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
+
+Implemented in {\bf ObjCryst::WXAtom} \doxyref{}{p.}{a00110_a5509a746fb1a6d918b6cbde8453d6a44}, {\bf ObjCryst::WXCrystObj} \doxyref{}{p.}{a00114_a093c04eb7b70ff063b80427779c7c456}, {\bf ObjCryst::WXFieldString} \doxyref{}{p.}{a00125_ad2a636e69047cf9f4f3610515aa53666}, {\bf ObjCryst::WXFieldName} \doxyref{}{p.}{a00120_a490d3cd6888b9fd6c59dabe031e17440}, {\bf ObjCryst::WXFieldPar$<$ T $>$} \doxyref{}{p.}{a00122_a1777f9713ca5d40c29c5bd3ab5484aff}, {\bf ObjCryst::WXFieldChoice} \doxyref{}{p.}{a00119_a5cbdea12ea798037dd2da13fe53220f2}, {\bf ObjCryst::WXCrystMenuBar} \doxyref{}{p.}{a00113_acc23d478cb50225e17fb5b6dc29fce7b}, {\bf ObjCryst::WXCrystal} \doxyref{}{p.}{a00112_a62946717943682dc2ac07ea4584030f4}, {\bf ObjCryst::WXDiffractionSingleCrystal} \doxyref{}{p.}{a00117_a6419580548c5f35434e0128b62f5b4e6}, {\bf ObjCryst::WXOptimizationObj} \doxyref{}{p.}{a00134_adbaf395e3e68e7605da0805e0e6465a0}, {\bf ObjCryst::WXMolAtom} \doxyref{}{p.}{a00127_aa11b0794a07ac4c8066228a4c625e13e}, {\bf ObjCryst::WXMolBond} \doxyref{}{p.}{a00128_a2b84cac0f51c4aa5f53f3d1a69bc63fb}, {\bf ObjCryst::WXMolBondAngle} \doxyref{}{p.}{a00129_aff45dee9e236b37fd2013937afbb71b9}, {\bf ObjCryst::WXMolDihedralAngle} \doxyref{}{p.}{a00130_aecf2a097f8edb2598466daf7b92008c4}, {\bf ObjCryst::WXMolecule} \doxyref{}{p.}{a00131_ae932cbbd6d7e55d319f1b4eb169c63ef}, {\bf ObjCryst::WXPowderPattern} \doxyref{}{p.}{a00135_aaeace05033eaea9499398825fc8244da}, {\bf ObjCryst::WXPowderPatternBackground} \doxyref{}{p.}{a00136_a11c6de5af2d72bcfc276838a2d62c32e}, {\bf ObjCryst::WXTexturePhaseMarchDollase} \doxyref{}{p.}{a00148_a06a3febd2a335ca805a88c2a254f5b31}, {\bf ObjCryst::WXPowderPatternDiffraction} \doxyref{}{p.}{a00137_a0f7d965eea526ddce53d5bda8487b3fa}, {\bf ObjCryst::WXRadiation} \doxyref{}{p.}{a00141_a993c35c331f833bb5f049d536747779b}, {\bf ObjCryst::WXFieldRefPar} \doxyref{}{p.}{a00124_ad43d8a21434d0b4888e1b87c5965578c}, {\bf ObjCryst::WXFieldOption} \doxyref{}{p.}{a00121_adcb0b8495d2a0d03d7e2093bec17545e}, {\bf ObjCryst::WXRefinableObj} \doxyref{}{p.}{a00142_a19a1d057eecafd48710d9a3b770c1b28}, {\bf ObjCryst::WXScatteringPowerAtom} \doxyref{}{p.}{a00145_a727146d4ecd5e1c4e5790a3eab0f0ace}, {\bf ObjCryst::WXScatteringPowerSphere} \doxyref{}{p.}{a00146_a95d4f9b618ffbd4885294806b12b066c}, and {\bf ObjCryst::WXFieldPar$<$ long $>$} \doxyref{}{p.}{a00122_a1777f9713ca5d40c29c5bd3ab5484aff}.
+
+\subsubsection{Member Data Documentation}
+\index{ObjCryst::WXCrystObjBasic@{ObjCryst::WXCrystObjBasic}!mvpList@{mvpList}}
+\index{mvpList@{mvpList}!ObjCryst::WXCrystObjBasic@{ObjCryst::WXCrystObjBasic}}
+\paragraph[{mvpList}]{\setlength{\rightskip}{0pt plus 5cm}std::set$<${\bf WXCrystObjBasicList}$\ast$$>$ {\bf ObjCryst::WXCrystObjBasic::mvpList}\hspace{0.3cm}{\ttfamily  [protected]}}\hfill\label{a00115_acdf122c5232f3902d342afdc95e56bc2}
+
+
+\doxyref{WXCrystObjBasicList}{p.}{a00116} which are aware of this object, and which should be told on destruction. 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+wxCryst.h\end{DoxyCompactItemize}

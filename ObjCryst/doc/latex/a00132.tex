@@ -1,0 +1,55 @@
+\subsection{ObjCryst::WXMonteCarloObj Class Reference}
+\label{a00132}\index{ObjCryst::WXMonteCarloObj@{ObjCryst::WXMonteCarloObj}}
+
+
+Class for Graphical interface to Monte-\/Carlo objects (Simulated Annealing, Parallel Tempering).  
+Inheritance diagram for ObjCryst::WXMonteCarloObj::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4cm]{a00132}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries WXMonteCarloObj} (wxWindow $\ast$parent, {\bf MonteCarloObj} $\ast$)\label{a00132_a7f065d157d74531110e16c7d8081a95c}
+
+\item 
+virtual void {\bfseries OnRunOptimization} (wxCommandEvent \&event)\label{a00132_a098a0d500afd4106725f308b4a5938a5}
+
+\item 
+void {\bf UpdateDisplayNbTrial} ()\label{a00132_acbceaa3d0ad0a5936d79a4322eca4df3}
+
+\begin{DoxyCompactList}\small\item\em Called during optimization, to show the user something's still going on... \item\end{DoxyCompactList}\item 
+virtual {\bf OptimizationObj} \& {\bfseries GetOptimizationObj} ()\label{a00132_a82f53dc7990c736211df87a47c0104eb}
+
+\item 
+virtual const {\bf OptimizationObj} \& {\bfseries GetOptimizationObj} () const \label{a00132_a9d58c53f79b831360d3dc09eb8da5213}
+
+\item 
+void {\bfseries OnLSQRefine} (wxCommandEvent \&event)\label{a00132_aa7c362490aa3761ae1426f2fe111d622}
+
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf MonteCarloObj} $\ast$ {\bf mpMonteCarloObj}\label{a00132_aabf6054ded526d3420f94f15e4041c96}
+
+\begin{DoxyCompactList}\small\item\em The algorithm object. \item\end{DoxyCompactList}\item 
+long {\bf mNbTrial}\label{a00132_ae94ccb980fabf593aabe68c6c824f110}
+
+\begin{DoxyCompactList}\small\item\em The number of trials asked by the user. \item\end{DoxyCompactList}\item 
+long {\bf mNbRun}\label{a00132_a60b17ba417b67f8c621b5b714d68e3b0}
+
+\begin{DoxyCompactList}\small\item\em The number of cycles. \item\end{DoxyCompactList}\item 
+{\bf WXFieldPar}$<$ long $>$ $\ast$ {\bfseries mpWXFieldNbTrial}\label{a00132_a33e32f028bdeb510fbd9885eeafab809}
+
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+Class for Graphical interface to Monte-\/Carlo objects (Simulated Annealing, Parallel Tempering). 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+wxGlobalOptimObj.h\end{DoxyCompactItemize}

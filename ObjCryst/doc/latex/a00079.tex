@@ -1,0 +1,69 @@
+\subsection{ObjCryst::RefParType Class Reference}
+\label{a00079}\index{ObjCryst::RefParType@{ObjCryst::RefParType}}
+
+
+class of refinable parameter types.  
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf RefParType} (const string \&name)
+\begin{DoxyCompactList}\small\item\em Create a {\itshape top\/} parameter type. \item\end{DoxyCompactList}\item 
+{\bf RefParType} (const {\bf RefParType} $\ast$parent, const string \&name)\label{a00079_a390f7a24ccff7cc557a26f7b2a120566}
+
+\begin{DoxyCompactList}\small\item\em create a children type. \item\end{DoxyCompactList}\item 
+{\bf $\sim$RefParType} ()\label{a00079_a46519355b2de6a3f1a0f32c3b3c5a84d}
+
+\begin{DoxyCompactList}\small\item\em Destructor. \item\end{DoxyCompactList}\item 
+bool {\bf IsDescendantFromOrSameAs} (const {\bf RefParType} $\ast$type) const \label{a00079_a023686ecd57ef99599d03e3e515b78cd}
+
+\begin{DoxyCompactList}\small\item\em Returns true if the parameter is a descendant of 'type'. \item\end{DoxyCompactList}\item 
+bool {\bf operator==} (const {\bf RefParType} $\ast$parent) const \label{a00079_a327807a0879388c73dbfe050b50982ae}
+
+\begin{DoxyCompactList}\small\item\em returns true if the two types are the same. \item\end{DoxyCompactList}\item 
+const string \& {\bf GetName} () const \label{a00079_a6ef864a2d7855bc96339434872c4debe}
+
+\begin{DoxyCompactList}\small\item\em Get the name for this parameter. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf InitId} ()\label{a00079_a929f680e5b161133c5701771233bdcc0}
+
+\begin{DoxyCompactList}\small\item\em Get a Unique id (\doxyref{RefParType::mId}{p.}{a00079_a9e93e2f4cbd029fd11fd965d5ec72842}). \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const {\bf RefParType} $\ast$ {\bf mpParent}\label{a00079_abd3cbb0f24e903f10addff974e6829bb}
+
+\begin{DoxyCompactList}\small\item\em the parent for this \doxyref{RefParType}{p.}{a00079} (we could easily allow several...) \item\end{DoxyCompactList}\item 
+const string {\bf mName}\label{a00079_acc75b58e4b6af356dad4677492fdfda4}
+
+\begin{DoxyCompactList}\small\item\em The name/description for this parameter type. \item\end{DoxyCompactList}\item 
+unsigned long {\bf mId}\label{a00079_a9e93e2f4cbd029fd11fd965d5ec72842}
+
+\begin{DoxyCompactList}\small\item\em The unique number identifying this type. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+class of refinable parameter types. This is used to categorize all parameters, to be able to modify a complete category of parameters (fix/unfix, set limits,...). The types are organized as a tree.
+
+Parameters should be allocated globally in the heap, so we only use pointers in the interface.
+
+\begin{DoxyNote}{Note}
+when modifying (fixing, changing limits) for a given \doxyref{RefParType}{p.}{a00079} (ie a 'family' of parameters), it affects all \doxyref{RefinablePar}{p.}{a00072} of this type {\itshape and\/} the parameters belonging to the children of this \doxyref{RefParType}{p.}{a00079}. eg fixing for the type \char`\"{}gpRefParTypeScatt\char`\"{} will fix all the derived postionnal, orientationnal, and population parameters for the scatterers.
+\end{DoxyNote}
+\begin{DoxyRemark}{Remarks}
+In the future, why not use a tree with multiple inheritance ?? It would be easy to allow multiple parents... But beware of loops... 
+\end{DoxyRemark}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\index{ObjCryst::RefParType@{ObjCryst::RefParType}!RefParType@{RefParType}}
+\index{RefParType@{RefParType}!ObjCryst::RefParType@{ObjCryst::RefParType}}
+\paragraph[{RefParType}]{\setlength{\rightskip}{0pt plus 5cm}ObjCryst::RefParType::RefParType (const string \& {\em name})}\hfill\label{a00079_a31d4f6797fa0a4b43d12203f89dbdb5c}
+
+
+Create a {\itshape top\/} parameter type. (in \doxyref{ObjCryst}{p.}{a00170}, there is only one, the \char`\"{}ObjCryst\char`\"{} category. 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+RefinableObj.h\end{DoxyCompactItemize}

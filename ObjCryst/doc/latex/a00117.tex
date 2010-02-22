@@ -1,0 +1,120 @@
+\subsection{ObjCryst::WXDiffractionSingleCrystal Class Reference}
+\label{a00117}\index{ObjCryst::WXDiffractionSingleCrystal@{ObjCryst::WXDiffractionSingleCrystal}}
+
+
+WX Class for \doxyref{DiffractionDataSingleCrystal}{p.}{a00026} objects.  
+Inheritance diagram for ObjCryst::WXDiffractionSingleCrystal::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4cm]{a00117}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries WXDiffractionSingleCrystal} (wxWindow $\ast$parent, {\bf DiffractionDataSingleCrystal} $\ast$)\label{a00117_afa08ecf9a4981696d954ca7f45180437}
+
+\item 
+virtual void {\bf CrystUpdate} (const bool updateUI=false, const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em Get new values to be displayed from the underlying object, and raise flag if an UI update is necessary. \item\end{DoxyCompactList}\item 
+virtual void {\bf UpdateUI} (const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em Update the User Interface, if necessary. \item\end{DoxyCompactList}\item 
+void {\bf NotifyDeleteGraph} ()\label{a00117_a52503c26f8efb76d0d00568a5119f8d1}
+
+\begin{DoxyCompactList}\small\item\em For the mpGraph to tell its owner it was deleted. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries OnMenuSimulate} (wxCommandEvent \&WXUNUSED(event))\label{a00117_abb0cf6ec0ccc65d3b180fd0257cbc2ce}
+
+\item 
+void {\bfseries OnMenuImport} (wxCommandEvent \&event)\label{a00117_a9d8383d61561ca20475d797e37a10eba}
+
+\item 
+void {\bfseries OnMenuSaveHKLIobsIcalc} (wxCommandEvent \&WXUNUSED(event))\label{a00117_a6681273899696ea7a7d15d478184ce4f}
+
+\item 
+void {\bfseries OnMenuSaveHKLFcalc} (wxCommandEvent \&WXUNUSED(event))\label{a00117_a0800caa6fbbe81cd9060e71bacfadf43}
+
+\item 
+void {\bfseries OnMenuSetWavelength} (wxCommandEvent \&event)\label{a00117_ad7c65d7ece4e3ed9f66027a0eaa4b86a}
+
+\item 
+void {\bfseries OnMenuShowGraph} (wxCommandEvent \&event)\label{a00117_a5567f7f3bb232bab136b2534ab82ab4d}
+
+\item 
+void {\bfseries OnChangeCrystal} (wxCommandEvent \&WXUNUSED(event))\label{a00117_adb878f28fc6abfc0d57d62eb9a134964}
+
+\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf WXFieldChoice} $\ast$ {\bfseries mpFieldCrystal}\label{a00117_ad267dfc3c399ebaf634e28a13df24477}
+
+\item 
+{\bf DiffractionDataSingleCrystal} $\ast$ {\bfseries mpData}\label{a00117_a144e44ade061e1ed151f891de77c0661}
+
+\item 
+REAL {\bfseries mChi2}\label{a00117_ad83d8469a67ac3f7586b8a30553972fa}
+
+\item 
+REAL {\bfseries mGoF}\label{a00117_ab8a3f2922842d16e0a175352c9dc4b56}
+
+\item 
+REAL {\bfseries mRwp}\label{a00117_ac7ff65557c0e38a9c706a30312d1ace4}
+
+\item 
+REAL {\bfseries mRp}\label{a00117_a4f09f9d7bd9fe022094ff8be2b6f9063}
+
+\item 
+WXMultiGraph $\ast$ {\bfseries mpGraph}\label{a00117_a7d40f7e157c631f047f2ef06f606bf59}
+
+\item 
+unsigned long {\bfseries mGrapIdObs}\label{a00117_a6a4fe70ca9131d39d4acb4850e044d27}
+
+\item 
+unsigned long {\bfseries mGrapIdCalc}\label{a00117_a46a1d6c2e2b2692fe323549a391491e6}
+
+\item 
+valarray$<$ float $>$ {\bf mIobs}\label{a00117_a0f4e1acb9d9a69b039a0879f6407183a}
+
+\begin{DoxyCompactList}\small\item\em Copy of the data for graph display. \item\end{DoxyCompactList}\item 
+valarray$<$ float $>$ {\bfseries mIcalc}\label{a00117_a9e02244cee598b0407e885d9a68ca376}
+
+\item 
+valarray$<$ float $>$ {\bfseries mX}\label{a00117_ab32baf33607cbdefa04b155e85004d9e}
+
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+WX Class for \doxyref{DiffractionDataSingleCrystal}{p.}{a00026} objects. 
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::WXDiffractionSingleCrystal@{ObjCryst::WXDiffractionSingleCrystal}!CrystUpdate@{CrystUpdate}}
+\index{CrystUpdate@{CrystUpdate}!ObjCryst::WXDiffractionSingleCrystal@{ObjCryst::WXDiffractionSingleCrystal}}
+\paragraph[{CrystUpdate}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::WXDiffractionSingleCrystal::CrystUpdate (const bool {\em updateUI} = {\ttfamily false}, \/  const bool {\em mutexlock} = {\ttfamily false})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00117_a79a9bb91f352c12bfb3a1ebd60267cbc}
+
+
+Get new values to be displayed from the underlying object, and raise flag if an UI update is necessary. The actual GUI update is not made here. \doxyref{UpdateUI()}{p.}{a00117_a6419580548c5f35434e0128b62f5b4e6} should be called separately, from the main thread.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em updateUI,:}]if true, this will call UpdateUI, either directly (if in the main thread), or by sending a message. \item[{\em mutexlock,:}]if true, a Mutex will be used to lock the data shared between main and background thread. The idea is to only use a few Mutexes to lock data from the top objects (wxRefinableObj,...), when calling \doxyref{CrystUpdate()}{p.}{a00117_a79a9bb91f352c12bfb3a1ebd60267cbc} and \doxyref{UpdateUI()}{p.}{a00117_a6419580548c5f35434e0128b62f5b4e6}. As sub-\/objects (\doxyref{WXField}{p.}{a00118},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. \end{DoxyParams}
+
+
+Reimplemented from {\bf ObjCryst::WXRefinableObj} \doxyref{}{p.}{a00142_a13e4f37ac098de756b27cdb91d6a0551}.\index{ObjCryst::WXDiffractionSingleCrystal@{ObjCryst::WXDiffractionSingleCrystal}!UpdateUI@{UpdateUI}}
+\index{UpdateUI@{UpdateUI}!ObjCryst::WXDiffractionSingleCrystal@{ObjCryst::WXDiffractionSingleCrystal}}
+\paragraph[{UpdateUI}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::WXDiffractionSingleCrystal::UpdateUI (const bool {\em mutexlock} = {\ttfamily false})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00117_a6419580548c5f35434e0128b62f5b4e6}
+
+
+Update the User Interface, if necessary. 
+\begin{DoxyParams}{Parameters}
+\item[{\em mutexlock,:}]if true, a Mutex will be used to lock the data shared between main and background thread.\end{DoxyParams}
+The idea is to only use a few Mutexes to lock data from the top objects (wxRefinableObj,...), when calling \doxyref{CrystUpdate()}{p.}{a00117_a79a9bb91f352c12bfb3a1ebd60267cbc} and \doxyref{UpdateUI()}{p.}{a00117_a6419580548c5f35434e0128b62f5b4e6}. As sub-\/objects (\doxyref{WXField}{p.}{a00118},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
+
+Reimplemented from {\bf ObjCryst::WXRefinableObj} \doxyref{}{p.}{a00142_a19a1d057eecafd48710d9a3b770c1b28}.
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+wxDiffractionSingleCrystal.h\end{DoxyCompactItemize}

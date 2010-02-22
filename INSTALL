@@ -1,0 +1,12 @@
+##### Linux quick installation notes #####
+
+To compile & install Fox, do the following:
+   cd Fox
+   make
+   make install
+
+This will install Fox in /usr/local/bin/Fox
+
+For more instructions, see the Fox wiki :
+   http://objcryst.sourceforge.net/Fox/Install
+

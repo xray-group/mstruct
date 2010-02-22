@@ -1,0 +1,185 @@
+\label{a00221__todo000020}
+ 
+\begin{DoxyDescription}
+\item[Class \doxyref{CrystVector$<$ T $>$}{p.}{a00024} ]check again Blitz++ support in newer gcc versions. 
+\end{DoxyDescription}
+
+\label{a00221__todo000014}
+ 
+\begin{DoxyDescription}
+\item[Class \doxyref{ObjCryst::AsymmetricUnit}{p.}{a00007} ]Currently the initialization of the asymmetric unit is done numerically, slowly. A faster algorithm should be used (using dichotomy), or we could switch to using a table of asymmetric units. 
+\end{DoxyDescription}
+
+\label{a00221__todo000001}
+ 
+\begin{DoxyDescription}
+\item[Class \doxyref{ObjCryst::Crystal}{p.}{a00020} ]exporting (and importing) crystal structures to/from other files format than ObjCryst's XML (eg CIF, and format used by refinement software)
+
+
+\end{DoxyDescription}
+
+\label{a00221__todo000003}
+ 
+\begin{DoxyDescription}
+\item[Member \doxyref{ObjCryst::Crystal::CalcDistTable}{p.}{a00020_a1d59955724fb598fbba3ff4c0bd125e3}(const bool fast) const  ]sanitize the result distance table in a more usable structure than the currently used Crystal::mDistTableSq and Crystal::mDistTableIndex. 
+
+optimize again. Test if recomputation is needed using Clocks. Use a global option instead of asymUnitMargin. 
+\end{DoxyDescription}
+
+\label{a00221__todo000002}
+ 
+\begin{DoxyDescription}
+\item[Member \doxyref{ObjCryst::Crystal::Print}{p.}{a00020_ac4a7086d3757be4bbe2484f549a1b0fc}(ostream \&os=cout) const  ]one function to print on one line and a PrintLong() function 
+\end{DoxyDescription}
+
+\label{a00221__todo000005}
+ 
+\begin{DoxyDescription}
+\item[Class \doxyref{ObjCryst::MolZAtom}{p.}{a00048} ]: some flags could be added to mark the fixed/limited nature of the parameters. 
+\end{DoxyDescription}
+
+\label{a00221__todo000022}
+ 
+\begin{DoxyDescription}
+\item[Class \doxyref{ObjCryst::ObjRegistry$<$ T $>$}{p.}{a00053} ](?) create two derived classes with the same interface, one which is a const registry (the 'client' registry for RefinableObj), and one which has a non-\/const access to the registered objects (the 'sub-\/objects' in RefinableObj). 
+\end{DoxyDescription}
+
+\label{a00221__todo000008}
+ 
+\begin{DoxyDescription}
+\item[Class \doxyref{ObjCryst::PolarizationCorr}{p.}{a00060} ]: extend this to take into account other diffracting \& monochromatic geometries. 
+\end{DoxyDescription}
+
+\label{a00221__todo000007}
+ 
+\begin{DoxyDescription}
+\item[Member \doxyref{ObjCryst::PowderPattern::SavePowderPattern}{p.}{a00061_a9d47390be9f1a5a47ea141d2708b8992}(const string \&filename=\char`\"{}powderPattern.out\char`\"{}) const  ]export in other formats (.prf,...), with a list of reflection position for all phases... 
+\end{DoxyDescription}
+
+\label{a00221__todo000006}
+ 
+\begin{DoxyDescription}
+\item[Member \doxyref{ObjCryst::PowderPatternDiffraction::mIntensityCorr}{p.}{a00065_addc10ae4a02801eb441e38b4beae2e9a} ]: store all corrections in a registry, so that other corrections can more easily be added (? Maybe not that useful, especially since these correction do not need to be displayed to the user ?). 
+\end{DoxyDescription}
+
+\label{a00221__todo000009}
+ 
+\begin{DoxyDescription}
+\item[Class \doxyref{ObjCryst::Radiation}{p.}{a00068} ]also add here information about the polarization of the beam. 
+\end{DoxyDescription}
+
+\label{a00221__todo000023}
+ 
+\begin{DoxyDescription}
+\item[Class \doxyref{ObjCryst::RefinableObj}{p.}{a00070} ]Define more clearly which operations are recursive (ie also modify sub-\/objects). 
+\end{DoxyDescription}
+
+\label{a00221__todo000025}
+ 
+\begin{DoxyDescription}
+\item[Member \doxyref{ObjCryst::RefinableObj::GetLSQDeriv}{p.}{a00070_a24bfb12849c7733a7034928fbb0b14a8}(const unsigned int, RefinablePar \&) ]This should be a const method, and the given RefPar should be const too... 
+\end{DoxyDescription}
+
+\label{a00221__todo000024}
+ 
+\begin{DoxyDescription}
+\item[Member \doxyref{ObjCryst::RefinableObj::RegisterClient}{p.}{a00070_a8afc65925b0e4d1894d72c457ad38bc9}(RefinableObj \&) const  ]: the clients should be const, but are not... This need to be fixed... 
+\end{DoxyDescription}
+
+\label{a00221__todo000027}
+ 
+\begin{DoxyDescription}
+\item[Member \doxyref{ObjCryst::RefinableObj::XMLInput}{p.}{a00070_ac13a4045c3f187879443c8615c38d623}(istream \&is, const XMLCrystTag \&tag) ]Add an bool XMLInputTag(is,tag) function to recognize all the tags from the stream. So that each inherited class can use the XMLInputTag function from its parent (ie take advantage of inheritance). The children class would first try to interpret the tag, then if unsuccessful would pass it to its parent (thus allowing overloading), etc... 
+\end{DoxyDescription}
+
+\label{a00221__todo000026}
+ 
+\begin{DoxyDescription}
+\item[Member \doxyref{ObjCryst::RefinableObj::XMLOutput}{p.}{a00070_a7b9b6ed0f8dcf753d398c35e073de973}(ostream \&os, int indent=0) const  ]Use inheritance.. as for XMLInputTag()... 
+\end{DoxyDescription}
+
+\label{a00221__todo000021}
+ 
+\begin{DoxyDescription}
+\item[Class \doxyref{ObjCryst::RefinablePar}{p.}{a00072} ]: define parameters using equations between parameters. 
+
+: for complex objects with lots of parameters, give the possibility to define vectors of parameters, all with the same properties, to reduce memory usage. 
+\end{DoxyDescription}
+
+\label{a00221__todo000010}
+ 
+\begin{DoxyDescription}
+\item[Class \doxyref{ObjCryst::ScatteringData}{p.}{a00088} ]Optimize computation for Bijvoet/Friedel mates. To do this, generate an internal list of 'true independent reflections', with two entries for each, for both mates, and make the 'real' reflections only a reference to these reflections.
+
+
+
+a {\bfseries lot} of cleaning is necessary in the computing of structure factors, for (1) the 'preparation' part (deciding what needs to be recomputed) and (2) to allow anisotropic temperature factors (or other anisotropic parts) 
+\end{DoxyDescription}
+
+\label{a00221__todo000012}
+ 
+\begin{DoxyDescription}
+\item[Member \doxyref{ObjCryst::ScatteringData::SetIsIgnoringImagScattFact}{p.}{a00088_ae126b860d309daa78e975b8b6d8a3ec0}(const bool b) ]this should become useless once we take fully advantage of coupled computation of Structure Factors for Fridel/Bijvoet mates using an internal list of 'fully unique' reflections. Then only one of the mates need to be computed.. 
+\end{DoxyDescription}
+
+\label{a00221__todo000013}
+ 
+\begin{DoxyDescription}
+\item[Class \doxyref{ObjCryst::ScatteringPower}{p.}{a00089} ]Anisotropic scattering (temperature factor especially) code, using derived classes 
+
+Clarify organization by removing any 'real' data from the top, abstract base class (eg remove Biso and Betaij), and by creating derived classes. Optionnaly 3 classes (used as members of ScatteringPower) could be created, TemperatureFactor, ScatteringFactor, and ResonantScatteringFactor. In any way the design of this class should not evolve, so that code using the ScatteringPower interface will remain compatible whatever modifications are made. 
+\end{DoxyDescription}
+
+\label{a00221__todo000015}
+ 
+\begin{DoxyDescription}
+\item[Member \doxyref{ObjCryst::SpaceGroup::ChangeToAsymmetricUnit}{p.}{a00094_adc3c511d36ad707690ca4f9c0154a8a0}(REAL x, REAL y, REAL z) const  ]SpaceGroup::IsInAsymmetricUnit() 
+\end{DoxyDescription}
+
+\label{a00221__todo000016}
+ 
+\begin{DoxyDescription}
+\item[Member \doxyref{ObjCryst::SpaceGroup::Print}{p.}{a00094_a7c3746694fb9a6dbe3f258febb858744}() const  ]
+\end{DoxyDescription}
+
+\label{a00221__todo000028}
+ 
+\begin{DoxyDescription}
+\item[Class \doxyref{ObjCryst::WXCrystObj}{p.}{a00114} ]Allow the objects to be collabsable. The difficulty is that even if the object is not shown, it is not removed by the Sizer as long as it is not deleted... Needs some testing ! Otherwise it would also be possible to delete and re-\/create sub-\/objects when collapsing, but that would be more difficult. 
+\end{DoxyDescription}
+
+\label{a00221__todo000031}
+ 
+\begin{DoxyDescription}
+\item[Class \doxyref{ObjCryst::WXFieldRefPar}{p.}{a00124} ]: allow acces to the parameters limits 
+\end{DoxyDescription}
+
+\label{a00221__todo000030}
+ 
+\begin{DoxyDescription}
+\item[Class \doxyref{ObjCryst::WXPowderPatternBackground}{p.}{a00136} ]Display the list of background points with the refinable intensity. Add th possibility to change the points. 
+\end{DoxyDescription}
+
+\label{a00221__todo000029}
+ 
+\begin{DoxyDescription}
+\item[Class \doxyref{ObjCryst::WXPowderPatternGraph}{p.}{a00138} ]display the difference pattern. Allow to zoom. Display reflection positions for crystalline phases. 
+\end{DoxyDescription}
+
+\label{a00221__todo000018}
+ 
+\begin{DoxyDescription}
+\item[Member \doxyref{ObjCryst::ZScatterer::ExportFenskeHallZMatrix}{p.}{a00155_a551fabc1d57cab02e957946dcfa1aae7}(ostream \&os) ]USe more strict formatting than space-\/delimited. 
+\end{DoxyDescription}
+
+\label{a00221__todo000017}
+ 
+\begin{DoxyDescription}
+\item[Member \doxyref{ObjCryst::ZScatterer::ImportFenskeHallZMatrix}{p.}{a00155_a097d27206e6e54259bb987a06d65f71c}(istream \&is, bool named=false) ]: identify which dihedral angles should {\itshape not\/} be limited, by analysing a coordination table. 
+\end{DoxyDescription}
+
+\label{a00221__todo000019}
+ 
+\begin{DoxyDescription}
+\item[Member \doxyref{ObjCryst::ZScatterer::m3DDisplayIndex}{p.}{a00155_aa02e92087f85784a74d1bdcebf178da9} ]This is still experimental. This is only used for the display of ZPolyhedron, and should be more developped (and it should also be saved in XML files !) 
+\end{DoxyDescription}

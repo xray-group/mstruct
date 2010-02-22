@@ -1,0 +1,727 @@
+\subsection{ObjCryst::RefinableObj Class Reference}
+\label{a00070}\index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+
+
+Generic Refinable Object.  
+Inheritance diagram for ObjCryst::RefinableObj::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=12cm]{a00070}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf RefinableObj} ()\label{a00070_a081d2bfc2065c2adaa2bfdf292900235}
+
+\begin{DoxyCompactList}\small\item\em Constructor. \item\end{DoxyCompactList}\item 
+{\bf RefinableObj} (const bool internalUseOnly)
+\begin{DoxyCompactList}\small\item\em Constructor. \item\end{DoxyCompactList}\item 
+{\bf RefinableObj} (const {\bf RefinableObj} \&old)
+\begin{DoxyCompactList}\small\item\em Defined not implemented. \item\end{DoxyCompactList}\item 
+virtual {\bf $\sim$RefinableObj} ()\label{a00070_a5cd8d41a828153e2585077a9fbd334ce}
+
+\begin{DoxyCompactList}\small\item\em Destructor. \item\end{DoxyCompactList}\item 
+virtual const string \& {\bf GetClassName} () const 
+\begin{DoxyCompactList}\small\item\em Name for this class (\char`\"{}RefinableObj\char`\"{}, \char`\"{}Crystal\char`\"{},. \item\end{DoxyCompactList}\item 
+virtual const string \& {\bf GetName} () const \label{a00070_a61f51d3364e13a542e8c32df454c88aa}
+
+\begin{DoxyCompactList}\small\item\em Name of the object. \item\end{DoxyCompactList}\item 
+virtual void {\bf SetName} (const string \&name)\label{a00070_a464caf574804fc21bd896f823131a1d7}
+
+\begin{DoxyCompactList}\small\item\em Name of the object. \item\end{DoxyCompactList}\item 
+void {\bf operator=} (const {\bf RefinableObj} \&old)
+\begin{DoxyCompactList}\small\item\em Defined not implemented. \item\end{DoxyCompactList}\item 
+void {\bf PrepareForRefinement} () const 
+\begin{DoxyCompactList}\small\item\em Find which parameters are used and {\bfseries not} fixed, for a refinement /optimization. \item\end{DoxyCompactList}\item 
+void {\bf FixAllPar} ()\label{a00070_ac1a65da1f7563472badaf699002b8b8b}
+
+\begin{DoxyCompactList}\small\item\em Fix All parameters. \item\end{DoxyCompactList}\item 
+void {\bf UnFixAllPar} ()\label{a00070_ab75dcf763d7f96063dcb4d85e6e78007}
+
+\begin{DoxyCompactList}\small\item\em UnFix All parameters. \item\end{DoxyCompactList}\item 
+void {\bf SetParIsFixed} (const long parIndex, const bool fix)\label{a00070_ad6284ca6b92364e1ebd02bbef81d7e7e}
+
+\begin{DoxyCompactList}\small\item\em Fix/un-\/fix one parameter from its \#. \item\end{DoxyCompactList}\item 
+void {\bf SetParIsFixed} (const string \&parName, const bool fix)\label{a00070_a8dc4cb100f839e12a9e0ae01facc5c9c}
+
+\begin{DoxyCompactList}\small\item\em Fix/un-\/fix one parameter from its name. \item\end{DoxyCompactList}\item 
+void {\bf SetParIsFixed} (const {\bf RefParType} $\ast$type, const bool fix)\label{a00070_acc7f25893d4dc4cec08fd04a84aa008d}
+
+\begin{DoxyCompactList}\small\item\em Fix/un-\/fix one family of parameters. \item\end{DoxyCompactList}\item 
+void {\bf SetParIsUsed} (const string \&parName, const bool use)\label{a00070_a1d0737a4ecb7cb1339f3138cd792ba7c}
+
+\begin{DoxyCompactList}\small\item\em Set whether a parameter is used. \item\end{DoxyCompactList}\item 
+void {\bf SetParIsUsed} (const {\bf RefParType} $\ast$type, const bool use)\label{a00070_a40eba4b59117dd18831286e05b5b982c}
+
+\begin{DoxyCompactList}\small\item\em Set whether a family of parameters is used. \item\end{DoxyCompactList}\item 
+long {\bf GetNbPar} () const 
+\begin{DoxyCompactList}\small\item\em Total number of refinable parameter in the object. \item\end{DoxyCompactList}\item 
+long {\bf GetNbParNotFixed} () const \label{a00070_a6ead9da8785dbaa3dc4fb5f93cb455a3}
+
+\begin{DoxyCompactList}\small\item\em Total number of non-\/fixed parameters. Is initialized by \doxyref{PrepareForRefinement()}{p.}{a00070_a0e9b816ad753f633ef6d9650ec6b4ca6}. \item\end{DoxyCompactList}\item 
+{\bf RefinablePar} \& {\bf GetPar} (const long i)\label{a00070_ae5c543d3b0fb010afa37b5f12620405b}
+
+\begin{DoxyCompactList}\small\item\em Access all parameters in the order they were inputted. \item\end{DoxyCompactList}\item 
+const {\bf RefinablePar} \& {\bf GetPar} (const long i) const \label{a00070_a5686cc39b27bc719be33aad0700438a1}
+
+\begin{DoxyCompactList}\small\item\em Access all parameters in the order they were inputted. \item\end{DoxyCompactList}\item 
+{\bf RefinablePar} \& {\bf GetPar} (const string \&name)\label{a00070_aea1c3b652c3f1eb5444bd47456e04392}
+
+\begin{DoxyCompactList}\small\item\em Access all parameters from their name. \item\end{DoxyCompactList}\item 
+const {\bf RefinablePar} \& {\bf GetPar} (const string \&name) const \label{a00070_a519b443c48cc463ed6b0682a6f557074}
+
+\begin{DoxyCompactList}\small\item\em Access all parameters from their name. \item\end{DoxyCompactList}\item 
+{\bf RefinablePar} \& {\bf GetPar} (const REAL $\ast$)\label{a00070_a07ea375ae64f69559e0b595e8c111087}
+
+\begin{DoxyCompactList}\small\item\em Access parameter from its adress. \item\end{DoxyCompactList}\item 
+const {\bf RefinablePar} \& {\bf GetPar} (const REAL $\ast$) const \label{a00070_a82b9eeedc157f76f17e9f9461c3a11d7}
+
+\begin{DoxyCompactList}\small\item\em Access parameter from its adress. \item\end{DoxyCompactList}\item 
+{\bf RefinablePar} \& {\bf GetParNotFixed} (const long i)
+\begin{DoxyCompactList}\small\item\em Access all parameters in the order they were inputted, skipping fixed parameters. \item\end{DoxyCompactList}\item 
+const {\bf RefinablePar} \& {\bf GetParNotFixed} (const long i) const 
+\begin{DoxyCompactList}\small\item\em Access all parameters in the order they were inputed, skipping fixed parameters. \item\end{DoxyCompactList}\item 
+void {\bf AddPar} (const {\bf RefinablePar} \&newRefPar)
+\begin{DoxyCompactList}\small\item\em Add a refinable parameter. \item\end{DoxyCompactList}\item 
+void {\bf AddPar} ({\bf RefinablePar} $\ast$newRefPar)
+\begin{DoxyCompactList}\small\item\em Add a refinable parameter. \item\end{DoxyCompactList}\item 
+void {\bf AddPar} ({\bf RefinableObj} \&newRefParList, const bool copyParam=false)
+\begin{DoxyCompactList}\small\item\em Add all the parameters in another \doxyref{RefinableObj}{p.}{a00070}. \item\end{DoxyCompactList}\item 
+vector$<$ {\bf RefinablePar} $\ast$ $>$::iterator {\bf RemovePar} ({\bf RefinablePar} $\ast$refPar)
+\begin{DoxyCompactList}\small\item\em Remove a refinable parameter. \item\end{DoxyCompactList}\item 
+virtual void {\bfseries Print} () const \label{a00070_a6033a7d7892806d9157daad9c4aea8c3}
+
+\item 
+unsigned long {\bf CreateParamSet} (const string name=\char`\"{}\char`\"{}) const 
+\begin{DoxyCompactList}\small\item\em Save the current set of refined values in a new set. \item\end{DoxyCompactList}\item 
+void {\bf ClearParamSet} (const unsigned long id) const \label{a00070_ae9a2401becfcd7dda785c0931d3f31f3}
+
+\begin{DoxyCompactList}\small\item\em Erase the param set with the given id, releasing memory. \item\end{DoxyCompactList}\item 
+void {\bf SaveParamSet} (const unsigned long id) const 
+\begin{DoxyCompactList}\small\item\em Save the current set of refined values over a previously-\/created set of saved values. \item\end{DoxyCompactList}\item 
+void {\bf RestoreParamSet} (const unsigned long id)
+\begin{DoxyCompactList}\small\item\em Restore a saved set of values. \item\end{DoxyCompactList}\item 
+const CrystVector\_\-REAL \& {\bf GetParamSet} (const unsigned long setId) const 
+\begin{DoxyCompactList}\small\item\em Access one save refpar set. \item\end{DoxyCompactList}\item 
+CrystVector\_\-REAL \& {\bf GetParamSet} (const unsigned long setId)
+\begin{DoxyCompactList}\small\item\em Access one save refpar set. \item\end{DoxyCompactList}\item 
+REAL {\bf GetParamSet\_\-ParNotFixedHumanValue} (const unsigned long setId, const long parNumber) const 
+\begin{DoxyCompactList}\small\item\em Access the (human) value of one refined parameter in a saved set of parameters. \item\end{DoxyCompactList}\item 
+const void {\bf EraseAllParamSet} ()
+\begin{DoxyCompactList}\small\item\em Erase all saved refpar sets. \item\end{DoxyCompactList}\item 
+const string \& {\bf GetParamSetName} (const unsigned long setId) const 
+\begin{DoxyCompactList}\small\item\em Get the name associated to a refpar set. \item\end{DoxyCompactList}\item 
+void {\bf SetLimitsAbsolute} (const string \&parName, const REAL min, const REAL max)\label{a00070_a2f24a7b834f5588e32aac9c6e33a1020}
+
+\begin{DoxyCompactList}\small\item\em Change the limits for a given parameter, giving absolute new limits. \item\end{DoxyCompactList}\item 
+void {\bf SetLimitsAbsolute} (const {\bf RefParType} $\ast$type, const REAL min, const REAL max)\label{a00070_a371f137ad14a77ee3b545520d05fe4d6}
+
+\begin{DoxyCompactList}\small\item\em Change the limits for a category of parameters, giving absolute new limits. \item\end{DoxyCompactList}\item 
+void {\bf SetLimitsRelative} (const string \&parName, const REAL min, const REAL max)
+\begin{DoxyCompactList}\small\item\em Change the limits for a given parameter, giving relative new limits (eg giving -\/.1 and +.1 will set new limits at the current value + min and current value + max) Thus min should logically be $<$0 and max $>$0. \item\end{DoxyCompactList}\item 
+void {\bf SetLimitsRelative} (const {\bf RefParType} $\ast$type, const REAL min, const REAL max)
+\begin{DoxyCompactList}\small\item\em Change the limits for a category of parameters, giving relative new limits (eg giving -\/.1 and +.1 will set new limits at the current value + min and current value + max). \item\end{DoxyCompactList}\item 
+void {\bf SetLimitsProportional} (const string \&parName, const REAL min, const REAL max)
+\begin{DoxyCompactList}\small\item\em Change the limits for a given parameter, proportionnaly to the current value. \item\end{DoxyCompactList}\item 
+void {\bf SetLimitsProportional} (const {\bf RefParType} $\ast$type, const REAL min, const REAL max)
+\begin{DoxyCompactList}\small\item\em Change the limits for a category of parameters, proportionnaly to their current value. \item\end{DoxyCompactList}\item 
+void {\bf SetGlobalOptimStep} (const {\bf RefParType} $\ast$type, const REAL step)\label{a00070_ae4f0b5b0038ff3b49dcdc8adbf98bc58}
+
+\begin{DoxyCompactList}\small\item\em Change the maximum step to use during Global Optimization algorithms. \item\end{DoxyCompactList}\item 
+{\bf ObjRegistry}$<$ {\bf RefinableObj} $>$ \& {\bf GetSubObjRegistry} ()\label{a00070_a30e81164b0176ca00e90d994ca0a0827}
+
+\begin{DoxyCompactList}\small\item\em Access to the registry of \doxyref{RefinableObj}{p.}{a00070} used by this object. \item\end{DoxyCompactList}\item 
+const {\bf ObjRegistry}$<$ {\bf RefinableObj} $>$ \& {\bf GetSubObjRegistry} () const \label{a00070_a23999d5fb06661cddc9bfa294c48624e}
+
+\begin{DoxyCompactList}\small\item\em Access to the registry of \doxyref{RefinableObj}{p.}{a00070} used by this object. \item\end{DoxyCompactList}\item 
+virtual void {\bf RegisterClient} ({\bf RefinableObj} \&) const 
+\begin{DoxyCompactList}\small\item\em Register a new object using this object. \item\end{DoxyCompactList}\item 
+virtual void {\bf DeRegisterClient} ({\bf RefinableObj} \&) const \label{a00070_ae37091ca0b7091eaf87bf630433ad91d}
+
+\begin{DoxyCompactList}\small\item\em Deregister an object (which not any more) using this object. \item\end{DoxyCompactList}\item 
+virtual const {\bf ObjRegistry}$<$ {\bf RefinableObj} $>$ \& {\bf GetClientRegistry} () const \label{a00070_abb63797f2ffc7e8317f66ce9749f105f}
+
+\begin{DoxyCompactList}\small\item\em Get the list of clients. \item\end{DoxyCompactList}\item 
+virtual {\bf ObjRegistry}$<$ {\bf RefinableObj} $>$ \& {\bf GetClientRegistry} ()\label{a00070_aaf7fdd5c8d015285639fe24138e31b6b}
+
+\begin{DoxyCompactList}\small\item\em Get the list of clients. \item\end{DoxyCompactList}\item 
+bool {\bf IsBeingRefined} () const \label{a00070_addbd91121eaf715f67080d95cfdc857c}
+
+\begin{DoxyCompactList}\small\item\em Is the object being refined ? (Can be refined by one algorithm at a time only.). \item\end{DoxyCompactList}\item 
+virtual void {\bf BeginOptimization} (const bool allowApproximations=false, const bool enableRestraints=false)
+\begin{DoxyCompactList}\small\item\em This should be called by any optimization class at the begining of an optimization. \item\end{DoxyCompactList}\item 
+virtual void {\bf EndOptimization} ()
+\begin{DoxyCompactList}\small\item\em This should be called by any optimization class at the end of an optimization. \item\end{DoxyCompactList}\item 
+virtual void {\bf SetApproximationFlag} (const bool allow)
+\begin{DoxyCompactList}\small\item\em Enable or disable numerical approximations. \item\end{DoxyCompactList}\item 
+virtual void {\bf RandomizeConfiguration} ()
+\begin{DoxyCompactList}\small\item\em Randomize Configuration (before a global optimization). \item\end{DoxyCompactList}\item 
+virtual void {\bf GlobalOptRandomMove} (const REAL mutationAmplitude, const {\bf RefParType} $\ast$type={\bf gpRefParTypeObjCryst})
+\begin{DoxyCompactList}\small\item\em Make a random move of the current configuration. \item\end{DoxyCompactList}\item 
+void {\bf BeginGlobalOptRandomMove} ()
+\begin{DoxyCompactList}\small\item\em Raise a flag, to be sure not to make a random change more than once in each \doxyref{RefinableObj}{p.}{a00070}. \item\end{DoxyCompactList}\item 
+virtual REAL {\bf GetLogLikelihood} () const 
+\begin{DoxyCompactList}\small\item\em Get -\/log(likelihood) of the current configuration for the object. \item\end{DoxyCompactList}\item 
+virtual unsigned int {\bf GetNbLSQFunction} () const \label{a00070_af435b8a23739f154222ba619f67cfc92}
+
+\begin{DoxyCompactList}\small\item\em Number of LSQ functions. \item\end{DoxyCompactList}\item 
+virtual const CrystVector\_\-REAL \& {\bf GetLSQCalc} (const unsigned int) const \label{a00070_a99e8e0a4d761829f940c0ed3d29fec89}
+
+\begin{DoxyCompactList}\small\item\em Get the current calculated value for the LSQ function. \item\end{DoxyCompactList}\item 
+virtual const CrystVector\_\-REAL \& {\bf GetLSQObs} (const unsigned int) const \label{a00070_a60ecf8524c697c0385c3810b825459f2}
+
+\begin{DoxyCompactList}\small\item\em Get the observed values for the LSQ function. \item\end{DoxyCompactList}\item 
+virtual const CrystVector\_\-REAL \& {\bf GetLSQWeight} (const unsigned int) const \label{a00070_a798d3ab37d696395897a0a416f0757c0}
+
+\begin{DoxyCompactList}\small\item\em Get the weight values for the LSQ function. \item\end{DoxyCompactList}\item 
+virtual const CrystVector\_\-REAL \& {\bf GetLSQDeriv} (const unsigned int, {\bf RefinablePar} \&)
+\begin{DoxyCompactList}\small\item\em Get the first derivative values for the LSQ function, for a given parameter. \item\end{DoxyCompactList}\item 
+void {\bf ResetParList} ()
+\begin{DoxyCompactList}\small\item\em Re-\/init the list of refinable parameters, removing all parameters. \item\end{DoxyCompactList}\item 
+virtual void {\bf XMLOutput} (ostream \&os, int indent=0) const 
+\begin{DoxyCompactList}\small\item\em Output to stream in well-\/formed XML. \item\end{DoxyCompactList}\item 
+virtual void {\bf XMLInput} (istream \&is, const {\bf XMLCrystTag} \&tag)
+\begin{DoxyCompactList}\small\item\em Input From stream. \item\end{DoxyCompactList}\item 
+virtual void {\bf UpdateDisplay} () const 
+\begin{DoxyCompactList}\small\item\em If there is an interface, this should be automatically be called each time there is a 'new, significant' configuration to report. \item\end{DoxyCompactList}\item 
+unsigned int {\bf GetNbOption} () const \label{a00070_a389c9d9ed7e8c700abfa4dfb72a32792}
+
+\begin{DoxyCompactList}\small\item\em Number of Options for this object. \item\end{DoxyCompactList}\item 
+{\bf RefObjOpt} \& {\bf GetOption} (const unsigned int i)\label{a00070_a2dcb69d78e55dc75a7377e5a772536de}
+
+\begin{DoxyCompactList}\small\item\em Access to the options. \item\end{DoxyCompactList}\item 
+const {\bf RefObjOpt} \& {\bf GetOption} (const unsigned int i) const \label{a00070_a77b66fd9c4e752e9b58ecd9e5ec2a218}
+
+\begin{DoxyCompactList}\small\item\em const access to the options \item\end{DoxyCompactList}\item 
+virtual void {\bf GetGeneGroup} (const {\bf RefinableObj} \&obj, CrystVector\_\-uint \&groupIndex, unsigned int \&firstGroup) const 
+\begin{DoxyCompactList}\small\item\em Get the gene group assigned to each parameter. \item\end{DoxyCompactList}\item 
+void {\bf SetDeleteRefParInDestructor} (const bool b)
+\begin{DoxyCompactList}\small\item\em Set this object not to delete its list of parameters when destroyed. \item\end{DoxyCompactList}\item 
+const {\bf RefinableObjClock} \& {\bf GetRefParListClock} () const 
+\begin{DoxyCompactList}\small\item\em What was the last time a \doxyref{RefinablePar}{p.}{a00072} was added/removed ? \item\end{DoxyCompactList}\item 
+virtual REAL {\bf GetRestraintCost} () const 
+\begin{DoxyCompactList}\small\item\em Get the restraint cost (overall penalty of all restraints). \item\end{DoxyCompactList}\item 
+void {\bf AddRestraint} ({\bf Restraint} $\ast$pNewRestraint)
+\begin{DoxyCompactList}\small\item\em Add a new restraint. \item\end{DoxyCompactList}\item 
+vector$<$ {\bf Restraint} $\ast$ $>$::iterator {\bf RemoveRestraint} ({\bf Restraint} $\ast$pRestraint)
+\begin{DoxyCompactList}\small\item\em Remove a restraint from the list of known restraints. \item\end{DoxyCompactList}\item 
+virtual void {\bf TagNewBestConfig} () const 
+\begin{DoxyCompactList}\small\item\em During a global optimization, tells the object that the current config is the latest \char`\"{}best\char`\"{} config. \item\end{DoxyCompactList}\item 
+const {\bf RefinableObjClock} \& {\bf GetClockMaster} () const \label{a00070_a5910fb213a6b51da18d5f65badceb029}
+
+\begin{DoxyCompactList}\small\item\em This clocks records \_\-any\_\- change in the object. See refinableObj::mClockMaster. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+long {\bf FindPar} (const string \&name) const \label{a00070_a6c1fd4ec11915278a6a9db9bf3aa1374}
+
+\begin{DoxyCompactList}\small\item\em Find a refinable parameter with a given name. \item\end{DoxyCompactList}\item 
+long {\bf FindPar} (const REAL $\ast$) const \label{a00070_a96acb0979c364332bc5365a73b58a246}
+
+\begin{DoxyCompactList}\small\item\em Find a refinable parameter from the adress of its value. \item\end{DoxyCompactList}\item 
+void {\bf AddSubRefObj} ({\bf RefinableObj} \&)
+\item 
+void {\bf RemoveSubRefObj} ({\bf RefinableObj} \&)
+\item 
+void {\bf AddOption} ({\bf RefObjOpt} $\ast$opt)
+\item 
+virtual void {\bf Prepare} ()
+\item 
+map$<$ unsigned long, pair$<$ CrystVector\_\-REAL, string $>$ $>$::iterator {\bf FindParamSet} (unsigned long id) const \label{a00070_a5db8d488c4782f2e143fbb6ec96e0b32}
+
+\begin{DoxyCompactList}\small\item\em Find a parameter set with a given id (and check if it is there). \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string {\bf mName}\label{a00070_ad8ddc8c4b3daae8649986d7febc5fca4}
+
+\begin{DoxyCompactList}\small\item\em Name for this RefinableObject. Should be unique, at least in the same scope.+. \item\end{DoxyCompactList}\item 
+vector$<$ {\bf RefinablePar} $\ast$ $>$ {\bf mvpRefPar}\label{a00070_ae05556c30ef2d6818c22750c89690fc9}
+
+\begin{DoxyCompactList}\small\item\em Vector of pointers to the refinable parameters. \item\end{DoxyCompactList}\item 
+vector$<$ {\bf Restraint} $\ast$ $>$ {\bf mvpRestraint}
+\begin{DoxyCompactList}\small\item\em Vector of pointers to the restraints for this object. \item\end{DoxyCompactList}\item 
+map$<$ unsigned long, pair$<$ CrystVector\_\-REAL, string $>$ $>$ {\bf mvpSavedValuesSet}
+\begin{DoxyCompactList}\small\item\em Map of (index,pointers to arrays) used to save sets of values for all parameters. \item\end{DoxyCompactList}\item 
+long {\bf mNbRefParNotFixed}\label{a00070_a8cffff9a5b5d2a76bd9e29cce5f4700e}
+
+\begin{DoxyCompactList}\small\item\em Total of not-\/fixed parameters. \item\end{DoxyCompactList}\item 
+CrystVector\_\-long {\bf mRefparNotFixedIndex}\label{a00070_a359f6599fdaa11ea01afd91289265bac}
+
+\begin{DoxyCompactList}\small\item\em Index of not-\/fixed parameters. \item\end{DoxyCompactList}\item 
+int {\bf mOptimizationDepth}
+\begin{DoxyCompactList}\small\item\em Is the object being refined or optimized ? if mOptimizationDepth=0, no optimization is taking place. \item\end{DoxyCompactList}\item 
+{\bf ObjRegistry}$<$ {\bf RefinableObj} $>$ {\bf mSubObjRegistry}\label{a00070_a101ff2559ab840729c8cbc7b2469afd6}
+
+\begin{DoxyCompactList}\small\item\em Registry of RefinableObject needed for this object (owned by this object or not). \item\end{DoxyCompactList}\item 
+{\bf ObjRegistry}$<$ {\bf RefinableObj} $>$ {\bf mClientObjRegistry}
+\begin{DoxyCompactList}\small\item\em Registry of RefinableObject using this object. \item\end{DoxyCompactList}\item 
+{\bf ObjRegistry}$<$ {\bf RefObjOpt} $>$ {\bf mOptionRegistry}
+\begin{DoxyCompactList}\small\item\em List of options for this object. \item\end{DoxyCompactList}\item 
+bool {\bf mDeleteRefParInDestructor}
+\begin{DoxyCompactList}\small\item\em If true (the default), then all \doxyref{RefinablePar}{p.}{a00072} will be deleted when the the object is deleted. \item\end{DoxyCompactList}\item 
+{\bf RefinableObjClock} {\bf mRefParListClock}\label{a00070_a867562fcd8c5afd0fd178c98729e1f35}
+
+\begin{DoxyCompactList}\small\item\em Last time the RefinableParList was modified (a parameter added or removed). \item\end{DoxyCompactList}\item 
+bool {\bf mRandomMoveIsDone}
+\item 
+CrystVector\_\-REAL {\bf mLSQDeriv}
+\begin{DoxyCompactList}\small\item\em Temporary array used to return derivative values of the LSQ function for given parameters. \item\end{DoxyCompactList}\item 
+{\bf RefinableObjClock} {\bf mClockMaster}
+\begin{DoxyCompactList}\small\item\em Master clock, which is changed whenever the object has been altered. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+Generic Refinable Object. This is basically a list of refinable parameters, with other basic common properties such as a name,. etc... This allows optimization/refinement algorithms to access the parameters without knowing what the object really is.
+
+\begin{Desc}
+\item[{\bf Todo}]Define more clearly which operations are recursive (ie also modify sub-\/objects). \end{Desc}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!RefinableObj@{RefinableObj}}
+\index{RefinableObj@{RefinableObj}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{RefinableObj}]{\setlength{\rightskip}{0pt plus 5cm}ObjCryst::RefinableObj::RefinableObj (const bool {\em internalUseOnly})}\hfill\label{a00070_aa0eaf0982686476cbec02a8afeebc92d}
+
+
+Constructor. Using internalUseOnly=true will avoid registering the the object to any registry, and thus (for example) no display will be created, nor will this object be automatically be saved. \index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!RefinableObj@{RefinableObj}}
+\index{RefinableObj@{RefinableObj}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{RefinableObj}]{\setlength{\rightskip}{0pt plus 5cm}ObjCryst::RefinableObj::RefinableObj (const {\bf RefinableObj} \& {\em old})}\hfill\label{a00070_a5f77dcf037cc8d2ea1fd84bfda6ddbc0}
+
+
+Defined not implemented. .. Should never be called (copying the refinable parameters would allow you to modify the input object). Use the default constructor and RefinableObj::AddPar(RefinableObj\&) instead. 
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!AddOption@{AddOption}}
+\index{AddOption@{AddOption}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{AddOption}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::RefinableObj::AddOption ({\bf RefObjOpt} $\ast$ {\em opt})\hspace{0.3cm}{\ttfamily  [protected]}}\hfill\label{a00070_a8bd8353b34fc4088a987be0eaf01e5f6}
+\begin{DoxyInternal}{For internal use only.}
+Add an option for this parameter \end{DoxyInternal}
+\index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!AddPar@{AddPar}}
+\index{AddPar@{AddPar}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{AddPar}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::RefinableObj::AddPar ({\bf RefinableObj} \& {\em newRefParList}, \/  const bool {\em copyParam} = {\ttfamily false})}\hfill\label{a00070_a6a28259e473fadd53fbc9b9bf7930813}
+
+
+Add all the parameters in another \doxyref{RefinableObj}{p.}{a00070}. Parameters are  copied, so they should be allocated in the heap.
+
+\begin{DoxyWarning}{Warning}
+If a copy of another \doxyref{RefinableObj}{p.}{a00070} parameter list is made, such as in the \doxyref{OptimizationObj}{p.}{a00054} class, make sure that upon deletion of this object the parameters will not be destroyed. To do this use RefinableObj::SetDeleteRefParInDestructor(false).
+\end{DoxyWarning}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em copyParam,:}]if false (default), then parameters are not copied from the object but just referenced. Use RefinableObj::SetDeleteRefParInDestructor(false) accordingly. If true, then the parameters are copied, so that any modification to the fixed/limited/used attributes do not affect the original parameter. Only the value and the parameter's clock can then be modified by the copied parameter\end{DoxyParams}
+\begin{DoxyNote}{Note}
+: if a parameter is added and its name is already used by another, its name will be automatically appended with an $\sim$ 
+\end{DoxyNote}
+\index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!AddPar@{AddPar}}
+\index{AddPar@{AddPar}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{AddPar}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::RefinableObj::AddPar ({\bf RefinablePar} $\ast$ {\em newRefPar})}\hfill\label{a00070_a4a792c84f7d35e71b3e89aae5a87bffa}
+
+
+Add a refinable parameter. The parameter is {\itshape not\/} copied, so it should be allocated in the heap.
+
+\begin{DoxyNote}{Note}
+: if a parameter is added and its name is already used by another, its name will be automatically appended with an $\sim$ 
+\end{DoxyNote}
+\index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!AddPar@{AddPar}}
+\index{AddPar@{AddPar}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{AddPar}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::RefinableObj::AddPar (const {\bf RefinablePar} \& {\em newRefPar})}\hfill\label{a00070_a0c0050a3d3141ca34eb8f4b559ad2f8d}
+
+
+Add a refinable parameter. The parameter is copied, so it need only be allocated temporarily.
+
+\begin{Desc}
+\item[{\bf Deprecated}]Use the next function, which supplies the parameter as a pointer, and avoids a useless copy. \end{Desc}
+\begin{DoxyNote}{Note}
+: if a parameter is added and its name is already used by another, its name will be automatically appended with an $\sim$ 
+\end{DoxyNote}
+\index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!AddRestraint@{AddRestraint}}
+\index{AddRestraint@{AddRestraint}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{AddRestraint}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::RefinableObj::AddRestraint ({\bf Restraint} $\ast$ {\em pNewRestraint})}\hfill\label{a00070_a0eec1ccf5ba9769e5c6a82a85ecf451d}
+
+
+Add a new restraint. This returns an iterator pointing to the next \doxyref{Restraint}{p.}{a00080} in the vector. \index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!AddSubRefObj@{AddSubRefObj}}
+\index{AddSubRefObj@{AddSubRefObj}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{AddSubRefObj}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::RefinableObj::AddSubRefObj ({\bf RefinableObj} \&)\hspace{0.3cm}{\ttfamily  [protected]}}\hfill\label{a00070_ae4740b33ea934e4ab9b9bce9ebbfa806}
+\begin{DoxyInternal}{For internal use only.}
+Add an object in the registry of used objects. \end{DoxyInternal}
+\index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!BeginGlobalOptRandomMove@{BeginGlobalOptRandomMove}}
+\index{BeginGlobalOptRandomMove@{BeginGlobalOptRandomMove}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{BeginGlobalOptRandomMove}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::RefinableObj::BeginGlobalOptRandomMove ()}\hfill\label{a00070_a47fc5a85493671a3590ed7e3971b18fe}
+
+
+Raise a flag, to be sure not to make a random change more than once in each \doxyref{RefinableObj}{p.}{a00070}. This calls recursively all sub-\/objects.
+
+This is necessary since one object may be included in several others. This must be called before making a random configuration change on a list of objects. \index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!BeginOptimization@{BeginOptimization}}
+\index{BeginOptimization@{BeginOptimization}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{BeginOptimization}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::RefinableObj::BeginOptimization (const bool {\em allowApproximations} = {\ttfamily false}, \/  const bool {\em enableRestraints} = {\ttfamily false})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00070_ababd8f2916e41a20d2c1b21f6ffefe96}
+
+
+This should be called by any optimization class at the begining of an optimization. This will also check that everything is ready, eg call the \doxyref{RefinableObj::Prepare()}{p.}{a00070_a48d11671e7f8699f7bc24077585c5e0f} function. This also affects all sub-\/objects. \begin{DoxyNote}{Note}
+this may be called several time for some objects which are used by several other objects, or for nested optimizations (e.g. least-\/squares optimizations inside a global one).
+
+\doxyref{EndOptimization()}{p.}{a00070_ab0035f6164cb24ace67b51b11993a851} must be called at the end of the optimization, the same number of time \doxyref{BeginOptimization()}{p.}{a00070_ababd8f2916e41a20d2c1b21f6ffefe96} was called !
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em allowApproximations,:}]if true, then the object can use faster but less precise functions during the optimization. This is useful for global optimization not using derivatives. \item[{\em enableRestraints,:}]\end{DoxyParams}
+\begin{Desc}
+\item[{\bf Deprecated}]if true, then restrained parameters will be allowed to go beyond theur hard limits. This implies that the algorithm will take into account the cost (penalty) related to the restraints. Objects which do not use restraints will simply ignore this. WARNING: this parameter may be removed with the new likelihood scheme. \end{Desc}
+
+
+Reimplemented in {\bf ObjCryst::Crystal} \doxyref{}{p.}{a00020_afe25ea6d287d6dd9cd0a03aed3798525}, {\bf ObjCryst::CellExplorer} \doxyref{}{p.}{a00014_ae75ee0eb6652d5d43404b7205ec3cb94}, {\bf ObjCryst::Molecule} \doxyref{}{p.}{a00046_a5fbdadb37966f382a6e33150285819dc}, {\bf ObjCryst::PowderPatternBackground} \doxyref{}{p.}{a00062_ac9a022b49d583e8ae81e4d96e50cc9d8}, {\bf ObjCryst::PowderPatternDiffraction} \doxyref{}{p.}{a00065_a44d10a7c3404153fe4513c8944629c45}, {\bf ObjCryst::PowderPattern} \doxyref{}{p.}{a00061_a8e29b6186253d686c4f078906592df7b}, {\bf ObjCryst::TextureMarchDollase} \doxyref{}{p.}{a00103_a73f6148d035bbdeb98b0115d76fe48a8}, and {\bf ObjCryst::ScatteringData} \doxyref{}{p.}{a00088_a6b0f18996edafa21a03bf9550dcf8981}.\index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!CreateParamSet@{CreateParamSet}}
+\index{CreateParamSet@{CreateParamSet}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{CreateParamSet}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long ObjCryst::RefinableObj::CreateParamSet (const string {\em name} = {\ttfamily \char`\"{}\char`\"{}}) const}\hfill\label{a00070_abd5b0aa78ff6ec95838e78e2d3685b56}
+
+
+Save the current set of refined values in a new set. 
+\begin{DoxyParams}{Parameters}
+\item[{\em name}]: the name associated to this set of values. Names should be unique. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+an number identifying the set of saved values.
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+: there is no limit to the number of parameters sets, so try to release them when you don't need them. 
+\end{DoxyWarning}
+\index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!EndOptimization@{EndOptimization}}
+\index{EndOptimization@{EndOptimization}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{EndOptimization}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::RefinableObj::EndOptimization ()\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00070_ab0035f6164cb24ace67b51b11993a851}
+
+
+This should be called by any optimization class at the end of an optimization. This also affects all sub-\/objects. \begin{DoxyNote}{Note}
+this may be called several time for some objects which are used by several other objects. 
+\end{DoxyNote}
+
+
+Reimplemented in {\bf ObjCryst::Molecule} \doxyref{}{p.}{a00046_aec0a3ba0d08fdfed38cc757efb635ffb}, {\bf ObjCryst::PowderPatternDiffraction} \doxyref{}{p.}{a00065_a11f7690878a07983de3abb839b087798}, {\bf ObjCryst::ScatteringData} \doxyref{}{p.}{a00088_a782e0caf5c6f2941ca64d17293b1e8b4}, and {\bf ObjCryst::ZScatterer} \doxyref{}{p.}{a00155_a5742d1fa13b1300c92359ef1250753c3}.\index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!EraseAllParamSet@{EraseAllParamSet}}
+\index{EraseAllParamSet@{EraseAllParamSet}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{EraseAllParamSet}]{\setlength{\rightskip}{0pt plus 5cm}const void ObjCryst::RefinableObj::EraseAllParamSet ()}\hfill\label{a00070_ac269ad4ad4ca8b4e9f13f5466475d959}
+
+
+Erase all saved refpar sets. \index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!GetClassName@{GetClassName}}
+\index{GetClassName@{GetClassName}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{GetClassName}]{\setlength{\rightskip}{0pt plus 5cm}virtual const string\& ObjCryst::RefinableObj::GetClassName () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00070_a62968d90a7a3080738b363934616c019}
+
+
+Name for this class (\char`\"{}RefinableObj\char`\"{}, \char`\"{}Crystal\char`\"{},. ..). This is only useful to distinguish different classes when picking up objects from the \doxyref{RefinableObj}{p.}{a00070} Global Registry 
+
+Reimplemented in {\bf ObjCryst::Atom} \doxyref{}{p.}{a00008_a9f0d1cb7c3b1db1baf84076e5da0ca0e}, {\bf ObjCryst::Crystal} \doxyref{}{p.}{a00020_ad1f69a5fb8981a2cf0eeb6245728af6d}, {\bf ObjCryst::DiffractionDataSingleCrystal} \doxyref{}{p.}{a00026_a05b1f448a143ad61036f001d09a3509f}, {\bf ObjCryst::CellExplorer} \doxyref{}{p.}{a00014_a67ec6642b2a93030878764091178a0fb}, {\bf ObjCryst::Molecule} \doxyref{}{p.}{a00046_a7f0f1ae6670032f5afc9ccf65d45f8c4}, {\bf ObjCryst::PDF} \doxyref{}{p.}{a00055_a809ab3f4cc8bdd268bd815baedccdc20}, {\bf ObjCryst::PowderPatternComponent} \doxyref{}{p.}{a00064_a5e797476d8d76ef797e1e8b51db9e8fb}, {\bf ObjCryst::PowderPatternBackground} \doxyref{}{p.}{a00062_afae084513270b7adf50954bec4037380}, {\bf ObjCryst::PowderPatternDiffraction} \doxyref{}{p.}{a00065_a74b02e35219c6bc18521e66719778881}, {\bf ObjCryst::PowderPattern} \doxyref{}{p.}{a00061_a20dadada4d5b428c5122d4c75fb49164}, {\bf ObjCryst::PowderPatternBackgroundBayesianMinimiser} \doxyref{}{p.}{a00063_a7f39f799fafc12a3bdb937b5cc9545ad}, {\bf ObjCryst::ReflectionProfilePseudoVoigt} \doxyref{}{p.}{a00075_a55628cdadc249b7973f2a6471d478e76}, {\bf ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt} \doxyref{}{p.}{a00074_a5e921c0682e78188e422c006e34df8a0}, {\bf ObjCryst::Scatterer} \doxyref{}{p.}{a00084_a374fc1bb2887ab1f61d456326d97c05f}, {\bf ObjCryst::TextureMarchDollase} \doxyref{}{p.}{a00103_a2b1002c1ed071f53b2a6f1b953527cc2}, {\bf ObjCryst::Radiation} \doxyref{}{p.}{a00068_a56558c41ec3bd350a2904f5e469fb68a}, {\bf ObjCryst::ScatteringPower} \doxyref{}{p.}{a00089_ac31cc4135011046f93d49f4173aee3ee}, {\bf ObjCryst::ScatteringPowerAtom} \doxyref{}{p.}{a00090_a87fcc8fe4871d1b9b6ec08af5f353657}, {\bf ObjCryst::ScatteringPowerSphere} \doxyref{}{p.}{a00091_a57e85d29926fe93da66041a43583e893}, {\bf ObjCryst::UnitCell} \doxyref{}{p.}{a00109_ac3b3c2e007083bf6f329eb11a6b610d1}, and {\bf ObjCryst::ZScatterer} \doxyref{}{p.}{a00155_a610a62c221ed289e1ce4d68adac921ee}.\index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!GetGeneGroup@{GetGeneGroup}}
+\index{GetGeneGroup@{GetGeneGroup}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{GetGeneGroup}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::RefinableObj::GetGeneGroup (const {\bf RefinableObj} \& {\em obj}, \/  CrystVector\_\-uint \& {\em groupIndex}, \/  unsigned int \& {\em firstGroup}) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00070_ad59c8ad2b0d7ee59fa3f399a54f05e54}
+
+
+Get the gene group assigned to each parameter. Each parameter (a {\itshape gene\/} in terms of genetic algorithms) can be assigned to a gene group. Thus when mating two configurations, genes will be exchanged by groups. By default (in the base RefinabeObj class), each parameter is alone in its group. Derived classes can group genes for a better s$\ast$$\ast$ life.
+
+The number identifying a gene group only has a meaning in a given object. It can also change on subsequent calls, and thus is not unique.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em obj}]the , supplied by an algorithm class (\doxyref{OptimizationObj}{p.}{a00054},..), which contains a list of parameters, some of which (but possibly all or none) are parameters belonging to this object. \item[{\em groupIndex}]a vector of unsigned integers, one for each parameter in the input object, giving an unsigned integer value as gene group index. At the beginning this vector should contain only zeros (no group assigned). \item[{\em firstGroup}]this is the number of groups which have already been assigned, plus one. The gene groups returned by this object will start from this value, and increment {\bfseries firstGroup} for each gene group used, so that different \doxyref{RefinableObj}{p.}{a00070} cannot share a gene group. \end{DoxyParams}
+\begin{DoxyNote}{Note}
+this function is not optimized, and should only be called at the beginning of a refinement. 
+\end{DoxyNote}
+
+
+Reimplemented in {\bf ObjCryst::Atom} \doxyref{}{p.}{a00008_a01645142310cf68d21b50ec514a0af77}, {\bf ObjCryst::Crystal} \doxyref{}{p.}{a00020_afcef6e251265ddf23657fe10b0cd4912}, {\bf ObjCryst::PowderPatternBackground} \doxyref{}{p.}{a00062_ae34c8b65496994cce5b6b73748d3a2b9}, {\bf ObjCryst::PowderPatternDiffraction} \doxyref{}{p.}{a00065_a7c6a94f74a6010abdb9ba4d5a8653d3f}, {\bf ObjCryst::PowderPattern} \doxyref{}{p.}{a00061_ad3b643041cc61a3d39765bd7c268d6bc}, {\bf ObjCryst::ScatteringPower} \doxyref{}{p.}{a00089_aae98160e01ecb2098cf4777126860aa5}, and {\bf ObjCryst::ZScatterer} \doxyref{}{p.}{a00155_ae8143bbd71decab10138ddadf0e8b220}.\index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!GetLogLikelihood@{GetLogLikelihood}}
+\index{GetLogLikelihood@{GetLogLikelihood}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{GetLogLikelihood}]{\setlength{\rightskip}{0pt plus 5cm}virtual REAL ObjCryst::RefinableObj::GetLogLikelihood () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00070_a9a9a5ea2b997cd36b44ed35c2bab3245}
+
+
+Get -\/log(likelihood) of the current configuration for the object. By default (no likelihood evaluation available), this is equal to 0.
+
+This call should not be recursive, it is the task of the algorithm to get the sum of likelihoods for all objects invlolved.
+
+\begin{DoxyNote}{Note}
+contrary to the old \char`\"{}Cost Function\char`\"{} approach, with log(Likelihood) there is no 'choice' of cost function, so that it is the task of the object to give the optimized likelihood (possibly with user options).
+\end{DoxyNote}
+\begin{DoxyWarning}{Warning}
+: this is in under heavy development, so expect changes... 
+\end{DoxyWarning}
+
+
+Reimplemented in {\bf ObjCryst::Crystal} \doxyref{}{p.}{a00020_a6f10c5a30864b9699b313f90b646138f}, {\bf ObjCryst::DiffractionDataSingleCrystal} \doxyref{}{p.}{a00026_ad42c5159763eb136fadfb653067d1a7b}, {\bf ObjCryst::Molecule} \doxyref{}{p.}{a00046_a1c0e8ad2410035c07c4be88315554f3f}, {\bf ObjCryst::PowderPattern} \doxyref{}{p.}{a00061_a40363370a5a3e82d445fc3f1d653fd63}, {\bf ObjCryst::PowderPatternBackgroundBayesianMinimiser} \doxyref{}{p.}{a00063_a515e6c16b8900dd4360bcae023ebbd38}, and {\bf ObjCryst::ZMoveMinimizer} \doxyref{}{p.}{a00153_a1a0bd982430b7f38d54ed798edd6ac18}.\index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!GetLSQDeriv@{GetLSQDeriv}}
+\index{GetLSQDeriv@{GetLSQDeriv}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{GetLSQDeriv}]{\setlength{\rightskip}{0pt plus 5cm}virtual const CrystVector\_\-REAL\& ObjCryst::RefinableObj::GetLSQDeriv (const unsigned {\em int}, \/  {\bf RefinablePar} \&)\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00070_a24bfb12849c7733a7034928fbb0b14a8}
+
+
+Get the first derivative values for the LSQ function, for a given parameter. Note that the default method in the base \doxyref{RefinableObj}{p.}{a00070} class is to use numerical derivatives, so it should be overridden for better precision.
+
+\begin{Desc}
+\item[{\bf Todo}]This should be a const method, and the given RefPar should be const too... \end{Desc}
+
+
+Reimplemented in {\bf ObjCryst::CellExplorer} \doxyref{}{p.}{a00014_a6e4e1e3300bbf3e5f23900fccb135da3}, and {\bf ObjCryst::Molecule} \doxyref{}{p.}{a00046_adef00ca72bec0e4553bbfba0852e1ba1}.\index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!GetNbPar@{GetNbPar}}
+\index{GetNbPar@{GetNbPar}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{GetNbPar}]{\setlength{\rightskip}{0pt plus 5cm}long ObjCryst::RefinableObj::GetNbPar () const}\hfill\label{a00070_a945800fc9c72fb9a538e384a7831b37f}
+
+
+Total number of refinable parameter in the object. Note that some may be actually fixed or even not used !! For refinement use \doxyref{PrepareForRefinement()}{p.}{a00070_a0e9b816ad753f633ef6d9650ec6b4ca6}, NbRefParNotFixed(), and ParNotFixed(i) \index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!GetParamSet@{GetParamSet}}
+\index{GetParamSet@{GetParamSet}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{GetParamSet}]{\setlength{\rightskip}{0pt plus 5cm}CrystVector\_\-REAL\& ObjCryst::RefinableObj::GetParamSet (const unsigned long {\em setId})}\hfill\label{a00070_a33290cd0d3d90620cb7465dacb675085}
+
+
+Access one save refpar set. 
+\begin{DoxyParams}{Parameters}
+\item[{\em setId}]: the number identifying the set. \end{DoxyParams}
+\index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!GetParamSet@{GetParamSet}}
+\index{GetParamSet@{GetParamSet}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{GetParamSet}]{\setlength{\rightskip}{0pt plus 5cm}const CrystVector\_\-REAL\& ObjCryst::RefinableObj::GetParamSet (const unsigned long {\em setId}) const}\hfill\label{a00070_aa5ebd29814d5ed1a18a669ea0f3417f3}
+
+
+Access one save refpar set. 
+\begin{DoxyParams}{Parameters}
+\item[{\em setId}]: the number identifying the set. \end{DoxyParams}
+\index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!GetParamSet\_\-ParNotFixedHumanValue@{GetParamSet\_\-ParNotFixedHumanValue}}
+\index{GetParamSet\_\-ParNotFixedHumanValue@{GetParamSet\_\-ParNotFixedHumanValue}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{GetParamSet\_\-ParNotFixedHumanValue}]{\setlength{\rightskip}{0pt plus 5cm}REAL ObjCryst::RefinableObj::GetParamSet\_\-ParNotFixedHumanValue (const unsigned long {\em setId}, \/  const long {\em parNumber}) const}\hfill\label{a00070_ab17775f3f007ae6edd2de6fd2433c6ce}
+
+
+Access the (human) value of one refined parameter in a saved set of parameters. \begin{DoxyInternal}{For internal use only.}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em setId}]: the number identifying the set. \item[{\em parNumber}]: the number identifying the parameter in the list of refined parameters \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+if parNumber=5 and setId=37, then the returned value will be the value (scaled if it is an angle) value of the 5th not-\/fixed parameter in the saved set \#37. 
+\end{DoxyReturn}
+\end{DoxyInternal}
+\index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!GetParamSetName@{GetParamSetName}}
+\index{GetParamSetName@{GetParamSetName}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{GetParamSetName}]{\setlength{\rightskip}{0pt plus 5cm}const string\& ObjCryst::RefinableObj::GetParamSetName (const unsigned long {\em setId}) const}\hfill\label{a00070_a1426f90c9b580a4854917ab7db876c3e}
+
+
+Get the name associated to a refpar set. 
+\begin{DoxyParams}{Parameters}
+\item[{\em setId}]: the number identifying the set. \end{DoxyParams}
+\index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!GetParNotFixed@{GetParNotFixed}}
+\index{GetParNotFixed@{GetParNotFixed}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{GetParNotFixed}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf RefinablePar}\& ObjCryst::RefinableObj::GetParNotFixed (const long {\em i}) const}\hfill\label{a00070_a91112351e072c2448c4af8be3ad2da12}
+
+
+Access all parameters in the order they were inputed, skipping fixed parameters. Must call \doxyref{PrepareForRefinement()}{p.}{a00070_a0e9b816ad753f633ef6d9650ec6b4ca6} before ! \index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!GetParNotFixed@{GetParNotFixed}}
+\index{GetParNotFixed@{GetParNotFixed}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{GetParNotFixed}]{\setlength{\rightskip}{0pt plus 5cm}{\bf RefinablePar}\& ObjCryst::RefinableObj::GetParNotFixed (const long {\em i})}\hfill\label{a00070_ae06ade6e11e2de4d041d07612a7d802c}
+
+
+Access all parameters in the order they were inputted, skipping fixed parameters. Must call \doxyref{PrepareForRefinement()}{p.}{a00070_a0e9b816ad753f633ef6d9650ec6b4ca6} before ! \index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!GetRefParListClock@{GetRefParListClock}}
+\index{GetRefParListClock@{GetRefParListClock}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{GetRefParListClock}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf RefinableObjClock}\& ObjCryst::RefinableObj::GetRefParListClock () const}\hfill\label{a00070_a52422a72840cdb07ac5274eced2d2152}
+
+
+What was the last time a \doxyref{RefinablePar}{p.}{a00072} was added/removed ? \index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!GetRestraintCost@{GetRestraintCost}}
+\index{GetRestraintCost@{GetRestraintCost}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{GetRestraintCost}]{\setlength{\rightskip}{0pt plus 5cm}virtual REAL ObjCryst::RefinableObj::GetRestraintCost () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00070_a92288a2ec22c405bbb9985bdc1a0b633}
+
+
+Get the restraint cost (overall penalty of all restraints). By default this returns 0, so this {\itshape must\/} be overloaded by any object which actually uses restraint. \begin{DoxyNote}{Note}
+Instead, we could return by default the sum of the restraints, but this is dangerous since we {\itshape want\/} to have derived objects fully responsible for handling restraints. 
+\end{DoxyNote}
+\index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!GlobalOptRandomMove@{GlobalOptRandomMove}}
+\index{GlobalOptRandomMove@{GlobalOptRandomMove}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{GlobalOptRandomMove}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::RefinableObj::GlobalOptRandomMove (const REAL {\em mutationAmplitude}, \/  const {\bf RefParType} $\ast$ {\em type} = {\ttfamily {\bf gpRefParTypeObjCryst}})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00070_a18375c8525ae38c481ba77e9cf9d67c1}
+
+
+Make a random move of the current configuration. This is for global optimization algorithms. the moves for each parameter are less than their global optimization step, multiplied by the mutation amplitude.
+
+\begin{DoxyWarning}{Warning}
+: this makes a random move for the parameter declared for this object, and it is the duty of the object to decide whether the included objects should be moved and how. (eg an algorithm should only call for a move with the top object, and this object decides how he and his sub-\/objects moves). By default (\doxyref{RefinableObj}{p.}{a00070} implementation) all included objects are moved recursively.
+\end{DoxyWarning}
+\doxyref{RefinableObj}{p.}{a00070}:: 
+\begin{DoxyParams}{Parameters}
+\item[{\em mutationAmplitude,:}]multiplier for the maximum move amplitude, for all parameters \item[{\em type,:}]restrain the change exclusively to parameters of a given type (same type or descendant from this \doxyref{RefParType}{p.}{a00079}). \end{DoxyParams}
+
+
+Reimplemented in {\bf ObjCryst::Crystal} \doxyref{}{p.}{a00020_ab6a8a2cc28f3b1cde012754a19c279de}, {\bf ObjCryst::DiffractionDataSingleCrystal} \doxyref{}{p.}{a00026_a9f19efd0a77a471666ddd5b4be421ffa}, {\bf ObjCryst::Molecule} \doxyref{}{p.}{a00046_a11e623f6482b468f6dd05fc0ab2bbb24}, {\bf ObjCryst::PowderPattern} \doxyref{}{p.}{a00061_a35119a32e043f1b9e003cfe1ed18a1b1}, {\bf ObjCryst::TextureMarchDollase} \doxyref{}{p.}{a00103_a43d8d96c3f14d9d01145dfbefb759e6a}, and {\bf ObjCryst::ZScatterer} \doxyref{}{p.}{a00155_a6df5359190e4cf5dc45a5e72c9a5a9a0}.\index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!operator=@{operator=}}
+\index{operator=@{operator=}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::RefinableObj::operator= (const {\bf RefinableObj} \& {\em old})}\hfill\label{a00070_ab9b15adff1092f15e8f06cfeecc314f8}
+
+
+Defined not implemented. .. Should never be called \index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!Prepare@{Prepare}}
+\index{Prepare@{Prepare}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{Prepare}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::RefinableObj::Prepare ()\hspace{0.3cm}{\ttfamily  [protected, virtual]}}\hfill\label{a00070_a48d11671e7f8699f7bc24077585c5e0f}
+\begin{DoxyInternal}{For internal use only.}
+Prepare everything (if necessary) for an optimization/calculation. \end{DoxyInternal}
+
+
+Reimplemented in {\bf ObjCryst::PowderPatternComponent} \doxyref{}{p.}{a00064_a6a99877f0f9dec09fd5f596a7ddeb6f6}, {\bf ObjCryst::PowderPatternBackground} \doxyref{}{p.}{a00062_aac7d53c229cd59c2c9d4c5de539a60e1}, {\bf ObjCryst::PowderPatternDiffraction} \doxyref{}{p.}{a00065_ae19852383674ae3ab673748a30a8432a}, and {\bf ObjCryst::PowderPattern} \doxyref{}{p.}{a00061_ae03f4d2f08e749e4f494eb78050dbffe}.\index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!PrepareForRefinement@{PrepareForRefinement}}
+\index{PrepareForRefinement@{PrepareForRefinement}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{PrepareForRefinement}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::RefinableObj::PrepareForRefinement () const}\hfill\label{a00070_a0e9b816ad753f633ef6d9650ec6b4ca6}
+
+
+Find which parameters are used and {\bfseries not} fixed, for a refinement /optimization. This {\bfseries must} be called before any refinement... \index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!RandomizeConfiguration@{RandomizeConfiguration}}
+\index{RandomizeConfiguration@{RandomizeConfiguration}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{RandomizeConfiguration}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::RefinableObj::RandomizeConfiguration ()\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00070_a01b02e566db9aebfd0f9ed2647441f40}
+
+
+Randomize Configuration (before a global optimization). This Affects only parameters which are limited and not fixed. The randomization also affects all sub-\/objects (recursive). 
+
+Reimplemented in {\bf ObjCryst::Molecule} \doxyref{}{p.}{a00046_aaa76da93619174b17db73de9d2374ac7}.\index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!RegisterClient@{RegisterClient}}
+\index{RegisterClient@{RegisterClient}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{RegisterClient}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::RefinableObj::RegisterClient ({\bf RefinableObj} \&) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00070_a8afc65925b0e4d1894d72c457ad38bc9}
+
+
+Register a new object using this object. \begin{Desc}
+\item[{\bf Todo}]: the clients should be const, but are not... This need to be fixed... \end{Desc}
+\index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!RemovePar@{RemovePar}}
+\index{RemovePar@{RemovePar}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{RemovePar}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf RefinablePar} $\ast$$>$::iterator ObjCryst::RefinableObj::RemovePar ({\bf RefinablePar} $\ast$ {\em refPar})}\hfill\label{a00070_a33a10888dfa13b40a5989d6b9af52174}
+
+
+Remove a refinable parameter. This returns an iterator to the next parameter in the vector. \index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!RemoveRestraint@{RemoveRestraint}}
+\index{RemoveRestraint@{RemoveRestraint}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{RemoveRestraint}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf Restraint}$\ast$$>$::iterator ObjCryst::RefinableObj::RemoveRestraint ({\bf Restraint} $\ast$ {\em pRestraint})}\hfill\label{a00070_a0e738f16d06bed8a50985a97deb48e7d}
+
+
+Remove a restraint from the list of known restraints. This does not delete the \doxyref{Restraint}{p.}{a00080} object. \index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!RemoveSubRefObj@{RemoveSubRefObj}}
+\index{RemoveSubRefObj@{RemoveSubRefObj}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{RemoveSubRefObj}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::RefinableObj::RemoveSubRefObj ({\bf RefinableObj} \&)\hspace{0.3cm}{\ttfamily  [protected]}}\hfill\label{a00070_af533cb95da45c5ce875c9f5ec8cf9c1e}
+\begin{DoxyInternal}{For internal use only.}
+Remove an object in the registry of used objects. \end{DoxyInternal}
+\index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!ResetParList@{ResetParList}}
+\index{ResetParList@{ResetParList}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{ResetParList}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::RefinableObj::ResetParList ()}\hfill\label{a00070_a3b6228c6fbd154441d935af2d511fe82}
+
+
+Re-\/init the list of refinable parameters, removing all parameters. This does {\itshape not\/} delete the \doxyref{RefinablePar}{p.}{a00072} if \doxyref{RefinableObj::mDeleteRefParInDestructor}{p.}{a00070_a8e3295302c9a1f9ea29f1749132e561b} is false \index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!RestoreParamSet@{RestoreParamSet}}
+\index{RestoreParamSet@{RestoreParamSet}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{RestoreParamSet}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::RefinableObj::RestoreParamSet (const unsigned long {\em id})}\hfill\label{a00070_a057437fe6759b589906d8a16f9732e22}
+
+
+Restore a saved set of values. 
+\begin{DoxyParams}{Parameters}
+\item[{\em id}]: the number identifying the set. \end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+this only affects parameters which are used. Others remain unchanged. Parameters which are fixed are also restored, although generally they will not be altered. 
+\end{DoxyWarning}
+\index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!SaveParamSet@{SaveParamSet}}
+\index{SaveParamSet@{SaveParamSet}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{SaveParamSet}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::RefinableObj::SaveParamSet (const unsigned long {\em id}) const}\hfill\label{a00070_afdcabf808440aa0d566e56f145de235d}
+
+
+Save the current set of refined values over a previously-\/created set of saved values. 
+\begin{DoxyParams}{Parameters}
+\item[{\em id}]the number identifying the set of saved values. \end{DoxyParams}
+\index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!SetApproximationFlag@{SetApproximationFlag}}
+\index{SetApproximationFlag@{SetApproximationFlag}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{SetApproximationFlag}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::RefinableObj::SetApproximationFlag (const bool {\em allow})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00070_a565c41c23c04f5945512374ae671e2e3}
+
+
+Enable or disable numerical approximations. This can be used for global optimization to get faster calculations. Depending on the type of object, this may do something or not (it does not do anything in a base \doxyref{RefinableObj}{p.}{a00070}, except calling this function for all sub-\/objects).
+
+\begin{DoxyNote}{Note}
+Currently there is no mApproximationFlag in the base class, but maybe there should...
+\end{DoxyNote}
+Also see: 
+
+Reimplemented in {\bf ObjCryst::PowderPatternDiffraction} \doxyref{}{p.}{a00065_a0e7b4a6f4b3a7b783ebed15230a1c45f}, and {\bf ObjCryst::ScatteringData} \doxyref{}{p.}{a00088_a109ed8c2e8dc676e77aa80feafa91071}.\index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!SetDeleteRefParInDestructor@{SetDeleteRefParInDestructor}}
+\index{SetDeleteRefParInDestructor@{SetDeleteRefParInDestructor}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{SetDeleteRefParInDestructor}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::RefinableObj::SetDeleteRefParInDestructor (const bool {\em b})}\hfill\label{a00070_a33f94e9c9c0717ea77c8b9427e9e137e}
+
+
+Set this object not to delete its list of parameters when destroyed. This is used for the \doxyref{RefinableObj}{p.}{a00070} in algorithms objects (\doxyref{OptimizationObj}{p.}{a00054}), which only hold copies of parameters from the refined objects. \index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!SetLimitsProportional@{SetLimitsProportional}}
+\index{SetLimitsProportional@{SetLimitsProportional}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{SetLimitsProportional}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::RefinableObj::SetLimitsProportional (const {\bf RefParType} $\ast$ {\em type}, \/  const REAL {\em min}, \/  const REAL {\em max})}\hfill\label{a00070_a75741a3e7f7f1740243901b60f406e93}
+
+
+Change the limits for a category of parameters, proportionnaly to their current value. min should be $<$ 1. and max $>$ 1. \index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!SetLimitsProportional@{SetLimitsProportional}}
+\index{SetLimitsProportional@{SetLimitsProportional}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{SetLimitsProportional}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::RefinableObj::SetLimitsProportional (const string \& {\em parName}, \/  const REAL {\em min}, \/  const REAL {\em max})}\hfill\label{a00070_adc6b05a95d524d600910a47861190e84}
+
+
+Change the limits for a given parameter, proportionnaly to the current value. min should be $<$ 1. and max $>$ 1. \index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!SetLimitsRelative@{SetLimitsRelative}}
+\index{SetLimitsRelative@{SetLimitsRelative}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{SetLimitsRelative}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::RefinableObj::SetLimitsRelative (const {\bf RefParType} $\ast$ {\em type}, \/  const REAL {\em min}, \/  const REAL {\em max})}\hfill\label{a00070_ae8d497fc43ac3f166a21781a62dfa25d}
+
+
+Change the limits for a category of parameters, giving relative new limits (eg giving -\/.1 and +.1 will set new limits at the current value + min and current value + max). Thus min should logically be $<$0 and max $>$0. \index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!SetLimitsRelative@{SetLimitsRelative}}
+\index{SetLimitsRelative@{SetLimitsRelative}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{SetLimitsRelative}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::RefinableObj::SetLimitsRelative (const string \& {\em parName}, \/  const REAL {\em min}, \/  const REAL {\em max})}\hfill\label{a00070_acacf469614253239fdeebb21e50f0c1c}
+
+
+Change the limits for a given parameter, giving relative new limits (eg giving -\/.1 and +.1 will set new limits at the current value + min and current value + max) Thus min should logically be $<$0 and max $>$0. \index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!TagNewBestConfig@{TagNewBestConfig}}
+\index{TagNewBestConfig@{TagNewBestConfig}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{TagNewBestConfig}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::RefinableObj::TagNewBestConfig () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00070_a3cb4cc924d39576618184eccd4321cf6}
+
+
+During a global optimization, tells the object that the current config is the latest \char`\"{}best\char`\"{} config. This can be used by the object to make more intellingent random moves (use with caution: highly experimental !). 
+
+Reimplemented in {\bf ObjCryst::Molecule} \doxyref{}{p.}{a00046_a91e2f80f1e4526fbb6cd99f5b229db9e}, {\bf ObjCryst::PowderPatternBackground} \doxyref{}{p.}{a00062_af1a8228087bafd3c3ae0830b3d94df2a}, and {\bf ObjCryst::TextureMarchDollase} \doxyref{}{p.}{a00103_a972d51af36bfd317f794c87841c58b5a}.\index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!UpdateDisplay@{UpdateDisplay}}
+\index{UpdateDisplay@{UpdateDisplay}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{UpdateDisplay}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::RefinableObj::UpdateDisplay () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00070_ab74e2cead734fe1e652c5add46c5e116}
+
+
+If there is an interface, this should be automatically be called each time there is a 'new, significant' configuration to report. 
+
+Reimplemented in {\bf ObjCryst::Molecule} \doxyref{}{p.}{a00046_af1ae2c4f9febbe16019987f807271b58}.\index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!XMLInput@{XMLInput}}
+\index{XMLInput@{XMLInput}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{XMLInput}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::RefinableObj::XMLInput (istream \& {\em is}, \/  const {\bf XMLCrystTag} \& {\em tag})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00070_ac13a4045c3f187879443c8615c38d623}
+
+
+Input From stream. \begin{Desc}
+\item[{\bf Todo}]Add an bool XMLInputTag(is,tag) function to recognize all the tags from the stream. So that each inherited class can use the XMLInputTag function from its parent (ie take advantage of inheritance). The children class would first try to interpret the tag, then if unsuccessful would pass it to its parent (thus allowing overloading), etc... \end{Desc}
+
+
+Reimplemented in {\bf ObjCryst::Atom} \doxyref{}{p.}{a00008_a08fe773b05dd0dc748b8008636b56187}, {\bf ObjCryst::Crystal} \doxyref{}{p.}{a00020_accc77bfc6df977685c01a43d150a8ba7}, {\bf ObjCryst::DiffractionDataSingleCrystal} \doxyref{}{p.}{a00026_a3b1edc7d3c612fa20cb658ef1d084c00}, {\bf ObjCryst::Molecule} \doxyref{}{p.}{a00046_a701f78d93d495d1102d0bd26700c4a3d}, {\bf ObjCryst::PowderPatternBackground} \doxyref{}{p.}{a00062_a7747e4a20056c4756943319bc8ffba8d}, {\bf ObjCryst::PowderPatternDiffraction} \doxyref{}{p.}{a00065_af350a4a95ddac5f15812bf35015f83fb}, {\bf ObjCryst::PowderPattern} \doxyref{}{p.}{a00061_ae80f37cee10c08e6acb02300fe30c894}, {\bf ObjCryst::ReflectionProfile} \doxyref{}{p.}{a00073_a7ad38593ddb4601632beb0a6bcae50f3}, {\bf ObjCryst::ReflectionProfilePseudoVoigt} \doxyref{}{p.}{a00075_a8c63700610f511503eae297c8161f311}, {\bf ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt} \doxyref{}{p.}{a00074_a4965f2a8994475187423a7afd6943031}, {\bf ObjCryst::TextureMarchDollase} \doxyref{}{p.}{a00103_a26ae81ce2e09c173d200c9a61cb67161}, {\bf ObjCryst::Radiation} \doxyref{}{p.}{a00068_a67d99d4fbfd583a3d257c9fce177445d}, {\bf ObjCryst::ScatteringPowerAtom} \doxyref{}{p.}{a00090_a9f2e4623c47ffc8d641ea48ef5d6cefa}, {\bf ObjCryst::ScatteringPowerSphere} \doxyref{}{p.}{a00091_aaaf687a105e65c6522521a0f01a98acf}, and {\bf ObjCryst::ZScatterer} \doxyref{}{p.}{a00155_afb23d2cf7f8fd74f790d7dd0835256b1}.\index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!XMLOutput@{XMLOutput}}
+\index{XMLOutput@{XMLOutput}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{XMLOutput}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::RefinableObj::XMLOutput (ostream \& {\em os}, \/  int {\em indent} = {\ttfamily 0}) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00070_a7b9b6ed0f8dcf753d398c35e073de973}
+
+
+Output to stream in well-\/formed XML. \begin{Desc}
+\item[{\bf Todo}]Use inheritance.. as for XMLInputTag()... \end{Desc}
+
+
+Reimplemented in {\bf ObjCryst::Atom} \doxyref{}{p.}{a00008_a83bd4047affa8c4de3126465595b77cb}, {\bf ObjCryst::Crystal} \doxyref{}{p.}{a00020_a037f8ea8c5dceece1044ce73d542a0e4}, {\bf ObjCryst::DiffractionDataSingleCrystal} \doxyref{}{p.}{a00026_a59dadf9f6dedc3a84e858ee96268526e}, {\bf ObjCryst::Molecule} \doxyref{}{p.}{a00046_a47762abe37f3e8f7378b7210916e71ea}, {\bf ObjCryst::PowderPatternBackground} \doxyref{}{p.}{a00062_a41f59111f35f92d0c3b99942606b234e}, {\bf ObjCryst::PowderPatternDiffraction} \doxyref{}{p.}{a00065_af4a2a4dbdbc9eb85274835a4b3d10be9}, {\bf ObjCryst::PowderPattern} \doxyref{}{p.}{a00061_a85e8803b7680a6d3b5463990fee76c6f}, {\bf ObjCryst::ReflectionProfile} \doxyref{}{p.}{a00073_a60e429bb999a8b39f09ef14cdaf5ad0c}, {\bf ObjCryst::ReflectionProfilePseudoVoigt} \doxyref{}{p.}{a00075_ac0438d3a1827accbdf2375e7355f18e5}, {\bf ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt} \doxyref{}{p.}{a00074_a6ec9818370703767da5362960c5b310a}, {\bf ObjCryst::TextureMarchDollase} \doxyref{}{p.}{a00103_a09d994c3344a276ba65563fb9f1b45ca}, {\bf ObjCryst::Radiation} \doxyref{}{p.}{a00068_a6d458f97232013cc128123e94b6e9937}, {\bf ObjCryst::ScatteringPowerAtom} \doxyref{}{p.}{a00090_a03090c251445ac6a5b08134032980310}, {\bf ObjCryst::ScatteringPowerSphere} \doxyref{}{p.}{a00091_a050e8e8b21857ec0593bbb41fd123e39}, and {\bf ObjCryst::ZScatterer} \doxyref{}{p.}{a00155_a406d107bfd110c5c3de61208348d4ad0}.
+
+\subsubsection{Member Data Documentation}
+\index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!mClientObjRegistry@{mClientObjRegistry}}
+\index{mClientObjRegistry@{mClientObjRegistry}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{mClientObjRegistry}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ObjRegistry}$<${\bf RefinableObj}$>$ {\bf ObjCryst::RefinableObj::mClientObjRegistry}\hspace{0.3cm}{\ttfamily  [mutable, protected]}}\hfill\label{a00070_abe0324d0b4bbd15ee9134412b98f55c3}
+
+
+Registry of RefinableObject using this object. This is mutable so that client can modify it (kludge?) \index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!mClockMaster@{mClockMaster}}
+\index{mClockMaster@{mClockMaster}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{mClockMaster}]{\setlength{\rightskip}{0pt plus 5cm}{\bf RefinableObjClock} {\bf ObjCryst::RefinableObj::mClockMaster}\hspace{0.3cm}{\ttfamily  [protected]}}\hfill\label{a00070_acbb5e80371ef0c72ef1bd8559226ae22}
+
+
+Master clock, which is changed whenever the object has been altered. It should be parent to all clocks recording changes in derived classes. \index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!mDeleteRefParInDestructor@{mDeleteRefParInDestructor}}
+\index{mDeleteRefParInDestructor@{mDeleteRefParInDestructor}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{mDeleteRefParInDestructor}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf ObjCryst::RefinableObj::mDeleteRefParInDestructor}\hspace{0.3cm}{\ttfamily  [protected]}}\hfill\label{a00070_a8e3295302c9a1f9ea29f1749132e561b}
+
+
+If true (the default), then all \doxyref{RefinablePar}{p.}{a00072} will be deleted when the the object is deleted. The opposite option (false) should only be used in \doxyref{RefinableObj}{p.}{a00070} holding 'copies' of other objects, such as in algorithms. \index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!mLSQDeriv@{mLSQDeriv}}
+\index{mLSQDeriv@{mLSQDeriv}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{mLSQDeriv}]{\setlength{\rightskip}{0pt plus 5cm}CrystVector\_\-REAL {\bf ObjCryst::RefinableObj::mLSQDeriv}\hspace{0.3cm}{\ttfamily  [mutable, protected]}}\hfill\label{a00070_a20a9cbc22a6b81f95dc66ebd0ed1668d}
+
+
+Temporary array used to return derivative values of the LSQ function for given parameters. \index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!mOptimizationDepth@{mOptimizationDepth}}
+\index{mOptimizationDepth@{mOptimizationDepth}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{mOptimizationDepth}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf ObjCryst::RefinableObj::mOptimizationDepth}\hspace{0.3cm}{\ttfamily  [protected]}}\hfill\label{a00070_a920ae46a7d90f940866d35b7548d77a8}
+
+
+Is the object being refined or optimized ? if mOptimizationDepth=0, no optimization is taking place. mOptimizationDepth$>$0 indicates the object is being optimized. Values larger than 1 indicate that several level of optimizations are taking place, e.g. one least-\/square optimization during a global optimization, etc... \index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!mOptionRegistry@{mOptionRegistry}}
+\index{mOptionRegistry@{mOptionRegistry}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{mOptionRegistry}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ObjRegistry}$<${\bf RefObjOpt}$>$ {\bf ObjCryst::RefinableObj::mOptionRegistry}\hspace{0.3cm}{\ttfamily  [protected]}}\hfill\label{a00070_a85a478e7564d71102aedf7c3e81f56d0}
+
+
+List of options for this object. Note that these are just references, to options allocated by the object, to have a simple global access to all options \index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!mRandomMoveIsDone@{mRandomMoveIsDone}}
+\index{mRandomMoveIsDone@{mRandomMoveIsDone}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{mRandomMoveIsDone}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf ObjCryst::RefinableObj::mRandomMoveIsDone}\hspace{0.3cm}{\ttfamily  [protected]}}\hfill\label{a00070_aab4b8fa7fc23598d79351ebd500beb3e}
+\begin{DoxyInternal}{For internal use only.}
+This true is false if \doxyref{RefinableObj::GlobalOptRandomMove()}{p.}{a00070_a18375c8525ae38c481ba77e9cf9d67c1} has been called since \doxyref{RefinableObj::BeginGlobalOptRandomMove()}{p.}{a00070_a47fc5a85493671a3590ed7e3971b18fe} was called. \end{DoxyInternal}
+\index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!mvpRestraint@{mvpRestraint}}
+\index{mvpRestraint@{mvpRestraint}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{mvpRestraint}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf Restraint}$\ast$$>$ {\bf ObjCryst::RefinableObj::mvpRestraint}\hspace{0.3cm}{\ttfamily  [protected]}}\hfill\label{a00070_ad3b06da1eb64191be95934c097829efc}
+
+
+Vector of pointers to the restraints for this object. This excludes all \doxyref{RefinablePar}{p.}{a00072} declared in RefinableObj::mpRefPar, which also are \doxyref{Restraint}{p.}{a00080}. \index{ObjCryst::RefinableObj@{ObjCryst::RefinableObj}!mvpSavedValuesSet@{mvpSavedValuesSet}}
+\index{mvpSavedValuesSet@{mvpSavedValuesSet}!ObjCryst::RefinableObj@{ObjCryst::RefinableObj}}
+\paragraph[{mvpSavedValuesSet}]{\setlength{\rightskip}{0pt plus 5cm}map$<$unsigned long,pair$<$CrystVector\_\-REAL,string$>$ $>$ {\bf ObjCryst::RefinableObj::mvpSavedValuesSet}\hspace{0.3cm}{\ttfamily  [mutable, protected]}}\hfill\label{a00070_a22adaed8c98377e45800e5d8624531a2}
+
+
+Map of (index,pointers to arrays) used to save sets of values for all parameters. Currently there is no limit to the number of saved sets.
+
+This is mutable since creating/storing a param set does not affect the 'real' part of the object. 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+RefinableObj.h\end{DoxyCompactItemize}

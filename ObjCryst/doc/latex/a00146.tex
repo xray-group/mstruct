@@ -1,0 +1,58 @@
+\subsection{ObjCryst::WXScatteringPowerSphere Class Reference}
+\label{a00146}\index{ObjCryst::WXScatteringPowerSphere@{ObjCryst::WXScatteringPowerSphere}}
+
+
+wxCryst class for \doxyref{ScatteringPowerSphere}{p.}{a00091}  
+Inheritance diagram for ObjCryst::WXScatteringPowerSphere::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4cm]{a00146}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries WXScatteringPowerSphere} (wxWindow $\ast$parent, {\bf ScatteringPowerSphere} $\ast$)\label{a00146_a451416398f3296f4d584de1bfa49658c}
+
+\item 
+virtual bool {\bf OnChangeName} (const int id)
+\begin{DoxyCompactList}\small\item\em When a \doxyref{WXFieldName}{p.}{a00120} has been changed by the user, it is handled here. \item\end{DoxyCompactList}\item 
+void {\bfseries OnChangeColour} (wxCommandEvent \&event)\label{a00146_a355d570f5d80b6026a04d9a75b6d5107}
+
+\item 
+virtual void {\bf UpdateUI} (const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em Update the User Interface, if necessary. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf ScatteringPowerSphere} $\ast$ {\bfseries mpScatteringPower}\label{a00146_ad7c744e98e231b49f0fdc660ea7ae989}
+
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+wxCryst class for \doxyref{ScatteringPowerSphere}{p.}{a00091} 
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::WXScatteringPowerSphere@{ObjCryst::WXScatteringPowerSphere}!OnChangeName@{OnChangeName}}
+\index{OnChangeName@{OnChangeName}!ObjCryst::WXScatteringPowerSphere@{ObjCryst::WXScatteringPowerSphere}}
+\paragraph[{OnChangeName}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool ObjCryst::WXScatteringPowerSphere::OnChangeName (const int {\em id})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00146_a54f201d096de63b349e8979d69d6933a}
+
+
+When a \doxyref{WXFieldName}{p.}{a00120} has been changed by the user, it is handled here. This returns true if the value has been handled (for inheritance purposes). 
+
+Reimplemented from {\bf ObjCryst::WXRefinableObj} \doxyref{}{p.}{a00142_ad784c1cb9ccb0d0e4ebfbc18a8dbbc19}.\index{ObjCryst::WXScatteringPowerSphere@{ObjCryst::WXScatteringPowerSphere}!UpdateUI@{UpdateUI}}
+\index{UpdateUI@{UpdateUI}!ObjCryst::WXScatteringPowerSphere@{ObjCryst::WXScatteringPowerSphere}}
+\paragraph[{UpdateUI}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::WXScatteringPowerSphere::UpdateUI (const bool {\em mutexlock} = {\ttfamily false})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00146_a95d4f9b618ffbd4885294806b12b066c}
+
+
+Update the User Interface, if necessary. 
+\begin{DoxyParams}{Parameters}
+\item[{\em mutexlock,:}]if true, a Mutex will be used to lock the data shared between main and background thread.\end{DoxyParams}
+The idea is to only use a few Mutexes to lock data from the top objects (wxRefinableObj,...), when calling \doxyref{CrystUpdate()}{p.}{a00142_a13e4f37ac098de756b27cdb91d6a0551} and \doxyref{UpdateUI()}{p.}{a00146_a95d4f9b618ffbd4885294806b12b066c}. As sub-\/objects (\doxyref{WXField}{p.}{a00118},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
+
+Reimplemented from {\bf ObjCryst::WXRefinableObj} \doxyref{}{p.}{a00142_a19a1d057eecafd48710d9a3b770c1b28}.
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+wxScatteringPowerSphere.h\end{DoxyCompactItemize}

@@ -1,0 +1,200 @@
+\subsection{ObjCryst::MolBond Class Reference}
+\label{a00043}\index{ObjCryst::MolBond@{ObjCryst::MolBond}}
+
+
+Bond between two atoms, also a restraint on the associated bond length.  
+Inheritance diagram for ObjCryst::MolBond::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2cm]{a00043}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf MolBond} ({\bf MolAtom} \&atom1, {\bf MolAtom} \&atom2, const REAL length, const REAL sigma, const REAL delta, {\bf Molecule} \&parent, const REAL bondOrder=1.)
+\begin{DoxyCompactList}\small\item\em Constructor. \item\end{DoxyCompactList}\item 
+virtual {\bf $\sim$MolBond} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \item\end{DoxyCompactList}\item 
+const {\bf Molecule} \& {\bfseries GetMolecule} () const \label{a00043_a1a3c7684b661b7510938df418dc4b35e}
+
+\item 
+{\bf Molecule} \& {\bfseries GetMolecule} ()\label{a00043_ad48eecb32e26ec3c3134893b16e9e4b9}
+
+\item 
+string {\bf GetName} () const \label{a00043_af085014f7d56f746236d7b131b21c68f}
+
+\begin{DoxyCompactList}\small\item\em Name of the bond, e.g. \char`\"{}C3-\/O4\char`\"{}. \item\end{DoxyCompactList}\item 
+virtual void {\bfseries XMLOutput} (ostream \&os, int indent=0) const \label{a00043_a6b0e3c8ae91d926a6e12cc7f5fb6680a}
+
+\item 
+virtual void {\bfseries XMLInput} (istream \&is, const {\bf XMLCrystTag} \&tag)\label{a00043_af655bf9c3ff32e4e972880745ff94a13}
+
+\item 
+virtual REAL {\bf GetLogLikelihood} () const \label{a00043_af796fe008141e6a6fae7d4049273ccdf}
+
+\begin{DoxyCompactList}\small\item\em Get -\/ln(likelihood) for this restraint. \item\end{DoxyCompactList}\item 
+REAL {\bfseries GetLogLikelihood} (const bool calcDeriv, const bool recalc) const \label{a00043_ae02e3596ae088d9ae3116e6c3d789899}
+
+\item 
+REAL {\bf GetDeriv} (const std::map$<$ const {\bf MolAtom} $\ast$, {\bf XYZ} $>$ \&m, const bool llk=false) const 
+\begin{DoxyCompactList}\small\item\em Get the derivative of the bond length, given the derivatives of the atom positions This requires that GetLogLikelihood(calcDeriv=true) be called first. \item\end{DoxyCompactList}\item 
+void {\bf CalcGradient} (std::map$<$ {\bf MolAtom} $\ast$, {\bf XYZ} $>$ \&m) const 
+\begin{DoxyCompactList}\small\item\em Calc log(likelihood) gradient -\/ versus all atomic coordinates. \item\end{DoxyCompactList}\item 
+const {\bf MolAtom} \& {\bfseries GetAtom1} () const \label{a00043_ac55a424209a524004a77a16d08d05e44}
+
+\item 
+const {\bf MolAtom} \& {\bfseries GetAtom2} () const \label{a00043_a6986775d114461e91a9873d9415cb42f}
+
+\item 
+{\bf MolAtom} \& {\bfseries GetAtom1} ()\label{a00043_a69a13fd18cb20b2b31c6e71e35e7eb7e}
+
+\item 
+{\bf MolAtom} \& {\bfseries GetAtom2} ()\label{a00043_a972fe03e0c1b85cdab8ad09ecbd2bd88}
+
+\item 
+void {\bfseries SetAtom1} ({\bf MolAtom} \&at1)\label{a00043_a134d996eddce994d967b4b3f4358a3dd}
+
+\item 
+void {\bfseries SetAtom2} ({\bf MolAtom} \&at2)\label{a00043_a6d91f26445b8a4e0ca2c8a4e5af90490}
+
+\item 
+REAL {\bfseries GetLength} () const \label{a00043_a16685dcefa38d34d0a92725b000d558f}
+
+\item 
+REAL {\bfseries GetLength0} () const \label{a00043_ab6d10bf6342be4ae2f4c58f9d8b5d173}
+
+\item 
+REAL {\bfseries GetLengthDelta} () const \label{a00043_ad5d847da92fe2db752ba45a62f8cdf4a}
+
+\item 
+REAL {\bfseries GetLengthSigma} () const \label{a00043_aa0837a2385f057bbaa49e1e96bed6399}
+
+\item 
+REAL {\bfseries GetBondOrder} () const \label{a00043_a778587888f587d23d7d581135b4a99be}
+
+\item 
+REAL \& {\bfseries Length0} ()\label{a00043_a222b10e1cf332cf28220f00c6bab0688}
+
+\item 
+REAL \& {\bfseries LengthDelta} ()\label{a00043_ad3b78642b705684c5685fc1064e3e051}
+
+\item 
+REAL \& {\bfseries LengthSigma} ()\label{a00043_ae8e28507497bccddc50ea678c3a2aa62}
+
+\item 
+REAL \& {\bfseries BondOrder} ()\label{a00043_a329946012cb86eee1388b21ec9768ac6}
+
+\item 
+void {\bfseries SetLength0} (const REAL length)\label{a00043_a347971edc80f025dca4f7253fea78eb8}
+
+\item 
+void {\bfseries SetLengthDelta} (const REAL length)\label{a00043_a42e9a07e2383dcfdcb5b7f0728be726f}
+
+\item 
+void {\bfseries SetLengthSigma} (const REAL length)\label{a00043_ab96f037ddc070774b0cb9665e4e1b751}
+
+\item 
+void {\bfseries SetBondOrder} (const REAL length)\label{a00043_a1050f7fc227c9a925d8f98c01e2e1cc9}
+
+\item 
+bool {\bfseries IsFreeTorsion} () const \label{a00043_a95b84b6994623ff1c2f9704ff706b701}
+
+\item 
+void {\bfseries SetFreeTorsion} (const bool isInRing)\label{a00043_aab0b94a8e27c34d748f4cf7cd0060431}
+
+\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+pair$<$ {\bf MolAtom} $\ast$, {\bf MolAtom} $\ast$ $>$ {\bfseries mAtomPair}\label{a00043_ac7cc5382df3fdca08cc9fb17bdfc91d5}
+
+\item 
+REAL {\bfseries mLength0}\label{a00043_aa1652cde21c40d1422daf579409b8779}
+
+\item 
+REAL {\bfseries mDelta}\label{a00043_ada3df50564e2285ee1f6b659c4dbdee6}
+
+\item 
+REAL {\bfseries mSigma}\label{a00043_a3312763939b3c5f4bcac987b15c1f0b1}
+
+\item 
+REAL {\bfseries mBondOrder}\label{a00043_a785e2209e844fc83a85c0a20ec9cfe80}
+
+\item 
+bool {\bfseries mIsFreeTorsion}\label{a00043_ab71a7d1e120f0c351694317e054ec18c}
+
+\item 
+{\bf Molecule} $\ast$ {\bf mpMol}\label{a00043_af67c44fd54e60de27f4acb6f2a6e7e3b}
+
+\begin{DoxyCompactList}\small\item\em Parent \doxyref{Molecule}{p.}{a00046}. \item\end{DoxyCompactList}\item 
+REAL {\bf mLLK}\label{a00043_a48e0a0e15c8d21376732144a43a26264}
+
+\begin{DoxyCompactList}\small\item\em Stored log(likelihood). \item\end{DoxyCompactList}\item 
+{\bf XYZ} {\bf mDerivAtom1}
+\begin{DoxyCompactList}\small\item\em Derivatives of the bond length with respect to the coordinates of the atoms. \item\end{DoxyCompactList}\item 
+{\bf XYZ} {\bfseries mDerivAtom2}\label{a00043_a692a9986c610412913ddb700b881edc3}
+
+\item 
+REAL {\bf mDerivLLKCoeff}
+\begin{DoxyCompactList}\small\item\em The factor used to change the derivative of the length/angle, to the derivative of the log(likelihood). \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+Bond between two atoms, also a restraint on the associated bond length. 
+
+\subsubsection{Constructor \& Destructor Documentation}
+\index{ObjCryst::MolBond@{ObjCryst::MolBond}!MolBond@{MolBond}}
+\index{MolBond@{MolBond}!ObjCryst::MolBond@{ObjCryst::MolBond}}
+\paragraph[{MolBond}]{\setlength{\rightskip}{0pt plus 5cm}ObjCryst::MolBond::MolBond ({\bf MolAtom} \& {\em atom1}, \/  {\bf MolAtom} \& {\em atom2}, \/  const REAL {\em length}, \/  const REAL {\em sigma}, \/  const REAL {\em delta}, \/  {\bf Molecule} \& {\em parent}, \/  const REAL {\em bondOrder} = {\ttfamily 1.})}\hfill\label{a00043_aa5eb1a8ba4e34da2516bfc24af4fabec}
+
+
+Constructor. Both atoms of the bond are told of the creation of the bond, so that they can keep a list of bonds they are involved in.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em atom1,atom2,:}]the atoms of the bond \item[{\em length,:}]the expected bond length \item[{\em sigma,delta,:}]depending on the calculated length, the log(likelihood) is equal to:
+\begin{DoxyItemize}
+\item within $[length_{0}-\delta;length_{0}+\delta]$: $ -\log(likelihood)= \log\left(2\delta+\sqrt{2\pi\sigma^2}\right)$
+\item if $length > length_{0}+\delta$: $ -\log(likelihood)= \log\left(2\delta+\sqrt{2\pi\sigma^2}\right) + \left(\frac{(length-\delta)-length_{0}}{\sigma} \right)^2$
+\item if $length < length_{0}-\delta$: $ -\log(likelihood)= \log\left(2\delta+\sqrt{2\pi\sigma^2}\right) + \left(\frac{(length+\delta)-length_{0}}{\sigma} \right)^2$ 
+\end{DoxyItemize}\end{DoxyParams}
+\index{ObjCryst::MolBond@{ObjCryst::MolBond}!$\sim$MolBond@{$\sim$MolBond}}
+\index{$\sim$MolBond@{$\sim$MolBond}!ObjCryst::MolBond@{ObjCryst::MolBond}}
+\paragraph[{$\sim$MolBond}]{\setlength{\rightskip}{0pt plus 5cm}virtual ObjCryst::MolBond::$\sim$MolBond ()\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00043_a0aac13259fa1079e181d4a04c7556f3e}
+
+
+Destructor. Notifies the atoms that the bond has disappeared. 
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::MolBond@{ObjCryst::MolBond}!CalcGradient@{CalcGradient}}
+\index{CalcGradient@{CalcGradient}!ObjCryst::MolBond@{ObjCryst::MolBond}}
+\paragraph[{CalcGradient}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::MolBond::CalcGradient (std::map$<$ {\bf MolAtom} $\ast$, {\bf XYZ} $>$ \& {\em m}) const}\hfill\label{a00043_a187126a2a21c5944b2e351fc331fd5c9}
+
+
+Calc log(likelihood) gradient -\/ versus all atomic coordinates. 
+\begin{DoxyParams}{Parameters}
+\item[{\em m,:}]this map should have been initialized by adding all possible atom pointers as keys, with all \doxyref{XYZ}{p.}{a00151} values equal to zeros. On return, the derivative of the log(likelihood) vs each atomic coordinates will {\bfseries added} to each coordinate of the corresponding atoms. \end{DoxyParams}
+\index{ObjCryst::MolBond@{ObjCryst::MolBond}!GetDeriv@{GetDeriv}}
+\index{GetDeriv@{GetDeriv}!ObjCryst::MolBond@{ObjCryst::MolBond}}
+\paragraph[{GetDeriv}]{\setlength{\rightskip}{0pt plus 5cm}REAL ObjCryst::MolBond::GetDeriv (const std::map$<$ const {\bf MolAtom} $\ast$, {\bf XYZ} $>$ \& {\em m}, \/  const bool {\em llk} = {\ttfamily false}) const}\hfill\label{a00043_adeeda31a2485f2985a1a7023cfe374f8}
+
+
+Get the derivative of the bond length, given the derivatives of the atom positions This requires that GetLogLikelihood(calcDeriv=true) be called first. If llk=true, this will return the derivative of the llk rather than the derivative of the length or angle 
+
+\subsubsection{Member Data Documentation}
+\index{ObjCryst::MolBond@{ObjCryst::MolBond}!mDerivAtom1@{mDerivAtom1}}
+\index{mDerivAtom1@{mDerivAtom1}!ObjCryst::MolBond@{ObjCryst::MolBond}}
+\paragraph[{mDerivAtom1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf XYZ} {\bf ObjCryst::MolBond::mDerivAtom1}\hspace{0.3cm}{\ttfamily  [mutable, private]}}\hfill\label{a00043_afbabaca2a8c529a5ed48b86b90b6c7a7}
+
+
+Derivatives of the bond length with respect to the coordinates of the atoms. The derivatives are calculated in MolBond::GetLogLikelihood(true) \index{ObjCryst::MolBond@{ObjCryst::MolBond}!mDerivLLKCoeff@{mDerivLLKCoeff}}
+\index{mDerivLLKCoeff@{mDerivLLKCoeff}!ObjCryst::MolBond@{ObjCryst::MolBond}}
+\paragraph[{mDerivLLKCoeff}]{\setlength{\rightskip}{0pt plus 5cm}REAL {\bf ObjCryst::MolBond::mDerivLLKCoeff}\hspace{0.3cm}{\ttfamily  [mutable, private]}}\hfill\label{a00043_af7ec58bb24811ae897e8ba1ecc33d4de}
+
+
+The factor used to change the derivative of the length/angle, to the derivative of the log(likelihood). e.g. (for mDelta=0) $ mDerivLLKCoeff = \frac{L-L_0}{\sigma^2} $ 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Molecule.h\end{DoxyCompactItemize}

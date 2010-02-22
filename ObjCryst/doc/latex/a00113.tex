@@ -1,0 +1,81 @@
+\subsection{ObjCryst::WXCrystMenuBar Class Reference}
+\label{a00113}\index{ObjCryst::WXCrystMenuBar@{ObjCryst::WXCrystMenuBar}}
+
+
+Our own local menu bar, using buttons and Popup menus.  
+Inheritance diagram for ObjCryst::WXCrystMenuBar::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2cm]{a00113}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf WXCrystMenuBar} (wxWindow $\ast$parent, {\bf WXCrystObj} $\ast$owner)\label{a00113_aaa68b57dce657185fe3a93c19ecc648a}
+
+\begin{DoxyCompactList}\small\item\em Ctor. \item\end{DoxyCompactList}\item 
+void {\bf AddMenu} (const string \&name, const int menuId, const string \&help=\char`\"{}\char`\"{})\label{a00113_a99b2ca415d2bb4b670433557b1d42a5d}
+
+\begin{DoxyCompactList}\small\item\em Add a menu. \item\end{DoxyCompactList}\item 
+wxMenu \& {\bf GetMenu} (const int menuId)\label{a00113_a9a378d85bab72be5faec773730df4505}
+
+\begin{DoxyCompactList}\small\item\em Get access to a menu. \item\end{DoxyCompactList}\item 
+void {\bf AddMenuItem} (const int menuId, int id, const string \&item, const string \&help=\char`\"{}\char`\"{}, const bool checkable=false)\label{a00113_a689d06fe301f17b5e8940286d107340a}
+
+\begin{DoxyCompactList}\small\item\em Add an entry to a menu. \item\end{DoxyCompactList}\item 
+void {\bf AddMenuItem} (const int menuId, int id, const wxString \&item, wxMenu $\ast$subMenu, const wxString \&helpString=\_\-T(\char`\"{}\char`\"{}))\label{a00113_a8d8e212441d2df35499e13bc38c7c463}
+
+\begin{DoxyCompactList}\small\item\em Add a sub-\/menu to a menu. \item\end{DoxyCompactList}\item 
+virtual void {\bf CrystUpdate} (const bool updateUI=false, const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em Get new values to be displayed from the underlying object, and raise flag if an UI update is necessary. \item\end{DoxyCompactList}\item 
+virtual void {\bf UpdateUI} (const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em Update the User Interface, if necessary. \item\end{DoxyCompactList}\item 
+void {\bf OnPopupMenu} (wxCommandEvent \&event)\label{a00113_ade8539411ad2badf7ca0d84c982d1e1e}
+
+\begin{DoxyCompactList}\small\item\em Event handler to popu the menu when the button is clicked. \item\end{DoxyCompactList}\item 
+virtual void {\bf SetToolTip} (const wxString \&tip, long menu=0)\label{a00113_ad0ddf5302f5425ffcdcd4bf3681987dd}
+
+\begin{DoxyCompactList}\small\item\em Set tooltip for each menu. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+wxBoxSizer $\ast$ {\bf mpSizer}\label{a00113_a082b747b0a157df1dbe86349450f3f7a}
+
+\begin{DoxyCompactList}\small\item\em The sizer of the menu. \item\end{DoxyCompactList}\item 
+std::map$<$ long, pair$<$ wxMenu $\ast$, wxButton $\ast$ $>$ $>$ {\bf mvpMenu}\label{a00113_a73b92cea8b7a55c69d3c552771505560}
+
+\begin{DoxyCompactList}\small\item\em List of menus, first is the menu Id and second is a pair of $<$pointer to the menu, pointer to the button of the menu$>$. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+Our own local menu bar, using buttons and Popup menus. 
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::WXCrystMenuBar@{ObjCryst::WXCrystMenuBar}!CrystUpdate@{CrystUpdate}}
+\index{CrystUpdate@{CrystUpdate}!ObjCryst::WXCrystMenuBar@{ObjCryst::WXCrystMenuBar}}
+\paragraph[{CrystUpdate}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::WXCrystMenuBar::CrystUpdate (const bool {\em updateUI} = {\ttfamily false}, \/  const bool {\em mutexlock} = {\ttfamily false})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00113_ac0c3dead0da352d0c7e439508bc40303}
+
+
+Get new values to be displayed from the underlying object, and raise flag if an UI update is necessary. The actual GUI update is not made here. \doxyref{UpdateUI()}{p.}{a00113_acc23d478cb50225e17fb5b6dc29fce7b} should be called separately, from the main thread.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em updateUI,:}]if true, this will call UpdateUI, either directly (if in the main thread), or by sending a message. \item[{\em mutexlock,:}]if true, a Mutex will be used to lock the data shared between main and background thread. The idea is to only use a few Mutexes to lock data from the top objects (wxRefinableObj,...), when calling \doxyref{CrystUpdate()}{p.}{a00113_ac0c3dead0da352d0c7e439508bc40303} and \doxyref{UpdateUI()}{p.}{a00113_acc23d478cb50225e17fb5b6dc29fce7b}. As sub-\/objects (\doxyref{WXField}{p.}{a00118},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. \end{DoxyParams}
+
+
+Implements {\bf ObjCryst::WXCrystObjBasic} \doxyref{}{p.}{a00115_a7ac00ae2ae28f1a6fa26e6fa571186b6}.\index{ObjCryst::WXCrystMenuBar@{ObjCryst::WXCrystMenuBar}!UpdateUI@{UpdateUI}}
+\index{UpdateUI@{UpdateUI}!ObjCryst::WXCrystMenuBar@{ObjCryst::WXCrystMenuBar}}
+\paragraph[{UpdateUI}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::WXCrystMenuBar::UpdateUI (const bool {\em mutexlock} = {\ttfamily false})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00113_acc23d478cb50225e17fb5b6dc29fce7b}
+
+
+Update the User Interface, if necessary. 
+\begin{DoxyParams}{Parameters}
+\item[{\em mutexlock,:}]if true, a Mutex will be used to lock the data shared between main and background thread.\end{DoxyParams}
+The idea is to only use a few Mutexes to lock data from the top objects (wxRefinableObj,...), when calling \doxyref{CrystUpdate()}{p.}{a00113_ac0c3dead0da352d0c7e439508bc40303} and \doxyref{UpdateUI()}{p.}{a00113_acc23d478cb50225e17fb5b6dc29fce7b}. As sub-\/objects (\doxyref{WXField}{p.}{a00118},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
+
+Implements {\bf ObjCryst::WXCrystObjBasic} \doxyref{}{p.}{a00115_a3818940b7031ff7e45cf2178c4a99c90}.
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+wxCryst.h\end{DoxyCompactItemize}

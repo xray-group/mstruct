@@ -1,0 +1,38 @@
+\subsection{ObjCryst::CIFData::CIFAtom Struct Reference}
+\label{a00018}\index{ObjCryst::CIFData::CIFAtom@{ObjCryst::CIFData::CIFAtom}}
+
+
+\doxyref{Atom}{p.}{a00008} record.  
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std::string {\bf mLabel}\label{a00018_a32f3b29fdecc1ea4ed42fd2f588f7dc2}
+
+\begin{DoxyCompactList}\small\item\em Label of the atom, or empty string (\_\-atom\_\-site\_\-label). \item\end{DoxyCompactList}\item 
+std::string {\bf mSymbol}\label{a00018_a70e19874d95cb054f2e6b4da29716708}
+
+\begin{DoxyCompactList}\small\item\em Symbol of the atom, or empty string (\_\-atom\_\-type\_\-symbol or \_\-atom\_\-site\_\-type\_\-symbol). \item\end{DoxyCompactList}\item 
+std::vector$<$ float $>$ {\bf mCoordFrac}\label{a00018_a0fb94664112092c339319ac149bf8410}
+
+\begin{DoxyCompactList}\small\item\em Fractionnal coordinates (\_\-atom\_\-site\_\-fract\_\-\{x,y,z\}) or empty vector. \item\end{DoxyCompactList}\item 
+std::vector$<$ float $>$ {\bf mCoordCart}
+\begin{DoxyCompactList}\small\item\em Cartesian coordinates in Angstroem (\_\-atom\_\-site\_\-Cartn\_\-\{x,y,z\}) or empty vector. \item\end{DoxyCompactList}\item 
+float {\bf mOccupancy}\label{a00018_a95523357bde2b4dc4779e2e1a0bebba5}
+
+\begin{DoxyCompactList}\small\item\em Site occupancy, or -\/1. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+\doxyref{Atom}{p.}{a00008} record. 
+
+\subsubsection{Member Data Documentation}
+\index{ObjCryst::CIFData::CIFAtom@{ObjCryst::CIFData::CIFAtom}!mCoordCart@{mCoordCart}}
+\index{mCoordCart@{mCoordCart}!ObjCryst::CIFData::CIFAtom@{ObjCryst::CIFData::CIFAtom}}
+\paragraph[{mCoordCart}]{\setlength{\rightskip}{0pt plus 5cm}std::vector$<$float$>$ {\bf ObjCryst::CIFData::CIFAtom::mCoordCart}}\hfill\label{a00018_a0d0447f70b4bfa0227733a1b3cf51727}
+
+
+Cartesian coordinates in Angstroem (\_\-atom\_\-site\_\-Cartn\_\-\{x,y,z\}) or empty vector. Transformation to fractionnal coordinates currently assumes \char`\"{}a parallel to x; b in the plane of y and z\char`\"{} (see \_\-atom\_\-sites\_\-Cartn\_\-transform\_\-axes) 
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+CIF.h\end{DoxyCompactItemize}

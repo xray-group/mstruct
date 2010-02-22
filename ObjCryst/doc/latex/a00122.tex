@@ -1,0 +1,89 @@
+\subsection{ObjCryst::WXFieldPar$<$ T $>$ Class Template Reference}
+\label{a00122}\index{ObjCryst::WXFieldPar@{ObjCryst::WXFieldPar}}
+
+
+A field for a parameter.  
+Inheritance diagram for ObjCryst::WXFieldPar$<$ T $>$::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4cm]{a00122}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf WXFieldPar} (wxWindow $\ast$parent, const string \&label, const int field\_\-id, T $\ast$par, const int hsize=65)\label{a00122_acbd12ff692a7020f7145394379ed462f}
+
+\begin{DoxyCompactList}\small\item\em Constructor. \item\end{DoxyCompactList}\item 
+virtual void {\bf CrystUpdate} (const bool updateUI=false, const bool mutexlock=false)\label{a00122_a119a3152a4ab675522341f3d83ff88f0}
+
+\begin{DoxyCompactList}\small\item\em This gets a new value from the parameter. \item\end{DoxyCompactList}\item 
+virtual void {\bf UpdateUI} (const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em Update the User Interface, if necessary. \item\end{DoxyCompactList}\item 
+virtual void {\bf Revert} ()
+\begin{DoxyCompactList}\small\item\em After a user entry, this allows to go back to the last value, if for some reason the entry was rejected (because the object is currently busy, . \item\end{DoxyCompactList}\item 
+void {\bf SetHumanValueScale} (const T s)
+\begin{DoxyCompactList}\small\item\em Set Coefficient between the value used by ObjCryst++ and the one to be displayed to the user. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void {\bf ReadNewValue} ()\label{a00122_aa183a548b6f90955c110104d711e7436}
+
+\begin{DoxyCompactList}\small\item\em Reads the new value when the Enter key is hit. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+T $\ast$ {\bf mpValue}\label{a00122_ac9b8abe09a3c0b0f993aaa2f0e6c3022}
+
+\begin{DoxyCompactList}\small\item\em A pointer to the value displayed. \item\end{DoxyCompactList}\item 
+T {\bf mValue}\label{a00122_a107a4db390c1dfad6b899f84b4930bcd}
+
+\begin{DoxyCompactList}\small\item\em The value displayed. \item\end{DoxyCompactList}\item 
+T {\bf mValueOld}\label{a00122_a3d57d6853b52c00725f6148d8f509b21}
+
+\begin{DoxyCompactList}\small\item\em Last value. \item\end{DoxyCompactList}\item 
+T {\bf mHumanScale}
+\begin{DoxyCompactList}\small\item\em Coefficient between the value used by ObjCryst++ and the one to be displayed to the user. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+\subsubsection*{template$<$class T$>$ class ObjCryst::WXFieldPar$<$ T $>$}
+
+A field for a parameter. Template version. If the parameter is a \doxyref{RefinablePar}{p.}{a00072}, use \doxyref{WXFieldRefPar}{p.}{a00124} instead. 
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::WXFieldPar@{ObjCryst::WXFieldPar}!Revert@{Revert}}
+\index{Revert@{Revert}!ObjCryst::WXFieldPar@{ObjCryst::WXFieldPar}}
+\paragraph[{Revert}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ virtual void {\bf ObjCryst::WXFieldPar}$<$ T $>$::Revert ()\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00122_a8896b1a3ba9b901c83d990ac5e0bd6d1}
+
+
+After a user entry, this allows to go back to the last value, if for some reason the entry was rejected (because the object is currently busy, . ..) 
+
+Implements {\bf ObjCryst::WXFieldParBase} \doxyref{}{p.}{a00123_a27fd5066d2f6b6e87e213439fd8f7311}.\index{ObjCryst::WXFieldPar@{ObjCryst::WXFieldPar}!SetHumanValueScale@{SetHumanValueScale}}
+\index{SetHumanValueScale@{SetHumanValueScale}!ObjCryst::WXFieldPar@{ObjCryst::WXFieldPar}}
+\paragraph[{SetHumanValueScale}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ void {\bf ObjCryst::WXFieldPar}$<$ T $>$::SetHumanValueScale (const T {\em s})}\hfill\label{a00122_aea7020b96899dfcd41e568f8705fa2f8}
+
+
+Set Coefficient between the value used by ObjCryst++ and the one to be displayed to the user. Typically, 180/pi \index{ObjCryst::WXFieldPar@{ObjCryst::WXFieldPar}!UpdateUI@{UpdateUI}}
+\index{UpdateUI@{UpdateUI}!ObjCryst::WXFieldPar@{ObjCryst::WXFieldPar}}
+\paragraph[{UpdateUI}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ virtual void {\bf ObjCryst::WXFieldPar}$<$ T $>$::UpdateUI (const bool {\em mutexlock} = {\ttfamily false})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00122_a1777f9713ca5d40c29c5bd3ab5484aff}
+
+
+Update the User Interface, if necessary. 
+\begin{DoxyParams}{Parameters}
+\item[{\em mutexlock,:}]if true, a Mutex will be used to lock the data shared between main and background thread.\end{DoxyParams}
+The idea is to only use a few Mutexes to lock data from the top objects (wxRefinableObj,...), when calling \doxyref{CrystUpdate()}{p.}{a00122_a119a3152a4ab675522341f3d83ff88f0} and \doxyref{UpdateUI()}{p.}{a00122_a1777f9713ca5d40c29c5bd3ab5484aff}. As sub-\/objects (\doxyref{WXField}{p.}{a00118},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
+
+Implements {\bf ObjCryst::WXCrystObjBasic} \doxyref{}{p.}{a00115_a3818940b7031ff7e45cf2178c4a99c90}.
+
+\subsubsection{Member Data Documentation}
+\index{ObjCryst::WXFieldPar@{ObjCryst::WXFieldPar}!mHumanScale@{mHumanScale}}
+\index{mHumanScale@{mHumanScale}!ObjCryst::WXFieldPar@{ObjCryst::WXFieldPar}}
+\paragraph[{mHumanScale}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ T {\bf ObjCryst::WXFieldPar}$<$ T $>$::{\bf mHumanScale}\hspace{0.3cm}{\ttfamily  [protected]}}\hfill\label{a00122_aa37ca90ca40304e967b232e3eef4af12}
+
+
+Coefficient between the value used by ObjCryst++ and the one to be displayed to the user. Typically, 180/pi 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+wxCryst.h\end{DoxyCompactItemize}

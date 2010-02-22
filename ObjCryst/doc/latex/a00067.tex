@@ -1,0 +1,110 @@
+\subsection{ObjCryst::Quaternion Class Reference}
+\label{a00067}\index{ObjCryst::Quaternion@{ObjCryst::Quaternion}}
+
+
+A quaternion class, used to represent the orientation of the molecule.  
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Quaternion} ()\label{a00067_af5260414dcf9aaeb479370b55542ad58}
+
+\begin{DoxyCompactList}\small\item\em Default constructor, yields q=(1,0,0,0). \item\end{DoxyCompactList}\item 
+{\bf Quaternion} (const REAL q0, const REAL q1, const REAL q2, const REAL q3, bool unit=true)\label{a00067_a7adfabaa48d3f0a8aa056977f8a40492}
+
+\begin{DoxyCompactList}\small\item\em Creates a unit quaternion from its components (normalized automatically). \item\end{DoxyCompactList}\item 
+{\bf Quaternion} {\bf GetConjugate} () const \label{a00067_a45d3304cc7790cc8d6f3beb46a407c8a}
+
+\begin{DoxyCompactList}\small\item\em Get the conjugate of this quaternion (== the inverse if unit quaternion). \item\end{DoxyCompactList}\item 
+{\bf Quaternion} {\bf operator$\ast$} (const {\bf Quaternion} \&q) const \label{a00067_a5f3244aba238d4aedc4dbb45a4fa2d69}
+
+\begin{DoxyCompactList}\small\item\em \doxyref{Quaternion}{p.}{a00067} multiplication. \item\end{DoxyCompactList}\item 
+void {\bfseries operator$\ast$=} (const {\bf Quaternion} \&q)\label{a00067_ac01783b00149b154f0c6701403d72055}
+
+\item 
+void {\bfseries XMLOutput} (ostream \&os, int indent=0) const \label{a00067_a709cb217017604ca0796350b2ae644e3}
+
+\item 
+void {\bfseries XMLInput} (istream \&is, const {\bf XMLCrystTag} \&tag)\label{a00067_afea1afc8fed0f18668374b7e7bd11dce}
+
+\item 
+void {\bf RotateVector} (REAL \&v1, REAL \&v2, REAL \&v3) const \label{a00067_a50b7dd9fc29bf102e19ca55991a8f657}
+
+\begin{DoxyCompactList}\small\item\em Rotate vector v=(v1,v2,v3). The rotated components are directly written. \item\end{DoxyCompactList}\item 
+void {\bf Normalize} () const 
+\begin{DoxyCompactList}\small\item\em Re-\/normalize the quaternion to unity. \item\end{DoxyCompactList}\item 
+REAL {\bfseries GetNorm} () const \label{a00067_a39beed5204c7398e670ae93aefb1c31a}
+
+\item 
+const REAL \& {\bfseries Q0} () const \label{a00067_a66fc89c6cca64bd1e94789b8aef7e5cc}
+
+\item 
+const REAL \& {\bfseries Q1} () const \label{a00067_a53b3e3206e570719493a51ffe4ff9587}
+
+\item 
+const REAL \& {\bfseries Q2} () const \label{a00067_af438a7e1af4cc4d2d8b91feb93b6f3a9}
+
+\item 
+const REAL \& {\bfseries Q3} () const \label{a00067_adaff60b4982079b9290a84f581bdcc92}
+
+\item 
+REAL \& {\bfseries Q0} ()\label{a00067_ae7f96ecf853de39a78844c1202dba317}
+
+\item 
+REAL \& {\bfseries Q1} ()\label{a00067_a7afb9ac56760fc5b4eea48ca052add44}
+
+\item 
+REAL \& {\bfseries Q2} ()\label{a00067_af2f2c9dfbb6440ee42a51066ddc0231a}
+
+\item 
+REAL \& {\bfseries Q3} ()\label{a00067_a493592f09ec8f02dfafd1bf4c5c9bc56}
+
+\end{DoxyCompactItemize}
+\subsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static {\bf Quaternion} {\bf RotationQuaternion} (const REAL ang, const REAL v1, const REAL v2, const REAL v3)\label{a00067_a2cf209c3cc21ed46a52aec7a5f106cce}
+
+\begin{DoxyCompactList}\small\item\em Create a rotation quaternion around a given vector for a given angle. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+REAL {\bf mQ0}
+\begin{DoxyCompactList}\small\item\em The components of the quaternion z=(q0,v) with v=(q1,q2,q3). \item\end{DoxyCompactList}\item 
+REAL {\bfseries mQ1}\label{a00067_ad8a0a4af3b87af3ff7fa9f429b29d538}
+
+\item 
+REAL {\bfseries mQ2}\label{a00067_a8e0d3fd6e900716fd19dd4ca970bbd12}
+
+\item 
+REAL {\bfseries mQ3}\label{a00067_a7d70b76441a54466bd783a9ac121d173}
+
+\item 
+bool {\bfseries mIsUniQuaternion}\label{a00067_a51dbd4da0bd28b4054ea2482e10a26f3}
+
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+A quaternion class, used to represent the orientation of the molecule. It may or may not be a unit quaternion. 
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::Quaternion@{ObjCryst::Quaternion}!Normalize@{Normalize}}
+\index{Normalize@{Normalize}!ObjCryst::Quaternion@{ObjCryst::Quaternion}}
+\paragraph[{Normalize}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::Quaternion::Normalize () const}\hfill\label{a00067_a155ad4519b9a17e369ef30e2bc72a160}
+
+
+Re-\/normalize the quaternion to unity. This should not be useful, except on individual component input, or after long calculations. And even if wrong, the rotation is independent of the norm of the quaternion.
+
+This is markerd const because we use only unit quaternions 
+
+\subsubsection{Member Data Documentation}
+\index{ObjCryst::Quaternion@{ObjCryst::Quaternion}!mQ0@{mQ0}}
+\index{mQ0@{mQ0}!ObjCryst::Quaternion@{ObjCryst::Quaternion}}
+\paragraph[{mQ0}]{\setlength{\rightskip}{0pt plus 5cm}REAL {\bf ObjCryst::Quaternion::mQ0}\hspace{0.3cm}{\ttfamily  [mutable, private]}}\hfill\label{a00067_a4f13c62b89627afaa8f4e08727dbdcdb}
+
+
+The components of the quaternion z=(q0,v) with v=(q1,q2,q3). These are mutable so that the quaternion can be normalized in a const method. 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Molecule.h\end{DoxyCompactItemize}

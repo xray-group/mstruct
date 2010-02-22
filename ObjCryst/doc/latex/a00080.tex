@@ -1,0 +1,54 @@
+\subsection{ObjCryst::Restraint Class Reference}
+\label{a00080}\index{ObjCryst::Restraint@{ObjCryst::Restraint}}
+
+
+\doxyref{Restraint}{p.}{a00080}: generic class for a restraint of a given model.  
+Inheritance diagram for ObjCryst::Restraint::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.57303cm]{a00080}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Restraint} ()\label{a00080_ac916c489ee14891b38bf9a877d9e0d03}
+
+\begin{DoxyCompactList}\small\item\em Default constructor, sets \doxyref{RefParType}{p.}{a00079} to gpRefParTypeObjCryst. \item\end{DoxyCompactList}\item 
+{\bf Restraint} (const {\bf RefParType} $\ast$type)\label{a00080_a5fd37c4a5f20a41dcacb78b0af3b8a7d}
+
+\begin{DoxyCompactList}\small\item\em constructor specifying the type \item\end{DoxyCompactList}\item 
+virtual const {\bf RefParType} $\ast$ {\bfseries GetType} () const \label{a00080_aaa8b94f207f2e77f58754236af929a57}
+
+\item 
+virtual void {\bfseries SetType} (const {\bf RefParType} $\ast$type)\label{a00080_ab9dc55ae087d99cd30e9915ffb6e5371}
+
+\item 
+virtual REAL {\bf GetLogLikelihood} () const \label{a00080_adac7d5d594f6d0c26aa7a15b0bb1c73c}
+
+\begin{DoxyCompactList}\small\item\em Get -\/ln(likelihood) for this restraint. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const {\bf RefParType} $\ast$ {\bfseries mpRefParType}\label{a00080_a4f87437f4e2e44c1f3ca2039c54b202f}
+
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+\doxyref{Restraint}{p.}{a00080}: generic class for a restraint of a given model. This defines only the category (\doxyref{RefParType}{p.}{a00079}) of restraint, and the function to access the log(likelihood) associated to this restraint and the current model.
+
+By default: -\/log(likelihood)=0, and the function must be overloaded for \char`\"{}real\char`\"{} restraints.
+
+\begin{DoxyNote}{Note}
+the log(likelihood) {\itshape must\/} always include the normalization term, so that variances can also optimized during the maximum likelihood optimization. e.g.:
+\begin{DoxyItemize}
+\item $ P=\frac{1}{\sqrt{2\pi\sigma^2}}e^{\frac{-(calc-expected)^2}{\sigma^2}}$
+\item $ -\log(P)= \log\left(\sqrt{2\pi\sigma^2}\right) + \left(\frac{calc-expected}{\sigma} \right)^2$
+\end{DoxyItemize}
+\end{DoxyNote}
+forgetting the normalization term would result in making the optimization diverge towards infinite variances. 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+RefinableObj.h\end{DoxyCompactItemize}

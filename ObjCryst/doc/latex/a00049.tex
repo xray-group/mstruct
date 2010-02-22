@@ -1,0 +1,249 @@
+\subsection{ObjCryst::MonteCarloObj Class Reference}
+\label{a00049}\index{ObjCryst::MonteCarloObj@{ObjCryst::MonteCarloObj}}
+
+
+Base object for Monte-\/Carlo Global Optimization methods.  
+Inheritance diagram for ObjCryst::MonteCarloObj::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2cm]{a00049}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf MonteCarloObj} (const string name=\char`\"{}\char`\"{})\label{a00049_a6ef446b8361a8c53d016f213f0d1e17f}
+
+\begin{DoxyCompactList}\small\item\em Constructor. \item\end{DoxyCompactList}\item 
+{\bf MonteCarloObj} (const bool internalUseOnly)
+\begin{DoxyCompactList}\small\item\em Constructor. \item\end{DoxyCompactList}\item 
+virtual {\bf $\sim$MonteCarloObj} ()\label{a00049_a7f928d56e60a279085c67e78dc334f39}
+
+\begin{DoxyCompactList}\small\item\em Destructor. \item\end{DoxyCompactList}\item 
+void {\bf SetAlgorithmSimulAnnealing} (const {\bf AnnealingSchedule} scheduleTemp, const REAL tMax, const REAL tMin, const {\bf AnnealingSchedule} scheduleMutation=ANNEALING\_\-CONSTANT, const REAL mutMax=16., const REAL mutMin=.125, const long nbTrialRetry=0, const REAL minCostRetry=0.)
+\begin{DoxyCompactList}\small\item\em Set the refinement method to simulated Annealing. \item\end{DoxyCompactList}\item 
+void {\bf SetAlgorithmParallTempering} (const {\bf AnnealingSchedule} scheduleTemp, const REAL tMax, const REAL tMin, const {\bf AnnealingSchedule} scheduleMutation=ANNEALING\_\-CONSTANT, const REAL mutMax=16., const REAL mutMin=.125)
+\begin{DoxyCompactList}\small\item\em Set the refinement method to Parallel Tempering. \item\end{DoxyCompactList}\item 
+virtual void {\bf Optimize} (long \&nbSteps, const bool silent=false, const REAL finalcost=0, const REAL maxTime=-\/1)
+\begin{DoxyCompactList}\small\item\em Launch optimization (a single run) for N steps. \item\end{DoxyCompactList}\item 
+virtual void {\bf MultiRunOptimize} (long \&nbCycle, long \&nbSteps, const bool silent=false, const REAL finalcost=0, const REAL maxTime=-\/1)
+\begin{DoxyCompactList}\small\item\em Launch optimization for multiple runs of N steps. \item\end{DoxyCompactList}\item 
+void {\bf RunSimulatedAnnealing} (long \&nbSteps, const bool silent=false, const REAL finalcost=0, const REAL maxTime=-\/1)
+\item 
+void {\bf RunParallelTempering} (long \&nbSteps, const bool silent=false, const REAL finalcost=0, const REAL maxTime=-\/1)
+\item 
+virtual void {\bf XMLOutput} (ostream \&os, int indent=0) const 
+\begin{DoxyCompactList}\small\item\em Output a description of the object in XML format to a stream. \item\end{DoxyCompactList}\item 
+virtual void {\bf XMLInput} (istream \&is, const {\bf XMLCrystTag} \&tag)
+\begin{DoxyCompactList}\small\item\em Input in XML format from a stream, restoring the set of refined objects and the associated cost functions. \item\end{DoxyCompactList}\item 
+virtual const string {\bf GetClassName} () const \label{a00049_a8093d58ee8d609cf89a52455df240882}
+
+\begin{DoxyCompactList}\small\item\em Get the name for this class type. \item\end{DoxyCompactList}\item 
+{\bf LSQNumObj} \& {\bf GetLSQObj} ()\label{a00049_a517ee30d65b11c5172f4643aac8a8128}
+
+\begin{DoxyCompactList}\small\item\em Access to the builtin LSQ optimization object. \item\end{DoxyCompactList}\item 
+const {\bf LSQNumObj} \& {\bf GetLSQObj} () const \label{a00049_a695d603e54e12bbf9cd6efa6282ee948}
+
+\begin{DoxyCompactList}\small\item\em Access to the builtin LSQ optimization object. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void {\bf NewConfiguration} (const {\bf RefParType} $\ast$type={\bf gpRefParTypeObjCryst})
+\begin{DoxyCompactList}\small\item\em Make a random change in the configuration. \item\end{DoxyCompactList}\item 
+virtual void {\bf InitOptions} ()\label{a00049_aa9c005fcbe5c600efe2dee1a2c7697a4}
+
+\begin{DoxyCompactList}\small\item\em Initialization of options. \item\end{DoxyCompactList}\item 
+virtual void {\bf InitLSQ} (const bool useFullPowderPatternProfile=true)
+\begin{DoxyCompactList}\small\item\em Prepare mLSQ for least-\/squares refinement during the global optimization. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf RefObjOpt} {\bf mGlobalOptimType}
+\begin{DoxyCompactList}\small\item\em Method used for the global optimization. \item\end{DoxyCompactList}\item 
+REAL {\bf mCurrentCost}\label{a00049_a96805488cd133249ec1c24c67d3a2dda}
+
+\begin{DoxyCompactList}\small\item\em Current value of the cost function. \item\end{DoxyCompactList}\item 
+{\bf RefObjOpt} {\bf mSaveTrackedData}
+\begin{DoxyCompactList}\small\item\em Option to save the evolution of tracked data (cost functions, likelihhod, individual parameters,. \item\end{DoxyCompactList}\item 
+REAL {\bf mTemperature}\label{a00049_a17997726361536481a041fb5736fedb9}
+
+\begin{DoxyCompactList}\small\item\em Current temperature for annealing. \item\end{DoxyCompactList}\item 
+REAL {\bf mTemperatureMax}\label{a00049_a1256bc3d6ceae83f8b36de6141a8945d}
+
+\begin{DoxyCompactList}\small\item\em Beginning temperature for annealing. \item\end{DoxyCompactList}\item 
+REAL {\bf mTemperatureMin}\label{a00049_a8ba61158d22cd66be193aabcd41dd9f6}
+
+\begin{DoxyCompactList}\small\item\em Lower temperature. \item\end{DoxyCompactList}\item 
+{\bf RefObjOpt} {\bf mAnnealingScheduleTemp}\label{a00049_ae630f1608e3be9b01159d0780980eb08}
+
+\begin{DoxyCompactList}\small\item\em Schedule for the annealing. \item\end{DoxyCompactList}\item 
+REAL {\bf mTemperatureGamma}\label{a00049_af1a7aeb7079f01175fbef95b31ca47af}
+
+\begin{DoxyCompactList}\small\item\em Gamma for the 'gamma' temperature schedule. \item\end{DoxyCompactList}\item 
+REAL {\bf mMutationAmplitude}
+\begin{DoxyCompactList}\small\item\em Mutation amplitude. \item\end{DoxyCompactList}\item 
+REAL {\bf mMutationAmplitudeMax}\label{a00049_ae56181bde6b87eeeb24a6fdd1428a0b9}
+
+\begin{DoxyCompactList}\small\item\em Mutation amplitude at the beginning of the optimization. \item\end{DoxyCompactList}\item 
+REAL {\bf mMutationAmplitudeMin}\label{a00049_a6f4e6631d2079c0ac3f82a271a6ad3ec}
+
+\begin{DoxyCompactList}\small\item\em Mutation amplitude at the end of the optimization. \item\end{DoxyCompactList}\item 
+{\bf RefObjOpt} {\bf mAnnealingScheduleMutation}\label{a00049_a5bb4e03ae2221be34131f4c0f108271e}
+
+\begin{DoxyCompactList}\small\item\em Schedule for the annealing. \item\end{DoxyCompactList}\item 
+REAL {\bf mMutationAmplitudeGamma}\label{a00049_a1cfbd1b4fc984a06a02c5102a9dcfcd3}
+
+\begin{DoxyCompactList}\small\item\em Gamma for the 'gamma' Mutation amplitude schedule. \item\end{DoxyCompactList}\item 
+long {\bf mNbTrialRetry}
+\begin{DoxyCompactList}\small\item\em Number of trials before testing if we are below the given minimum cost. \item\end{DoxyCompactList}\item 
+REAL {\bf mMinCostRetry}\label{a00049_a9a45d65ee6522c4dc159a91fdb4c1661}
+
+\begin{DoxyCompactList}\small\item\em Cost to reach unless an automatic randomization and retry is done. \item\end{DoxyCompactList}\item 
+{\bf LSQNumObj} {\bf mLSQ}\label{a00049_a36b4c13151172e24108d6578d63d1125}
+
+\begin{DoxyCompactList}\small\item\em Least squares object. \item\end{DoxyCompactList}\item 
+{\bf RefObjOpt} {\bf mAutoLSQ}\label{a00049_a3d6e159362a2f93d5a2883e60f1710d8}
+
+\begin{DoxyCompactList}\small\item\em Option to run automatic least-\/squares refinements. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+Base object for Monte-\/Carlo Global Optimization methods. The algorithm is quite simple, whith two type of optimizations, either simulated Annealing or Parallel Tempering, the latter being recommanded for most real-\/world optimizations. 
+
+\subsubsection{Constructor \& Destructor Documentation}
+\index{ObjCryst::MonteCarloObj@{ObjCryst::MonteCarloObj}!MonteCarloObj@{MonteCarloObj}}
+\index{MonteCarloObj@{MonteCarloObj}!ObjCryst::MonteCarloObj@{ObjCryst::MonteCarloObj}}
+\paragraph[{MonteCarloObj}]{\setlength{\rightskip}{0pt plus 5cm}ObjCryst::MonteCarloObj::MonteCarloObj (const bool {\em internalUseOnly})}\hfill\label{a00049_a503419b4b79fdb5ae41928656a888ec8}
+
+
+Constructor. Using internalUseOnly=true will avoid registering the the object to any registry, and thus (for example) no display will be created, nor will this object be automatically be saved. 
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::MonteCarloObj@{ObjCryst::MonteCarloObj}!InitLSQ@{InitLSQ}}
+\index{InitLSQ@{InitLSQ}!ObjCryst::MonteCarloObj@{ObjCryst::MonteCarloObj}}
+\paragraph[{InitLSQ}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::MonteCarloObj::InitLSQ (const bool {\em useFullPowderPatternProfile} = {\ttfamily true})\hspace{0.3cm}{\ttfamily  [protected, virtual]}}\hfill\label{a00049_abe55c9dd193cca72bf5b947a6eaf7fdd}
+
+
+Prepare mLSQ for least-\/squares refinement during the global optimization. 
+\begin{DoxyParams}{Parameters}
+\item[{\em useFullPowderPatternProfile,:}]if true, the refinement will use the full profile version of powder patterns, otherwise only the integrated powder pattern will be used (faster). \end{DoxyParams}
+\index{ObjCryst::MonteCarloObj@{ObjCryst::MonteCarloObj}!MultiRunOptimize@{MultiRunOptimize}}
+\index{MultiRunOptimize@{MultiRunOptimize}!ObjCryst::MonteCarloObj@{ObjCryst::MonteCarloObj}}
+\paragraph[{MultiRunOptimize}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::MonteCarloObj::MultiRunOptimize (long \& {\em nbCycle}, \/  long \& {\em nbSteps}, \/  const bool {\em silent} = {\ttfamily false}, \/  const REAL {\em finalcost} = {\ttfamily 0}, \/  const REAL {\em maxTime} = {\ttfamily -\/1})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00049_ae1689aa2dd5867499768328df935334d}
+
+
+Launch optimization for multiple runs of N steps. 
+\begin{DoxyParams}{Parameters}
+\item[{\em nbCycle,:}]the number of runs (cycles) to perform. The structure is randomized at the beginning of each cycle. If nbCycle==-\/1, this will run indefinitely. The nbCycle parameter is decreased after each run. \item[{\em nbSteps,:}]the number of steps to go. This number is modified (decreases!) as the refinement goes on. \item[{\em silent}]: if true, absolutely no message should be printed (except debugging) \item[{\em finalcost,:}]the optimization will stop if overall cost fallse below this value \item[{\em maxTime,:}]the optimization will stop after the given number of seconds has been spent optimizing (ignored if $<$0). \end{DoxyParams}
+
+
+Implements {\bf ObjCryst::OptimizationObj} \doxyref{}{p.}{a00054_aa53575dbda2ec3f561bed934beb4ca6f}.\index{ObjCryst::MonteCarloObj@{ObjCryst::MonteCarloObj}!NewConfiguration@{NewConfiguration}}
+\index{NewConfiguration@{NewConfiguration}!ObjCryst::MonteCarloObj@{ObjCryst::MonteCarloObj}}
+\paragraph[{NewConfiguration}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::MonteCarloObj::NewConfiguration (const {\bf RefParType} $\ast$ {\em type} = {\ttfamily {\bf gpRefParTypeObjCryst}})\hspace{0.3cm}{\ttfamily  [protected, virtual]}}\hfill\label{a00049_a8f177c8ada9f3cf392f8e8706eeae28b}
+
+
+Make a random change in the configuration. \begin{DoxyInternal}{For internal use only.}
+This just generates a new configuration with random changes (according to current parameters). The new configuration is {\itshape not\/} tested {\itshape in\/} {\itshape this\/} {\itshape function\/} vs temperature: this should be done in the \doxyref{OptimizationObj::Optimize()}{p.}{a00054_a08c77dc6ec80f63bf067ef2968a0b6dc} function, which also chooses whether to revert to the previous configuration.
+
+Random moves are made by the objects and not by this function, because the new configuration can be specific (like, for example, permutations between some of the parameters (atoms)).
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em type,:}]can be used to restrict the move to a given category of parameters. \end{DoxyParams}
+\end{DoxyInternal}
+\index{ObjCryst::MonteCarloObj@{ObjCryst::MonteCarloObj}!Optimize@{Optimize}}
+\index{Optimize@{Optimize}!ObjCryst::MonteCarloObj@{ObjCryst::MonteCarloObj}}
+\paragraph[{Optimize}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::MonteCarloObj::Optimize (long \& {\em nbSteps}, \/  const bool {\em silent} = {\ttfamily false}, \/  const REAL {\em finalcost} = {\ttfamily 0}, \/  const REAL {\em maxTime} = {\ttfamily -\/1})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00049_aef060de8a302fb8c4e607e00667d7b49}
+
+
+Launch optimization (a single run) for N steps. 
+\begin{DoxyParams}{Parameters}
+\item[{\em nbSteps,:}]the number of steps to go. This number is modified (decreases!) as the refinement goes on. \item[{\em silent}]: if true, absolutely no message should be printed (except debugging) \item[{\em finalcost,:}]the optimization will stop if overall cost fallse below this value \item[{\em maxTime,:}]the optimization will stop after the given number of seconds has been spent optimizing (ignored if $<$0). \end{DoxyParams}
+
+
+Implements {\bf ObjCryst::OptimizationObj} \doxyref{}{p.}{a00054_a08c77dc6ec80f63bf067ef2968a0b6dc}.\index{ObjCryst::MonteCarloObj@{ObjCryst::MonteCarloObj}!RunParallelTempering@{RunParallelTempering}}
+\index{RunParallelTempering@{RunParallelTempering}!ObjCryst::MonteCarloObj@{ObjCryst::MonteCarloObj}}
+\paragraph[{RunParallelTempering}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::MonteCarloObj::RunParallelTempering (long \& {\em nbSteps}, \/  const bool {\em silent} = {\ttfamily false}, \/  const REAL {\em finalcost} = {\ttfamily 0}, \/  const REAL {\em maxTime} = {\ttfamily -\/1})}\hfill\label{a00049_a707045b814adb938fa5a1d8485074d21}
+\begin{DoxyInternal}{For internal use only.}
+Do a single Parallel Tempering run. This is called by Optimize(...) and \doxyref{MultiRunOptimize()}{p.}{a00049_ae1689aa2dd5867499768328df935334d}, which must also prepare the optimization (\doxyref{PrepareRefParList()}{p.}{a00054_a2f11f520bc1bd0b70f8aea98d3f8224c}, etc..). \end{DoxyInternal}
+\index{ObjCryst::MonteCarloObj@{ObjCryst::MonteCarloObj}!RunSimulatedAnnealing@{RunSimulatedAnnealing}}
+\index{RunSimulatedAnnealing@{RunSimulatedAnnealing}!ObjCryst::MonteCarloObj@{ObjCryst::MonteCarloObj}}
+\paragraph[{RunSimulatedAnnealing}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::MonteCarloObj::RunSimulatedAnnealing (long \& {\em nbSteps}, \/  const bool {\em silent} = {\ttfamily false}, \/  const REAL {\em finalcost} = {\ttfamily 0}, \/  const REAL {\em maxTime} = {\ttfamily -\/1})}\hfill\label{a00049_a80c15a8ba385e2e0f3e8a52451898fde}
+\begin{DoxyInternal}{For internal use only.}
+Do a single simulated annealing run. This is called by Optimize(...) and \doxyref{MultiRunOptimize()}{p.}{a00049_ae1689aa2dd5867499768328df935334d}, which must also prepare the optimization (\doxyref{PrepareRefParList()}{p.}{a00054_a2f11f520bc1bd0b70f8aea98d3f8224c}, etc..). \end{DoxyInternal}
+\index{ObjCryst::MonteCarloObj@{ObjCryst::MonteCarloObj}!SetAlgorithmParallTempering@{SetAlgorithmParallTempering}}
+\index{SetAlgorithmParallTempering@{SetAlgorithmParallTempering}!ObjCryst::MonteCarloObj@{ObjCryst::MonteCarloObj}}
+\paragraph[{SetAlgorithmParallTempering}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::MonteCarloObj::SetAlgorithmParallTempering (const {\bf AnnealingSchedule} {\em scheduleTemp}, \/  const REAL {\em tMax}, \/  const REAL {\em tMin}, \/  const {\bf AnnealingSchedule} {\em scheduleMutation} = {\ttfamily ANNEALING\_\-CONSTANT}, \/  const REAL {\em mutMax} = {\ttfamily 16.}, \/  const REAL {\em mutMin} = {\ttfamily .125})}\hfill\label{a00049_a54c7ad3cb78846c82c65d6a6db27801a}
+
+
+Set the refinement method to Parallel Tempering. The refinement begins at max and finishes at min temperature.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em scheduleTemp,:}]temperature schedule \item[{\em tMax,tMin,:}]Max and Min temperatures. See AnnealingSchedule. \item[{\em scheduleMutation,:}]the mutation schedule. For each new configuration, the variation of each refinable parameter is less than its RefinablePar::GlobalOptimStep(), multiplied by the current mutation amplitude. By default this mutation is equal to 1., but making bigger steps can be a good idea at the beginning of the refinement. Thus you can choose a schedule for the amplitude, exactly like for the temperature. \item[{\em mutMax,mutMin,:}]Max and Min mutation amplitudes. \end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+do not use the 'smart' option for the temperature schedule, it is not yet implemented. Later it will be used to set the temperatures as a function of the amplitude schedule, so that we keep accepted move between 30\% and 70\%. 
+\end{DoxyWarning}
+\begin{DoxyNote}{Note}
+this will be removed when we separate the different algorithms in different classes. 
+\end{DoxyNote}
+\index{ObjCryst::MonteCarloObj@{ObjCryst::MonteCarloObj}!SetAlgorithmSimulAnnealing@{SetAlgorithmSimulAnnealing}}
+\index{SetAlgorithmSimulAnnealing@{SetAlgorithmSimulAnnealing}!ObjCryst::MonteCarloObj@{ObjCryst::MonteCarloObj}}
+\paragraph[{SetAlgorithmSimulAnnealing}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::MonteCarloObj::SetAlgorithmSimulAnnealing (const {\bf AnnealingSchedule} {\em scheduleTemp}, \/  const REAL {\em tMax}, \/  const REAL {\em tMin}, \/  const {\bf AnnealingSchedule} {\em scheduleMutation} = {\ttfamily ANNEALING\_\-CONSTANT}, \/  const REAL {\em mutMax} = {\ttfamily 16.}, \/  const REAL {\em mutMin} = {\ttfamily .125}, \/  const long {\em nbTrialRetry} = {\ttfamily 0}, \/  const REAL {\em minCostRetry} = {\ttfamily 0.})}\hfill\label{a00049_ac094251dbd02a4709dd4afb29d8454e5}
+
+
+Set the refinement method to simulated Annealing. Note that Parellel Tempering is more efficient to get out of local minima, so you sould rather use that method.
+
+The refinement begins at max and finishes at min temperature.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em scheduleTemp,:}]temperature schedule. See AnnealingSchedule. \item[{\em tMax,tMin,:}]Max and Min temperatures. \item[{\em scheduleMutation,:}]the mutation schedule. For each new configuration, the variation of each refinable parameter is less than its RefinablePar::GlobalOptimStep(), multiplied by the current mutation amplitude. By default this mutation is equal to 1., but making bigger steps is a good idea at the beginning of the refinement (for higher temperatures). See AnnealingSchedule. See AnnealingSchedule. \item[{\em mutMax,mutMin,:}]Max and Min mutation amplitudes. \item[{\em minCostRetry,nbTrialRetry,:}]if after nbTrialRetry, the cost function is still above minCostRetry, then start again from a random configuration. No randomization is made if nbTrialRetry $<$= 0. \item[{\em maxNbTrialSinceBest,:}]if more than maxNbTrialSinceBest trials have been made since the best configuration was recorded, then revert to that configuration. This should be large enough to have an ergodic search (the default is never to revert..)\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+do not use the 'smart' option for the temperature schedule, it is not yet implemented. Later it will be used to set the temperatures as a function of the amplitude schedule, so that we accept between 30\% and 70\% moves. 
+\end{DoxyWarning}
+\begin{DoxyNote}{Note}
+this will be removed when we separate the different algorithms in different classes. 
+\end{DoxyNote}
+\index{ObjCryst::MonteCarloObj@{ObjCryst::MonteCarloObj}!XMLInput@{XMLInput}}
+\index{XMLInput@{XMLInput}!ObjCryst::MonteCarloObj@{ObjCryst::MonteCarloObj}}
+\paragraph[{XMLInput}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::MonteCarloObj::XMLInput (istream \& {\em is}, \/  const {\bf XMLCrystTag} \& {\em tag})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00049_a2f9428857b1d26bbdac08d59debb9f52}
+
+
+Input in XML format from a stream, restoring the set of refined objects and the associated cost functions. Note that the corresponding objects must have been loaded in memory before, else shit happens. 
+
+Implements {\bf ObjCryst::OptimizationObj} \doxyref{}{p.}{a00054_aa07aee60f56780e2c56fb20f4a5f48a8}.\index{ObjCryst::MonteCarloObj@{ObjCryst::MonteCarloObj}!XMLOutput@{XMLOutput}}
+\index{XMLOutput@{XMLOutput}!ObjCryst::MonteCarloObj@{ObjCryst::MonteCarloObj}}
+\paragraph[{XMLOutput}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::MonteCarloObj::XMLOutput (ostream \& {\em os}, \/  int {\em indent} = {\ttfamily 0}) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00049_a619eb171e5fe384be4d37f999dde8e0f}
+
+
+Output a description of the object in XML format to a stream. This saves the list of refined object and the cost functions, as well as options for the refinement. The refined objects are {\bfseries not} saved, so this must be done somewhere else (they must be reloaded before this object). 
+
+Implements {\bf ObjCryst::OptimizationObj} \doxyref{}{p.}{a00054_a6b7726159bb0d5dad1c7eebaee78f53a}.
+
+\subsubsection{Member Data Documentation}
+\index{ObjCryst::MonteCarloObj@{ObjCryst::MonteCarloObj}!mGlobalOptimType@{mGlobalOptimType}}
+\index{mGlobalOptimType@{mGlobalOptimType}!ObjCryst::MonteCarloObj@{ObjCryst::MonteCarloObj}}
+\paragraph[{mGlobalOptimType}]{\setlength{\rightskip}{0pt plus 5cm}{\bf RefObjOpt} {\bf ObjCryst::MonteCarloObj::mGlobalOptimType}\hspace{0.3cm}{\ttfamily  [protected]}}\hfill\label{a00049_af5ab36ab840b6654f6738c30712b2f95}
+
+
+Method used for the global optimization. Should be removed when we switch to using several classes for different algorithms. \index{ObjCryst::MonteCarloObj@{ObjCryst::MonteCarloObj}!mMutationAmplitude@{mMutationAmplitude}}
+\index{mMutationAmplitude@{mMutationAmplitude}!ObjCryst::MonteCarloObj@{ObjCryst::MonteCarloObj}}
+\paragraph[{mMutationAmplitude}]{\setlength{\rightskip}{0pt plus 5cm}REAL {\bf ObjCryst::MonteCarloObj::mMutationAmplitude}\hspace{0.3cm}{\ttfamily  [protected]}}\hfill\label{a00049_afb02263e40ec89621bffe34ca859be96}
+
+
+Mutation amplitude. From .25 to 64. Random moves will have a maximum amplitude equal to this amplitude multiplied by the Global optimization step defined for each \doxyref{RefinablePar}{p.}{a00072}. Large amplitude should be used at the beginning of the refinement (high temeratures). \index{ObjCryst::MonteCarloObj@{ObjCryst::MonteCarloObj}!mNbTrialRetry@{mNbTrialRetry}}
+\index{mNbTrialRetry@{mNbTrialRetry}!ObjCryst::MonteCarloObj@{ObjCryst::MonteCarloObj}}
+\paragraph[{mNbTrialRetry}]{\setlength{\rightskip}{0pt plus 5cm}long {\bf ObjCryst::MonteCarloObj::mNbTrialRetry}\hspace{0.3cm}{\ttfamily  [protected]}}\hfill\label{a00049_a22e972f1cb525f9dc5336fd1f47fa93b}
+
+
+Number of trials before testing if we are below the given minimum cost. If $<$=0, this will be ignored. \index{ObjCryst::MonteCarloObj@{ObjCryst::MonteCarloObj}!mSaveTrackedData@{mSaveTrackedData}}
+\index{mSaveTrackedData@{mSaveTrackedData}!ObjCryst::MonteCarloObj@{ObjCryst::MonteCarloObj}}
+\paragraph[{mSaveTrackedData}]{\setlength{\rightskip}{0pt plus 5cm}{\bf RefObjOpt} {\bf ObjCryst::MonteCarloObj::mSaveTrackedData}\hspace{0.3cm}{\ttfamily  [protected]}}\hfill\label{a00049_ac782f38b1343464aa3db886873798107}
+
+
+Option to save the evolution of tracked data (cost functions, likelihhod, individual parameters,. ..) 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+GlobalOptimObj.h\end{DoxyCompactItemize}

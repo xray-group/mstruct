@@ -1,0 +1,79 @@
+\subsection{ObjCryst::ZMoveMinimizer Class Reference}
+\label{a00153}\index{ObjCryst::ZMoveMinimizer@{ObjCryst::ZMoveMinimizer}}
+
+
+Class to minimize conformation changes for random moves.  
+Inheritance diagram for ObjCryst::ZMoveMinimizer::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2cm]{a00153}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries ZMoveMinimizer} ({\bf ZScatterer} \&scatt)\label{a00153_a4ad0464228125bcf96ea69742c41e618}
+
+\item 
+virtual REAL {\bf GetLogLikelihood} () const 
+\begin{DoxyCompactList}\small\item\em Get -\/log(likelihood) of the current configuration for the object. \item\end{DoxyCompactList}\item 
+void {\bfseries RecordConformation} ()\label{a00153_aa740a4b34e94f988290b4b752a0700ac}
+
+\item 
+void {\bfseries SetZAtomWeight} (const CrystVector\_\-REAL weight)\label{a00153_a2e089c0f16e151b8ef1de4f3252e50fd}
+
+\item 
+void {\bfseries MinimizeChange} (long nbTrial=10000)\label{a00153_a8ecf95b446cc5c14768149eb76a8e580}
+
+\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf ZScatterer} $\ast$ {\bfseries mpZScatt}\label{a00153_ae68275c4cb001a345fdbbf6a5b8ae178}
+
+\item 
+{\bf MonteCarloObj} {\bfseries mOptimObj}\label{a00153_ad036f4df4e83572b41999451f647fe1a}
+
+\item 
+CrystVector\_\-REAL {\bfseries mXCoord0}\label{a00153_af4eb3480b92d69c67212599207acfaa2}
+
+\item 
+CrystVector\_\-REAL {\bfseries mYCoord0}\label{a00153_a8bccfa825ed2dab7e014a0a6742367c1}
+
+\item 
+CrystVector\_\-REAL {\bfseries mZCoord0}\label{a00153_ae3bf61fa8b32a5ea4773683fce680ad5}
+
+\item 
+CrystVector\_\-REAL {\bfseries mAtomWeight}\label{a00153_ae1c828e64bd918edeadf62577505fb71}
+
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+Class to minimize conformation changes for random moves. Very experimental !!! \begin{DoxyInternal}{For internal use only.}
+Only used within \doxyref{ZScatterer}{p.}{a00155}. \end{DoxyInternal}
+
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::ZMoveMinimizer@{ObjCryst::ZMoveMinimizer}!GetLogLikelihood@{GetLogLikelihood}}
+\index{GetLogLikelihood@{GetLogLikelihood}!ObjCryst::ZMoveMinimizer@{ObjCryst::ZMoveMinimizer}}
+\paragraph[{GetLogLikelihood}]{\setlength{\rightskip}{0pt plus 5cm}virtual REAL ObjCryst::ZMoveMinimizer::GetLogLikelihood () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00153_a1a0bd982430b7f38d54ed798edd6ac18}
+
+
+Get -\/log(likelihood) of the current configuration for the object. By default (no likelihood evaluation available), this is equal to 0.
+
+This call should not be recursive, it is the task of the algorithm to get the sum of likelihoods for all objects invlolved.
+
+\begin{DoxyNote}{Note}
+contrary to the old \char`\"{}Cost Function\char`\"{} approach, with log(Likelihood) there is no 'choice' of cost function, so that it is the task of the object to give the optimized likelihood (possibly with user options).
+\end{DoxyNote}
+\begin{DoxyWarning}{Warning}
+: this is in under heavy development, so expect changes... 
+\end{DoxyWarning}
+
+
+Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_a9a9a5ea2b997cd36b44ed35c2bab3245}.
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+ZScatterer.h\end{DoxyCompactItemize}

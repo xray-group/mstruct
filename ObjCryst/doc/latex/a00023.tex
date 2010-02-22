@@ -1,0 +1,113 @@
+\subsection{CrystMatrix$<$ T $>$ Class Template Reference}
+\label{a00023}\index{CrystMatrix@{CrystMatrix}}
+
+
+2D Vector library (Blitz++ mimic) for ObjCryst++  
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries CrystMatrix} (const long ySize, const long xSize)\label{a00023_a8efa69213a1bb63c9b5b88cd4c162aec}
+
+\item 
+{\bfseries CrystMatrix} (const {\bf CrystMatrix} \&old)\label{a00023_afa851ee3fa092891cb6c90d6deda4abc}
+
+\item 
+void {\bfseries operator=} (const {\bf CrystMatrix} \&old)\label{a00023_ac268742edcc4262683e7e66be62a032c}
+
+\item 
+void {\bfseries reference} ({\bf CrystMatrix} \&old)\label{a00023_ab5c414985f04c70ab8300a9873fe383c}
+
+\item 
+long {\bfseries numElements} () const \label{a00023_a6f15c6cb68646a505850c2466d96d851}
+
+\item 
+T {\bfseries sum} () const \label{a00023_ac3392a70a349875b5c0fa84640b3a7ed}
+
+\item 
+T {\bfseries min} () const \label{a00023_a8cc1b6c0d049d9cd99a83b909abd2568}
+
+\item 
+T {\bfseries max} () const \label{a00023_a49ceb4488c973a9f459761fe8d4e3f4e}
+
+\item 
+long {\bfseries rows} () const \label{a00023_adbc8ce2c59bb6ea20f3724e049a2b5fe}
+
+\item 
+long {\bfseries cols} () const \label{a00023_afd2e1a8ba1cb06ff717a80e36fbf9017}
+
+\item 
+T $\ast$ {\bfseries data} ()\label{a00023_ac826366ce5da1606ba4f064d7851acf2}
+
+\item 
+const T $\ast$ {\bfseries data} () const \label{a00023_a95feb15c65f3690971fea9a815a92862}
+
+\item 
+void {\bfseries resize} (const long ySize, const long xSize)\label{a00023_a8101d474998f112760f93583ace9428d}
+
+\item 
+void {\bfseries resizeAndPreserve} (const long ySize, const long xSize)\label{a00023_a974a4a41cb958343c8f5705d1c517678}
+
+\item 
+void {\bfseries operator$\ast$=} (const T num)\label{a00023_a67a1e3b60fb4430d464d5fed033fb8a1}
+
+\item 
+void {\bfseries operator$\ast$=} (const {\bf CrystMatrix} \&vect)\label{a00023_a0b5df33a84d358d43694dcd712a00cc5}
+
+\item 
+void {\bfseries operator/=} (const T num)\label{a00023_a56176f2c83e397dcc5ec5b97d0c49422}
+
+\item 
+void {\bfseries operator+=} (const T num)\label{a00023_ab3ea287ef4232a7623164435426e0060}
+
+\item 
+void {\bfseries operator-\/=} (const T num)\label{a00023_a9cefdbb9ebb808d21a2e2e8949641839}
+
+\item 
+ListInitializerSwitch {\bfseries operator=} (const T num)\label{a00023_a91b62f3f5e54ef9318e396ea34e0a151}
+
+\item 
+T {\bfseries operator()} (const long i) const \label{a00023_a13d6388a402cf475ea0c2115bb5722f9}
+
+\item 
+T {\bfseries operator()} (const long row, const long col) const \label{a00023_a5e535ee17f5f6deff881752da62e470e}
+
+\item 
+T \& {\bfseries operator()} (const long i)\label{a00023_ac971dfc553773adf0ee2aaadad5ed860}
+
+\item 
+T \& {\bfseries operator()} (const long i, const long j)\label{a00023_af9e43d7e4a04fbe5d55688544aaa55b8}
+
+\item 
+{\bf CrystMatrix} {\bfseries transpose} (const int dim1, const int dim2) const \label{a00023_ad362480be9841756dbd8d8e8f9fd7180}
+
+\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+T $\ast$ {\bfseries mpData}\label{a00023_ad4589250a66601dea026a26798146b64}
+
+\item 
+long {\bfseries mNumElements}\label{a00023_a761330d340b333f69f43fd0227c4a0b4}
+
+\item 
+long {\bfseries mXSize}\label{a00023_a704714863b9f5e72eba0ea915960ec41}
+
+\item 
+long {\bfseries mYSize}\label{a00023_a310c17ccc241926dfdb633c8dc93d5c0}
+
+\item 
+bool {\bfseries mIsAreference}\label{a00023_aa6cf3caeb89fe7aa0db2a9c658a84fc2}
+
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+\subsubsection*{template$<$class T$>$ class CrystMatrix$<$ T $>$}
+
+2D Vector library (Blitz++ mimic) for ObjCryst++ The \doxyref{CrystVector}{p.}{a00024} library is not a new array computation library, despite the appearances. ObjCryst++ should used the {\tt Blitz++ array library} , which yields excellent performance {\itshape and\/} simple array expressions. Unfortunately, the memory required to {\itshape compile\/} the library using gcc is far too high to be reasonable when using complex expressions and optimizing code. So until this has changed, The \doxyref{CrystVector}{p.}{a00024} and \doxyref{CrystMatrix}{p.}{a00023} library have been created, and these emulate (supposedly exactly) the Blitz++ interface (but not the smart handling of mathematical expressions, so pointers must be used). For documentation about these two libraries you should read the {\tt Blitz++ documentation}. \doxyref{CrystVector}{p.}{a00024} and \doxyref{CrystMatrix}{p.}{a00023} use the same kind of storage in memory.
+
+You can use CrystMatrix\_\-REAL, CrystMatrix\_\-long,etc... to declare 2D vectors. Macros ensure (well, should) ensure compatibility with Blitz++. (as of april 2001 support of blitz++ is broken). 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+CrystVector.h\end{DoxyCompactItemize}

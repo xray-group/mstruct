@@ -1,0 +1,447 @@
+\subsection{ObjCryst::DiffractionDataSingleCrystal Class Reference}
+\label{a00026}\index{ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}}
+
+
+DiffractionData object for Single \doxyref{Crystal}{p.}{a00020} analysis.  
+Inheritance diagram for ObjCryst::DiffractionDataSingleCrystal::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3cm]{a00026}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf DiffractionDataSingleCrystal} (const bool regist=true)
+\begin{DoxyCompactList}\small\item\em Default constructor. \item\end{DoxyCompactList}\item 
+{\bf DiffractionDataSingleCrystal} ({\bf Crystal} \&cryst, const bool regist=true)
+\begin{DoxyCompactList}\small\item\em Constructor, with an assigned crystal structure. \item\end{DoxyCompactList}\item 
+{\bf DiffractionDataSingleCrystal} (const {\bf DiffractionDataSingleCrystal} \&old)\label{a00026_a2fbe3262e7146a0c1057da102d0a9046}
+
+\begin{DoxyCompactList}\small\item\em Copy constructor. \item\end{DoxyCompactList}\item 
+virtual {\bf DiffractionDataSingleCrystal} $\ast$ {\bf CreateCopy} () const \label{a00026_a49d006a0476d72570352e1d169200845}
+
+\begin{DoxyCompactList}\small\item\em So-\/called virtual copy constructor. \item\end{DoxyCompactList}\item 
+virtual const string \& {\bf GetClassName} () const 
+\begin{DoxyCompactList}\small\item\em Name for this class (\char`\"{}RefinableObj\char`\"{}, \char`\"{}Crystal\char`\"{},. \item\end{DoxyCompactList}\item 
+const CrystVector\_\-REAL \& {\bf GetIcalc} () const 
+\begin{DoxyCompactList}\small\item\em returns the calculated diffracted intensity. \item\end{DoxyCompactList}\item 
+const CrystVector\_\-REAL \& {\bf GetIobs} () const \label{a00026_a75e80d760a8f540aae7a0b678f3d60c6}
+
+\begin{DoxyCompactList}\small\item\em Return the array of observed intensities for all peaks. \item\end{DoxyCompactList}\item 
+void {\bf SetIobs} (const CrystVector\_\-REAL \&)\label{a00026_aaa8dd9fa1a0f7b3b050c96540992cea1}
+
+\begin{DoxyCompactList}\small\item\em Return the array of observed intensities for all peaks. \item\end{DoxyCompactList}\item 
+const CrystVector\_\-REAL \& {\bf GetSigma} () const \label{a00026_aad718f90b34f9a544ba86d5f8b02f46b}
+
+\begin{DoxyCompactList}\small\item\em Return the array of sigmas for observed intensities, for all peaks. \item\end{DoxyCompactList}\item 
+void {\bf SetSigma} (const CrystVector\_\-REAL \&)\label{a00026_afec714c8df5dc6a7cf68858dbf70742b}
+
+\begin{DoxyCompactList}\small\item\em Return the array of sigmas for observed intensities, for all peaks. \item\end{DoxyCompactList}\item 
+void {\bf SetIobsToIcalc} ()\label{a00026_aa741c9f638e305ca800cf4ce0e31a615}
+
+\begin{DoxyCompactList}\small\item\em Set Iobs to current values of Icalc. Mostly used for tests. \item\end{DoxyCompactList}\item 
+const CrystVector\_\-REAL \& {\bf GetWeight} () const \label{a00026_ab602d46a7bb6020229b2f8587171ae6a}
+
+\begin{DoxyCompactList}\small\item\em Return the weights (for each reflection) used for computing Rw. \item\end{DoxyCompactList}\item 
+void {\bf SetWeight} (const CrystVector\_\-REAL \&)\label{a00026_ad30750b0b14e9b01427c311af560705c}
+
+\begin{DoxyCompactList}\small\item\em Change the weights (for each reflection) used for computing Rw. \item\end{DoxyCompactList}\item 
+void {\bf SetHklIobs} (const CrystVector\_\-long \&h, const CrystVector\_\-long \&k, const CrystVector\_\-long \&l, const CrystVector\_\-REAL \&iObs, const CrystVector\_\-REAL \&sigma)
+\begin{DoxyCompactList}\small\item\em input H,K,L, Iobs and Sigma \item\end{DoxyCompactList}\item 
+void {\bf ImportHklIobs} (const string \&fileName, const long nbRefl, const int skipLines=0)
+\begin{DoxyCompactList}\small\item\em Import h,k,l,I from a file. \item\end{DoxyCompactList}\item 
+void {\bf ImportHklIobsSigma} (const string \&fileName, const long nbRefl, const int skipLines=0)
+\begin{DoxyCompactList}\small\item\em Import h,k,l,I,Sigma from a file. \item\end{DoxyCompactList}\item 
+void {\bf ImportHklIobsSigmaJanaM91} (const string \&fileName)
+\begin{DoxyCompactList}\small\item\em Import h,k,l,I,Sigma from a Jana98 '$\ast$.m91' file. \item\end{DoxyCompactList}\item 
+void {\bf ImportHklIobsGroup} (const string \&fileName, const unsigned int skipLines=0)
+\begin{DoxyCompactList}\small\item\em Import h,k,l and grouped intensities from a file. \item\end{DoxyCompactList}\item 
+virtual REAL {\bf GetRw} () const 
+\begin{DoxyCompactList}\small\item\em Return the \doxyref{Crystal}{p.}{a00020} R-\/factor (weighted). \item\end{DoxyCompactList}\item 
+virtual REAL {\bf GetR} () const 
+\begin{DoxyCompactList}\small\item\em Return the \doxyref{Crystal}{p.}{a00020} R-\/factor (unweighted). \item\end{DoxyCompactList}\item 
+virtual REAL {\bf GetChi2} () const 
+\begin{DoxyCompactList}\small\item\em Return conventionnal Chi$^\wedge$2. \item\end{DoxyCompactList}\item 
+virtual void {\bf FitScaleFactorForRw} () const 
+\begin{DoxyCompactList}\small\item\em Compute the best scale factor minimising Rw. \item\end{DoxyCompactList}\item 
+virtual void {\bf FitScaleFactorForR} () const 
+\begin{DoxyCompactList}\small\item\em Compute the best scale factor minimising R. \item\end{DoxyCompactList}\item 
+virtual REAL {\bf GetBestRFactor} () const 
+\begin{DoxyCompactList}\small\item\em Compute the best scale factor to minimize R, apply this scale factor and return the R value obtained. \item\end{DoxyCompactList}\item 
+virtual void {\bf SetSigmaToSqrtIobs} ()
+\begin{DoxyCompactList}\small\item\em Set sigma for all observed intensities to sqrt(obs). \item\end{DoxyCompactList}\item 
+virtual void {\bf SetWeightToInvSigma2} (const REAL minRelatSigma=1e-\/4)
+\begin{DoxyCompactList}\small\item\em Set the weight for all observed intensities to 1/sigma$^\wedge$2. \item\end{DoxyCompactList}\item 
+REAL {\bf GetScaleFactor} () const \label{a00026_a92da5b55bca84f7923d117e0794d9689}
+
+\begin{DoxyCompactList}\small\item\em Scale factor (applied to Icalc to match Iobs). \item\end{DoxyCompactList}\item 
+virtual void {\bf PrintObsData} () const 
+\begin{DoxyCompactList}\small\item\em Print H, K, L Iobs sigma for all reflections. \item\end{DoxyCompactList}\item 
+virtual void {\bf PrintObsCalcData} () const \label{a00026_a17da834176b793bc5edb3915f243a960}
+
+\begin{DoxyCompactList}\small\item\em Print H, K, L Iobs sigma Icalc for all reflections Iobs and sigma (if given) are scaled to Icalc (if available). \item\end{DoxyCompactList}\item 
+virtual void {\bfseries SetUseOnlyLowAngleData} (const bool useOnlyLowAngle, const REAL angle=0.)\label{a00026_abfcedd24e1485124423b6e14aafb2b55}
+
+\item 
+void {\bf SaveHKLIobsIcalc} (const string \&filename=\char`\"{}hklIobsIcalc.out\char`\"{})
+\begin{DoxyCompactList}\small\item\em Save H,K,L Iobs Icalc to a file, text format, 3 columns theta Iobs Icalc. \item\end{DoxyCompactList}\item 
+virtual void {\bf GlobalOptRandomMove} (const REAL mutationAmplitude, const {\bf RefParType} $\ast$type={\bf gpRefParTypeObjCryst})
+\begin{DoxyCompactList}\small\item\em Make a random move of the current configuration. \item\end{DoxyCompactList}\item 
+virtual REAL {\bf GetLogLikelihood} () const 
+\begin{DoxyCompactList}\small\item\em Get -\/log(likelihood) of the current configuration for the object. \item\end{DoxyCompactList}\item 
+virtual unsigned int {\bf GetNbLSQFunction} () const \label{a00026_af3fbd99a3fc7abe6450d9adcb59fc314}
+
+\begin{DoxyCompactList}\small\item\em Number of LSQ functions. \item\end{DoxyCompactList}\item 
+virtual const CrystVector\_\-REAL \& {\bf GetLSQCalc} (const unsigned int) const \label{a00026_ad13c33ef47af441539b95e11b6347054}
+
+\begin{DoxyCompactList}\small\item\em Get the current calculated value for the LSQ function. \item\end{DoxyCompactList}\item 
+virtual const CrystVector\_\-REAL \& {\bf GetLSQObs} (const unsigned int) const \label{a00026_a339318a2481faa122f22fce3fce08a70}
+
+\begin{DoxyCompactList}\small\item\em Get the observed values for the LSQ function. \item\end{DoxyCompactList}\item 
+virtual const CrystVector\_\-REAL \& {\bf GetLSQWeight} (const unsigned int) const \label{a00026_ab7ce20d0a0d849f2d0304c7abad11b7f}
+
+\begin{DoxyCompactList}\small\item\em Get the weight values for the LSQ function. \item\end{DoxyCompactList}\item 
+virtual void {\bf XMLOutput} (ostream \&os, int indent=0) const 
+\begin{DoxyCompactList}\small\item\em Output to stream in well-\/formed XML. \item\end{DoxyCompactList}\item 
+virtual void {\bf XMLInput} (istream \&is, const {\bf XMLCrystTag} \&tag)
+\begin{DoxyCompactList}\small\item\em Input From stream. \item\end{DoxyCompactList}\item 
+virtual const {\bf Radiation} \& {\bf GetRadiation} () const \label{a00026_a334973e747b95a62fb7b2fc67ebb40d3}
+
+\begin{DoxyCompactList}\small\item\em Get the radiation object for this data. \item\end{DoxyCompactList}\item 
+{\bf Radiation} \& {\bfseries GetRadiation} ()\label{a00026_aaf39551c91d7849d49604012eba2a10c}
+
+\item 
+virtual void {\bf SetRadiationType} (const {\bf RadiationType} radiation)\label{a00026_a3c96d35001fef3833731910f4ed4690f}
+
+\begin{DoxyCompactList}\small\item\em Set : neutron or x-\/ray experiment ? Wavelength ? \item\end{DoxyCompactList}\item 
+void {\bf SetWavelength} (const REAL)\label{a00026_a19d588f3fd7ca539d89d87e7420438e1}
+
+\begin{DoxyCompactList}\small\item\em Set the (monochromatic) wavelength of the beam. \item\end{DoxyCompactList}\item 
+void {\bf SetWavelength} (const string \&XRayTubeElementName, const REAL alpha2Alpha2ratio=0.5)
+\begin{DoxyCompactList}\small\item\em $\backslash$ brief Set X-\/Ray tube radiation. \item\end{DoxyCompactList}\item 
+void {\bf SetEnergy} (const REAL)\label{a00026_a4fa3e393b4b643bd02d184c043954def}
+
+\begin{DoxyCompactList}\small\item\em Set the (monochromatic) energy of the beam. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void {\bfseries InitRefParList} ()\label{a00026_afe663c6aa23f64956d0b985fea65a0a5}
+
+\item 
+void {\bf CalcIcalc} () const \label{a00026_ad8480ba2ebf761c8dafea7a8c05f2a33}
+
+\begin{DoxyCompactList}\small\item\em Calc intensities. \item\end{DoxyCompactList}\item 
+virtual CrystVector\_\-long {\bf SortReflectionBySinThetaOverLambda} (const REAL maxTheta=-\/1.)
+\item 
+void {\bf InitOptions} ()\label{a00026_a3eafc2c0206c365024f40d4302c1257f}
+
+\begin{DoxyCompactList}\small\item\em Init options (currently only twinning). \item\end{DoxyCompactList}\item 
+void {\bf PrepareTwinningCalc} () const 
+\begin{DoxyCompactList}\small\item\em Determine the index of reflections to be summed because of twinning (GroupOption==1) The reflections {\itshape must\/} have been sorted by increasing theta beforehand. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool {\bf mHasObservedData}\label{a00026_a6509d08699c990b10bacae56e1c81da9}
+
+\begin{DoxyCompactList}\small\item\em Are there observed intensities ? \item\end{DoxyCompactList}\item 
+CrystVector\_\-REAL {\bf mObsIntensity}
+\begin{DoxyCompactList}\small\item\em Observed intensity (after ABS and LP corrections). \item\end{DoxyCompactList}\item 
+CrystVector\_\-REAL {\bf mObsSigma}\label{a00026_ac944ecba535c9edb0c19adc503e014ec}
+
+\begin{DoxyCompactList}\small\item\em Sigma for observed intensities (either individual reflections or spectrum). \item\end{DoxyCompactList}\item 
+CrystVector\_\-REAL {\bf mWeight}\label{a00026_a5856abdb592d801b220d3833d9306d88}
+
+\begin{DoxyCompactList}\small\item\em weight for computing R-\/Factor, for each observed value. \item\end{DoxyCompactList}\item 
+CrystVector\_\-REAL {\bf mCalcIntensity}\label{a00026_a41450ac0f53bff0e8672ac69a7f63795}
+
+\begin{DoxyCompactList}\small\item\em Calculated intensities. \item\end{DoxyCompactList}\item 
+REAL {\bf mScaleFactor}
+\begin{DoxyCompactList}\small\item\em Scale factor. \item\end{DoxyCompactList}\item 
+REAL {\bf mChi2}\label{a00026_a1ec5ae2f5102440a06f436c06938d78a}
+
+\begin{DoxyCompactList}\small\item\em Chi$^\wedge$2. \item\end{DoxyCompactList}\item 
+{\bf RefinableObjClock} {\bf mClockIcalc}\label{a00026_a92796e78d88ba827bc39fd9278ea0d2d}
+
+\begin{DoxyCompactList}\small\item\em Last time Icalc was computed. \item\end{DoxyCompactList}\item 
+{\bf RefinableObjClock} {\bf mClockScaleFactor}\label{a00026_a082df0e2c370d12dae3e84ca4be0c985}
+
+\begin{DoxyCompactList}\small\item\em Last modification of the scale factor. \item\end{DoxyCompactList}\item 
+{\bf RefinableObjClock} {\bf mClockChi2}\label{a00026_a600bb857f6648a262adbaeae67acb119}
+
+\begin{DoxyCompactList}\small\item\em Clock the last time Chi$^\wedge$2 was computed. \item\end{DoxyCompactList}\item 
+{\bf RefObjOpt} {\bf mGroupOption}\label{a00026_a2173fb98cd1d27617eb8305ef12ad607}
+
+\begin{DoxyCompactList}\small\item\em Option for the type of grouping (0:no, 1:by theta values (twinning), 2:user-\/supplied groups). \item\end{DoxyCompactList}\item 
+CrystVector\_\-REAL {\bf mGroupIobs}\label{a00026_a40173c931093085373ad6fd304f202b8}
+
+\begin{DoxyCompactList}\small\item\em The observed intensities summed on all reflections that are (or could be) overlapped dur to a twinning. \item\end{DoxyCompactList}\item 
+CrystVector\_\-REAL {\bf mGroupSigma}\label{a00026_ac741c4954e3b89b81693c80afaec1576}
+
+\begin{DoxyCompactList}\small\item\em The uncertainty on observed grouped intensities. \item\end{DoxyCompactList}\item 
+CrystVector\_\-REAL {\bf mGroupIcalc}\label{a00026_a079d62283adb291b74d6c19e5d114eb4}
+
+\begin{DoxyCompactList}\small\item\em The calculated intensities summed on all reflections that are grouped. \item\end{DoxyCompactList}\item 
+CrystVector\_\-REAL {\bf mGroupWeight}
+\begin{DoxyCompactList}\small\item\em The weight on each reflection sum in case of grouped reflections. \item\end{DoxyCompactList}\item 
+CrystVector\_\-long {\bf mGroupIndex}
+\begin{DoxyCompactList}\small\item\em The index of reflections which need to be summed. \item\end{DoxyCompactList}\item 
+long {\bf mNbGroup}\label{a00026_a3ebc7c0b1cd1a13247920f7264903009}
+
+\begin{DoxyCompactList}\small\item\em Number of groups. \item\end{DoxyCompactList}\item 
+long {\bf mNbGroupUsed}\label{a00026_abc5c636a84c000d831fab9e506904077}
+
+\begin{DoxyCompactList}\small\item\em Number of groups below max[sin(theta)/lambda]. \item\end{DoxyCompactList}\item 
+{\bf RefinableObjClock} {\bf mClockPrepareTwinningCorr}\label{a00026_a03be010eb090d416b9c191f37e876ae6}
+
+\begin{DoxyCompactList}\small\item\em Clock for twinning, when the preparation of twinning correction was last made. \item\end{DoxyCompactList}\item 
+{\bf Radiation} {\bfseries mRadiation}\label{a00026_a82c829f88648010c963ea6ca80f5916f}
+
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+DiffractionData object for Single \doxyref{Crystal}{p.}{a00020} analysis. Currently this handles only in the simplest way single crystal dat: ie only data which has been completely corrected for Lorentz/Polarization and absorption.
+
+What needs to be developped: define the geometry of the experiment (incident and emerging angles), the polarization of the beam, etc... 
+
+\subsubsection{Constructor \& Destructor Documentation}
+\index{ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}!DiffractionDataSingleCrystal@{DiffractionDataSingleCrystal}}
+\index{DiffractionDataSingleCrystal@{DiffractionDataSingleCrystal}!ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}}
+\paragraph[{DiffractionDataSingleCrystal}]{\setlength{\rightskip}{0pt plus 5cm}ObjCryst::DiffractionDataSingleCrystal::DiffractionDataSingleCrystal (const bool {\em regist} = {\ttfamily true})}\hfill\label{a00026_ab182bcffdd5cded6e7bd536bc71a3241}
+
+
+Default constructor. 
+\begin{DoxyParams}{Parameters}
+\item[{\em regist,:}]if false, do not add to the global registry of single crystal data or refinable objects -\/ this is only useful for data to be used internally only.\end{DoxyParams}
+\begin{Desc}
+\item[{\bf Deprecated}]Use the constructor passing a crystal structure instead. \end{Desc}
+\index{ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}!DiffractionDataSingleCrystal@{DiffractionDataSingleCrystal}}
+\index{DiffractionDataSingleCrystal@{DiffractionDataSingleCrystal}!ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}}
+\paragraph[{DiffractionDataSingleCrystal}]{\setlength{\rightskip}{0pt plus 5cm}ObjCryst::DiffractionDataSingleCrystal::DiffractionDataSingleCrystal ({\bf Crystal} \& {\em cryst}, \/  const bool {\em regist} = {\ttfamily true})}\hfill\label{a00026_a3fcfa9d8f263043025d4167001c2243f}
+
+
+Constructor, with an assigned crystal structure. 
+\begin{DoxyParams}{Parameters}
+\item[{\em regist,:}]if false, do not add to the global registry of single crystal data or refinable objects -\/ this is only useful for data to be used internally only. \end{DoxyParams}
+
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}!FitScaleFactorForR@{FitScaleFactorForR}}
+\index{FitScaleFactorForR@{FitScaleFactorForR}!ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}}
+\paragraph[{FitScaleFactorForR}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::DiffractionDataSingleCrystal::FitScaleFactorForR () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00026_a97e666eeeb9e3b97a36145415e3f959e}
+
+
+Compute the best scale factor minimising R. The computed scale factor is {\itshape immediatly\/} applied to Icalc \index{ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}!FitScaleFactorForRw@{FitScaleFactorForRw}}
+\index{FitScaleFactorForRw@{FitScaleFactorForRw}!ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}}
+\paragraph[{FitScaleFactorForRw}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::DiffractionDataSingleCrystal::FitScaleFactorForRw () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00026_a82c8acf2a3f315091d97ad154a74e17b}
+
+
+Compute the best scale factor minimising Rw. The computed scale factor is {\itshape immediatly\/} applied to Icalc \index{ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}!GetBestRFactor@{GetBestRFactor}}
+\index{GetBestRFactor@{GetBestRFactor}!ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}}
+\paragraph[{GetBestRFactor}]{\setlength{\rightskip}{0pt plus 5cm}virtual REAL ObjCryst::DiffractionDataSingleCrystal::GetBestRFactor () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00026_a9f4bedb3f24193c14a39ad97ef074948}
+
+
+Compute the best scale factor to minimize R, apply this scale factor and return the R value obtained. \index{ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}!GetChi2@{GetChi2}}
+\index{GetChi2@{GetChi2}!ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}}
+\paragraph[{GetChi2}]{\setlength{\rightskip}{0pt plus 5cm}virtual REAL ObjCryst::DiffractionDataSingleCrystal::GetChi2 () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00026_a406a2e413ed8c0a6afd92f384246d36c}
+
+
+Return conventionnal Chi$^\wedge$2. \begin{DoxyReturn}{Returns}
+$ \chi^2 = \sum_i w_i \left(I_i^{obs}-I_i^{calc} \right)^2 $ 
+\end{DoxyReturn}
+\index{ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}!GetClassName@{GetClassName}}
+\index{GetClassName@{GetClassName}!ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}}
+\paragraph[{GetClassName}]{\setlength{\rightskip}{0pt plus 5cm}virtual const string\& ObjCryst::DiffractionDataSingleCrystal::GetClassName () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00026_a05b1f448a143ad61036f001d09a3509f}
+
+
+Name for this class (\char`\"{}RefinableObj\char`\"{}, \char`\"{}Crystal\char`\"{},. ..). This is only useful to distinguish different classes when picking up objects from the \doxyref{RefinableObj}{p.}{a00070} Global Registry 
+
+Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_a62968d90a7a3080738b363934616c019}.\index{ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}!GetIcalc@{GetIcalc}}
+\index{GetIcalc@{GetIcalc}!ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}}
+\paragraph[{GetIcalc}]{\setlength{\rightskip}{0pt plus 5cm}const CrystVector\_\-REAL\& ObjCryst::DiffractionDataSingleCrystal::GetIcalc () const}\hfill\label{a00026_a5aade79d8baf1b770ab82af93fd244e6}
+
+
+returns the calculated diffracted intensity. This is an array of calculated intensities for each reflections in the single crystal case, and the array with the full powder powder profile for powder diffraction. \index{ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}!GetLogLikelihood@{GetLogLikelihood}}
+\index{GetLogLikelihood@{GetLogLikelihood}!ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}}
+\paragraph[{GetLogLikelihood}]{\setlength{\rightskip}{0pt plus 5cm}virtual REAL ObjCryst::DiffractionDataSingleCrystal::GetLogLikelihood () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00026_ad42c5159763eb136fadfb653067d1a7b}
+
+
+Get -\/log(likelihood) of the current configuration for the object. By default (no likelihood evaluation available), this is equal to 0.
+
+This call should not be recursive, it is the task of the algorithm to get the sum of likelihoods for all objects invlolved.
+
+\begin{DoxyNote}{Note}
+contrary to the old \char`\"{}Cost Function\char`\"{} approach, with log(Likelihood) there is no 'choice' of cost function, so that it is the task of the object to give the optimized likelihood (possibly with user options).
+\end{DoxyNote}
+\begin{DoxyWarning}{Warning}
+: this is in under heavy development, so expect changes... 
+\end{DoxyWarning}
+
+
+Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_a9a9a5ea2b997cd36b44ed35c2bab3245}.\index{ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}!GetR@{GetR}}
+\index{GetR@{GetR}!ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}}
+\paragraph[{GetR}]{\setlength{\rightskip}{0pt plus 5cm}virtual REAL ObjCryst::DiffractionDataSingleCrystal::GetR () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00026_a52253e2e3a9e0e1a8200c6e042d6f8c9}
+
+
+Return the \doxyref{Crystal}{p.}{a00020} R-\/factor (unweighted). \begin{DoxyReturn}{Returns}
+$ R= \sqrt {\frac{\sum_i \left( I_i^{obs}-I_i^{calc} \right)^2} {\sum_i (I_i^{obs})^2} }$ 
+\end{DoxyReturn}
+\index{ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}!GetRw@{GetRw}}
+\index{GetRw@{GetRw}!ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}}
+\paragraph[{GetRw}]{\setlength{\rightskip}{0pt plus 5cm}virtual REAL ObjCryst::DiffractionDataSingleCrystal::GetRw () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00026_addee789ac9e373d7080bd0fc395e68e8}
+
+
+Return the \doxyref{Crystal}{p.}{a00020} R-\/factor (weighted). \begin{DoxyReturn}{Returns}
+$ R_{w}= \sqrt {\frac{\sum_i w_i\left( I_i^{obs}-I_i^{calc} \right)^2} {\sum_i w_i (I_i^{obs})^2} }$ 
+\end{DoxyReturn}
+\index{ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}!GlobalOptRandomMove@{GlobalOptRandomMove}}
+\index{GlobalOptRandomMove@{GlobalOptRandomMove}!ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}}
+\paragraph[{GlobalOptRandomMove}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::DiffractionDataSingleCrystal::GlobalOptRandomMove (const REAL {\em mutationAmplitude}, \/  const {\bf RefParType} $\ast$ {\em type} = {\ttfamily {\bf gpRefParTypeObjCryst}})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00026_a9f19efd0a77a471666ddd5b4be421ffa}
+
+
+Make a random move of the current configuration. This is for global optimization algorithms. the moves for each parameter are less than their global optimization step, multiplied by the mutation amplitude.
+
+\begin{DoxyWarning}{Warning}
+: this makes a random move for the parameter declared for this object, and it is the duty of the object to decide whether the included objects should be moved and how. (eg an algorithm should only call for a move with the top object, and this object decides how he and his sub-\/objects moves). By default (\doxyref{RefinableObj}{p.}{a00070} implementation) all included objects are moved recursively.
+\end{DoxyWarning}
+\doxyref{RefinableObj}{p.}{a00070}:: 
+\begin{DoxyParams}{Parameters}
+\item[{\em mutationAmplitude,:}]multiplier for the maximum move amplitude, for all parameters \item[{\em type,:}]restrain the change exclusively to parameters of a given type (same type or descendant from this \doxyref{RefParType}{p.}{a00079}). \end{DoxyParams}
+
+
+Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_a18375c8525ae38c481ba77e9cf9d67c1}.\index{ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}!ImportHklIobs@{ImportHklIobs}}
+\index{ImportHklIobs@{ImportHklIobs}!ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}}
+\paragraph[{ImportHklIobs}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::DiffractionDataSingleCrystal::ImportHklIobs (const string \& {\em fileName}, \/  const long {\em nbRefl}, \/  const int {\em skipLines} = {\ttfamily 0})}\hfill\label{a00026_ac306439389c8eab225dd8dd87aa8f189}
+
+
+Import h,k,l,I from a file. The file is assumed to correspond to a single crystal diffraction file. 
+\begin{DoxyParams}{Parameters}
+\item[{\em fileName}]The name of the data file. This file should be formatted with H,k,l, Iobs separated by spaces. \item[{\em nbRefl}]The number of reflections to extract. \item[{\em skipLines}]The number of lines to skip at the beginning of the file. \end{DoxyParams}
+\index{ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}!ImportHklIobsGroup@{ImportHklIobsGroup}}
+\index{ImportHklIobsGroup@{ImportHklIobsGroup}!ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}}
+\paragraph[{ImportHklIobsGroup}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::DiffractionDataSingleCrystal::ImportHklIobsGroup (const string \& {\em fileName}, \/  const unsigned int {\em skipLines} = {\ttfamily 0})}\hfill\label{a00026_af590310eb70814be523947dc7ddc695c}
+
+
+Import h,k,l and grouped intensities from a file. The file is assumed to correspond to a single crystal diffraction file. 
+\begin{DoxyParams}{Parameters}
+\item[{\em fileName}]The name of the data file. This file should be formatted with H,k,l, Iobs separated by spaces. \item[{\em skipLines}]The number of lines to skip at the beginning of the file.\end{DoxyParams}
+File format (the reflection which has an intensity entry marks the end of the group) h k l Igroup -\/2 4 2 -\/2 -\/4 2 100.4 2 -\/4 1 2 4 1 193.2 ... \index{ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}!ImportHklIobsSigma@{ImportHklIobsSigma}}
+\index{ImportHklIobsSigma@{ImportHklIobsSigma}!ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}}
+\paragraph[{ImportHklIobsSigma}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::DiffractionDataSingleCrystal::ImportHklIobsSigma (const string \& {\em fileName}, \/  const long {\em nbRefl}, \/  const int {\em skipLines} = {\ttfamily 0})}\hfill\label{a00026_a041f22715b9b4d1f2beb2b7e387fa682}
+
+
+Import h,k,l,I,Sigma from a file. The file is assumed to correspond to a single crystal diffraction file. 
+\begin{DoxyParams}{Parameters}
+\item[{\em fileName}]The name of the data file. This file should be formatted with H,k,l, Iobs and Sigma separated by spaces. \item[{\em nbRefl}]The number of reflections to extract. \item[{\em skipLines}]The number of lines to skip at the beginning of the file. \end{DoxyParams}
+\index{ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}!ImportHklIobsSigmaJanaM91@{ImportHklIobsSigmaJanaM91}}
+\index{ImportHklIobsSigmaJanaM91@{ImportHklIobsSigmaJanaM91}!ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}}
+\paragraph[{ImportHklIobsSigmaJanaM91}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::DiffractionDataSingleCrystal::ImportHklIobsSigmaJanaM91 (const string \& {\em fileName})}\hfill\label{a00026_a5721769a1b4a8e33664c3b0867c05086}
+
+
+Import h,k,l,I,Sigma from a Jana98 '$\ast$.m91' file. The file is assumed to correspond to a single crystal diffraction file. 
+\begin{DoxyParams}{Parameters}
+\item[{\em fileName}]The name of the data file. \end{DoxyParams}
+\index{ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}!PrepareTwinningCalc@{PrepareTwinningCalc}}
+\index{PrepareTwinningCalc@{PrepareTwinningCalc}!ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}}
+\paragraph[{PrepareTwinningCalc}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::DiffractionDataSingleCrystal::PrepareTwinningCalc () const\hspace{0.3cm}{\ttfamily  [private]}}\hfill\label{a00026_a7cc9b7b685ef9031f6e6176a5da1ed63}
+
+
+Determine the index of reflections to be summed because of twinning (GroupOption==1) The reflections {\itshape must\/} have been sorted by increasing theta beforehand. \index{ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}!PrintObsData@{PrintObsData}}
+\index{PrintObsData@{PrintObsData}!ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}}
+\paragraph[{PrintObsData}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::DiffractionDataSingleCrystal::PrintObsData () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00026_ad3c0c4361b81a2f7e786ed16968c6d88}
+
+
+Print H, K, L Iobs sigma for all reflections. \index{ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}!SaveHKLIobsIcalc@{SaveHKLIobsIcalc}}
+\index{SaveHKLIobsIcalc@{SaveHKLIobsIcalc}!ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}}
+\paragraph[{SaveHKLIobsIcalc}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::DiffractionDataSingleCrystal::SaveHKLIobsIcalc (const string \& {\em filename} = {\ttfamily \char`\"{}hklIobsIcalc.out\char`\"{}})}\hfill\label{a00026_af220156c564b8d602b0c05ba222fba03}
+
+
+Save H,K,L Iobs Icalc to a file, text format, 3 columns theta Iobs Icalc. If Iobs is missing, the column is omitted. \index{ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}!SetHklIobs@{SetHklIobs}}
+\index{SetHklIobs@{SetHklIobs}!ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}}
+\paragraph[{SetHklIobs}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::DiffractionDataSingleCrystal::SetHklIobs (const CrystVector\_\-long \& {\em h}, \/  const CrystVector\_\-long \& {\em k}, \/  const CrystVector\_\-long \& {\em l}, \/  const CrystVector\_\-REAL \& {\em iObs}, \/  const CrystVector\_\-REAL \& {\em sigma})}\hfill\label{a00026_a0d13ab934c60c9bd0aebbb285a92c5cb}
+
+
+input H,K,L, Iobs and Sigma 
+\begin{DoxyParams}{Parameters}
+\item[{\em h,k,l,:}]REAL arrays (vectors with NbRefl elements -\/same size) with the h, k and l coordinates of all reflections. \item[{\em iobs,sigma,:}]REAL arrays (vectors with NbRefl elements -\/same size) with the Observed intensity and sigma for all reflections. \end{DoxyParams}
+\index{ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}!SetSigmaToSqrtIobs@{SetSigmaToSqrtIobs}}
+\index{SetSigmaToSqrtIobs@{SetSigmaToSqrtIobs}!ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}}
+\paragraph[{SetSigmaToSqrtIobs}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::DiffractionDataSingleCrystal::SetSigmaToSqrtIobs ()\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00026_a55b89595cdd1305f69b725ba49dd9855}
+
+
+Set sigma for all observed intensities to sqrt(obs). \index{ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}!SetWavelength@{SetWavelength}}
+\index{SetWavelength@{SetWavelength}!ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}}
+\paragraph[{SetWavelength}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::DiffractionDataSingleCrystal::SetWavelength (const string \& {\em XRayTubeElementName}, \/  const REAL {\em alpha2Alpha2ratio} = {\ttfamily 0.5})}\hfill\label{a00026_a231437207dca7389aa593b1fd4fd9f1b}
+
+
+$\backslash$ brief Set X-\/Ray tube radiation. 
+\begin{DoxyParams}{Parameters}
+\item[{\em XRayTubeElementName}]: name of the anticathode element name. Known ones are Cr, Fe, Cu, Mo, Ag. \item[{\em alpha2Alpha2ratio,:}]Kalpha2/Kalpha1 ratio (0.5 by default)\end{DoxyParams}
+the average wavelength is calculated using the alpha2/alpha1 weight. All structure factors computation are made using the average wavelength, and for powder diffraction, profiles are output at the alpha1 and alpha2 ratio for the calculated pattern.
+
+NOTE : if the name of the wavelength is generic (eg\char`\"{}Cu\char`\"{}), then the program considers that there are both Alpha1 and Alpha2, and thus automatically changes the WavelengthType to WAVELENGTH\_\-ALPHA12. If instead either alpha1 or alpha2 (eg \char`\"{}CuA1\char`\"{}) is asked for, the WavelengthType is set to WAVELENGTH\_\-MONOCHROMATIC. In both cases, the radiation type is set to X-\/Ray. \index{ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}!SetWeightToInvSigma2@{SetWeightToInvSigma2}}
+\index{SetWeightToInvSigma2@{SetWeightToInvSigma2}!ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}}
+\paragraph[{SetWeightToInvSigma2}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::DiffractionDataSingleCrystal::SetWeightToInvSigma2 (const REAL {\em minRelatSigma} = {\ttfamily 1e-\/4})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00026_a1b2bf6486f5030fa0cf59d057e8501b0}
+
+
+Set the weight for all observed intensities to 1/sigma$^\wedge$2. For sigmas which are smaller than minRelatSigma times the max value of sigma, the output weight is set to 0. \index{ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}!SortReflectionBySinThetaOverLambda@{SortReflectionBySinThetaOverLambda}}
+\index{SortReflectionBySinThetaOverLambda@{SortReflectionBySinThetaOverLambda}!ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}}
+\paragraph[{SortReflectionBySinThetaOverLambda}]{\setlength{\rightskip}{0pt plus 5cm}virtual CrystVector\_\-long ObjCryst::DiffractionDataSingleCrystal::SortReflectionBySinThetaOverLambda (const REAL {\em maxSTOL} = {\ttfamily -\/1.})\hspace{0.3cm}{\ttfamily  [private, virtual]}}\hfill\label{a00026_aeac660426ee4c5aa52d494b449a164f9}
+\begin{DoxyInternal}{For internal use only.}
+sort reflections by theta values (also get rid of [0,0,0] if present) If maxSTOL $>$0, then only reflections where sin(theta)/lambda$<$maxSTOL are kept \begin{DoxyReturn}{Returns}
+an array with the subscript of the kept reflections (for inherited classes) 
+\end{DoxyReturn}
+\end{DoxyInternal}
+
+
+Reimplemented from {\bf ObjCryst::ScatteringData} \doxyref{}{p.}{a00088_a4b843c3350e25d4d0c52da3400768fb7}.\index{ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}!XMLInput@{XMLInput}}
+\index{XMLInput@{XMLInput}!ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}}
+\paragraph[{XMLInput}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::DiffractionDataSingleCrystal::XMLInput (istream \& {\em is}, \/  const {\bf XMLCrystTag} \& {\em tag})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00026_a3b1edc7d3c612fa20cb658ef1d084c00}
+
+
+Input From stream. \begin{Desc}
+\item[{\bf Todo}]Add an bool XMLInputTag(is,tag) function to recognize all the tags from the stream. So that each inherited class can use the XMLInputTag function from its parent (ie take advantage of inheritance). The children class would first try to interpret the tag, then if unsuccessful would pass it to its parent (thus allowing overloading), etc... \end{Desc}
+
+
+Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_ac13a4045c3f187879443c8615c38d623}.\index{ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}!XMLOutput@{XMLOutput}}
+\index{XMLOutput@{XMLOutput}!ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}}
+\paragraph[{XMLOutput}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::DiffractionDataSingleCrystal::XMLOutput (ostream \& {\em os}, \/  int {\em indent} = {\ttfamily 0}) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00026_a59dadf9f6dedc3a84e858ee96268526e}
+
+
+Output to stream in well-\/formed XML. \begin{Desc}
+\item[{\bf Todo}]Use inheritance.. as for XMLInputTag()... \end{Desc}
+
+
+Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_a7b9b6ed0f8dcf753d398c35e073de973}.
+
+\subsubsection{Member Data Documentation}
+\index{ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}!mGroupIndex@{mGroupIndex}}
+\index{mGroupIndex@{mGroupIndex}!ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}}
+\paragraph[{mGroupIndex}]{\setlength{\rightskip}{0pt plus 5cm}CrystVector\_\-long {\bf ObjCryst::DiffractionDataSingleCrystal::mGroupIndex}\hspace{0.3cm}{\ttfamily  [mutable, private]}}\hfill\label{a00026_a44eb55c673c51633521b38af7a489abe}
+
+
+The index of reflections which need to be summed. They must have been sorted by increasing theta values. Each entry (the reflection index) marks the beginning of a new batch of reflections to be summed.
+
+Here only the groups of reflections are {\itshape roughly\/} sorted by sin(theta)/lambda. It is assumed, howver, that grouped reflections are of approximately the same d\_\-hkl. After \doxyref{ScatteringData::GetNbReflBelowMaxSinThetaOvLambda()}{p.}{a00088_aac8034f8b0f6980c619e595ce6ba1d65}, the number of groups for which $\ast$all$\ast$ reflections are below the limit are taken into account for the statistics.
+
+Note that  \doxyref{DiffractionDataSingleCrystal::SortReflectionBySinThetaOverLambda()}{p.}{a00026_aeac660426ee4c5aa52d494b449a164f9} is called (i.e. immediately after importing the reflections) \index{ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}!mGroupWeight@{mGroupWeight}}
+\index{mGroupWeight@{mGroupWeight}!ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}}
+\paragraph[{mGroupWeight}]{\setlength{\rightskip}{0pt plus 5cm}CrystVector\_\-REAL {\bf ObjCryst::DiffractionDataSingleCrystal::mGroupWeight}\hspace{0.3cm}{\ttfamily  [mutable, private]}}\hfill\label{a00026_a800c45f228a27bf7915e312ae05048dc}
+
+
+The weight on each reflection sum in case of grouped reflections. The sum is the inverse of the sum of all sigma$^\wedge$2 \index{ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}!mObsIntensity@{mObsIntensity}}
+\index{mObsIntensity@{mObsIntensity}!ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}}
+\paragraph[{mObsIntensity}]{\setlength{\rightskip}{0pt plus 5cm}CrystVector\_\-REAL {\bf ObjCryst::DiffractionDataSingleCrystal::mObsIntensity}\hspace{0.3cm}{\ttfamily  [private]}}\hfill\label{a00026_a376708cee05a5d49ff22282748ef491b}
+
+
+Observed intensity (after ABS and LP corrections). In the single crystal case, this is a list of intensity corresponding to (h,k,l). For a powder sample, this is a list of all peaks intensities. \index{ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}!mScaleFactor@{mScaleFactor}}
+\index{mScaleFactor@{mScaleFactor}!ObjCryst::DiffractionDataSingleCrystal@{ObjCryst::DiffractionDataSingleCrystal}}
+\paragraph[{mScaleFactor}]{\setlength{\rightskip}{0pt plus 5cm}REAL {\bf ObjCryst::DiffractionDataSingleCrystal::mScaleFactor}\hspace{0.3cm}{\ttfamily  [mutable, private]}}\hfill\label{a00026_a4de0d528fa61c01cff4a0c78f5f5f1c3}
+
+
+Scale factor. It is applied when computing intensities. The scale applies to intensities 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+DiffractionDataSingleCrystal.h\end{DoxyCompactItemize}

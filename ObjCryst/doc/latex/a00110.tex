@@ -1,0 +1,52 @@
+\subsection{ObjCryst::WXAtom Class Reference}
+\label{a00110}\index{ObjCryst::WXAtom@{ObjCryst::WXAtom}}
+
+
+wxCryst class for Atoms  
+Inheritance diagram for ObjCryst::WXAtom::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=5cm]{a00110}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries WXAtom} (wxWindow $\ast$parent, {\bf Atom} $\ast$)\label{a00110_ad5013fde76bd65b8327976ee3d7b4538}
+
+\item 
+void {\bfseries OnChangeScattPow} (wxCommandEvent \&WXUNUSED(event))\label{a00110_a761d4b22d56c314568884ce001ae53d5}
+
+\item 
+virtual void {\bf UpdateUI} (const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em Update the User Interface, if necessary. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Atom} $\ast$ {\bfseries mpAtom}\label{a00110_ab4e8f3bee82f37e9ba24138d6015df04}
+
+\item 
+{\bf WXFieldChoice} $\ast$ {\bfseries mpFieldScattPower}\label{a00110_a9dd98ddab95fa288885099d719d22084}
+
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+wxCryst class for Atoms 
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::WXAtom@{ObjCryst::WXAtom}!UpdateUI@{UpdateUI}}
+\index{UpdateUI@{UpdateUI}!ObjCryst::WXAtom@{ObjCryst::WXAtom}}
+\paragraph[{UpdateUI}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::WXAtom::UpdateUI (const bool {\em mutexlock} = {\ttfamily false})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00110_a5509a746fb1a6d918b6cbde8453d6a44}
+
+
+Update the User Interface, if necessary. 
+\begin{DoxyParams}{Parameters}
+\item[{\em mutexlock,:}]if true, a Mutex will be used to lock the data shared between main and background thread.\end{DoxyParams}
+The idea is to only use a few Mutexes to lock data from the top objects (wxRefinableObj,...), when calling \doxyref{CrystUpdate()}{p.}{a00142_a13e4f37ac098de756b27cdb91d6a0551} and \doxyref{UpdateUI()}{p.}{a00110_a5509a746fb1a6d918b6cbde8453d6a44}. As sub-\/objects (\doxyref{WXField}{p.}{a00118},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
+
+Reimplemented from {\bf ObjCryst::WXRefinableObj} \doxyref{}{p.}{a00142_a19a1d057eecafd48710d9a3b770c1b28}.
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+wxAtom.h\end{DoxyCompactItemize}

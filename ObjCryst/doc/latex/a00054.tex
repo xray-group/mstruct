@@ -1,0 +1,296 @@
+\subsection{ObjCryst::OptimizationObj Class Reference}
+\label{a00054}\index{ObjCryst::OptimizationObj@{ObjCryst::OptimizationObj}}
+
+
+Base object for Optimization methods.  
+Inheritance diagram for ObjCryst::OptimizationObj::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2cm]{a00054}
+\end{center}
+\end{figure}
+\subsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf LogLikelihoodStats}
+\begin{DoxyCompactList}\small\item\em Statistics about each object contributing to the overall Log(likelihood). \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf OptimizationObj} (const string name=\char`\"{}\char`\"{})\label{a00054_a939444ac47768e16d205bebbc247cc12}
+
+\begin{DoxyCompactList}\small\item\em Constructor. \item\end{DoxyCompactList}\item 
+virtual {\bf $\sim$OptimizationObj} ()\label{a00054_a6fdf1e7158254a3c0a21b33e6ed5ffb5}
+
+\begin{DoxyCompactList}\small\item\em Destructor. \item\end{DoxyCompactList}\item 
+virtual void {\bf RandomizeStartingConfig} ()
+\begin{DoxyCompactList}\small\item\em Randomize starting configuration. \item\end{DoxyCompactList}\item 
+virtual void {\bf Optimize} (long \&nbSteps, const bool silent=false, const REAL finalcost=0, const REAL maxTime=-\/1)=0
+\begin{DoxyCompactList}\small\item\em Launch optimization (a single run) for N steps. \item\end{DoxyCompactList}\item 
+virtual void {\bf MultiRunOptimize} (long \&nbCycle, long \&nbSteps, const bool silent=false, const REAL finalcost=0, const REAL maxTime=-\/1)=0
+\begin{DoxyCompactList}\small\item\em Launch optimization for multiple runs of N steps. \item\end{DoxyCompactList}\item 
+void {\bf FixAllPar} ()\label{a00054_af8b3cef84c6bcca37cdc4bfde9ecde45}
+
+\begin{DoxyCompactList}\small\item\em Fix all parameters. \item\end{DoxyCompactList}\item 
+void {\bf SetParIsFixed} (const string \&parName, const bool fix)\label{a00054_aca3e1d2c6ace92f1a3a67da2455eac39}
+
+\begin{DoxyCompactList}\small\item\em Fix one parameter. \item\end{DoxyCompactList}\item 
+void {\bf SetParIsFixed} (const {\bf RefParType} $\ast$type, const bool fix)\label{a00054_a12a66416a701cbf0db17de3bfafdec99}
+
+\begin{DoxyCompactList}\small\item\em Fix one family of parameters. \item\end{DoxyCompactList}\item 
+void {\bf UnFixAllPar} ()\label{a00054_adb016adacaa7a2a15e40cfb746705bdd}
+
+\begin{DoxyCompactList}\small\item\em UnFix All parameters. \item\end{DoxyCompactList}\item 
+void {\bf SetParIsUsed} (const string \&parName, const bool use)\label{a00054_ab2f87becfb73eb00d8f7c3ff25435c0d}
+
+\begin{DoxyCompactList}\small\item\em Set a parameter to be used. \item\end{DoxyCompactList}\item 
+void {\bf SetParIsUsed} (const {\bf RefParType} $\ast$type, const bool use)\label{a00054_a73c29f094ad0a4923a2873388fc1eb93}
+
+\begin{DoxyCompactList}\small\item\em Set a family of parameters to be used. \item\end{DoxyCompactList}\item 
+void {\bf SetLimitsRelative} (const string \&parName, const REAL min, const REAL max)\label{a00054_a78113a7741eeda2263a27adcc24497c0}
+
+\begin{DoxyCompactList}\small\item\em Change the relative limits for a parameter from its name. \item\end{DoxyCompactList}\item 
+void {\bf SetLimitsRelative} (const {\bf RefParType} $\ast$type, const REAL min, const REAL max)\label{a00054_a0437fb441bebe91879de98efcb82865e}
+
+\begin{DoxyCompactList}\small\item\em Change the relative limits for a family of parameter. \item\end{DoxyCompactList}\item 
+void {\bf SetLimitsAbsolute} (const string \&parName, const REAL min, const REAL max)\label{a00054_ad0bc0b36d1525526c55dc6642109d0b4}
+
+\begin{DoxyCompactList}\small\item\em Change the absolute limits for a parameter from its name. \item\end{DoxyCompactList}\item 
+void {\bf SetLimitsAbsolute} (const {\bf RefParType} $\ast$type, const REAL min, const REAL max)\label{a00054_ade59b2e1d698ff7ba93ac5aa88187c58}
+
+\begin{DoxyCompactList}\small\item\em Change the absolute limits for a family of parameter. \item\end{DoxyCompactList}\item 
+virtual REAL {\bf GetLogLikelihood} () const 
+\begin{DoxyCompactList}\small\item\em The optimized (minimized, actually) function. \item\end{DoxyCompactList}\item 
+void {\bf StopAfterCycle} ()\label{a00054_a288306acc3189c4fcaca398d11b32e4e}
+
+\begin{DoxyCompactList}\small\item\em Stop after the current cycle. USed for interactive refinement. \item\end{DoxyCompactList}\item 
+virtual void {\bf DisplayReport} ()\label{a00054_af09e8a9cd1b7f7f29bf57d027e08fc54}
+
+\begin{DoxyCompactList}\small\item\em Show report to the user during refinement. Used for GUI update. \item\end{DoxyCompactList}\item 
+void {\bf AddRefinableObj} ({\bf RefinableObj} \&)\label{a00054_a05e7019188763202126f9f83a31e1673}
+
+\begin{DoxyCompactList}\small\item\em Add a refined object. All sub-\/objects are also added. \item\end{DoxyCompactList}\item 
+{\bf RefinableObj} \& {\bf GetFullRefinableObj} (const bool rebuild=true)
+\begin{DoxyCompactList}\small\item\em Get the \doxyref{RefinableObj}{p.}{a00070} with all the parameters from all refined objects. \item\end{DoxyCompactList}\item 
+virtual void {\bf XMLOutput} (ostream \&os, int indent=0) const =0
+\begin{DoxyCompactList}\small\item\em Output a description of the object in XML format to a stream. \item\end{DoxyCompactList}\item 
+virtual void {\bf XMLInput} (istream \&is, const {\bf XMLCrystTag} \&tag)=0
+\begin{DoxyCompactList}\small\item\em Input in XML format from a stream, restoring the set of refined objects and the associated cost functions. \item\end{DoxyCompactList}\item 
+const string \& {\bf GetName} () const \label{a00054_af595745274e554956834f885d7a1dc71}
+
+\begin{DoxyCompactList}\small\item\em Get the name for this object. \item\end{DoxyCompactList}\item 
+void {\bf SetName} (const string \&)\label{a00054_a076dc80d878fc4ab5e5491f54642382e}
+
+\begin{DoxyCompactList}\small\item\em Set the name for this object. \item\end{DoxyCompactList}\item 
+virtual const string {\bf GetClassName} () const \label{a00054_a2f00b2c3eb874d966bbb778a0d81abb1}
+
+\begin{DoxyCompactList}\small\item\em Get the name for this class type. \item\end{DoxyCompactList}\item 
+virtual void {\bf Print} () const \label{a00054_a55e92db45821ed13288d6852055c0003}
+
+\begin{DoxyCompactList}\small\item\em Print some information about this object. \item\end{DoxyCompactList}\item 
+void {\bf RestoreBestConfiguration} ()\label{a00054_a25a4ea1cf717a7d62ecf2cdbee87fa7a}
+
+\begin{DoxyCompactList}\small\item\em Restore the Best configuration. \item\end{DoxyCompactList}\item 
+bool {\bf IsOptimizing} () const \label{a00054_a02d12183cd9d167358717b87ada6ba1f}
+
+\begin{DoxyCompactList}\small\item\em Are we busy optimizing ? \item\end{DoxyCompactList}\item 
+void {\bf TagNewBestConfig} ()\label{a00054_a99ca4e2216b0fd93ab335c35a99ca895}
+
+\begin{DoxyCompactList}\small\item\em During a global optimization, tell all objects that the current config is the latest \char`\"{}best\char`\"{} config. \item\end{DoxyCompactList}\item 
+REAL {\bf GetLastOptimElapsedTime} () const \label{a00054_af9bb37804ee3012cb05ffc217584db42}
+
+\begin{DoxyCompactList}\small\item\em Get the elapsed time (in seconds) during the last optimization. \item\end{DoxyCompactList}\item 
+{\bf MainTracker} \& {\bf GetMainTracker} ()\label{a00054_af8328b810bc37e45881e19948da7d2d7}
+
+\begin{DoxyCompactList}\small\item\em Get the \doxyref{MainTracker}{p.}{a00040}. \item\end{DoxyCompactList}\item 
+const {\bf MainTracker} \& {\bf GetMainTracker} () const \label{a00054_a737490fc1ac0b30fc3bb3a5bb8061a8b}
+
+\begin{DoxyCompactList}\small\item\em Get the \doxyref{MainTracker}{p.}{a00040}. \item\end{DoxyCompactList}\item 
+{\bf RefObjOpt} \& {\bfseries GetXMLAutoSaveOption} ()\label{a00054_a82e4adbc7b5d3374f7c414a0e89c25fd}
+
+\item 
+const {\bf RefObjOpt} \& {\bfseries GetXMLAutoSaveOption} () const \label{a00054_a0a37e6bcce21926e13a3f57882e971b0}
+
+\item 
+const REAL \& {\bf GetBestCost} () const \label{a00054_a56c9ec94e7632c8b3f36e3a837c02594}
+
+\begin{DoxyCompactList}\small\item\em Access to current best cost. \item\end{DoxyCompactList}\item 
+REAL \& {\bf GetBestCost} ()\label{a00054_a894882f10bd768e3e57ffdfa9f9df7fe}
+
+\begin{DoxyCompactList}\small\item\em Access to current best cost. \item\end{DoxyCompactList}\item 
+virtual void {\bf BeginOptimization} (const bool allowApproximations=false, const bool enableRestraints=false)\label{a00054_a13c12dbdc72825f892c3d48dd2b6cfe3}
+
+\begin{DoxyCompactList}\small\item\em Begin optimization for all objects. \item\end{DoxyCompactList}\item 
+virtual void {\bf EndOptimization} ()\label{a00054_a37c2335ad867152121253996daaebc6e}
+
+\begin{DoxyCompactList}\small\item\em End optimization for all objects. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf PrepareRefParList} ()
+\item 
+virtual void {\bf InitOptions} ()\label{a00054_a0d7f6ae8f6ef49b59f0bc5b4794931e9}
+
+\begin{DoxyCompactList}\small\item\em Initialization of options. \item\end{DoxyCompactList}\item 
+virtual void {\bf UpdateDisplay} ()
+\begin{DoxyCompactList}\small\item\em Update Display (if any display is available), when a new 'relevant' configuration is reached. \item\end{DoxyCompactList}\item 
+void {\bf BuildRecursiveRefObjList} ()
+\begin{DoxyCompactList}\small\item\em (Re)build \doxyref{OptimizationObj::mRecursiveRefinedObjList}{p.}{a00054_a0e6a9e9d4d12ed73c582da36190f110f}, if an object has been added or modified. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf RefinableObj} {\bf mRefParList}
+\begin{DoxyCompactList}\small\item\em The refinable par list used during refinement. \item\end{DoxyCompactList}\item 
+string {\bf mName}\label{a00054_a9fa42c95df26834a9f369af61eb10ea6}
+
+\begin{DoxyCompactList}\small\item\em Name of the GlobalOptimization object. \item\end{DoxyCompactList}\item 
+string {\bf mSaveFileName}\label{a00054_a2694dd9fc6ab088e3d79e0c9e0358311}
+
+\begin{DoxyCompactList}\small\item\em File name where refinement info is saved (NOT USED so far...). \item\end{DoxyCompactList}\item 
+long {\bf mNbTrial}\label{a00054_af47650ca783520dd0100077b08271c79}
+
+\begin{DoxyCompactList}\small\item\em Number of trials so far. \item\end{DoxyCompactList}\item 
+REAL {\bf mBestCost}\label{a00054_a495926a48dd408a3b92de8a6b33f815a}
+
+\begin{DoxyCompactList}\small\item\em Best value of the cost function so far. \item\end{DoxyCompactList}\item 
+long {\bf mBestParSavedSetIndex}\label{a00054_aa9c2d238f7b60c7ea3bd715bf145b5d3}
+
+\begin{DoxyCompactList}\small\item\em Index of the 'best' saved parameter set. \item\end{DoxyCompactList}\item 
+unsigned long {\bf mContext}\label{a00054_a7139f75c5b214ea00f99c2e4c25b2b34}
+
+\begin{DoxyCompactList}\small\item\em The current 'context', in the case the optimization is run in different parallel contexts. \item\end{DoxyCompactList}\item 
+map$<$ unsigned long, map$<$ const {\bf RefinableObj} $\ast$, {\bf LogLikelihoodStats} $>$ $>$ {\bf mvContextObjStats}\label{a00054_a1b33baa71f4e0b182bae66766608425f}
+
+\begin{DoxyCompactList}\small\item\em Statistics for each context (mutable for dynamic update during optimization). \item\end{DoxyCompactList}\item 
+map$<$ const {\bf RefinableObj} $\ast$, DynamicObjWeight $>$ {\bf mvObjWeight}\label{a00054_a4b1120b0a6fc24c82c273152722f672c}
+
+\begin{DoxyCompactList}\small\item\em Weights for each objects in each context (mutable for dynamic update during optimization). \item\end{DoxyCompactList}\item 
+std::vector$<$ pair$<$ long, REAL $>$ $>$ {\bf mvSavedParamSet}
+\begin{DoxyCompactList}\small\item\em List of saved parameter sets. \item\end{DoxyCompactList}\item 
+bool {\bf mIsOptimizing}\label{a00054_a712048cd592825ce31ced1120733345b}
+
+\begin{DoxyCompactList}\small\item\em True if a refinement is being done. For multi-\/threaded environment. \item\end{DoxyCompactList}\item 
+bool {\bf mStopAfterCycle}\label{a00054_abec493a46c9e57c7e71e886bcae601fb}
+
+\begin{DoxyCompactList}\small\item\em If true, then stop at the end of the cycle. Used in multi-\/threaded environment. \item\end{DoxyCompactList}\item 
+{\bf ObjRegistry}$<$ {\bf RefinableObj} $>$ {\bf mRefinedObjList}\label{a00054_a73f491b5c8a0ae5f087e496916f76016}
+
+\begin{DoxyCompactList}\small\item\em The refined objects. \item\end{DoxyCompactList}\item 
+{\bf ObjRegistry}$<$ {\bf RefinableObj} $>$ {\bf mRecursiveRefinedObjList}
+\begin{DoxyCompactList}\small\item\em The refined objects, recursively including all sub-\/objects. \item\end{DoxyCompactList}\item 
+{\bf RefObjOpt} {\bf mXMLAutoSave}\label{a00054_a94038e1c477b1efa6417c13106d6bc89}
+
+\begin{DoxyCompactList}\small\item\em Periodic save of complete environment as an xml file. \item\end{DoxyCompactList}\item 
+REAL {\bf mLastOptimTime}\label{a00054_abf309e1b2248a7e1d3744d4b20d15bfd}
+
+\begin{DoxyCompactList}\small\item\em The time elapsed after the last optimization, in seconds. \item\end{DoxyCompactList}\item 
+{\bf MainTracker} {\bf mMainTracker}
+\begin{DoxyCompactList}\small\item\em \doxyref{MainTracker}{p.}{a00040} object to track the evolution of cost functions, likelihood, and individual parameters. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+Base object for Optimization methods. This is an abstract base class, derived for Monte-\/Cralo type algorithms (Simulated Annealing \& Parallel Tempering), and hopefully soon for Genetic Algorithms.
+
+\begin{DoxyRemark}{Remarks}
+Instead of keeping a copy of the list of parameters here, maybe it would be better to delegate all parameter handling to the refined objects (they would also have to keep in memory the saved parameter sets, so that could be difficult to administrate...). 
+\end{DoxyRemark}
+
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::OptimizationObj@{ObjCryst::OptimizationObj}!BuildRecursiveRefObjList@{BuildRecursiveRefObjList}}
+\index{BuildRecursiveRefObjList@{BuildRecursiveRefObjList}!ObjCryst::OptimizationObj@{ObjCryst::OptimizationObj}}
+\paragraph[{BuildRecursiveRefObjList}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::OptimizationObj::BuildRecursiveRefObjList ()\hspace{0.3cm}{\ttfamily  [protected]}}\hfill\label{a00054_a7c819c5f8fc52caafd97ea9d468da2be}
+
+
+(Re)build \doxyref{OptimizationObj::mRecursiveRefinedObjList}{p.}{a00054_a0e6a9e9d4d12ed73c582da36190f110f}, if an object has been added or modified. If no object has been added and no sub-\/object has been added/removed, then nothing is done. \index{ObjCryst::OptimizationObj@{ObjCryst::OptimizationObj}!GetFullRefinableObj@{GetFullRefinableObj}}
+\index{GetFullRefinableObj@{GetFullRefinableObj}!ObjCryst::OptimizationObj@{ObjCryst::OptimizationObj}}
+\paragraph[{GetFullRefinableObj}]{\setlength{\rightskip}{0pt plus 5cm}{\bf RefinableObj}\& ObjCryst::OptimizationObj::GetFullRefinableObj (const bool {\em rebuild} = {\ttfamily true})}\hfill\label{a00054_afef162d94382a93fe037fac1b5d3ef03}
+
+
+Get the \doxyref{RefinableObj}{p.}{a00070} with all the parameters from all refined objects. If rebuild=true, prepare again the list of objects/parameters. \index{ObjCryst::OptimizationObj@{ObjCryst::OptimizationObj}!GetLogLikelihood@{GetLogLikelihood}}
+\index{GetLogLikelihood@{GetLogLikelihood}!ObjCryst::OptimizationObj@{ObjCryst::OptimizationObj}}
+\paragraph[{GetLogLikelihood}]{\setlength{\rightskip}{0pt plus 5cm}virtual REAL ObjCryst::OptimizationObj::GetLogLikelihood () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00054_a0f317f235e6e5cb1867cc7c5870f510f}
+
+
+The optimized (minimized, actually) function. This function is the weighted sum of the chosen Cost Functions for the refined objects. \index{ObjCryst::OptimizationObj@{ObjCryst::OptimizationObj}!MultiRunOptimize@{MultiRunOptimize}}
+\index{MultiRunOptimize@{MultiRunOptimize}!ObjCryst::OptimizationObj@{ObjCryst::OptimizationObj}}
+\paragraph[{MultiRunOptimize}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::OptimizationObj::MultiRunOptimize (long \& {\em nbCycle}, \/  long \& {\em nbSteps}, \/  const bool {\em silent} = {\ttfamily false}, \/  const REAL {\em finalcost} = {\ttfamily 0}, \/  const REAL {\em maxTime} = {\ttfamily -\/1})\hspace{0.3cm}{\ttfamily  [pure virtual]}}\hfill\label{a00054_aa53575dbda2ec3f561bed934beb4ca6f}
+
+
+Launch optimization for multiple runs of N steps. 
+\begin{DoxyParams}{Parameters}
+\item[{\em nbCycle,:}]the number of runs (cycles) to perform. The structure is randomized at the beginning of each cycle. If nbCycle==-\/1, this will run indefinitely. The nbCycle parameter is decreased after each run. \item[{\em nbSteps,:}]the number of steps to go. This number is modified (decreases!) as the refinement goes on. \item[{\em silent}]: if true, absolutely no message should be printed (except debugging) \item[{\em finalcost,:}]the optimization will stop if overall cost fallse below this value \item[{\em maxTime,:}]the optimization will stop after the given number of seconds has been spent optimizing (ignored if $<$0). \end{DoxyParams}
+
+
+Implemented in {\bf ObjCryst::MonteCarloObj} \doxyref{}{p.}{a00049_ae1689aa2dd5867499768328df935334d}, and {\bf ObjCryst::SimplexObj} \doxyref{}{p.}{a00092_a1c7ae823f9e31169b453f36d15c049b8}.\index{ObjCryst::OptimizationObj@{ObjCryst::OptimizationObj}!Optimize@{Optimize}}
+\index{Optimize@{Optimize}!ObjCryst::OptimizationObj@{ObjCryst::OptimizationObj}}
+\paragraph[{Optimize}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::OptimizationObj::Optimize (long \& {\em nbSteps}, \/  const bool {\em silent} = {\ttfamily false}, \/  const REAL {\em finalcost} = {\ttfamily 0}, \/  const REAL {\em maxTime} = {\ttfamily -\/1})\hspace{0.3cm}{\ttfamily  [pure virtual]}}\hfill\label{a00054_a08c77dc6ec80f63bf067ef2968a0b6dc}
+
+
+Launch optimization (a single run) for N steps. 
+\begin{DoxyParams}{Parameters}
+\item[{\em nbSteps,:}]the number of steps to go. This number is modified (decreases!) as the refinement goes on. \item[{\em silent}]: if true, absolutely no message should be printed (except debugging) \item[{\em finalcost,:}]the optimization will stop if overall cost fallse below this value \item[{\em maxTime,:}]the optimization will stop after the given number of seconds has been spent optimizing (ignored if $<$0). \end{DoxyParams}
+
+
+Implemented in {\bf ObjCryst::MonteCarloObj} \doxyref{}{p.}{a00049_aef060de8a302fb8c4e607e00667d7b49}, and {\bf ObjCryst::SimplexObj} \doxyref{}{p.}{a00092_aa8bf4b209e2ce6229722b18ec9911010}.\index{ObjCryst::OptimizationObj@{ObjCryst::OptimizationObj}!PrepareRefParList@{PrepareRefParList}}
+\index{PrepareRefParList@{PrepareRefParList}!ObjCryst::OptimizationObj@{ObjCryst::OptimizationObj}}
+\paragraph[{PrepareRefParList}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::OptimizationObj::PrepareRefParList ()\hspace{0.3cm}{\ttfamily  [protected]}}\hfill\label{a00054_a2f11f520bc1bd0b70f8aea98d3f8224c}
+\begin{DoxyInternal}{For internal use only.}
+Prepare mRefParList for the refinement \end{DoxyInternal}
+\index{ObjCryst::OptimizationObj@{ObjCryst::OptimizationObj}!RandomizeStartingConfig@{RandomizeStartingConfig}}
+\index{RandomizeStartingConfig@{RandomizeStartingConfig}!ObjCryst::OptimizationObj@{ObjCryst::OptimizationObj}}
+\paragraph[{RandomizeStartingConfig}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::OptimizationObj::RandomizeStartingConfig ()\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00054_a04ac9f4d67eb8823b78b00f222a5a29c}
+
+
+Randomize starting configuration. Only affects limited and periodic parameters. \index{ObjCryst::OptimizationObj@{ObjCryst::OptimizationObj}!UpdateDisplay@{UpdateDisplay}}
+\index{UpdateDisplay@{UpdateDisplay}!ObjCryst::OptimizationObj@{ObjCryst::OptimizationObj}}
+\paragraph[{UpdateDisplay}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::OptimizationObj::UpdateDisplay ()\hspace{0.3cm}{\ttfamily  [protected, virtual]}}\hfill\label{a00054_a3658f0e6232756d68b8b17256f27a9bd}
+
+
+Update Display (if any display is available), when a new 'relevant' configuration is reached. This calls all \doxyref{RefinableObj::UpdateDisplay()}{p.}{a00070_ab74e2cead734fe1e652c5add46c5e116} \index{ObjCryst::OptimizationObj@{ObjCryst::OptimizationObj}!XMLInput@{XMLInput}}
+\index{XMLInput@{XMLInput}!ObjCryst::OptimizationObj@{ObjCryst::OptimizationObj}}
+\paragraph[{XMLInput}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::OptimizationObj::XMLInput (istream \& {\em is}, \/  const {\bf XMLCrystTag} \& {\em tag})\hspace{0.3cm}{\ttfamily  [pure virtual]}}\hfill\label{a00054_aa07aee60f56780e2c56fb20f4a5f48a8}
+
+
+Input in XML format from a stream, restoring the set of refined objects and the associated cost functions. Note that the corresponding objects must have been loaded in memory before, else shit happens. 
+
+Implemented in {\bf ObjCryst::MonteCarloObj} \doxyref{}{p.}{a00049_a2f9428857b1d26bbdac08d59debb9f52}, and {\bf ObjCryst::SimplexObj} \doxyref{}{p.}{a00092_ae6ed0602ffdd2db1a10be80820a0a285}.\index{ObjCryst::OptimizationObj@{ObjCryst::OptimizationObj}!XMLOutput@{XMLOutput}}
+\index{XMLOutput@{XMLOutput}!ObjCryst::OptimizationObj@{ObjCryst::OptimizationObj}}
+\paragraph[{XMLOutput}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::OptimizationObj::XMLOutput (ostream \& {\em os}, \/  int {\em indent} = {\ttfamily 0}) const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\hfill\label{a00054_a6b7726159bb0d5dad1c7eebaee78f53a}
+
+
+Output a description of the object in XML format to a stream. This saves the list of refined object and the cost functions, as well as options for the refinement. The refined objects are {\bfseries not} saved, so this must be done somewhere else (they must be reloaded before this object). 
+
+Implemented in {\bf ObjCryst::MonteCarloObj} \doxyref{}{p.}{a00049_a619eb171e5fe384be4d37f999dde8e0f}, and {\bf ObjCryst::SimplexObj} \doxyref{}{p.}{a00092_a7111042ca3a7201039a25fe548cb524c}.
+
+\subsubsection{Member Data Documentation}
+\index{ObjCryst::OptimizationObj@{ObjCryst::OptimizationObj}!mMainTracker@{mMainTracker}}
+\index{mMainTracker@{mMainTracker}!ObjCryst::OptimizationObj@{ObjCryst::OptimizationObj}}
+\paragraph[{mMainTracker}]{\setlength{\rightskip}{0pt plus 5cm}{\bf MainTracker} {\bf ObjCryst::OptimizationObj::mMainTracker}\hspace{0.3cm}{\ttfamily  [protected]}}\hfill\label{a00054_abe2f9a9812abe0f4a6c414457b5b2967}
+
+
+\doxyref{MainTracker}{p.}{a00040} object to track the evolution of cost functions, likelihood, and individual parameters. \index{ObjCryst::OptimizationObj@{ObjCryst::OptimizationObj}!mRecursiveRefinedObjList@{mRecursiveRefinedObjList}}
+\index{mRecursiveRefinedObjList@{mRecursiveRefinedObjList}!ObjCryst::OptimizationObj@{ObjCryst::OptimizationObj}}
+\paragraph[{mRecursiveRefinedObjList}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ObjRegistry}$<${\bf RefinableObj}$>$ {\bf ObjCryst::OptimizationObj::mRecursiveRefinedObjList}\hspace{0.3cm}{\ttfamily  [mutable, protected]}}\hfill\label{a00054_a0e6a9e9d4d12ed73c582da36190f110f}
+
+
+The refined objects, recursively including all sub-\/objects. This is mutable, since it is a function of mRefinedObjList only. \index{ObjCryst::OptimizationObj@{ObjCryst::OptimizationObj}!mRefParList@{mRefParList}}
+\index{mRefParList@{mRefParList}!ObjCryst::OptimizationObj@{ObjCryst::OptimizationObj}}
+\paragraph[{mRefParList}]{\setlength{\rightskip}{0pt plus 5cm}{\bf RefinableObj} {\bf ObjCryst::OptimizationObj::mRefParList}\hspace{0.3cm}{\ttfamily  [mutable, protected]}}\hfill\label{a00054_a9cf13c38f24b4b2ddd6cb239286053af}
+
+
+The refinable par list used during refinement. Only a condensed version of all objects. This is useful to keep an history of modifications, and to restore previous values. \begin{DoxyRemark}{Remarks}
+maybe this should be completely delegated to the refined objetcs. 
+\end{DoxyRemark}
+\index{ObjCryst::OptimizationObj@{ObjCryst::OptimizationObj}!mvSavedParamSet@{mvSavedParamSet}}
+\index{mvSavedParamSet@{mvSavedParamSet}!ObjCryst::OptimizationObj@{ObjCryst::OptimizationObj}}
+\paragraph[{mvSavedParamSet}]{\setlength{\rightskip}{0pt plus 5cm}std::vector$<$pair$<$long,REAL$>$ $>$ {\bf ObjCryst::OptimizationObj::mvSavedParamSet}\hspace{0.3cm}{\ttfamily  [protected]}}\hfill\label{a00054_a9063bb2fa6a6f0938295be2ffe2bfe84}
+
+
+List of saved parameter sets. This is used to save possible solutions during the optimization, so that the user can check them afterwards.
+
+The first member of each pair is the {\itshape index\/} of the parameter set, and the second is the overall cost for that set. 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+GlobalOptimObj.h\end{DoxyCompactItemize}

@@ -1,0 +1,82 @@
+\subsection{ObjCryst::XMLCrystTag Class Reference}
+\label{a00150}\index{ObjCryst::XMLCrystTag@{ObjCryst::XMLCrystTag}}
+
+
+class to input or output a well-\/formatted xml beginning or ending tag.  
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries XMLCrystTag} (istream \&is)\label{a00150_a89d1228d4574dd21f2c911ec22996ddc}
+
+\item 
+{\bfseries XMLCrystTag} (const string \&tagName, const bool isEndTag=false, const bool isEmptyTag=false)\label{a00150_a2ffd153fc95c129002a3dd9827769a13}
+
+\item 
+const string \& {\bfseries GetName} () const \label{a00150_a8ab01d1553671576e73c404a146b11df}
+
+\item 
+const string \& {\bfseries GetClassName} () const \label{a00150_a55f072beeef284eeb455ea580b9a6f90}
+
+\item 
+unsigned int {\bfseries GetNbAttribute} () const \label{a00150_af48df589ce812781203427b67c7e3cf0}
+
+\item 
+void {\bfseries AddAttribute} (const string \&attName, const string \&attValue)\label{a00150_a20fc20c3a1c1378811a6f2afb5c9acab}
+
+\item 
+void {\bfseries GetAttribute} (const int attNum, string \&attName, string \&attValue)\label{a00150_a73ced51009c3f8754ee7b18d28b62340}
+
+\item 
+const string \& {\bfseries GetAttributeName} (const int attNum) const \label{a00150_ad1bae4de372b49359a9b177852ca8ddd}
+
+\item 
+const string \& {\bfseries GetAttributeValue} (const int attNum) const \label{a00150_a72c0c1dcad6a41234fc8f43947c96d4c}
+
+\item 
+void {\bfseries SetIsEndTag} (const bool isEndTag)\label{a00150_a8c7fd75290484b8525e956b31ef48261}
+
+\item 
+bool {\bfseries IsEndTag} () const \label{a00150_aa46dc96ed7cfce3a6694c3cfa9f3d693}
+
+\item 
+void {\bfseries SetIsEmptyTag} (const bool isEmptyTag)\label{a00150_a638dff0e517133f28702f774374f32c8}
+
+\item 
+bool {\bfseries IsEmptyTag} () const \label{a00150_a2972d76f345b551017443edd93ac3d1d}
+
+\item 
+void {\bfseries Print} () const \label{a00150_a7f7595ce638038a9d55ef35c45c67ab2}
+
+\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string {\bfseries mName}\label{a00150_a9500597e30b8384b05500ae6a8c452f1}
+
+\item 
+bool {\bfseries mIsEndTag}\label{a00150_a157c453bd10c2f8964c0a9580a8469a5}
+
+\item 
+bool {\bfseries mIsEmptyTag}\label{a00150_ac8f2db515acf4d883d43a26ec5677981}
+
+\item 
+vector$<$ pair$<$ std::string, std::string $>$ $>$ {\bfseries mvAttribute}\label{a00150_aad577e02e7d5dec5324d0929dddecdcd}
+
+\end{DoxyCompactItemize}
+\subsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+ostream \& {\bf operator$<$$<$} (ostream \&, const {\bf XMLCrystTag} \&)\label{a00150_a45a81f89a25fe1192f50330d453e195c}
+
+\begin{DoxyCompactList}\small\item\em Output an \doxyref{XMLCrystTag}{p.}{a00150} to a stream. \item\end{DoxyCompactList}\item 
+istream \& {\bf operator$>$$>$} (istream \&, {\bf XMLCrystTag} \&)\label{a00150_ac262675809dec8086fe3793a695a541f}
+
+\begin{DoxyCompactList}\small\item\em Input an \doxyref{XMLCrystTag}{p.}{a00150} from a stream. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+class to input or output a well-\/formatted xml beginning or ending tag. 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+RefinableObj/IO.h\end{DoxyCompactItemize}

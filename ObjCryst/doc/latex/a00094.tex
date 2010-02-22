@@ -1,0 +1,276 @@
+\subsection{ObjCryst::SpaceGroup Class Reference}
+\label{a00094}\index{ObjCryst::SpaceGroup@{ObjCryst::SpaceGroup}}
+
+
+The crystallographic space group, and the cell choice.  
+\subsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf SMx}
+\begin{DoxyCompactList}\small\item\em Struct to store rot+trans matrix. \item\end{DoxyCompactList}\item 
+struct {\bf TRx}
+\begin{DoxyCompactList}\small\item\em Struct to store trans matrix. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf SpaceGroup} ()
+\begin{DoxyCompactList}\small\item\em Default Constructor (initializes in P1). \item\end{DoxyCompactList}\item 
+{\bf SpaceGroup} (const string \&spgId)
+\begin{DoxyCompactList}\small\item\em Constructor with a specified spacegroup symbol or number. \item\end{DoxyCompactList}\item 
+{\bf $\sim$SpaceGroup} ()\label{a00094_a9dfc390a5e455426c323ee7a8d6ced10}
+
+\begin{DoxyCompactList}\small\item\em Destructor. \item\end{DoxyCompactList}\item 
+void {\bf ChangeSpaceGroup} (const string \&spgId)\label{a00094_af592aa42f04d02e4caecbf2b93031be8}
+
+\begin{DoxyCompactList}\small\item\em Change the Spacegroup. \item\end{DoxyCompactList}\item 
+const string \& {\bf GetName} () const \label{a00094_a633e6ba97400f7b4f7d3887c94dce2c0}
+
+\begin{DoxyCompactList}\small\item\em Get the name of this spacegroup (its name, as supplied initially by the calling program or user). \item\end{DoxyCompactList}\item 
+bool {\bf IsInAsymmetricUnit} (const REAL x, const REAL y, const REAL z) const \label{a00094_accd8f865d9cbb12e420a6737fe50bc06}
+
+\begin{DoxyCompactList}\small\item\em Test if a given scatterer at (x,y,z) is in the asymmetric unit. \item\end{DoxyCompactList}\item 
+void {\bf ChangeToAsymmetricUnit} (REAL x, REAL y, REAL z) const 
+\begin{DoxyCompactList}\small\item\em Move (x,y,z) coordinates to their equivalent in the asym unit. \item\end{DoxyCompactList}\item 
+const {\bf AsymmetricUnit} \& {\bf GetAsymUnit} () const \label{a00094_aaf14567efef1b6031df146a3f8b7b9a2}
+
+\begin{DoxyCompactList}\small\item\em Get the \doxyref{AsymmetricUnit}{p.}{a00007} for this spacegroup. \item\end{DoxyCompactList}\item 
+int {\bf GetSpaceGroupNumber} () const \label{a00094_add04f45fac118cc9c235a6a6270d12c7}
+
+\begin{DoxyCompactList}\small\item\em Id number of the spacegroup. \item\end{DoxyCompactList}\item 
+bool {\bf IsCentrosymmetric} () const \label{a00094_a0f2bc9f6351fcde894338cad26d5617e}
+
+\begin{DoxyCompactList}\small\item\em Is the crystal centrosymmetric ? \item\end{DoxyCompactList}\item 
+int {\bf GetNbTranslationVectors} () const 
+\begin{DoxyCompactList}\small\item\em Number of translation vectors (1 for 'P' cells, 2 for 'I', 4 for 'F',etc. \item\end{DoxyCompactList}\item 
+const std::vector$<$ {\bf SpaceGroup::TRx} $>$ \& {\bf GetTranslationVectors} () const 
+\begin{DoxyCompactList}\small\item\em Return all Translation Vectors, as a 3 columns-\/array. \item\end{DoxyCompactList}\item 
+CrystMatrix\_\-REAL {\bf GetAllSymmetrics} (const REAL x, const REAL y, const REAL z, const bool noCenter=false, const bool noTransl=false, const bool noIdentical=false) const 
+\begin{DoxyCompactList}\small\item\em Get all equivalent positions of a (xyz) position. \item\end{DoxyCompactList}\item 
+int {\bf GetNbSymmetrics} (const bool noCenter=false, const bool noTransl=false) const 
+\begin{DoxyCompactList}\small\item\em Return the number of equivalent positions in the spacegroup, ie the multilicity of the general position. \item\end{DoxyCompactList}\item 
+void {\bf Print} () const 
+\begin{DoxyCompactList}\small\item\em Prints a description of the spacegroup (symbol, properties). \item\end{DoxyCompactList}\item 
+bool {\bf HasInversionCenter} () const \label{a00094_a68ea2fc39bfa77cf615c438df4bd9a77}
+
+\begin{DoxyCompactList}\small\item\em Is centrosymmetric ? \item\end{DoxyCompactList}\item 
+bool {\bf IsInversionCenterAtOrigin} () const \label{a00094_a9a9e27fc72c881e415c2f56b1ec24d17}
+
+\begin{DoxyCompactList}\small\item\em Is the center of symmetry at the origin ? \item\end{DoxyCompactList}\item 
+const cctbx::sgtbx::space\_\-group \& {\bf GetCCTbxSpg} () const \label{a00094_ad4b7f4d59b0f85c63f5400771c4ef3b8}
+
+\begin{DoxyCompactList}\small\item\em Get the underlying cctbx Spacegroup object. \item\end{DoxyCompactList}\item 
+const {\bf RefinableObjClock} \& {\bf GetClockSpaceGroup} () const \label{a00094_a23a802d400f7a4eddbedc6ba2116a0e5}
+
+\begin{DoxyCompactList}\small\item\em Get the \doxyref{SpaceGroup}{p.}{a00094} Clock (corresponding to the time of the initialization of the \doxyref{SpaceGroup}{p.}{a00094}). \item\end{DoxyCompactList}\item 
+unsigned int {\bf GetUniqueAxis} () const \label{a00094_aa6d4d7e6522df61f418005455fff30d0}
+
+\begin{DoxyCompactList}\small\item\em Which is the unique axis (for monoclinic space groups ). \item\end{DoxyCompactList}\item 
+char {\bf GetExtension} () const \label{a00094_a7a1a325a3722f85549d99c12821269f0}
+
+\begin{DoxyCompactList}\small\item\em Extension to space group symbol ('1','2':origin choice ; 'R','H'=rhomboedral/hexagonal). \item\end{DoxyCompactList}\item 
+unsigned int {\bf AreReflEquiv} (const REAL h1, const REAL k1, const REAL l1, const REAL h2, const REAL k2, const REAL l2) const 
+\begin{DoxyCompactList}\small\item\em Are these reflections equivalent ? \item\end{DoxyCompactList}\item 
+CrystMatrix\_\-REAL {\bf GetAllEquivRefl} (const REAL h, const REAL k, const REAL l, const bool excludeFriedelMate=false, const bool forceFriedelLaw=false, const REAL sf\_\-re=0, const REAL sf\_\-im=0) const 
+\begin{DoxyCompactList}\small\item\em Get the list of all equivalent reflections. \item\end{DoxyCompactList}\item 
+bool {\bf IsReflSystematicAbsent} (const REAL h, const REAL k, const REAL l) const \label{a00094_a913dcf7cca770f37da93e0baf49b93f5}
+
+\begin{DoxyCompactList}\small\item\em Is the reflection systematically absent ? \item\end{DoxyCompactList}\item 
+bool {\bf IsReflCentric} (const REAL h, const REAL k, const REAL l) const \label{a00094_a28297c63dbb762b89d6cb63d37fe12b1}
+
+\begin{DoxyCompactList}\small\item\em Is the reflection centric ? \item\end{DoxyCompactList}\item 
+unsigned int {\bf GetExpectedIntensityFactor} (const REAL h, const REAL k, const REAL l) const 
+\begin{DoxyCompactList}\small\item\em Get the \char`\"{}expected intensity factor\char`\"{} for a given reflection. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf InitSpaceGroup} (const string \&spgId)
+\begin{DoxyCompactList}\small\item\em Init the spaceGroup object from its name. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string {\bf mId}
+\begin{DoxyCompactList}\small\item\em Spacegroup's name ( 'I422', 'D2$^\wedge$8','230') Maybe we should only store the Hermann-\/Mauguin symbol, rather than storing the string which was initially given by the user/program for the initialization. \item\end{DoxyCompactList}\item 
+cctbx::sgtbx::space\_\-group $\ast$ {\bf mpCCTbxSpaceGroup}
+\begin{DoxyCompactList}\small\item\em SgOps structure for this spacegroup. \item\end{DoxyCompactList}\item 
+bool {\bf mHasInversionCenter}
+\begin{DoxyCompactList}\small\item\em Is spacegroup centrosymmetric ? \item\end{DoxyCompactList}\item 
+bool {\bf mIsInversionCenterAtOrigin}
+\begin{DoxyCompactList}\small\item\em Is center of symmetry at the origin ? \item\end{DoxyCompactList}\item 
+{\bf AsymmetricUnit} {\bf mAsymmetricUnit}\label{a00094_afab66408e77f673c763759a6b711a171}
+
+\begin{DoxyCompactList}\small\item\em The spacegroup asymmetric unit. \item\end{DoxyCompactList}\item 
+{\bf RefinableObjClock} {\bf mClock}\label{a00094_adc6df7cab781386adbf925e2db531a50}
+
+\begin{DoxyCompactList}\small\item\em The Spacegroup clock. \item\end{DoxyCompactList}\item 
+unsigned int {\bf mUniqueAxisId}\label{a00094_ae893aec7a2f92d875c69df9c02224510}
+
+\begin{DoxyCompactList}\small\item\em Unique axis number (0=a,1=b,2=c). \item\end{DoxyCompactList}\item 
+unsigned long {\bf mNbSym}\label{a00094_aecfbdf6789b8d2630231ba260bcad1d2}
+
+\begin{DoxyCompactList}\small\item\em Number of symmetry operations (excluding center, and translations). \item\end{DoxyCompactList}\item 
+unsigned long {\bf mNbTrans}\label{a00094_a818fda764b1ca81deb48112c11616e67}
+
+\begin{DoxyCompactList}\small\item\em Number of lattice translations, including (0,0,0). \item\end{DoxyCompactList}\item 
+unsigned long {\bf mSpgNumber}\label{a00094_a2921d4275e42e989bba01e569d25fd06}
+
+\begin{DoxyCompactList}\small\item\em \doxyref{SpaceGroup}{p.}{a00094} Number. \item\end{DoxyCompactList}\item 
+char {\bf mExtension}\label{a00094_afe396f7dc29a70c460f606461a849278}
+
+\begin{DoxyCompactList}\small\item\em Extension to space group symbol (1,2:origin choice ; R,H=rhomboedral/hexagonal). \item\end{DoxyCompactList}\item 
+std::vector$<$ {\bf SMx} $>$ {\bf mvSym}\label{a00094_a312ef11d6802deb621501f5f7e67ee50}
+
+\begin{DoxyCompactList}\small\item\em Store floating-\/point matrices for faster use. \item\end{DoxyCompactList}\item 
+std::vector$<$ {\bf TRx} $>$ {\bf mvTrans}\label{a00094_ad32dcbecd3a115f4d0ab395a47331a3d}
+
+\begin{DoxyCompactList}\small\item\em Store floating-\/point translation vectors for faster use. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+The crystallographic space group, and the cell choice. This class includes functions to get basic information about the symmetries, as well as getting all symmetrics for a given position in a unit cell.
+
+This class included a pointer to a function calculating the \char`\"{}geometrical
+ structure factor\char`\"{} (ie the sum of sin() and cos() for all symetrics, as could be found in the old version of the (red) International Tables), which was used to speed up computation of structure factors by using pre-\/factorised formulas. This is not used anymore, since methods can be used to speed up computations.
+
+This class uses R. Grosse-\/Kunstleve 'SgLite' package, which is part of the Pymol package : {\tt http://pymol.sourceforge.net/}
+
+\begin{DoxyWarning}{Warning}
+: the interface of the class will somewhat change when switching from sgLite to cctbx ({\tt http://cctbx.sourceforge.net}). Particularly functions Spacegroup::GetSgOps() and Spacegroup::GetHM\_\-as\_\-Hall() will be removed. 
+\end{DoxyWarning}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\index{ObjCryst::SpaceGroup@{ObjCryst::SpaceGroup}!SpaceGroup@{SpaceGroup}}
+\index{SpaceGroup@{SpaceGroup}!ObjCryst::SpaceGroup@{ObjCryst::SpaceGroup}}
+\paragraph[{SpaceGroup}]{\setlength{\rightskip}{0pt plus 5cm}ObjCryst::SpaceGroup::SpaceGroup ()}\hfill\label{a00094_a5f5f5b814480e6ab109c22926cc359ca}
+
+
+Default Constructor (initializes in P1). You can use later \doxyref{SpaceGroup::ChangeSpaceGroup()}{p.}{a00094_af592aa42f04d02e4caecbf2b93031be8} to set the spacegroup. \index{ObjCryst::SpaceGroup@{ObjCryst::SpaceGroup}!SpaceGroup@{SpaceGroup}}
+\index{SpaceGroup@{SpaceGroup}!ObjCryst::SpaceGroup@{ObjCryst::SpaceGroup}}
+\paragraph[{SpaceGroup}]{\setlength{\rightskip}{0pt plus 5cm}ObjCryst::SpaceGroup::SpaceGroup (const string \& {\em spgId})}\hfill\label{a00094_a5db1daaae23fab45637555f74c705b3e}
+
+
+Constructor with a specified spacegroup symbol or number. 
+\begin{DoxyParams}{Parameters}
+\item[{\em spgId}]The space group identifier, either an Hermann-\/Maugin, or Hall, or Schonflies symbol. \end{DoxyParams}
+
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::SpaceGroup@{ObjCryst::SpaceGroup}!AreReflEquiv@{AreReflEquiv}}
+\index{AreReflEquiv@{AreReflEquiv}!ObjCryst::SpaceGroup@{ObjCryst::SpaceGroup}}
+\paragraph[{AreReflEquiv}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int ObjCryst::SpaceGroup::AreReflEquiv (const REAL {\em h1}, \/  const REAL {\em k1}, \/  const REAL {\em l1}, \/  const REAL {\em h2}, \/  const REAL {\em k2}, \/  const REAL {\em l2}) const}\hfill\label{a00094_abc388337be91c9ae1bee5cc13ffc1aa4}
+
+
+Are these reflections equivalent ? \begin{DoxyReturn}{Returns}
+1 if they are equivalent, 2 if they are Friedel/Bijvoet mates, and else 0. 
+\end{DoxyReturn}
+\index{ObjCryst::SpaceGroup@{ObjCryst::SpaceGroup}!ChangeToAsymmetricUnit@{ChangeToAsymmetricUnit}}
+\index{ChangeToAsymmetricUnit@{ChangeToAsymmetricUnit}!ObjCryst::SpaceGroup@{ObjCryst::SpaceGroup}}
+\paragraph[{ChangeToAsymmetricUnit}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::SpaceGroup::ChangeToAsymmetricUnit (REAL {\em x}, \/  REAL {\em y}, \/  REAL {\em z}) const}\hfill\label{a00094_adc3c511d36ad707690ca4f9c0154a8a0}
+
+
+Move (x,y,z) coordinates to their equivalent in the asym unit. \begin{DoxyWarning}{Warning}
+Not implemented yet. 
+\end{DoxyWarning}
+\begin{Desc}
+\item[{\bf Todo}]\doxyref{SpaceGroup::IsInAsymmetricUnit()}{p.}{a00094_accd8f865d9cbb12e420a6737fe50bc06} \end{Desc}
+\index{ObjCryst::SpaceGroup@{ObjCryst::SpaceGroup}!GetAllEquivRefl@{GetAllEquivRefl}}
+\index{GetAllEquivRefl@{GetAllEquivRefl}!ObjCryst::SpaceGroup@{ObjCryst::SpaceGroup}}
+\paragraph[{GetAllEquivRefl}]{\setlength{\rightskip}{0pt plus 5cm}CrystMatrix\_\-REAL ObjCryst::SpaceGroup::GetAllEquivRefl (const REAL {\em h}, \/  const REAL {\em k}, \/  const REAL {\em l}, \/  const bool {\em excludeFriedelMate} = {\ttfamily false}, \/  const bool {\em forceFriedelLaw} = {\ttfamily false}, \/  const REAL {\em sf\_\-re} = {\ttfamily 0}, \/  const REAL {\em sf\_\-im} = {\ttfamily 0}) const}\hfill\label{a00094_a63733aec55c2f6dc07c9d88a56f38238}
+
+
+Get the list of all equivalent reflections. \begin{DoxyReturn}{Returns}
+a matrix with 5 columns for h,k,l,Re(F),Im(F) and as many rows as there are reflections (the input reflection is included), with the associated structure factor, from the structure factor of the input reflection. 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em excludeFriedelMate}]if true, then Friedel mates of reflections will not be listed, even if there is a center of symmetry. \item[{\em forceFriedelLaw}]if true, a center of symmetry will be added (to force considering Friedel mates as equivalent). This as no effect if excludeFriedelMate=true\item[{\em sf\_\-re,sf\_\-im,:}]the real \& imaginary part of the structure factor of the original reflection \end{DoxyParams}
+\index{ObjCryst::SpaceGroup@{ObjCryst::SpaceGroup}!GetAllSymmetrics@{GetAllSymmetrics}}
+\index{GetAllSymmetrics@{GetAllSymmetrics}!ObjCryst::SpaceGroup@{ObjCryst::SpaceGroup}}
+\paragraph[{GetAllSymmetrics}]{\setlength{\rightskip}{0pt plus 5cm}CrystMatrix\_\-REAL ObjCryst::SpaceGroup::GetAllSymmetrics (const REAL {\em x}, \/  const REAL {\em y}, \/  const REAL {\em z}, \/  const bool {\em noCenter} = {\ttfamily false}, \/  const bool {\em noTransl} = {\ttfamily false}, \/  const bool {\em noIdentical} = {\ttfamily false}) const}\hfill\label{a00094_a1c547bc807cc28143b92b0ed4834581e}
+
+
+Get all equivalent positions of a (xyz) position. 
+\begin{DoxyParams}{Parameters}
+\item[{\em x,y,z}]fractional coordinates of the position \item[{\em noCenter}]if set to 'false' (the default), then the center of symmetry (if any) is used to generate ALL positions. If 'true', then only one half of equivalent positions are generated. This has no influence if the group is not centrosymmetric. ({\bfseries note} Not generating symmetrical positions from center of symmetry is useful to speed up computation of structure factor, but is a bit tricky if the inversion is not at the origin. This is taken into account) \item[{\em noTransl}]if set to 'false' (the default), then translation are taken into account to generate all atom positions. This affect only body or face(s)-\/centered spacegroups. \item[{\em noIdentical}]if set to true, then atom in special positions will only return the distinct atomic positions. Currently two atoms are considered distinct if the difference for all of their fractionnal coordinates is less than 1e-\/5 \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a 3-\/column (x,y,z) matrix with as many rows as symmetric atoms 
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+'special' positions are not taken into account. (ie an atom in special position will return duplicate entries. This may be corrected automatically later.) You can use the 'noIdentical' option for that, 
+\end{DoxyWarning}
+\index{ObjCryst::SpaceGroup@{ObjCryst::SpaceGroup}!GetExpectedIntensityFactor@{GetExpectedIntensityFactor}}
+\index{GetExpectedIntensityFactor@{GetExpectedIntensityFactor}!ObjCryst::SpaceGroup@{ObjCryst::SpaceGroup}}
+\paragraph[{GetExpectedIntensityFactor}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int ObjCryst::SpaceGroup::GetExpectedIntensityFactor (const REAL {\em h}, \/  const REAL {\em k}, \/  const REAL {\em l}) const}\hfill\label{a00094_add3a6c0f649b952225fd7ef07b9e02d7}
+
+
+Get the \char`\"{}expected intensity factor\char`\"{} for a given reflection. This is the number of times the reflection is identical to the reflections deduced by the symmetry operators, under all distinct pure rotationnal symmetry operations of the space group.
+
+This is used for the probability distribution of reflection intensities.
+
+See:
+\begin{DoxyItemize}
+\item Stewart \& Karle, Acta. Cryst 132 (1976), 1005
+\item Wilson, Acta Cryst 3 (1950), 258 
+\end{DoxyItemize}\index{ObjCryst::SpaceGroup@{ObjCryst::SpaceGroup}!GetNbSymmetrics@{GetNbSymmetrics}}
+\index{GetNbSymmetrics@{GetNbSymmetrics}!ObjCryst::SpaceGroup@{ObjCryst::SpaceGroup}}
+\paragraph[{GetNbSymmetrics}]{\setlength{\rightskip}{0pt plus 5cm}int ObjCryst::SpaceGroup::GetNbSymmetrics (const bool {\em noCenter} = {\ttfamily false}, \/  const bool {\em noTransl} = {\ttfamily false}) const}\hfill\label{a00094_a1bf3ff968700527947d0a134b8058a85}
+
+
+Return the number of equivalent positions in the spacegroup, ie the multilicity of the general position. 
+\begin{DoxyParams}{Parameters}
+\item[{\em noCenter}]if 'true', do not take into account the center of symmetry \item[{\em noTransl}]if 'true', do not take into account translations \end{DoxyParams}
+\index{ObjCryst::SpaceGroup@{ObjCryst::SpaceGroup}!GetNbTranslationVectors@{GetNbTranslationVectors}}
+\index{GetNbTranslationVectors@{GetNbTranslationVectors}!ObjCryst::SpaceGroup@{ObjCryst::SpaceGroup}}
+\paragraph[{GetNbTranslationVectors}]{\setlength{\rightskip}{0pt plus 5cm}int ObjCryst::SpaceGroup::GetNbTranslationVectors () const}\hfill\label{a00094_a83b6cae3a3b76abc0a25a89cecf43ee1}
+
+
+Number of translation vectors (1 for 'P' cells, 2 for 'I', 4 for 'F',etc. .) \index{ObjCryst::SpaceGroup@{ObjCryst::SpaceGroup}!GetTranslationVectors@{GetTranslationVectors}}
+\index{GetTranslationVectors@{GetTranslationVectors}!ObjCryst::SpaceGroup@{ObjCryst::SpaceGroup}}
+\paragraph[{GetTranslationVectors}]{\setlength{\rightskip}{0pt plus 5cm}const std::vector$<${\bf SpaceGroup::TRx}$>$\& ObjCryst::SpaceGroup::GetTranslationVectors () const}\hfill\label{a00094_a763a2f9e54363c2134a92beed214bbe2}
+
+
+Return all Translation Vectors, as a 3 columns-\/array. The first vector is always [0,0,0] \begin{DoxyReturn}{Returns}
+$ \left[ \begin {array}{ccc} 0 & 0 & 0 \end{array} \right] $ for a 'P' Cell, $ \left[ \begin {array}{ccc} 0 & 0 & 0 \\ \frac{1}{2} & \frac{1}{2} & \frac{1}{2} \\ \end{array} \right] $ for a 'I' cell, and $ \left[ \begin {array}{ccc} 0 & 0 & 0 \\ \frac{1}{2} & \frac{1}{2} & 0 \\ \frac{1}{2} & 0 & \frac{1}{2} \\ 0 & \frac{1}{2} & \frac{1}{2} \\ \end{array} \right] $ for a 'F' cell,etc... 
+\end{DoxyReturn}
+\index{ObjCryst::SpaceGroup@{ObjCryst::SpaceGroup}!InitSpaceGroup@{InitSpaceGroup}}
+\index{InitSpaceGroup@{InitSpaceGroup}!ObjCryst::SpaceGroup@{ObjCryst::SpaceGroup}}
+\paragraph[{InitSpaceGroup}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::SpaceGroup::InitSpaceGroup (const string \& {\em spgId})\hspace{0.3cm}{\ttfamily  [private]}}\hfill\label{a00094_a4e3c79f1baccc4436dc0792d5489a821}
+
+
+Init the spaceGroup object from its name. Initialize the SgOps \& HM\_\-as\_\-Hall structures (SgLite), and set the function pointers to the functions used to compute the geometrical structure factors. \index{ObjCryst::SpaceGroup@{ObjCryst::SpaceGroup}!Print@{Print}}
+\index{Print@{Print}!ObjCryst::SpaceGroup@{ObjCryst::SpaceGroup}}
+\paragraph[{Print}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::SpaceGroup::Print () const}\hfill\label{a00094_a7c3746694fb9a6dbe3f258febb858744}
+
+
+Prints a description of the spacegroup (symbol, properties). \begin{Desc}
+\item[{\bf Todo}]\end{Desc}
+
+
+\subsubsection{Member Data Documentation}
+\index{ObjCryst::SpaceGroup@{ObjCryst::SpaceGroup}!mHasInversionCenter@{mHasInversionCenter}}
+\index{mHasInversionCenter@{mHasInversionCenter}!ObjCryst::SpaceGroup@{ObjCryst::SpaceGroup}}
+\paragraph[{mHasInversionCenter}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf ObjCryst::SpaceGroup::mHasInversionCenter}\hspace{0.3cm}{\ttfamily  [private]}}\hfill\label{a00094_a1c78b80ee241395b34f156cbe3b42261}
+
+
+Is spacegroup centrosymmetric ? \index{ObjCryst::SpaceGroup@{ObjCryst::SpaceGroup}!mId@{mId}}
+\index{mId@{mId}!ObjCryst::SpaceGroup@{ObjCryst::SpaceGroup}}
+\paragraph[{mId}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf ObjCryst::SpaceGroup::mId}\hspace{0.3cm}{\ttfamily  [private]}}\hfill\label{a00094_a5b8633c14cba4ab300327163b6fb2cdc}
+
+
+Spacegroup's name ( 'I422', 'D2$^\wedge$8','230') Maybe we should only store the Hermann-\/Mauguin symbol, rather than storing the string which was initially given by the user/program for the initialization. \index{ObjCryst::SpaceGroup@{ObjCryst::SpaceGroup}!mIsInversionCenterAtOrigin@{mIsInversionCenterAtOrigin}}
+\index{mIsInversionCenterAtOrigin@{mIsInversionCenterAtOrigin}!ObjCryst::SpaceGroup@{ObjCryst::SpaceGroup}}
+\paragraph[{mIsInversionCenterAtOrigin}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf ObjCryst::SpaceGroup::mIsInversionCenterAtOrigin}\hspace{0.3cm}{\ttfamily  [private]}}\hfill\label{a00094_a81e299e91344679806f1aecd5118a509}
+
+
+Is center of symmetry at the origin ? \index{ObjCryst::SpaceGroup@{ObjCryst::SpaceGroup}!mpCCTbxSpaceGroup@{mpCCTbxSpaceGroup}}
+\index{mpCCTbxSpaceGroup@{mpCCTbxSpaceGroup}!ObjCryst::SpaceGroup@{ObjCryst::SpaceGroup}}
+\paragraph[{mpCCTbxSpaceGroup}]{\setlength{\rightskip}{0pt plus 5cm}cctbx::sgtbx::space\_\-group$\ast$ {\bf ObjCryst::SpaceGroup::mpCCTbxSpaceGroup}\hspace{0.3cm}{\ttfamily  [private]}}\hfill\label{a00094_a8964d9e944d964dcc122adae63ac9d81}
+
+
+SgOps structure for this spacegroup. (Symmetry operations)
+
+See sglite subdirectory for more information. This is (c) R. Gross-\/Kunstleve, part of PyMol software {\tt http://pymol.sourceforge.net/} 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+SpaceGroup.h\end{DoxyCompactItemize}

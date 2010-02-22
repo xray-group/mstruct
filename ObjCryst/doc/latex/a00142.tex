@@ -1,0 +1,99 @@
+\subsection{ObjCryst::WXRefinableObj Class Reference}
+\label{a00142}\index{ObjCryst::WXRefinableObj@{ObjCryst::WXRefinableObj}}
+
+
+The base wxCryst class for all \doxyref{RefinableObj}{p.}{a00070} objects.  
+Inheritance diagram for ObjCryst::WXRefinableObj::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=12cm]{a00142}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries WXRefinableObj} (wxWindow $\ast$parent, {\bf RefinableObj} $\ast$)\label{a00142_a2765af8e024ebd42ced05b4f0e991db7}
+
+\item 
+virtual void {\bf CrystUpdate} (const bool updateUI=false, const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em Get new values to be displayed from the underlying object, and raise flag if an UI update is necessary. \item\end{DoxyCompactList}\item 
+virtual void {\bf UpdateUI} (const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em Update the User Interface, if necessary. \item\end{DoxyCompactList}\item 
+virtual bool {\bf OnChangeName} (const int id)
+\begin{DoxyCompactList}\small\item\em When a \doxyref{WXFieldName}{p.}{a00120} has been changed by the user, it is handled here. \item\end{DoxyCompactList}\item 
+void {\bfseries OnMenuSave} (wxCommandEvent \&WXUNUSED(event))\label{a00142_a1e65b19af240ac0680f9ce8d6c429328}
+
+\item 
+void {\bfseries OnMenuLoad} (wxCommandEvent \&WXUNUSED(event))\label{a00142_aa907c618a7a19c49daece82a63c904f6}
+
+\item 
+void {\bfseries OnMenuFixAllPar} (wxCommandEvent \&WXUNUSED(event))\label{a00142_a8589d79fe29e9a011637c3076b5bdaa7}
+
+\item 
+void {\bfseries OnMenuUnFixAllPar} (wxCommandEvent \&WXUNUSED(event))\label{a00142_ad04001216b52fc977de689ffad29a86b}
+
+\item 
+void {\bfseries OnMenuParRandomize} (wxCommandEvent \&WXUNUSED(event))\label{a00142_a308d9d22e41ff6d681fe2e7de09ead98}
+
+\item 
+virtual void {\bfseries OnUpdateUI} (wxUpdateUIEvent \&event)\label{a00142_a38c010955736653762a145d48c4e5b7d}
+
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf WXCrystMenuBar} $\ast$ {\bfseries mpMenuBar}\label{a00142_a1a53ab3646070ff4bc799321c22c0cd3}
+
+\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf RefinableObj} $\ast$ {\bfseries mpRefinableObj}\label{a00142_aec11f29fb2d78c03154fa7a8c5d17287}
+
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+The base wxCryst class for all \doxyref{RefinableObj}{p.}{a00070} objects. This shows the title, a menu for XMLInput/XMLOutput, and all \doxyref{RefObjOpt}{p.}{a00077}. 
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::WXRefinableObj@{ObjCryst::WXRefinableObj}!CrystUpdate@{CrystUpdate}}
+\index{CrystUpdate@{CrystUpdate}!ObjCryst::WXRefinableObj@{ObjCryst::WXRefinableObj}}
+\paragraph[{CrystUpdate}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::WXRefinableObj::CrystUpdate (const bool {\em updateUI} = {\ttfamily false}, \/  const bool {\em mutexlock} = {\ttfamily false})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00142_a13e4f37ac098de756b27cdb91d6a0551}
+
+
+Get new values to be displayed from the underlying object, and raise flag if an UI update is necessary. The actual GUI update is not made here. \doxyref{UpdateUI()}{p.}{a00142_a19a1d057eecafd48710d9a3b770c1b28} should be called separately, from the main thread.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em updateUI,:}]if true, this will call UpdateUI, either directly (if in the main thread), or by sending a message. \item[{\em mutexlock,:}]if true, a Mutex will be used to lock the data shared between main and background thread. The idea is to only use a few Mutexes to lock data from the top objects (wxRefinableObj,...), when calling \doxyref{CrystUpdate()}{p.}{a00142_a13e4f37ac098de756b27cdb91d6a0551} and \doxyref{UpdateUI()}{p.}{a00142_a19a1d057eecafd48710d9a3b770c1b28}. As sub-\/objects (\doxyref{WXField}{p.}{a00118},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. \end{DoxyParams}
+
+
+Reimplemented from {\bf ObjCryst::WXCrystObj} \doxyref{}{p.}{a00114_a2e5de90ae4d1ca8feb65b88debf6d3cb}.
+
+Reimplemented in {\bf ObjCryst::WXCrystal} \doxyref{}{p.}{a00112_a55d7dc41da5c6d4360609d2eac91f39b}, {\bf ObjCryst::WXDiffractionSingleCrystal} \doxyref{}{p.}{a00117_a79a9bb91f352c12bfb3a1ebd60267cbc}, {\bf ObjCryst::WXMolecule} \doxyref{}{p.}{a00131_a4d8fe8698ddc741c34b613643dec87b0}, {\bf ObjCryst::WXPowderPattern} \doxyref{}{p.}{a00135_a90f999b4aab7ed134db388c532b1d63e}, and {\bf ObjCryst::WXPowderPatternBackground} \doxyref{}{p.}{a00136_adacc1d5b1efe6eaf6a7a6a2d544c5e81}.\index{ObjCryst::WXRefinableObj@{ObjCryst::WXRefinableObj}!OnChangeName@{OnChangeName}}
+\index{OnChangeName@{OnChangeName}!ObjCryst::WXRefinableObj@{ObjCryst::WXRefinableObj}}
+\paragraph[{OnChangeName}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool ObjCryst::WXRefinableObj::OnChangeName (const int {\em id})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00142_ad784c1cb9ccb0d0e4ebfbc18a8dbbc19}
+
+
+When a \doxyref{WXFieldName}{p.}{a00120} has been changed by the user, it is handled here. This returns true if the value has been handled (for inheritance purposes). 
+
+Implements {\bf ObjCryst::WXCrystObj} \doxyref{}{p.}{a00114_a3736357599263df7e550790753c040a3}.
+
+Reimplemented in {\bf ObjCryst::WXCrystal} \doxyref{}{p.}{a00112_a7a15c2d1b5f5997ace336724fc396892}, {\bf ObjCryst::WXScatteringPowerAtom} \doxyref{}{p.}{a00145_a99081b400737a5e28a7207c8c905f6d5}, and {\bf ObjCryst::WXScatteringPowerSphere} \doxyref{}{p.}{a00146_a54f201d096de63b349e8979d69d6933a}.\index{ObjCryst::WXRefinableObj@{ObjCryst::WXRefinableObj}!UpdateUI@{UpdateUI}}
+\index{UpdateUI@{UpdateUI}!ObjCryst::WXRefinableObj@{ObjCryst::WXRefinableObj}}
+\paragraph[{UpdateUI}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::WXRefinableObj::UpdateUI (const bool {\em mutexlock} = {\ttfamily false})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00142_a19a1d057eecafd48710d9a3b770c1b28}
+
+
+Update the User Interface, if necessary. 
+\begin{DoxyParams}{Parameters}
+\item[{\em mutexlock,:}]if true, a Mutex will be used to lock the data shared between main and background thread.\end{DoxyParams}
+The idea is to only use a few Mutexes to lock data from the top objects (wxRefinableObj,...), when calling \doxyref{CrystUpdate()}{p.}{a00142_a13e4f37ac098de756b27cdb91d6a0551} and \doxyref{UpdateUI()}{p.}{a00142_a19a1d057eecafd48710d9a3b770c1b28}. As sub-\/objects (\doxyref{WXField}{p.}{a00118},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
+
+Reimplemented from {\bf ObjCryst::WXCrystObj} \doxyref{}{p.}{a00114_a093c04eb7b70ff063b80427779c7c456}.
+
+Reimplemented in {\bf ObjCryst::WXAtom} \doxyref{}{p.}{a00110_a5509a746fb1a6d918b6cbde8453d6a44}, {\bf ObjCryst::WXCrystal} \doxyref{}{p.}{a00112_a62946717943682dc2ac07ea4584030f4}, {\bf ObjCryst::WXDiffractionSingleCrystal} \doxyref{}{p.}{a00117_a6419580548c5f35434e0128b62f5b4e6}, {\bf ObjCryst::WXMolecule} \doxyref{}{p.}{a00131_ae932cbbd6d7e55d319f1b4eb169c63ef}, {\bf ObjCryst::WXPowderPattern} \doxyref{}{p.}{a00135_aaeace05033eaea9499398825fc8244da}, {\bf ObjCryst::WXPowderPatternBackground} \doxyref{}{p.}{a00136_a11c6de5af2d72bcfc276838a2d62c32e}, {\bf ObjCryst::WXPowderPatternDiffraction} \doxyref{}{p.}{a00137_a0f7d965eea526ddce53d5bda8487b3fa}, {\bf ObjCryst::WXScatteringPowerAtom} \doxyref{}{p.}{a00145_a727146d4ecd5e1c4e5790a3eab0f0ace}, and {\bf ObjCryst::WXScatteringPowerSphere} \doxyref{}{p.}{a00146_a95d4f9b618ffbd4885294806b12b066c}.
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+wxRefinableObj.h\end{DoxyCompactItemize}

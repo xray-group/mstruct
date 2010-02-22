@@ -1,0 +1,82 @@
+\subsection{ObjCryst::PDF Class Reference}
+\label{a00055}\index{ObjCryst::PDF@{ObjCryst::PDF}}
+
+
+Main class for Pair distribution function calculations and comparison to observed one.  
+Inheritance diagram for ObjCryst::PDF::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2cm]{a00055}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf PDF} (const {\bf PDF} \&old)\label{a00055_af5633baa0e58aa65b1a7cf80cfb79712}
+
+\begin{DoxyCompactList}\small\item\em Copy constructor. \item\end{DoxyCompactList}\item 
+{\bf $\sim$PDF} ()\label{a00055_adf8dacf02c0b3a6c8f49d86daa25b527}
+
+\begin{DoxyCompactList}\small\item\em \doxyref{Crystal}{p.}{a00020} destructor. \item\end{DoxyCompactList}\item 
+virtual const string \& {\bf GetClassName} () const 
+\begin{DoxyCompactList}\small\item\em Name for this class (\char`\"{}RefinableObj\char`\"{}, \char`\"{}Crystal\char`\"{},. \item\end{DoxyCompactList}\item 
+void {\bf SetPDFObs} (const CrystVector\_\-REAL \&r, const CrystVector\_\-REAL \&obs)\label{a00055_a7ff4d297dca6974e099ad5b45d6b9ffa}
+
+\begin{DoxyCompactList}\small\item\em Experimental data. \item\end{DoxyCompactList}\item 
+{\bf RadiationType} {\bf GetRadiationType} () const \label{a00055_a940341ae04811d1b0bdf87c72ba594b5}
+
+\begin{DoxyCompactList}\small\item\em GetRadiationType. \item\end{DoxyCompactList}\item 
+void {\bf SetRadiationType} ({\bf RadiationType} type)\label{a00055_a51d1cebecb13d8e60038fca30547c84e}
+
+\begin{DoxyCompactList}\small\item\em SetRadiationType. \item\end{DoxyCompactList}\item 
+REAL {\bf GetRMax} () const \label{a00055_a00503dc494bffe09c7ae85d29e2a339e}
+
+\begin{DoxyCompactList}\small\item\em Cutoff r value. \item\end{DoxyCompactList}\item 
+const CrystVector\_\-REAL \& {\bf GetPDFCalc} () const \label{a00055_a741872ecb602f9721b77c7b255f56876}
+
+\begin{DoxyCompactList}\small\item\em Get the calculated \doxyref{PDF}{p.}{a00055}. \item\end{DoxyCompactList}\item 
+const CrystVector\_\-REAL \& {\bf GetPDFObs} () const \label{a00055_a09dcfddbc9ec6bf33726675dad856fe4}
+
+\begin{DoxyCompactList}\small\item\em Get the observed \doxyref{PDF}{p.}{a00055}. \item\end{DoxyCompactList}\item 
+const CrystVector\_\-REAL \& {\bf GetPDFR} () const \label{a00055_a79778c610b24aee1caedaa011a8ec0fb}
+
+\begin{DoxyCompactList}\small\item\em Get the r coordinates (in Angstroem) for the \doxyref{PDF}{p.}{a00055}. \item\end{DoxyCompactList}\item 
+void {\bf AddPDFPhase} ({\bf PDFPhase} \&phase)\label{a00055_a4a39ea9bce2350b5786575fc4fc7a9ea}
+
+\begin{DoxyCompactList}\small\item\em Add \doxyref{PDF}{p.}{a00055} phase. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf RadiationType} {\bf mRadiationType}\label{a00055_af3ab577cb12f62f38fbd3a6d88e242bf}
+
+\begin{DoxyCompactList}\small\item\em \doxyref{Radiation}{p.}{a00068} type. \item\end{DoxyCompactList}\item 
+CrystVector\_\-REAL {\bf mPDFR}\label{a00055_a49cadbd04ae733321638566defc3a246}
+
+\begin{DoxyCompactList}\small\item\em r coordinates (in Angstroem) of the \doxyref{PDF}{p.}{a00055} \item\end{DoxyCompactList}\item 
+CrystVector\_\-REAL {\bf mPDFCalc}\label{a00055_a6a907317c064f14614b5c55456de42b0}
+
+\begin{DoxyCompactList}\small\item\em The \doxyref{PDF}{p.}{a00055} itself,calculated. \item\end{DoxyCompactList}\item 
+CrystVector\_\-REAL {\bf mPDFObs}\label{a00055_a7cc4d168934d80fdea6f22c3f2789ff3}
+
+\begin{DoxyCompactList}\small\item\em The \doxyref{PDF}{p.}{a00055} itself,observed. \item\end{DoxyCompactList}\item 
+std::list$<$ std::pair$<$ {\bf PDFPhase} $\ast$, REAL $>$ $>$ {\bf mvPDFPhase}\label{a00055_aa389a686162b7341ba62a2dffafb0d7b}
+
+\begin{DoxyCompactList}\small\item\em Contributions to the \doxyref{PDF}{p.}{a00055}, with their scale factor. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+Main class for Pair distribution function calculations and comparison to observed one. 
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::PDF@{ObjCryst::PDF}!GetClassName@{GetClassName}}
+\index{GetClassName@{GetClassName}!ObjCryst::PDF@{ObjCryst::PDF}}
+\paragraph[{GetClassName}]{\setlength{\rightskip}{0pt plus 5cm}virtual const string\& ObjCryst::PDF::GetClassName () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00055_a809ab3f4cc8bdd268bd815baedccdc20}
+
+
+Name for this class (\char`\"{}RefinableObj\char`\"{}, \char`\"{}Crystal\char`\"{},. ..). This is only useful to distinguish different classes when picking up objects from the \doxyref{RefinableObj}{p.}{a00070} Global Registry 
+
+Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_a62968d90a7a3080738b363934616c019}.
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+PDF.h\end{DoxyCompactItemize}

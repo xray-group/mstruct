@@ -1,0 +1,143 @@
+\subsection{ObjCryst::GlobalScatteringPower Class Reference}
+\label{a00034}\index{ObjCryst::GlobalScatteringPower@{ObjCryst::GlobalScatteringPower}}
+
+
+Global Scattering Power.  
+Inheritance diagram for ObjCryst::GlobalScatteringPower::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3cm]{a00034}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries GlobalScatteringPower} (const {\bf ZScatterer} \&scatt)\label{a00034_acb09756b2191173fdd48356c77e325bc}
+
+\item 
+{\bfseries GlobalScatteringPower} (const {\bf GlobalScatteringPower} \&old)\label{a00034_a9a494d9a254eaaf7bb1525bfb7a1ad14}
+
+\item 
+void {\bf Init} (const {\bf ZScatterer} \&scatt)\label{a00034_a8f47e4dd26899ab2fcedd5f6b844317d}
+
+\begin{DoxyCompactList}\small\item\em Re-\/initialize parameters (after using the default constructor). \item\end{DoxyCompactList}\item 
+virtual CrystVector\_\-REAL {\bf GetScatteringFactor} (const {\bf ScatteringData} \&data, const int spgSymPosIndex=0) const 
+\begin{DoxyCompactList}\small\item\em Get the Scattering factor for all reflections of a given \doxyref{ScatteringData}{p.}{a00088} object. \item\end{DoxyCompactList}\item 
+virtual REAL {\bf GetForwardScatteringFactor} (const {\bf RadiationType}) const 
+\begin{DoxyCompactList}\small\item\em Get the scattering factor at (0,0,0). \item\end{DoxyCompactList}\item 
+virtual CrystVector\_\-REAL {\bf GetTemperatureFactor} (const {\bf ScatteringData} \&data, const int spgSymPosIndex=0) const 
+\begin{DoxyCompactList}\small\item\em Get the temperature factor for all reflections of a given \doxyref{ScatteringData}{p.}{a00088} object. \item\end{DoxyCompactList}\item 
+virtual CrystMatrix\_\-REAL {\bf GetResonantScattFactReal} (const {\bf ScatteringData} \&data, const int spgSymPosIndex=0) const 
+\begin{DoxyCompactList}\small\item\em Get the real part of the resonant scattering factor. \item\end{DoxyCompactList}\item 
+virtual CrystMatrix\_\-REAL {\bf GetResonantScattFactImag} (const {\bf ScatteringData} \&data, const int spgSymPosIndex=0) const 
+\begin{DoxyCompactList}\small\item\em Get the imaginary part of the resonant scattering factor. \item\end{DoxyCompactList}\item 
+virtual REAL {\bf GetRadius} () const 
+\begin{DoxyCompactList}\small\item\em Return the physical radius of this type of scatterer (for 3D display purposes). \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void {\bfseries InitRefParList} ()\label{a00034_afbe6ee1b8dda34cd9967f93a20cccb5d}
+
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf ZScatterer} $\ast$ {\bf mpZScatterer}\label{a00034_aadee43da66fb5faaa1ed6296a0a90132}
+
+\begin{DoxyCompactList}\small\item\em a copy of the \doxyref{ZScatterer}{p.}{a00155} associated to this object \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+Global Scattering Power. Used to approximate the scattering power of a multi-\/atom \doxyref{ZScatterer}{p.}{a00155} (polyhedron,...) to an isotropic scattering power.
+
+The scattering power will be ({\bfseries slowly}) approximated to the average scattering power of this \doxyref{ZScatterer}{p.}{a00155} take in all orientations. The approximated scattering factor will include the temperature factor and resonant scattering factors contributions.
+
+This is only used in \doxyref{ZScatterer}{p.}{a00155}, and maybe obsolete (?). 
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::GlobalScatteringPower@{ObjCryst::GlobalScatteringPower}!GetForwardScatteringFactor@{GetForwardScatteringFactor}}
+\index{GetForwardScatteringFactor@{GetForwardScatteringFactor}!ObjCryst::GlobalScatteringPower@{ObjCryst::GlobalScatteringPower}}
+\paragraph[{GetForwardScatteringFactor}]{\setlength{\rightskip}{0pt plus 5cm}virtual REAL ObjCryst::GlobalScatteringPower::GetForwardScatteringFactor (const  {\em RadiationType}) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00034_a33c01c7512929a947e6489df41edf7b3}
+
+
+Get the scattering factor at (0,0,0). Used for scatterer (electron, nucleus) density generation. 
+
+Implements {\bf ObjCryst::ScatteringPower} \doxyref{}{p.}{a00089_a854b51b9b08e96af0fe7986fe372c50c}.\index{ObjCryst::GlobalScatteringPower@{ObjCryst::GlobalScatteringPower}!GetRadius@{GetRadius}}
+\index{GetRadius@{GetRadius}!ObjCryst::GlobalScatteringPower@{ObjCryst::GlobalScatteringPower}}
+\paragraph[{GetRadius}]{\setlength{\rightskip}{0pt plus 5cm}virtual REAL ObjCryst::GlobalScatteringPower::GetRadius () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00034_aadef1e0a463f70f4f70dba3d12dba9ed}
+
+
+Return the physical radius of this type of scatterer (for 3D display purposes). \begin{DoxyWarning}{Warning}
+this may be removed later. 
+\end{DoxyWarning}
+
+
+Implements {\bf ObjCryst::ScatteringPower} \doxyref{}{p.}{a00089_ac44860aca21734844379ddec87622f7b}.\index{ObjCryst::GlobalScatteringPower@{ObjCryst::GlobalScatteringPower}!GetResonantScattFactImag@{GetResonantScattFactImag}}
+\index{GetResonantScattFactImag@{GetResonantScattFactImag}!ObjCryst::GlobalScatteringPower@{ObjCryst::GlobalScatteringPower}}
+\paragraph[{GetResonantScattFactImag}]{\setlength{\rightskip}{0pt plus 5cm}virtual CrystMatrix\_\-REAL ObjCryst::GlobalScatteringPower::GetResonantScattFactImag (const {\bf ScatteringData} \& {\em data}, \/  const int {\em spgSymPosIndex} = {\ttfamily 0}) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00034_af3b5eefc24e2c60843793cdfbc240a11}
+
+
+Get the imaginary part of the resonant scattering factor. \begin{DoxyReturn}{Returns}
+a matrix where each row corresponds to each wavelength (currently only monochromatic experiments are made so there is only one row), and each column corresponds to each reflection {\itshape only\/} if the scattering term is anisotropic, which is not the case so far... 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em data,:}]the \doxyref{ScatteringData}{p.}{a00088} object, giving access to all the reflections, and a list of wavelengths. \item[{\em spgSymPosIndex,:}]if the \doxyref{ScatteringPower}{p.}{a00089} is anisotropic, then the different symmetrics will not have the same scattering power for all reflections. This parameter is the index of the symmetric position in the Spacegroup. If spgSymPosIndex=-\/1, the isotropic values are returned. \end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+There is no anisotropic code yet, so spgSymPosIndex is simply ignored so far , but the design of this function is general for any anisotropic scattering. 
+\end{DoxyWarning}
+
+
+Implements {\bf ObjCryst::ScatteringPower} \doxyref{}{p.}{a00089_a9bc5d86bf76116f645b43d46f2a9771c}.\index{ObjCryst::GlobalScatteringPower@{ObjCryst::GlobalScatteringPower}!GetResonantScattFactReal@{GetResonantScattFactReal}}
+\index{GetResonantScattFactReal@{GetResonantScattFactReal}!ObjCryst::GlobalScatteringPower@{ObjCryst::GlobalScatteringPower}}
+\paragraph[{GetResonantScattFactReal}]{\setlength{\rightskip}{0pt plus 5cm}virtual CrystMatrix\_\-REAL ObjCryst::GlobalScatteringPower::GetResonantScattFactReal (const {\bf ScatteringData} \& {\em data}, \/  const int {\em spgSymPosIndex} = {\ttfamily 0}) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00034_a9ddb16c057b744df58473fd2880baa3c}
+
+
+Get the real part of the resonant scattering factor. \begin{DoxyReturn}{Returns}
+a matrix where each row corresponds to each wavelength (currently only monochromatic experiments are made so there is only one row), and each column corresponds to each reflection {\itshape only\/} if the scattering term is anisotropic, which is not the case so far... 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em data,:}]the \doxyref{ScatteringData}{p.}{a00088} object, giving access to all the reflections and a list of wavelengths). \item[{\em spgSymPosIndex,:}]if the \doxyref{ScatteringPower}{p.}{a00089} is anisotropic, then the different symmetrics will not have the same scattering power for all reflections. This parameter is the index of the symmetric position in the Spacegroup. If spgSymPosIndex=-\/1, the isotropic values are returned. \end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+There is no anisotropic code yet, so spgSymPosIndex is simply ignored so far , but the design of this function is general for any anisotropic scattering. 
+\end{DoxyWarning}
+
+
+Implements {\bf ObjCryst::ScatteringPower} \doxyref{}{p.}{a00089_a42c1302254787d13b9e0f2210315291a}.\index{ObjCryst::GlobalScatteringPower@{ObjCryst::GlobalScatteringPower}!GetScatteringFactor@{GetScatteringFactor}}
+\index{GetScatteringFactor@{GetScatteringFactor}!ObjCryst::GlobalScatteringPower@{ObjCryst::GlobalScatteringPower}}
+\paragraph[{GetScatteringFactor}]{\setlength{\rightskip}{0pt plus 5cm}virtual CrystVector\_\-REAL ObjCryst::GlobalScatteringPower::GetScatteringFactor (const {\bf ScatteringData} \& {\em data}, \/  const int {\em spgSymPosIndex} = {\ttfamily 0}) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00034_acd525a54e45dc3c70fb5445b8b9b5a8c}
+
+
+Get the Scattering factor for all reflections of a given \doxyref{ScatteringData}{p.}{a00088} object. \begin{DoxyReturn}{Returns}
+a vector with the scattering factor for all reflections, in the same order as in the \doxyref{ScatteringData}{p.}{a00088} object. This format is independent of the radiation type (X-\/Ray, neutron..). 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em data,:}]the \doxyref{ScatteringData}{p.}{a00088} object, giving access to all the reflections. \item[{\em spgSymPosIndex,:}]if the \doxyref{ScatteringPower}{p.}{a00089} is anisotropic, then the different symmetrics will not have the same scattering power for all reflections. This parameter is the index of the symmetric position in the Spacegroup. If spgSymPosIndex=-\/1, the isotropic values are returned. \end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+There is no anisotropic code yet, so spgSymPosIndex is simply ignored so far , but the design of this function is general for any anisotropic scattering. 
+\end{DoxyWarning}
+
+
+Implements {\bf ObjCryst::ScatteringPower} \doxyref{}{p.}{a00089_af18f3eaaf45af87bc3a2a0ff21bc34b6}.\index{ObjCryst::GlobalScatteringPower@{ObjCryst::GlobalScatteringPower}!GetTemperatureFactor@{GetTemperatureFactor}}
+\index{GetTemperatureFactor@{GetTemperatureFactor}!ObjCryst::GlobalScatteringPower@{ObjCryst::GlobalScatteringPower}}
+\paragraph[{GetTemperatureFactor}]{\setlength{\rightskip}{0pt plus 5cm}virtual CrystVector\_\-REAL ObjCryst::GlobalScatteringPower::GetTemperatureFactor (const {\bf ScatteringData} \& {\em data}, \/  const int {\em spgSymPosIndex} = {\ttfamily 0}) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00034_a48da59604bb5a35fdac09087bc0fcff4}
+
+
+Get the temperature factor for all reflections of a given \doxyref{ScatteringData}{p.}{a00088} object. \begin{DoxyReturn}{Returns}
+a vector with the temperature factor for all reflections, in the same order as in the \doxyref{ScatteringData}{p.}{a00088} object. 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em data,:}]the \doxyref{ScatteringData}{p.}{a00088} object, giving access to all the reflections. \item[{\em spgSymPosIndex,:}]if the \doxyref{ScatteringPower}{p.}{a00089} is anisotropic, then the different symmetrics will not have the same scattering power for all reflections. This parameter is the index of the symmetric position in the Spacegroup. If spgSymPosIndex=-\/1, the isotropic values are returned. \end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+There is no anisotropic code yet, so spgSymPosIndex is simply ignored so far , but the design of this function is general for any anisotropic scattering. 
+\end{DoxyWarning}
+
+
+Implements {\bf ObjCryst::ScatteringPower} \doxyref{}{p.}{a00089_a3df723db77380c82ecff5f7050490255}.
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+ZScatterer.h\end{DoxyCompactItemize}

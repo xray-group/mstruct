@@ -1,0 +1,73 @@
+\subsection{CubicSpline Class Reference}
+\label{a00025}\index{CubicSpline@{CubicSpline}}
+
+
+Cubic spline interpolation.  
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf CubicSpline} ()\label{a00025_a3eee74ae159c9473a6d15512ddc68d25}
+
+\begin{DoxyCompactList}\small\item\em Default constructor -\/ \doxyref{CubicSpline::Init()}{p.}{a00025_a2a9501b0f12aafa8f7cd3c3c4e842a91} should be called afterwards. \item\end{DoxyCompactList}\item 
+{\bf CubicSpline} (const CrystVector\_\-REAL \&x, const CrystVector\_\-REAL \&y, const REAL yp1, const REAL ypn)\label{a00025_a2f6cf405f4b630e857225ce16a34efe2}
+
+\begin{DoxyCompactList}\small\item\em Spline with given extremum derivatives. \item\end{DoxyCompactList}\item 
+{\bf CubicSpline} (const REAL $\ast$px, const REAL $\ast$py, const unsigned long nbPoints, const REAL yp1, const REAL ypn)\label{a00025_a2f1c6e1d34287f8581a7dad044afa62c}
+
+\begin{DoxyCompactList}\small\item\em Spline with given extremum derivatives. \item\end{DoxyCompactList}\item 
+{\bf CubicSpline} (const CrystVector\_\-REAL \&x, const CrystVector\_\-REAL \&y)\label{a00025_ad2b267f8e9318a4a0d841ad1b07592f6}
+
+\begin{DoxyCompactList}\small\item\em Natural cubic spline. \item\end{DoxyCompactList}\item 
+{\bf CubicSpline} (const REAL $\ast$px, const REAL $\ast$py, const unsigned long nbPoints)\label{a00025_a7f5839dfe86ee680fd2d554d0c04221b}
+
+\begin{DoxyCompactList}\small\item\em Natural cubic spline. \item\end{DoxyCompactList}\item 
+void {\bf Init} (const CrystVector\_\-REAL \&x, const CrystVector\_\-REAL \&y, const REAL yp1, const REAL ypn)\label{a00025_a2a9501b0f12aafa8f7cd3c3c4e842a91}
+
+\begin{DoxyCompactList}\small\item\em Spline with given extremum derivatives. \item\end{DoxyCompactList}\item 
+void {\bf Init} (const REAL $\ast$px, const REAL $\ast$py, const unsigned long nbPoints, const REAL yp1, const REAL ypn)\label{a00025_aa1ed1465ea9734c0ed05b04f9ae7c47b}
+
+\begin{DoxyCompactList}\small\item\em Spline with given extremum derivatives. \item\end{DoxyCompactList}\item 
+void {\bf Init} (const CrystVector\_\-REAL \&x, const CrystVector\_\-REAL \&y)\label{a00025_a84962d14bf6ff65bfacb6cd427e07391}
+
+\begin{DoxyCompactList}\small\item\em Natural cubic spline. \item\end{DoxyCompactList}\item 
+void {\bf Init} (const REAL $\ast$px, const REAL $\ast$py, const unsigned long nbPoints)\label{a00025_afbdb1826d76b9d0c469d91f99a1c815a}
+
+\begin{DoxyCompactList}\small\item\em Natural cubic spline. \item\end{DoxyCompactList}\item 
+CrystVector\_\-REAL {\bf operator()} (const CrystVector\_\-REAL \&x) const \label{a00025_a6cf4ca8b1143fc2b7aa9ba861e446c68}
+
+\begin{DoxyCompactList}\small\item\em Get spline value at a series of point -\/ x is assumed to be sorted by increasing values. \item\end{DoxyCompactList}\item 
+CrystVector\_\-REAL {\bf operator()} (const REAL min, const REAL step, const long nbpoint) const \label{a00025_ae2bec1a4a4284bf1938d522860aecfa1}
+
+\begin{DoxyCompactList}\small\item\em Get spline value on a range of values with a fixed step. \item\end{DoxyCompactList}\item 
+REAL {\bf operator()} (const REAL x) const \label{a00025_a9752d18c5d0785295bcabcb0c84c10b3}
+
+\begin{DoxyCompactList}\small\item\em Get spline value at one point. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries InitSpline} (const REAL yp1, const REAL ypn)\label{a00025_a3172bad30da398f0e815f277f5847ea7}
+
+\item 
+void {\bfseries InitNaturalSpline} ()\label{a00025_ad421702f49be1d812e57d467cde5af8b}
+
+\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+CrystVector\_\-REAL {\bfseries mX}\label{a00025_a19cb8a2f8f22acbec80677372853ca12}
+
+\item 
+CrystVector\_\-REAL {\bfseries mY}\label{a00025_aa745b561ac1d17f7089b8ffa061b512a}
+
+\item 
+CrystVector\_\-REAL {\bfseries mYsecond}\label{a00025_a21894736c52a8b12f070e20b51a4f64d}
+
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+Cubic spline interpolation. 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+CrystVector.h\end{DoxyCompactItemize}

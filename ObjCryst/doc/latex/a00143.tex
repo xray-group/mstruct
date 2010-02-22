@@ -1,0 +1,51 @@
+\subsection{ObjCryst::WXRegistry$<$ T $>$ Class Template Reference}
+\label{a00143}\index{ObjCryst::WXRegistry@{ObjCryst::WXRegistry}}
+
+
+This displays all components of a ObjCryst++ Registry.  
+Inheritance diagram for ObjCryst::WXRegistry$<$ T $>$::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3cm]{a00143}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries WXRegistry} (wxWindow $\ast$parent, {\bf ObjRegistry}$<$ T $>$ $\ast$reg)\label{a00143_afb58c566db7148efa580ceb021a6e149}
+
+\item 
+void {\bfseries Add} ({\bf WXCrystObjBasic} $\ast$obj)\label{a00143_a03bc390fd462bfb8363dcf8da28bb36a}
+
+\item 
+void {\bfseries Remove} ({\bf WXCrystObjBasic} $\ast$obj)\label{a00143_af539e9e1b919e3753943ef6e16c63d27}
+
+\item 
+virtual bool {\bf OnChangeName} (const int id)
+\begin{DoxyCompactList}\small\item\em When a \doxyref{WXFieldName}{p.}{a00120} has been changed by the user, it is handled here. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf ObjRegistry}$<$ T $>$ $\ast$ {\bfseries mpRegistry}\label{a00143_a2c035b37680c128d7e44f0669d575114}
+
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+\subsubsection*{template$<$class T$>$ class ObjCryst::WXRegistry$<$ T $>$}
+
+This displays all components of a ObjCryst++ Registry. 
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::WXRegistry@{ObjCryst::WXRegistry}!OnChangeName@{OnChangeName}}
+\index{OnChangeName@{OnChangeName}!ObjCryst::WXRegistry@{ObjCryst::WXRegistry}}
+\paragraph[{OnChangeName}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ virtual bool {\bf ObjCryst::WXRegistry}$<$ T $>$::OnChangeName (const int {\em id})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00143_add68cfae172f6d78a3261927a5977474}
+
+
+When a \doxyref{WXFieldName}{p.}{a00120} has been changed by the user, it is handled here. This returns true if the value has been handled (for inheritance purposes). 
+
+Implements {\bf ObjCryst::WXCrystObj} \doxyref{}{p.}{a00114_a3736357599263df7e550790753c040a3}.
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+wxRefinableObj.h\end{DoxyCompactItemize}

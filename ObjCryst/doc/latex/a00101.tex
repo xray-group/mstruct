@@ -1,0 +1,63 @@
+\subsection{ObjCryst::StretchModeTwist Struct Reference}
+\label{a00101}\index{ObjCryst::StretchModeTwist@{ObjCryst::StretchModeTwist}}
+
+
+Atoms moved $\ast$between$\ast$ two other atoms, using a \char`\"{}twist\char`\"{} of their positions -\/ only small twists of their positions are allowed to avoid breaking restraints too much.  
+Inheritance diagram for ObjCryst::StretchModeTwist::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2cm]{a00101}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf StretchModeTwist} ({\bf MolAtom} \&at1, {\bf MolAtom} \&at2)\label{a00101_a6ed224b06c93f630ccb7bf7920f054a9}
+
+\begin{DoxyCompactList}\small\item\em Constructor If pDihedralAngle!=0, the dihedral angle length restraint is respected. \item\end{DoxyCompactList}\item 
+virtual void {\bf CalcDeriv} (const bool derivllk=true) const 
+\begin{DoxyCompactList}\small\item\em Calculate the derivative of the Molecule's Log(likelihood) and atomic positions versus a change of the bond length. \item\end{DoxyCompactList}\item 
+virtual void {\bf Print} (ostream \&os, bool full=true) const \label{a00101_a6bd2ea406272adfbaa047e49079893b7}
+
+\begin{DoxyCompactList}\small\item\em Print one-\/line list of atoms moved. \item\end{DoxyCompactList}\item 
+virtual void {\bf Stretch} (const REAL change)\label{a00101_a9eb2c84a7567bd022677f5ded0d18a84}
+
+\begin{DoxyCompactList}\small\item\em Move the atoms according to this mode. \item\end{DoxyCompactList}\item 
+virtual void {\bf RandomStretch} (const REAL amplitude)\label{a00101_af38a4c05e360733d48039c3becbcb3bd}
+
+\begin{DoxyCompactList}\small\item\em Move the atoms according to this mode, randomly. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf MolAtom} $\ast$ {\bf mpAtom1}\label{a00101_ad744e9f68b07367752ed7c03d381a30c}
+
+\begin{DoxyCompactList}\small\item\em The first atom. \item\end{DoxyCompactList}\item 
+{\bf MolAtom} $\ast$ {\bf mpAtom2}\label{a00101_a36180a825c130a18a59c6cfe1a44398c}
+
+\begin{DoxyCompactList}\small\item\em The second atom. \item\end{DoxyCompactList}\item 
+set$<$ {\bf MolAtom} $\ast$ $>$ {\bf mvRotatedAtomList}\label{a00101_a5b3c7f8a0bf81c04ca39fcc88e596f22}
+
+\begin{DoxyCompactList}\small\item\em The set of atoms that are to be rotated around at1-\/at2. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+Atoms moved $\ast$between$\ast$ two other atoms, using a \char`\"{}twist\char`\"{} of their positions -\/ only small twists of their positions are allowed to avoid breaking restraints too much. Also, the atoms in the middle between the two reference atoms are more displaced than the one closer, to help avoid breaking restraints. 
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::StretchModeTwist@{ObjCryst::StretchModeTwist}!CalcDeriv@{CalcDeriv}}
+\index{CalcDeriv@{CalcDeriv}!ObjCryst::StretchModeTwist@{ObjCryst::StretchModeTwist}}
+\paragraph[{CalcDeriv}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::StretchModeTwist::CalcDeriv (const bool {\em derivllk} = {\ttfamily true}) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00101_afd1ac754d10507e1c9bed829a4eaeb79}
+
+
+Calculate the derivative of the Molecule's Log(likelihood) and atomic positions versus a change of the bond length. The result is stored in mLLKDeriv and mLLKDerivXYZ, as well as in the various lists of restraints broken by this mode.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em derivllk,:}]if false, the derivative of the overall llk will not be computed, only the derivative of the atomic positions. \end{DoxyParams}
+
+
+Implements {\bf ObjCryst::StretchMode} \doxyref{}{p.}{a00096_a5b5ab5f9819c047a49719a330722d419}.
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+Molecule.h\end{DoxyCompactItemize}

@@ -1,0 +1,50 @@
+\subsection{ObjCryst::WXGlobalOptimRunThread Class Reference}
+\label{a00126}\index{ObjCryst::WXGlobalOptimRunThread@{ObjCryst::WXGlobalOptimRunThread}}
+
+
+Class for a GlobalOptimization thread.  
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries WXGlobalOptimRunThread} ({\bf OptimizationObj} \&globalOptObj, long \&nbTrial, const REAL finalCost, long \&nbRun, const bool multiple=true)\label{a00126_ad4a30391ecd09902d2bde258cf6d7c05}
+
+\item 
+virtual void $\ast$ {\bfseries Entry} ()\label{a00126_a0c5d3f16fc314450619e561d0a68cb56}
+
+\item 
+virtual void {\bfseries OnExit} ()\label{a00126_a5f980c9a070545f46381cf573b06e4ff}
+
+\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf OptimizationObj} $\ast$ {\bfseries mpGlobalOptObj}\label{a00126_aebc578c18b9dc9492eb9caa6be48592d}
+
+\item 
+long $\ast$ {\bf mpNbTrial}\label{a00126_ace13caa17cbd44768496adfdb36f2766}
+
+\begin{DoxyCompactList}\small\item\em This points to the mNbTrial member in \doxyref{WXOptimizationObj}{p.}{a00134}. \item\end{DoxyCompactList}\item 
+long $\ast$ {\bf mpNbRun}\label{a00126_a7b58a2ed60d74cce4a33245126a3c2f0}
+
+\begin{DoxyCompactList}\small\item\em This points to the mNbRun member in \doxyref{WXOptimizationObj}{p.}{a00134}. \item\end{DoxyCompactList}\item 
+const REAL {\bf mFinalCost}
+\begin{DoxyCompactList}\small\item\em The value of the cost below which the optimization should stop (0 by default) even if the desired number pf trial has not been reached. \item\end{DoxyCompactList}\item 
+const bool {\bf mDoMultiple}\label{a00126_a69ff8f87fc924ec96d79ddee04941813}
+
+\begin{DoxyCompactList}\small\item\em Use multiple Runs ? \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+Class for a GlobalOptimization thread. 
+
+\subsubsection{Member Data Documentation}
+\index{ObjCryst::WXGlobalOptimRunThread@{ObjCryst::WXGlobalOptimRunThread}!mFinalCost@{mFinalCost}}
+\index{mFinalCost@{mFinalCost}!ObjCryst::WXGlobalOptimRunThread@{ObjCryst::WXGlobalOptimRunThread}}
+\paragraph[{mFinalCost}]{\setlength{\rightskip}{0pt plus 5cm}const REAL {\bf ObjCryst::WXGlobalOptimRunThread::mFinalCost}\hspace{0.3cm}{\ttfamily  [private]}}\hfill\label{a00126_a2ef0f785a8cabac94cf245a6b2f39acc}
+
+
+The value of the cost below which the optimization should stop (0 by default) even if the desired number pf trial has not been reached. 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+wxGlobalOptimObj.h\end{DoxyCompactItemize}

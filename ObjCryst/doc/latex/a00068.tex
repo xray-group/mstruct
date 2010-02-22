@@ -1,0 +1,194 @@
+\subsection{ObjCryst::Radiation Class Reference}
+\label{a00068}\index{ObjCryst::Radiation@{ObjCryst::Radiation}}
+
+
+Class to define the radiation (type, monochromaticity, wavelength(s)) of an experiment.  
+Inheritance diagram for ObjCryst::Radiation::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2cm]{a00068}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Radiation} ()\label{a00068_abd533ac660e70618339636f18d1347f4}
+
+\begin{DoxyCompactList}\small\item\em Default constructor. \item\end{DoxyCompactList}\item 
+{\bf Radiation} (const {\bf RadiationType} rad, const REAL wavelength)
+\begin{DoxyCompactList}\small\item\em $\backslash$ brief Constructor \item\end{DoxyCompactList}\item 
+{\bf Radiation} (const string \&XRayTubeElementName, const REAL alpha2Alpha2ratio=0.5)
+\begin{DoxyCompactList}\small\item\em $\backslash$ brief Constructor for X-\/Ray tube radiation \item\end{DoxyCompactList}\item 
+{\bf Radiation} (const {\bf Radiation} \&)\label{a00068_ab08e37b8dd00149612aa656f1641a76f}
+
+\begin{DoxyCompactList}\small\item\em Copy constructor. \item\end{DoxyCompactList}\item 
+virtual const string \& {\bf GetClassName} () const 
+\begin{DoxyCompactList}\small\item\em Name for this class (\char`\"{}RefinableObj\char`\"{}, \char`\"{}Crystal\char`\"{},. \item\end{DoxyCompactList}\item 
+void {\bfseries operator=} (const {\bf Radiation} \&)\label{a00068_aaa4a0199b2d383fb69c0de13c62a024c}
+
+\item 
+{\bf RadiationType} {\bf GetRadiationType} () const \label{a00068_a3c4e81e8db0ea43c42278948c56ba46f}
+
+\begin{DoxyCompactList}\small\item\em Get the radiation type (X-\/Rays, Neutron). \item\end{DoxyCompactList}\item 
+void {\bf SetRadiationType} (const {\bf RadiationType})\label{a00068_a8fd969b9f546fc48f5bfd7b38ff9c995}
+
+\begin{DoxyCompactList}\small\item\em Set the radiation type (X-\/Rays, Neutron). \item\end{DoxyCompactList}\item 
+void {\bf SetWavelengthType} (const {\bf WavelengthType} \&type)\label{a00068_adc4fac12bb11e01e515365e5d7a46ddc}
+
+\begin{DoxyCompactList}\small\item\em Set the Wavelength type (monochromatic, Alpha1+Alpha2, Time Of Flight...). \item\end{DoxyCompactList}\item 
+{\bf WavelengthType} {\bf GetWavelengthType} () const \label{a00068_ab1c21d1a6344287a8c4271c2b7a12c79}
+
+\begin{DoxyCompactList}\small\item\em Get the Wavelength type (monochromatic, Alpha1+Alpha2, Time Of Flight...). \item\end{DoxyCompactList}\item 
+const CrystVector\_\-REAL \& {\bf GetWavelength} () const 
+\begin{DoxyCompactList}\small\item\em Get the wavelength(s) in Angstroems. \item\end{DoxyCompactList}\item 
+void {\bf SetWavelength} (const REAL)\label{a00068_ac40cb0879be00b232a6c3e78c069823d}
+
+\begin{DoxyCompactList}\small\item\em Set the (monochromatic) wavelength of the beam. \item\end{DoxyCompactList}\item 
+void {\bf SetWavelength} (const string \&XRayTubeElementName, const REAL alpha2Alpha2ratio=0.5)
+\begin{DoxyCompactList}\small\item\em $\backslash$ brief Set X-\/Ray tube radiation. \item\end{DoxyCompactList}\item 
+REAL {\bf GetXRayTubeDeltaLambda} () const \label{a00068_aaacaaa8568c368b0f39d4ee8cea95576}
+
+\begin{DoxyCompactList}\small\item\em Get the wavelength difference for Alpha1 and Alpha2. \item\end{DoxyCompactList}\item 
+REAL {\bf GetXRayTubeAlpha2Alpha1Ratio} () const \label{a00068_aa2016f3b8df9727cc59d74f137f2c626}
+
+\begin{DoxyCompactList}\small\item\em Get the Kalpha2/Kalpha1 ratio. \item\end{DoxyCompactList}\item 
+const {\bf RefinableObjClock} \& {\bf GetClockWavelength} () const \label{a00068_a049b5bed7c75b14ad1e5e84ff945b7fa}
+
+\begin{DoxyCompactList}\small\item\em Last time the wavelength has been changed. \item\end{DoxyCompactList}\item 
+const {\bf RefinableObjClock} \& {\bf GetClockRadiation} () const \label{a00068_ac3085d33817e372b906527d89d06fa8f}
+
+\begin{DoxyCompactList}\small\item\em Last time the nature (X-\/Rays/Neutron, number of wavelengths)radiation has been changed. \item\end{DoxyCompactList}\item 
+virtual void {\bf XMLOutput} (ostream \&os, int indent=0) const 
+\begin{DoxyCompactList}\small\item\em Output to stream in well-\/formed XML. \item\end{DoxyCompactList}\item 
+virtual void {\bf XMLInput} (istream \&is, const {\bf XMLCrystTag} \&tag)
+\begin{DoxyCompactList}\small\item\em Input From stream. \item\end{DoxyCompactList}\item 
+void {\bf Print} () const \label{a00068_a74fa173d33eb724be83a2ede6042dce3}
+
+\begin{DoxyCompactList}\small\item\em Print to screen/console the charcteristics of the radiation. \item\end{DoxyCompactList}\item 
+REAL {\bfseries GetLinearPolarRate} () const \label{a00068_a103b3216086ff11bfe3465e2d057fbda}
+
+\item 
+void {\bfseries SetLinearPolarRate} (const REAL f)\label{a00068_a9602288c888944773e93fa67f8542d95}
+
+\end{DoxyCompactItemize}
+\subsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries InitOptions} ()\label{a00068_a4663c4bfeb1bb617f77896179fb0a2d2}
+
+\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf RefObjOpt} {\bf mRadiationType}\label{a00068_a3b736f32b507d8e0f4ebd8b46e50659b}
+
+\begin{DoxyCompactList}\small\item\em Neutron ? X-\/Ray ? (Electron: unimplemented). \item\end{DoxyCompactList}\item 
+{\bf RefObjOpt} {\bf mWavelengthType}\label{a00068_a9ef30865d93e28dbba31fee53c4c39aa}
+
+\begin{DoxyCompactList}\small\item\em monochromatic ? Alpha1 \& Alpha2 ? Multi-\/Wavelength ? \item\end{DoxyCompactList}\item 
+CrystVector\_\-REAL {\bf mWavelength}\label{a00068_a1c786f2e4a6035954fc76cb7cb7ad736}
+
+\begin{DoxyCompactList}\small\item\em Wavelength of the Experiment, in Angstroems. \item\end{DoxyCompactList}\item 
+string {\bf mXRayTubeName}
+\begin{DoxyCompactList}\small\item\em Name of the X-\/Ray tube used, if relevant. \item\end{DoxyCompactList}\item 
+REAL {\bf mXRayTubeDeltaLambda}\label{a00068_a66546a093f76ef3b9822be44e98ca17f}
+
+\begin{DoxyCompactList}\small\item\em Absolute difference between alpha1 and alpha2, in angstroems. \item\end{DoxyCompactList}\item 
+REAL {\bf mXRayTubeAlpha2Alpha1Ratio}\label{a00068_a72fd03ef0f28986f3ea66fd96d040688}
+
+\begin{DoxyCompactList}\small\item\em Ratio alpha2/alpha1 (should be 0.5). \item\end{DoxyCompactList}\item 
+{\bf RefinableObjClock} {\bfseries mClockWavelength}\label{a00068_af492e24a913e63781a53946feecb6ffc}
+
+\item 
+{\bf RefinableObjClock} {\bfseries mClockRadiation}\label{a00068_a255532a6369c7265df67aabba103153f}
+
+\item 
+REAL {\bf mLinearPolarRate}\label{a00068_a0e8a10c625ae1bd2733e830c2ca7d606}
+
+\begin{DoxyCompactList}\small\item\em Linear Polarization Rate (default:0, X-\/Ray tube unmonochromatized). \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+Class to define the radiation (type, monochromaticity, wavelength(s)) of an experiment. This can be developped for more complex experiments, hence the {\itshape vector\/} of wavelengths (so far it is not possible to use several wavelengths, though).
+
+X-\/Rays and Neutrons are available. Electrons are not available yet in \doxyref{ScatteringData}{p.}{a00088} classes.
+
+\begin{Desc}
+\item[{\bf Todo}]also add here information about the polarization of the beam. \end{Desc}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\index{ObjCryst::Radiation@{ObjCryst::Radiation}!Radiation@{Radiation}}
+\index{Radiation@{Radiation}!ObjCryst::Radiation@{ObjCryst::Radiation}}
+\paragraph[{Radiation}]{\setlength{\rightskip}{0pt plus 5cm}ObjCryst::Radiation::Radiation (const {\bf RadiationType} {\em rad}, \/  const REAL {\em wavelength})}\hfill\label{a00068_ace67fea27bc640ac4820fc1ba73114d5}
+
+
+$\backslash$ brief Constructor 
+\begin{DoxyParams}{Parameters}
+\item[{\em rad}]the RadiationType used (X-\/Rays, neutrons) \item[{\em wavelength}]the wavelength (in Angstroems) of the monochromatic radiation. \end{DoxyParams}
+\index{ObjCryst::Radiation@{ObjCryst::Radiation}!Radiation@{Radiation}}
+\index{Radiation@{Radiation}!ObjCryst::Radiation@{ObjCryst::Radiation}}
+\paragraph[{Radiation}]{\setlength{\rightskip}{0pt plus 5cm}ObjCryst::Radiation::Radiation (const string \& {\em XRayTubeElementName}, \/  const REAL {\em alpha2Alpha2ratio} = {\ttfamily 0.5})}\hfill\label{a00068_a0302f8a0f706db01d0ada609c2e427d4}
+
+
+$\backslash$ brief Constructor for X-\/Ray tube radiation 
+\begin{DoxyParams}{Parameters}
+\item[{\em XRayTubeElementName}]: name of the anticathode element name. Known ones are Cr, Fe, Cu, Mo, Ag. \item[{\em alpha2Alpha2ratio,:}]Kalpha2/Kalpha1 ratio (0.5 by default)\end{DoxyParams}
+the average wavelength is calculated using the alpha2/alpha1 weight. All structure factors computation are made using the average wavelength, and for powder diffraction, profiles are output at the alpha1 and alpha2 ratio for the calculated pattern.
+
+NOTE : if the name of the wavelength is generic (eg\char`\"{}Cu\char`\"{}), then the program considers that there are both Alpha1 and Alpha2, and thus automatically changes the WavelengthType to WAVELENGTH\_\-ALPHA12. If instead either alpha1 or alpha2 (eg \char`\"{}CuA1\char`\"{}) is asked for, the WavelengthType is set to WAVELENGTH\_\-MONOCHROMATIC. In both cases, the radiation type is set to X-\/Ray. 
+
+\subsubsection{Member Function Documentation}
+\index{ObjCryst::Radiation@{ObjCryst::Radiation}!GetClassName@{GetClassName}}
+\index{GetClassName@{GetClassName}!ObjCryst::Radiation@{ObjCryst::Radiation}}
+\paragraph[{GetClassName}]{\setlength{\rightskip}{0pt plus 5cm}virtual const string\& ObjCryst::Radiation::GetClassName () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00068_a56558c41ec3bd350a2904f5e469fb68a}
+
+
+Name for this class (\char`\"{}RefinableObj\char`\"{}, \char`\"{}Crystal\char`\"{},. ..). This is only useful to distinguish different classes when picking up objects from the \doxyref{RefinableObj}{p.}{a00070} Global Registry 
+
+Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_a62968d90a7a3080738b363934616c019}.\index{ObjCryst::Radiation@{ObjCryst::Radiation}!GetWavelength@{GetWavelength}}
+\index{GetWavelength@{GetWavelength}!ObjCryst::Radiation@{ObjCryst::Radiation}}
+\paragraph[{GetWavelength}]{\setlength{\rightskip}{0pt plus 5cm}const CrystVector\_\-REAL\& ObjCryst::Radiation::GetWavelength () const}\hfill\label{a00068_a8dc3440d994fe1af5713dd254c56302c}
+
+
+Get the wavelength(s) in Angstroems. Currently only monochromatic is used, so the vector should only return only one wavelength. \index{ObjCryst::Radiation@{ObjCryst::Radiation}!SetWavelength@{SetWavelength}}
+\index{SetWavelength@{SetWavelength}!ObjCryst::Radiation@{ObjCryst::Radiation}}
+\paragraph[{SetWavelength}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::Radiation::SetWavelength (const string \& {\em XRayTubeElementName}, \/  const REAL {\em alpha2Alpha2ratio} = {\ttfamily 0.5})}\hfill\label{a00068_a61393e596990f9fdac7dfc6d8acd91ac}
+
+
+$\backslash$ brief Set X-\/Ray tube radiation. 
+\begin{DoxyParams}{Parameters}
+\item[{\em XRayTubeElementName}]: name of the anticathode element name. Known ones are Cr, Fe, Cu, Mo, Ag. \item[{\em alpha2Alpha2ratio,:}]Kalpha2/Kalpha1 ratio (0.5 by default)\end{DoxyParams}
+the average wavelength is calculated using the alpha2/alpha1 weight. All structure factors computation are made using the average wavelength, and for powder diffraction, profiles are output at the alpha1 and alpha2 ratio for the calculated pattern.
+
+NOTE : if the name of the wavelength is generic (eg\char`\"{}Cu\char`\"{}), then the program considers that there are both Alpha1 and Alpha2, and thus automatically changes the WavelengthType to WAVELENGTH\_\-ALPHA12. If instead either alpha1 or alpha2 (eg \char`\"{}CuA1\char`\"{}) is asked for, the WavelengthType is set to WAVELENGTH\_\-MONOCHROMATIC. In both cases, the radiation type is set to X-\/Ray. \index{ObjCryst::Radiation@{ObjCryst::Radiation}!XMLInput@{XMLInput}}
+\index{XMLInput@{XMLInput}!ObjCryst::Radiation@{ObjCryst::Radiation}}
+\paragraph[{XMLInput}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::Radiation::XMLInput (istream \& {\em is}, \/  const {\bf XMLCrystTag} \& {\em tag})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00068_a67d99d4fbfd583a3d257c9fce177445d}
+
+
+Input From stream. \begin{Desc}
+\item[{\bf Todo}]Add an bool XMLInputTag(is,tag) function to recognize all the tags from the stream. So that each inherited class can use the XMLInputTag function from its parent (ie take advantage of inheritance). The children class would first try to interpret the tag, then if unsuccessful would pass it to its parent (thus allowing overloading), etc... \end{Desc}
+
+
+Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_ac13a4045c3f187879443c8615c38d623}.\index{ObjCryst::Radiation@{ObjCryst::Radiation}!XMLOutput@{XMLOutput}}
+\index{XMLOutput@{XMLOutput}!ObjCryst::Radiation@{ObjCryst::Radiation}}
+\paragraph[{XMLOutput}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::Radiation::XMLOutput (ostream \& {\em os}, \/  int {\em indent} = {\ttfamily 0}) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00068_a6d458f97232013cc128123e94b6e9937}
+
+
+Output to stream in well-\/formed XML. \begin{Desc}
+\item[{\bf Todo}]Use inheritance.. as for XMLInputTag()... \end{Desc}
+
+
+Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_a7b9b6ed0f8dcf753d398c35e073de973}.
+
+\subsubsection{Member Data Documentation}
+\index{ObjCryst::Radiation@{ObjCryst::Radiation}!mXRayTubeName@{mXRayTubeName}}
+\index{mXRayTubeName@{mXRayTubeName}!ObjCryst::Radiation@{ObjCryst::Radiation}}
+\paragraph[{mXRayTubeName}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf ObjCryst::Radiation::mXRayTubeName}\hspace{0.3cm}{\ttfamily  [private]}}\hfill\label{a00068_a3af206eb2068d56ec54d57262c619346}
+
+
+Name of the X-\/Ray tube used, if relevant. ie \char`\"{}Cu\char`\"{}, \char`\"{}Fe\char`\"{},etc... \char`\"{}CuA1\char`\"{} for Cu-\/alpha1, etc... 
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+ScatteringData.h\end{DoxyCompactItemize}
