@@ -34,6 +34,7 @@ extern bool bsavecalc;
 #include "ObjCryst/PowderPattern.h"
 
 #include <vector>
+#include <utility>
 
 namespace RotationTB {
 
@@ -55,6 +56,8 @@ CrystVector_REAL VectorTransf(const CrystMatrix_REAL& A, const CrystVector_REAL&
 } // RotationTB
 
 namespace MStruct {
+
+  REAL CalcUnitCellMass(const ObjCryst::Crystal& crystal); // (1e-24 g)
 
 // ReflData
 class ReflData {
@@ -96,10 +99,41 @@ public:
   virtual ~LSQNumObj() {};
   void Optimize (long &nbSteps, const bool silent=false, const REAL finalcost=0, const REAL maxTime=-1) {};
   void MultiRunOptimize (long &nbCycle, long &nbSteps, const bool silent=false, const REAL finalcost=0, const REAL maxTime=-1) {};
-  void Refine (int nbCycle=1, bool useLevenbergMarquardt=false, const bool silent=false);
+  void Refine (int nbCycle=1,bool useLevenbergMarquardt=false,
+                   const bool silent=false, const bool callBeginEndOptimization=true,
+                   const float minChi2var=0.01);
   void XMLOutput (ostream &os, int indent=0) const {};
   void XMLInput (istream &is, const ObjCryst::XMLCrystTag &tag) {};
 }; // class LSQNumObj
+
+// RandomOptimizationObj
+class RandomOptimizationObj: public ObjCryst::OptimizationObj
+{
+ public:
+  RandomOptimizationObj (std::string objName="Unnamed OptimizationObj object");
+  void SetLSQNumObj (ObjCryst::LSQNumObj *pLSQNumObj, int nbCycle=1,bool useLevenbergMarquardt=false,
+		     const bool silent=false, const bool callBeginEndOptimization=true,
+		     const float minChi2var=0.01);
+  void SetRefinableObjRandomised (ObjCryst::RefinableObj *pRefinableObj);
+  void Optimize (long &nbSteps, const bool silent=false, const REAL finalcost=0, const REAL maxTime=-1);
+  void WriteResultsToFile(const string &filename) const;
+  void WriteCurrentParamSetToFile(const string &filename, const bool append=true);
+
+  void MultiRunOptimize (long &nbCycle, long &nbSteps, const bool silent=false, const REAL finalcost=0,
+			 const REAL maxTime=-1) {};
+  void XMLOutput (ostream &os, int indent=0) const {};
+  void XMLInput (istream &is, const ObjCryst::XMLCrystTag &tag) {};
+ protected:
+  ObjCryst::LSQNumObj* mpLSQNumObj;
+  int mLSQnbCycle;
+  bool mLSQuseLevenbergMarquardt;
+  bool mLSQsilent;
+  bool mLSQcallBeginEndOptimization;
+  REAL mLSQminChi2var;
+  ObjCryst::RefinableObj* mpRefinableObjRandomised;
+  std::vector< std::pair<unsigned long, REAL> > mSetInfo;
+
+}; // RandomOptimizationObj
 
 /** PowderPatternBackgroundBase : Auxilliary base class for various background models.
  *
@@ -120,7 +154,7 @@ public:
 	/// Name of this class (MStruct:: PowderPatternBackgroundBase)
 	virtual const string& GetClassName()const; 
 	/// Set the PowderPattern object which uses this component.
-	virtual void SetParentPowderPattern(const ObjCryst::PowderPattern &);
+	virtual void SetParentPowderPattern(ObjCryst::PowderPattern &);
 	/// Get the calculated powder pattern for this component.
 	virtual const CrystVector_REAL& GetPowderPatternCalc()const;
 	/// Get the integrated values of the powder pattern.
@@ -143,7 +177,7 @@ protected:
 	/// Calc the integrated powder pattern.
 	virtual void CalcPowderPatternIntegrated()const;
 	/// Get the pixel positions separating the integration intervals around reflections.
-	virtual void GetBraggLimits(CrystVector_long *& min, CrystVector_long *& max)const;
+	virtual const CrystVector_long & GetBraggLimits()const;
 	//virtual const CrystVector_long& GetBraggLimits()const;
 	/// Set the maximum value for sin(theta)/lambda. (Dummy method - calculation ignores this settings)
 	virtual void SetMaxSinThetaOvLambda(const REAL max);
@@ -546,6 +580,7 @@ private:
 	REAL mLSQAlpha;
 public:
   SizeDistribBroadeningEffect();
+  const string& GetClassName()const;
   CrystVector_REAL GetProfile(const CrystVector_REAL &x,
 			      const REAL xcenter,
 			      const REAL h, const REAL k, const REAL l);
@@ -553,33 +588,289 @@ public:
 		     const REAL h, const REAL k, const REAL l)const;
   bool IsRealSpaceType()const;
   void SetDistribution(const CrystVector_REAL d1, const CrystVector_REAL d2,
-											 const CrystVector_REAL distrib, const CrystVector_int fixed);
+		       const CrystVector_REAL distrib, const CrystVector_int fixed);
+  /// Get vector of values representing the size distribution (unnormalised histogram).
+  const CrystVector_REAL & GetDistribution () const;
+  /// Get vectors defining lower (D1) and upper (D2) bounds of the distribution bins. 
+  void GetDistributionBins (CrystVector_REAL & D1, CrystVector_REAL & D2) const; 
 	void ReadDistributionFromFile(const char* filename);
 	void WriteDistributionToFile(const char* filename) const;
-	void SetLSQAlpha(const REAL alpha);
 	void SetLSQConstraintScale(const REAL scale);
-	const CrystVector_REAL& GetLSQCalc(const unsigned int n) const;
-  const CrystVector_REAL& GetLSQObs(const unsigned int n) const;
-  const CrystVector_REAL& GetLSQWeight(const unsigned int n) const;
-  const CrystVector_REAL& GetLSQDeriv(const unsigned int n, ObjCryst::RefinablePar &par);
+	//const CrystVector_REAL& GetLSQCalc(const unsigned int n) const;
+	//const CrystVector_REAL& GetLSQObs(const unsigned int n) const;
+	//const CrystVector_REAL& GetLSQWeight(const unsigned int n) const;
+	//const CrystVector_REAL& GetLSQDeriv(const unsigned int n, ObjCryst::RefinablePar &par);
   unsigned int GetNbLSQConstraints() const;
   void GetLSQConstraint(const unsigned int n,
-  											std::vector< const ObjCryst::RefinablePar* > &parList, CrystVector_REAL &coef) const;
+			std::vector< const ObjCryst::RefinablePar* > &parList, CrystVector_REAL &coef) const;
+  virtual unsigned int GetNbLSQRegularizationOperator(const unsigned int LSQfunc) const;
+  virtual const ObjCryst::LSQRegularizationOperator & GetLSQRegularizationOperator(const unsigned int nOp,
+										   const unsigned int LSQfunc) const;
+
+    void GenerateRandomDistrib();
+  /// TODO:: comment here
+  virtual void GlobalOptRandomMove(const REAL mutationAmplitude,
+				   const ObjCryst::RefParType *type=ObjCryst::gpRefParTypeObjCryst);
+
+  /**   \brief No size regularization used in the LSQ refinement.
+   *
+   * Type option for a distribution regularization method used during the LSQ refinement.
+   * No regularization is done for this option.
+   *
+   */
+  static const int LSQRegOpt_None =               0;
+
+  /**   \brief Simple method of size distribution regularization by minimizing roughly its derivative
+   *           is used for the LSQs.
+   *
+   * Type option for a distribution regularization method used during the LSQ refinement.
+   * 
+   * The vector repsenting a rough numerical approximation of the distribution derivative in the middle
+   * of (D1,D2) intervals were distribution is defined is returned byt the object's GetLSQCalc(...) method.
+   * Appropriate GetLSQObs(...) values are set zero hence the derivatives are minimized in advance.
+   * The calculated ChiSq value of the derivatives is weighted by mLSQAlpha.
+   *
+   * Note: Size distributions with "holes" in their definition (if defined by intervasls) are not correctly
+   *       handled during the spline interpolation. Define distribution with fixed zero values in the "holes"
+   *       to obey this problem.
+   *
+   */
+  static const int LSQRegOpt_DistribDeriv =       1;
+
+  /**   \brief Simple method of size distribution regularization by minimizing roughly the derivative
+   *           of the volume weighted size distribution.
+   *
+   * Type option for a distribution regularization method used during the LSQ refinement.
+   * 
+   * The vector repsenting a rough numerical approximation of the distribution derivative in the middle
+   * of (D1,D2) intervals were distribution is defined is returned byt the object's GetLSQCalc(...) method.
+   * Appropriate GetLSQObs(...) values are set zero hence the derivatives are minimized in advance.
+   * The calculated ChiSq value of the derivatives is weighted by mLSQAlpha.
+   *
+   * Note: Size distributions with "holes" in their definition (if defined by intervasls) are not correctly
+   *       handled during the spline interpolation. Define distribution with fixed zero values in the "holes"
+   *       to obey this problem.
+   *
+   */
+  static const int LSQRegOpt_VolumeDistribDeriv = 2;
+
+  /**   \brief Simple method of size distribution regularization by minimizing roughly the derivative
+   *           of the arithmetic and the volume weighted size distribution with the same weight.
+   *
+   * Type option for a distribution regularization method used during the LSQ refinement.
+   * 
+   * The vector repsenting a rough numerical approximation of the distribution derivative in the middle
+   * of (D1,D2) intervals were distribution is defined is returned byt the object's GetLSQCalc(...) method.
+   * Appropriate GetLSQObs(...) values are set zero hence the derivatives are minimized in advance.
+   * The calculated ChiSq value of the derivatives is weighted by mLSQAlpha. 
+   *
+   * The first part of the LSQFunction vector represents the derivative of the arithmetic distribution,
+   * the second part is linked with the volume weighted distribution.
+   *
+   */
+  static const int LSQRegOpt_BothDistribDeriv = 3;
+
+  /**   \brief Integral of unsigned size distribution curvature is minimized to regularize the distrubution.
+   *
+   * Type option for a distribution regularization method used during the LSQ refinement.
+   * 
+   * The distribution is interpolated by a cubic spline and an integral of the unsigned curvature
+   * is calcualted over the range of crystallites sizes (0,Dmax). This integral weighted by mLSQAlpha
+   * is then minimized also by LSQs. The object's GetLSQCalc(...) method returns a vector containing only
+   * one element: Sqrt( IntegralOfCurvature ).
+   *
+   * In addition it is assumend for spline interpolation that size distribution f(D) is zero and has zero
+   * derivatives at points D=0 and D=Dmax.
+   *
+   * Note: Size distributions with "holes" in their definition (if defined by intervasls) are not correctly
+   *       handled during the spline interpolation. Define distribution with fixed zero values in the "holes"
+   *       to obey this problem.
+   *
+   */
+  static const int LSQRegOpt_CurvIntegral =       4;
+
+  /**   \brief  Set a weight and a method type used for the distribution regularization in the LSQ refinement.
+   *
+   * See a particular option documentation for details of a method used.
+   *
+   */
+  void AddLSQRegularizationMethod(const int option=LSQRegOpt_None, const REAL weight=0.);
+
+  /**   \brief  Build a new distribution.
+   *
+   * \par NbIntervals intervals of crystallites sizes from \par \Dmin (A) to \par Dmax (A) are generated
+   * with "liner", "log" or "sqrt" spacing.
+   *
+   * 1 - cos( 2*Pi*(D-Dmin)/(Dmax-Dmin) ) like distribution is assigned to the centers of generated
+   * intervals. The distribution values in all the intervals are set to be refined.
+   *
+   */
+  void BuildDistribution(const REAL Dmin=10., const REAL Dmax=1.e3, const int NbIntervals=10,
+			 const string spacing=string("linear"));
+
+  /// Get integral of the area below the arithmetic distribution.
+  REAL GetDistribIntegral() const;
+  /// Get integral of the area below the volume weighted distribution.
+  REAL GetVolumeDistribIntegral() const;
+
+  /**   \brief  This should be called by any optimization class at the begining of an optimization.
+   *
+   * It prints information about regularization.
+   *
+   */
+  virtual void BeginOptimization (const bool allowApproximations, const bool enableRestraints);
+  /**   \brief  This should be called by any optimization class at the end of an optimization.
+   *
+   * It prints information about regularization.
+   *
+   */
+  virtual void 	EndOptimization ();
+  
+  void PrintRegularizationStatistics () const;
+  void PrintConstraintsStatistics () const;
+
 protected:
-	CrystVector_REAL mLSQCalc;
-  CrystVector_REAL mLSQObs;
-  CrystVector_REAL mLSQWeight;
-  CrystVector_REAL mLSQDeriv;
+
+  /// Calculate integrated areas below the arithmetic and the volume weighted distribution
+  void CalcDistIntegral () const;
+  /// Rebuild the list of Regularization Operators used in the LSQ refinement.
+  void RebuildLSQRegOpList ();
+
+  //mutable CrystVector_REAL mLSQCalc;
+  //CrystVector_REAL mLSQObs;
+  //CrystVector_REAL mLSQWeight;
+  //CrystVector_REAL mLSQDeriv;
   REAL mLSQConstraintScale;
+  /// List of types of distribution regularization methods used in the LSQ refinement
+  vector<int> mLSQRegTypeList;
+  /// List of weights of distribution regularization operators used in the LSQ refinement
+  vector<REAL> mLSQRegWeightList;
+  /** \brief List of LSQ Regularizator Operators - requiring smoothness of the distribution
+   * 
+   * The LSQRegularizationOperators are normalised "on the fly" (dynamically) in the const method
+   * GetLSQRegularizationOperator(...), hence the operators are mutable.
+   *
+   */
+  mutable std::vector< ObjCryst::LSQRegularizationOperator > mLSQRegOpList;
+  /** \brief Norms of LSQ Regularizator Operators as their were used last time
+   * 
+   * The LSQRegularizationOperators are normalised "on the fly" (dynamically) in the const method
+   * GetLSQRegularizationOperator(...), the calculated norms as used in that method last time
+   * are stored here.
+   *
+   */
+  mutable std::vector< REAL > mLSQRegOpNorm;
+  /// Maximum crystallites size for the given distribution
+  REAL mDmax;
+  
+  /// Integrated area of the arithmetic distribution  
+  mutable REAL mDistIntegral;
+  /// Integrated area of the volume weighted distribution  
+  mutable REAL mVolumeDistIntegral;
+  /// Last time the integrals of the distribution were calculated
+  mutable ObjCryst::RefinableObjClock mClockDistIntegralCalc;
+
+private:
+  /// TODO::
+  ObjCryst::LSQRegularizationOperator CreateLSQRegOpVolumeDistribDeriv (const REAL weight=0.) const;
+  /// TODO::
+  ObjCryst::LSQRegularizationOperator CreateLSQRegOpDistribDeriv (const REAL weight=0.) const;
+  /**  \brief  Calculate approximative size distribution integrated curvature.
+   *
+   * Size distribution is interpolated by a cubic spline. Than its unsigned curvature is
+   * integrated over the whole range (0,Dmax). For spline interpolation The size distribution
+   * is complemented by zero values at points D=0 and D=Dmax and also zero derivatives at these
+   * point are assumed.
+   *
+   * Note: Size distributions with "holes" in their definition (if defined by intervasls) are not correctly
+   *       handled during the spline interpolation. Define distribution with fixed zero values in the "holes"
+   *       to obey this problem.
+   *
+   */
+  REAL CalcCurvInt() const;
+
+  /// Step for numerical integration of the unsigned curvature of the distribution
+  REAL mCurvIntStep;
+
+  /// Number of times the Begin and End Optimization methods were called
+  int mBeginEndOptimizationCalled;
+
 }; // class SizeDistribBroadeningEffect
+
+/** RandomSizeDistribBroadeningEffect : This provides reflection profile
+ * calculation from spherical crystallites with randomly distrubuted diameter D.
+ *
+ * Distribution of crystallites size diameter D is defined in the N bins between
+ * D=0 and D=Dmax. The bin width is dD=Dmax/N. The distribution is represented by
+ * a probability P(i) of finding P crystallites with size in the i-th bin (D lies in
+ * the interval i*dD + (0,dD) ). This probability P(i) is distributed uniformly in
+ * each bin independently of others bins and it is normalised that
+ * sum(i=0..N-1, P(i)*dD)==1 holds.
+ *
+ */
+class RandomSizeDistribBroadeningEffect: public ReflectionProfileComponent {
+ public:
+  /// Constructor
+  RandomSizeDistribBroadeningEffect();
+  /// Name for this class ("MStruct::RandomSizeDistribBroadeningEffect")
+  virtual const string & GetClassName() const;
+  /**   \brief Set new distribution
+   *  \param Nbins   : number of bins in which the interval of crystallite size D is divided.
+   *  \param Dmax    : crystallite sizes are distributed in the interval (0,Dmax) (in nm)
+   *  \param distrib : vector of length Nbins containing initial distribution (optional)
+   */
+  void SetDistribution(const int Nbins=20, const REAL Dmax=1.e3,
+		       const CrystVector_REAL &distrib=CrystVector_REAL(0));
+  /**   \brief Generate random distribution
+   *
+   *  Generate random distribution: a random value P(i) representiing the crystallite size
+   *  distrution is choosen from an uniform distribution for each bin independently
+   *  on other bins. Aftervards the values P(i) in all bins are normalised so 
+   *  sum(i=0..Nbins-1, P(i)*BinWidth)==1 holds.
+   */
+  void GenerateRandomDistrib();
+
+  /// TODO:: comment here
+  virtual void GlobalOptRandomMove(const REAL mutationAmplitude,
+				   const ObjCryst::RefParType *type=ObjCryst::gpRefParTypeObjCryst);
+
+  virtual CrystVector_REAL GetProfile(const CrystVector_REAL &x,
+				      const REAL xcenter,
+				      const REAL h, const REAL k, const REAL l);
+  virtual REAL GetApproxFWHM(const REAL xcenter,const REAL h, const REAL k, const REAL l)const;
+  virtual bool IsRealSpaceType()const;
+
+ protected:
+  /// Initialize RefinableObj parameters
+  void Init();
+
+  // data members section
+
+  /// Number of bins between 0 and Dmax representing the crystallites size distribution
+  int mNbins;
+  /// Width of the bin representing the crystallites size distribution, Width = Dmax/Nbins
+  REAL mBinWidth;
+  /// Vector representing crystallites size distribution P(i)
+  CrystVector_REAL mDistrib;
+  /// Clock when reflection profile was calculated last time
+  ObjCryst::RefinableObjClock mClockReflProfCalc;
+
+}; // RandomSizeDistribBroadeningEffect
 
 class DislocationBroadeningEffectSvB: public ReflectionProfileComponent {
 private:
-	REAL mRe;
+	REAL mReOrMWilk;
 	REAL mRou;
 	REAL mCg0;
 	mutable REAL mQ1;
 	mutable REAL mQ2;
+	bool mUseMWilk;
+	int mFormula;
+	int mArgument;
+	REAL mKaganerEta0;
+	REAL mKaganerEta1;
+
+	bool mIsIntialised;
 public:
 	DislocationBroadeningEffectSvB();
 	void SetParentReflectionProfile(const ReflectionProfile &);
@@ -592,8 +883,16 @@ public:
 														double &s0, double &Chkl, double &thkl)const;
 	bool IsRealSpaceType()const;
 	bool IsAnisotropic()const;
-	void SetProfilePar(const REAL re, const REAL rou, const REAL cg0 = 1.,
+	void SetProfilePar(const REAL reOrMWilk, const REAL rou, const REAL cg0 = 1.,
 					   const REAL q1 = 0., const REAL q2 = 0.);
+	
+	void SetUseMWilk(const bool useMWilk);
+	void SetFormula(const int formula, const int arg);
+
+	/*	unsigned int GetNbLSQConstraints() const;
+	void GetLSQConstraint(const unsigned int n,
+			      std::vector< const ObjCryst::RefinablePar* > &parList,
+			      CrystVector_REAL &coef) const;*/
 private:
 	mutable int mCellType;
 	mutable REAL mACr; // a/c ratio
@@ -603,9 +902,56 @@ private:
 	// clock for auxiliary params (cell type, a/c ratio, Burgers vector length) 
 	mutable ObjCryst::RefinableObjClock mClockAuxParams;
 private:
-	void InitParameters();
+	void InitParameters(const bool reinitialize = false);
 	void SetAuxParameters()const;
 }; // class DislocationBroadeningEffectSvB
+
+/** SizeDistribPowderPatternDiffraction: is a PowderPatternDiffraction class optimised
+ * for a refinement of a histogram-like crystallites size representation. It should
+ * provide effectively derivatives of the powder diffraction pattern with respect to
+ * size distribution parameters (histogram values) and increase performace of the
+ * LSQ-refinement especially if solely the size distribution is optimised.
+ *
+ */
+class SizeDistribPowderPatternDiffraction: virtual public MStruct::PowderPatternDiffraction {
+ public:
+  /// Constructor.
+  SizeDistribPowderPatternDiffraction ();
+  /// Virtual copy constructor. 
+  SizeDistribPowderPatternDiffraction (const SizeDistribPowderPatternDiffraction &);
+  /// Creates copy of the object.
+  virtual SizeDistribPowderPatternDiffraction * CreateCopy () const;
+  /// Name for this class ("MStruct::PowderPattern", ...). 
+  virtual const string & GetClassName () const;
+
+  /** \brief Get the first derivative values for the LSQ function, for a given parameter.
+   *
+   *  The SizeDistrib PowderPatternDiffraction class is optimised to provide effectively
+   *  LSQ derivatives with respect to SizeDistrib parameters (histogram values). 
+   *  GetLSQDeriv should return these derivatives effectively without unnecessary
+   *  repeated numerical recalculations.
+   */
+  virtual const CrystVector_REAL & GetLSQDeriv (const unsigned int, ObjCryst::RefinablePar &);
+
+ protected:
+  /// Prepare everything for an optimization/calculation. 
+  virtual void Prepare ();
+
+ protected:
+  /// Pointer to the SizeDistrib ReflectionProfile Component Object whose calculation should be optimised.
+  SizeDistribBroadeningEffect * mpSizeDistribReflProf;
+  /// Clock when all possibly related refinable parameters except the SizeDistrib parameters were mutated.
+  ObjCryst::RefinableObjClock mOtherParamsClock;
+  /// Clocks when LSQDerivatives with respect to SizeDistrib parameters were calculated.
+  std::vector< ObjCryst::RefinableObjClock > mvClockLSQDerivCalculated;
+  
+  /// Calculated LSQDerivatives with respect to the SizeDistrib parameters
+  std::vector< CrystVector_REAL > mvLSQDerivSizeDistrib;
+ private:
+  /// Values of a Size Fourier coefficients for a zero length A(0) for all SizeDistrib bins 
+  CrystVector_REAL mSizeDistribA0;
+
+}; // SizeDistribPowderPatternDiffraction
 
 class FaultsBroadeningEffectFCC: public ReflectionProfileComponent {
 protected:
@@ -820,6 +1166,12 @@ public:
   virtual const string& GetClassName()const;
 
   void AddReflectionProfileComponent(ReflectionProfileComponent &);
+  long GeReflectionProfileComponentNb() const;
+  const ReflectionProfileComponent & GetReflectionProfileComponent (long ) const;
+  ReflectionProfileComponent & GetReflectionProfileComponent (long );
+  const ReflectionProfileComponent & GetReflectionProfileComponent (const string &objName) const;
+  ReflectionProfileComponent & GetReflectionProfileComponent (const string &objName);
+
   virtual void SetParentPowderPatternDiffraction(const ObjCryst::PowderPatternDiffraction &);
   virtual const ObjCryst::PowderPatternDiffraction& GetParentPowderPatternDiffraction()const;
   //void SetProfilePar(const REAL m, const REAL sigma);
@@ -844,6 +1196,10 @@ private:
   void InitParameters();
   bool PrepareForCalc(const CrystVector_REAL &x, const REAL xcenter,
 		      REAL h, REAL k, REAL l);
+ private:
+  /// Clock when phenomenological stress correction parameters (q) were chnged last time.
+  ObjCryst::RefinableObjClock mClockStressCorrQ;
+
 }; // class ReflectionProfile
 
 class DoubleComponentReflectionProfile: public ObjCryst::ReflectionProfile {
@@ -1843,6 +2199,7 @@ PeakParams CalcPeakParams(const CrystVector_REAL &x, const CrystVector_REAL &y, 
 
 extern const ObjCryst::RefParType *gpRefParTypeScattDataCorrHKLIntensity;
 extern const ObjCryst::RefParType *gpRefParTypeMaterialData;
+extern const ObjCryst::RefParType *gpRefParTypeScattDataProfileSizeDistrib;
 
 // Global register for all XECs Objects
 extern ObjCryst::ObjRegistry<XECsObj> gXECsObjRegistry;
@@ -1854,9 +2211,12 @@ public:
       gpRefParTypeScattDataCorrHKLIntensity
 	=new ObjCryst::RefParType(ObjCryst::gpRefParTypeObjCryst,
 				  "HKL Intensity Corr.");
-	  gpRefParTypeMaterialData
+      gpRefParTypeMaterialData
 	=new ObjCryst::RefParType(ObjCryst::gpRefParTypeObjCryst,
 				  "Material Data");
+      gpRefParTypeScattDataProfileSizeDistrib
+	=new ObjCryst::RefParType(ObjCryst::gpRefParTypeScattDataProfileWidth,
+				  "Crystallites Size Distrib.");	  
     }
   }
   ~NiftyStaticGlobalObjectsInitializer_MStruct() {
@@ -1865,6 +2225,8 @@ public:
       gpRefParTypeScattDataCorrHKLIntensity=0;
       delete gpRefParTypeMaterialData;
       gpRefParTypeMaterialData=0;
+      delete gpRefParTypeScattDataProfileSizeDistrib;
+      gpRefParTypeScattDataProfileSizeDistrib=0;
     }
   }
 private:

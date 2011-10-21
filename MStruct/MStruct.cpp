@@ -52,6 +52,9 @@
 #include <limits>
 #include <ctime>
 
+#include <stdlib.h> // rand, srand
+//#include <time.h> // time
+
 #include <assert.h>
 
 #include <stdexcept>
@@ -59,12 +62,16 @@
 #include <signal.h> // To catch CTRL+C signal during LSQNumObj refinement
 
 bool bsavecalc = false;
-REAL xcenterlimits[2] = {15.*DEG2RAD, 22.*DEG2RAD}; // 14 16, 144 145 102 107, 135 138, 72 77
+REAL xcenterlimits[2] = {25.2*DEG2RAD, 25.5*DEG2RAD}; // 14 16, 144 145 102 107, 135 138, 72 77, 15 22, 23 27, 5 27, 87 93
 
 #define absorption_corr_factor 1.e4
 
 //extern "C" double expei_(double *x); from ei.f
 //extern "C" double daw_(double *x); from dw.f
+
+// --- REAL RANDOM VALUES GENERATOR ---
+
+#define real_rand() ( (REAL) ((double) rand() / (RAND_MAX + 1.)) )
 
 double func_ei(const double x);
 double func_daw(const double x);
@@ -87,25 +94,25 @@ namespace RotationTB {
 void GetEulerAngles(REAL& phi1, REAL& phi, REAL& phi2,
 										const CrystMatrix_REAL& A)
 {
-	phi = acos(A(2,2)); // a33 = cos(phi)
+  phi = acos(A(2,2)); // a33 = cos(phi)
   if (fabs(phi)>FLT_EPSILON && fabs(phi-M_PI)>FLT_EPSILON) {
     REAL sinphi = sin(phi);
-		// a31 =  sin(phi) sin(phi1)
-		// a32 = -sin(phi) cos(phi1)
+    // a31 =  sin(phi) sin(phi1)
+    // a32 = -sin(phi) cos(phi1)
     phi1 = atan2(A(2,0)/sinphi,-A(2,1)/sinphi);
-		// a13 = sin(phi) sin(phi2)
-		// a23 = sin(phi) cos(phi2)
+    // a13 = sin(phi) sin(phi2)
+    // a23 = sin(phi) cos(phi2)
     phi2 = atan2(A(0,2)/sinphi,A(1,2)/sinphi); }
   else {
-		// phi2 == 0, a11 = cos(phi1), a12 = sin(phi1)
+    // phi2 == 0, a11 = cos(phi1), a12 = sin(phi1)
     phi1 = atan2(A(0,1),A(0,0));
     phi2 = 0.0; }
 }
 
 CrystMatrix_REAL GetEulerMatrix(const REAL phi1, const REAL phi, const REAL phi2)
 {
-	CrystMatrix_REAL A(3,3);
-	A(0,0) = cos(phi1)*cos(phi2) - cos(phi)*sin(phi1)*sin(phi2);
+  CrystMatrix_REAL A(3,3);
+  A(0,0) = cos(phi1)*cos(phi2) - cos(phi)*sin(phi1)*sin(phi2);
   A(0,1) = cos(phi2)*sin(phi1) + cos(phi1)*cos(phi)*sin(phi2);
   A(0,2) = sin(phi2)*sin(phi);
   A(1,0) = -(cos(phi2)*cos(phi)*sin(phi1)) - cos(phi1)*sin(phi2);
@@ -119,43 +126,43 @@ CrystMatrix_REAL GetEulerMatrix(const REAL phi1, const REAL phi, const REAL phi2
 
 CrystMatrix_REAL MatrixMult(const CrystMatrix_REAL& A, const CrystMatrix_REAL& B)
 {
-	if(A.cols()!=B.rows())
-		throw ObjCrystException("RotationTB::MatrixMult: Matrix dimension mismatch!");
+  if(A.cols()!=B.rows())
+    throw ObjCrystException("RotationTB::MatrixMult: Matrix dimension mismatch!");
+  
+  CrystMatrix_REAL C(A.rows(),B.cols());
+  
+  C = 0.;
+  
+  for(int i=0; i<C.rows(); i++)
+    for(int j=0; j<C.cols(); j++)
+      for(int k=0; k<A.cols(); k++) C(i,j) += A(i,k)*B(k,j);
 		
-	CrystMatrix_REAL C(A.rows(),B.cols());
-	
-	C = 0.;
-	
-	for(int i=0; i<C.rows(); i++)
-		for(int j=0; j<C.cols(); j++)
-			for(int k=0; k<A.cols(); k++) C(i,j) += A(i,k)*B(k,j);
-		
-	return C;
+  return C;
 }
 
 CrystMatrix_REAL MatrixTranspose(const CrystMatrix_REAL& A)
 {
-	CrystMatrix_REAL B(A.cols(),A.rows());
-	
-	for(int i=0; i<A.rows(); i++)
-		for(int j=0; j<A.cols(); j++) B(j,i) = A(i,j);
-		
-	return B;
+  CrystMatrix_REAL B(A.cols(),A.rows());
+  
+  for(int i=0; i<A.rows(); i++)
+    for(int j=0; j<A.cols(); j++) B(j,i) = A(i,j);
+  
+  return B;
 }
 
 CrystVector_REAL VectorTransf(const CrystMatrix_REAL& A, const CrystVector_REAL& b)
 {
-	if(A.cols()!=b.numElements())
-		throw ObjCrystException("RotationTB::VectorTransf: Matrix dimension mismatch!");
-	
-	CrystVector_REAL a(A.rows());
-	
-	for(int i=0; i<a.numElements(); i++) {
-		a(i) = 0.;
-		for(int k=0; k<A.cols(); k++) a(i) += A(i,k)*b(k);
-	}
-	
-	return a; 
+  if(A.cols()!=b.numElements())
+    throw ObjCrystException("RotationTB::VectorTransf: Matrix dimension mismatch!");
+  
+  CrystVector_REAL a(A.rows());
+  
+  for(int i=0; i<a.numElements(); i++) {
+    a(i) = 0.;
+    for(int k=0; k<A.cols(); k++) a(i) += A(i,k)*b(k);
+  }
+  
+  return a; 
 }
 
 } // namespace RotationTB 
@@ -164,10 +171,11 @@ namespace MStruct {
 
 const ObjCryst::RefParType *gpRefParTypeScattDataCorrHKLIntensity=0;
 const ObjCryst::RefParType *gpRefParTypeMaterialData=0;
+const ObjCryst::RefParType *gpRefParTypeScattDataProfileSizeDistrib=0;
 
 long NiftyStaticGlobalObjectsInitializer_MStruct::mCount=0;
 
-#define MSTRUCT_NONE	0
+#define MSTRUCT_NONE	        0
 #define MSTRUCT_SC		1
 #define MSTRUCT_BCC		2
 #define MSTRUCT_FCC		4
@@ -205,11 +213,15 @@ void ReflStore::print(std::ostream& s)const
 ////////////////////////////////////////////////////////////////////////
 
 ObjCryst::ObjRegistry< ObjCryst::LSQNumObj > GlobalLSQNumObj_SIGINT_Registry;
+/// Global counter of handled SIGINT signals
+unsigned int Global_SIGINThandled_counter = 0;
 
 // CTRL+C signal handler for LSQNumObjects finds 
 void LSQNumObj_SIGINT_Handler (int param)
 {
 	cout << "\t...CTRL+C signal received..."<<endl;
+	
+	Global_SIGINThandled_counter++;
 	
 	// Stop refinement of all registred LSQNumObj objects
 	for(long i=0; i<GlobalLSQNumObj_SIGINT_Registry.GetNb(); i++) {
@@ -218,7 +230,9 @@ void LSQNumObj_SIGINT_Handler (int param)
 	}
 }
 
-void LSQNumObj::Refine (int nbCycle, bool useLevenbergMarquardt, const bool silent)
+void LSQNumObj::Refine (int nbCycle,bool useLevenbergMarquardt,
+                        const bool silent, const bool callBeginEndOptimization,
+                        const float minChi2var)
 {
 	// register CTRL+C signal handler
 	void (*prev_fn)(int);	
@@ -228,12 +242,182 @@ void LSQNumObj::Refine (int nbCycle, bool useLevenbergMarquardt, const bool sile
 	GlobalLSQNumObj_SIGINT_Registry.Register(*this);
 	
 	// run refinement
-	ObjCryst::LSQNumObj::Refine (nbCycle, useLevenbergMarquardt, silent);
+	ObjCryst::LSQNumObj::Refine (nbCycle, useLevenbergMarquardt, silent,
+				     callBeginEndOptimization, minChi2var);
 	
 	// de-register CTRL+C signal handler
 	signal (SIGINT, prev_fn);
 	// DeRegister this object to disable SIGINT handler functionality
 	GlobalLSQNumObj_SIGINT_Registry.DeRegister(*this);
+}
+
+////////////////////////////////////////////////////////////////////////
+//
+//    RandomOptimizationObj
+//
+////////////////////////////////////////////////////////////////////////
+RandomOptimizationObj::RandomOptimizationObj(std::string objName)
+  :ObjCryst::OptimizationObj(objName),mpLSQNumObj(NULL),mLSQnbCycle(1),
+   mLSQuseLevenbergMarquardt(false),mLSQsilent(false),mLSQcallBeginEndOptimization(true),
+   mLSQminChi2var(0.01),mpRefinableObjRandomised(NULL)
+{}
+
+void RandomOptimizationObj::SetLSQNumObj(ObjCryst::LSQNumObj *pLSQNumObj, int nbCycle,
+					 bool useLevenbergMarquardt, const bool silent,
+					 const bool callBeginEndOptimization, const float minChi2var)
+{
+  mpLSQNumObj = pLSQNumObj;
+  mLSQnbCycle= nbCycle;
+  mLSQuseLevenbergMarquardt = useLevenbergMarquardt;
+  mLSQsilent = silent;
+  mLSQcallBeginEndOptimization = callBeginEndOptimization;
+  mLSQminChi2var = minChi2var;
+}
+
+void RandomOptimizationObj::SetRefinableObjRandomised(ObjCryst::RefinableObj *pRefinableObj)
+{
+  mpRefinableObjRandomised = pRefinableObj;
+}
+
+void RandomOptimizationObj::Optimize(long &nbSteps, const bool silent, const REAL finalcost, const REAL maxTime)
+{
+  if(mpLSQNumObj==NULL) {
+    cerr << "MStruct::RandomOptimizationObj::Optimize(): No LSQNumObject set." << endl;
+    return;
+  }
+
+  if(mpRefinableObjRandomised==NULL) {
+    cerr << "MStruct::RandomOptimizationObj::Optimize(): No RefinableObj to randomise set." << endl;
+    return;
+  }
+
+  // clear old results
+  mpRefinableObjRandomised->EraseAllParamSet();
+  mSetInfo.clear();
+  
+  // save the fixed-refined state for all params of the randomised object
+  vector<bool> vFixed(false,mpRefinableObjRandomised->GetNbPar());
+  for(int ipar=0; ipar<mpRefinableObjRandomised->GetNbPar(); ipar++)
+    vFixed[ipar] = mpRefinableObjRandomised->GetPar(ipar).IsFixed();
+  
+  // results will be consecutively saved in a file
+  WriteCurrentParamSetToFile("randOptSet1-current.dat", false);
+
+  // run optimization - random search for the best sets of configurations
+  for(int istep=0; istep<nbSteps; istep++) {
+    
+    if(!silent) cout <<"--- Running trial step nb. "<<(istep+1)<<"/"<<nbSteps<<" ---\n";
+
+    // randomise configuration
+    mpRefinableObjRandomised->GlobalOptRandomMove(1.);
+    
+    // fix all parameters in the randomised RefinableObj before refinement
+    //    mpRefinableObjRandomised->FixAllPar();
+
+    // run LSQ refinement
+    mpLSQNumObj->Refine(mLSQnbCycle,mLSQuseLevenbergMarquardt,mLSQsilent,
+			mLSQcallBeginEndOptimization,mLSQminChi2var);
+    
+    // during the refinement some parameters can be fixed by chance, restore their fixed-refined state
+    for(int ipar=0; ipar<mpRefinableObjRandomised->GetNbPar(); ipar++)
+      mpRefinableObjRandomised->GetPar(ipar).SetIsFixed(vFixed[ipar]);
+
+    // unfix all parameters in the randomised RefinableObj before a par. set is created
+    //    mpRefinableObjRandomised->UnFixAllPar();
+
+    // save configuration
+    unsigned long id = mpRefinableObjRandomised->CreateParamSet();
+
+    // get ChiSquare value
+    REAL chiSq = mpLSQNumObj->ChiSquare();
+    
+    // save Param.Set ID and chiSq value
+    mSetInfo.push_back( std::make_pair( id, chiSq ) );
+
+    // write current parameter set into the file
+    WriteCurrentParamSetToFile("randOptSet1-current.dat", true);
+
+  } // for istep
+
+}
+
+void RandomOptimizationObj::WriteResultsToFile(const string &filename) const
+{
+  std::ofstream os(filename.c_str());
+  
+  // nb of parameters in the set
+  const int nbpar = mpRefinableObjRandomised->GetNbPar();
+
+  // print header
+  os<<"#"<<setw(8)<<"id"<<setw(14)<<"chiSq";
+  for(int i=0; i<nbpar; i++)
+    os<<setw(14)<<mpRefinableObjRandomised->GetPar(i).GetName();
+  os<<"\n";
+      
+  // print values
+  for(int iset=0; iset<mSetInfo.size(); iset++) {
+    
+    unsigned long id = mSetInfo[iset].first;
+    REAL chiSq = mSetInfo[iset].second;
+
+    // unfix all parameters in the randomised RefinableObj before a par. set is restored
+    //mpRefinableObjRandomised->UnFixAllPar();
+
+    // restore parameter set
+    mpRefinableObjRandomised->RestoreParamSet(id);
+    
+    os<<setw(9)<<id<<setw(14)<<scientific<<showpoint<<setprecision(3)<<chiSq;
+
+    for(int i=0; i<nbpar; i++)
+      os<<setw(14)<<mpRefinableObjRandomised->GetPar(i).GetHumanValue();
+	
+    os<<"\n";
+
+  }
+
+  // fix all parameters in the randomised RefinableObj after we finished
+  //mpRefinableObjRandomised->FixAllPar();
+
+  os.close();
+}
+
+void RandomOptimizationObj::WriteCurrentParamSetToFile(const string &filename, const bool append)
+{
+  std::ofstream os;
+
+  if (append)
+    os.open(filename.c_str(),ios_base::app);
+  else
+    os.open(filename.c_str());
+  
+  // nb of parameters in the set
+  const int nbpar = mpRefinableObjRandomised->GetNbPar();
+
+  // print header
+  if (!append) {
+    os<<"#"<<setw(8)<<"id"<<setw(14)<<"chiSq";
+    for(int i=0; i<nbpar; i++)
+      os<<setw(14)<<mpRefinableObjRandomised->GetPar(i).GetName();
+    os<<"\n";
+  }
+      
+  // print values
+  
+  if( mSetInfo.size()>0 ) {
+    
+    unsigned long id = mSetInfo[mSetInfo.size()-1].first;
+    REAL chiSq = mpLSQNumObj->ChiSquare();
+    
+    os<<setw(9)<<id<<setw(14)<<scientific<<showpoint<<setprecision(4)<<chiSq;
+
+    for(int i=0; i<nbpar; i++)
+      os<<setw(14)<<mpRefinableObjRandomised->GetPar(i).GetHumanValue();
+	
+    os<<"\n";
+
+  }
+
+  os.close();
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -259,15 +443,15 @@ const string& PowderPatternBackgroundBase::GetClassName()const
 	return className;
 }
 
-void PowderPatternBackgroundBase::SetParentPowderPattern(const ObjCryst::PowderPattern &s)
+void PowderPatternBackgroundBase::SetParentPowderPattern(ObjCryst::PowderPattern &s)
 {
-	if(mpParentPowderPattern!=0) 
-      mClockMaster.RemoveChild(mpParentPowderPattern->GetIntegratedProfileLimitsClock());
-   mpParentPowderPattern = &s;
-   mClockMaster.AddChild(mpParentPowderPattern->GetIntegratedProfileLimitsClock());
-   mClockMaster.AddChild(mpParentPowderPattern->GetClockPowderPatternPar());
-   //mClockMaster.AddChild(mpParentPowderPattern->GetClockPowderPatternXCorr());
-   //mClockMaster.AddChild(mpParentPowderPattern->GetClockPowderPatternRadiation());
+  if(mpParentPowderPattern!=0) 
+    mClockMaster.RemoveChild(mpParentPowderPattern->GetIntegratedProfileLimitsClock());
+  mpParentPowderPattern = &s;
+  mClockMaster.AddChild(mpParentPowderPattern->GetIntegratedProfileLimitsClock());
+  mClockMaster.AddChild(mpParentPowderPattern->GetClockPowderPatternPar());
+  //mClockMaster.AddChild(mpParentPowderPattern->GetClockPowderPatternXCorr());
+  //mClockMaster.AddChild(mpParentPowderPattern->GetClockPowderPatternRadiation());
 }
 
 const CrystVector_REAL&	PowderPatternBackgroundBase::GetPowderPatternCalc()const
@@ -395,18 +579,11 @@ void PowderPatternBackgroundBase::CalcPowderPatternIntegrated()const
 	VFN_DEBUG_EXIT("MStruct::PowderPatternBackgroundBase::CalcPowderPatternIntegrated():End",3)
 }
 
-//const CrystVector_long& PowderPatternBackgroundBase::GetBraggLimits()const
-//{
-	// no integration interval for the background
-	//mIntegratedReflLimits.resize(0);
-	//return mIntegratedReflLimits;
-//}
-
-// TODO:// Method arguments modified in the newer version of ObjCryst (see above)
-void PowderPatternBackgroundBase::GetBraggLimits(CrystVector_long *&min,CrystVector_long *&max)const
+const CrystVector_long& PowderPatternBackgroundBase::GetBraggLimits()const
 {
-	min = 0;
-	max = 0;
+  // no integration interval for the background
+  mIntegratedReflLimits.resize(0);
+  return mIntegratedReflLimits;
 }
 
 void PowderPatternBackgroundBase::SetMaxSinThetaOvLambda(const REAL max)
@@ -819,6 +996,8 @@ PowderPattern::PowderPattern()
 {
   // Add scales to relevant params
   mClockMaster.AddChild(mClockScaleFactor);
+  // Set Integration Option - not Integrated
+  mOptProfileIntegration.SetChoice(1);
 }
 
 const CrystVector_REAL& PowderPattern::GetLSQCalc(const unsigned int n) const
@@ -1032,13 +1211,13 @@ const CrystVector_REAL& PowderPattern::GetLSQDeriv(const unsigned int n, Refinab
     S.open(filename.c_str());
   }
 
-	bool bnotcalculated = true;
+  bool bnotcalculated = true;
 	
   string str = string(par.GetName());
   string::size_type loc;
 	
-	// "*_Ihkl_*"
-	
+  // "*_Ihkl_*"
+  
   loc = str.find("_Ihkl_", 0); // CompName_Ihkl_h_k_l
   if(loc != string::npos) {
     VFN_DEBUG_MESSAGE("MStruct::PowderPattern::GetLSQDerivative: "<<
@@ -1051,35 +1230,88 @@ const CrystVector_REAL& PowderPattern::GetLSQDeriv(const unsigned int n, Refinab
     bnotcalculated = false;
   }
 
-	// "Background_Coef_*"
-	if(bnotcalculated) {
-		loc = str.find("Background_Coef_", 0);
-		if (loc != string::npos) {
-			VFN_DEBUG_MESSAGE("MStruct::PowderPattern::GetLSQDerivative: "<<
-		  	    "Derivative for Chebyshev polynomial coef. detected: "<< str,11)
-    	mLSQDeriv = GetPowderPatternComponent("bkgData_Chebyshev").GetLSQDeriv(n,par);
-    	bnotcalculated = false;
-		}
+  // "*pD_*" (SizeDistrib)
+
+  loc = str.find("pD_", 0); // pD_ProfileName_nb
+  // If it is SizeDistrib we need to
+  //   1) verify this is really derivative with respect to SizeDistrib (histogram) coef.
+  //   2) identify the PowderPatternDiffraction component
+  //   3) verify that the PowderPatternDiffraction component is of a SizeDistrib type
+  if( loc != string::npos && // TODO:: create SizeDistribRefPartype
+      par.GetType()->IsDescendantFromOrSameAs(gpRefParTypeScattDataProfileSizeDistrib) ) {
+    VFN_DEBUG_MESSAGE("MStruct::PowderPattern::GetLSQDerivative: "<<
+		      "Possible Derivative for SizeDistrib detected: "<< str,11)
+    
+    // Try to find the corresponding ReflectionProfileComponent from the "ProfileName"
+    string::size_type loc1 = str.find_last_of("_");
+    string profileName = str.substr(loc+3,loc1-(loc+3));
+    MStruct::SizeDistribPowderPatternDiffraction *pDiffObj = NULL;
+    MStruct::SizeDistribBroadeningEffect *pSizeDistribEffect = NULL;
+    {
+      unsigned int iComp=0;
+      for( ; iComp<this->GetNbPowderPatternComponent(); iComp++) {
+	long ind = -1;
+	if(this->GetPowderPatternComponent(iComp).GetClassName()==string("MStruct::SizeDistribPowderPatternDiffraction"))
+	  ind = dynamic_cast<const MStruct::SizeDistribPowderPatternDiffraction &>(this->GetPowderPatternComponent(iComp)).
+	    GetProfile().GetSubObjRegistry().Find(profileName,"MStruct::SizeDistribBroadeningEffect",true);
+	if(ind>=0) {
+	  pDiffObj =
+	    & dynamic_cast<MStruct::SizeDistribPowderPatternDiffraction &>(this->GetPowderPatternComponent(iComp));
+	  pSizeDistribEffect =
+	    & dynamic_cast<MStruct::SizeDistribBroadeningEffect &>(pDiffObj->GetProfile().GetSubObjRegistry().GetObj(ind));
+	  // Confirm finally that the SizeDistribBroadeningEffect really owns the parameter
+	  if(pSizeDistribEffect->GetParIndex(par.GetPointer(),true)==-1) {
+	    // Finally we have not found what we wanted
+	    pDiffObj = NULL;
+	    pSizeDistribEffect = NULL;
+	  } else
+	    break;
 	}
-	
-	// "Scale_"
-	if(bnotcalculated) {
-  	
-  	loc = str.find("Scale_", 0);
+      }
+    }
+
+    if(pDiffObj!=NULL && pSizeDistribEffect!=NULL) {
+      VFN_DEBUG_MESSAGE("MStruct::PowderPattern::GetLSQDerivative: "<<
+			"Calculation is forwarded to the Object name: "<< pDiffObj->GetName(),11)
+      mLSQDeriv = pDiffObj->GetLSQDeriv(n,par);
+      // apply scale factor
+      mLSQDeriv *= this->GetScaleFactor( *pDiffObj );
+
+      bnotcalculated = false; 
+    }
+
+  }
+    
+  
+  // "Background_Coef_*"
+  if(bnotcalculated) {
+    loc = str.find("Background_Coef_", 0);
+    if (loc != string::npos) {
+      VFN_DEBUG_MESSAGE("MStruct::PowderPattern::GetLSQDerivative: "<<
+			"Derivative for Chebyshev polynomial coef. detected: "<< str,11)
+      mLSQDeriv = GetPowderPatternComponent("bkgData_Chebyshev").GetLSQDeriv(n,par);
+      bnotcalculated = false;
+    }
+  }
+  
+  // "Scale_"
+  if(bnotcalculated) {
+    
+    loc = str.find("Scale_", 0);
  
-  	if (loc != string::npos) {
-  		VFN_DEBUG_MESSAGE("MStruct::PowderPattern::GetLSQDerivative: "<<
-		  	    "Derivative for Scale detected: "<< str.data()+loc+6,11)
-    	mLSQDeriv = GetPowderPatternComponent(str.data()+loc+6).GetPowderPatternCalc();
-    	bnotcalculated = false;
-  	}
-	}
+    if (loc != string::npos) {
+      VFN_DEBUG_MESSAGE("MStruct::PowderPattern::GetLSQDerivative: "<<
+			"Derivative for Scale detected: "<< str.data()+loc+6,11)
+      mLSQDeriv = GetPowderPatternComponent(str.data()+loc+6).GetPowderPatternCalc();
+      bnotcalculated = false;
+    }
+  }
   	
-  // standart calculation
+  // standard calculation
   if(bnotcalculated) {	
-    	ObjCryst::PowderPattern::GetLSQDeriv(n,par);
-    	bnotcalculated = false;
-    	excluderegions = false;
+    ObjCryst::PowderPattern::GetLSQDeriv(n,par);
+    bnotcalculated = false;
+    excluderegions = false;
   }
 
   if (bsavecalc) {
@@ -1091,7 +1323,7 @@ const CrystVector_REAL& PowderPattern::GetLSQDeriv(const unsigned int n, Refinab
   
   // excluded regions
   const long nbExclude=mExcludedRegionMinX.numElements();
-
+  
   const REAL *p1=mLSQDeriv.data();
 
   if(excluderegions==true && nbExclude>0) {
@@ -1124,23 +1356,23 @@ const CrystVector_REAL& PowderPattern::GetLSQDeriv(const unsigned int n, Refinab
   
   // contributions of additional LSQ func. objects
 	
-	std::vector< const CrystVector_REAL* > vLSQDeriv(mAdditionalLSQObjRegistry.GetNb());
-	long nn = 0;
-	for(int iobj=0; iobj<mAdditionalLSQObjRegistry.GetNb(); iobj++) {
-		vLSQDeriv[iobj] = &mAdditionalLSQObjRegistry.GetObj(iobj).GetLSQDeriv(n,par);
-		nn += vLSQDeriv[iobj]->numElements();
-	}
+  std::vector< const CrystVector_REAL* > vLSQDeriv(mAdditionalLSQObjRegistry.GetNb());
+  long nn = 0;
+  for(int iobj=0; iobj<mAdditionalLSQObjRegistry.GetNb(); iobj++) {
+    vLSQDeriv[iobj] = &mAdditionalLSQObjRegistry.GetObj(iobj).GetLSQDeriv(n,par);
+    nn += vLSQDeriv[iobj]->numElements();
+  }
 	
-	long nn0 = mLSQDerivNotExcluded.numElements();
-	
-	mLSQDerivNotExcluded.resizeAndPreserve(nn0+nn);
-	
-	// copy data
-	REAL *p2 = mLSQDerivNotExcluded.data() + nn0;
-	for(int iobj=0; iobj<mAdditionalLSQObjRegistry.GetNb(); iobj++) {
-		const REAL *p1 = vLSQDeriv[iobj]->data();
-		for(int i=0; i<vLSQDeriv[iobj]->numElements(); i++) *p2++ = *p1++;
-	}
+  long nn0 = mLSQDerivNotExcluded.numElements();
+  
+  mLSQDerivNotExcluded.resizeAndPreserve(nn0+nn);
+  
+  // copy data
+  REAL *p2 = mLSQDerivNotExcluded.data() + nn0;
+  for(int iobj=0; iobj<mAdditionalLSQObjRegistry.GetNb(); iobj++) {
+    const REAL *p1 = vLSQDeriv[iobj]->data();
+    for(int i=0; i<vLSQDeriv[iobj]->numElements(); i++) *p2++ = *p1++;
+  }
   
   return mLSQDerivNotExcluded;  
 }
@@ -2649,12 +2881,15 @@ const ReflStore& HKLIntensityCorr::GetReflStore()const
 // PowderPatternDiffraction
 PowderPatternDiffraction::PowderPatternDiffraction()
 :mOmega(-1.),mCorrAbsorption(*this),mCorrTexture(*this),
-mCorrHKLIntensity(*this)
+ mCorrHKLIntensity(*this)
 {
   mClockMaster.AddChild(mCorrTexture.GetClockMaster());
   this->AddSubRefObj(mCorrTexture);
   this->AddSubRefObj(mCorrHKLIntensity);
   //mCorrHKLIntensity.RegisterClient(*this);
+
+  mReflProfFact = 2.0;
+  mReflProfMinRelIntensity = 0.001;
 }
 
 PowderPatternDiffraction::PowderPatternDiffraction(const PowderPatternDiffraction &old):
@@ -2815,7 +3050,7 @@ const CrystVector_REAL& PowderPatternDiffraction::GetLSQDeriv(
 			      const unsigned int n, RefinablePar &par)
 {
   string str = string(par.GetName());
-  unsigned int loc;
+  string::size_type loc;
 
   loc = str.find("_Ihkl_", 0); // CompName_Ihkl_h_k_l
   if(loc == string::npos) {
@@ -3251,14 +3486,201 @@ void SizeBroadeningEffect::InitParameters()
   }
 }
 
+////////////////////////////////////////////////////////////////////////
+//
+//    SizeDistribPowderPatternDiffraction
+//
+////////////////////////////////////////////////////////////////////////
+
+SizeDistribPowderPatternDiffraction::SizeDistribPowderPatternDiffraction ()
+  : mpSizeDistribReflProf(NULL)
+{}
+
+SizeDistribPowderPatternDiffraction::SizeDistribPowderPatternDiffraction (const SizeDistribPowderPatternDiffraction & old)
+  : MStruct::PowderPatternDiffraction(old), mpSizeDistribReflProf(NULL)
+{}
+
+SizeDistribPowderPatternDiffraction * SizeDistribPowderPatternDiffraction::CreateCopy () const
+{
+  return new SizeDistribPowderPatternDiffraction(*this);
+}
+
+const string & SizeDistribPowderPatternDiffraction::GetClassName () const
+{
+  static const string className = "MStruct::SizeDistribPowderPatternDiffraction";
+  return className;
+}
+
+const CrystVector_REAL & SizeDistribPowderPatternDiffraction::GetLSQDeriv (const unsigned int n, ObjCryst::RefinablePar & par)
+{
+  
+  mLSQDeriv.resize( this->GetParentPowderPattern().GetPowderPatternX().numElements() );
+  mLSQDeriv = 0.;
+
+  string str = par.GetName();
+  string::size_type loc = str.find("pD_", 0); // pD_ProfileName_nb
+ 
+  if( loc != string::npos && mpSizeDistribReflProf!=NULL ) {
+    VFN_DEBUG_MESSAGE("MStruct::SizeDistribPowderPatternDiffraction::GetLSQDeriv: "<<
+		      "Derivative with respect to a SizeDistrib (histogram) value detected: "<< str,11)
+    
+    // Confirm from the parameter address that this is really the SizeDistrib parameter
+    // and identify the (histogram) value related.
+    const CrystVector_REAL & dist = mpSizeDistribReflProf->GetDistribution();
+    long indPar = -1;
+    if( par.GetPointer()>=dist.data() && par.GetPointer()<=(dist.data()+dist.numElements()-1) )
+      indPar = long(par.GetPointer()-dist.data());
+    if( indPar<0 ) {
+      cerr << "Error: MStruct::SizeDistribPowderPatternDiffraction::GetLSQDeriv(...) asked to calculate "
+	   << "derivative with respect to variable name=" << par.GetName()
+	   << ". Can not find the related SizeDistrib parameter.\n";
+      throw ObjCrystException("MStruct::SizeDistribPowderPatternDiffraction::GetLSQDeriv(...): \
+             Wrong input argument.");
+    }
+    // Check clocks
+    if( mvClockLSQDerivCalculated[indPar]>mOtherParamsClock )
+      // the stored value can be used
+      mLSQDeriv = mvLSQDerivSizeDistrib[indPar];
+    else {
+      /*cout << par.GetName() << " derivative will be recalculated. " << '\n';*/
+      // the derivative has to be calculated
+      
+      // reference to the SizeDistribution
+      const CrystVector_REAL &dist = mpSizeDistribReflProf->GetDistribution();
+      // copy distribution (histogram) values
+      const CrystVector_REAL dist_current(dist);
+      // set distribution to P(*) = 0; P(indPar) = 1
+      for(int i=0; i<dist.numElements(); i++)
+	mpSizeDistribReflProf->GetPar( dist.data()+i ).SetValue(0.);
+      par.SetValue(1.);
+      // calculate pattern
+      mLSQDeriv = this->GetPowderPatternCalc();
+      // restore the distribution (histogram) values
+      for(int i=0; i<dist.numElements(); i++)
+	mpSizeDistribReflProf->GetPar( dist.data()+i ).SetValue(dist_current(i));
+
+      // save the calculated derivative
+      mvLSQDerivSizeDistrib[indPar] = mLSQDeriv;
+      mvClockLSQDerivCalculated[indPar].Click();
+    }
+
+    // finish the calculation and normalise the derivative
+    mLSQDeriv -= this->GetPowderPatternCalc();;
+    CrystVector_REAL t = mSizeDistribA0;
+    t *= mpSizeDistribReflProf->GetDistribution();
+    mLSQDeriv *= mSizeDistribA0(indPar)/t.sum();
+    
+    return mLSQDeriv;
+  }/* else {
+    cerr << "Error: MStruct::SizeDistribPowderPatternDiffraction::GetLSQDeriv(...) asked to calculate "
+	 << "derivative with respect to variable name=" << par.GetName()
+	 << ". This derivative not supported.\n";
+    throw ObjCrystException("MStruct::SizeDistribPowderPatternDiffraction::GetLSQDeriv(...): \
+             Wrong input argument.");
+	     } I_h_k_l ??? */
+
+  return MStruct::PowderPatternDiffraction::GetLSQDeriv(n,par);
+}
+
+void SizeDistribPowderPatternDiffraction::Prepare ()
+{
+  MStruct::PowderPatternDiffraction::Prepare();
+  mpSizeDistribReflProf = NULL;
+
+  // Try to find a SizeDistribBroadeningEffect in the list of ReflectionProfileComponents
+  if(this->GetProfile().GetClassName()==string("MStruct::ReflectionProfile")) {
+    MStruct::ReflectionProfile & reflProf = dynamic_cast<MStruct::ReflectionProfile &>(this->GetProfile());
+    vector<long> ind;
+    for(long i=0; i<reflProf.GeReflectionProfileComponentNb(); i++)
+      if(reflProf.GetReflectionProfileComponent(i).GetClassName()==string("MStruct::SizeDistribBroadeningEffect"))
+	ind.push_back(i);
+    if(ind.size()>0) {
+      mpSizeDistribReflProf =
+	dynamic_cast<MStruct::SizeDistribBroadeningEffect*>(&reflProf.GetReflectionProfileComponent(ind[0]));
+      VFN_DEBUG_MESSAGE("MStruct::SizeDistribPowderPatternDiffraction::Prepare: "<<
+			"SizeDistribBroadeningEffect object found whose clacluation will be optimised : "
+			<< mpSizeDistribReflProf->GetName(),11)
+    } // if(ind.size()>0)
+    if(ind.size()>1) {
+      cout << "Warning: (MStruct::SizeDistribPowderPatternDiffraction::Prepare) "
+	   << "Multiple ("<<ind.size()<<") MStruct::SizeDistribBroadeningEffect(s) found "
+	   << "in the (" << this->GetName() << ") object. Calculation for only the first one ("
+	   << mpSizeDistribReflProf->GetName() << ") will be optimised.";
+    } // if(ind.size()>1)
+  } // if(...)
+
+  // Create a Clock that triggers chages in all possibly related refinable parameters except
+  // that of the SizeDistrib model
+  {
+    // Remove all Child Clocks
+    // TODO:: Do this more clearly. Calling destructors explicitly looks ugly.
+    mOtherParamsClock.~RefinableObjClock(); mOtherParamsClock = ObjCryst::RefinableObjClock();// we need new clocks
+  }
+
+  // Connect "mOtherParamsClock" with appropriate parametrs.
+  if(mpSizeDistribReflProf!=NULL) {
+    // This is a little bit tricky to save code here
+    // 1) build an ObjRegistry. 2) go through the ObjRegistry and register Children Clocks.
+
+    // It is assumed that the SizeDistrib values are stored continuosly in the memory.
+    // Hence the first and last element adresses are used later for their identification.
+    const CrystVector_REAL & dist = mpSizeDistribReflProf->GetDistribution();
+    const REAL *pSizeDistribBegin = dist.data();
+    const REAL *pSizeDistribEnd = dist.data()+(dist.numElements()-1);
+
+    ObjCryst::ObjRegistry< ObjCryst::RefinableObj > tmpReg;
+    ObjCryst::RefObjRegisterRecursive ((ObjCryst::RefinableObj &)*this, tmpReg);
+    for(long iObj=0; iObj<tmpReg.GetNb(); iObj++) {
+      ObjCryst::RefinableObj & refObj = tmpReg.GetObj(iObj);
+      for(long iPar=0; iPar<refObj.GetNbPar(); iPar++) {
+	ObjCryst::RefinablePar & par = refObj.GetPar(iPar);
+	if(par.GetPointer()<pSizeDistribBegin || par.GetPointer()>pSizeDistribEnd)
+	  mOtherParamsClock.AddChild( par.GetClock() ); // this is not a SizeDistrib parameter
+      } // iPar
+    } // iObj 
+  }
+
+  // Crete Clocks when the LSQDerivatives were calculated last time
+  if(mpSizeDistribReflProf!=NULL) {
+    mvClockLSQDerivCalculated.clear(); // remove old clocks
+    // Create new clocks and Reset them 
+    mvClockLSQDerivCalculated.resize( mpSizeDistribReflProf->GetDistribution().numElements() );
+    for_each( mvClockLSQDerivCalculated.begin(), mvClockLSQDerivCalculated.end(),
+	      mem_fun_ref(&ObjCryst::RefinableObjClock::Reset) );
+  }
+  
+  // Prepare mpSizeDistribReflProf to store calculated derivatives
+  if(mpSizeDistribReflProf!=NULL)
+    mvLSQDerivSizeDistrib.resize( mpSizeDistribReflProf->GetDistribution().numElements() );
+
+  // Prepare the A(0) values used later for derivative calculation/normalisation
+  if(mpSizeDistribReflProf!=NULL) {
+    mSizeDistribA0.resize( mpSizeDistribReflProf->GetDistribution().numElements() );
+    CrystVector_REAL D1, D2;
+    mpSizeDistribReflProf->GetDistributionBins(D1, D2);
+    for(int i=0; i<D1.numElements(); i++)
+      mSizeDistribA0(i) = (pow(D1(i),2)+pow(D2(i),2))/pow(D1(i)+D2(i),2);
+  }
+}
+
 //----------------------------------
 //----------------------------------
 //----------------------------------
 
 // SizeDistribBroadeningEffect
-SizeDistribBroadeningEffect::SizeDistribBroadeningEffect():
-mD1(0), mD2(0), mDistrib(0), mLSQAlpha(0.), mLSQConstraintScale(0.)
+SizeDistribBroadeningEffect::SizeDistribBroadeningEffect()
+  :mD1(0), mD2(0), mDistrib(0), mLSQAlpha(0.), mLSQConstraintScale(0.),
+   mDmax(0.), mDistIntegral(0.), mVolumeDistIntegral(0.), mCurvIntStep(0.),
+   mBeginEndOptimizationCalled(0)
 {
+  //SetLSQRegularizationOption(LSQRegOpt_None); // Deprecated
+  mLSQConstraintScale = ObjCryst::RefinableObj::mDefaultLSQConstraintScale;
+}
+
+const string& SizeDistribBroadeningEffect::GetClassName()const
+{
+  static const string className = "MStruct::SizeDistribBroadeningEffect";
+  return className;
 }
 
 CrystVector_REAL SizeDistribBroadeningEffect::GetProfile(const CrystVector_REAL &x,
@@ -3347,65 +3769,111 @@ bool SizeDistribBroadeningEffect::IsRealSpaceType()const {
 }
 
 void SizeDistribBroadeningEffect::SetDistribution(const CrystVector_REAL d1, const CrystVector_REAL d2,
-																									const CrystVector_REAL distrib, const CrystVector_int fixed)
+						  const CrystVector_REAL distrib, const CrystVector_int fixed)
 {
-	if(d1.numElements()!=d2.numElements() || d2.numElements()!=distrib.numElements() || distrib.numElements()!=fixed.numElements()) {
-		cerr << "Error: Vectors contanining shape of crystallite size distribution have to be of same size.\n";
-		cerr << "Size distribution not set!" << endl;
-		return;
-	}
+  if(d1.numElements()!=d2.numElements() ||
+     d2.numElements()!=distrib.numElements() ||
+     distrib.numElements()!=fixed.numElements()) {
+    cerr << "Error: Vectors defining crystallite size distribution must be of same size.\n";
+    cerr << "Size distribution not set!" << endl;
+    return;
+  }
 	
-	// remove refinable parameters of the old distribution
-	for(int i=0; i<mDistrib.numElements(); i++) {
-		long n = this->FindPar(&mDistrib(i));
-		if (n>0 && n<this->GetNbPar()) this->RemovePar(&(this->GetPar(n)));
-	}
+  // remove refinable parameters of the old distribution
+  for(int i=0; i<mDistrib.numElements(); i++) {
+    long n = this->FindPar(&mDistrib(i));
+    if (n>=0 && n<this->GetNbPar()) this->RemovePar(&(this->GetPar(n)));
+  }
 	
-	// set the new distribution
+  // set the new distribution
   mD1 = d1;
   mD2 = d2;
   mDistrib = distrib;
   
+  // find Dmax and min(widthD)
+  REAL Dmax = -1., Dw = 1e6;
+  for(int i=0; i<distrib.numElements(); i++) {
+    if ( mD2(i)>Dmax ) Dmax = mD2(i);
+    if ( (mD2(i)-mD1(i))<Dw ) Dw = mD2(i)-mD1(i);
+  }
+  mDmax = Dmax;
+  mCurvIntStep = Dw/2;
+
   // set new refinable parameters
   for(int i=0; i<distrib.numElements(); i++) {
-  	// generate parameter name
-  	string name;
-  	{
-    	stringstream s;
-    	s << "pD_" << this->GetName() << "_" << i;
-    	name = s.str();
-  	}
-  	// add new refinable paramer
-  	{
-    	RefinablePar tmp(name, &mDistrib(i), 0., 1.e4,
-                     gpRefParTypeScattDataProfileWidth,
-                     REFPAR_DERIV_STEP_ABSOLUTE,true,fixed(i),true,false,1.0);
-    	tmp.AssignClock(mClockMaster);
-    	tmp.SetDerivStep(0.1);
-    	this->AddPar(tmp);
-    	this->GetPar(name).SetIsFixed(fixed(i));
-    	this->GetPar(name).Print();
-  	}  
+    // generate parameter name
+    string name;
+    {
+      stringstream s;
+      s << "pD_" << this->GetName() << "_" << i;
+      name = s.str();
+    }
+    // add new refinable paramer
+    {
+      RefinablePar tmp(name, &mDistrib(i), 0., 1.e7,
+		       gpRefParTypeScattDataProfileSizeDistrib,
+		       REFPAR_DERIV_STEP_ABSOLUTE,true,fixed(i),true,false,1.0);
+      tmp.AssignClock(mClockMaster);
+      tmp.SetDerivStep(0.01);
+      this->AddPar(tmp);
+      this->GetPar(name).SetIsFixed(fixed(i));
+      this->GetPar(name).Print();
+    }  
   }
   
-  // set mLSQCalc, mLSQObs and mLSQDeriv attributes
-  mLSQCalc.resize(mDistrib.numElements()-1);
-  mLSQObs.resize(mDistrib.numElements()-1);
-  mLSQWeight.resize(mDistrib.numElements()-1);
-  mLSQDeriv.resize(mDistrib.numElements()-1);
-	
-	mLSQCalc = 0.;
-	mLSQObs = 0.;
-	mLSQWeight = mLSQAlpha;
-	for(int i=0; i<mLSQCalc.numElements(); i++)
-		mLSQCalc(i) = (mDistrib(i+1)-mDistrib(i))/(0.5*(mD1(i+1)+mD2(i+1))-0.5*(mD1(i)+mD2(i)));
+  // rebuild the list of LSQ Regularization Operators
+  this->RebuildLSQRegOpList();
+  
+  // reset clocks
+  mClockDistIntegralCalc.Reset();
+}
+
+const CrystVector_REAL & SizeDistribBroadeningEffect::GetDistribution () const
+{
+  return mDistrib;
+}
+
+void SizeDistribBroadeningEffect::GetDistributionBins (CrystVector_REAL & D1, CrystVector_REAL & D2) const
+{
+  D1 = mD1;
+  D2 = mD2;
+}
+
+REAL SizeDistribBroadeningEffect::GetDistribIntegral() const
+{
+  this->CalcDistIntegral();
+  return mDistIntegral;
+}
+
+REAL SizeDistribBroadeningEffect::GetVolumeDistribIntegral() const
+{
+  this->CalcDistIntegral();
+  return mVolumeDistIntegral;
+}
+
+void SizeDistribBroadeningEffect::CalcDistIntegral() const
+{
+  // distribution is connected with the master clock
+  if(mClockDistIntegralCalc<this->GetClockMaster()) {
+    // recalculate integrals
+    mDistIntegral = 0.;
+    mVolumeDistIntegral = 0.;
+
+    for(int i=0; i<mDistrib.numElements(); i++) {
+      const REAL w = mD2(i)-mD1(i);
+      const REAL d = 0.5*(mD1(i)+mD2(i));
+      mDistIntegral += mDistrib(i)/pow(d,3); //*w
+      mVolumeDistIntegral += mDistrib(i); //*w
+    }
+    mClockDistIntegralCalc.Click();
+  }
 }
 
 void SizeDistribBroadeningEffect::ReadDistributionFromFile(
 						  const char* filename)
 {
-	CrystVector_REAL vD1(10), vD2(10), vDistrib(10);
-	CrystVector_int vFixed(10);
+  CrystVector_REAL vD1(10), vD2(10), vDistrib(10);
+  CrystVector_int vFixed(10);
 	
   ifstream f(filename);
   string line;
@@ -3416,13 +3884,13 @@ void SizeDistribBroadeningEffect::ReadDistributionFromFile(
     int fixed = 1;
     REAL d1, d2, v;
     istringstream s(line);
-    s >> d1 >> d2 >> v >> fixed;
+    s >> d1 >> d2 >> v >> fixed; // >> sigma;
     if (s.fail()==true) break;
     if(n>=vD1.numElements()) {
-    	vD1.resizeAndPreserve(n+10);
-    	vD2.resizeAndPreserve(n+10);
-    	vDistrib.resizeAndPreserve(n+10);
-    	vFixed.resizeAndPreserve(n+10);
+      vD1.resizeAndPreserve(n+10);
+      vD2.resizeAndPreserve(n+10);
+      vDistrib.resizeAndPreserve(n+10);
+      vFixed.resizeAndPreserve(n+10);
     }
     vD1(n) = d1*10.; vD2(n) = d2*10.; vDistrib(n) = v; vFixed(n) = fixed;
     n++;
@@ -3451,14 +3919,16 @@ void SizeDistribBroadeningEffect::WriteDistributionToFile(const char* filename) 
   ofstream f(filename);
   
   // write header
-  f << "#     D1(nm)" << setw(10) << "D2(nm)" << setw(10) << "distrib" << setw(8) << "fixed" << "\n";
+  f << "#     D1(nm)" << setw(10) << "D2(nm)" << setw(12) << "distrib" << setw(8) << "fixed" << "\n";
   f << showpoint << fixed;
   const REAL *p = mDistrib.data();
   for(int i=0; i<mDistrib.numElements(); i++) {
-  	const RefinablePar &par = this->GetPar(p+i);
-  	f << setprecision(1) << setw(12) << mD1(i)/10. << setw(10) << mD2(i)/10.;
-  	f << setprecision(2) << setw(10) << mDistrib(i) << setw(8) << (int) par.IsFixed();
-  	f << "\n";
+    const RefinablePar &par = this->GetPar(p+i);
+    f << setprecision(2) << setw(12) << mD1(i)/10. << setw(10) << mD2(i)/10.;
+    f << setprecision(3) << setw(12) << mDistrib(i) << setw(8) << (int) par.IsFixed();
+    f << setprecision(3) << setw(12) << par.GetHumanSigma();
+    f << scientific << setprecision(2) << setw(12) << mDistrib(i)/pow(0.5*(mD2(i)+mD1(i))/10.,3) << fixed;
+    f << "\n";
   }
   
   // save original file content at the end of the file
@@ -3467,72 +3937,661 @@ void SizeDistribBroadeningEffect::WriteDistributionToFile(const char* filename) 
   f.close();
 }
 
-void SizeDistribBroadeningEffect::SetLSQAlpha(const REAL alpha)
-{
-	mLSQAlpha = alpha;
-}
-
 void SizeDistribBroadeningEffect::SetLSQConstraintScale(const REAL scale)
 {
-	mLSQConstraintScale = scale;
+  mLSQConstraintScale = scale;
 }
 
-const CrystVector_REAL& SizeDistribBroadeningEffect::GetLSQCalc(const unsigned int n) const
+void SizeDistribBroadeningEffect::BuildDistribution(const REAL Dmin, const REAL Dmax,
+						    const int NbIntervals, const string spacing)
 {
-	return mLSQCalc;
-}
+  CrystVector_REAL D1(NbIntervals);
+  CrystVector_REAL D2(NbIntervals);
+  CrystVector_REAL  G(NbIntervals); // f(D)*D^3*(D2-D1)
+  CrystVector_int Fixed(NbIntervals);
+  
+  Fixed = 0;
+  
+  if( (Dmin<=1e-7) || (Dmax<Dmin) || (NbIntervals<1) ) {
+    cerr << "< MStruct::SizeDistribBroadeningEffect::GenerateDistribution(...)\n";
+    cerr << "\t"<<" Dmin="<<Dmin<<", Dmax="<<Dmax<<", NbIntervals="<<NbIntervals<<"\n";
+    cerr << "\t Wrong input argument. >"<<endl;
+    throw ObjCrystException("MStruct::SizeDistribBroadeningEffect::GenerateDistribution(...): \
+             Wrong input argument.");
+  }
+  
+  // genarete x-axis values
+  if ( spacing == string("linear") ) {
+    // linear
+    for(int i=0; i<NbIntervals; i++) {
+      D1(i) = Dmin + i     * (Dmax-Dmin)/NbIntervals;
+      D2(i) = Dmin + (i+1) * (Dmax-Dmin)/NbIntervals;
+    }
 
-const CrystVector_REAL& SizeDistribBroadeningEffect::GetLSQObs(const unsigned int n) const
-{	
-	return mLSQObs;
-}
-
-const CrystVector_REAL& SizeDistribBroadeningEffect::GetLSQWeight(const unsigned int n) const
-{
-	return mLSQWeight;
-}
-
-const CrystVector_REAL& SizeDistribBroadeningEffect::GetLSQDeriv(const unsigned int n, ObjCryst::RefinablePar &par)
-{
-	//CrystVector_REAL mLSQDeriv(mDistrib.numElements()-1);
-	
-	mLSQDeriv = 0.;
-	
-	// find par in the list of mDistrib
-	int j = -1;
-	for(int i=0; i<mDistrib.numElements(); i++) {
-		// the easiest way whould be to copmpare values adresses,
-		// byt the physical adress of the parametr value is inaccessible
-		// hence the par. names or parmaeters directly have to be comapred
-		if(par.GetName()==this->GetPar(&mDistrib(i)).GetName()) { j = i; break; }
-	}
-	
-	// if the parameter was found
-	if(j>=0)
-		for(int i=0; i<mLSQDeriv.numElements(); i++)
-			if(i+1==j) mLSQDeriv(i) = (+1.)/(0.5*(mD1(i+1)+mD2(i+1))-0.5*(mD1(i)+mD2(i)));
-			else if(i==j) mLSQDeriv(i) = (-1.)/(0.5*(mD1(i+1)+mD2(i+1))-0.5*(mD1(i)+mD2(i)));
-		
-	return mLSQDeriv;
+  } else if ( spacing == string("log") ) {
+    // logarithmic
+    for(int i=0; i<NbIntervals; i++) {
+      D1(i) = exp( log(Dmin) + i     * ( log(Dmax/Dmin)/NbIntervals ) );
+      D2(i) = exp( log(Dmin) + (i+1) * ( log(Dmax/Dmin)/NbIntervals ) );
+    }
+  } else if ( spacing == string("sqrt") ) {
+    // square root
+    for(int i=0; i<NbIntervals; i++) {
+      D1(i) = pow( sqrt(Dmin) + i     * ( (sqrt(Dmax)-sqrt(Dmin))/NbIntervals ) ,2);
+      D2(i) = pow( sqrt(Dmin) + (i+1) * ( (sqrt(Dmax)-sqrt(Dmin))/NbIntervals ) ,2);
+    }
+  } else {
+    // unknown option
+    cerr << "< MStruct::SizeDistribBroadeningEffect::GenerateDistribution(...)\n";
+    cerr << "\t"<<"spacing="<<spacing<<" \t"<<"Unknown x spacing type. >"<<endl;
+    throw ObjCrystException("MStruct::SizeDistribBroadeningEffect::GenerateDistribution(...): \
+             Wrong input argument.");
+  }
+  
+  REAL t = 0.;
+  for(int i=0; i<NbIntervals; i++) {
+    REAL D = 0.5*(D1(i)+D2(i));
+    //G(i) = (1.-cos(2.*M_PI*(D-D1(0))/(D2(NbIntervals-1)-D1(0)))) / (D2(NbIntervals-1)-D1(0)) * pow(D,3);
+    G(i) = (1.-cos(2.*M_PI*(D-D1(0))/(D2(NbIntervals-1)-D1(0)))) * pow(D,3) / (D2(i)-D1(i));
+    t += G(i);
+  }
+  G *= 1.e5/t;
+  
+  this->SetDistribution(D1,D2,G,Fixed);
 }
 
 unsigned int SizeDistribBroadeningEffect::GetNbLSQConstraints() const
 {
-	return 1;
+  return 1;
 }
 
 void SizeDistribBroadeningEffect::GetLSQConstraint(const unsigned int n,
-  																								 std::vector< const ObjCryst::RefinablePar* > &parList, CrystVector_REAL &coef) const
+						   std::vector< const ObjCryst::RefinablePar* > &parList,
+						   CrystVector_REAL &coef) const
 {
-	parList.clear();
-	coef.resize(mDistrib.numElements());
+  parList.clear();
+  coef.resize(mDistrib.numElements());
+  
+  for(int i=0; i<mDistrib.numElements(); i++) {
+    parList.push_back(&(this->GetPar(mDistrib.data()+i)));
+    coef(i) = 1.; // abs(mD2(i)-mD1(i));
+  }
+
+  //coef *= mLSQConstraintScale/coef.max();
+}
+
+unsigned int SizeDistribBroadeningEffect::GetNbLSQRegularizationOperator(const unsigned int LSQfunc) const
+{
+  return mLSQRegOpList.size();
+}
+
+const LSQRegularizationOperator &
+            SizeDistribBroadeningEffect::GetLSQRegularizationOperator(const unsigned int nOp,
+								      const unsigned int LSQfunc) const
+{
+  if( !(nOp<mLSQRegOpList.size()) ) {
+    cerr<<"MStruct::SizeDistribBroadeningEffect::GetLSQRegularizationOperator(nOp="<<nOp;
+    cerr<<", LSQfunc="<<LSQfunc<<"): Only "<<mLSQRegOpList.size()<<" operator(s) aviable.\n";
+    throw ObjCrystException("MStruct::SizeDistribBroadeningEffect::GetLSQRegularizationOperator(...): \
+Wrong input argument.");
+  }
+  
+  // Normalise the LSQ regularization matrix
+
+  CrystMatrix_REAL H = mLSQRegOpList[nOp].GetRegularizationOperatorMatrix();
+  REAL scale = 1.;
+
+  switch ( mLSQRegTypeList[nOp] ) {
+    
+  case LSQRegOpt_DistribDeriv: // Integral of the Arithmetic Distribution Derivative
+    scale = pow(1./(mDmax*this->GetDistribIntegral()),2)/mDmax;
+    break;
+
+  case LSQRegOpt_VolumeDistribDeriv: // Integral of the Volume weighted Distribution Derivative
+    scale = mDmax*pow(mDmax/this->GetVolumeDistribIntegral(),2);
+    break;
+
+  } // switch
+
+  // rescale matrix
+  H *= scale/mLSQRegOpNorm[nOp];
+  // save the current norm
+  mLSQRegOpNorm[nOp] = scale;
+
+  mLSQRegOpList[nOp].SetRegularizationOperatorMatrix(H);
+
+  return mLSQRegOpList[nOp];
+}
+
+void SizeDistribBroadeningEffect::GlobalOptRandomMove(const REAL mutationAmplitude,
+							    const RefParType *type)
+{
+  VFN_DEBUG_MESSAGE("MStruct::SizeDistribBroadeningEffect::GlobalOptRandomMove:Begin",11);
+
+  GenerateRandomDistrib();
+
+  VFN_DEBUG_EXIT("MStruct::SizeDistribBroadeningEffect::GlobalOptRandomMove:End",11);
+}
+
+LSQRegularizationOperator SizeDistribBroadeningEffect::CreateLSQRegOpVolumeDistribDeriv(const REAL weight) const
+{
+  if( mDistrib.numElements()==0 )
+    return EmptyLSQRegularizationOperatorObj;
+
+  // prepare regularization operator
+  const int nbBins = mDistrib.numElements();
+  CrystMatrix_REAL H(nbBins,nbBins);
+
+  /*  | 2  -1   0   0   0    0 |
+      |-1   2  -1   0   0    0 |
+      | 0  -1   2  -1   0    0 |
+      | 0   0  -1   2  -1    0 |
+      | 0   0   0  -1   2   -1 |
+      | 0   0   0   0  -1    2 | */
+
+  // points at bins centers, derivates are calculated between them
+  CrystVector_REAL D(nbBins);
+  for(int i=0; i<nbBins; i++)
+    D(i) = 0.5*(mD1(i)+mD2(i));
+
+  H = 0.;
+  //const REAL scale = mDmax*pow(mDmax/this->GetVolumeDistribIntegral(),2);
+  const REAL scale = 1.; // scaled dynamically in the GetLSQRegularizationOperator(...)
+
+  // diagonal
+  H(0,0) = scale*(1./(D(1)-D(0))+1./(D(0)-0)) /pow(mD2(0)-mD1(0),2);
+  for(int i=1; i<nbBins-1; i++)
+    H(i,i) = scale*(1./(D(i)-D(i-1))+1./(D(i+1)-D(i))) /pow(mD2(i)-mD1(i),2);
+  H(nbBins-1,nbBins-1) = scale*(1./(D(nbBins-1)-D(nbBins-2))+
+				1./(mDmax-D(nbBins-1))) /pow(mD2(nbBins-1)-mD1(nbBins-1),2);
+  // upper diagonal
+  for(int i=0; i<nbBins-1; i++)
+    H(i,i+1) = -1.*scale/(D(i+1)-D(i)) /(mD2(i)-mD1(i))/(mD2(i+1)-mD1(i+1));
+  // lower diagonal
+  for(int i=0; i<nbBins-1; i++)
+    H(i+1,i) = -1.*scale/(D(i+1)-D(i)) /(mD2(i)-mD1(i))/(mD2(i+1)-mD1(i+1));
+
+  // create parameters list
+  std::vector< const RefinablePar * > parList;
+  for(int i=0; i<nbBins; i++) {
+    parList.push_back( &(this->GetPar(mDistrib.data()+i)) );
+  }
+
+  // add new LSQRegularizationOperator
+  LSQRegularizationOperator regOp("SizeDistrib "+this->GetName()+" LSQRegOp - volume distrib. derivative");
+  regOp.SetRegularizationOperatorMatrix(H);
+  regOp.SetRegularizationOperatorWeight(weight);
+  regOp.SetParamList(parList);
+  
+  return regOp;
+}
+
+LSQRegularizationOperator SizeDistribBroadeningEffect::CreateLSQRegOpDistribDeriv(const REAL weight) const
+{
+  if( mDistrib.numElements()==0 )
+    return EmptyLSQRegularizationOperatorObj;
+
+  // prepare regularization operator
+  const int nbBins = mDistrib.numElements();
+  CrystMatrix_REAL H(nbBins,nbBins);
+
+  /*  | 2  -1   0   0   0    0 |
+      |-1   2  -1   0   0    0 |
+      | 0  -1   2  -1   0    0 |
+      | 0   0  -1   2  -1    0 |
+      | 0   0   0  -1   2   -1 |
+      | 0   0   0   0  -1    2 | */
+
+  // points at bins centers, derivates are calculated between them
+  CrystVector_REAL D(nbBins);
+  for(int i=0; i<nbBins; i++)
+    D(i) = 0.5*(mD1(i)+mD2(i));
+
+  H = 0.;
+  //const REAL scale = pow(1./(mDmax*this->GetDistribIntegral()),2)/mDmax;
+  const REAL scale = 1.; // scaled dynamically in the GetLSQRegularizationOperator(...)
+
+  // diagonal
+  H(0,0) = scale*(1./(D(1)-D(0))+1./(D(0)-0)) /pow(D(0)/mDmax,6) /pow(mD2(0)-mD1(0),2);
+  for(int i=1; i<nbBins-1; i++)
+    H(i,i) = scale*(1./(D(i)-D(i-1))+1./(D(i+1)-D(i))) /pow(D(i)/mDmax,6) /pow(mD2(i)-mD1(i),2);
+  H(nbBins-1,nbBins-1) = scale*(1./(D(nbBins-1)-D(nbBins-2))+
+				1./(mDmax-D(nbBins-1))) /pow(D(nbBins-1)/mDmax,6) /pow(mD2(nbBins-1)-mD1(nbBins-1),2);
+  // upper diagonal
+  for(int i=0; i<nbBins-1; i++)
+    H(i,i+1) = -1.*scale/(D(i+1)-D(i)) /pow(D(i)/mDmax,3)/pow(D(i+1)/mDmax,3) /(mD2(i)-mD1(i))/(mD2(i+1)-mD1(i+1));
+  // lower diagonal
+  for(int i=0; i<nbBins-1; i++)
+    H(i+1,i) = -1.*scale/(D(i+1)-D(i)) /pow(D(i+1)/mDmax,3)/pow(D(i)/mDmax,3) /(mD2(i)-mD1(i))/(mD2(i+1)-mD1(i+1));
+
+  // create parameters list
+  std::vector< const RefinablePar * > parList;
+  for(int i=0; i<nbBins; i++)
+    parList.push_back( &(this->GetPar(mDistrib.data()+i)) );
+
+  // add new LSQRegularizationOperator
+  LSQRegularizationOperator regOp("SizeDistrib "+this->GetName()+" LSQRegOp - distrib. derivative");
+  regOp.SetRegularizationOperatorMatrix(H);
+  regOp.SetRegularizationOperatorWeight(weight);
+  regOp.SetParamList(parList);
+  
+  return regOp;
+}
+
+void SizeDistribBroadeningEffect::GenerateRandomDistrib()
+{
+  VFN_DEBUG_MESSAGE("MStruct::SizeDistribBroadeningEffect::GenerateRandomDistrib:Begin",11);
+  
+  // for each bin select a random value from uniform distribution in the interval [0,1)
+  REAL *p = mDistrib.data();
+  //for(int i=0; i<<mDistrub.numElements(); i++) { *p = real_rand()/pow(i+0.5,3); p++; } // v2
+  for(int i=0; i<mDistrib.numElements(); i++) {
+    if (!(this->GetPar(p).IsFixed())) *p = real_rand()*pow(0.5*(mD1(i)+mD2(i))/10.,3); // v1
+    p++;
+  }
+
+  // normalise the distrution so sum(i=0..Nbins-1, P(i)*BinWidth)==1 holds
+  REAL sum = 0.;
+  for(int i=0; i<mDistrib.numElements(); i++)
+    sum += mDistrib(i)/pow(0.5*(mD1(i)+mD2(i))/10.,3) * fabs(mD2(i)-mD1(i));
+
+  if( sum>1.e-7 ) mDistrib *= 1./sum; // NOTE: Here also fixed params. are affected
+
+  // Distribution has changed, reflection profile should be recomputed
+  //mClockReflProfCalc.Reset();
+
+  // Object has changed
+  mClockMaster.Click();
+
+  VFN_DEBUG_EXIT("MStruct::SizeDistribBroadeningEffect::GenerateRandomDistrib:End",11);
+}
+
+
+void SizeDistribBroadeningEffect::AddLSQRegularizationMethod(const int option, const REAL weight)
+{
+  VFN_DEBUG_MESSAGE("MStruct::SizeDistribBroadeningEffect::AddLSQRegularizationMethod("
+		    <<option<<","<<weight<<"):Begin",11);
+  
+  // add new in the list
+  mLSQRegTypeList.push_back(option);
+  mLSQRegWeightList.push_back(weight);
+  
+  // rebuild the RegOpList
+  this->RebuildLSQRegOpList();
+
+  VFN_DEBUG_EXIT("MStruct::SizeDistribBroadeningEffect::AddLSQRegularizationMethod:End",11);
+}
+
+REAL SizeDistribBroadeningEffect::CalcCurvInt() const
+{
+  VFN_DEBUG_MESSAGE("MStruct::SizeDistribBroadeningEffect::CalcCurvInt():Begin",11);
+
+  // calcualte unsigned curvature integral - approximate data with cubic spline
+
+  // create cubic spline approximation of the size distribution
+  // TODO:: be carefull ! - noncontinous distributions with "holes" are not handled correctly
+
+  const int nb = mD1.numElements();
+  CrystVector_REAL x(nb+2);
+  CrystVector_REAL y(nb+2); // zero values will be added to the begin and end 
+    
+  // assign data, Distrib(D=0)==0, Distrib(Dmax=0)==0
+  x(0) = 0.; y(0) = 0.;
+  x(nb+1) = mDmax; y(nb+1) = 0.;
+    
+  REAL *px = x.data()+1; REAL *py = y.data()+1;
+  const REAL *pd1 = mD1.data(); const REAL *pd2 = mD2.data(); const REAL *pD = mDistrib.data();
+  for(int i=0; i<nb; i++) {
+    *px = (*pd1+*pd2)/2.;
+    *py = *pD/pow(*px,3);
+    px++; py++; pd1++; pd2++; pD++;
+  }
+    
+  // cubic spline approximation with zero derivatives at D=0 and D=Dmax points
+  CubicSpline spline(x,y,0.,0.);
+
+  // calculate integral of the size distribution unsigned curvature over
+  // the whole distribution interval
+
+  // first derivative
+  const int nint = int(mDmax/mCurvIntStep)+1;
+  const CrystVector_REAL yy1 = spline.Derivative(0.,mCurvIntStep,nint);
+  // second derivative
+  const CrystVector_REAL yy2 = spline.Derivative(0.,mCurvIntStep,nint);
+  
+  // integrate using trapezoidal rule
+  REAL sum = 0.;
+  const REAL *p1 = yy1.data()+1;
+  const REAL *p2 = yy2.data()+1;
+  for(int k=1; k<nint-1; k++)
+    sum += abs(*p2)/(1. + (*p1)*(*p1));
+  sum += 0.5 * ( abs(yy2(0))/(1. + yy1(0)*yy1(0)) + abs(yy2(nint-1))/(1. + yy1(nint-1)*yy1(nint-1)) );
+  sum *= mCurvIntStep;
+  
+  VFN_DEBUG_EXIT("MStruct::SizeDistribBroadeningEffect::CalcCurvInt():End:"<<sum,11);
+
+  return sum;
+}
+
+void SizeDistribBroadeningEffect::RebuildLSQRegOpList ()
+{
+  // mDmax and mCurvIntStep are set at same time as the distribution is defined
+  
+  // clear the list of regularization operators
+  mLSQRegOpList.clear();
+  mLSQRegOpNorm.clear();
+
+  // build new operators
+  for(int iOp=0; iOp<mLSQRegTypeList.size(); iOp++) {
+    
+    // prepare attributes for the given option
+    switch ( mLSQRegTypeList[iOp] ) {
+
+    case LSQRegOpt_None: // no regularization - nothing to do
+
+      break;
+
+    case LSQRegOpt_DistribDeriv: // simple arithmetic distribution derivative optimization
+
+      mLSQRegOpList.push_back( CreateLSQRegOpDistribDeriv(mLSQRegWeightList[iOp]) );
+      mLSQRegOpNorm.push_back(1.);
+      break;
+
+    case LSQRegOpt_VolumeDistribDeriv: // simple (volume weighted) distribution derivative optimization
+    
+      mLSQRegOpList.push_back( CreateLSQRegOpVolumeDistribDeriv(mLSQRegWeightList[iOp]) );
+      mLSQRegOpNorm.push_back(1.);
+      break;
+    
+    case LSQRegOpt_BothDistribDeriv: // both arithetic distribution and volume weighted
+                                     // distribution derivatives optimization
+ 
+      mLSQRegOpList.push_back( CreateLSQRegOpVolumeDistribDeriv(mLSQRegWeightList[iOp]) );
+      mLSQRegOpNorm.push_back(1.);
+      mLSQRegOpList.push_back( CreateLSQRegOpDistribDeriv(mLSQRegWeightList[iOp]) );
+      mLSQRegOpNorm.push_back(1.);
+      break;
+
+    case LSQRegOpt_CurvIntegral: // curvature integral minimization
+    
+      // unsupportd
+      break;
+  
+    default: // error
+
+      cerr << "< MStruct::SizeDistribBroadeningEffect::RebuildLSQRegOpList()\n";
+      cerr << "\t"<<"iOp:"<<iOp<<", option="<<mLSQRegTypeList[iOp]<<" \t"<<"Unknown option. >"<<endl;
+      throw ObjCrystException("MStruct::SizeDistribBroadeningEffect::RebuildLSQRegOpList(): \
+             Logical error.");
+      break;
+
+    } // switch
+
+  } // iOp
+}
+
+void SizeDistribBroadeningEffect::BeginOptimization (const bool allowApproximations,
+						     const bool enableRestraints)
+{
+  mBeginEndOptimizationCalled++;
+
+  // When called for the first time, print Constraints and Regularization Info
+  if(mBeginEndOptimizationCalled==1) {
+    this->PrintConstraintsStatistics();
+    this->PrintRegularizationStatistics();
+  }
+}
+
+void SizeDistribBroadeningEffect::EndOptimization ()
+{
+  mBeginEndOptimizationCalled--;
+
+  // When called for the last time, print Constraints and Regularization Info
+  if(mBeginEndOptimizationCalled==0) {
+    this->PrintConstraintsStatistics();
+    this->PrintRegularizationStatistics();
+  }
+}
+
+void SizeDistribBroadeningEffect::PrintRegularizationStatistics () const
+{
+  if(this->GetNbLSQRegularizationOperator(0)==0) return;
+
+  cout << "SizeDistribBroadeningEffect: " << this->GetName() << " Regularization Statistics\n";
+  cout << " ------------------------------------------------------------------------------- \n";
+  for(int iOp=0; iOp<this->GetNbLSQRegularizationOperator(0); iOp++) {
+    const ObjCryst::LSQRegularizationOperator & regOp = this->GetLSQRegularizationOperator(iOp,0);
+    REAL ChiSq = regOp.GetValue();
+    REAL Lambda = regOp.GetRegularizationOperatorWeight();
+    cout << "(non-weighted)RegOp-ChiSq" << iOp << ": " << ChiSq;
+    cout << "\t\tWeight: " << Lambda << "\t\t(" << regOp.GetName() << ")\n";
+  }
+}
+
+void SizeDistribBroadeningEffect::PrintConstraintsStatistics () const
+{
+  if(this->GetNbLSQConstraints()==0) return;
+
+  cout << "SizeDistribBroadeningEffect: " << this->GetName() << " Constraints Statistics\n";
+  cout << " ------------------------------------------------------------------------------- \n";
+  for(int iCon=0; iCon<this->GetNbLSQConstraints(); iCon++) {
+
+    std::vector< const ObjCryst::RefinablePar* > parList;
+    CrystVector_REAL coef;
+    
+    this->GetLSQConstraint(iCon, parList, coef);
+
+    REAL val = 0.;
+    for(int i=0; i<parList.size(); i++)
+      val += coef(i) * parList[i]->GetValue();
+
+    cout << "Constraint" << iCon << ": " << val;
+    cout << "\t\t(VolumeDistribInteg: " << this->GetVolumeDistribIntegral();
+    cout << ", DistribInteg: " << this->GetDistribIntegral() << ")\n";
+  }
+}
+
+//----------------------------------
+//----------------------------------
+//----------------------------------
+
+// RandomSizeDistribBroadeningEffect
+RandomSizeDistribBroadeningEffect::RandomSizeDistribBroadeningEffect()
+  :mNbins(0),mBinWidth(0.),mDistrib(0)
+{}
+
+const string& RandomSizeDistribBroadeningEffect::GetClassName()const
+{
+  static const string className = "MStruct::RandomSizeDistribBroadeningEffect";
+  return className;
+}
+
+void RandomSizeDistribBroadeningEffect::SetDistribution(const int Nbins, const REAL Dmax,
+							const CrystVector_REAL &distrib)
+{
+  VFN_DEBUG_MESSAGE("MStruct::RandomSizeDistribBroadeningEffect::SetDistribution(...):Begin",11);
 	
-	for(int i=0; i<mDistrib.numElements(); i++) {
-		parList.push_back(&(this->GetPar(mDistrib.data()+i)));
-		coef(i) = abs(mD2(i)-mD1(i));
-	}
+  bool rebuild = ( mNbins != Nbins );
 	
-	coef *= mLSQConstraintScale/coef.max(); 
+  if (rebuild) {
+    // Number of params. has changed. The old params. and params. sets have to be removed.
+    
+    // Remove all possible own RefinablePar sets
+    EraseAllParamSet();
+
+    // Remove all registred parameters connected with the old size distribution
+    try {
+      for(int i=0; i<mNbins; i++) {
+	ObjCryst::RefinablePar &par = this->GetPar(&mDistrib(i));
+	this->RemovePar(&par);
+      }
+    }
+    catch (std::exception &e) {
+      cerr << "< MStruct::RandomSizeDistribBroadeningEffect::SetDistribution()\n";
+      cerr << "Unexpected exception: " << e.what() << "\n";
+      cerr << "Unexpected exception thrown during removing old parameters from the object.\n >" << endl; 
+      throw ObjCrystException("MStruct::RandomSizeDistribBroadeningEffect::SetDistribution(): Program error.");
+    }
+  } // rebuild==true
+
+  // set new distribution
+  mBinWidth = (Nbins!=0) ? Dmax*10./Nbins : 0.; // nm->A
+  mDistrib.resize(Nbins);
+  mNbins = Nbins;
+  
+  if( distrib.numElements()==mNbins && fabs(mBinWidth)>1e-6 ) {
+    mDistrib = distrib;
+    // check if distribution is properly normalised
+    mDistrib *= 1./(mDistrib.sum()*mBinWidth);
+  }
+  else // generate new random set
+    GenerateRandomDistrib(); // be careful here - maybe the parameters are not initialised
+
+  if (rebuild) {
+    // Number of params. has changed. Object has to be reinitialised.
+    Init();
+  }
+
+  mClockMaster.Click(); // Object has been changed
+
+  mClockReflProfCalc.Reset(); // Distribution has changed, reflection profile should be recomputed
+	
+  VFN_DEBUG_EXIT("MStruct::RandomSizeDistribBroadeningEffect::SetDistribution:End",11);
+}
+
+void RandomSizeDistribBroadeningEffect::GenerateRandomDistrib()
+{
+  VFN_DEBUG_MESSAGE("MStruct::RandomSizeDistribBroadeningEffect::GenerateRandomDistrib:Begin",11);
+  
+  // for each bin select a random value from uniform distribution in the interval [0,1)
+  REAL *p = mDistrib.data();
+  //for(int i=0; i<mNbins; i++) { *p = real_rand()/pow(i+0.5,3); p++; } // v2
+  for(int i=0; i<mNbins; i++) { *p = real_rand(); p++; } // v1
+
+  // normalise the distrution so sum(i=0..Nbins-1, P(i)*BinWidth)==1 holds
+  if ( mNbins>0 && fabs(mBinWidth)>0. ) mDistrib *= 1./(mDistrib.sum()*mBinWidth);
+
+  // Distribution has changed, reflection profile should be recomputed
+  mClockReflProfCalc.Reset();
+
+  // Object has changed
+  mClockMaster.Click();
+
+  VFN_DEBUG_EXIT("MStruct::RandomSizeDistribBroadeningEffect::GenerateRandomDistrib:End",11);
+}
+
+CrystVector_REAL RandomSizeDistribBroadeningEffect::GetProfile(const CrystVector_REAL &x,
+							       const REAL xcenter,
+							       const REAL h, const REAL k, const REAL l)
+{
+  VFN_DEBUG_MESSAGE("MStruct::RandomSizeDistribBroadeningEffect::GetProfile():Begin",11);
+
+  int nbPoints = x.numElements(); 
+  CrystVector_REAL profile(nbPoints);
+
+  // size effect
+
+  if(mNbins==0 || fabs(mBinWidth)<1e-6) {
+    profile = 1.;
+  } else {
+    const REAL *p1 = x.data();
+    REAL *p2 = profile.data();
+    double t = 0;
+    for(int j=0; j<mDistrib.numElements(); j++)
+      t += (2*j+1)*( pow(double(j+1),2) + pow(double(j),2) ) * mDistrib(j);//pow(int,int)-not working with gcc4.1
+
+    for(int i=0;i<nbPoints;i++) {
+      double x = *p1++; x = fabs(x)/mBinWidth;
+      double A = 0.;
+      if(x<1.e-4)
+	A = 1.0;
+      else {
+	for(int j=0; j<mDistrib.numElements(); j++) {
+	
+	  if(x<j)
+	    A += ( (j+1+x)*pow(j+1-x,3) - (j+x)*pow(j-x,3) ) / t * mDistrib(j);
+	  else if(x<j+1)
+	    A += (j+1+x)*pow(j+1-x,3) / t * mDistrib(j);
+	} // for(int j=0; j<mDistrib.numElements(); j++)
+      }
+      *p2++ = (REAL) A;
+    } // for(int i=0;i<nbPoints;i++)
+  } // if(mNbins==0 || fabs(mBinWidth)<1e-6)
+
+  if (bsavecalc && xcenter>=xcenterlimits[0] && xcenter<=xcenterlimits[1]) {
+    ofstream F("profileARSD.dat");
+    F<<"# xcenter="<<xcenter*RAD2DEG<<", ApproxFWHM="<<GetApproxFWHM(xcenter,h,k,l)*RAD2DEG<<" (deg)"<<endl;
+    for(int i=0; i<mDistrib.numElements(); i++)
+      F<<"# "<<setw(8)<<i*mBinWidth/10.<<setw(8)<<(i+1)*mBinWidth/10.<<"  "<<setw(16)<<mDistrib(i)<<"\n";
+    for(int i=0;i<nbPoints;i++)
+      F<<setw(18)<<x(i)<<setw(18)<<profile(i)<<endl;
+    F.close();
+  }
+
+  VFN_DEBUG_EXIT("MStruct::RandomSizeDistribBroadeningEffect::GetProfile():End",11);
+  return profile;
+}
+
+REAL RandomSizeDistribBroadeningEffect::GetApproxFWHM(const REAL xcenter,
+					 const REAL h, const REAL k, const REAL l)const
+{
+  VFN_DEBUG_MESSAGE("MStruct::RandomSizeDistribBroadeningEffect::GetApproxFWHM:Begin",11);
+
+  const Radiation &r =
+    GetParentReflectionProfile().GetParentPowderPatternDiffraction().GetRadiation();
+  
+  REAL t1 = 0., t2 = 0.;
+  for(int i=0; i<mDistrib.numElements(); i++) {
+    t1 += (2*i+1)*( pow(double(i+1),2) + pow(double(i),2) ) * mDistrib(i);//pow(int,int)-not working with gcc4.1
+    t2 += 0.3*(5*i*(i*(pow(double(i),2)+2*i+2)+1)+1) * mDistrib(i);//pow(int,int)-not working with gcc4.1
+  }
+  t2 *= mBinWidth;
+  
+  const REAL fwhm = (mNbins>0 && fabs(mBinWidth)>0.) ? 1.3*r.GetWavelength()(0)/cos(0.5*xcenter)*t1/t2 : 0.0;
+
+  VFN_DEBUG_EXIT("MStruct::RandomSizeDistribBroadeningEffect::GetApproxFWHM:End:"<<fwhm*RAD2DEG,11);
+  return fwhm;
+}
+
+bool RandomSizeDistribBroadeningEffect::IsRealSpaceType()const {
+  return true;
+}
+
+void RandomSizeDistribBroadeningEffect::GlobalOptRandomMove(const REAL mutationAmplitude,
+							    const RefParType *type)
+{
+  VFN_DEBUG_MESSAGE("MStruct::RandomSizeDistribBroadeningEffect::GlobalOptRandomMove:Begin",11);
+
+  GenerateRandomDistrib();
+
+  VFN_DEBUG_EXIT("MStruct::RandomSizeDistribBroadeningEffect::GlobalOptRandomMove:End",11);
+}
+
+
+void RandomSizeDistribBroadeningEffect::Init()
+{
+  VFN_DEBUG_MESSAGE("MStruct::RandomSizeDistribBroadeningEffect::Init:Begin",11);
+  // add parameters (distribution values for each bin)
+  for(int i=0; i<mDistrib.numElements(); i++) {
+    // generate parameter name
+    string name;
+    {
+      stringstream s;
+      s << "rsD_";
+      if(!(this->GetName().empty())) s << "_";
+      s << i;
+      name = s.str();
+    }
+    // create a new parameter
+    RefinablePar tmp(name,&mDistrib(i),0.,1.e4,
+		     gpRefParTypeScattDataProfileWidth,
+		     REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false,1.);
+    tmp.AssignClock(mClockMaster);
+    tmp.SetDerivStep(0.01);
+    //tmp.SetGlobalOptimStep(.005);
+    this->AddPar(tmp);
+  }
+  VFN_DEBUG_EXIT("MStruct::RandomSizeDistribBroadeningEffect::Init:End",11);
 }
 
 //----------------------------------
@@ -3636,121 +4695,237 @@ bool IsAnisotropic()const
 //----------------------------------
 
 // DislocationBroadeningEffectSvB
-DislocationBroadeningEffectSvB::DislocationBroadeningEffectSvB():
-mRe(100.), mRou(0.01), mCg0(1.), mQ1(0.), mQ2(0.), mCellType(MSTRUCT_NONE), mACr(1.)
+DislocationBroadeningEffectSvB::DislocationBroadeningEffectSvB()
+  :mReOrMWilk(100.), mRou(0.0001), mCg0(1.), mQ1(0.), mQ2(0.), mUseMWilk(false), mFormula(0),
+   mArgument(0), mKaganerEta0(2.2), mKaganerEta1(0.), mCellType(MSTRUCT_NONE), mACr(1.)
 {
-	InitParameters();
+  InitParameters(false);
 }
 
 void DislocationBroadeningEffectSvB::SetParentReflectionProfile(const ReflectionProfile &s)
 {
-	// Call the superclass method to ensure functionality.
-	ReflectionProfileComponent::SetParentReflectionProfile(s);
-	
-	// Init auxiliary parameters (cell type, lenfth of Burgers vector)
-	SetAuxParameters();
+  // Call the superclass method to ensure functionality.
+  ReflectionProfileComponent::SetParentReflectionProfile(s);
+  
+  // Init auxiliary parameters (cell type, lenfth of Burgers vector)
+  SetAuxParameters();
 }
 
 CrystVector_REAL DislocationBroadeningEffectSvB::GetProfile(const CrystVector_REAL &x,
-						  									const REAL xcenter,
-						  									const REAL h, const REAL k, const REAL l)
+							    const REAL xcenter,
+							    const REAL h, const REAL k, const REAL l)
 {
-	// nb of points and vector for calc. result
-	int nbPoints = x.numElements(); 
-	CrystVector_REAL profile(nbPoints);
-  
-	// First of all we need to check if the object is properly initialized:
-	// Auxiliary variables are properly set.
-	
-	// Generally we need access to the parent ReflectionProfile and ParentPowderPatternDiffraction
-	// objects and their GetRadiation and UnitCell objects.
-	
-	try {
-		// Init auxiliary parameters (cell type, lenfth of Burgers vector) if necessary,
-		// calculate length of the difraction vector and dislocation contrast factor
-		double s0 = 0., Chkl = 0., t = 0.;
-		
-		// - these all done by the PrepareCalcAuxParams method
-		PrepareCalcAuxParams(xcenter,h,k,l,s0,Chkl,t);
-  				
-  	// calculation
- 		const REAL *p1 = x.data();
- 		REAL *p2 = profile.data();
- 		for(int i=0;i<nbPoints;i++) {
-   		double x = fabs(*p1)/mRe;
-   		if (x<1.e-4)
-     			*p2 = 1.;
-   		else {
-     			double a = (x<=1) ? (-log(x) + 1.75 - M_LN2 + (1./6. - 32./225./M_PI*x)*x*x)
-     					    	  : (256./45./M_PI - (11./24. + M_LN2*x/4.)/x)/x;
-     			a *= 0.5*M_PI*Chkl*(s0*s0)*(mb*mb)*mRou*(mRe*mRe)*(x*x);
-     			*p2 = (REAL) exp(-a);
-   		}
-   		p1++; p2++;
- 		}
+  // coeficients for "Full" Wilkens approx formula - series expansion up to x^15
+  static const double WilkCoef15[6] = { 32./11025    /M_PI, 2./19845.   /M_PI, 4./343035.   /M_PI,
+					 5./2208492. /M_PI, 1./1673100. /M_PI, 7./36067200. /M_PI};
 
- 		if (bsavecalc && xcenter>=xcenterlimits[0] && xcenter<=xcenterlimits[1]) {
-	   	ofstream F("profileAD.dat");
-			F<<"# re="<<mRe<<",rou="<<mRou<<",Cg0="<<mCg0<<",q1="<<mQ1<<",q2="<<mQ2;
-			F<<", (hkl)=("<<h<<k<<l<<"), t="<<t<<", Chkl="<<Chkl<<", b="<<mb<<" ,s0="<<s0;
-			F<<", approxFWHM="<<GetApproxFWHM(xcenter,h,k,l)*RAD2DEG;
-			F<<",xcenter="<<xcenter*RAD2DEG<<endl;
-  		for(int i=0;i<nbPoints;i++)
-      	F<<setw(18)<<x(i)<<setw(18)<<profile(i)<<endl;
-    	F.close(); }
+  // nb of points and vector for calc. result
+  int nbPoints = x.numElements(); 
+  CrystVector_REAL profile(nbPoints);
+  
+  // First of all we need to check if the object is properly initialized:
+  // Auxiliary variables are properly set.
+  
+  // Generally we need access to the parent ReflectionProfile and ParentPowderPatternDiffraction
+  // objects and their GetRadiation and UnitCell objects.
+
+  try {
+    // Init auxiliary parameters (cell type, lenfth of Burgers vector) if necessary,
+    // calculate length of the difraction vector and dislocation contrast factor
+    double s0 = 0., Chkl = 0., t = 0.;
+		
+    // - these all done by the PrepareCalcAuxParams method
+    PrepareCalcAuxParams(xcenter,h,k,l,s0,Chkl,t);
+    
+    // dislocation model params
+    REAL rou = 0.0001, re = 100., MWilk = 1.;
+    if (mUseMWilk==true) {
+      // MWilk and rou used as parameters
+      MWilk = mReOrMWilk; rou = mRou; re = (rou<1.e-7) ? 1.e4 : MWilk/sqrt(rou);
+    } else {
+      // rou and re used as parameters
+      rou = mRou; re = mReOrMWilk; MWilk = re*sqrt(rou);
+    }
+
+    double eta;
+    // ---- T = Y * (Z*x/Re)^2 * f(Z*x/Re) ----
+    
+    double Z, Y;
+    switch (mArgument) {
+    case 0: // x/Re
+      Z = 1.;
+      Y = 0.5*M_PI*Chkl*(s0*s0)*(mb*mb)*(MWilk*MWilk);
+      break;
+    case 1: // (b*g)*x/Re
+      Z = mb*s0;
+      Y = 0.5*M_PI*Chkl*(MWilk*MWilk);
+      break;
+    case 2: // (sqrt(Chkl)*b*g)*x/Re
+      Z = sqrt(Chkl)*mb*s0;
+      Y = 0.5*M_PI*(MWilk*MWilk);
+      break;
+    default: // unknown option
+      profile = 1.;
+      throw ObjCrystException("DislocationBroadeningEffectSvB::GetProfile: Wrong model-argument type!");
+      break;
+    } // switch (mArgument)
+
+    if( rou>=1.e-7 ) { // calculation
+      const REAL *p1 = x.data();
+      REAL *p2 = profile.data();
+
+      switch (mFormula) {
+      case 0: // van Berkum --------------------
+
+	// Using van Berkum's formula for x<=1
+	// (the 3rd order approx of the full Wilkens's formula)
+	for(int i=0;i<nbPoints;i++) {
+	  double x = Z*fabs(*p1)/re;
+	  if (x<1.e-4)
+	    *p2 = 1.;
+	  else {
+	    double a = (x<=1) ? (-log(x) + 1.75 - M_LN2 + (1./6. - 32./225./M_PI*x)*x*x)
+	      : (256./45./M_PI - (11./24. + log(2.*x)/4.)/x)/x;
+	    //: (256./45./M_PI - (11./24. + M_LN2*x/4.)/x)/x;
+	    a *= Y*(x*x);
+	    *p2 = (REAL) exp(-a);
+	  }
+	  p1++; p2++;
 	}
+	break;
+
+      case 1: // full Wilkens --------------------
+
+	// Full Wilkens formula for x<=1
+	// approx: same as van Berkum's series expansion, but done up to the 15th order,
+	// which should ensure accuracy better than 1e-7
+	for(int i=0;i<nbPoints;i++) {
+	  double x = Z*fabs(*p1)/re;
+	  if (x<1.e-4)
+	    *p2 = 1.;
+	  else {
+	    double a = 0.;
+	    if(x<=1) {
+	      double x2 = x*x;
+	      a += (-log(x) + 1.75 - M_LN2 + (1./6. - 32./225./M_PI*x)*x2);
+	      double xt = x*x2*x2;
+	      for(int iw=0; iw<6; iw++) {
+		double t = WilkCoef15[iw]*xt;
+		if( t<1e-8 ) break;
+		a += t;
+		xt *= x2;
+	      } // iw
+	    } else
+	      a += (256./45./M_PI - (11./24. + log(2.*x)/4.)/x)/x;
+	    // (256./45./M_PI - (11./24. + M_LN2*x/4.)/x)/x;
+
+	    a *= Y*(x*x);
+	    *p2 = (REAL) exp(-a);
+	  }
+	  p1++; p2++;
+	} // i
+	break;
+
+      case 2: // Kaganer --------------------
 	
-	catch(std::exception &e) {
-		cout << "< MStruct::DislocationBroadeningEffectSvB::GetProfiles(...)\n";
-		cout << "exception: " << e.what() << "\n";
-		cout << "Exception thrown during calculation of the Fourier Coefficients.\n \
+	eta = mKaganerEta0 + mKaganerEta1/(Z*re);
+
+	for(int i=0;i<nbPoints;i++) {
+	  double x = Z*fabs(*p1)/re;
+	  if (x<1.e-4)
+	    *p2 = 1.;
+	  else {
+	    double a = -log( x/(eta+x) );
+	    
+	    a *= Y*(x*x);
+	    *p2 = (REAL) exp(-a);
+	  }
+	  p1++; p2++;
+	} // i
+	break;
+	
+      default: // default - error --------------------
+	
+	profile = 1.;
+	throw ObjCrystException("DislocationBroadeningEffectSvB::GetProfile: Wrong model-formula type!");
+	break;
+
+      } // switch
+    } else
+      profile = 1.;
+    
+    if (bsavecalc && xcenter>=xcenterlimits[0] && xcenter<=xcenterlimits[1]) {
+      ofstream F("profileAD.dat");
+      F<<"# re="<<re<<",rou="<<rou<<",MWilk="<<MWilk<<",Cg0="<<mCg0<<",q1="<<mQ1<<",q2="<<mQ2;
+      F<<", (hkl)=("<<h<<k<<l<<"), t="<<t<<", Chkl="<<Chkl<<", b="<<mb<<" ,s0="<<s0;
+      F<<", approxFWHM="<<GetApproxFWHM(xcenter,h,k,l)*RAD2DEG;
+      F<<",xcenter="<<xcenter*RAD2DEG<<endl;
+      for(int i=0;i<nbPoints;i++)
+      	F<<setw(18)<<x(i)<<setw(18)<<profile(i)<<endl;
+      F.close(); }
+  }
+	
+  catch(std::exception &e) {
+    cout << "< MStruct::DislocationBroadeningEffectSvB::GetProfiles(...)\n";
+    cout << "exception: " << e.what() << "\n";
+    cout << "Exception thrown during calculation of the Fourier Coefficients.\n \
 				 Maybe some objects are not properly initialized or some parametrs\n \
 				 have wrong values. >" << endl; 
-		throw;
-	}
-	
+    throw;
+  }
+  
   return profile;
 }
 
 REAL DislocationBroadeningEffectSvB::GetApproxFWHM(const REAL xcenter,
 					 const REAL h, const REAL k, const REAL l)const
 {
-	// First of all we need to check if the object is properly initialized:
-	// Auxiliary variables are properly set.
+  // First of all we need to check if the object is properly initialized:
+  // Auxiliary variables are properly set.
+  
+  // Generally we need access to the parent ReflectionProfile and ParentPowderPatternDiffraction
+  // objects and their GetRadiation and UnitCell objects.
 	
-	// Generally we need access to the parent ReflectionProfile and ParentPowderPatternDiffraction
-	// objects and their GetRadiation and UnitCell objects.
+  double fwhm = 0.;
 	
-	double fwhm = 0.;
-	
-	try {
-		// Init auxiliary parameters (cell type, lenfth of Burgers vector) if necessary,
-		// calculate length of the difraction vector and dislocation contrast factor
-		double s0 = 0., Chkl = 0., t = 0.;
+  try {
+    // Init auxiliary parameters (cell type, lenfth of Burgers vector) if necessary,
+    // calculate length of the difraction vector and dislocation contrast factor
+    double s0 = 0., Chkl = 0., t = 0.;
 		
-		// - these all done by the PrepareCalcAuxParams method
-		PrepareCalcAuxParams(xcenter,h,k,l,s0,Chkl,t);
-		
-		// Calcualtion
-		const double y = sqrt(mRou*Chkl)*mRe*mb*s0;
-		// numerical approximation with absolute precision app. 1e-3 in the range y from the interval (0.,5.)
-		// MSVC have no erf(REAl) hence the identity erf(x) = 1 - erfc(x) is used (erfc() is implemented in ObjCryst++) 
-		fwhm = 1.8865 * 0.5 * (y*(1.-erfc(sqrt(M_LN2)*y/0.5622)) + 0.5622/sqrt(M_LN2*M_PI)*(exp(-M_LN2*pow(y/0.5622,2))-1.)) +
-					 1.2343 * M_1_PI * (y*atan(y/2.3364) - 0.5 * 2.3364 * log(1. + pow(y/2.3364,2)));
-		fwhm /= mRe; // (1/A)
-	}
+    // - these all done by the PrepareCalcAuxParams method
+    PrepareCalcAuxParams(xcenter,h,k,l,s0,Chkl,t);
+    
+    // dislocation model params
+    REAL rou = 0.0001, re = 100., MWilk = 1.;
+    if (mUseMWilk==true) {
+      // MWilk and rou used as parameters
+      MWilk = mReOrMWilk; rou = mRou; re = (rou<1e-7) ? 1.e4 : MWilk/sqrt(rou);
+    } else {
+      // rou and re used as parameters
+      rou = mRou; re = mReOrMWilk; MWilk = re*sqrt(rou);
+    }
+
+    // Calculation
+    const double y = sqrt(rou*Chkl)*re*mb*s0;
+    // numerical approximation with absolute precision app. 1e-3 in the range y from the interval (0.,5.)
+    // MSVC have no erf(REAl) hence the identity erf(x) = 1 - erfc(x) is used (erfc() is implemented in ObjCryst++) 
+    fwhm = 1.8865 * 0.5 * (y*(1.-erfc(sqrt(M_LN2)*y/0.5622)) + 0.5622/sqrt(M_LN2*M_PI)*(exp(-M_LN2*pow(y/0.5622,2))-1.)) +
+      1.2343 * M_1_PI * (y*atan(y/2.3364) - 0.5 * 2.3364 * log(1. + pow(y/2.3364,2)));
+    fwhm /= re; // (1/A)
+  }
 	
-	catch(std::exception &e) {
-		cout << "< MStruct::DislocationBroadeningEffectSvB::GetApproxFWHM(...)\n";
-		cout << "exception: " << e.what() << "\n";
-		cout << "Exception thrown during calculation of the FWHM guess for the dislocation effect.\n \
+  catch(std::exception &e) {
+    cout << "< MStruct::DislocationBroadeningEffectSvB::GetApproxFWHM(...)\n";
+    cout << "exception: " << e.what() << "\n";
+    cout << "Exception thrown during calculation of the FWHM guess for the dislocation effect.\n \
 				 Maybe some objects are not properly initialized or some parametrs\n \
 				 have wrong values. >" << endl; 
-		throw;
-	}
+    throw;
+  }
 	
-	const Radiation &r = GetParentReflectionProfile().
-  	GetParentPowderPatternDiffraction().GetRadiation();
+  const Radiation &r = GetParentReflectionProfile().
+    GetParentPowderPatternDiffraction().GetRadiation();
   
   return fwhm*r.GetWavelength()(0)/cos(0.5*xcenter); // (rad)
 }
@@ -3758,55 +4933,55 @@ REAL DislocationBroadeningEffectSvB::GetApproxFWHM(const REAL xcenter,
 void DislocationBroadeningEffectSvB::PrepareCalcAuxParams(const REAL xcenter, const REAL h, const REAL k, const REAL l,
 																								 				  double &s0, double &Chkl, double &t)const
 {
-	// First of all we need to check if the object is properly initialized:
-	// Auxiliary variables are properly set.
+  // First of all we need to check if the object is properly initialized:
+  // Auxiliary variables are properly set.
 	
-	// Generally we need access to the parent ReflectionProfile and ParentPowderPatternDiffraction
-	// objects and their GetRadiation and UnitCell objects.
+  // Generally we need access to the parent ReflectionProfile and ParentPowderPatternDiffraction
+  // objects and their GetRadiation and UnitCell objects.
 	
-	// Init auxiliary parameters (cell type, lenfth of Burgers vector) if necessary
-	if(GetParentReflectionProfile().GetParentPowderPatternDiffraction().
-		GetCrystal().GetClockMaster()<mClockAuxParams) SetAuxParameters();
+  // Init auxiliary parameters (cell type, lenfth of Burgers vector) if necessary
+  if(GetParentReflectionProfile().GetParentPowderPatternDiffraction().
+     GetCrystal().GetClockMaster()<mClockAuxParams) SetAuxParameters();
 
-	// Get radiation and wavelength
-	const Radiation &rad = GetParentReflectionProfile().
-  			GetParentPowderPatternDiffraction().GetRadiation();
-	const REAL Lambda = rad.GetWavelength()(0);
+  // Get radiation and wavelength
+  const Radiation &rad = GetParentReflectionProfile().
+    GetParentPowderPatternDiffraction().GetRadiation();
+  const REAL Lambda = rad.GetWavelength()(0);
 
-	// length of the difraction vector
-	s0 = 2.*sin(0.5*xcenter)/Lambda;  		
-
-	// dislocation contrast factor
-	Chkl = 0.;
-	t = 0.;
+  // length of the difraction vector
+  s0 = 2.*sin(0.5*xcenter)/Lambda;  		
+  
+  // dislocation contrast factor
+  Chkl = 0.;
+  t = 0.;
 	
-	// ref: T.Ungar,J.Gubicza,G.Ribarik,A.Borbely,J.Appl.Cryst.(2001)34,298-310
-	// ref: I.C.Dragomir,T.Ungar,J.Appl.Cryst(2002)35,556-564
+  // ref: T.Ungar,J.Gubicza,G.Ribarik,A.Borbely,J.Appl.Cryst.(2001)34,298-310
+  // ref: I.C.Dragomir,T.Ungar,J.Appl.Cryst(2002)35,556-564
 	
-	switch(mCellType) {
-		case MSTRUCT_FCC:
-		case MSTRUCT_BCC:
-		case MSTRUCT_SC: {
-			t = REAL((h*h)*(k*k)+(k*k)*(l*l)+(l*l)*(h*h))/pow(h*h+k*k+l*l,2);
-			Chkl = mCg0*(1. + mQ1*t); }
-			break;
-		case MSTRUCT_HCP:
-			t = 0.5*(l*l)/((h*h)+(h*k)+(k*k)+(mACr*mACr)*(l*l)); 
-			Chkl = mCg0*(1. + mQ1*t + mQ2*(t*t));
-			break;
-		case MSTRUCT_NONE:
-			Chkl = mCg0;
-			break;
-		default:
-			throw ObjCrystException("Invalid cell type.");
-			break;
-	}
+  switch(mCellType) {
+  case MSTRUCT_FCC:
+  case MSTRUCT_BCC:
+  case MSTRUCT_SC: {
+    t = REAL((h*h)*(k*k)+(k*k)*(l*l)+(l*l)*(h*h))/pow(h*h+k*k+l*l,2);
+    Chkl = mCg0*(1. + mQ1*t); }
+    break;
+  case MSTRUCT_HCP:
+    t = 0.5*(l*l)/((h*h)+(h*k)+(k*k)+(mACr*mACr)*(l*l)); 
+    Chkl = mCg0*(1. + mQ1*t + mQ2*(t*t));
+    break;
+  case MSTRUCT_NONE:
+    Chkl = mCg0;
+    break;
+  default:
+    throw ObjCrystException("Invalid cell type.");
+    break;
+  }
 }
 
-void DislocationBroadeningEffectSvB::SetProfilePar(const REAL re, const REAL rou, const REAL cg0,
-												   const REAL q1, const REAL q2)
+void DislocationBroadeningEffectSvB::SetProfilePar(const REAL reOrRou, const REAL rou, const REAL cg0,
+						   const REAL q1, const REAL q2)
 {
-  mRe = 10.*re;
+  mReOrMWilk = (mUseMWilk==true) ? reOrRou : 10.*reOrRou;
   mRou = 0.01*rou;
   mCg0 = cg0;
   mQ1 = q1;
@@ -3814,16 +4989,55 @@ void DislocationBroadeningEffectSvB::SetProfilePar(const REAL re, const REAL rou
   mClockMaster.Click();  
 }
 
-void DislocationBroadeningEffectSvB::InitParameters()
+void DislocationBroadeningEffectSvB::SetUseMWilk(const bool useMWilk)
 {
+  mUseMWilk = useMWilk;
+  InitParameters(true);
+  mClockMaster.Click();
+}
+
+void DislocationBroadeningEffectSvB::SetFormula(const int formula, const int arg)
+{
+  mFormula = formula;
+  mArgument = arg;
+  InitParameters(true);
+  mClockMaster.Click();
+}
+
+void DislocationBroadeningEffectSvB::InitParameters(const bool reinitialize)
+{
+  if (reinitialize==true) {
+    // remove old parameters
+
+    long ipar;
+    ipar = this->FindPar( &mReOrMWilk ); if(ipar>=0) this->RemovePar(&this->GetPar(ipar));
+    ipar = this->FindPar( &mRou ); if(ipar>=0) this->RemovePar(&this->GetPar(ipar));
+    ipar = this->FindPar( &mCg0 ); if(ipar>=0) this->RemovePar(&this->GetPar(ipar));
+    ipar = this->FindPar( &mQ1 ); if(ipar>=0) this->RemovePar(&this->GetPar(ipar));
+    ipar = this->FindPar( &mQ2 ); if(ipar>=0) this->RemovePar(&this->GetPar(ipar));
+    ipar = this->FindPar( &mKaganerEta0 ); if(ipar>=0) this->RemovePar(&this->GetPar(ipar));
+    ipar = this->FindPar( &mKaganerEta1 ); if(ipar>=0) this->RemovePar(&this->GetPar(ipar));
+  }
+
+  if (mUseMWilk==true)
   {
-    RefinablePar tmp("Re", &mRe, 10., 3.e3,
+    RefinablePar tmp("MWilk", &mReOrMWilk, 0., 100.,
+                     gpRefParTypeScattDataProfileWidth,
+                     REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false,1.0);
+    tmp.AssignClock(mClockMaster);
+    tmp.SetDerivStep(0.05);
+    this->AddPar(tmp);
+  }
+  else
+  {
+    RefinablePar tmp("Re", &mReOrMWilk, 10., 1.e4,
                      gpRefParTypeScattDataProfileWidth,
                      REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false,0.1);
     tmp.AssignClock(mClockMaster);
-    tmp.SetDerivStep(5.);
+    tmp.SetDerivStep(5.0);
     this->AddPar(tmp);
   }
+
   {
     RefinablePar tmp("Rou", &mRou, 0., 0.01,
                      gpRefParTypeScattDataProfileWidth,
@@ -3856,103 +5070,146 @@ void DislocationBroadeningEffectSvB::InitParameters()
     tmp.SetDerivStep(0.05);
     this->AddPar(tmp);
   }
+  if(mFormula==2) { // formula = Kaganer
+    RefinablePar tmp("KaganerEta0", &mKaganerEta0, 0.1, 5.,
+                     gpRefParTypeScattDataProfileWidth,
+                     REFPAR_DERIV_STEP_ABSOLUTE,false,true,true,false,1.);
+    tmp.AssignClock(mClockMaster);
+    tmp.SetDerivStep(0.05);
+    this->AddPar(tmp);
+  }
+  if(mFormula==2) { // formula = Kaganer
+    RefinablePar tmp("KaganerEta1", &mKaganerEta1, 0., 10.,
+                     gpRefParTypeScattDataProfileWidth,
+                     REFPAR_DERIV_STEP_ABSOLUTE,false,true,true,false,1.);
+    tmp.AssignClock(mClockMaster);
+    tmp.SetDerivStep(0.05);
+    this->AddPar(tmp);
+  }
 }
 
 void DislocationBroadeningEffectSvB::SetAuxParameters()const
 {
-	// We need to know mainly the cell type, the Burgers vector length and a/c ratio
-	// in the case of hexagonal hcp structure
-	
-	// To calc their proper values we need access to Crystal/UnitCell object.
-	
-	// We can get the Crystal/UnitCell object trough ParentPowderPatternDiffraction object,
-	// but we need the object ParentReflectionProfile and the ParentPowderPatternDiffractio
-	// to be accessible.
-	try {
-		const UnitCell &uc = GetParentReflectionProfile().GetParentPowderPatternDiffraction().GetCrystal();
+  // We need to know mainly the cell type, the Burgers vector length and a/c ratio
+  // in the case of hexagonal hcp structure
+  
+  // To calc their proper values we need access to Crystal/UnitCell object.
+  
+  // We can get the Crystal/UnitCell object trough ParentPowderPatternDiffraction object,
+  // but we need the object ParentReflectionProfile and the ParentPowderPatternDiffractio
+  // to be accessible.
+  try {
+    const UnitCell &uc = GetParentReflectionProfile().GetParentPowderPatternDiffraction().GetCrystal();
 	                           
-		// We want to detect the lattice type (fcc,bcc,hcp) and set the length
-		// of the Burgers vector.
+    // We want to detect the lattice type (fcc,bcc,hcp) and set the length
+    // of the Burgers vector.
 	
-		// At present time only hcp and cubic structures are supported.
+    // At present time only hcp and cubic structures are supported.
+    
+    // hcp Mg has space group number 194, cubic groups have numbers 195-230,
+    // primitive cubic structures have 1 translation vector, bcc structures have 2 and fcc 4.
 	
-		// hcp Mg has space group number 194, cubic groups have numbers 195-230,
-		// primitive cubic structures have 1 translation vector, bcc structures have 2 and fcc 4.
-	
-		const int sgnb = uc.GetSpaceGroup().GetSpaceGroupNumber();
-	
-		if (sgnb >= 195) {
-			// cubic structure
-			const REAL aa = uc.GetLatticePar(0);
-			switch (uc.GetSpaceGroup().GetNbTranslationVectors()) {
-				case 1:
-					mCellType = MSTRUCT_SC;
-					mb = aa;
-					break;
-				case 2:
-					mCellType = MSTRUCT_BCC;
-					mb = sqrt(3.)/2.*aa; 
-					break;
-				case 4:
-					mCellType = MSTRUCT_FCC;
-					mb = aa/M_SQRT2;;
-					break;
-				default:
-					mCellType = MSTRUCT_NONE;
-					mb = 1.;
-					// something strange
-					cout << "Warning: MStruct::DislocationBroadeningEffectSvB:" << "Assuming cubic cell, \
+    const int sgnb = uc.GetSpaceGroup().GetSpaceGroupNumber();
+    
+    if (sgnb >= 195) {
+      // cubic structure
+      const REAL aa = uc.GetLatticePar(0);
+      switch (uc.GetSpaceGroup().GetNbTranslationVectors()) {
+      case 1:
+	mCellType = MSTRUCT_SC;
+	mb = aa;
+	break;
+      case 2:
+	mCellType = MSTRUCT_BCC;
+	mb = sqrt(3.)/2.*aa; 
+	break;
+      case 4:
+	mCellType = MSTRUCT_FCC;
+	mb = aa/M_SQRT2;;
+	break;
+      default:
+	mCellType = MSTRUCT_NONE;
+	mb = 1.;
+	// something strange
+	cout << "Warning: MStruct::DislocationBroadeningEffectSvB:" << "Assuming cubic cell, \
 				             but can not recognize type (fcc,bcc,sc),\n\t the length of the Burgers vector \
 				             set to 1." << endl; 
-					break;
-			}
-			mQ2 = 0.;
-		}
-		else if (sgnb == 194) {
-			// hexagonal cell
-			const REAL aa = uc.GetLatticePar(0);
-			const REAL cc = uc.GetLatticePar(3);
-			// P 6_3 / m m c (typical hcp group)
-			mCellType = MSTRUCT_HCP;
-			mb = aa;
-			// a/c ratio
-			mACr = aa/cc;
-		}
-		else {
-			// not supported structure
-			mCellType = MSTRUCT_NONE;
-			mb = 1.;
-			// something strange
-			cout << "Warning: MStruct::DislocationBroadeningEffectSvB:" << "Only cubic and hcp structures \
+	break;
+      }
+      mQ2 = 0.;
+    }
+    else if (sgnb == 194) {
+      // hexagonal cell
+      const REAL aa = uc.GetLatticePar(0);
+      const REAL cc = uc.GetLatticePar(3);
+      // P 6_3 / m m c (typical hcp group)
+      mCellType = MSTRUCT_HCP;
+      mb = aa;
+      // a/c ratio
+      mACr = aa/cc;
+    }
+    else {
+      // not supported structure
+      mCellType = MSTRUCT_NONE;
+      mb = 1.;
+      // something strange
+      cout << "Warning: MStruct::DislocationBroadeningEffectSvB:" << "Only cubic and hcp structures \
 			         supported.\n\t The cell type was not recognised to be any of them, the length of Burgers vector \
 			         set to 1.\n\t Width of diffraction lines will not be anisotropic." << endl;
-			mQ1 = 0.;
-			mQ2 = 0.;
-		}
-		
-		mClockAuxParams.Click();
-	}
+      mQ1 = 0.;
+      mQ2 = 0.;
+    }
+    
+    mClockAuxParams.Click();
+  }
 	
-	catch(std::exception &e) {
-		cout << "< MStruct::DislocationBroadeningEffectSvB::SetAuxParameters()\n";
-		cout << "exception: " << e.what() << "\n";
-		cout << "Maybe a parent ReflectionProfile object to this broadenig component\n \
+  catch(std::exception &e) {
+    cout << "< MStruct::DislocationBroadeningEffectSvB::SetAuxParameters()\n";
+    cout << "exception: " << e.what() << "\n";
+    cout << "Maybe a parent ReflectionProfile object to this broadenig component\n \
 				 or its parent PowderpatterDiffraction object or its Crystal object\n \
 				 have not been set yet. Without them a cell type, the length of Burgers vector\n \
 				 or other params. can not be calculated. >" << endl; 
-		throw;;
-	}
+    throw;;
+  }
 }
 
 bool DislocationBroadeningEffectSvB::IsRealSpaceType()const
 {
-	return true;
+  return true;
 }
 
 bool DislocationBroadeningEffectSvB::IsAnisotropic()const
 {
-	return (abs(mQ1)>1.e-4 || abs(mQ2)>1.e-4);
+  return (abs(mQ1)>1.e-4 || abs(mQ2)>1.e-4);
 }
+
+/*
+unsigned int DislocationBroadeningEffectSvB::GetNbLSQConstraints() const
+{
+return 1;
+}
+
+void DislocationBroadeningEffectSvB::GetLSQConstraint(const unsigned int n,
+						      std::vector< const ObjCryst::RefinablePar* > &parList,
+						      CrystVector_REAL &coef) const
+{
+  parList = std::vector< const ObjCryst::RefinablePar* >(2, NULL);
+  coef.resize(2);
+  
+  // constraint: sqrt(rou) * Re = const
+  
+  parList[0] = &(this->GetPar(&mRou));
+  coef(0) = 0.5*mRe;
+  
+  parList[1] = &(this->GetPar(&mRe));
+  coef(1) = mRou;
+
+  coef *= 1.e6*mDefaultLSQConstraintScale/coef(0);
+
+  cout<<"contraint: "<<"Re: "<<mRe<<", rou: "<<mRou<<", c(0): "<<coef(0)<<", c(1): "<<coef(1)<<endl;
+}
+*/
 
 // FaultsBroadeningEffectFCC
 FaultsBroadeningEffectFCC::FaultsBroadeningEffectFCC():
@@ -4004,8 +5261,8 @@ REAL FaultsBroadeningEffectFCC::GetApproxFWHM(const REAL xcenter,
 		
 		// FWHM - Warren formula (in reciprocal space units)
 		//fwhm += (1.5*mAlpha+mBeta)/(h*h+k*k+l*l)/s0/mCount.sum()*tsum;
-		fwhm += (1.5*mAlpha+mBeta)/s0/mCount.sum()*tsum / M_PI;   // ( FWHM ~ 1/pi * 1/D )                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
-		
+		fwhm += (1.5*mAlpha+mBeta)/s0/mCount.sum()*tsum / M_PI;   // ( FWHM ~ 1/pi * 1/D )
+
 		tsum = 0.;
 		
 		for(int igroup=0; igroup<mSign.numElements(); igroup++)
@@ -5333,7 +6590,7 @@ void HKLPseudoVoigtBroadeningEffectA::SetProfilePar(int h,int k,int l,
     }
 
     {
-    RefinablePar tmp(string(name+"_fwhm").c_str(),&(pData->fwhm),0.*DEG2RAD,5.*DEG2RAD,
+    RefinablePar tmp(string(name+"_fwhm").c_str(),&(pData->fwhm),0.*DEG2RAD,10.*DEG2RAD,
 		     gpRefParTypeScattDataProfileWidth, // TODO:: change this
 		     REFPAR_DERIV_STEP_ABSOLUTE,
 		     true,false,false,false,RAD2DEG);
@@ -5407,9 +6664,10 @@ REAL HKLPseudoVoigtBroadeningEffectA::GetPositionCorr(const REAL xcenter,
 // ReflectionProfile
 ReflectionProfile::ReflectionProfile (const UnitCell& cell,
 				      const Radiation& radiation):
-mpUnitCell(&cell), mpRadiation(&radiation), mOmega(-1.), mFactor(1.),
+mpUnitCell(&cell), mpRadiation(&radiation), mOmega(-1.), mFactor(1.), // 9
 mN(1024),mNbPoints(0),mvL(1024),mvs(1024),mpParentPowderPatternDiffraction(0)
 {
+  this->mClockMaster.AddChild( mClockStressCorrQ );
   mReflectionProfileComponentRegistry.SetName("ReflectionProfile Components");
   mStressCoeff.resize(5);
   mStressCoeff = 0.; mStressCoeff(1) = -1.;
@@ -5430,7 +6688,8 @@ mvs(old.mvs),
 mReflStore(old.mReflStore),
 mReflectionProfileComponentRegistry(old.mReflectionProfileComponentRegistry),
 mpParentPowderPatternDiffraction(old.mpParentPowderPatternDiffraction)
-{  
+{
+  this->mClockMaster.AddChild( mClockStressCorrQ );
   InitParameters();
 }
   
@@ -5474,6 +6733,17 @@ void ReflectionProfile::AddReflectionProfileComponent(ReflectionProfileComponent
   this->UpdateDisplay();
   VFN_DEBUG_EXIT("ReflectionProfile::AddReflectionProfileComponent():"<<comp.GetName(),11)
 }
+
+long ReflectionProfile::GeReflectionProfileComponentNb() const
+{ return mReflectionProfileComponentRegistry.GetNb(); }
+const ReflectionProfileComponent &  ReflectionProfile::GetReflectionProfileComponent (long n) const
+{ return mReflectionProfileComponentRegistry.GetObj(n); }
+ReflectionProfileComponent &  ReflectionProfile::GetReflectionProfileComponent (long n)
+{ return mReflectionProfileComponentRegistry.GetObj(n); }
+const ReflectionProfileComponent &  ReflectionProfile::GetReflectionProfileComponent (const string &objName) const
+{ return mReflectionProfileComponentRegistry.GetObj(objName); }
+ReflectionProfileComponent &  ReflectionProfile::GetReflectionProfileComponent (const string &objName)
+{ return mReflectionProfileComponentRegistry.GetObj(objName); }
 
 bool ReflectionProfile::PrepareForCalc(const CrystVector_REAL &x,
 				       const REAL xcenter, 
@@ -5994,7 +7264,7 @@ void ReflectionProfile::InitParameters()
     RefinablePar tmp("q0",&mStressCoeff(0),-1,1.,
 		     gpRefParTypeScattDataProfileType,
 		     REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false);
-    tmp.AssignClock(mClockMaster);
+    tmp.AssignClock(mClockStressCorrQ);
     tmp.SetDerivStep(1e-4);
     this->AddPar(tmp);
   }
@@ -6002,7 +7272,7 @@ void ReflectionProfile::InitParameters()
     RefinablePar tmp("q1",&mStressCoeff(1),-1,1.,
 		     gpRefParTypeScattDataProfileType,
 		     REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false);
-    tmp.AssignClock(mClockMaster);
+    tmp.AssignClock(mClockStressCorrQ);
     tmp.SetDerivStep(1e-4);
     this->AddPar(tmp);
   }
@@ -6010,7 +7280,7 @@ void ReflectionProfile::InitParameters()
     RefinablePar tmp("q2",&mStressCoeff(2),-1,1.,
 		     gpRefParTypeScattDataProfileType,
 		     REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false);
-    tmp.AssignClock(mClockMaster);
+    tmp.AssignClock(mClockStressCorrQ);
     tmp.SetDerivStep(1e-4);
     this->AddPar(tmp);
   }
@@ -6018,7 +7288,7 @@ void ReflectionProfile::InitParameters()
     RefinablePar tmp("q3",&mStressCoeff(3),-1,1.,
 		     gpRefParTypeScattDataProfileType,
 		     REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false);
-    tmp.AssignClock(mClockMaster);
+    tmp.AssignClock(mClockStressCorrQ);
     tmp.SetDerivStep(1e-4);
     this->AddPar(tmp);
   }
@@ -6026,7 +7296,7 @@ void ReflectionProfile::InitParameters()
     RefinablePar tmp("q4",&mStressCoeff(4),-1,1.,
 		     gpRefParTypeScattDataProfileType,
 		     REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false);
-    tmp.AssignClock(mClockMaster);
+    tmp.AssignClock(mClockStressCorrQ);
     tmp.SetDerivStep(1e-4);
     this->AddPar(tmp);
   }
@@ -6228,6 +7498,50 @@ void RefractionPositionCorr::SetChemicalFormula(const string & formula, const RE
   }
 }
 
+REAL CalcUnitCellMass(const ObjCryst::Crystal& crystal)
+{
+  // get Scattering Component List to obtain Atom scatters
+  const ObjCryst::ScatteringComponentList & sc_list = crystal.GetScatteringComponentList();
+					
+  REAL mass = 0.;
+					
+  for (long icomp=0; icomp<sc_list.GetNbComponent(); icomp++) {
+    
+    const ObjCryst::ScatteringPower * pScattPow = sc_list(icomp).mpScattPow;
+								
+    if ( pScattPow->GetClassName()=="ScatteringPowerAtom" ) {
+      const ObjCryst::ScatteringPowerAtom * pScattPowAtom =
+	dynamic_cast<const ObjCryst::ScatteringPowerAtom*>(pScattPow);
+      // TODO:: Atom scatter population could be calculated also using Dynamical populacy correction without
+      //        calling SpaceGroup::GetAllSymmetrics(...) method but DynPopCorr looks working wrongly
+      //        in the case of an one atom crystal (e.g. Al, Cu, Mg, etc.)
+      ///const REAL popu = sc_list(icomp).mOccupancy*sc_list(icomp).mDynPopCorr;
+							
+      // find atom in the periodic table to get its atomic weight 
+      cctbx::eltbx::tiny_pse::table tpse(pScattPowAtom->GetSymbol());
+      // number of equivalent atom site symmetry positions
+      const int nb_sym_pos = crystal.GetSpaceGroup().GetAllSymmetrics(sc_list(icomp).mX,sc_list(icomp).mY,
+								      sc_list(icomp).mZ,false,false,true).rows(); 
+      //cout << "Scatterer nb. " << icomp << ", symbol: " << pScattPowAtom->GetSymbol();
+      //cout << ", x, y, z: " << sc_list(icomp).mX << ", " << sc_list(icomp).mY << ", " << sc_list(icomp).mZ << ", sym: " << nb_sym_pos;
+      //cout << ", occ: " << sc_list(icomp).mOccupancy << ", DynPopCorr: " << sc_list(icomp).mDynPopCorr << ", popu: " << popu << ", weight: " << tpse.weight() << endl;
+					
+      // atomic mass constant (ref: http://physics.nist.gov/cuu)
+      // m_u = 1.660 538 782 x 10^-27 kg
+      // 
+      //  density = Sum_atoms { nb_sym_pos*occ*weight } * m_u / UnitCell.volume
+      //  density(g/cm3)   exponents   (27-3) - (3*10-3*2) = 24 - 24 = 0
+      
+      REAL t = nb_sym_pos * sc_list(icomp).mOccupancy;
+      mass += t * tpse.weight();
+    }
+  } // for icomp
+  
+  mass *= 1.660538782; // (1e-24 g)
+
+  return mass; // (1e-24 g)
+}
+
 void RefractionPositionCorr::SetChi0(const complex<REAL> & chi0)
 {
 	mpCrystal = NULL;
@@ -6295,7 +7609,7 @@ const complex< REAL > & RefractionPositionCorr::GetChi0(const bool forceReCalc)c
 							const ObjCryst::ScatteringPowerAtom * pScattPowAtom = dynamic_cast<const ObjCryst::ScatteringPowerAtom*>(pScattPow);
 							// TODO:: Atom scatter population could be calculated also using Dynamical populacy correction without calling
 							//          SpaceGroup::GetAllSymmetrics(...) method but DynPopCorr looks working wrongly in the case of an one atom crystal (e.g. Al, Cu, Mg, etc.)
-							///const REAL popu = sc_list(icomp).mOccupancy*sc_list(icomp).mDynPopCorr;
+							const REAL popu = sc_list(icomp).mOccupancy*sc_list(icomp).mDynPopCorr;
 							
 							// find atom in the periodic table to get its atomic weight 
 							cctbx::eltbx::tiny_pse::table tpse(pScattPowAtom->GetSymbol());

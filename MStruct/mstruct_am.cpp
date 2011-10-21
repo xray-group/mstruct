@@ -4,7 +4,7 @@
  * MStruct++ - Object-Oriented computer program/library for MicroStructure analysis
  * 					   from powder diffraction data.
  * 
- * Copyright (C) 2009  Zdenek Matej
+ * Copyright (C) 2009-2011  Zdenek Matej
  * 
  * This file is part of MStruct++.
  * 
@@ -28,7 +28,7 @@
  *
  */
 
-#define program_version "0.25-develop"
+#define program_version "0.28-(Fox-r1204)-testing"
 
 #include "MStruct.h"
 
@@ -45,6 +45,9 @@
 
 #include <algorithm>
 #include <functional>
+
+#include <stdlib.h> // rand, srand
+#include <time.h> // time
 
 using namespace ObjCryst;
 
@@ -98,15 +101,21 @@ void rename_crystal_params(Crystal &crystal);
 // for a parameter called 'a') 
 RefinablePar& get_par(const string &extended_name, RefinableObj &ref_obj);
 
+// Global counter of handled SIGINT signals
+
+namespace MStruct {
+  extern unsigned int Global_SIGINThandled_counter;
+} // namespace MStruct
+
 int main (int argc, char *argv[])
 {
 	if(argc>=2 && (string(argv[1])==string("-v") || string(argv[1])==string("--version"))) //print version
    {
    		// print version and license information
       cout << "version: " << program_version << "\n";
-      cout << "mstruct  Copyright (C) 2009 Zdenek Matej\n";
+      cout << "mstruct  Copyright (C) 2009-2011 Zdenek Matej\n";
       cout << "e-mail: matej@karlov.mff.cuni.cz\n";
-      cout << "License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.\n";
+      cout << "License GPLv2: GNU GPL version 2 <http://gnu.org/licenses/gpl.html>.\n";
       cout << "This program comes with ABSOLUTELY NO WARRANTY;\n";
       cout << "This is free software, and you are welcome to redistribute it.\n";
       cout << flush;
@@ -127,6 +136,12 @@ int main (int argc, char *argv[])
      bsavecalc=atoi(argv[2])!=0;
    }
    
+   
+  // initialisation of the random number genarator
+   if(0) {
+     srand((unsigned) time(NULL));
+   }
+
   // input stream (standard input or a supplied imput file)
   // (a short comedy for MSVC - not working simply without pointers)
 	istream *pointer_to_ccin = &cin;
@@ -172,6 +187,9 @@ int main (int argc, char *argv[])
 				break;
 			case 17:
 				val = MStruct::mstruct_test7(argc, argv, imp_file);
+				break;
+			case 18:
+				val = MStruct::mstruct_test8(argc, argv, imp_file);
 				break;
 			default:
 				cout << "Job/test type not recognised!" << endl;
@@ -469,12 +487,12 @@ int main (int argc, char *argv[])
 
 	 vector< int > vHKLChoice;
 	 vector< int > vHKLChoicePrint;
-   vector< MStruct::PowderPatternDiffraction* > vDiffData;
+   vector< MStruct::PowderPatternDiffraction* > vDiffData;	   
    vector< MStruct::HKLPseudoVoigtBroadeningEffectA* > vHKLEffect;
 	 vector<string> vPhasesNames;
 	 vector< MStruct::SizeDistribBroadeningEffect* > vSizeDistribEffect;
 	 vector<string> vSizeDistribFileName;
-	 
+	  
   // Number of Phases
    int nbphases = 0;
    cout << "number of phases" << endl;
@@ -494,7 +512,6 @@ int main (int argc, char *argv[])
      cout << "filename, name (filename-crystal xml file,name-crystal name)" << endl;
      read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
      ccin >> crystal_filename >> crystal_name;
-     
      vPhasesNames.push_back(phase_name);
 		 XMLCrystFileLoadObject(crystal_filename,"Crystal",crystal_name,crystal);
 		/* Unfortunatelly there is a clear shortage in ObjCryst:
@@ -506,12 +523,14 @@ int main (int argc, char *argv[])
  	 	 	 RefinableObj &obj = gRefinableObjRegistry.GetObj(crystal_name,"Crystal");
  	 		 crystal = &(dynamic_cast<ObjCryst::Crystal&>(obj));
  	 	 }
- 	 	 
 		// rename crystal lattice parameters (to ensure better acces to them)
 		 //rename_crystal_params(*crystal);
 		 
     // Add Crystal as a Crystalline phase
-     vDiffData.push_back(new MStruct::PowderPatternDiffraction);
+     if(job_type==3)
+       vDiffData.push_back(new MStruct::SizeDistribPowderPatternDiffraction);
+     else
+       vDiffData.push_back(new MStruct::PowderPatternDiffraction);
      vDiffData[iphase]->SetName(phase_name);
     // rename "Global Biso" -> "Global_Biso"
      rename_par(*vDiffData[iphase],"Global Biso","Global_Biso");
@@ -708,49 +727,165 @@ int main (int argc, char *argv[])
      	 }
      	// Size broadening (refinable size distribution) 
      	 if(btype_not_found && btype==string("SizeDistrib")) {
-     	 	  MStruct::SizeDistribBroadeningEffect * sizeEffect
-       			 = new MStruct::SizeDistribBroadeningEffect;
-       		sizeEffect->SetName(bname);
-       		vReflProfComponents.push_back(sizeEffect);
+	   MStruct::SizeDistribBroadeningEffect * sizeEffect
+	                               = new MStruct::SizeDistribBroadeningEffect;
+	   sizeEffect->SetName(bname);
+	   vReflProfComponents.push_back(sizeEffect);
+	   
+	  // parameters
+	   
+	   // distribution type/source (file/generated)
+	   string distribType;
+	   REAL lsqConstraintScale;
+	   
+	   cout << "distribution type/source (file/create), LSQ constraint scale factor" << endl;
+	   read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+	   ccin >> distribType >> lsqConstraintScale;
+	   
+	   // convert string to lowercase
+	   for_each( distribType.begin() , distribType.end() , char2lower() );
+	   
+	   string filename;
+
+	   if ( distribType==string("file") ) {
+	    // distribution will be loaded from file
+	     cout << "name of file with prescribed weighted distribution" << endl;
+	     read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+	     ccin >> filename;
+	   } else if ( distribType==string("create") ) {
+	    // build the distribution and ave the distribution in the file (to be reload later)
+	     cout << "histogram spacing type (linear/log/sqrt), Dmin (nm), Dmax (nm), nb. of intervals" << endl;
+	     string htype;
+	     REAL Dmin, Dmax;
+	     int nbIntervals;
+	     read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+	     ccin >> htype >> Dmin >> Dmax >> nbIntervals;
+	     // convert string to lowercase
+	     for_each( htype.begin() , htype.end() , char2lower() );
+	     sizeEffect->BuildDistribution(Dmin*10.,Dmax*10.,nbIntervals,htype);
+	     // create distribution file name
+	     filename = string("wD_") + crystal->GetName() + string(".dat");
+	     // save data - will be reloaded later
+	     //        (this means in addition that LSQRegType will also be altered later)
+	     sizeEffect->WriteDistributionToFile( filename.c_str() );
+	   }
+	   
+	   // set LSQ constraint scale
+	   sizeEffect->SetLSQConstraintScale(lsqConstraintScale);
+
+	   // get nb. of LSQ regularization methods used
+	   int nbLSQRegOp = 0;
+	   cout << "number of LSQ regularization methods used" << endl;
+	   read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+	   ccin >> nbLSQRegOp;
+
+	   // read all LSQ regularization operators
+	   for(int iOp=0; iOp<nbLSQRegOp; iOp++) {
+
+	     // get LSQ regularization type and weight
+	     string LsqRegType;   
+	     REAL alpha;
+
+	     cout << "LSQ regularization method type (none/derivative/curvature), LSQ weight factor" << endl;
+	     read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+	     ccin >> LsqRegType >> alpha;
+	   
+	     // convert string to lowercase
+	     for_each( LsqRegType.begin() , LsqRegType.end() , char2lower() );
+
+	     if ( LsqRegType==string("none") )
+	       sizeEffect->AddLSQRegularizationMethod( MStruct::SizeDistribBroadeningEffect::LSQRegOpt_None );
+	     else if ( LsqRegType==string("derivative") || LsqRegType==string("deriv") )
+	       sizeEffect->AddLSQRegularizationMethod( MStruct::SizeDistribBroadeningEffect::LSQRegOpt_DistribDeriv,
+						       alpha );
+	     else if ( LsqRegType==string("volume-derivative") || LsqRegType==string("vol-deriv") )
+	       sizeEffect->AddLSQRegularizationMethod( MStruct::SizeDistribBroadeningEffect::LSQRegOpt_VolumeDistribDeriv,
+						       alpha );
+	     else if ( LsqRegType==string("both-derivative") || LsqRegType==string("both-deriv") )
+	       sizeEffect->AddLSQRegularizationMethod( MStruct::SizeDistribBroadeningEffect::LSQRegOpt_BothDistribDeriv,
+						       alpha );
+	     else if ( LsqRegType==string("curvature") || LsqRegType==string("curv") )
+	       sizeEffect->AddLSQRegularizationMethod( MStruct::SizeDistribBroadeningEffect::LSQRegOpt_CurvIntegral,
+						       alpha );
+	     else {
+	       cerr<<"Error: Unknow LSQ rgularization method: "<<LsqRegType;
+	       cerr<<" for SizeDistribBroadeningEffect: "<<sizeEffect->GetName()<<endl;
+	     }
+	   } // iOp
+	   
+	   // do other common work to finish SizeDistribBroadeningEffect settings
+
+	   //sizeEffect->ReadDistributionFromFile(filename.c_str());
+	   vSizeDistribEffect.push_back(sizeEffect);
+	   vSizeDistribFileName.push_back(filename);
+	   // this effect is registered by the PowwderPattern as an additional LSQ func obj later
+	   //sizeEffect->SetParentReflectionProfile(*reflProfile);
+	   //reflProfile->AddReflectionProfileComponent(*sizeEffect);
+	   btype_not_found = false;
+     	 }
+	// Size broadening (refinable size distribution - random version with same bits) 
+     	 if(btype_not_found && btype==string("RandomSizeDistrib")) {
+	   MStruct::RandomSizeDistribBroadeningEffect * sizeEffect
+	     = new MStruct::RandomSizeDistribBroadeningEffect;
+	   sizeEffect->SetName(bname);
+	   vReflProfComponents.push_back(sizeEffect);
        		
-       	 // parameters
-       		string filename;
-       		REAL lsqConstraintScale;
-       		REAL alpha;
-       		cout << "name of file with prescribed weighted distribution, LSQ constraint scale factor, LSQ weight factor" << endl;
-       		read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
-       		ccin >> filename >> lsqConstraintScale >> alpha;
-     			//sizeEffect->ReadDistributionFromFile(filename.c_str());
-     			sizeEffect->SetLSQConstraintScale(lsqConstraintScale);
-     			sizeEffect->SetLSQAlpha(alpha);
-     			vSizeDistribEffect.push_back(sizeEffect);
-     			vSizeDistribFileName.push_back(filename);
-     			// this effect is registered by the PowwderPattern as an additional LSQ func obj later
-     			//sizeEffect->SetParentReflectionProfile(*reflProfile);
-     			//reflProfile->AddReflectionProfileComponent(*sizeEffect);
-     			btype_not_found = false;
+	  // parameters
+	   int Nbins;
+	   REAL Dmax;
+	   CrystVector_REAL distrib;
+
+	   cout << "nb. of distribution bins, Dmax value (nm)" << endl;
+	   read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+	   ccin >> Nbins >> Dmax;
+	   
+	   cout << Nbins << " - values of crystallite size distribution" << endl;
+	   distrib.resize(Nbins);
+	   read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+	   for(int i=0; i<Nbins; i++) ccin >> distrib(i);
+
+	   sizeEffect->SetDistribution(Nbins,Dmax,distrib);
+     			
+	   //sizeEffect->SetParentReflectionProfile(*reflProfile);
+	   //reflProfile->AddReflectionProfileComponent(*sizeEffect);
+	   btype_not_found = false;
      	 }
      	// Dislocation broadening dislocSLvN
-     	 if(btype_not_found && btype==string("dislocSLvB")) {
+     	 if(btype_not_found && ( btype==string("dislocSLvB") || btype==string("dislocSLvB+") ||
+				 btype==string("dislocSLvBplus") || btype==string("dislocSLvBPlus"))) {
      	 	 	MStruct::DislocationBroadeningEffectSvB * strainEffect
        			 = new MStruct::DislocationBroadeningEffectSvB;
        	  strainEffect->SetName(bname);
        	  vReflProfComponents.push_back(strainEffect);
        	  
+	 // use MWilk or Re and formula type for "-log(eta)"
+	  int useMWilk = 0, formulaType = 0, argType = 0;
+	  if(btype==string("dislocSLvB+") || btype==string("dislocSLvBplus") || btype==string("dislocSLvBPlus")) {
+	    cout << "use MWilk instead of Re (0-No,1-Yes), formula (0-vanBerkum,1-fullWilkens,2-Kaganer), argument (0-x/Re,1-(b*g)*x/Re,2-(sqrt(C)*b*g)/Re" << endl;
+	    read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+	    ccin >> useMWilk >> formulaType >> argType;
+	  }
+
+	  strainEffect->SetUseMWilk( useMWilk==1 );
+	  strainEffect->SetFormula( formulaType , argType );
+
        	 // parameters
-       	  REAL Re, Rou;
-       	  cout << "Re(nm),rou(1/nm^2)" << endl;
-       	  read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
-       	  ccin >> Re >> Rou;
-       	  
+       	  REAL ReOrMWilk, Rou;
+	  if( useMWilk==1 )
+	    cout << "MWilk,rou(1/nm^2)" << endl;
+	  else
+	    cout << "Re(nm),rou(1/nm^2)" << endl;
+	  read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+	  ccin >> ReOrMWilk >> Rou;
+
        	  REAL Cg0 = 1., Q1 = 0., Q2 = 0.;
        	  cout << "Cg0,q1,q2" << endl;
        	  read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
        	  ccin >> Cg0 >> Q1 >> Q2;
-       	  strainEffect->SetProfilePar(Re,Rou,Cg0,Q1,Q2);
+       	  strainEffect->SetProfilePar(ReOrMWilk,Rou,Cg0,Q1,Q2);
        	  //strainEffect->SetParentReflectionProfile(*reflProfile);
-     			//reflProfile->AddReflectionProfileComponent(*strainEffect);
-     	 		btype_not_found = false;
+	  //reflProfile->AddReflectionProfileComponent(*strainEffect);
+	  btype_not_found = false;
      	 }
      	// Deformation and Twin faults broadening for fcc material as desribed by Velterop2000 faultsVfcc
      	 if(btype_not_found && btype==string("faultsVfcc")) {
@@ -1221,18 +1356,12 @@ int main (int argc, char *argv[])
      vDiffData[iphase]->SetProfile(vReflProfiles[parentReflProfNb]);
     
    } // iphase
-  
+   
   // Prepare data
    data.Prepare();
    data.FitScaleFactorForRw();
    	
    if (1) {
-  // Create the LSQ optimization object
-   MStruct::LSQNumObj lsqOptObj("lsqOptObj");
-   lsqOptObj.SetRefinedObj(data);
-   lsqOptObj.AddRefinableObj(data);
-
-   lsqOptObj.FixAllPar();
   // load IhklCorr params from files
   for(int iphase=0; iphase<nbphases; iphase++)
    if(vHKLChoice[iphase]>0)
@@ -1262,8 +1391,8 @@ int main (int argc, char *argv[])
    	 vSizeDistribEffect[ieffect]->ReadDistributionFromFile(vSizeDistribFileName[ieffect].c_str());
 
 	// register all Size Distribututions as additional LSQ func. objects
-	for(unsigned int ieffect=0; ieffect<vSizeDistribEffect.size(); ieffect++)
-   	 data.AddAdditionalLSQObj(*vSizeDistribEffect[ieffect]);
+	/*for(unsigned int ieffect=0; ieffect<vSizeDistribEffect.size(); ieffect++)
+	  data.AddAdditionalLSQObj(*vSizeDistribEffect[ieffect]);*/ // hack
    	 
   // Set refinement status of background points and parameters
    for(int icomp=0; icomp<(int)v_bkg_type_ids.size(); icomp++)
@@ -1330,6 +1459,17 @@ int main (int argc, char *argv[])
    	 	   break;
    	 }
 
+     // Create the LSQ optimization object
+   MStruct::LSQNumObj lsqOptObj("lsqOptObj");
+   lsqOptObj.SetRefinedObj(data,0,true,true);
+   lsqOptObj.AddRefinableObj(data);
+
+   lsqOptObj.ObjCryst::LSQNumObj::PrepareRefParList(false);
+   RefinableObj & lsqCompiledObj = lsqOptObj.GetCompiledRefinedObj();
+   lsqCompiledObj.PrepareForRefinement();
+
+   //lsqOptObj.FixAllPar();
+
 	// for grid refinement (job=1) define a grid
 	 CrystVector_REAL gridx(0);
 	 CrystVector_REAL gridRw(0);
@@ -1363,16 +1503,24 @@ int main (int argc, char *argv[])
 		 }*/
 	 }
    string filename; // output filename
-   int niter=0, nparams=0;
+   int niter=0, nparams=0, niter1=0, niter2=0;
+   REAL lsqTuneCoef=-1.;
 
   // Set PowderPattern params
    cout << "output filename" << endl;
    read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
    ccin >> filename;
    
-   cout << "nb of interactions" << endl;
-   read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
-   ccin >> niter;
+   if(job_type!=3) {
+     cout << "nb of interactions" << endl;
+     read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+     ccin >> niter;
+   } else {
+     // SizeDistrib refinement
+     cout << "nb of reduced,nb of full interactions,nb of cycles,tuning coef." << endl;
+     read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+     ccin >> niter >> niter1 >> niter2 >> lsqTuneCoef;
+   }
 
    cout << "nb of params to be set" << endl;
    read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
@@ -1404,9 +1552,8 @@ int main (int argc, char *argv[])
      // set param
      try {
      RefinablePar &param = (str.at(0)=='#') ?
-       lsqOptObj.GetFullRefinableObj().GetPar(atoi(str.substr(1).c_str())) :
-       get_par(str, lsqOptObj.GetFullRefinableObj());
-       //lsqOptObj.GetFullRefinableObj().GetPar(str.c_str());
+       lsqCompiledObj.GetPar(atoi(str.substr(1).c_str())) :
+       get_par(str, lsqOptObj.GetCompiledRefinedObj());
      param.Print();
      param.SetIsLimited(limited==1); // do first to allow user change default limits before setting value
      if (limited==1) {
@@ -1434,9 +1581,9 @@ int main (int argc, char *argv[])
    cout << "Initial data (before fit-for analysis):" << endl;
    cout << "finished cycle #0/0. Rw="<<rw<<"->"<<rw<<endl;
    {
-     const RefinableObj &obj = lsqOptObj.GetFullRefinableObj();
-     obj.PrepareForRefinement();
-     
+     const RefinableObj &obj = lsqCompiledObj;
+     lsqCompiledObj.PrepareForRefinement();
+
      for(int i=0;i<obj.GetNbParNotFixed();i++) {
        const RefinablePar &par = obj.GetParNotFixed(i);
        cout << setw(29) << left << par.GetName() << right;
@@ -1502,9 +1649,123 @@ int main (int argc, char *argv[])
 				 cerr << "Error: grid - refinement - best parameters set not found!" << endl;
 		 }
 	 }
+	 else if(job_type==3) {
+	   // Combined full and reduced SizeDistrib refinement
+
+	   // list of all parameters of the optimised RefinableObj and their fixed/refined status
+	   vector< pair< long, bool > > refObjParams;
+	   for(long ipar=0; ipar<lsqCompiledObj.GetNbPar(); ipar++)
+	     refObjParams.push_back( make_pair( ipar, lsqCompiledObj.GetPar(ipar).IsFixed() ) );
+
+	   // saved values of regularization operators weights set before they are tuned
+	   vector< REAL > userRegOpWeight;
+
+	   for(int irep=0; irep<niter2; irep++) {
+	     
+	     // Tune LSQ regularization weights
+
+	     if(lsqTuneCoef>0.) {
+
+	       // calculate data Chi2
+	       REAL chi2data = 0.;
+	       {
+		 int nfun = 0;
+		 CrystVector_REAL t = data.GetLSQCalc(nfun);
+		 t -= data.GetLSQObs(nfun);
+		 t *= t;
+		 t *= data.GetLSQWeight(nfun);
+		 chi2data = t.sum();
+	       }
+ 
+	       vector< std::pair< RefinableObj *, unsigned int > > refinedObjMap = lsqOptObj.GetRefinedObjMap();
+	       vector< std::pair< RefinableObj *, unsigned int > >::const_iterator itRefObj;
+	       // the preparation cycle
+	       itRefObj = refinedObjMap.begin();
+	       REAL chi2regSumSq = 0.;
+	       for( ; itRefObj!=refinedObjMap.end(); ++itRefObj ) {
+		 for(int iOp=0; iOp<itRefObj->first->GetNbLSQRegularizationOperator(itRefObj->second); iOp++) {
+		   long ind = gLSQRegularizationOperatorRegistry.Find(&(itRefObj->first->GetLSQRegularizationOperator(iOp,itRefObj->second)));
+		   LSQRegularizationOperator & regOp = gLSQRegularizationOperatorRegistry.GetObj(ind);
+		   if(irep==0)
+		     userRegOpWeight.push_back(regOp.GetRegularizationOperatorWeight()); // save user's weight
+		   chi2regSumSq += userRegOpWeight[iOp]*pow(regOp.GetValue(),2);
+		 } // iOp
+	       } // itRefObj
+	       // the init cycle
+	       itRefObj = refinedObjMap.begin();
+	       for( ; itRefObj!=refinedObjMap.end(); ++itRefObj ) {
+		 for(int iOp=0; iOp<itRefObj->first->GetNbLSQRegularizationOperator(itRefObj->second); iOp++) {
+		   long ind = gLSQRegularizationOperatorRegistry.Find(&(itRefObj->first->GetLSQRegularizationOperator(iOp,itRefObj->second)));
+		   LSQRegularizationOperator & regOp = gLSQRegularizationOperatorRegistry.GetObj(ind);
+		   REAL chi2 = regOp.GetValue();
+		   if(chi2regSumSq>1.e-7) {
+		     REAL lambda = lsqTuneCoef*chi2data/chi2regSumSq *userRegOpWeight[iOp]*chi2;
+		     regOp.SetRegularizationOperatorWeight(lambda);
+		   }
+		 } // iOp
+	       } // itRefObj	       
+	     }
+
+	     // Reduced refinement
+
+	     // fix parameters with some exceptions
+	     vector< pair< long, bool > >::const_iterator it = refObjParams.begin();
+	     for( ; it!=refObjParams.end(); ++it) {
+	       ObjCryst::RefinablePar & par = lsqCompiledObj.GetPar(it->first);
+	       if( par.GetType()!=ObjCryst::gpRefParTypeScattDataScale &&
+		   par.GetType()!=ObjCryst::gpRefParTypeObjCryst &&
+		   !par.GetType()->IsDescendantFromOrSameAs(MStruct::gpRefParTypeScattDataProfileSizeDistrib) )
+		 par.SetIsFixed(true);
+	     }
+	     // run
+	     if(niter!=0 && MStruct::Global_SIGINThandled_counter==0)
+	       lsqOptObj.Refine(-niter,useLevenbergMarquardt,silent,true,0.001);
+
+	     // unfix parameters after reduced refinement
+	     it = refObjParams.begin();
+	     for( ; it!=refObjParams.end(); ++it) {
+	       ObjCryst::RefinablePar & par = lsqCompiledObj.GetPar(it->first);
+	       par.SetIsFixed(it->second);
+	     }
+	     
+	     // Full refinement
+	     if(niter1!=0 && MStruct::Global_SIGINThandled_counter==0)
+	       lsqOptObj.Refine(-niter1,useLevenbergMarquardt,silent,true,0.001);
+	   }
+	 }
 	 else {
-		// Run the refinement
-		 lsqOptObj.Refine(niter,useLevenbergMarquardt,silent);
+	   // Run the refinement (normal or Random-search?)
+	   ObjCryst::RefinableObj * pRefObjRand = NULL;
+	   {
+	     // try to find an object of MStruct::RandomSizeDistribBroadeningEffect class
+	     //ObjCryst::ObjRegistry< ObjCryst::RefinableObj > &objRegistry = lsqOptObj.GetFullRefinableObj().GetSubObjRegistry();
+	     ObjCryst::ObjRegistry< ObjCryst::RefinableObj > &objRegistry = ObjCryst::gRefinableObjRegistry;
+	     for(int i=0; i<objRegistry.GetNb(); i++) {
+	       ObjCryst::RefinableObj &obj = objRegistry.GetObj(i);
+	       //cout << "ClassName:" << obj.GetClassName() << endl;
+	       if( obj.GetClassName()==string("MStruct::RandomSizeDistribBroadeningEffect") 
+		|| obj.GetClassName()==string("MStruct::SizeDistribBroadeningEffect-X") ) {
+		 pRefObjRand = &obj;
+		 break; // the first one is used
+	       }
+	     }
+	   }
+	   
+	   if(pRefObjRand==NULL) // normal LSQ refinement
+	     lsqOptObj.Refine(-niter,useLevenbergMarquardt,silent,true,0.001);
+	   else { // random averaging with LSQ refinement
+	     // create new random optimization object
+	     MStruct::RandomOptimizationObj randOptObj("RandomOptObj");
+	     // set the random optimization object
+	     randOptObj.SetLSQNumObj(&lsqOptObj,-niter,useLevenbergMarquardt,silent,true,0.001);
+	     randOptObj.SetRefinableObjRandomised(pRefObjRand);
+	     // run optimization/refinement
+	     //long nbSteps = 1500;
+	     long nbSteps = 400;
+	     randOptObj.Optimize(nbSteps,false);
+	     // print results into the file
+	     randOptObj.WriteResultsToFile("randOptSet1.dat");
+	   }
 	 }
 
   // save IhklCorr params from file
@@ -1525,12 +1786,44 @@ int main (int argc, char *argv[])
    }
   // Save the powder pattern in text format
    data.SavePowderPattern(filename.c_str());
-  
+
    } // if(1)
 
   // print values of Scale factors
-	if(1) {
-		cout << "\n";
+   if(1) {
+     // vector of data scale factors
+     const CrystVector_REAL &scaleFactor = data.GetScaleFactor();
+     cout << "\n";
+     cout << setw(50) << "Scale factors" << setw(30) << "(Mcell*Vcell 1e-4)" << "\n";
+     cout << "********************************************************************************\n";
+     cout << scientific << setprecision(3);
+     for(int icomp=0; icomp<data.GetNbPowderPatternComponent(); icomp++) {
+       // check if this is a PowderPatternDiffraction component (for unscalable comps. scale=1)
+       if( data.GetPowderPatternComponent(icomp).IsScalable()==false ) continue;
+       // print name and human value
+       RefinablePar &par = data.GetPar(scaleFactor.data()+icomp);
+       cout << setw(30) << par.GetName();
+       cout << setw(20) << par.GetHumanValue();
+       // check if this is a diffraction componenet
+       const string &cname = data.GetPowderPatternComponent(icomp).GetClassName();
+       if( cname=="PowderPatternDiffraction" || cname=="MStruct::PowderPatternDiffraction" || 
+	   cname=="MStruct::SizeDistribPowderPatternDiffraction" ) {
+	 const ObjCryst::PowderPatternDiffraction &diff =
+	   dynamic_cast<const ObjCryst::PowderPatternDiffraction&>(data.GetPowderPatternComponent(icomp));
+	 // get reference to crystal
+	 const ObjCryst::Crystal &crystal = diff.GetCrystal();
+	 // print Mcell * Vcell (10-4)
+	 ostringstream ss;
+	 ss << "(" << fixed << setprecision(3)
+	    << MStruct::CalcUnitCellMass(crystal)*crystal.GetVolume()*1e-4 << ")";
+	 cout << setw(30) << ss.str();
+       }
+       cout << setw(20) << par.GetHumanSigma();
+       cout << "\n";
+     }
+
+	  /*
+			cout << "\n";
 		cout << "Scale factors\n";
 		cout << "*********************************************************************\n";
 		cout << scientific << setprecision(3);
@@ -1542,16 +1835,21 @@ int main (int argc, char *argv[])
     		cout << "\t\t" << par.GetHumanValue() << "\n";
     	}
     }
-	}
-	
+    */
+   }
+
    if(0) { // sV
   // Save calculated intensities
    ofstream f("phase1_par.txt");
    vDiffData[0]->PrintHKLInfo(f);
    f.close();
+   ofstream f1("phase2_par.txt");
+   vDiffData[1]->PrintHKLInfo(f1);
+   f1.close();
    //
    ofstream f2("phase1_par_2.txt");
    vDiffData[0]->PrintHKLInfo2(f2,0.001);
+   //vDiffData[1]->PrintHKLInfo(f2);
    f2.close();
   // Save the powder pattern in text format
    //data.SavePowderPattern("tio2.dat");

@@ -38,7 +38,10 @@
 #include "ObjCryst/IO.h"
 #include "Quirks/VFNStreamFormat.h"
 
+#include "CrystVector/CrystVector.h"
 #include "ObjCryst/DiffractionDataSingleCrystal.h"
+
+#include <boost/algorithm/string/trim.hpp>
 
 using namespace std;
 using namespace ObjCryst;
@@ -800,6 +803,75 @@ int mstruct_test7(int argc, char* argv[], std::istream &is)
 	
 	return 0;
 }
+
+int mstruct_test8(int argc, char* argv[], std::istream &iss)
+{
+  // ObjCryst::CubicSpline test
+
+  cout << "Running test no. 8" << endl;
+
+  cout << " CubicSpline Test" << endl;
+	
+  // input-string-stream to which the input is translated to ignore comments etc. 
+  istringstream ccin;
+  
+  // input filename
+  string filename;
+  cout << "input file name" << endl;
+  read_line (ccin, iss); // read a line (ignoring all comments, etc.)
+  ccin >> filename;
+  
+  // x,y, vectors
+  std::vector< REAL > tx, ty;
+
+  ifstream fin(filename.c_str());
+  string s;
+  while( getline(fin,s) ) {
+    boost::algorithm::trim(s); // trim the string
+    if( s.size() == 0 ) continue; // empty line
+    if( s.size() >= 1 && s[0] == '#' ) {
+      cout << "  ignoring comment: " << s << endl;
+    } else {
+      istringstream ss(s);
+      double x, y;
+      while( ss >> x >> y ) {
+	cout << "  got a numbers: " << x << ", " << y << endl;
+	tx.push_back(x);
+	ty.push_back(y);
+      }
+    }
+  }
+  fin.close();
+  
+  // set zero values in x=0 and x=1
+  CrystVector_REAL x(tx.size()+2);
+  CrystVector_REAL y(tx.size()+2);
+  
+  x(0) = 0.;           y(0) = 0.;
+  x(tx.size()+1) = 1.; y(tx.size()+1) = 0.;
+
+  // copy data
+  for(int i=0; i<tx.size(); i++ )
+    { x(i+1) = tx[i]; y(i+1) = ty[i]; }
+
+  CubicSpline p(x,y,0.,0.);
+  
+  const int N = 1000;
+
+  CrystVector_REAL yy  = p(0.,1./N,N+1);
+  CrystVector_REAL yy1 = p.Derivative(0.,1./N,N+1);
+  CrystVector_REAL yy2 = p.SecondDerivative(0.,1./N,N+1);
+
+  cout << setprecision(4);
+
+  for(int i=0; i<=N; i++) {
+    cout << setw(14) << 1./N*i << setw(14) << yy(i);
+    cout << setw(14) << yy1(i) << setw(14) << yy2(i) <<"\n"; 
+  }
+
+  return 0;
+
+} // mstruct_test8
 
 } // namespace MStruct
 
