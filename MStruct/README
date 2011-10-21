@@ -1,0 +1,45 @@
+MStruct++ - is a free computer program for MicroStructure analysis from powder diffraction data.
+
+It is based on the free library ObjCryst++ (ref: http://vincefn.net/Fox/). The library is extended
+by classes/routines for microstructural effects modelling.
+
+MStruct++ is still under development. The authors apologize for lack of documentation.
+
+Please, use this program with patience. You can contact the authors for help.
+
+Contact:
+
+* Zdenek Matej, e-mail: matej@karlov.mff.cuni.cz, jabber: mstruct@jabbim.com, phone: +420 22191 1455
+* Radomir Kuzel, e-mail: kuzel@karlov.mff.cuni.cz
+
+    Department of Condensed Matter Physics
+    Faculty of Mathematics and Physics, Charles University
+    Address: Ke Karlovu 5, 121 16 Praha 2, Czech Republic
+
+    www: http://xray.cz/xray.htm
+
+//----------------------------------------------------------------------------------------------------------
+
+(note: MStruct requires in addition FFTW headers and libraries installed.)
+
+TO COMPILE under Linux:
+
+1) cd "this directory"
+2) make -f gnu.mak wxcryst=0 opengl=0 fftw=0 shared-wxgtk=1 shared-glut=1 shared-newmat=0 shared-fftw=0 unicode=0 shared=1 debug=0 zdenek=1 mstruct_am
+
+OR
+
+1) open "clean_all_objcryst.sh" in the text editor and set "mstruct_dir" to your mstruct directory
+2) run "clean_all_objcryst.sh" script and answer 2x Yes: ./clean_all_objcryst.sh
+
+TO RUN with example nb. 1:
+
+1) ./mstruct_am < tio2-film-stress1.imp > tio2-film-stress1.out
+
+TO CLEAN compiled project:
+
+1) make -f gnu.mak clean_all
+
+//----------------------------------------------------------------------------------------------------------
+
+

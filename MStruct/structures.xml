@@ -1,0 +1,1432 @@
+<ObjCryst Date="2007-09-27T13:54:04GMT">
+
+  <Crystal Name="Anatase" SpaceGroup="I 41/a m d">
+    <Par Refined="0" Limited="0" Min="1" Max="100" Name="a">3.787</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="b">3.785</Par>
+    <Par Refined="0" Limited="0" Min="1" Max="100" Name="c">9.507</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="alpha">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="beta">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="gamma">90</Par>
+    <Option Name="Constrain Lattice to SpaceGroup Symmetry" Choice="0" ChoiceName="Yes (Default)"/>
+
+    <Option Name="Use Dynamical Occupancy Correction" Choice="1" ChoiceName="Yes"/>
+
+    <Option Name="Display Enantiomer" Choice="0" ChoiceName="No"/>
+
+    <ScatteringPowerAtom Name="Ti" Symbol="Ti4+">
+      <Par Refined="0" Limited="0" Min="0.1" Max="5" Name="Biso">0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>1 1 1</RGBColour>
+    </ScatteringPowerAtom>
+    <ScatteringPowerAtom Name="O" Symbol="O2-">
+      <Par Refined="0" Limited="0" Min="0.1" Max="5" Name="Biso">0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>1 0 0</RGBColour>
+    </ScatteringPowerAtom>
+
+    <Atom Name="Ti1" ScattPow="Ti">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0.25</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0.375</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+    <Atom Name="O1" ScattPow="O">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0.25</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0.16608</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+  </Crystal>
+
+  <Crystal Name="AnataseITF" SpaceGroup="I 41/a m d">
+    <Par Refined="0" Limited="0" Min="1" Max="100" Name="a">3.787</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="b">3.785</Par>
+    <Par Refined="0" Limited="0" Min="1" Max="100" Name="c">9.507</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="alpha">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="beta">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="gamma">90</Par>
+    <Option Name="Constrain Lattice to SpaceGroup Symmetry" Choice="0" ChoiceName="Yes (Default)"/>
+
+    <Option Name="Use Dynamical Occupancy Correction" Choice="1" ChoiceName="Yes"/>
+
+    <Option Name="Display Enantiomer" Choice="0" ChoiceName="No"/>
+
+    <ScatteringPowerAtom Name="Ti" Symbol="Ti4+">
+      <Par Refined="0" Limited="0" Min="0.1" Max="5" Name="Biso">2.37</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>1 1 1</RGBColour>
+    </ScatteringPowerAtom>
+    <ScatteringPowerAtom Name="O" Symbol="O2-">
+      <Par Refined="0" Limited="0" Min="0.1" Max="5" Name="Biso">1.65</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>1 0 0</RGBColour>
+    </ScatteringPowerAtom>
+
+    <Atom Name="Ti1" ScattPow="Ti">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0.25</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0.375</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+    <Atom Name="O1" ScattPow="O">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0.25</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0.16608</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+  </Crystal>
+
+  <Crystal Name="Rutile" SpaceGroup="P 42/m n m">
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="a">4.593</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="b">4.593</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="c">2.959</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="alpha">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="beta">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="gamma">90</Par>
+    <Option Name="Constrain Lattice to SpaceGroup Symmetry" Choice="0" ChoiceName="Yes (Default)"/>
+
+    <Option Name="Use Dynamical Occupancy Correction" Choice="1" ChoiceName="Yes"/>
+
+    <Option Name="Display Enantiomer" Choice="0" ChoiceName="No"/>
+
+    <ScatteringPowerAtom Name="Ti" Symbol="Ti4+">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>1 1 1</RGBColour>
+    </ScatteringPowerAtom>
+    <ScatteringPowerAtom Name="O" Symbol="O2-">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>1 0 0</RGBColour>
+    </ScatteringPowerAtom>
+
+    <Atom Name="Ti1" ScattPow="Ti">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+    <Atom Name="O1" ScattPow="O">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0.30519</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0.30519</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+  </Crystal>
+
+  <Crystal Name="UN" SpaceGroup="F m -3 m">
+    <Par Refined="0" Limited="0" Min="1" Max="100" Name="a">4.889</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="b">4.889</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="c">4.889</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="alpha">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="beta">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="gamma">90</Par>
+    <Option Name="Constrain Lattice to SpaceGroup Symmetry" Choice="0" ChoiceName="Yes (Default)"/>
+
+    <Option Name="Use Dynamical Occupancy Correction" Choice="1" ChoiceName="Yes"/>
+
+    <Option Name="Display Enantiomer" Choice="0" ChoiceName="No"/>
+
+    <ScatteringPowerAtom Name="N" Symbol="N">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>0.184314 0.309804 0.184314</RGBColour>
+    </ScatteringPowerAtom>
+    <ScatteringPowerAtom Name="U" Symbol="U">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>1 1 1</RGBColour>
+    </ScatteringPowerAtom>
+
+    <Atom Name="N" ScattPow="N">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+    <Atom Name="U" ScattPow="U">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0.5</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0.5</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0.5</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+  </Crystal>
+
+  <Crystal Name="Si" SpaceGroup="F d -3 m">
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="a">5.431</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="b">5.431</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="c">5.431</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="alpha">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="beta">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="gamma">90</Par>
+    <Option Name="Constrain Lattice to SpaceGroup Symmetry" Choice="0" ChoiceName="Yes (Default)"/>
+
+    <Option Name="Use Dynamical Occupancy Correction" Choice="1" ChoiceName="Yes"/>
+
+    <Option Name="Display Enantiomer" Choice="0" ChoiceName="No"/>
+
+    <ScatteringPowerAtom Name="Si" Symbol="Si">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>1 1 1</RGBColour>
+    </ScatteringPowerAtom>
+
+    <Atom Name="Si" ScattPow="Si">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0.125</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0.125</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0.125</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+  </Crystal>
+
+  <Crystal Name="Cu" SpaceGroup="F m -3 m">
+    <Par Refined="0" Limited="0" Min="1" Max="100" Name="a">3.615</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="b">3.615</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="c">3.615</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="alpha">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="beta">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="gamma">90</Par>
+    <Option Name="Constrain Lattice to SpaceGroup Symmetry" Choice="0" ChoiceName="Yes (Default)"/>
+
+    <Option Name="Use Dynamical Occupancy Correction" Choice="1" ChoiceName="Yes"/>
+
+    <Option Name="Display Enantiomer" Choice="0" ChoiceName="No"/>
+
+    <ScatteringPowerAtom Name="Cu" Symbol="Cu">
+      <Par Refined="0" Limited="1" Min="0" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>0.72 0.45 0.2</RGBColour>
+    </ScatteringPowerAtom>
+
+    <Atom Name="Cu" ScattPow="Cu">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+  </Crystal>
+  
+  <Crystal Name="Au" SpaceGroup="Fm-3m">
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="a">4.08</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="b">4.08</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="c">4.08</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="alpha">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="beta">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="gamma">90</Par>
+    <Option Name="Constrain Lattice to SpaceGroup Symmetry" Choice="0" ChoiceName="Yes (Default)"/>
+
+    <Option Name="Use Dynamical Occupancy Correction" Choice="1" ChoiceName="Yes"/>
+
+    <Option Name="Display Enantiomer" Choice="0" ChoiceName="No"/>
+
+    <ScatteringPowerAtom Name="Au-sp" Symbol="Au">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>0.8 0.498039 0.196078</RGBColour>
+    </ScatteringPowerAtom>
+
+    <Atom Name="Au1" ScattPow="Au-sp">
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="x">0</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="y">0</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="z">0</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>  </Crystal>
+
+  <Crystal Name="Brookite" SpaceGroup="P b c a">
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="a">9.174</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="b">5.452</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="c">5.137</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="alpha">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="beta">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="gamma">90</Par>
+    <Option Name="Constrain Lattice to SpaceGroup Symmetry" Choice="0" ChoiceName="Yes (Default)"/>
+
+    <Option Name="Use Dynamical Occupancy Correction" Choice="1" ChoiceName="Yes"/>
+
+    <Option Name="Display Enantiomer" Choice="0" ChoiceName="No"/>
+
+    <ScatteringPowerAtom Name="Ti" Symbol="Ti4+">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>1 1 1</RGBColour>
+    </ScatteringPowerAtom>
+    <ScatteringPowerAtom Name="O" Symbol="O2-">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>1 0 0</RGBColour>
+    </ScatteringPowerAtom>
+
+    <Atom Name="Ti1" ScattPow="Ti">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0.129</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0.1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0.868</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+    <Atom Name="O1" ScattPow="O">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0.014</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0.16</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0.181</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+    <Atom Name="O2" ScattPow="O">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0.244</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0.126</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0.525</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+  </Crystal>
+
+  <Crystal Name="Fe" SpaceGroup="I m -3 m">
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="a">2.866</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="b">10</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="c">10</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="alpha">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="beta">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="gamma">90</Par>
+    <Option Name="Constrain Lattice to SpaceGroup Symmetry" Choice="0" ChoiceName="Yes (Default)"/>
+
+    <Option Name="Use Dynamical Occupancy Correction" Choice="1" ChoiceName="Yes"/>
+
+    <Option Name="Display Enantiomer" Choice="0" ChoiceName="No"/>
+
+    <ScatteringPowerAtom Name="Fe" Symbol="Fe">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>1 0.5 0</RGBColour>
+    </ScatteringPowerAtom>
+
+    <Atom Name="Fe" ScattPow="Fe">
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="x">0</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="y">0</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="z">0</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+  </Crystal>
+
+  <Crystal Name="Mg" SpaceGroup="P 63/m m c">
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="a">3.2126</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="b">3.2126</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="c">5.2133</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="alpha">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="beta">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="gamma">120</Par>
+    <Option Name="Constrain Lattice to SpaceGroup Symmetry" Choice="0" ChoiceName="Yes (Default)"/>
+
+    <Option Name="Use Dynamical Occupancy Correction" Choice="1" ChoiceName="Yes"/>
+
+    <Option Name="Display Enantiomer" Choice="0" ChoiceName="No"/>
+
+    <ScatteringPowerAtom Name="Mg" Symbol="Mg">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>1 1 1</RGBColour>
+    </ScatteringPowerAtom>
+
+    <Atom Name="Mg1" ScattPow="Mg">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0.333333</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0.666667</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0.75</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+  </Crystal>
+
+  <Crystal Name="LaB6" SpaceGroup="P m -3 m">
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="a">4.1569</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="b">10</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="c">10</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="alpha">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="beta">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="gamma">90</Par>
+    <Option Name="Constrain Lattice to SpaceGroup Symmetry" Choice="0" ChoiceName="Yes (Default)"/>
+
+    <Option Name="Use Dynamical Occupancy Correction" Choice="1" ChoiceName="Yes"/>
+
+    <Option Name="Display Enantiomer" Choice="0" ChoiceName="No"/>
+
+    <ScatteringPowerAtom Name="La" Symbol="La">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>1 1 1</RGBColour>
+    </ScatteringPowerAtom>
+    <ScatteringPowerAtom Name="B" Symbol="B">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>1 1 1</RGBColour>
+    </ScatteringPowerAtom>
+
+    <Atom Name="La1" ScattPow="La">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+    <Atom Name="B1" ScattPow="B">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0.5</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0.5</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0.1996</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+  </Crystal>
+
+ <Crystal Name="STO" SpaceGroup="P m -3 m">
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="a">3.9052</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="b">10</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="c">10</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="alpha">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="beta">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="gamma">90</Par>
+    <Option Name="Constrain Lattice to SpaceGroup Symmetry" Choice="0" ChoiceName="Yes (Default)"/>
+
+    <Option Name="Use Dynamical Occupancy Correction" Choice="1" ChoiceName="Yes"/>
+
+    <Option Name="Display Enantiomer" Choice="0" ChoiceName="No"/>
+
+    <ScatteringPowerAtom Name="Sr" Symbol="Sr2+">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>1 1 1</RGBColour>
+    </ScatteringPowerAtom>
+    <ScatteringPowerAtom Name="Ti" Symbol="Ti4+">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>1 1 1</RGBColour>
+    </ScatteringPowerAtom>
+    <ScatteringPowerAtom Name="O" Symbol="O2-">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>1 0 0</RGBColour>
+    </ScatteringPowerAtom>
+
+    <Atom Name="Sr" ScattPow="Sr">
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="x">0.5</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="y">0.5</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="z">0.5</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+    <Atom Name="Ti" ScattPow="Ti">
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="x">0</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="y">0</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="z">0</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+    <Atom Name="O" ScattPow="O">
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="x">0.5</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="y">0</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="z">0</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+  </Crystal>
+  
+  <Crystal Name="alphaU2N3" SpaceGroup="I a -3">
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="a">10.699</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="b">10</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="c">10</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="alpha">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="beta">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="gamma">90</Par>
+    <Option Name="Constrain Lattice to SpaceGroup Symmetry" Choice="0" ChoiceName="Yes (Default)"/>
+
+    <Option Name="Use Dynamical Occupancy Correction" Choice="1" ChoiceName="Yes"/>
+
+    <Option Name="Display Enantiomer" Choice="0" ChoiceName="No"/>
+
+    <ScatteringPowerAtom Name="N" Symbol="N">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>0.184314 0.309804 0.184314</RGBColour>
+    </ScatteringPowerAtom>
+    <ScatteringPowerAtom Name="U" Symbol="U">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>1 1 1</RGBColour>
+    </ScatteringPowerAtom>
+
+    <Atom Name="N1" ScattPow="N">
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="x">0.385</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="y">0.145</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="z">0.38</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+    <Atom Name="N2" ScattPow="N">
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="x">0.25</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="y">0.25</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="z">0.25</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+    <Atom Name="U" ScattPow="U">
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="x">0.982</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="y">0</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="z">0.25</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+  </Crystal>
+
+  <Crystal Name="U2N3" SpaceGroup="P -3 m 1">
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="a">3.7</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="b">10</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="c">5.825</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="alpha">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="beta">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="gamma">120</Par>
+    <Option Name="Constrain Lattice to SpaceGroup Symmetry" Choice="0" ChoiceName="Yes (Default)"/>
+
+    <Option Name="Use Dynamical Occupancy Correction" Choice="1" ChoiceName="Yes"/>
+
+    <Option Name="Display Enantiomer" Choice="0" ChoiceName="No"/>
+
+    <ScatteringPowerAtom Name="N" Symbol="N">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>0.184314 0.309804 0.184314</RGBColour>
+    </ScatteringPowerAtom>
+    <ScatteringPowerAtom Name="U" Symbol="U">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>1 1 1</RGBColour>
+    </ScatteringPowerAtom>
+
+    <Atom Name="N1" ScattPow="N">
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="x">0</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="y">0</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="z">0</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+    <Atom Name="N2" ScattPow="N">
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="x">0.333333</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="y">0.666667</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="z">0.641</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+    <Atom Name="U" ScattPow="U">
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="x">0.333333</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="y">0.666667</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="z">0.25</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+  </Crystal>
+
+  <Crystal Name="KTaO3" SpaceGroup="P m -3 m">
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="a">3.98905</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="b">10</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="c">10</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="alpha">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="beta">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="gamma">90</Par>
+    <Option Name="Constrain Lattice to SpaceGroup Symmetry" Choice="0" ChoiceName="Yes (Default)"/>
+
+    <Option Name="Use Dynamical Occupancy Correction" Choice="1" ChoiceName="Yes"/>
+
+    <Option Name="Display Enantiomer" Choice="0" ChoiceName="No"/>
+
+    <ScatteringPowerAtom Name="K" Symbol="K+">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>0 0 1</RGBColour>
+    </ScatteringPowerAtom>
+    <ScatteringPowerAtom Name="Ta" Symbol="Ta5+">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>0 1 0</RGBColour>
+    </ScatteringPowerAtom>
+    <ScatteringPowerAtom Name="O" Symbol="O2-">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>1 0 0</RGBColour>
+    </ScatteringPowerAtom>
+
+    <Atom Name="K" ScattPow="K">
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="x">0.0</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="y">0.0</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="z">0.0</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+    <Atom Name="Ta" ScattPow="Ta">
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="x">0.5</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="y">0.5</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="z">0.5</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+    <Atom Name="O" ScattPow="O">
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="x">0.0</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="y">0.5</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="z">0.5</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+  </Crystal>
+
+  <Crystal Name="KTaO3_tetragonal" SpaceGroup="P 4 m m">
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="a">3.98905</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="b">10.0</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="c">3.98905</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="alpha">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="beta">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="gamma">90</Par>
+    <Option Name="Constrain Lattice to SpaceGroup Symmetry" Choice="0" ChoiceName="Yes (Default)"/>
+
+    <Option Name="Use Dynamical Occupancy Correction" Choice="1" ChoiceName="Yes"/>
+
+    <Option Name="Display Enantiomer" Choice="0" ChoiceName="No"/>
+
+    <ScatteringPowerAtom Name="K" Symbol="K+">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>0 0 1</RGBColour>
+    </ScatteringPowerAtom>
+    <ScatteringPowerAtom Name="Ta" Symbol="Ta5+">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>0 1 0</RGBColour>
+    </ScatteringPowerAtom>
+    <ScatteringPowerAtom Name="O" Symbol="O2-">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>1 0 0</RGBColour>
+    </ScatteringPowerAtom>
+
+    <Atom Name="K" ScattPow="K">
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="x">0.0</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="y">0.0</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="z">0.0</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+    <Atom Name="Ta" ScattPow="Ta">
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="x">0.5</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="y">0.5</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="z">0.512</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+    <Atom Name="O" ScattPow="O">
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="x">0.5</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="y">0.5</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="z">0.9740</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+    <Atom Name="O" ScattPow="O">
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="x">0.0</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="y">0.5</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="z">0.5</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+  </Crystal>
+
+  <Crystal Name="ZrO2-M" SpaceGroup="P 21/c">
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="a">5.150</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="b">5.212</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="c">5.317</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="alpha">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="beta">99.23</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="gamma">90</Par>
+    <Option Name="Constrain Lattice to SpaceGroup Symmetry" Choice="0" ChoiceName="Yes (Default)"/>
+
+    <Option Name="Use Dynamical Occupancy Correction" Choice="1" ChoiceName="Yes"/>
+
+    <Option Name="Display Enantiomer" Choice="0" ChoiceName="No"/>
+
+    <ScatteringPowerAtom Name="Zr" Symbol="Zr4+">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>0 0 1</RGBColour>
+    </ScatteringPowerAtom>
+    <ScatteringPowerAtom Name="O" Symbol="O2-">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>0 1 0</RGBColour>
+    </ScatteringPowerAtom>
+
+    <Atom Name="Zr" ScattPow="Zr">
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="x">0.2754</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="y">0.0395</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="z">0.2083</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+    <Atom Name="O1" ScattPow="O">
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="x">0.07</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="y">0.3317</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="z">0.3447</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+    <Atom Name="O2" ScattPow="O">
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="x">0.4496</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="y">0.7569</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="z">0.4792</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+  </Crystal>
+
+  <Crystal Name="ZrO-C" SpaceGroup="F m -3 m">
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="a">5.11</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="b">5.11</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="c">5.11</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="alpha">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="beta">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="gamma">90</Par>
+    <Option Name="Constrain Lattice to SpaceGroup Symmetry" Choice="0" ChoiceName="Yes (Default)"/>
+
+    <Option Name="Use Dynamical Occupancy Correction" Choice="1" ChoiceName="Yes"/>
+
+    <Option Name="Display Enantiomer" Choice="0" ChoiceName="No"/>
+
+    <ScatteringPowerAtom Name="Zr" Symbol="Zr4+">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>0 0 1</RGBColour>
+    </ScatteringPowerAtom>
+    <ScatteringPowerAtom Name="O" Symbol="O2-">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>0 1 0</RGBColour>
+    </ScatteringPowerAtom>
+
+    <Atom Name="Zr" ScattPow="Zr">
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="x">0.0</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="y">0.0</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="z">0.0</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+    <Atom Name="O" ScattPow="O">
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="x">0.25</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="y">0.25</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="z">0.25</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">0.5</Par>
+    </Atom>
+  </Crystal>
+
+  <Crystal Name="ZrO2-T" SpaceGroup="P 42/n m c">
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="a">3.607</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="b">3.607</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="c">5.176</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="alpha">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="beta">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="gamma">90</Par>
+    <Option Name="Constrain Lattice to SpaceGroup Symmetry" Choice="0" ChoiceName="Yes (Default)"/>
+
+    <Option Name="Use Dynamical Occupancy Correction" Choice="1" ChoiceName="Yes"/>
+
+    <Option Name="Display Enantiomer" Choice="0" ChoiceName="No"/>
+
+    <ScatteringPowerAtom Name="Zr" Symbol="Zr4+">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>0 0 1</RGBColour>
+    </ScatteringPowerAtom>
+    <ScatteringPowerAtom Name="O" Symbol="O2-">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>0 1 0</RGBColour>
+    </ScatteringPowerAtom>
+
+    <Atom Name="Zr" ScattPow="Zr">
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="x">0.75</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="y">0.25</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="z">0.75</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+    <Atom Name="O" ScattPow="O">
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="x">0.25</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="y">0.25</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="z">0.4589</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+  </Crystal>
+  
+  <Crystal Name="TiN" SpaceGroup="F m -3 m">
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="a">4.241</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="b">4.241</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="c">4.241</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="alpha">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="beta">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="gamma">90</Par>
+    <Option Name="Constrain Lattice to SpaceGroup Symmetry" Choice="0" ChoiceName="Yes (Default)"/>
+
+    <Option Name="Use Dynamical Occupancy Correction" Choice="1" ChoiceName="Yes"/>
+
+    <Option Name="Display Enantiomer" Choice="0" ChoiceName="No"/>
+
+    <ScatteringPowerAtom Name="N" Symbol="N2-">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>0 0 1</RGBColour>
+    </ScatteringPowerAtom>
+    <ScatteringPowerAtom Name="Ti" Symbol="Ti4+">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>0 1 0</RGBColour>
+    </ScatteringPowerAtom>
+
+    <Atom Name="N" ScattPow="N">
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="x">0.0</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="y">0.0</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="z">0.0</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+    <Atom Name="Ti" ScattPow="Ti">
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="x">0.5</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="y">0.5</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="z">0.5</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+  </Crystal>
+  
+  <Crystal Name="Corundum" SpaceGroup="R -3 c:H">
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="a">4.7602</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="b">12.9933</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="c">12.9933</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="alpha">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="beta">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="gamma">120</Par>
+    <Option Name="Constrain Lattice to SpaceGroup Symmetry" Choice="0" ChoiceName="Yes (Default)"/>
+
+    <Option Name="Use Dynamical Occupancy Correction" Choice="1" ChoiceName="Yes"/>
+
+    <Option Name="Display Enantiomer" Choice="0" ChoiceName="No"/>
+
+    <ScatteringPowerAtom Name="Al" Symbol="Al">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>1 1 1</RGBColour>
+    </ScatteringPowerAtom>
+    <ScatteringPowerAtom Name="O" Symbol="O">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>1 0 0</RGBColour>
+    </ScatteringPowerAtom>
+
+    <Atom Name="Al1" ScattPow="Al">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0.35216</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+    <Atom Name="O1" ScattPow="O">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0.30624</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0.25</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+
+  </Crystal>
+
+
+
+  <Crystal Name="Pyrope" SpaceGroup="I a -3 d">
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="a">11.4582</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="b">11.4582</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="c">11.4582</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="alpha">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="beta">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="gamma">90</Par>
+    <Option Name="Constrain Lattice to SpaceGroup Symmetry" Choice="0" ChoiceName="Yes (Default)"/>
+
+    <Option Name="Use Dynamical Occupancy Correction" Choice="1" ChoiceName="Yes"/>
+
+    <Option Name="Display Enantiomer" Choice="0" ChoiceName="No"/>
+
+    <ScatteringPowerAtom Name="Mg" Symbol="Mg">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">0.652</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>0 0 1</RGBColour>
+    </ScatteringPowerAtom>
+    <ScatteringPowerAtom Name="Al" Symbol="Al">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">0.312</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>0 1 0</RGBColour>
+    </ScatteringPowerAtom>
+    <ScatteringPowerAtom Name="Si" Symbol="Si">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">0.295</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>1 1 1</RGBColour>
+    </ScatteringPowerAtom>
+    <ScatteringPowerAtom Name="O" Symbol="O">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">0.488</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>1 0 0</RGBColour>
+    </ScatteringPowerAtom>
+
+    <Atom Name="Mg1" ScattPow="Mg">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0.125</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0.25</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+    <Atom Name="Al1" ScattPow="Al">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+    <Atom Name="Si1" ScattPow="Si">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0.375</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0.25</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+    <Atom Name="O1" ScattPow="O">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0.03301</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0.05024</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0.65329</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+
+  </Crystal>
+
+  <Crystal Name="Al4Ni3" SpaceGroup="I a -3 d">
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="a">11.408</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="b">10</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="c">10</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="alpha">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="beta">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="gamma">90</Par>
+    <Option Name="Constrain Lattice to SpaceGroup Symmetry" Choice="0" ChoiceName="Yes (Default)"/>
+
+    <Option Name="Use Dynamical Occupancy Correction" Choice="1" ChoiceName="Yes"/>
+
+    <Option Name="Display Enantiomer" Choice="0" ChoiceName="No"/>
+
+    <ScatteringPowerAtom Name="Ni" Symbol="Ni">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>0 1 0</RGBColour>
+    </ScatteringPowerAtom>
+    <ScatteringPowerAtom Name="Al" Symbol="Al">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>1 1 1</RGBColour>
+    </ScatteringPowerAtom>
+
+    <Atom Name="Ni1" ScattPow="Ni">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0.125</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0.631</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0.619</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+    <Atom Name="Al1" ScattPow="Al">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0.01</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0.25</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+    <Atom Name="Al2" ScattPow="Al">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+
+  </Crystal>
+
+    <Crystal Name="Spinel-MgAl2O4" SpaceGroup="F d -3 m:2">
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="a">8.0887</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="b">8.0887</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="c">8.0887</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="alpha">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="beta">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="gamma">90</Par>
+    <Option Name="Constrain Lattice to SpaceGroup Symmetry" Choice="0" ChoiceName="Yes (Default)"/>
+
+    <Option Name="Use Dynamical Occupancy Correction" Choice="1" ChoiceName="Yes"/>
+
+    <Option Name="Display Enantiomer" Choice="0" ChoiceName="No"/>
+
+    <ScatteringPowerAtom Name="Mg" Symbol="Mg">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">0.4</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>1 1 1</RGBColour>
+    </ScatteringPowerAtom>
+    <ScatteringPowerAtom Name="Al" Symbol="Al">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">0.38</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>1 1 1</RGBColour>
+    </ScatteringPowerAtom>
+    <ScatteringPowerAtom Name="O" Symbol="O">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">0.49</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>1 0 0</RGBColour>
+    </ScatteringPowerAtom>
+
+    <Atom Name="Mg1" ScattPow="Mg">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0.375</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0.375</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0.375</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+    <Atom Name="Al1" ScattPow="Al">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+    <Atom Name="O1" ScattPow="O">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0.2367</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0.2367</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0.2367</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+
+  </Crystal>
+
+  <Crystal Name="Aluminum" SpaceGroup="F m -3 m">
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="a">4.0497</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="b">4.0497</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="c">4.0497</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="alpha">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="beta">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="gamma">90</Par>
+    <Option Name="Constrain Lattice to SpaceGroup Symmetry" Choice="0" ChoiceName="Yes (Default)"/>
+
+    <Option Name="Use Dynamical Occupancy Correction" Choice="1" ChoiceName="Yes"/>
+
+    <Option Name="Display Enantiomer" Choice="0" ChoiceName="No"/>
+
+    <ScatteringPowerAtom Name="Al" Symbol="Al">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">0.5</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>1 1 1</RGBColour>
+    </ScatteringPowerAtom>
+
+    <Atom Name="Al1" ScattPow="Al">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+
+  </Crystal>
+
+  <Crystal Name="ITO" SpaceGroup="Ia-3">
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="a">10.1234</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="b">10.1234</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="c">10.1234</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="alpha">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="beta">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="gamma">90</Par>
+    <Option Name="Constrain Lattice to SpaceGroup Symmetry" Choice="0" ChoiceName="Yes (Default)"/>
+
+    <Option Name="Use Dynamical Occupancy Correction" Choice="1" ChoiceName="Yes"/>
+
+    <Option Name="Display Enantiomer" Choice="0" ChoiceName="No"/>
+
+    <ScatteringPowerAtom Name="In8b" Symbol="In">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">0.38</Par>
+          <Par Refined="0" Limited="1" Min="0" Max="1" Name="ML Error">0</Par>
+      <RGBColour>1 0 0</RGBColour>
+    </ScatteringPowerAtom>
+    <ScatteringPowerAtom Name="In24d" Symbol="In">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">0.31</Par>
+          <Par Refined="0" Limited="1" Min="0" Max="1" Name="ML Error">0</Par>
+      <RGBColour>0 1 0</RGBColour>
+    </ScatteringPowerAtom>
+    <ScatteringPowerAtom Name="Sn8b" Symbol="Sn">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">0.38</Par>
+          <Par Refined="0" Limited="1" Min="0" Max="1" Name="ML Error">0</Par>
+      <RGBColour>1 0 0</RGBColour>
+    </ScatteringPowerAtom>
+    <ScatteringPowerAtom Name="Sn24d" Symbol="Sn">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">0.31</Par>
+          <Par Refined="0" Limited="1" Min="0" Max="1" Name="ML Error">0</Par>
+      <RGBColour>0 1 0</RGBColour>
+    </ScatteringPowerAtom>
+    <ScatteringPowerAtom Name="O" Symbol="O">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">0.5</Par>
+          <Par Refined="0" Limited="1" Min="0" Max="1" Name="ML Error">0</Par>
+      <RGBColour>0 0 1</RGBColour>
+    </ScatteringPowerAtom>
+
+    <Atom Name="Sn1" ScattPow="Sn8b">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0.25</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0.25</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0.25</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">0.03</Par>
+    </Atom>
+    <Atom Name="In2" ScattPow="In24d">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0.4673</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0.25</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">0.97</Par>
+    </Atom>
+    <Atom Name="O3" ScattPow="O">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0.3899</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0.1547</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0.3821</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+    <Atom Name="In4" ScattPow="In8b">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0.25</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0.25</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0.25</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">0.97</Par>
+    </Atom>
+    <Atom Name="Sn5" ScattPow="Sn24d">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0.4673</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0.25</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">0.03</Par>
+    </Atom>
+  </Crystal>
+
+  <Crystal Name="g-Alumina" SpaceGroup="F d -3 m:2">
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="a">7.911</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="b">7.911</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="c">7.911</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="alpha">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="beta">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="gamma">90</Par>
+    <Option Name="Constrain Lattice to SpaceGroup Symmetry" Choice="0" ChoiceName="Yes (Default)"/>
+
+    <Option Name="Use Dynamical Occupancy Correction" Choice="1" ChoiceName="Yes"/>
+
+    <Option Name="Display Enantiomer" Choice="0" ChoiceName="No"/>
+
+    <ScatteringPowerAtom Name="Al" Symbol="Al">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">0.5</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>1 1 1</RGBColour>
+    </ScatteringPowerAtom>
+    <ScatteringPowerAtom Name="O" Symbol="O">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>1 0 0</RGBColour>
+    </ScatteringPowerAtom>
+
+    <Atom Name="O1" ScattPow="O">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0.2547</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0.2547</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0.2547</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+    <Atom Name="Al1" ScattPow="Al">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0.5</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0.5</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0.5</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">0.58</Par>
+    </Atom>
+    <Atom Name="Al2" ScattPow="Al">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0.125</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0.125</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0.125</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">0.84</Par>
+    </Atom>
+    <Atom Name="Al3" ScattPow="Al">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0.0272</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0.0272</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0.0272</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">0.17</Par>
+    </Atom>
+
+  </Crystal>
+
+  <Crystal Name="Rhodium" SpaceGroup="F m -3 m">
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="a">3.8031</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="b">3.8031</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="c">3.8031</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="alpha">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="beta">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="gamma">90</Par>
+    <Option Name="Constrain Lattice to SpaceGroup Symmetry" Choice="0" ChoiceName="Yes (Default)"/>
+
+    <Option Name="Use Dynamical Occupancy Correction" Choice="1" ChoiceName="Yes"/>
+
+    <Option Name="Display Enantiomer" Choice="0" ChoiceName="No"/>
+
+    <ScatteringPowerAtom Name="Rh" Symbol="Rh">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>1 1 1</RGBColour>
+    </ScatteringPowerAtom>
+
+    <Atom Name="Rh1" ScattPow="Rh">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+
+  </Crystal>
+
+  <Crystal Name="Ceria" SpaceGroup="F m -3 m">
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="a">5.411</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="b">5.411</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="c">5.411</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="alpha">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="beta">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="gamma">90</Par>
+    <Option Name="Constrain Lattice to SpaceGroup Symmetry" Choice="0" ChoiceName="Yes (Default)"/>
+
+    <Option Name="Use Dynamical Occupancy Correction" Choice="1" ChoiceName="Yes"/>
+
+    <Option Name="Display Enantiomer" Choice="0" ChoiceName="No"/>
+
+    <ScatteringPowerAtom Name="Ce" Symbol="Ce4+">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>1 1 1</RGBColour>
+    </ScatteringPowerAtom>
+    <ScatteringPowerAtom Name="O" Symbol="O2-">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>1 0 0</RGBColour>
+    </ScatteringPowerAtom>
+
+    <Atom Name="Ce1" ScattPow="Ce">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+    <Atom Name="O1" ScattPow="O">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0.25</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0.25</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0.25</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+
+  </Crystal>
+
+  <Crystal Name="beta-TiO2" SpaceGroup="C 1 2/m 1">
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="a">12.1787</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="b">3.7412</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="c">6.5249</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="alpha">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="beta">107.29</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="gamma">90</Par>
+    <Option Name="Constrain Lattice to SpaceGroup Symmetry" Choice="0" ChoiceName="Yes (Default)"/>
+
+    <Option Name="Use Dynamical Occupancy Correction" Choice="1" ChoiceName="Yes"/>
+
+    <Option Name="Display Enantiomer" Choice="0" ChoiceName="No"/>
+
+    <ScatteringPowerAtom Name="Ti" Symbol="Ti">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>1 1 1</RGBColour>
+    </ScatteringPowerAtom>
+    <ScatteringPowerAtom Name="O" Symbol="O">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>1 0 0</RGBColour>
+    </ScatteringPowerAtom>
+
+    <Atom Name="Ti1" ScattPow="Ti">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0.197</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0.0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0.292</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+    <Atom Name="O1" ScattPow="O">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0.132</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0.0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0.004</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+    <Atom Name="O2" ScattPow="O">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0.264</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0.0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0.653</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+    <Atom Name="Ti2" ScattPow="Ti">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0.099</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0.0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0.705</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+    <Atom Name="O3" ScattPow="O">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0.06</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0.0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0.371</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+    <Atom Name="O4" ScattPow="O">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0.362</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0.0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0.293</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+
+  </Crystal>
+
+  <Crystal Name="Pt-crystal" SpaceGroup="F m -3 m">
+    <Par Refined="0" Limited="0" Min="1" Max="100" Name="a">3.923</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="b">3.923</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="c">3.923</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="alpha">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="beta">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="gamma">90</Par>
+    <Option Name="Constrain Lattice to SpaceGroup Symmetry" Choice="0" ChoiceName="Yes (Default)"/>
+
+    <Option Name="Use Dynamical Occupancy Correction" Choice="1" ChoiceName="Yes"/>
+
+    <Option Name="Display Enantiomer" Choice="0" ChoiceName="No"/>
+
+    <ScatteringPowerAtom Name="Pt" Symbol="Pt">
+      <Par Refined="0" Limited="1" Min="0" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>0.72 0.45 0.2</RGBColour>
+    </ScatteringPowerAtom>
+
+    <Atom Name="Pt1" ScattPow="Pt">
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+  </Crystal>
+
+  <Crystal Name="Cerianite" SpaceGroup="F m -3 m">
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="a">5.411</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="b">5.411</Par>
+    <Par Refined="0" Limited="1" Min="1" Max="100" Name="c">5.411</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="alpha">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="beta">90</Par>
+    <Par Refined="0" Limited="1" Min="28.6479" Max="171.887" Name="gamma">90</Par>
+    <Option Name="Constrain Lattice to SpaceGroup Symmetry" Choice="0" ChoiceName="Yes (Default)"/>
+
+    <Option Name="Use Dynamical Occupancy Correction" Choice="1" ChoiceName="Yes"/>
+
+    <Option Name="Display Enantiomer" Choice="0" ChoiceName="No"/>
+
+    <ScatteringPowerAtom Name="Ce" Symbol="Ce">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>1 1 1</RGBColour>
+    </ScatteringPowerAtom>
+    <ScatteringPowerAtom Name="O" Symbol="O">
+      <Par Refined="0" Limited="1" Min="0.1" Max="5" Name="Biso">1</Par>
+      <Par Refined="0" Limited="0" Min="0" Max="1" Name="ML Error">0</Par>
+      <Par Refined="0" Limited="1" Min="0" Max="10" Name="ML-NbGhost">0</Par>
+      <Par Refined="0" Limited="1" Min="-10" Max="10" Name="Formal Charge">0</Par>
+      <RGBColour>1 0 0</RGBColour>
+    </ScatteringPowerAtom>
+
+    <Atom Name="Ce1" ScattPow="Ce">
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="x">0</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="y">0</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="z">0</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+    <Atom Name="O1" ScattPow="O">
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="x">0.25</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="y">0.25</Par>
+      <Par Refined="1" Limited="0" Min="0" Max="1" Name="z">0.25</Par>
+      <Par Refined="0" Limited="1" Min="0.01" Max="1" Name="Occup">1</Par>
+    </Atom>
+  </Crystal>
+
+</ObjCryst>
