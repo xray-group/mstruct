@@ -115,7 +115,7 @@ int main (int argc, char *argv[])
       cout << "version: " << program_version << "\n";
       cout << "mstruct  Copyright (C) 2009-2011 Zdenek Matej\n";
       cout << "e-mail: matej@karlov.mff.cuni.cz\n";
-      cout << "License GPLv2: GNU GPL version 2 <http://gnu.org/licenses/gpl.html>.\n";
+      cout << "License GPLv3: GNU GPL version 3 <http://gnu.org/licenses/gpl.html>.\n";
       cout << "This program comes with ABSOLUTELY NO WARRANTY;\n";
       cout << "This is free software, and you are welcome to redistribute it.\n";
       cout << flush;
