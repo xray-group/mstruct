@@ -131,7 +131,7 @@ const string& ReflectionProfilePseudoVoigt::GetClassName()const
 }
 
 CrystVector_REAL ReflectionProfilePseudoVoigt::GetProfile(const CrystVector_REAL &x,
-                            const REAL center,const REAL h, const REAL k, const REAL l)const
+							  const REAL center,const REAL h, const REAL k, const REAL l) // Zdenek (const)
 {
    VFN_DEBUG_ENTRY("ReflectionProfilePseudoVoigt::GetProfile(),c="<<center,2)
    REAL fwhm= mCagliotiW
@@ -551,7 +551,7 @@ const string& ReflectionProfileDoubleExponentialPseudoVoigt::GetClassName()const
 
 CrystVector_REAL ReflectionProfileDoubleExponentialPseudoVoigt
    ::GetProfile(const CrystVector_REAL &x, const REAL center,
-                const REAL h, const REAL k, const REAL l)const
+                const REAL h, const REAL k, const REAL l) // Zdenek (const)
 {
    VFN_DEBUG_ENTRY("ReflectionProfileDoubleExponentialPseudoVoigt::GetProfile()",4)
    REAL dcenter=0;

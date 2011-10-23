@@ -31,9 +31,9 @@
 #include <map>
 #include <set>
 
-#include "CrystVector/CrystVector.h"
-#include "ObjCryst/General.h"
-#include "RefinableObj/IO.h"
+#include "ObjCryst/CrystVector/CrystVector.h"
+#include "ObjCryst/ObjCryst/General.h"
+#include "ObjCryst/RefinableObj/IO.h"
 
 #ifdef __WX__CRYST__
    class wxWindow;
@@ -44,11 +44,16 @@ namespace ObjCryst
    template<class T> class RefObjOption;
    class RefinableObj;
 }
-#include "wxCryst/wxRefinableObj.h"
+#include "ObjCryst/wxCryst/wxRefinableObj.h"
 #endif
 
 namespace ObjCryst
 {
+
+class LSQRegularizationOperator; // Zdenek: in ObjCryst/RefinableObj/LSQNumObj.h
+extern LSQRegularizationOperator EmptyLSQRegularizationOperatorObj;
+extern const LSQRegularizationOperator EmptyLSQRegularizationOperatorObj_const;
+
 /// How do we compute steps h for numerical derivative calculation : d=f(x+h)-f(x-h)/h/2
 /// either h is fixed (absolute), or relative h=x*derivFactor
 enum  RefParDerivStepModel
@@ -153,6 +158,8 @@ class RefinableObjClock
       void Print()const;
       /// Print current general clock value. Only for debugging purposes.
       void PrintStatic()const;
+      /// bla, bla
+      void PrintParentsRecursive(const string & tab="\t", const string & indent="") const;
       /// Add a 'child' clock. Whenever a child clock is clicked, it will also click its parent.
       /// This function takes care of adding itself to the list of parent in the children clock.
       void AddChild(const RefinableObjClock &);
@@ -314,6 +321,12 @@ class RefinablePar:public Restraint
          */
          REAL GetValue()const;
 
+         /** Access to a const pointer to the refined value
+         *
+         * This can be used to identify the parameter
+         */
+         const REAL* GetPointer()const;
+
          /** of the parameter. Use the The Mutate() and MutateTo() function
          *  to change this value.
          */
@@ -444,6 +457,10 @@ class RefinablePar:public Restraint
       /// Assign a clock to this parameter. Any time this parameter is modified,
       /// the clock will be ticked !
       void AssignClock(RefinableObjClock &clock);
+      /// Get a constant reference to the clock assigned to this parameter.
+      const RefinableObjClock & GetClock() const; // Zdenek
+      /// Get a reference to the clock assigned to this parameter.
+      RefinableObjClock & GetClock(); // Zdenek
       //@}
       
       /// \name Change Limits
@@ -795,6 +812,11 @@ class RefinableObj
       /// Access parameter from its adress
       const RefinablePar& GetPar(const REAL*) const;
       
+      /// Get a parameter index (the order it was inputted) from its name.
+      long GetParIndex(const string & name, const bool nothrow=false) const; // Zdenek
+      /// Get a parameter index (the order it was inputted) from its adress.
+      long GetParIndex(const REAL *, const bool nothrow=false) const; // Zdenek
+
       /// Access all parameters in the order they were inputted,
       /// skipping fixed parameters. Must call PrepareForRefinement() before !
       RefinablePar& GetParNotFixed(const long i);
@@ -1052,6 +1074,26 @@ class RefinableObj
          */
          virtual const CrystVector_REAL& GetLSQDeriv(const unsigned int, RefinablePar&);
 
+#ifdef __ZDENEK__
+	 /// Number of LSQ-constraints
+	 virtual unsigned int GetNbLSQConstraints() const;
+	 /** Get the n-th LSQ constraint. List of pointers to constrained
+	  * parameters and appropriate constraint coefficients are stored
+	  * in the vectors "parList" and "coef". LSQ constrain scaling factor
+	  * is stored in the REAL argument "scale". TODO:: scale not used ?
+	  */
+	 virtual void GetLSQConstraint(const unsigned int n,
+				       std::vector< const RefinablePar* > &parList,
+				       CrystVector_REAL &coef) const;
+
+	 /// Number of LSQ-Regularization Operators
+	 virtual unsigned int GetNbLSQRegularizationOperator(const unsigned int LSQfunc) const;
+	 /// Get a constant reference to the n-th LSQ-Regularization Operator.
+	 virtual const LSQRegularizationOperator & GetLSQRegularizationOperator(const unsigned int nOp,
+										const unsigned int LSQfunc) const;
+
+#endif // __ZDENEK__
+
       /// Re-init the list of refinable parameters, removing all parameters.
       /// This does \e not delete the RefinablePar if 
       /// RefinableObj::mDeleteRefParInDestructor is false
@@ -1225,6 +1267,14 @@ class RefinableObj
       /// Master clock, which is changed whenever the object has been altered.
       /// It should be parent to all clocks recording changes in derived classes.
       RefinableObjClock mClockMaster;
+
+#ifdef __ZDENEK__
+      /// Default value for constraints scale in the LSQ fitting.
+      /// The constraints scale should be large enough to force the constraint validity
+      /// but not to high to put out the LSQ fitting algorithm. This value should offer
+      /// a typical default constraint scale.
+      static const REAL mDefaultLSQConstraintScale;
+#endif
    #ifdef __WX__CRYST__
    public:
       /// Create a WXCrystObj for this object. Only a generic WXCrystObj pointer is kept.

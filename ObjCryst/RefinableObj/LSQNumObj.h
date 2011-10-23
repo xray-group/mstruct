@@ -23,13 +23,16 @@
 #ifndef _LSQOBJNUM_H
 #define _LSQOBJNUM_H
 
-#include "CrystVector/CrystVector.h"
-#include "RefinableObj/RefinableObj.h"
+#include "ObjCryst/CrystVector/CrystVector.h"
+#include "ObjCryst/RefinableObj/RefinableObj.h"
 #include <string>
 #include <map>
 
 namespace ObjCryst
 {
+
+class LSQRegularizationOperator; // Zdenek
+
 /** \brief (Quick & dirty) Least-Squares Refinement Object with Numerical derivatives
 *
 * This is still highly experimental !
@@ -39,6 +42,10 @@ class LSQNumObj
    public:
       LSQNumObj(std::string objName="Unnamed LSQ object");
       ~LSQNumObj();
+      /// Name for this class ("RefinableObj", "Crystal",...)
+      const string & GetClassName () const; // Zdenek
+      /// Name of the object.
+      const string & GetName () const; // Zdenek
       /// Fix one parameter.
       ///
       /// LSQNumObj::PrepareRefParList() must be called first!
@@ -47,6 +54,23 @@ class LSQNumObj
       ///
       /// LSQNumObj::PrepareRefParList() must be called first!
       void SetParIsFixed(const RefParType *type,const bool fix);
+      /** Fix one parameter
+      *
+      * Note that this will fix the copied parameter, not the one
+      * in the original object. The supplied RefinablePar
+      * may be either the copied one or the original.
+      *
+      * LSQNumObj::PrepareRefParList() must be called first!
+      **/ 
+      void SetParIsFixed(RefinablePar &par,const bool fix);
+      /** Fix all parameters within an object
+      *
+      * Note that this will fix the copied parameters, not the one
+      * in the original objects.
+      *
+      * LSQNumObj::PrepareRefParList() must be called first!
+      **/ 
+      void SetParIsFixed(RefinableObj &obj,const bool fix);
       /// UnFix All parameters
       ///
       /// LSQNumObj::PrepareRefParList() must be called first!
@@ -78,6 +102,8 @@ class LSQNumObj
       void Refine (int nbCycle=1,bool useLevenbergMarquardt=false,
                    const bool silent=false, const bool callBeginEndOptimization=true,
                    const float minChi2var=0.01);
+      /// Stop after the current cycle. Used for refinement interruption. 
+      void StopAfterCycle(); // Zdenek
       CrystVector_REAL Sigma()const;
       CrystMatrix_REAL CorrelMatrix()const;
       REAL Rfactor()const;
@@ -105,12 +131,14 @@ class LSQNumObj
       * that are taken into account for the refinement. The key is a pointer to the
       * object and the value is the LSQ function index for that object.
       */
-      const std::map<RefinableObj*,unsigned int>& GetRefinedObjMap() const;
+      //const std::map<RefinableObj*,unsigned int>& GetRefinedObjMap() const;
+      const std::vector< std::pair<RefinableObj*,unsigned int> >& GetRefinedObjMap() const; // Zdenek
       /** Get the map of refined objects - this is a recursive list of all the objects
       * that are taken into account for the refinement. The key is a pointer to the
       * object and the value is the LSQ function index for that object.
       */
-      std::map<RefinableObj*,unsigned int>& GetRefinedObjMap();
+      //std::map<RefinableObj*,unsigned int>& GetRefinedObjMap();
+      std::vector< std::pair<RefinableObj*,unsigned int> >& GetRefinedObjMap(); // Zdenek
       /** Access to the RefinableObj which is the compilation of all parameters
       * from the object supplied for optimization and its sub-objects.
       *
@@ -170,9 +198,37 @@ class LSQNumObj
       void EndOptimization();
    protected:
    private:
+#ifdef __ZDENEK__
+      /// Get the matrix of constraints for refined parameters
+      CrystMatrix_REAL GetConstraintsMatrix() const; // Zdenek
+      /** Get the sum of all weighted regularization operators matrices.
+       *
+       * In addition to the ChiSq value for the given LSQ function \param LSQfunc
+       * a regularization term is minimised during refinemet. Minimised quantity is:
+       *
+       *          ChiSq(a0+da) + Lambda * (a0+da)*H*(a0+da) ,
+       *
+       * where a0 ... states for a vector of model parameters, da ... is the mutation
+       * of model parameters refined by LSQs, Lambda ... is the weighting factor and
+       * H ... is the symmetric regularization operator. Multiple such regularisation
+       * operators can be possibly applied in general. The matrix returned is the sum
+       * of all such operators required from sub-refinable objects. The weighting
+       * factors (Lambdas) are already included in the final matrix.
+      */
+      CrystMatrix_REAL GetGlobalWeightedRegularizationMatrix(const int LSQfunc=0) const; // Zdenek
+#endif // __ZDENEK__
       // Refined object
          /// The recursive list of all refined sub-objects
          ObjRegistry<RefinableObj> mRecursiveRefinedObjList;
+#ifdef __ZDENEK__
+      /// The list of all refined sub-objects with LSQ Constraints
+      ObjRegistry<RefinableObj> mConstrainedRefinedObjList;
+      /// The list of all refined sub-objects with LSQ Regularization Operators
+      ObjRegistry<RefinableObj> mRegularizedRefinedObjList;
+      REAL mChiSqReg;
+      /// Get the ChiSq value associated with the regularization part
+      REAL GetRegularizationChiSq(const int LSQfunc=0);
+#endif // __ZDENEK__
       /** The refinable par list used during refinement. It is only a compilation
       * of the parameters in RefinableObj and its sub-objects
       *
@@ -190,7 +246,7 @@ class LSQNumObj
       std::string mName;
       /// File name where refinement info is saved
       std::string mSaveFileName;
-      REAL mR,mRw,mChiSq;
+      REAL mR,mRw,mChiSq,mRex;
       /// Correlation matrix between all refined parameters.
       CrystMatrix_REAL mCorrelMatrix;
       ///Variance-Covariance matrix, as a std::map
@@ -214,8 +270,8 @@ class LSQNumObj
       *
       * Individual LSQ functions can be changed using GetRefinedObjMap().
       */
-      std::map<RefinableObj*,unsigned int> mvRefinedObjMap;
-      
+      //std::map<RefinableObj*,unsigned int> mvRefinedObjMap;
+      std::vector< std::pair<RefinableObj*,unsigned int> > mvRefinedObjMap; // Zdenek
       /// If true, then parameters to be refined will be copied instead of referenced.
       /// Therefore only their values and the parameter's clocks are affected when
       /// working on the copy.
@@ -233,6 +289,92 @@ class LSQNumObj
       WXCrystObjBasic *mpWXCrystObj;
 #endif
 };
+
+// Zdenekk(begin)
+
+/** \brief Simple Regularization Operator for the Least-Squares Refinement.
+*
+* During the common LSQ refinement a ChiSq value representing the difference of
+* observed and simulated data is minimized. The matter of this object is to
+* provide an operator that is used to regularize refinement solution in some
+* way. For example it is assumed that the solution should be smooth. This means
+* a that each model parameter from a given group of parametres, representing e.g.
+* a continous function, should not differ much from neighbouring parameters
+* in the group. Such a condition can be expressed as an additional operator 
+* that should be optimised. Hence insteed of minimizing only the ChiSq value
+* the quantity:
+*                      ChiSq(a0+da) + Lambda * (a0+da)*H*(a0+da) 
+*
+* is minimised now. Here a0 ... states for a vector of model parameters,
+* da ... is the mutation of model parameters refined by LSQs,
+* Lambda ... is the weighting factor and H ... is the symmetric regularization
+* operator.
+* 
+*/
+class LSQRegularizationOperator
+{
+ public:
+  /// Constructor
+  LSQRegularizationOperator (std::string objName="Unnamed LSQ Regularization Obj");
+  /// Copy constructor
+  LSQRegularizationOperator (const LSQRegularizationOperator & );
+  /// Descructor
+  ~LSQRegularizationOperator();
+  /// Name for this class ("LSQRegularizationOperator",...)
+  const string & GetClassName () const;
+  /// Name of the object.
+  const string & GetName () const;
+
+  /** Get the matrix reprezenting the regularization operator.
+   *
+   * The elements of the matrix descibe relations between parameters returned
+   * by GetParamsList(). Hence this list defines the order of matrix rows and columns.
+   * 
+   * The matrix is symmetric. The lower triangular part of the matrix should be used
+   * preferably (becouse of compatibility with Newmat).
+   */
+  const CrystMatrix_REAL & GetRegularizationOperatorMatrix () const;
+  /// Get the list of parameters. This list links the matrix elements with the appropriate parameters.
+  const std::vector< const RefinablePar * > & GetParamList () const;
+  /// Get the weighting factor of the regularization operator in the minimized ChiSq quantity.
+  REAL GetRegularizationOperatorWeight () const;
+  
+  /** Set the matrix reprezenting the regularization operator.
+   *
+   * The elements of the matrix descibe relations between parameters returned
+   * by GetParamsList(). Hence this list defines the order of matrix rows and columns.
+   * 
+   * The matrix must be symmetric. The lower triangular part of the matrix should be used
+   * preferably (becouse of compatibility with Newmat).
+   */
+  void SetRegularizationOperatorMatrix (const CrystMatrix_REAL & matrix);
+  /// Set the list of parameters on which the operator is working. This list links the matrix elements with the appropriate parameters.
+  void SetParamList (const std::vector< const RefinablePar * > & paramList);
+  /// Set the weighting factor of the regularization operator in the minimized ChiSq quantity.
+  void SetRegularizationOperatorWeight (const REAL Lambda);
+
+  /// Get (non-weighted) value of Regularization Operator applied to the current parameters set.
+  REAL GetValue () const;
+
+ private:
+  /// Name of the object
+  std::string mName;
+
+  /// List of parameters on which the regularization operator is working.
+  std::vector< const RefinablePar * > mParamList;
+  /// Regularization operator matrix.
+  CrystMatrix_REAL mRegOpMatrix;
+  /// Weight of the regularization operator.
+  REAL mLambda;
+};
+
+/// An empty LSQ Regularization Operator Object
+extern LSQRegularizationOperator EmptyLSQRegularizationOperatorObj;
+/// Constant empty LSQ Regularization Operator Object
+extern const LSQRegularizationOperator EmptyLSQRegularizationOperatorObj_const;
+/// Global Registry for all LSQRegularizationOperators
+extern ObjRegistry<LSQRegularizationOperator> gLSQRegularizationOperatorRegistry;
+// Zdenek (end)
 
 }//namespace
 #endif //_LSQOBJNUM_H

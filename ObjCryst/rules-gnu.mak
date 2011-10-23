@@ -2,6 +2,7 @@
 #ROOT_DIR = ${CURDIR}
 # Base ObjCryst directory
 DIR_CRYST = $(BUILD_DIR)/ObjCryst
+DIR_CRYST_LOWER = $(BUILD_DIR)/ObjCryst/../
 
 #Libraries to be statically linked are installed in $(DIR_STATIC_LIBS)/lib,
 #with their headers in DIR_STATIC_LIBS)/include 
@@ -43,7 +44,7 @@ CRYST_LDFLAGS   = ${LDFLAGS} -L/usr/lib -L/usr/local/lib -L$(DIR_CRYSTVECTOR) -L
 MAKEDEPEND = gcc -MM ${CPPFLAGS} ${CXXFLAGS} ${C_BLITZFLAG} $< > $*.dep
 
 # header files
-SEARCHDIRS = -I$(DIR_TAU)/include -I${DIR_CRYST} -I$(DIR_STATIC_LIBS)/include
+SEARCHDIRS = -I$(DIR_TAU)/include -I${DIR_CRYST} -I${DIR_CRYST_LOWER} -I$(DIR_STATIC_LIBS)/include
 
 #wxWindows flags
 ifeq ($(wxcryst),1)
@@ -111,10 +112,28 @@ FFTW_LIB :=
 FFTW_FLAGS :=
 endif
 
+#Using clapack (used for GSVD)
+ifneq ($(clapack),0)
+CLAPACK_LIB = -llapack -lblas
+CLAPACK_FLAGS = -DHAVE_CLAPACK
+else
+CLAPACK_LIB :=
+CLAPACK_FLAGS :=
+endif
+
 ifneq ($(shared-newmat),1)
 LDNEWMAT := $(DIR_STATIC_LIBS)/lib/libnewmat.a
 else
 LDNEWMAT := -lnewmat
+endif
+
+#Using Zdenek's Code ?
+ifeq ($(zdenek),1)
+ZFLAGS := -D__ZDENEK__
+ZLIBS :=
+else
+ZFLAGS :=
+ZLIBS :=
 endif
 
 #Set DEBUG options
@@ -126,8 +145,8 @@ ifeq ($(debug),1)
    else
       CPPFLAGS = -g -Wall -D__DEBUG__ 
    endif
-   DEPENDFLAGS = ${SEARCHDIRS} ${GL_FLAGS} ${WXCRYSTFLAGS} ${FFTW_FLAGS}
-   LOADLIBES = -lm -lcryst -lCrystVector -lQuirks -lRefinableObj -lcctbx ${LDNEWMAT} ${PROFILELIB} ${GL_LIB} ${WX_LDFLAGS} ${FFTW_LIB}
+   DEPENDFLAGS = ${SEARCHDIRS} ${GL_FLAGS} ${WXCRYSTFLAGS} ${FFTW_FLAGS} ${CLAPACK_FLAGS} ${ZFLAGS}
+   LOADLIBES = -lm -lcryst -lCrystVector -lQuirks -lRefinableObj -lcctbx ${LDNEWMAT} ${PROFILELIB} ${GL_LIB} ${WX_LDFLAGS} ${FFTW_LIB} ${CLAPACK_LIB} ${ZLIB}
 else
 # -march=athlon,pentiumpro
    ifdef RPM_OPT_FLAGS
@@ -141,8 +160,8 @@ else
       #default flags
       CPPFLAGS = -O3 -w -ffast-math -fstrict-aliasing -pipe -fomit-frame-pointer -funroll-loops
    endif
-   DEPENDFLAGS = ${SEARCHDIRS} ${GL_FLAGS} ${WXCRYSTFLAGS} ${FFTW_FLAGS}
-   LOADLIBES = -s -lm -lcryst -lCrystVector -lQuirks -lRefinableObj -lcctbx ${LDNEWMAT} ${PROFILELIB} ${GL_LIB} ${WX_LDFLAGS} ${FFTW_LIB}
+   DEPENDFLAGS = ${SEARCHDIRS} ${GL_FLAGS} ${WXCRYSTFLAGS} ${FFTW_FLAGS} ${ZFLAGS}
+   LOADLIBES = -s -lm -lcryst -lCrystVector -lQuirks -lRefinableObj -lcctbx ${LDNEWMAT} ${PROFILELIB} ${GL_LIB} ${WX_LDFLAGS} ${FFTW_LIB} ${ZLIB}
 endif
 # Add to statically link: -nodefaultlibs -lgcc /usr/lib/libstdc++.a
 
@@ -208,7 +227,7 @@ endif
 #cctbx
 $(DIR_STATIC_LIBS)/lib/libcctbx.a:
 	mkdir -p $(DIR_STATIC_LIBS)/lib/ $(DIR_STATIC_LIBS)/include/
-	cd $(BUILD_DIR) && tar -xjf cctbx.tar.bz2
+	#cd $(BUILD_DIR) && tar -xjf cctbx.tar.bz2
 	$(MAKE) -f gnu.mak -C $(BUILD_DIR)/cctbx install
 	#ln -sf $(BUILD_DIR)/boost $(DIR_STATIC_LIBS)/include/
 	#rm -Rf $(BUILD_DIR)/cctbx

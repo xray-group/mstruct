@@ -24,6 +24,10 @@
 #include <iterator>
 #include <algorithm>
 
+#ifdef _MSC_VER // for time identifier
+#include <time.h>
+#endif
+
 #include "Quirks/VFNStreamFormat.h"
 #include "ObjCryst/Molecule.h"
 #include "RefinableObj/GlobalOptimObj.h"

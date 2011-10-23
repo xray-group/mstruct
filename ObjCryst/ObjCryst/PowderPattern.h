@@ -374,7 +374,7 @@ class PowderPatternDiffraction : virtual public PowderPatternComponent,public Sc
       /// \internal Calc reflection profiles for ALL reflections (powder diffraction)
       void CalcPowderReflProfile()const;
       /// \internal Calc Lorentz-Polarisation-APerture correction
-      void CalcIntensityCorr()const;
+      virtual void CalcIntensityCorr()const; // Zdenek
       /// \internal Compute the intensity for all reflections (taking into account
       /// corrections, but not the multiplicity)
       virtual void CalcIhkl() const;
@@ -465,6 +465,10 @@ class PowderPatternDiffraction : virtual public PowderPatternComponent,public Sc
       bool mExtractionMode;
       /// Single crystal data extracted from the powder pattern.
       DiffractionDataSingleCrystal *mpLeBailData;
+      /// Range in which reflection profiles are calcualted is enlarged by this factor 
+      REAL mReflProfFact; // Zdenek
+      /// Minimum relative intensity for reflection profile calculation
+      REAL mReflProfMinRelIntensity; // Zdenek
    #ifdef __WX__CRYST__
    public:
       virtual WXCrystObjBasic* WXCreate(wxWindow*);

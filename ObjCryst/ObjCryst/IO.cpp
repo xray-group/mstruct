@@ -44,6 +44,9 @@
 #include <fstream>
 #include <sstream>
 #include <cstdlib>
+#if defined(_MSC_VER) || defined(__BORLANDC__)
+#include <float.h>
+#endif
 
 //#define USE_BACKGROUND_MAXLIKE_ERROR
 
@@ -150,7 +153,8 @@ template<class T> void XMLCrystFileLoadObject(const string & filename,
    ifstream is(filename.c_str());
    if(!is){};//:TODO:
    XMLCrystTag tag;
-   while(true)
+   bool obj_not_found = true; // Zdenek
+   while(obj_not_found) // Zdenek
    {
       is>>tag;
       if(true==is.eof())
@@ -164,7 +168,7 @@ template<class T> void XMLCrystFileLoadObject(const string & filename,
       if(tagName!=tag.GetName())continue;
       for(unsigned int i=0;i<tag.GetNbAttribute();i++)
          if("Name"==tag.GetAttributeName(i))
-            if(name==tag.GetAttributeValue(i)) break;
+            if(name==tag.GetAttributeValue(i)) obj_not_found = false; // Zdenek
    }
    VFN_DEBUG_MESSAGE("XMLCrystFileLoadObject(filename,IOCrystTag,T&):Found"<<tag,5)
    obj = new T;

@@ -21,14 +21,15 @@
 *
 */
 #include <ctime>
-#include "RefinableObj/RefinableObj.h"
-#include "Quirks/VFNStreamFormat.h"
-#include "Quirks/VFNDebug.h"
+#include "ObjCryst/RefinableObj/RefinableObj.h"
+#include "ObjCryst/Quirks/VFNStreamFormat.h"
+#include "ObjCryst/Quirks/VFNDebug.h"
 #ifdef __WX__CRYST__
-   #include "wxCryst/wxRefinableObj.h"
+   #include "ObjCryst/wxCryst/wxRefinableObj.h"
    #undef GetClassName // Conflict from wxMSW headers ? (cygwin)
 #endif
 #include <algorithm>
+
 namespace ObjCryst
 {
 //######################################################################
@@ -149,6 +150,12 @@ void RefinableObjClock::Print()const
 void RefinableObjClock::PrintStatic()const
 {
    cout <<"RefinableObj class Clock():"<<msTick1<<":"<<msTick0<<endl;
+}
+void RefinableObjClock::PrintParentsRecursive(const string & tab, const string & indent)const
+{
+  cout << indent << "(" << this << "): "; this->Print();
+  for(std::set<RefinableObjClock*>::iterator pos=mvParent.begin(); pos!=mvParent.end();++pos)
+    (*pos)->PrintParentsRecursive(tab,indent+tab);
 }
 void RefinableObjClock::AddChild(const RefinableObjClock &clock)
 {mvChild.insert(&clock);clock.AddParent(*this);this->Click();}
@@ -342,6 +349,11 @@ REAL RefinablePar::GetValue()const
    }
    #endif
    return *mpValue;
+}
+
+const REAL* RefinablePar::GetPointer()const
+{
+   return mpValue;
 }
 
 void RefinablePar::SetValue(const REAL value)
@@ -656,6 +668,8 @@ void RefinablePar::AssignClock(RefinableObjClock &clock)
    mpClock=&clock;
    mHasAssignedClock=true;
 }
+const RefinableObjClock &  RefinablePar::GetClock() const {return *mpClock;}
+RefinableObjClock &  RefinablePar::GetClock() {return *mpClock;}
 void RefinablePar::Click()
 {
    if(false==mHasAssignedClock) return;
@@ -838,6 +852,11 @@ template<class T> void RefObjOption<T>::Init(const int nbChoice,
    mfpSetNewValue=fp;
 }
 
+#ifdef __ZDENEK__
+}// namespace ObjCryst
+#include "ObjRegistry_T.cpp"
+namespace ObjCryst {
+#else
 //######################################################################
 //    ObjRegistry
 //######################################################################
@@ -1108,6 +1127,8 @@ template<class T> void ObjRegistry<T>::WXNotifyDelete()
 }
 #endif
 
+#endif // __ZDENEK__ ObjRegistry_T.cpp
+
 //######################################################################
 //    function RefObjRegisterRecursive
 //######################################################################
@@ -1140,6 +1161,11 @@ ObjRegistry<RefinableObj> gTopRefinableObjRegistry("Global Top RefinableObj regi
 
 /// Maximum number of saved sets of parameters
 const unsigned long MaxNbSavedSets(1000);
+
+/// 
+#ifdef __ZDENEK__
+const REAL RefinableObj::mDefaultLSQConstraintScale = 1.e3; // Zdenek
+#endif
 
 RefinableObj::RefinableObj():
 mName(""),
@@ -1277,11 +1303,20 @@ void RefinableObj::SetParIsFixed(const long parIndex,const bool fix)
    this->GetPar(parIndex).SetIsFixed(fix);
 }
 
+/*
 void RefinableObj::SetParIsFixed(const string& name,const bool fix)
 {
    for(long i=this->GetNbPar()-1;i>=0;i--) 
       if( this->GetPar(i).GetName() == name) 
          this->GetPar(i).SetIsFixed(fix);
+}
+*/ // Zdenek - old ObjCryst code
+
+void RefinableObj::SetParIsFixed(const string& parName,const bool fix)
+{
+   long index=this->FindPar(parName);
+   if(-1==index) return; //:TODO:
+   this->GetPar(index).SetIsFixed(fix);
 }
 
 void RefinableObj::SetParIsFixed(const RefParType *type,const bool fix)
@@ -1373,6 +1408,28 @@ const RefinablePar& RefinableObj::GetPar(const REAL *p) const
    return *(mvpRefPar[i]);
 }
 
+long RefinableObj::GetParIndex(const string & name, const bool nothrow) const
+{
+  const long i=this->FindPar(name);
+  if(-1==i && nothrow==false)
+  {
+    this->Print();
+    throw ObjCrystException("RefinableObj::GetParIndex(): cannot find parameter: "+name+" in object:"+this->GetName());
+  }
+  return i;
+}
+
+long RefinableObj::GetParIndex(const REAL *p, const bool nothrow) const
+{
+  const long i=this->FindPar(p);
+  if(-1==i && nothrow==false)
+  {
+    this->Print();
+    throw ObjCrystException("RefinableObj::GetParIndex(*p): cannot find parameter in object:"+this->GetName());
+  }
+  return i;
+}
+
 RefinablePar& RefinableObj::GetParNotFixed(const long i)
 {
    return *(mvpRefPar[mRefparNotFixedIndex(i)]);
@@ -1387,15 +1444,17 @@ void RefinableObj::AddPar(const RefinablePar &newRefPar)
 {
    VFN_DEBUG_MESSAGE("RefinableObj::AddPar(RefPar&)",2)
    string name=newRefPar.GetName();
+#ifndef __ZDENEK__ // Zdenek
    long ct=0;
    if(this->FindPar(name)>=0)
       while(this->FindPar(name)!=-1)
       {// KLUDGE ? Extend name if another parameter already exists with the same name
          VFN_DEBUG_MESSAGE("RefinableObj::AddPar(): need to change name ?! -> "<<name<<","<<this->FindPar(name),10)
-         name += "~";
+	 name += "~";
          if(++ct==100) break;// KLUDGE, let go and hope for the best...
       }
-   
+#endif
+
    mvpRefPar.push_back(new RefinablePar(newRefPar));
    mvpRefPar.back()->SetName(name);
    mRefParListClock.Click();
@@ -1405,6 +1464,7 @@ void RefinableObj::AddPar(RefinablePar *newRefPar)
 {
    VFN_DEBUG_MESSAGE("RefinableObj::AddPar(RefPar&)",2)
    string name=newRefPar->GetName();
+#ifndef __ZDENEK__ // Zdenek
    long ct=0;
    if(this->FindPar(name)>=0)
       while(this->FindPar(name)!=-1)
@@ -1413,6 +1473,7 @@ void RefinableObj::AddPar(RefinablePar *newRefPar)
          name += "~";
          if(++ct==100) break;// KLUDGE, let go and hope for the best...
       }
+#endif
    mvpRefPar.push_back(newRefPar);
    mvpRefPar.back()->SetName(name);
    mRefParListClock.Click();
@@ -1770,14 +1831,52 @@ const CrystVector_REAL& RefinableObj::GetLSQWeight(const unsigned int) const
 const CrystVector_REAL& RefinableObj::GetLSQDeriv(const unsigned int n, RefinablePar&par)
 {
    // By default, use numerical derivatives
-   par.Mutate(par.GetDerivStep());
+   /*par.Mutate(par.GetDerivStep());
    mLSQDeriv  =this->GetLSQCalc(n);
    par.Mutate(-2*par.GetDerivStep());
    mLSQDeriv -=this->GetLSQCalc(n);
    par.Mutate(par.GetDerivStep());
-   mLSQDeriv /= par.GetDerivStep()/2;
+   mLSQDeriv /= par.GetDerivStep()*2; // Zdenek
+   return mLSQDeriv;*/
+   REAL d1 = par.GetValue(); // Zdenek
+   par.Mutate(par.GetDerivStep());
+   REAL d2 = par.GetValue();
+   d1 =  d2 - d1; // true +mutation
+   mLSQDeriv  =this->GetLSQCalc(n);
+   par.Mutate(-2*par.GetDerivStep());
+   d2 = par.GetValue() - d2; // true -mutation
+   mLSQDeriv -=this->GetLSQCalc(n);
+   par.Mutate(-d2-d1);
+   mLSQDeriv /= -d2; // Zdenek
    return mLSQDeriv;
 }
+
+#ifdef __ZDENEK__
+
+unsigned int RefinableObj::GetNbLSQConstraints() const
+{
+	return 0;
+}
+
+void RefinableObj::GetLSQConstraint(const unsigned int n,
+  																	std::vector< const RefinablePar* > &parList, CrystVector_REAL &coef) const
+{
+	parList.clear();
+	coef.resize(0);
+}
+
+unsigned int RefinableObj::GetNbLSQRegularizationOperator(const unsigned int LSQfunc) const
+{
+  return 0;
+}
+
+const LSQRegularizationOperator & RefinableObj::GetLSQRegularizationOperator(const unsigned int n,
+									     const unsigned int LSQfunc) const
+{
+  return EmptyLSQRegularizationOperatorObj_const;
+}
+ 										
+#endif // __ZDENEK__
 
 void RefinableObj::ResetParList()
 {
@@ -1996,16 +2095,16 @@ void GetRefParListClockRecursive(ObjRegistry<RefinableObj> &reg,RefinableObjCloc
 //***********EXPLICIT INSTANTIATION*******************//
 template void RefObjRegisterRecursive(RefinableObj &obj,ObjRegistry<RefinableObj> &reg);
 }//namespace
-#include "ObjCryst/Crystal.h"
-#include "ObjCryst/Scatterer.h"
-#include "ObjCryst/ScatteringPower.h"
-#include "ObjCryst/ZScatterer.h"
-#include "ObjCryst/PowderPattern.h"
-#include "ObjCryst/DiffractionDataSingleCrystal.h"
-#include "ObjCryst/ScatteringCorr.h"
-#include "RefinableObj/GlobalOptimObj.h"
-#include "RefinableObj/IO.h"
-#include "ObjCryst/ReflectionProfile.h"
+#include "ObjCryst/ObjCryst/Crystal.h"
+#include "ObjCryst/ObjCryst/Scatterer.h"
+#include "ObjCryst/ObjCryst/ScatteringPower.h"
+#include "ObjCryst/ObjCryst/ZScatterer.h"
+#include "ObjCryst/ObjCryst/PowderPattern.h"
+#include "ObjCryst/ObjCryst/DiffractionDataSingleCrystal.h"
+#include "ObjCryst/ObjCryst/ScatteringCorr.h"
+#include "ObjCryst/RefinableObj/GlobalOptimObj.h"
+#include "ObjCryst/RefinableObj/IO.h"
+#include "ObjCryst/ObjCryst/ReflectionProfile.h"
 using namespace ObjCryst;
 template class ObjRegistry<RefObjOpt>;
 template class ObjRegistry<RefinableObj>;

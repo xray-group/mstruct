@@ -308,17 +308,18 @@ CrystMatrix_REAL SpaceGroup::GetAllSymmetrics(const REAL x, const REAL y, const 
    {
       VFN_DEBUG_MESSAGE("SpaceGroup::GetAllSymmetrics():Removing identical atoms",5)
       //Bring back all coordinates to [0;1[
+      const REAL eps=1e-5; // Zdenek L324 -> L311
       REAL *p=coords.data();
       double junk;
       for(long i=0;i<coords.numElements();i++)
       {
          *p = modf(*p,&junk);
-         if(*p<0) *p += 1.;
+         if(*p<-eps/2) *p += 1.; // Zdenek 0 -> -eps/2
          p++;
       }
       CrystMatrix_REAL newCoords;
       newCoords=coords;
-      const REAL eps=1e-5;
+      //const REAL eps=1e-5; // Zdenek L324 -> L311
       long nbKeep=0;
       for(long i=0;i<coords.rows();i++)
       {
@@ -385,7 +386,7 @@ void SpaceGroup::Print() const
                         << this->GetCCTbxSpg().ltr(i)[1]/(REAL)this->GetCCTbxSpg().ltr(i).den()<<","
                         << this->GetCCTbxSpg().ltr(i)[2]/(REAL)this->GetCCTbxSpg().ltr(i).den()<<endl;
    }
-   cout<<"Extension (origin choice, rhomboedral/hexagonal):"<<mExtension<<endl;
+   cout<<"Extension (origin choice, rhomboedral/hexagonal):"<<(mExtension!='\0' ? mExtension : ' ')<<endl; // Zdenek
 }
 bool SpaceGroup::HasInversionCenter() const {return mHasInversionCenter;}
 bool SpaceGroup::IsInversionCenterAtOrigin() const {return mIsInversionCenterAtOrigin;}

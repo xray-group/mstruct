@@ -579,6 +579,23 @@ class CubicSpline
       CrystVector_REAL operator()(const REAL min,const REAL step, const long nbpoint) const;
       /// Get spline value at one point
       REAL operator()(const REAL x) const;
+
+      // Zdenek
+
+      /// Get spline first derivative value at a series of point - x is assumed to be sorted by increasing values
+      CrystVector_REAL Derivative(const CrystVector_REAL &x) const;
+      /// Get spline first derivative value on a range of values with a fixed step
+      CrystVector_REAL Derivative(const REAL min,const REAL step, const long nbpoint) const;
+      /// Get spline first derivative value at one point
+      REAL Derivative(const REAL x) const;
+
+      /// Get spline second derivative value at a series of point - x is assumed to be sorted by increasing values
+      CrystVector_REAL SecondDerivative(const CrystVector_REAL &x) const;
+      /// Get spline second derivative value on a range of values with a fixed step
+      CrystVector_REAL SecondDerivative(const REAL min,const REAL step, const long nbpoint) const;
+      /// Get spline second derivative value at one point
+      REAL SecondDerivative(const REAL x) const;
+
    private:
       void InitSpline(const REAL yp1, const REAL ypn);
       void InitNaturalSpline();

@@ -10,6 +10,7 @@ html/index.html: ../*/*.h
 #	cp ${DIR_CRYST}/../atominfo/readme.html html/atominfo.html
 #	cp ${DIR_CRYST}/../sglite/LICENSE html/sglite-license.txt
 
+
 doc: html/index.html
 
 pdf: doc
@@ -19,7 +20,7 @@ ctags:
 	ctags ${DIR_LIBCRYST}/*.cpp ${DIR_VFNQUIRKS}/*.cpp ${DIR_SGLITE}/*.c  ${DIR_ATOMINFO}/*.c ${DIR_REFOBJ}/*.cpp ${DIR_CRYSTVECTOR}/*.cpp ${DIR_WXWCRYST}/*.cpp ${DIR_LIBCRYST}/*.h  ${DIR_VFNQUIRKS}/*.h ${DIR_SGLITE}/*.h  ${DIR_ATOMINFO}/*.h  ${DIR_CRYSTVECTOR}/*.h ${DIR_REFOBJ}/*.h ${DIR_CRYSTVECTOR}/*.h ${DIR_WXWCRYST}/*.h
 
 clean:
-	@${RM} html/* latex/*
+	@${RM} html/* latex/* ObjCryst.tag
 
 sourceforge:
 	scp -C -r html/* vincefn@shell.sourceforge.net:/home/groups/o/ob/objcryst/htdocs/ObjCryst/

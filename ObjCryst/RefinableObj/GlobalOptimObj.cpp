@@ -1875,8 +1875,10 @@ void MonteCarloObj::InitLSQ(const bool useFullPowderPatternProfile)
    
    if(!useFullPowderPatternProfile)
    {// Use LSQ function #1 for powder patterns (integrated patterns - faster !)
-      for(map<RefinableObj*,unsigned int>::iterator pos=mLSQ.GetRefinedObjMap().begin();pos!=mLSQ.GetRefinedObjMap().end();++pos)
-         if(pos->first->GetClassName()=="PowderPattern") pos->second=1;
+     //for(map<RefinableObj*,unsigned int>::iterator pos=mLSQ.GetRefinedObjMap().begin();pos!=mLSQ.GetRefinedObjMap().end();++pos)
+     for(vector< pair<RefinableObj*,unsigned int> >::iterator pos=mLSQ.GetRefinedObjMap().begin();pos!=mLSQ.GetRefinedObjMap().end();++pos) // Zdenek
+       //if(pos->first->GetClassName()=="PowderPattern") pos->second=1;
+       if((*pos).first->GetClassName()=="PowderPattern") pos->second=1; // Zdenek
    }
    // Only refine structural parameters (excepting parameters already fixed) and scale factor
    mLSQ.PrepareRefParList(true);
