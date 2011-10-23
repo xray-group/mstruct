@@ -35,7 +35,7 @@ namespace {
       {  19, "K",  "potassium",     39.098 },
       {  20, "Ca", "calcium",       40.078 },
       {  21, "Sc", "scandium",      44.956 },
-      {  22, "Ti", "titanium",      47.883 },
+      {  22, "Ti", "titanium",      47.867 }, // 47.883 -> 47.867(NIST) Zdenek
       {  23, "V",  "vanadium",      50.941 },
       {  24, "Cr", "chromium",      51.996 },
       {  25, "Mn", "manganese",     54.938 },
