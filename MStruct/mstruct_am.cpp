@@ -28,7 +28,7 @@
  *
  */
 
-#define program_version "0.29-(Fox-r1221)-testing"
+#define program_version "0.37-(Fox-r1221)-testing"
 
 #include "MStruct.h"
 
