@@ -6066,6 +6066,78 @@ void FaultsBroadeningEffectFCCBaloghUngar::GetSubComponentsPar(const REAL alpha,
 	}
 }
 
+// FaultsBroadeningEffectWC11m23
+
+FaultsBroadeningEffectWC11m23::FaultsBroadeningEffectWC11m23()
+  : mAlpha(0.)
+{}
+
+CrystVector_REAL FaultsBroadeningEffectWC11m23::GetProfile (const CrystVector_REAL &x, const REAL xcenter, const REAL h, const REAL k, const REAL l)
+{
+  // get all equivalent reflections
+  
+  
+  return x;
+}
+
+REAL FaultsBroadeningEffectWC11m23::GetApproxFWHM (const REAL xcenter, const REAL h, const REAL k, const REAL l)
+{
+  return 0;
+}
+
+bool FaultsBroadeningEffectWC11m23::IsRealSpaceType () const
+{
+  return true;
+}
+
+bool FaultsBroadeningEffectWC11m23::IsAnisotropic () const
+{
+  return fabs(mAlpha)>1e-5;
+}
+
+
+REAL FaultsBroadeningEffectWC11m23::GetPositionCorr (const REAL xcenter, const REAL h, const REAL k, const REAL l) const
+{
+  return 0;
+}
+
+void FaultsBroadeningEffectWC11m23::SetAuxParameters () const
+{
+  // mpUnitCell need to be initialised and the cell type should be checked
+	
+  // To get ther necessary information an access to Crystal/UnitCell object is needed
+	
+  // Crystal/UnitCell can be obtained object from ParentPowderPatternDiffraction object,
+  // through ParentReflectionProfile and ParentPowderPatternDiffraction objects.
+  // Pointer to the UnitCell object is stored for a simple and direct access for e.g.
+  // generating a list of symmetry equivalent reflections.
+  try {
+		
+    mpUnitCell = &GetParentReflectionProfile().GetParentPowderPatternDiffraction().GetCrystal();
+	                           
+    // We want to detect the space group
+	
+    // Only the WC (P-6m2 nb.187) space group is accepted.
+	
+    const int sgnb = mpUnitCell->GetSpaceGroup().GetSpaceGroupNumber();
+	
+    if (sgnb != 187) {
+      cout << "Warning: MStruct::FaultsBroadeningEffectWC11m23:" << "Only hexagonal WC type cell supported." << endl; 
+      mClockAuxParams.Click();
+    }
+  }
+	
+  catch(std::exception &e) {
+    cout << "< MStruct::FaultsBroadeningEffectWC11m23::SetAuxParameters()\n";
+    cout << "exception: " << e.what() << "\n";
+    cout << "Maybe a parent ReflectionProfile object to this broadenig component,\n \
+	     its parent PowderpatterDiffraction object, or Crystal object\n \
+	     have not been set yet. Without them a cell type and other data \
+ 	     can not be checked and the object can not be properly initialised. >" << endl; 
+    throw ;
+  }
+}
+
 // PseudoVoigtBroadeningEffect
 
 PseudoVoigtBroadeningEffect::PseudoVoigtBroadeningEffect():

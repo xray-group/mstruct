@@ -1056,6 +1056,37 @@ protected:
 	static const ParametersTable TableExtrinsic; // Parameters table for extrinsic stacking faults
 }; // class FaultsBroadeningEffectFCCBaloghUngar
 
+/** FaultsBroadeningEffectWC11m23 : Describes line broadeng from [11-23] displacement faults in WC. 
+ *
+ * It simulates line broadenig profiles from a WC sample containing [11-23] displacement faults as described
+ * by S. Hagege et al.(1980).
+ *
+ * A simple model assuming stacking of the aAbB tetra-layers is used, hence only a B|a fault is included.
+ * Fourier coefficients derived by Zdenek (Jan, 2012) by applying directly the simple approach of Warren.
+ *
+ * ref: [1] S. Hagege, J. Vicens, G. Nouet, P. Delavignette, phys. stat. sol (a) 61, 675 (1980)
+ *      [2] B. E. Warren, X-Ray Diffraction, Addison-Wesley (1969)
+ *
+ */
+class FaultsBroadeningEffectWC11m23: public ReflectionProfileComponent {
+private:
+  /// Fault probability
+  REAL mAlpha;
+public:
+  /// Constructor
+  FaultsBroadeningEffectWC11m23();
+  /// Get peak profile (returns Four.Coefs. here)
+  virtual CrystVector_REAL GetProfile (const CrystVector_REAL &x, const REAL xcenter, const REAL h, const REAL k, const REAL l);
+  /// Get a rough estimate of peak width
+  virtual REAL 	GetApproxFWHM (const REAL xcenter, const REAL h, const REAL k, const REAL l);
+  /// Is this effect of real space type? (Yes - it returns. Four.Coefs. insteed of intensity)
+  virtual bool 	IsRealSpaceType () const;
+  /// Is this effect anisotropic? (Yes - it is (hkl) dependent)
+  virtual bool 	IsAnisotropic () const;
+  /// Get an additional correction for peak position (zero here)
+  virtual REAL GetPositionCorr (const REAL xcenter, const REAL h, const REAL k, const REAL l) const;
+}; // class FaultsBroadeningEffectWCHagege11m23
+
 class PseudoVoigtBroadeningEffectA: public ReflectionProfileComponent {
 private:
   REAL mCagliotiU;
