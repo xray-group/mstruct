@@ -1078,13 +1078,25 @@ public:
   /// Get peak profile (returns Four.Coefs. here)
   virtual CrystVector_REAL GetProfile (const CrystVector_REAL &x, const REAL xcenter, const REAL h, const REAL k, const REAL l);
   /// Get a rough estimate of peak width
-  virtual REAL 	GetApproxFWHM (const REAL xcenter, const REAL h, const REAL k, const REAL l);
+  virtual REAL GetApproxFWHM (const REAL xcenter, const REAL h, const REAL k, const REAL l) const;
   /// Is this effect of real space type? (Yes - it returns. Four.Coefs. insteed of intensity)
-  virtual bool 	IsRealSpaceType () const;
+  virtual bool IsRealSpaceType () const;
   /// Is this effect anisotropic? (Yes - it is (hkl) dependent)
-  virtual bool 	IsAnisotropic () const;
+  virtual bool IsAnisotropic () const;
   /// Get an additional correction for peak position (zero here)
   virtual REAL GetPositionCorr (const REAL xcenter, const REAL h, const REAL k, const REAL l) const;
+  /// Set effect parameters - fault probability (alpha)
+  void SetProfilePar (const REAL alpha);
+private:
+  /// Initialise object (refinable) parameters
+  void InitParameters ();
+  /// An auxilliary method intended to set and check auxilliary object data
+  void SetAuxParameters () const;
+private:
+  /// Auxilliary pointer to the parents UnitCell object
+  mutable const ObjCryst::UnitCell *mpUnitCell;
+  /// Object auxilliary data clock (When they were modified/updated last time?)
+  mutable ObjCryst::RefinableObjClock mClockAuxParams;
 }; // class FaultsBroadeningEffectWCHagege11m23
 
 class PseudoVoigtBroadeningEffectA: public ReflectionProfileComponent {

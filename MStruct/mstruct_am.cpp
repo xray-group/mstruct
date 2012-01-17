@@ -28,7 +28,7 @@
  *
  */
 
-#define program_version "0.37-(Fox-r1221)-testing"
+#define program_version "0.38-(Fox-r1221)-testing-WCfaults"
 
 #include "MStruct.h"
 
@@ -53,9 +53,9 @@ using namespace ObjCryst;
 
 namespace MStruct {
 
-#define BACKGROUND_INTERPOLATED		0
-#define BACKGROUND_INVX				1
-#define BACKGROUND_CHEBYSHEV		2
+#define BACKGROUND_INTERPOLATED    0
+#define BACKGROUND_INVX            1
+#define BACKGROUND_CHEBYSHEV       2
 
 class PowderPatternBackground : public ObjCryst::PowderPatternBackground {
 public:
@@ -941,6 +941,25 @@ int main (int argc, char *argv[])
        	  //strainEffect->SetParentReflectionProfile(*reflProfile);
      			//reflProfile->AddReflectionProfileComponent(*strainEffect);
      	 		btype_not_found = false;
+     	 }
+
+	// [11-23] displacement faults broadening in hexagonal WC faultsWC11m23
+     	 if(btype_not_found && btype==string("faultsWC11m23")) {
+     	 	 	MStruct::FaultsBroadeningEffectWC11m23 * faultsEffect
+       			 = new MStruct::FaultsBroadeningEffectWC11m23;
+       		faultsEffect->SetName(bname);
+       		vReflProfComponents.push_back(faultsEffect);
+       		
+       	 // parameters
+       	  REAL alpha;
+       	  cout << "alpha" << endl;
+       	  read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+       	  ccin >> alpha;
+       	  
+       	  faultsEffect->SetProfilePar(alpha);
+       	  //faultsEffect->SetParentReflectionProfile(*reflProfile);
+     	  //reflProfile->AddReflectionProfileComponent(*faultsEffect);
+     	  btype_not_found = false;
      	 }
      	// Phenomenological broadening
      	 if(btype_not_found && btype==string("HKLpVoigtA")) {
@@ -1901,7 +1920,7 @@ std::vector< void* > read_line ( istringstream &iss, istream &is, const bool loa
 	}
 	
 	iss.str(s);
-	//out << "iss: " << iss.str().c_str() << endl;
+	//cout << "iss: " << iss.str().c_str() << endl;
 	
 	return objects;
 }

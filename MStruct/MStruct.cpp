@@ -18,7 +18,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License
+ * You should have received a copy of the GNU General Public License`
  * along with MStruct++.  If not, see <http://www.gnu.org/licenses/>.
  * 
  */
@@ -6069,20 +6069,105 @@ void FaultsBroadeningEffectFCCBaloghUngar::GetSubComponentsPar(const REAL alpha,
 // FaultsBroadeningEffectWC11m23
 
 FaultsBroadeningEffectWC11m23::FaultsBroadeningEffectWC11m23()
-  : mAlpha(0.)
+  : mAlpha(0.), mpUnitCell(0)
 {}
 
 CrystVector_REAL FaultsBroadeningEffectWC11m23::GetProfile (const CrystVector_REAL &x, const REAL xcenter, const REAL h, const REAL k, const REAL l)
 {
-  // get all equivalent reflections
-  
-  
-  return x;
+  // First of all it should be checked if the object is properly initialised and
+  // the auxiliary variables are properly set.
+	
+  // Generally an access to the parent ReflectionProfile and ParentPowderPatternDiffraction
+  // objects and their GetRadiation and UnitCell methods/objects is needed.
+	
+  // Init auxiliary parameters (cell type, pointer to the UnitCell object ... ) if necessary
+  if(GetParentReflectionProfile().GetParentPowderPatternDiffraction().
+     GetCrystal().GetClockMaster()<mClockAuxParams) SetAuxParameters();
+
+  // Get radiation and wavelength
+  const Radiation &rad = GetParentReflectionProfile().GetParentPowderPatternDiffraction().GetRadiation();
+  const REAL Lambda = rad.GetWavelength()(0);
+
+  // length of the difraction vector
+  const REAL s0 = 2.*sin(0.5*xcenter)/Lambda;  		
+  // 'a' lattice parameter
+  const REAL aa = mpUnitCell->GetLatticePar(0);
+
+  // Get all symmetry equivalent reflections
+  CrystMatrix_REAL equivRefl = mpUnitCell->GetSpaceGroup().GetAllEquivRefl(h,k,l,false,false);
+
+  // Calculation
+
+  // nb of points and vector for calc. result
+  int nbPoints = x.numElements(); 
+  CrystVector_REAL profile(nbPoints);
+
+  // A very straighforward implementation (a little bit ineffective)
+
+  profile = 0;
+
+  // for each component
+  for(int irefl = 0; irefl<equivRefl.rows(); irefl++) {
+    if( (int(equivRefl(irefl,0)+equivRefl(irefl,1)+equivRefl(irefl,2)) & 1)
+	&& (fabs(equivRefl(irefl,0)-equivRefl(irefl,1))>1.e-4) ) {
+      // affected component
+      const REAL B = fabs(1-2*mAlpha)* fabs(equivRefl(irefl,0)-equivRefl(irefl,1))/2./aa/s0 *1./sqrt(3.)/aa;
+      const REAL *p1 = x.data();
+      REAL *p2 = profile.data();
+      for(int i=0; i<nbPoints; i++, p1++, p2++)
+	*p2 += exp(-B*fabs(*p1));
+    } else
+      profile += 1.; // unaffected component
+  } // irefl
+
+  profile *= 1./equivRefl.rows();
+
+  return profile;
 }
 
-REAL FaultsBroadeningEffectWC11m23::GetApproxFWHM (const REAL xcenter, const REAL h, const REAL k, const REAL l)
+REAL FaultsBroadeningEffectWC11m23::GetApproxFWHM (const REAL xcenter, const REAL h, const REAL k, const REAL l) const
 {
-  return 0;
+  // First of all it should be checked if the object is properly initialised and
+  // the auxiliary variables are properly set.
+	
+  // Generally an access to the parent ReflectionProfile and ParentPowderPatternDiffraction
+  // objects and their GetRadiation and UnitCell methods/objects is needed.
+	
+  // Init auxiliary parameters (cell type, pointer to the UnitCell object ... ) if necessary
+  if(GetParentReflectionProfile().GetParentPowderPatternDiffraction().
+     GetCrystal().GetClockMaster()<mClockAuxParams) SetAuxParameters();
+
+  // Get radiation and wavelength
+  const Radiation &rad = GetParentReflectionProfile().GetParentPowderPatternDiffraction().GetRadiation();
+  const REAL Lambda = rad.GetWavelength()(0);
+
+  // length of the difraction vector
+  const REAL s0 = 2.*sin(0.5*xcenter)/Lambda;  		
+  // 'a' lattice parameter
+  const REAL aa = mpUnitCell->GetLatticePar(0);
+
+  // Get all symmetry equivalent reflections
+  CrystMatrix_REAL equivRefl = mpUnitCell->GetSpaceGroup().GetAllEquivRefl(h,k,l,false,false);
+
+  // Calculation
+  REAL fwhm = 0.;
+
+  // A very straighforward implementation (a little bit ineffective)
+
+  // The estimate of the approximate width is an arithmetic average width over all components
+
+  // for each component
+  for(int irefl = 0; irefl<equivRefl.rows(); irefl++) {
+    if( (int(equivRefl(irefl,0)+equivRefl(irefl,1)+equivRefl(irefl,2)) & 1)
+	&& (fabs(equivRefl(irefl,0)-equivRefl(irefl,1))>1.e-4) ) {
+      // affected component
+      fwhm += fabs(1-2*mAlpha)* fabs(equivRefl(irefl,0)-equivRefl(irefl,1))/2./aa/s0 *1./sqrt(3.)/aa;
+    }
+  } // irefl
+
+  fwhm *= 1./equivRefl.rows()/2./M_PI;
+
+  return fwhm;
 }
 
 bool FaultsBroadeningEffectWC11m23::IsRealSpaceType () const
@@ -6095,27 +6180,44 @@ bool FaultsBroadeningEffectWC11m23::IsAnisotropic () const
   return fabs(mAlpha)>1e-5;
 }
 
-
 REAL FaultsBroadeningEffectWC11m23::GetPositionCorr (const REAL xcenter, const REAL h, const REAL k, const REAL l) const
 {
   return 0;
+}
+
+void FaultsBroadeningEffectWC11m23::SetProfilePar (const REAL alpha)
+{
+  mAlpha = alpha;
+  mClockMaster.Click();
+}
+
+void FaultsBroadeningEffectWC11m23::InitParameters ()
+{
+  {
+    RefinablePar tmp("Alpha", &mAlpha, 0., 1.,
+                     gpRefParTypeScattDataProfileWidth,
+                     REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false,1.);
+    tmp.AssignClock(mClockMaster);
+    tmp.SetDerivStep(0.005);
+    this->AddPar(tmp);
+  }
 }
 
 void FaultsBroadeningEffectWC11m23::SetAuxParameters () const
 {
   // mpUnitCell need to be initialised and the cell type should be checked
 	
-  // To get ther necessary information an access to Crystal/UnitCell object is needed
+  // Access to Crystal/UnitCell object is needed
 	
-  // Crystal/UnitCell can be obtained object from ParentPowderPatternDiffraction object,
+  // Crystal/UnitCell can be obtained from ParentPowderPatternDiffraction object,
   // through ParentReflectionProfile and ParentPowderPatternDiffraction objects.
-  // Pointer to the UnitCell object is stored for a simple and direct access for e.g.
+  // Pointer to the UnitCell object is stored for a direct access for e.g.
   // generating a list of symmetry equivalent reflections.
   try {
 		
     mpUnitCell = &GetParentReflectionProfile().GetParentPowderPatternDiffraction().GetCrystal();
 	                           
-    // We want to detect the space group
+    // Space group need to be detected
 	
     // Only the WC (P-6m2 nb.187) space group is accepted.
 	
@@ -6130,10 +6232,11 @@ void FaultsBroadeningEffectWC11m23::SetAuxParameters () const
   catch(std::exception &e) {
     cout << "< MStruct::FaultsBroadeningEffectWC11m23::SetAuxParameters()\n";
     cout << "exception: " << e.what() << "\n";
-    cout << "Maybe a parent ReflectionProfile object to this broadenig component,\n \
+    cout << "The Object can not be properly initialised.\n \
+             Maybe a parent ReflectionProfile object of this broadenig component,\n \					\
 	     its parent PowderpatterDiffraction object, or Crystal object\n \
-	     have not been set yet. Without them a cell type and other data \
- 	     can not be checked and the object can not be properly initialised. >" << endl; 
+	     have not been set yet. Without them a cell type and other data\n \
+ 	     can not be checked. >" << endl; 
     throw ;
   }
 }
