@@ -5138,7 +5138,7 @@ void DislocationBroadeningEffectSvB::SetAuxParameters()const
       }
       mQ2 = 0.;
     }
-    else if (sgnb == 194) {
+    else if (sgnb == 194 || sgnb == 187) {
       // hexagonal cell
       const REAL aa = uc.GetLatticePar(0);
       const REAL cc = uc.GetLatticePar(3);
@@ -6070,7 +6070,9 @@ void FaultsBroadeningEffectFCCBaloghUngar::GetSubComponentsPar(const REAL alpha,
 
 FaultsBroadeningEffectWC11m23::FaultsBroadeningEffectWC11m23()
   : mAlpha(0.), mpUnitCell(0)
-{}
+{
+  InitParameters ();
+}
 
 CrystVector_REAL FaultsBroadeningEffectWC11m23::GetProfile (const CrystVector_REAL &x, const REAL xcenter, const REAL h, const REAL k, const REAL l)
 {
@@ -6111,11 +6113,11 @@ CrystVector_REAL FaultsBroadeningEffectWC11m23::GetProfile (const CrystVector_RE
     if( (int(equivRefl(irefl,0)+equivRefl(irefl,1)+equivRefl(irefl,2)) & 1)
 	&& (fabs(equivRefl(irefl,0)-equivRefl(irefl,1))>1.e-4) ) {
       // affected component
-      const REAL B = fabs(1-2*mAlpha)* fabs(equivRefl(irefl,0)-equivRefl(irefl,1))/2./aa/s0 *1./sqrt(3.)/aa;
+      const REAL B = log(1-2*mAlpha)* fabs(equivRefl(irefl,0)-equivRefl(irefl,1))/2./aa/s0 *1./sqrt(3.)/aa;
       const REAL *p1 = x.data();
       REAL *p2 = profile.data();
       for(int i=0; i<nbPoints; i++, p1++, p2++)
-	*p2 += exp(-B*fabs(*p1));
+	*p2 += exp(B*fabs(*p1));
     } else
       profile += 1.; // unaffected component
   } // irefl
@@ -6161,11 +6163,11 @@ REAL FaultsBroadeningEffectWC11m23::GetApproxFWHM (const REAL xcenter, const REA
     if( (int(equivRefl(irefl,0)+equivRefl(irefl,1)+equivRefl(irefl,2)) & 1)
 	&& (fabs(equivRefl(irefl,0)-equivRefl(irefl,1))>1.e-4) ) {
       // affected component
-      fwhm += fabs(1-2*mAlpha)* fabs(equivRefl(irefl,0)-equivRefl(irefl,1))/2./aa/s0 *1./sqrt(3.)/aa;
+      fwhm += -log(1-2*mAlpha)* fabs(equivRefl(irefl,0)-equivRefl(irefl,1))/2./aa/s0 *1./sqrt(3.)/aa;
     }
   } // irefl
 
-  fwhm *= 1./equivRefl.rows()/2./M_PI;
+  fwhm *= 1./equivRefl.rows()/2./M_PI * Lambda/cos(0.5*xcenter);
 
   return fwhm;
 }
@@ -6189,6 +6191,15 @@ void FaultsBroadeningEffectWC11m23::SetProfilePar (const REAL alpha)
 {
   mAlpha = alpha;
   mClockMaster.Click();
+}
+
+void FaultsBroadeningEffectWC11m23::SetParentReflectionProfile (const ReflectionProfile &s)
+{
+  // Call the superclass method to ensure functionality
+  ReflectionProfileComponent::SetParentReflectionProfile(s);
+	
+  // Init auxiliary parameters (check cell type)
+  SetAuxParameters();
 }
 
 void FaultsBroadeningEffectWC11m23::InitParameters ()

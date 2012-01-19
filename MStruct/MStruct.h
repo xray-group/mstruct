@@ -1056,16 +1056,17 @@ protected:
 	static const ParametersTable TableExtrinsic; // Parameters table for extrinsic stacking faults
 }; // class FaultsBroadeningEffectFCCBaloghUngar
 
-/** FaultsBroadeningEffectWC11m23 : Describes line broadeng from [11-23] displacement faults in WC. 
+/** \brief Class describes line broadeng from [11-23] displacement faults in WC. 
  *
- * It simulates line broadenig profiles from a WC sample containing [11-23] displacement faults as described
- * by S. Hagege et al.(1980).
+ * It simulates diffraction profiles from a WC sample containing [11-23] displacement faults described
+ * by S. Hagege et al. (1980) [1].\n
  *
- * A simple model assuming stacking of the aAbB tetra-layers is used, hence only a B|a fault is included.
- * Fourier coefficients derived by Zdenek (Jan, 2012) by applying directly the simple approach of Warren.
+ * A simple model assuming stacking of the aAbB tetra-layers is used, hence only a B|a fault is included.\n
+ * Fourier coefficients were derived by Zdenek (Dec, 2011) using a simple approach like in Warren (1969) [2].
  *
- * ref: [1] S. Hagege, J. Vicens, G. Nouet, P. Delavignette, phys. stat. sol (a) 61, 675 (1980)
- *      [2] B. E. Warren, X-Ray Diffraction, Addison-Wesley (1969)
+ * references:\n
+ * [1] S. Hagege, J. Vicens, G. Nouet, P. Delavignette, phys. stat. sol (a) 61, 675 (1980)\n
+ * [2] B. E. Warren, X-Ray Diffraction, Addison-Wesley (1969)
  *
  */
 class FaultsBroadeningEffectWC11m23: public ReflectionProfileComponent {
@@ -1075,18 +1076,20 @@ private:
 public:
   /// Constructor
   FaultsBroadeningEffectWC11m23();
-  /// Get peak profile (returns Four.Coefs. here)
+  /// Get peak profile (it returns Four. coefs. here)
   virtual CrystVector_REAL GetProfile (const CrystVector_REAL &x, const REAL xcenter, const REAL h, const REAL k, const REAL l);
-  /// Get a rough estimate of peak width
+  /// Get a rough estimate of peak width (in radians)
   virtual REAL GetApproxFWHM (const REAL xcenter, const REAL h, const REAL k, const REAL l) const;
-  /// Is this effect of real space type? (Yes - it returns. Four.Coefs. insteed of intensity)
+  /// Is this effect of real space type? (Yes - it returns. Four. coefs. insteed of intensity)
   virtual bool IsRealSpaceType () const;
-  /// Is this effect anisotropic? (Yes - it is (hkl) dependent)
+  /// Is this effect anisotropic? (Yes - it is hkl dependent)
   virtual bool IsAnisotropic () const;
   /// Get an additional correction for peak position (zero here)
   virtual REAL GetPositionCorr (const REAL xcenter, const REAL h, const REAL k, const REAL l) const;
   /// Set effect parameters - fault probability (alpha)
   void SetProfilePar (const REAL alpha);
+  /// Set parent reflection profile (needed for proper functionality, TODO:: Why the parent virtual method is not satisfactory?)
+  void SetParentReflectionProfile (const ReflectionProfile &s);
 private:
   /// Initialise object (refinable) parameters
   void InitParameters ();
