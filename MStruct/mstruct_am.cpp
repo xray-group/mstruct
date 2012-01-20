@@ -1490,9 +1490,11 @@ int main (int argc, char *argv[])
    //lsqOptObj.FixAllPar();
 
 	// for grid refinement (job=1) define a grid
-	 CrystVector_REAL gridx(0);
-	 CrystVector_REAL gridRw(0);
+   CrystVector_REAL gridx(0);
+   CrystVector_REAL gridy(0);
+   CrystMatrix_REAL gridRw(0,0);
 	 string grid_xname("");
+	 string grid_yname("");
 	   
 	 if(job_type==1) {
 	 	 // refinement grid
@@ -1503,16 +1505,33 @@ int main (int argc, char *argv[])
 	   read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
 	   ccin >> grid_dim;
 	   
-	   cout << "grid variable: name, min, max, step" << endl;
-	   read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
-	   ccin >> grid_xname >> grid_xmin >> grid_xmax >> grid_xstep; 
-	   grid_xn = int(1.1*(grid_xmax-grid_xmin)/grid_xstep)+1;
-	   gridx.resize(grid_xn);
-	   for(int ix=0; ix<grid_xn; ix++) {
-	   	gridx(ix) = grid_xmin + ix*grid_xstep;
+	   {
+	     cout << "grid variable (x): name, min, max, step" << endl;
+	     read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+	     ccin >> grid_xname >> grid_xmin >> grid_xmax >> grid_xstep;
+
+	     grid_xn = int(1.1*(grid_xmax-grid_xmin)/grid_xstep)+1;
+	     gridx.resize(grid_xn);
+	     for(int ix=0; ix<grid_xn; ix++) {
+	       gridx(ix) = grid_xmin + ix*grid_xstep;
+	     }
+
+	     gridRw.resize(1,grid_xn);
 	   }
-	   
-	   gridRw.resize(grid_xn);
+
+	   if(grid_dim==2) {
+	     cout << "grid variable (y): name, min, max, step" << endl;
+	     read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+	     ccin >> grid_yname >> grid_ymin >> grid_ymax >> grid_ystep;
+
+	     grid_yn = int(1.1*(grid_ymax-grid_ymin)/grid_ystep)+1;
+	     gridy.resize(grid_yn);
+	     for(int iy=0; iy<grid_yn; iy++) {
+	       gridx(iy) = grid_ymin + iy*grid_ystep;
+	     }
+	     
+	     gridRw.resize(grid_yn,grid_xn);
+	   }
 	   
 		 /*if(dim>1) {
 		 	 cout << "grid variable: name, min, max, step" << endl;
@@ -1616,8 +1635,9 @@ int main (int argc, char *argv[])
    bool silent=false;
    
 	 if(job_type==1) { // grid refinement
-		// get param
+		// get param(s)
 		 RefinablePar *pparamx = 0;
+		 RefinablePar *pparamy = 0;
 		 try {
 		 	 string str = grid_xname;
 			 pparamx = (str.at(0)=='#') ?
@@ -1628,6 +1648,19 @@ int main (int argc, char *argv[])
 		 }
 		 catch (...) {
 			 cout << "Warning: Parameter: " << grid_xname << " not found and ignored!" << endl;
+		 }
+		 if(gridy.numElements()>0) {
+		 try {
+		 	 string str = grid_yname;
+			 pparamy = (str.at(0)=='#') ?
+					&lsqOptObj.GetFullRefinableObj().GetPar(atoi(str.substr(1).c_str())) :
+					&get_par(str, lsqOptObj.GetFullRefinableObj());
+			 //lsqOptObj.GetFullRefinableObj().GetPar(str.c_str());
+			 pparamy->SetIsFixed(true);
+		 }
+		 catch (...) {
+			 cout << "Warning: Parameter: " << grid_yname << " not found and ignored!" << endl;
+		 }
 		 }
 		 if (pparamx!=0) {
 		 	// the best configuration
