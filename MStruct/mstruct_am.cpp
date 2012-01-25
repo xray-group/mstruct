@@ -1510,7 +1510,7 @@ int main (int argc, char *argv[])
 	     read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
 	     ccin >> grid_xname >> grid_xmin >> grid_xmax >> grid_xstep;
 
-	     grid_xn = int(1.1*(grid_xmax-grid_xmin)/grid_xstep)+1;
+	     grid_xn = int(1.01*(grid_xmax-grid_xmin)/grid_xstep)+1;
 	     gridx.resize(grid_xn);
 	     for(int ix=0; ix<grid_xn; ix++) {
 	       gridx(ix) = grid_xmin + ix*grid_xstep;
@@ -1524,10 +1524,10 @@ int main (int argc, char *argv[])
 	     read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
 	     ccin >> grid_yname >> grid_ymin >> grid_ymax >> grid_ystep;
 
-	     grid_yn = int(1.1*(grid_ymax-grid_ymin)/grid_ystep)+1;
+	     grid_yn = int(1.01*(grid_ymax-grid_ymin)/grid_ystep)+1;
 	     gridy.resize(grid_yn);
 	     for(int iy=0; iy<grid_yn; iy++) {
-	       gridx(iy) = grid_ymin + iy*grid_ystep;
+	       gridy(iy) = grid_ymin + iy*grid_ystep;
 	     }
 	     
 	     gridRw.resize(grid_yn,grid_xn);
@@ -1634,7 +1634,7 @@ int main (int argc, char *argv[])
    bool useLevenbergMarquardt=true;
    bool silent=false;
    
-	 if(job_type==1) { // grid refinement
+   if(job_type==1) { // grid refinement
 		// get param(s)
 		 RefinablePar *pparamx = 0;
 		 RefinablePar *pparamy = 0;
@@ -1664,43 +1664,93 @@ int main (int argc, char *argv[])
 		 }
 		 if (pparamx!=0) {
 		 	// the best configuration
-		 	 REAL bestRw = numeric_limits<REAL>::max();
-		 	 int best_set_id =	lsqOptObj.GetFullRefinableObj().CreateParamSet("bestParamsSet");
+		         REAL bestRw = numeric_limits<REAL>::max();
+		 	 int best_set_id = lsqOptObj.GetFullRefinableObj().CreateParamSet("bestParamsSet");
 		 	 int ibestvalx = -1;
+			 int ibestvaly = -1;
 		 	// save starting params. set
-		 	 const int start_set_id =	lsqOptObj.GetFullRefinableObj().CreateParamSet("startingParamsSet");
-			 for(int ix=0; ix<gridx.numElements(); ix++) {
-			 	// restore starting parmas. set
-			 	 lsqOptObj.GetFullRefinableObj().RestoreParamSet(start_set_id);
-				// set param
-				 pparamx->SetValue(gridx(ix)/pparamx->GetHumanScale());
-				// run the refinement
-				 lsqOptObj.Refine(niter,useLevenbergMarquardt,silent);
-				// store the Rw value
-				 gridRw(ix) = lsqOptObj.RwFactor();
-				// save the best configuration
-				 if (gridRw(ix)<=bestRw) { // store the best configuration
-				 	 bestRw = gridRw(ix);
-				 	 lsqOptObj.GetFullRefinableObj().SaveParamSet(best_set_id);
-				 	 ibestvalx = ix;
-				 }
-			 }
-			// print grid refinement results
-			 cout << " ------------------------------------------------ " << endl;
-			 cout << "GRID REFINEMENT results:" << endl;
-			 cout << setw(25) << grid_xname << setw(15) << "Rw" << endl;
-			 for(int ix=0; ix<gridx.numElements(); ix++)
-			 	 cout << setw(25) << gridx(ix) << setw(15) << gridRw(ix) << endl;
-			 if (ibestvalx>=0) {
-			 	cout << "Best parameters set: " << grid_xname << " = " << gridx(ibestvalx) << endl;
-				// restore the best configuration
-				 lsqOptObj.GetFullRefinableObj().RestoreParamSet(best_set_id);
-				cout << "Best parameters set restored." << endl;
-			 }
-			 else
-				 cerr << "Error: grid - refinement - best parameters set not found!" << endl;
-		 }
-	 }
+		 	 const int start_set_id = lsqOptObj.GetFullRefinableObj().CreateParamSet("startingParamsSet");
+
+			 if(gridy.numElements()==0) {
+			   for(int ix=0; ix<gridx.numElements(); ix++) {
+			    // restore starting parmas. set
+			     lsqOptObj.GetFullRefinableObj().RestoreParamSet(start_set_id);
+			    // set param
+			     pparamx->SetValue(gridx(ix)/pparamx->GetHumanScale());
+			    // run the refinement
+			     lsqOptObj.Refine(niter,useLevenbergMarquardt,silent);
+			    // store the Rw value
+			     gridRw(0,ix) = lsqOptObj.RwFactor();
+			    // save the best configuration
+			     if (gridRw(ix)<=bestRw) { // store the best configuration
+			       bestRw = gridRw(0,ix);
+			       lsqOptObj.GetFullRefinableObj().SaveParamSet(best_set_id);
+			       ibestvalx = ix;
+			     }
+			   }
+			  // print grid refinement results
+			   cout << " ------------------------------------------------ " << endl;
+			   cout << "GRID REFINEMENT results:" << endl;
+			   cout << setw(25) << grid_xname << setw(15) << "Rw" << endl;
+			   for(int ix=0; ix<gridx.numElements(); ix++)
+			     cout << setw(25) << gridx(ix) << setw(15) << gridRw(0,ix) << endl;
+			   if (ibestvalx>=0) {
+			     cout << "Best parameters set: " << grid_xname << " = " << gridx(ibestvalx) << endl;
+			    // restore the best configuration
+			     lsqOptObj.GetFullRefinableObj().RestoreParamSet(best_set_id);
+			     cout << "Best parameters set restored." << endl;
+			   }
+			   else
+			     cerr << "Error: grid - refinement - best parameters set not found!" << endl;
+			 } // if(gridy.numElements()==0)
+
+			 if(gridy.numElements()>0) {			 
+			   for(int iy=0; iy<gridy.numElements(); iy++)
+			     for(int ix=0; ix<gridx.numElements(); ix++) {
+			      // restore starting parmas. set
+			       lsqOptObj.GetFullRefinableObj().RestoreParamSet(start_set_id);
+			      // set params
+			       pparamx->SetValue(gridx(ix)/pparamx->GetHumanScale());
+			       pparamy->SetValue(gridy(iy)/pparamy->GetHumanScale());
+			      // run the refinement
+			       lsqOptObj.Refine(niter,useLevenbergMarquardt,silent);
+			      // store the Rw value
+			       gridRw(iy,ix) = lsqOptObj.RwFactor();
+			      // save the best configuration
+			       if (gridRw(iy,ix)<=bestRw) { // store the best configuration
+				 bestRw = gridRw(iy,ix);
+				 lsqOptObj.GetFullRefinableObj().SaveParamSet(best_set_id);
+				 ibestvalx = ix;
+				 ibestvaly = iy;
+			       }
+			     }
+			  // print grid refinement results
+			   cout << " ------------------------------------------------ " << endl;
+			   cout << "GRID REFINEMENT results:" << endl;
+			   cout << setw(20) << grid_xname << setw(20) << grid_yname << setw(20) << "Rw" << endl;
+			   cout << setw(20) << "";
+			   for(int iy=0; iy<gridy.numElements(); iy++)
+			       cout << setw(20) << setw(20) << gridy(iy);
+			   cout << endl;
+			   for(int ix=0; ix<gridx.numElements(); ix++) {
+			     cout << setw(20) << gridx(ix);
+			     for(int iy=0; iy<gridy.numElements(); iy++)
+			       cout << setw(20) << gridRw(iy,ix);
+			     cout << endl;
+			   }
+			   if (ibestvalx>=0 && ibestvaly>=0) {
+			     cout << "Best parameters set: ( " << grid_xname << " , " << grid_yname << " ) = ( ";
+			     cout << gridx(ibestvalx) << " , " << gridy(ibestvaly) << " )" << endl;
+			    // restore the best configuration
+			     lsqOptObj.GetFullRefinableObj().RestoreParamSet(best_set_id);
+			     cout << "Best parameters set restored." << endl;
+			   }
+			   else
+			     cerr << "Error: grid - refinement - best parameters set not found!" << endl;
+		 } // if(gridy.numElements()>0)
+
+   } // if (pparamx!=0)
+   }
 	 else if(job_type==3) {
 	   // Combined full and reduced SizeDistrib refinement
 
