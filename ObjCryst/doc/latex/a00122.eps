@@ -5,7 +5,7 @@
 %%For: 
 %Magnification: 1.00
 %%Orientation: Portrait
-%%BoundingBox: 0 0 500 451.977
+%%BoundingBox: 0 0 500 338.983051
 %%Pages: 0
 %%BeginSetup
 %%EndSetup
@@ -19,12 +19,12 @@
 /marginwidth 10 def
 /distx 20 def
 /disty 40 def
-/boundaspect 1.10625 def  % aspect ratio of the BoundingBox (width/height)
+/boundaspect 1.475000 def  % aspect ratio of the BoundingBox (width/height)
 /boundx 500 def
 /boundy boundx boundaspect div def
 /xspacing 0 def
 /yspacing 0 def
-/rows 4 def
+/rows 3 def
 /cols 1 def
 /scalefactor 0 def
 /boxfont /Times-Roman findfont fontheight scalefont def
@@ -173,8 +173,7 @@
 
 boxfont setfont
 1 boundaspect scale
-(ObjCryst::WXFieldPar< T >) cw
-(ObjCryst::WXFieldParBase) cw
+(ObjCryst::WXFieldOption) cw
 (ObjCryst::WXField) cw
 (ObjCryst::WXCrystObjBasic) cw
 /boxwidth boxwidth marginwidth 2 mul add def
@@ -188,22 +187,17 @@ boundx scalefactor div boundy scalefactor div scale
 
 % ----- classes -----
 
- (ObjCryst::WXFieldPar< T >) 0 0 box
- (ObjCryst::WXFieldParBase) 0 1 box
- (ObjCryst::WXField) 0 2 box
- (ObjCryst::WXCrystObjBasic) 0 3 box
+ (ObjCryst::WXFieldOption) 0.000000 0.000000 box
+ (ObjCryst::WXField) 0.000000 1.000000 box
+ (ObjCryst::WXCrystObjBasic) 0.000000 2.000000 box
 
 % ----- relations -----
 
 solid
-0 0 0 out
+0 0.000000 0.000000 out
 solid
-1 0 1 in
+1 0.000000 1.000000 in
 solid
-0 0 1 out
+0 0.000000 1.000000 out
 solid
-1 0 2 in
-solid
-0 0 2 out
-solid
-1 0 3 in
+1 0.000000 2.000000 in

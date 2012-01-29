@@ -1,68 +1,64 @@
-\subsection{ObjCryst::ScatteringComponentList Class Reference}
-\label{a00086}\index{ObjCryst::ScatteringComponentList@{ObjCryst::ScatteringComponentList}}
+\subsection{\-Obj\-Cryst\-:\-:\-Scattering\-Component \-Struct \-Reference}
+\label{a00086}\index{\-Obj\-Cryst\-::\-Scattering\-Component@{\-Obj\-Cryst\-::\-Scattering\-Component}}
 
 
-list of scattering positions in a crystal, associated with the corresponding occupancy and a pointer to the \doxyref{ScatteringPower}{p.}{a00089}.  
-\subsubsection*{Public Member Functions}
+\-A scattering position in a crystal, associated with the corresponding occupancy and a pointer to the \doxyref{\-Scattering\-Power}{p.}{a00090}.  
+
+
+\subsubsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries ScatteringComponentList} (const long nbComponent)\label{a00086_a5d75cfe634f123de9c84c928dfea1eaa}
+bool {\bfseries operator==} (const {\bf \-Scattering\-Component} \&rhs) const \label{a00086_a3c90ac5f4f15fd8ab4e1272a542ce4a9}
 
 \item 
-{\bfseries ScatteringComponentList} (const {\bf ScatteringComponentList} \&old)\label{a00086_ac1b58052220493fab0712ebc9d8bc481}
+bool {\bfseries operator!=} (const {\bf \-Scattering\-Component} \&rhs) const \label{a00086_a7a2f4b968cc15b1adbfb0dda7e8b3452}
 
 \item 
-void {\bf Reset} ()
-\begin{DoxyCompactList}\small\item\em Reset the list. \item\end{DoxyCompactList}\item 
-const {\bf ScatteringComponent} \& {\bf operator()} (const long i) const \label{a00086_ac5245c446a41fd40ee1e312480023536}
+void {\bf \-Print} () const \label{a00086_ae539b046ae25fba220ef58881c2fe9b7}
 
-\begin{DoxyCompactList}\small\item\em Access to a component. \item\end{DoxyCompactList}\item 
-{\bf ScatteringComponent} \& {\bfseries operator()} (const long i)\label{a00086_a414a8c4bfcdc598826ca04720ce576a5}
-
-\item 
-long {\bf GetNbComponent} () const \label{a00086_a94c1375420b97a79594af7859cb968a6}
-
-\begin{DoxyCompactList}\small\item\em Number of components. \item\end{DoxyCompactList}\item 
-void {\bf operator=} (const {\bf ScatteringComponentList} \&rhs)\label{a00086_a93c5514484bd8d32a346e1c4a155a4a3}
-
-\begin{DoxyCompactList}\small\item\em Assignement operator. \item\end{DoxyCompactList}\item 
-bool {\bf operator==} (const {\bf ScatteringComponentList} \&rhs) const \label{a00086_ada4b582d2e62c807e99417c5cee4a8ce}
-
-\begin{DoxyCompactList}\small\item\em Compare two lists. \item\end{DoxyCompactList}\item 
-void {\bf operator+=} (const {\bf ScatteringComponentList} \&rhs)\label{a00086_a423df65157ec66cda8f5542116bc63f8}
-
-\begin{DoxyCompactList}\small\item\em Add another list of components. \item\end{DoxyCompactList}\item 
-void {\bf operator+=} (const {\bf ScatteringComponent} \&rhs)\label{a00086_a36ea90b4b48c473af0bee85402479f82}
-
-\begin{DoxyCompactList}\small\item\em Add component. \item\end{DoxyCompactList}\item 
-void {\bf operator++} ()\label{a00086_a8524c2bc3633441b2a808b2908ce99ec}
-
-\begin{DoxyCompactList}\small\item\em Add component (the whole list should be updated after that). \item\end{DoxyCompactList}\item 
-void {\bf operator-\/-\/} ()\label{a00086_afb399786cc9031db1cbf95df2868831b}
-
-\begin{DoxyCompactList}\small\item\em Remove component (the whole list should be updated after that). \item\end{DoxyCompactList}\item 
-void {\bf Print} () const \label{a00086_a3e7855dd6cbc411de63cbe14feef70cf}
-
-\begin{DoxyCompactList}\small\item\em Print the list of Scattering components. For debugging. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Protected Attributes}
+\begin{DoxyCompactList}\small\item\em \-Print one line oabout this component. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{\-Public \-Attributes}
 \begin{DoxyCompactItemize}
 \item 
-vector$<$ {\bf ScatteringComponent} $>$ {\bf mvScattComp}\label{a00086_a191cb4df412bb4294a4e300313e35c3f}
+\-R\-E\-A\-L {\bf m\-X}\label{a00086_a5e298bbfa80dc72cbf666bd8007c1a58}
 
-\begin{DoxyCompactList}\small\item\em The vector of components. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \-Coordinates of scattering positions i the crystal with the corresponding occupancy. \end{DoxyCompactList}\item 
+\-R\-E\-A\-L {\bfseries m\-Y}\label{a00086_a0ad9f5614c3240d3b97310da61180a48}
 
-
-\subsubsection{Detailed Description}
-list of scattering positions in a crystal, associated with the corresponding occupancy and a pointer to the \doxyref{ScatteringPower}{p.}{a00089}. 
-
-\subsubsection{Member Function Documentation}
-\index{ObjCryst::ScatteringComponentList@{ObjCryst::ScatteringComponentList}!Reset@{Reset}}
-\index{Reset@{Reset}!ObjCryst::ScatteringComponentList@{ObjCryst::ScatteringComponentList}}
-\paragraph[{Reset}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::ScatteringComponentList::Reset ()}\hfill\label{a00086_a512dcd4870c53b3f98ad6e7b04be9801}
-
-
-Reset the list. This does {\bfseries not} free the memory, but simply forgets that there already are some entries. 
-
-The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
 \item 
-ScatteringPower.h\end{DoxyCompactItemize}
+\-R\-E\-A\-L {\bfseries m\-Z}\label{a00086_a6e3cf2fb825a1a6912bf9cebc62d4cf7}
+
+\item 
+\-R\-E\-A\-L {\bfseries m\-Occupancy}\label{a00086_a845b921b1d5945619b5bfcb87264c125}
+
+\item 
+const {\bf \-Scattering\-Power} $\ast$ {\bf mp\-Scatt\-Pow}\label{a00086_a1aa0c754e20ac3a0489ed57c0cb31bd3}
+
+\begin{DoxyCompactList}\small\item\em \-The \doxyref{\-Scattering\-Power}{p.}{a00090} associated with this position. \end{DoxyCompactList}\item 
+\-R\-E\-A\-L {\bf m\-Dyn\-Pop\-Corr}
+\begin{DoxyCompactList}\small\item\em \-Dynamical \-Population \-Correction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{\-Detailed \-Description}
+\-A scattering position in a crystal, associated with the corresponding occupancy and a pointer to the \doxyref{\-Scattering\-Power}{p.}{a00090}. 
+
+\-Also given is the 
+
+\subsubsection{\-Member \-Data \-Documentation}
+\index{\-Obj\-Cryst\-::\-Scattering\-Component@{\-Obj\-Cryst\-::\-Scattering\-Component}!m\-Dyn\-Pop\-Corr@{m\-Dyn\-Pop\-Corr}}
+\index{m\-Dyn\-Pop\-Corr@{m\-Dyn\-Pop\-Corr}!ObjCryst::ScatteringComponent@{\-Obj\-Cryst\-::\-Scattering\-Component}}
+\paragraph[{m\-Dyn\-Pop\-Corr}]{\setlength{\rightskip}{0pt plus 5cm}\-R\-E\-A\-L {\bf \-Obj\-Cryst\-::\-Scattering\-Component\-::m\-Dyn\-Pop\-Corr}\hspace{0.3cm}{\ttfamily  [mutable]}}\label{a00086_a33af12bb3f340af259a8b8450f837efd}
+
+
+\-Dynamical \-Population \-Correction. 
+
+\-The population of any atom is given by m\-Occupancy$\ast$m\-Dyn\-Pop\-Corr. m\-Popu is the {\itshape real\/} m\-Occupancy (0$<$.$<$1), and should be the only one used during a refinement. \-However during a {\itshape model\/} {\itshape search\/} for the structure, atoms may fall unexpectedly in a special position or with an overlap of two atoms (the shared oxygen between two polyhedras, for example). \-In these cases it is necessary to dynamically correct the population during the generation of structural models. \-See also \doxyref{\-Crystal\-::\-Calc\-Dyn\-Pop\-Corr}{p.}{a00020_a69975008974c9603ebb794bb6bb20fe8}
+
+\begin{DoxyNote}{\-Note}
+this parameter is mutable, and is computed by the \doxyref{\-Crystal}{p.}{a00020} object 
+\end{DoxyNote}
+
+
+\-The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\-Scattering\-Power.\-h\end{DoxyCompactItemize}

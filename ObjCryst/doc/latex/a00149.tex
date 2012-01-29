@@ -1,52 +1,93 @@
-\subsection{ObjCryst::WXZScatterer Class Reference}
-\label{a00149}\index{ObjCryst::WXZScatterer@{ObjCryst::WXZScatterer}}
+\subsection{\-Obj\-Cryst\-:\-:\-W\-X\-Texture\-Phase\-March\-Dollase \-Class \-Reference}
+\label{a00149}\index{\-Obj\-Cryst\-::\-W\-X\-Texture\-Phase\-March\-Dollase@{\-Obj\-Cryst\-::\-W\-X\-Texture\-Phase\-March\-Dollase}}
 
 
-wxCryst class for \doxyref{ZScatterer}{p.}{a00155} objects  
-Inheritance diagram for ObjCryst::WXZScatterer::\begin{figure}[H]
+\-Class to display one \-Preferred \-Orientation phase using the \-March-\/\-Dollase parametrization.  
+
+
+\-Inheritance diagram for \-Obj\-Cryst\-:\-:\-W\-X\-Texture\-Phase\-March\-Dollase\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=5cm]{a00149}
+\includegraphics[height=2.000000cm]{a00149}
 \end{center}
 \end{figure}
-\subsubsection*{Public Member Functions}
+\subsubsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries WXZScatterer} (wxWindow $\ast$parent, {\bf ZScatterer} $\ast$)\label{a00149_a31bc4d836fd15777ed05bcad6de0bf10}
+{\bfseries \-W\-X\-Texture\-Phase\-March\-Dollase} (wx\-Window $\ast$parent, {\bf \-Texture\-Phase\-March\-Dollase} $\ast$, {\bf \-Texture\-March\-Dollase} $\ast$)\label{a00149_abcee0093325198b3c432468579b46dc2}
 
 \item 
-void {\bfseries OnMenuAddZAtom} (wxCommandEvent \&WXUNUSED(event))\label{a00149_a833bd6904f5fd6f4b9f55e0ec0913d68}
-
-\item 
-void {\bfseries OnMenuSetLimits} (wxCommandEvent \&event)\label{a00149_ab2d3abcead0647cce625f56e54707c79}
-
-\item 
-void {\bfseries OnMenuChangePivotAtom} (wxCommandEvent \&WXUNUSED(event))\label{a00149_a5f95e101225b58cc017fdeae754de065}
-
-\item 
-void {\bfseries OnMenuImportZMatrix} (wxCommandEvent \&WXUNUSED(event))\label{a00149_ae5e0aa58d6af68a0f429020275d4be00}
-
-\item 
-void {\bfseries OnMenuExportZMatrix} (wxCommandEvent \&WXUNUSED(event))\label{a00149_a7b4b1f359ce9f0072b9dc3b9e8dc3861}
-
-\item 
-void {\bfseries OnMenuConvert2Molecule} (wxCommandEvent \&WXUNUSED(event))\label{a00149_a99d3177d4efb43fc834bf01e16f408e6}
-
-\end{DoxyCompactItemize}
-\subsubsection*{Private Attributes}
+virtual void {\bf \-Cryst\-Update} (const bool update\-U\-I=false, const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em \-Get new values to be displayed from the underlying object, and raise flag if an \-U\-I update is necessary. \end{DoxyCompactList}\item 
+virtual void {\bf \-Update\-U\-I} (const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em \-Update the \-User \-Interface, if necessary. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{\-Private \-Attributes}
 \begin{DoxyCompactItemize}
 \item 
-{\bf ZScatterer} $\ast$ {\bfseries mpZScatterer}\label{a00149_a0c2e1abdddb004d693ef16307d4a3460}
+wx\-Box\-Sizer $\ast$ {\bfseries mp\-Sizer}\label{a00149_a08809bc9ebaeeb01f0e3353d82643103}
 
 \item 
-{\bf WXRegistry}$<$ {\bf ZAtom} $>$ $\ast$ {\bfseries mpWXZAtomRegistry}\label{a00149_acd59f2c3a72dbb2893df2c0930552cf4}
+{\bf \-W\-X\-Cryst\-Obj\-Basic\-List} {\bfseries m\-List}\label{a00149_a058b4b80ff9c616d3b29b6d0a1f52f33}
+
+\item 
+{\bf \-Texture\-Phase\-March\-Dollase} $\ast$ {\bfseries mp\-Texture\-Phase\-March\-Dollase}\label{a00149_a9ae04b7dad1deec6101380336808e18f}
 
 \end{DoxyCompactItemize}
 
 
-\subsubsection{Detailed Description}
-wxCryst class for \doxyref{ZScatterer}{p.}{a00155} objects 
+\subsubsection{\-Detailed \-Description}
+\-Class to display one \-Preferred \-Orientation phase using the \-March-\/\-Dollase parametrization. 
 
-The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+
+
+\subsubsection{\-Member \-Function \-Documentation}
+\index{\-Obj\-Cryst\-::\-W\-X\-Texture\-Phase\-March\-Dollase@{\-Obj\-Cryst\-::\-W\-X\-Texture\-Phase\-March\-Dollase}!\-Cryst\-Update@{\-Cryst\-Update}}
+\index{\-Cryst\-Update@{\-Cryst\-Update}!ObjCryst::WXTexturePhaseMarchDollase@{\-Obj\-Cryst\-::\-W\-X\-Texture\-Phase\-March\-Dollase}}
+\paragraph[{\-Cryst\-Update}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-W\-X\-Texture\-Phase\-March\-Dollase\-::\-Cryst\-Update} (
+\begin{DoxyParamCaption}
+\item[{const bool}]{update\-U\-I = {\ttfamily false}, }
+\item[{const bool}]{mutexlock = {\ttfamily false}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00149_a451ab85e51319c9700e125a6274fec47}
+
+
+\-Get new values to be displayed from the underlying object, and raise flag if an \-U\-I update is necessary. 
+
+\-The actual \-G\-U\-I update is not made here. \doxyref{\-Update\-U\-I()}{p.}{a00149_a06a3febd2a335ca805a88c2a254f5b31} should be called separately, from the main thread.
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em update\-U\-I,\-:} & if true, this will call \-Update\-U\-I, either directly (if in the main thread), or by sending a message. \\
+\hline
+{\em mutexlock,\-:} & if true, a \-Mutex will be used to lock the data shared between main and background thread. \-The idea is to only use a few \-Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{\-Cryst\-Update()}{p.}{a00149_a451ab85e51319c9700e125a6274fec47} and \doxyref{\-Update\-U\-I()}{p.}{a00149_a06a3febd2a335ca805a88c2a254f5b31}. \-As sub-\/objects (\doxyref{\-W\-X\-Field}{p.}{a00119},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. \\
+\hline
+\end{DoxyParams}
+
+
+\-Implements {\bf \-Obj\-Cryst\-::\-W\-X\-Cryst\-Obj\-Basic} \doxyref{}{p.}{a00116_a7ac00ae2ae28f1a6fa26e6fa571186b6}.
+
+\index{\-Obj\-Cryst\-::\-W\-X\-Texture\-Phase\-March\-Dollase@{\-Obj\-Cryst\-::\-W\-X\-Texture\-Phase\-March\-Dollase}!\-Update\-U\-I@{\-Update\-U\-I}}
+\index{\-Update\-U\-I@{\-Update\-U\-I}!ObjCryst::WXTexturePhaseMarchDollase@{\-Obj\-Cryst\-::\-W\-X\-Texture\-Phase\-March\-Dollase}}
+\paragraph[{\-Update\-U\-I}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-W\-X\-Texture\-Phase\-March\-Dollase\-::\-Update\-U\-I} (
+\begin{DoxyParamCaption}
+\item[{const bool}]{mutexlock = {\ttfamily false}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00149_a06a3febd2a335ca805a88c2a254f5b31}
+
+
+\-Update the \-User \-Interface, if necessary. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em mutexlock,\-:} & if true, a \-Mutex will be used to lock the data shared between main and background thread.\\
+\hline
+\end{DoxyParams}
+\-The idea is to only use a few \-Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{\-Cryst\-Update()}{p.}{a00149_a451ab85e51319c9700e125a6274fec47} and \doxyref{\-Update\-U\-I()}{p.}{a00149_a06a3febd2a335ca805a88c2a254f5b31}. \-As sub-\/objects (\doxyref{\-W\-X\-Field}{p.}{a00119},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
+
+\-Implements {\bf \-Obj\-Cryst\-::\-W\-X\-Cryst\-Obj\-Basic} \doxyref{}{p.}{a00116_a3818940b7031ff7e45cf2178c4a99c90}.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-wxZScatterer.h\end{DoxyCompactItemize}
+wx\-Powder\-Pattern.\-h\end{DoxyCompactItemize}

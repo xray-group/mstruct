@@ -1,37 +1,78 @@
-\subsection{ObjCryst::WXTextureMarchDollase Class Reference}
-\label{a00147}\index{ObjCryst::WXTextureMarchDollase@{ObjCryst::WXTextureMarchDollase}}
+\subsection{\-Obj\-Cryst\-:\-:\-W\-X\-Scattering\-Power\-Sphere \-Class \-Reference}
+\label{a00147}\index{\-Obj\-Cryst\-::\-W\-X\-Scattering\-Power\-Sphere@{\-Obj\-Cryst\-::\-W\-X\-Scattering\-Power\-Sphere}}
 
 
-Class to display the Preferred Orientation Correction using the March-\/Dollase parametrization.  
-Inheritance diagram for ObjCryst::WXTextureMarchDollase::\begin{figure}[H]
+wx\-Cryst class for \doxyref{\-Scattering\-Power\-Sphere}{p.}{a00092}  
+
+
+\-Inheritance diagram for \-Obj\-Cryst\-:\-:\-W\-X\-Scattering\-Power\-Sphere\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=4cm]{a00147}
+\includegraphics[height=4.000000cm]{a00147}
 \end{center}
 \end{figure}
-\subsubsection*{Public Member Functions}
+\subsubsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries WXTextureMarchDollase} (wxWindow $\ast$parent, {\bf TextureMarchDollase} $\ast$)\label{a00147_ab8ab6eceeb0c83bf6dc4b6f775e02905}
+{\bfseries \-W\-X\-Scattering\-Power\-Sphere} (wx\-Window $\ast$parent, {\bf \-Scattering\-Power\-Sphere} $\ast$)\label{a00147_a451416398f3296f4d584de1bfa49658c}
 
 \item 
-void {\bfseries OnAddTexturePhase} (wxCommandEvent \&WXUNUSED(event))\label{a00147_aafd20a474b15713ea0c4fea247a254be}
+virtual bool {\bf \-On\-Change\-Name} (const int id)
+\begin{DoxyCompactList}\small\item\em \-When a \doxyref{\-W\-X\-Field\-Name}{p.}{a00121} has been changed by the user, it is handled here. \end{DoxyCompactList}\item 
+void {\bfseries \-On\-Change\-Colour} (wx\-Command\-Event \&event)\label{a00147_a355d570f5d80b6026a04d9a75b6d5107}
 
 \item 
-void {\bfseries OnDeleteTexturePhase} (wxCommandEvent \&WXUNUSED(event))\label{a00147_ae0f2b94788268422e5a2ca215f49387a}
-
-\end{DoxyCompactItemize}
-\subsubsection*{Private Attributes}
+virtual void {\bf \-Update\-U\-I} (const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em \-Update the \-User \-Interface, if necessary. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{\-Protected \-Attributes}
 \begin{DoxyCompactItemize}
 \item 
-{\bf TextureMarchDollase} $\ast$ {\bfseries mpTextureMarchDollase}\label{a00147_aac7625565230e97c441006ff2f68dd2e}
+{\bf \-Scattering\-Power\-Sphere} $\ast$ {\bfseries mp\-Scattering\-Power}\label{a00147_ad7c744e98e231b49f0fdc660ea7ae989}
 
 \end{DoxyCompactItemize}
 
 
-\subsubsection{Detailed Description}
-Class to display the Preferred Orientation Correction using the March-\/Dollase parametrization. Allows to add phases, and change the parameters. 
+\subsubsection{\-Detailed \-Description}
+wx\-Cryst class for \doxyref{\-Scattering\-Power\-Sphere}{p.}{a00092} 
 
-The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\subsubsection{\-Member \-Function \-Documentation}
+\index{\-Obj\-Cryst\-::\-W\-X\-Scattering\-Power\-Sphere@{\-Obj\-Cryst\-::\-W\-X\-Scattering\-Power\-Sphere}!\-On\-Change\-Name@{\-On\-Change\-Name}}
+\index{\-On\-Change\-Name@{\-On\-Change\-Name}!ObjCryst::WXScatteringPowerSphere@{\-Obj\-Cryst\-::\-W\-X\-Scattering\-Power\-Sphere}}
+\paragraph[{\-On\-Change\-Name}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool {\bf \-Obj\-Cryst\-::\-W\-X\-Scattering\-Power\-Sphere\-::\-On\-Change\-Name} (
+\begin{DoxyParamCaption}
+\item[{const int}]{id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00147_a54f201d096de63b349e8979d69d6933a}
+
+
+\-When a \doxyref{\-W\-X\-Field\-Name}{p.}{a00121} has been changed by the user, it is handled here. 
+
+\-This returns true if the value has been handled (for inheritance purposes). 
+
+\-Reimplemented from {\bf \-Obj\-Cryst\-::\-W\-X\-Refinable\-Obj} \doxyref{}{p.}{a00143_ad784c1cb9ccb0d0e4ebfbc18a8dbbc19}.
+
+\index{\-Obj\-Cryst\-::\-W\-X\-Scattering\-Power\-Sphere@{\-Obj\-Cryst\-::\-W\-X\-Scattering\-Power\-Sphere}!\-Update\-U\-I@{\-Update\-U\-I}}
+\index{\-Update\-U\-I@{\-Update\-U\-I}!ObjCryst::WXScatteringPowerSphere@{\-Obj\-Cryst\-::\-W\-X\-Scattering\-Power\-Sphere}}
+\paragraph[{\-Update\-U\-I}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-W\-X\-Scattering\-Power\-Sphere\-::\-Update\-U\-I} (
+\begin{DoxyParamCaption}
+\item[{const bool}]{mutexlock = {\ttfamily false}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00147_a95d4f9b618ffbd4885294806b12b066c}
+
+
+\-Update the \-User \-Interface, if necessary. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em mutexlock,\-:} & if true, a \-Mutex will be used to lock the data shared between main and background thread.\\
+\hline
+\end{DoxyParams}
+\-The idea is to only use a few \-Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{\-Cryst\-Update()}{p.}{a00143_a13e4f37ac098de756b27cdb91d6a0551} and \doxyref{\-Update\-U\-I()}{p.}{a00147_a95d4f9b618ffbd4885294806b12b066c}. \-As sub-\/objects (\doxyref{\-W\-X\-Field}{p.}{a00119},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
+
+\-Reimplemented from {\bf \-Obj\-Cryst\-::\-W\-X\-Refinable\-Obj} \doxyref{}{p.}{a00143_a19a1d057eecafd48710d9a3b770c1b28}.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-wxPowderPattern.h\end{DoxyCompactItemize}
+wx\-Scattering\-Power\-Sphere.\-h\end{DoxyCompactItemize}

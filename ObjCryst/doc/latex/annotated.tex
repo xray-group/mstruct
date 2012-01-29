@@ -1,152 +1,153 @@
-\subsection{Class List}
-Here are the classes, structs, unions and interfaces with brief descriptions:\begin{DoxyCompactList}
-\item\contentsline{section}{{\bf ObjCryst::AsymmetricUnit} (The basic description of spacegroup asymmetric unit )}{\pageref{a00007}}{}
-\item\contentsline{section}{{\bf ObjCryst::Atom} (The basic atom scatterer, in a crystal )}{\pageref{a00008}}{}
-\item\contentsline{section}{{\bf ObjCryst::Crystal::BumpMergePar} (Storage for anti-\/bump/merge parameters )}{\pageref{a00009}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXMolecule::CellAtom} (Structure to store the \doxyref{Atom}{p.}{a00008} parameters )}{\pageref{a00010}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXMolecule::CellBond} (Structure to store the bond current values )}{\pageref{a00011}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXMolecule::CellBondAngle} (Structure to store the bond angles current values )}{\pageref{a00012}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXMolecule::CellDihedralAngle} (Structure to store the dihedral angles current values )}{\pageref{a00013}}{}
-\item\contentsline{section}{{\bf ObjCryst::CellExplorer} (Algorithm class to find the correct indexing from observed peak positions )}{\pageref{a00014}}{}
-\item\contentsline{section}{{\bf Chronometer} (Simple chronometer class, with microsecond precision )}{\pageref{a00015}}{}
-\item\contentsline{section}{{\bf ci\_\-char\_\-traits} (Case-\/insensitive string class From: Guru of the Week \#29 e.g )}{\pageref{a00016}}{}
-\item\contentsline{section}{{\bf ObjCryst::CIF} (Main \doxyref{CIF}{p.}{a00017} class -\/ parses the stream and separates data blocks, comments, items, loops )}{\pageref{a00017}}{}
-\item\contentsline{section}{{\bf ObjCryst::CIFData::CIFAtom} (\doxyref{Atom}{p.}{a00008} record )}{\pageref{a00018}}{}
-\item\contentsline{section}{{\bf ObjCryst::CIFData} (Holds all the information from a {\itshape single\/} data\_\- block from a cif file )}{\pageref{a00019}}{}
-\item\contentsline{section}{{\bf ObjCryst::Crystal} (\doxyref{Crystal}{p.}{a00020} class: Unit cell, spacegroup, scatterers )}{\pageref{a00020}}{}
-\item\contentsline{section}{{\bf ObjCryst::CrystalPOVRayOptions} (Class to store POV-\/Ray output options )}{\pageref{a00021}}{}
-\item\contentsline{section}{{\bf CrystArray3D$<$ T $>$} (3D Vector (Blitz++ mimic) for ObjCryst++ )}{\pageref{a00022}}{}
-\item\contentsline{section}{{\bf CrystMatrix$<$ T $>$} (2D Vector library (Blitz++ mimic) for ObjCryst++ )}{\pageref{a00023}}{}
-\item\contentsline{section}{{\bf CrystVector$<$ T $>$} (Vector library (Blitz++ mimic) for ObjCryst++ )}{\pageref{a00024}}{}
-\item\contentsline{section}{{\bf CubicSpline} (Cubic spline interpolation )}{\pageref{a00025}}{}
-\item\contentsline{section}{{\bf ObjCryst::DiffractionDataSingleCrystal} (DiffractionData object for Single \doxyref{Crystal}{p.}{a00020} analysis )}{\pageref{a00026}}{}
-\item\contentsline{section}{{\bf ObjCryst::Molecule::FlipGroup} (When 3(A1..1n) or more atoms are connected to a same atom A, it defines a 'flip' group, where it is possible to rotate bonds to their symmetric with respect to one plane defined by atoms Ai-\/A-\/Aj )}{\pageref{a00027}}{}
-\item\contentsline{section}{{\bf FormatFloat} (Output a number as a formatted float: )}{\pageref{a00028}}{}
-\item\contentsline{section}{{\bf FormatHorizVector$<$ T $>$} (Format vector as horiz array: )}{\pageref{a00029}}{}
-\item\contentsline{section}{{\bf FormatInt} (Output a number as a formatted integer: )}{\pageref{a00030}}{}
-\item\contentsline{section}{{\bf FormatString} (Output a string with a fixed length (adding necessary space or removing excess characters) : )}{\pageref{a00031}}{}
-\item\contentsline{section}{{\bf FormatVertVector$<$ T $>$} (Output one or several vectors as (a) column(s): )}{\pageref{a00032}}{}
-\item\contentsline{section}{{\bf FormatVertVectorHKLFloats$<$ T $>$} (Output vectors as column arrays, with the first 3 columns printed as integers )}{\pageref{a00033}}{}
-\item\contentsline{section}{{\bf ObjCryst::GlobalScatteringPower} (Global Scattering Power )}{\pageref{a00034}}{}
-\item\contentsline{section}{{\bf ObjCryst::PeakList::hkl} (One observed diffraction line, to be indexed )}{\pageref{a00035}}{}
-\item\contentsline{section}{{\bf ObjCryst::PeakList::hkl0} (One set of Miller indices, a possible indexation for a reflection )}{\pageref{a00036}}{}
-\item\contentsline{section}{{\bf ObjCryst::OptimizationObj::LogLikelihoodStats} (Statistics about each object contributing to the overall Log(likelihood) )}{\pageref{a00037}}{}
-\item\contentsline{section}{{\bf ObjCryst::LorentzCorr} (Lorentz Correction )}{\pageref{a00038}}{}
-\item\contentsline{section}{{\bf ObjCryst::LSQNumObj} ((Quick \& dirty) Least-\/Squares Refinement Object with Numerical derivatives )}{\pageref{a00039}}{}
-\item\contentsline{section}{{\bf ObjCryst::MainTracker} (A class to hold all trackers )}{\pageref{a00040}}{}
-\item\contentsline{section}{{\bf ObjCryst::MDAtomGroup} (Groups of atoms that can be moved using molecular dynamics principles, taking a list of restraints as ptential )}{\pageref{a00041}}{}
-\item\contentsline{section}{{\bf ObjCryst::MolAtom} (\doxyref{MolAtom}{p.}{a00042} : atom inside a \doxyref{Molecule}{p.}{a00046} )}{\pageref{a00042}}{}
-\item\contentsline{section}{{\bf ObjCryst::MolBond} (Bond between two atoms, also a restraint on the associated bond length )}{\pageref{a00043}}{}
-\item\contentsline{section}{{\bf ObjCryst::MolBondAngle} (Bond angle restraint between 3 atoms )}{\pageref{a00044}}{}
-\item\contentsline{section}{{\bf ObjCryst::MolDihedralAngle} (Dihedral angle restraint between 4 atoms )}{\pageref{a00045}}{}
-\item\contentsline{section}{{\bf ObjCryst::Molecule} (\doxyref{Molecule}{p.}{a00046} : class for complex scatterer descriptions using cartesian coordinates with bond length/angle restraints, and moves either of individual atoms or using torsion bonds )}{\pageref{a00046}}{}
-\item\contentsline{section}{{\bf ObjCryst::MolRing} (Ring class )}{\pageref{a00047}}{}
-\item\contentsline{section}{{\bf ObjCryst::MolZAtom} (Light-\/weight representation of an atom in the molecule, as a part of a Z-\/matrix )}{\pageref{a00048}}{}
-\item\contentsline{section}{{\bf ObjCryst::MonteCarloObj} (Base object for Monte-\/Carlo Global Optimization methods )}{\pageref{a00049}}{}
-\item\contentsline{section}{{\bf ObjCryst::Crystal::Neighbour} (Interatomic distance for a given neighbour )}{\pageref{a00050}}{}
-\item\contentsline{section}{{\bf ObjCryst::Crystal::NeighbourHood} (Table of neighbours for a given unique atom )}{\pageref{a00051}}{}
-\item\contentsline{section}{{\bf ObjCryst::ObjCrystException} (Exception class for ObjCryst++ library )}{\pageref{a00052}}{}
-\item\contentsline{section}{{\bf ObjCryst::ObjRegistry$<$ T $>$} (Object Registry )}{\pageref{a00053}}{}
-\item\contentsline{section}{{\bf ObjCryst::OptimizationObj} (Base object for Optimization methods )}{\pageref{a00054}}{}
-\item\contentsline{section}{{\bf ObjCryst::PDF} (Main class for Pair distribution function calculations and comparison to observed one )}{\pageref{a00055}}{}
-\item\contentsline{section}{{\bf ObjCryst::PDFCrystal::pdfAtom} (Container of temp data for each atom )}{\pageref{a00056}}{}
-\item\contentsline{section}{{\bf ObjCryst::PDFCrystal} (Class for Pair Distribution Function calculations for a single \doxyref{Crystal}{p.}{a00020} object )}{\pageref{a00057}}{}
-\item\contentsline{section}{{\bf ObjCryst::PDFPhase} (Contribution to a \doxyref{PDF}{p.}{a00055} )}{\pageref{a00058}}{}
-\item\contentsline{section}{{\bf ObjCryst::PeakList} (Class to store positions of observed reflections )}{\pageref{a00059}}{}
-\item\contentsline{section}{{\bf ObjCryst::PolarizationCorr} (Polarization Correction )}{\pageref{a00060}}{}
-\item\contentsline{section}{{\bf ObjCryst::PowderPattern} (Powder pattern class, with an observed pattern and several calculated components to modelize the pattern )}{\pageref{a00061}}{}
-\item\contentsline{section}{{\bf ObjCryst::PowderPatternBackground} (Phase to compute a background contribution to a powder pattern using an interpolation )}{\pageref{a00062}}{}
-\item\contentsline{section}{{\bf ObjCryst::PowderPatternBackgroundBayesianMinimiser} (This object is used to estimate the background in a powder pattern, using a Bayesian approach (David \& Sivia, Acta Cryst A50 (1994), 703) )}{\pageref{a00063}}{}
-\item\contentsline{section}{{\bf ObjCryst::PowderPatternComponent} (Generic class to compute components (eg the contribution of a given phase, or background) of a powder pattern )}{\pageref{a00064}}{}
-\item\contentsline{section}{{\bf ObjCryst::PowderPatternDiffraction} (Class to compute the contribution to a powder pattern from a crystalline phase )}{\pageref{a00065}}{}
-\item\contentsline{section}{{\bf ObjCryst::PowderSlitApertureCorr} (Slit aperture correction (for powder) )}{\pageref{a00066}}{}
-\item\contentsline{section}{{\bf ObjCryst::Quaternion} (A quaternion class, used to represent the orientation of the molecule )}{\pageref{a00067}}{}
-\item\contentsline{section}{{\bf ObjCryst::Radiation} (Class to define the radiation (type, monochromaticity, wavelength(s)) of an experiment )}{\pageref{a00068}}{}
-\item\contentsline{section}{{\bf ObjCryst::RecUnitCell} (Lightweight class describing the reciprocal unit cell, for the fast computation of d$\ast$\_\-hkl$^\wedge$2 )}{\pageref{a00069}}{}
-\item\contentsline{section}{{\bf ObjCryst::RefinableObj} (Generic Refinable Object )}{\pageref{a00070}}{}
-\item\contentsline{section}{{\bf ObjCryst::RefinableObjClock} (We need to record exactly when refinable objects have been modified for the last time (to avoid re-\/computation), and to do that we need a precise time )}{\pageref{a00071}}{}
-\item\contentsline{section}{{\bf ObjCryst::RefinablePar} (Generic class for parameters of refinable objects )}{\pageref{a00072}}{}
-\item\contentsline{section}{{\bf ObjCryst::ReflectionProfile} (Abstract base class for reflection profiles )}{\pageref{a00073}}{}
-\item\contentsline{section}{{\bf ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt} (Double-\/Exponential Pseudo-\/Voigt profile for TOF )}{\pageref{a00074}}{}
-\item\contentsline{section}{{\bf ObjCryst::ReflectionProfilePseudoVoigt} (Pseudo-\/Voigt reflection profile )}{\pageref{a00075}}{}
-\item\contentsline{section}{{\bf ObjCryst::PowderPatternDiffraction::ReflProfile} (Profile of a single reflection )}{\pageref{a00076}}{}
-\item\contentsline{section}{{\bf ObjCryst::RefObjOpt} (Base class for options )}{\pageref{a00077}}{}
-\item\contentsline{section}{{\bf ObjCryst::RefObjOption$<$ T $>$} (Class for options of \doxyref{RefinableObj}{p.}{a00070}, templated so that we can warn the object that something has been changed )}{\pageref{a00078}}{}
-\item\contentsline{section}{{\bf ObjCryst::RefParType} (Class of refinable parameter types )}{\pageref{a00079}}{}
-\item\contentsline{section}{{\bf ObjCryst::Restraint} (\doxyref{Restraint}{p.}{a00080}: generic class for a restraint of a given model )}{\pageref{a00080}}{}
-\item\contentsline{section}{{\bf ObjCryst::RigidGroup} (Rigid groups of atoms inside a molecule )}{\pageref{a00081}}{}
-\item\contentsline{section}{{\bf ObjCryst::Molecule::RotorGroup} (Defines a group of atoms which can be rotated around an axis defined by two other atoms )}{\pageref{a00082}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXCrystal::RowScattPow} (Structure to store the scattering power parameters )}{\pageref{a00083}}{}
-\item\contentsline{section}{{\bf ObjCryst::Scatterer} (Generic type of scatterer: can be an atom, or a more complex assembly of atoms )}{\pageref{a00084}}{}
-\item\contentsline{section}{{\bf ObjCryst::ScatteringComponent} (A scattering position in a crystal, associated with the corresponding occupancy and a pointer to the \doxyref{ScatteringPower}{p.}{a00089} )}{\pageref{a00085}}{}
-\item\contentsline{section}{{\bf ObjCryst::ScatteringComponentList} (List of scattering positions in a crystal, associated with the corresponding occupancy and a pointer to the \doxyref{ScatteringPower}{p.}{a00089} )}{\pageref{a00086}}{}
-\item\contentsline{section}{{\bf ObjCryst::ScatteringCorr} (Base class to compute all kind of corrections to intensities: Lorentz, Polar, absorption, texcture, extinction, etc )}{\pageref{a00087}}{}
-\item\contentsline{section}{{\bf ObjCryst::ScatteringData} (Class to compute structure factors for a set of reflections and a \doxyref{Crystal}{p.}{a00020} )}{\pageref{a00088}}{}
-\item\contentsline{section}{{\bf ObjCryst::ScatteringPower} (Abstract Base Class to describe the scattering power of any \doxyref{Scatterer}{p.}{a00084} component in a crystal )}{\pageref{a00089}}{}
-\item\contentsline{section}{{\bf ObjCryst::ScatteringPowerAtom} (The Scattering Power for an \doxyref{Atom}{p.}{a00008} )}{\pageref{a00090}}{}
-\item\contentsline{section}{{\bf ObjCryst::ScatteringPowerSphere} ($\backslash$ brief \doxyref{ScatteringPower}{p.}{a00089} for a spherical particule )}{\pageref{a00091}}{}
-\item\contentsline{section}{{\bf ObjCryst::SimplexObj} (Conjugate Gradient Algorithm object )}{\pageref{a00092}}{}
-\item\contentsline{section}{{\bf ObjCryst::SpaceGroup::SMx} (Struct to store rot+trans matrix )}{\pageref{a00093}}{}
-\item\contentsline{section}{{\bf ObjCryst::SpaceGroup} (The crystallographic space group, and the cell choice )}{\pageref{a00094}}{}
-\item\contentsline{section}{{\bf ObjCryst::SpeedTestReport} (Structure to hold the results of a speedtest (see \doxyref{ObjCryst::SpeedTest()}{p.}{a00170_a775b62d07c596365d2f2d021dca408db}) )}{\pageref{a00095}}{}
-\item\contentsline{section}{{\bf ObjCryst::StretchMode} (Abstract base Stretch Mode for \doxyref{Molecule}{p.}{a00046} objects )}{\pageref{a00096}}{}
-\item\contentsline{section}{{\bf ObjCryst::StretchModeBondAngle} (Atoms moved when changing a bond angle )}{\pageref{a00097}}{}
-\item\contentsline{section}{{\bf ObjCryst::StretchModeBondLength} (Group of atoms for random moves changing a bond length )}{\pageref{a00098}}{}
-\item\contentsline{section}{{\bf ObjCryst::Molecule::StretchModeGroup} (Group of concurrent StretchModes (affecting common restraints) A given stretch mode can only belong to one group )}{\pageref{a00099}}{}
-\item\contentsline{section}{{\bf ObjCryst::StretchModeTorsion} (Atoms moved when rotated around a bond at0-\/at1-\/at2-\/at3 )}{\pageref{a00100}}{}
-\item\contentsline{section}{{\bf ObjCryst::StretchModeTwist} (Atoms moved $\ast$between$\ast$ two other atoms, using a \char`\"{}twist\char`\"{} of their positions -\/ only small twists of their positions are allowed to avoid breaking restraints too much )}{\pageref{a00101}}{}
-\item\contentsline{section}{{\bf ObjCryst::SymmetricPairCompare$<$ T $>$} (Class to compare pairs of objects, with the two objects playing a symmetric role )}{\pageref{a00102}}{}
-\item\contentsline{section}{{\bf ObjCryst::TextureMarchDollase} (Texture correction using the March-\/Dollase model )}{\pageref{a00103}}{}
-\item\contentsline{section}{{\bf ObjCryst::TexturePhaseMarchDollase} (One texture phase for the March-\/Dollase model )}{\pageref{a00104}}{}
-\item\contentsline{section}{{\bf ObjCryst::TOFCorr} (Time-\/Of-\/Flight Correction )}{\pageref{a00105}}{}
-\item\contentsline{section}{{\bf ObjCryst::Tracker} (A class to track the variation of parameters as a function of a number of cycles/trials )}{\pageref{a00106}}{}
-\item\contentsline{section}{{\bf ObjCryst::TrackerObject$<$ T $>$} (\doxyref{Tracker}{p.}{a00106} for objects (\doxyref{RefinableObj}{p.}{a00070}, \doxyref{Crystal}{p.}{a00020}, \doxyref{PowderPattern}{p.}{a00061}, RefPar, )}{\pageref{a00107}}{}
-\item\contentsline{section}{{\bf ObjCryst::SpaceGroup::TRx} (Struct to store trans matrix )}{\pageref{a00108}}{}
-\item\contentsline{section}{{\bf ObjCryst::UnitCell} (Unit Cell class: Unit cell with spacegroup information )}{\pageref{a00109}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXAtom} (WxCryst class for Atoms )}{\pageref{a00110}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXCRYST\_\-ID} (Class to automatically assign a unique wxID to each window )}{\pageref{a00111}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXCrystal} (WxCryst class for Crystals )}{\pageref{a00112}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXCrystMenuBar} (Our own local menu bar, using buttons and Popup menus )}{\pageref{a00113}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXCrystObj} (Base class for all displayed \doxyref{ObjCryst}{p.}{a00170} objects (with a title, and a sizer to stack objects) )}{\pageref{a00114}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXCrystObjBasic} (Abstract base class for all objects in wxCryst )}{\pageref{a00115}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXCrystObjBasicList} (A List of \doxyref{WXCrystObjBasic}{p.}{a00115} )}{\pageref{a00116}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXDiffractionSingleCrystal} (WX Class for \doxyref{DiffractionDataSingleCrystal}{p.}{a00026} objects )}{\pageref{a00117}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXField} (This is the abstract base class for all fields, wether they contain a floating-\/point parameter, or a string, )}{\pageref{a00118}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXFieldChoice} (Class to pick one choice )}{\pageref{a00119}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXFieldName} (A field with the name of a \doxyref{WXCrystObj}{p.}{a00114} )}{\pageref{a00120}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXFieldOption} (WX representation of a RefObj option. This displays the names of the different choices )}{\pageref{a00121}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXFieldPar$<$ T $>$} (A field for a parameter )}{\pageref{a00122}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXFieldParBase} (A field for a parameter )}{\pageref{a00123}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXFieldRefPar} (A field for a \doxyref{RefinablePar}{p.}{a00072} )}{\pageref{a00124}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXFieldString} (A field which directly links to a string )}{\pageref{a00125}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXGlobalOptimRunThread} (Class for a GlobalOptimization thread )}{\pageref{a00126}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXMolAtom} (Wx class for \doxyref{MolAtom}{p.}{a00042} objects )}{\pageref{a00127}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXMolBond} (Wx class for \doxyref{MolBond}{p.}{a00043} objects )}{\pageref{a00128}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXMolBondAngle} (Wx class for \doxyref{MolBondAngle}{p.}{a00044} objects )}{\pageref{a00129}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXMolDihedralAngle} (Wx class for \doxyref{MolDihedralAngle}{p.}{a00045} objects )}{\pageref{a00130}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXMolecule} (WxCryst class for \doxyref{Molecule}{p.}{a00046} objects )}{\pageref{a00131}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXMonteCarloObj} (Class for Graphical interface to Monte-\/Carlo objects (Simulated Annealing, Parallel Tempering) )}{\pageref{a00132}}{}
-\item\contentsline{section}{{\bf ObjCryst::wxMultiChoiceDialog\_\-ListBox} (Provides the same functionnality as wxMultiChoiceDialog, but always using a wxListBox, which is much easier when selecting a large number of successive choices (using shift-\/click) )}{\pageref{a00133}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXOptimizationObj} (WX Class for a Global Optimization objects )}{\pageref{a00134}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXPowderPattern} (WX Class for \doxyref{PowderPattern}{p.}{a00061} objects )}{\pageref{a00135}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXPowderPatternBackground} (Class to display a Powder Pattern Background )}{\pageref{a00136}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXPowderPatternDiffraction} (Class to display a Powder Pattern for a crystalline phase )}{\pageref{a00137}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXPowderPatternGraph} (Class to display a Powder Pattern (calc,obs) in a graphic window )}{\pageref{a00138}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXProfileDoubleExponentialPseudoVoigt} (Class to display a Powder Pattern Pseudo-\/Voigt Profile )}{\pageref{a00139}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXProfilePseudoVoigt} (Class to display a Powder Pattern Pseudo-\/Voigt Profile )}{\pageref{a00140}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXRadiation} (WX Class for \doxyref{Radiation}{p.}{a00068} )}{\pageref{a00141}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXRefinableObj} (The base wxCryst class for all \doxyref{RefinableObj}{p.}{a00070} objects )}{\pageref{a00142}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXRegistry$<$ T $>$} (This displays all components of a ObjCryst++ Registry )}{\pageref{a00143}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXScatterer} (Base wxCryst class for Scatterers )}{\pageref{a00144}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXScatteringPowerAtom} (WxCryst class for \doxyref{ScatteringPowerAtom}{p.}{a00090} )}{\pageref{a00145}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXScatteringPowerSphere} (WxCryst class for \doxyref{ScatteringPowerSphere}{p.}{a00091} )}{\pageref{a00146}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXTextureMarchDollase} (Class to display the Preferred Orientation Correction using the March-\/Dollase parametrization )}{\pageref{a00147}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXTexturePhaseMarchDollase} (Class to display one Preferred Orientation phase using the March-\/Dollase parametrization )}{\pageref{a00148}}{}
-\item\contentsline{section}{{\bf ObjCryst::WXZScatterer} (WxCryst class for \doxyref{ZScatterer}{p.}{a00155} objects )}{\pageref{a00149}}{}
-\item\contentsline{section}{{\bf ObjCryst::XMLCrystTag} (Class to input or output a well-\/formatted xml beginning or ending tag )}{\pageref{a00150}}{}
-\item\contentsline{section}{{\bf ObjCryst::XYZ} (Structure holding 3 coordinates, or deriviatives with respect to each of these coordinates )}{\pageref{a00151}}{}
-\item\contentsline{section}{{\bf ObjCryst::ZAtom} (Class for individual atoms in a \doxyref{ZScatterer}{p.}{a00155} Object )}{\pageref{a00152}}{}
-\item\contentsline{section}{{\bf ObjCryst::ZMoveMinimizer} (Class to minimize conformation changes for random moves )}{\pageref{a00153}}{}
-\item\contentsline{section}{{\bf ObjCryst::ZPolyhedron} (\doxyref{ZPolyhedron}{p.}{a00154}: a \doxyref{Scatterer}{p.}{a00084} to describe polyhedras such as octahedron, tetrahedron, square plane, etc )}{\pageref{a00154}}{}
-\item\contentsline{section}{{\bf ObjCryst::ZScatterer} (\doxyref{ZScatterer}{p.}{a00155}: the basic type of complex scatterers, where atom positions are defined using a standard \char`\"{}Z-\/Matrix\char`\"{} description )}{\pageref{a00155}}{}
+\subsection{\-Class \-List}
+\-Here are the classes, structs, unions and interfaces with brief descriptions\-:\begin{DoxyCompactList}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Asymmetric\-Unit} \\*\-The basic description of spacegroup asymmetric unit }{\pageref{a00007}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Atom} \\*\-The basic atom scatterer, in a crystal }{\pageref{a00008}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Crystal\-::\-Bump\-Merge\-Par} \\*\-Storage for anti-\/bump/merge parameters }{\pageref{a00009}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Molecule\-::\-Cell\-Atom} \\*\-Structure to store the \doxyref{\-Atom}{p.}{a00008} parameters }{\pageref{a00010}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Molecule\-::\-Cell\-Bond} \\*\-Structure to store the bond current values }{\pageref{a00011}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Molecule\-::\-Cell\-Bond\-Angle} \\*\-Structure to store the bond angles current values }{\pageref{a00012}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Molecule\-::\-Cell\-Dihedral\-Angle} \\*\-Structure to store the dihedral angles current values }{\pageref{a00013}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Cell\-Explorer} \\*\-Algorithm class to find the correct indexing from observed peak positions }{\pageref{a00014}}{}
+\item\contentsline{section}{{\bf \-Chronometer} \\*\-Simple chronometer class, with microsecond precision }{\pageref{a00015}}{}
+\item\contentsline{section}{{\bf ci\-\_\-char\-\_\-traits} \\*\-Case-\/insensitive string class \-From\-: \-Guru of the \-Week \#29 e.\-g }{\pageref{a00016}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-C\-I\-F} \\*\-Main \doxyref{\-C\-I\-F}{p.}{a00017} class -\/ parses the stream and separates data blocks, comments, items, loops }{\pageref{a00017}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-C\-I\-F\-Data\-::\-C\-I\-F\-Atom} \\*\doxyref{\-Atom}{p.}{a00008} record }{\pageref{a00018}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-C\-I\-F\-Data} \\*\-Holds all the information from a {\itshape single\/} data\-\_\- block from a cif file }{\pageref{a00019}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Crystal} \\*\doxyref{\-Crystal}{p.}{a00020} class\-: \-Unit cell, spacegroup, scatterers }{\pageref{a00020}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Crystal\-P\-O\-V\-Ray\-Options} \\*\-Class to store \-P\-O\-V-\/\-Ray output options }{\pageref{a00021}}{}
+\item\contentsline{section}{{\bf \-Cryst\-Array3\-D$<$ T $>$} \\*3\-D \-Vector (\-Blitz++ mimic) for \-Obj\-Cryst++ }{\pageref{a00022}}{}
+\item\contentsline{section}{{\bf \-Cryst\-Matrix$<$ T $>$} \\*2\-D \-Vector library (\-Blitz++ mimic) for \-Obj\-Cryst++ }{\pageref{a00023}}{}
+\item\contentsline{section}{{\bf \-Cryst\-Vector$<$ T $>$} \\*\-Vector library (\-Blitz++ mimic) for \-Obj\-Cryst++ }{\pageref{a00024}}{}
+\item\contentsline{section}{{\bf \-Cubic\-Spline} \\*\-Cubic spline interpolation }{\pageref{a00025}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Diffraction\-Data\-Single\-Crystal} \\*\-Diffraction\-Data object for \-Single \doxyref{\-Crystal}{p.}{a00020} analysis }{\pageref{a00026}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Molecule\-::\-Flip\-Group} \\*\-When 3(\-A1..1n) or more atoms are connected to a same atom \-A, it defines a 'flip' group, where it is possible to rotate bonds to their symmetric with respect to one plane defined by atoms \-Ai-\/\-A-\/\-Aj }{\pageref{a00027}}{}
+\item\contentsline{section}{{\bf \-Format\-Float} \\*\-Output a number as a formatted float\-: }{\pageref{a00028}}{}
+\item\contentsline{section}{{\bf \-Format\-Horiz\-Vector$<$ T $>$} \\*\-Format vector as horiz array\-: }{\pageref{a00029}}{}
+\item\contentsline{section}{{\bf \-Format\-Int} \\*\-Output a number as a formatted integer\-: }{\pageref{a00030}}{}
+\item\contentsline{section}{{\bf \-Format\-String} \\*\-Output a string with a fixed length (adding necessary space or removing excess characters) \-: }{\pageref{a00031}}{}
+\item\contentsline{section}{{\bf \-Format\-Vert\-Vector$<$ T $>$} \\*\-Output one or several vectors as (a) column(s)\-: }{\pageref{a00032}}{}
+\item\contentsline{section}{{\bf \-Format\-Vert\-Vector\-H\-K\-L\-Floats$<$ T $>$} \\*\-Output vectors as column arrays, with the first 3 columns printed as integers }{\pageref{a00033}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Global\-Scattering\-Power} \\*\-Global \-Scattering \-Power }{\pageref{a00034}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Peak\-List\-::hkl} \\*\-One observed diffraction line, to be indexed }{\pageref{a00035}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Peak\-List\-::hkl0} \\*\-One set of \-Miller indices, a possible indexation for a reflection }{\pageref{a00036}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Optimization\-Obj\-::\-Log\-Likelihood\-Stats} \\*\-Statistics about each object contributing to the overall \-Log(likelihood) }{\pageref{a00037}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Lorentz\-Corr} \\*\-Lorentz \-Correction }{\pageref{a00038}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-L\-S\-Q\-Num\-Obj} \\*(\-Quick \& dirty) \-Least-\/\-Squares \-Refinement \-Object with \-Numerical derivatives }{\pageref{a00039}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-L\-S\-Q\-Regularization\-Operator} \\*\-Simple \-Regularization \-Operator for the \-Least-\/\-Squares \-Refinement }{\pageref{a00040}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Main\-Tracker} \\*\-A class to hold all trackers }{\pageref{a00041}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-M\-D\-Atom\-Group} \\*\-Groups of atoms that can be moved using molecular dynamics principles, taking a list of restraints as ptential }{\pageref{a00042}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Mol\-Atom} \\*\doxyref{\-Mol\-Atom}{p.}{a00043} \-: atom inside a \doxyref{\-Molecule}{p.}{a00047} }{\pageref{a00043}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Mol\-Bond} \\*\-Bond between two atoms, also a restraint on the associated bond length }{\pageref{a00044}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Mol\-Bond\-Angle} \\*\-Bond angle restraint between 3 atoms }{\pageref{a00045}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Mol\-Dihedral\-Angle} \\*\-Dihedral angle restraint between 4 atoms }{\pageref{a00046}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Molecule} \\*\doxyref{\-Molecule}{p.}{a00047} \-: class for complex scatterer descriptions using cartesian coordinates with bond length/angle restraints, and moves either of individual atoms or using torsion bonds }{\pageref{a00047}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Mol\-Ring} \\*\-Ring class }{\pageref{a00048}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Mol\-Z\-Atom} \\*\-Light-\/weight representation of an atom in the molecule, as a part of a \-Z-\/matrix }{\pageref{a00049}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Monte\-Carlo\-Obj} \\*\-Base object for \-Monte-\/\-Carlo \-Global \-Optimization methods }{\pageref{a00050}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Crystal\-::\-Neighbour} \\*\-Interatomic distance for a given neighbour }{\pageref{a00051}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Crystal\-::\-Neighbour\-Hood} \\*\-Table of neighbours for a given unique atom }{\pageref{a00052}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Obj\-Cryst\-Exception} \\*\-Exception class for \-Obj\-Cryst++ library }{\pageref{a00053}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Obj\-Registry$<$ T $>$} \\*\-Object \-Registry }{\pageref{a00054}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Optimization\-Obj} \\*\-Base object for \-Optimization methods }{\pageref{a00055}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-P\-D\-F} \\*\-Main class for \-Pair distribution function calculations and comparison to observed one }{\pageref{a00056}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-P\-D\-F\-Crystal\-::pdf\-Atom} \\*\-Container of temp data for each atom }{\pageref{a00057}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-P\-D\-F\-Crystal} \\*\-Class for \-Pair \-Distribution \-Function calculations for a single \doxyref{\-Crystal}{p.}{a00020} object }{\pageref{a00058}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-P\-D\-F\-Phase} \\*\-Contribution to a \doxyref{\-P\-D\-F}{p.}{a00056} }{\pageref{a00059}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Peak\-List} \\*\-Class to store positions of observed reflections }{\pageref{a00060}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Polarization\-Corr} \\*\-Polarization \-Correction }{\pageref{a00061}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Powder\-Pattern} \\*\-Powder pattern class, with an observed pattern and several calculated components to modelize the pattern }{\pageref{a00062}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-Background} \\*\-Phase to compute a background contribution to a powder pattern using an interpolation }{\pageref{a00063}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-Background\-Bayesian\-Minimiser} \\*\-This object is used to estimate the background in a powder pattern, using a \-Bayesian approach (\-David \& \-Sivia, \-Acta \-Cryst \-A50 (1994), 703) }{\pageref{a00064}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-Component} \\*\-Generic class to compute components (eg the contribution of a given phase, or background) of a powder pattern }{\pageref{a00065}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-Diffraction} \\*\-Class to compute the contribution to a powder pattern from a crystalline phase }{\pageref{a00066}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Powder\-Slit\-Aperture\-Corr} \\*\-Slit aperture correction (for powder) }{\pageref{a00067}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Quaternion} \\*\-A quaternion class, used to represent the orientation of the molecule }{\pageref{a00068}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Radiation} \\*\-Class to define the radiation (type, monochromaticity, wavelength(s)) of an experiment }{\pageref{a00069}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Rec\-Unit\-Cell} \\*\-Lightweight class describing the reciprocal unit cell, for the fast computation of d$\ast$\-\_\-hkl$^\wedge$2 }{\pageref{a00070}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Refinable\-Obj} \\*\-Generic \-Refinable \-Object }{\pageref{a00071}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Refinable\-Obj\-Clock} \\*\-We need to record exactly when refinable objects have been modified for the last time (to avoid re-\/computation), and to do that we need a precise time }{\pageref{a00072}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Refinable\-Par} \\*\-Generic class for parameters of refinable objects }{\pageref{a00073}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Reflection\-Profile} \\*\-Abstract base class for reflection profiles }{\pageref{a00074}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt} \\*\-Double-\/\-Exponential \-Pseudo-\/\-Voigt profile for \-T\-O\-F }{\pageref{a00075}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt} \\*\-Pseudo-\/\-Voigt reflection profile }{\pageref{a00076}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-Diffraction\-::\-Refl\-Profile} \\*\-Profile of a single reflection }{\pageref{a00077}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Ref\-Obj\-Opt} \\*\-Base class for options }{\pageref{a00078}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Ref\-Obj\-Option$<$ T $>$} \\*\-Class for options of \doxyref{\-Refinable\-Obj}{p.}{a00071}, templated so that we can warn the object that something has been changed }{\pageref{a00079}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Ref\-Par\-Type} \\*\-Class of refinable parameter types }{\pageref{a00080}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Restraint} \\*\doxyref{\-Restraint}{p.}{a00081}\-: generic class for a restraint of a given model }{\pageref{a00081}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Rigid\-Group} \\*\-Rigid groups of atoms inside a molecule }{\pageref{a00082}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Molecule\-::\-Rotor\-Group} \\*\-Defines a group of atoms which can be rotated around an axis defined by two other atoms }{\pageref{a00083}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Crystal\-::\-Row\-Scatt\-Pow} \\*\-Structure to store the scattering power parameters }{\pageref{a00084}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Scatterer} \\*\-Generic type of scatterer\-: can be an atom, or a more complex assembly of atoms }{\pageref{a00085}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Scattering\-Component} \\*\-A scattering position in a crystal, associated with the corresponding occupancy and a pointer to the \doxyref{\-Scattering\-Power}{p.}{a00090} }{\pageref{a00086}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Scattering\-Component\-List} \\*\-List of scattering positions in a crystal, associated with the corresponding occupancy and a pointer to the \doxyref{\-Scattering\-Power}{p.}{a00090} }{\pageref{a00087}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Scattering\-Corr} \\*\-Base class to compute all kind of corrections to intensities\-: \-Lorentz, \-Polar, absorption, texcture, extinction, etc.. }{\pageref{a00088}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Scattering\-Data} \\*\-Class to compute structure factors for a set of reflections and a \doxyref{\-Crystal}{p.}{a00020} }{\pageref{a00089}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Scattering\-Power} \\*\-Abstract \-Base \-Class to describe the scattering power of any \doxyref{\-Scatterer}{p.}{a00085} component in a crystal }{\pageref{a00090}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Scattering\-Power\-Atom} \\*\-The \-Scattering \-Power for an \doxyref{\-Atom}{p.}{a00008} }{\pageref{a00091}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Scattering\-Power\-Sphere} \\*$\backslash$ brief \doxyref{\-Scattering\-Power}{p.}{a00090} for a spherical particule }{\pageref{a00092}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Simplex\-Obj} \\*\-Conjugate \-Gradient \-Algorithm object }{\pageref{a00093}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Space\-Group\-::\-S\-Mx} \\*\-Struct to store rot+trans matrix }{\pageref{a00094}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Space\-Group} \\*\-The crystallographic space group, and the cell choice }{\pageref{a00095}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Speed\-Test\-Report} \\*\-Structure to hold the results of a speedtest (see \doxyref{\-Obj\-Cryst\-::\-Speed\-Test()}{p.}{a00171_a775b62d07c596365d2f2d021dca408db}) }{\pageref{a00096}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Stretch\-Mode} \\*\-Abstract base \-Stretch \-Mode for \doxyref{\-Molecule}{p.}{a00047} objects }{\pageref{a00097}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Stretch\-Mode\-Bond\-Angle} \\*\-Atoms moved when changing a bond angle }{\pageref{a00098}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Stretch\-Mode\-Bond\-Length} \\*\-Group of atoms for random moves changing a bond length }{\pageref{a00099}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Molecule\-::\-Stretch\-Mode\-Group} \\*\-Group of concurrent \-Stretch\-Modes (affecting common restraints) \-A given stretch mode can only belong to one group }{\pageref{a00100}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Stretch\-Mode\-Torsion} \\*\-Atoms moved when rotated around a bond at0-\/at1-\/at2-\/at3 }{\pageref{a00101}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Stretch\-Mode\-Twist} \\*\-Atoms moved $\ast$between$\ast$ two other atoms, using a \char`\"{}twist\char`\"{} of their positions -\/ only small twists of their positions are allowed to avoid breaking restraints too much }{\pageref{a00102}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Symmetric\-Pair\-Compare$<$ T $>$} \\*\-Class to compare pairs of objects, with the two objects playing a symmetric role }{\pageref{a00103}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Texture\-March\-Dollase} \\*\-Texture correction using the \-March-\/\-Dollase model }{\pageref{a00104}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Texture\-Phase\-March\-Dollase} \\*\-One texture phase for the \-March-\/\-Dollase model }{\pageref{a00105}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-T\-O\-F\-Corr} \\*\-Time-\/\-Of-\/\-Flight \-Correction }{\pageref{a00106}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Tracker} \\*\-A class to track the variation of parameters as a function of a number of cycles/trials }{\pageref{a00107}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Tracker\-Object$<$ T $>$} \\*\doxyref{\-Tracker}{p.}{a00107} for objects (\doxyref{\-Refinable\-Obj}{p.}{a00071}, \doxyref{\-Crystal}{p.}{a00020}, \doxyref{\-Powder\-Pattern}{p.}{a00062}, \-Ref\-Par,...) }{\pageref{a00108}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Space\-Group\-::\-T\-Rx} \\*\-Struct to store trans matrix }{\pageref{a00109}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Unit\-Cell} \\*\-Unit \-Cell class\-: \-Unit cell with spacegroup information }{\pageref{a00110}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Atom} \\*\-Wx\-Cryst class for \-Atoms }{\pageref{a00111}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-C\-R\-Y\-S\-T\-\_\-\-I\-D} \\*\-Class to automatically assign a unique wx\-I\-D to each window }{\pageref{a00112}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Crystal} \\*\-Wx\-Cryst class for \-Crystals }{\pageref{a00113}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Cryst\-Menu\-Bar} \\*\-Our own local menu bar, using buttons and \-Popup menus }{\pageref{a00114}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Cryst\-Obj} \\*\-Base class for all displayed \doxyref{\-Obj\-Cryst}{p.}{a00171} objects (with a title, and a sizer to stack objects) }{\pageref{a00115}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Cryst\-Obj\-Basic} \\*\-Abstract base class for all objects in wx\-Cryst }{\pageref{a00116}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Cryst\-Obj\-Basic\-List} \\*\-A \-List of \doxyref{\-W\-X\-Cryst\-Obj\-Basic}{p.}{a00116} }{\pageref{a00117}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Diffraction\-Single\-Crystal} \\*\-W\-X \-Class for \doxyref{\-Diffraction\-Data\-Single\-Crystal}{p.}{a00026} objects }{\pageref{a00118}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Field} \\*\-This is the abstract base class for all fields, wether they contain a floating-\/point parameter, or a string,.. }{\pageref{a00119}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Field\-Choice} \\*\-Class to pick one choice.. }{\pageref{a00120}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Field\-Name} \\*\-A field with the name of a \doxyref{\-W\-X\-Cryst\-Obj}{p.}{a00115} }{\pageref{a00121}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Field\-Option} \\*\-W\-X representation of a \-Ref\-Obj option. \-This displays the names of the different choices }{\pageref{a00122}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Field\-Par$<$ T $>$} \\*\-A field for a parameter }{\pageref{a00123}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Field\-Par\-Base} \\*\-A field for a parameter }{\pageref{a00124}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Field\-Ref\-Par} \\*\-A field for a \doxyref{\-Refinable\-Par}{p.}{a00073} }{\pageref{a00125}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Field\-String} \\*\-A field which directly links to a string }{\pageref{a00126}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Global\-Optim\-Run\-Thread} \\*\-Class for a \-Global\-Optimization thread }{\pageref{a00127}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Mol\-Atom} \\*\-Wx class for \doxyref{\-Mol\-Atom}{p.}{a00043} objects }{\pageref{a00128}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Mol\-Bond} \\*\-Wx class for \doxyref{\-Mol\-Bond}{p.}{a00044} objects }{\pageref{a00129}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Mol\-Bond\-Angle} \\*\-Wx class for \doxyref{\-Mol\-Bond\-Angle}{p.}{a00045} objects }{\pageref{a00130}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Mol\-Dihedral\-Angle} \\*\-Wx class for \doxyref{\-Mol\-Dihedral\-Angle}{p.}{a00046} objects }{\pageref{a00131}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Molecule} \\*\-Wx\-Cryst class for \doxyref{\-Molecule}{p.}{a00047} objects }{\pageref{a00132}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Monte\-Carlo\-Obj} \\*\-Class for \-Graphical interface to \-Monte-\/\-Carlo objects (\-Simulated \-Annealing, \-Parallel \-Tempering) }{\pageref{a00133}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::wx\-Multi\-Choice\-Dialog\-\_\-\-List\-Box} \\*\-Provides the same functionnality as wx\-Multi\-Choice\-Dialog, but always using a wx\-List\-Box, which is much easier when selecting a large number of successive choices (using shift-\/click) }{\pageref{a00134}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Optimization\-Obj} \\*\-W\-X \-Class for a \-Global \-Optimization objects }{\pageref{a00135}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Powder\-Pattern} \\*\-W\-X \-Class for \doxyref{\-Powder\-Pattern}{p.}{a00062} objects }{\pageref{a00136}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Powder\-Pattern\-Background} \\*\-Class to display a \-Powder \-Pattern \-Background }{\pageref{a00137}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Powder\-Pattern\-Diffraction} \\*\-Class to display a \-Powder \-Pattern for a crystalline phase }{\pageref{a00138}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Powder\-Pattern\-Graph} \\*\-Class to display a \-Powder \-Pattern (calc,obs) in a graphic window }{\pageref{a00139}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Profile\-Double\-Exponential\-Pseudo\-Voigt} \\*\-Class to display a \-Powder \-Pattern \-Pseudo-\/\-Voigt \-Profile }{\pageref{a00140}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Profile\-Pseudo\-Voigt} \\*\-Class to display a \-Powder \-Pattern \-Pseudo-\/\-Voigt \-Profile }{\pageref{a00141}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Radiation} \\*\-W\-X \-Class for \doxyref{\-Radiation}{p.}{a00069} }{\pageref{a00142}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Refinable\-Obj} \\*\-The base wx\-Cryst class for all \doxyref{\-Refinable\-Obj}{p.}{a00071} objects }{\pageref{a00143}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Registry$<$ T $>$} \\*\-This displays all components of a \-Obj\-Cryst++ \-Registry }{\pageref{a00144}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Scatterer} \\*\-Base wx\-Cryst class for \-Scatterers }{\pageref{a00145}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Scattering\-Power\-Atom} \\*\-Wx\-Cryst class for \doxyref{\-Scattering\-Power\-Atom}{p.}{a00091} }{\pageref{a00146}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Scattering\-Power\-Sphere} \\*\-Wx\-Cryst class for \doxyref{\-Scattering\-Power\-Sphere}{p.}{a00092} }{\pageref{a00147}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Texture\-March\-Dollase} \\*\-Class to display the \-Preferred \-Orientation \-Correction using the \-March-\/\-Dollase parametrization }{\pageref{a00148}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Texture\-Phase\-March\-Dollase} \\*\-Class to display one \-Preferred \-Orientation phase using the \-March-\/\-Dollase parametrization }{\pageref{a00149}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-W\-X\-Z\-Scatterer} \\*\-Wx\-Cryst class for \doxyref{\-Z\-Scatterer}{p.}{a00156} objects }{\pageref{a00150}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-X\-M\-L\-Cryst\-Tag} \\*\-Class to input or output a well-\/formatted xml beginning or ending tag }{\pageref{a00151}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-X\-Y\-Z} \\*\-Structure holding 3 coordinates, or deriviatives with respect to each of these coordinates }{\pageref{a00152}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Z\-Atom} \\*\-Class for individual atoms in a \doxyref{\-Z\-Scatterer}{p.}{a00156} \-Object }{\pageref{a00153}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Z\-Move\-Minimizer} \\*\-Class to minimize conformation changes for random moves }{\pageref{a00154}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Z\-Polyhedron} \\*\doxyref{\-Z\-Polyhedron}{p.}{a00155}\-: a \doxyref{\-Scatterer}{p.}{a00085} to describe polyhedras such as octahedron, tetrahedron, square plane, etc.. }{\pageref{a00155}}{}
+\item\contentsline{section}{{\bf \-Obj\-Cryst\-::\-Z\-Scatterer} \\*\doxyref{\-Z\-Scatterer}{p.}{a00156}\-: the basic type of complex scatterers, where atom positions are defined using a standard \char`\"{}\-Z-\/\-Matrix\char`\"{} description }{\pageref{a00156}}{}
 \end{DoxyCompactList}

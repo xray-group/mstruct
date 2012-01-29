@@ -62,7 +62,7 @@
 #include <signal.h> // To catch CTRL+C signal during LSQNumObj refinement
 
 bool bsavecalc = false;
-REAL xcenterlimits[2] = {25.2*DEG2RAD, 25.5*DEG2RAD}; // 14 16, 144 145 102 107, 135 138, 72 77, 15 22, 23 27, 5 27, 87 93
+REAL xcenterlimits[2] = {83*DEG2RAD, 85*DEG2RAD};
 
 #define absorption_corr_factor 1.e4
 
@@ -4976,6 +4976,8 @@ void DislocationBroadeningEffectSvB::PrepareCalcAuxParams(const REAL xcenter, co
     throw ObjCrystException("Invalid cell type.");
     break;
   }
+  // Check for negative values
+  if(Chkl<0.) throw ObjCrystException("DislocationBroadeningEffectSvB::PrepareCalcAuxParams: Negative Chkl !");
 }
 
 void DislocationBroadeningEffectSvB::SetProfilePar(const REAL reOrRou, const REAL rou, const REAL cg0,
@@ -6946,8 +6948,11 @@ bool ReflectionProfile::PrepareForCalc(const CrystVector_REAL &x,
   ms0 = 2*sin(xcenter/2)/mLambda;
 
   // range of calc profile in the reciprocal units
-  ms1 = max(abs(2*sin(x(0)/2)/mLambda-ms0),
-	    abs(2*sin(x(mNbPoints-1)/2)/mLambda-ms0));
+  {
+    const REAL smin = (x(0)<0.) ? 2*sin(x(0)/2)/mLambda : ms0-(xcenter-x(0))*cos(xcenter/2)/mLambda;
+    const REAL smax = (x(mNbPoints-1)>=2.*M_PI) ? 2*sin(x(mNbPoints-1)/2)/mLambda : ms0+(x(mNbPoints-1)-xcenter)*cos(xcenter/2)/mLambda;
+    ms1 = max(abs(ms0-smin),abs(smax-ms0));
+  }
   
   // step in the direct space
   mdL = 0.5/ms1/sqrt(mFactor);
@@ -7321,7 +7326,7 @@ REAL ReflectionProfile::GetFullProfileWidth (const REAL relativeIntensity,
       n2=nb-1; p=prof.data()+n2;
       while(*p<test){ p--; n2--;}
       n2++;
-      VFN_DEBUG_EXIT("MStruct::ReflectionProfile::GetFullProfileWidth():"<<x(n2)-x(n1),10)
+      VFN_DEBUG_EXIT("\MStruct::ReflectionProfile::GetFullProfileWidth():"<<x(n2)-x(n1),10)
       return x(n2)-x(n1);
       // DUMMY !!!
 	/*
@@ -7341,6 +7346,7 @@ REAL ReflectionProfile::GetFullProfileWidth (const REAL relativeIntensity,
     n*=2.0;
     //if(n>200) exit(0);
   }
+  VFN_DEBUG_EXIT("\MStruct::ReflectionProfile::GetFullProfileWidth(): Undefined EXIT !",10)
 }
 
 REAL ReflectionProfile::GetIntegralWidth (const REAL xcenter,
@@ -9059,6 +9065,7 @@ CrystVector_REAL DoubleComponentReflectionProfile::GetProfile(const CrystVector_
 REAL DoubleComponentReflectionProfile::GetFullProfileWidth(const REAL relativeIntensity, const REAL xcenter,
 			    								 																 const REAL h, const REAL k, const REAL l)
 {
+	VFN_DEBUG_ENTRY("MStruct::DoubleComponentReflectionProfile::GetFullProfileWidth()",10)
 	// check if reflection profile components are set
 	if(mComponent1==NULL || mComponent1==NULL) {
 		cerr << "< DoubleComponentReflectionProfile::GetFullProfileWidth(...)\n";
@@ -9071,10 +9078,16 @@ REAL DoubleComponentReflectionProfile::GetFullProfileWidth(const REAL relativeIn
 	}
 	
 	// if it is a "pure" function than this task is simple
-	if (abs(1.-mWeight)<1e-6)
-		return mComponent2->GetFullProfileWidth(relativeIntensity,xcenter,h,k,l);
-	else if (abs(mWeight)<1e-6)
-		 return mComponent1->GetFullProfileWidth(relativeIntensity,xcenter,h,k,l);
+	if (abs(1.-mWeight)<1e-6) {
+	  const REAL width = mComponent2->GetFullProfileWidth(relativeIntensity,xcenter,h,k,l);
+	  VFN_DEBUG_EXIT("\MStruct::DoubleComponentReflectionProfile::GetFullProfileWidth():"<<width,10)
+	  return width;
+	}
+	else if (abs(mWeight)<1e-6) {
+	  const REAL width = mComponent1->GetFullProfileWidth(relativeIntensity,xcenter,h,k,l);
+	  VFN_DEBUG_EXIT("\MStruct::DoubleComponentReflectionProfile::GetFullProfileWidth():"<<width,10)
+	  return width;
+	}
 		 
 	// mixed type reflection profile (mWeight > 0 && mWeight < 1)
 	
@@ -9142,7 +9155,7 @@ REAL DoubleComponentReflectionProfile::GetFullProfileWidth(const REAL relativeIn
 		else
 			width *= 2;
 	}
-	
+
 	if(counter>=10) {
 		cerr << "< DoubleComponentReflectionProfile::GetFullProfileWidth(...)\n";
 		cerr << "\t"<<"relativeIntensity="<<relativeIntensity;
@@ -9175,7 +9188,7 @@ REAL DoubleComponentReflectionProfile::GetFullProfileWidth(const REAL relativeIn
 	py++; n1++;
 	for(int i=1; i<y.numElements(); i++)
 		if(*py>Ilim) break; else { n1++; py++; }
-	
+
 	REAL xleft;
 	{
 		REAL x0 = x(n1-1), x1 = x(n1); // TODO:: n1<x.numElements() ?
@@ -9189,14 +9202,15 @@ REAL DoubleComponentReflectionProfile::GetFullProfileWidth(const REAL relativeIn
 	py--; n1--;
 	for(int i=1; i<y.numElements(); i++)
 		if(*py>Ilim) break; else { n1--; py--; }
-	
+
 	REAL xright;
 	{
 		REAL x0 = x(n1), x1 = x(n1+1); // TODO:: n1>=0 ?
 		REAL y0 = y(n1), y1 = y(n1+1);
 		xright = x0 + (x1-x0)/(y1-y0) * (Ilim-y0);
 	}
-	
+
+	VFN_DEBUG_EXIT("\MStruct::DoubleComponentReflectionProfile::GetFullProfileWidth():"<<(xright-xleft),10)
 	return (xright-xleft);
 }
 			    								 

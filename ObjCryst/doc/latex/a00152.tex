@@ -1,125 +1,33 @@
-\subsection{ObjCryst::ZAtom Class Reference}
-\label{a00152}\index{ObjCryst::ZAtom@{ObjCryst::ZAtom}}
+\subsection{\-Obj\-Cryst\-:\-:\-X\-Y\-Z \-Struct \-Reference}
+\label{a00152}\index{\-Obj\-Cryst\-::\-X\-Y\-Z@{\-Obj\-Cryst\-::\-X\-Y\-Z}}
 
 
-Class for individual atoms in a \doxyref{ZScatterer}{p.}{a00155} Object.  
-\subsubsection*{Public Member Functions}
+\-Structure holding 3 coordinates, or deriviatives with respect to each of these coordinates.  
+
+
+\subsubsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries ZAtom} ({\bf ZScatterer} \&scatt, const {\bf ScatteringPower} $\ast$pow, const long atomBond=0, const REAL bondLength=1, const long atomAngle=0, const REAL bondAngle=M\_\-PI, const long atomDihedral=0, const REAL dihedralAngle=M\_\-PI, const REAL popu=1., const string \&name=\char`\"{}\char`\"{})\label{a00152_abef15e9b63a090e6cf40a6837ea2ac24}
-
-\item 
-const string \& {\bfseries GetClassName} () const \label{a00152_a24e6825a8f25efa16a1d3489be551989}
-
-\item 
-const string \& {\bfseries GetName} () const \label{a00152_a38d201a3d337c5888e9a1eaac96f8a95}
-
-\item 
-void {\bfseries SetName} (const string \&)\label{a00152_a6cca6a4b33e91ce1bb1a8912f9ba5a53}
-
-\item 
-const {\bf ZScatterer} \& {\bf GetZScatterer} () const \label{a00152_a228dcc5c1427564705d4e0e3c1209fd3}
-
-\begin{DoxyCompactList}\small\item\em Get the \doxyref{ZScatterer}{p.}{a00155} associated to this \doxyref{ZAtom}{p.}{a00152}. \item\end{DoxyCompactList}\item 
-{\bf ZScatterer} \& {\bf GetZScatterer} ()\label{a00152_a75a3c9acc2299bd05ac312767552fc65}
-
-\begin{DoxyCompactList}\small\item\em Get the \doxyref{ZScatterer}{p.}{a00155} associated to this \doxyref{ZAtom}{p.}{a00152}. \item\end{DoxyCompactList}\item 
-long {\bf GetZBondAtom} () const \label{a00152_a27900cb697c7802f4536b63acffa2abf}
-
-\begin{DoxyCompactList}\small\item\em Index of the 1st atom used to define the atom in the Z-\/Matrix (the one from which the bondlength is calculated). \item\end{DoxyCompactList}\item 
-long {\bf GetZAngleAtom} () const \label{a00152_ad0bf2b2f3b806aa84a38e2b27834d6c7}
-
-\begin{DoxyCompactList}\small\item\em Index of the 2nd atom used to define the atom in the Z-\/Matrix (the one from which the angle is calculated). \item\end{DoxyCompactList}\item 
-long {\bf GetZDihedralAngleAtom} () const \label{a00152_ab72688856a2e82cab68e9316b595316f}
-
-\begin{DoxyCompactList}\small\item\em Index of the 3rd atom used to define the atom in the Z-\/Matrix (the one from which the dihedral angle is calculated). \item\end{DoxyCompactList}\item 
-const REAL \& {\bf GetZBondLength} () const \label{a00152_a5726da359fe1a86aa0ac2294c580c4f6}
-
-\begin{DoxyCompactList}\small\item\em Const access to bondlength parameter. \item\end{DoxyCompactList}\item 
-const REAL \& {\bf GetZAngle} () const \label{a00152_a4223fbd5846a55c8ce6b104229b9f1a3}
-
-\begin{DoxyCompactList}\small\item\em Const access to the angle parameter. \item\end{DoxyCompactList}\item 
-const REAL \& {\bf GetZDihedralAngle} () const \label{a00152_a6335f5ae14e04a11162a8da86d717452}
-
-\begin{DoxyCompactList}\small\item\em Const access to the dihedral angle parameter. \item\end{DoxyCompactList}\item 
-const REAL \& {\bf GetOccupancy} () const \label{a00152_aae8bd87d1b2e863f15a33fabf583cd24}
-
-\begin{DoxyCompactList}\small\item\em Const access to the ocupancy parameter. \item\end{DoxyCompactList}\item 
-const {\bf ScatteringPower} $\ast$ {\bf GetScatteringPower} () const \label{a00152_a5e3eb98f72f7345930077d060bcf4fea}
-
-\begin{DoxyCompactList}\small\item\em \doxyref{ScatteringPower}{p.}{a00089} for this atom. \item\end{DoxyCompactList}\item 
-void {\bf SetZBondLength} (const REAL)\label{a00152_ad4d6d810bc1bb90ae7773ac3889bd035}
-
-\begin{DoxyCompactList}\small\item\em Access to bondlength parameter. \item\end{DoxyCompactList}\item 
-void {\bf SetZAngle} (const REAL)\label{a00152_a84aef5886287556191d7ca2b949160a7}
-
-\begin{DoxyCompactList}\small\item\em Access to the angle parameter. \item\end{DoxyCompactList}\item 
-void {\bf SetZDihedralAngle} (const REAL)\label{a00152_a17c32ebb8d2ef87b6e9a3b9323457c9f}
-
-\begin{DoxyCompactList}\small\item\em Access to the dihedral angle parameter. \item\end{DoxyCompactList}\item 
-void {\bf SetOccupancy} (const REAL)\label{a00152_a75e0ae656bb50d29cc511a5ef87ed45f}
-
-\begin{DoxyCompactList}\small\item\em Access to the dihedral angle parameter. \item\end{DoxyCompactList}\item 
-void {\bf SetScatteringPower} (const {\bf ScatteringPower} $\ast$)\label{a00152_a2ca9cf4a73457c2a2645c780cf3175c1}
-
-\begin{DoxyCompactList}\small\item\em Set the \doxyref{ScatteringPower}{p.}{a00089}. \item\end{DoxyCompactList}\item 
-void {\bfseries XMLOutput} (ostream \&os, int indent=0) const \label{a00152_a03c3fb8d81c63db45b58ee30e0094c8c}
-
-\item 
-void {\bfseries XMLInput} (istream \&is, const {\bf XMLCrystTag} \&tag)\label{a00152_a86561067f1c11ed584f94da62b921356}
+{\bfseries \-X\-Y\-Z} (\-R\-E\-A\-L x=0, \-R\-E\-A\-L y=0, \-R\-E\-A\-L z=0)\label{a00152_ae4cfcbc2f1f06734305b99aea62a9551}
 
 \end{DoxyCompactItemize}
-\subsubsection*{Private Attributes}
+\subsubsection*{\-Public \-Attributes}
 \begin{DoxyCompactItemize}
 \item 
-const {\bf ScatteringPower} $\ast$ {\bf mpScattPow}\label{a00152_a231b9157ac0c1e46f918ceb81e00c5a9}
-
-\begin{DoxyCompactList}\small\item\em The \doxyref{ScatteringPower}{p.}{a00089} corresponding to this atom. \item\end{DoxyCompactList}\item 
-long {\bf mAtomBond}
-\begin{DoxyCompactList}\small\item\em The index (in the \doxyref{ZScatterer}{p.}{a00155}) of the atoms which are used to define the position of this atom. \item\end{DoxyCompactList}\item 
-long {\bfseries mAtomAngle}\label{a00152_afbb3f2a1081feba9df47a633d9b3c03c}
+\-R\-E\-A\-L {\bfseries x}\label{a00152_a98bdadb23d017e4b57694e2543014933}
 
 \item 
-long {\bfseries mAtomDihed}\label{a00152_aeb8e98f1aafff33d594829c2f4fd54dc}
+\-R\-E\-A\-L {\bfseries y}\label{a00152_a3e6889d0cf6d4b6fe0477467faf46e08}
 
 \item 
-REAL {\bf mBondLength}\label{a00152_ad0611bc2c841424820de4e22369f92c2}
-
-\begin{DoxyCompactList}\small\item\em Bond length, angle and dihedral angle. \item\end{DoxyCompactList}\item 
-REAL {\bfseries mAngle}\label{a00152_a0dbf6bba12d4991a68ca55f358a83fb1}
-
-\item 
-REAL {\bfseries mDihed}\label{a00152_aa589d6f9d9223e49dceee0e43ed6cbd5}
-
-\item 
-REAL {\bfseries mOccupancy}\label{a00152_a10981a1df565aa1dda5843fcc6e0737c}
-
-\item 
-string {\bf mName}\label{a00152_ab065278f14855ba84aedad6b3469b95e}
-
-\begin{DoxyCompactList}\small\item\em Name for this atom. \item\end{DoxyCompactList}\item 
-{\bf ZScatterer} $\ast$ {\bf mpScatt}\label{a00152_ad04d66e284260a92f94a189e4b8d0241}
-
-\begin{DoxyCompactList}\small\item\em the \doxyref{ZScatterer}{p.}{a00155} in which this atom is included. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Friends}
-\begin{DoxyCompactItemize}
-\item 
-class {\bfseries ZScatterer}\label{a00152_a1a78ff190d815e7f00791ac526f74e91}
+\-R\-E\-A\-L {\bfseries z}\label{a00152_a8625df962c37093db37747e63c371e3f}
 
 \end{DoxyCompactItemize}
 
 
-\subsubsection{Detailed Description}
-Class for individual atoms in a \doxyref{ZScatterer}{p.}{a00155} Object. This class is {\itshape purely\/} {\itshape internal\/} to \doxyref{ZScatterer}{p.}{a00155}, so should not be used for any other purpose... 
+\subsubsection{\-Detailed \-Description}
+\-Structure holding 3 coordinates, or deriviatives with respect to each of these coordinates. 
 
-\subsubsection{Member Data Documentation}
-\index{ObjCryst::ZAtom@{ObjCryst::ZAtom}!mAtomBond@{mAtomBond}}
-\index{mAtomBond@{mAtomBond}!ObjCryst::ZAtom@{ObjCryst::ZAtom}}
-\paragraph[{mAtomBond}]{\setlength{\rightskip}{0pt plus 5cm}long {\bf ObjCryst::ZAtom::mAtomBond}\hspace{0.3cm}{\ttfamily  [private]}}\hfill\label{a00152_a7db82eb57372c450d2001c4b065d98bb}
-
-
-The index (in the \doxyref{ZScatterer}{p.}{a00155}) of the atoms which are used to define the position of this atom. 
-
-The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\-The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-ZScatterer.h\end{DoxyCompactItemize}
+\-Molecule.\-h\end{DoxyCompactItemize}

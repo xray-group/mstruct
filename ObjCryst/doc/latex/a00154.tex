@@ -1,56 +1,89 @@
-\subsection{ObjCryst::ZPolyhedron Class Reference}
-\label{a00154}\index{ObjCryst::ZPolyhedron@{ObjCryst::ZPolyhedron}}
+\subsection{\-Obj\-Cryst\-:\-:\-Z\-Move\-Minimizer \-Class \-Reference}
+\label{a00154}\index{\-Obj\-Cryst\-::\-Z\-Move\-Minimizer@{\-Obj\-Cryst\-::\-Z\-Move\-Minimizer}}
 
 
-\doxyref{ZPolyhedron}{p.}{a00154}: a \doxyref{Scatterer}{p.}{a00084} to describe polyhedras such as octahedron, tetrahedron, square plane, etc.  
-Inheritance diagram for ObjCryst::ZPolyhedron::\begin{figure}[H]
+\-Class to minimize conformation changes for random moves.  
+
+
+\-Inheritance diagram for \-Obj\-Cryst\-:\-:\-Z\-Move\-Minimizer\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=4cm]{a00154}
+\includegraphics[height=2.000000cm]{a00154}
 \end{center}
 \end{figure}
-\subsubsection*{Public Member Functions}
+\subsubsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bf ZPolyhedron} (const RegularPolyhedraType type, {\bf Crystal} \&cryst, const REAL x, const REAL y, const REAL z, const string \&name, const {\bf ScatteringPower} $\ast$centralAtomPow, const {\bf ScatteringPower} $\ast$periphAtomPow, const REAL centralPeriphDist, const REAL ligandPopu=1, const REAL phi=0., const REAL chi=0., const REAL psi=0.)
-\begin{DoxyCompactList}\small\item\em \doxyref{ZPolyhedron}{p.}{a00154} constructor. \item\end{DoxyCompactList}\item 
-{\bf ZPolyhedron} (const {\bf ZPolyhedron} \&)\label{a00154_a7d9b825ac03903e63d072c53fc791f50}
+{\bfseries \-Z\-Move\-Minimizer} ({\bf \-Z\-Scatterer} \&scatt)\label{a00154_a4ad0464228125bcf96ea69742c41e618}
 
-\begin{DoxyCompactList}\small\item\em Copy Constructor. \item\end{DoxyCompactList}\item 
-virtual {\bf ZPolyhedron} $\ast$ {\bf CreateCopy} () const 
+\item 
+virtual \-R\-E\-A\-L {\bf \-Get\-Log\-Likelihood} () const 
+\begin{DoxyCompactList}\small\item\em \-Get -\/log(likelihood) of the current configuration for the object. \end{DoxyCompactList}\item 
+void {\bfseries \-Record\-Conformation} ()\label{a00154_aa740a4b34e94f988290b4b752a0700ac}
+
+\item 
+void {\bfseries \-Set\-Z\-Atom\-Weight} (const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L weight)\label{a00154_a2e089c0f16e151b8ef1de4f3252e50fd}
+
+\item 
+void {\bfseries \-Minimize\-Change} (long nb\-Trial=10000)\label{a00154_a8ecf95b446cc5c14768149eb76a8e580}
+
 \end{DoxyCompactItemize}
-\subsubsection*{Private Attributes}
+\subsubsection*{\-Private \-Attributes}
 \begin{DoxyCompactItemize}
 \item 
-RegularPolyhedraType {\bfseries mPolyhedraType}\label{a00154_aa41437829f14e36030818f54ddb26faf}
+{\bf \-Z\-Scatterer} $\ast$ {\bfseries mp\-Z\-Scatt}\label{a00154_ae68275c4cb001a345fdbbf6a5b8ae178}
+
+\item 
+{\bf \-Monte\-Carlo\-Obj} {\bfseries m\-Optim\-Obj}\label{a00154_ad036f4df4e83572b41999451f647fe1a}
+
+\item 
+\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bfseries m\-X\-Coord0}\label{a00154_af4eb3480b92d69c67212599207acfaa2}
+
+\item 
+\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bfseries m\-Y\-Coord0}\label{a00154_a8bccfa825ed2dab7e014a0a6742367c1}
+
+\item 
+\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bfseries m\-Z\-Coord0}\label{a00154_ae3bf61fa8b32a5ea4773683fce680ad5}
+
+\item 
+\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bfseries m\-Atom\-Weight}\label{a00154_ae1c828e64bd918edeadf62577505fb71}
 
 \end{DoxyCompactItemize}
 
 
-\subsubsection{Detailed Description}
-\doxyref{ZPolyhedron}{p.}{a00154}: a \doxyref{Scatterer}{p.}{a00084} to describe polyhedras such as octahedron, tetrahedron, square plane, etc. .. These are \doxyref{ZScatterer}{p.}{a00155} objects, so that even if they are initialized with constraints, these can be removed to make any configuration. 
+\subsubsection{\-Detailed \-Description}
+\-Class to minimize conformation changes for random moves. 
 
-\subsubsection{Constructor \& Destructor Documentation}
-\index{ObjCryst::ZPolyhedron@{ObjCryst::ZPolyhedron}!ZPolyhedron@{ZPolyhedron}}
-\index{ZPolyhedron@{ZPolyhedron}!ObjCryst::ZPolyhedron@{ObjCryst::ZPolyhedron}}
-\paragraph[{ZPolyhedron}]{\setlength{\rightskip}{0pt plus 5cm}ObjCryst::ZPolyhedron::ZPolyhedron (const RegularPolyhedraType {\em type}, \/  {\bf Crystal} \& {\em cryst}, \/  const REAL {\em x}, \/  const REAL {\em y}, \/  const REAL {\em z}, \/  const string \& {\em name}, \/  const {\bf ScatteringPower} $\ast$ {\em centralAtomPow}, \/  const {\bf ScatteringPower} $\ast$ {\em periphAtomPow}, \/  const REAL {\em centralPeriphDist}, \/  const REAL {\em ligandPopu} = {\ttfamily 1}, \/  const REAL {\em phi} = {\ttfamily 0.}, \/  const REAL {\em chi} = {\ttfamily 0.}, \/  const REAL {\em psi} = {\ttfamily 0.})}\hfill\label{a00154_a624314fc85edd2b27e572e33c1487bed}
+\-Very experimental !!! \-Only used within \doxyref{\-Z\-Scatterer}{p.}{a00156}. 
 
-
-\doxyref{ZPolyhedron}{p.}{a00154} constructor. 
-\begin{DoxyParams}{Parameters}
-\item[{\em type}]: OCTAHEDRON, TETRAHEDRON,... \item[{\em cryst}]: a crystal is necessary to transform the orthornormal coordinates (in which the relative atom positions are computed) to fractional ones. \item[{\em x,y,z}]: {\itshape fractional\/} coordinates of the center of the polyhedra \item[{\em name}]: name of the Polyhedra ('WO6','TaSe4\_\-a', 'Tetra01'...). The name can have {\itshape any\/} format but spaces should be avoided, since it will generate problems when reading the names from a file. And there must {\bfseries not} be identical name for two scatterers in a given crystal object. \item[{\em periphAtomPow,centralAtomPow,:}]the \doxyref{ScatteringPower}{p.}{a00089} corresponding to the central and peripheral atoms, respectively. \item[{\em centralPeriphDist,:}]the distance, in angstroems, from the central to the peripheral atoms \item[{\em ligandPopu}]: the relative population of ligand atoms, equal to 1/n if ligand atoms are shared by n polyhedra. If you are using the 'Dynamical Polpulation Correction', then keep this parameter to 1. \item[{\em phi,chi,psi,:}]initial angles for this polyhedron \end{DoxyParams}
-
-
-\subsubsection{Member Function Documentation}
-\index{ObjCryst::ZPolyhedron@{ObjCryst::ZPolyhedron}!CreateCopy@{CreateCopy}}
-\index{CreateCopy@{CreateCopy}!ObjCryst::ZPolyhedron@{ObjCryst::ZPolyhedron}}
-\paragraph[{CreateCopy}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf ZPolyhedron}$\ast$ ObjCryst::ZPolyhedron::CreateCopy () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00154_a83436a907a22d794259e5fea9b7670ce}
-\begin{DoxyInternal}{For internal use only.}
-so-\/called Virtual copy constructor, needed to make copies of arrays of Scatterers \end{DoxyInternal}
+\subsubsection{\-Member \-Function \-Documentation}
+\index{\-Obj\-Cryst\-::\-Z\-Move\-Minimizer@{\-Obj\-Cryst\-::\-Z\-Move\-Minimizer}!\-Get\-Log\-Likelihood@{\-Get\-Log\-Likelihood}}
+\index{\-Get\-Log\-Likelihood@{\-Get\-Log\-Likelihood}!ObjCryst::ZMoveMinimizer@{\-Obj\-Cryst\-::\-Z\-Move\-Minimizer}}
+\paragraph[{\-Get\-Log\-Likelihood}]{\setlength{\rightskip}{0pt plus 5cm}virtual \-R\-E\-A\-L {\bf \-Obj\-Cryst\-::\-Z\-Move\-Minimizer\-::\-Get\-Log\-Likelihood} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00154_a1a0bd982430b7f38d54ed798edd6ac18}
 
 
-Reimplemented from {\bf ObjCryst::ZScatterer} \doxyref{}{p.}{a00155_a6cf9f5891cf87e865efa971d36599d24}.
+\-Get -\/log(likelihood) of the current configuration for the object. 
 
-The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\-By default (no likelihood evaluation available), this is equal to 0.
+
+\-This call should not be recursive, it is the task of the algorithm to get the sum of likelihoods for all objects invlolved.
+
+\begin{DoxyNote}{\-Note}
+contrary to the old \char`\"{}\-Cost Function\char`\"{} approach, with log(\-Likelihood) there is no 'choice' of cost function, so that it is the task of the object to give the optimized likelihood (possibly with user options).
+\end{DoxyNote}
+\begin{DoxyWarning}{\-Warning}
+\-: this is in under heavy development, so expect changes... 
+\end{DoxyWarning}
+
+
+\-Reimplemented from {\bf \-Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00071_a9a9a5ea2b997cd36b44ed35c2bab3245}.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-ZScatterer.h\end{DoxyCompactItemize}
+\-Z\-Scatterer.\-h\end{DoxyCompactItemize}

@@ -1,25 +1,33 @@
-\subsection{ObjCryst::Crystal::NeighbourHood Struct Reference}
-\label{a00051}\index{ObjCryst::Crystal::NeighbourHood@{ObjCryst::Crystal::NeighbourHood}}
+\subsection{\-Obj\-Cryst\-:\-:\-Crystal\-:\-:\-Neighbour \-Struct \-Reference}
+\label{a00051}\index{\-Obj\-Cryst\-::\-Crystal\-::\-Neighbour@{\-Obj\-Cryst\-::\-Crystal\-::\-Neighbour}}
 
 
-Table of neighbours for a given unique atom.  
-\subsubsection*{Public Attributes}
+\-Interatomic distance for a given neighbour.  
+
+
+\subsubsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-unsigned long {\bf mIndex}\label{a00051_a50582f69538cb6bddaa5e42c56a1f048}
+{\bfseries \-Neighbour} (const unsigned long neighbour\-Index, const int sym, const \-R\-E\-A\-L dist2)\label{a00051_af3dfe5fb08c8c73dc5e804439b0e46c9}
 
-\begin{DoxyCompactList}\small\item\em Index of the atom in the scattering component list. \item\end{DoxyCompactList}\item 
-unsigned int {\bf mUniquePosSymmetryIndex}\label{a00051_aa27ccaa8f5020e450d69bfb09e7bef94}
-
-\begin{DoxyCompactList}\small\item\em Index of the symmetry operation for the chosen unique position in the (pseudo) asymmetric unit. \item\end{DoxyCompactList}\item 
-std::vector$<$ {\bf Crystal::Neighbour} $>$ {\bf mvNeighbour}\label{a00051_af35a4b4181e6af317a8dd33e9db249a8}
-
-\begin{DoxyCompactList}\small\item\em List of neighbours. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
-
-
-\subsubsection{Detailed Description}
-Table of neighbours for a given unique atom. 
-
-The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\end{DoxyCompactItemize}
+\subsubsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
 \item 
-Crystal.h\end{DoxyCompactItemize}
+unsigned long {\bf m\-Neighbour\-Index}\label{a00051_a00b603db2329cf55dd6bc66cf76e54ad}
+
+\begin{DoxyCompactList}\small\item\em \-The number associated to the neighbour (its index in the \doxyref{\-Crystal}{p.}{a00020}'s scattering component list) \end{DoxyCompactList}\item 
+unsigned int {\bf m\-Neighbour\-Symmetry\-Index}\label{a00051_a6ccf11f6f5ad2641cfeb22c8339fa2e5}
+
+\begin{DoxyCompactList}\small\item\em \-The symmetry position associated to the neighbour (its index in the \doxyref{\-Crystal}{p.}{a00020}'s scattering component list) \end{DoxyCompactList}\item 
+\-R\-E\-A\-L {\bf m\-Dist2}\label{a00051_ac4b4d41dc4899ce7520d6b178602e2d3}
+
+\begin{DoxyCompactList}\small\item\em \-The squared distance, in square \-Angstroems. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{\-Detailed \-Description}
+\-Interatomic distance for a given neighbour. 
+
+\-The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\-Crystal.\-h\end{DoxyCompactItemize}

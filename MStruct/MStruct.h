@@ -1227,8 +1227,8 @@ public:
 			       const REAL h, const REAL k, const REAL l);
   REAL GetApproxFWHM (const REAL xcenter,
 		      const REAL h, const REAL k, const REAL l)const;
-  REAL GetFullProfileWidth (const REAL relativeIntensity, const REAL xcenter,
-			    const REAL h, const REAL k, const REAL l);
+  virtual REAL GetFullProfileWidth (const REAL relativeIntensity, const REAL xcenter,
+				    const REAL h, const REAL k, const REAL l);
   REAL GetIntegralWidth (const REAL xcenter,const REAL h,const REAL k,const REAL l); 
   void XMLOutput (ostream &os, int indent=0) const {};
   void XMLInput (istream &is, const ObjCryst::XMLCrystTag &tag) {};

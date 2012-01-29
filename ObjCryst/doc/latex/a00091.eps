@@ -5,7 +5,7 @@
 %%For: 
 %Magnification: 1.00
 %%Orientation: Portrait
-%%BoundingBox: 0 0 500 285.714
+%%BoundingBox: 0 0 500 304.568528
 %%Pages: 0
 %%BeginSetup
 %%EndSetup
@@ -19,7 +19,7 @@
 /marginwidth 10 def
 /distx 20 def
 /disty 40 def
-/boundaspect 1.75 def  % aspect ratio of the BoundingBox (width/height)
+/boundaspect 1.641667 def  % aspect ratio of the BoundingBox (width/height)
 /boundx 500 def
 /boundy boundx boundaspect div def
 /xspacing 0 def
@@ -173,7 +173,7 @@
 
 boxfont setfont
 1 boundaspect scale
-(ObjCryst::ScatteringPowerSphere) cw
+(ObjCryst::ScatteringPowerAtom) cw
 (ObjCryst::ScatteringPower) cw
 (ObjCryst::RefinableObj) cw
 /boxwidth boxwidth marginwidth 2 mul add def
@@ -187,19 +187,21 @@ boundx scalefactor div boundy scalefactor div scale
 
 % ----- classes -----
 
- (ObjCryst::ScatteringPowerSphere) 0 0 box
- (ObjCryst::ScatteringPower) 0 1 box
+ (ObjCryst::ScatteringPowerAtom) 0.000000 0.000000 box
 dashed
- (ObjCryst::RefinableObj) 0 2 box
+ (ObjCryst::ScatteringPower) 0.000000 1.000000 box
+solid
+dashed
+ (ObjCryst::RefinableObj) 0.000000 2.000000 box
 solid
 
 % ----- relations -----
 
 solid
-0 0 0 out
+0 0.000000 0.000000 out
 solid
-1 0 1 in
+1 0.000000 1.000000 in
 solid
-0 0 1 out
+0 0.000000 1.000000 out
 solid
-1 0 2 in
+1 0.000000 2.000000 in

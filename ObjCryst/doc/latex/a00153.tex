@@ -1,79 +1,131 @@
-\subsection{ObjCryst::ZMoveMinimizer Class Reference}
-\label{a00153}\index{ObjCryst::ZMoveMinimizer@{ObjCryst::ZMoveMinimizer}}
+\subsection{\-Obj\-Cryst\-:\-:\-Z\-Atom \-Class \-Reference}
+\label{a00153}\index{\-Obj\-Cryst\-::\-Z\-Atom@{\-Obj\-Cryst\-::\-Z\-Atom}}
 
 
-Class to minimize conformation changes for random moves.  
-Inheritance diagram for ObjCryst::ZMoveMinimizer::\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[height=2cm]{a00153}
-\end{center}
-\end{figure}
-\subsubsection*{Public Member Functions}
+\-Class for individual atoms in a \doxyref{\-Z\-Scatterer}{p.}{a00156} \-Object.  
+
+
+\subsubsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries ZMoveMinimizer} ({\bf ZScatterer} \&scatt)\label{a00153_a4ad0464228125bcf96ea69742c41e618}
+{\bfseries \-Z\-Atom} ({\bf \-Z\-Scatterer} \&scatt, const {\bf \-Scattering\-Power} $\ast$pow, const long atom\-Bond=0, const \-R\-E\-A\-L bond\-Length=1, const long atom\-Angle=0, const \-R\-E\-A\-L bond\-Angle=\-M\-\_\-\-P\-I, const long atom\-Dihedral=0, const \-R\-E\-A\-L dihedral\-Angle=\-M\-\_\-\-P\-I, const \-R\-E\-A\-L popu=1., const string \&name=\char`\"{}\char`\"{})\label{a00153_abef15e9b63a090e6cf40a6837ea2ac24}
 
 \item 
-virtual REAL {\bf GetLogLikelihood} () const 
-\begin{DoxyCompactList}\small\item\em Get -\/log(likelihood) of the current configuration for the object. \item\end{DoxyCompactList}\item 
-void {\bfseries RecordConformation} ()\label{a00153_aa740a4b34e94f988290b4b752a0700ac}
+const string \& {\bfseries \-Get\-Class\-Name} () const \label{a00153_a24e6825a8f25efa16a1d3489be551989}
 
 \item 
-void {\bfseries SetZAtomWeight} (const CrystVector\_\-REAL weight)\label{a00153_a2e089c0f16e151b8ef1de4f3252e50fd}
+const string \& {\bfseries \-Get\-Name} () const \label{a00153_a38d201a3d337c5888e9a1eaac96f8a95}
 
 \item 
-void {\bfseries MinimizeChange} (long nbTrial=10000)\label{a00153_a8ecf95b446cc5c14768149eb76a8e580}
+void {\bfseries \-Set\-Name} (const string \&)\label{a00153_a6cca6a4b33e91ce1bb1a8912f9ba5a53}
+
+\item 
+const {\bf \-Z\-Scatterer} \& {\bf \-Get\-Z\-Scatterer} () const \label{a00153_a228dcc5c1427564705d4e0e3c1209fd3}
+
+\begin{DoxyCompactList}\small\item\em \-Get the \doxyref{\-Z\-Scatterer}{p.}{a00156} associated to this \doxyref{\-Z\-Atom}{p.}{a00153}. \end{DoxyCompactList}\item 
+{\bf \-Z\-Scatterer} \& {\bf \-Get\-Z\-Scatterer} ()\label{a00153_a75a3c9acc2299bd05ac312767552fc65}
+
+\begin{DoxyCompactList}\small\item\em \-Get the \doxyref{\-Z\-Scatterer}{p.}{a00156} associated to this \doxyref{\-Z\-Atom}{p.}{a00153}. \end{DoxyCompactList}\item 
+long {\bf \-Get\-Z\-Bond\-Atom} () const \label{a00153_a27900cb697c7802f4536b63acffa2abf}
+
+\begin{DoxyCompactList}\small\item\em \-Index of the 1st atom used to define the atom in the \-Z-\/\-Matrix (the one from which the bondlength is calculated) \end{DoxyCompactList}\item 
+long {\bf \-Get\-Z\-Angle\-Atom} () const \label{a00153_ad0bf2b2f3b806aa84a38e2b27834d6c7}
+
+\begin{DoxyCompactList}\small\item\em \-Index of the 2nd atom used to define the atom in the \-Z-\/\-Matrix (the one from which the angle is calculated) \end{DoxyCompactList}\item 
+long {\bf \-Get\-Z\-Dihedral\-Angle\-Atom} () const \label{a00153_ab72688856a2e82cab68e9316b595316f}
+
+\begin{DoxyCompactList}\small\item\em \-Index of the 3rd atom used to define the atom in the \-Z-\/\-Matrix (the one from which the dihedral angle is calculated) \end{DoxyCompactList}\item 
+const \-R\-E\-A\-L \& {\bf \-Get\-Z\-Bond\-Length} () const \label{a00153_a5726da359fe1a86aa0ac2294c580c4f6}
+
+\begin{DoxyCompactList}\small\item\em \-Const access to bondlength parameter. \end{DoxyCompactList}\item 
+const \-R\-E\-A\-L \& {\bf \-Get\-Z\-Angle} () const \label{a00153_a4223fbd5846a55c8ce6b104229b9f1a3}
+
+\begin{DoxyCompactList}\small\item\em \-Const access to the angle parameter. \end{DoxyCompactList}\item 
+const \-R\-E\-A\-L \& {\bf \-Get\-Z\-Dihedral\-Angle} () const \label{a00153_a6335f5ae14e04a11162a8da86d717452}
+
+\begin{DoxyCompactList}\small\item\em \-Const access to the dihedral angle parameter. \end{DoxyCompactList}\item 
+const \-R\-E\-A\-L \& {\bf \-Get\-Occupancy} () const \label{a00153_aae8bd87d1b2e863f15a33fabf583cd24}
+
+\begin{DoxyCompactList}\small\item\em \-Const access to the ocupancy parameter. \end{DoxyCompactList}\item 
+const {\bf \-Scattering\-Power} $\ast$ {\bf \-Get\-Scattering\-Power} () const \label{a00153_a5e3eb98f72f7345930077d060bcf4fea}
+
+\begin{DoxyCompactList}\small\item\em \doxyref{\-Scattering\-Power}{p.}{a00090} for this atom. \end{DoxyCompactList}\item 
+void {\bf \-Set\-Z\-Bond\-Length} (const \-R\-E\-A\-L)\label{a00153_ad4d6d810bc1bb90ae7773ac3889bd035}
+
+\begin{DoxyCompactList}\small\item\em \-Access to bondlength parameter. \end{DoxyCompactList}\item 
+void {\bf \-Set\-Z\-Angle} (const \-R\-E\-A\-L)\label{a00153_a84aef5886287556191d7ca2b949160a7}
+
+\begin{DoxyCompactList}\small\item\em \-Access to the angle parameter. \end{DoxyCompactList}\item 
+void {\bf \-Set\-Z\-Dihedral\-Angle} (const \-R\-E\-A\-L)\label{a00153_a17c32ebb8d2ef87b6e9a3b9323457c9f}
+
+\begin{DoxyCompactList}\small\item\em \-Access to the dihedral angle parameter. \end{DoxyCompactList}\item 
+void {\bf \-Set\-Occupancy} (const \-R\-E\-A\-L)\label{a00153_a75e0ae656bb50d29cc511a5ef87ed45f}
+
+\begin{DoxyCompactList}\small\item\em \-Access to the dihedral angle parameter. \end{DoxyCompactList}\item 
+void {\bf \-Set\-Scattering\-Power} (const {\bf \-Scattering\-Power} $\ast$)\label{a00153_a2ca9cf4a73457c2a2645c780cf3175c1}
+
+\begin{DoxyCompactList}\small\item\em \-Set the \doxyref{\-Scattering\-Power}{p.}{a00090}. \end{DoxyCompactList}\item 
+void {\bfseries \-X\-M\-L\-Output} (ostream \&os, int indent=0) const \label{a00153_a03c3fb8d81c63db45b58ee30e0094c8c}
+
+\item 
+void {\bfseries \-X\-M\-L\-Input} (istream \&is, const {\bf \-X\-M\-L\-Cryst\-Tag} \&tag)\label{a00153_a86561067f1c11ed584f94da62b921356}
 
 \end{DoxyCompactItemize}
-\subsubsection*{Private Attributes}
+\subsubsection*{\-Private \-Attributes}
 \begin{DoxyCompactItemize}
 \item 
-{\bf ZScatterer} $\ast$ {\bfseries mpZScatt}\label{a00153_ae68275c4cb001a345fdbbf6a5b8ae178}
+const {\bf \-Scattering\-Power} $\ast$ {\bf mp\-Scatt\-Pow}\label{a00153_a231b9157ac0c1e46f918ceb81e00c5a9}
+
+\begin{DoxyCompactList}\small\item\em \-The \doxyref{\-Scattering\-Power}{p.}{a00090} corresponding to this atom. \end{DoxyCompactList}\item 
+long {\bf m\-Atom\-Bond}
+\begin{DoxyCompactList}\small\item\em \-The index (in the \doxyref{\-Z\-Scatterer}{p.}{a00156}) of the atoms which are used to define the position of this atom. \end{DoxyCompactList}\item 
+long {\bfseries m\-Atom\-Angle}\label{a00153_afbb3f2a1081feba9df47a633d9b3c03c}
 
 \item 
-{\bf MonteCarloObj} {\bfseries mOptimObj}\label{a00153_ad036f4df4e83572b41999451f647fe1a}
+long {\bfseries m\-Atom\-Dihed}\label{a00153_aeb8e98f1aafff33d594829c2f4fd54dc}
 
 \item 
-CrystVector\_\-REAL {\bfseries mXCoord0}\label{a00153_af4eb3480b92d69c67212599207acfaa2}
+\-R\-E\-A\-L {\bf m\-Bond\-Length}\label{a00153_ad0611bc2c841424820de4e22369f92c2}
+
+\begin{DoxyCompactList}\small\item\em \-Bond length, angle and dihedral angle. \end{DoxyCompactList}\item 
+\-R\-E\-A\-L {\bfseries m\-Angle}\label{a00153_a0dbf6bba12d4991a68ca55f358a83fb1}
 
 \item 
-CrystVector\_\-REAL {\bfseries mYCoord0}\label{a00153_a8bccfa825ed2dab7e014a0a6742367c1}
+\-R\-E\-A\-L {\bfseries m\-Dihed}\label{a00153_aa589d6f9d9223e49dceee0e43ed6cbd5}
 
 \item 
-CrystVector\_\-REAL {\bfseries mZCoord0}\label{a00153_ae3bf61fa8b32a5ea4773683fce680ad5}
+\-R\-E\-A\-L {\bfseries m\-Occupancy}\label{a00153_a10981a1df565aa1dda5843fcc6e0737c}
 
 \item 
-CrystVector\_\-REAL {\bfseries mAtomWeight}\label{a00153_ae1c828e64bd918edeadf62577505fb71}
+string {\bf m\-Name}\label{a00153_ab065278f14855ba84aedad6b3469b95e}
+
+\begin{DoxyCompactList}\small\item\em \-Name for this atom. \end{DoxyCompactList}\item 
+{\bf \-Z\-Scatterer} $\ast$ {\bf mp\-Scatt}\label{a00153_ad04d66e284260a92f94a189e4b8d0241}
+
+\begin{DoxyCompactList}\small\item\em the \doxyref{\-Z\-Scatterer}{p.}{a00156} in which this atom is included. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{\-Friends}
+\begin{DoxyCompactItemize}
+\item 
+class {\bfseries \-Z\-Scatterer}\label{a00153_a1a78ff190d815e7f00791ac526f74e91}
 
 \end{DoxyCompactItemize}
 
 
-\subsubsection{Detailed Description}
-Class to minimize conformation changes for random moves. Very experimental !!! \begin{DoxyInternal}{For internal use only.}
-Only used within \doxyref{ZScatterer}{p.}{a00155}. \end{DoxyInternal}
+\subsubsection{\-Detailed \-Description}
+\-Class for individual atoms in a \doxyref{\-Z\-Scatterer}{p.}{a00156} \-Object. 
+
+\-This class is {\itshape purely\/} {\itshape internal\/} to \doxyref{\-Z\-Scatterer}{p.}{a00156}, so should not be used for any other purpose... 
+
+\subsubsection{\-Member \-Data \-Documentation}
+\index{\-Obj\-Cryst\-::\-Z\-Atom@{\-Obj\-Cryst\-::\-Z\-Atom}!m\-Atom\-Bond@{m\-Atom\-Bond}}
+\index{m\-Atom\-Bond@{m\-Atom\-Bond}!ObjCryst::ZAtom@{\-Obj\-Cryst\-::\-Z\-Atom}}
+\paragraph[{m\-Atom\-Bond}]{\setlength{\rightskip}{0pt plus 5cm}long {\bf \-Obj\-Cryst\-::\-Z\-Atom\-::m\-Atom\-Bond}\hspace{0.3cm}{\ttfamily  [private]}}\label{a00153_a7db82eb57372c450d2001c4b065d98bb}
 
 
-\subsubsection{Member Function Documentation}
-\index{ObjCryst::ZMoveMinimizer@{ObjCryst::ZMoveMinimizer}!GetLogLikelihood@{GetLogLikelihood}}
-\index{GetLogLikelihood@{GetLogLikelihood}!ObjCryst::ZMoveMinimizer@{ObjCryst::ZMoveMinimizer}}
-\paragraph[{GetLogLikelihood}]{\setlength{\rightskip}{0pt plus 5cm}virtual REAL ObjCryst::ZMoveMinimizer::GetLogLikelihood () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00153_a1a0bd982430b7f38d54ed798edd6ac18}
+\-The index (in the \doxyref{\-Z\-Scatterer}{p.}{a00156}) of the atoms which are used to define the position of this atom. 
 
 
-Get -\/log(likelihood) of the current configuration for the object. By default (no likelihood evaluation available), this is equal to 0.
 
-This call should not be recursive, it is the task of the algorithm to get the sum of likelihoods for all objects invlolved.
-
-\begin{DoxyNote}{Note}
-contrary to the old \char`\"{}Cost Function\char`\"{} approach, with log(Likelihood) there is no 'choice' of cost function, so that it is the task of the object to give the optimized likelihood (possibly with user options).
-\end{DoxyNote}
-\begin{DoxyWarning}{Warning}
-: this is in under heavy development, so expect changes... 
-\end{DoxyWarning}
-
-
-Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_a9a9a5ea2b997cd36b44ed35c2bab3245}.
-
-The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-ZScatterer.h\end{DoxyCompactItemize}
+\-Z\-Scatterer.\-h\end{DoxyCompactItemize}

@@ -1,74 +1,265 @@
-\subsection{ObjCryst::RecUnitCell Class Reference}
-\label{a00069}\index{ObjCryst::RecUnitCell@{ObjCryst::RecUnitCell}}
+\subsection{\-Obj\-Cryst\-:\-:\-Radiation \-Class \-Reference}
+\label{a00069}\index{\-Obj\-Cryst\-::\-Radiation@{\-Obj\-Cryst\-::\-Radiation}}
 
 
-Lightweight class describing the reciprocal unit cell, for the fast computation of d$\ast$\_\-hkl$^\wedge$2.  
-\subsubsection*{Public Member Functions}
+\-Class to define the radiation (type, monochromaticity, wavelength(s)) of an experiment.  
+
+
+\-Inheritance diagram for \-Obj\-Cryst\-:\-:\-Radiation\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{a00069}
+\end{center}
+\end{figure}
+\subsubsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries RecUnitCell} (const float zero=0, const float par0=0, const float par1=0, const float par2=0, const float par3=0, const float par4=0, const float par5=0, {\bf CrystalSystem} lattice=CUBIC, const CrystalCentering cent=LATTICE\_\-P)\label{a00069_a547acefb4b824862c0dddb82c8977bea}
+{\bf \-Radiation} ()\label{a00069_abd533ac660e70618339636f18d1347f4}
+
+\begin{DoxyCompactList}\small\item\em \-Default constructor. \end{DoxyCompactList}\item 
+{\bf \-Radiation} (const {\bf \-Radiation\-Type} rad, const \-R\-E\-A\-L wavelength)
+\begin{DoxyCompactList}\small\item\em $\backslash$ brief \-Constructor \end{DoxyCompactList}\item 
+{\bf \-Radiation} (const string \&\-X\-Ray\-Tube\-Element\-Name, const \-R\-E\-A\-L alpha2\-Alpha2ratio=0.\-5)
+\begin{DoxyCompactList}\small\item\em $\backslash$ brief \-Constructor for \-X-\/\-Ray tube radiation \end{DoxyCompactList}\item 
+{\bf \-Radiation} (const {\bf \-Radiation} \&)\label{a00069_ab08e37b8dd00149612aa656f1641a76f}
+
+\begin{DoxyCompactList}\small\item\em \-Copy constructor. \end{DoxyCompactList}\item 
+virtual const string \& {\bf \-Get\-Class\-Name} () const 
+\begin{DoxyCompactList}\small\item\em \-Name for this class (\char`\"{}\-Refinable\-Obj\char`\"{}, \char`\"{}\-Crystal\char`\"{},...). \end{DoxyCompactList}\item 
+void {\bfseries operator=} (const {\bf \-Radiation} \&)\label{a00069_aaa4a0199b2d383fb69c0de13c62a024c}
 
 \item 
-{\bfseries RecUnitCell} (const {\bf RecUnitCell} \&old)\label{a00069_aa9c6ed37f40ded76feb05ef9abc13eb6}
+{\bf \-Radiation\-Type} {\bf \-Get\-Radiation\-Type} () const \label{a00069_a3c4e81e8db0ea43c42278948c56ba46f}
+
+\begin{DoxyCompactList}\small\item\em \-Get the radiation type (\-X-\/\-Rays, \-Neutron) \end{DoxyCompactList}\item 
+void {\bf \-Set\-Radiation\-Type} (const {\bf \-Radiation\-Type})\label{a00069_a8fd969b9f546fc48f5bfd7b38ff9c995}
+
+\begin{DoxyCompactList}\small\item\em \-Set the radiation type (\-X-\/\-Rays, \-Neutron) \end{DoxyCompactList}\item 
+void {\bf \-Set\-Wavelength\-Type} (const {\bf \-Wavelength\-Type} \&type)\label{a00069_adc4fac12bb11e01e515365e5d7a46ddc}
+
+\begin{DoxyCompactList}\small\item\em \-Set the \-Wavelength type (monochromatic, \-Alpha1+\-Alpha2, \-Time \-Of \-Flight...) \end{DoxyCompactList}\item 
+{\bf \-Wavelength\-Type} {\bf \-Get\-Wavelength\-Type} () const \label{a00069_ab1c21d1a6344287a8c4271c2b7a12c79}
+
+\begin{DoxyCompactList}\small\item\em \-Get the \-Wavelength type (monochromatic, \-Alpha1+\-Alpha2, \-Time \-Of \-Flight...) \end{DoxyCompactList}\item 
+const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \& {\bf \-Get\-Wavelength} () const 
+\begin{DoxyCompactList}\small\item\em \-Get the wavelength(s) in \-Angstroems. \end{DoxyCompactList}\item 
+void {\bf \-Set\-Wavelength} (const \-R\-E\-A\-L)\label{a00069_ac40cb0879be00b232a6c3e78c069823d}
+
+\begin{DoxyCompactList}\small\item\em \-Set the (monochromatic) wavelength of the beam. \end{DoxyCompactList}\item 
+void {\bf \-Set\-Wavelength} (const string \&\-X\-Ray\-Tube\-Element\-Name, const \-R\-E\-A\-L alpha2\-Alpha2ratio=0.\-5)
+\begin{DoxyCompactList}\small\item\em $\backslash$ brief \-Set \-X-\/\-Ray tube radiation. \end{DoxyCompactList}\item 
+\-R\-E\-A\-L {\bf \-Get\-X\-Ray\-Tube\-Delta\-Lambda} () const \label{a00069_aaacaaa8568c368b0f39d4ee8cea95576}
+
+\begin{DoxyCompactList}\small\item\em \-Get the wavelength difference for \-Alpha1 and \-Alpha2. \end{DoxyCompactList}\item 
+\-R\-E\-A\-L {\bf \-Get\-X\-Ray\-Tube\-Alpha2\-Alpha1\-Ratio} () const \label{a00069_aa2016f3b8df9727cc59d74f137f2c626}
+
+\begin{DoxyCompactList}\small\item\em \-Get the \-Kalpha2/\-Kalpha1 ratio. \end{DoxyCompactList}\item 
+const {\bf \-Refinable\-Obj\-Clock} \& {\bf \-Get\-Clock\-Wavelength} () const \label{a00069_a049b5bed7c75b14ad1e5e84ff945b7fa}
+
+\begin{DoxyCompactList}\small\item\em \-Last time the wavelength has been changed. \end{DoxyCompactList}\item 
+const {\bf \-Refinable\-Obj\-Clock} \& {\bf \-Get\-Clock\-Radiation} () const \label{a00069_ac3085d33817e372b906527d89d06fa8f}
+
+\begin{DoxyCompactList}\small\item\em \-Last time the nature (\-X-\/\-Rays/\-Neutron, number of wavelengths)radiation has been changed. \end{DoxyCompactList}\item 
+virtual void {\bf \-X\-M\-L\-Output} (ostream \&os, int indent=0) const 
+\begin{DoxyCompactList}\small\item\em \-Output to stream in well-\/formed \-X\-M\-L. \end{DoxyCompactList}\item 
+virtual void {\bf \-X\-M\-L\-Input} (istream \&is, const {\bf \-X\-M\-L\-Cryst\-Tag} \&tag)
+\begin{DoxyCompactList}\small\item\em \-Input \-From stream. \end{DoxyCompactList}\item 
+void {\bf \-Print} () const \label{a00069_a74fa173d33eb724be83a2ede6042dce3}
+
+\begin{DoxyCompactList}\small\item\em \-Print to screen/console the charcteristics of the radiation. \end{DoxyCompactList}\item 
+\-R\-E\-A\-L {\bfseries \-Get\-Linear\-Polar\-Rate} () const \label{a00069_a103b3216086ff11bfe3465e2d057fbda}
 
 \item 
-void {\bfseries operator=} (const {\bf RecUnitCell} \&rhs)\label{a00069_a317806844b8bb03f4d5a940465e76975}
-
-\item 
-float {\bf hkl2d} (const float h, const float k, const float l, REAL $\ast$derivpar=NULL, const unsigned int derivhkl=0) const 
-\begin{DoxyCompactList}\small\item\em Compute d$\ast$$^\wedge$2 for hkl reflection if deriv != -\/1, compute derivate versus the corresponding parameter. \item\end{DoxyCompactList}\item 
-void {\bf hkl2d\_\-delta} (const float h, const float k, const float l, const {\bf RecUnitCell} \&delta, float \&dmin, float \&dmax) const 
-\begin{DoxyCompactList}\small\item\em Compute d$\ast$$^\wedge$2 for one hkl reflection: this functions computes a d$\ast$$^\wedge$2 range (min,max) for a given range of unit cell parameter (given in the delta parameter) around the current parameters. \item\end{DoxyCompactList}\item 
-std::vector$<$ float $>$ {\bf DirectUnitCell} (const bool equiv=false) const 
-\begin{DoxyCompactList}\small\item\em Compute real space unit cell from reciprocal one. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Public Attributes}
-\begin{DoxyCompactItemize}
-\item 
-REAL {\bf par} [7]
-\begin{DoxyCompactList}\small\item\em The 6 parameters defining 1/d\_\-hkl$^\wedge$2 = d$\ast$\_\-hkl$^\wedge$2, for different crystal classes, from: d$\ast$\_\-hkl$^\wedge$2 = zero + a$\ast$$^\wedge$2 h$^\wedge$2 + b$\ast$$^\wedge$2 k$^\wedge$2 + c$\ast$$^\wedge$2 l$^\wedge$2 + 2 a$\ast$.b$\ast$ hk + 2 b$\ast$.c$\ast$ kl + 2 a$\ast$.c$\ast$ hl. \item\end{DoxyCompactList}\item 
-float {\bfseries zero}\label{a00069_accd778c87bc4c93b7d259b65b9c6d794}
-
-\item 
-{\bf CrystalSystem} {\bfseries mlattice}\label{a00069_ab751018126adbc0306ec2bc5f582547a}
-
-\item 
-CrystalCentering {\bfseries mCentering}\label{a00069_a203d74dc8d3b23a592230be7685f45b9}
+void {\bfseries \-Set\-Linear\-Polar\-Rate} (const \-R\-E\-A\-L f)\label{a00069_a9602288c888944773e93fa67f8542d95}
 
 \end{DoxyCompactItemize}
-
-
-\subsubsection{Detailed Description}
-Lightweight class describing the reciprocal unit cell, for the fast computation of d$\ast$\_\-hkl$^\wedge$2. 
-
-\subsubsection{Member Function Documentation}
-\index{ObjCryst::RecUnitCell@{ObjCryst::RecUnitCell}!DirectUnitCell@{DirectUnitCell}}
-\index{DirectUnitCell@{DirectUnitCell}!ObjCryst::RecUnitCell@{ObjCryst::RecUnitCell}}
-\paragraph[{DirectUnitCell}]{\setlength{\rightskip}{0pt plus 5cm}std::vector$<$float$>$ ObjCryst::RecUnitCell::DirectUnitCell (const bool {\em equiv} = {\ttfamily false}) const}\hfill\label{a00069_acf2fe1cbb89b8388a9d7c6fe4e3078a9}
-
-
-Compute real space unit cell from reciprocal one. 
-\begin{DoxyParams}{Parameters}
-\item[{\em equiv,:}]if true, return real unit cell {\itshape equivalent\/} to the one computed from the reciprocal one, so that alpha, beta and gamma are larger or equal to pi/2, and minimum. This is done by adding multiples of {\bfseries a} to {\bfseries b} and multiples of {\bfseries a} and {\bfseries b} to {\bfseries c}. \end{DoxyParams}
-\index{ObjCryst::RecUnitCell@{ObjCryst::RecUnitCell}!hkl2d@{hkl2d}}
-\index{hkl2d@{hkl2d}!ObjCryst::RecUnitCell@{ObjCryst::RecUnitCell}}
-\paragraph[{hkl2d}]{\setlength{\rightskip}{0pt plus 5cm}float ObjCryst::RecUnitCell::hkl2d (const float {\em h}, \/  const float {\em k}, \/  const float {\em l}, \/  REAL $\ast$ {\em derivpar} = {\ttfamily NULL}, \/  const unsigned int {\em derivhkl} = {\ttfamily 0}) const}\hfill\label{a00069_ac71ccf881e231fa1853ba628b48ce915}
-
-
-Compute d$\ast$$^\wedge$2 for hkl reflection if deriv != -\/1, compute derivate versus the corresponding parameter. If derivhkl=1,2,3, compute derivative versus h,k or l. \index{ObjCryst::RecUnitCell@{ObjCryst::RecUnitCell}!hkl2d\_\-delta@{hkl2d\_\-delta}}
-\index{hkl2d\_\-delta@{hkl2d\_\-delta}!ObjCryst::RecUnitCell@{ObjCryst::RecUnitCell}}
-\paragraph[{hkl2d\_\-delta}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::RecUnitCell::hkl2d\_\-delta (const float {\em h}, \/  const float {\em k}, \/  const float {\em l}, \/  const {\bf RecUnitCell} \& {\em delta}, \/  float \& {\em dmin}, \/  float \& {\em dmax}) const}\hfill\label{a00069_a29ed2d05b37b3a9344e8d95d3344651e}
-
-
-Compute d$\ast$$^\wedge$2 for one hkl reflection: this functions computes a d$\ast$$^\wedge$2 range (min,max) for a given range of unit cell parameter (given in the delta parameter) around the current parameters. Used for DicVol algorithm 
-
-\subsubsection{Member Data Documentation}
-\index{ObjCryst::RecUnitCell@{ObjCryst::RecUnitCell}!par@{par}}
-\index{par@{par}!ObjCryst::RecUnitCell@{ObjCryst::RecUnitCell}}
-\paragraph[{par}]{\setlength{\rightskip}{0pt plus 5cm}REAL {\bf ObjCryst::RecUnitCell::par}[7]}\hfill\label{a00069_a624fa31d8c012440df7a3d7637dae182}
-
-
-The 6 parameters defining 1/d\_\-hkl$^\wedge$2 = d$\ast$\_\-hkl$^\wedge$2, for different crystal classes, from: d$\ast$\_\-hkl$^\wedge$2 = zero + a$\ast$$^\wedge$2 h$^\wedge$2 + b$\ast$$^\wedge$2 k$^\wedge$2 + c$\ast$$^\wedge$2 l$^\wedge$2 + 2 a$\ast$.b$\ast$ hk + 2 b$\ast$.c$\ast$ kl + 2 a$\ast$.c$\ast$ hl. for triclinic: d$\ast$\_\-hkl$^\wedge$2 = par[0] + par[1] h$^\wedge$2 + par[1] k$^\wedge$2 + par[2]$^\wedge$2 l$^\wedge$2 + par[3] hk + par[4] kl + par[5] hl for monoclinic: d$\ast$\_\-hkl$^\wedge$2 = zero + par[0]$^\wedge$2 h$^\wedge$2 + par[1]$^\wedge$2 k$^\wedge$2 + par[2]$^\wedge$2 l$^\wedge$2 + par[0]$\ast$par[2]$\ast$par[3] hl for orthorombic: d$\ast$\_\-hkl$^\wedge$2 = zero + par[0]$^\wedge$2 h$^\wedge$2 + par[1]$^\wedge$2 k$^\wedge$2 + par[2]$^\wedge$2 l$^\wedge$2 for hexagonal: d$\ast$\_\-hkl$^\wedge$2 = zero + par[0]$^\wedge$2 h$^\wedge$2 + par[0]$^\wedge$2 k$^\wedge$2 + par[2]$^\wedge$2 l$^\wedge$2 + sqrt(3)/2$\ast$par[0]$^\wedge$2 hk for rhomboedral: d$\ast$\_\-hkl$^\wedge$2 = zero + par[0]$^\wedge$2 h$^\wedge$2 + par[1]$^\wedge$2 k$^\wedge$2 + par[2]$^\wedge$2 l$^\wedge$2 + par[3] (hk + kl + hl) for quadratic: d$\ast$\_\-hkl$^\wedge$2 = zero + par[0]$^\wedge$2 h$^\wedge$2 + par[0]$^\wedge$2 k$^\wedge$2 + par[1]$^\wedge$2 l$^\wedge$2 for cubic d$\ast$\_\-hkl$^\wedge$2 = zero + par[0]$^\wedge$2 (h$^\wedge$2 + k$^\wedge$2 + l$^\wedge$2) 
-
-The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\subsubsection*{\-Private \-Member \-Functions}
+\begin{DoxyCompactItemize}
 \item 
-Indexing.h\end{DoxyCompactItemize}
+void {\bfseries \-Init\-Options} ()\label{a00069_a4663c4bfeb1bb617f77896179fb0a2d2}
+
+\end{DoxyCompactItemize}
+\subsubsection*{\-Private \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-Ref\-Obj\-Opt} {\bf m\-Radiation\-Type}\label{a00069_a3b736f32b507d8e0f4ebd8b46e50659b}
+
+\begin{DoxyCompactList}\small\item\em \-Neutron ? \-X-\/\-Ray ? (\-Electron\-: unimplemented) \end{DoxyCompactList}\item 
+{\bf \-Ref\-Obj\-Opt} {\bf m\-Wavelength\-Type}\label{a00069_a9ef30865d93e28dbba31fee53c4c39aa}
+
+\begin{DoxyCompactList}\small\item\em monochromatic ? \-Alpha1 \& \-Alpha2 ? \-Multi-\/\-Wavelength ? \end{DoxyCompactList}\item 
+\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf m\-Wavelength}\label{a00069_a1c786f2e4a6035954fc76cb7cb7ad736}
+
+\begin{DoxyCompactList}\small\item\em \-Wavelength of the \-Experiment, in \-Angstroems. \end{DoxyCompactList}\item 
+string {\bf m\-X\-Ray\-Tube\-Name}
+\begin{DoxyCompactList}\small\item\em \-Name of the \-X-\/\-Ray tube used, if relevant. \end{DoxyCompactList}\item 
+\-R\-E\-A\-L {\bf m\-X\-Ray\-Tube\-Delta\-Lambda}\label{a00069_a66546a093f76ef3b9822be44e98ca17f}
+
+\begin{DoxyCompactList}\small\item\em \-Absolute difference between alpha1 and alpha2, in angstroems. \end{DoxyCompactList}\item 
+\-R\-E\-A\-L {\bf m\-X\-Ray\-Tube\-Alpha2\-Alpha1\-Ratio}\label{a00069_a72fd03ef0f28986f3ea66fd96d040688}
+
+\begin{DoxyCompactList}\small\item\em \-Ratio alpha2/alpha1 (should be 0.\-5) \end{DoxyCompactList}\item 
+{\bf \-Refinable\-Obj\-Clock} {\bfseries m\-Clock\-Wavelength}\label{a00069_af492e24a913e63781a53946feecb6ffc}
+
+\item 
+{\bf \-Refinable\-Obj\-Clock} {\bfseries m\-Clock\-Radiation}\label{a00069_a255532a6369c7265df67aabba103153f}
+
+\item 
+\-R\-E\-A\-L {\bf m\-Linear\-Polar\-Rate}\label{a00069_a0e8a10c625ae1bd2733e830c2ca7d606}
+
+\begin{DoxyCompactList}\small\item\em \-Linear \-Polarization \-Rate (default\-:0, \-X-\/\-Ray tube unmonochromatized) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{\-Detailed \-Description}
+\-Class to define the radiation (type, monochromaticity, wavelength(s)) of an experiment. 
+
+\-This can be developped for more complex experiments, hence the {\itshape vector\/} of wavelengths (so far it is not possible to use several wavelengths, though).
+
+\-X-\/\-Rays and \-Neutrons are available. \-Electrons are not available yet in \doxyref{\-Scattering\-Data}{p.}{a00089} classes.
+
+\begin{DoxyRefDesc}{\-Todo}
+\item[{\bf \-Todo}]also add here information about the polarization of the beam. \end{DoxyRefDesc}
+
+
+\subsubsection{\-Constructor \& \-Destructor \-Documentation}
+\index{\-Obj\-Cryst\-::\-Radiation@{\-Obj\-Cryst\-::\-Radiation}!\-Radiation@{\-Radiation}}
+\index{\-Radiation@{\-Radiation}!ObjCryst::Radiation@{\-Obj\-Cryst\-::\-Radiation}}
+\paragraph[{\-Radiation}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Obj\-Cryst\-::\-Radiation\-::\-Radiation} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Radiation\-Type}}]{rad, }
+\item[{const \-R\-E\-A\-L}]{wavelength}
+\end{DoxyParamCaption}
+)}\label{a00069_ace67fea27bc640ac4820fc1ba73114d5}
+
+
+$\backslash$ brief \-Constructor 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em rad} & the \-Radiation\-Type used (\-X-\/\-Rays, neutrons) \\
+\hline
+{\em wavelength} & the wavelength (in \-Angstroems) of the monochromatic radiation. \\
+\hline
+\end{DoxyParams}
+\index{\-Obj\-Cryst\-::\-Radiation@{\-Obj\-Cryst\-::\-Radiation}!\-Radiation@{\-Radiation}}
+\index{\-Radiation@{\-Radiation}!ObjCryst::Radiation@{\-Obj\-Cryst\-::\-Radiation}}
+\paragraph[{\-Radiation}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Obj\-Cryst\-::\-Radiation\-::\-Radiation} (
+\begin{DoxyParamCaption}
+\item[{const string \&}]{\-X\-Ray\-Tube\-Element\-Name, }
+\item[{const \-R\-E\-A\-L}]{alpha2\-Alpha2ratio = {\ttfamily 0.5}}
+\end{DoxyParamCaption}
+)}\label{a00069_a0302f8a0f706db01d0ada609c2e427d4}
+
+
+$\backslash$ brief \-Constructor for \-X-\/\-Ray tube radiation 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em \-X\-Ray\-Tube\-Element\-Name} & \-: name of the anticathode element name. \-Known ones are \-Cr, \-Fe, \-Cu, \-Mo, \-Ag. \\
+\hline
+{\em alpha2\-Alpha2ratio,\-:} & \-Kalpha2/\-Kalpha1 ratio (0.\-5 by default)\\
+\hline
+\end{DoxyParams}
+the average wavelength is calculated using the alpha2/alpha1 weight. \-All structure factors computation are made using the average wavelength, and for powder diffraction, profiles are output at the alpha1 and alpha2 ratio for the calculated pattern.
+
+\-N\-O\-T\-E \-: if the name of the wavelength is generic (eg\char`\"{}\-Cu\char`\"{}), then the program considers that there are both \-Alpha1 and \-Alpha2, and thus automatically changes the \-Wavelength\-Type to \-W\-A\-V\-E\-L\-E\-N\-G\-T\-H\-\_\-\-A\-L\-P\-H\-A12. \-If instead either alpha1 or alpha2 (eg \char`\"{}\-Cu\-A1\char`\"{}) is asked for, the \-Wavelength\-Type is set to \-W\-A\-V\-E\-L\-E\-N\-G\-T\-H\-\_\-\-M\-O\-N\-O\-C\-H\-R\-O\-M\-A\-T\-I\-C. \-In both cases, the radiation type is set to \-X-\/\-Ray. 
+
+\subsubsection{\-Member \-Function \-Documentation}
+\index{\-Obj\-Cryst\-::\-Radiation@{\-Obj\-Cryst\-::\-Radiation}!\-Get\-Class\-Name@{\-Get\-Class\-Name}}
+\index{\-Get\-Class\-Name@{\-Get\-Class\-Name}!ObjCryst::Radiation@{\-Obj\-Cryst\-::\-Radiation}}
+\paragraph[{\-Get\-Class\-Name}]{\setlength{\rightskip}{0pt plus 5cm}virtual const string\& {\bf \-Obj\-Cryst\-::\-Radiation\-::\-Get\-Class\-Name} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00069_a56558c41ec3bd350a2904f5e469fb68a}
+
+
+\-Name for this class (\char`\"{}\-Refinable\-Obj\char`\"{}, \char`\"{}\-Crystal\char`\"{},...). 
+
+\-This is only useful to distinguish different classes when picking up objects from the \doxyref{\-Refinable\-Obj}{p.}{a00071} \-Global \-Registry 
+
+\-Reimplemented from {\bf \-Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00071_a62968d90a7a3080738b363934616c019}.
+
+\index{\-Obj\-Cryst\-::\-Radiation@{\-Obj\-Cryst\-::\-Radiation}!\-Get\-Wavelength@{\-Get\-Wavelength}}
+\index{\-Get\-Wavelength@{\-Get\-Wavelength}!ObjCryst::Radiation@{\-Obj\-Cryst\-::\-Radiation}}
+\paragraph[{\-Get\-Wavelength}]{\setlength{\rightskip}{0pt plus 5cm}const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L\& {\bf \-Obj\-Cryst\-::\-Radiation\-::\-Get\-Wavelength} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{a00069_a8dc3440d994fe1af5713dd254c56302c}
+
+
+\-Get the wavelength(s) in \-Angstroems. 
+
+\-Currently only monochromatic is used, so the vector should only return only one wavelength. \index{\-Obj\-Cryst\-::\-Radiation@{\-Obj\-Cryst\-::\-Radiation}!\-Set\-Wavelength@{\-Set\-Wavelength}}
+\index{\-Set\-Wavelength@{\-Set\-Wavelength}!ObjCryst::Radiation@{\-Obj\-Cryst\-::\-Radiation}}
+\paragraph[{\-Set\-Wavelength}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Obj\-Cryst\-::\-Radiation\-::\-Set\-Wavelength} (
+\begin{DoxyParamCaption}
+\item[{const string \&}]{\-X\-Ray\-Tube\-Element\-Name, }
+\item[{const \-R\-E\-A\-L}]{alpha2\-Alpha2ratio = {\ttfamily 0.5}}
+\end{DoxyParamCaption}
+)}\label{a00069_a61393e596990f9fdac7dfc6d8acd91ac}
+
+
+$\backslash$ brief \-Set \-X-\/\-Ray tube radiation. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em \-X\-Ray\-Tube\-Element\-Name} & \-: name of the anticathode element name. \-Known ones are \-Cr, \-Fe, \-Cu, \-Mo, \-Ag. \\
+\hline
+{\em alpha2\-Alpha2ratio,\-:} & \-Kalpha2/\-Kalpha1 ratio (0.\-5 by default)\\
+\hline
+\end{DoxyParams}
+the average wavelength is calculated using the alpha2/alpha1 weight. \-All structure factors computation are made using the average wavelength, and for powder diffraction, profiles are output at the alpha1 and alpha2 ratio for the calculated pattern.
+
+\-N\-O\-T\-E \-: if the name of the wavelength is generic (eg\char`\"{}\-Cu\char`\"{}), then the program considers that there are both \-Alpha1 and \-Alpha2, and thus automatically changes the \-Wavelength\-Type to \-W\-A\-V\-E\-L\-E\-N\-G\-T\-H\-\_\-\-A\-L\-P\-H\-A12. \-If instead either alpha1 or alpha2 (eg \char`\"{}\-Cu\-A1\char`\"{}) is asked for, the \-Wavelength\-Type is set to \-W\-A\-V\-E\-L\-E\-N\-G\-T\-H\-\_\-\-M\-O\-N\-O\-C\-H\-R\-O\-M\-A\-T\-I\-C. \-In both cases, the radiation type is set to \-X-\/\-Ray. \index{\-Obj\-Cryst\-::\-Radiation@{\-Obj\-Cryst\-::\-Radiation}!\-X\-M\-L\-Input@{\-X\-M\-L\-Input}}
+\index{\-X\-M\-L\-Input@{\-X\-M\-L\-Input}!ObjCryst::Radiation@{\-Obj\-Cryst\-::\-Radiation}}
+\paragraph[{\-X\-M\-L\-Input}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-Radiation\-::\-X\-M\-L\-Input} (
+\begin{DoxyParamCaption}
+\item[{istream \&}]{is, }
+\item[{const {\bf \-X\-M\-L\-Cryst\-Tag} \&}]{tag}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00069_a67d99d4fbfd583a3d257c9fce177445d}
+
+
+\-Input \-From stream. 
+
+\begin{DoxyRefDesc}{\-Todo}
+\item[{\bf \-Todo}]\-Add an bool \-X\-M\-L\-Input\-Tag(is,tag) function to recognize all the tags from the stream. \-So that each inherited class can use the \-X\-M\-L\-Input\-Tag function from its parent (ie take advantage of inheritance). \-The children class would first try to interpret the tag, then if unsuccessful would pass it to its parent (thus allowing overloading), etc... \end{DoxyRefDesc}
+
+
+\-Reimplemented from {\bf \-Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00071_ac13a4045c3f187879443c8615c38d623}.
+
+\index{\-Obj\-Cryst\-::\-Radiation@{\-Obj\-Cryst\-::\-Radiation}!\-X\-M\-L\-Output@{\-X\-M\-L\-Output}}
+\index{\-X\-M\-L\-Output@{\-X\-M\-L\-Output}!ObjCryst::Radiation@{\-Obj\-Cryst\-::\-Radiation}}
+\paragraph[{\-X\-M\-L\-Output}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-Radiation\-::\-X\-M\-L\-Output} (
+\begin{DoxyParamCaption}
+\item[{ostream \&}]{os, }
+\item[{int}]{indent = {\ttfamily 0}}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00069_a6d458f97232013cc128123e94b6e9937}
+
+
+\-Output to stream in well-\/formed \-X\-M\-L. 
+
+\begin{DoxyRefDesc}{\-Todo}
+\item[{\bf \-Todo}]\-Use inheritance.. as for \-X\-M\-L\-Input\-Tag()... \end{DoxyRefDesc}
+
+
+\-Reimplemented from {\bf \-Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00071_a7b9b6ed0f8dcf753d398c35e073de973}.
+
+
+
+\subsubsection{\-Member \-Data \-Documentation}
+\index{\-Obj\-Cryst\-::\-Radiation@{\-Obj\-Cryst\-::\-Radiation}!m\-X\-Ray\-Tube\-Name@{m\-X\-Ray\-Tube\-Name}}
+\index{m\-X\-Ray\-Tube\-Name@{m\-X\-Ray\-Tube\-Name}!ObjCryst::Radiation@{\-Obj\-Cryst\-::\-Radiation}}
+\paragraph[{m\-X\-Ray\-Tube\-Name}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf \-Obj\-Cryst\-::\-Radiation\-::m\-X\-Ray\-Tube\-Name}\hspace{0.3cm}{\ttfamily  [private]}}\label{a00069_a3af206eb2068d56ec54d57262c619346}
+
+
+\-Name of the \-X-\/\-Ray tube used, if relevant. 
+
+ie \char`\"{}\-Cu\char`\"{}, \char`\"{}\-Fe\char`\"{},etc... \char`\"{}\-Cu\-A1\char`\"{} for \-Cu-\/alpha1, etc... 
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\-Scattering\-Data.\-h\end{DoxyCompactItemize}

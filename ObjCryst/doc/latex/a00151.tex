@@ -1,31 +1,85 @@
-\subsection{ObjCryst::XYZ Struct Reference}
-\label{a00151}\index{ObjCryst::XYZ@{ObjCryst::XYZ}}
+\subsection{\-Obj\-Cryst\-:\-:\-X\-M\-L\-Cryst\-Tag \-Class \-Reference}
+\label{a00151}\index{\-Obj\-Cryst\-::\-X\-M\-L\-Cryst\-Tag@{\-Obj\-Cryst\-::\-X\-M\-L\-Cryst\-Tag}}
 
 
-Structure holding 3 coordinates, or deriviatives with respect to each of these coordinates.  
-\subsubsection*{Public Member Functions}
+class to input or output a well-\/formatted xml beginning or ending tag.  
+
+
+\subsubsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries XYZ} (REAL x=0, REAL y=0, REAL z=0)\label{a00151_ae4cfcbc2f1f06734305b99aea62a9551}
+{\bfseries \-X\-M\-L\-Cryst\-Tag} (istream \&is)\label{a00151_a89d1228d4574dd21f2c911ec22996ddc}
+
+\item 
+{\bfseries \-X\-M\-L\-Cryst\-Tag} (const string \&tag\-Name, const bool is\-End\-Tag=false, const bool is\-Empty\-Tag=false)\label{a00151_a2ffd153fc95c129002a3dd9827769a13}
+
+\item 
+const string \& {\bfseries \-Get\-Name} () const \label{a00151_a8ab01d1553671576e73c404a146b11df}
+
+\item 
+const string \& {\bfseries \-Get\-Class\-Name} () const \label{a00151_a55f072beeef284eeb455ea580b9a6f90}
+
+\item 
+unsigned int {\bfseries \-Get\-Nb\-Attribute} () const \label{a00151_af48df589ce812781203427b67c7e3cf0}
+
+\item 
+void {\bfseries \-Add\-Attribute} (const string \&att\-Name, const string \&att\-Value)\label{a00151_a20fc20c3a1c1378811a6f2afb5c9acab}
+
+\item 
+void {\bfseries \-Get\-Attribute} (const int att\-Num, string \&att\-Name, string \&att\-Value)\label{a00151_a73ced51009c3f8754ee7b18d28b62340}
+
+\item 
+const string \& {\bfseries \-Get\-Attribute\-Name} (const int att\-Num) const \label{a00151_ad1bae4de372b49359a9b177852ca8ddd}
+
+\item 
+const string \& {\bfseries \-Get\-Attribute\-Value} (const int att\-Num) const \label{a00151_a72c0c1dcad6a41234fc8f43947c96d4c}
+
+\item 
+void {\bfseries \-Set\-Is\-End\-Tag} (const bool is\-End\-Tag)\label{a00151_a8c7fd75290484b8525e956b31ef48261}
+
+\item 
+bool {\bfseries \-Is\-End\-Tag} () const \label{a00151_aa46dc96ed7cfce3a6694c3cfa9f3d693}
+
+\item 
+void {\bfseries \-Set\-Is\-Empty\-Tag} (const bool is\-Empty\-Tag)\label{a00151_a638dff0e517133f28702f774374f32c8}
+
+\item 
+bool {\bfseries \-Is\-Empty\-Tag} () const \label{a00151_a2972d76f345b551017443edd93ac3d1d}
+
+\item 
+void {\bfseries \-Print} () const \label{a00151_a7f7595ce638038a9d55ef35c45c67ab2}
 
 \end{DoxyCompactItemize}
-\subsubsection*{Public Attributes}
+\subsubsection*{\-Private \-Attributes}
 \begin{DoxyCompactItemize}
 \item 
-REAL {\bfseries x}\label{a00151_a98bdadb23d017e4b57694e2543014933}
+string {\bfseries m\-Name}\label{a00151_a9500597e30b8384b05500ae6a8c452f1}
 
 \item 
-REAL {\bfseries y}\label{a00151_a3e6889d0cf6d4b6fe0477467faf46e08}
+bool {\bfseries m\-Is\-End\-Tag}\label{a00151_a157c453bd10c2f8964c0a9580a8469a5}
 
 \item 
-REAL {\bfseries z}\label{a00151_a8625df962c37093db37747e63c371e3f}
+bool {\bfseries m\-Is\-Empty\-Tag}\label{a00151_ac8f2db515acf4d883d43a26ec5677981}
+
+\item 
+vector$<$ pair$<$ std\-::string, \*
+std\-::string $>$ $>$ {\bfseries mv\-Attribute}\label{a00151_aad577e02e7d5dec5324d0929dddecdcd}
 
 \end{DoxyCompactItemize}
-
-
-\subsubsection{Detailed Description}
-Structure holding 3 coordinates, or deriviatives with respect to each of these coordinates. 
-
-The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\subsubsection*{\-Friends}
+\begin{DoxyCompactItemize}
 \item 
-Molecule.h\end{DoxyCompactItemize}
+ostream \& {\bf operator$<$$<$} (ostream \&, const {\bf \-X\-M\-L\-Cryst\-Tag} \&)\label{a00151_a45a81f89a25fe1192f50330d453e195c}
+
+\begin{DoxyCompactList}\small\item\em \-Output an \doxyref{\-X\-M\-L\-Cryst\-Tag}{p.}{a00151} to a stream. \end{DoxyCompactList}\item 
+istream \& {\bf operator$>$$>$} (istream \&, {\bf \-X\-M\-L\-Cryst\-Tag} \&)\label{a00151_ac262675809dec8086fe3793a695a541f}
+
+\begin{DoxyCompactList}\small\item\em \-Input an \doxyref{\-X\-M\-L\-Cryst\-Tag}{p.}{a00151} from a stream. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{\-Detailed \-Description}
+class to input or output a well-\/formatted xml beginning or ending tag. 
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\-Refinable\-Obj/\-I\-O.\-h\end{DoxyCompactItemize}

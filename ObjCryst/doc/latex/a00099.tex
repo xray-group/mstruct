@@ -1,28 +1,80 @@
-\subsection{ObjCryst::Molecule::StretchModeGroup Struct Reference}
-\label{a00099}\index{ObjCryst::Molecule::StretchModeGroup@{ObjCryst::Molecule::StretchModeGroup}}
+\subsection{\-Obj\-Cryst\-:\-:\-Stretch\-Mode\-Bond\-Length \-Struct \-Reference}
+\label{a00099}\index{\-Obj\-Cryst\-::\-Stretch\-Mode\-Bond\-Length@{\-Obj\-Cryst\-::\-Stretch\-Mode\-Bond\-Length}}
 
 
-Group of concurrent StretchModes (affecting common restraints) A given stretch mode can only belong to one group.  
-\subsubsection*{Public Attributes}
+\-Group of atoms for random moves changing a bond length.  
+
+
+\-Inheritance diagram for \-Obj\-Cryst\-:\-:\-Stretch\-Mode\-Bond\-Length\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{a00099}
+\end{center}
+\end{figure}
+\subsubsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-std::set$<$ {\bf StretchMode} $\ast$ $>$ {\bfseries mvpStretchMode}\label{a00099_a63c54cd06ab4a7b838cc686214d41750}
+{\bf \-Stretch\-Mode\-Bond\-Length} ({\bf \-Mol\-Atom} \&at0, {\bf \-Mol\-Atom} \&at1, const {\bf \-Mol\-Bond} $\ast$p\-Bond)\label{a00099_aa04e0fdc910b1fcbb25de4de51d32455}
 
+\begin{DoxyCompactList}\small\item\em \-Constructor \-If p\-Bond!=0, the bond length restraint is respected. \end{DoxyCompactList}\item 
+virtual void {\bf \-Calc\-Deriv} (const bool derivllk=true) const 
+\begin{DoxyCompactList}\small\item\em \-Calculate the derivative of the \doxyref{\-Molecule}{p.}{a00047}'s \-Log(likelihood) and atomic positions versus a change of the bond length. \end{DoxyCompactList}\item 
+virtual void {\bf \-Print} (ostream \&os, bool full=true) const \label{a00099_a37f862548c4540b2a34d435a18518564}
+
+\begin{DoxyCompactList}\small\item\em \-Print one-\/line list of atoms moved. \end{DoxyCompactList}\item 
+virtual void {\bf \-Stretch} (const \-R\-E\-A\-L change)\label{a00099_a65db454973b827a24f5ef35e654650ea}
+
+\begin{DoxyCompactList}\small\item\em \-Move the atoms according to this mode. \end{DoxyCompactList}\item 
+virtual void {\bf \-Random\-Stretch} (const \-R\-E\-A\-L amplitude)\label{a00099_a41e0165a10a248a1af200e217739e585}
+
+\begin{DoxyCompactList}\small\item\em \-Move the atoms according to this mode, randomly. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
 \item 
-std::set$<$ const {\bf MolBond} $\ast$ $>$ {\bfseries mvpBrokenBond}\label{a00099_a3f6e58dc0887b43c2187080b27e2836f}
+{\bf \-Mol\-Atom} $\ast$ {\bf mp\-Atom0}\label{a00099_a3ddf1478c2b932ad976d33eda56dd35a}
 
+\begin{DoxyCompactList}\small\item\em \-The first atom (fixed). \end{DoxyCompactList}\item 
+{\bf \-Mol\-Atom} $\ast$ {\bf mp\-Atom1}\label{a00099_aef858d1c7ca2ee9c09e88f8464337b31}
+
+\begin{DoxyCompactList}\small\item\em \-The second atom (first atom moved) \end{DoxyCompactList}\item 
+const {\bf \-Mol\-Bond} $\ast$ {\bf mp\-Bond}\label{a00099_a6fc92ed5334db0589d860f32254cac93}
+
+\begin{DoxyCompactList}\small\item\em \-The (optional) bond length which this stretch mode should respect. \end{DoxyCompactList}\item 
+set$<$ {\bf \-Mol\-Atom} $\ast$ $>$ {\bf mv\-Translated\-Atom\-List}\label{a00099_ac18eef8c47f6ac752c00f1f93216a6ee}
+
+\begin{DoxyCompactList}\small\item\em \-The set of atoms that are to be translated, including at1. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{\-Detailed \-Description}
+\-Group of atoms for random moves changing a bond length. 
+
+\-This should be merged (or have an inheritance relation) with \doxyref{\-Mol\-Bond}{p.}{a00044}. 
+
+\subsubsection{\-Member \-Function \-Documentation}
+\index{\-Obj\-Cryst\-::\-Stretch\-Mode\-Bond\-Length@{\-Obj\-Cryst\-::\-Stretch\-Mode\-Bond\-Length}!\-Calc\-Deriv@{\-Calc\-Deriv}}
+\index{\-Calc\-Deriv@{\-Calc\-Deriv}!ObjCryst::StretchModeBondLength@{\-Obj\-Cryst\-::\-Stretch\-Mode\-Bond\-Length}}
+\paragraph[{\-Calc\-Deriv}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-Stretch\-Mode\-Bond\-Length\-::\-Calc\-Deriv} (
+\begin{DoxyParamCaption}
+\item[{const bool}]{derivllk = {\ttfamily true}}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00099_a72bab02ebf84cbf65cf2703e74c1e02e}
+
+
+\-Calculate the derivative of the \doxyref{\-Molecule}{p.}{a00047}'s \-Log(likelihood) and atomic positions versus a change of the bond length. 
+
+\-The result is stored in m\-L\-L\-K\-Deriv and m\-L\-L\-K\-Deriv\-X\-Y\-Z, as well as in the various lists of restraints broken by this mode.
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em derivllk,\-:} & if false, the derivative of the overall llk will not be computed, only the derivative of the atomic positions. \\
+\hline
+\end{DoxyParams}
+
+
+\-Implements {\bf \-Obj\-Cryst\-::\-Stretch\-Mode} \doxyref{}{p.}{a00097_a5b5ab5f9819c047a49719a330722d419}.
+
+
+
+\-The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-std::set$<$ const {\bf MolBondAngle} $\ast$ $>$ {\bfseries mvpBrokenBondAngle}\label{a00099_a2b325fc86d71b14c62efc683e05b0fe0}
-
-\item 
-std::set$<$ const {\bf MolDihedralAngle} $\ast$ $>$ {\bfseries mvpBrokenDihedralAngle}\label{a00099_aaaee134991cbfe70408dc4b310981c63}
-
-\end{DoxyCompactItemize}
-
-
-\subsubsection{Detailed Description}
-Group of concurrent StretchModes (affecting common restraints) A given stretch mode can only belong to one group. 
-
-The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
-\item 
-Molecule.h\end{DoxyCompactItemize}
+\-Molecule.\-h\end{DoxyCompactItemize}

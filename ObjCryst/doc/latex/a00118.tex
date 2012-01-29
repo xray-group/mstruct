@@ -1,67 +1,147 @@
-\subsection{ObjCryst::WXField Class Reference}
-\label{a00118}\index{ObjCryst::WXField@{ObjCryst::WXField}}
+\subsection{\-Obj\-Cryst\-:\-:\-W\-X\-Diffraction\-Single\-Crystal \-Class \-Reference}
+\label{a00118}\index{\-Obj\-Cryst\-::\-W\-X\-Diffraction\-Single\-Crystal@{\-Obj\-Cryst\-::\-W\-X\-Diffraction\-Single\-Crystal}}
 
 
-This is the abstract base class for all fields, wether they contain a floating-\/point parameter, or a string,.  
-Inheritance diagram for ObjCryst::WXField::\begin{figure}[H]
+\-W\-X \-Class for \doxyref{\-Diffraction\-Data\-Single\-Crystal}{p.}{a00026} objects.  
+
+
+\-Inheritance diagram for \-Obj\-Cryst\-:\-:\-W\-X\-Diffraction\-Single\-Crystal\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=2.10923cm]{a00118}
+\includegraphics[height=4.000000cm]{a00118}
 \end{center}
 \end{figure}
-\subsubsection*{Public Member Functions}
+\subsubsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bf WXField} (wxWindow $\ast$parent, const string \&label, const int field\_\-id)\label{a00118_a750b0a756fd49172806fd5af020a1e07}
+{\bfseries \-W\-X\-Diffraction\-Single\-Crystal} (wx\-Window $\ast$parent, {\bf \-Diffraction\-Data\-Single\-Crystal} $\ast$)\label{a00118_afa08ecf9a4981696d954ca7f45180437}
 
-\begin{DoxyCompactList}\small\item\em Constructor, specifying the label of the field. \item\end{DoxyCompactList}\item 
-void {\bf SetLabel} (const string \&)\label{a00118_a0092c7a134e627a4c9b975c339f6d54e}
+\item 
+virtual void {\bf \-Cryst\-Update} (const bool update\-U\-I=false, const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em \-Get new values to be displayed from the underlying object, and raise flag if an \-U\-I update is necessary. \end{DoxyCompactList}\item 
+virtual void {\bf \-Update\-U\-I} (const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em \-Update the \-User \-Interface, if necessary. \end{DoxyCompactList}\item 
+void {\bf \-Notify\-Delete\-Graph} ()\label{a00118_a52503c26f8efb76d0d00568a5119f8d1}
 
-\begin{DoxyCompactList}\small\item\em Change the field's label. \item\end{DoxyCompactList}\item 
-virtual void {\bf Revert} ()=0
-\begin{DoxyCompactList}\small\item\em After a user entry, this allows to go back to the last value, if for some reason the entry was rejected (because the object is currently busy, . \item\end{DoxyCompactList}\item 
-virtual bool {\bf SetForegroundColour} (const wxColour \&colour)
-\begin{DoxyCompactList}\small\item\em Change the colour of the field's title. \item\end{DoxyCompactList}\item 
-virtual void {\bf ValidateUserInput} ()=0\label{a00118_aa0a7701e04c91832e8fda19b5b2c147a}
-
-\begin{DoxyCompactList}\small\item\em This function shall be called when a new value has been entered. \item\end{DoxyCompactList}\item 
-virtual void {\bf SetSize} (int width, int height)\label{a00118_a9a77acbfeaa049019e788521bf8e0b50}
-
-\begin{DoxyCompactList}\small\item\em Change the size of the field (excluding the title). \item\end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Protected Attributes}
+\begin{DoxyCompactList}\small\item\em \-For the mp\-Graph to tell its owner it was deleted. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{\-Private \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-wxBoxSizer $\ast$ {\bf mpSizer}\label{a00118_a7853a2d4f8b99e97c9959c01e8cce686}
+void {\bfseries \-On\-Menu\-Simulate} (wx\-Command\-Event \&\-W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00118_abb0cf6ec0ccc65d3b180fd0257cbc2ce}
 
-\begin{DoxyCompactList}\small\item\em The horizontal sizer in which the title, button, fields, are put. \item\end{DoxyCompactList}\item 
-wxStaticText $\ast$ {\bf mpLabel}\label{a00118_a0823abc300be21229f94eb44fc8acfc3}
-
-\begin{DoxyCompactList}\small\item\em The label. \item\end{DoxyCompactList}\item 
-const int {\bf mId}\label{a00118_aa34f4178c0b17434cbdf757d7997afa9}
-
-\begin{DoxyCompactList}\small\item\em The Id of this field. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
-
-
-\subsubsection{Detailed Description}
-This is the abstract base class for all fields, wether they contain a floating-\/point parameter, or a string,. .. All \doxyref{WXField}{p.}{a00118} have a title and an entry field.
-
-Note that \doxyref{WXField::CrystUpdate()}{p.}{a00115_a7ac00ae2ae28f1a6fa26e6fa571186b6} and \doxyref{WXField::UpdateUI()}{p.}{a00115_a3818940b7031ff7e45cf2178c4a99c90} should be done from the parent object. Notably using \doxyref{WXField::CrystUpdate}{p.}{a00115_a7ac00ae2ae28f1a6fa26e6fa571186b6}(updateui=true) will not trigger an update of the UI. 
-
-\subsubsection{Member Function Documentation}
-\index{ObjCryst::WXField@{ObjCryst::WXField}!Revert@{Revert}}
-\index{Revert@{Revert}!ObjCryst::WXField@{ObjCryst::WXField}}
-\paragraph[{Revert}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::WXField::Revert ()\hspace{0.3cm}{\ttfamily  [pure virtual]}}\hfill\label{a00118_a178d6d770d1e3adfa02e27da94b2dffa}
-
-
-After a user entry, this allows to go back to the last value, if for some reason the entry was rejected (because the object is currently busy, . ..) 
-
-Implemented in {\bf ObjCryst::WXFieldString} \doxyref{}{p.}{a00125_a0372d3d98cad5236fc2ebb628c881600}, {\bf ObjCryst::WXFieldName} \doxyref{}{p.}{a00120_a59ce32e9b9860b6cc6a0833f9d96b753}, {\bf ObjCryst::WXFieldParBase} \doxyref{}{p.}{a00123_a27fd5066d2f6b6e87e213439fd8f7311}, {\bf ObjCryst::WXFieldPar$<$ T $>$} \doxyref{}{p.}{a00122_a8896b1a3ba9b901c83d990ac5e0bd6d1}, {\bf ObjCryst::WXFieldChoice} \doxyref{}{p.}{a00119_a3b923575bb9d616bd9c80a7929d0a388}, {\bf ObjCryst::WXFieldRefPar} \doxyref{}{p.}{a00124_acc2b6724451be954f41a64e09d6cf082}, {\bf ObjCryst::WXFieldOption} \doxyref{}{p.}{a00121_a8caf4ac439d8c702583ceda0612618ab}, and {\bf ObjCryst::WXFieldPar$<$ long $>$} \doxyref{}{p.}{a00122_a8896b1a3ba9b901c83d990ac5e0bd6d1}.\index{ObjCryst::WXField@{ObjCryst::WXField}!SetForegroundColour@{SetForegroundColour}}
-\index{SetForegroundColour@{SetForegroundColour}!ObjCryst::WXField@{ObjCryst::WXField}}
-\paragraph[{SetForegroundColour}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool ObjCryst::WXField::SetForegroundColour (const wxColour \& {\em colour})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00118_a2fd615e41430e4a1ab05e7507ac686c2}
-
-
-Change the colour of the field's title. Can be used (with parcimony) to clarify the interface. 
-
-The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
 \item 
-wxCryst.h\end{DoxyCompactItemize}
+void {\bfseries \-On\-Menu\-Import} (wx\-Command\-Event \&event)\label{a00118_a9d8383d61561ca20475d797e37a10eba}
+
+\item 
+void {\bfseries \-On\-Menu\-Save\-H\-K\-L\-Iobs\-Icalc} (wx\-Command\-Event \&\-W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00118_a6681273899696ea7a7d15d478184ce4f}
+
+\item 
+void {\bfseries \-On\-Menu\-Save\-H\-K\-L\-Fcalc} (wx\-Command\-Event \&\-W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00118_a0800caa6fbbe81cd9060e71bacfadf43}
+
+\item 
+void {\bfseries \-On\-Menu\-Set\-Wavelength} (wx\-Command\-Event \&event)\label{a00118_ad7c65d7ece4e3ed9f66027a0eaa4b86a}
+
+\item 
+void {\bfseries \-On\-Menu\-Show\-Graph} (wx\-Command\-Event \&event)\label{a00118_a5567f7f3bb232bab136b2534ab82ab4d}
+
+\item 
+void {\bfseries \-On\-Change\-Crystal} (wx\-Command\-Event \&\-W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00118_adb878f28fc6abfc0d57d62eb9a134964}
+
+\end{DoxyCompactItemize}
+\subsubsection*{\-Private \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf \-W\-X\-Field\-Choice} $\ast$ {\bfseries mp\-Field\-Crystal}\label{a00118_ad267dfc3c399ebaf634e28a13df24477}
+
+\item 
+{\bf \-Diffraction\-Data\-Single\-Crystal} $\ast$ {\bfseries mp\-Data}\label{a00118_a144e44ade061e1ed151f891de77c0661}
+
+\item 
+\-R\-E\-A\-L {\bfseries m\-Chi2}\label{a00118_ad83d8469a67ac3f7586b8a30553972fa}
+
+\item 
+\-R\-E\-A\-L {\bfseries m\-Go\-F}\label{a00118_ab8a3f2922842d16e0a175352c9dc4b56}
+
+\item 
+\-R\-E\-A\-L {\bfseries m\-Rwp}\label{a00118_ac7ff65557c0e38a9c706a30312d1ace4}
+
+\item 
+\-R\-E\-A\-L {\bfseries m\-Rp}\label{a00118_a4f09f9d7bd9fe022094ff8be2b6f9063}
+
+\item 
+\-W\-X\-Multi\-Graph $\ast$ {\bfseries mp\-Graph}\label{a00118_a7d40f7e157c631f047f2ef06f606bf59}
+
+\item 
+unsigned long {\bfseries m\-Grap\-Id\-Obs}\label{a00118_a6a4fe70ca9131d39d4acb4850e044d27}
+
+\item 
+unsigned long {\bfseries m\-Grap\-Id\-Calc}\label{a00118_a46a1d6c2e2b2692fe323549a391491e6}
+
+\item 
+valarray$<$ float $>$ {\bf m\-Iobs}\label{a00118_a0f4e1acb9d9a69b039a0879f6407183a}
+
+\begin{DoxyCompactList}\small\item\em \-Copy of the data for graph display. \end{DoxyCompactList}\item 
+valarray$<$ float $>$ {\bfseries m\-Icalc}\label{a00118_a9e02244cee598b0407e885d9a68ca376}
+
+\item 
+valarray$<$ float $>$ {\bfseries m\-X}\label{a00118_ab32baf33607cbdefa04b155e85004d9e}
+
+\end{DoxyCompactItemize}
+
+
+\subsubsection{\-Detailed \-Description}
+\-W\-X \-Class for \doxyref{\-Diffraction\-Data\-Single\-Crystal}{p.}{a00026} objects. 
+
+
+
+\subsubsection{\-Member \-Function \-Documentation}
+\index{\-Obj\-Cryst\-::\-W\-X\-Diffraction\-Single\-Crystal@{\-Obj\-Cryst\-::\-W\-X\-Diffraction\-Single\-Crystal}!\-Cryst\-Update@{\-Cryst\-Update}}
+\index{\-Cryst\-Update@{\-Cryst\-Update}!ObjCryst::WXDiffractionSingleCrystal@{\-Obj\-Cryst\-::\-W\-X\-Diffraction\-Single\-Crystal}}
+\paragraph[{\-Cryst\-Update}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-W\-X\-Diffraction\-Single\-Crystal\-::\-Cryst\-Update} (
+\begin{DoxyParamCaption}
+\item[{const bool}]{update\-U\-I = {\ttfamily false}, }
+\item[{const bool}]{mutexlock = {\ttfamily false}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00118_a79a9bb91f352c12bfb3a1ebd60267cbc}
+
+
+\-Get new values to be displayed from the underlying object, and raise flag if an \-U\-I update is necessary. 
+
+\-The actual \-G\-U\-I update is not made here. \doxyref{\-Update\-U\-I()}{p.}{a00118_a6419580548c5f35434e0128b62f5b4e6} should be called separately, from the main thread.
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em update\-U\-I,\-:} & if true, this will call \-Update\-U\-I, either directly (if in the main thread), or by sending a message. \\
+\hline
+{\em mutexlock,\-:} & if true, a \-Mutex will be used to lock the data shared between main and background thread. \-The idea is to only use a few \-Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{\-Cryst\-Update()}{p.}{a00118_a79a9bb91f352c12bfb3a1ebd60267cbc} and \doxyref{\-Update\-U\-I()}{p.}{a00118_a6419580548c5f35434e0128b62f5b4e6}. \-As sub-\/objects (\doxyref{\-W\-X\-Field}{p.}{a00119},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. \\
+\hline
+\end{DoxyParams}
+
+
+\-Reimplemented from {\bf \-Obj\-Cryst\-::\-W\-X\-Refinable\-Obj} \doxyref{}{p.}{a00143_a13e4f37ac098de756b27cdb91d6a0551}.
+
+\index{\-Obj\-Cryst\-::\-W\-X\-Diffraction\-Single\-Crystal@{\-Obj\-Cryst\-::\-W\-X\-Diffraction\-Single\-Crystal}!\-Update\-U\-I@{\-Update\-U\-I}}
+\index{\-Update\-U\-I@{\-Update\-U\-I}!ObjCryst::WXDiffractionSingleCrystal@{\-Obj\-Cryst\-::\-W\-X\-Diffraction\-Single\-Crystal}}
+\paragraph[{\-Update\-U\-I}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-W\-X\-Diffraction\-Single\-Crystal\-::\-Update\-U\-I} (
+\begin{DoxyParamCaption}
+\item[{const bool}]{mutexlock = {\ttfamily false}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00118_a6419580548c5f35434e0128b62f5b4e6}
+
+
+\-Update the \-User \-Interface, if necessary. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em mutexlock,\-:} & if true, a \-Mutex will be used to lock the data shared between main and background thread.\\
+\hline
+\end{DoxyParams}
+\-The idea is to only use a few \-Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{\-Cryst\-Update()}{p.}{a00118_a79a9bb91f352c12bfb3a1ebd60267cbc} and \doxyref{\-Update\-U\-I()}{p.}{a00118_a6419580548c5f35434e0128b62f5b4e6}. \-As sub-\/objects (\doxyref{\-W\-X\-Field}{p.}{a00119},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
+
+\-Reimplemented from {\bf \-Obj\-Cryst\-::\-W\-X\-Refinable\-Obj} \doxyref{}{p.}{a00143_a19a1d057eecafd48710d9a3b770c1b28}.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+wx\-Diffraction\-Single\-Crystal.\-h\end{DoxyCompactItemize}

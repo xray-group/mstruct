@@ -1,270 +1,54 @@
-\subsection{ObjCryst::Scatterer Class Reference}
-\label{a00084}\index{ObjCryst::Scatterer@{ObjCryst::Scatterer}}
+\subsection{\-Obj\-Cryst\-:\-:\-W\-X\-Crystal\-:\-:\-Row\-Scatt\-Pow \-Struct \-Reference}
+\label{a00084}\index{\-Obj\-Cryst\-::\-W\-X\-Crystal\-::\-Row\-Scatt\-Pow@{\-Obj\-Cryst\-::\-W\-X\-Crystal\-::\-Row\-Scatt\-Pow}}
 
 
-Generic type of scatterer: can be an atom, or a more complex assembly of atoms.  
-Inheritance diagram for ObjCryst::Scatterer::\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[height=4cm]{a00084}
-\end{center}
-\end{figure}
-\subsubsection*{Public Member Functions}
+\-Structure to store the scattering power parameters.  
+
+
+\subsubsection*{\-Public \-Attributes}
 \begin{DoxyCompactItemize}
 \item 
-{\bf Scatterer} ()\label{a00084_a5367833f94dd2daeed41ffe3836c1c64}
+std\-::string {\bfseries m\-Name}\label{a00084_aaff5df78e44468ceaa7ee98088322cd6}
 
-\begin{DoxyCompactList}\small\item\em Constructor. \item\end{DoxyCompactList}\item 
-{\bf Scatterer} (const {\bf Scatterer} \&old)\label{a00084_a0d568f50de46100c0faff213dde8544f}
-
-\begin{DoxyCompactList}\small\item\em Copy Constructor. \item\end{DoxyCompactList}\item 
-virtual {\bf $\sim$Scatterer} ()\label{a00084_a5e28b2aa0b7f8e82b533bb8aec288b21}
-
-\begin{DoxyCompactList}\small\item\em Destructor. \item\end{DoxyCompactList}\item 
-virtual {\bf Scatterer} $\ast$ {\bf CreateCopy} () const =0
 \item 
-virtual const string \& {\bf GetClassName} () const 
-\begin{DoxyCompactList}\small\item\em Name for this class (\char`\"{}RefinableObj\char`\"{}, \char`\"{}Crystal\char`\"{},. \item\end{DoxyCompactList}\item 
-virtual int {\bf GetNbComponent} () const =0\label{a00084_a18d63b8e79b35942902244c555ea33ef}
+\-R\-E\-A\-L {\bf m\-Biso}\label{a00084_a113c7f507461cdce97417be2ce89c70f}
 
-\begin{DoxyCompactList}\small\item\em Number of components in the scatterer (eg number of point scatterers). \item\end{DoxyCompactList}\item 
-virtual const {\bf ScatteringComponentList} \& {\bf GetScatteringComponentList} () const =0
-\begin{DoxyCompactList}\small\item\em Get the list of all scattering components for this scatterer. \item\end{DoxyCompactList}\item 
-virtual string {\bf GetComponentName} (const int i) const =0
-\begin{DoxyCompactList}\small\item\em Name for the i-\/th component of this scatterer. \item\end{DoxyCompactList}\item 
-REAL {\bf GetX} () const 
-\begin{DoxyCompactList}\small\item\em X coordinate (fractionnal) of the scatterer (for complex scatterers, this corresponds to the position of one atom of the \doxyref{Scatterer}{p.}{a00084}, ideally it should be near the center of the \doxyref{Scatterer}{p.}{a00084}. \item\end{DoxyCompactList}\item 
-REAL {\bf GetY} () const 
-\begin{DoxyCompactList}\small\item\em Y coordinate (fractionnal) of the scatterer (for complex scatterers, this corresponds to the position of one atom of the \doxyref{Scatterer}{p.}{a00084}, ideally it should be near the center of the \doxyref{Scatterer}{p.}{a00084}. \item\end{DoxyCompactList}\item 
-REAL {\bf GetZ} () const 
-\begin{DoxyCompactList}\small\item\em Z coordinate (fractionnal) of the scatterer (for complex scatterers, this corresponds to the position of one atom of the \doxyref{Scatterer}{p.}{a00084}, ideally it should be near the center of the \doxyref{Scatterer}{p.}{a00084}. \item\end{DoxyCompactList}\item 
-REAL {\bf GetOccupancy} () const 
-\begin{DoxyCompactList}\small\item\em Get the occupancy of the scatterer (0. \item\end{DoxyCompactList}\item 
-virtual void {\bf SetX} (const REAL x)
-\begin{DoxyCompactList}\small\item\em X coordinate (fractionnal) of the scatterer (for complex scatterers, this corresponds to the position of one atom of the \doxyref{Scatterer}{p.}{a00084}, ideally it should be near the center of the \doxyref{Scatterer}{p.}{a00084}. \item\end{DoxyCompactList}\item 
-virtual void {\bf SetY} (const REAL y)
-\begin{DoxyCompactList}\small\item\em Y coordinate (fractionnal) of the scatterer (for complex scatterers, this corresponds to the position of one atom of the \doxyref{Scatterer}{p.}{a00084}, ideally it should be near the center of the \doxyref{Scatterer}{p.}{a00084}. \item\end{DoxyCompactList}\item 
-virtual void {\bf SetZ} (const REAL z)
-\begin{DoxyCompactList}\small\item\em Z coordinate (fractionnal) of the scatterer (for complex scatterers, this corresponds to the position of one atom of the \doxyref{Scatterer}{p.}{a00084}, ideally it should be near the center of the \doxyref{Scatterer}{p.}{a00084}. \item\end{DoxyCompactList}\item 
-virtual void {\bf SetOccupancy} (const REAL occupancy)
-\begin{DoxyCompactList}\small\item\em Change the occupancy of the scatterer (0. \item\end{DoxyCompactList}\item 
-{\bf operator string} () const 
-\begin{DoxyCompactList}\small\item\em Conversion function. \item\end{DoxyCompactList}\item 
-virtual void {\bf Print} () const =0\label{a00084_a0d865e9598c10ce4db5ff8885ecbc0a9}
+\begin{DoxyCompactList}\small\item\em \-Last displayed values. \end{DoxyCompactList}\item 
+\-R\-E\-A\-L {\bfseries m\-Formal\-Charge}\label{a00084_a8d821d61d7a4c2cb49d43238643236dc}
 
-\begin{DoxyCompactList}\small\item\em Print some info about the scatterer (ideally this should be one line...). \item\end{DoxyCompactList}\item 
-virtual const string \& {\bf GetColour} () const 
-\begin{DoxyCompactList}\small\item\em Colour associated to this scatterer (using POVRay names). \item\end{DoxyCompactList}\item 
-virtual const float $\ast$ {\bf GetColourRGB} () const \label{a00084_ae79467fc8546f90dc51a42037a8d193e}
-
-\begin{DoxyCompactList}\small\item\em Colour associated to this scatterer, 3 RGB Coordinates. \item\end{DoxyCompactList}\item 
-virtual ostream \& {\bf POVRayDescription} (ostream \&os, const {\bf CrystalPOVRayOptions} \&options) const =0
 \item 
-virtual void {\bf GLInitDisplayList} (const bool noSymmetrics=false, const REAL xMin=-\/.1, const REAL xMax=1.1, const REAL yMin=-\/.1, const REAL yMax=1.1, const REAL zMin=-\/.1, const REAL zMax=1.1, const bool displayEnantiomer=false, const bool displayNames=false) const =0
+\-R\-E\-A\-L {\bfseries m\-R}\label{a00084_a94c3494f460db87d1de194ed011456ee}
+
 \item 
-const {\bf RefinableObjClock} \& {\bf GetClockScatterer} () const \label{a00084_a9f72e14ca11568fc85bb808b720883fc}
+\-R\-E\-A\-L {\bfseries m\-G}\label{a00084_a7bfca1f0a4ba197b0788636e8f13bec4}
 
-\begin{DoxyCompactList}\small\item\em Last time anything in the scatterer was changed (atoms, positions, scattering power). \item\end{DoxyCompactList}\item 
-{\bf RefinableObjClock} \& {\bf GetClockScatterer} ()\label{a00084_a02f9ce5c724e92ca8eb7c6e4322f8c85}
-
-\begin{DoxyCompactList}\small\item\em Last time anything in the scatterer was changed (atoms, positions, scattering power). \item\end{DoxyCompactList}\item 
-void {\bf SetCrystal} ({\bf Crystal} \&)\label{a00084_ace072c5113b5328a7145d33779582621}
-
-\begin{DoxyCompactList}\small\item\em Set the crystal in which is included this \doxyref{Scatterer}{p.}{a00084}. \item\end{DoxyCompactList}\item 
-const {\bf Crystal} \& {\bf GetCrystal} () const \label{a00084_a89eed8d88f9e3f31957353254b9bbc81}
-
-\begin{DoxyCompactList}\small\item\em In which crystal is this \doxyref{Scatterer}{p.}{a00084} included ? \item\end{DoxyCompactList}\item 
-{\bf Crystal} \& {\bf GetCrystal} ()\label{a00084_acc71fa0e4198adc72c64480628e5e49c}
-
-\begin{DoxyCompactList}\small\item\em In which crystal is this \doxyref{Scatterer}{p.}{a00084} included ? \item\end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Protected Member Functions}
-\begin{DoxyCompactItemize}
 \item 
-virtual void {\bf InitRefParList} ()=0
+\-R\-E\-A\-L {\bfseries m\-B}\label{a00084_ae6477b327330701a23ce1c036aee4059}
+
 \item 
-virtual void {\bf InitRGBColour} ()
-\begin{DoxyCompactList}\small\item\em Get RGB Colour coordinates from Colour Name. \item\end{DoxyCompactList}\item 
-const {\bf RefinableObjClock} \& {\bf GetClockScattCompList} () const \label{a00084_a204e5b5ba54b967074c6de965940b00e}
+\-R\-E\-A\-L {\bfseries m\-Maximum\-Likelihood\-Error}\label{a00084_a2a590e5bfb8ba1ef43fe55dc6bbd8b70}
 
-\begin{DoxyCompactList}\small\item\em Last time the \doxyref{ScatteringComponentList}{p.}{a00086} was generated. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Protected Attributes}
-\begin{DoxyCompactItemize}
 \item 
-CrystVector\_\-REAL {\bf mXYZ}\label{a00084_a9cc523b07c82846bf0ddc3ce0e74bcc6}
+\-R\-E\-A\-L {\bfseries m\-Nb\-Ghost\-Atoms}\label{a00084_a83b5f5447f19b2e1fdd91d2ed3b4ec32}
 
-\begin{DoxyCompactList}\small\item\em coordinates of the scatterer (or of its center..) \item\end{DoxyCompactList}\item 
-REAL {\bf mOccupancy}
-\begin{DoxyCompactList}\small\item\em Occupancy : 0 $<$= occ $<$= 1 For a multi-\/atom scatterer (polyhedron,. \item\end{DoxyCompactList}\item 
-string {\bf mColourName}\label{a00084_a1d1166aabc3a811ca70e37d2ad03ba05}
-
-\begin{DoxyCompactList}\small\item\em Colour for this scatterer (from POVRay). \item\end{DoxyCompactList}\item 
-float {\bf mColourRGB} [3]\label{a00084_ab62464d3d132a8e70f283648ae9ea020}
-
-\begin{DoxyCompactList}\small\item\em Colour for this scatterer using RGB. \item\end{DoxyCompactList}\item 
-{\bf RefinableObjClock} {\bf mClockScatterer}\label{a00084_ace0238cbbd28dd0adb9e6102bc2b8cae}
-
-\begin{DoxyCompactList}\small\item\em Last time anything (number of atoms, positions, scattering power) was changed. \item\end{DoxyCompactList}\item 
-{\bf RefinableObjClock} {\bf mClockScattCompList}
 \item 
-{\bf Crystal} $\ast$ {\bf mpCryst}
-\begin{DoxyCompactList}\small\item\em The crystal in which the \doxyref{Scatterer}{p.}{a00084} is This is needed so that we can know which scattering powers are available in the crystal, and also to convert fractionnal to orthonormal coordinates (for some scatterers only). \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+std\-::vector$<$ \-R\-E\-A\-L $>$ {\bf mv\-Anti\-Bump\-Distance}\label{a00084_a8fe9f826b395b40e671ef7f8a0427343}
+
+\begin{DoxyCompactList}\small\item\em \-Last displayed values for antibump. \end{DoxyCompactList}\item 
+std\-::vector$<$ \-R\-E\-A\-L $>$ {\bf mv\-Bond\-Valence\-Ro}\label{a00084_ae02d7507960b535b29ad6e1fbaf70066}
+
+\begin{DoxyCompactList}\small\item\em \-Last displayed values for bond valence. \end{DoxyCompactList}\item 
+bool {\bf m\-Need\-Update\-U\-I}\label{a00084_ac63f66d901578d4b9074336a63eb4f6f}
+
+\begin{DoxyCompactList}\small\item\em \-True if we need to update the displayed values. \end{DoxyCompactList}\item 
+int {\bf m\-Idx}\label{a00084_a8de50d30238e0f61e625a2ca61640161}
+
+\begin{DoxyCompactList}\small\item\em \-Current position in the list of rows or columns. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\subsubsection{Detailed Description}
-Generic type of scatterer: can be an atom, or a more complex assembly of atoms. A \doxyref{Scatterer}{p.}{a00084} is able to give its position (in fractionnal coordinates) in the unit cell, and more generally the position of all point scattering centers (\doxyref{ScatteringComponent}{p.}{a00085}), along with the \doxyref{ScatteringPower}{p.}{a00089} associated with each position.
+\subsubsection{\-Detailed \-Description}
+\-Structure to store the scattering power parameters. 
 
-For simple atoms, there is only one scattering position with the associated scattering power (scattering factor, anomalous, thermic). For complex scatterers (molecules: \doxyref{ZScatterer}{p.}{a00155}) there are as many positions as atoms.
-
-A scatterer also has a few functions to display itself in 3D
-
-This is an abstract base class. 
-
-\subsubsection{Member Function Documentation}
-\index{ObjCryst::Scatterer@{ObjCryst::Scatterer}!CreateCopy@{CreateCopy}}
-\index{CreateCopy@{CreateCopy}!ObjCryst::Scatterer@{ObjCryst::Scatterer}}
-\paragraph[{CreateCopy}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf Scatterer}$\ast$ ObjCryst::Scatterer::CreateCopy () const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\hfill\label{a00084_a4d374adcff97163a24492d362f6def73}
-\begin{DoxyInternal}{For internal use only.}
-so-\/called Virtual copy constructor, needed to make copies of arrays of Scatterers \end{DoxyInternal}
-
-
-Implemented in {\bf ObjCryst::Atom} \doxyref{}{p.}{a00008_af5215404ae1f180ed84046700845f92a}, {\bf ObjCryst::Molecule} \doxyref{}{p.}{a00046_a96728865d25881151b7010d3eaf4ec0f}, {\bf ObjCryst::ZScatterer} \doxyref{}{p.}{a00155_a6cf9f5891cf87e865efa971d36599d24}, and {\bf ObjCryst::ZPolyhedron} \doxyref{}{p.}{a00154_a83436a907a22d794259e5fea9b7670ce}.\index{ObjCryst::Scatterer@{ObjCryst::Scatterer}!GetClassName@{GetClassName}}
-\index{GetClassName@{GetClassName}!ObjCryst::Scatterer@{ObjCryst::Scatterer}}
-\paragraph[{GetClassName}]{\setlength{\rightskip}{0pt plus 5cm}virtual const string\& ObjCryst::Scatterer::GetClassName () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00084_a374fc1bb2887ab1f61d456326d97c05f}
-
-
-Name for this class (\char`\"{}RefinableObj\char`\"{}, \char`\"{}Crystal\char`\"{},. ..). This is only useful to distinguish different classes when picking up objects from the \doxyref{RefinableObj}{p.}{a00070} Global Registry 
-
-Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_a62968d90a7a3080738b363934616c019}.
-
-Reimplemented in {\bf ObjCryst::Atom} \doxyref{}{p.}{a00008_a9f0d1cb7c3b1db1baf84076e5da0ca0e}, {\bf ObjCryst::Molecule} \doxyref{}{p.}{a00046_a7f0f1ae6670032f5afc9ccf65d45f8c4}, and {\bf ObjCryst::ZScatterer} \doxyref{}{p.}{a00155_a610a62c221ed289e1ce4d68adac921ee}.\index{ObjCryst::Scatterer@{ObjCryst::Scatterer}!GetColour@{GetColour}}
-\index{GetColour@{GetColour}!ObjCryst::Scatterer@{ObjCryst::Scatterer}}
-\paragraph[{GetColour}]{\setlength{\rightskip}{0pt plus 5cm}virtual const string\& ObjCryst::Scatterer::GetColour () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00084_a2db9df8f429181af0e478ba74c16cb27}
-
-
-Colour associated to this scatterer (using POVRay names). \index{ObjCryst::Scatterer@{ObjCryst::Scatterer}!GetComponentName@{GetComponentName}}
-\index{GetComponentName@{GetComponentName}!ObjCryst::Scatterer@{ObjCryst::Scatterer}}
-\paragraph[{GetComponentName}]{\setlength{\rightskip}{0pt plus 5cm}virtual string ObjCryst::Scatterer::GetComponentName (const int {\em i}) const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\hfill\label{a00084_a42bdf508da6a90859a5a61e16c27d47e}
-
-
-Name for the i-\/th component of this scatterer. If the component is an \doxyref{Atom}{p.}{a00008}, Then the name is that of the atom. Else, it is the name of the scatterer plus the component number in the scatterer plus the name of the \doxyref{ScatteringPower}{p.}{a00089}. \begin{DoxyNote}{Note}
-It would be better to return a reference, but we don't want to keep a name for all components... Weeelll, needs some more thinking... see what performance hit results (if any).
-\end{DoxyNote}
-\begin{Desc}
-\item[{\bf Bug}]does not take into account dummy atoms !! \end{Desc}
-
-
-Implemented in {\bf ObjCryst::Atom} \doxyref{}{p.}{a00008_a88fed92945210af0e6cf28e34fa545f4}, {\bf ObjCryst::Molecule} \doxyref{}{p.}{a00046_a8dae19447740afaa1780e39a61f625c9}, and {\bf ObjCryst::ZScatterer} \doxyref{}{p.}{a00155_a44e9bf9d72e256ef8bc39ea2cf0eef4e}.\index{ObjCryst::Scatterer@{ObjCryst::Scatterer}!GetOccupancy@{GetOccupancy}}
-\index{GetOccupancy@{GetOccupancy}!ObjCryst::Scatterer@{ObjCryst::Scatterer}}
-\paragraph[{GetOccupancy}]{\setlength{\rightskip}{0pt plus 5cm}REAL ObjCryst::Scatterer::GetOccupancy () const}\hfill\label{a00084_a11c4a95b3299bf8cbdc29ceea5815aad}
-
-
-Get the occupancy of the scatterer (0. -\/$>$ 1.0)
-
-The occupancy is given in \%, and must take into account the 'special position' character of atoms (ie an atom on a 2fold axis should have at most a .5 population, etc...). For a multi-\/atom scatterer (polyhedra), this is the {\bfseries overall} occupancy of the scatterer, affecting all atoms. \index{ObjCryst::Scatterer@{ObjCryst::Scatterer}!GetScatteringComponentList@{GetScatteringComponentList}}
-\index{GetScatteringComponentList@{GetScatteringComponentList}!ObjCryst::Scatterer@{ObjCryst::Scatterer}}
-\paragraph[{GetScatteringComponentList}]{\setlength{\rightskip}{0pt plus 5cm}virtual const {\bf ScatteringComponentList}\& ObjCryst::Scatterer::GetScatteringComponentList () const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\hfill\label{a00084_aca0e08e3793cc69d31fce53e481c2a67}
-
-
-Get the list of all scattering components for this scatterer. This is the most important function of this class, giving the list of scattering positions along with the associated \doxyref{ScatteringPower}{p.}{a00089}. 
-
-Implemented in {\bf ObjCryst::Atom} \doxyref{}{p.}{a00008_a3483660b1d08b113af61d708ecff8d1a}, {\bf ObjCryst::Molecule} \doxyref{}{p.}{a00046_a3ac17bd45a709c82d9a4d304fde09b88}, and {\bf ObjCryst::ZScatterer} \doxyref{}{p.}{a00155_aadfeeafb618aad01ea80f099dd7c3299}.\index{ObjCryst::Scatterer@{ObjCryst::Scatterer}!GetX@{GetX}}
-\index{GetX@{GetX}!ObjCryst::Scatterer@{ObjCryst::Scatterer}}
-\paragraph[{GetX}]{\setlength{\rightskip}{0pt plus 5cm}REAL ObjCryst::Scatterer::GetX () const}\hfill\label{a00084_a36051907538dc50c4989fcbff5b9d4e6}
-
-
-X coordinate (fractionnal) of the scatterer (for complex scatterers, this corresponds to the position of one atom of the \doxyref{Scatterer}{p.}{a00084}, ideally it should be near the center of the \doxyref{Scatterer}{p.}{a00084}. \index{ObjCryst::Scatterer@{ObjCryst::Scatterer}!GetY@{GetY}}
-\index{GetY@{GetY}!ObjCryst::Scatterer@{ObjCryst::Scatterer}}
-\paragraph[{GetY}]{\setlength{\rightskip}{0pt plus 5cm}REAL ObjCryst::Scatterer::GetY () const}\hfill\label{a00084_afd11a010b62690b84dacea7e47176ec1}
-
-
-Y coordinate (fractionnal) of the scatterer (for complex scatterers, this corresponds to the position of one atom of the \doxyref{Scatterer}{p.}{a00084}, ideally it should be near the center of the \doxyref{Scatterer}{p.}{a00084}. \index{ObjCryst::Scatterer@{ObjCryst::Scatterer}!GetZ@{GetZ}}
-\index{GetZ@{GetZ}!ObjCryst::Scatterer@{ObjCryst::Scatterer}}
-\paragraph[{GetZ}]{\setlength{\rightskip}{0pt plus 5cm}REAL ObjCryst::Scatterer::GetZ () const}\hfill\label{a00084_a667e97f3e177bc74dfc3cbd582afaad5}
-
-
-Z coordinate (fractionnal) of the scatterer (for complex scatterers, this corresponds to the position of one atom of the \doxyref{Scatterer}{p.}{a00084}, ideally it should be near the center of the \doxyref{Scatterer}{p.}{a00084}. \index{ObjCryst::Scatterer@{ObjCryst::Scatterer}!GLInitDisplayList@{GLInitDisplayList}}
-\index{GLInitDisplayList@{GLInitDisplayList}!ObjCryst::Scatterer@{ObjCryst::Scatterer}}
-\paragraph[{GLInitDisplayList}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::Scatterer::GLInitDisplayList (const bool {\em noSymmetrics} = {\ttfamily false}, \/  const REAL {\em xMin} = {\ttfamily -\/.1}, \/  const REAL {\em xMax} = {\ttfamily 1.1}, \/  const REAL {\em yMin} = {\ttfamily -\/.1}, \/  const REAL {\em yMax} = {\ttfamily 1.1}, \/  const REAL {\em zMin} = {\ttfamily -\/.1}, \/  const REAL {\em zMax} = {\ttfamily 1.1}, \/  const bool {\em displayEnantiomer} = {\ttfamily false}, \/  const bool {\em displayNames} = {\ttfamily false}) const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\hfill\label{a00084_a4eaf9cf9780bef83e40155810db120a0}
-\begin{DoxyInternal}{For internal use only.}
-Create an OpenGL Display List of the scatterer. This should only be called by a \doxyref{Crystal}{p.}{a00020} object.
-
-
-\begin{DoxyParams}{Parameters}
-\item[{\em noSymmetrics,:}]if false (the default), then all symmetrics are shown in the 3D display, within the limits defined by the min/max parameters $\backslash$ param xMin,xMax,yMin,yMax,zMin,zMax: in fractionnal coordinates, the region in which we want scaterrer to be displayed. The test is made on the center of the scatterer (eg a \doxyref{ZScatterer}{p.}{a00155} (molecule) will not be 'cut' on the border). \item[{\em displayNames,:}]if true, only the names of the scatterers will be displayed, at the position of the scatterers (to actually see them, they will have to be translated with respect to the drawing of the scatterers). \end{DoxyParams}
-\end{DoxyInternal}
-
-
-Implemented in {\bf ObjCryst::Atom} \doxyref{}{p.}{a00008_a14e239415f6923d83ceff1347b89393b}, {\bf ObjCryst::Molecule} \doxyref{}{p.}{a00046_a00aa7620326d8663b1f4e1bd9237ffb8}, and {\bf ObjCryst::ZScatterer} \doxyref{}{p.}{a00155_a17fb665a72c2d694410580e3b33ea1a9}.\index{ObjCryst::Scatterer@{ObjCryst::Scatterer}!InitRefParList@{InitRefParList}}
-\index{InitRefParList@{InitRefParList}!ObjCryst::Scatterer@{ObjCryst::Scatterer}}
-\paragraph[{InitRefParList}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::Scatterer::InitRefParList ()\hspace{0.3cm}{\ttfamily  [protected, pure virtual]}}\hfill\label{a00084_a45ef328b68a0a68c0228beefc25cda7f}
-\begin{DoxyInternal}{For internal use only.}
-Prepare refinable parameters for the scatterer object \end{DoxyInternal}
-
-
-Implemented in {\bf ObjCryst::Atom} \doxyref{}{p.}{a00008_a72fe4868d70c8068483ba635029bbc86}, {\bf ObjCryst::Molecule} \doxyref{}{p.}{a00046_ad96fe78688ce898dc9aeffcc23523967}, and {\bf ObjCryst::ZScatterer} \doxyref{}{p.}{a00155_a36839536bcb14d3a8dd581baf168f3d7}.\index{ObjCryst::Scatterer@{ObjCryst::Scatterer}!InitRGBColour@{InitRGBColour}}
-\index{InitRGBColour@{InitRGBColour}!ObjCryst::Scatterer@{ObjCryst::Scatterer}}
-\paragraph[{InitRGBColour}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::Scatterer::InitRGBColour ()\hspace{0.3cm}{\ttfamily  [protected, virtual]}}\hfill\label{a00084_a0142f5a84db948319c3ff310315c8599}
-
-
-Get RGB Colour coordinates from Colour Name. Note that the colour used for display is usually that of the \doxyref{ScatteringPower}{p.}{a00089}, not that of the \doxyref{Scatterer}{p.}{a00084} \index{ObjCryst::Scatterer@{ObjCryst::Scatterer}!operator string@{operator string}}
-\index{operator string@{operator string}!ObjCryst::Scatterer@{ObjCryst::Scatterer}}
-\paragraph[{operator string}]{\setlength{\rightskip}{0pt plus 5cm}ObjCryst::Scatterer::operator string () const}\hfill\label{a00084_a121e6e739f9b740564afc32c8c74a664}
-
-
-Conversion function. -\/$>$ returns the scatt name
-
-\begin{DoxyWarning}{Warning}
-EXPERIMENTAL. DO NOT USE, as this may be removed. 
-\end{DoxyWarning}
-\index{ObjCryst::Scatterer@{ObjCryst::Scatterer}!POVRayDescription@{POVRayDescription}}
-\index{POVRayDescription@{POVRayDescription}!ObjCryst::Scatterer@{ObjCryst::Scatterer}}
-\paragraph[{POVRayDescription}]{\setlength{\rightskip}{0pt plus 5cm}virtual ostream\& ObjCryst::Scatterer::POVRayDescription (ostream \& {\em os}, \/  const {\bf CrystalPOVRayOptions} \& {\em options}) const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\hfill\label{a00084_a708cc857f82c9af4cbdf4d9334449d0f}
-\begin{DoxyInternal}{For internal use only.}
-Output a description of the scatterer for POVRay. This should only be called by the \doxyref{Crystal}{p.}{a00020} Object to which belongs this scatterer. \end{DoxyInternal}
-
-
-Implemented in {\bf ObjCryst::Atom} \doxyref{}{p.}{a00008_a2994321bc2974d853f36b011d23a94b3}, {\bf ObjCryst::Molecule} \doxyref{}{p.}{a00046_a98bd83a14b359c994be9ab1bf4b8453b}, and {\bf ObjCryst::ZScatterer} \doxyref{}{p.}{a00155_a6dd20fe536310e622c1a30fb1d5a788f}.\index{ObjCryst::Scatterer@{ObjCryst::Scatterer}!SetOccupancy@{SetOccupancy}}
-\index{SetOccupancy@{SetOccupancy}!ObjCryst::Scatterer@{ObjCryst::Scatterer}}
-\paragraph[{SetOccupancy}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::Scatterer::SetOccupancy (const REAL {\em occupancy})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00084_a43c371cd475f921e94c6a13b7c1d89a0}
-
-
-Change the occupancy of the scatterer (0. -\/$>$ 1.0)
-
-The occupancy is given in \%, and must take into account the 'special position' character of atoms (ie an atom on a 2fold axis should have at most a .5 population, etc...). For a multi-\/atom scatterer (polyhedra), this is the {\bfseries overall} occupancy of the scatterer, affecting all atoms. \index{ObjCryst::Scatterer@{ObjCryst::Scatterer}!SetX@{SetX}}
-\index{SetX@{SetX}!ObjCryst::Scatterer@{ObjCryst::Scatterer}}
-\paragraph[{SetX}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::Scatterer::SetX (const REAL {\em x})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00084_aaefba31ab4187b0f826436929f3c0456}
-
-
-X coordinate (fractionnal) of the scatterer (for complex scatterers, this corresponds to the position of one atom of the \doxyref{Scatterer}{p.}{a00084}, ideally it should be near the center of the \doxyref{Scatterer}{p.}{a00084}. \index{ObjCryst::Scatterer@{ObjCryst::Scatterer}!SetY@{SetY}}
-\index{SetY@{SetY}!ObjCryst::Scatterer@{ObjCryst::Scatterer}}
-\paragraph[{SetY}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::Scatterer::SetY (const REAL {\em y})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00084_afeaa60aaa33907fb6d974f626d91a390}
-
-
-Y coordinate (fractionnal) of the scatterer (for complex scatterers, this corresponds to the position of one atom of the \doxyref{Scatterer}{p.}{a00084}, ideally it should be near the center of the \doxyref{Scatterer}{p.}{a00084}. \index{ObjCryst::Scatterer@{ObjCryst::Scatterer}!SetZ@{SetZ}}
-\index{SetZ@{SetZ}!ObjCryst::Scatterer@{ObjCryst::Scatterer}}
-\paragraph[{SetZ}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::Scatterer::SetZ (const REAL {\em z})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00084_ab7bd1b921a51b476ee776624425ac46c}
-
-
-Z coordinate (fractionnal) of the scatterer (for complex scatterers, this corresponds to the position of one atom of the \doxyref{Scatterer}{p.}{a00084}, ideally it should be near the center of the \doxyref{Scatterer}{p.}{a00084}. 
-
-\subsubsection{Member Data Documentation}
-\index{ObjCryst::Scatterer@{ObjCryst::Scatterer}!mClockScattCompList@{mClockScattCompList}}
-\index{mClockScattCompList@{mClockScattCompList}!ObjCryst::Scatterer@{ObjCryst::Scatterer}}
-\paragraph[{mClockScattCompList}]{\setlength{\rightskip}{0pt plus 5cm}{\bf RefinableObjClock} {\bf ObjCryst::Scatterer::mClockScattCompList}\hspace{0.3cm}{\ttfamily  [mutable, protected]}}\hfill\label{a00084_a807f373561fbd1c460b0dfc40924e542}
-\begin{DoxyInternal}{For internal use only.}
-Last time the \doxyref{ScatteringComponentList}{p.}{a00086} was generated \end{DoxyInternal}
-\index{ObjCryst::Scatterer@{ObjCryst::Scatterer}!mOccupancy@{mOccupancy}}
-\index{mOccupancy@{mOccupancy}!ObjCryst::Scatterer@{ObjCryst::Scatterer}}
-\paragraph[{mOccupancy}]{\setlength{\rightskip}{0pt plus 5cm}REAL {\bf ObjCryst::Scatterer::mOccupancy}\hspace{0.3cm}{\ttfamily  [protected]}}\hfill\label{a00084_ae51b357e1cf9f523994f0e08c70bb489}
-
-
-Occupancy : 0 $<$= occ $<$= 1 For a multi-\/atom scatterer (polyhedron,. .), this is the {\bfseries overall} occupancy of the scatterer (affects all components of the scatterer). \index{ObjCryst::Scatterer@{ObjCryst::Scatterer}!mpCryst@{mpCryst}}
-\index{mpCryst@{mpCryst}!ObjCryst::Scatterer@{ObjCryst::Scatterer}}
-\paragraph[{mpCryst}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Crystal}$\ast$ {\bf ObjCryst::Scatterer::mpCryst}\hspace{0.3cm}{\ttfamily  [protected]}}\hfill\label{a00084_a359e6115a710c44bf340f439a17cb073}
-
-
-The crystal in which the \doxyref{Scatterer}{p.}{a00084} is This is needed so that we can know which scattering powers are available in the crystal, and also to convert fractionnal to orthonormal coordinates (for some scatterers only). It cannot be const since some scatterers may want to modify the list of scattering powers of the crystal... 
-
-The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\-The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-Scatterer.h\end{DoxyCompactItemize}
+wx\-Crystal.\-h\end{DoxyCompactItemize}

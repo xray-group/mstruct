@@ -1,31 +1,27 @@
-\subsection{ObjCryst::ObjCrystException Class Reference}
-\label{a00052}\index{ObjCryst::ObjCrystException@{ObjCryst::ObjCrystException}}
+\subsection{\-Obj\-Cryst\-:\-:\-Crystal\-:\-:\-Neighbour\-Hood \-Struct \-Reference}
+\label{a00052}\index{\-Obj\-Cryst\-::\-Crystal\-::\-Neighbour\-Hood@{\-Obj\-Cryst\-::\-Crystal\-::\-Neighbour\-Hood}}
 
 
-Exception class for ObjCryst++ library.  
-\subsubsection*{Public Member Functions}
+\-Table of neighbours for a given unique atom.  
+
+
+\subsubsection*{\-Public \-Attributes}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries ObjCrystException} (const string \&message)\label{a00052_ad678d8fd5936912af76bb39b7d68fdde}
+unsigned long {\bf m\-Index}\label{a00052_a50582f69538cb6bddaa5e42c56a1f048}
 
-\end{DoxyCompactItemize}
-\subsubsection*{Public Attributes}
-\begin{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \-Index of the atom in the scattering component list. \end{DoxyCompactList}\item 
+unsigned int {\bf m\-Unique\-Pos\-Symmetry\-Index}\label{a00052_aa27ccaa8f5020e450d69bfb09e7bef94}
+
+\begin{DoxyCompactList}\small\item\em \-Index of the symmetry operation for the chosen unique position in the (pseudo) asymmetric unit. \end{DoxyCompactList}\item 
+std\-::vector$<$ {\bf \-Crystal\-::\-Neighbour} $>$ {\bf mv\-Neighbour}\label{a00052_af35a4b4181e6af317a8dd33e9db249a8}
+
+\begin{DoxyCompactList}\small\item\em \-List of neighbours. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{\-Detailed \-Description}
+\-Table of neighbours for a given unique atom. 
+
+\-The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-string {\bfseries message}\label{a00052_ad92e8d5369de58b6764f7c940dc7f0a6}
-
-\end{DoxyCompactItemize}
-\subsubsection*{Static Public Attributes}
-\begin{DoxyCompactItemize}
-\item 
-static bool {\bfseries verbose}\label{a00052_aa764ea2ee67edf7343b795cb8571b3c9}
-
-\end{DoxyCompactItemize}
-
-
-\subsubsection{Detailed Description}
-Exception class for ObjCryst++ library. 
-
-The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
-\item 
-General.h\end{DoxyCompactItemize}
+\-Crystal.\-h\end{DoxyCompactItemize}

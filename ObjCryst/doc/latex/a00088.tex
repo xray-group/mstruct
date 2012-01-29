@@ -1,574 +1,74 @@
-\subsection{ObjCryst::ScatteringData Class Reference}
-\label{a00088}\index{ObjCryst::ScatteringData@{ObjCryst::ScatteringData}}
+\subsection{\-Obj\-Cryst\-:\-:\-Scattering\-Corr \-Class \-Reference}
+\label{a00088}\index{\-Obj\-Cryst\-::\-Scattering\-Corr@{\-Obj\-Cryst\-::\-Scattering\-Corr}}
 
 
-Class to compute structure factors for a set of reflections and a \doxyref{Crystal}{p.}{a00020}.  
-Inheritance diagram for ObjCryst::ScatteringData::\begin{figure}[H]
+\-Base class to compute all kind of corrections to intensities\-: \-Lorentz, \-Polar, absorption, texcture, extinction, etc...  
+
+
+\-Inheritance diagram for \-Obj\-Cryst\-:\-:\-Scattering\-Corr\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=3cm]{a00088}
+\includegraphics[height=1.056604cm]{a00088}
 \end{center}
 \end{figure}
-\subsubsection*{Public Member Functions}
+\subsubsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries ScatteringData} (const {\bf ScatteringData} \&old)\label{a00088_a903a77bd764277db294220be8c560fbf}
+{\bf \-Scattering\-Corr} (const {\bf \-Scattering\-Data} \&data)\label{a00088_ac1e37a73b0a107f66d1b1d75b9db9c47}
 
-\item 
-virtual {\bf ScatteringData} $\ast$ {\bf CreateCopy} () const =0\label{a00088_a9356e72bc7a48184692100d0d1ee8ea1}
+\begin{DoxyCompactList}\small\item\em \-Constructor, with the associated \doxyref{\-Scattering\-Data}{p.}{a00089} object. \end{DoxyCompactList}\item 
+virtual const string \& {\bf \-Get\-Name} () const =0\label{a00088_adb2782d4e32cbcb89e2e69b3c8ad66fb}
 
-\begin{DoxyCompactList}\small\item\em So-\/called virtual copy constructor. \item\end{DoxyCompactList}\item 
-virtual void {\bf SetHKL} (const CrystVector\_\-REAL \&h, const CrystVector\_\-REAL \&k, const CrystVector\_\-REAL \&l)
-\begin{DoxyCompactList}\small\item\em input H,K,L \item\end{DoxyCompactList}\item 
-virtual void {\bf GenHKLFullSpace2} (const REAL maxsithsl, const bool unique=false)
-\begin{DoxyCompactList}\small\item\em Generate a list of h,k,l to describe a full reciprocal space, up to a given maximum theta value. \item\end{DoxyCompactList}\item 
-virtual void {\bf GenHKLFullSpace} (const REAL maxTheta, const bool unique=false)
-\begin{DoxyCompactList}\small\item\em Generate a list of h,k,l to describe a full reciprocal space, up to a given maximum theta value. \item\end{DoxyCompactList}\item 
-{\bf RadiationType} {\bf GetRadiationType} () const \label{a00088_a20166ceef04122ede9bd6534cf645a86}
+\begin{DoxyCompactList}\small\item\em \-Get the name of this object. \end{DoxyCompactList}\item 
+virtual const string \& {\bf \-Get\-Class\-Name} () const =0\label{a00088_a6d72e7a6ffff0c16d86930d9e72c6673}
 
-\begin{DoxyCompactList}\small\item\em Neutron or x-\/ray experiment ? Wavelength ? \item\end{DoxyCompactList}\item 
-virtual const {\bf Radiation} \& {\bf GetRadiation} () const =0\label{a00088_a14deaa47d5b79d12369ed5d8d4afbfbe}
+\begin{DoxyCompactList}\small\item\em \-Get the name of the class. \end{DoxyCompactList}\item 
+const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \& {\bf \-Get\-Corr} () const 
+\begin{DoxyCompactList}\small\item\em \-Get the vector of corrections for all reflections. \end{DoxyCompactList}\item 
+const {\bf \-Refinable\-Obj\-Clock} \& {\bf \-Get\-Clock\-Corr} () const \label{a00088_a4c5bead3a47202db88495e3d123c5927}
 
-\begin{DoxyCompactList}\small\item\em Get the radiation object for this data. \item\end{DoxyCompactList}\item 
-virtual void {\bf SetCrystal} ({\bf Crystal} \&crystal)
-\begin{DoxyCompactList}\small\item\em Set the crystal for this experiment. \item\end{DoxyCompactList}\item 
-const {\bf Crystal} \& {\bf GetCrystal} () const \label{a00088_a966649e9385039c2c351bdea78b031e8}
-
-\begin{DoxyCompactList}\small\item\em Const access to the data's crystal. \item\end{DoxyCompactList}\item 
-{\bf Crystal} \& {\bf GetCrystal} ()\label{a00088_a66a413655f9de7de6ed058ce3824a241}
-
-\begin{DoxyCompactList}\small\item\em Access to the data's crystal. \item\end{DoxyCompactList}\item 
-long {\bf GetNbRefl} () const \label{a00088_a11d7f74e603192b865cf370bbb5468b8}
-
-\begin{DoxyCompactList}\small\item\em Return the number of reflections in this experiment. \item\end{DoxyCompactList}\item 
-const CrystVector\_\-REAL \& {\bf GetH} () const \label{a00088_a2c9dcb826c09824f9ea6d00496926e42}
-
-\begin{DoxyCompactList}\small\item\em Return the 1D array of H coordinates for all reflections. \item\end{DoxyCompactList}\item 
-const CrystVector\_\-REAL \& {\bf GetK} () const \label{a00088_ad12390677c09a1d61a239de80fc60ec0}
-
-\begin{DoxyCompactList}\small\item\em Return the 1D array of K coordinates for all reflections. \item\end{DoxyCompactList}\item 
-const CrystVector\_\-REAL \& {\bf GetL} () const \label{a00088_a3e20ec3ee12beaa5f9f58a475d145866}
-
-\begin{DoxyCompactList}\small\item\em Return the 1D array of L coordinates for all reflections. \item\end{DoxyCompactList}\item 
-const CrystVector\_\-REAL \& {\bf GetH2Pi} () const 
-\begin{DoxyCompactList}\small\item\em Return the 1D array of H coordinates for all reflections, multiplied by 2$\ast$pi. \item\end{DoxyCompactList}\item 
-const CrystVector\_\-REAL \& {\bf GetK2Pi} () const 
-\begin{DoxyCompactList}\small\item\em Return the 1D array of K coordinates for all reflections, multiplied by 2$\ast$pi. \item\end{DoxyCompactList}\item 
-const CrystVector\_\-REAL \& {\bf GetL2Pi} () const 
-\begin{DoxyCompactList}\small\item\em Return the 1D array of L coordinates for all reflections, multiplied by 2$\ast$pi. \item\end{DoxyCompactList}\item 
-const CrystVector\_\-REAL \& {\bf GetReflX} () const \label{a00088_a10dfb4fe4da3445503bba6a40f39b354}
-
-\begin{DoxyCompactList}\small\item\em Return the 1D array of orthonormal x coordinates for all reflections (recipr. space). \item\end{DoxyCompactList}\item 
-const CrystVector\_\-REAL \& {\bf GetReflY} () const \label{a00088_a30bb85e249b057d592c4c0b5262c8ec1}
-
-\begin{DoxyCompactList}\small\item\em Return the 1D array of orthonormal y coordinates for all reflections (recipr. space). \item\end{DoxyCompactList}\item 
-const CrystVector\_\-REAL \& {\bf GetReflZ} () const \label{a00088_a2802607e29950c125742b45e2085e551}
-
-\begin{DoxyCompactList}\small\item\em Return the 1D array of orthonormal z coordinates for all reflections (recipr. space). \item\end{DoxyCompactList}\item 
-const CrystVector\_\-REAL \& {\bf GetSinThetaOverLambda} () const \label{a00088_a3150d51e5ec7adb1a842fa2055e70537}
-
-\begin{DoxyCompactList}\small\item\em Return an array with $ \frac{sin(\theta)}{\lambda} = \frac{1}{2d_{hkl}}$ for all reflections. \item\end{DoxyCompactList}\item 
-const CrystVector\_\-REAL \& {\bf GetTheta} () const \label{a00088_aede7a50a0ac03fe15557191059ba552b}
-
-\begin{DoxyCompactList}\small\item\em Return an array with theta values for all reflections. \item\end{DoxyCompactList}\item 
-const {\bf RefinableObjClock} \& {\bf GetClockTheta} () const \label{a00088_aca474e1e20c1a56ff4bfc8421b6425a0}
-
-\begin{DoxyCompactList}\small\item\em Clock the last time the sin(theta)/lambda and theta arrays were re-\/computed. \item\end{DoxyCompactList}\item 
-const CrystVector\_\-REAL \& {\bf GetFhklCalcSq} () const \label{a00088_a9e36c9b59ed495c594619e4483fa9079}
-
-\begin{DoxyCompactList}\small\item\em Returns the Array of calculated $|$F(hkl)$|$$^\wedge$2 for all reflections. \item\end{DoxyCompactList}\item 
-const CrystVector\_\-REAL \& {\bf GetFhklCalcReal} () const \label{a00088_a19ffd12fa3dc8a24a48b0f33aeef3f1b}
-
-\begin{DoxyCompactList}\small\item\em Access to real part of F(hkl)calc. \item\end{DoxyCompactList}\item 
-const CrystVector\_\-REAL \& {\bf GetFhklCalcImag} () const \label{a00088_ab6589249a39e310dc8b9b69da8b5d6a8}
-
-\begin{DoxyCompactList}\small\item\em Access to imaginary part of F(hkl)calc. \item\end{DoxyCompactList}\item 
-const CrystVector\_\-REAL \& {\bf GetFhklObsSq} () const \label{a00088_afe5d217f0775fe7c65d7eb84ed4213ac}
-
-\begin{DoxyCompactList}\small\item\em Returns the Array of observed $|$F(hkl)$|$$^\wedge$2 for all reflections. \item\end{DoxyCompactList}\item 
-const map$<$ const {\bf ScatteringPower} $\ast$, CrystVector\_\-REAL $>$ \& {\bf GetScatteringFactor} () const \label{a00088_a6415646188e66a451624e78d32999d05}
-
-\begin{DoxyCompactList}\small\item\em Scattering factors for each \doxyref{ScatteringPower}{p.}{a00089}, as vectors with NbRefl elements. \item\end{DoxyCompactList}\item 
-CrystVector\_\-REAL {\bf GetWavelength} () const \label{a00088_a0f0c7dc22a095e2c861c79440fed9b93}
-
-\begin{DoxyCompactList}\small\item\em wavelength of the experiment (in Angstroems) \item\end{DoxyCompactList}\item 
-void {\bf SetIsIgnoringImagScattFact} (const bool b)
-\begin{DoxyCompactList}\small\item\em If true, then the imaginary part of the scattering factor is ignored during Structure factor computation. \item\end{DoxyCompactList}\item 
-bool {\bf IsIgnoringImagScattFact} () const 
-\begin{DoxyCompactList}\small\item\em If true, then the imaginary part of the scattering factor is ignored during Structure factor computation. \item\end{DoxyCompactList}\item 
-virtual void {\bf PrintFhklCalc} (ostream \&os=cout) const 
-\begin{DoxyCompactList}\small\item\em Print H, K, L F$^\wedge$2 Re(F) Im(F) theta sin(theta)/lambda for all reflections. \item\end{DoxyCompactList}\item 
-virtual void {\bf PrintFhklCalcDetail} (ostream \&os=cout) const \label{a00088_ad5519dfdb73da540c705173218905309}
-
-\begin{DoxyCompactList}\small\item\em Print H, K, L sin(theta)/lambda theta F$^\wedge$2 Re(F) Im(F) [Re(F) Im(F)]\_\-i, where [Re(F) Im(F)]\_\-i are the real and imaginary contribution of the different scattering powers to the overall structure factor. \item\end{DoxyCompactList}\item 
-virtual void {\bf BeginOptimization} (const bool allowApproximations=false, const bool enableRestraints=false)
-\begin{DoxyCompactList}\small\item\em This should be called by any optimization class at the begining of an optimization. \item\end{DoxyCompactList}\item 
-virtual void {\bf EndOptimization} ()
-\begin{DoxyCompactList}\small\item\em This should be called by any optimization class at the end of an optimization. \item\end{DoxyCompactList}\item 
-virtual void {\bf SetApproximationFlag} (const bool allow)
-\begin{DoxyCompactList}\small\item\em Enable or disable numerical approximations. \item\end{DoxyCompactList}\item 
-virtual void {\bf SetMaxSinThetaOvLambda} (const REAL max)
-\begin{DoxyCompactList}\small\item\em Set the maximum value for sin(theta)/lambda. \item\end{DoxyCompactList}\item 
-REAL {\bf GetMaxSinThetaOvLambda} () const \label{a00088_ad682b6879c751fd4d241a198b1893e6e}
-
-\begin{DoxyCompactList}\small\item\em Get the maximum value for sin(theta)/lambda. \item\end{DoxyCompactList}\item 
-virtual long {\bf GetNbReflBelowMaxSinThetaOvLambda} () const 
-\begin{DoxyCompactList}\small\item\em Recalc, and get the number of reflections which should be actually used, due to the maximuml sin(theta)/lambda value set. \item\end{DoxyCompactList}\item 
-const {\bf RefinableObjClock} \& {\bf GetClockNbReflBelowMaxSinThetaOvLambda} () const \label{a00088_a44e729df21dc6710d222724b55ab4254}
-
-\begin{DoxyCompactList}\small\item\em Clock the last time the number of reflections used was changed. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactList}\small\item\em \-Get the value of the clock corresponding to the last time the correction was actually computed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{\-Protected \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-virtual void {\bf PrepareHKLarrays} ()
-\item 
-virtual CrystVector\_\-long {\bf SortReflectionBySinThetaOverLambda} (const REAL maxSTOL=-\/1.)
-\item 
-CrystVector\_\-long {\bf EliminateExtinctReflections} ()
-\item 
-virtual void {\bf CalcSinThetaLambda} () const 
-\item 
-void {\bf CalcScattFactor} () const 
-\item 
-void {\bf CalcTemperatureFactor} () const 
-\item 
-virtual void {\bf CalcResonantScattFactor} () const 
-\item 
-void {\bf CalcGlobalTemperatureFactor} () const \label{a00088_a324662c4eb164b080ac06c92a4627f1f}
+virtual void {\bf \-Calc\-Corr} () const =0\label{a00088_a437a916156f6d88c76cb01ca4c748c89}
 
-\begin{DoxyCompactList}\small\item\em Compute the overall temperature factor affecting all reflections. \item\end{DoxyCompactList}\item 
-void {\bf CalcStructFactor} () const 
-\begin{DoxyCompactList}\small\item\em Compute the overall structure factor (real {\bfseries and} imaginary part). \item\end{DoxyCompactList}\item 
-void {\bf CalcGeomStructFactor} () const 
-\begin{DoxyCompactList}\small\item\em Compute the 'Geometrical Structure Factor' for each \doxyref{ScatteringPower}{p.}{a00089} of the \doxyref{Crystal}{p.}{a00020}. \item\end{DoxyCompactList}\item 
-void {\bf CalcLuzzatiFactor} () const \label{a00088_a2f49b0c18be65eb9fbe3d78210f662c3}
-
-\begin{DoxyCompactList}\small\item\em Calculate the Luzzati factor associated to each \doxyref{ScatteringPower}{p.}{a00089} and each reflection, for maximum likelihood optimization. \item\end{DoxyCompactList}\item 
-void {\bf CalcStructFactVariance} () const 
-\begin{DoxyCompactList}\small\item\em Calculate the variance associated to the calculated structure factor. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Protected Attributes}
+\begin{DoxyCompactList}\small\item\em \-Do the computation of corrected intensities. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{\-Protected \-Attributes}
 \begin{DoxyCompactItemize}
 \item 
-long {\bf mNbRefl}\label{a00088_aba357b481cf3c012da758218da7ff726}
+const {\bf \-Scattering\-Data} $\ast$ {\bf mp\-Data}\label{a00088_a0fa066328104835ff72ddf98687c8513}
 
-\begin{DoxyCompactList}\small\item\em Number of H,K,L reflections. \item\end{DoxyCompactList}\item 
-CrystVector\_\-REAL {\bf mH}\label{a00088_ac589707de5e5d4f0122314d4ba034572}
+\begin{DoxyCompactList}\small\item\em \-The associated \doxyref{\-Scattering\-Data}{p.}{a00089} object. \end{DoxyCompactList}\item 
+\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf m\-Corr}\label{a00088_a7669922ac4bbdfb826748148d4016088}
 
-\begin{DoxyCompactList}\small\item\em H,K,L coordinates. \item\end{DoxyCompactList}\item 
-CrystVector\_\-REAL {\bfseries mK}\label{a00088_a880e2a060579e815eadbbeefcbba7084}
+\begin{DoxyCompactList}\small\item\em \-The vector of correction to intensities. \end{DoxyCompactList}\item 
+{\bf \-Refinable\-Obj\-Clock} {\bf m\-Clock\-Corr\-Calc}\label{a00088_aa969418138a9d1867797857318d6f303}
 
+\begin{DoxyCompactList}\small\item\em \-The clock marking the last time the correction was calculated. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{\-Detailed \-Description}
+\-Base class to compute all kind of corrections to intensities\-: \-Lorentz, \-Polar, absorption, texcture, extinction, etc... 
+
+\-The computed intensities are to be multiplied by all the \doxyref{\-Scattering\-Corr}{p.}{a00088} calculated.
+
+\-This is an abstract base class. 
+
+\subsubsection{\-Member \-Function \-Documentation}
+\index{\-Obj\-Cryst\-::\-Scattering\-Corr@{\-Obj\-Cryst\-::\-Scattering\-Corr}!\-Get\-Corr@{\-Get\-Corr}}
+\index{\-Get\-Corr@{\-Get\-Corr}!ObjCryst::ScatteringCorr@{\-Obj\-Cryst\-::\-Scattering\-Corr}}
+\paragraph[{\-Get\-Corr}]{\setlength{\rightskip}{0pt plus 5cm}const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L\& {\bf \-Obj\-Cryst\-::\-Scattering\-Corr\-::\-Get\-Corr} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{a00088_a50395369eb93155bf278453ba158f8cb}
+
+
+\-Get the vector of corrections for all reflections. 
+
+\-Calculated values must be multiplied by these values. 
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-CrystVector\_\-REAL {\bfseries mL}\label{a00088_a836d6399a8f5735af724694e63a31d34}
-
-\item 
-CrystVector\_\-long {\bf mIntH}\label{a00088_ac6300cac304360f11ce20a340a786aee}
-
-\begin{DoxyCompactList}\small\item\em H,K,L integer coordinates. \item\end{DoxyCompactList}\item 
-CrystVector\_\-long {\bfseries mIntK}\label{a00088_a42ee2b356e4f1621a32a5f7f495fd0c7}
-
-\item 
-CrystVector\_\-long {\bfseries mIntL}\label{a00088_a4f86b449b7e9e0e6ff9a804ebdd598b9}
-
-\item 
-CrystVector\_\-REAL {\bf mH2Pi}\label{a00088_af9ccd5e0d976d303fb8d84e27d799cdf}
-
-\begin{DoxyCompactList}\small\item\em H,K,L coordinates, multiplied by 2PI. \item\end{DoxyCompactList}\item 
-CrystVector\_\-REAL {\bfseries mK2Pi}\label{a00088_a0d08c79a1293a32afa79908533cc94d3}
-
-\item 
-CrystVector\_\-REAL {\bfseries mL2Pi}\label{a00088_a1b551f2ee693eb56a69bd99f58831927}
-
-\item 
-CrystVector\_\-REAL {\bf mX}\label{a00088_a93547f7f9c1c8d69222e501aee68b07d}
-
-\begin{DoxyCompactList}\small\item\em reflection coordinates in an orthonormal base \item\end{DoxyCompactList}\item 
-CrystVector\_\-REAL {\bfseries mY}\label{a00088_a5aeecfc21d47eb84e60d9ea1900aa6c0}
-
-\item 
-CrystVector\_\-REAL {\bfseries mZ}\label{a00088_af4b63c112d8865006db7660516859a69}
-
-\item 
-CrystVector\_\-int {\bf mMultiplicity}\label{a00088_affaae453ef7ac110ab7a1f0abb2c50a7}
-
-\begin{DoxyCompactList}\small\item\em Multiplicity for each reflections (mostly for powder diffraction). \item\end{DoxyCompactList}\item 
-CrystVector\_\-int {\bf mExpectedIntensityFactor}
-\begin{DoxyCompactList}\small\item\em Expected intensity factor for all reflections. \item\end{DoxyCompactList}\item 
-CrystVector\_\-REAL {\bf mFhklCalcReal}\label{a00088_a8544897db01ff8f9cb7a245c49c7a4e4}
-
-\begin{DoxyCompactList}\small\item\em real \&imaginary parts of F(HKL)calc \item\end{DoxyCompactList}\item 
-CrystVector\_\-REAL {\bfseries mFhklCalcImag}\label{a00088_a048112ed1fa83eeb209843140e86a41c}
-
-\item 
-CrystVector\_\-REAL {\bf mFhklCalcSq}\label{a00088_a5c61007b1d35f8af192cbb86da7c1ba9}
-
-\begin{DoxyCompactList}\small\item\em F(HKL)$^\wedge$2 calc for each reflection. \item\end{DoxyCompactList}\item 
-{\bf Crystal} $\ast$ {\bf mpCrystal}
-\begin{DoxyCompactList}\small\item\em Pointer to the crystal corresponding to this experiment. \item\end{DoxyCompactList}\item 
-REAL {\bf mGlobalBiso}\label{a00088_a15f71120c0eabe7b1bd768663a176752}
-
-\begin{DoxyCompactList}\small\item\em Global Biso, affecting the overall structure factor for all reflections (but not the structure factors of individual atoms or type of atomes). \item\end{DoxyCompactList}\item 
-CrystVector\_\-REAL {\bf mGlobalTemperatureFactor}\label{a00088_af12d3e0312ba9dc9488ca1db7f35be56}
-
-\begin{DoxyCompactList}\small\item\em Global Biso factor. \item\end{DoxyCompactList}\item 
-bool {\bf mUseFastLessPreciseFunc}
-\begin{DoxyCompactList}\small\item\em Use faster, but less precise, approximations for functions? (integer approximations to compute sin and cos in structure factors, and also to compute interatomic distances). \item\end{DoxyCompactList}\item 
-CrystVector\_\-REAL {\bf mSinThetaLambda}\label{a00088_a06804c1df56b267a8ecb0218e061bdb4}
-
-\begin{DoxyCompactList}\small\item\em $ \frac{sin(\theta)}{\lambda} = \frac{1}{2d_{hkl}}$ for the crystal and the reflections in ReciprSpace \item\end{DoxyCompactList}\item 
-CrystVector\_\-REAL {\bf mTheta}\label{a00088_ae7b30bacb0d4bd5e1e54590b7567392f}
-
-\begin{DoxyCompactList}\small\item\em theta for the crystal and the HKL in ReciprSpace (in radians) \item\end{DoxyCompactList}\item 
-map$<$ const {\bf ScatteringPower} $\ast$, REAL $>$ {\bf mvFprime}
-\begin{DoxyCompactList}\small\item\em Anomalous X-\/Ray scattering term f' and f" are stored here for each \doxyref{ScatteringPower}{p.}{a00089} We store here only a value. \item\end{DoxyCompactList}\item 
-map$<$ const {\bf ScatteringPower} $\ast$, REAL $>$ {\bfseries mvFsecond}\label{a00088_a57882d7477ac1567e1c2caf72f56e9d2}
-
-\item 
-map$<$ const {\bf ScatteringPower} $\ast$, CrystVector\_\-REAL $>$ {\bf mvTemperatureFactor}\label{a00088_a66d5208047bdd6bf1eb066926adc676f}
-
-\begin{DoxyCompactList}\small\item\em Thermic factors for each \doxyref{ScatteringPower}{p.}{a00089}, as vectors with NbRefl elements. \item\end{DoxyCompactList}\item 
-map$<$ const {\bf ScatteringPower} $\ast$, CrystVector\_\-REAL $>$ {\bf mvScatteringFactor}\label{a00088_a130783a5c9beffd3791ee1885953b4cd}
-
-\begin{DoxyCompactList}\small\item\em Scattering factors for each \doxyref{ScatteringPower}{p.}{a00089}, as vectors with NbRefl elements. \item\end{DoxyCompactList}\item 
-map$<$ const {\bf ScatteringPower} $\ast$, CrystVector\_\-REAL $>$ {\bf mvRealGeomSF}\label{a00088_a938a4a024e6fd830786bb22d1171c084}
-
-\begin{DoxyCompactList}\small\item\em Geometrical Structure factor for each \doxyref{ScatteringPower}{p.}{a00089}, as vectors with NbRefl elements. \item\end{DoxyCompactList}\item 
-map$<$ const {\bf ScatteringPower} $\ast$, CrystVector\_\-REAL $>$ {\bfseries mvImagGeomSF}\label{a00088_a5dbceac44c1e2f76279dc4e6160c47eb}
-
-\item 
-{\bf RefinableObjClock} {\bf mClockHKL}\label{a00088_afad19f562c1f34565391c0a05028516f}
-
-\begin{DoxyCompactList}\small\item\em Clock for the list of hkl. \item\end{DoxyCompactList}\item 
-{\bf RefinableObjClock} {\bf mClockStructFactor}\label{a00088_a182f20f79682668151ee46092dce98a2}
-
-\begin{DoxyCompactList}\small\item\em Clock for the structure factor. \item\end{DoxyCompactList}\item 
-{\bf RefinableObjClock} {\bf mClockStructFactorSq}\label{a00088_a65bf8a4033d331408ba09548eaa202d2}
-
-\begin{DoxyCompactList}\small\item\em Clock for the square modulus of the structure factor. \item\end{DoxyCompactList}\item 
-{\bf RefinableObjClock} {\bf mClockTheta}\label{a00088_a22e1b86b0bc485070ebe11bf1461bbe3}
-
-\begin{DoxyCompactList}\small\item\em Clock the last time theta was computed. \item\end{DoxyCompactList}\item 
-{\bf RefinableObjClock} {\bf mClockScattFactor}\label{a00088_a8ce62b5bfb1fcd804c67dbd930b1f548}
-
-\begin{DoxyCompactList}\small\item\em Clock the last time scattering factors were computed. \item\end{DoxyCompactList}\item 
-{\bf RefinableObjClock} {\bf mClockScattFactorResonant}\label{a00088_af3c0765a73ec998573658cce33ccb2c1}
-
-\begin{DoxyCompactList}\small\item\em Clock the last time resonant scattering factors were computed. \item\end{DoxyCompactList}\item 
-{\bf RefinableObjClock} {\bf mClockGeomStructFact}\label{a00088_adae75c08082bf39716f00acf417a661c}
-
-\begin{DoxyCompactList}\small\item\em Clock the last time the geometrical structure factors were computed. \item\end{DoxyCompactList}\item 
-{\bf RefinableObjClock} {\bf mClockThermicFact}\label{a00088_a4295811a2c12d31985b51e2ab6c40088}
-
-\begin{DoxyCompactList}\small\item\em Clock the last time temperature factors were computed. \item\end{DoxyCompactList}\item 
-{\bf RefinableObjClock} {\bf mClockGlobalBiso}\label{a00088_aabaceea890c524c14ca3e6c898d27f8f}
-
-\begin{DoxyCompactList}\small\item\em last time the global Biso factor was modified \item\end{DoxyCompactList}\item 
-{\bf RefinableObjClock} {\bf mClockGlobalTemperatureFact}\label{a00088_a20c193cc38f93c26926dd0d362066ec0}
-
-\begin{DoxyCompactList}\small\item\em last time the global temperature factor was computed \item\end{DoxyCompactList}\item 
-bool {\bf mIgnoreImagScattFact}
-\begin{DoxyCompactList}\small\item\em Ignore imaginary part of scattering factor. \item\end{DoxyCompactList}\item 
-REAL {\bf mMaxSinThetaOvLambda}
-\begin{DoxyCompactList}\small\item\em Maximum sin(theta)/lambda for all calculations (10 by default). \item\end{DoxyCompactList}\item 
-long {\bf mNbReflUsed}
-\begin{DoxyCompactList}\small\item\em Number of reflections which are below the max. \item\end{DoxyCompactList}\item 
-{\bf RefinableObjClock} {\bf mClockNbReflUsed}\label{a00088_a03a5d099c5ff2c41dc37e4f849e5be7b}
-
-\begin{DoxyCompactList}\small\item\em Clock recording the last time the number of reflections used has increased. \item\end{DoxyCompactList}\item 
-map$<$ const {\bf ScatteringPower} $\ast$, CrystVector\_\-REAL $>$ {\bf mvLuzzatiFactor}\label{a00088_a8b9610ceeee8a68a39fc2f13e14d0391}
-
-\begin{DoxyCompactList}\small\item\em The Luzzati 'D' factor for each scattering power and each reflection. \item\end{DoxyCompactList}\item 
-CrystVector\_\-REAL {\bf mFhklCalcVariance}
-\begin{DoxyCompactList}\small\item\em The variance on all calculated structure factors, taking into account the positionnal errors and the expected intensity factor. \item\end{DoxyCompactList}\item 
-{\bf RefinableObjClock} {\bfseries mClockLuzzatiFactor}\label{a00088_a20ce8091b6bf08d1a37cdebb6e254ac1}
-
-\item 
-{\bf RefinableObjClock} {\bfseries mClockFhklCalcVariance}\label{a00088_a401ebb00cb9677b9f2faf62ed326c8da}
-
-\item 
-CrystVector\_\-REAL {\bf mFhklObsSq}\label{a00088_a71ebbc98f69dab63f03d7fb032228e1e}
-
-\begin{DoxyCompactList}\small\item\em Observed squared structure factors (zero-\/sized if none). \item\end{DoxyCompactList}\item 
-{\bf RefinableObjClock} {\bf mClockFhklObsSq}\label{a00088_a1ea122e6d6eb2c987a7e4f59ec111714}
-
-\begin{DoxyCompactList}\small\item\em Last time observed squared structure factors were altered. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
-
-
-\subsubsection{Detailed Description}
-Class to compute structure factors for a set of reflections and a \doxyref{Crystal}{p.}{a00020}. This class only computes structure factor, but no intensity. i.e. it does not include any correction such as absorption, Lorentz or Polarization.
-
-Does this really need to be a \doxyref{RefinableObj}{p.}{a00070} ? \begin{Desc}
-\item[{\bf Todo}]Optimize computation for Bijvoet/Friedel mates. To do this, generate an internal list of 'true independent reflections', with two entries for each, for both mates, and make the 'real' reflections only a reference to these reflections.\end{Desc}
-\begin{Desc}
-\item[{\bf Todo}]a {\bfseries lot} of cleaning is necessary in the computing of structure factors, for (1) the 'preparation' part (deciding what needs to be recomputed) and (2) to allow anisotropic temperature factors (or other anisotropic parts) \end{Desc}
-
-
-\subsubsection{Member Function Documentation}
-\index{ObjCryst::ScatteringData@{ObjCryst::ScatteringData}!BeginOptimization@{BeginOptimization}}
-\index{BeginOptimization@{BeginOptimization}!ObjCryst::ScatteringData@{ObjCryst::ScatteringData}}
-\paragraph[{BeginOptimization}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::ScatteringData::BeginOptimization (const bool {\em allowApproximations} = {\ttfamily false}, \/  const bool {\em enableRestraints} = {\ttfamily false})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00088_a6b0f18996edafa21a03bf9550dcf8981}
-
-
-This should be called by any optimization class at the begining of an optimization. This will also check that everything is ready, eg call the \doxyref{RefinableObj::Prepare()}{p.}{a00070_a48d11671e7f8699f7bc24077585c5e0f} function. This also affects all sub-\/objects. \begin{DoxyNote}{Note}
-this may be called several time for some objects which are used by several other objects, or for nested optimizations (e.g. least-\/squares optimizations inside a global one).
-
-\doxyref{EndOptimization()}{p.}{a00088_a782e0caf5c6f2941ca64d17293b1e8b4} must be called at the end of the optimization, the same number of time \doxyref{BeginOptimization()}{p.}{a00088_a6b0f18996edafa21a03bf9550dcf8981} was called !
-\end{DoxyNote}
-
-\begin{DoxyParams}{Parameters}
-\item[{\em allowApproximations,:}]if true, then the object can use faster but less precise functions during the optimization. This is useful for global optimization not using derivatives. \item[{\em enableRestraints,:}]\end{DoxyParams}
-\begin{Desc}
-\item[{\bf Deprecated}]if true, then restrained parameters will be allowed to go beyond theur hard limits. This implies that the algorithm will take into account the cost (penalty) related to the restraints. Objects which do not use restraints will simply ignore this. WARNING: this parameter may be removed with the new likelihood scheme. \end{Desc}
-
-
-Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_ababd8f2916e41a20d2c1b21f6ffefe96}.
-
-Reimplemented in {\bf ObjCryst::PowderPatternDiffraction} \doxyref{}{p.}{a00065_a44d10a7c3404153fe4513c8944629c45}.\index{ObjCryst::ScatteringData@{ObjCryst::ScatteringData}!CalcGeomStructFactor@{CalcGeomStructFactor}}
-\index{CalcGeomStructFactor@{CalcGeomStructFactor}!ObjCryst::ScatteringData@{ObjCryst::ScatteringData}}
-\paragraph[{CalcGeomStructFactor}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::ScatteringData::CalcGeomStructFactor () const\hspace{0.3cm}{\ttfamily  [protected]}}\hfill\label{a00088_abbb21a3870c4ad22501a5ed95fa8f1f9}
-
-
-Compute the 'Geometrical Structure Factor' for each \doxyref{ScatteringPower}{p.}{a00089} of the \doxyref{Crystal}{p.}{a00020}. \index{ObjCryst::ScatteringData@{ObjCryst::ScatteringData}!CalcResonantScattFactor@{CalcResonantScattFactor}}
-\index{CalcResonantScattFactor@{CalcResonantScattFactor}!ObjCryst::ScatteringData@{ObjCryst::ScatteringData}}
-\paragraph[{CalcResonantScattFactor}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::ScatteringData::CalcResonantScattFactor () const\hspace{0.3cm}{\ttfamily  [protected, virtual]}}\hfill\label{a00088_a4189bd87d77c86063609bb8f2c56a62f}
-\begin{DoxyInternal}{For internal use only.}
-get f' and f" for \doxyref{ScatteringPower}{p.}{a00089} of the crystal, at the exp. wavelength
-
-This {\itshape could\/} be specialized for multi-\/wavelength experiments... \end{DoxyInternal}
-\index{ObjCryst::ScatteringData@{ObjCryst::ScatteringData}!CalcScattFactor@{CalcScattFactor}}
-\index{CalcScattFactor@{CalcScattFactor}!ObjCryst::ScatteringData@{ObjCryst::ScatteringData}}
-\paragraph[{CalcScattFactor}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::ScatteringData::CalcScattFactor () const\hspace{0.3cm}{\ttfamily  [protected]}}\hfill\label{a00088_aa15aa0bf6efdecc4843bb2924a197be8}
-\begin{DoxyInternal}{For internal use only.}
-Get scattering factors for all \doxyref{ScatteringPower}{p.}{a00089} \& reflections \end{DoxyInternal}
-\index{ObjCryst::ScatteringData@{ObjCryst::ScatteringData}!CalcSinThetaLambda@{CalcSinThetaLambda}}
-\index{CalcSinThetaLambda@{CalcSinThetaLambda}!ObjCryst::ScatteringData@{ObjCryst::ScatteringData}}
-\paragraph[{CalcSinThetaLambda}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::ScatteringData::CalcSinThetaLambda () const\hspace{0.3cm}{\ttfamily  [protected, virtual]}}\hfill\label{a00088_a36f66ab4f80103384551fa5c649eac8c}
-\begin{DoxyInternal}{For internal use only.}
-Compute sin(theta)/lambda as well a orthonormal coordinates for all reflections. theta and tan(theta), are also re-\/computed, provided a wavelength has been supplied. \end{DoxyInternal}
-\index{ObjCryst::ScatteringData@{ObjCryst::ScatteringData}!CalcStructFactor@{CalcStructFactor}}
-\index{CalcStructFactor@{CalcStructFactor}!ObjCryst::ScatteringData@{ObjCryst::ScatteringData}}
-\paragraph[{CalcStructFactor}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::ScatteringData::CalcStructFactor () const\hspace{0.3cm}{\ttfamily  [protected]}}\hfill\label{a00088_aceb9551affff0a8c53c6d0e80d0536a2}
-
-
-Compute the overall structure factor (real {\bfseries and} imaginary part). This function is {\itshape optimized\/} {\itshape for\/} {\itshape speed\/} (geometrical structure factors are computed for all atoms and all reflections in two loops, avoiding re-\/calculation). So use this function for repetitive calculations.
-
-This function recognizes the type of radiation (XRay or neutron) and uses the corresponding scattering factor/length.
-
-\begin{DoxyReturn}{Returns}
-the result (real and imaginary part of the structure factor) (mRealFhklCalc, mImagFhklCalc) are stored in \doxyref{ScatteringData}{p.}{a00088}. 
-\end{DoxyReturn}
-\index{ObjCryst::ScatteringData@{ObjCryst::ScatteringData}!CalcStructFactVariance@{CalcStructFactVariance}}
-\index{CalcStructFactVariance@{CalcStructFactVariance}!ObjCryst::ScatteringData@{ObjCryst::ScatteringData}}
-\paragraph[{CalcStructFactVariance}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::ScatteringData::CalcStructFactVariance () const\hspace{0.3cm}{\ttfamily  [protected]}}\hfill\label{a00088_a86079e8b7f2f5a9f8bccfdd0a6ecc25a}
-
-
-Calculate the variance associated to the calculated structure factor. \index{ObjCryst::ScatteringData@{ObjCryst::ScatteringData}!CalcTemperatureFactor@{CalcTemperatureFactor}}
-\index{CalcTemperatureFactor@{CalcTemperatureFactor}!ObjCryst::ScatteringData@{ObjCryst::ScatteringData}}
-\paragraph[{CalcTemperatureFactor}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::ScatteringData::CalcTemperatureFactor () const\hspace{0.3cm}{\ttfamily  [protected]}}\hfill\label{a00088_ab9073f536aa7312de2ceb97e1b1ddcbd}
-\begin{DoxyInternal}{For internal use only.}
-Compute thermic factors for all \doxyref{ScatteringPower}{p.}{a00089} \& reflections \end{DoxyInternal}
-\index{ObjCryst::ScatteringData@{ObjCryst::ScatteringData}!EliminateExtinctReflections@{EliminateExtinctReflections}}
-\index{EliminateExtinctReflections@{EliminateExtinctReflections}!ObjCryst::ScatteringData@{ObjCryst::ScatteringData}}
-\paragraph[{EliminateExtinctReflections}]{\setlength{\rightskip}{0pt plus 5cm}CrystVector\_\-long ObjCryst::ScatteringData::EliminateExtinctReflections ()\hspace{0.3cm}{\ttfamily  [protected]}}\hfill\label{a00088_ac8cc7361579cd633ae295823a235813c}
-\begin{DoxyInternal}{For internal use only.}
-Get rid of extinct reflections. Useful after \doxyref{GenHKLFullSpace()}{p.}{a00088_a5fee409771ee116fae73d7cc530aee6a}. Do not use this if you have a list of observed reflections !
-
-Currently done using (brute-\/force) numerical evaluation. Should rather use \doxyref{SpaceGroup}{p.}{a00094} info... To do !
-
-\begin{DoxyReturn}{Returns}
-an array with the subscript of the kept reflections (for inherited classes) 
-\end{DoxyReturn}
-\end{DoxyInternal}
-\index{ObjCryst::ScatteringData@{ObjCryst::ScatteringData}!EndOptimization@{EndOptimization}}
-\index{EndOptimization@{EndOptimization}!ObjCryst::ScatteringData@{ObjCryst::ScatteringData}}
-\paragraph[{EndOptimization}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::ScatteringData::EndOptimization ()\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00088_a782e0caf5c6f2941ca64d17293b1e8b4}
-
-
-This should be called by any optimization class at the end of an optimization. This also affects all sub-\/objects. \begin{DoxyNote}{Note}
-this may be called several time for some objects which are used by several other objects. 
-\end{DoxyNote}
-
-
-Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_ab0035f6164cb24ace67b51b11993a851}.
-
-Reimplemented in {\bf ObjCryst::PowderPatternDiffraction} \doxyref{}{p.}{a00065_a11f7690878a07983de3abb839b087798}.\index{ObjCryst::ScatteringData@{ObjCryst::ScatteringData}!GenHKLFullSpace@{GenHKLFullSpace}}
-\index{GenHKLFullSpace@{GenHKLFullSpace}!ObjCryst::ScatteringData@{ObjCryst::ScatteringData}}
-\paragraph[{GenHKLFullSpace}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::ScatteringData::GenHKLFullSpace (const REAL {\em maxTheta}, \/  const bool {\em unique} = {\ttfamily false})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00088_a5fee409771ee116fae73d7cc530aee6a}
-
-
-Generate a list of h,k,l to describe a full reciprocal space, up to a given maximum theta value. 
-\begin{DoxyParams}{Parameters}
-\item[{\em maxsithsl:maximum}]sin(theta)/lambda=1/2d value \item[{\em unique,:}]if set to true, only unique reflections will be listed. Bijvoet (Friedel) pairs are NOT merged, for 'anomalous' reasons, unless you have chosen to ignore the imaginary part of the scattering factor.\end{DoxyParams}
-The multiplicity is always stored in \doxyref{ScatteringData::mMultiplicity}{p.}{a00088_affaae453ef7ac110ab7a1f0abb2c50a7}.
-
-\begin{DoxyWarning}{Warning}
-The \doxyref{ScatteringData}{p.}{a00088} object must already have been assigned a crystal object using \doxyref{SetCrystal()}{p.}{a00088_a75ea37efc16db856fff9b8832b524284}, and the experimental wavelength must also have been set before calling this function.
-\end{DoxyWarning}
-\begin{Desc}
-\item[{\bf Deprecated}]Rather use PowderPattern::GenHKLFullSpace2, with a maximum sin(theta)/lambda value, which also works for dispersive experiments. \end{Desc}
-\index{ObjCryst::ScatteringData@{ObjCryst::ScatteringData}!GenHKLFullSpace2@{GenHKLFullSpace2}}
-\index{GenHKLFullSpace2@{GenHKLFullSpace2}!ObjCryst::ScatteringData@{ObjCryst::ScatteringData}}
-\paragraph[{GenHKLFullSpace2}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::ScatteringData::GenHKLFullSpace2 (const REAL {\em maxsithsl}, \/  const bool {\em unique} = {\ttfamily false})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00088_acfb56224331e834478baf240813f7432}
-
-
-Generate a list of h,k,l to describe a full reciprocal space, up to a given maximum theta value. 
-\begin{DoxyParams}{Parameters}
-\item[{\em maxTheta:maximum}]theta value \item[{\em unique,:}]if set to true, only unique reflections will be listed. Bijvoet (Friedel) pairs are NOT merged, for 'anomalous' reasons, unless you have chosen to ignore the imaginary part of the scattering factor.\end{DoxyParams}
-The multiplicity is always stored in \doxyref{ScatteringData::mMultiplicity}{p.}{a00088_affaae453ef7ac110ab7a1f0abb2c50a7}.
-
-\begin{DoxyWarning}{Warning}
-The \doxyref{ScatteringData}{p.}{a00088} object must already have been assigned a crystal object using \doxyref{SetCrystal()}{p.}{a00088_a75ea37efc16db856fff9b8832b524284}, and the experimental wavelength must also have been set before calling this function. 
-\end{DoxyWarning}
-\index{ObjCryst::ScatteringData@{ObjCryst::ScatteringData}!GetH2Pi@{GetH2Pi}}
-\index{GetH2Pi@{GetH2Pi}!ObjCryst::ScatteringData@{ObjCryst::ScatteringData}}
-\paragraph[{GetH2Pi}]{\setlength{\rightskip}{0pt plus 5cm}const CrystVector\_\-REAL\& ObjCryst::ScatteringData::GetH2Pi () const}\hfill\label{a00088_ad79b3ec44d9dcf512c2015f55c72bf67}
-
-
-Return the 1D array of H coordinates for all reflections, multiplied by 2$\ast$pi. \begin{DoxyInternal}{For internal use only.}
-Should be private \end{DoxyInternal}
-\index{ObjCryst::ScatteringData@{ObjCryst::ScatteringData}!GetK2Pi@{GetK2Pi}}
-\index{GetK2Pi@{GetK2Pi}!ObjCryst::ScatteringData@{ObjCryst::ScatteringData}}
-\paragraph[{GetK2Pi}]{\setlength{\rightskip}{0pt plus 5cm}const CrystVector\_\-REAL\& ObjCryst::ScatteringData::GetK2Pi () const}\hfill\label{a00088_a092d2c4539f4d318cd5dbfa423d0c2fb}
-
-
-Return the 1D array of K coordinates for all reflections, multiplied by 2$\ast$pi. \begin{DoxyInternal}{For internal use only.}
-Should be private \end{DoxyInternal}
-\index{ObjCryst::ScatteringData@{ObjCryst::ScatteringData}!GetL2Pi@{GetL2Pi}}
-\index{GetL2Pi@{GetL2Pi}!ObjCryst::ScatteringData@{ObjCryst::ScatteringData}}
-\paragraph[{GetL2Pi}]{\setlength{\rightskip}{0pt plus 5cm}const CrystVector\_\-REAL\& ObjCryst::ScatteringData::GetL2Pi () const}\hfill\label{a00088_a27efeb3532f93c273e6d53af74fd8804}
-
-
-Return the 1D array of L coordinates for all reflections, multiplied by 2$\ast$pi. \begin{DoxyInternal}{For internal use only.}
-Should be private \end{DoxyInternal}
-\index{ObjCryst::ScatteringData@{ObjCryst::ScatteringData}!GetNbReflBelowMaxSinThetaOvLambda@{GetNbReflBelowMaxSinThetaOvLambda}}
-\index{GetNbReflBelowMaxSinThetaOvLambda@{GetNbReflBelowMaxSinThetaOvLambda}!ObjCryst::ScatteringData@{ObjCryst::ScatteringData}}
-\paragraph[{GetNbReflBelowMaxSinThetaOvLambda}]{\setlength{\rightskip}{0pt plus 5cm}virtual long ObjCryst::ScatteringData::GetNbReflBelowMaxSinThetaOvLambda () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00088_aac8034f8b0f6980c619e595ce6ba1d65}
-
-
-Recalc, and get the number of reflections which should be actually used, due to the maximuml sin(theta)/lambda value set. 
-
-Reimplemented in {\bf ObjCryst::PowderPatternDiffraction} \doxyref{}{p.}{a00065_a2793f8d2df13e5a1e9a5efc527771b3a}.\index{ObjCryst::ScatteringData@{ObjCryst::ScatteringData}!IsIgnoringImagScattFact@{IsIgnoringImagScattFact}}
-\index{IsIgnoringImagScattFact@{IsIgnoringImagScattFact}!ObjCryst::ScatteringData@{ObjCryst::ScatteringData}}
-\paragraph[{IsIgnoringImagScattFact}]{\setlength{\rightskip}{0pt plus 5cm}bool ObjCryst::ScatteringData::IsIgnoringImagScattFact () const}\hfill\label{a00088_a24cdbd2eb620d7d972ce4b6ccf23a0b0}
-
-
-If true, then the imaginary part of the scattering factor is ignored during Structure factor computation. \index{ObjCryst::ScatteringData@{ObjCryst::ScatteringData}!PrepareHKLarrays@{PrepareHKLarrays}}
-\index{PrepareHKLarrays@{PrepareHKLarrays}!ObjCryst::ScatteringData@{ObjCryst::ScatteringData}}
-\paragraph[{PrepareHKLarrays}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::ScatteringData::PrepareHKLarrays ()\hspace{0.3cm}{\ttfamily  [protected, virtual]}}\hfill\label{a00088_a0c01e0c2ffbe9bfbb92d7b5751e420e2}
-\begin{DoxyInternal}{For internal use only.}
-This function is called after H,K and L arrays have been initialized or modified. \end{DoxyInternal}
-\index{ObjCryst::ScatteringData@{ObjCryst::ScatteringData}!PrintFhklCalc@{PrintFhklCalc}}
-\index{PrintFhklCalc@{PrintFhklCalc}!ObjCryst::ScatteringData@{ObjCryst::ScatteringData}}
-\paragraph[{PrintFhklCalc}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::ScatteringData::PrintFhklCalc (ostream \& {\em os} = {\ttfamily cout}) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00088_ace1458ac95c287fffa89049f58ac0a41}
-
-
-Print H, K, L F$^\wedge$2 Re(F) Im(F) theta sin(theta)/lambda for all reflections. \index{ObjCryst::ScatteringData@{ObjCryst::ScatteringData}!SetApproximationFlag@{SetApproximationFlag}}
-\index{SetApproximationFlag@{SetApproximationFlag}!ObjCryst::ScatteringData@{ObjCryst::ScatteringData}}
-\paragraph[{SetApproximationFlag}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::ScatteringData::SetApproximationFlag (const bool {\em allow})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00088_a109ed8c2e8dc676e77aa80feafa91071}
-
-
-Enable or disable numerical approximations. This can be used for global optimization to get faster calculations. Depending on the type of object, this may do something or not (it does not do anything in a base \doxyref{RefinableObj}{p.}{a00070}, except calling this function for all sub-\/objects).
-
-\begin{DoxyNote}{Note}
-Currently there is no mApproximationFlag in the base class, but maybe there should...
-\end{DoxyNote}
-Also see: 
-
-Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_a565c41c23c04f5945512374ae671e2e3}.
-
-Reimplemented in {\bf ObjCryst::PowderPatternDiffraction} \doxyref{}{p.}{a00065_a0e7b4a6f4b3a7b783ebed15230a1c45f}.\index{ObjCryst::ScatteringData@{ObjCryst::ScatteringData}!SetCrystal@{SetCrystal}}
-\index{SetCrystal@{SetCrystal}!ObjCryst::ScatteringData@{ObjCryst::ScatteringData}}
-\paragraph[{SetCrystal}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::ScatteringData::SetCrystal ({\bf Crystal} \& {\em crystal})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00088_a75ea37efc16db856fff9b8832b524284}
-
-
-Set the crystal for this experiment. 
-
-Reimplemented in {\bf ObjCryst::PowderPatternDiffraction} \doxyref{}{p.}{a00065_a855f114ce585410a354b56a6ea336eaf}.\index{ObjCryst::ScatteringData@{ObjCryst::ScatteringData}!SetHKL@{SetHKL}}
-\index{SetHKL@{SetHKL}!ObjCryst::ScatteringData@{ObjCryst::ScatteringData}}
-\paragraph[{SetHKL}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::ScatteringData::SetHKL (const CrystVector\_\-REAL \& {\em h}, \/  const CrystVector\_\-REAL \& {\em k}, \/  const CrystVector\_\-REAL \& {\em l})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00088_aada0135fdf333760b7b2627b6f36206c}
-
-
-input H,K,L 
-\begin{DoxyParams}{Parameters}
-\item[{\em h,k,l,:}]REAL arrays (vectors with NbRefl elements -\/same size), with the h, k and l coordinates of all reflections. \end{DoxyParams}
-\index{ObjCryst::ScatteringData@{ObjCryst::ScatteringData}!SetIsIgnoringImagScattFact@{SetIsIgnoringImagScattFact}}
-\index{SetIsIgnoringImagScattFact@{SetIsIgnoringImagScattFact}!ObjCryst::ScatteringData@{ObjCryst::ScatteringData}}
-\paragraph[{SetIsIgnoringImagScattFact}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::ScatteringData::SetIsIgnoringImagScattFact (const bool {\em b})}\hfill\label{a00088_ae126b860d309daa78e975b8b6d8a3ec0}
-
-
-If true, then the imaginary part of the scattering factor is ignored during Structure factor computation. (default value=false)
-
-\begin{Desc}
-\item[{\bf Todo}]this should become useless once we take fully advantage of coupled computation of Structure Factors for Fridel/Bijvoet mates using an internal list of 'fully unique' reflections. Then only one of the mates need to be computed.. \end{Desc}
-\index{ObjCryst::ScatteringData@{ObjCryst::ScatteringData}!SetMaxSinThetaOvLambda@{SetMaxSinThetaOvLambda}}
-\index{SetMaxSinThetaOvLambda@{SetMaxSinThetaOvLambda}!ObjCryst::ScatteringData@{ObjCryst::ScatteringData}}
-\paragraph[{SetMaxSinThetaOvLambda}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::ScatteringData::SetMaxSinThetaOvLambda (const REAL {\em max})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00088_a54629fa52fe111d2867797ae1204ddf8}
-
-
-Set the maximum value for sin(theta)/lambda. All data (reflections,..) still exist but are ignored for all calculations. 
-
-Reimplemented in {\bf ObjCryst::PowderPatternDiffraction} \doxyref{}{p.}{a00065_a699af7ea523fca128032384b548ceef1}.\index{ObjCryst::ScatteringData@{ObjCryst::ScatteringData}!SortReflectionBySinThetaOverLambda@{SortReflectionBySinThetaOverLambda}}
-\index{SortReflectionBySinThetaOverLambda@{SortReflectionBySinThetaOverLambda}!ObjCryst::ScatteringData@{ObjCryst::ScatteringData}}
-\paragraph[{SortReflectionBySinThetaOverLambda}]{\setlength{\rightskip}{0pt plus 5cm}virtual CrystVector\_\-long ObjCryst::ScatteringData::SortReflectionBySinThetaOverLambda (const REAL {\em maxSTOL} = {\ttfamily -\/1.})\hspace{0.3cm}{\ttfamily  [protected, virtual]}}\hfill\label{a00088_a4b843c3350e25d4d0c52da3400768fb7}
-\begin{DoxyInternal}{For internal use only.}
-sort reflections by theta values (also get rid of [0,0,0] if present) If maxSTOL $>$0, then only reflections where sin(theta)/lambda$<$maxSTOL are kept \begin{DoxyReturn}{Returns}
-an array with the subscript of the kept reflections (for inherited classes) 
-\end{DoxyReturn}
-\end{DoxyInternal}
-
-
-Reimplemented in {\bf ObjCryst::DiffractionDataSingleCrystal} \doxyref{}{p.}{a00026_aeac660426ee4c5aa52d494b449a164f9}.
-
-\subsubsection{Member Data Documentation}
-\index{ObjCryst::ScatteringData@{ObjCryst::ScatteringData}!mExpectedIntensityFactor@{mExpectedIntensityFactor}}
-\index{mExpectedIntensityFactor@{mExpectedIntensityFactor}!ObjCryst::ScatteringData@{ObjCryst::ScatteringData}}
-\paragraph[{mExpectedIntensityFactor}]{\setlength{\rightskip}{0pt plus 5cm}CrystVector\_\-int {\bf ObjCryst::ScatteringData::mExpectedIntensityFactor}\hspace{0.3cm}{\ttfamily  [protected]}}\hfill\label{a00088_a8296cf05015c7c4bbfc1dc7b443e3096}
-
-
-Expected intensity factor for all reflections. See \doxyref{SpaceGroup::GetExpectedIntensityFactor()}{p.}{a00094_add3a6c0f649b952225fd7ef07b9e02d7} \index{ObjCryst::ScatteringData@{ObjCryst::ScatteringData}!mFhklCalcVariance@{mFhklCalcVariance}}
-\index{mFhklCalcVariance@{mFhklCalcVariance}!ObjCryst::ScatteringData@{ObjCryst::ScatteringData}}
-\paragraph[{mFhklCalcVariance}]{\setlength{\rightskip}{0pt plus 5cm}CrystVector\_\-REAL {\bf ObjCryst::ScatteringData::mFhklCalcVariance}\hspace{0.3cm}{\ttfamily  [mutable, protected]}}\hfill\label{a00088_a85ab0dd2973824fc2ad62fb6fef2e274}
-
-
-The variance on all calculated structure factors, taking into account the positionnal errors and the expected intensity factor. Actually this is the variance on both real and imaginary parts. \index{ObjCryst::ScatteringData@{ObjCryst::ScatteringData}!mIgnoreImagScattFact@{mIgnoreImagScattFact}}
-\index{mIgnoreImagScattFact@{mIgnoreImagScattFact}!ObjCryst::ScatteringData@{ObjCryst::ScatteringData}}
-\paragraph[{mIgnoreImagScattFact}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf ObjCryst::ScatteringData::mIgnoreImagScattFact}\hspace{0.3cm}{\ttfamily  [protected]}}\hfill\label{a00088_a3a9764c52916a533a44baaea89bdceab}
-
-
-Ignore imaginary part of scattering factor. This can be used either to speed up computation, or when f" has a small effect on calculated intensities, mostly for powder diffraction (GenHKLFullSpace will not generate Friedel pairs, reducing the number of reflections by a factor up to 2 for some structures).
-
-Practically this makes f"=0 during computation. The real resonant contribution (f') is not affected.
-
-This may be removed later on... \index{ObjCryst::ScatteringData@{ObjCryst::ScatteringData}!mMaxSinThetaOvLambda@{mMaxSinThetaOvLambda}}
-\index{mMaxSinThetaOvLambda@{mMaxSinThetaOvLambda}!ObjCryst::ScatteringData@{ObjCryst::ScatteringData}}
-\paragraph[{mMaxSinThetaOvLambda}]{\setlength{\rightskip}{0pt plus 5cm}REAL {\bf ObjCryst::ScatteringData::mMaxSinThetaOvLambda}\hspace{0.3cm}{\ttfamily  [protected]}}\hfill\label{a00088_acb0398e21f803308b79103182906f6c5}
-
-
-Maximum sin(theta)/lambda for all calculations (10 by default). This keeps all data in memory, but only the part which is below the max is calculated.
-
-This affects the computing of structure factors, intensities (for single crystal and powder patterns), R and Rw.
-
-The reflections {\bfseries must} be sorted by increasing sin(theta)/lambda for this to work correctly. \index{ObjCryst::ScatteringData@{ObjCryst::ScatteringData}!mNbReflUsed@{mNbReflUsed}}
-\index{mNbReflUsed@{mNbReflUsed}!ObjCryst::ScatteringData@{ObjCryst::ScatteringData}}
-\paragraph[{mNbReflUsed}]{\setlength{\rightskip}{0pt plus 5cm}long {\bf ObjCryst::ScatteringData::mNbReflUsed}\hspace{0.3cm}{\ttfamily  [mutable, protected]}}\hfill\label{a00088_a00e0972eebd70ae92231b804884a83b6}
-
-
-Number of reflections which are below the max. This is updated automatically from \doxyref{ScatteringData::mMaxSinThetaOvLambda}{p.}{a00088_acb0398e21f803308b79103182906f6c5} \index{ObjCryst::ScatteringData@{ObjCryst::ScatteringData}!mpCrystal@{mpCrystal}}
-\index{mpCrystal@{mpCrystal}!ObjCryst::ScatteringData@{ObjCryst::ScatteringData}}
-\paragraph[{mpCrystal}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Crystal}$\ast$ {\bf ObjCryst::ScatteringData::mpCrystal}\hspace{0.3cm}{\ttfamily  [protected]}}\hfill\label{a00088_a8c4e778a97e93098d585ffdc597dbb54}
-
-
-Pointer to the crystal corresponding to this experiment. This gives an access to the UB matrix for the crystal, as well as to the list of \doxyref{Scatterer}{p.}{a00084}. \index{ObjCryst::ScatteringData@{ObjCryst::ScatteringData}!mUseFastLessPreciseFunc@{mUseFastLessPreciseFunc}}
-\index{mUseFastLessPreciseFunc@{mUseFastLessPreciseFunc}!ObjCryst::ScatteringData@{ObjCryst::ScatteringData}}
-\paragraph[{mUseFastLessPreciseFunc}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf ObjCryst::ScatteringData::mUseFastLessPreciseFunc}\hspace{0.3cm}{\ttfamily  [protected]}}\hfill\label{a00088_a7a3fa9e9ea5c3a1dc6076f69ad584ad7}
-
-
-Use faster, but less precise, approximations for functions? (integer approximations to compute sin and cos in structure factors, and also to compute interatomic distances). This is activated by global optimization algortithms, only during the optimization. \index{ObjCryst::ScatteringData@{ObjCryst::ScatteringData}!mvFprime@{mvFprime}}
-\index{mvFprime@{mvFprime}!ObjCryst::ScatteringData@{ObjCryst::ScatteringData}}
-\paragraph[{mvFprime}]{\setlength{\rightskip}{0pt plus 5cm}map$<$const {\bf ScatteringPower}$\ast$,REAL$>$ {\bf ObjCryst::ScatteringData::mvFprime}\hspace{0.3cm}{\ttfamily  [mutable, protected]}}\hfill\label{a00088_a13e1ec375416a17f94370a4cf4bd5583}
-
-
-Anomalous X-\/Ray scattering term f' and f" are stored here for each \doxyref{ScatteringPower}{p.}{a00089} We store here only a value. For multi-\/wavelength support this should be changed to a vector... or to a matrix to take into account anisotropy of anomalous scattering... 
-
-The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
-\item 
-ScatteringData.h\end{DoxyCompactItemize}
+\-Scattering\-Corr.\-h\end{DoxyCompactItemize}

@@ -1,70 +1,74 @@
-\subsection{ObjCryst::PeakList::hkl Struct Reference}
-\label{a00035}\index{ObjCryst::PeakList::hkl@{ObjCryst::PeakList::hkl}}
+\subsection{\-Obj\-Cryst\-:\-:\-Peak\-List\-:\-:hkl \-Struct \-Reference}
+\label{a00035}\index{\-Obj\-Cryst\-::\-Peak\-List\-::hkl@{\-Obj\-Cryst\-::\-Peak\-List\-::hkl}}
 
 
-One observed diffraction line, to be indexed.  
-\subsubsection*{Public Member Functions}
+\-One observed diffraction line, to be indexed.  
+
+
+\subsubsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries hkl} (const float {\bf dobs}=1.0, const float {\bf iobs}=0.0, const float {\bf dobssigma}=0.0, const float {\bf iobssigma}=0.0, const int {\bf h}=0, const int k=0, const int l=0, const float {\bf d2calc}=0)\label{a00035_a8c23626fff887e4eae3941b76dfa39e6}
+{\bfseries hkl} (const float {\bf dobs}=1.\-0, const float {\bf iobs}=0.\-0, const float {\bf dobssigma}=0.\-0, const float {\bf iobssigma}=0.\-0, const int {\bf h}=0, const int k=0, const int l=0, const float {\bf d2calc}=0)\label{a00035_a8c23626fff887e4eae3941b76dfa39e6}
 
 \end{DoxyCompactItemize}
-\subsubsection*{Public Attributes}
+\subsubsection*{\-Public \-Attributes}
 \begin{DoxyCompactItemize}
 \item 
 float {\bf dobs}\label{a00035_a55f08e63e4fb2b1144a443ff9af6f417}
 
-\begin{DoxyCompactList}\small\item\em Observed peak position 1/d. \item\end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \-Observed peak position 1/d. \end{DoxyCompactList}\item 
 float {\bf dobssigma}\label{a00035_a8faeba0e940c91c2fcc26076eb4a3a9d}
 
-\begin{DoxyCompactList}\small\item\em Error on peak position. \item\end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \-Error on peak position. \end{DoxyCompactList}\item 
 float {\bf d2obs}\label{a00035_ae3ff81cbc0c1ee35afb879446cf4069a}
 
-\begin{DoxyCompactList}\small\item\em Observed peak position 1/d$^\wedge$2. \item\end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \-Observed peak position 1/d$^\wedge$2. \end{DoxyCompactList}\item 
 float {\bf d2obsmin}\label{a00035_a7bbdbab34e41397933140b0b0114389f}
 
-\begin{DoxyCompactList}\small\item\em Min value for observed peak position 1/(d+disgma/2)$^\wedge$2. \item\end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \-Min value for observed peak position 1/(d+disgma/2)$^\wedge$2. \end{DoxyCompactList}\item 
 float {\bf d2obsmax}\label{a00035_a437e9b76b38092c298b4f4aa64b45a9e}
 
-\begin{DoxyCompactList}\small\item\em Min value for observed peak position 1/(d-\/disgma/2)$^\wedge$2. \item\end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \-Min value for observed peak position 1/(d-\/disgma/2)$^\wedge$2. \end{DoxyCompactList}\item 
 float {\bf iobs}\label{a00035_a84f98b9cf3b479c563d49dbb87e42700}
 
-\begin{DoxyCompactList}\small\item\em Observed peak intensity. \item\end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \-Observed peak intensity. \end{DoxyCompactList}\item 
 float {\bf iobssigma}\label{a00035_aec948131b33d0f5a1c898119d131e0d8}
 
-\begin{DoxyCompactList}\small\item\em Error on observed peak intensity. \item\end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \-Error on observed peak intensity. \end{DoxyCompactList}\item 
 int {\bf h}\label{a00035_ac0ab3e1d9bacbeb86c581adc48b61d51}
 
-\begin{DoxyCompactList}\small\item\em Miller indices, after line is indexed. \item\end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \-Miller indices, after line is indexed. \end{DoxyCompactList}\item 
 int {\bfseries k}\label{a00035_a2833fb7b4399c1bb5b4c18cdde593bc8}
 
 \item 
 int {\bfseries l}\label{a00035_abcbb5600968e6e6ba8cf3249ea347b1f}
 
 \item 
-std::list$<$ {\bf hkl0} $>$ {\bf vDicVolHKL}\label{a00035_aac462f11d462e446b70a008118ee979a}
+std\-::list$<$ {\bf hkl0} $>$ {\bf v\-Dic\-Vol\-H\-K\-L}\label{a00035_aac462f11d462e446b70a008118ee979a}
 
-\begin{DoxyCompactList}\small\item\em Possible Miller indices, stored during a dichotomy search. \item\end{DoxyCompactList}\item 
-bool {\bf isIndexed}\label{a00035_ac326ec57ba6dd5026512ddb9b9d317c8}
+\begin{DoxyCompactList}\small\item\em \-Possible \-Miller indices, stored during a dichotomy search. \end{DoxyCompactList}\item 
+bool {\bf is\-Indexed}\label{a00035_ac326ec57ba6dd5026512ddb9b9d317c8}
 
-\begin{DoxyCompactList}\small\item\em Is this line indexed ? \item\end{DoxyCompactList}\item 
-bool {\bf isSpurious}\label{a00035_a2e7a78636f1ece663db539279ac03837}
+\begin{DoxyCompactList}\small\item\em \-Is this line indexed ? \end{DoxyCompactList}\item 
+bool {\bf is\-Spurious}\label{a00035_a2e7a78636f1ece663db539279ac03837}
 
-\begin{DoxyCompactList}\small\item\em Is this an impurity line ? \item\end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \-Is this an impurity line ? \end{DoxyCompactList}\item 
 unsigned long {\bf stats}\label{a00035_a39d25f8e470547a4da7a9e1d3cf9a4fc}
 
-\begin{DoxyCompactList}\small\item\em Indexing statistics. \item\end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \-Indexing statistics. \end{DoxyCompactList}\item 
 float {\bf d2calc}\label{a00035_a16036f6dea4f34c7715bafa41e08d913}
 
-\begin{DoxyCompactList}\small\item\em Calculated position, 1/d$^\wedge$2. \item\end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \-Calculated position, 1/d$^\wedge$2. \end{DoxyCompactList}\item 
 float {\bf d2diff}\label{a00035_a66ae3d76c7c2173e27a142ebfcb99162}
 
-\begin{DoxyCompactList}\small\item\em 1/d$^\wedge$2 difference, obs-\/calc \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em 1/d$^\wedge$2 difference, obs-\/calc \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\subsubsection{Detailed Description}
-One observed diffraction line, to be indexed. 
+\subsubsection{\-Detailed \-Description}
+\-One observed diffraction line, to be indexed. 
 
-The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+
+
+\-The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-Indexing.h\end{DoxyCompactItemize}
+\-Indexing.\-h\end{DoxyCompactItemize}

@@ -5,7 +5,7 @@
 %%For: 
 %Magnification: 1.00
 %%Orientation: Portrait
-%%BoundingBox: 0 0 500 127.119
+%%BoundingBox: 0 0 500 37.735849
 %%Pages: 0
 %%BeginSetup
 %%EndSetup
@@ -19,13 +19,13 @@
 /marginwidth 10 def
 /distx 20 def
 /disty 40 def
-/boundaspect 3.93333 def  % aspect ratio of the BoundingBox (width/height)
+/boundaspect 13.250000 def  % aspect ratio of the BoundingBox (width/height)
 /boundx 500 def
 /boundy boundx boundaspect div def
 /xspacing 0 def
 /yspacing 0 def
-/rows 3 def
-/cols 2 def
+/rows 2 def
+/cols 5 def
 /scalefactor 0 def
 /boxfont /Times-Roman findfont fontheight scalefont def
 
@@ -173,10 +173,12 @@
 
 boxfont setfont
 1 boundaspect scale
-(ObjCryst::ScatteringData) cw
-(ObjCryst::RefinableObj) cw
-(ObjCryst::DiffractionDataSingleCrystal) cw
-(ObjCryst::PowderPatternDiffraction) cw
+(ObjCryst::ScatteringCorr) cw
+(ObjCryst::LorentzCorr) cw
+(ObjCryst::PolarizationCorr) cw
+(ObjCryst::PowderSlitApertureCorr) cw
+(ObjCryst::TextureMarchDollase) cw
+(ObjCryst::TOFCorr) cw
 /boxwidth boxwidth marginwidth 2 mul add def
 /xspacing boxwidth distx add def
 /yspacing boxheight disty add def
@@ -188,24 +190,26 @@ boundx scalefactor div boundy scalefactor div scale
 
 % ----- classes -----
 
- (ObjCryst::ScatteringData) 0.5 1 box
-dashed
- (ObjCryst::RefinableObj) 0.5 2 box
-solid
- (ObjCryst::DiffractionDataSingleCrystal) 0 0 box
- (ObjCryst::PowderPatternDiffraction) 1 0 box
+ (ObjCryst::ScatteringCorr) 2.000000 1.000000 box
+ (ObjCryst::LorentzCorr) 0.000000 0.000000 box
+ (ObjCryst::PolarizationCorr) 1.000000 0.000000 box
+ (ObjCryst::PowderSlitApertureCorr) 2.000000 0.000000 box
+ (ObjCryst::TextureMarchDollase) 3.000000 0.000000 box
+ (ObjCryst::TOFCorr) 4.000000 0.000000 box
 
 % ----- relations -----
 
 solid
-0 0.5 1 out
+1 2.000000 0.250000 out
 solid
-1 0.5 2 in
+0.000000 4.000000 1.000000 conn
 solid
-1 0.5 0.25 out
+0 0.000000 0.750000 in
 solid
-0 1 1 conn
+0 1.000000 0.750000 in
 solid
-0 0 0.75 in
+0 2.000000 0.750000 in
 solid
-0 1 0.75 in
+0 3.000000 0.750000 in
+solid
+0 4.000000 0.750000 in

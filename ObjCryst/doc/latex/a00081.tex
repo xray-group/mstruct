@@ -1,51 +1,58 @@
-\subsection{ObjCryst::RigidGroup Class Reference}
-\label{a00081}\index{ObjCryst::RigidGroup@{ObjCryst::RigidGroup}}
+\subsection{\-Obj\-Cryst\-:\-:\-Restraint \-Class \-Reference}
+\label{a00081}\index{\-Obj\-Cryst\-::\-Restraint@{\-Obj\-Cryst\-::\-Restraint}}
 
 
-Rigid groups of atoms inside a molecule.  
-\subsubsection*{Public Member Functions}
+\doxyref{\-Restraint}{p.}{a00081}\-: generic class for a restraint of a given model.  
+
+
+\-Inheritance diagram for \-Obj\-Cryst\-:\-:\-Restraint\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.573034cm]{a00081}
+\end{center}
+\end{figure}
+\subsubsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-std::string {\bfseries GetName} () const \label{a00081_ae16707c1aa4b50c7df8a468d9d8dd751}
+{\bf \-Restraint} ()\label{a00081_ac916c489ee14891b38bf9a877d9e0d03}
+
+\begin{DoxyCompactList}\small\item\em \-Default constructor, sets \doxyref{\-Ref\-Par\-Type}{p.}{a00080} to gp\-Ref\-Par\-Type\-Obj\-Cryst. \end{DoxyCompactList}\item 
+{\bf \-Restraint} (const {\bf \-Ref\-Par\-Type} $\ast$type)\label{a00081_a5fd37c4a5f20a41dcacb78b0af3b8a7d}
+
+\begin{DoxyCompactList}\small\item\em constructor specifying the type \end{DoxyCompactList}\item 
+virtual const {\bf \-Ref\-Par\-Type} $\ast$ {\bfseries \-Get\-Type} () const \label{a00081_aaa8b94f207f2e77f58754236af929a57}
+
+\item 
+virtual void {\bfseries \-Set\-Type} (const {\bf \-Ref\-Par\-Type} $\ast$type)\label{a00081_ab9dc55ae087d99cd30e9915ffb6e5371}
+
+\item 
+virtual \-R\-E\-A\-L {\bf \-Get\-Log\-Likelihood} () const \label{a00081_adac7d5d594f6d0c26aa7a15b0bb1c73c}
+
+\begin{DoxyCompactList}\small\item\em \-Get -\/ln(likelihood) for this restraint. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{\-Private \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const {\bf \-Ref\-Par\-Type} $\ast$ {\bfseries mp\-Ref\-Par\-Type}\label{a00081_a4f87437f4e2e44c1f3ca2039c54b202f}
 
 \end{DoxyCompactItemize}
-\subsubsection*{Public Attributes}
-\begin{DoxyCompactItemize}
+
+
+\subsubsection{\-Detailed \-Description}
+\doxyref{\-Restraint}{p.}{a00081}\-: generic class for a restraint of a given model. 
+
+\-This defines only the category (\doxyref{\-Ref\-Par\-Type}{p.}{a00080}) of restraint, and the function to access the log(likelihood) associated to this restraint and the current model.
+
+\-By default\-: -\/log(likelihood)=0, and the function must be overloaded for \char`\"{}real\char`\"{} restraints.
+
+\begin{DoxyNote}{\-Note}
+the log(likelihood) {\itshape must\/} always include the normalization term, so that variances can also optimized during the maximum likelihood optimization. e.\-g.\-:
+\begin{DoxyItemize}
+\item $ P=\frac{1}{\sqrt{2\pi\sigma^2}}e^{\frac{-(calc-expected)^2}{\sigma^2}}$
+\item $ -\log(P)= \log\left(\sqrt{2\pi\sigma^2}\right) + \left(\frac{calc-expected}{\sigma} \right)^2$
+\end{DoxyItemize}
+\end{DoxyNote}
+forgetting the normalization term would result in making the optimization diverge towards infinite variances. 
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-{\bf Quaternion} {\bf mQuat}
-\begin{DoxyCompactList}\small\item\em The unit quaternion defining the orientation -\/ this is used during optimizations to rotate all atoms as a group. \item\end{DoxyCompactList}\item 
-REAL {\bf mX}
-\begin{DoxyCompactList}\small\item\em The translation of all the atoms as a group The values will be resetted whenever entering or leaving an optimization. \item\end{DoxyCompactList}\item 
-REAL {\bfseries mY}\label{a00081_a941525a36f26bb426fbbde9c1752c930}
-
-\item 
-REAL {\bfseries mZ}\label{a00081_ac0d6341c324838a1868a6bf34e25d64d}
-
-\item 
-std::set$<$ unsigned int $>$ {\bf mvIdx}\label{a00081_a5c24037c1724aa2e0060c9432f0ec907}
-
-\begin{DoxyCompactList}\small\item\em Temporary list of the atoms indices in the molecule, used during optimization This is created in \doxyref{Molecule::BeginOptimization()}{p.}{a00046_a5fbdadb37966f382a6e33150285819dc}. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
-
-
-\subsubsection{Detailed Description}
-Rigid groups of atoms inside a molecule. These atoms can be moved as a group using one rotation and one translation. \begin{DoxyWarning}{Warning}
-: the rotation (quaternion) and translation parameters are not saved or displayed, so any time this must be done \doxyref{Molecule::ResetRigidGroupsPar()}{p.}{a00046_a9daa98a9b4a992d56e0dba41b104b291} {\bfseries must} be called beforehand -\/ this will use the rotation and translation parameters to generate the final atomic coordinates, and reset mQuat,mX,mY and mZ. 
-\end{DoxyWarning}
-
-
-\subsubsection{Member Data Documentation}
-\index{ObjCryst::RigidGroup@{ObjCryst::RigidGroup}!mQuat@{mQuat}}
-\index{mQuat@{mQuat}!ObjCryst::RigidGroup@{ObjCryst::RigidGroup}}
-\paragraph[{mQuat}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Quaternion} {\bf ObjCryst::RigidGroup::mQuat}\hspace{0.3cm}{\ttfamily  [mutable]}}\hfill\label{a00081_a65b5f08946d861618286787ac67ec2fb}
-
-
-The unit quaternion defining the orientation -\/ this is used during optimizations to rotate all atoms as a group. The quaternion does not give an absolute position -\/ its value will be resetted whenever entering or leaving an optimization. \index{ObjCryst::RigidGroup@{ObjCryst::RigidGroup}!mX@{mX}}
-\index{mX@{mX}!ObjCryst::RigidGroup@{ObjCryst::RigidGroup}}
-\paragraph[{mX}]{\setlength{\rightskip}{0pt plus 5cm}REAL {\bf ObjCryst::RigidGroup::mX}\hspace{0.3cm}{\ttfamily  [mutable]}}\hfill\label{a00081_abda5125459a21cc5534c90d9516312e9}
-
-
-The translation of all the atoms as a group The values will be resetted whenever entering or leaving an optimization. 
-
-The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
-\item 
-Molecule.h\end{DoxyCompactItemize}
+\-Refinable\-Obj.\-h\end{DoxyCompactItemize}

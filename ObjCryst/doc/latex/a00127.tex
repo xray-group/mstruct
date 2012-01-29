@@ -1,75 +1,54 @@
-\subsection{ObjCryst::WXMolAtom Class Reference}
-\label{a00127}\index{ObjCryst::WXMolAtom@{ObjCryst::WXMolAtom}}
+\subsection{\-Obj\-Cryst\-:\-:\-W\-X\-Global\-Optim\-Run\-Thread \-Class \-Reference}
+\label{a00127}\index{\-Obj\-Cryst\-::\-W\-X\-Global\-Optim\-Run\-Thread@{\-Obj\-Cryst\-::\-W\-X\-Global\-Optim\-Run\-Thread}}
 
 
-wx class for \doxyref{MolAtom}{p.}{a00042} objects  
-Inheritance diagram for ObjCryst::WXMolAtom::\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[height=2cm]{a00127}
-\end{center}
-\end{figure}
-\subsubsection*{Public Member Functions}
+\-Class for a \-Global\-Optimization thread.  
+
+
+\subsubsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries WXMolAtom} (wxWindow $\ast$parent, {\bf MolAtom} $\ast$)\label{a00127_ae921caf4a024c3d5a3823fe06032dbc0}
+{\bfseries \-W\-X\-Global\-Optim\-Run\-Thread} ({\bf \-Optimization\-Obj} \&global\-Opt\-Obj, long \&nb\-Trial, const \-R\-E\-A\-L final\-Cost, long \&nb\-Run, const bool multiple=true)\label{a00127_ad4a30391ecd09902d2bde258cf6d7c05}
 
 \item 
-virtual void {\bf CrystUpdate} (const bool updateUI=false, const bool mutexlock=false)
-\begin{DoxyCompactList}\small\item\em Get new values to be displayed from the underlying object, and raise flag if an UI update is necessary. \item\end{DoxyCompactList}\item 
-virtual void {\bf UpdateUI} (const bool mutexlock=false)
-\begin{DoxyCompactList}\small\item\em Update the User Interface, if necessary. \item\end{DoxyCompactList}\item 
-void {\bfseries OnChangeScattPow} (wxCommandEvent \&)\label{a00127_a81b5ddf74808c63edf2407410d1cd56d}
+virtual void $\ast$ {\bfseries \-Entry} ()\label{a00127_a0c5d3f16fc314450619e561d0a68cb56}
+
+\item 
+virtual void {\bfseries \-On\-Exit} ()\label{a00127_a5f980c9a070545f46381cf573b06e4ff}
 
 \end{DoxyCompactItemize}
-\subsubsection*{Private Attributes}
+\subsubsection*{\-Private \-Attributes}
 \begin{DoxyCompactItemize}
 \item 
-{\bf MolAtom} $\ast$ {\bfseries mpMolAtom}\label{a00127_a1169b933dfa4cb1dbfbe7f9755f2f614}
+{\bf \-Optimization\-Obj} $\ast$ {\bfseries mp\-Global\-Opt\-Obj}\label{a00127_aebc578c18b9dc9492eb9caa6be48592d}
 
 \item 
-wxBoxSizer $\ast$ {\bfseries mpSizer}\label{a00127_a124eb1c9a7e0b14114f0d6210b1e2acc}
+long $\ast$ {\bf mp\-Nb\-Trial}\label{a00127_ace13caa17cbd44768496adfdb36f2766}
 
+\begin{DoxyCompactList}\small\item\em \-This points to the m\-Nb\-Trial member in \doxyref{\-W\-X\-Optimization\-Obj}{p.}{a00135}. \end{DoxyCompactList}\item 
+long $\ast$ {\bf mp\-Nb\-Run}\label{a00127_a7b58a2ed60d74cce4a33245126a3c2f0}
+
+\begin{DoxyCompactList}\small\item\em \-This points to the m\-Nb\-Run member in \doxyref{\-W\-X\-Optimization\-Obj}{p.}{a00135}. \end{DoxyCompactList}\item 
+const \-R\-E\-A\-L {\bf m\-Final\-Cost}
+\begin{DoxyCompactList}\small\item\em \-The value of the cost below which the optimization should stop (0 by default) even if the desired number pf trial has not been reached. \end{DoxyCompactList}\item 
+const bool {\bf m\-Do\-Multiple}\label{a00127_a69ff8f87fc924ec96d79ddee04941813}
+
+\begin{DoxyCompactList}\small\item\em \-Use multiple \-Runs ? \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{\-Detailed \-Description}
+\-Class for a \-Global\-Optimization thread. 
+
+\subsubsection{\-Member \-Data \-Documentation}
+\index{\-Obj\-Cryst\-::\-W\-X\-Global\-Optim\-Run\-Thread@{\-Obj\-Cryst\-::\-W\-X\-Global\-Optim\-Run\-Thread}!m\-Final\-Cost@{m\-Final\-Cost}}
+\index{m\-Final\-Cost@{m\-Final\-Cost}!ObjCryst::WXGlobalOptimRunThread@{\-Obj\-Cryst\-::\-W\-X\-Global\-Optim\-Run\-Thread}}
+\paragraph[{m\-Final\-Cost}]{\setlength{\rightskip}{0pt plus 5cm}const \-R\-E\-A\-L {\bf \-Obj\-Cryst\-::\-W\-X\-Global\-Optim\-Run\-Thread\-::m\-Final\-Cost}\hspace{0.3cm}{\ttfamily  [private]}}\label{a00127_a2ef0f785a8cabac94cf245a6b2f39acc}
+
+
+\-The value of the cost below which the optimization should stop (0 by default) even if the desired number pf trial has not been reached. 
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-{\bf WXCrystObjBasicList} {\bfseries mList}\label{a00127_aecf34795a532ce4aae6a1ec054d64685}
-
-\item 
-{\bf WXFieldString} $\ast$ {\bfseries mpFieldName}\label{a00127_ab3e4e55eec0f1b9c2cc4d060b2e84a6d}
-
-\item 
-{\bf WXFieldChoice} $\ast$ {\bfseries mpFieldScattPower}\label{a00127_a74333960d604050356b215b8ef14eb47}
-
-\end{DoxyCompactItemize}
-
-
-\subsubsection{Detailed Description}
-wx class for \doxyref{MolAtom}{p.}{a00042} objects 
-
-\subsubsection{Member Function Documentation}
-\index{ObjCryst::WXMolAtom@{ObjCryst::WXMolAtom}!CrystUpdate@{CrystUpdate}}
-\index{CrystUpdate@{CrystUpdate}!ObjCryst::WXMolAtom@{ObjCryst::WXMolAtom}}
-\paragraph[{CrystUpdate}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::WXMolAtom::CrystUpdate (const bool {\em updateUI} = {\ttfamily false}, \/  const bool {\em mutexlock} = {\ttfamily false})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00127_aaca6492a7c5382d07946ebb88e051f7f}
-
-
-Get new values to be displayed from the underlying object, and raise flag if an UI update is necessary. The actual GUI update is not made here. \doxyref{UpdateUI()}{p.}{a00127_aa11b0794a07ac4c8066228a4c625e13e} should be called separately, from the main thread.
-
-
-\begin{DoxyParams}{Parameters}
-\item[{\em updateUI,:}]if true, this will call UpdateUI, either directly (if in the main thread), or by sending a message. \item[{\em mutexlock,:}]if true, a Mutex will be used to lock the data shared between main and background thread. The idea is to only use a few Mutexes to lock data from the top objects (wxRefinableObj,...), when calling \doxyref{CrystUpdate()}{p.}{a00127_aaca6492a7c5382d07946ebb88e051f7f} and \doxyref{UpdateUI()}{p.}{a00127_aa11b0794a07ac4c8066228a4c625e13e}. As sub-\/objects (\doxyref{WXField}{p.}{a00118},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. \end{DoxyParams}
-
-
-Implements {\bf ObjCryst::WXCrystObjBasic} \doxyref{}{p.}{a00115_a7ac00ae2ae28f1a6fa26e6fa571186b6}.\index{ObjCryst::WXMolAtom@{ObjCryst::WXMolAtom}!UpdateUI@{UpdateUI}}
-\index{UpdateUI@{UpdateUI}!ObjCryst::WXMolAtom@{ObjCryst::WXMolAtom}}
-\paragraph[{UpdateUI}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::WXMolAtom::UpdateUI (const bool {\em mutexlock} = {\ttfamily false})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00127_aa11b0794a07ac4c8066228a4c625e13e}
-
-
-Update the User Interface, if necessary. 
-\begin{DoxyParams}{Parameters}
-\item[{\em mutexlock,:}]if true, a Mutex will be used to lock the data shared between main and background thread.\end{DoxyParams}
-The idea is to only use a few Mutexes to lock data from the top objects (wxRefinableObj,...), when calling \doxyref{CrystUpdate()}{p.}{a00127_aaca6492a7c5382d07946ebb88e051f7f} and \doxyref{UpdateUI()}{p.}{a00127_aa11b0794a07ac4c8066228a4c625e13e}. As sub-\/objects (\doxyref{WXField}{p.}{a00118},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
-
-Implements {\bf ObjCryst::WXCrystObjBasic} \doxyref{}{p.}{a00115_a3818940b7031ff7e45cf2178c4a99c90}.
-
-The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
-\item 
-wxMolecule.h\end{DoxyCompactItemize}
+wx\-Global\-Optim\-Obj.\-h\end{DoxyCompactItemize}

@@ -1,243 +1,119 @@
-\subsection{ObjCryst::PowderPatternComponent Class Reference}
-\label{a00064}\index{ObjCryst::PowderPatternComponent@{ObjCryst::PowderPatternComponent}}
+\subsection{\-Obj\-Cryst\-:\-:\-Powder\-Pattern\-Background\-Bayesian\-Minimiser \-Class \-Reference}
+\label{a00064}\index{\-Obj\-Cryst\-::\-Powder\-Pattern\-Background\-Bayesian\-Minimiser@{\-Obj\-Cryst\-::\-Powder\-Pattern\-Background\-Bayesian\-Minimiser}}
 
 
-Generic class to compute components (eg the contribution of a given phase, or background) of a powder pattern.  
-Inheritance diagram for ObjCryst::PowderPatternComponent::\begin{figure}[H]
+\-This object is used to estimate the background in a powder pattern, using a \-Bayesian approach (\-David \& \-Sivia, \-Acta \-Cryst \-A50 (1994), 703)  
+
+
+\-Inheritance diagram for \-Obj\-Cryst\-:\-:\-Powder\-Pattern\-Background\-Bayesian\-Minimiser\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=3cm]{a00064}
+\includegraphics[height=2.000000cm]{a00064}
 \end{center}
 \end{figure}
-\subsubsection*{Public Member Functions}
+\subsubsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries PowderPatternComponent} (const {\bf PowderPatternComponent} \&)\label{a00064_a10afd347f725df06fa8fabf94ee9c90f}
+{\bfseries \-Powder\-Pattern\-Background\-Bayesian\-Minimiser} ({\bf \-Powder\-Pattern\-Background} \&backgd)\label{a00064_a38fecc6393f5feed3dd22e585d2fd708}
 
 \item 
-virtual const string \& {\bf GetClassName} () const 
-\begin{DoxyCompactList}\small\item\em Name for this class (\char`\"{}RefinableObj\char`\"{}, \char`\"{}Crystal\char`\"{},. \item\end{DoxyCompactList}\item 
-const {\bf PowderPattern} \& {\bf GetParentPowderPattern} () const 
-\begin{DoxyCompactList}\small\item\em Get the \doxyref{PowderPattern}{p.}{a00061} object which uses this component. \item\end{DoxyCompactList}\item 
-{\bf PowderPattern} \& {\bf GetParentPowderPattern} ()
-\begin{DoxyCompactList}\small\item\em Get the \doxyref{PowderPattern}{p.}{a00061} object which uses this component. \item\end{DoxyCompactList}\item 
-virtual void {\bf SetParentPowderPattern} ({\bf PowderPattern} \&)=0
-\begin{DoxyCompactList}\small\item\em Set the \doxyref{PowderPattern}{p.}{a00061} object which uses this component. \item\end{DoxyCompactList}\item 
-virtual const CrystVector\_\-REAL \& {\bf GetPowderPatternCalc} () const =0
-\begin{DoxyCompactList}\small\item\em Get the calculated powder pattern for this component. \item\end{DoxyCompactList}\item 
-virtual pair$<$ const CrystVector\_\-REAL $\ast$, const {\bf RefinableObjClock} $\ast$ $>$ {\bf GetPowderPatternIntegratedCalc} () const =0
-\begin{DoxyCompactList}\small\item\em Get the integrated values of the powder pattern. \item\end{DoxyCompactList}\item 
-bool {\bf IsScalable} () const 
-\begin{DoxyCompactList}\small\item\em Is this component scalable ? \item\end{DoxyCompactList}\item 
-virtual const CrystVector\_\-REAL \& {\bf GetPowderPatternCalcVariance} () const =0
-\begin{DoxyCompactList}\small\item\em Get the variance associated to each point of the calculated powder pattern, for this component. \item\end{DoxyCompactList}\item 
-virtual pair$<$ const CrystVector\_\-REAL $\ast$, const {\bf RefinableObjClock} $\ast$ $>$ {\bf GetPowderPatternIntegratedCalcVariance} () const =0
-\begin{DoxyCompactList}\small\item\em Get the variance associated to each point of the calculated powder pattern, for this component (integrated version). \item\end{DoxyCompactList}\item 
-virtual bool {\bf HasPowderPatternCalcVariance} () const =0\label{a00064_a773d077df9d066f3d15631ec84ca15fd}
-
-\begin{DoxyCompactList}\small\item\em Does this component have a variance associated with each calculated point ? i.e., do we use maximum likelihood to take into account incomplete models ? \item\end{DoxyCompactList}\item 
-const {\bf RefinableObjClock} \& {\bf GetClockPowderPatternCalc} () const \label{a00064_a179247c07e05dcaa468ce149d9cd5a06}
-
-\begin{DoxyCompactList}\small\item\em Last time the powder pattern was calculated. \item\end{DoxyCompactList}\item 
-const list$<$ pair$<$ const REAL,const string $>$ $>$ \& {\bf GetPatternLabelList} () const 
-\begin{DoxyCompactList}\small\item\em Get a list of labels for the pattern (usually reflection indexes). \item\end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Protected Member Functions}
+virtual const string \& {\bf \-Get\-Class\-Name} () const 
+\begin{DoxyCompactList}\small\item\em \-Name for this class (\char`\"{}\-Refinable\-Obj\char`\"{}, \char`\"{}\-Crystal\char`\"{},...). \end{DoxyCompactList}\item 
+virtual \-R\-E\-A\-L {\bf \-Get\-Log\-Likelihood} () const 
+\begin{DoxyCompactList}\small\item\em \-Get -\/log(likelihood) of the current configuration for the object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{\-Static \-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-const {\bf RefinableObjClock} \& {\bf GetClockPowderPatternCalcVariance} () const \label{a00064_a96109dc93d23fdc2ec87b25e42254ae0}
-
-\begin{DoxyCompactList}\small\item\em Last time the variance on the pattern was actually calculated. \item\end{DoxyCompactList}\item 
-virtual void {\bf CalcPowderPattern} () const =0
-\begin{DoxyCompactList}\small\item\em Calc the powder pattern. \item\end{DoxyCompactList}\item 
-virtual void {\bf CalcPowderPatternIntegrated} () const =0
-\begin{DoxyCompactList}\small\item\em Calc the integrated powder pattern. \item\end{DoxyCompactList}\item 
-virtual const CrystVector\_\-long \& {\bf GetBraggLimits} () const =0
-\begin{DoxyCompactList}\small\item\em Get the pixel positions separating the integration intervals around reflections. \item\end{DoxyCompactList}\item 
-const {\bf RefinableObjClock} \& {\bf GetClockBraggLimits} () const \label{a00064_a3743a5978a853dacabb004096519b35f}
-
-\begin{DoxyCompactList}\small\item\em Get last time the Bragg Limits were changed. \item\end{DoxyCompactList}\item 
-virtual void {\bf SetMaxSinThetaOvLambda} (const REAL max)=0
-\begin{DoxyCompactList}\small\item\em Set the maximum value for sin(theta)/lambda. \item\end{DoxyCompactList}\item 
-virtual void {\bf Prepare} ()=0
-\end{DoxyCompactItemize}
-\subsubsection*{Protected Attributes}
+static \-R\-E\-A\-L {\bf \-Bayesian\-Background\-Log\-Likelihood} (const \-R\-E\-A\-L t)
+\begin{DoxyCompactList}\small\item\em \-Returns the log(likelihood) of a background by marginalizing the effect of \-Bragg peaks, following the method described by \-David and \-Sivia ({\itshape \-J.\-Appl.\-Cryst\/}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{\-Public \-Attributes}
 \begin{DoxyCompactItemize}
 \item 
-CrystVector\_\-REAL {\bf mPowderPatternCalc}
-\begin{DoxyCompactList}\small\item\em The calculated component of a powder pattern. \item\end{DoxyCompactList}\item 
-CrystVector\_\-REAL {\bf mPowderPatternIntegratedCalc}\label{a00064_a86c152ac7f6fca46572986ea99686ae0}
-
-\begin{DoxyCompactList}\small\item\em The calculated powder pattern, integrated. \item\end{DoxyCompactList}\item 
-CrystVector\_\-REAL {\bf mPowderPatternCalcVariance}\label{a00064_a01a50aa4e4114acc999676cd8069d426}
-
-\begin{DoxyCompactList}\small\item\em The variance associated to each point of the calculated powder pattern. \item\end{DoxyCompactList}\item 
-CrystVector\_\-REAL {\bf mPowderPatternIntegratedCalcVariance}\label{a00064_aeaeac00300d33fa5d9ebae323143c6e2}
-
-\begin{DoxyCompactList}\small\item\em The variance associated to each point of the calculated powder pattern, integrated. \item\end{DoxyCompactList}\item 
-CrystVector\_\-long {\bf mIntegratedReflLimits}\label{a00064_ad0441f62b3b16e18f7cbdda6d89432cb}
-
-\begin{DoxyCompactList}\small\item\em Interval limits around each reflection, for integrated R-\/factors. \item\end{DoxyCompactList}\item 
-bool {\bf mIsScalable}\label{a00064_aa1729b95ee7b6fbdc3e6aa7a9ca94aad}
-
-\begin{DoxyCompactList}\small\item\em Scalable ? (crystal phase = scalable, background= not scalable). \item\end{DoxyCompactList}\item 
-{\bf RefinableObjClock} {\bf mClockPowderPatternCalc}\label{a00064_aa64deb96cf54c504d9a24cdf209e9e0e}
-
-\begin{DoxyCompactList}\small\item\em When was the powder pattern last computed ? \item\end{DoxyCompactList}\item 
-{\bf RefinableObjClock} {\bf mClockPowderPatternIntegratedCalc}\label{a00064_adc8435a9476962ad2876a8cfbee5cde5}
-
-\begin{DoxyCompactList}\small\item\em When was the 'integrated' powder pattern last computed ? \item\end{DoxyCompactList}\item 
-{\bf RefinableObjClock} {\bf mClockPowderPatternVarianceCalc}\label{a00064_a503f89c2087ebd815e5df69961efb148}
-
-\begin{DoxyCompactList}\small\item\em When was the powder pattern variance last computed ? \item\end{DoxyCompactList}\item 
-{\bf RefinableObjClock} {\bf mClockPowderPatternIntegratedVarianceCalc}\label{a00064_a4f1cc991dadf2cecfbd758c91b9cbd78}
-
-\begin{DoxyCompactList}\small\item\em When was the 'integrated' powder pattern variance last computed ? \item\end{DoxyCompactList}\item 
-{\bf PowderPattern} $\ast$ {\bf mpParentPowderPattern}\label{a00064_ad565327e0f1e6af053d0766c39ced8a0}
-
-\begin{DoxyCompactList}\small\item\em The \doxyref{PowderPattern}{p.}{a00061} object in which this component is included. \item\end{DoxyCompactList}\item 
-{\bf RefinableObjClock} {\bf mClockBraggLimits}\label{a00064_a7320d473c830fda04684c01a9cd1f5cb}
-
-\begin{DoxyCompactList}\small\item\em Get last time the Bragg Limits were changed. \item\end{DoxyCompactList}\item 
-list$<$ pair$<$ const REAL,const string $>$ $>$ {\bf mvLabel}\label{a00064_abe173118c67113339887a9831ad3a10f}
-
-\begin{DoxyCompactList}\small\item\em The labels associated to different points of the pattern. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Friends}
-\begin{DoxyCompactItemize}
-\item 
-class {\bfseries PowderPattern}\label{a00064_a7b7565a5c419f2d4753446ff094a44cb}
+{\bf \-Powder\-Pattern\-Background} $\ast$ {\bfseries mp\-Background}\label{a00064_ab87e1261cd1824365908c4d67e9d696e}
 
 \end{DoxyCompactItemize}
 
 
-\subsubsection{Detailed Description}
-Generic class to compute components (eg the contribution of a given phase, or background) of a powder pattern. This is an abstract base class.
-
-Most functions are protected, only to be accessed, internally or from the friend class \doxyref{PowderPattern}{p.}{a00061}. 
-
-\subsubsection{Member Function Documentation}
-\index{ObjCryst::PowderPatternComponent@{ObjCryst::PowderPatternComponent}!CalcPowderPattern@{CalcPowderPattern}}
-\index{CalcPowderPattern@{CalcPowderPattern}!ObjCryst::PowderPatternComponent@{ObjCryst::PowderPatternComponent}}
-\paragraph[{CalcPowderPattern}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::PowderPatternComponent::CalcPowderPattern () const\hspace{0.3cm}{\ttfamily  [protected, pure virtual]}}\hfill\label{a00064_a8417ecb93009a9b7b9fccf074a9438d9}
+\subsubsection{\-Detailed \-Description}
+\-This object is used to estimate the background in a powder pattern, using a \-Bayesian approach (\-David \& \-Sivia, \-Acta \-Cryst \-A50 (1994), 703) 
 
 
-Calc the powder pattern. As always, recomputation is only done if necessary (ie if a parameter has changed since the last computation) 
 
-Implemented in {\bf ObjCryst::PowderPatternBackground} \doxyref{}{p.}{a00062_a563a5021d4d1dbbf7d5cec58f524c60a}, and {\bf ObjCryst::PowderPatternDiffraction} \doxyref{}{p.}{a00065_a1f37b1e47c8bef989931fac08cf18849}.\index{ObjCryst::PowderPatternComponent@{ObjCryst::PowderPatternComponent}!CalcPowderPatternIntegrated@{CalcPowderPatternIntegrated}}
-\index{CalcPowderPatternIntegrated@{CalcPowderPatternIntegrated}!ObjCryst::PowderPatternComponent@{ObjCryst::PowderPatternComponent}}
-\paragraph[{CalcPowderPatternIntegrated}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::PowderPatternComponent::CalcPowderPatternIntegrated () const\hspace{0.3cm}{\ttfamily  [protected, pure virtual]}}\hfill\label{a00064_a24c4fb58e500cd669f3298475a31f72f}
-
-
-Calc the integrated powder pattern. This should be optimized so that the full powder pattern is not explicitely computed. 
-
-Implemented in {\bf ObjCryst::PowderPatternBackground} \doxyref{}{p.}{a00062_af486465f3fa318d9d7737fb1347d0649}, and {\bf ObjCryst::PowderPatternDiffraction} \doxyref{}{p.}{a00065_ae9e715bb230da8a3683adfee296288ad}.\index{ObjCryst::PowderPatternComponent@{ObjCryst::PowderPatternComponent}!GetBraggLimits@{GetBraggLimits}}
-\index{GetBraggLimits@{GetBraggLimits}!ObjCryst::PowderPatternComponent@{ObjCryst::PowderPatternComponent}}
-\paragraph[{GetBraggLimits}]{\setlength{\rightskip}{0pt plus 5cm}virtual const CrystVector\_\-long\& ObjCryst::PowderPatternComponent::GetBraggLimits () const\hspace{0.3cm}{\ttfamily  [protected, pure virtual]}}\hfill\label{a00064_a727488f859528b0a9b5da47973804e01}
+\subsubsection{\-Member \-Function \-Documentation}
+\index{\-Obj\-Cryst\-::\-Powder\-Pattern\-Background\-Bayesian\-Minimiser@{\-Obj\-Cryst\-::\-Powder\-Pattern\-Background\-Bayesian\-Minimiser}!\-Bayesian\-Background\-Log\-Likelihood@{\-Bayesian\-Background\-Log\-Likelihood}}
+\index{\-Bayesian\-Background\-Log\-Likelihood@{\-Bayesian\-Background\-Log\-Likelihood}!ObjCryst::PowderPatternBackgroundBayesianMinimiser@{\-Obj\-Cryst\-::\-Powder\-Pattern\-Background\-Bayesian\-Minimiser}}
+\paragraph[{\-Bayesian\-Background\-Log\-Likelihood}]{\setlength{\rightskip}{0pt plus 5cm}static \-R\-E\-A\-L {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-Background\-Bayesian\-Minimiser\-::\-Bayesian\-Background\-Log\-Likelihood} (
+\begin{DoxyParamCaption}
+\item[{const \-R\-E\-A\-L}]{t}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [static]}}\label{a00064_ade871cf6919b2b3fa572d6a073b4c664}
 
 
-Get the pixel positions separating the integration intervals around reflections. \begin{DoxyReturn}{Returns}
-: an array with the pixel positions, empty if this component has no peaks. The positions should be in increasing order, but could go beyond the pattern limits. 
+\-Returns the log(likelihood) of a background by marginalizing the effect of \-Bragg peaks, following the method described by \-David and \-Sivia ({\itshape \-J.\-Appl.\-Cryst\/}. 
+
+{\bfseries 34}(2001), 318).
+
+\begin{DoxyReturn}{\-Returns}
+
+\begin{DoxyItemize}
+\item $ L(t) = \frac{\left(y^{calc}_{Background}-y^{obs}\right)^2}{2\sigma^2}$ for $<$0
+\item $ L(t) = A-\log{\int_\epsilon^{\infty} {\frac{1}{u} e^{-(t-u)^2} du}}$ for t$>$0, with\-: $\epsilon = 1e-6$, $ t = \frac{y^{calc}_{Background}-y^{obs}}{\sigma\sqrt{2}}$ and \-A a normalizing constant so that the function is continuous for t=0 (i.\-e. {\itshape \-L(0)=0\/}).
+\end{DoxyItemize}
 \end{DoxyReturn}
 
+\begin{DoxyParams}[1]{\-Parameters}
+$\backslash$form & {\em 25} & \-For small {\itshape t$>$0\/} values, {\itshape \-L(t)\/} behaves like a quadratic function, and for large positive values it is equivalent to $ \log{\frac{\sqrt{\pi}}{t}}$.\\
+\hline
+\end{DoxyParams}
+\-As the integral diverges for $\epsilon=0$, it is necessary to use a small, non-\/null $\epsilon$. \-The use of a smaller $\epsilon$ changes the range over which the function behaves quadratically, as well as the maximum value (at {\itshape t=0\/}), but does not affect the asymptotic value.
 
-Implemented in {\bf ObjCryst::PowderPatternBackground} \doxyref{}{p.}{a00062_a348238a43c30b1601eaa1c30503b56e2}, and {\bf ObjCryst::PowderPatternDiffraction} \doxyref{}{p.}{a00065_ab9e21f6f16d77e96e4b5bed47db82dca}.\index{ObjCryst::PowderPatternComponent@{ObjCryst::PowderPatternComponent}!GetClassName@{GetClassName}}
-\index{GetClassName@{GetClassName}!ObjCryst::PowderPatternComponent@{ObjCryst::PowderPatternComponent}}
-\paragraph[{GetClassName}]{\setlength{\rightskip}{0pt plus 5cm}virtual const string\& ObjCryst::PowderPatternComponent::GetClassName () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00064_a5e797476d8d76ef797e1e8b51db9e8fb}
+\-See tabulated values in the source code. \-The function is approximated with a cubic spline until {\itshape t=8\/}, and then uses the asymptotic $A-\log{\frac{\sqrt{\pi}}{t}}$ value.
 
-
-Name for this class (\char`\"{}RefinableObj\char`\"{}, \char`\"{}Crystal\char`\"{},. ..). This is only useful to distinguish different classes when picking up objects from the \doxyref{RefinableObj}{p.}{a00070} Global Registry 
-
-Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_a62968d90a7a3080738b363934616c019}.
-
-Reimplemented in {\bf ObjCryst::PowderPatternBackground} \doxyref{}{p.}{a00062_afae084513270b7adf50954bec4037380}, and {\bf ObjCryst::PowderPatternDiffraction} \doxyref{}{p.}{a00065_a74b02e35219c6bc18521e66719778881}.\index{ObjCryst::PowderPatternComponent@{ObjCryst::PowderPatternComponent}!GetParentPowderPattern@{GetParentPowderPattern}}
-\index{GetParentPowderPattern@{GetParentPowderPattern}!ObjCryst::PowderPatternComponent@{ObjCryst::PowderPatternComponent}}
-\paragraph[{GetParentPowderPattern}]{\setlength{\rightskip}{0pt plus 5cm}{\bf PowderPattern}\& ObjCryst::PowderPatternComponent::GetParentPowderPattern ()}\hfill\label{a00064_aa2b7cef2cb0c00f17b87efefa26448fd}
-
-
-Get the \doxyref{PowderPattern}{p.}{a00061} object which uses this component. This allows to know the observed powder pattern to evaluate the background. \index{ObjCryst::PowderPatternComponent@{ObjCryst::PowderPatternComponent}!GetParentPowderPattern@{GetParentPowderPattern}}
-\index{GetParentPowderPattern@{GetParentPowderPattern}!ObjCryst::PowderPatternComponent@{ObjCryst::PowderPatternComponent}}
-\paragraph[{GetParentPowderPattern}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf PowderPattern}\& ObjCryst::PowderPatternComponent::GetParentPowderPattern () const}\hfill\label{a00064_a86b0e6ff842608be85b3465f4c179434}
-
-
-Get the \doxyref{PowderPattern}{p.}{a00061} object which uses this component. This allows to know the observed powder pattern to evaluate the background. \index{ObjCryst::PowderPatternComponent@{ObjCryst::PowderPatternComponent}!GetPatternLabelList@{GetPatternLabelList}}
-\index{GetPatternLabelList@{GetPatternLabelList}!ObjCryst::PowderPatternComponent@{ObjCryst::PowderPatternComponent}}
-\paragraph[{GetPatternLabelList}]{\setlength{\rightskip}{0pt plus 5cm}const list$<$pair$<$const REAL ,const string $>$ $>$\& ObjCryst::PowderPatternComponent::GetPatternLabelList () const}\hfill\label{a00064_a9307408216499bf327b919fd0a0141bf}
-
-
-Get a list of labels for the pattern (usually reflection indexes). This returns the list generated during the last computation of the powder pattern. \index{ObjCryst::PowderPatternComponent@{ObjCryst::PowderPatternComponent}!GetPowderPatternCalc@{GetPowderPatternCalc}}
-\index{GetPowderPatternCalc@{GetPowderPatternCalc}!ObjCryst::PowderPatternComponent@{ObjCryst::PowderPatternComponent}}
-\paragraph[{GetPowderPatternCalc}]{\setlength{\rightskip}{0pt plus 5cm}virtual const CrystVector\_\-REAL\& ObjCryst::PowderPatternComponent::GetPowderPatternCalc () const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\hfill\label{a00064_a45258e9f9b44ff019bf53aa3dfb1a305}
-
-
-Get the calculated powder pattern for this component. Note that the pattern is {\itshape not\/} scaled. 
-
-Implemented in {\bf ObjCryst::PowderPatternBackground} \doxyref{}{p.}{a00062_adb37c0a9b8e41e6dc11e6a9718c89bf5}, and {\bf ObjCryst::PowderPatternDiffraction} \doxyref{}{p.}{a00065_a8003dc9bbaf67b5d95e443c20166b742}.\index{ObjCryst::PowderPatternComponent@{ObjCryst::PowderPatternComponent}!GetPowderPatternCalcVariance@{GetPowderPatternCalcVariance}}
-\index{GetPowderPatternCalcVariance@{GetPowderPatternCalcVariance}!ObjCryst::PowderPatternComponent@{ObjCryst::PowderPatternComponent}}
-\paragraph[{GetPowderPatternCalcVariance}]{\setlength{\rightskip}{0pt plus 5cm}virtual const CrystVector\_\-REAL\& ObjCryst::PowderPatternComponent::GetPowderPatternCalcVariance () const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\hfill\label{a00064_ad67b39669fd0d336b01937ee81a59ddc}
-
-
-Get the variance associated to each point of the calculated powder pattern, for this component. \begin{DoxyWarning}{Warning}
-: this is experimental, with the aim of using Maximum Likelihood to improve structure determination. 
-\end{DoxyWarning}
-
-
-Implemented in {\bf ObjCryst::PowderPatternBackground} \doxyref{}{p.}{a00062_a871e01608feb73589bb27f4375194630}, and {\bf ObjCryst::PowderPatternDiffraction} \doxyref{}{p.}{a00065_a664e1f47391720d06ffaa2b10b0aaf49}.\index{ObjCryst::PowderPatternComponent@{ObjCryst::PowderPatternComponent}!GetPowderPatternIntegratedCalc@{GetPowderPatternIntegratedCalc}}
-\index{GetPowderPatternIntegratedCalc@{GetPowderPatternIntegratedCalc}!ObjCryst::PowderPatternComponent@{ObjCryst::PowderPatternComponent}}
-\paragraph[{GetPowderPatternIntegratedCalc}]{\setlength{\rightskip}{0pt plus 5cm}virtual pair$<$const CrystVector\_\-REAL$\ast$,const {\bf RefinableObjClock}$\ast$$>$ ObjCryst::PowderPatternComponent::GetPowderPatternIntegratedCalc () const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\hfill\label{a00064_ac54b7ae5a177492de681afc2cbed72eb}
-
-
-Get the integrated values of the powder pattern. \begin{DoxyNote}{Note}
-: the integration intervals are those given by the parent \doxyref{PowderPattern}{p.}{a00061}, so that all PowderPatternComponent's intervals are taken into account
+\begin{DoxyNote}{\-Note}
+\-For a more strict calculation, we should include a normalizing constant (?) 
 \end{DoxyNote}
-This avoids explicitely calculating the full profile powder pattern. 
+\index{\-Obj\-Cryst\-::\-Powder\-Pattern\-Background\-Bayesian\-Minimiser@{\-Obj\-Cryst\-::\-Powder\-Pattern\-Background\-Bayesian\-Minimiser}!\-Get\-Class\-Name@{\-Get\-Class\-Name}}
+\index{\-Get\-Class\-Name@{\-Get\-Class\-Name}!ObjCryst::PowderPatternBackgroundBayesianMinimiser@{\-Obj\-Cryst\-::\-Powder\-Pattern\-Background\-Bayesian\-Minimiser}}
+\paragraph[{\-Get\-Class\-Name}]{\setlength{\rightskip}{0pt plus 5cm}virtual const string\& {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-Background\-Bayesian\-Minimiser\-::\-Get\-Class\-Name} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00064_a7f39f799fafc12a3bdb937b5cc9545ad}
 
-Implemented in {\bf ObjCryst::PowderPatternBackground} \doxyref{}{p.}{a00062_a5bc997017cf1d95641b44021175c3dad}, and {\bf ObjCryst::PowderPatternDiffraction} \doxyref{}{p.}{a00065_a2f2a745dcfa6cb7b7af4523b268827fe}.\index{ObjCryst::PowderPatternComponent@{ObjCryst::PowderPatternComponent}!GetPowderPatternIntegratedCalcVariance@{GetPowderPatternIntegratedCalcVariance}}
-\index{GetPowderPatternIntegratedCalcVariance@{GetPowderPatternIntegratedCalcVariance}!ObjCryst::PowderPatternComponent@{ObjCryst::PowderPatternComponent}}
-\paragraph[{GetPowderPatternIntegratedCalcVariance}]{\setlength{\rightskip}{0pt plus 5cm}virtual pair$<$const CrystVector\_\-REAL$\ast$,const {\bf RefinableObjClock}$\ast$$>$ ObjCryst::PowderPatternComponent::GetPowderPatternIntegratedCalcVariance () const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\hfill\label{a00064_ae721bd290b50aa9503bac419616a21c6}
+
+\-Name for this class (\char`\"{}\-Refinable\-Obj\char`\"{}, \char`\"{}\-Crystal\char`\"{},...). 
+
+\-This is only useful to distinguish different classes when picking up objects from the \doxyref{\-Refinable\-Obj}{p.}{a00071} \-Global \-Registry 
+
+\-Reimplemented from {\bf \-Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00071_a62968d90a7a3080738b363934616c019}.
+
+\index{\-Obj\-Cryst\-::\-Powder\-Pattern\-Background\-Bayesian\-Minimiser@{\-Obj\-Cryst\-::\-Powder\-Pattern\-Background\-Bayesian\-Minimiser}!\-Get\-Log\-Likelihood@{\-Get\-Log\-Likelihood}}
+\index{\-Get\-Log\-Likelihood@{\-Get\-Log\-Likelihood}!ObjCryst::PowderPatternBackgroundBayesianMinimiser@{\-Obj\-Cryst\-::\-Powder\-Pattern\-Background\-Bayesian\-Minimiser}}
+\paragraph[{\-Get\-Log\-Likelihood}]{\setlength{\rightskip}{0pt plus 5cm}virtual \-R\-E\-A\-L {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-Background\-Bayesian\-Minimiser\-::\-Get\-Log\-Likelihood} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00064_a515e6c16b8900dd4360bcae023ebbd38}
 
 
-Get the variance associated to each point of the calculated powder pattern, for this component (integrated version). \begin{DoxyWarning}{Warning}
-: this is experimental, with the aim of using Maximum Likelihood to improve structure determination. 
+\-Get -\/log(likelihood) of the current configuration for the object. 
+
+\-By default (no likelihood evaluation available), this is equal to 0.
+
+\-This call should not be recursive, it is the task of the algorithm to get the sum of likelihoods for all objects invlolved.
+
+\begin{DoxyNote}{\-Note}
+contrary to the old \char`\"{}\-Cost Function\char`\"{} approach, with log(\-Likelihood) there is no 'choice' of cost function, so that it is the task of the object to give the optimized likelihood (possibly with user options).
+\end{DoxyNote}
+\begin{DoxyWarning}{\-Warning}
+\-: this is in under heavy development, so expect changes... 
 \end{DoxyWarning}
 
 
-Implemented in {\bf ObjCryst::PowderPatternBackground} \doxyref{}{p.}{a00062_a48d8a351e2fcb8428a9af36c6a4fbf0f}, and {\bf ObjCryst::PowderPatternDiffraction} \doxyref{}{p.}{a00065_ae529ea1dab34388e88ba4a818ed48ca1}.\index{ObjCryst::PowderPatternComponent@{ObjCryst::PowderPatternComponent}!IsScalable@{IsScalable}}
-\index{IsScalable@{IsScalable}!ObjCryst::PowderPatternComponent@{ObjCryst::PowderPatternComponent}}
-\paragraph[{IsScalable}]{\setlength{\rightskip}{0pt plus 5cm}bool ObjCryst::PowderPatternComponent::IsScalable () const}\hfill\label{a00064_aa0449b956187c242c3540a44e0a43e02}
+\-Reimplemented from {\bf \-Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00071_a9a9a5ea2b997cd36b44ed35c2bab3245}.
 
 
-Is this component scalable ? This is used by the \doxyref{PowderPattern}{p.}{a00061} class, which fits all pattern components using scale factors. Some components may not need to be scaled: background components, which are assumed to be absolute. \index{ObjCryst::PowderPatternComponent@{ObjCryst::PowderPatternComponent}!Prepare@{Prepare}}
-\index{Prepare@{Prepare}!ObjCryst::PowderPatternComponent@{ObjCryst::PowderPatternComponent}}
-\paragraph[{Prepare}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::PowderPatternComponent::Prepare ()\hspace{0.3cm}{\ttfamily  [protected, pure virtual]}}\hfill\label{a00064_a6a99877f0f9dec09fd5f596a7ddeb6f6}
-\begin{DoxyInternal}{For internal use only.}
-This will be called by the parent \doxyref{PowderPattern}{p.}{a00061} object, before calculating the first powder pattern. Or maybe it should be called automatically by the object itself... \end{DoxyInternal}
 
-
-Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_a48d11671e7f8699f7bc24077585c5e0f}.
-
-Implemented in {\bf ObjCryst::PowderPatternBackground} \doxyref{}{p.}{a00062_aac7d53c229cd59c2c9d4c5de539a60e1}, and {\bf ObjCryst::PowderPatternDiffraction} \doxyref{}{p.}{a00065_ae19852383674ae3ab673748a30a8432a}.\index{ObjCryst::PowderPatternComponent@{ObjCryst::PowderPatternComponent}!SetMaxSinThetaOvLambda@{SetMaxSinThetaOvLambda}}
-\index{SetMaxSinThetaOvLambda@{SetMaxSinThetaOvLambda}!ObjCryst::PowderPatternComponent@{ObjCryst::PowderPatternComponent}}
-\paragraph[{SetMaxSinThetaOvLambda}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::PowderPatternComponent::SetMaxSinThetaOvLambda (const REAL {\em max})\hspace{0.3cm}{\ttfamily  [protected, pure virtual]}}\hfill\label{a00064_a4731b5a64ee9aab6779e2ef323242fe5}
-
-
-Set the maximum value for sin(theta)/lambda. All data above still exist but are ignored for all calculations. 
-
-Implemented in {\bf ObjCryst::PowderPatternBackground} \doxyref{}{p.}{a00062_a6c6c5f75dc132609ba822337123edd1d}, and {\bf ObjCryst::PowderPatternDiffraction} \doxyref{}{p.}{a00065_a699af7ea523fca128032384b548ceef1}.\index{ObjCryst::PowderPatternComponent@{ObjCryst::PowderPatternComponent}!SetParentPowderPattern@{SetParentPowderPattern}}
-\index{SetParentPowderPattern@{SetParentPowderPattern}!ObjCryst::PowderPatternComponent@{ObjCryst::PowderPatternComponent}}
-\paragraph[{SetParentPowderPattern}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::PowderPatternComponent::SetParentPowderPattern ({\bf PowderPattern} \&)\hspace{0.3cm}{\ttfamily  [pure virtual]}}\hfill\label{a00064_a6b3dc911118c280dbbdcb7fb97acf980}
-
-
-Set the \doxyref{PowderPattern}{p.}{a00061} object which uses this component. This sets all necessary pattern parameters (2theta/tof range, wavelength, radiation type...) accordingly. 
-
-Implemented in {\bf ObjCryst::PowderPatternBackground} \doxyref{}{p.}{a00062_a02032467fb6485e05f0a1bbf74133833}, and {\bf ObjCryst::PowderPatternDiffraction} \doxyref{}{p.}{a00065_ab67953ad7f27c37334a6b557c2da1d73}.
-
-\subsubsection{Member Data Documentation}
-\index{ObjCryst::PowderPatternComponent@{ObjCryst::PowderPatternComponent}!mPowderPatternCalc@{mPowderPatternCalc}}
-\index{mPowderPatternCalc@{mPowderPatternCalc}!ObjCryst::PowderPatternComponent@{ObjCryst::PowderPatternComponent}}
-\paragraph[{mPowderPatternCalc}]{\setlength{\rightskip}{0pt plus 5cm}CrystVector\_\-REAL {\bf ObjCryst::PowderPatternComponent::mPowderPatternCalc}\hspace{0.3cm}{\ttfamily  [mutable, protected]}}\hfill\label{a00064_ae6e41d0a85e00cdf0a7d52f74dc20d4a}
-
-
-The calculated component of a powder pattern. It is mutable since it is completely defined by other parameters (eg it is not an 'independent parameter') 
-
-The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-PowderPattern.h\end{DoxyCompactItemize}
+\-Powder\-Pattern\-Background\-Bayesian\-Minimiser.\-h\end{DoxyCompactItemize}

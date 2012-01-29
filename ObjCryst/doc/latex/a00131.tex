@@ -1,195 +1,109 @@
-\subsection{ObjCryst::WXMolecule Class Reference}
-\label{a00131}\index{ObjCryst::WXMolecule@{ObjCryst::WXMolecule}}
+\subsection{\-Obj\-Cryst\-:\-:\-W\-X\-Mol\-Dihedral\-Angle \-Class \-Reference}
+\label{a00131}\index{\-Obj\-Cryst\-::\-W\-X\-Mol\-Dihedral\-Angle@{\-Obj\-Cryst\-::\-W\-X\-Mol\-Dihedral\-Angle}}
 
 
-wxCryst class for \doxyref{Molecule}{p.}{a00046} objects  
-Inheritance diagram for ObjCryst::WXMolecule::\begin{figure}[H]
+wx class for \doxyref{\-Mol\-Dihedral\-Angle}{p.}{a00046} objects  
+
+
+\-Inheritance diagram for \-Obj\-Cryst\-:\-:\-W\-X\-Mol\-Dihedral\-Angle\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=5cm]{a00131}
+\includegraphics[height=2.000000cm]{a00131}
 \end{center}
 \end{figure}
-\subsubsection*{Classes}
+\subsubsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-struct {\bf CellAtom}
-\begin{DoxyCompactList}\small\item\em Structure to store the \doxyref{Atom}{p.}{a00008} parameters. \item\end{DoxyCompactList}\item 
-struct {\bf CellBond}
-\begin{DoxyCompactList}\small\item\em Structure to store the bond current values. \item\end{DoxyCompactList}\item 
-struct {\bf CellBondAngle}
-\begin{DoxyCompactList}\small\item\em Structure to store the bond angles current values. \item\end{DoxyCompactList}\item 
-struct {\bf CellDihedralAngle}
-\begin{DoxyCompactList}\small\item\em Structure to store the dihedral angles current values. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Public Member Functions}
-\begin{DoxyCompactItemize}
-\item 
-{\bfseries WXMolecule} (wxWindow $\ast$parent, {\bf Molecule} $\ast$)\label{a00131_a57731ea0ecff7d010fab0ff1c1c32481}
+{\bfseries \-W\-X\-Mol\-Dihedral\-Angle} (wx\-Window $\ast$parent, {\bf \-Mol\-Dihedral\-Angle} $\ast$)\label{a00131_a7824312068845db4bac2aac7f36e0546}
 
 \item 
-void {\bfseries OnMenuOptimizeConformation} (wxCommandEvent \&WXUNUSED(event))\label{a00131_a34831556ec0bdc84b5b7cfe94a934baa}
-
-\item 
-void {\bfseries OnMenuPrintRestraintStatus} (wxCommandEvent \&WXUNUSED(event))\label{a00131_ac209109374534a4ec8d0e61eafdddfe0}
-
-\item 
-void {\bfseries OnMenuAddAtom} (wxCommandEvent \&WXUNUSED(event))\label{a00131_a427efdff9bdcdb346e8ee85baf555257}
-
-\item 
-void {\bfseries OnMenuAddBond} (wxCommandEvent \&WXUNUSED(event))\label{a00131_a1f1372073b5fdb46415ee490fb627869}
-
-\item 
-void {\bfseries OnMenuAddAngle} (wxCommandEvent \&WXUNUSED(event))\label{a00131_ad7ee1e9b2e45220a0e58dedbd9ca5b64}
-
-\item 
-void {\bfseries OnMenuAddDihedralAngle} (wxCommandEvent \&WXUNUSED(event))\label{a00131_ad133de384874dd6fd70c17bb449cf13f}
-
-\item 
-void {\bfseries OnMenuAddRigidGroup} (wxCommandEvent \&WXUNUSED(event))\label{a00131_a5b9eca62a8f3703c42cc664e02533066}
-
-\item 
-void {\bfseries OnMenuRigidfyWithDihedralAngles} (wxCommandEvent \&WXUNUSED(event))\label{a00131_adda44dc2550db73e8441765eb39d74b5}
-
-\item 
-void {\bfseries OnMenuRemoveAtom} (wxCommandEvent \&WXUNUSED(event))\label{a00131_ac4eeca65577162ccf83650be1963e24a}
-
-\item 
-void {\bfseries OnMenuRemoveBond} (wxCommandEvent \&WXUNUSED(event))\label{a00131_ae1405b673f0c1c1339d0eea853332a74}
-
-\item 
-void {\bfseries OnMenuRemoveAngle} (wxCommandEvent \&WXUNUSED(event))\label{a00131_a63c66c48faf827070ee62fc6e03f8861}
-
-\item 
-void {\bfseries OnMenuRemoveDihedralAngle} (wxCommandEvent \&WXUNUSED(event))\label{a00131_aba87db72c513cd77e9824cd174288e7e}
-
-\item 
-void {\bfseries OnMenuRemoveRigidGroup} (wxCommandEvent \&WXUNUSED(event))\label{a00131_aa22db407d0f3881ee4dd7810e4d8b2d6}
-
-\item 
-void {\bfseries OnMenuSetLimits} (wxCommandEvent \&event)\label{a00131_a62766f2621cf0b02fc43d9837ffd1e9e}
-
-\item 
-void {\bfseries OnMenuShowRestraintWindow} (wxCommandEvent \&event)\label{a00131_a04c1ba4eea3c12e616845fddfe5553e1}
-
-\item 
-void {\bfseries OnMenuSetDeltaSigma} (wxCommandEvent \&event)\label{a00131_a2ea30924e60e764ebe5a2068903a0dac}
-
-\item 
-void {\bfseries OnChangeCenterAtom} (wxCommandEvent \&event)\label{a00131_a6c7d9eedb57c708ab7beee02e899e0bc}
-
-\item 
-void {\bfseries OnEditGridAtom} (wxGridEvent \&e)\label{a00131_aaa33600d60e0216ecd47af8430b072fd}
-
-\item 
-void {\bfseries OnEditGridBondLength} (wxGridEvent \&e)\label{a00131_ac0d973e42c5124e8718cebc58174f4f3}
-
-\item 
-void {\bfseries OnEditGridBondAngle} (wxGridEvent \&e)\label{a00131_a47e7c95b206903ca007793631788e0f0}
-
-\item 
-void {\bfseries OnEditGridDihedralAngle} (wxGridEvent \&e)\label{a00131_a69fadbe109e32276089a3bf26e7eaf16}
-
-\item 
-void {\bfseries OnEditGridRigidGroup} (wxGridEvent \&e)\label{a00131_a5f73ebb7b6c64ef34f53cc8fd37f2033}
-
-\item 
-void {\bfseries OnMenuExport2ZMatrix} (wxCommandEvent \&event)\label{a00131_a6f8e8e6d48d8ddba22e88c7057e2aa67}
-
-\item 
-void {\bfseries OnMenuTest} (wxCommandEvent \&event)\label{a00131_ac17b49db6e8c89663229bf3e488f99c0}
-
-\item 
-void {\bfseries OnMenuRotate} (wxCommandEvent \&event)\label{a00131_a9d2d15ae3f047e5c96b7457b0eeb28b0}
-
-\item 
-void {\bf NotifyDeleteListWin} (WXMolScrolledWindow $\ast$win)\label{a00131_a0f40875a760fc29cb92db426fbdf21ce}
-
-\begin{DoxyCompactList}\small\item\em Notify that either the bond, bond angle or dihedral angle list window has been destroyed. \item\end{DoxyCompactList}\item 
-virtual void {\bf CrystUpdate} (const bool updateUI=false, const bool mutexlock=false)
-\begin{DoxyCompactList}\small\item\em Get new values to be displayed from the underlying object, and raise flag if an UI update is necessary. \item\end{DoxyCompactList}\item 
-virtual void {\bf UpdateUI} (const bool mutexlock=false)
-\begin{DoxyCompactList}\small\item\em Update the User Interface, if necessary. \item\end{DoxyCompactList}\item 
-virtual bool {\bfseries Enable} (bool enable=true)\label{a00131_aef6c57327979fc0325ae375d74ad3816}
+virtual void {\bf \-Cryst\-Update} (const bool update\-U\-I=false, const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em \-Get new values to be displayed from the underlying object, and raise flag if an \-U\-I update is necessary. \end{DoxyCompactList}\item 
+virtual void {\bf \-Update\-U\-I} (const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em \-Update the \-User \-Interface, if necessary. \end{DoxyCompactList}\item 
+void {\bfseries \-On\-Change\-Atom} (wx\-Command\-Event \&)\label{a00131_a7aedda600fad925e9a6bcf15d882f555}
 
 \end{DoxyCompactItemize}
-\subsubsection*{Private Attributes}
+\subsubsection*{\-Private \-Attributes}
 \begin{DoxyCompactItemize}
 \item 
-{\bf Molecule} $\ast$ {\bfseries mpMolecule}\label{a00131_a3d5a1323ddeee01cc840cec36df9d352}
+{\bf \-Mol\-Dihedral\-Angle} $\ast$ {\bfseries mp\-Mol\-Dihedral\-Angle}\label{a00131_a46c39f7f4734d99be83f4de70dc195ad}
 
 \item 
-WXMolScrolledWindow $\ast$ {\bfseries mpAtomWin}\label{a00131_a812459ac0516bfcdc3a218f959004db3}
+wx\-Box\-Sizer $\ast$ {\bfseries mp\-Sizer}\label{a00131_a87b1cd0fa468a07f772dec23c3fd72d2}
 
 \item 
-WXMolScrolledWindow $\ast$ {\bfseries mpBondWin}\label{a00131_a637bc57f107529a6d81a08f65a49a478}
+{\bf \-W\-X\-Cryst\-Obj\-Basic\-List} {\bfseries m\-List}\label{a00131_a4759f94a2b13b0e8fbbe9ce9567dc21b}
 
 \item 
-WXMolScrolledWindow $\ast$ {\bfseries mpAngleWin}\label{a00131_a984646e23692a9150d426362a47e1de7}
+{\bf \-W\-X\-Field\-Choice} $\ast$ {\bfseries mp\-Field\-Atom1}\label{a00131_ae0d08433c0ae0129fa8cb20a0e5411dd}
 
 \item 
-WXMolScrolledWindow $\ast$ {\bfseries mpDihedralAngleWin}\label{a00131_aec3ae75f631d7a2aa943f455ba7115ab}
+{\bf \-W\-X\-Field\-Choice} $\ast$ {\bfseries mp\-Field\-Atom2}\label{a00131_a52210b6b058bd9c7619294f817f1cfc9}
 
 \item 
-WXMolScrolledWindow $\ast$ {\bfseries mpRigidGroupWin}\label{a00131_a88334f0090f722ade05b3a7658e5b18f}
+{\bf \-W\-X\-Field\-Choice} $\ast$ {\bfseries mp\-Field\-Atom3}\label{a00131_a8e10080cadbc2a7acc801c21e87c3c29}
 
 \item 
-std::list$<$ {\bf CellAtom} $>$ {\bf mvpAtom}\label{a00131_a400319bb4a94ca5d1b23310dee604b21}
+{\bf \-W\-X\-Field\-Choice} $\ast$ {\bfseries mp\-Field\-Atom4}\label{a00131_a954b5fe1aeab1e3f1ef3aaf799e4e835}
 
-\begin{DoxyCompactList}\small\item\em Displayed list of atoms. \item\end{DoxyCompactList}\item 
-std::list$<$ {\bf CellBond} $>$ {\bf mvpBond}\label{a00131_a49e995cb6e10871a18da635bf5c73ff2}
-
-\begin{DoxyCompactList}\small\item\em Displayed list of bonds, in the order they appear. \item\end{DoxyCompactList}\item 
-std::list$<$ {\bf CellBondAngle} $>$ {\bf mvpBondAngle}\label{a00131_a435f90f7c190400e997f97b78c38bd26}
-
-\begin{DoxyCompactList}\small\item\em Displayed list of bond angle. \item\end{DoxyCompactList}\item 
-std::list$<$ {\bf CellDihedralAngle} $>$ {\bf mvpDihedralAngle}\label{a00131_a110d6571aa8efdd18a5ce90856898ad8}
-
-\begin{DoxyCompactList}\small\item\em Displayed list of Dihedral angles. \item\end{DoxyCompactList}\item 
-std::list$<$ CellRigidGroup $>$ {\bf mvpRigidGroup}\label{a00131_a01efbd492b9c455984f2826e4bd82f7a}
-
-\begin{DoxyCompactList}\small\item\em Displayed list of Dihedral angles. \item\end{DoxyCompactList}\item 
-bool {\bf mIsSelfUpdating}
-\begin{DoxyCompactList}\small\item\em Flag to indicate whether we are updating values in the wxGrid data. \item\end{DoxyCompactList}\item 
-{\bf WXFieldChoice} $\ast$ {\bf mpFieldCenterAtom}\label{a00131_a1fb2931404174a9ec3b37f42c5cd7590}
-
-\begin{DoxyCompactList}\small\item\em Center atom. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
-
-
-\subsubsection{Detailed Description}
-wxCryst class for \doxyref{Molecule}{p.}{a00046} objects 
-
-\subsubsection{Member Function Documentation}
-\index{ObjCryst::WXMolecule@{ObjCryst::WXMolecule}!CrystUpdate@{CrystUpdate}}
-\index{CrystUpdate@{CrystUpdate}!ObjCryst::WXMolecule@{ObjCryst::WXMolecule}}
-\paragraph[{CrystUpdate}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::WXMolecule::CrystUpdate (const bool {\em updateUI} = {\ttfamily false}, \/  const bool {\em mutexlock} = {\ttfamily false})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00131_a4d8fe8698ddc741c34b613643dec87b0}
-
-
-Get new values to be displayed from the underlying object, and raise flag if an UI update is necessary. The actual GUI update is not made here. \doxyref{UpdateUI()}{p.}{a00131_ae932cbbd6d7e55d319f1b4eb169c63ef} should be called separately, from the main thread.
-
-
-\begin{DoxyParams}{Parameters}
-\item[{\em updateUI,:}]if true, this will call UpdateUI, either directly (if in the main thread), or by sending a message. \item[{\em mutexlock,:}]if true, a Mutex will be used to lock the data shared between main and background thread. The idea is to only use a few Mutexes to lock data from the top objects (wxRefinableObj,...), when calling \doxyref{CrystUpdate()}{p.}{a00131_a4d8fe8698ddc741c34b613643dec87b0} and \doxyref{UpdateUI()}{p.}{a00131_ae932cbbd6d7e55d319f1b4eb169c63ef}. As sub-\/objects (\doxyref{WXField}{p.}{a00118},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. \end{DoxyParams}
-
-
-Reimplemented from {\bf ObjCryst::WXRefinableObj} \doxyref{}{p.}{a00142_a13e4f37ac098de756b27cdb91d6a0551}.\index{ObjCryst::WXMolecule@{ObjCryst::WXMolecule}!UpdateUI@{UpdateUI}}
-\index{UpdateUI@{UpdateUI}!ObjCryst::WXMolecule@{ObjCryst::WXMolecule}}
-\paragraph[{UpdateUI}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::WXMolecule::UpdateUI (const bool {\em mutexlock} = {\ttfamily false})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00131_ae932cbbd6d7e55d319f1b4eb169c63ef}
-
-
-Update the User Interface, if necessary. 
-\begin{DoxyParams}{Parameters}
-\item[{\em mutexlock,:}]if true, a Mutex will be used to lock the data shared between main and background thread.\end{DoxyParams}
-The idea is to only use a few Mutexes to lock data from the top objects (wxRefinableObj,...), when calling \doxyref{CrystUpdate()}{p.}{a00131_a4d8fe8698ddc741c34b613643dec87b0} and \doxyref{UpdateUI()}{p.}{a00131_ae932cbbd6d7e55d319f1b4eb169c63ef}. As sub-\/objects (\doxyref{WXField}{p.}{a00118},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
-
-Reimplemented from {\bf ObjCryst::WXRefinableObj} \doxyref{}{p.}{a00142_a19a1d057eecafd48710d9a3b770c1b28}.
-
-\subsubsection{Member Data Documentation}
-\index{ObjCryst::WXMolecule@{ObjCryst::WXMolecule}!mIsSelfUpdating@{mIsSelfUpdating}}
-\index{mIsSelfUpdating@{mIsSelfUpdating}!ObjCryst::WXMolecule@{ObjCryst::WXMolecule}}
-\paragraph[{mIsSelfUpdating}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf ObjCryst::WXMolecule::mIsSelfUpdating}\hspace{0.3cm}{\ttfamily  [private]}}\hfill\label{a00131_ac4f6aa1555229aa3e175a5b1597926bd}
-
-
-Flag to indicate whether we are updating values in the wxGrid data. (enabled in wxMolecule::UpdateUI()). 
-
-The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
 \item 
-wxMolecule.h\end{DoxyCompactItemize}
+\-R\-E\-A\-L {\bf m\-Value}\label{a00131_a69add82889fa57d20529691f66b2bad4}
+
+\begin{DoxyCompactList}\small\item\em \-The current value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{\-Detailed \-Description}
+wx class for \doxyref{\-Mol\-Dihedral\-Angle}{p.}{a00046} objects 
+
+\subsubsection{\-Member \-Function \-Documentation}
+\index{\-Obj\-Cryst\-::\-W\-X\-Mol\-Dihedral\-Angle@{\-Obj\-Cryst\-::\-W\-X\-Mol\-Dihedral\-Angle}!\-Cryst\-Update@{\-Cryst\-Update}}
+\index{\-Cryst\-Update@{\-Cryst\-Update}!ObjCryst::WXMolDihedralAngle@{\-Obj\-Cryst\-::\-W\-X\-Mol\-Dihedral\-Angle}}
+\paragraph[{\-Cryst\-Update}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-W\-X\-Mol\-Dihedral\-Angle\-::\-Cryst\-Update} (
+\begin{DoxyParamCaption}
+\item[{const bool}]{update\-U\-I = {\ttfamily false}, }
+\item[{const bool}]{mutexlock = {\ttfamily false}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00131_a48fa57f12c56fd9fb065bff5c31fe954}
+
+
+\-Get new values to be displayed from the underlying object, and raise flag if an \-U\-I update is necessary. 
+
+\-The actual \-G\-U\-I update is not made here. \doxyref{\-Update\-U\-I()}{p.}{a00131_aecf2a097f8edb2598466daf7b92008c4} should be called separately, from the main thread.
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em update\-U\-I,\-:} & if true, this will call \-Update\-U\-I, either directly (if in the main thread), or by sending a message. \\
+\hline
+{\em mutexlock,\-:} & if true, a \-Mutex will be used to lock the data shared between main and background thread. \-The idea is to only use a few \-Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{\-Cryst\-Update()}{p.}{a00131_a48fa57f12c56fd9fb065bff5c31fe954} and \doxyref{\-Update\-U\-I()}{p.}{a00131_aecf2a097f8edb2598466daf7b92008c4}. \-As sub-\/objects (\doxyref{\-W\-X\-Field}{p.}{a00119},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. \\
+\hline
+\end{DoxyParams}
+
+
+\-Implements {\bf \-Obj\-Cryst\-::\-W\-X\-Cryst\-Obj\-Basic} \doxyref{}{p.}{a00116_a7ac00ae2ae28f1a6fa26e6fa571186b6}.
+
+\index{\-Obj\-Cryst\-::\-W\-X\-Mol\-Dihedral\-Angle@{\-Obj\-Cryst\-::\-W\-X\-Mol\-Dihedral\-Angle}!\-Update\-U\-I@{\-Update\-U\-I}}
+\index{\-Update\-U\-I@{\-Update\-U\-I}!ObjCryst::WXMolDihedralAngle@{\-Obj\-Cryst\-::\-W\-X\-Mol\-Dihedral\-Angle}}
+\paragraph[{\-Update\-U\-I}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-W\-X\-Mol\-Dihedral\-Angle\-::\-Update\-U\-I} (
+\begin{DoxyParamCaption}
+\item[{const bool}]{mutexlock = {\ttfamily false}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00131_aecf2a097f8edb2598466daf7b92008c4}
+
+
+\-Update the \-User \-Interface, if necessary. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em mutexlock,\-:} & if true, a \-Mutex will be used to lock the data shared between main and background thread.\\
+\hline
+\end{DoxyParams}
+\-The idea is to only use a few \-Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{\-Cryst\-Update()}{p.}{a00131_a48fa57f12c56fd9fb065bff5c31fe954} and \doxyref{\-Update\-U\-I()}{p.}{a00131_aecf2a097f8edb2598466daf7b92008c4}. \-As sub-\/objects (\doxyref{\-W\-X\-Field}{p.}{a00119},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
+
+\-Implements {\bf \-Obj\-Cryst\-::\-W\-X\-Cryst\-Obj\-Basic} \doxyref{}{p.}{a00116_a3818940b7031ff7e45cf2178c4a99c90}.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+wx\-Molecule.\-h\end{DoxyCompactItemize}

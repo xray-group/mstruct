@@ -1,55 +1,71 @@
-\subsection{ObjCryst::WXFieldChoice Class Reference}
-\label{a00119}\index{ObjCryst::WXFieldChoice@{ObjCryst::WXFieldChoice}}
+\subsection{\-Obj\-Cryst\-:\-:\-W\-X\-Field \-Class \-Reference}
+\label{a00119}\index{\-Obj\-Cryst\-::\-W\-X\-Field@{\-Obj\-Cryst\-::\-W\-X\-Field}}
 
 
-Class to pick one choice.  
-Inheritance diagram for ObjCryst::WXFieldChoice::\begin{figure}[H]
+\-This is the abstract base class for all fields, wether they contain a floating-\/point parameter, or a string,...  
+
+
+\-Inheritance diagram for \-Obj\-Cryst\-:\-:\-W\-X\-Field\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=3cm]{a00119}
+\includegraphics[height=2.109228cm]{a00119}
 \end{center}
 \end{figure}
-\subsubsection*{Public Member Functions}
+\subsubsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bf WXFieldChoice} (wxWindow $\ast$parent, const int field\_\-id, const string \&name, const int hsize=80)\label{a00119_a1f2515335651539ee3a9b2cfc331f447}
+{\bf \-W\-X\-Field} (wx\-Window $\ast$parent, const string \&label, const int field\-\_\-id)\label{a00119_a750b0a756fd49172806fd5af020a1e07}
 
-\begin{DoxyCompactList}\small\item\em Constructor. \item\end{DoxyCompactList}\item 
-virtual void {\bf CrystUpdate} (const bool updateUI=false, const bool mutexlock=false)\label{a00119_ade00cc3852045daceaab7f0eacba296a}
+\begin{DoxyCompactList}\small\item\em \-Constructor, specifying the label of the field. \end{DoxyCompactList}\item 
+void {\bf \-Set\-Label} (const string \&)\label{a00119_a0092c7a134e627a4c9b975c339f6d54e}
 
-\begin{DoxyCompactList}\small\item\em Does nothing. \item\end{DoxyCompactList}\item 
-virtual void {\bf UpdateUI} (const bool mutexlock=false)\label{a00119_a5cbdea12ea798037dd2da13fe53220f2}
+\begin{DoxyCompactList}\small\item\em \-Change the field's label. \end{DoxyCompactList}\item 
+virtual void {\bf \-Revert} ()=0\label{a00119_a178d6d770d1e3adfa02e27da94b2dffa}
 
-\begin{DoxyCompactList}\small\item\em Does nothing. \item\end{DoxyCompactList}\item 
-void {\bf Revert} ()
-\begin{DoxyCompactList}\small\item\em After a user entry, this allows to go back to the last value, if for some reason the entry was rejected (because the object is currently busy, . \item\end{DoxyCompactList}\item 
-void {\bf SetValue} (const string \&)\label{a00119_aae6b6916aaa6881c36aa543a05c68726}
+\begin{DoxyCompactList}\small\item\em \-After a user entry, this allows to go back to the last value, if for some reason the entry was rejected (because the object is currently busy, ...) \end{DoxyCompactList}\item 
+virtual bool {\bf \-Set\-Foreground\-Colour} (const wx\-Colour \&colour)
+\begin{DoxyCompactList}\small\item\em \-Change the colour of the field's title. \end{DoxyCompactList}\item 
+virtual void {\bf \-Validate\-User\-Input} ()=0\label{a00119_aa0a7701e04c91832e8fda19b5b2c147a}
 
-\begin{DoxyCompactList}\small\item\em Used by the owner to change the name of the choice. \item\end{DoxyCompactList}\item 
-virtual void {\bf ValidateUserInput} ()\label{a00119_a614c78cfd612074a7ac9474a6614bb89}
+\begin{DoxyCompactList}\small\item\em \-This function shall be called when a new value has been entered. \end{DoxyCompactList}\item 
+virtual void {\bf \-Set\-Size} (int width, int height)\label{a00119_a9a77acbfeaa049019e788521bf8e0b50}
 
-\begin{DoxyCompactList}\small\item\em Unnecessary here. Any change is immediately taken into account. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Protected Attributes}
+\begin{DoxyCompactList}\small\item\em \-Change the size of the field (excluding the title) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{\-Protected \-Attributes}
 \begin{DoxyCompactItemize}
 \item 
-wxButton $\ast$ {\bf mpButton}\label{a00119_a9b58dd176b85093cdda849d0cb041e5f}
+wx\-Box\-Sizer $\ast$ {\bf mp\-Sizer}\label{a00119_a7853a2d4f8b99e97c9959c01e8cce686}
 
-\begin{DoxyCompactList}\small\item\em The button to be clicked to change the value. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \-The horizontal sizer in which the title, button, fields, are put. \end{DoxyCompactList}\item 
+wx\-Static\-Text $\ast$ {\bf mp\-Label}\label{a00119_a0823abc300be21229f94eb44fc8acfc3}
 
+\begin{DoxyCompactList}\small\item\em \-The label. \end{DoxyCompactList}\item 
+const int {\bf m\-Id}\label{a00119_aa34f4178c0b17434cbdf757d7997afa9}
 
-\subsubsection{Detailed Description}
-Class to pick one choice. .. Choice change/update is handled by the \doxyref{WXCrystObj}{p.}{a00114} owner, who should grab the incoming event. Useful, for example, to change the scattering power associated to an atom. 
-
-\subsubsection{Member Function Documentation}
-\index{ObjCryst::WXFieldChoice@{ObjCryst::WXFieldChoice}!Revert@{Revert}}
-\index{Revert@{Revert}!ObjCryst::WXFieldChoice@{ObjCryst::WXFieldChoice}}
-\paragraph[{Revert}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::WXFieldChoice::Revert ()\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00119_a3b923575bb9d616bd9c80a7929d0a388}
+\begin{DoxyCompactList}\small\item\em \-The \-Id of this field. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-After a user entry, this allows to go back to the last value, if for some reason the entry was rejected (because the object is currently busy, . ..) 
+\subsubsection{\-Detailed \-Description}
+\-This is the abstract base class for all fields, wether they contain a floating-\/point parameter, or a string,... 
 
-Implements {\bf ObjCryst::WXField} \doxyref{}{p.}{a00118_a178d6d770d1e3adfa02e27da94b2dffa}.
+\-All \doxyref{\-W\-X\-Field}{p.}{a00119} have a title and an entry field.
 
-The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\-Note that \doxyref{\-W\-X\-Field\-::\-Cryst\-Update()}{p.}{a00116_a7ac00ae2ae28f1a6fa26e6fa571186b6} and \doxyref{\-W\-X\-Field\-::\-Update\-U\-I()}{p.}{a00116_a3818940b7031ff7e45cf2178c4a99c90} should be done from the parent object. \-Notably using \doxyref{\-W\-X\-Field\-::\-Cryst\-Update}{p.}{a00116_a7ac00ae2ae28f1a6fa26e6fa571186b6}(updateui=true) will not trigger an update of the \-U\-I. 
+
+\subsubsection{\-Member \-Function \-Documentation}
+\index{\-Obj\-Cryst\-::\-W\-X\-Field@{\-Obj\-Cryst\-::\-W\-X\-Field}!\-Set\-Foreground\-Colour@{\-Set\-Foreground\-Colour}}
+\index{\-Set\-Foreground\-Colour@{\-Set\-Foreground\-Colour}!ObjCryst::WXField@{\-Obj\-Cryst\-::\-W\-X\-Field}}
+\paragraph[{\-Set\-Foreground\-Colour}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool {\bf \-Obj\-Cryst\-::\-W\-X\-Field\-::\-Set\-Foreground\-Colour} (
+\begin{DoxyParamCaption}
+\item[{const wx\-Colour \&}]{colour}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00119_a2fd615e41430e4a1ab05e7507ac686c2}
+
+
+\-Change the colour of the field's title. 
+
+\-Can be used (with parcimony) to clarify the interface. 
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-wxCryst.h\end{DoxyCompactItemize}
+wx\-Cryst.\-h\end{DoxyCompactItemize}

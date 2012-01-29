@@ -1,52 +1,59 @@
-\subsection{ObjCryst::WXCrystal::RowScattPow Struct Reference}
-\label{a00083}\index{ObjCryst::WXCrystal::RowScattPow@{ObjCryst::WXCrystal::RowScattPow}}
+\subsection{\-Obj\-Cryst\-:\-:\-Molecule\-:\-:\-Rotor\-Group \-Struct \-Reference}
+\label{a00083}\index{\-Obj\-Cryst\-::\-Molecule\-::\-Rotor\-Group@{\-Obj\-Cryst\-::\-Molecule\-::\-Rotor\-Group}}
 
 
-Structure to store the scattering power parameters.  
-\subsubsection*{Public Attributes}
+\-Defines a group of atoms which can be rotated around an axis defined by two other atoms.  
+
+
+\subsubsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-std::string {\bfseries mName}\label{a00083_aaff5df78e44468ceaa7ee98088322cd6}
-
+{\bf \-Rotor\-Group} (const {\bf \-Mol\-Atom} \&at1, const {\bf \-Mol\-Atom} \&at2)
+\begin{DoxyCompactList}\small\item\em \-Constructor, with the two atoms around which the rotation shall be made. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
 \item 
-REAL {\bf mBiso}\label{a00083_a113c7f507461cdce97417be2ce89c70f}
+const {\bf \-Mol\-Atom} $\ast$ {\bf mp\-Atom1}\label{a00083_a58f9b6ed1fc288d547a1617b17e75316}
 
-\begin{DoxyCompactList}\small\item\em Last displayed values. \item\end{DoxyCompactList}\item 
-REAL {\bfseries mFormalCharge}\label{a00083_a8d821d61d7a4c2cb49d43238643236dc}
+\begin{DoxyCompactList}\small\item\em \-The first atom defining the rotation axis. \end{DoxyCompactList}\item 
+const {\bf \-Mol\-Atom} $\ast$ {\bf mp\-Atom2}\label{a00083_ae6829772d661cbdef458f20a6d2d83a6}
 
+\begin{DoxyCompactList}\small\item\em \-The second atom defining the rotation axis. \end{DoxyCompactList}\item 
+set$<$ {\bf \-Mol\-Atom} $\ast$ $>$ {\bf mv\-Rotated\-Atom\-List}\label{a00083_a2ff8b0fdb5c57289ffbc53f301331caa}
+
+\begin{DoxyCompactList}\small\item\em \-The set of atoms that are to be rotated. \end{DoxyCompactList}\item 
+\-R\-E\-A\-L {\bf m\-Base\-Rotation\-Amplitude}
+\begin{DoxyCompactList}\small\item\em \-The recommended rotation amplitude, for a base global optimization displacement, to obtain an average 0.\-1 \-Angstroem displacement per atom (pi$\ast$0.04 by default) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{\-Detailed \-Description}
+\-Defines a group of atoms which can be rotated around an axis defined by two other atoms. 
+
+\subsubsection{\-Constructor \& \-Destructor \-Documentation}
+\index{\-Obj\-Cryst\-::\-Molecule\-::\-Rotor\-Group@{\-Obj\-Cryst\-::\-Molecule\-::\-Rotor\-Group}!\-Rotor\-Group@{\-Rotor\-Group}}
+\index{\-Rotor\-Group@{\-Rotor\-Group}!ObjCryst::Molecule::RotorGroup@{\-Obj\-Cryst\-::\-Molecule\-::\-Rotor\-Group}}
+\paragraph[{\-Rotor\-Group}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Obj\-Cryst\-::\-Molecule\-::\-Rotor\-Group\-::\-Rotor\-Group} (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-Mol\-Atom} \&}]{at1, }
+\item[{const {\bf \-Mol\-Atom} \&}]{at2}
+\end{DoxyParamCaption}
+)}\label{a00083_a04efc612bcdfd3c84132e6dc0c54bf92}
+
+
+\-Constructor, with the two atoms around which the rotation shall be made. 
+
+\-The list of atoms to be rotated is initially empty. 
+
+\subsubsection{\-Member \-Data \-Documentation}
+\index{\-Obj\-Cryst\-::\-Molecule\-::\-Rotor\-Group@{\-Obj\-Cryst\-::\-Molecule\-::\-Rotor\-Group}!m\-Base\-Rotation\-Amplitude@{m\-Base\-Rotation\-Amplitude}}
+\index{m\-Base\-Rotation\-Amplitude@{m\-Base\-Rotation\-Amplitude}!ObjCryst::Molecule::RotorGroup@{\-Obj\-Cryst\-::\-Molecule\-::\-Rotor\-Group}}
+\paragraph[{m\-Base\-Rotation\-Amplitude}]{\setlength{\rightskip}{0pt plus 5cm}\-R\-E\-A\-L {\bf \-Obj\-Cryst\-::\-Molecule\-::\-Rotor\-Group\-::m\-Base\-Rotation\-Amplitude}}\label{a00083_ab98013a7f74a26ebe8d04c066f9ea49d}
+
+
+\-The recommended rotation amplitude, for a base global optimization displacement, to obtain an average 0.\-1 \-Angstroem displacement per atom (pi$\ast$0.04 by default) 
+
+\-This is learnt at the beginning of an optimization, i.\-e. in \doxyref{\-Molecule\-::\-Build\-Rotor\-Group()}{p.}{a00047_a3642fa8104faa1ce84a977600f9d1aeb} 
+
+\-The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-REAL {\bfseries mR}\label{a00083_a94c3494f460db87d1de194ed011456ee}
-
-\item 
-REAL {\bfseries mG}\label{a00083_a7bfca1f0a4ba197b0788636e8f13bec4}
-
-\item 
-REAL {\bfseries mB}\label{a00083_ae6477b327330701a23ce1c036aee4059}
-
-\item 
-REAL {\bfseries mMaximumLikelihoodError}\label{a00083_a2a590e5bfb8ba1ef43fe55dc6bbd8b70}
-
-\item 
-REAL {\bfseries mNbGhostAtoms}\label{a00083_a83b5f5447f19b2e1fdd91d2ed3b4ec32}
-
-\item 
-std::vector$<$ REAL $>$ {\bf mvAntiBumpDistance}\label{a00083_a8fe9f826b395b40e671ef7f8a0427343}
-
-\begin{DoxyCompactList}\small\item\em Last displayed values for antibump. \item\end{DoxyCompactList}\item 
-std::vector$<$ REAL $>$ {\bf mvBondValenceRo}\label{a00083_ae02d7507960b535b29ad6e1fbaf70066}
-
-\begin{DoxyCompactList}\small\item\em Last displayed values for bond valence. \item\end{DoxyCompactList}\item 
-bool {\bf mNeedUpdateUI}\label{a00083_ac63f66d901578d4b9074336a63eb4f6f}
-
-\begin{DoxyCompactList}\small\item\em True if we need to update the displayed values. \item\end{DoxyCompactList}\item 
-int {\bf mIdx}\label{a00083_a8de50d30238e0f61e625a2ca61640161}
-
-\begin{DoxyCompactList}\small\item\em Current position in the list of rows or columns. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
-
-
-\subsubsection{Detailed Description}
-Structure to store the scattering power parameters. 
-
-The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
-\item 
-wxCrystal.h\end{DoxyCompactItemize}
+\-Molecule.\-h\end{DoxyCompactItemize}

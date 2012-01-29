@@ -1,131 +1,107 @@
-\subsection{ObjCryst::WXCrystObj Class Reference}
-\label{a00114}\index{ObjCryst::WXCrystObj@{ObjCryst::WXCrystObj}}
+\subsection{\-Obj\-Cryst\-:\-:\-W\-X\-Cryst\-Menu\-Bar \-Class \-Reference}
+\label{a00114}\index{\-Obj\-Cryst\-::\-W\-X\-Cryst\-Menu\-Bar@{\-Obj\-Cryst\-::\-W\-X\-Cryst\-Menu\-Bar}}
 
 
-Base class for all displayed \doxyref{ObjCryst}{p.}{a00170} objects (with a title, and a sizer to stack objects).  
-Inheritance diagram for ObjCryst::WXCrystObj::\begin{figure}[H]
+\-Our own local menu bar, using buttons and \-Popup menus.  
+
+
+\-Inheritance diagram for \-Obj\-Cryst\-:\-:\-W\-X\-Cryst\-Menu\-Bar\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=4.34951cm]{a00114}
+\includegraphics[height=2.000000cm]{a00114}
 \end{center}
 \end{figure}
-\subsubsection*{Public Member Functions}
+\subsubsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bf WXCrystObj} (wxWindow $\ast$parent, int orient=wxHORIZONTAL, bool showName=true)\label{a00114_aee6a4d5c3a1dfa315e5520f56621c153}
+{\bf \-W\-X\-Cryst\-Menu\-Bar} (wx\-Window $\ast$parent, {\bf \-W\-X\-Cryst\-Obj} $\ast$owner)\label{a00114_aaa68b57dce657185fe3a93c19ecc648a}
 
-\begin{DoxyCompactList}\small\item\em Constructor, with a. \item\end{DoxyCompactList}\item 
-void {\bf OnToggleCollapse} (wxCommandEvent \&WXUNUSED(event))
-\begin{DoxyCompactList}\small\item\em Only display the title, and collapse everything else. \item\end{DoxyCompactList}\item 
-virtual bool {\bf OnChangeName} (const int id)=0
-\begin{DoxyCompactList}\small\item\em When a \doxyref{WXFieldName}{p.}{a00120} has been changed by the user, it is handled here. \item\end{DoxyCompactList}\item 
-virtual void {\bf CrystUpdate} (const bool updateUI=false, const bool mutexlock=false)
-\begin{DoxyCompactList}\small\item\em Get new values to be displayed from the underlying object, and raise flag if an UI update is necessary. \item\end{DoxyCompactList}\item 
-virtual void {\bf UpdateUI} (const bool mutexlock=false)
-\begin{DoxyCompactList}\small\item\em Update the User Interface, if necessary. \item\end{DoxyCompactList}\item 
-virtual void {\bfseries OnEnable} (wxUpdateUIEvent \&event)\label{a00114_a862e490ea63c3f4e81e727dd76c11f50}
+\begin{DoxyCompactList}\small\item\em \-Ctor. \end{DoxyCompactList}\item 
+void {\bf \-Add\-Menu} (const string \&name, const int menu\-Id, const string \&help=\char`\"{}\char`\"{})\label{a00114_a99b2ca415d2bb4b670433557b1d42a5d}
 
-\item 
-virtual bool {\bfseries Enable} (bool enable)\label{a00114_adb1428e6b8fea322ec93212af80d17d3}
+\begin{DoxyCompactList}\small\item\em \-Add a menu. \end{DoxyCompactList}\item 
+wx\-Menu \& {\bf \-Get\-Menu} (const int menu\-Id)\label{a00114_a9a378d85bab72be5faec773730df4505}
 
-\item 
-virtual void {\bf BottomLayout} ({\bf WXCrystObjBasic} $\ast$pChild)
-\begin{DoxyCompactList}\small\item\em Ask for a new Layout with recalculated size hints, because a child has been changed or added. \item\end{DoxyCompactList}\item 
-virtual void {\bf AddChild} ({\bf WXCrystObjBasic} $\ast$pChild, bool doBottomLayout=true)
-\begin{DoxyCompactList}\small\item\em Notify that a new children has been added, also adding it to the correct sizer (which can be the top sizer or not). \item\end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Protected Attributes}
+\begin{DoxyCompactList}\small\item\em \-Get access to a menu. \end{DoxyCompactList}\item 
+void {\bf \-Add\-Menu\-Item} (const int menu\-Id, int id, const string \&item, const string \&help=\char`\"{}\char`\"{}, const bool checkable=false)\label{a00114_a689d06fe301f17b5e8940286d107340a}
+
+\begin{DoxyCompactList}\small\item\em \-Add an entry to a menu. \end{DoxyCompactList}\item 
+void {\bf \-Add\-Menu\-Item} (const int menu\-Id, int id, const wx\-String \&item, wx\-Menu $\ast$sub\-Menu, const wx\-String \&help\-String=\-\_\-\-T(\char`\"{}\char`\"{}))\label{a00114_a8d8e212441d2df35499e13bc38c7c463}
+
+\begin{DoxyCompactList}\small\item\em \-Add a sub-\/menu to a menu. \end{DoxyCompactList}\item 
+virtual void {\bf \-Cryst\-Update} (const bool update\-U\-I=false, const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em \-Get new values to be displayed from the underlying object, and raise flag if an \-U\-I update is necessary. \end{DoxyCompactList}\item 
+virtual void {\bf \-Update\-U\-I} (const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em \-Update the \-User \-Interface, if necessary. \end{DoxyCompactList}\item 
+void {\bf \-On\-Popup\-Menu} (wx\-Command\-Event \&event)\label{a00114_ade8539411ad2badf7ca0d84c982d1e1e}
+
+\begin{DoxyCompactList}\small\item\em \-Event handler to popu the menu when the button is clicked. \end{DoxyCompactList}\item 
+virtual void {\bf \-Set\-Tool\-Tip} (const wx\-String \&tip, long menu=0)\label{a00114_ad0ddf5302f5425ffcdcd4bf3681987dd}
+
+\begin{DoxyCompactList}\small\item\em \-Set tooltip for each menu. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{\-Protected \-Attributes}
 \begin{DoxyCompactItemize}
 \item 
-wxBoxSizer $\ast$ {\bf mpTopSizer}\label{a00114_aaa27c0ed63bd119b55b884dc274c71bc}
+wx\-Box\-Sizer $\ast$ {\bf mp\-Sizer}\label{a00114_a082b747b0a157df1dbe86349450f3f7a}
 
-\begin{DoxyCompactList}\small\item\em Top sizer including the title and \doxyref{WXCrystObj::mpSizer}{p.}{a00114_a0fcc77bbdc5c4c3e191f96e15e82ef86}. \item\end{DoxyCompactList}\item 
-wxBoxSizer $\ast$ {\bf mpSizer}\label{a00114_a0fcc77bbdc5c4c3e191f96e15e82ef86}
+\begin{DoxyCompactList}\small\item\em \-The sizer of the menu. \end{DoxyCompactList}\item 
+std\-::map$<$ long, pair$<$ wx\-Menu \*
+$\ast$, wx\-Button $\ast$ $>$ $>$ {\bf mvp\-Menu}\label{a00114_a73b92cea8b7a55c69d3c552771505560}
 
-\begin{DoxyCompactList}\small\item\em Sizer including all sub-\/objects. \item\end{DoxyCompactList}\item 
-{\bf WXFieldName} $\ast$ {\bf mpWXTitle}\label{a00114_a047ca586b293087e62eaa2054ce6164e}
-
-\begin{DoxyCompactList}\small\item\em The title. \item\end{DoxyCompactList}\item 
-bool {\bf mIsExpanded}\label{a00114_a0ad5527d3992a9aa86b1f1475c213521}
-
-\begin{DoxyCompactList}\small\item\em To be used for collapsing the sub-\/objects. \item\end{DoxyCompactList}\item 
-{\bf WXCrystObjBasicList} {\bf mList}\label{a00114_a2ec7c27e1a75da178e402c6166301126}
-
-\begin{DoxyCompactList}\small\item\em All windows but the title and collapse button are in this list. \item\end{DoxyCompactList}\item 
-wxButton $\ast$ {\bf mpCollapseButton}\label{a00114_abdcafc600137d8c8603dc5af76476eea}
-
-\begin{DoxyCompactList}\small\item\em The collapse button. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \-List of menus, first is the menu \-Id and second is a pair of $<$pointer to the menu, pointer to the button of the menu$>$ \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\subsubsection{Detailed Description}
-Base class for all displayed \doxyref{ObjCryst}{p.}{a00170} objects (with a title, and a sizer to stack objects). A button (which should be used to collapse the object) is used to create an indentation for the sub-\/objects.
+\subsubsection{\-Detailed \-Description}
+\-Our own local menu bar, using buttons and \-Popup menus. 
 
-\begin{Desc}
-\item[{\bf Todo}]Allow the objects to be collabsable. The difficulty is that even if the object is not shown, it is not removed by the Sizer as long as it is not deleted... Needs some testing ! Otherwise it would also be possible to delete and re-\/create sub-\/objects when collapsing, but that would be more difficult. \end{Desc}
-
-
-\subsubsection{Member Function Documentation}
-\index{ObjCryst::WXCrystObj@{ObjCryst::WXCrystObj}!AddChild@{AddChild}}
-\index{AddChild@{AddChild}!ObjCryst::WXCrystObj@{ObjCryst::WXCrystObj}}
-\paragraph[{AddChild}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::WXCrystObj::AddChild ({\bf WXCrystObjBasic} $\ast$ {\em pChild}, \/  bool {\em doBottomLayout} = {\ttfamily true})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00114_a0e0790010b9be47e533998a61f27fa1a}
-
-
-Notify that a new children has been added, also adding it to the correct sizer (which can be the top sizer or not). 
-\begin{DoxyParams}{Parameters}
-\item[{\em doBottomLayout}]ask for a new Layout of the window and of its parents. \end{DoxyParams}
+\subsubsection{\-Member \-Function \-Documentation}
+\index{\-Obj\-Cryst\-::\-W\-X\-Cryst\-Menu\-Bar@{\-Obj\-Cryst\-::\-W\-X\-Cryst\-Menu\-Bar}!\-Cryst\-Update@{\-Cryst\-Update}}
+\index{\-Cryst\-Update@{\-Cryst\-Update}!ObjCryst::WXCrystMenuBar@{\-Obj\-Cryst\-::\-W\-X\-Cryst\-Menu\-Bar}}
+\paragraph[{\-Cryst\-Update}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-W\-X\-Cryst\-Menu\-Bar\-::\-Cryst\-Update} (
+\begin{DoxyParamCaption}
+\item[{const bool}]{update\-U\-I = {\ttfamily false}, }
+\item[{const bool}]{mutexlock = {\ttfamily false}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00114_ac0c3dead0da352d0c7e439508bc40303}
 
 
-Reimplemented from {\bf ObjCryst::WXCrystObjBasic} \doxyref{}{p.}{a00115_ae346606a6dbb6aeffe89fc16de380b81}.\index{ObjCryst::WXCrystObj@{ObjCryst::WXCrystObj}!BottomLayout@{BottomLayout}}
-\index{BottomLayout@{BottomLayout}!ObjCryst::WXCrystObj@{ObjCryst::WXCrystObj}}
-\paragraph[{BottomLayout}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::WXCrystObj::BottomLayout ({\bf WXCrystObjBasic} $\ast$ {\em pChild})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00114_a8fcadf77f9216819c62384d0c03bd710}
+\-Get new values to be displayed from the underlying object, and raise flag if an \-U\-I update is necessary. 
+
+\-The actual \-G\-U\-I update is not made here. \doxyref{\-Update\-U\-I()}{p.}{a00114_acc23d478cb50225e17fb5b6dc29fce7b} should be called separately, from the main thread.
 
 
-Ask for a new Layout with recalculated size hints, because a child has been changed or added. 
-\begin{DoxyParams}{Parameters}
-\item[{\em pChild,:}]the modified child. If null, this will mean we are asking for a new layout of the window itself (useful when a sub-\/window is deleted). \end{DoxyParams}
+\begin{DoxyParams}{\-Parameters}
+{\em update\-U\-I,\-:} & if true, this will call \-Update\-U\-I, either directly (if in the main thread), or by sending a message. \\
+\hline
+{\em mutexlock,\-:} & if true, a \-Mutex will be used to lock the data shared between main and background thread. \-The idea is to only use a few \-Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{\-Cryst\-Update()}{p.}{a00114_ac0c3dead0da352d0c7e439508bc40303} and \doxyref{\-Update\-U\-I()}{p.}{a00114_acc23d478cb50225e17fb5b6dc29fce7b}. \-As sub-\/objects (\doxyref{\-W\-X\-Field}{p.}{a00119},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. \\
+\hline
+\end{DoxyParams}
 
 
-Reimplemented from {\bf ObjCryst::WXCrystObjBasic} \doxyref{}{p.}{a00115_afbd0ece297950eda664fa819c240a318}.\index{ObjCryst::WXCrystObj@{ObjCryst::WXCrystObj}!CrystUpdate@{CrystUpdate}}
-\index{CrystUpdate@{CrystUpdate}!ObjCryst::WXCrystObj@{ObjCryst::WXCrystObj}}
-\paragraph[{CrystUpdate}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::WXCrystObj::CrystUpdate (const bool {\em updateUI} = {\ttfamily false}, \/  const bool {\em mutexlock} = {\ttfamily false})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00114_a2e5de90ae4d1ca8feb65b88debf6d3cb}
+\-Implements {\bf \-Obj\-Cryst\-::\-W\-X\-Cryst\-Obj\-Basic} \doxyref{}{p.}{a00116_a7ac00ae2ae28f1a6fa26e6fa571186b6}.
+
+\index{\-Obj\-Cryst\-::\-W\-X\-Cryst\-Menu\-Bar@{\-Obj\-Cryst\-::\-W\-X\-Cryst\-Menu\-Bar}!\-Update\-U\-I@{\-Update\-U\-I}}
+\index{\-Update\-U\-I@{\-Update\-U\-I}!ObjCryst::WXCrystMenuBar@{\-Obj\-Cryst\-::\-W\-X\-Cryst\-Menu\-Bar}}
+\paragraph[{\-Update\-U\-I}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-W\-X\-Cryst\-Menu\-Bar\-::\-Update\-U\-I} (
+\begin{DoxyParamCaption}
+\item[{const bool}]{mutexlock = {\ttfamily false}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00114_acc23d478cb50225e17fb5b6dc29fce7b}
 
 
-Get new values to be displayed from the underlying object, and raise flag if an UI update is necessary. The actual GUI update is not made here. \doxyref{UpdateUI()}{p.}{a00114_a093c04eb7b70ff063b80427779c7c456} should be called separately, from the main thread.
+\-Update the \-User \-Interface, if necessary. 
 
 
-\begin{DoxyParams}{Parameters}
-\item[{\em updateUI,:}]if true, this will call UpdateUI, either directly (if in the main thread), or by sending a message. \item[{\em mutexlock,:}]if true, a Mutex will be used to lock the data shared between main and background thread. The idea is to only use a few Mutexes to lock data from the top objects (wxRefinableObj,...), when calling \doxyref{CrystUpdate()}{p.}{a00114_a2e5de90ae4d1ca8feb65b88debf6d3cb} and \doxyref{UpdateUI()}{p.}{a00114_a093c04eb7b70ff063b80427779c7c456}. As sub-\/objects (\doxyref{WXField}{p.}{a00118},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. \end{DoxyParams}
+\begin{DoxyParams}{\-Parameters}
+{\em mutexlock,\-:} & if true, a \-Mutex will be used to lock the data shared between main and background thread.\\
+\hline
+\end{DoxyParams}
+\-The idea is to only use a few \-Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{\-Cryst\-Update()}{p.}{a00114_ac0c3dead0da352d0c7e439508bc40303} and \doxyref{\-Update\-U\-I()}{p.}{a00114_acc23d478cb50225e17fb5b6dc29fce7b}. \-As sub-\/objects (\doxyref{\-W\-X\-Field}{p.}{a00119},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
+
+\-Implements {\bf \-Obj\-Cryst\-::\-W\-X\-Cryst\-Obj\-Basic} \doxyref{}{p.}{a00116_a3818940b7031ff7e45cf2178c4a99c90}.
 
 
-Implements {\bf ObjCryst::WXCrystObjBasic} \doxyref{}{p.}{a00115_a7ac00ae2ae28f1a6fa26e6fa571186b6}.
 
-Reimplemented in {\bf ObjCryst::WXCrystal} \doxyref{}{p.}{a00112_a55d7dc41da5c6d4360609d2eac91f39b}, {\bf ObjCryst::WXDiffractionSingleCrystal} \doxyref{}{p.}{a00117_a79a9bb91f352c12bfb3a1ebd60267cbc}, {\bf ObjCryst::WXOptimizationObj} \doxyref{}{p.}{a00134_a440befb33ae526a51eb9a7f3d9739d3e}, {\bf ObjCryst::WXMolecule} \doxyref{}{p.}{a00131_a4d8fe8698ddc741c34b613643dec87b0}, {\bf ObjCryst::WXPowderPattern} \doxyref{}{p.}{a00135_a90f999b4aab7ed134db388c532b1d63e}, {\bf ObjCryst::WXPowderPatternBackground} \doxyref{}{p.}{a00136_adacc1d5b1efe6eaf6a7a6a2d544c5e81}, and {\bf ObjCryst::WXRefinableObj} \doxyref{}{p.}{a00142_a13e4f37ac098de756b27cdb91d6a0551}.\index{ObjCryst::WXCrystObj@{ObjCryst::WXCrystObj}!OnChangeName@{OnChangeName}}
-\index{OnChangeName@{OnChangeName}!ObjCryst::WXCrystObj@{ObjCryst::WXCrystObj}}
-\paragraph[{OnChangeName}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool ObjCryst::WXCrystObj::OnChangeName (const int {\em id})\hspace{0.3cm}{\ttfamily  [pure virtual]}}\hfill\label{a00114_a3736357599263df7e550790753c040a3}
-
-
-When a \doxyref{WXFieldName}{p.}{a00120} has been changed by the user, it is handled here. This returns true if the value has been handled (for inheritance purposes). 
-
-Implemented in {\bf ObjCryst::WXCrystal} \doxyref{}{p.}{a00112_a7a15c2d1b5f5997ace336724fc396892}, {\bf ObjCryst::WXOptimizationObj} \doxyref{}{p.}{a00134_a19a866ffdeaba16f73fe3af78dbffa58}, {\bf ObjCryst::WXProfilePseudoVoigt} \doxyref{}{p.}{a00140_a6af548e3f77328ca30fb3a06a50fd40a}, {\bf ObjCryst::WXProfileDoubleExponentialPseudoVoigt} \doxyref{}{p.}{a00139_adbfe19fda83e06f57047c064dbdd6ba3}, {\bf ObjCryst::WXRegistry$<$ T $>$} \doxyref{}{p.}{a00143_add68cfae172f6d78a3261927a5977474}, {\bf ObjCryst::WXRefinableObj} \doxyref{}{p.}{a00142_ad784c1cb9ccb0d0e4ebfbc18a8dbbc19}, {\bf ObjCryst::WXScatteringPowerAtom} \doxyref{}{p.}{a00145_a99081b400737a5e28a7207c8c905f6d5}, {\bf ObjCryst::WXScatteringPowerSphere} \doxyref{}{p.}{a00146_a54f201d096de63b349e8979d69d6933a}, {\bf ObjCryst::WXRegistry$<$ ZAtom $>$} \doxyref{}{p.}{a00143_add68cfae172f6d78a3261927a5977474}, {\bf ObjCryst::WXRegistry$<$ ScatteringPower $>$} \doxyref{}{p.}{a00143_add68cfae172f6d78a3261927a5977474}, {\bf ObjCryst::WXRegistry$<$ Scatterer $>$} \doxyref{}{p.}{a00143_add68cfae172f6d78a3261927a5977474}, and {\bf ObjCryst::WXRegistry$<$ PowderPatternComponent $>$} \doxyref{}{p.}{a00143_add68cfae172f6d78a3261927a5977474}.\index{ObjCryst::WXCrystObj@{ObjCryst::WXCrystObj}!OnToggleCollapse@{OnToggleCollapse}}
-\index{OnToggleCollapse@{OnToggleCollapse}!ObjCryst::WXCrystObj@{ObjCryst::WXCrystObj}}
-\paragraph[{OnToggleCollapse}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::WXCrystObj::OnToggleCollapse (wxCommandEvent \& {\em WXUNUSED}event)}\hfill\label{a00114_ae55c3091101cae5d79e5aacb77c48856}
-
-
-Only display the title, and collapse everything else. \begin{Desc}
-\item[{\bf Bug}]: the windows do collapse, but the size of the window is not changed, so it is pretty useless so far... \end{Desc}
-\index{ObjCryst::WXCrystObj@{ObjCryst::WXCrystObj}!UpdateUI@{UpdateUI}}
-\index{UpdateUI@{UpdateUI}!ObjCryst::WXCrystObj@{ObjCryst::WXCrystObj}}
-\paragraph[{UpdateUI}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::WXCrystObj::UpdateUI (const bool {\em mutexlock} = {\ttfamily false})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00114_a093c04eb7b70ff063b80427779c7c456}
-
-
-Update the User Interface, if necessary. 
-\begin{DoxyParams}{Parameters}
-\item[{\em mutexlock,:}]if true, a Mutex will be used to lock the data shared between main and background thread.\end{DoxyParams}
-The idea is to only use a few Mutexes to lock data from the top objects (wxRefinableObj,...), when calling \doxyref{CrystUpdate()}{p.}{a00114_a2e5de90ae4d1ca8feb65b88debf6d3cb} and \doxyref{UpdateUI()}{p.}{a00114_a093c04eb7b70ff063b80427779c7c456}. As sub-\/objects (\doxyref{WXField}{p.}{a00118},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
-
-Implements {\bf ObjCryst::WXCrystObjBasic} \doxyref{}{p.}{a00115_a3818940b7031ff7e45cf2178c4a99c90}.
-
-Reimplemented in {\bf ObjCryst::WXAtom} \doxyref{}{p.}{a00110_a5509a746fb1a6d918b6cbde8453d6a44}, {\bf ObjCryst::WXCrystal} \doxyref{}{p.}{a00112_a62946717943682dc2ac07ea4584030f4}, {\bf ObjCryst::WXDiffractionSingleCrystal} \doxyref{}{p.}{a00117_a6419580548c5f35434e0128b62f5b4e6}, {\bf ObjCryst::WXOptimizationObj} \doxyref{}{p.}{a00134_adbaf395e3e68e7605da0805e0e6465a0}, {\bf ObjCryst::WXMolecule} \doxyref{}{p.}{a00131_ae932cbbd6d7e55d319f1b4eb169c63ef}, {\bf ObjCryst::WXPowderPattern} \doxyref{}{p.}{a00135_aaeace05033eaea9499398825fc8244da}, {\bf ObjCryst::WXPowderPatternBackground} \doxyref{}{p.}{a00136_a11c6de5af2d72bcfc276838a2d62c32e}, {\bf ObjCryst::WXPowderPatternDiffraction} \doxyref{}{p.}{a00137_a0f7d965eea526ddce53d5bda8487b3fa}, {\bf ObjCryst::WXRefinableObj} \doxyref{}{p.}{a00142_a19a1d057eecafd48710d9a3b770c1b28}, {\bf ObjCryst::WXScatteringPowerAtom} \doxyref{}{p.}{a00145_a727146d4ecd5e1c4e5790a3eab0f0ace}, and {\bf ObjCryst::WXScatteringPowerSphere} \doxyref{}{p.}{a00146_a95d4f9b618ffbd4885294806b12b066c}.
-
-The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-wxCryst.h\end{DoxyCompactItemize}
+wx\-Cryst.\-h\end{DoxyCompactItemize}

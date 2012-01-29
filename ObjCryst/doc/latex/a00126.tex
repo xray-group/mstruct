@@ -1,50 +1,156 @@
-\subsection{ObjCryst::WXGlobalOptimRunThread Class Reference}
-\label{a00126}\index{ObjCryst::WXGlobalOptimRunThread@{ObjCryst::WXGlobalOptimRunThread}}
+\subsection{\-Obj\-Cryst\-:\-:\-W\-X\-Field\-String \-Class \-Reference}
+\label{a00126}\index{\-Obj\-Cryst\-::\-W\-X\-Field\-String@{\-Obj\-Cryst\-::\-W\-X\-Field\-String}}
 
 
-Class for a GlobalOptimization thread.  
-\subsubsection*{Public Member Functions}
+\-A field which directly links to a string.  
+
+
+\-Inheritance diagram for \-Obj\-Cryst\-:\-:\-W\-X\-Field\-String\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{a00126}
+\end{center}
+\end{figure}
+\subsubsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries WXGlobalOptimRunThread} ({\bf OptimizationObj} \&globalOptObj, long \&nbTrial, const REAL finalCost, long \&nbRun, const bool multiple=true)\label{a00126_ad4a30391ecd09902d2bde258cf6d7c05}
+{\bfseries \-W\-X\-Field\-String} (wx\-Window $\ast$parent, string \&st, const int field\-\_\-id, const int hsize=50, bool is\-Editable=true)\label{a00126_ac4c30cbc2b61cd29f864e8b6853474d4}
 
 \item 
-virtual void $\ast$ {\bfseries Entry} ()\label{a00126_a0c5d3f16fc314450619e561d0a68cb56}
+void {\bf \-On\-Enter} (wx\-Command\-Event \&event)
+\begin{DoxyCompactList}\small\item\em \-When a new value is entered (must type it and then hit the 'enter' key). \end{DoxyCompactList}\item 
+void {\bf \-On\-Text} (wx\-Command\-Event \&\-W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00126_a0c9a4f6f2c3c1082ba3aff0fa55d19f3}
 
-\item 
-virtual void {\bfseries OnExit} ()\label{a00126_a5f980c9a070545f46381cf573b06e4ff}
+\begin{DoxyCompactList}\small\item\em \-Records when text is entered (either from self-\/updating or user input) \end{DoxyCompactList}\item 
+void {\bf \-Set\-Value} (const string \&)
+\begin{DoxyCompactList}\small\item\em \-This actually posts an \-Update\-U\-I event, so that it is safe to call it from a non-\/graphic thread. \end{DoxyCompactList}\item 
+const string {\bf \-Get\-Value} () const \label{a00126_a488ed5b180ffd0dea95624c02962ab35}
 
-\end{DoxyCompactItemize}
-\subsubsection*{Private Attributes}
+\begin{DoxyCompactList}\small\item\em \-Get the current name. \end{DoxyCompactList}\item 
+virtual void {\bf \-Cryst\-Update} (const bool update\-U\-I=false, const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em \-Get new values to be displayed from the underlying object, and raise flag if an \-U\-I update is necessary. \end{DoxyCompactList}\item 
+virtual void {\bf \-Update\-U\-I} (const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em \-Update the \-User \-Interface, if necessary. \end{DoxyCompactList}\item 
+void {\bf \-Revert} ()\label{a00126_a0372d3d98cad5236fc2ebb628c881600}
+
+\begin{DoxyCompactList}\small\item\em \-After a user entry, this allows to go back to the last value, if for some reason the entry was rejected (because the object is currently busy, ...) \end{DoxyCompactList}\item 
+virtual void {\bf \-Validate\-User\-Input} ()\label{a00126_a37e535d0725ecfdb59795363f1472c90}
+
+\begin{DoxyCompactList}\small\item\em \-This function shall be called when a new value has been entered. \end{DoxyCompactList}\item 
+virtual void {\bf \-Set\-Size} (int width, int height)\label{a00126_ac263b80aafdff3bb56187427445b27c7}
+
+\begin{DoxyCompactList}\small\item\em \-Change the size of the field (excluding the title) \end{DoxyCompactList}\item 
+virtual void {\bf \-Set\-Tool\-Tip} (const wx\-String \&tip)\label{a00126_a861f4019069a28ab6d70c87157d832f1}
+
+\begin{DoxyCompactList}\small\item\em \-Set tooltip for this window. \-It will be activated when going over the entry field. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{\-Protected \-Attributes}
 \begin{DoxyCompactItemize}
 \item 
-{\bf OptimizationObj} $\ast$ {\bfseries mpGlobalOptObj}\label{a00126_aebc578c18b9dc9492eb9caa6be48592d}
+string $\ast$ {\bf mp\-String}\label{a00126_af0a4daf786fad26b6bd9939426fdb94a}
 
+\begin{DoxyCompactList}\small\item\em \-The \doxyref{\-W\-X\-Cryst\-Obj}{p.}{a00115} whose name is shown here. \end{DoxyCompactList}\item 
+string {\bf m\-Value}\label{a00126_a9e283fe8a42b5935bb5c21a7adf17edd}
+
+\begin{DoxyCompactList}\small\item\em \-Last name displayed. \end{DoxyCompactList}\item 
+wx\-Text\-Ctrl $\ast$ {\bf mp\-Field}\label{a00126_aa76720da6e7e99c814a6566a54c7b644}
+
+\begin{DoxyCompactList}\small\item\em \-The text window. \end{DoxyCompactList}\item 
+string {\bf m\-Value\-Old}
+\begin{DoxyCompactList}\small\item\em \-Last name displayed, before the value was changed by the user. \end{DoxyCompactList}\item 
+bool {\bf m\-Is\-Self\-Updating}
+\begin{DoxyCompactList}\small\item\em \-Set to true if the \-Field is being updated, so that no '\-E\-V\-T\-\_\-\-T\-E\-X\-T' is understood as user input. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{\-Detailed \-Description}
+\-A field which directly links to a string. 
+
+\subsubsection{\-Member \-Function \-Documentation}
+\index{\-Obj\-Cryst\-::\-W\-X\-Field\-String@{\-Obj\-Cryst\-::\-W\-X\-Field\-String}!\-Cryst\-Update@{\-Cryst\-Update}}
+\index{\-Cryst\-Update@{\-Cryst\-Update}!ObjCryst::WXFieldString@{\-Obj\-Cryst\-::\-W\-X\-Field\-String}}
+\paragraph[{\-Cryst\-Update}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-W\-X\-Field\-String\-::\-Cryst\-Update} (
+\begin{DoxyParamCaption}
+\item[{const bool}]{update\-U\-I = {\ttfamily false}, }
+\item[{const bool}]{mutexlock = {\ttfamily false}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00126_af10eb2c5beb34a1bae3175b04149e39d}
+
+
+\-Get new values to be displayed from the underlying object, and raise flag if an \-U\-I update is necessary. 
+
+\-The actual \-G\-U\-I update is not made here. \doxyref{\-Update\-U\-I()}{p.}{a00126_ad2a636e69047cf9f4f3610515aa53666} should be called separately, from the main thread.
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em update\-U\-I,\-:} & if true, this will call \-Update\-U\-I, either directly (if in the main thread), or by sending a message. \\
+\hline
+{\em mutexlock,\-:} & if true, a \-Mutex will be used to lock the data shared between main and background thread. \-The idea is to only use a few \-Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{\-Cryst\-Update()}{p.}{a00126_af10eb2c5beb34a1bae3175b04149e39d} and \doxyref{\-Update\-U\-I()}{p.}{a00126_ad2a636e69047cf9f4f3610515aa53666}. \-As sub-\/objects (\doxyref{\-W\-X\-Field}{p.}{a00119},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. \\
+\hline
+\end{DoxyParams}
+
+
+\-Implements {\bf \-Obj\-Cryst\-::\-W\-X\-Cryst\-Obj\-Basic} \doxyref{}{p.}{a00116_a7ac00ae2ae28f1a6fa26e6fa571186b6}.
+
+\index{\-Obj\-Cryst\-::\-W\-X\-Field\-String@{\-Obj\-Cryst\-::\-W\-X\-Field\-String}!\-On\-Enter@{\-On\-Enter}}
+\index{\-On\-Enter@{\-On\-Enter}!ObjCryst::WXFieldString@{\-Obj\-Cryst\-::\-W\-X\-Field\-String}}
+\paragraph[{\-On\-Enter}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Obj\-Cryst\-::\-W\-X\-Field\-String\-::\-On\-Enter} (
+\begin{DoxyParamCaption}
+\item[{wx\-Command\-Event \&}]{event}
+\end{DoxyParamCaption}
+)}\label{a00126_a4ab041e7f333884f0bfb8371699a47ad}
+
+
+\-When a new value is entered (must type it and then hit the 'enter' key). 
+
+\-The \-Field reads the new value, then forwards the event to its owner, who will take care of anything that must be done. \index{\-Obj\-Cryst\-::\-W\-X\-Field\-String@{\-Obj\-Cryst\-::\-W\-X\-Field\-String}!\-Set\-Value@{\-Set\-Value}}
+\index{\-Set\-Value@{\-Set\-Value}!ObjCryst::WXFieldString@{\-Obj\-Cryst\-::\-W\-X\-Field\-String}}
+\paragraph[{\-Set\-Value}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Obj\-Cryst\-::\-W\-X\-Field\-String\-::\-Set\-Value} (
+\begin{DoxyParamCaption}
+\item[{const string \&}]{}
+\end{DoxyParamCaption}
+)}\label{a00126_a26889c2974269016abf0ed81c860ca29}
+
+
+\-This actually posts an \-Update\-U\-I event, so that it is safe to call it from a non-\/graphic thread. 
+
+\index{\-Obj\-Cryst\-::\-W\-X\-Field\-String@{\-Obj\-Cryst\-::\-W\-X\-Field\-String}!\-Update\-U\-I@{\-Update\-U\-I}}
+\index{\-Update\-U\-I@{\-Update\-U\-I}!ObjCryst::WXFieldString@{\-Obj\-Cryst\-::\-W\-X\-Field\-String}}
+\paragraph[{\-Update\-U\-I}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-W\-X\-Field\-String\-::\-Update\-U\-I} (
+\begin{DoxyParamCaption}
+\item[{const bool}]{mutexlock = {\ttfamily false}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00126_ad2a636e69047cf9f4f3610515aa53666}
+
+
+\-Update the \-User \-Interface, if necessary. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em mutexlock,\-:} & if true, a \-Mutex will be used to lock the data shared between main and background thread.\\
+\hline
+\end{DoxyParams}
+\-The idea is to only use a few \-Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{\-Cryst\-Update()}{p.}{a00126_af10eb2c5beb34a1bae3175b04149e39d} and \doxyref{\-Update\-U\-I()}{p.}{a00126_ad2a636e69047cf9f4f3610515aa53666}. \-As sub-\/objects (\doxyref{\-W\-X\-Field}{p.}{a00119},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
+
+\-Implements {\bf \-Obj\-Cryst\-::\-W\-X\-Cryst\-Obj\-Basic} \doxyref{}{p.}{a00116_a3818940b7031ff7e45cf2178c4a99c90}.
+
+
+
+\subsubsection{\-Member \-Data \-Documentation}
+\index{\-Obj\-Cryst\-::\-W\-X\-Field\-String@{\-Obj\-Cryst\-::\-W\-X\-Field\-String}!m\-Is\-Self\-Updating@{m\-Is\-Self\-Updating}}
+\index{m\-Is\-Self\-Updating@{m\-Is\-Self\-Updating}!ObjCryst::WXFieldString@{\-Obj\-Cryst\-::\-W\-X\-Field\-String}}
+\paragraph[{m\-Is\-Self\-Updating}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-Obj\-Cryst\-::\-W\-X\-Field\-String\-::m\-Is\-Self\-Updating}\hspace{0.3cm}{\ttfamily  [protected]}}\label{a00126_aa22ef2e61af183c448dabe73b98d367e}
+
+
+\-Set to true if the \-Field is being updated, so that no '\-E\-V\-T\-\_\-\-T\-E\-X\-T' is understood as user input. 
+
+\index{\-Obj\-Cryst\-::\-W\-X\-Field\-String@{\-Obj\-Cryst\-::\-W\-X\-Field\-String}!m\-Value\-Old@{m\-Value\-Old}}
+\index{m\-Value\-Old@{m\-Value\-Old}!ObjCryst::WXFieldString@{\-Obj\-Cryst\-::\-W\-X\-Field\-String}}
+\paragraph[{m\-Value\-Old}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf \-Obj\-Cryst\-::\-W\-X\-Field\-String\-::m\-Value\-Old}\hspace{0.3cm}{\ttfamily  [protected]}}\label{a00126_a3764d3f904c5e3709be04a97cc0a1e2b}
+
+
+\-Last name displayed, before the value was changed by the user. 
+
+\-Not used yet, could be useful for undo. 
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-long $\ast$ {\bf mpNbTrial}\label{a00126_ace13caa17cbd44768496adfdb36f2766}
-
-\begin{DoxyCompactList}\small\item\em This points to the mNbTrial member in \doxyref{WXOptimizationObj}{p.}{a00134}. \item\end{DoxyCompactList}\item 
-long $\ast$ {\bf mpNbRun}\label{a00126_a7b58a2ed60d74cce4a33245126a3c2f0}
-
-\begin{DoxyCompactList}\small\item\em This points to the mNbRun member in \doxyref{WXOptimizationObj}{p.}{a00134}. \item\end{DoxyCompactList}\item 
-const REAL {\bf mFinalCost}
-\begin{DoxyCompactList}\small\item\em The value of the cost below which the optimization should stop (0 by default) even if the desired number pf trial has not been reached. \item\end{DoxyCompactList}\item 
-const bool {\bf mDoMultiple}\label{a00126_a69ff8f87fc924ec96d79ddee04941813}
-
-\begin{DoxyCompactList}\small\item\em Use multiple Runs ? \item\end{DoxyCompactList}\end{DoxyCompactItemize}
-
-
-\subsubsection{Detailed Description}
-Class for a GlobalOptimization thread. 
-
-\subsubsection{Member Data Documentation}
-\index{ObjCryst::WXGlobalOptimRunThread@{ObjCryst::WXGlobalOptimRunThread}!mFinalCost@{mFinalCost}}
-\index{mFinalCost@{mFinalCost}!ObjCryst::WXGlobalOptimRunThread@{ObjCryst::WXGlobalOptimRunThread}}
-\paragraph[{mFinalCost}]{\setlength{\rightskip}{0pt plus 5cm}const REAL {\bf ObjCryst::WXGlobalOptimRunThread::mFinalCost}\hspace{0.3cm}{\ttfamily  [private]}}\hfill\label{a00126_a2ef0f785a8cabac94cf245a6b2f39acc}
-
-
-The value of the cost below which the optimization should stop (0 by default) even if the desired number pf trial has not been reached. 
-
-The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
-\item 
-wxGlobalOptimObj.h\end{DoxyCompactItemize}
+wx\-Cryst.\-h\end{DoxyCompactItemize}

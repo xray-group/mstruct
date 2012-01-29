@@ -1,73 +1,33 @@
-\subsection{ObjCryst::StretchModeTorsion Struct Reference}
-\label{a00100}\index{ObjCryst::StretchModeTorsion@{ObjCryst::StretchModeTorsion}}
+\subsection{\-Obj\-Cryst\-:\-:\-Molecule\-:\-:\-Stretch\-Mode\-Group \-Struct \-Reference}
+\label{a00100}\index{\-Obj\-Cryst\-::\-Molecule\-::\-Stretch\-Mode\-Group@{\-Obj\-Cryst\-::\-Molecule\-::\-Stretch\-Mode\-Group}}
 
 
-Atoms moved when rotated around a bond at0-\/at1-\/at2-\/at3.  
-Inheritance diagram for ObjCryst::StretchModeTorsion::\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[height=2cm]{a00100}
-\end{center}
-\end{figure}
-\subsubsection*{Public Member Functions}
+\-Group of concurrent \-Stretch\-Modes (affecting common restraints) \-A given stretch mode can only belong to one group.  
+
+
+\subsubsection*{\-Public \-Attributes}
 \begin{DoxyCompactItemize}
 \item 
-{\bf StretchModeTorsion} ({\bf MolAtom} \&at1, {\bf MolAtom} \&at2, const {\bf MolDihedralAngle} $\ast$pDihedralAngle)\label{a00100_a87d8b940172d8aaa8961d70edc891424}
+std\-::set$<$ {\bf \-Stretch\-Mode} $\ast$ $>$ {\bfseries mvp\-Stretch\-Mode}\label{a00100_a63c54cd06ab4a7b838cc686214d41750}
 
-\begin{DoxyCompactList}\small\item\em Constructor If pDihedralAngle!=0, the dihedral angle length restraint is respected. \item\end{DoxyCompactList}\item 
-virtual void {\bf CalcDeriv} (const bool derivllk=true) const 
-\begin{DoxyCompactList}\small\item\em Calculate the derivative of the Molecule's Log(likelihood) and atomic positions versus a change of the bond length. \item\end{DoxyCompactList}\item 
-virtual void {\bf Print} (ostream \&os, bool full=true) const \label{a00100_a09cb572292e22edc2561c4d521976c1e}
-
-\begin{DoxyCompactList}\small\item\em Print one-\/line list of atoms moved. \item\end{DoxyCompactList}\item 
-virtual void {\bf Stretch} (const REAL change)\label{a00100_a38459c1fe17f977d8e7aa111e60fcb80}
-
-\begin{DoxyCompactList}\small\item\em Move the atoms according to this mode. \item\end{DoxyCompactList}\item 
-virtual void {\bf RandomStretch} (const REAL amplitude)\label{a00100_a45af672b46859970f6f77f3734d973f0}
-
-\begin{DoxyCompactList}\small\item\em Move the atoms according to this mode, randomly. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Public Attributes}
-\begin{DoxyCompactItemize}
 \item 
-{\bf MolAtom} $\ast$ {\bf mpAtom1}\label{a00100_a634c5b17f5b6fec260556256c8f8c6a2}
+std\-::set$<$ const {\bf \-Mol\-Bond} $\ast$ $>$ {\bfseries mvp\-Broken\-Bond}\label{a00100_a3f6e58dc0887b43c2187080b27e2836f}
 
-\begin{DoxyCompactList}\small\item\em The first atom. \item\end{DoxyCompactList}\item 
-{\bf MolAtom} $\ast$ {\bf mpAtom2}\label{a00100_a6efdb86745541ac989f8cd703d1919d0}
-
-\begin{DoxyCompactList}\small\item\em The second atom. \item\end{DoxyCompactList}\item 
-const {\bf MolDihedralAngle} $\ast$ {\bf mpDihedralAngle}
-\begin{DoxyCompactList}\small\item\em The (optional) bond angle restraint which this stretch mode should respect. \item\end{DoxyCompactList}\item 
-set$<$ {\bf MolAtom} $\ast$ $>$ {\bf mvRotatedAtomList}\label{a00100_ad20b18eb2901e1f0c94af520c2defd1b}
-
-\begin{DoxyCompactList}\small\item\em The set of atoms that are to be rotated around at1-\/at2. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
-
-
-\subsubsection{Detailed Description}
-Atoms moved when rotated around a bond at0-\/at1-\/at2-\/at3. This should be merged (or have an inheritance relation) with \doxyref{MolDihedralAngle}{p.}{a00045} 
-
-\subsubsection{Member Function Documentation}
-\index{ObjCryst::StretchModeTorsion@{ObjCryst::StretchModeTorsion}!CalcDeriv@{CalcDeriv}}
-\index{CalcDeriv@{CalcDeriv}!ObjCryst::StretchModeTorsion@{ObjCryst::StretchModeTorsion}}
-\paragraph[{CalcDeriv}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::StretchModeTorsion::CalcDeriv (const bool {\em derivllk} = {\ttfamily true}) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00100_abecf1074b05ba13fd938667399df110e}
-
-
-Calculate the derivative of the Molecule's Log(likelihood) and atomic positions versus a change of the bond length. The result is stored in mLLKDeriv and mLLKDerivXYZ, as well as in the various lists of restraints broken by this mode.
-
-
-\begin{DoxyParams}{Parameters}
-\item[{\em derivllk,:}]if false, the derivative of the overall llk will not be computed, only the derivative of the atomic positions. \end{DoxyParams}
-
-
-Implements {\bf ObjCryst::StretchMode} \doxyref{}{p.}{a00096_a5b5ab5f9819c047a49719a330722d419}.
-
-\subsubsection{Member Data Documentation}
-\index{ObjCryst::StretchModeTorsion@{ObjCryst::StretchModeTorsion}!mpDihedralAngle@{mpDihedralAngle}}
-\index{mpDihedralAngle@{mpDihedralAngle}!ObjCryst::StretchModeTorsion@{ObjCryst::StretchModeTorsion}}
-\paragraph[{mpDihedralAngle}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf MolDihedralAngle}$\ast$ {\bf ObjCryst::StretchModeTorsion::mpDihedralAngle}}\hfill\label{a00100_a93128fa32715a53d1ecc6758283f8641}
-
-
-The (optional) bond angle restraint which this stretch mode should respect. The mpAtom1 and mpAtom2 must be the central atoms of this restraint. 
-
-The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
 \item 
-Molecule.h\end{DoxyCompactItemize}
+std\-::set$<$ const {\bf \-Mol\-Bond\-Angle} $\ast$ $>$ {\bfseries mvp\-Broken\-Bond\-Angle}\label{a00100_a2b325fc86d71b14c62efc683e05b0fe0}
+
+\item 
+std\-::set$<$ const \*
+{\bf \-Mol\-Dihedral\-Angle} $\ast$ $>$ {\bfseries mvp\-Broken\-Dihedral\-Angle}\label{a00100_aaaee134991cbfe70408dc4b310981c63}
+
+\end{DoxyCompactItemize}
+
+
+\subsubsection{\-Detailed \-Description}
+\-Group of concurrent \-Stretch\-Modes (affecting common restraints) \-A given stretch mode can only belong to one group. 
+
+
+
+\-The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\-Molecule.\-h\end{DoxyCompactItemize}

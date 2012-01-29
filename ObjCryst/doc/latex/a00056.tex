@@ -1,58 +1,95 @@
-\subsection{ObjCryst::PDFCrystal::pdfAtom Struct Reference}
-\label{a00056}\index{ObjCryst::PDFCrystal::pdfAtom@{ObjCryst::PDFCrystal::pdfAtom}}
+\subsection{\-Obj\-Cryst\-:\-:\-P\-D\-F \-Class \-Reference}
+\label{a00056}\index{\-Obj\-Cryst\-::\-P\-D\-F@{\-Obj\-Cryst\-::\-P\-D\-F}}
 
 
-Container of temp data for each atom.  
-\subsubsection*{Public Member Functions}
+\-Main class for \-Pair distribution function calculations and comparison to observed one.  
+
+
+\-Inheritance diagram for \-Obj\-Cryst\-:\-:\-P\-D\-F\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{a00056}
+\end{center}
+\end{figure}
+\subsubsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bf pdfAtom} ()\label{a00056_a3909167af1d0f03dd62d1a7b07524aaa}
+{\bf \-P\-D\-F} (const {\bf \-P\-D\-F} \&old)\label{a00056_af5633baa0e58aa65b1a7cf80cfb79712}
 
-\begin{DoxyCompactList}\small\item\em default constructor \item\end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Public Attributes}
+\begin{DoxyCompactList}\small\item\em \-Copy constructor. \end{DoxyCompactList}\item 
+{\bf $\sim$\-P\-D\-F} ()\label{a00056_adf8dacf02c0b3a6c8f49d86daa25b527}
+
+\begin{DoxyCompactList}\small\item\em \doxyref{\-Crystal}{p.}{a00020} destructor. \end{DoxyCompactList}\item 
+virtual const string \& {\bf \-Get\-Class\-Name} () const 
+\begin{DoxyCompactList}\small\item\em \-Name for this class (\char`\"{}\-Refinable\-Obj\char`\"{}, \char`\"{}\-Crystal\char`\"{},...). \end{DoxyCompactList}\item 
+void {\bf \-Set\-P\-D\-F\-Obs} (const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \&r, const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \&obs)\label{a00056_a7ff4d297dca6974e099ad5b45d6b9ffa}
+
+\begin{DoxyCompactList}\small\item\em \-Experimental data. \end{DoxyCompactList}\item 
+{\bf \-Radiation\-Type} {\bf \-Get\-Radiation\-Type} () const \label{a00056_a940341ae04811d1b0bdf87c72ba594b5}
+
+\begin{DoxyCompactList}\small\item\em \-Get\-Radiation\-Type. \end{DoxyCompactList}\item 
+void {\bf \-Set\-Radiation\-Type} ({\bf \-Radiation\-Type} type)\label{a00056_a51d1cebecb13d8e60038fca30547c84e}
+
+\begin{DoxyCompactList}\small\item\em \-Set\-Radiation\-Type. \end{DoxyCompactList}\item 
+\-R\-E\-A\-L {\bf \-Get\-R\-Max} () const \label{a00056_a00503dc494bffe09c7ae85d29e2a339e}
+
+\begin{DoxyCompactList}\small\item\em \-Cutoff r value. \end{DoxyCompactList}\item 
+const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \& {\bf \-Get\-P\-D\-F\-Calc} () const \label{a00056_a741872ecb602f9721b77c7b255f56876}
+
+\begin{DoxyCompactList}\small\item\em \-Get the calculated \doxyref{\-P\-D\-F}{p.}{a00056}. \end{DoxyCompactList}\item 
+const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \& {\bf \-Get\-P\-D\-F\-Obs} () const \label{a00056_a09dcfddbc9ec6bf33726675dad856fe4}
+
+\begin{DoxyCompactList}\small\item\em \-Get the observed \doxyref{\-P\-D\-F}{p.}{a00056}. \end{DoxyCompactList}\item 
+const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \& {\bf \-Get\-P\-D\-F\-R} () const \label{a00056_a79778c610b24aee1caedaa011a8ec0fb}
+
+\begin{DoxyCompactList}\small\item\em \-Get the r coordinates (in \-Angstroem) for the \doxyref{\-P\-D\-F}{p.}{a00056}. \end{DoxyCompactList}\item 
+void {\bf \-Add\-P\-D\-F\-Phase} ({\bf \-P\-D\-F\-Phase} \&phase)\label{a00056_a4a39ea9bce2350b5786575fc4fc7a9ea}
+
+\begin{DoxyCompactList}\small\item\em \-Add \doxyref{\-P\-D\-F}{p.}{a00056} phase. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{\-Private \-Attributes}
 \begin{DoxyCompactItemize}
 \item 
-REAL {\bf fx0}\label{a00056_a64a01ae0646a38e7ec6aacc32879293b}
+{\bf \-Radiation\-Type} {\bf m\-Radiation\-Type}\label{a00056_af3ab577cb12f62f38fbd3a6d88e242bf}
 
-\begin{DoxyCompactList}\small\item\em Fractionnal \& cartesian unique coordinates. \item\end{DoxyCompactList}\item 
-REAL {\bfseries fy0}\label{a00056_a842098b3e4c330de75d81360430bff2b}
+\begin{DoxyCompactList}\small\item\em \doxyref{\-Radiation}{p.}{a00069} type. \end{DoxyCompactList}\item 
+\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf m\-P\-D\-F\-R}\label{a00056_a49cadbd04ae733321638566defc3a246}
 
+\begin{DoxyCompactList}\small\item\em r coordinates (in \-Angstroem) of the \doxyref{\-P\-D\-F}{p.}{a00056} \end{DoxyCompactList}\item 
+\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf m\-P\-D\-F\-Calc}\label{a00056_a6a907317c064f14614b5c55456de42b0}
+
+\begin{DoxyCompactList}\small\item\em \-The \doxyref{\-P\-D\-F}{p.}{a00056} itself,calculated. \end{DoxyCompactList}\item 
+\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf m\-P\-D\-F\-Obs}\label{a00056_a7cc4d168934d80fdea6f22c3f2789ff3}
+
+\begin{DoxyCompactList}\small\item\em \-The \doxyref{\-P\-D\-F}{p.}{a00056} itself,observed. \end{DoxyCompactList}\item 
+std\-::list$<$ std\-::pair$<$ {\bf \-P\-D\-F\-Phase} \*
+$\ast$, \-R\-E\-A\-L $>$ $>$ {\bf mv\-P\-D\-F\-Phase}\label{a00056_aa389a686162b7341ba62a2dffafb0d7b}
+
+\begin{DoxyCompactList}\small\item\em \-Contributions to the \doxyref{\-P\-D\-F}{p.}{a00056}, with their scale factor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{\-Detailed \-Description}
+\-Main class for \-Pair distribution function calculations and comparison to observed one. 
+
+
+
+\subsubsection{\-Member \-Function \-Documentation}
+\index{\-Obj\-Cryst\-::\-P\-D\-F@{\-Obj\-Cryst\-::\-P\-D\-F}!\-Get\-Class\-Name@{\-Get\-Class\-Name}}
+\index{\-Get\-Class\-Name@{\-Get\-Class\-Name}!ObjCryst::PDF@{\-Obj\-Cryst\-::\-P\-D\-F}}
+\paragraph[{\-Get\-Class\-Name}]{\setlength{\rightskip}{0pt plus 5cm}virtual const string\& {\bf \-Obj\-Cryst\-::\-P\-D\-F\-::\-Get\-Class\-Name} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00056_a809ab3f4cc8bdd268bd815baedccdc20}
+
+
+\-Name for this class (\char`\"{}\-Refinable\-Obj\char`\"{}, \char`\"{}\-Crystal\char`\"{},...). 
+
+\-This is only useful to distinguish different classes when picking up objects from the \doxyref{\-Refinable\-Obj}{p.}{a00071} \-Global \-Registry 
+
+\-Reimplemented from {\bf \-Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00071_a62968d90a7a3080738b363934616c019}.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-REAL {\bfseries fz0}\label{a00056_a869b4043afffd73fa4691075b9cf49fb}
-
-\item 
-REAL {\bfseries x0}\label{a00056_a684db85285aafa127dcc2b3ab1ee705e}
-
-\item 
-REAL {\bfseries y0}\label{a00056_a33fc5fb326d440de0c4e27a45eac3bee}
-
-\item 
-REAL {\bfseries z0}\label{a00056_a62c30b98c58028facfcac46ca7773754}
-
-\item 
-const {\bf ScatteringPower} $\ast$ {\bf pScattPow}\label{a00056_ac9fb4e85c6a68222212b4e0fc35dc45d}
-
-\begin{DoxyCompactList}\small\item\em The scattering power. \item\end{DoxyCompactList}\item 
-REAL {\bf occupBi}\label{a00056_aba908a68756273eda5261980e574dfef}
-
-\begin{DoxyCompactList}\small\item\em Scattering amplitudes, multiplied by occupancy. \item\end{DoxyCompactList}\item 
-bool {\bf hasChanged}\label{a00056_a273d054875caabd824b8d1f4ee12cc22}
-
-\begin{DoxyCompactList}\small\item\em Has this atom changed since last time ? \item\end{DoxyCompactList}\item 
-CrystVector\_\-REAL {\bf x}\label{a00056_a807d379b04bd1c18c64b8636060577bf}
-
-\begin{DoxyCompactList}\small\item\em List of all equivalent \& translated positions, in cartesian coordinates. \item\end{DoxyCompactList}\item 
-CrystVector\_\-REAL {\bfseries y}\label{a00056_ad9a1f5bf4df655fc3208eca9f655677f}
-
-\item 
-CrystVector\_\-REAL {\bfseries z}\label{a00056_a2cd91f3033cf28f48664c84ecff25fcc}
-
-\end{DoxyCompactItemize}
-
-
-\subsubsection{Detailed Description}
-Container of temp data for each atom. 
-
-The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
-\item 
-PDF.h\end{DoxyCompactItemize}
+\-P\-D\-F.\-h\end{DoxyCompactItemize}

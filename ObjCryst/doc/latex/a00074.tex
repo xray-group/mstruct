@@ -1,151 +1,138 @@
-\subsection{ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt Class Reference}
-\label{a00074}\index{ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt@{ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt}}
+\subsection{\-Obj\-Cryst\-:\-:\-Reflection\-Profile \-Class \-Reference}
+\label{a00074}\index{\-Obj\-Cryst\-::\-Reflection\-Profile@{\-Obj\-Cryst\-::\-Reflection\-Profile}}
 
 
-Double-\/Exponential Pseudo-\/Voigt profile for TOF.  
-Inheritance diagram for ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt::\begin{figure}[H]
+\-Abstract base class for reflection profiles.  
+
+
+\-Inheritance diagram for \-Obj\-Cryst\-:\-:\-Reflection\-Profile\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=3cm]{a00074}
+\includegraphics[height=2.434783cm]{a00074}
 \end{center}
 \end{figure}
-\subsubsection*{Public Member Functions}
+\subsubsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bf ReflectionProfileDoubleExponentialPseudoVoigt} ()\label{a00074_a99d69f5a755094081165c27f8cbc0de2}
-
-\begin{DoxyCompactList}\small\item\em Constructor, without unit cell. \item\end{DoxyCompactList}\item 
-{\bf ReflectionProfileDoubleExponentialPseudoVoigt} (const {\bf UnitCell} \&cell)\label{a00074_a83ca292045467ce5ca2fd5f33f60082b}
-
-\begin{DoxyCompactList}\small\item\em Constructor, with unit cell. \item\end{DoxyCompactList}\item 
-{\bfseries ReflectionProfileDoubleExponentialPseudoVoigt} (const {\bf ReflectionProfileDoubleExponentialPseudoVoigt} \&old)\label{a00074_ae4b01c3514699b3ca8981776afd11010}
+{\bfseries \-Reflection\-Profile} (const {\bf \-Reflection\-Profile} \&old)\label{a00074_a4647aa58d8e98429b10c54499b9b050e}
 
 \item 
-virtual {\bf ReflectionProfileDoubleExponentialPseudoVoigt} $\ast$ {\bfseries CreateCopy} () const \label{a00074_a495f3877130c4afa1f7456d962b62407}
+virtual {\bf \-Reflection\-Profile} $\ast$ {\bfseries \-Create\-Copy} () const =0\label{a00074_a620f88c536f3c13881262efd155cc504}
 
 \item 
-virtual const string \& {\bf GetClassName} () const 
-\begin{DoxyCompactList}\small\item\em Name for this class (\char`\"{}RefinableObj\char`\"{}, \char`\"{}Crystal\char`\"{},. \item\end{DoxyCompactList}\item 
-CrystVector\_\-REAL {\bf GetProfile} (const CrystVector\_\-REAL \&x, const REAL xcenter, const REAL h, const REAL k, const REAL l) const 
-\begin{DoxyCompactList}\small\item\em Get the reflection profile. \item\end{DoxyCompactList}\item 
-void {\bf SetProfilePar} (const REAL instrumentAlpha0, const REAL instrumentAlpha1, const REAL instrumentBeta0, const REAL instrumentBeta1, const REAL gaussianSigma0, const REAL gaussianSigma1, const REAL gaussianSigma2, const REAL lorentzianGamma0, const REAL lorentzianGamma1, const REAL lorentzianGamma2)
-\begin{DoxyCompactList}\small\item\em Set reflection profile parameters. \item\end{DoxyCompactList}\item 
-virtual REAL {\bf GetFullProfileWidth} (const REAL relativeIntensity, const REAL xcenter, const REAL h, const REAL k, const REAL l)
-\begin{DoxyCompactList}\small\item\em Get the (approximate) full profile width at a given percentage of the profile maximum (e.g. \item\end{DoxyCompactList}\item 
-bool {\bf IsAnisotropic} () const \label{a00074_a912e47b21ac000e04385058a183aba9b}
+virtual \-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf \-Get\-Profile} (const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \&x, const \-R\-E\-A\-L xcenter, const \-R\-E\-A\-L h, const \-R\-E\-A\-L k, const \-R\-E\-A\-L l)=0
+\begin{DoxyCompactList}\small\item\em \-Get the reflection profile. \end{DoxyCompactList}\item 
+virtual \-R\-E\-A\-L {\bf \-Get\-Full\-Profile\-Width} (const \-R\-E\-A\-L relative\-Intensity, const \-R\-E\-A\-L xcenter, const \-R\-E\-A\-L h, const \-R\-E\-A\-L k, const \-R\-E\-A\-L l)=0
+\begin{DoxyCompactList}\small\item\em \-Get the (approximate) full profile width at a given percentage of the profile maximum (e.\-g. \end{DoxyCompactList}\item 
+virtual bool {\bf \-Is\-Anisotropic} () const \label{a00074_ad1c2083adc170bc0d84b44f17b79d008}
 
-\begin{DoxyCompactList}\small\item\em Is the profile anisotropic ? \item\end{DoxyCompactList}\item 
-virtual void {\bf XMLOutput} (ostream \&os, int indent=0) const 
-\begin{DoxyCompactList}\small\item\em Output to stream in well-\/formed XML. \item\end{DoxyCompactList}\item 
-virtual void {\bf XMLInput} (istream \&is, const {\bf XMLCrystTag} \&tag)
-\begin{DoxyCompactList}\small\item\em Input From stream. \item\end{DoxyCompactList}\item 
-void {\bf SetUnitCell} (const {\bf UnitCell} \&cell)
-\begin{DoxyCompactList}\small\item\em Set unit cell. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Private Member Functions}
-\begin{DoxyCompactItemize}
-\item 
-void {\bf InitParameters} ()\label{a00074_a32fe8cd36500837396f2ac7070b9f841}
-
-\begin{DoxyCompactList}\small\item\em Initialize parameters. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Private Attributes}
-\begin{DoxyCompactItemize}
-\item 
-REAL {\bfseries mInstrumentAlpha0}\label{a00074_a93fd2450116ca2461fcffc08a2d8e674}
-
-\item 
-REAL {\bfseries mInstrumentAlpha1}\label{a00074_a35157f2ea58bd0f5f6ad1620ea227078}
-
-\item 
-REAL {\bfseries mInstrumentBeta0}\label{a00074_af385ee3d583f76cef00990878844a597}
-
-\item 
-REAL {\bfseries mInstrumentBeta1}\label{a00074_a98ce27de2255899ebd7421298b718eb2}
-
-\item 
-REAL {\bfseries mGaussianSigma0}\label{a00074_a78b99801a7ab4823a58cd89fd0400beb}
-
-\item 
-REAL {\bfseries mGaussianSigma1}\label{a00074_ad2914ce7d769b298e51304356a3d13bb}
-
-\item 
-REAL {\bfseries mGaussianSigma2}\label{a00074_a00604d593343a5e9be201f1d488ff975}
-
-\item 
-REAL {\bfseries mLorentzianGamma0}\label{a00074_ac8db724a2bebf7a8414301130cc41ae6}
-
-\item 
-REAL {\bfseries mLorentzianGamma1}\label{a00074_af29ac5bd00450014f504ebd580dc5918}
-
-\item 
-REAL {\bfseries mLorentzianGamma2}\label{a00074_a38b892cfe6e8fde52ef68e04729b0b3e}
-
-\item 
-const {\bf UnitCell} $\ast$ {\bfseries mpCell}\label{a00074_ae371d6156d93a9391bcf868c28b1270e}
-
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \-Is the profile anisotropic ? \end{DoxyCompactList}\item 
+virtual void {\bf \-X\-M\-L\-Output} (ostream \&os, int indent=0) const =0
+\begin{DoxyCompactList}\small\item\em \-Output to stream in well-\/formed \-X\-M\-L. \end{DoxyCompactList}\item 
+virtual void {\bf \-X\-M\-L\-Input} (istream \&is, const {\bf \-X\-M\-L\-Cryst\-Tag} \&tag)=0
+\begin{DoxyCompactList}\small\item\em \-Input \-From stream. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\subsubsection{Detailed Description}
-Double-\/Exponential Pseudo-\/Voigt profile for TOF. Ref Mark Pitt 
+\subsubsection{\-Detailed \-Description}
+\-Abstract base class for reflection profiles. 
 
-\subsubsection{Member Function Documentation}
-\index{ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt@{ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt}!GetClassName@{GetClassName}}
-\index{GetClassName@{GetClassName}!ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt@{ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt}}
-\paragraph[{GetClassName}]{\setlength{\rightskip}{0pt plus 5cm}virtual const string\& ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt::GetClassName () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00074_a5e921c0682e78188e422c006e34df8a0}
-
-
-Name for this class (\char`\"{}RefinableObj\char`\"{}, \char`\"{}Crystal\char`\"{},. ..). This is only useful to distinguish different classes when picking up objects from the \doxyref{RefinableObj}{p.}{a00070} Global Registry 
-
-Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_a62968d90a7a3080738b363934616c019}.\index{ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt@{ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt}!GetFullProfileWidth@{GetFullProfileWidth}}
-\index{GetFullProfileWidth@{GetFullProfileWidth}!ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt@{ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt}}
-\paragraph[{GetFullProfileWidth}]{\setlength{\rightskip}{0pt plus 5cm}virtual REAL ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt::GetFullProfileWidth (const REAL {\em relativeIntensity}, \/  const REAL {\em xcenter}, \/  const REAL {\em h}, \/  const REAL {\em k}, \/  const REAL {\em l})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00074_ac1c2c1f3673f4558eca2c7bee8c3fdea}
-
-
-Get the (approximate) full profile width at a given percentage of the profile maximum (e.g. FWHM=GetFullProfileWidth(0.5)). 
-
-Implements {\bf ObjCryst::ReflectionProfile} \doxyref{}{p.}{a00073_ac6d2a69e63c3efd06f30ab134062bbc0}.\index{ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt@{ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt}!GetProfile@{GetProfile}}
-\index{GetProfile@{GetProfile}!ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt@{ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt}}
-\paragraph[{GetProfile}]{\setlength{\rightskip}{0pt plus 5cm}CrystVector\_\-REAL ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt::GetProfile (const CrystVector\_\-REAL \& {\em x}, \/  const REAL {\em xcenter}, \/  const REAL {\em h}, \/  const REAL {\em k}, \/  const REAL {\em l}) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00074_a2037750549dbf610823ddd354d73a107}
+\subsubsection{\-Member \-Function \-Documentation}
+\index{\-Obj\-Cryst\-::\-Reflection\-Profile@{\-Obj\-Cryst\-::\-Reflection\-Profile}!\-Get\-Full\-Profile\-Width@{\-Get\-Full\-Profile\-Width}}
+\index{\-Get\-Full\-Profile\-Width@{\-Get\-Full\-Profile\-Width}!ObjCryst::ReflectionProfile@{\-Obj\-Cryst\-::\-Reflection\-Profile}}
+\paragraph[{\-Get\-Full\-Profile\-Width}]{\setlength{\rightskip}{0pt plus 5cm}virtual \-R\-E\-A\-L {\bf \-Obj\-Cryst\-::\-Reflection\-Profile\-::\-Get\-Full\-Profile\-Width} (
+\begin{DoxyParamCaption}
+\item[{const \-R\-E\-A\-L}]{relative\-Intensity, }
+\item[{const \-R\-E\-A\-L}]{xcenter, }
+\item[{const \-R\-E\-A\-L}]{h, }
+\item[{const \-R\-E\-A\-L}]{k, }
+\item[{const \-R\-E\-A\-L}]{l}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{a00074_ac6d2a69e63c3efd06f30ab134062bbc0}
 
 
-Get the reflection profile. 
-\begin{DoxyParams}{Parameters}
-\item[{\em x,:}]the vector of x coordinates (i.e. either 2theta or time-\/of-\/flight) \item[{\em xcenter,:}]coordinate (2theta, tof) of the center of the peak \item[{\em h,k,l,:}]reflection Miller indices \end{DoxyParams}
-\begin{DoxyNote}{Note}
-: derived classes who need either d\_\-hkl or the orthonormal coordinates of the scattering vector should be passed a \doxyref{ObjCryst::UnitCell}{p.}{a00109} object in the constructor so that they can use \doxyref{ObjCryst::UnitCell::MillerToOrthonormalCoords()}{p.}{a00109_af6efcbafcd761c6f8f4953190e7024d0} 
+\-Get the (approximate) full profile width at a given percentage of the profile maximum (e.\-g. 
+
+\-F\-W\-H\-M=\-Get\-Full\-Profile\-Width(0.\-5)). 
+
+\-Implemented in {\bf \-Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt} \doxyref{}{p.}{a00075_ac1c2c1f3673f4558eca2c7bee8c3fdea}, and {\bf \-Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt} \doxyref{}{p.}{a00076_abacd734b6ff73b4fc5e6c4a5cba62eb6}.
+
+\index{\-Obj\-Cryst\-::\-Reflection\-Profile@{\-Obj\-Cryst\-::\-Reflection\-Profile}!\-Get\-Profile@{\-Get\-Profile}}
+\index{\-Get\-Profile@{\-Get\-Profile}!ObjCryst::ReflectionProfile@{\-Obj\-Cryst\-::\-Reflection\-Profile}}
+\paragraph[{\-Get\-Profile}]{\setlength{\rightskip}{0pt plus 5cm}virtual \-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf \-Obj\-Cryst\-::\-Reflection\-Profile\-::\-Get\-Profile} (
+\begin{DoxyParamCaption}
+\item[{const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \&}]{x, }
+\item[{const \-R\-E\-A\-L}]{xcenter, }
+\item[{const \-R\-E\-A\-L}]{h, }
+\item[{const \-R\-E\-A\-L}]{k, }
+\item[{const \-R\-E\-A\-L}]{l}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{a00074_a93a92759349fa242b1c3ed6bb7b24979}
+
+
+\-Get the reflection profile. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em x,\-:} & the vector of x coordinates (i.\-e. either 2theta or time-\/of-\/flight) \\
+\hline
+{\em xcenter,\-:} & coordinate (2theta, tof) of the center of the peak \\
+\hline
+{\em h,k,l,\-:} & reflection \-Miller indices \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{\-Note}
+\-: derived classes who need either d\-\_\-hkl or the orthonormal coordinates of the scattering vector should be passed a \doxyref{\-Obj\-Cryst\-::\-Unit\-Cell}{p.}{a00110} object in the constructor so that they can use \doxyref{\-Obj\-Cryst\-::\-Unit\-Cell\-::\-Miller\-To\-Orthonormal\-Coords()}{p.}{a00110_af6efcbafcd761c6f8f4953190e7024d0} 
 \end{DoxyNote}
 
 
-Implements {\bf ObjCryst::ReflectionProfile} \doxyref{}{p.}{a00073_a0c71ddbfb976e320ccedf907b741b4d5}.\index{ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt@{ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt}!SetProfilePar@{SetProfilePar}}
-\index{SetProfilePar@{SetProfilePar}!ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt@{ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt}}
-\paragraph[{SetProfilePar}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt::SetProfilePar (const REAL {\em instrumentAlpha0}, \/  const REAL {\em instrumentAlpha1}, \/  const REAL {\em instrumentBeta0}, \/  const REAL {\em instrumentBeta1}, \/  const REAL {\em gaussianSigma0}, \/  const REAL {\em gaussianSigma1}, \/  const REAL {\em gaussianSigma2}, \/  const REAL {\em lorentzianGamma0}, \/  const REAL {\em lorentzianGamma1}, \/  const REAL {\em lorentzianGamma2})}\hfill\label{a00074_a056c4179927ced1e55e3529fe54696f6}
+\-Implemented in {\bf \-Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt} \doxyref{}{p.}{a00075_ab7c71a3e6156a66f4210fea3086db8d6}, and {\bf \-Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt} \doxyref{}{p.}{a00076_a14ba03c411e8b3d2d4f5af46e6504658}.
+
+\index{\-Obj\-Cryst\-::\-Reflection\-Profile@{\-Obj\-Cryst\-::\-Reflection\-Profile}!\-X\-M\-L\-Input@{\-X\-M\-L\-Input}}
+\index{\-X\-M\-L\-Input@{\-X\-M\-L\-Input}!ObjCryst::ReflectionProfile@{\-Obj\-Cryst\-::\-Reflection\-Profile}}
+\paragraph[{\-X\-M\-L\-Input}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-Reflection\-Profile\-::\-X\-M\-L\-Input} (
+\begin{DoxyParamCaption}
+\item[{istream \&}]{is, }
+\item[{const {\bf \-X\-M\-L\-Cryst\-Tag} \&}]{tag}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{a00074_a7ad38593ddb4601632beb0a6bcae50f3}
 
 
-Set reflection profile parameters. \index{ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt@{ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt}!SetUnitCell@{SetUnitCell}}
-\index{SetUnitCell@{SetUnitCell}!ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt@{ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt}}
-\paragraph[{SetUnitCell}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt::SetUnitCell (const {\bf UnitCell} \& {\em cell})}\hfill\label{a00074_a917d6e23b96ac2a9ffc4b9e45002d505}
+\-Input \-From stream. 
+
+\begin{DoxyRefDesc}{\-Todo}
+\item[{\bf \-Todo}]\-Add an bool \-X\-M\-L\-Input\-Tag(is,tag) function to recognize all the tags from the stream. \-So that each inherited class can use the \-X\-M\-L\-Input\-Tag function from its parent (ie take advantage of inheritance). \-The children class would first try to interpret the tag, then if unsuccessful would pass it to its parent (thus allowing overloading), etc... \end{DoxyRefDesc}
 
 
-Set unit cell. This is used to compute d\_\-hkl for reflections. \index{ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt@{ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt}!XMLInput@{XMLInput}}
-\index{XMLInput@{XMLInput}!ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt@{ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt}}
-\paragraph[{XMLInput}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt::XMLInput (istream \& {\em is}, \/  const {\bf XMLCrystTag} \& {\em tag})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00074_a4965f2a8994475187423a7afd6943031}
+\-Reimplemented from {\bf \-Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00071_ac13a4045c3f187879443c8615c38d623}.
 
 
-Input From stream. \begin{Desc}
-\item[{\bf Todo}]Add an bool XMLInputTag(is,tag) function to recognize all the tags from the stream. So that each inherited class can use the XMLInputTag function from its parent (ie take advantage of inheritance). The children class would first try to interpret the tag, then if unsuccessful would pass it to its parent (thus allowing overloading), etc... \end{Desc}
+
+\-Implemented in {\bf \-Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt} \doxyref{}{p.}{a00075_a4965f2a8994475187423a7afd6943031}, and {\bf \-Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt} \doxyref{}{p.}{a00076_a8c63700610f511503eae297c8161f311}.
+
+\index{\-Obj\-Cryst\-::\-Reflection\-Profile@{\-Obj\-Cryst\-::\-Reflection\-Profile}!\-X\-M\-L\-Output@{\-X\-M\-L\-Output}}
+\index{\-X\-M\-L\-Output@{\-X\-M\-L\-Output}!ObjCryst::ReflectionProfile@{\-Obj\-Cryst\-::\-Reflection\-Profile}}
+\paragraph[{\-X\-M\-L\-Output}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-Reflection\-Profile\-::\-X\-M\-L\-Output} (
+\begin{DoxyParamCaption}
+\item[{ostream \&}]{os, }
+\item[{int}]{indent = {\ttfamily 0}}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{a00074_a60e429bb999a8b39f09ef14cdaf5ad0c}
 
 
-Implements {\bf ObjCryst::ReflectionProfile} \doxyref{}{p.}{a00073_a7ad38593ddb4601632beb0a6bcae50f3}.\index{ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt@{ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt}!XMLOutput@{XMLOutput}}
-\index{XMLOutput@{XMLOutput}!ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt@{ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt}}
-\paragraph[{XMLOutput}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt::XMLOutput (ostream \& {\em os}, \/  int {\em indent} = {\ttfamily 0}) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00074_a6ec9818370703767da5362960c5b310a}
+\-Output to stream in well-\/formed \-X\-M\-L. 
+
+\begin{DoxyRefDesc}{\-Todo}
+\item[{\bf \-Todo}]\-Use inheritance.. as for \-X\-M\-L\-Input\-Tag()... \end{DoxyRefDesc}
 
 
-Output to stream in well-\/formed XML. \begin{Desc}
-\item[{\bf Todo}]Use inheritance.. as for XMLInputTag()... \end{Desc}
+\-Reimplemented from {\bf \-Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00071_a7b9b6ed0f8dcf753d398c35e073de973}.
 
 
-Implements {\bf ObjCryst::ReflectionProfile} \doxyref{}{p.}{a00073_a60e429bb999a8b39f09ef14cdaf5ad0c}.
 
-The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\-Implemented in {\bf \-Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt} \doxyref{}{p.}{a00075_a6ec9818370703767da5362960c5b310a}, and {\bf \-Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt} \doxyref{}{p.}{a00076_ac0438d3a1827accbdf2375e7355f18e5}.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-ReflectionProfile.h\end{DoxyCompactItemize}
+\-Reflection\-Profile.\-h\end{DoxyCompactItemize}

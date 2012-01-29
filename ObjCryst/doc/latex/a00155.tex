@@ -1,432 +1,98 @@
-\subsection{ObjCryst::ZScatterer Class Reference}
-\label{a00155}\index{ObjCryst::ZScatterer@{ObjCryst::ZScatterer}}
+\subsection{\-Obj\-Cryst\-:\-:\-Z\-Polyhedron \-Class \-Reference}
+\label{a00155}\index{\-Obj\-Cryst\-::\-Z\-Polyhedron@{\-Obj\-Cryst\-::\-Z\-Polyhedron}}
 
 
-\doxyref{ZScatterer}{p.}{a00155}: the basic type of complex scatterers, where atom positions are defined using a standard \char`\"{}Z-\/Matrix\char`\"{} description.  
-Inheritance diagram for ObjCryst::ZScatterer::\begin{figure}[H]
+\doxyref{\-Z\-Polyhedron}{p.}{a00155}\-: a \doxyref{\-Scatterer}{p.}{a00085} to describe polyhedras such as octahedron, tetrahedron, square plane, etc...  
+
+
+\-Inheritance diagram for \-Obj\-Cryst\-:\-:\-Z\-Polyhedron\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=4cm]{a00155}
+\includegraphics[height=4.000000cm]{a00155}
 \end{center}
 \end{figure}
-\subsubsection*{Public Member Functions}
+\subsubsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bf ZScatterer} (const string \&name, {\bf Crystal} \&cryst, const REAL x=0., const REAL y=0., const REAL z=0., const REAL phi=0., const REAL chi=0., const REAL psi=0.)
-\begin{DoxyCompactList}\small\item\em \doxyref{ZScatterer}{p.}{a00155} constructor. \item\end{DoxyCompactList}\item 
-{\bf ZScatterer} (const {\bf ZScatterer} \&old)
-\begin{DoxyCompactList}\small\item\em Copy constructor. \item\end{DoxyCompactList}\item 
-virtual {\bf ZScatterer} $\ast$ {\bf CreateCopy} () const 
-\item 
-virtual const string \& {\bf GetClassName} () const 
-\begin{DoxyCompactList}\small\item\em Name for this class (\char`\"{}RefinableObj\char`\"{}, \char`\"{}Crystal\char`\"{},. \item\end{DoxyCompactList}\item 
-void {\bf AddAtom} (const string \&name, const {\bf ScatteringPower} $\ast$pow, const long atomBond, const REAL bondLength, const long atomAngle, const REAL bondAngle, const long atomDihedral, const REAL dihedralAngle, const REAL popu=1.)
-\begin{DoxyCompactList}\small\item\em Add an atom to the Zscatterer. \item\end{DoxyCompactList}\item 
-virtual int {\bf GetNbComponent} () const \label{a00155_a3aede3e309f7e77bcc4b0013619c922e}
+{\bf \-Z\-Polyhedron} (const \-Regular\-Polyhedra\-Type type, {\bf \-Crystal} \&cryst, const \-R\-E\-A\-L x, const \-R\-E\-A\-L y, const \-R\-E\-A\-L z, const string \&name, const {\bf \-Scattering\-Power} $\ast$central\-Atom\-Pow, const {\bf \-Scattering\-Power} $\ast$periph\-Atom\-Pow, const \-R\-E\-A\-L central\-Periph\-Dist, const \-R\-E\-A\-L ligand\-Popu=1, const \-R\-E\-A\-L phi=0., const \-R\-E\-A\-L chi=0., const \-R\-E\-A\-L psi=0.)
+\begin{DoxyCompactList}\small\item\em \doxyref{\-Z\-Polyhedron}{p.}{a00155} constructor. \end{DoxyCompactList}\item 
+{\bf \-Z\-Polyhedron} (const {\bf \-Z\-Polyhedron} \&)\label{a00155_a7d9b825ac03903e63d072c53fc791f50}
 
-\begin{DoxyCompactList}\small\item\em Number of components in the scatterer (eg number of point scatterers). \item\end{DoxyCompactList}\item 
-virtual const {\bf ScatteringComponentList} \& {\bf GetScatteringComponentList} () const 
-\begin{DoxyCompactList}\small\item\em Get the list of all scattering components for this scatterer. \item\end{DoxyCompactList}\item 
-virtual string {\bf GetComponentName} (const int i) const 
-\begin{DoxyCompactList}\small\item\em Name for the i-\/th component of this scatterer. \item\end{DoxyCompactList}\item 
-void {\bf Print} () const \label{a00155_a70dbf802482ce7d8139651375464b4a0}
-
-\begin{DoxyCompactList}\small\item\em Print a single line of information about this scatterer. \item\end{DoxyCompactList}\item 
-REAL {\bf GetPhi} () const \label{a00155_a70468c7a09000a061ac8db15da391f02}
-
-\begin{DoxyCompactList}\small\item\em Access to phi parameter (overall orientation of the scatterer). \item\end{DoxyCompactList}\item 
-REAL {\bf GetChi} () const \label{a00155_a5e528512fe57a35c7ef594d437f311cc}
-
-\begin{DoxyCompactList}\small\item\em Access to chi parameter (overall orientation of the scatterer). \item\end{DoxyCompactList}\item 
-REAL {\bf GetPsi} () const \label{a00155_a1c86cb34c5c3005281b8207a93fbcf58}
-
-\begin{DoxyCompactList}\small\item\em Access to psi parameter (overall orientation of the scatterer). \item\end{DoxyCompactList}\item 
-void {\bf SetPhi} (const REAL)\label{a00155_a887dbc07697df53f50fe4546563c8a07}
-
-\begin{DoxyCompactList}\small\item\em Access to phi parameter (overall orientation of the scatterer). \item\end{DoxyCompactList}\item 
-void {\bf SetChi} (const REAL)\label{a00155_ac1cced93f67978157b93ae72b3fba644}
-
-\begin{DoxyCompactList}\small\item\em Access to chi parameter (overall orientation of the scatterer). \item\end{DoxyCompactList}\item 
-void {\bf SetPsi} (const REAL)\label{a00155_aeb0b5e2ceae975ef762857659cb30fbd}
-
-\begin{DoxyCompactList}\small\item\em Access to psi parameter (overall orientation of the scatterer). \item\end{DoxyCompactList}\item 
-REAL {\bf GetZAtomX} (const int i) const \label{a00155_ad535a440d13dc28139406588874b4b27}
-
-\begin{DoxyCompactList}\small\item\em Get the X fractionnal coordinate of atom i. \item\end{DoxyCompactList}\item 
-REAL {\bf GetZAtomY} (const int i) const \label{a00155_aeaf52b41121b4878be2c4be4d83a17f7}
-
-\begin{DoxyCompactList}\small\item\em Get the Y fractionnal coordinate of atom i. \item\end{DoxyCompactList}\item 
-REAL {\bf GetZAtomZ} (const int i) const \label{a00155_a53e5bb949403eccbc64fe3c28661d7bf}
-
-\begin{DoxyCompactList}\small\item\em Get the Z fractionnal coordinate of atom i. \item\end{DoxyCompactList}\item 
-long {\bf GetZBondAtom} (const int i) const \label{a00155_a6f6ec32bc2df1901c92c381cd7be5906}
-
-\begin{DoxyCompactList}\small\item\em Index of the 1st atom used to define the i-\/th atom in the Z-\/Matrix (the one from which the bondlength is calculated). \item\end{DoxyCompactList}\item 
-long {\bf GetZAngleAtom} (const int i) const \label{a00155_a0a17a16b8ac41efd2c5f18d2a32bfed2}
-
-\begin{DoxyCompactList}\small\item\em Index of the 2nd atom used to define the i-\/th atom in the Z-\/Matrix (the one from which the angle is calculated). \item\end{DoxyCompactList}\item 
-long {\bf GetZDihedralAngleAtom} (const int i) const \label{a00155_ac4d8facb2659e79e09d002788b9fab7a}
-
-\begin{DoxyCompactList}\small\item\em Index of the 3rd atom used to define the i-\/th atom in the Z-\/Matrix (the one from which the dihedral angle is calculated). \item\end{DoxyCompactList}\item 
-REAL {\bf GetZBondLength} (const int i) const \label{a00155_a3ec611e17c6cb9ddd39b991cfbc28a36}
-
-\begin{DoxyCompactList}\small\item\em Const access to bondlength parameter, for the i-\/th row in the Z-\/Matrix. \item\end{DoxyCompactList}\item 
-REAL {\bf GetZAngle} (const int i) const \label{a00155_a655f049e0b556a8374cc8d8b792e974f}
-
-\begin{DoxyCompactList}\small\item\em Const access to the angle parameter, for the i-\/th row in the Z-\/Matrix. \item\end{DoxyCompactList}\item 
-REAL {\bf GetZDihedralAngle} (const int i) const \label{a00155_a976a7cb7196028bdf4b43f89eeaa8945}
-
-\begin{DoxyCompactList}\small\item\em Const access to the dihedral angle parameter, for the i-\/th row in the Z-\/Matrix. \item\end{DoxyCompactList}\item 
-void {\bf SetZBondLength} (const int i, const REAL)\label{a00155_acbad23f36916911878e3179fb70c62ba}
-
-\begin{DoxyCompactList}\small\item\em Access to bondlength parameter, for the i-\/th row in the Z-\/Matrix. \item\end{DoxyCompactList}\item 
-void {\bf SetZAngle} (const int i, const REAL)\label{a00155_a20e056b613cfcb83be567c672df7fca6}
-
-\begin{DoxyCompactList}\small\item\em Access to the angle parameter, for the i-\/th row in the Z-\/Matrix. \item\end{DoxyCompactList}\item 
-void {\bf SetZDihedralAngle} (const int i, const REAL)\label{a00155_a75a9bc717dd7c1fae40ad53176017bd6}
-
-\begin{DoxyCompactList}\small\item\em Access to the dihedral angle parameter, for the i-\/th row in the Z-\/Matrix. \item\end{DoxyCompactList}\item 
-const {\bf ObjRegistry}$<$ {\bf ZAtom} $>$ \& {\bf GetZAtomRegistry} () const \label{a00155_a2b076a4f65d4d2718c0c850d08e6ad6f}
-
-\begin{DoxyCompactList}\small\item\em Access to the registry of ZAtoms. \item\end{DoxyCompactList}\item 
-virtual ostream \& {\bf POVRayDescription} (ostream \&os, const {\bf CrystalPOVRayOptions} \&options) const 
-\item 
-virtual void {\bf GLInitDisplayList} (const bool onlyIndependentAtoms=false, const REAL xMin=-\/.1, const REAL xMax=1.1, const REAL yMin=-\/.1, const REAL yMax=1.1, const REAL zMin=-\/.1, const REAL zMax=1.1, const bool displayEnantiomer=false, const bool displayNames=false) const 
-\item 
-virtual void {\bf SetUseGlobalScatteringPower} (const bool useIt)
-\begin{DoxyCompactList}\small\item\em use a Global scattering power for this scatterer ? \item\end{DoxyCompactList}\item 
-virtual void {\bf XMLOutput} (ostream \&os, int indent=0) const 
-\begin{DoxyCompactList}\small\item\em Output to stream in well-\/formed XML. \item\end{DoxyCompactList}\item 
-virtual void {\bf XMLInput} (istream \&is, const {\bf XMLCrystTag} \&tag)
-\begin{DoxyCompactList}\small\item\em Input From stream. \item\end{DoxyCompactList}\item 
-virtual void {\bf GetGeneGroup} (const {\bf RefinableObj} \&obj, CrystVector\_\-uint \&groupIndex, unsigned int \&firstGroup) const 
-\begin{DoxyCompactList}\small\item\em Get the gene group assigned to each parameter. \item\end{DoxyCompactList}\item 
-virtual void {\bf GlobalOptRandomMove} (const REAL mutationAmplitude, const {\bf RefParType} $\ast$type={\bf gpRefParTypeObjCryst})
-\begin{DoxyCompactList}\small\item\em Make a random move of the current configuration. \item\end{DoxyCompactList}\item 
-const CrystVector\_\-REAL \& {\bf GetXCoord} () const \label{a00155_a0a784d02541c6ffe762b7c40404c4b78}
-
-\begin{DoxyCompactList}\small\item\em Get the list of all \doxyref{ZAtom}{p.}{a00152} cartesian x coordinates. \item\end{DoxyCompactList}\item 
-const CrystVector\_\-REAL \& {\bf GetYCoord} () const \label{a00155_a0a6b34606c81d58c3bd0d837ff4a57ea}
-
-\begin{DoxyCompactList}\small\item\em Get the list of all \doxyref{ZAtom}{p.}{a00152} cartesian x coordinates. \item\end{DoxyCompactList}\item 
-const CrystVector\_\-REAL \& {\bf GetZCoord} () const \label{a00155_a1f8123a22d88198db465fb5ffeb533b3}
-
-\begin{DoxyCompactList}\small\item\em Get the list of all \doxyref{ZAtom}{p.}{a00152} cartesian x coordinates. \item\end{DoxyCompactList}\item 
-virtual void {\bf EndOptimization} ()
-\begin{DoxyCompactList}\small\item\em This should be called by any optimization class at the end of an optimization. \item\end{DoxyCompactList}\item 
-void {\bf ImportFenskeHallZMatrix} (istream \&is, bool named=false)
-\begin{DoxyCompactList}\small\item\em Import \char`\"{}Fenske-\/Hall\char`\"{} ZMatrix file (fhz in the babel program {\tt http://www.eyesopen.com/babel.html}$\backslash$ example: use \char`\"{}./babel -\/ipdb foo.pdb -\/ofhz foo.fhz -\/d\char`\"{}, to convert a pdb file to a Z-\/Matrix file (the -\/d removes hydrogen atoms). \item\end{DoxyCompactList}\item 
-void {\bf ExportFenskeHallZMatrix} (ostream \&os)
-\begin{DoxyCompactList}\small\item\em Export to Fenske-\/Hall ZMatrix file. \item\end{DoxyCompactList}\item 
-void {\bf SetCenterAtomIndex} (const unsigned int)\label{a00155_a225e9fe8e640555f24bfbb5f6ec2fe25}
-
-\begin{DoxyCompactList}\small\item\em Set the index of the central atom (around which the rotation is made). \item\end{DoxyCompactList}\item 
-unsigned int {\bf GetCenterAtomIndex} () const \label{a00155_a1495e1783ae1658579f03162bdaaa4e5}
-
-\begin{DoxyCompactList}\small\item\em Get the index of the central atom (around which the rotation is made). \item\end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactList}\small\item\em \-Copy \-Constructor. \end{DoxyCompactList}\item 
+virtual {\bf \-Z\-Polyhedron} $\ast$ {\bf \-Create\-Copy} () const 
+\end{DoxyCompactItemize}
+\subsubsection*{\-Private \-Attributes}
 \begin{DoxyCompactItemize}
 \item 
-void {\bf UpdateCoordinates} () const 
-\begin{DoxyCompactList}\small\item\em Update the atom coordinates (in real units, in Angstroems). \item\end{DoxyCompactList}\item 
-void {\bf UpdateScattCompList} () const \label{a00155_adf587a20fb3c36e5cf276fe1c0fa81ab}
-
-\begin{DoxyCompactList}\small\item\em Update the scattering component list, ie compute all atom positions from the bonds/angles/dihedral angles, and convert the coordinates to fractionnal coordinates of the \doxyref{Crystal}{p.}{a00020}. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Protected Attributes}
-\begin{DoxyCompactItemize}
-\item 
-CrystMatrix\_\-long {\bf m3DDisplayIndex}
-\begin{DoxyCompactList}\small\item\em For 3D display of the structure, bonds, triangular and quadric faces can be displayed. \item\end{DoxyCompactList}\item 
-{\bf ScatteringComponentList} {\bf mScattCompList}\label{a00155_aa7f8346399e0039aa37a13ec9ff3a408}
-
-\begin{DoxyCompactList}\small\item\em The list of scattering components. \item\end{DoxyCompactList}\item 
-long {\bf mNbAtom}\label{a00155_af4c3961f3b36c0aff6bb644f0831aa01}
-
-\begin{DoxyCompactList}\small\item\em Total number of atoms in the structure. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Private Member Functions}
-\begin{DoxyCompactItemize}
-\item 
-virtual void {\bf InitRefParList} ()\label{a00155_a36839536bcb14d3a8dd581baf168f3d7}
-
-\begin{DoxyCompactList}\small\item\em Prepare refinable parameters for the scatterer object. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Private Attributes}
-\begin{DoxyCompactItemize}
-\item 
-long {\bf mNbDummyAtom}\label{a00155_ad07df797a68c2e153db0b809dc86b75d}
-
-\begin{DoxyCompactList}\small\item\em Number of \char`\"{}dummy\char`\"{} atoms in the structure. \item\end{DoxyCompactList}\item 
-CrystVector\_\-int {\bf mComponentIndex}
-\begin{DoxyCompactList}\small\item\em Index of atoms in the \doxyref{ScatteringComponentList}{p.}{a00086}. \item\end{DoxyCompactList}\item 
-REAL {\bf mPhi}
-\begin{DoxyCompactList}\small\item\em Angles giving the orientation of the \doxyref{ZScatterer}{p.}{a00155} (stored in radian). \item\end{DoxyCompactList}\item 
-REAL {\bfseries mChi}\label{a00155_a478083578583445743cc65a4017a1b58}
-
-\item 
-REAL {\bfseries mPsi}\label{a00155_afbf06c2d9f3d83474524e048ce569229}
-
-\item 
-{\bf ObjRegistry}$<$ {\bf ZAtom} $>$ {\bf mZAtomRegistry}\label{a00155_a9045886980786a8d5603d1a679ac3e67}
-
-\begin{DoxyCompactList}\small\item\em Registry for ZAtoms in this \doxyref{Scatterer}{p.}{a00084}. \item\end{DoxyCompactList}\item 
-long {\bf mCenterAtomIndex}
-\begin{DoxyCompactList}\small\item\em Index of the atom used as a pivot (the scatterer is rotated around this atom). \item\end{DoxyCompactList}\item 
-CrystMatrix\_\-REAL {\bf mPhiChiPsiMatrix}\label{a00155_ae3d1682b34d1efc5d8dd9277eda50ab1}
-
-\begin{DoxyCompactList}\small\item\em Rotation matrix for the orientation of the scatterer. \item\end{DoxyCompactList}\item 
-bool {\bf mUseGlobalScattPow}
-\begin{DoxyCompactList}\small\item\em Does the \doxyref{ZScatterer}{p.}{a00155} use a global scattering power ? \item\end{DoxyCompactList}\item 
-{\bf GlobalScatteringPower} $\ast$ {\bf mpGlobalScattPow}
-\begin{DoxyCompactList}\small\item\em the global scattering power used, if mUseGlobalScattPow=true \item\end{DoxyCompactList}\item 
-CrystVector\_\-REAL {\bf mXCoord}
-\begin{DoxyCompactList}\small\item\em Storage for Cartesian coordinates. \item\end{DoxyCompactList}\item 
-CrystVector\_\-REAL {\bfseries mYCoord}\label{a00155_a5df8241a2fc731c20efdcaa46f975133}
-
-\item 
-CrystVector\_\-REAL {\bfseries mZCoord}\label{a00155_ab5aab7523839746ab4ff6a9216c827ac}
-
-\item 
-{\bf RefinableObjClock} {\bf mClockCoord}\label{a00155_a595d35d75bff97e19a79f75e2f1a84d7}
-
-\begin{DoxyCompactList}\small\item\em Last time the cartesian coordinates were computed. \item\end{DoxyCompactList}\item 
-{\bf ZMoveMinimizer} $\ast$ {\bfseries mpZMoveMinimizer}\label{a00155_aa17adf3c664004b62b051f4222b917eb}
+\-Regular\-Polyhedra\-Type {\bfseries m\-Polyhedra\-Type}\label{a00155_aa41437829f14e36030818f54ddb26faf}
 
 \end{DoxyCompactItemize}
 
 
-\subsubsection{Detailed Description}
-\doxyref{ZScatterer}{p.}{a00155}: the basic type of complex scatterers, where atom positions are defined using a standard \char`\"{}Z-\/Matrix\char`\"{} description. This is used to describe inorganic polyhedras, as well as molecules. 
-
-\subsubsection{Constructor \& Destructor Documentation}
-\index{ObjCryst::ZScatterer@{ObjCryst::ZScatterer}!ZScatterer@{ZScatterer}}
-\index{ZScatterer@{ZScatterer}!ObjCryst::ZScatterer@{ObjCryst::ZScatterer}}
-\paragraph[{ZScatterer}]{\setlength{\rightskip}{0pt plus 5cm}ObjCryst::ZScatterer::ZScatterer (const string \& {\em name}, \/  {\bf Crystal} \& {\em cryst}, \/  const REAL {\em x} = {\ttfamily 0.}, \/  const REAL {\em y} = {\ttfamily 0.}, \/  const REAL {\em z} = {\ttfamily 0.}, \/  const REAL {\em phi} = {\ttfamily 0.}, \/  const REAL {\em chi} = {\ttfamily 0.}, \/  const REAL {\em psi} = {\ttfamily 0.})}\hfill\label{a00155_a2798124784744758620d1b7838b82af0}
-
-
-\doxyref{ZScatterer}{p.}{a00155} constructor. 
-\begin{DoxyParams}{Parameters}
-\item[{\em name,:}]the name of the scatterer \item[{\em cryst,:}]the crystal in which the scatterer is (needed to convert from cartesian to fractionnal coordinates). \item[{\em x,y,z,:}]fractionnal coordinates of the scatterer \item[{\em phi,chi,:}]angles defining the orientation of the scatterer \end{DoxyParams}
-\index{ObjCryst::ZScatterer@{ObjCryst::ZScatterer}!ZScatterer@{ZScatterer}}
-\index{ZScatterer@{ZScatterer}!ObjCryst::ZScatterer@{ObjCryst::ZScatterer}}
-\paragraph[{ZScatterer}]{\setlength{\rightskip}{0pt plus 5cm}ObjCryst::ZScatterer::ZScatterer (const {\bf ZScatterer} \& {\em old})}\hfill\label{a00155_aa371bd36d61fe7200753cd3a3e1076c8}
-
-
-Copy constructor. 
-
-\subsubsection{Member Function Documentation}
-\index{ObjCryst::ZScatterer@{ObjCryst::ZScatterer}!AddAtom@{AddAtom}}
-\index{AddAtom@{AddAtom}!ObjCryst::ZScatterer@{ObjCryst::ZScatterer}}
-\paragraph[{AddAtom}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::ZScatterer::AddAtom (const string \& {\em name}, \/  const {\bf ScatteringPower} $\ast$ {\em pow}, \/  const long {\em atomBond}, \/  const REAL {\em bondLength}, \/  const long {\em atomAngle}, \/  const REAL {\em bondAngle}, \/  const long {\em atomDihedral}, \/  const REAL {\em dihedralAngle}, \/  const REAL {\em popu} = {\ttfamily 1.})}\hfill\label{a00155_abe2114dff3bb1a170b4a0a855ba8bafa}
-
-
-Add an atom to the Zscatterer. If \&ScatteringPower=0, then it is a 'dummy' atom and will be ignored for any scattering analysis. The 'name' supplied may not be respected, and can be replaced by 'ZScatterer\_\-name'+'AtomNum'+'ScattPowName' \index{ObjCryst::ZScatterer@{ObjCryst::ZScatterer}!CreateCopy@{CreateCopy}}
-\index{CreateCopy@{CreateCopy}!ObjCryst::ZScatterer@{ObjCryst::ZScatterer}}
-\paragraph[{CreateCopy}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf ZScatterer}$\ast$ ObjCryst::ZScatterer::CreateCopy () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00155_a6cf9f5891cf87e865efa971d36599d24}
-\begin{DoxyInternal}{For internal use only.}
-so-\/called Virtual copy constructor, needed to make copies of arrays of Scatterers \end{DoxyInternal}
-
-
-Implements {\bf ObjCryst::Scatterer} \doxyref{}{p.}{a00084_a4d374adcff97163a24492d362f6def73}.
-
-Reimplemented in {\bf ObjCryst::ZPolyhedron} \doxyref{}{p.}{a00154_a83436a907a22d794259e5fea9b7670ce}.\index{ObjCryst::ZScatterer@{ObjCryst::ZScatterer}!EndOptimization@{EndOptimization}}
-\index{EndOptimization@{EndOptimization}!ObjCryst::ZScatterer@{ObjCryst::ZScatterer}}
-\paragraph[{EndOptimization}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::ZScatterer::EndOptimization ()\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00155_a5742d1fa13b1300c92359ef1250753c3}
-
-
-This should be called by any optimization class at the end of an optimization. This also affects all sub-\/objects. \begin{DoxyNote}{Note}
-this may be called several time for some objects which are used by several other objects. 
-\end{DoxyNote}
-
-
-Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_ab0035f6164cb24ace67b51b11993a851}.\index{ObjCryst::ZScatterer@{ObjCryst::ZScatterer}!ExportFenskeHallZMatrix@{ExportFenskeHallZMatrix}}
-\index{ExportFenskeHallZMatrix@{ExportFenskeHallZMatrix}!ObjCryst::ZScatterer@{ObjCryst::ZScatterer}}
-\paragraph[{ExportFenskeHallZMatrix}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::ZScatterer::ExportFenskeHallZMatrix (ostream \& {\em os})}\hfill\label{a00155_a551fabc1d57cab02e957946dcfa1aae7}
-
-
-Export to Fenske-\/Hall ZMatrix file. \begin{Desc}
-\item[{\bf Todo}]USe more strict formatting than space-\/delimited. \end{Desc}
-\index{ObjCryst::ZScatterer@{ObjCryst::ZScatterer}!GetClassName@{GetClassName}}
-\index{GetClassName@{GetClassName}!ObjCryst::ZScatterer@{ObjCryst::ZScatterer}}
-\paragraph[{GetClassName}]{\setlength{\rightskip}{0pt plus 5cm}virtual const string\& ObjCryst::ZScatterer::GetClassName () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00155_a610a62c221ed289e1ce4d68adac921ee}
-
-
-Name for this class (\char`\"{}RefinableObj\char`\"{}, \char`\"{}Crystal\char`\"{},. ..). This is only useful to distinguish different classes when picking up objects from the \doxyref{RefinableObj}{p.}{a00070} Global Registry 
-
-Reimplemented from {\bf ObjCryst::Scatterer} \doxyref{}{p.}{a00084_a374fc1bb2887ab1f61d456326d97c05f}.\index{ObjCryst::ZScatterer@{ObjCryst::ZScatterer}!GetComponentName@{GetComponentName}}
-\index{GetComponentName@{GetComponentName}!ObjCryst::ZScatterer@{ObjCryst::ZScatterer}}
-\paragraph[{GetComponentName}]{\setlength{\rightskip}{0pt plus 5cm}virtual string ObjCryst::ZScatterer::GetComponentName (const int {\em i}) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00155_a44e9bf9d72e256ef8bc39ea2cf0eef4e}
-
-
-Name for the i-\/th component of this scatterer. If the component is an \doxyref{Atom}{p.}{a00008}, Then the name is that of the atom. Else, it is the name of the scatterer plus the component number in the scatterer plus the name of the \doxyref{ScatteringPower}{p.}{a00089}. \begin{DoxyNote}{Note}
-It would be better to return a reference, but we don't want to keep a name for all components... Weeelll, needs some more thinking... see what performance hit results (if any).
-\end{DoxyNote}
-\begin{Desc}
-\item[{\bf Bug}]does not take into account dummy atoms !! \end{Desc}
-
-
-Implements {\bf ObjCryst::Scatterer} \doxyref{}{p.}{a00084_a42bdf508da6a90859a5a61e16c27d47e}.\index{ObjCryst::ZScatterer@{ObjCryst::ZScatterer}!GetGeneGroup@{GetGeneGroup}}
-\index{GetGeneGroup@{GetGeneGroup}!ObjCryst::ZScatterer@{ObjCryst::ZScatterer}}
-\paragraph[{GetGeneGroup}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::ZScatterer::GetGeneGroup (const {\bf RefinableObj} \& {\em obj}, \/  CrystVector\_\-uint \& {\em groupIndex}, \/  unsigned int \& {\em firstGroup}) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00155_ae8143bbd71decab10138ddadf0e8b220}
-
-
-Get the gene group assigned to each parameter. Each parameter (a {\itshape gene\/} in terms of genetic algorithms) can be assigned to a gene group. Thus when mating two configurations, genes will be exchanged by groups. By default (in the base RefinabeObj class), each parameter is alone in its group. Derived classes can group genes for a better s$\ast$$\ast$ life.
-
-The number identifying a gene group only has a meaning in a given object. It can also change on subsequent calls, and thus is not unique.
-
-
-\begin{DoxyParams}{Parameters}
-\item[{\em obj}]the , supplied by an algorithm class (\doxyref{OptimizationObj}{p.}{a00054},..), which contains a list of parameters, some of which (but possibly all or none) are parameters belonging to this object. \item[{\em groupIndex}]a vector of unsigned integers, one for each parameter in the input object, giving an unsigned integer value as gene group index. At the beginning this vector should contain only zeros (no group assigned). \item[{\em firstGroup}]this is the number of groups which have already been assigned, plus one. The gene groups returned by this object will start from this value, and increment {\bfseries firstGroup} for each gene group used, so that different \doxyref{RefinableObj}{p.}{a00070} cannot share a gene group. \end{DoxyParams}
-\begin{DoxyNote}{Note}
-this function is not optimized, and should only be called at the beginning of a refinement. 
-\end{DoxyNote}
-
-
-Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_ad59c8ad2b0d7ee59fa3f399a54f05e54}.\index{ObjCryst::ZScatterer@{ObjCryst::ZScatterer}!GetScatteringComponentList@{GetScatteringComponentList}}
-\index{GetScatteringComponentList@{GetScatteringComponentList}!ObjCryst::ZScatterer@{ObjCryst::ZScatterer}}
-\paragraph[{GetScatteringComponentList}]{\setlength{\rightskip}{0pt plus 5cm}virtual const {\bf ScatteringComponentList}\& ObjCryst::ZScatterer::GetScatteringComponentList () const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00155_aadfeeafb618aad01ea80f099dd7c3299}
-
-
-Get the list of all scattering components for this scatterer. This is the most important function of this class, giving the list of scattering positions along with the associated \doxyref{ScatteringPower}{p.}{a00089}. 
-
-Implements {\bf ObjCryst::Scatterer} \doxyref{}{p.}{a00084_aca0e08e3793cc69d31fce53e481c2a67}.\index{ObjCryst::ZScatterer@{ObjCryst::ZScatterer}!GLInitDisplayList@{GLInitDisplayList}}
-\index{GLInitDisplayList@{GLInitDisplayList}!ObjCryst::ZScatterer@{ObjCryst::ZScatterer}}
-\paragraph[{GLInitDisplayList}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::ZScatterer::GLInitDisplayList (const bool {\em noSymmetrics} = {\ttfamily false}, \/  const REAL {\em xMin} = {\ttfamily -\/.1}, \/  const REAL {\em xMax} = {\ttfamily 1.1}, \/  const REAL {\em yMin} = {\ttfamily -\/.1}, \/  const REAL {\em yMax} = {\ttfamily 1.1}, \/  const REAL {\em zMin} = {\ttfamily -\/.1}, \/  const REAL {\em zMax} = {\ttfamily 1.1}, \/  const bool {\em displayEnantiomer} = {\ttfamily false}, \/  const bool {\em displayNames} = {\ttfamily false}) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00155_a17fb665a72c2d694410580e3b33ea1a9}
-\begin{DoxyInternal}{For internal use only.}
-Create an OpenGL Display List of the scatterer. This should only be called by a \doxyref{Crystal}{p.}{a00020} object.
-
-
-\begin{DoxyParams}{Parameters}
-\item[{\em noSymmetrics,:}]if false (the default), then all symmetrics are shown in the 3D display, within the limits defined by the min/max parameters $\backslash$ param xMin,xMax,yMin,yMax,zMin,zMax: in fractionnal coordinates, the region in which we want scaterrer to be displayed. The test is made on the center of the scatterer (eg a \doxyref{ZScatterer}{p.}{a00155} (molecule) will not be 'cut' on the border). \item[{\em displayNames,:}]if true, only the names of the scatterers will be displayed, at the position of the scatterers (to actually see them, they will have to be translated with respect to the drawing of the scatterers). \end{DoxyParams}
-\end{DoxyInternal}
-
-
-Implements {\bf ObjCryst::Scatterer} \doxyref{}{p.}{a00084_a4eaf9cf9780bef83e40155810db120a0}.\index{ObjCryst::ZScatterer@{ObjCryst::ZScatterer}!GlobalOptRandomMove@{GlobalOptRandomMove}}
-\index{GlobalOptRandomMove@{GlobalOptRandomMove}!ObjCryst::ZScatterer@{ObjCryst::ZScatterer}}
-\paragraph[{GlobalOptRandomMove}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::ZScatterer::GlobalOptRandomMove (const REAL {\em mutationAmplitude}, \/  const {\bf RefParType} $\ast$ {\em type} = {\ttfamily {\bf gpRefParTypeObjCryst}})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00155_a6df5359190e4cf5dc45a5e72c9a5a9a0}
-
-
-Make a random move of the current configuration. This is for global optimization algorithms. the moves for each parameter are less than their global optimization step, multiplied by the mutation amplitude.
-
-\begin{DoxyWarning}{Warning}
-: this makes a random move for the parameter declared for this object, and it is the duty of the object to decide whether the included objects should be moved and how. (eg an algorithm should only call for a move with the top object, and this object decides how he and his sub-\/objects moves). By default (\doxyref{RefinableObj}{p.}{a00070} implementation) all included objects are moved recursively.
-\end{DoxyWarning}
-\doxyref{RefinableObj}{p.}{a00070}:: 
-\begin{DoxyParams}{Parameters}
-\item[{\em mutationAmplitude,:}]multiplier for the maximum move amplitude, for all parameters \item[{\em type,:}]restrain the change exclusively to parameters of a given type (same type or descendant from this \doxyref{RefParType}{p.}{a00079}). \end{DoxyParams}
-
-
-Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_a18375c8525ae38c481ba77e9cf9d67c1}.\index{ObjCryst::ZScatterer@{ObjCryst::ZScatterer}!ImportFenskeHallZMatrix@{ImportFenskeHallZMatrix}}
-\index{ImportFenskeHallZMatrix@{ImportFenskeHallZMatrix}!ObjCryst::ZScatterer@{ObjCryst::ZScatterer}}
-\paragraph[{ImportFenskeHallZMatrix}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::ZScatterer::ImportFenskeHallZMatrix (istream \& {\em is}, \/  bool {\em named} = {\ttfamily false})}\hfill\label{a00155_a097d27206e6e54259bb987a06d65f71c}
-
-
-Import \char`\"{}Fenske-\/Hall\char`\"{} ZMatrix file (fhz in the babel program {\tt http://www.eyesopen.com/babel.html}$\backslash$ example: use \char`\"{}./babel -\/ipdb foo.pdb -\/ofhz foo.fhz -\/d\char`\"{}, to convert a pdb file to a Z-\/Matrix file (the -\/d removes hydrogen atoms). 
-\begin{DoxyParams}{Parameters}
-\item[{\em is,:}]the input stream from which to read the z-\/matrix \item[{\em names,:}]if true, instead of reading a standard Fenske-\/Hall z-\/matrix, the file will be read with names, i.e. with an added first column with the names of the atoms, and the number used to reference the bond, bond angle and dihedral angle atoms are replaced by the names of the atoms.\end{DoxyParams}
-\begin{DoxyWarning}{Warning}
-: this should be called {\itshape before\/} any atom has been added (if there are already atoms, they should be removed but this has not been tested...)
-\end{DoxyWarning}
-\begin{DoxyNote}{Note}
-: this will search in the \doxyref{Crystal}{p.}{a00020} associated with this \doxyref{ZScatterer}{p.}{a00155} the relevant \doxyref{ScatteringPowerAtom}{p.}{a00090}, which should have the name of the corresponding symbol (eg 'H', 'C',...) if these are not found then they will be added to the \doxyref{Crystal}{p.}{a00020} with a default isotropic B-\/factor equal to 1. 
-
-: this also sets relative limits of +/-\/.03 Angstroems for all bond distances, and +/-\/3.6 degress for bond and dihedral angles. 
-\end{DoxyNote}
-\begin{Desc}
-\item[{\bf Todo}]: identify which dihedral angles should {\itshape not\/} be limited, by analysing a coordination table. \end{Desc}
-\index{ObjCryst::ZScatterer@{ObjCryst::ZScatterer}!POVRayDescription@{POVRayDescription}}
-\index{POVRayDescription@{POVRayDescription}!ObjCryst::ZScatterer@{ObjCryst::ZScatterer}}
-\paragraph[{POVRayDescription}]{\setlength{\rightskip}{0pt plus 5cm}virtual ostream\& ObjCryst::ZScatterer::POVRayDescription (ostream \& {\em os}, \/  const {\bf CrystalPOVRayOptions} \& {\em options}) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00155_a6dd20fe536310e622c1a30fb1d5a788f}
-\begin{DoxyWarning}{Warning}
-Not implemented for \doxyref{ZScatterer}{p.}{a00155} 
-\end{DoxyWarning}
-
-
-Implements {\bf ObjCryst::Scatterer} \doxyref{}{p.}{a00084_a708cc857f82c9af4cbdf4d9334449d0f}.\index{ObjCryst::ZScatterer@{ObjCryst::ZScatterer}!SetUseGlobalScatteringPower@{SetUseGlobalScatteringPower}}
-\index{SetUseGlobalScatteringPower@{SetUseGlobalScatteringPower}!ObjCryst::ZScatterer@{ObjCryst::ZScatterer}}
-\paragraph[{SetUseGlobalScatteringPower}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::ZScatterer::SetUseGlobalScatteringPower (const bool {\em useIt})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00155_a6796374831dcd7a7d3a04dfcc2be1a83}
-
-
-use a Global scattering power for this scatterer ? If true, then the overall scattering power of this \doxyref{ZScatterer}{p.}{a00155} will be approximated to an isotropic scattering power computed for this scatterer. Of course, only use this if the \char`\"{}isotropic\char`\"{} approximation is reasonable for this scatterer (typically true for 'large' polyhedra). See \doxyref{GlobalScatteringPower}{p.}{a00034}.
-
-\begin{DoxyWarning}{Warning}
-EXPERIMENTAL 
-\end{DoxyWarning}
-\index{ObjCryst::ZScatterer@{ObjCryst::ZScatterer}!UpdateCoordinates@{UpdateCoordinates}}
-\index{UpdateCoordinates@{UpdateCoordinates}!ObjCryst::ZScatterer@{ObjCryst::ZScatterer}}
-\paragraph[{UpdateCoordinates}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::ZScatterer::UpdateCoordinates () const\hspace{0.3cm}{\ttfamily  [protected]}}\hfill\label{a00155_a762bdaa10f81d266f545a88e857b1f56}
-
-
-Update the atom coordinates (in real units, in Angstroems). This takes into account the translation and global rotation of the scatterer (ie this does not generate 'internal coordinates). \index{ObjCryst::ZScatterer@{ObjCryst::ZScatterer}!XMLInput@{XMLInput}}
-\index{XMLInput@{XMLInput}!ObjCryst::ZScatterer@{ObjCryst::ZScatterer}}
-\paragraph[{XMLInput}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::ZScatterer::XMLInput (istream \& {\em is}, \/  const {\bf XMLCrystTag} \& {\em tag})\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00155_afb23d2cf7f8fd74f790d7dd0835256b1}
-
-
-Input From stream. \begin{Desc}
-\item[{\bf Todo}]Add an bool XMLInputTag(is,tag) function to recognize all the tags from the stream. So that each inherited class can use the XMLInputTag function from its parent (ie take advantage of inheritance). The children class would first try to interpret the tag, then if unsuccessful would pass it to its parent (thus allowing overloading), etc... \end{Desc}
-
-
-Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_ac13a4045c3f187879443c8615c38d623}.\index{ObjCryst::ZScatterer@{ObjCryst::ZScatterer}!XMLOutput@{XMLOutput}}
-\index{XMLOutput@{XMLOutput}!ObjCryst::ZScatterer@{ObjCryst::ZScatterer}}
-\paragraph[{XMLOutput}]{\setlength{\rightskip}{0pt plus 5cm}virtual void ObjCryst::ZScatterer::XMLOutput (ostream \& {\em os}, \/  int {\em indent} = {\ttfamily 0}) const\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00155_a406d107bfd110c5c3de61208348d4ad0}
-
-
-Output to stream in well-\/formed XML. \begin{Desc}
-\item[{\bf Todo}]Use inheritance.. as for XMLInputTag()... \end{Desc}
-
-
-Reimplemented from {\bf ObjCryst::RefinableObj} \doxyref{}{p.}{a00070_a7b9b6ed0f8dcf753d398c35e073de973}.
-
-\subsubsection{Member Data Documentation}
-\index{ObjCryst::ZScatterer@{ObjCryst::ZScatterer}!m3DDisplayIndex@{m3DDisplayIndex}}
-\index{m3DDisplayIndex@{m3DDisplayIndex}!ObjCryst::ZScatterer@{ObjCryst::ZScatterer}}
-\paragraph[{m3DDisplayIndex}]{\setlength{\rightskip}{0pt plus 5cm}CrystMatrix\_\-long {\bf ObjCryst::ZScatterer::m3DDisplayIndex}\hspace{0.3cm}{\ttfamily  [protected]}}\hfill\label{a00155_aa02e92087f85784a74d1bdcebf178da9}
-
-
-For 3D display of the structure, bonds, triangular and quadric faces can be displayed. This matrix determines what is drawn. This is a 5-\/column matrix. The first column indicates the type of drawing (0: : nothing, 1: display the atom (a sphere), 2: bond, 3: triangular face, 4: quadric face) the other columns indicate the index of the atoms involved in the drawing (2 atoms for a bond, 3 for....)
-
-If the matrix is empty only the individual atoms are displayed.
-
-\begin{Desc}
-\item[{\bf Todo}]This is still experimental. This is only used for the display of \doxyref{ZPolyhedron}{p.}{a00154}, and should be more developped (and it should also be saved in XML files !) \end{Desc}
-\index{ObjCryst::ZScatterer@{ObjCryst::ZScatterer}!mCenterAtomIndex@{mCenterAtomIndex}}
-\index{mCenterAtomIndex@{mCenterAtomIndex}!ObjCryst::ZScatterer@{ObjCryst::ZScatterer}}
-\paragraph[{mCenterAtomIndex}]{\setlength{\rightskip}{0pt plus 5cm}long {\bf ObjCryst::ZScatterer::mCenterAtomIndex}\hspace{0.3cm}{\ttfamily  [private]}}\hfill\label{a00155_a613abbb7f015620587e0bdaa750e5d03}
-
-
-Index of the atom used as a pivot (the scatterer is rotated around this atom). This should more or less be at the center of the \doxyref{Scatterer}{p.}{a00084}. \index{ObjCryst::ZScatterer@{ObjCryst::ZScatterer}!mComponentIndex@{mComponentIndex}}
-\index{mComponentIndex@{mComponentIndex}!ObjCryst::ZScatterer@{ObjCryst::ZScatterer}}
-\paragraph[{mComponentIndex}]{\setlength{\rightskip}{0pt plus 5cm}CrystVector\_\-int {\bf ObjCryst::ZScatterer::mComponentIndex}\hspace{0.3cm}{\ttfamily  [private]}}\hfill\label{a00155_ab78108309d3a213454c7ac7d06da4dca}
-
-
-Index of atoms in the \doxyref{ScatteringComponentList}{p.}{a00086}. We need this list because Dummy atoms are not included in it. So this is an integer array with [ 0 1 2 4 5 6].. where the missing '3' marks a Dummy atom. Thus to get the name of component 'i' in the component list, you must take the mComponentIndex(i) atom in the \doxyref{ZAtom}{p.}{a00152} Registry. \index{ObjCryst::ZScatterer@{ObjCryst::ZScatterer}!mpGlobalScattPow@{mpGlobalScattPow}}
-\index{mpGlobalScattPow@{mpGlobalScattPow}!ObjCryst::ZScatterer@{ObjCryst::ZScatterer}}
-\paragraph[{mpGlobalScattPow}]{\setlength{\rightskip}{0pt plus 5cm}{\bf GlobalScatteringPower}$\ast$ {\bf ObjCryst::ZScatterer::mpGlobalScattPow}\hspace{0.3cm}{\ttfamily  [private]}}\hfill\label{a00155_a41e3dd665f7b096851b1f8109c56cd23}
-
-
-the global scattering power used, if mUseGlobalScattPow=true \begin{DoxyWarning}{Warning}
-EXPERIMENTAL. 
-\end{DoxyWarning}
-\index{ObjCryst::ZScatterer@{ObjCryst::ZScatterer}!mPhi@{mPhi}}
-\index{mPhi@{mPhi}!ObjCryst::ZScatterer@{ObjCryst::ZScatterer}}
-\paragraph[{mPhi}]{\setlength{\rightskip}{0pt plus 5cm}REAL {\bf ObjCryst::ZScatterer::mPhi}\hspace{0.3cm}{\ttfamily  [private]}}\hfill\label{a00155_a42fe9734108865176b2f5ddf12e7ccff}
-
-
-Angles giving the orientation of the \doxyref{ZScatterer}{p.}{a00155} (stored in radian). The position of any atom can be transformed from internal coordinates (orthonormal coordinates derived from the ZMatrix, with first atom at (0,0,0), second atom at (x,0,0), third atom at (x,y,0),...) to orthonormal coordinates in the crystal reference frame (ie with orientation of the \doxyref{ZScatterer}{p.}{a00155}) using : \[ \left[ \begin{array}{c} x(i) \\ y(i) \\ z(i) \end{array} \right]_{orthonormal} = \left[ \begin{array}{ccc} \cos(\chi) & 0 & -\sin(\chi) \\ 0 & 1 & 0 \\ \sin(\chi) & 0 & \cos(\chi) \end{array} \right] \times \left[ \begin{array}{ccc} \cos(\phi) & -\sin(\phi) & 0 \\ \sin(\phi) & \cos(\phi) & 0 \\ 0 & 0 & 1 \end{array} \right] \times \left[ \begin{array}{ccc} 1 & 0 & 0 \\ 0 & \cos(\psi) & -\sin(\psi) \\ 0 & \sin(\psi) & \cos(\psi) \end{array} \right] \times \left[ \begin{array}{c} x_0(i) \\ y_0(i) \\ z_0(i) \end{array} \right] \] , where x0(i), y0(i) and z0(i) describe the position for atom (i) in internal coordinates, and x(i), y(i), z(i) are coordinates of the rotated \doxyref{ZScatterer}{p.}{a00155}.
-
-The rotation is performed around a 'pivot' atom (see ZScatterer::mPivotAtom) \index{ObjCryst::ZScatterer@{ObjCryst::ZScatterer}!mUseGlobalScattPow@{mUseGlobalScattPow}}
-\index{mUseGlobalScattPow@{mUseGlobalScattPow}!ObjCryst::ZScatterer@{ObjCryst::ZScatterer}}
-\paragraph[{mUseGlobalScattPow}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf ObjCryst::ZScatterer::mUseGlobalScattPow}\hspace{0.3cm}{\ttfamily  [private]}}\hfill\label{a00155_a971f73bdfed4eb3a9243fcdd7d20bcf3}
-
-
-Does the \doxyref{ZScatterer}{p.}{a00155} use a global scattering power ? \begin{DoxyWarning}{Warning}
-EXPERIMENTAL. 
-\end{DoxyWarning}
-\index{ObjCryst::ZScatterer@{ObjCryst::ZScatterer}!mXCoord@{mXCoord}}
-\index{mXCoord@{mXCoord}!ObjCryst::ZScatterer@{ObjCryst::ZScatterer}}
-\paragraph[{mXCoord}]{\setlength{\rightskip}{0pt plus 5cm}CrystVector\_\-REAL {\bf ObjCryst::ZScatterer::mXCoord}\hspace{0.3cm}{\ttfamily  [mutable, private]}}\hfill\label{a00155_a69918a0d5561e4076064e263616c4ed1}
-
-
-Storage for Cartesian coordinates. The (0,0,0) is on the central atom. This includes Dummy atoms. 
-
-The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\subsubsection{\-Detailed \-Description}
+\doxyref{\-Z\-Polyhedron}{p.}{a00155}\-: a \doxyref{\-Scatterer}{p.}{a00085} to describe polyhedras such as octahedron, tetrahedron, square plane, etc... 
+
+\-These are \doxyref{\-Z\-Scatterer}{p.}{a00156} objects, so that even if they are initialized with constraints, these can be removed to make any configuration. 
+
+\subsubsection{\-Constructor \& \-Destructor \-Documentation}
+\index{\-Obj\-Cryst\-::\-Z\-Polyhedron@{\-Obj\-Cryst\-::\-Z\-Polyhedron}!\-Z\-Polyhedron@{\-Z\-Polyhedron}}
+\index{\-Z\-Polyhedron@{\-Z\-Polyhedron}!ObjCryst::ZPolyhedron@{\-Obj\-Cryst\-::\-Z\-Polyhedron}}
+\paragraph[{\-Z\-Polyhedron}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Obj\-Cryst\-::\-Z\-Polyhedron\-::\-Z\-Polyhedron} (
+\begin{DoxyParamCaption}
+\item[{const \-Regular\-Polyhedra\-Type}]{type, }
+\item[{{\bf \-Crystal} \&}]{cryst, }
+\item[{const \-R\-E\-A\-L}]{x, }
+\item[{const \-R\-E\-A\-L}]{y, }
+\item[{const \-R\-E\-A\-L}]{z, }
+\item[{const string \&}]{name, }
+\item[{const {\bf \-Scattering\-Power} $\ast$}]{central\-Atom\-Pow, }
+\item[{const {\bf \-Scattering\-Power} $\ast$}]{periph\-Atom\-Pow, }
+\item[{const \-R\-E\-A\-L}]{central\-Periph\-Dist, }
+\item[{const \-R\-E\-A\-L}]{ligand\-Popu = {\ttfamily 1}, }
+\item[{const \-R\-E\-A\-L}]{phi = {\ttfamily 0.}, }
+\item[{const \-R\-E\-A\-L}]{chi = {\ttfamily 0.}, }
+\item[{const \-R\-E\-A\-L}]{psi = {\ttfamily 0.}}
+\end{DoxyParamCaption}
+)}\label{a00155_a624314fc85edd2b27e572e33c1487bed}
+
+
+\doxyref{\-Z\-Polyhedron}{p.}{a00155} constructor. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em type} & \-: \-O\-C\-T\-A\-H\-E\-D\-R\-O\-N, \-T\-E\-T\-R\-A\-H\-E\-D\-R\-O\-N,... \\
+\hline
+{\em cryst} & \-: a crystal is necessary to transform the orthornormal coordinates (in which the relative atom positions are computed) to fractional ones. \\
+\hline
+{\em x,y,z} & \-: {\itshape fractional\/} coordinates of the center of the polyhedra \\
+\hline
+{\em name} & \-: name of the \-Polyhedra ('\-W\-O6','\-Ta\-Se4\-\_\-a', '\-Tetra01'...). \-The name can have {\itshape any\/} format but spaces should be avoided, since it will generate problems when reading the names from a file. \-And there must {\bfseries not} be identical name for two scatterers in a given crystal object. \\
+\hline
+{\em periph\-Atom\-Pow,central\-Atom\-Pow,\-:} & the \doxyref{\-Scattering\-Power}{p.}{a00090} corresponding to the central and peripheral atoms, respectively. \\
+\hline
+{\em central\-Periph\-Dist,\-:} & the distance, in angstroems, from the central to the peripheral atoms \\
+\hline
+{\em ligand\-Popu} & \-: the relative population of ligand atoms, equal to 1/n if ligand atoms are shared by n polyhedra. \-If you are using the '\-Dynamical \-Polpulation \-Correction', then keep this parameter to 1. \\
+\hline
+{\em phi,chi,psi,\-:} & initial angles for this polyhedron \\
+\hline
+\end{DoxyParams}
+
+
+\subsubsection{\-Member \-Function \-Documentation}
+\index{\-Obj\-Cryst\-::\-Z\-Polyhedron@{\-Obj\-Cryst\-::\-Z\-Polyhedron}!\-Create\-Copy@{\-Create\-Copy}}
+\index{\-Create\-Copy@{\-Create\-Copy}!ObjCryst::ZPolyhedron@{\-Obj\-Cryst\-::\-Z\-Polyhedron}}
+\paragraph[{\-Create\-Copy}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf \-Z\-Polyhedron}$\ast$ {\bf \-Obj\-Cryst\-::\-Z\-Polyhedron\-::\-Create\-Copy} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00155_a83436a907a22d794259e5fea9b7670ce}
+so-\/called \-Virtual copy constructor, needed to make copies of arrays of \-Scatterers 
+
+\-Reimplemented from {\bf \-Obj\-Cryst\-::\-Z\-Scatterer} \doxyref{}{p.}{a00156_a6cf9f5891cf87e865efa971d36599d24}.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-ZScatterer.h\end{DoxyCompactItemize}
+\-Z\-Scatterer.\-h\end{DoxyCompactItemize}

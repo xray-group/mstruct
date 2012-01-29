@@ -1,200 +1,212 @@
-\subsection{ObjCryst::MolBond Class Reference}
-\label{a00043}\index{ObjCryst::MolBond@{ObjCryst::MolBond}}
+\subsection{\-Obj\-Cryst\-:\-:\-Mol\-Atom \-Class \-Reference}
+\label{a00043}\index{\-Obj\-Cryst\-::\-Mol\-Atom@{\-Obj\-Cryst\-::\-Mol\-Atom}}
 
 
-Bond between two atoms, also a restraint on the associated bond length.  
-Inheritance diagram for ObjCryst::MolBond::\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[height=2cm]{a00043}
-\end{center}
-\end{figure}
-\subsubsection*{Public Member Functions}
+\doxyref{\-Mol\-Atom}{p.}{a00043} \-: atom inside a \doxyref{\-Molecule}{p.}{a00047}.  
+
+
+\subsubsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bf MolBond} ({\bf MolAtom} \&atom1, {\bf MolAtom} \&atom2, const REAL length, const REAL sigma, const REAL delta, {\bf Molecule} \&parent, const REAL bondOrder=1.)
-\begin{DoxyCompactList}\small\item\em Constructor. \item\end{DoxyCompactList}\item 
-virtual {\bf $\sim$MolBond} ()
-\begin{DoxyCompactList}\small\item\em Destructor. \item\end{DoxyCompactList}\item 
-const {\bf Molecule} \& {\bfseries GetMolecule} () const \label{a00043_a1a3c7684b661b7510938df418dc4b35e}
+{\bf \-Mol\-Atom} (const \-R\-E\-A\-L x, const \-R\-E\-A\-L y, const \-R\-E\-A\-L z, const {\bf \-Scattering\-Power} $\ast$p\-Pow, const string \&name, {\bf \-Molecule} \&parent)
+\begin{DoxyCompactList}\small\item\em \-Constructor for a \doxyref{\-Mol\-Atom}{p.}{a00043}. \end{DoxyCompactList}\item 
+virtual {\bf $\sim$\-Mol\-Atom} ()
+\begin{DoxyCompactList}\small\item\em \-Destructor. \end{DoxyCompactList}\item 
+void {\bfseries \-Set\-Name} (const string \&name)\label{a00043_ac25d454197829303bbc0c6550c7bed1e}
 
 \item 
-{\bf Molecule} \& {\bfseries GetMolecule} ()\label{a00043_ad48eecb32e26ec3c3134893b16e9e4b9}
+const string \& {\bfseries \-Get\-Name} () const \label{a00043_a65d16c95f4cc7b8009b72ac8cb933c1c}
 
 \item 
-string {\bf GetName} () const \label{a00043_af085014f7d56f746236d7b131b21c68f}
-
-\begin{DoxyCompactList}\small\item\em Name of the bond, e.g. \char`\"{}C3-\/O4\char`\"{}. \item\end{DoxyCompactList}\item 
-virtual void {\bfseries XMLOutput} (ostream \&os, int indent=0) const \label{a00043_a6b0e3c8ae91d926a6e12cc7f5fb6680a}
+string \& {\bfseries \-Get\-Name} ()\label{a00043_a84abc06691835b602488b10e89e6532f}
 
 \item 
-virtual void {\bfseries XMLInput} (istream \&is, const {\bf XMLCrystTag} \&tag)\label{a00043_af655bf9c3ff32e4e972880745ff94a13}
+const {\bf \-Molecule} \& {\bfseries \-Get\-Molecule} () const \label{a00043_a71a5369e57ac5a763a36e78b702f85ce}
 
 \item 
-virtual REAL {\bf GetLogLikelihood} () const \label{a00043_af796fe008141e6a6fae7d4049273ccdf}
-
-\begin{DoxyCompactList}\small\item\em Get -\/ln(likelihood) for this restraint. \item\end{DoxyCompactList}\item 
-REAL {\bfseries GetLogLikelihood} (const bool calcDeriv, const bool recalc) const \label{a00043_ae02e3596ae088d9ae3116e6c3d789899}
+{\bf \-Molecule} \& {\bfseries \-Get\-Molecule} ()\label{a00043_a7cc19830ad1c0be8c7ef456d1bc96f7a}
 
 \item 
-REAL {\bf GetDeriv} (const std::map$<$ const {\bf MolAtom} $\ast$, {\bf XYZ} $>$ \&m, const bool llk=false) const 
-\begin{DoxyCompactList}\small\item\em Get the derivative of the bond length, given the derivatives of the atom positions This requires that GetLogLikelihood(calcDeriv=true) be called first. \item\end{DoxyCompactList}\item 
-void {\bf CalcGradient} (std::map$<$ {\bf MolAtom} $\ast$, {\bf XYZ} $>$ \&m) const 
-\begin{DoxyCompactList}\small\item\em Calc log(likelihood) gradient -\/ versus all atomic coordinates. \item\end{DoxyCompactList}\item 
-const {\bf MolAtom} \& {\bfseries GetAtom1} () const \label{a00043_ac55a424209a524004a77a16d08d05e44}
+const \-R\-E\-A\-L \& {\bfseries \-X} () const \label{a00043_a5d4b01f59fc7ef3efca0e88b64b0a392}
 
 \item 
-const {\bf MolAtom} \& {\bfseries GetAtom2} () const \label{a00043_a6986775d114461e91a9873d9415cb42f}
+const \-R\-E\-A\-L \& {\bfseries \-Y} () const \label{a00043_a92da05bc18ad568996443f023fe83540}
 
 \item 
-{\bf MolAtom} \& {\bfseries GetAtom1} ()\label{a00043_a69a13fd18cb20b2b31c6e71e35e7eb7e}
+const \-R\-E\-A\-L \& {\bfseries \-Z} () const \label{a00043_ac21d89a0913be8f834c836c637ae4b6c}
 
 \item 
-{\bf MolAtom} \& {\bfseries GetAtom2} ()\label{a00043_a972fe03e0c1b85cdab8ad09ecbd2bd88}
+\-R\-E\-A\-L \& {\bfseries \-X} ()\label{a00043_a51fceb52778a723f2344bab915dbf732}
 
 \item 
-void {\bfseries SetAtom1} ({\bf MolAtom} \&at1)\label{a00043_a134d996eddce994d967b4b3f4358a3dd}
+\-R\-E\-A\-L \& {\bfseries \-Y} ()\label{a00043_a46bb8cfc174c6c64c05b3748e8661f6a}
 
 \item 
-void {\bfseries SetAtom2} ({\bf MolAtom} \&at2)\label{a00043_a6d91f26445b8a4e0ca2c8a4e5af90490}
+\-R\-E\-A\-L \& {\bfseries \-Z} ()\label{a00043_a8c97f56e512ed7a7476101366ce7942c}
 
 \item 
-REAL {\bfseries GetLength} () const \label{a00043_a16685dcefa38d34d0a92725b000d558f}
+\-R\-E\-A\-L {\bfseries \-Get\-X} () const \label{a00043_a77014c411e808229b937489da81beb59}
 
 \item 
-REAL {\bfseries GetLength0} () const \label{a00043_ab6d10bf6342be4ae2f4c58f9d8b5d173}
+\-R\-E\-A\-L {\bfseries \-Get\-Y} () const \label{a00043_a676965d9d8b4fa5ec7718387c957d996}
 
 \item 
-REAL {\bfseries GetLengthDelta} () const \label{a00043_ad5d847da92fe2db752ba45a62f8cdf4a}
+\-R\-E\-A\-L {\bfseries \-Get\-Z} () const \label{a00043_a1d8a4e4922843e2c601f3b6f9c64c303}
 
 \item 
-REAL {\bfseries GetLengthSigma} () const \label{a00043_aa0837a2385f057bbaa49e1e96bed6399}
+\-R\-E\-A\-L {\bfseries \-Get\-Occupancy} () const \label{a00043_ad0945615bcbe0623d99261ee8ef0dab7}
 
 \item 
-REAL {\bfseries GetBondOrder} () const \label{a00043_a778587888f587d23d7d581135b4a99be}
+void {\bfseries \-Set\-Occupancy} (const \-R\-E\-A\-L)\label{a00043_a10c532deb02e46211868c8bff6237a57}
 
 \item 
-REAL \& {\bfseries Length0} ()\label{a00043_a222b10e1cf332cf28220f00c6bab0688}
+bool {\bf \-Is\-Dummy} () const 
+\begin{DoxyCompactList}\small\item\em \-Returns true if this is a dummy atom, i.\-e. \end{DoxyCompactList}\item 
+const {\bf \-Scattering\-Power} \& {\bfseries \-Get\-Scattering\-Power} () const \label{a00043_acf7340c3da60a04b0245fda93b92a674}
 
 \item 
-REAL \& {\bfseries LengthDelta} ()\label{a00043_ad3b78642b705684c5685fc1064e3e051}
+void {\bfseries \-Set\-Scattering\-Power} (const {\bf \-Scattering\-Power} \&)\label{a00043_aedf49d98c4759f96d2ca438e7d60c482}
 
 \item 
-REAL \& {\bfseries LengthSigma} ()\label{a00043_ae8e28507497bccddc50ea678c3a2aa62}
+virtual void {\bfseries \-X\-M\-L\-Output} (ostream \&os, int indent=0) const \label{a00043_ad8fbbdcd2120ffae9569c9f09f4151ff}
 
 \item 
-REAL \& {\bfseries BondOrder} ()\label{a00043_a329946012cb86eee1388b21ec9768ac6}
+virtual void {\bfseries \-X\-M\-L\-Input} (istream \&is, const {\bf \-X\-M\-L\-Cryst\-Tag} \&tag)\label{a00043_a89b3f56dc2b926212f2067452ecc7688}
 
 \item 
-void {\bfseries SetLength0} (const REAL length)\label{a00043_a347971edc80f025dca4f7253fea78eb8}
-
-\item 
-void {\bfseries SetLengthDelta} (const REAL length)\label{a00043_a42e9a07e2383dcfdcb5b7f0728be726f}
-
-\item 
-void {\bfseries SetLengthSigma} (const REAL length)\label{a00043_ab96f037ddc070774b0cb9665e4e1b751}
-
-\item 
-void {\bfseries SetBondOrder} (const REAL length)\label{a00043_a1050f7fc227c9a925d8f98c01e2e1cc9}
-
-\item 
-bool {\bfseries IsFreeTorsion} () const \label{a00043_a95b84b6994623ff1c2f9704ff706b701}
-
-\item 
-void {\bfseries SetFreeTorsion} (const bool isInRing)\label{a00043_aab0b94a8e27c34d748f4cf7cd0060431}
+void {\bf \-Set\-Is\-In\-Ring} (const bool r) const 
+\begin{DoxyCompactList}\small\item\em \-Flag this atom as being in a ring (or not). \end{DoxyCompactList}\item 
+bool {\bfseries \-Is\-In\-Ring} () const \label{a00043_ae9c6870de5c35fb8e333628e3a788479}
 
 \end{DoxyCompactItemize}
-\subsubsection*{Private Attributes}
+{\bf }\par
 \begin{DoxyCompactItemize}
 \item 
-pair$<$ {\bf MolAtom} $\ast$, {\bf MolAtom} $\ast$ $>$ {\bfseries mAtomPair}\label{a00043_ac7cc5382df3fdca08cc9fb17bdfc91d5}
+void {\bf \-Set\-X} (const \-R\-E\-A\-L) const 
+\begin{DoxyCompactList}\small\item\em \-Set the \-X,\-Y,\-Z coordinate -\/ this is const because sometimes their coordinate must be changed even though the atom does not move, if the atom is part of a rigid group (its position is then described by a combination of atomic cooordinates, plus a global translation and rotation... \end{DoxyCompactList}\item 
+void {\bfseries \-Set\-Y} (const \-R\-E\-A\-L) const \label{a00043_a18bbddb5f5de159b94755aa3d92e35c6}
 
 \item 
-REAL {\bfseries mLength0}\label{a00043_aa1652cde21c40d1422daf579409b8779}
+void {\bfseries \-Set\-Z} (const \-R\-E\-A\-L) const \label{a00043_a9e20c5cfb9b606c2fa0e0c0a9797504c}
+
+\end{DoxyCompactItemize}
+
+\subsubsection*{\-Private \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string {\bf m\-Name}\label{a00043_a9b5acff7bfa3e693a0ffb294f625da4a}
+
+\begin{DoxyCompactList}\small\item\em \-Name for this atom. \end{DoxyCompactList}\item 
+\-R\-E\-A\-L {\bf m\-X}
+\begin{DoxyCompactList}\small\item\em \-Cartesian oordinates in the \doxyref{\-Molecule}{p.}{a00047} reference frame. \end{DoxyCompactList}\item 
+\-R\-E\-A\-L {\bfseries m\-Y}\label{a00043_a9b2dced49b3f7bc7c7796bcd6f9ea744}
 
 \item 
-REAL {\bfseries mDelta}\label{a00043_ada3df50564e2285ee1f6b659c4dbdee6}
+\-R\-E\-A\-L {\bfseries m\-Z}\label{a00043_a97e87a6f7313a4c35f5ac7a36fb973e3}
 
 \item 
-REAL {\bfseries mSigma}\label{a00043_a3312763939b3c5f4bcac987b15c1f0b1}
+\-R\-E\-A\-L {\bf m\-Occupancy}\label{a00043_ab2ec9204d2dbe32fbdddcf86a5976bb5}
 
+\begin{DoxyCompactList}\small\item\em \-Occupancy. \end{DoxyCompactList}\item 
+const {\bf \-Scattering\-Power} $\ast$ {\bf mp\-Scatt\-Pow}\label{a00043_a03d1229197681392ce1528d812ce6390}
+
+\begin{DoxyCompactList}\small\item\em \doxyref{\-Scattering\-Power}{p.}{a00090}. \end{DoxyCompactList}\item 
+{\bf \-Molecule} $\ast$ {\bf mp\-Mol}\label{a00043_a56eeb020f2b23d601f68b2fdd6160366}
+
+\begin{DoxyCompactList}\small\item\em \-Parent \doxyref{\-Molecule}{p.}{a00047}. \end{DoxyCompactList}\item 
+bool {\bf m\-Is\-In\-Ring}\label{a00043_a3bc8679a02465375d92d7fc3410dbb2e}
+
+\begin{DoxyCompactList}\small\item\em \-Is the atom in a ring ? \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{\-Detailed \-Description}
+\doxyref{\-Mol\-Atom}{p.}{a00043} \-: atom inside a \doxyref{\-Molecule}{p.}{a00047}. 
+
+\-This keeps coordinates, recorded in a cartesian frame (in \-Angstroem), the associated scattering power and it also keeps in a list of all bonds in which this atom is involved.
+
+\begin{DoxyNote}{\-Note}
+maybe it's not a great idea to keep a reference of bonds for this atom in here 
+\end{DoxyNote}
+
+
+\subsubsection{\-Constructor \& \-Destructor \-Documentation}
+\index{\-Obj\-Cryst\-::\-Mol\-Atom@{\-Obj\-Cryst\-::\-Mol\-Atom}!\-Mol\-Atom@{\-Mol\-Atom}}
+\index{\-Mol\-Atom@{\-Mol\-Atom}!ObjCryst::MolAtom@{\-Obj\-Cryst\-::\-Mol\-Atom}}
+\paragraph[{\-Mol\-Atom}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Obj\-Cryst\-::\-Mol\-Atom\-::\-Mol\-Atom} (
+\begin{DoxyParamCaption}
+\item[{const \-R\-E\-A\-L}]{x, }
+\item[{const \-R\-E\-A\-L}]{y, }
+\item[{const \-R\-E\-A\-L}]{z, }
+\item[{const {\bf \-Scattering\-Power} $\ast$}]{p\-Pow, }
+\item[{const string \&}]{name, }
+\item[{{\bf \-Molecule} \&}]{parent}
+\end{DoxyParamCaption}
+)}\label{a00043_a4a96ce5bd91d7b46e53fe8bbc95fa243}
+
+
+\-Constructor for a \doxyref{\-Mol\-Atom}{p.}{a00043}. 
+
+\index{\-Obj\-Cryst\-::\-Mol\-Atom@{\-Obj\-Cryst\-::\-Mol\-Atom}!$\sim$\-Mol\-Atom@{$\sim$\-Mol\-Atom}}
+\index{$\sim$\-Mol\-Atom@{$\sim$\-Mol\-Atom}!ObjCryst::MolAtom@{\-Obj\-Cryst\-::\-Mol\-Atom}}
+\paragraph[{$\sim$\-Mol\-Atom}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf \-Obj\-Cryst\-::\-Mol\-Atom\-::$\sim$\-Mol\-Atom} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00043_a1f9c680d749ee2c61917fbb29da5dcf4}
+
+
+\-Destructor. 
+
+\-Tells the parent \doxyref{\-Molecule}{p.}{a00047} and all \-Bond that it is being destroyed. 
+
+\subsubsection{\-Member \-Function \-Documentation}
+\index{\-Obj\-Cryst\-::\-Mol\-Atom@{\-Obj\-Cryst\-::\-Mol\-Atom}!\-Is\-Dummy@{\-Is\-Dummy}}
+\index{\-Is\-Dummy@{\-Is\-Dummy}!ObjCryst::MolAtom@{\-Obj\-Cryst\-::\-Mol\-Atom}}
+\paragraph[{\-Is\-Dummy}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf \-Obj\-Cryst\-::\-Mol\-Atom\-::\-Is\-Dummy} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{a00043_abdbf729debbc3a441ccad8ecf2c6a282}
+
+
+\-Returns true if this is a dummy atom, i.\-e. 
+
+without an associated scattering power.
+
+\-Dummy atoms can be used to mark positions, or for restraints. \index{\-Obj\-Cryst\-::\-Mol\-Atom@{\-Obj\-Cryst\-::\-Mol\-Atom}!\-Set\-Is\-In\-Ring@{\-Set\-Is\-In\-Ring}}
+\index{\-Set\-Is\-In\-Ring@{\-Set\-Is\-In\-Ring}!ObjCryst::MolAtom@{\-Obj\-Cryst\-::\-Mol\-Atom}}
+\paragraph[{\-Set\-Is\-In\-Ring}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Obj\-Cryst\-::\-Mol\-Atom\-::\-Set\-Is\-In\-Ring} (
+\begin{DoxyParamCaption}
+\item[{const bool}]{r}
+\end{DoxyParamCaption}
+) const}\label{a00043_a74a751f11661824b78b7b9d51cee71cf}
+
+
+\-Flag this atom as being in a ring (or not). 
+
+\-This is a const method because the existence of a ring is only a consequence of the connectivity of the \doxyref{\-Molecule}{p.}{a00047}. \index{\-Obj\-Cryst\-::\-Mol\-Atom@{\-Obj\-Cryst\-::\-Mol\-Atom}!\-Set\-X@{\-Set\-X}}
+\index{\-Set\-X@{\-Set\-X}!ObjCryst::MolAtom@{\-Obj\-Cryst\-::\-Mol\-Atom}}
+\paragraph[{\-Set\-X}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Obj\-Cryst\-::\-Mol\-Atom\-::\-Set\-X} (
+\begin{DoxyParamCaption}
+\item[{const \-R\-E\-A\-L}]{}
+\end{DoxyParamCaption}
+) const}\label{a00043_a993ef08d14ccf4a88046e294f9dc333a}
+
+
+\-Set the \-X,\-Y,\-Z coordinate -\/ this is const because sometimes their coordinate must be changed even though the atom does not move, if the atom is part of a rigid group (its position is then described by a combination of atomic cooordinates, plus a global translation and rotation... 
+
+
+
+\subsubsection{\-Member \-Data \-Documentation}
+\index{\-Obj\-Cryst\-::\-Mol\-Atom@{\-Obj\-Cryst\-::\-Mol\-Atom}!m\-X@{m\-X}}
+\index{m\-X@{m\-X}!ObjCryst::MolAtom@{\-Obj\-Cryst\-::\-Mol\-Atom}}
+\paragraph[{m\-X}]{\setlength{\rightskip}{0pt plus 5cm}\-R\-E\-A\-L {\bf \-Obj\-Cryst\-::\-Mol\-Atom\-::m\-X}\hspace{0.3cm}{\ttfamily  [mutable, private]}}\label{a00043_a217bda060e7d3b5e5b2b7f37e11ef4e0}
+
+
+\-Cartesian oordinates in the \doxyref{\-Molecule}{p.}{a00047} reference frame. 
+
+mutable because they may need to be changed when in a rigid group, even though the end position of the atom remains the same. 
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-REAL {\bfseries mBondOrder}\label{a00043_a785e2209e844fc83a85c0a20ec9cfe80}
-
-\item 
-bool {\bfseries mIsFreeTorsion}\label{a00043_ab71a7d1e120f0c351694317e054ec18c}
-
-\item 
-{\bf Molecule} $\ast$ {\bf mpMol}\label{a00043_af67c44fd54e60de27f4acb6f2a6e7e3b}
-
-\begin{DoxyCompactList}\small\item\em Parent \doxyref{Molecule}{p.}{a00046}. \item\end{DoxyCompactList}\item 
-REAL {\bf mLLK}\label{a00043_a48e0a0e15c8d21376732144a43a26264}
-
-\begin{DoxyCompactList}\small\item\em Stored log(likelihood). \item\end{DoxyCompactList}\item 
-{\bf XYZ} {\bf mDerivAtom1}
-\begin{DoxyCompactList}\small\item\em Derivatives of the bond length with respect to the coordinates of the atoms. \item\end{DoxyCompactList}\item 
-{\bf XYZ} {\bfseries mDerivAtom2}\label{a00043_a692a9986c610412913ddb700b881edc3}
-
-\item 
-REAL {\bf mDerivLLKCoeff}
-\begin{DoxyCompactList}\small\item\em The factor used to change the derivative of the length/angle, to the derivative of the log(likelihood). \item\end{DoxyCompactList}\end{DoxyCompactItemize}
-
-
-\subsubsection{Detailed Description}
-Bond between two atoms, also a restraint on the associated bond length. 
-
-\subsubsection{Constructor \& Destructor Documentation}
-\index{ObjCryst::MolBond@{ObjCryst::MolBond}!MolBond@{MolBond}}
-\index{MolBond@{MolBond}!ObjCryst::MolBond@{ObjCryst::MolBond}}
-\paragraph[{MolBond}]{\setlength{\rightskip}{0pt plus 5cm}ObjCryst::MolBond::MolBond ({\bf MolAtom} \& {\em atom1}, \/  {\bf MolAtom} \& {\em atom2}, \/  const REAL {\em length}, \/  const REAL {\em sigma}, \/  const REAL {\em delta}, \/  {\bf Molecule} \& {\em parent}, \/  const REAL {\em bondOrder} = {\ttfamily 1.})}\hfill\label{a00043_aa5eb1a8ba4e34da2516bfc24af4fabec}
-
-
-Constructor. Both atoms of the bond are told of the creation of the bond, so that they can keep a list of bonds they are involved in.
-
-
-\begin{DoxyParams}{Parameters}
-\item[{\em atom1,atom2,:}]the atoms of the bond \item[{\em length,:}]the expected bond length \item[{\em sigma,delta,:}]depending on the calculated length, the log(likelihood) is equal to:
-\begin{DoxyItemize}
-\item within $[length_{0}-\delta;length_{0}+\delta]$: $ -\log(likelihood)= \log\left(2\delta+\sqrt{2\pi\sigma^2}\right)$
-\item if $length > length_{0}+\delta$: $ -\log(likelihood)= \log\left(2\delta+\sqrt{2\pi\sigma^2}\right) + \left(\frac{(length-\delta)-length_{0}}{\sigma} \right)^2$
-\item if $length < length_{0}-\delta$: $ -\log(likelihood)= \log\left(2\delta+\sqrt{2\pi\sigma^2}\right) + \left(\frac{(length+\delta)-length_{0}}{\sigma} \right)^2$ 
-\end{DoxyItemize}\end{DoxyParams}
-\index{ObjCryst::MolBond@{ObjCryst::MolBond}!$\sim$MolBond@{$\sim$MolBond}}
-\index{$\sim$MolBond@{$\sim$MolBond}!ObjCryst::MolBond@{ObjCryst::MolBond}}
-\paragraph[{$\sim$MolBond}]{\setlength{\rightskip}{0pt plus 5cm}virtual ObjCryst::MolBond::$\sim$MolBond ()\hspace{0.3cm}{\ttfamily  [virtual]}}\hfill\label{a00043_a0aac13259fa1079e181d4a04c7556f3e}
-
-
-Destructor. Notifies the atoms that the bond has disappeared. 
-
-\subsubsection{Member Function Documentation}
-\index{ObjCryst::MolBond@{ObjCryst::MolBond}!CalcGradient@{CalcGradient}}
-\index{CalcGradient@{CalcGradient}!ObjCryst::MolBond@{ObjCryst::MolBond}}
-\paragraph[{CalcGradient}]{\setlength{\rightskip}{0pt plus 5cm}void ObjCryst::MolBond::CalcGradient (std::map$<$ {\bf MolAtom} $\ast$, {\bf XYZ} $>$ \& {\em m}) const}\hfill\label{a00043_a187126a2a21c5944b2e351fc331fd5c9}
-
-
-Calc log(likelihood) gradient -\/ versus all atomic coordinates. 
-\begin{DoxyParams}{Parameters}
-\item[{\em m,:}]this map should have been initialized by adding all possible atom pointers as keys, with all \doxyref{XYZ}{p.}{a00151} values equal to zeros. On return, the derivative of the log(likelihood) vs each atomic coordinates will {\bfseries added} to each coordinate of the corresponding atoms. \end{DoxyParams}
-\index{ObjCryst::MolBond@{ObjCryst::MolBond}!GetDeriv@{GetDeriv}}
-\index{GetDeriv@{GetDeriv}!ObjCryst::MolBond@{ObjCryst::MolBond}}
-\paragraph[{GetDeriv}]{\setlength{\rightskip}{0pt plus 5cm}REAL ObjCryst::MolBond::GetDeriv (const std::map$<$ const {\bf MolAtom} $\ast$, {\bf XYZ} $>$ \& {\em m}, \/  const bool {\em llk} = {\ttfamily false}) const}\hfill\label{a00043_adeeda31a2485f2985a1a7023cfe374f8}
-
-
-Get the derivative of the bond length, given the derivatives of the atom positions This requires that GetLogLikelihood(calcDeriv=true) be called first. If llk=true, this will return the derivative of the llk rather than the derivative of the length or angle 
-
-\subsubsection{Member Data Documentation}
-\index{ObjCryst::MolBond@{ObjCryst::MolBond}!mDerivAtom1@{mDerivAtom1}}
-\index{mDerivAtom1@{mDerivAtom1}!ObjCryst::MolBond@{ObjCryst::MolBond}}
-\paragraph[{mDerivAtom1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf XYZ} {\bf ObjCryst::MolBond::mDerivAtom1}\hspace{0.3cm}{\ttfamily  [mutable, private]}}\hfill\label{a00043_afbabaca2a8c529a5ed48b86b90b6c7a7}
-
-
-Derivatives of the bond length with respect to the coordinates of the atoms. The derivatives are calculated in MolBond::GetLogLikelihood(true) \index{ObjCryst::MolBond@{ObjCryst::MolBond}!mDerivLLKCoeff@{mDerivLLKCoeff}}
-\index{mDerivLLKCoeff@{mDerivLLKCoeff}!ObjCryst::MolBond@{ObjCryst::MolBond}}
-\paragraph[{mDerivLLKCoeff}]{\setlength{\rightskip}{0pt plus 5cm}REAL {\bf ObjCryst::MolBond::mDerivLLKCoeff}\hspace{0.3cm}{\ttfamily  [mutable, private]}}\hfill\label{a00043_af7ec58bb24811ae897e8ba1ecc33d4de}
-
-
-The factor used to change the derivative of the length/angle, to the derivative of the log(likelihood). e.g. (for mDelta=0) $ mDerivLLKCoeff = \frac{L-L_0}{\sigma^2} $ 
-
-The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
-\item 
-Molecule.h\end{DoxyCompactItemize}
+\-Molecule.\-h\end{DoxyCompactItemize}
