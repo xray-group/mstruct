@@ -191,6 +191,9 @@ int main (int argc, char *argv[])
 			case 18:
 				val = MStruct::mstruct_test8(argc, argv, imp_file);
 				break;
+			case 19:
+			        val = MStruct::mstruct_test9(argc, argv, imp_file);
+				break;	
 			default:
 				cout << "Job/test type not recognised!" << endl;
 				break;
@@ -753,7 +756,7 @@ int main (int argc, char *argv[])
 	     read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
 	     ccin >> filename;
 	   } else if ( distribType==string("create") ) {
-	    // build the distribution and ave the distribution in the file (to be reload later)
+	    // build the distribution and save the distribution in the file (to be reload later)
 	     cout << "histogram spacing type (linear/log/sqrt), Dmin (nm), Dmax (nm), nb. of intervals" << endl;
 	     string htype;
 	     REAL Dmin, Dmax;
@@ -807,6 +810,14 @@ int main (int argc, char *argv[])
 	     else if ( LsqRegType==string("curvature") || LsqRegType==string("curv") )
 	       sizeEffect->AddLSQRegularizationMethod( MStruct::SizeDistribBroadeningEffect::LSQRegOpt_CurvIntegral,
 						       alpha );
+	     else if ( LsqRegType==string("uniformize") || LsqRegType==string("unif") || LsqRegType==string("uniformizeMC1") ) {
+	       // this is strictly not a regularization method but rather a distrubition uniformization should be applied at
+	       // the beginning of each optimization run
+	       // ... load an additional parameter (nb of uniformization algorithm steps)
+	       long Niter;
+	       ccin >> Niter;
+	       sizeEffect->SetUniformizeDistributionAtBeginOptimization ( true, Niter, alpha );
+	     }
 	     else {
 	       cerr<<"Error: Unknow LSQ rgularization method: "<<LsqRegType;
 	       cerr<<" for SizeDistribBroadeningEffect: "<<sizeEffect->GetName()<<endl;

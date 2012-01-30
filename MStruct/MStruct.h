@@ -688,7 +688,7 @@ public:
    *
    */
   static const int LSQRegOpt_CurvIntegral =       4;
-
+  
   /**   \brief  Set a weight and a method type used for the distribution regularization in the LSQ refinement.
    *
    * See a particular option documentation for details of a method used.
@@ -708,6 +708,31 @@ public:
   void BuildDistribution(const REAL Dmin=10., const REAL Dmax=1.e3, const int NbIntervals=10,
 			 const string spacing=string("linear"));
 
+  /**   \brief Uniformize distribution.
+   *
+   * This method tries to make a distribution of bin areas uniform. This is done in order to make a possible
+   * contribution of each bin to integrated intensity scatterd by the crystallites ensemble similar to the
+   * contribution from other bins. Weak neighbouring bins are merged, strong bins are refined.
+   * 
+   * The method implements a very rough Monte-Carlo like algorithm. In each iteraction a single bin
+   * is divided into halfs and simultaneously a pair of neighbouring bins is merged if this will
+   * result in decrasing a variance of mDistrib. Randomely also increasing steps
+   * are accepted with likehood depending on the \par Temperature. This is repeated for \par Niter
+   * iteraction steps.
+   *
+   */
+  void UniformizeDistributionMC1(const long Niter = 100, const REAL Temperature = 0.);
+
+  /**   \brief  Sets whether the distrubution is uniformized at the beginning of the optimization.
+   *
+   *    Sets also parameters of the uniformization algorithm:
+   *    \par Niter is the number of iterative steps of the uniformization algorithm.
+   *    \par Temperature is the temperature at which the distribution is uniformized by a M-C algorithm.
+   *
+   */
+  void SetUniformizeDistributionAtBeginOptimization(const bool uniformize = true,
+						    const long Niter = 100, const REAL Temperature = 0.);
+
   /// Get integral of the area below the arithmetic distribution.
   REAL GetDistribIntegral() const;
   /// Get integral of the area below the volume weighted distribution.
@@ -715,6 +740,7 @@ public:
 
   /**   \brief  This should be called by any optimization class at the begining of an optimization.
    *
+   * If required it applies the uniformization algorithm to the current distribution first.
    * It prints information about regularization.
    *
    */
@@ -769,6 +795,13 @@ protected:
   mutable REAL mVolumeDistIntegral;
   /// Last time the integrals of the distribution were calculated
   mutable ObjCryst::RefinableObjClock mClockDistIntegralCalc;
+
+  /// Flag whether the distribution should be regularised at the beginning of optimization
+  bool mUniformizeAtBegin;
+  /// Number of iteractions of the Uniformazation algorithm applied at the beginning of optimization
+  long mNbUniformizationIter;
+  /// Temperature at which the distribution is uniformized by the MC algorithm at the beginning of optimization
+  REAL mUniformizationTemperature;
 
 private:
   /// TODO::

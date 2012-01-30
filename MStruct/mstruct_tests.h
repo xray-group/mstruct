@@ -41,6 +41,7 @@ int mstruct_test5(int argc, char* argv[], std::istream &is);
 int mstruct_test6(int argc, char* argv[], std::istream &is);
 int mstruct_test7(int argc, char* argv[], std::istream &is);
 int mstruct_test8(int argc, char* argv[], std::istream &is);
+int mstruct_test9(int argc, char* argv[], std::istream &is);
 
 } // namespace MStruct
 

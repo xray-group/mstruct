@@ -873,6 +873,35 @@ int mstruct_test8(int argc, char* argv[], std::istream &iss)
 
 } // mstruct_test8
 
+int mstruct_test9(int argc, char* argv[], std::istream &iss)
+{
+  // ObjCryst::CubicSpline test
+
+  cout << "Running test no. 9" << endl;
+
+  cout << "  SizeDistribBroadeningEffect::UniformiseDistributionMC1() Test" << endl;
+	
+  // input-string-stream to which the input is translated to ignore comments etc. 
+  istringstream ccin;
+  
+  // input filename
+  string filename;
+  cout << "distribution-file name" << endl;
+  read_line (ccin, iss); // read a line (ignoring all comments, etc.)
+  ccin >> filename;
+
+  MStruct::SizeDistribBroadeningEffect effect;
+
+  effect.ReadDistributionFromFile(filename.c_str());
+
+  effect.UniformizeDistributionMC1( 10000, 0.001 );
+
+  effect.WriteDistributionToFile(filename.c_str());
+
+  return 0;
+
+} // mstruct_test9
+
 } // namespace MStruct
 
 

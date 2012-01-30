@@ -3670,8 +3670,9 @@ void SizeDistribPowderPatternDiffraction::Prepare ()
 // SizeDistribBroadeningEffect
 SizeDistribBroadeningEffect::SizeDistribBroadeningEffect()
   :mD1(0), mD2(0), mDistrib(0), mLSQAlpha(0.), mLSQConstraintScale(0.),
-   mDmax(0.), mDistIntegral(0.), mVolumeDistIntegral(0.), mCurvIntStep(0.),
-   mBeginEndOptimizationCalled(0)
+   mDmax(0.), mDistIntegral(0.), mVolumeDistIntegral(0.),
+   mUniformizeAtBegin(false), mNbUniformizationIter(100), mUniformizationTemperature(0.),
+   mCurvIntStep(0.), mBeginEndOptimizationCalled(0)
 {
   //SetLSQRegularizationOption(LSQRegOpt_None); // Deprecated
   mLSQConstraintScale = ObjCryst::RefinableObj::mDefaultLSQConstraintScale;
@@ -3998,6 +3999,114 @@ void SizeDistribBroadeningEffect::BuildDistribution(const REAL Dmin, const REAL 
   G *= 1.e5/t;
   
   this->SetDistribution(D1,D2,G,Fixed);
+}
+
+void SizeDistribBroadeningEffect::UniformizeDistributionMC1(const long Niter, const REAL Temperature)
+{
+  VFN_DEBUG_ENTRY("MStruct::SizeDistribBroadeningEffect::UniformiseDistributionMC1()",11)
+
+  // nb of bins
+  const long nBins = mDistrib.numElements();
+  // new (refined) distribution
+  CrystVector_REAL D1 = mD1, D2 = mD2, distrib = mDistrib;
+
+  // calculate variance of the current distribution
+  REAL varsq = 0.;
+  REAL t = distrib.sum()/nBins;
+  for(long ib=0; ib<nBins; ib++) varsq += pow(distrib(ib)-t,2);
+  varsq = sqrt(varsq);  
+
+  cout << setw(10) << -1 << setw(10) << varsq << '\n';
+
+  for(unsigned int iit=0; iit<Niter; iit++) {
+    
+    // generate a random integer number in the range 1 ... nBins-2
+    long i1 = rand() % (nBins-2) + 1;
+    // select a neighbouring bin (left/right)
+    long i2 = i1;
+    if( rand()/REAL(RAND_MAX) < 0.5 ) i1--; else i2++;
+    // randomly select a bin which will be divided
+    long i3;
+    do { // pick a random integer in the interval 0 ... nBins-1
+      i3 = rand() % nBins;
+    } while ( (i1==i3) || (i2==i3) );
+    
+    // merge i1 and i2 bins and divide bin i3
+
+    // integrate over overlapped bins of the reference (original) distribution
+    REAL s = 0;
+    {
+      long ib1, ib2;
+      for(ib1 =   0; ib1<nBins; ib1++) if( mD2(ib1)>D1(i1) ) break;
+      for(ib2 = ib1; ib2<nBins; ib2++) if( mD1(ib2)>D2(i2) ) break;
+      ib2--;
+      
+      for(long ib=ib1; ib<=ib2; ib++) {
+	REAL delta = min(D2(i2),mD2(ib)) - max(D1(i1),mD1(ib));
+	s += mDistrib(ib)/(mD2(ib)-mD1(ib))*delta;
+      } // ib
+    }
+    
+    // new distribution
+    CrystVector_REAL distrib1 = distrib;
+
+    if(i3>i2) {
+      distrib1(i1) = s;
+      distrib1(i3) *= 0.5;
+      for(long ib=i2; ib<i3; ib++) distrib1(ib) = distrib1(ib+1);
+    } else {
+      distrib1(i3) *= 0.5;
+      for(long ib=i1; ib>i3; ib--) distrib1(ib) = distrib1(ib-1);
+      distrib1(i2) = s;
+    }
+      
+    // variance of the new distribution
+    REAL var1sq = 0.; 
+    t = distrib1.sum()/nBins;
+    for(long ib=0; ib<nBins; ib++) var1sq += pow(distrib1(ib)-t,2);
+    var1sq = sqrt(var1sq);
+
+    // Do we accept the new distribution ?
+    if( exp((varsq-var1sq)/varsq/Temperature)>rand()/REAL(RAND_MAX) ) {
+      // distribution modification accepted
+      distrib = distrib1;
+      varsq = var1sq;
+      // TODO
+      
+      if(i3>i2) {
+	D2(i1) = D2(i2);
+	for(long ib=i2; ib<i3; ib++) { D1(ib) = D1(ib+1); D2(ib) = D2(ib+1); }
+	D2(i3-1) = D1(i3) + (D2(i3)-D1(i3))/2.;
+	D1(i3) = D2(i3-1);
+      } else {
+	D1(i2) = D1(i1);
+	for(long ib=i1; ib>i3; ib--) { D1(ib) = D1(ib-1); D2(ib) = D2(ib-1); }
+	D2(i3) = D1(i3) + (D2(i3)-D1(i3))/2.;
+	D1(i3+1) = D2(i3);
+      }
+      
+    } // if solution accepted
+      
+    cout << setw(10) << iit << setw(10) << varsq << '\n';
+
+  } // for iit
+
+  // renormalise distribution
+  if (abs(distrib.sum())>1e-7) distrib *= mDistrib.sum()/distrib.sum();
+  mDistrib = distrib;
+  mD1 = D1;
+  mD2 = D2;
+
+  VFN_DEBUG_EXIT("\MStruct::SizeDistribBroadeningEffect::UniformiseDistributionMC1()",11)
+}
+
+void SizeDistribBroadeningEffect::SetUniformizeDistributionAtBeginOptimization(const bool uniformize,
+									       const long Niter,
+									       const REAL Temperature)
+{
+  mUniformizeAtBegin = uniformize;
+  mNbUniformizationIter = Niter;
+  mUniformizationTemperature = Temperature;
 }
 
 unsigned int SizeDistribBroadeningEffect::GetNbLSQConstraints() const
@@ -4335,11 +4444,16 @@ void SizeDistribBroadeningEffect::BeginOptimization (const bool allowApproximati
 {
   mBeginEndOptimizationCalled++;
 
+  // If the distribution should be uniformized, try to do the work here
+  if(mUniformizeAtBegin)
+    UniformizeDistributionMC1( mNbUniformizationIter, mUniformizationTemperature );
+
   // When called for the first time, print Constraints and Regularization Info
   if(mBeginEndOptimizationCalled==1) {
     this->PrintConstraintsStatistics();
     this->PrintRegularizationStatistics();
   }
+
 }
 
 void SizeDistribBroadeningEffect::EndOptimization ()
