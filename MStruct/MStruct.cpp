@@ -3824,6 +3824,10 @@ void SizeDistribBroadeningEffect::SetDistribution(const CrystVector_REAL d1, con
   
   // rebuild the list of LSQ Regularization Operators
   this->RebuildLSQRegOpList();
+
+  cout << "SizeDistribBroadeningEffect(" << GetName() << ") distribution: \n";
+  for(long i=0; i<distrib.numElements(); i++)
+    cout << setw(10) << mD1(i)/10. << setw(10) << mD2(i)/10. << setw(10) << mDistrib(i) << '\n';
   
   // reset clocks
   mClockDistIntegralCalc.Reset();
@@ -3993,7 +3997,9 @@ void SizeDistribBroadeningEffect::BuildDistribution(const REAL Dmin, const REAL 
   for(int i=0; i<NbIntervals; i++) {
     REAL D = 0.5*(D1(i)+D2(i));
     //G(i) = (1.-cos(2.*M_PI*(D-D1(0))/(D2(NbIntervals-1)-D1(0)))) / (D2(NbIntervals-1)-D1(0)) * pow(D,3);
-    G(i) = (1.-cos(2.*M_PI*(D-D1(0))/(D2(NbIntervals-1)-D1(0)))) * pow(D,3) / (D2(i)-D1(i));
+    //G(i) = (1.-cos(2.*M_PI*(D-D1(0))/(D2(NbIntervals-1)-D1(0)))) * pow(D,3) / (D2(i)-D1(i));
+    G(i) = (1.-cos(2.*M_PI*(D-D1(0))/(D2(NbIntervals-1)-D1(0)))) * pow(D,3)
+      / ( D1(0)*pow( D2(NbIntervals-1)/D1(0) , (D-D1(0))/(D2(NbIntervals-1)-D1(0)) ) );
     t += G(i);
   }
   G *= 1.e5/t;
@@ -4016,7 +4022,10 @@ void SizeDistribBroadeningEffect::UniformizeDistributionMC1(const long Niter, co
   for(long ib=0; ib<nBins; ib++) varsq += pow(distrib(ib)-t,2);
   varsq = sqrt(varsq);  
 
-  cout << setw(10) << -1 << setw(10) << varsq << '\n';
+  cout << "SizeDistribBroadeningEffect(" << GetName()<< ") Distribution Variance:\n";
+  cout << " -------------------------------------------------------------------------------\n";
+  cout << "StartSq: " << varsq << '\n';
+  //cout << setw(10) << -1 << setw(10) << varsq << '\n';
 
   for(unsigned int iit=0; iit<Niter; iit++) {
     
@@ -4030,7 +4039,11 @@ void SizeDistribBroadeningEffect::UniformizeDistributionMC1(const long Niter, co
     do { // pick a random integer in the interval 0 ... nBins-1
       i3 = rand() % nBins;
     } while ( (i1==i3) || (i2==i3) );
-    
+
+    //((D2(i3)-D1(i3))<=(D2(nBins-1)-D1(0))/100) );
+    // never accept if i3 bin too fine
+    if ((D2(i3)-D1(i3))/(D2(i3)+D1(i3))<0.1) continue;
+
     // merge i1 and i2 bins and divide bin i3
 
     // integrate over overlapped bins of the reference (original) distribution
@@ -4087,15 +4100,21 @@ void SizeDistribBroadeningEffect::UniformizeDistributionMC1(const long Niter, co
       
     } // if solution accepted
       
-    cout << setw(10) << iit << setw(10) << varsq << '\n';
+    //cout << setw(10) << iit << setw(10) << varsq << '\n';
 
   } // for iit
 
+  cout << "Final SqVar: " << varsq << '\n';
+
   // renormalise distribution
   if (abs(distrib.sum())>1e-7) distrib *= mDistrib.sum()/distrib.sum();
-  mDistrib = distrib;
-  mD1 = D1;
-  mD2 = D2;
+  
+  //mDistrib = distrib;
+  //mD1 = D1;
+  //mD2 = D2;
+  CrystVector_int fixed(distrib.numElements());
+  fixed = 0; // TODO:: fixed/refined status when uniforming distribution
+  this->SetDistribution(D1,D2,distrib,fixed);
 
   VFN_DEBUG_EXIT("\MStruct::SizeDistribBroadeningEffect::UniformiseDistributionMC1()",11)
 }
@@ -4444,12 +4463,14 @@ void SizeDistribBroadeningEffect::BeginOptimization (const bool allowApproximati
 {
   mBeginEndOptimizationCalled++;
 
-  // If the distribution should be uniformized, try to do the work here
-  if(mUniformizeAtBegin)
-    UniformizeDistributionMC1( mNbUniformizationIter, mUniformizationTemperature );
-
-  // When called for the first time, print Constraints and Regularization Info
+  // When called for the first time
+  //   If the distribution should be uniformized, try to do the work here
+  //   Print Constraints and Regularization Info
   if(mBeginEndOptimizationCalled==1) {
+
+    if(mUniformizeAtBegin)
+      UniformizeDistributionMC1( mNbUniformizationIter, mUniformizationTemperature );
+
     this->PrintConstraintsStatistics();
     this->PrintRegularizationStatistics();
   }

@@ -890,11 +890,18 @@ int mstruct_test9(int argc, char* argv[], std::istream &iss)
   read_line (ccin, iss); // read a line (ignoring all comments, etc.)
   ccin >> filename;
 
+  REAL temp = 1.e-7;
+  long Niter = 0;
+  
+  cout << "temperature, nb. iterations" << endl;
+  read_line (ccin, iss); // read a line (ignoring all comments, etc.)
+  ccin >> temp >> Niter;
+
   MStruct::SizeDistribBroadeningEffect effect;
 
   effect.ReadDistributionFromFile(filename.c_str());
 
-  effect.UniformizeDistributionMC1( 10000, 0.001 );
+  effect.UniformizeDistributionMC1( Niter, temp );
 
   effect.WriteDistributionToFile(filename.c_str());
 

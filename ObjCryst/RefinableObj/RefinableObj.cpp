@@ -1855,14 +1855,47 @@ const CrystVector_REAL& RefinableObj::GetLSQDeriv(const unsigned int n, Refinabl
 
 unsigned int RefinableObj::GetNbLSQConstraints() const
 {
-	return 0;
+  return mExternalLSQConstraints.size();
 }
 
 void RefinableObj::GetLSQConstraint(const unsigned int n,
-  																	std::vector< const RefinablePar* > &parList, CrystVector_REAL &coef) const
+				    std::vector< const RefinablePar* > &parList, CrystVector_REAL &coef) const
 {
-	parList.clear();
-	coef.resize(0);
+  if(n<mExternalLSQConstraints.size()) {
+    parList = mExternalLSQConstraints[n].first;
+    coef = mExternalLSQConstraints[n].second;
+  } else {
+    parList.clear();
+    coef.resize(0);
+  }
+}
+
+unsigned int RefinableObj::AddExternalLSQConstraint(std::vector< const RefinablePar* > &parList,
+						    CrystVector_REAL &coef,
+						    const std::string name)
+{
+  mExternalLSQConstraints.push_back( std::make_pair(parList,coef) );
+  mExternalLSQConstraintsNames.push_back( name );
+  return mExternalLSQConstraints.size()-1;
+}
+
+void RefinableObj::PrintExternalConstraintsStatistics () const
+{
+  if(this-> mExternalLSQConstraints.size()==0) return;
+
+  cout << "RefinableObj: " << this->GetName() << " External LSQConstraints Statistics\n";
+  cout << " ------------------------------------------------------------------------------- \n";
+  for(int iCon=0; iCon<mExternalLSQConstraints.size(); iCon++) {
+
+    std::vector< const ObjCryst::RefinablePar* > parList = mExternalLSQConstraints[iCon].first;
+    CrystVector_REAL coef = mExternalLSQConstraints[iCon].second;
+
+    REAL val = 0.;
+    for(int i=0; i<parList.size(); i++)
+      val += coef(i) * parList[i]->GetValue();
+
+    cout << "Constraint" << iCon << "(" << mExternalLSQConstraintsNames[iCon] << ")" << ": " << val << "\n";
+  }
 }
 
 unsigned int RefinableObj::GetNbLSQRegularizationOperator(const unsigned int LSQfunc) const
@@ -1875,7 +1908,7 @@ const LSQRegularizationOperator & RefinableObj::GetLSQRegularizationOperator(con
 {
   return EmptyLSQRegularizationOperatorObj_const;
 }
- 										
+									
 #endif // __ZDENEK__
 
 void RefinableObj::ResetParList()

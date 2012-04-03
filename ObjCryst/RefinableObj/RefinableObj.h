@@ -1092,6 +1092,14 @@ class RefinableObj
 	 virtual const LSQRegularizationOperator & GetLSQRegularizationOperator(const unsigned int nOp,
 										const unsigned int LSQfunc) const;
 
+	 /// Add an external (e.g. user defined) LSQ constraint. Returns the constraint number.
+	 virtual unsigned int AddExternalLSQConstraint(std::vector< const RefinablePar* > &parList,
+						       CrystVector_REAL &coef,
+						       const std::string name = "unnamed");
+
+	 /// Print statistics for external constraints
+	 virtual void PrintExternalConstraintsStatistics () const;
+
 #endif // __ZDENEK__
 
       /// Re-init the list of refinable parameters, removing all parameters.
@@ -1271,9 +1279,14 @@ class RefinableObj
 #ifdef __ZDENEK__
       /// Default value for constraints scale in the LSQ fitting.
       /// The constraints scale should be large enough to force the constraint validity
-      /// but not to high to put out the LSQ fitting algorithm. This value should offer
+      /// but not too high to put out the LSQ fitting algorithm. This value should offer
       /// a typical default constraint scale.
       static const REAL mDefaultLSQConstraintScale;
+
+      /// List of external constraints (e.g. constraints set by user)
+      std::vector< std::pair< std::vector< const RefinablePar* > , CrystVector_REAL > > mExternalLSQConstraints;
+      /// List of names of external constraints
+      std::vector< string > mExternalLSQConstraintsNames;
 #endif
    #ifdef __WX__CRYST__
    public:

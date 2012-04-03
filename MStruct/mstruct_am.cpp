@@ -28,7 +28,7 @@
  *
  */
 
-#define program_version "0.38-(Fox-r1221)-testing-WCfaults"
+#define program_version "0.38-(Fox-r1221)-testing-WCfaults+ExternalLSQConstraints"
 
 #include "MStruct.h"
 
@@ -36,6 +36,7 @@
 
 #include <fstream>
 #include <iomanip>
+#include <cstring>
 
 #include "ObjCryst/Atom.h"
 #include "ObjCryst/IO.h"
@@ -156,7 +157,7 @@ int main (int argc, char *argv[])
 	istream & imp_file = *pointer_to_ccin;
 	// input-string-stream to which the input is translated to ignore comments etc. 
 	istringstream ccin;
-	
+
   // job type (job_type>10 - run test number job_type-1)
 	int job_type = 0;
 	cout << "job type (0-data refinement,1-grid refinement)" << endl;
@@ -789,7 +790,7 @@ int main (int argc, char *argv[])
 	     string LsqRegType;   
 	     REAL alpha;
 
-	     cout << "LSQ regularization method type (none/derivative/curvature), LSQ weight factor" << endl;
+	     cout << "LSQ regularization method type (none/derivative/curvature), LSQ weight factor, [Niter]" << endl;
 	     read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
 	     ccin >> LsqRegType >> alpha;
 	   
@@ -1618,8 +1619,77 @@ int main (int argc, char *argv[])
 		 }
    }
 
+  // Load additional Objects/Options/Constraints initiated by @-symbol
+   if(!using_file)
+     cout << "insert additional Objects/Options/Constraints initiated by @-symbol or type '@end'" << endl;
+
+   bool need_refParList_update = false;
+   read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+
+   while( ccin.str().length()>0 && ccin.str()[0] == '@' ) {
+     
+     string keyword;
+     ccin >> keyword;
+     
+     // @end
+     if( keyword=="@end" || keyword=="@END" || keyword=="@End" )
+       break;
+
+     // @LSQConstraint
+     if( strncmp(keyword.c_str(),"@LSQConstraint",14)==0 ) {
+
+       std::string name = ( keyword.length()>16 && keyword.at(14)==':' ) ? keyword.substr(15) : "unnamed";
+
+       int nb;
+       ccin >> nb; // number of constrained params
+       std::vector< const RefinablePar* > parList;
+       CrystVector_REAL coef;
+
+       // params list
+       read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+
+       parList.resize(nb);
+       for(int i=0; i<nb; i++) {
+
+	 std::string str;
+	 ccin >> str;
+
+	 // find param
+	 try {
+	   parList[i] = &( (str.at(0)=='#') ?
+			   lsqCompiledObj.GetPar(atoi(str.substr(1).c_str())) :
+			   get_par(str, lsqOptObj.GetCompiledRefinedObj()) );
+	 } catch (...) {
+	   parList[i] = NULL;
+	   cout << "Warning: Parameter: " << str << " not found and ignored!" << endl;
+	 }
+       } // for(int i=0; i<nb; ...
+       
+       // constraint coeficients
+       read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+
+       coef.resize(nb);
+       for(int i=0; i<nb; i++) {
+	 ccin >> coef(i);
+       }
+       
+       // add the constraint
+       lsqCompiledObj.AddExternalLSQConstraint( parList, coef, name );
+       need_refParList_update = true;
+
+     } // if @LSQConstraint
+
+     read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+   }
+   
+   // update Refined parameters list to include external constraints, etc.
+   if(need_refParList_update)
+     lsqOptObj.ObjCryst::LSQNumObj::PrepareRefParList(false);
+
   // Save the powder pattern in text format
    //data.FitScaleFactorForRw(); (don't refine scale factors)
+   if( lsqCompiledObj.GetNbLSQConstraints() > 0 )
+     lsqCompiledObj.PrintExternalConstraintsStatistics();
    REAL rw = data.GetRw();
    if (0){ // sV
      string::size_type loc = filename.find_last_of('.');
@@ -1642,7 +1712,7 @@ int main (int argc, char *argv[])
      }
 	 }
    
-   bool useLevenbergMarquardt=true;
+   bool useLevenbergMarquardt=false;
    bool silent=false;
    
    if(job_type==1) { // grid refinement
@@ -1899,6 +1969,9 @@ int main (int argc, char *argv[])
    }
   // Save the powder pattern in text format
    data.SavePowderPattern(filename.c_str());
+
+   if( lsqCompiledObj.GetNbLSQConstraints() > 0 )
+     lsqCompiledObj.PrintExternalConstraintsStatistics();
 
    } // if(1)
 

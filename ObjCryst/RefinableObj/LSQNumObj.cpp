@@ -989,6 +989,9 @@ void LSQNumObj::PrepareRefParList(const bool copy_param)
       if( pos->first->GetNbLSQRegularizationOperator(pos->second)>0 )
 	mRegularizedRefinedObjList.Register( *(pos->first) ); // Zdenek
    }
+   if( mRefParList.GetNbLSQConstraints()>0 ) { // Zdenek
+     mConstrainedRefinedObjList.Register( mRefParList );
+   }
 }
 
 const CrystVector_REAL& LSQNumObj::GetLSQCalc() const
