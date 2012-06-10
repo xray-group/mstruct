@@ -7084,8 +7084,8 @@ bool ReflectionProfile::PrepareForCalc(const CrystVector_REAL &x,
 
   // range of calc profile in the reciprocal units
   {
-    const REAL smin = (x(0)<0.) ? 2*sin(x(0)/2)/mLambda : ms0-(xcenter-x(0))*cos(xcenter/2)/mLambda;
-    const REAL smax = (x(mNbPoints-1)>=2.*M_PI) ? 2*sin(x(mNbPoints-1)/2)/mLambda : ms0+(x(mNbPoints-1)-xcenter)*cos(xcenter/2)/mLambda;
+    const REAL smin = (x(0)>=0.) ? 2*sin(x(0)/2)/mLambda : ms0-(xcenter-x(0))*cos(xcenter/2)/mLambda;
+    const REAL smax = (x(mNbPoints-1)<2.*M_PI) ? 2*sin(x(mNbPoints-1)/2)/mLambda : ms0+(x(mNbPoints-1)-xcenter)*cos(xcenter/2)/mLambda;
     ms1 = max(abs(ms0-smin),abs(smax-ms0));
   }
   

@@ -28,7 +28,8 @@
  *
  */
 
-#define program_version "0.38-(Fox-r1221)-testing-WCfaults+ExternalLSQConstraints"
+//#define program_version "0.39-(Fox-r1221)-testing-WCfaults+ExternalLSQConstraints"
+#define program_version "0.55-(Fox-r1221)-klatovy"
 
 #include "MStruct.h"
 
@@ -114,9 +115,9 @@ int main (int argc, char *argv[])
    {
    		// print version and license information
       cout << "version: " << program_version << "\n";
-      cout << "mstruct  Copyright (C) 2009-2011 Zdenek Matej\n";
+      cout << "mstruct  Copyright (C) 2009-2012 Zdenek Matej, Charles University in Prague\n";
       cout << "e-mail: matej@karlov.mff.cuni.cz\n";
-      cout << "License GPLv3: GNU GPL version 3 <http://gnu.org/licenses/gpl.html>.\n";
+      cout << "License GPLv2: GNU GPL version 2 <http://gnu.org/licenses/gpl.html>.\n";
       cout << "This program comes with ABSOLUTELY NO WARRANTY;\n";
       cout << "This is free software, and you are welcome to redistribute it.\n";
       cout << flush;
@@ -2003,7 +2004,10 @@ int main (int argc, char *argv[])
 	 ss << "(" << fixed << setprecision(3)
 	    << MStruct::CalcUnitCellMass(crystal)*crystal.GetVolume()*1e-4 << ")";
 	 cout << setw(30) << ss.str();
-       }
+	   } else {
+		  // empty space printed
+		   cout << setw(30) << "       ";
+	   }
        cout << setw(20) << par.GetHumanSigma();
        cout << "\n";
      }

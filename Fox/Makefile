@@ -1,1 +1,1 @@
-gnu.mak
+Link: gnu.mak

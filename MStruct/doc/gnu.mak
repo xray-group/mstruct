@@ -6,5 +6,5 @@ doc: ../*.h ${DIR_CRYST}/*/*.h
 	doxygen Doxyfile
 
 clean:
-	@${RM} -fr html/* latex/* *.tag
+	@${RM} -frd html/* latex/* *.tag
 	

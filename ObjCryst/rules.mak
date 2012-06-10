@@ -1,1 +1,1 @@
-rules-gnu.mak
+Link: rules-gnu.mak

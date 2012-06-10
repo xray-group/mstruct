@@ -796,7 +796,7 @@ protected:
   /// Last time the integrals of the distribution were calculated
   mutable ObjCryst::RefinableObjClock mClockDistIntegralCalc;
 
-  /// Flag whether the distribution should be regularised at the beginning of optimization
+  /// Flag whether the distribution should be unigormized at the beginning of optimization
   bool mUniformizeAtBegin;
   /// Number of iteractions of the Uniformazation algorithm applied at the beginning of optimization
   long mNbUniformizationIter;
