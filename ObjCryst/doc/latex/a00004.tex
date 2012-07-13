@@ -1,43 +1,43 @@
-\-If you have any comment or suggestion about this you can {\tt drop me an email}.
+If you have any comment or suggestion about this you can {\tt drop me an email}.
 
-\-Also read \doxyref{\-Why is \-Object \-Oriented \-Programming good for \-Crystallographic \-Computing ?}{p.}{a00003}.\subsection{\-Overview of the Library (\-Crystallographic classes)}\label{a00004_overview}
-\begin{DoxyParagraph}{\-Scatterer}
-\-A \-Scatterer is the common denominator for any scattering object\-: all it includes is a function which gives a list of positions in fractional coordinates, with a scattering power associated to each position (\-Scatterer\-::\-Get\-Scattering\-Component\-List()). \-It also includes a few functions for the display (3\-D) of the object. 
+Also read \doxyref{Why is Object Oriented Programming good for Crystallographic Computing ?}{p.}{a00003}.\subsection{Overview of the Library (\-Crystallographic classes)}\label{a00004_overview}
+\begin{DoxyParagraph}{Scatterer}
+A Scatterer is the common denominator for any scattering object\-: all it includes is a function which gives a list of positions in fractional coordinates, with a scattering power associated to each position (Scatterer\-::\-Get\-Scattering\-Component\-List()). It also includes a few functions for the display (3\-D) of the object. 
 \end{DoxyParagraph}
 \begin{DoxyParagraph}{}
-\-All \-Scatterer can be derived from such a class\-: \-Atom, \-Z\-Scatterer. \-The advantage of using inheritance is that all derived classes {\bfseries must} re-\/use the functions declared in the base class, so that {\itshape any\/} function which knows what a generic '\-Scatterer' object (but does not know what an \-Atom or \-Z\-Scatterer is) can still use any derived class. 
+All Scatterer can be derived from such a class\-: Atom, Z\-Scatterer. The advantage of using inheritance is that all derived classes {\bfseries must} re-\/use the functions declared in the base class, so that {\itshape any} function which knows what a generic 'Scatterer' object (but does not know what an Atom or Z\-Scatterer is) can still use any derived class. 
 \end{DoxyParagraph}
 \begin{DoxyParagraph}{}
-{\itshape \-Further\/} {\itshape development\/} {\itshape example\-:\/} currently there is no 'rigid body' object\-: if any developper wants to create such an object, he just needs to make sure he rewrites the function \-Get\-Scattering\-Component\-List(). \-Thus without any modification, the \-Crystal and \-Scattering\-Data classes will automatically be able to use this new object... since this \-Rigid\-Body object is derived from the \-Scatterer class (which \-Crystal and \-Scattering\-Data know).
+{\itshape Further} {\itshape development} {\itshape example\-:} currently there is no 'rigid body' object\-: if any developper wants to create such an object, he just needs to make sure he rewrites the function Get\-Scattering\-Component\-List(). Thus without any modification, the Crystal and Scattering\-Data classes will automatically be able to use this new object... since this Rigid\-Body object is derived from the Scatterer class (which Crystal and Scattering\-Data know).
 \end{DoxyParagraph}
-\begin{DoxyParagraph}{\-Scattering\-Power}
-\-This class can compute the scattering, resonant and thermic factor for any \-Scattering\-Data object (eg a list of reflections with some metric information). \-The three member function \-Get\-Scattering\-Factor(), \-Get\-Temperature\-Factor(),\-Get\-Resonant\-Scatt\-Fact\-Real(), and \-Get\-Resonant\-Scatt\-Fact\-Imag() can be used to get the corresponding factors for a list of reflections (and wavelengths for resonant terms) in a \-Scattering\-Data object. 
-\end{DoxyParagraph}
-\begin{DoxyParagraph}{}
-\-The base class is designed to handle anisotropic factors\-: for this the index of the symetric position in the \-Spacegroup must be given. 
+\begin{DoxyParagraph}{Scattering\-Power}
+This class can compute the scattering, resonant and thermic factor for any Scattering\-Data object (eg a list of reflections with some metric information). The three member function Get\-Scattering\-Factor(), Get\-Temperature\-Factor(),Get\-Resonant\-Scatt\-Fact\-Real(), and Get\-Resonant\-Scatt\-Fact\-Imag() can be used to get the corresponding factors for a list of reflections (and wavelengths for resonant terms) in a Scattering\-Data object. 
 \end{DoxyParagraph}
 \begin{DoxyParagraph}{}
-{\itshape \-Further\/} {\itshape development\/} {\itshape example\-:\/} currently only the interface to handle anisotropy has been written, but no code or derived class. \-But no matter what kind of anisotropy is added, it will always work with the base class interface. 
+The base class is designed to handle anisotropic factors\-: for this the index of the symetric position in the Spacegroup must be given. 
 \end{DoxyParagraph}
 \begin{DoxyParagraph}{}
-{\itshape \-Note\-:\/} why always use a \-Scattering\-Data object as input (to compute scattering factors, for example), rather than, say, a list of \-H\-K\-L or a list of sin(theta/lambda) ? \-The first reason is that from a \-Scattering\-Data you can extract all these hkl's and sin(theta)/lambda. \-The second reason is that with such an approach, no matter how complex the derived classes are, you can always use the same interface (for isotropic thermic factors as well as anharmonic !), so that any function written with only the knowledge of the base class can use any derived class.
-\end{DoxyParagraph}
-\begin{DoxyParagraph}{\-Crystal}
-a \-Crystal is a unit cell with an associated \-Space\-Group with a list of \-Scatterer.
-\end{DoxyParagraph}
-\begin{DoxyParagraph}{\-Scattering\-Data}
-\-The \-Scattering\-Data is a base class which is basically a list of reflections with the ability to compute structure factors. \-The \-Diffraction\-Data\-Single\-Crystal and \-Powder\-Pattern\-Diffraction classes are derived from it.
-\end{DoxyParagraph}
-\subsection{\-Optimization design}\label{a00004_optim}
-\begin{DoxyParagraph}{\-Refinable\-Obj}
-\-The \-Refinable\-Obj is the base class for almost all objects in the library. \-The advantage of such a design (see the inheritance tree on the \doxyref{\-Obj\-Cryst\-::\-Refinable\-Obj}{p.}{a00071} page) is that when you design an algorithm, you do not need to know what kind of object is refined. \-All you need to know is (i) how many parameters there are (ii) how to move these parameters (iii) how to access one or several 'cost function' for the optimized object (to characterize 'how good' the current configuration is). \-Indeed, the global optimization class (for simulated annealing and parallel tempering) does not include any of the crystallographic headers, and yet it can refine the crystal structures... 
+{\itshape Further} {\itshape development} {\itshape example\-:} currently only the interface to handle anisotropy has been written, but no code or derived class. But no matter what kind of anisotropy is added, it will always work with the base class interface. 
 \end{DoxyParagraph}
 \begin{DoxyParagraph}{}
-\-This design does not mean that only 'stupid' algorithms can be handled. \-Since the 'random moves' are handled by the refined objects, this 'random moves' can be very non-\/random (for example in the \-Crystal object, permutation of \-Scatterers is made from time to time...). 
+{\itshape Note\-:} why always use a Scattering\-Data object as input (to compute scattering factors, for example), rather than, say, a list of H\-K\-L or a list of sin(theta/lambda) ? The first reason is that from a Scattering\-Data you can extract all these hkl's and sin(theta)/lambda. The second reason is that with such an approach, no matter how complex the derived classes are, you can always use the same interface (for isotropic thermic factors as well as anharmonic !), so that any function written with only the knowledge of the base class can use any derived class.
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Crystal}
+a Crystal is a unit cell with an associated Space\-Group with a list of Scatterer.
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Scattering\-Data}
+The Scattering\-Data is a base class which is basically a list of reflections with the ability to compute structure factors. The Diffraction\-Data\-Single\-Crystal and Powder\-Pattern\-Diffraction classes are derived from it.
+\end{DoxyParagraph}
+\subsection{Optimization design}\label{a00004_optim}
+\begin{DoxyParagraph}{Refinable\-Obj}
+The Refinable\-Obj is the base class for almost all objects in the library. The advantage of such a design (see the inheritance tree on the \doxyref{Obj\-Cryst\-::\-Refinable\-Obj}{p.}{a00071} page) is that when you design an algorithm, you do not need to know what kind of object is refined. All you need to know is (i) how many parameters there are (ii) how to move these parameters (iii) how to access one or several 'cost function' for the optimized object (to characterize 'how good' the current configuration is). Indeed, the global optimization class (for simulated annealing and parallel tempering) does not include any of the crystallographic headers, and yet it can refine the crystal structures... 
 \end{DoxyParagraph}
 \begin{DoxyParagraph}{}
-\-What if you are {\itshape not\/} interested in the \-Refinable\-Obj functionnality ? \-You can simply ignore it, it will not do any harm. \-You can do other crystallographic work by 'forgetting' that a \-Crystal, \-Powder\-Pattern, \-Atom is a \-Refinable\-Obj. \-Even new derived objects do not have to declare their parameters as '\-Refinable\-Par', if you want to save some memory. 
+This design does not mean that only 'stupid' algorithms can be handled. Since the 'random moves' are handled by the refined objects, this 'random moves' can be very non-\/random (for example in the Crystal object, permutation of Scatterers is made from time to time...). 
 \end{DoxyParagraph}
 \begin{DoxyParagraph}{}
-what is currently lacking in \-Refinable\-Obj is (i) a way to set constraints/restraints (currently there are only limits for individual parameters), the ability to have arrays of \-Refinable\-Par (to handle large structure without a significant memory penalty), and a design for analytical derivatives (well \-I've got a few ideas about this but this is not a priority yet...). 
+What if you are {\itshape not} interested in the Refinable\-Obj functionnality ? You can simply ignore it, it will not do any harm. You can do other crystallographic work by 'forgetting' that a Crystal, Powder\-Pattern, Atom is a Refinable\-Obj. Even new derived objects do not have to declare their parameters as 'Refinable\-Par', if you want to save some memory. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+what is currently lacking in Refinable\-Obj is (i) a way to set constraints/restraints (currently there are only limits for individual parameters), the ability to have arrays of Refinable\-Par (to handle large structure without a significant memory penalty), and a design for analytical derivatives (well I've got a few ideas about this but this is not a priority yet...). 
 \end{DoxyParagraph}

@@ -1,74 +1,74 @@
-\subsection{\-Obj\-Cryst\-:\-:\-Peak\-List \-Class \-Reference}
-\label{a00060}\index{\-Obj\-Cryst\-::\-Peak\-List@{\-Obj\-Cryst\-::\-Peak\-List}}
+\subsection{Obj\-Cryst\-:\-:Peak\-List Class Reference}
+\label{a00060}\index{Obj\-Cryst\-::\-Peak\-List@{Obj\-Cryst\-::\-Peak\-List}}
 
 
-\-Class to store positions of observed reflections.  
+Class to store positions of observed reflections.  
 
 
-\subsubsection*{\-Classes}
+\subsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
 struct {\bf hkl}
-\begin{DoxyCompactList}\small\item\em \-One observed diffraction line, to be indexed. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em One observed diffraction line, to be indexed. \end{DoxyCompactList}\item 
 struct {\bf hkl0}
-\begin{DoxyCompactList}\small\item\em \-One set of \-Miller indices, a possible indexation for a reflection. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactList}\small\item\em One set of Miller indices, a possible indexation for a reflection. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries \-Peak\-List} (const {\bf \-Peak\-List} \&old)\label{a00060_a61c463b62f2ef45451dc873e2903e9c8}
+{\bfseries Peak\-List} (const {\bf Peak\-List} \&old)\label{a00060_a61c463b62f2ef45451dc873e2903e9c8}
 
 \item 
-void {\bfseries operator=} (const {\bf \-Peak\-List} \&rhs)\label{a00060_a47e535574bdbcf7017b24b5154cf6251}
+void {\bfseries operator=} (const {\bf Peak\-List} \&rhs)\label{a00060_a47e535574bdbcf7017b24b5154cf6251}
 
 \item 
-void {\bfseries \-Import\-Dhkl\-D\-Sigma\-Intensity} (std\-::istream \&is, float defaultsigma=.\-001)\label{a00060_ac4373f4302ba0767cc957e64da9d9c00}
+void {\bfseries Import\-Dhkl\-D\-Sigma\-Intensity} (std\-::istream \&is, float defaultsigma=.\-001)\label{a00060_ac4373f4302ba0767cc957e64da9d9c00}
 
 \item 
-void {\bfseries \-Import\-Dhkl\-Intensity} (std\-::istream \&is)\label{a00060_a10fba158184bcfd1b19a7ec524641123}
+void {\bfseries Import\-Dhkl\-Intensity} (std\-::istream \&is)\label{a00060_a10fba158184bcfd1b19a7ec524641123}
 
 \item 
-void {\bfseries \-Import\-Dhkl} (std\-::istream \&is)\label{a00060_a50cad4f19639264f93f153775824dcdd}
+void {\bfseries Import\-Dhkl} (std\-::istream \&is)\label{a00060_a50cad4f19639264f93f153775824dcdd}
 
 \item 
-void {\bfseries \-Import2\-Theta\-Intensity} (std\-::istream \&is, const float wavelength=1.\-5418)\label{a00060_a84f1e73d15c57b5e0cabd543b1b340c4}
+void {\bfseries Import2\-Theta\-Intensity} (std\-::istream \&is, const float wavelength=1.\-5418)\label{a00060_a84f1e73d15c57b5e0cabd543b1b340c4}
 
 \item 
-float {\bf \-Simulate} (float zero, float a, float b, float c, float alpha, float beta, float gamma, bool deg, unsigned int nb=20, unsigned int nbspurious=0, float sigma=0, float percent\-Missing=0, const bool verbose=false)
-\begin{DoxyCompactList}\small\item\em \-Generate a list of simulated peak positions, from given lattice parameters. \end{DoxyCompactList}\item 
-void {\bfseries \-Export\-Dhkl\-D\-Sigma\-Intensity} (std\-::ostream \&out) const \label{a00060_acb479606e89d9b6c4ec830d491d56ea6}
+float {\bf Simulate} (float zero, float a, float b, float c, float alpha, float beta, float gamma, bool deg, unsigned int nb=20, unsigned int nbspurious=0, float sigma=0, float percent\-Missing=0, const bool verbose=false)
+\begin{DoxyCompactList}\small\item\em Generate a list of simulated peak positions, from given lattice parameters. \end{DoxyCompactList}\item 
+void {\bfseries Export\-Dhkl\-D\-Sigma\-Intensity} (std\-::ostream \&out) const \label{a00060_acb479606e89d9b6c4ec830d491d56ea6}
 
 \item 
-void {\bf \-Add\-Peak} (const float d, const float iobs=1.\-0, const float dobssigma=0.\-0, const float iobssigma=0.\-0, const int h=0, const int k=0, const int l=0, const float d2calc=0)
-\begin{DoxyCompactList}\small\item\em \-Add one peak. \end{DoxyCompactList}\item 
-void {\bfseries \-Remove\-Peak} (unsigned int i)\label{a00060_a1b87305d81488c71ea877c9ccf182cc4}
+void {\bf Add\-Peak} (const float d, const float iobs=1.\-0, const float dobssigma=0.\-0, const float iobssigma=0.\-0, const int h=0, const int k=0, const int l=0, const float d2calc=0)
+\begin{DoxyCompactList}\small\item\em Add one peak. \end{DoxyCompactList}\item 
+void {\bfseries Remove\-Peak} (unsigned int i)\label{a00060_a1b87305d81488c71ea877c9ccf182cc4}
 
 \item 
-void {\bfseries \-Print} (std\-::ostream \&os) const \label{a00060_ab57bd49f08c438474f69c48f6bd36719}
+void {\bfseries Print} (std\-::ostream \&os) const \label{a00060_ab57bd49f08c438474f69c48f6bd36719}
 
 \item 
-vector$<$ {\bf hkl} $>$ \& {\bf \-Get\-Peak\-List} ()\label{a00060_af03dbe751fc2fa8a22add4713e725136}
+vector$<$ {\bf hkl} $>$ \& {\bf Get\-Peak\-List} ()\label{a00060_af03dbe751fc2fa8a22add4713e725136}
 
-\begin{DoxyCompactList}\small\item\em \-Get peak list. \end{DoxyCompactList}\item 
-const vector$<$ {\bf hkl} $>$ \& {\bf \-Get\-Peak\-List} () const \label{a00060_a9ff6862efaf4bac8467034303ab438a7}
+\begin{DoxyCompactList}\small\item\em Get peak list. \end{DoxyCompactList}\item 
+const vector$<$ {\bf hkl} $>$ \& {\bf Get\-Peak\-List} () const \label{a00060_a9ff6862efaf4bac8467034303ab438a7}
 
-\begin{DoxyCompactList}\small\item\em \-Get peak list. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{\-Public \-Attributes}
+\begin{DoxyCompactList}\small\item\em Get peak list. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 vector$<$ {\bf hkl} $>$ {\bf mv\-H\-K\-L}
-\begin{DoxyCompactList}\small\item\em \-Predict peak positions \-Best h,k,l for each observed peak (for least-\/squares refinement) \-This is stored by the \-Score function, optionnally. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Predict peak positions Best h,k,l for each observed peak (for least-\/squares refinement) This is stored by the Score function, optionnally. \end{DoxyCompactList}\item 
 list$<$ {\bf hkl} $>$ {\bf mv\-Predicted\-H\-K\-L}\label{a00060_a7e3d44332948bcd9565089aa8172c009}
 
-\begin{DoxyCompactList}\small\item\em \-Full list of calculated \-H\-K\-L positions for a given solution, up to a given resolution \-After finding a candidate solution, use score with p\-Predicted\-H\-K\-L=\&mv\-Predicted\-H\-K\-L. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Full list of calculated H\-K\-L positions for a given solution, up to a given resolution After finding a candidate solution, use score with p\-Predicted\-H\-K\-L=\&mv\-Predicted\-H\-K\-L. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\subsubsection{\-Detailed \-Description}
-\-Class to store positions of observed reflections. 
+\subsubsection{Detailed Description}
+Class to store positions of observed reflections. 
 
-\subsubsection{\-Member \-Function \-Documentation}
-\index{\-Obj\-Cryst\-::\-Peak\-List@{\-Obj\-Cryst\-::\-Peak\-List}!\-Add\-Peak@{\-Add\-Peak}}
-\index{\-Add\-Peak@{\-Add\-Peak}!ObjCryst::PeakList@{\-Obj\-Cryst\-::\-Peak\-List}}
-\paragraph[{\-Add\-Peak}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Obj\-Cryst\-::\-Peak\-List\-::\-Add\-Peak} (
+\subsubsection{Member Function Documentation}
+\index{Obj\-Cryst\-::\-Peak\-List@{Obj\-Cryst\-::\-Peak\-List}!Add\-Peak@{Add\-Peak}}
+\index{Add\-Peak@{Add\-Peak}!ObjCryst::PeakList@{Obj\-Cryst\-::\-Peak\-List}}
+\paragraph[{Add\-Peak}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-Peak\-List\-::\-Add\-Peak (
 \begin{DoxyParamCaption}
 \item[{const float}]{d, }
 \item[{const float}]{iobs = {\ttfamily 1.0}, }
@@ -82,16 +82,16 @@ list$<$ {\bf hkl} $>$ {\bf mv\-Predicted\-H\-K\-L}\label{a00060_a7e3d44332948bcd
 )}\label{a00060_a825e83f775144bdbe0d558789af02d97}
 
 
-\-Add one peak. 
+Add one peak. 
 
 
-\begin{DoxyParams}{\-Parameters}
-{\em d,\-:} & 1/d for this peak (\-Angstroem) \\
+\begin{DoxyParams}{Parameters}
+{\em d,\-:} & 1/d for this peak (Angstroem) \\
 \hline
 \end{DoxyParams}
-\index{\-Obj\-Cryst\-::\-Peak\-List@{\-Obj\-Cryst\-::\-Peak\-List}!\-Simulate@{\-Simulate}}
-\index{\-Simulate@{\-Simulate}!ObjCryst::PeakList@{\-Obj\-Cryst\-::\-Peak\-List}}
-\paragraph[{\-Simulate}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf \-Obj\-Cryst\-::\-Peak\-List\-::\-Simulate} (
+\index{Obj\-Cryst\-::\-Peak\-List@{Obj\-Cryst\-::\-Peak\-List}!Simulate@{Simulate}}
+\index{Simulate@{Simulate}!ObjCryst::PeakList@{Obj\-Cryst\-::\-Peak\-List}}
+\paragraph[{Simulate}]{\setlength{\rightskip}{0pt plus 5cm}float Obj\-Cryst\-::\-Peak\-List\-::\-Simulate (
 \begin{DoxyParamCaption}
 \item[{float}]{zero, }
 \item[{float}]{a, }
@@ -110,11 +110,11 @@ list$<$ {\bf hkl} $>$ {\bf mv\-Predicted\-H\-K\-L}\label{a00060_a7e3d44332948bcd
 )}\label{a00060_a88b5e22d20e07c1392b7b3916a9f58fe}
 
 
-\-Generate a list of simulated peak positions, from given lattice parameters. 
+Generate a list of simulated peak positions, from given lattice parameters. 
 
 
-\begin{DoxyParams}{\-Parameters}
-{\em zero,\-:} & the zero, given for d$\ast$$^\wedge$2 (in \-Angstroems$^\wedge$-\/2) \\
+\begin{DoxyParams}{Parameters}
+{\em zero,\-:} & the zero, given for d$\ast$$^\wedge$2 (in Angstroems$^\wedge$-\/2) \\
 \hline
 {\em a,b,c,alpha,beta,gamma,\-:} & lattice parameters \\
 \hline
@@ -131,21 +131,21 @@ list$<$ {\bf hkl} $>$ {\bf mv\-Predicted\-H\-K\-L}\label{a00060_a7e3d44332948bcd
 {\em verbose,\-:} & print some info \\
 \hline
 \end{DoxyParams}
-\begin{DoxyReturn}{\-Returns}
+\begin{DoxyReturn}{Returns}
 \-: the volume of the simulated unit cell 
 \end{DoxyReturn}
 
 
-\subsubsection{\-Member \-Data \-Documentation}
-\index{\-Obj\-Cryst\-::\-Peak\-List@{\-Obj\-Cryst\-::\-Peak\-List}!mv\-H\-K\-L@{mv\-H\-K\-L}}
-\index{mv\-H\-K\-L@{mv\-H\-K\-L}!ObjCryst::PeakList@{\-Obj\-Cryst\-::\-Peak\-List}}
-\paragraph[{mv\-H\-K\-L}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf hkl}$>$ {\bf \-Obj\-Cryst\-::\-Peak\-List\-::mv\-H\-K\-L}\hspace{0.3cm}{\ttfamily  [mutable]}}\label{a00060_a810ed3eb6c76a08488ace8b530529631}
+\subsubsection{Member Data Documentation}
+\index{Obj\-Cryst\-::\-Peak\-List@{Obj\-Cryst\-::\-Peak\-List}!mv\-H\-K\-L@{mv\-H\-K\-L}}
+\index{mv\-H\-K\-L@{mv\-H\-K\-L}!ObjCryst::PeakList@{Obj\-Cryst\-::\-Peak\-List}}
+\paragraph[{mv\-H\-K\-L}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf hkl}$>$ Obj\-Cryst\-::\-Peak\-List\-::mv\-H\-K\-L\hspace{0.3cm}{\ttfamily [mutable]}}\label{a00060_a810ed3eb6c76a08488ace8b530529631}
 
 
-\-Predict peak positions \-Best h,k,l for each observed peak (for least-\/squares refinement) \-This is stored by the \-Score function, optionnally. 
+Predict peak positions Best h,k,l for each observed peak (for least-\/squares refinement) This is stored by the Score function, optionnally. 
 
 
 
-\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-\-Indexing.\-h\end{DoxyCompactItemize}
+Indexing.\-h\end{DoxyCompactItemize}

@@ -1,64 +1,64 @@
-\subsection{\-Obj\-Cryst\-:\-:\-Molecule\-:\-:\-Flip\-Group \-Struct \-Reference}
-\label{a00027}\index{\-Obj\-Cryst\-::\-Molecule\-::\-Flip\-Group@{\-Obj\-Cryst\-::\-Molecule\-::\-Flip\-Group}}
+\subsection{Obj\-Cryst\-:\-:Molecule\-:\-:Flip\-Group Struct Reference}
+\label{a00027}\index{Obj\-Cryst\-::\-Molecule\-::\-Flip\-Group@{Obj\-Cryst\-::\-Molecule\-::\-Flip\-Group}}
 
 
-\-When 3(\-A1..1n) or more atoms are connected to a same atom \-A, it defines a 'flip' group, where it is possible to rotate bonds to their symmetric with respect to one plane defined by atoms \-Ai-\/\-A-\/\-Aj.  
+When 3(A1..1n) or more atoms are connected to a same atom A, it defines a 'flip' group, where it is possible to rotate bonds to their symmetric with respect to one plane defined by atoms Ai-\/\-A-\/\-Aj.  
 
 
-\subsubsection*{\-Public \-Member \-Functions}
+\subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bf \-Flip\-Group} (const {\bf \-Mol\-Atom} \&at0, const {\bf \-Mol\-Atom} \&at1, const {\bf \-Mol\-Atom} \&at2)\label{a00027_ac065fb88e47795199d5e0c12dd53b839}
+{\bf Flip\-Group} (const {\bf Mol\-Atom} \&at0, const {\bf Mol\-Atom} \&at1, const {\bf Mol\-Atom} \&at2)\label{a00027_ac065fb88e47795199d5e0c12dd53b839}
 
-\begin{DoxyCompactList}\small\item\em \-Constructor, with the central atom. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{\-Public \-Attributes}
+\begin{DoxyCompactList}\small\item\em Constructor, with the central atom. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-const {\bf \-Mol\-Atom} $\ast$ {\bf mp\-Atom0}\label{a00027_abb2dfdd1e7967f5963b0fc0fdc079b4f}
+const {\bf Mol\-Atom} $\ast$ {\bf mp\-Atom0}\label{a00027_abb2dfdd1e7967f5963b0fc0fdc079b4f}
 
-\begin{DoxyCompactList}\small\item\em \-The atom which is an asymmetric center. \end{DoxyCompactList}\item 
-const {\bf \-Mol\-Atom} $\ast$ {\bf mp\-Atom1}\label{a00027_ae503d7996cce85ae1acc1c4e07773fe6}
+\begin{DoxyCompactList}\small\item\em The atom which is an asymmetric center. \end{DoxyCompactList}\item 
+const {\bf Mol\-Atom} $\ast$ {\bf mp\-Atom1}\label{a00027_ae503d7996cce85ae1acc1c4e07773fe6}
 
-\begin{DoxyCompactList}\small\item\em \-The first atom defining the rotation axis. \end{DoxyCompactList}\item 
-const {\bf \-Mol\-Atom} $\ast$ {\bf mp\-Atom2}\label{a00027_a3a7b47199e00b11ae9f039221bfd8283}
+\begin{DoxyCompactList}\small\item\em The first atom defining the rotation axis. \end{DoxyCompactList}\item 
+const {\bf Mol\-Atom} $\ast$ {\bf mp\-Atom2}\label{a00027_a3a7b47199e00b11ae9f039221bfd8283}
 
-\begin{DoxyCompactList}\small\item\em \-The second atom defining the rotation axis. \end{DoxyCompactList}\item 
-list$<$ pair$<$ const {\bf \-Mol\-Atom} \*
-$\ast$, set$<$ {\bf \-Mol\-Atom} $\ast$ $>$ $>$ $>$ {\bf mv\-Rotated\-Chain\-List}
-\begin{DoxyCompactList}\small\item\em \-The set of atoms that are to be rotated during the flip. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em The second atom defining the rotation axis. \end{DoxyCompactList}\item 
+list$<$ pair$<$ const {\bf Mol\-Atom} \\*
+$\ast$, set$<$ {\bf Mol\-Atom} $\ast$ $>$ $>$ $>$ {\bf mv\-Rotated\-Chain\-List}
+\begin{DoxyCompactList}\small\item\em The set of atoms that are to be rotated during the flip. \end{DoxyCompactList}\item 
 unsigned long {\bf m\-Nb\-Test}
-\begin{DoxyCompactList}\small\item\em \-Number of times this flip has been tried, and the number of times it has been accepted. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Number of times this flip has been tried, and the number of times it has been accepted. \end{DoxyCompactList}\item 
 unsigned long {\bfseries m\-Nb\-Accept}\label{a00027_a0c6da7db2f88263d66a9fbba4ede927b}
 
 \end{DoxyCompactItemize}
 
 
-\subsubsection{\-Detailed \-Description}
-\-When 3(\-A1..1n) or more atoms are connected to a same atom \-A, it defines a 'flip' group, where it is possible to rotate bonds to their symmetric with respect to one plane defined by atoms \-Ai-\/\-A-\/\-Aj. 
+\subsubsection{Detailed Description}
+When 3(A1..1n) or more atoms are connected to a same atom A, it defines a 'flip' group, where it is possible to rotate bonds to their symmetric with respect to one plane defined by atoms Ai-\/\-A-\/\-Aj. 
 
-\-This is useful to flip the absolute configuration for asymmetric centers. \-Note that the bond is only rotated, so that the entire group is not mirrored (no absolute configuration is broken in the group).
+This is useful to flip the absolute configuration for asymmetric centers. Note that the bond is only rotated, so that the entire group is not mirrored (no absolute configuration is broken in the group).
 
-\-Also, a \doxyref{\-Flip\-Group}{p.}{a00027} can correspond to a 180� rotation exchanging \-Ai and \-Aj (rotating the two chains around the bissecting angle of bonds \-A-\/\-Ai and \-A-\/\-Aj) 
+Also, a \doxyref{Flip\-Group}{p.}{a00027} can correspond to a 180� rotation exchanging Ai and Aj (rotating the two chains around the bissecting angle of bonds A-\/\-Ai and A-\/\-Aj) 
 
-\subsubsection{\-Member \-Data \-Documentation}
-\index{\-Obj\-Cryst\-::\-Molecule\-::\-Flip\-Group@{\-Obj\-Cryst\-::\-Molecule\-::\-Flip\-Group}!m\-Nb\-Test@{m\-Nb\-Test}}
-\index{m\-Nb\-Test@{m\-Nb\-Test}!ObjCryst::Molecule::FlipGroup@{\-Obj\-Cryst\-::\-Molecule\-::\-Flip\-Group}}
-\paragraph[{m\-Nb\-Test}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long {\bf \-Obj\-Cryst\-::\-Molecule\-::\-Flip\-Group\-::m\-Nb\-Test}\hspace{0.3cm}{\ttfamily  [mutable]}}\label{a00027_ac957576c4d555f0f32d76fedf11d1c3d}
-
-
-\-Number of times this flip has been tried, and the number of times it has been accepted. 
-
-\-Used in \doxyref{\-Molecule\-::\-Global\-Opt\-Random\-Move}{p.}{a00047_a11e623f6482b468f6dd05fc0ab2bbb24}, to avoid flips that break some restraint (and deciding which flips break some restraint is difficult before having a real conformation). \index{\-Obj\-Cryst\-::\-Molecule\-::\-Flip\-Group@{\-Obj\-Cryst\-::\-Molecule\-::\-Flip\-Group}!mv\-Rotated\-Chain\-List@{mv\-Rotated\-Chain\-List}}
-\index{mv\-Rotated\-Chain\-List@{mv\-Rotated\-Chain\-List}!ObjCryst::Molecule::FlipGroup@{\-Obj\-Cryst\-::\-Molecule\-::\-Flip\-Group}}
-\paragraph[{mv\-Rotated\-Chain\-List}]{\setlength{\rightskip}{0pt plus 5cm}list$<$pair$<$const {\bf \-Mol\-Atom} $\ast$,set$<${\bf \-Mol\-Atom} $\ast$$>$ $>$ $>$ {\bf \-Obj\-Cryst\-::\-Molecule\-::\-Flip\-Group\-::mv\-Rotated\-Chain\-List}}\label{a00027_a30d77e3abea9f1bb27ffcd92dc1120cc}
+\subsubsection{Member Data Documentation}
+\index{Obj\-Cryst\-::\-Molecule\-::\-Flip\-Group@{Obj\-Cryst\-::\-Molecule\-::\-Flip\-Group}!m\-Nb\-Test@{m\-Nb\-Test}}
+\index{m\-Nb\-Test@{m\-Nb\-Test}!ObjCryst::Molecule::FlipGroup@{Obj\-Cryst\-::\-Molecule\-::\-Flip\-Group}}
+\paragraph[{m\-Nb\-Test}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long Obj\-Cryst\-::\-Molecule\-::\-Flip\-Group\-::m\-Nb\-Test\hspace{0.3cm}{\ttfamily [mutable]}}\label{a00027_ac957576c4d555f0f32d76fedf11d1c3d}
 
 
-\-The set of atoms that are to be rotated during the flip. 
+Number of times this flip has been tried, and the number of times it has been accepted. 
 
-\-The first atom is the one bonded to the central atom, whose bond will be flipped with respect to the plane defined by (at1,at0,at2).
+Used in \doxyref{Molecule\-::\-Global\-Opt\-Random\-Move}{p.}{a00047_a11e623f6482b468f6dd05fc0ab2bbb24}, to avoid flips that break some restraint (and deciding which flips break some restraint is difficult before having a real conformation). \index{Obj\-Cryst\-::\-Molecule\-::\-Flip\-Group@{Obj\-Cryst\-::\-Molecule\-::\-Flip\-Group}!mv\-Rotated\-Chain\-List@{mv\-Rotated\-Chain\-List}}
+\index{mv\-Rotated\-Chain\-List@{mv\-Rotated\-Chain\-List}!ObjCryst::Molecule::FlipGroup@{Obj\-Cryst\-::\-Molecule\-::\-Flip\-Group}}
+\paragraph[{mv\-Rotated\-Chain\-List}]{\setlength{\rightskip}{0pt plus 5cm}list$<$pair$<$const {\bf Mol\-Atom} $\ast$,set$<${\bf Mol\-Atom} $\ast$$>$ $>$ $>$ Obj\-Cryst\-::\-Molecule\-::\-Flip\-Group\-::mv\-Rotated\-Chain\-List}\label{a00027_a30d77e3abea9f1bb27ffcd92dc1120cc}
 
-\-However, if this atom is identical to mp\-Atom0, then this indicates that a 180� rotation exchanging atom1 and atom2 is to be performed. 
 
-\-The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+The set of atoms that are to be rotated during the flip. 
+
+The first atom is the one bonded to the central atom, whose bond will be flipped with respect to the plane defined by (at1,at0,at2).
+
+However, if this atom is identical to mp\-Atom0, then this indicates that a 180� rotation exchanging atom1 and atom2 is to be performed. 
+
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-\-Molecule.\-h\end{DoxyCompactItemize}
+Molecule.\-h\end{DoxyCompactItemize}

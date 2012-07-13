@@ -1,111 +1,111 @@
-\subsection{\-Obj\-Cryst\-:\-:\-Cell\-Explorer \-Class \-Reference}
-\label{a00014}\index{\-Obj\-Cryst\-::\-Cell\-Explorer@{\-Obj\-Cryst\-::\-Cell\-Explorer}}
+\subsection{Obj\-Cryst\-:\-:Cell\-Explorer Class Reference}
+\label{a00014}\index{Obj\-Cryst\-::\-Cell\-Explorer@{Obj\-Cryst\-::\-Cell\-Explorer}}
 
 
-\-Algorithm class to find the correct indexing from observed peak positions.  
+Algorithm class to find the correct indexing from observed peak positions.  
 
 
-\-Inheritance diagram for \-Obj\-Cryst\-:\-:\-Cell\-Explorer\-:\begin{figure}[H]
+Inheritance diagram for Obj\-Cryst\-:\-:Cell\-Explorer\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{a00014}
 \end{center}
 \end{figure}
-\subsubsection*{\-Public \-Member \-Functions}
+\subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries \-Cell\-Explorer} (const {\bf \-Peak\-List} \&dhkl, const {\bf \-Crystal\-System} lattice, const unsigned int nb\-Spurious)\label{a00014_ab5812858db181b2da7793d50a0adf257}
+{\bfseries Cell\-Explorer} (const {\bf Peak\-List} \&dhkl, const {\bf Crystal\-System} lattice, const unsigned int nb\-Spurious)\label{a00014_ab5812858db181b2da7793d50a0adf257}
 
 \item 
-void {\bfseries \-Evolution} (unsigned int ng, const bool randomize=true, const float f=0.\-7, const float cr=0.\-5, unsigned int np=100)\label{a00014_acef356378502e9c69fe03f92b02c0f36}
+void {\bfseries Evolution} (unsigned int ng, const bool randomize=true, const float f=0.\-7, const float cr=0.\-5, unsigned int np=100)\label{a00014_acef356378502e9c69fe03f92b02c0f36}
 
 \item 
-void {\bfseries \-Set\-Length\-Min\-Max} (const float min, const float max)\label{a00014_a637ca3e27ed5991e56e31c34e675bda3}
+void {\bfseries Set\-Length\-Min\-Max} (const float min, const float max)\label{a00014_a637ca3e27ed5991e56e31c34e675bda3}
 
 \item 
-void {\bfseries \-Set\-Angle\-Min\-Max} (const float min, const float max)\label{a00014_a25a18c19322a421c3161b48330260e42}
+void {\bfseries Set\-Angle\-Min\-Max} (const float min, const float max)\label{a00014_a25a18c19322a421c3161b48330260e42}
 
 \item 
-void {\bfseries \-Set\-Volume\-Min\-Max} (const float min, const float max)\label{a00014_a6c729ec9156a394c54880470076e45b5}
+void {\bfseries Set\-Volume\-Min\-Max} (const float min, const float max)\label{a00014_a6c729ec9156a394c54880470076e45b5}
 
 \item 
-void {\bfseries \-Set\-Nb\-Spurious} (const unsigned int nb)\label{a00014_a58cb7aaf7195b6263e4f950a810c0800}
+void {\bfseries Set\-Nb\-Spurious} (const unsigned int nb)\label{a00014_a58cb7aaf7195b6263e4f950a810c0800}
 
 \item 
-void {\bf \-Set\-D2\-Error} (const float err)\label{a00014_a9f700330603affae619486c0b0a052d5}
+void {\bf Set\-D2\-Error} (const float err)\label{a00014_a9f700330603affae619486c0b0a052d5}
 
-\begin{DoxyCompactList}\small\item\em \-Allowed error on 1/d (squared!), used for dicvol. \end{DoxyCompactList}\item 
-void {\bfseries \-Set\-Min\-Max\-Zero\-Shift} (const float min, const float max)\label{a00014_a91d0eedc650c3b4c2f062011b101fbd1}
-
-\item 
-void {\bfseries \-Set\-Crystal\-System} (const {\bf \-Crystal\-System} system)\label{a00014_a7b1dbaf22380e1ac581be1827930c9ba}
+\begin{DoxyCompactList}\small\item\em Allowed error on 1/d (squared!), used for dicvol. \end{DoxyCompactList}\item 
+void {\bfseries Set\-Min\-Max\-Zero\-Shift} (const float min, const float max)\label{a00014_a91d0eedc650c3b4c2f062011b101fbd1}
 
 \item 
-void {\bfseries \-Set\-Crystal\-Centering} (const \-Crystal\-Centering cent)\label{a00014_a37548d6bf7f5ff9b6908e097a830dc2c}
+void {\bfseries Set\-Crystal\-System} (const {\bf Crystal\-System} system)\label{a00014_a7b1dbaf22380e1ac581be1827930c9ba}
 
 \item 
-virtual const string \& {\bf \-Get\-Class\-Name} () const 
-\begin{DoxyCompactList}\small\item\em \-Name for this class (\char`\"{}\-Refinable\-Obj\char`\"{}, \char`\"{}\-Crystal\char`\"{},...). \end{DoxyCompactList}\item 
-virtual const string \& {\bf \-Get\-Name} () const \label{a00014_a5d36f314bc0090493f29099eab7ce5ef}
-
-\begin{DoxyCompactList}\small\item\em \-Name of the object. \end{DoxyCompactList}\item 
-virtual void {\bfseries \-Print} () const \label{a00014_a87a517d92f81cd0ba5a92b0e1643c72c}
+void {\bfseries Set\-Crystal\-Centering} (const Crystal\-Centering cent)\label{a00014_a37548d6bf7f5ff9b6908e097a830dc2c}
 
 \item 
-virtual unsigned int {\bf \-Get\-Nb\-L\-S\-Q\-Function} () const \label{a00014_a56aecc6855396e7377d6f346ed079661}
+virtual const string \& {\bf Get\-Class\-Name} () const 
+\begin{DoxyCompactList}\small\item\em Name for this class (\char`\"{}\-Refinable\-Obj\char`\"{}, \char`\"{}\-Crystal\char`\"{},...). \end{DoxyCompactList}\item 
+virtual const string \& {\bf Get\-Name} () const \label{a00014_a5d36f314bc0090493f29099eab7ce5ef}
 
-\begin{DoxyCompactList}\small\item\em \-Number of \-L\-S\-Q functions. \end{DoxyCompactList}\item 
-virtual const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \& {\bf \-Get\-L\-S\-Q\-Calc} (const unsigned int) const \label{a00014_ac6c61fd4c10e37c0e7fa1850c3aaeeab}
-
-\begin{DoxyCompactList}\small\item\em \-Get the current calculated value for the \-L\-S\-Q function. \end{DoxyCompactList}\item 
-virtual const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \& {\bf \-Get\-L\-S\-Q\-Obs} (const unsigned int) const \label{a00014_aee7d3ae4beb8eefab9135a7232acc168}
-
-\begin{DoxyCompactList}\small\item\em \-Get the observed values for the \-L\-S\-Q function. \end{DoxyCompactList}\item 
-virtual const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \& {\bf \-Get\-L\-S\-Q\-Weight} (const unsigned int) const \label{a00014_a9609a2fc939138b683eb5897527710b8}
-
-\begin{DoxyCompactList}\small\item\em \-Get the weight values for the \-L\-S\-Q function. \end{DoxyCompactList}\item 
-virtual const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \& {\bf \-Get\-L\-S\-Q\-Deriv} (const unsigned int, {\bf \-Refinable\-Par} \&)
-\begin{DoxyCompactList}\small\item\em \-Get the first derivative values for the \-L\-S\-Q function, for a given parameter. \end{DoxyCompactList}\item 
-virtual void {\bf \-Begin\-Optimization} (const bool allow\-Approximations=false, const bool enable\-Restraints=false)
-\begin{DoxyCompactList}\small\item\em \-This should be called by any optimization class at the begining of an optimization. \end{DoxyCompactList}\item 
-void {\bfseries \-L\-S\-Q\-Refine} (int nb\-Cycle=1, bool use\-Levenberg\-Marquardt=true, const bool silent=false)\label{a00014_a08259c076c61fef7e81fb69f7fc046dc}
+\begin{DoxyCompactList}\small\item\em Name of the object. \end{DoxyCompactList}\item 
+virtual void {\bfseries Print} () const \label{a00014_a87a517d92f81cd0ba5a92b0e1643c72c}
 
 \item 
-void {\bf \-Dic\-Vol} (const float min\-Score=10, const unsigned int min\-Depth=3, const float stop\-On\-Score=50.\-0, const unsigned int stop\-On\-Depth=6)
-\begin{DoxyCompactList}\small\item\em \-Run \-Dic\-V\-Ol algorithm, store only solutions with score $>$min\-Score or depth$>$=min\-Depth, stop at the end of one volume interval ($\sim$400 \-A$^\wedge$3) if best score$>$stop\-On\-Score, or if one solution was found at depth$>$=stop\-On\-Depth. \end{DoxyCompactList}\item 
-void {\bf \-Reduce\-Solutions} (const bool update\-Report\-Threshold=false)
-\begin{DoxyCompactList}\small\item\em \-Sort all solutions by score, remove duplicates. \end{DoxyCompactList}\item 
-float {\bfseries \-Get\-Best\-Score} () const \label{a00014_accd55684af9cc89c39066160181227b5}
+virtual unsigned int {\bf Get\-Nb\-L\-S\-Q\-Function} () const \label{a00014_a56aecc6855396e7377d6f346ed079661}
+
+\begin{DoxyCompactList}\small\item\em Number of L\-S\-Q functions. \end{DoxyCompactList}\item 
+virtual const Cryst\-Vector\-\_\-\-R\-E\-A\-L \& {\bf Get\-L\-S\-Q\-Calc} (const unsigned int) const \label{a00014_ac6c61fd4c10e37c0e7fa1850c3aaeeab}
+
+\begin{DoxyCompactList}\small\item\em Get the current calculated value for the L\-S\-Q function. \end{DoxyCompactList}\item 
+virtual const Cryst\-Vector\-\_\-\-R\-E\-A\-L \& {\bf Get\-L\-S\-Q\-Obs} (const unsigned int) const \label{a00014_aee7d3ae4beb8eefab9135a7232acc168}
+
+\begin{DoxyCompactList}\small\item\em Get the observed values for the L\-S\-Q function. \end{DoxyCompactList}\item 
+virtual const Cryst\-Vector\-\_\-\-R\-E\-A\-L \& {\bf Get\-L\-S\-Q\-Weight} (const unsigned int) const \label{a00014_a9609a2fc939138b683eb5897527710b8}
+
+\begin{DoxyCompactList}\small\item\em Get the weight values for the L\-S\-Q function. \end{DoxyCompactList}\item 
+virtual const Cryst\-Vector\-\_\-\-R\-E\-A\-L \& {\bf Get\-L\-S\-Q\-Deriv} (const unsigned int, {\bf Refinable\-Par} \&)
+\begin{DoxyCompactList}\small\item\em Get the first derivative values for the L\-S\-Q function, for a given parameter. \end{DoxyCompactList}\item 
+virtual void {\bf Begin\-Optimization} (const bool allow\-Approximations=false, const bool enable\-Restraints=false)
+\begin{DoxyCompactList}\small\item\em This should be called by any optimization class at the begining of an optimization. \end{DoxyCompactList}\item 
+void {\bfseries L\-S\-Q\-Refine} (int nb\-Cycle=1, bool use\-Levenberg\-Marquardt=true, const bool silent=false)\label{a00014_a08259c076c61fef7e81fb69f7fc046dc}
 
 \item 
-const std\-::list$<$ std\-::pair\*
-$<$ {\bf \-Rec\-Unit\-Cell}, float $>$ $>$ \& {\bfseries \-Get\-Solutions} () const \label{a00014_a41c02ecb44040167fbd0e30525bc6907}
+void {\bf Dic\-Vol} (const float min\-Score=10, const unsigned int min\-Depth=3, const float stop\-On\-Score=50.\-0, const unsigned int stop\-On\-Depth=6)
+\begin{DoxyCompactList}\small\item\em Run Dic\-V\-Ol algorithm, store only solutions with score $>$min\-Score or depth$>$=min\-Depth, stop at the end of one volume interval ($\sim$400 A$^\wedge$3) if best score$>$stop\-On\-Score, or if one solution was found at depth$>$=stop\-On\-Depth. \end{DoxyCompactList}\item 
+void {\bf Reduce\-Solutions} (const bool update\-Report\-Threshold=false)
+\begin{DoxyCompactList}\small\item\em Sort all solutions by score, remove duplicates. \end{DoxyCompactList}\item 
+float {\bfseries Get\-Best\-Score} () const \label{a00014_accd55684af9cc89c39066160181227b5}
 
 \item 
-std\-::list$<$ std\-::pair\*
-$<$ {\bf \-Rec\-Unit\-Cell}, float $>$ $>$ \& {\bfseries \-Get\-Solutions} ()\label{a00014_ab2f61cb3f32e9cee000e5a59f616a905}
+const std\-::list$<$ std\-::pair\\*
+$<$ {\bf Rec\-Unit\-Cell}, float $>$ $>$ \& {\bfseries Get\-Solutions} () const \label{a00014_a41c02ecb44040167fbd0e30525bc6907}
+
+\item 
+std\-::list$<$ std\-::pair\\*
+$<$ {\bf Rec\-Unit\-Cell}, float $>$ $>$ \& {\bfseries Get\-Solutions} ()\label{a00014_ab2f61cb3f32e9cee000e5a59f616a905}
 
 \end{DoxyCompactItemize}
-\subsubsection*{\-Private \-Member \-Functions}
+\subsubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-unsigned int {\bfseries \-R\-Dic\-Vol} ({\bf \-Rec\-Unit\-Cell} uc0, {\bf \-Rec\-Unit\-Cell} uc1, unsigned int depth, unsigned long \&nb\-Calc, const float min\-V, const float max\-V, vector$<$ unsigned int $>$ vdepth=vector$<$ unsigned int $>$())\label{a00014_a1fecb1e47c97a9d2b84a1e0183bb4fc9}
+unsigned int {\bfseries R\-Dic\-Vol} ({\bf Rec\-Unit\-Cell} uc0, {\bf Rec\-Unit\-Cell} uc1, unsigned int depth, unsigned long \&nb\-Calc, const float min\-V, const float max\-V, vector$<$ unsigned int $>$ vdepth=vector$<$ unsigned int $>$())\label{a00014_a1fecb1e47c97a9d2b84a1e0183bb4fc9}
 
 \item 
-void {\bfseries \-Init} ()\label{a00014_ae4eeab6d7eff28c864fbb0fab58db600}
+void {\bfseries Init} ()\label{a00014_ae4eeab6d7eff28c864fbb0fab58db600}
 
 \end{DoxyCompactItemize}
-\subsubsection*{\-Private \-Attributes}
+\subsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-std\-::list$<$ std\-::pair\*
-$<$ {\bf \-Rec\-Unit\-Cell}, float $>$ $>$ {\bf mv\-Solution}\label{a00014_ac693e7aab9144b6758a7075faac67784}
+std\-::list$<$ std\-::pair\\*
+$<$ {\bf Rec\-Unit\-Cell}, float $>$ $>$ {\bf mv\-Solution}\label{a00014_ac693e7aab9144b6758a7075faac67784}
 
-\begin{DoxyCompactList}\small\item\em \-Max number of obs reflections to use. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Max number of obs reflections to use. \end{DoxyCompactList}\item 
 unsigned int {\bfseries mnpar}\label{a00014_aeded3ad11ac3eeebe6bb933995afd18a}
 
 \item 
-const {\bf \-Peak\-List} $\ast$ {\bfseries mp\-Peak\-List}\label{a00014_a77fcf4eec69d2a8fd1ac116e5b12cda6}
+const {\bf Peak\-List} $\ast$ {\bfseries mp\-Peak\-List}\label{a00014_a77fcf4eec69d2a8fd1ac116e5b12cda6}
 
 \item 
 float {\bfseries m\-Length\-Min}\label{a00014_a70dc866b2aa3596f385dac228a7db100}
@@ -134,46 +134,46 @@ float {\bfseries m\-Zero\-Shift\-Max}\label{a00014_adace9c5795be5c546b820c775cd4
 \item 
 float {\bf m\-Min} [7]\label{a00014_acca81c2311cc37670e70339d6ebd3984}
 
-\begin{DoxyCompactList}\small\item\em \-Min values for all parameters (7=unit cell +zero) \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Min values for all parameters (7=unit cell +zero) \end{DoxyCompactList}\item 
 float {\bf m\-Amp} [7]\label{a00014_ad90b6220e838b2b6cc1f56a962301be3}
 
-\begin{DoxyCompactList}\small\item\em \-Max amplitude (max=min+amplitude) for all parameters \-All parameters are treated as periodic for \-D\-E (??) \end{DoxyCompactList}\item 
-{\bf \-Crystal\-System} {\bf mlattice}\label{a00014_a47fb489ee2fa1c6a1048893162411ec8}
+\begin{DoxyCompactList}\small\item\em Max amplitude (max=min+amplitude) for all parameters All parameters are treated as periodic for D\-E (??) \end{DoxyCompactList}\item 
+{\bf Crystal\-System} {\bf mlattice}\label{a00014_a47fb489ee2fa1c6a1048893162411ec8}
 
-\begin{DoxyCompactList}\small\item\em \-Lattice type for which we search. \end{DoxyCompactList}\item 
-\-Crystal\-Centering {\bf m\-Centering}\label{a00014_a172a07f56757cb8fc2a8fb65fd8c3173}
+\begin{DoxyCompactList}\small\item\em Lattice type for which we search. \end{DoxyCompactList}\item 
+Crystal\-Centering {\bf m\-Centering}\label{a00014_a172a07f56757cb8fc2a8fb65fd8c3173}
 
-\begin{DoxyCompactList}\small\item\em \-Centering type. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Centering type. \end{DoxyCompactList}\item 
 unsigned int {\bfseries m\-Nb\-Spurious}\label{a00014_a50ba121b9d3ed4254992cb912e34b9c4}
 
 \item 
 float {\bfseries m\-D2\-Error}\label{a00014_a9b003761e823017903fb0f40b0924bc4}
 
 \item 
-{\bf \-L\-S\-Q\-Num\-Obj} {\bfseries m\-L\-S\-Q\-Obj}\label{a00014_a0d09ee2601d1159fad51218bfb67a5c7}
+{\bf L\-S\-Q\-Num\-Obj} {\bfseries m\-L\-S\-Q\-Obj}\label{a00014_a0d09ee2601d1159fad51218bfb67a5c7}
 
 \item 
-\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bfseries m\-Obs}\label{a00014_ad255b0637307a261c8a492e7f345cc68}
+Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bfseries m\-Obs}\label{a00014_ad255b0637307a261c8a492e7f345cc68}
 
 \item 
-\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bfseries m\-Calc}\label{a00014_a487e252a8948812d7c71d9307dec2508}
+Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bfseries m\-Calc}\label{a00014_a487e252a8948812d7c71d9307dec2508}
 
 \item 
-\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bfseries m\-Weight}\label{a00014_adaeb301383b51a7e6607f0d3d8b51539}
+Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bfseries m\-Weight}\label{a00014_adaeb301383b51a7e6607f0d3d8b51539}
 
 \item 
-\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bfseries m\-Deriv}\label{a00014_ac1dc395b436c64770fb25f562668e3dc}
+Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bfseries m\-Deriv}\label{a00014_ac1dc395b436c64770fb25f562668e3dc}
 
 \item 
-{\bf \-Rec\-Unit\-Cell} {\bf m\-Rec\-Unit\-Cell}\label{a00014_ad1d07024afde6d58f4e17cf58c0a9365}
+{\bf Rec\-Unit\-Cell} {\bf m\-Rec\-Unit\-Cell}\label{a00014_ad1d07024afde6d58f4e17cf58c0a9365}
 
-\begin{DoxyCompactList}\small\item\em \-Reciprocal unit cell used for least squares refinement. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Reciprocal unit cell used for least squares refinement. \end{DoxyCompactList}\item 
 float {\bf m\-Best\-Score}\label{a00014_a354958f672e8c88b48eb1ebe9930be32}
 
-\begin{DoxyCompactList}\small\item\em \-Current best score. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Current best score. \end{DoxyCompactList}\item 
 std\-::vector$<$ unsigned int $>$ {\bf mv\-Nb\-Solution\-Depth}\label{a00014_ad0312849ee35af2f354e60f7ff5d951b}
 
-\begin{DoxyCompactList}\small\item\em \-Number of solutions found during dicvol search, at each depth. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Number of solutions found during dicvol search, at each depth. \end{DoxyCompactList}\item 
 float {\bfseries m\-Min\-Score\-Report}\label{a00014_a7bfdecf37010628aedc6cb0af0087f4c}
 
 \item 
@@ -185,47 +185,50 @@ unsigned int {\bfseries m\-Dic\-Vol\-Depth\-Report}\label{a00014_aba033e4b7608d6
 \item 
 float {\bf m\-Cos\-Ang\-Max}\label{a00014_a42f12f0da01d8bb98d90369bf745dce4}
 
-\begin{DoxyCompactList}\small\item\em \-Stored value of cos(max ang) for tricilinic search -\/ we do not want to recompute the cos at every dicvol iteration. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Stored value of cos(max ang) for tricilinic search -\/ we do not want to recompute the cos at every dicvol iteration. \end{DoxyCompactList}\item 
 unsigned int {\bf m\-Nb\-L\-S\-Q\-Except}\label{a00014_a11c5a5dd196a163c5e04e4115462e8f8}
 
-\begin{DoxyCompactList}\small\item\em \-Number of exceptions caught during \-L\-S\-Q, in a given search -\/ above 20 \-L\-S\-Q is disabled. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Number of exceptions caught during L\-S\-Q, in a given search -\/ above 20 L\-S\-Q is disabled. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Additional Inherited Members}
 
 
-\subsubsection{\-Detailed \-Description}
-\-Algorithm class to find the correct indexing from observed peak positions. 
+\subsubsection{Detailed Description}
+Algorithm class to find the correct indexing from observed peak positions. 
 
-\subsubsection{\-Member \-Function \-Documentation}
-\index{\-Obj\-Cryst\-::\-Cell\-Explorer@{\-Obj\-Cryst\-::\-Cell\-Explorer}!\-Begin\-Optimization@{\-Begin\-Optimization}}
-\index{\-Begin\-Optimization@{\-Begin\-Optimization}!ObjCryst::CellExplorer@{\-Obj\-Cryst\-::\-Cell\-Explorer}}
-\paragraph[{\-Begin\-Optimization}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-Cell\-Explorer\-::\-Begin\-Optimization} (
+\subsubsection{Member Function Documentation}
+\index{Obj\-Cryst\-::\-Cell\-Explorer@{Obj\-Cryst\-::\-Cell\-Explorer}!Begin\-Optimization@{Begin\-Optimization}}
+\index{Begin\-Optimization@{Begin\-Optimization}!ObjCryst::CellExplorer@{Obj\-Cryst\-::\-Cell\-Explorer}}
+\paragraph[{Begin\-Optimization}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Cell\-Explorer\-::\-Begin\-Optimization (
 \begin{DoxyParamCaption}
 \item[{const bool}]{allow\-Approximations = {\ttfamily false}, }
 \item[{const bool}]{enable\-Restraints = {\ttfamily false}}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00014_ae75ee0eb6652d5d43404b7205ec3cb94}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00014_ae75ee0eb6652d5d43404b7205ec3cb94}
 
 
-\-This should be called by any optimization class at the begining of an optimization. 
+This should be called by any optimization class at the begining of an optimization. 
 
-\-This will also check that everything is ready, eg call the \doxyref{\-Refinable\-Obj\-::\-Prepare()}{p.}{a00071_a48d11671e7f8699f7bc24077585c5e0f} function. \-This also affects all sub-\/objects. \begin{DoxyNote}{\-Note}
+This will also check that everything is ready, eg call the \doxyref{Refinable\-Obj\-::\-Prepare()}{p.}{a00071_a48d11671e7f8699f7bc24077585c5e0f} function. This also affects all sub-\/objects. \begin{DoxyNote}{Note}
 this may be called several time for some objects which are used by several other objects, or for nested optimizations (e.\-g. least-\/squares optimizations inside a global one).
 
-\doxyref{\-End\-Optimization()}{p.}{a00071_ab0035f6164cb24ace67b51b11993a851} must be called at the end of the optimization, the same number of time \doxyref{\-Begin\-Optimization()}{p.}{a00014_ae75ee0eb6652d5d43404b7205ec3cb94} was called !
+\doxyref{End\-Optimization()}{p.}{a00071_ab0035f6164cb24ace67b51b11993a851} must be called at the end of the optimization, the same number of time \doxyref{Begin\-Optimization()}{p.}{a00014_ae75ee0eb6652d5d43404b7205ec3cb94} was called !
 \end{DoxyNote}
 
-\begin{DoxyParams}{\-Parameters}
-{\em allow\-Approximations,\-:} & if true, then the object can use faster but less precise functions during the optimization. \-This is useful for global optimization not using derivatives. \\
+\begin{DoxyParams}{Parameters}
+{\em allow\-Approximations,\-:} & if true, then the object can use faster but less precise functions during the optimization. This is useful for global optimization not using derivatives. \\
 \hline
-{\em enable\-Restraints\-:$\backslash$xrefitem} & deprecated 28. \\
+{\em enable\-Restraints,\-:} & \\
 \hline
 \end{DoxyParams}
+\begin{DoxyRefDesc}{Deprecated}
+\item[{\bf Deprecated}]if true, then restrained parameters will be allowed to go beyond theur hard limits. This implies that the algorithm will take into account the cost (penalty) related to the restraints. Objects which do not use restraints will simply ignore this. W\-A\-R\-N\-I\-N\-G\-: this parameter may be removed with the new likelihood scheme. \end{DoxyRefDesc}
 
 
-\-Reimplemented from {\bf \-Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00071_ababd8f2916e41a20d2c1b21f6ffefe96}.
+Reimplemented from {\bf Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00071_ababd8f2916e41a20d2c1b21f6ffefe96}.
 
-\index{\-Obj\-Cryst\-::\-Cell\-Explorer@{\-Obj\-Cryst\-::\-Cell\-Explorer}!\-Dic\-Vol@{\-Dic\-Vol}}
-\index{\-Dic\-Vol@{\-Dic\-Vol}!ObjCryst::CellExplorer@{\-Obj\-Cryst\-::\-Cell\-Explorer}}
-\paragraph[{\-Dic\-Vol}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Obj\-Cryst\-::\-Cell\-Explorer\-::\-Dic\-Vol} (
+\index{Obj\-Cryst\-::\-Cell\-Explorer@{Obj\-Cryst\-::\-Cell\-Explorer}!Dic\-Vol@{Dic\-Vol}}
+\index{Dic\-Vol@{Dic\-Vol}!ObjCryst::CellExplorer@{Obj\-Cryst\-::\-Cell\-Explorer}}
+\paragraph[{Dic\-Vol}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-Cell\-Explorer\-::\-Dic\-Vol (
 \begin{DoxyParamCaption}
 \item[{const float}]{min\-Score = {\ttfamily 10}, }
 \item[{const unsigned int}]{min\-Depth = {\ttfamily 3}, }
@@ -235,61 +238,61 @@ this may be called several time for some objects which are used by several other
 )}\label{a00014_adba0983c3b1dc6846ccf0d9ee7dbfa98}
 
 
-\-Run \-Dic\-V\-Ol algorithm, store only solutions with score $>$min\-Score or depth$>$=min\-Depth, stop at the end of one volume interval ($\sim$400 \-A$^\wedge$3) if best score$>$stop\-On\-Score, or if one solution was found at depth$>$=stop\-On\-Depth. 
+Run Dic\-V\-Ol algorithm, store only solutions with score $>$min\-Score or depth$>$=min\-Depth, stop at the end of one volume interval ($\sim$400 A$^\wedge$3) if best score$>$stop\-On\-Score, or if one solution was found at depth$>$=stop\-On\-Depth. 
 
-\-If stop\-On\-Depth==0, do not stop for any depth \index{\-Obj\-Cryst\-::\-Cell\-Explorer@{\-Obj\-Cryst\-::\-Cell\-Explorer}!\-Get\-Class\-Name@{\-Get\-Class\-Name}}
-\index{\-Get\-Class\-Name@{\-Get\-Class\-Name}!ObjCryst::CellExplorer@{\-Obj\-Cryst\-::\-Cell\-Explorer}}
-\paragraph[{\-Get\-Class\-Name}]{\setlength{\rightskip}{0pt plus 5cm}virtual const string\& {\bf \-Obj\-Cryst\-::\-Cell\-Explorer\-::\-Get\-Class\-Name} (
+If stop\-On\-Depth==0, do not stop for any depth \index{Obj\-Cryst\-::\-Cell\-Explorer@{Obj\-Cryst\-::\-Cell\-Explorer}!Get\-Class\-Name@{Get\-Class\-Name}}
+\index{Get\-Class\-Name@{Get\-Class\-Name}!ObjCryst::CellExplorer@{Obj\-Cryst\-::\-Cell\-Explorer}}
+\paragraph[{Get\-Class\-Name}]{\setlength{\rightskip}{0pt plus 5cm}virtual const string\& Obj\-Cryst\-::\-Cell\-Explorer\-::\-Get\-Class\-Name (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00014_a67ec6642b2a93030878764091178a0fb}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00014_a67ec6642b2a93030878764091178a0fb}
 
 
-\-Name for this class (\char`\"{}\-Refinable\-Obj\char`\"{}, \char`\"{}\-Crystal\char`\"{},...). 
+Name for this class (\char`\"{}\-Refinable\-Obj\char`\"{}, \char`\"{}\-Crystal\char`\"{},...). 
 
-\-This is only useful to distinguish different classes when picking up objects from the \doxyref{\-Refinable\-Obj}{p.}{a00071} \-Global \-Registry 
+This is only useful to distinguish different classes when picking up objects from the \doxyref{Refinable\-Obj}{p.}{a00071} Global Registry 
 
-\-Reimplemented from {\bf \-Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00071_a62968d90a7a3080738b363934616c019}.
+Reimplemented from {\bf Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00071_a62968d90a7a3080738b363934616c019}.
 
-\index{\-Obj\-Cryst\-::\-Cell\-Explorer@{\-Obj\-Cryst\-::\-Cell\-Explorer}!\-Get\-L\-S\-Q\-Deriv@{\-Get\-L\-S\-Q\-Deriv}}
-\index{\-Get\-L\-S\-Q\-Deriv@{\-Get\-L\-S\-Q\-Deriv}!ObjCryst::CellExplorer@{\-Obj\-Cryst\-::\-Cell\-Explorer}}
-\paragraph[{\-Get\-L\-S\-Q\-Deriv}]{\setlength{\rightskip}{0pt plus 5cm}virtual const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L\& {\bf \-Obj\-Cryst\-::\-Cell\-Explorer\-::\-Get\-L\-S\-Q\-Deriv} (
+\index{Obj\-Cryst\-::\-Cell\-Explorer@{Obj\-Cryst\-::\-Cell\-Explorer}!Get\-L\-S\-Q\-Deriv@{Get\-L\-S\-Q\-Deriv}}
+\index{Get\-L\-S\-Q\-Deriv@{Get\-L\-S\-Q\-Deriv}!ObjCryst::CellExplorer@{Obj\-Cryst\-::\-Cell\-Explorer}}
+\paragraph[{Get\-L\-S\-Q\-Deriv}]{\setlength{\rightskip}{0pt plus 5cm}virtual const Cryst\-Vector\-\_\-\-R\-E\-A\-L\& Obj\-Cryst\-::\-Cell\-Explorer\-::\-Get\-L\-S\-Q\-Deriv (
 \begin{DoxyParamCaption}
 \item[{const unsigned}]{int, }
-\item[{{\bf \-Refinable\-Par} \&}]{}
+\item[{{\bf Refinable\-Par} \&}]{}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00014_a6e4e1e3300bbf3e5f23900fccb135da3}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00014_a6e4e1e3300bbf3e5f23900fccb135da3}
 
 
-\-Get the first derivative values for the \-L\-S\-Q function, for a given parameter. 
+Get the first derivative values for the L\-S\-Q function, for a given parameter. 
 
-\-Note that the default method in the base \doxyref{\-Refinable\-Obj}{p.}{a00071} class is to use numerical derivatives, so it should be overridden for better precision.
+Note that the default method in the base \doxyref{Refinable\-Obj}{p.}{a00071} class is to use numerical derivatives, so it should be overridden for better precision.
 
-\begin{DoxyRefDesc}{\-Todo}
-\item[{\bf \-Todo}]\-This should be a const method, and the given \-Ref\-Par should be const too... \end{DoxyRefDesc}
+\begin{DoxyRefDesc}{Todo}
+\item[{\bf Todo}]This should be a const method, and the given Ref\-Par should be const too... \end{DoxyRefDesc}
 
 
-\-Reimplemented from {\bf \-Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00071_a24bfb12849c7733a7034928fbb0b14a8}.
+Reimplemented from {\bf Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00071_a24bfb12849c7733a7034928fbb0b14a8}.
 
-\index{\-Obj\-Cryst\-::\-Cell\-Explorer@{\-Obj\-Cryst\-::\-Cell\-Explorer}!\-Reduce\-Solutions@{\-Reduce\-Solutions}}
-\index{\-Reduce\-Solutions@{\-Reduce\-Solutions}!ObjCryst::CellExplorer@{\-Obj\-Cryst\-::\-Cell\-Explorer}}
-\paragraph[{\-Reduce\-Solutions}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Obj\-Cryst\-::\-Cell\-Explorer\-::\-Reduce\-Solutions} (
+\index{Obj\-Cryst\-::\-Cell\-Explorer@{Obj\-Cryst\-::\-Cell\-Explorer}!Reduce\-Solutions@{Reduce\-Solutions}}
+\index{Reduce\-Solutions@{Reduce\-Solutions}!ObjCryst::CellExplorer@{Obj\-Cryst\-::\-Cell\-Explorer}}
+\paragraph[{Reduce\-Solutions}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-Cell\-Explorer\-::\-Reduce\-Solutions (
 \begin{DoxyParamCaption}
 \item[{const bool}]{update\-Report\-Threshold = {\ttfamily false}}
 \end{DoxyParamCaption}
 )}\label{a00014_ae32d743e1e6df33e09243cd7bb9a8c52}
 
 
-\-Sort all solutions by score, remove duplicates. 
+Sort all solutions by score, remove duplicates. 
 
 
-\begin{DoxyParams}{\-Parameters}
+\begin{DoxyParams}{Parameters}
 {\em update\-Report\-Threshold,\-:} & if true, when too many solutions are produced, the threshold above which solutions are reported will be updated to get less solutions. \\
 \hline
 \end{DoxyParams}
 
 
-\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-\-Indexing.\-h\end{DoxyCompactItemize}
+Indexing.\-h\end{DoxyCompactItemize}

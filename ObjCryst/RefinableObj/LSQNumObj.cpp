@@ -537,7 +537,7 @@ void LSQNumObj::Refine (int nbCycle,bool useLevenbergMarquardt,
 	  for(int j=0; j<nbVar; j++) newmatB(i+1,j+1)=Con(i,j)*newmatDscale(j+1,j+1);
        // Right hand side is zero identically
 	if(!silent) cout << "LSQNumObj::Refine():GSVD...2" <<endl;
-	
+
 	try
 	{
 	  GSVD(newmatA,newmatB,newmatSig1,newmatSig2,newmatU,newmatV,newmatzR,newmatQ,k,l,ind);
@@ -1103,7 +1103,7 @@ CrystMatrix_REAL LSQNumObj::GetConstraintsMatrix() const // Zdenek
   unsigned int nc = 0;
   for(int i=0;i<mConstrainedRefinedObjList.GetNb();i++)
     nc += mConstrainedRefinedObjList.GetObj(i).GetNbLSQConstraints();
-  
+
   unsigned int np = mRefParList.GetNbParNotFixed();
 	
   CrystMatrix_REAL C(nc,np);
@@ -1136,6 +1136,7 @@ CrystMatrix_REAL LSQNumObj::GetConstraintsMatrix() const // Zdenek
 	  }
 	}
       } // k - 0..np
+      n++;
     } // j -  0..mConstrainedRefinedObjList.GetObj(i).GetNbLSQConstraints()
 
   // reduce empty equations

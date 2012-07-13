@@ -1,69 +1,69 @@
 
 \begin{DoxyRefList}
 \item[\label{a00222__todo000020}%
-\-Class \doxyref{\-Cryst\-Vector$<$ \-T $>$}{p.}{a00024} ]check again \-Blitz++ support in newer gcc versions.  
+Class \doxyref{Cryst\-Vector$<$ T $>$}{p.}{a00024} ]check again Blitz++ support in newer gcc versions.  
 \item[\label{a00222__todo000014}%
-\-Class \doxyref{\-Obj\-Cryst\-:\-:\-Asymmetric\-Unit}{p.}{a00007} ]\-Currently the initialization of the asymmetric unit is done numerically, slowly. \-A faster algorithm should be used (using dichotomy), or we could switch to using a table of asymmetric units.  
+Class \doxyref{Obj\-Cryst\-:\-:Asymmetric\-Unit}{p.}{a00007} ]Currently the initialization of the asymmetric unit is done numerically, slowly. A faster algorithm should be used (using dichotomy), or we could switch to using a table of asymmetric units.  
 \item[\label{a00222__todo000001}%
-\-Class \doxyref{\-Obj\-Cryst\-:\-:\-Crystal}{p.}{a00020} ]exporting (and importing) crystal structures to/from other files format than \doxyref{\-Obj\-Cryst}{p.}{a00171}'s \-X\-M\-L (eg \-C\-I\-F, and format used by refinement software) 
+Class \doxyref{Obj\-Cryst\-:\-:Crystal}{p.}{a00020} ]exporting (and importing) crystal structures to/from other files format than \doxyref{Obj\-Cryst}{p.}{a00171}'s X\-M\-L (eg C\-I\-F, and format used by refinement software) 
 \item[\label{a00222__todo000003}%
-\-Member \doxyref{\-Obj\-Cryst\-:\-:\-Crystal\-:\-:\-Calc\-Dist\-Table}{p.}{a00020_a1d59955724fb598fbba3ff4c0bd125e3} (const bool fast) const ]sanitize the result distance table in a more usable structure than the currently used \-Crystal\-::m\-Dist\-Table\-Sq and \-Crystal\-::m\-Dist\-Table\-Index. 
+Member \doxyref{Obj\-Cryst\-:\-:Crystal\-:\-:Calc\-Dist\-Table}{p.}{a00020_a1d59955724fb598fbba3ff4c0bd125e3} (const bool fast) const ]sanitize the result distance table in a more usable structure than the currently used Crystal\-::m\-Dist\-Table\-Sq and Crystal\-::m\-Dist\-Table\-Index. 
 
-optimize again. \-Test if recomputation is needed using \-Clocks. \-Use a global option instead of asym\-Unit\-Margin.  
+optimize again. Test if recomputation is needed using Clocks. Use a global option instead of asym\-Unit\-Margin.  
 \item[\label{a00222__todo000002}%
-\-Member \doxyref{\-Obj\-Cryst\-:\-:\-Crystal\-:\-:\-Print}{p.}{a00020_ac4a7086d3757be4bbe2484f549a1b0fc} (ostream \&os=cout) const ]one function to print on one line and a \-Print\-Long() function  
+Member \doxyref{Obj\-Cryst\-:\-:Crystal\-:\-:Print}{p.}{a00020_ac4a7086d3757be4bbe2484f549a1b0fc} (ostream \&os=cout) const ]one function to print on one line and a Print\-Long() function  
 \item[\label{a00222__todo000005}%
-\-Class \doxyref{\-Obj\-Cryst\-:\-:\-Mol\-Z\-Atom}{p.}{a00049} ]\-: some flags could be added to mark the fixed/limited nature of the parameters.  
+Class \doxyref{Obj\-Cryst\-:\-:Mol\-Z\-Atom}{p.}{a00049} ]\-: some flags could be added to mark the fixed/limited nature of the parameters.  
 \item[\label{a00222__todo000022}%
-\-Class \doxyref{\-Obj\-Cryst\-:\-:\-Obj\-Registry$<$ \-T $>$}{p.}{a00054} ](?) create two derived classes with the same interface, one which is a const registry (the 'client' registry for \-Refinable\-Obj), and one which has a non-\/const access to the registered objects (the 'sub-\/objects' in \-Refinable\-Obj).  
+Class \doxyref{Obj\-Cryst\-:\-:Obj\-Registry$<$ T $>$}{p.}{a00054} ](?) create two derived classes with the same interface, one which is a const registry (the 'client' registry for Refinable\-Obj), and one which has a non-\/const access to the registered objects (the 'sub-\/objects' in Refinable\-Obj).  
 \item[\label{a00222__todo000008}%
-\-Class \doxyref{\-Obj\-Cryst\-:\-:\-Polarization\-Corr}{p.}{a00061} ]\-: extend this to take into account other diffracting \& monochromatic geometries.  
+Class \doxyref{Obj\-Cryst\-:\-:Polarization\-Corr}{p.}{a00061} ]\-: extend this to take into account other diffracting \& monochromatic geometries.  
 \item[\label{a00222__todo000007}%
-\-Member \doxyref{\-Obj\-Cryst\-:\-:\-Powder\-Pattern\-:\-:\-Save\-Powder\-Pattern}{p.}{a00062_a9d47390be9f1a5a47ea141d2708b8992} (const string \&filename=\char`\"{}powder\-Pattern.\-out\char`\"{}) const ]export in other formats (.prf,...), with a list of reflection position for all phases...  
+Member \doxyref{Obj\-Cryst\-:\-:Powder\-Pattern\-:\-:Save\-Powder\-Pattern}{p.}{a00062_a9d47390be9f1a5a47ea141d2708b8992} (const string \&filename=\char`\"{}powder\-Pattern.\-out\char`\"{}) const ]export in other formats (.prf,...), with a list of reflection position for all phases...  
 \item[\label{a00222__todo000006}%
-\-Member \doxyref{\-Obj\-Cryst\-:\-:\-Powder\-Pattern\-Diffraction\-:\-:m\-Intensity\-Corr}{p.}{a00066_addc10ae4a02801eb441e38b4beae2e9a} ]\-: store all corrections in a registry, so that other corrections can more easily be added (? \-Maybe not that useful, especially since these correction do not need to be displayed to the user ?).  
+Member \doxyref{Obj\-Cryst\-:\-:Powder\-Pattern\-Diffraction\-:\-:m\-Intensity\-Corr}{p.}{a00066_addc10ae4a02801eb441e38b4beae2e9a} ]\-: store all corrections in a registry, so that other corrections can more easily be added (? Maybe not that useful, especially since these correction do not need to be displayed to the user ?).  
 \item[\label{a00222__todo000009}%
-\-Class \doxyref{\-Obj\-Cryst\-:\-:\-Radiation}{p.}{a00069} ]also add here information about the polarization of the beam.  
+Class \doxyref{Obj\-Cryst\-:\-:Radiation}{p.}{a00069} ]also add here information about the polarization of the beam.  
 \item[\label{a00222__todo000023}%
-\-Class \doxyref{\-Obj\-Cryst\-:\-:\-Refinable\-Obj}{p.}{a00071} ]\-Define more clearly which operations are recursive (ie also modify sub-\/objects).  
+Class \doxyref{Obj\-Cryst\-:\-:Refinable\-Obj}{p.}{a00071} ]Define more clearly which operations are recursive (ie also modify sub-\/objects).  
 \item[\label{a00222__todo000025}%
-\-Member \doxyref{\-Obj\-Cryst\-:\-:\-Refinable\-Obj\-:\-:\-Get\-L\-S\-Q\-Deriv}{p.}{a00071_a24bfb12849c7733a7034928fbb0b14a8} (const unsigned int, \-Refinable\-Par \&)]\-This should be a const method, and the given \-Ref\-Par should be const too...  
+Member \doxyref{Obj\-Cryst\-:\-:Refinable\-Obj\-:\-:Get\-L\-S\-Q\-Deriv}{p.}{a00071_a24bfb12849c7733a7034928fbb0b14a8} (const unsigned int, Refinable\-Par \&)]This should be a const method, and the given Ref\-Par should be const too...  
 \item[\label{a00222__todo000024}%
-\-Member \doxyref{\-Obj\-Cryst\-:\-:\-Refinable\-Obj\-:\-:\-Register\-Client}{p.}{a00071_a8afc65925b0e4d1894d72c457ad38bc9} (\-Refinable\-Obj \&) const ]\-: the clients should be const, but are not... 
+Member \doxyref{Obj\-Cryst\-:\-:Refinable\-Obj\-:\-:Register\-Client}{p.}{a00071_a8afc65925b0e4d1894d72c457ad38bc9} (Refinable\-Obj \&) const ]\-: the clients should be const, but are not... 
 \item[\label{a00222__todo000027}%
-\-Member \doxyref{\-Obj\-Cryst\-:\-:\-Refinable\-Obj\-:\-:\-X\-M\-L\-Input}{p.}{a00071_ac13a4045c3f187879443c8615c38d623} (istream \&is, const \-X\-M\-L\-Cryst\-Tag \&tag)]\-Add an bool \-X\-M\-L\-Input\-Tag(is,tag) function to recognize all the tags from the stream. \-So that each inherited class can use the \-X\-M\-L\-Input\-Tag function from its parent (ie take advantage of inheritance). \-The children class would first try to interpret the tag, then if unsuccessful would pass it to its parent (thus allowing overloading), etc...  
+Member \doxyref{Obj\-Cryst\-:\-:Refinable\-Obj\-:\-:X\-M\-L\-Input}{p.}{a00071_ac13a4045c3f187879443c8615c38d623} (istream \&is, const X\-M\-L\-Cryst\-Tag \&tag)]Add an bool X\-M\-L\-Input\-Tag(is,tag) function to recognize all the tags from the stream. So that each inherited class can use the X\-M\-L\-Input\-Tag function from its parent (ie take advantage of inheritance). The children class would first try to interpret the tag, then if unsuccessful would pass it to its parent (thus allowing overloading), etc...  
 \item[\label{a00222__todo000026}%
-\-Member \doxyref{\-Obj\-Cryst\-:\-:\-Refinable\-Obj\-:\-:\-X\-M\-L\-Output}{p.}{a00071_a7b9b6ed0f8dcf753d398c35e073de973} (ostream \&os, int indent=0) const ]\-Use inheritance.. as for \-X\-M\-L\-Input\-Tag()...  
+Member \doxyref{Obj\-Cryst\-:\-:Refinable\-Obj\-:\-:X\-M\-L\-Output}{p.}{a00071_a7b9b6ed0f8dcf753d398c35e073de973} (ostream \&os, int indent=0) const ]Use inheritance.. as for X\-M\-L\-Input\-Tag()...  
 \item[\label{a00222__todo000021}%
-\-Class \doxyref{\-Obj\-Cryst\-:\-:\-Refinable\-Par}{p.}{a00073} ]\-: define parameters using equations between parameters. 
+Class \doxyref{Obj\-Cryst\-:\-:Refinable\-Par}{p.}{a00073} ]\-: define parameters using equations between parameters. 
 
 \-: for complex objects with lots of parameters, give the possibility to define vectors of parameters, all with the same properties, to reduce memory usage.  
 \item[\label{a00222__todo000010}%
-\-Class \doxyref{\-Obj\-Cryst\-:\-:\-Scattering\-Data}{p.}{a00089} ]\-Optimize computation for \-Bijvoet/\-Friedel mates. \-To do this, generate an internal list of 'true independent reflections', with two entries for each, for both mates, and make the 'real' reflections only a reference to these reflections.
+Class \doxyref{Obj\-Cryst\-:\-:Scattering\-Data}{p.}{a00089} ]Optimize computation for Bijvoet/\-Friedel mates. To do this, generate an internal list of 'true independent reflections', with two entries for each, for both mates, and make the 'real' reflections only a reference to these reflections.
 
 a {\bfseries lot} of cleaning is necessary in the computing of structure factors, for (1) the 'preparation' part (deciding what needs to be recomputed) and (2) to allow anisotropic temperature factors (or other anisotropic parts)  
 \item[\label{a00222__todo000012}%
-\-Member \doxyref{\-Obj\-Cryst\-:\-:\-Scattering\-Data\-:\-:\-Set\-Is\-Ignoring\-Imag\-Scatt\-Fact}{p.}{a00089_ae126b860d309daa78e975b8b6d8a3ec0} (const bool b)]this should become useless once we take fully advantage of coupled computation of \-Structure \-Factors for \-Fridel/\-Bijvoet mates using an internal list of 'fully unique' reflections. \-Then only one of the mates need to be computed..  
+Member \doxyref{Obj\-Cryst\-:\-:Scattering\-Data\-:\-:Set\-Is\-Ignoring\-Imag\-Scatt\-Fact}{p.}{a00089_ae126b860d309daa78e975b8b6d8a3ec0} (const bool b)]this should become useless once we take fully advantage of coupled computation of Structure Factors for Fridel/\-Bijvoet mates using an internal list of 'fully unique' reflections. Then only one of the mates need to be computed..  
 \item[\label{a00222__todo000013}%
-\-Class \doxyref{\-Obj\-Cryst\-:\-:\-Scattering\-Power}{p.}{a00090} ]\-Anisotropic scattering (temperature factor especially) code, using derived classes 
+Class \doxyref{Obj\-Cryst\-:\-:Scattering\-Power}{p.}{a00090} ]Anisotropic scattering (temperature factor especially) code, using derived classes 
 
-\-Clarify organization by removing any 'real' data from the top, abstract base class (eg remove \-Biso and \-Betaij), and by creating derived classes. \-Optionnaly 3 classes (used as members of \-Scattering\-Power) could be created, \-Temperature\-Factor, \-Scattering\-Factor, and \-Resonant\-Scattering\-Factor. \-In any way the design of this class should not evolve, so that code using the \-Scattering\-Power interface will remain compatible whatever modifications are made.  
+Clarify organization by removing any 'real' data from the top, abstract base class (eg remove Biso and Betaij), and by creating derived classes. Optionnaly 3 classes (used as members of Scattering\-Power) could be created, Temperature\-Factor, Scattering\-Factor, and Resonant\-Scattering\-Factor. In any way the design of this class should not evolve, so that code using the Scattering\-Power interface will remain compatible whatever modifications are made.  
 \item[\label{a00222__todo000015}%
-\-Member \doxyref{\-Obj\-Cryst\-:\-:\-Space\-Group\-:\-:\-Change\-To\-Asymmetric\-Unit}{p.}{a00095_adc3c511d36ad707690ca4f9c0154a8a0} (\-R\-E\-A\-L x, \-R\-E\-A\-L y, \-R\-E\-A\-L z) const ]\-Space\-Group\-::\-Is\-In\-Asymmetric\-Unit()  
+Member \doxyref{Obj\-Cryst\-:\-:Space\-Group\-:\-:Change\-To\-Asymmetric\-Unit}{p.}{a00095_adc3c511d36ad707690ca4f9c0154a8a0} (R\-E\-A\-L x, R\-E\-A\-L y, R\-E\-A\-L z) const ]Space\-Group\-::\-Is\-In\-Asymmetric\-Unit()  
 \item[\label{a00222__todo000016}%
-\-Member \doxyref{\-Obj\-Cryst\-:\-:\-Space\-Group\-:\-:\-Print}{p.}{a00095_a7c3746694fb9a6dbe3f258febb858744} () const ]
+Member \doxyref{Obj\-Cryst\-:\-:Space\-Group\-:\-:Print}{p.}{a00095_a7c3746694fb9a6dbe3f258febb858744} () const ]
 \item[\label{a00222__todo000028}%
-\-Class \doxyref{\-Obj\-Cryst\-:\-:\-W\-X\-Cryst\-Obj}{p.}{a00115} ]\-Allow the objects to be collabsable. \-The difficulty is that even if the object is not shown, it is not removed by the \-Sizer as long as it is not deleted... \-Needs some testing ! \-Otherwise it would also be possible to delete and re-\/create sub-\/objects when collapsing, but that would be more difficult.  
+Class \doxyref{Obj\-Cryst\-:\-:W\-X\-Cryst\-Obj}{p.}{a00115} ]Allow the objects to be collabsable. The difficulty is that even if the object is not shown, it is not removed by the Sizer as long as it is not deleted... Needs some testing ! Otherwise it would also be possible to delete and re-\/create sub-\/objects when collapsing, but that would be more difficult.  
 \item[\label{a00222__todo000031}%
-\-Class \doxyref{\-Obj\-Cryst\-:\-:\-W\-X\-Field\-Ref\-Par}{p.}{a00125} ]\-: allow acces to the parameters limits  
+Class \doxyref{Obj\-Cryst\-:\-:W\-X\-Field\-Ref\-Par}{p.}{a00125} ]\-: allow acces to the parameters limits  
 \item[\label{a00222__todo000030}%
-\-Class \doxyref{\-Obj\-Cryst\-:\-:\-W\-X\-Powder\-Pattern\-Background}{p.}{a00137} ]\-Display the list of background points with the refinable intensity. \-Add th possibility to change the points.  
+Class \doxyref{Obj\-Cryst\-:\-:W\-X\-Powder\-Pattern\-Background}{p.}{a00137} ]Display the list of background points with the refinable intensity. Add th possibility to change the points.  
 \item[\label{a00222__todo000029}%
-\-Class \doxyref{\-Obj\-Cryst\-:\-:\-W\-X\-Powder\-Pattern\-Graph}{p.}{a00139} ]display the difference pattern. \-Allow to zoom. \-Display reflection positions for crystalline phases.  
+Class \doxyref{Obj\-Cryst\-:\-:W\-X\-Powder\-Pattern\-Graph}{p.}{a00139} ]display the difference pattern. Allow to zoom. Display reflection positions for crystalline phases.  
 \item[\label{a00222__todo000018}%
-\-Member \doxyref{\-Obj\-Cryst\-:\-:\-Z\-Scatterer\-:\-:\-Export\-Fenske\-Hall\-Z\-Matrix}{p.}{a00156_a551fabc1d57cab02e957946dcfa1aae7} (ostream \&os)]\-U\-Se more strict formatting than space-\/delimited.  
+Member \doxyref{Obj\-Cryst\-:\-:Z\-Scatterer\-:\-:Export\-Fenske\-Hall\-Z\-Matrix}{p.}{a00156_a551fabc1d57cab02e957946dcfa1aae7} (ostream \&os)]U\-Se more strict formatting than space-\/delimited.  
 \item[\label{a00222__todo000017}%
-\-Member \doxyref{\-Obj\-Cryst\-:\-:\-Z\-Scatterer\-:\-:\-Import\-Fenske\-Hall\-Z\-Matrix}{p.}{a00156_a097d27206e6e54259bb987a06d65f71c} (istream \&is, bool named=false)]\-: identify which dihedral angles should {\itshape not\/} be limited, by analysing a coordination table.  
+Member \doxyref{Obj\-Cryst\-:\-:Z\-Scatterer\-:\-:Import\-Fenske\-Hall\-Z\-Matrix}{p.}{a00156_a097d27206e6e54259bb987a06d65f71c} (istream \&is, bool named=false)]\-: identify which dihedral angles should {\itshape not} be limited, by analysing a coordination table.  
 \item[\label{a00222__todo000019}%
-\-Member \doxyref{\-Obj\-Cryst\-:\-:\-Z\-Scatterer\-:\-:m3\-D\-Display\-Index}{p.}{a00156_aa02e92087f85784a74d1bdcebf178da9} ]\-This is still experimental. \-This is only used for the display of \-Z\-Polyhedron, and should be more developped (and it should also be saved in \-X\-M\-L files !) 
+Member \doxyref{Obj\-Cryst\-:\-:Z\-Scatterer\-:\-:m3\-D\-Display\-Index}{p.}{a00156_aa02e92087f85784a74d1bdcebf178da9} ]This is still experimental. This is only used for the display of Z\-Polyhedron, and should be more developped (and it should also be saved in X\-M\-L files !) 
 \end{DoxyRefList}

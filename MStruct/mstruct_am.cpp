@@ -29,7 +29,7 @@
  */
 
 //#define program_version "0.39-(Fox-r1221)-testing-WCfaults+ExternalLSQConstraints"
-#define program_version "0.57-(Fox-r1221)-develop"
+#define program_version "0.58-(Fox-r1221)-develop"
 
 #include "MStruct.h"
 
