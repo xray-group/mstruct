@@ -62,7 +62,7 @@
 #include <signal.h> // To catch CTRL+C signal during LSQNumObj refinement
 
 bool bsavecalc = false;
-REAL xcenterlimits[2] = {83*DEG2RAD, 85*DEG2RAD};
+REAL xcenterlimits[2] = {49*DEG2RAD, 50.5*DEG2RAD};
 
 #define absorption_corr_factor 1.e4
 
