@@ -16,14 +16,13 @@ If you want to use the Graphical Interface part of the library (wx\-Cryst), e.\-
 \end{DoxyItemize}\subsection{C\-V\-S Repository}\label{a00001_cvs}
 The cutting-\/edge version of the library can always be obtained through its C\-V\-S repository. Under linux, to download the first time the Obj\-Cryst++ directory, first login in the C\-V\-S repository (give a blank password when asked) and then download the \doxyref{Obj\-Cryst}{p.}{a00171} source\-:
 \begin{DoxyCode}
-       cvs -d:pserver:anonymous@cvs.objcryst.sourceforge.net:/cvsroot/objcryst 
-      login
-       cvs -d:pserver:anonymous@cvs.objcryst.sourceforge.net:/cvsroot/objcryst 
+cvs -d:pserver:anonymous@cvs.objcryst.sourceforge.net:/cvsroot/objcryst login
+cvs -d:pserver:anonymous@cvs.objcryst.sourceforge.net:/cvsroot/objcryst 
       checkout ObjCryst
 \end{DoxyCode}
  once you have done this once, you can update to the current version by typing\-:
 \begin{DoxyCode}
-       cvs update 
+cvs update 
 \end{DoxyCode}
  (with a blank password) at the root of the \doxyref{Obj\-Cryst}{p.}{a00171} directory.
 
@@ -47,8 +46,8 @@ The library can also be compiled on Mac\-O\-S, using {\tt Metrowerks Codewarrior
 \subsection{Compiling wx\-Windows}\label{a00001_wxwindows}
 To use the graphical part of Obj\-Cryst++ (wx\-Cryst), you must first compile wx\-Windows. To do this under Linux, in the wx\-Windows directory\-:
 \begin{DoxyCode}
-       ./configure --with-opengl --disable-shared
-       make FINAL=1
+./configure --with-opengl --disable-shared
+make FINAL=1
 \end{DoxyCode}
  (this will take some time)
 
@@ -56,7 +55,7 @@ Under windows, follow the compile instruction for Borland C++ 5.\-5 in the wx\-W
 There is a short example in the Obj\-Cryst/example/pbso4 directory. \begin{DoxyParagraph}{Linux}
 Under linux, change to the Obj\-Cryst/example/pbso4 directoryand simply type\-:
 \begin{DoxyCode}
-       make -f gnu.mak wxcryst=1 opengl=1 debug=0 all 
+make -f gnu.mak wxcryst=1 opengl=1 debug=0 all 
 \end{DoxyCode}
 
 \end{DoxyParagraph}
@@ -65,7 +64,7 @@ Under linux, change to the Obj\-Cryst/example/pbso4 directoryand simply type\-:
 That should compile all necessary libraries and programs. You can try the different example programs, running on Pb\-S\-O4, on neutron and X-\/\-Ray powder diffraction, as well as X-\/\-Ray single crystal (in fact, extracted intensities) \begin{DoxyParagraph}{Windows}
 Under Windows (a D\-O\-S command prompt), change to the Obj\-Cryst/example/pbso4 and do\-:
 \begin{DoxyCode}
-       make -f bc32.mak all 
+make -f bc32.mak all 
 \end{DoxyCode}
 
 \end{DoxyParagraph}
@@ -75,12 +74,12 @@ To compile Fox, simply go to the Obj\-Cryst/wx\-Cryst directory and do\-:
 \begin{DoxyItemize}
 \item under Linux \-: 
 \begin{DoxyCode}
- make -f gnu.mak wxcryst=1 opengl=1 debug=0 all 
+make -f gnu.mak wxcryst=1 opengl=1 debug=0 all 
 \end{DoxyCode}
 
 \item under windows\-: 
 \begin{DoxyCode}
- make -f bc32.mak all 
+make -f bc32.mak all 
 \end{DoxyCode}
 
 \end{DoxyItemize}

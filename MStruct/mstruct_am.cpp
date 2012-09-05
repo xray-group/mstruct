@@ -730,6 +730,32 @@ int main (int argc, char *argv[])
      			//reflProfile->AddReflectionProfileComponent(*sizeEffect);
      			btype_not_found = false;
      	 }
+
+	// Simple Interference affected Size broadening
+	 if(btype_not_found && btype==string("SizeInterfSimple")) {
+	   MStruct::InterferenceSimpleSizeBroadeningEffect * sizeEffect
+	     = new MStruct::InterferenceSimpleSizeBroadeningEffect;
+	   cout << "SizeBroadeningEffect (1): "<< sizeEffect->GetName() << ", bname: " << bname << endl;
+	   sizeEffect->SetName(bname);
+	   cout << "SizeBroadeningEffect (2): "<< sizeEffect->GetName() << endl;
+	   vReflProfComponents.push_back(sizeEffect);
+       		
+       	 // parameters
+	   REAL MG, sigmaG, MC, sigmaC, s0coherence;
+	   cout << "MGrains(nm),sigmaGrains" << endl;
+	   read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+	   ccin >> MG >> sigmaG;
+	   cout << "MCrystallites(nm),sigmaCrystallites" << endl;
+	   read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+	   ccin >> MC >> sigmaC;
+	   cout << "s0=1/d (1/A) coherence limit" << endl;
+	   read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+	   ccin >> s0coherence;
+	   sizeEffect->SetProfilePar(MG,sigmaG,MC,sigmaC,s0coherence);
+	   //sizeEffect->SetParentReflectionProfile(*reflProfile);
+	   //reflProfile->AddReflectionProfileComponent(*sizeEffect);
+	   btype_not_found = false;
+     	 }
      	// Size broadening (refinable size distribution) 
      	 if(btype_not_found && btype==string("SizeDistrib")) {
 	   MStruct::SizeDistribBroadeningEffect * sizeEffect

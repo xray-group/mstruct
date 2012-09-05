@@ -552,6 +552,64 @@ private:
   void InitParameters();
 }; // class SizeBroadeningEffect
 
+/**   \brief Class implementing in an extremely primitive way Rafaja's interference broadening effect.
+   *
+   * In this simple implementation of the model of Rafaja [1] there is a given coherence
+   * limit, a critical length in the reciprocal space. Below this limit the broadening is related
+   * to the size of large "grains". However, the lattice of this grains is divided in small
+   * slightly disoriented areas - nanocrystallites. The size of these nanocrystallites gives
+   * diffraction line broadening above the coherence limit.
+   * 
+   * The model parameters are the coherence limit and model parameters of two size broadening models
+   * used to represent broadening above and below the coherence limit.
+   *
+   * Similar very straighforward implementation of the model in WPMM and a real example can be found
+   * also in much earlier work of Ribarik et al. [2].
+   * 
+   * [1] D.Rafaja, V.Klemm, G.Schreiber, M.Knapp, R.Kuzel. Interference phenomena observed by X-ray
+   *     diffraction in nanocrystalline thin films. J.Appl.Cryst.(2004) 37, 613-620. doi:10.1107/S0021889804012701
+   * [2] G.Ribarik, N.Audebrand, H.Palancher, T.Ungar, D.Louer. Dislocation densities and crystallite size
+   *     distributions in nanocrystalline ball-milled fluorides, MF2 (M = Ca, Sr, Ba and Cd), determined
+   *     by X-ray diffraction line-profile analysis. J.Appl.Cryst.(2005) 38, 912-926. doi:10.1107/S0021889805027202
+   */
+class InterferenceSimpleSizeBroadeningEffect: public ReflectionProfileComponent {
+private:
+  /// Median of large grains diameter (in angstroms)
+  REAL mMGrains;
+  /// Shape parameter of the lognormal-size distribution of large grains
+  REAL mSigmaGrains;
+  /// Median of small crystallites diameter (in angstroms)
+  REAL mMCrystallites;
+  /// Shape parameter of the lognormal-size distribution of tiny crystallites
+  REAL mSigmaCrystallites;
+
+  /// Limiting coherence length (in reciprocal angstroms)
+  REAL ms0CoherenceLimit;
+
+  /// Children object for calculation of size broedening effect for large grains
+  SizeBroadeningEffect mEffectGrains;
+  /// Children object for calculation of size broedening effect for tiny crystallites
+  SizeBroadeningEffect mEffectCrystallites;
+public:
+  /// Constructor
+  InterferenceSimpleSizeBroadeningEffect();
+  /// Overloaded parent method sets parent reflection profile also for both internal effects
+  void SetParentReflectionProfile(const ReflectionProfile&);
+  /// Calculate diffraction profile
+  CrystVector_REAL GetProfile(const CrystVector_REAL &x,
+			      const REAL xcenter,
+			      const REAL h, const REAL k, const REAL l);
+  /// Get approximate value of FWHM
+  REAL GetApproxFWHM(const REAL xcenter,
+		     const REAL h, const REAL k, const REAL l)const;
+  /// Effect calculates profile as Fourier coefficients in real space
+  bool IsRealSpaceType()const;
+  /// Set profile parameters (size in nanometers, coherence length in recip. angstroms)
+  void SetProfilePar(const REAL MGrains, const REAL sigmaGrains,
+		     const REAL MCrystallites, const REAL sigmaCrystallites,
+		     const REAL s0CoherenceLimit);
+}; // class RafajaSimpleSizeBroadeningEffect
+
 #ifdef __DEPRECATED_DoubleComponentBroadeningEffect__
 
 class DoubleComponentBroadeningEffect: public ReflectionProfileComponent {
@@ -1283,26 +1341,26 @@ private:
 
 class DoubleComponentReflectionProfile: public ObjCryst::ReflectionProfile {
 public:
-	DoubleComponentReflectionProfile();
-	~DoubleComponentReflectionProfile();
-	DoubleComponentReflectionProfile(const DoubleComponentReflectionProfile &old);
-	const string& GetClassName() const;
-	DoubleComponentReflectionProfile* CreateCopy()const;
+  DoubleComponentReflectionProfile();
+  ~DoubleComponentReflectionProfile();
+  DoubleComponentReflectionProfile(const DoubleComponentReflectionProfile &old);
+  const string& GetClassName() const;
+  DoubleComponentReflectionProfile* CreateCopy()const;
   CrystVector_REAL GetProfile(const CrystVector_REAL &x, const REAL xcenter,
-												      const REAL h, const REAL k, const REAL l);
-	REAL GetFullProfileWidth(const REAL relativeIntensity, const REAL xcenter,
+			      const REAL h, const REAL k, const REAL l);
+  REAL GetFullProfileWidth(const REAL relativeIntensity, const REAL xcenter,
 			    								 const REAL h, const REAL k, const REAL l);
-	bool IsAnisotropic()const;
-	void XMLOutput (ostream &os, int indent=0) const {};
+  bool IsAnisotropic()const;
+  void XMLOutput (ostream &os, int indent=0) const {};
   void XMLInput (istream &is, const ObjCryst::XMLCrystTag &tag) {};
   
   void SetComponents(ObjCryst::ReflectionProfile &comp1, ObjCryst::ReflectionProfile &comp2);
   void SetProfileParams(const REAL weight);
 protected:
-	REAL mWeight;
-	ObjCryst::ReflectionProfile* mComponent1;
-	ObjCryst::ReflectionProfile* mComponent2;
-	void InitParameters();
+  REAL mWeight;
+  ObjCryst::ReflectionProfile* mComponent1;
+  ObjCryst::ReflectionProfile* mComponent2;
+  void InitParameters();
 }; // class DoubleComponentReflectionProfile
 
 /** ReflectionPositionCorrBase : Auxilliary base class for various reflection shift corrections.

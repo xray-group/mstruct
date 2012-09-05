@@ -3488,6 +3488,111 @@ void SizeBroadeningEffect::InitParameters()
 
 ////////////////////////////////////////////////////////////////////////
 //
+//    InterferenceSimpleSizeBroadeningEffect
+//
+////////////////////////////////////////////////////////////////////////
+
+InterferenceSimpleSizeBroadeningEffect::InterferenceSimpleSizeBroadeningEffect()
+:ms0CoherenceLimit(0.42)
+{
+  // Set default name
+  this->SetName("SizeInterfSimple");
+
+  // Initialise children broadening effects (set name)
+  mEffectGrains.SetName("IS-Grains");
+  mEffectCrystallites.SetName("IS-Crystallites");
+  // Add the internal broadening effects as subrefinable objects
+  this->AddSubRefObj( mEffectGrains );
+  this->AddSubRefObj( mEffectCrystallites );
+  // Record changes in both broadening effects by MasterClock
+  mClockMaster.AddChild( mEffectGrains.GetClockMaster() );
+  mClockMaster.AddChild( mEffectCrystallites.GetClockMaster() );
+
+  // InitParameters
+  {
+    RefinablePar tmp("sCoherence", &ms0CoherenceLimit, 0.01, 10.,
+                     gpRefParTypeScattDataProfileWidth,
+                     REFPAR_DERIV_STEP_RELATIVE,true,true,true,false,1.0);
+    tmp.AssignClock(mClockMaster);
+    tmp.SetDerivStep(0.1);
+    this->AddPar(tmp);
+  }
+}
+
+void InterferenceSimpleSizeBroadeningEffect::SetParentReflectionProfile(const ReflectionProfile& s) {
+  // call parent method
+  this->ReflectionProfileComponent::SetParentReflectionProfile(s);
+  // set parent reflection profiles of both broadening effects
+  mEffectGrains.SetParentReflectionProfile(s);
+  mEffectCrystallites.SetParentReflectionProfile(s);
+}
+
+CrystVector_REAL InterferenceSimpleSizeBroadeningEffect::GetProfile(const CrystVector_REAL &x,
+								    const REAL xcenter,
+								    const REAL h, const REAL k, const REAL l)
+{
+  CrystVector_REAL result(0.);
+
+  // Get radiation and wavelength
+  const Radiation &rad = GetParentReflectionProfile().
+    GetParentPowderPatternDiffraction().GetRadiation();
+  const REAL Lambda = rad.GetWavelength()(0);
+
+  // difraction vector length
+  const REAL s0 = 2.*sin(0.5*xcenter)/Lambda;  
+
+  // call effect children method
+  if (s0<ms0CoherenceLimit)
+    result = mEffectGrains.GetProfile(x,xcenter,h,k,l);
+  else
+    result = mEffectCrystallites.GetProfile(x,xcenter,h,k,l);
+
+  return result;
+}
+
+REAL InterferenceSimpleSizeBroadeningEffect::GetApproxFWHM(const REAL xcenter,
+							   const REAL h, const REAL k, const REAL l)const
+{
+  REAL fwhm;
+
+  // Get radiation and wavelength
+  const Radiation &rad = GetParentReflectionProfile().
+    GetParentPowderPatternDiffraction().GetRadiation();
+  const REAL Lambda = rad.GetWavelength()(0);
+
+  // difraction vector length
+  const REAL s0 = 2.*sin(0.5*xcenter)/Lambda;  
+
+  // call effect children method
+  if (s0<ms0CoherenceLimit)
+    fwhm = mEffectGrains.GetApproxFWHM(xcenter,h,k,l);
+  else
+    fwhm = mEffectCrystallites.GetApproxFWHM(xcenter,h,k,l);
+
+  return fwhm;
+}
+
+bool InterferenceSimpleSizeBroadeningEffect::IsRealSpaceType()const
+{
+  return true;
+}
+
+void InterferenceSimpleSizeBroadeningEffect::SetProfilePar(const REAL MGrains, const REAL sigmaGrains,
+							   const REAL MCrystallites, const REAL sigmaCrystallites,
+							   const REAL s0CoherenceLimit)
+{
+  // set children broadening effects parameters
+  mEffectGrains.SetProfilePar(MGrains,sigmaGrains);
+  mEffectCrystallites.SetProfilePar(MCrystallites,sigmaCrystallites);
+
+  // set internal parameters
+  ms0CoherenceLimit = s0CoherenceLimit;
+  
+  mClockMaster.Click();
+}
+
+////////////////////////////////////////////////////////////////////////
+//
 //    SizeDistribPowderPatternDiffraction
 //
 ////////////////////////////////////////////////////////////////////////

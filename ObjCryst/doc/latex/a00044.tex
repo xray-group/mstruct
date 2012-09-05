@@ -163,19 +163,23 @@ Bond between two atoms, also a restraint on the associated bond length.
 
 Constructor. 
 
-\begin{DoxyVerb}   Both atoms of the bond are told of the creation of the bond, so that
-   they can keep a list of bonds they are involved in.
+Both atoms of the bond are told of the creation of the bond, so that they can keep a list of bonds they are involved in.
 
-   \param atom1, atom2: the atoms of the bond
-   \param length: the expected bond length
-   \param sigma,delta: depending on the calculated length, the log(likelihood) is equal to:
-   - within \form#3:
-\end{DoxyVerb}
- $ -\log(likelihood)= \log\left(2\delta+\sqrt{2\pi\sigma^2}\right)$
+
+\begin{DoxyParams}{Parameters}
+{\em atom1,atom2,\-:} & the atoms of the bond \\
+\hline
+{\em length,\-:} & the expected bond length \\
+\hline
+{\em sigma,delta,\-:} & depending on the calculated length, the log(likelihood) is equal to\-:
 \begin{DoxyItemize}
+\item within $[length_{0}-\delta;length_{0}+\delta]$\-: $ -\log(likelihood)= \log\left(2\delta+\sqrt{2\pi\sigma^2}\right)$
 \item if $length > length_{0}+\delta$\-: $ -\log(likelihood)= \log\left(2\delta+\sqrt{2\pi\sigma^2}\right) + \left(\frac{(length-\delta)-length_{0}}{\sigma} \right)^2$
 \item if $length < length_{0}-\delta$\-: $ -\log(likelihood)= \log\left(2\delta+\sqrt{2\pi\sigma^2}\right) + \left(\frac{(length+\delta)-length_{0}}{\sigma} \right)^2$ 
-\end{DoxyItemize}\index{Obj\-Cryst\-::\-Mol\-Bond@{Obj\-Cryst\-::\-Mol\-Bond}!$\sim$\-Mol\-Bond@{$\sim$\-Mol\-Bond}}
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+\index{Obj\-Cryst\-::\-Mol\-Bond@{Obj\-Cryst\-::\-Mol\-Bond}!$\sim$\-Mol\-Bond@{$\sim$\-Mol\-Bond}}
 \index{$\sim$\-Mol\-Bond@{$\sim$\-Mol\-Bond}!ObjCryst::MolBond@{Obj\-Cryst\-::\-Mol\-Bond}}
 \paragraph[{$\sim$\-Mol\-Bond}]{\setlength{\rightskip}{0pt plus 5cm}virtual Obj\-Cryst\-::\-Mol\-Bond\-::$\sim$\-Mol\-Bond (
 \begin{DoxyParamCaption}

@@ -137,7 +137,8 @@ virtual void {\bfseries Init\-Ref\-Par\-List} ()\label{a00026_afe663c6aa23f64956
 void {\bf Calc\-Icalc} () const \label{a00026_ad8480ba2ebf761c8dafea7a8c05f2a33}
 
 \begin{DoxyCompactList}\small\item\em Calc intensities. \end{DoxyCompactList}\item 
-virtual Cryst\-Vector\-\_\-long {\bf Sort\-Reflection\-By\-Sin\-Theta\-Over\-Lambda} (const R\-E\-A\-L max\-Theta=-\/1.)
+virtual Cryst\-Vector\-\_\-long {\bfseries Sort\-Reflection\-By\-Sin\-Theta\-Over\-Lambda} (const R\-E\-A\-L max\-Theta=-\/1.)\label{a00026_aeac660426ee4c5aa52d494b449a164f9}
+
 \item 
 void {\bf Init\-Options} ()\label{a00026_a3eafc2c0206c365024f40d4302c1257f}
 
@@ -583,21 +584,7 @@ $\ast$\-N\-O\-T\-E \-: if the name of the wavelength is generic (eg\char`\"{}\-C
 
 Set the weight for all observed intensities to 1/sigma$^\wedge$2. 
 
-$\ast$\-For sigmas which are smaller than min\-Relat\-Sigma times the max value of sigma, $\ast$the output weight is set to 0. \index{Obj\-Cryst\-::\-Diffraction\-Data\-Single\-Crystal@{Obj\-Cryst\-::\-Diffraction\-Data\-Single\-Crystal}!Sort\-Reflection\-By\-Sin\-Theta\-Over\-Lambda@{Sort\-Reflection\-By\-Sin\-Theta\-Over\-Lambda}}
-\index{Sort\-Reflection\-By\-Sin\-Theta\-Over\-Lambda@{Sort\-Reflection\-By\-Sin\-Theta\-Over\-Lambda}!ObjCryst::DiffractionDataSingleCrystal@{Obj\-Cryst\-::\-Diffraction\-Data\-Single\-Crystal}}
-\paragraph[{Sort\-Reflection\-By\-Sin\-Theta\-Over\-Lambda}]{\setlength{\rightskip}{0pt plus 5cm}virtual Cryst\-Vector\-\_\-long Obj\-Cryst\-::\-Diffraction\-Data\-Single\-Crystal\-::\-Sort\-Reflection\-By\-Sin\-Theta\-Over\-Lambda (
-\begin{DoxyParamCaption}
-\item[{const R\-E\-A\-L}]{max\-S\-T\-O\-L = {\ttfamily -\/1.}}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\label{a00026_aeac660426ee4c5aa52d494b449a164f9}
-sort reflections by theta values (also get rid of [0,0,0] if present) If max\-S\-T\-O\-L $>$0, then only reflections where sin(theta)/lambda$<$max\-S\-T\-O\-L are kept \begin{DoxyReturn}{Returns}
-an array with the subscript of the kept reflections (for inherited classes) 
-\end{DoxyReturn}
-
-
-Reimplemented from {\bf Obj\-Cryst\-::\-Scattering\-Data} \doxyref{}{p.}{a00089_a4b843c3350e25d4d0c52da3400768fb7}.
-
-\index{Obj\-Cryst\-::\-Diffraction\-Data\-Single\-Crystal@{Obj\-Cryst\-::\-Diffraction\-Data\-Single\-Crystal}!X\-M\-L\-Input@{X\-M\-L\-Input}}
+$\ast$\-For sigmas which are smaller than min\-Relat\-Sigma times the max value of sigma, $\ast$the output weight is set to 0. \index{Obj\-Cryst\-::\-Diffraction\-Data\-Single\-Crystal@{Obj\-Cryst\-::\-Diffraction\-Data\-Single\-Crystal}!X\-M\-L\-Input@{X\-M\-L\-Input}}
 \index{X\-M\-L\-Input@{X\-M\-L\-Input}!ObjCryst::DiffractionDataSingleCrystal@{Obj\-Cryst\-::\-Diffraction\-Data\-Single\-Crystal}}
 \paragraph[{X\-M\-L\-Input}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Diffraction\-Data\-Single\-Crystal\-::\-X\-M\-L\-Input (
 \begin{DoxyParamCaption}
@@ -647,7 +634,7 @@ They must have been sorted by increasing theta values. Each entry (the reflectio
 
 Here only the groups of reflections are {\itshape roughly} sorted by sin(theta)/lambda. It is assumed, howver, that grouped reflections are of approximately the same d\-\_\-hkl. After \doxyref{Scattering\-Data\-::\-Get\-Nb\-Refl\-Below\-Max\-Sin\-Theta\-Ov\-Lambda()}{p.}{a00089_aac8034f8b0f6980c619e595ce6ba1d65}, the number of groups for which {\itshape all} reflections are below the limit are taken into account for the statistics.
 
-Note that  \doxyref{Diffraction\-Data\-Single\-Crystal\-::\-Sort\-Reflection\-By\-Sin\-Theta\-Over\-Lambda()}{p.}{a00026_aeac660426ee4c5aa52d494b449a164f9} is called (i.\-e. immediately after importing the reflections) \index{Obj\-Cryst\-::\-Diffraction\-Data\-Single\-Crystal@{Obj\-Cryst\-::\-Diffraction\-Data\-Single\-Crystal}!m\-Group\-Weight@{m\-Group\-Weight}}
+Note that  Diffraction\-Data\-Single\-Crystal\-::\-Sort\-Reflection\-By\-Sin\-Theta\-Over\-Lambda() is called (i.\-e. immediately after importing the reflections) \index{Obj\-Cryst\-::\-Diffraction\-Data\-Single\-Crystal@{Obj\-Cryst\-::\-Diffraction\-Data\-Single\-Crystal}!m\-Group\-Weight@{m\-Group\-Weight}}
 \index{m\-Group\-Weight@{m\-Group\-Weight}!ObjCryst::DiffractionDataSingleCrystal@{Obj\-Cryst\-::\-Diffraction\-Data\-Single\-Crystal}}
 \paragraph[{m\-Group\-Weight}]{\setlength{\rightskip}{0pt plus 5cm}Cryst\-Vector\-\_\-\-R\-E\-A\-L Obj\-Cryst\-::\-Diffraction\-Data\-Single\-Crystal\-::m\-Group\-Weight\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}\label{a00026_a800c45f228a27bf7915e312ae05048dc}
 

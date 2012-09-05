@@ -1172,11 +1172,9 @@ Reimplemented from {\bf Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00071_a0
 
 Remove an atom. 
 
-Returns the iterator to the next atom in the list. \begin{DoxyVerb}   This also removes all corresponding bonds, bond angles, etc...
-   If del is true (default), then the MolAtom object is deleted. The del
-   flag gets sent to the RemoveXXX functions for the corresponding
-   objects.\end{DoxyVerb}
- \index{Obj\-Cryst\-::\-Molecule@{Obj\-Cryst\-::\-Molecule}!Remove\-Bond@{Remove\-Bond}}
+Returns the iterator to the next atom in the list.
+
+This also removes all corresponding bonds, bond angles, etc... If del is true (default), then the \doxyref{Mol\-Atom}{p.}{a00043} object is deleted. The del flag gets sent to the Remove\-X\-X\-X functions for the corresponding objects. \index{Obj\-Cryst\-::\-Molecule@{Obj\-Cryst\-::\-Molecule}!Remove\-Bond@{Remove\-Bond}}
 \index{Remove\-Bond@{Remove\-Bond}!ObjCryst::Molecule@{Obj\-Cryst\-::\-Molecule}}
 \paragraph[{Remove\-Bond}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf Mol\-Bond}$\ast$$>$\-::iterator Obj\-Cryst\-::\-Molecule\-::\-Remove\-Bond (
 \begin{DoxyParamCaption}
@@ -1188,8 +1186,9 @@ Returns the iterator to the next atom in the list. \begin{DoxyVerb}   This also 
 
 Remove a bond. 
 
-Returns the iterator to the next bond in the list. \begin{DoxyVerb}   If del is true (default), then the MolBond object is deleted.\end{DoxyVerb}
- \index{Obj\-Cryst\-::\-Molecule@{Obj\-Cryst\-::\-Molecule}!Remove\-Bond\-Angle@{Remove\-Bond\-Angle}}
+Returns the iterator to the next bond in the list.
+
+If del is true (default), then the \doxyref{Mol\-Bond}{p.}{a00044} object is deleted. \index{Obj\-Cryst\-::\-Molecule@{Obj\-Cryst\-::\-Molecule}!Remove\-Bond\-Angle@{Remove\-Bond\-Angle}}
 \index{Remove\-Bond\-Angle@{Remove\-Bond\-Angle}!ObjCryst::Molecule@{Obj\-Cryst\-::\-Molecule}}
 \paragraph[{Remove\-Bond\-Angle}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf Mol\-Bond\-Angle}$\ast$$>$\-::iterator Obj\-Cryst\-::\-Molecule\-::\-Remove\-Bond\-Angle (
 \begin{DoxyParamCaption}
@@ -1226,8 +1225,9 @@ If del is true (default), then the \doxyref{Mol\-Dihedral\-Angle}{p.}{a00046} ob
 
 Remove a rigid group of atoms. 
 
-See \doxyref{Molecule\-::mv\-Rigid\-Group}{p.}{a00047_a43939b3e3ad83065cf7ccb6065a53a12} \begin{DoxyVerb}   If del is true (default), then the RigidGroup object is deleted.\end{DoxyVerb}
- \index{Obj\-Cryst\-::\-Molecule@{Obj\-Cryst\-::\-Molecule}!Reset\-Rigid\-Groups\-Par@{Reset\-Rigid\-Groups\-Par}}
+See \doxyref{Molecule\-::mv\-Rigid\-Group}{p.}{a00047_a43939b3e3ad83065cf7ccb6065a53a12}
+
+If del is true (default), then the \doxyref{Rigid\-Group}{p.}{a00082} object is deleted. \index{Obj\-Cryst\-::\-Molecule@{Obj\-Cryst\-::\-Molecule}!Reset\-Rigid\-Groups\-Par@{Reset\-Rigid\-Groups\-Par}}
 \index{Reset\-Rigid\-Groups\-Par@{Reset\-Rigid\-Groups\-Par}!ObjCryst::Molecule@{Obj\-Cryst\-::\-Molecule}}
 \paragraph[{Reset\-Rigid\-Groups\-Par}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-Molecule\-::\-Reset\-Rigid\-Groups\-Par (
 \begin{DoxyParamCaption}
@@ -1422,9 +1422,9 @@ Reimplemented from {\bf Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00071_a7
 
 Option to automatically optimize the starting conformation, if the total restraint cost is too high. 
 
-This is done in \doxyref{Begin\-Optimization()}{p.}{a00047_a5fbdadb37966f382a6e33150285819dc}. \begin{DoxyVerb}   This is enabled by default, and should be disabled by people who already
-   supply a good starting conformation for their molecule.\end{DoxyVerb}
- \index{Obj\-Cryst\-::\-Molecule@{Obj\-Cryst\-::\-Molecule}!m\-Connectivity\-Table@{m\-Connectivity\-Table}}
+This is done in \doxyref{Begin\-Optimization()}{p.}{a00047_a5fbdadb37966f382a6e33150285819dc}.
+
+This is enabled by default, and should be disabled by people who already supply a good starting conformation for their molecule. \index{Obj\-Cryst\-::\-Molecule@{Obj\-Cryst\-::\-Molecule}!m\-Connectivity\-Table@{m\-Connectivity\-Table}}
 \index{m\-Connectivity\-Table@{m\-Connectivity\-Table}!ObjCryst::Molecule@{Obj\-Cryst\-::\-Molecule}}
 \paragraph[{m\-Connectivity\-Table}]{\setlength{\rightskip}{0pt plus 5cm}map$<${\bf Mol\-Atom} $\ast$,set$<${\bf Mol\-Atom} $\ast$$>$ $>$ Obj\-Cryst\-::\-Molecule\-::m\-Connectivity\-Table\hspace{0.3cm}{\ttfamily [mutable]}}\label{a00047_a13cffa530711a868859cfcfc17bce069}
 

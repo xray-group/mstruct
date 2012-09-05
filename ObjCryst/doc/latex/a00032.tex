@@ -56,11 +56,11 @@ output one or several vectors as (a) column(s)\-:
 
 
 \begin{DoxyCode}
-   os << FormatVertVector<REAL>(vect,8,3);
-   os << FormatVertVector<REAL>(vect1,vect2,vetc3,12,6);
-   \textcolor{comment}{// For 7 vectors with width 12 and precision 4,}
-   \textcolor{comment}{// pVect being a pointer to an array of 7 vectors:}
-   os << FormatVertVector<REAL>(pVect,7,12,4);
+os << FormatVertVector<REAL>(vect,8,3);
+os << FormatVertVector<REAL>(vect1,vect2,vetc3,12,6);
+\textcolor{comment}{// For 7 vectors with width 12 and precision 4,}
+\textcolor{comment}{// pVect being a pointer to an array of 7 vectors:}
+os << FormatVertVector<REAL>(pVect,7,12,4);
 \end{DoxyCode}
  
 
