@@ -4,7 +4,7 @@
  * MStruct++ - Object-Oriented computer program/library for MicroStructure analysis
  * 					   from powder diffraction data.
  * 
- * Copyright (C) 2009-2011  Zdenek Matej
+ * Copyright (C) 2009-2012  Zdenek Matej
  * 
  * This file is part of MStruct++.
  * 
@@ -29,7 +29,7 @@
  */
 
 //#define program_version "0.39-(Fox-r1221)-testing-WCfaults+ExternalLSQConstraints"
-#define program_version "0.58-(Fox-r1221)-develop"
+#define program_version "0.71-(Fox-r1221)-develop"
 
 #include "MStruct.h"
 
@@ -117,7 +117,7 @@ int main (int argc, char *argv[])
       cout << "version: " << program_version << "\n";
       cout << "mstruct  Copyright (C) 2009-2012 Zdenek Matej, Charles University in Prague\n";
       cout << "e-mail: matej@karlov.mff.cuni.cz\n";
-      cout << "License GPLv2: GNU GPL version 2 <http://gnu.org/licenses/gpl.html>.\n";
+      cout << "License GNU GPL: <http://gnu.org/licenses/gpl.html>.\n";
       cout << "This program comes with ABSOLUTELY NO WARRANTY;\n";
       cout << "This is free software, and you are welcome to redistribute it.\n";
       cout << flush;

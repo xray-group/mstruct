@@ -39,6 +39,8 @@ extern "C" int dggsvd_(char *jobu, char *jobv, char *jobq, integer *m,
 
 #ifdef _MSC_VER
 
+#ifdef __USE_FAKED_GSVD__
+
 /* dummy dggsvd_(...) function */
 int dggsvd_(char *jobu, char *jobv, char *jobq, integer *m, 
 		       integer *n, integer *p, integer *k, integer *l, doublereal *a, 
@@ -49,6 +51,8 @@ int dggsvd_(char *jobu, char *jobv, char *jobq, integer *m,
 {
 	return -1;
 }
+
+#endif /* __USE_FAKED_GSVD__ */
 
 #endif /* _MSC_VER */
 
