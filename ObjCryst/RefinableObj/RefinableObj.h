@@ -174,6 +174,12 @@ class RefinableObjClock
       /// the list of children and parent clocks. This will afterwards Click() the clock
       /// to notify parents.
       void operator=(const RefinableObjClock &rhs);
+#ifdef __ZDENEK__
+      // remove all child clocks. This also tells the child clock to remove the parent.
+      void RemoveAllChilds();
+      /// remove all parent clocks
+      void RemoveAllParents()const;
+#endif
    private:
       bool HasParent(const RefinableObjClock &) const;
       unsigned long mTick0, mTick1;

@@ -199,12 +199,37 @@ bool RefinableObjClock::HasParent(const RefinableObjClock &clock) const
    }
    return false;
 }
+#ifdef __ZDENEK__
+void RefinableObjClock::RemoveAllChilds()
+{
+  unsigned int i = 0;
+  for( std::set<const RefinableObjClock*>::iterator it = mvChild.begin();
+       it != mvChild.end(); ++it ) {
+    (**it).RemoveParent(*this);
+    VFN_DEBUG_MESSAGE("RefinableObjClock::RemoveAllChilds():"<<i,5)
+    i++;
+  }
+  mvChild.clear();
+  this->Click();
+}
+
+void RefinableObjClock::RemoveAllParents() const
+{
+  unsigned int i = 0;
+  for( std::set<RefinableObjClock*>::iterator it = mvParent.begin();
+       it != mvParent.end(); ++it ) {
+    VFN_DEBUG_MESSAGE("RefinableObjClock::RemoveAllParents():"<<i,5)
+    i++;
+  }
+  mvParent.clear();
+}
+#endif
 //######################################################################
 //    Restraint
 //######################################################################
 Restraint::Restraint():
 mpRefParType(gpRefParTypeObjCryst)
-{}$
+{}
 
 Restraint::Restraint(const RefParType *type):
 mpRefParType(type)
@@ -223,7 +248,7 @@ REAL Restraint::GetLogLikelihood()const{return 0.;}
 //    RefinablePar
 //######################################################################
 
-Ref$inablePar::RefinablePar():
+RefinablePar::RefinablePar():
 Restraint(),
 mName(""),mpValue(0),mMin(0),mMax(0),
 mHasLimits(false),mIsFixed(true),mIsUsed(true),mIsPeriodic(false),
