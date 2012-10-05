@@ -10,7 +10,7 @@ OBJ= $@.o
 -include $(OBJ:.o=.dep)
 
 mstruct_am: mstruct_am.o MStruct.o mstruct_test1.o libCrystVector libQuirks libRefinableObj libcctbx libCryst libnewmat
-	${LINKER} ${CRYST_LDFLAGS} -o $@ ${filter-out %.a %.so lib%, $^} ${LOADLIBES} -lfftw3 -lblas -llapack
+	${LINKER} ${CRYST_LDFLAGS} -o $@ ${filter-out %.a %.so lib%, $^} ${LOADLIBES} -lfftw3
 
 # target for making everything
 .PHONY : all

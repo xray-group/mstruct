@@ -3718,8 +3718,10 @@ void SizeDistribPowderPatternDiffraction::Prepare ()
   // that of the SizeDistrib model
   {
     // Remove all Child Clocks
-    // TODO:: Do this more clearly. Calling destructors explicitly looks ugly.
-    mOtherParamsClock.~RefinableObjClock(); mOtherParamsClock = ObjCryst::RefinableObjClock();// we need new clocks
+    mOtherParamsClock.RemoveAllChilds();
+    // Reset Clock
+    mOtherParamsClock.RemoveAllParents();
+    mOtherParamsClock.Reset();
   }
 
   // Connect "mOtherParamsClock" with appropriate parametrs.
