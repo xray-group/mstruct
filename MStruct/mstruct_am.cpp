@@ -29,7 +29,7 @@
  */
 
 //#define program_version "0.39-(Fox-r1221)-testing-WCfaults+ExternalLSQConstraints"
-#define program_version "0.71-(Fox-r1221)-develop"
+#define program_version "0.84-(Fox-r1221)-develop"
 
 #include "MStruct.h"
 
@@ -1408,7 +1408,7 @@ int main (int argc, char *argv[])
  			 		cerr << "Warning: Type of the given broadening effect not recognised!" << endl;
  			 		continue;
  			 }
-     } 
+     }
   
     // set profile 
      vDiffData[iphase]->SetProfile(vReflProfiles[parentReflProfNb]);
@@ -1418,7 +1418,7 @@ int main (int argc, char *argv[])
   // Prepare data
    data.Prepare();
    data.FitScaleFactorForRw();
-   	
+
    if (1) {
   // load IhklCorr params from files
   for(int iphase=0; iphase<nbphases; iphase++)

@@ -3703,7 +3703,7 @@ void SizeDistribPowderPatternDiffraction::Prepare ()
       mpSizeDistribReflProf =
 	dynamic_cast<MStruct::SizeDistribBroadeningEffect*>(&reflProf.GetReflectionProfileComponent(ind[0]));
       VFN_DEBUG_MESSAGE("MStruct::SizeDistribPowderPatternDiffraction::Prepare: "<<
-			"SizeDistribBroadeningEffect object found whose clacluation will be optimised : "
+			"SizeDistribBroadeningEffect object found whose calcluation will be optimised : "
 			<< mpSizeDistribReflProf->GetName(),11)
     } // if(ind.size()>0)
     if(ind.size()>1) {
@@ -3984,7 +3984,7 @@ void SizeDistribBroadeningEffect::ReadDistributionFromFile(
 {
   CrystVector_REAL vD1(10), vD2(10), vDistrib(10);
   CrystVector_int vFixed(10);
-	
+
   ifstream f(filename);
   string line;
   int n = 0;
@@ -4010,7 +4010,7 @@ void SizeDistribBroadeningEffect::ReadDistributionFromFile(
   vD2.resizeAndPreserve(n);
   vDistrib.resizeAndPreserve(n);
   vFixed.resizeAndPreserve(n);
-  
+
   this->SetDistribution(vD1,vD2,vDistrib,vFixed);
 }
 

@@ -204,7 +204,7 @@ bool RefinableObjClock::HasParent(const RefinableObjClock &clock) const
 //######################################################################
 Restraint::Restraint():
 mpRefParType(gpRefParTypeObjCryst)
-{}
+{}$
 
 Restraint::Restraint(const RefParType *type):
 mpRefParType(type)
@@ -223,7 +223,7 @@ REAL Restraint::GetLogLikelihood()const{return 0.;}
 //    RefinablePar
 //######################################################################
 
-RefinablePar::RefinablePar():
+Ref$inablePar::RefinablePar():
 Restraint(),
 mName(""),mpValue(0),mMin(0),mMax(0),
 mHasLimits(false),mIsFixed(true),mIsUsed(true),mIsPeriodic(false),
