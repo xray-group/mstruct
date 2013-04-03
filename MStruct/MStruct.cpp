@@ -945,7 +945,7 @@ void PowderPatternBackgroundChebyshev::CalcPowderPattern()const
 				for(unsigned long i=0; i<nb; i++) {	*p2 += (*p1)*mChebyshevCoef(m); p1++; p2++; }
 		}
 		
-		// variable slid intesity corr.
+		// variable slit intesity corr.
 		if ( mUseVariableSlitIntensityCorr && (M>0) )
 			mPowderPatternCalc *= GetPowderPatternSinTheta();
 		
