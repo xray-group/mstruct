@@ -4,7 +4,7 @@
  * MStruct++ - Object-Oriented computer program/library for MicroStructure analysis
  * 					   from powder diffraction data.
  * 
- * Copyright (C) 2009-2012  Zdenek Matej
+ * Copyright (C) 2009-2013  Zdenek Matej
  * 
  * This file is part of MStruct++.
  * 
@@ -29,7 +29,8 @@
  */
 
 //#define program_version "0.39-(Fox-r1221)-testing-WCfaults+ExternalLSQConstraints"
-#define program_version "0.84-(Fox-r1221)-develop"
+#define program_version "0.94-(Fox-r1221)-develop" // CircRodsGamma
+#define program_version "0.95-(Fox-r1221)-develop"
 
 #include "MStruct.h"
 
@@ -50,6 +51,8 @@
 
 #include <stdlib.h> // rand, srand
 #include <time.h> // time
+
+#include <boost/algorithm/string.hpp>
 
 using namespace ObjCryst;
 
@@ -115,7 +118,7 @@ int main (int argc, char *argv[])
    {
    		// print version and license information
       cout << "version: " << program_version << "\n";
-      cout << "mstruct  Copyright (C) 2009-2012 Zdenek Matej, Charles University in Prague\n";
+      cout << "mstruct  Copyright (C) 2009-2013 Zdenek Matej, Charles University in Prague\n";
       cout << "e-mail: matej@karlov.mff.cuni.cz\n";
       cout << "License GNU GPL: <http://gnu.org/licenses/gpl.html>.\n";
       cout << "This program comes with ABSOLUTELY NO WARRANTY;\n";
@@ -889,6 +892,59 @@ int main (int argc, char *argv[])
 	   //reflProfile->AddReflectionProfileComponent(*sizeEffect);
 	   btype_not_found = false;
      	 }
+	// Size broadening from circular rods with Gamma distribution
+	 if(btype_not_found && ( btype==string("CircRodsGamma") ) ) {
+	   MStruct::CircRodsGammaBroadeningEffect * sizeEffect
+	     = new MStruct::CircRodsGammaBroadeningEffect;
+	   sizeEffect->SetName(bname);
+	   vReflProfComponents.push_back(sizeEffect);
+
+	  // rod axis
+	   REAL hh, kk, ll;
+	   cout << "(hkl) indices of the rod axis (i.e. indices of the basal plane)" << endl;
+	   read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+	   ccin >> hh >> kk >> ll;
+	   sizeEffect->SetRodAxis(hh,kk,ll);
+
+	  // model parameters-set
+	   string paramset;
+	   cout << "choice of parameters set (DL, aD, AL)" << endl;
+	   read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+	   ccin >> paramset;
+
+	   boost::algorithm::to_lower(paramset);
+	   if(paramset==string("dl") || paramset==string("d-l")) {
+	     sizeEffect->SetModelParSet(MStruct::CircRodsGammaBroadeningEffect::PARAM_SET_DL);
+	     REAL D, theta, L;
+	     cout << "diameter (nm), theta, length (nm)" << endl;
+	     read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+	     ccin >> D >> theta >> L;
+	     sizeEffect->SetRodLength(L);
+	     sizeEffect->SetRodDiameter(D,theta);
+	   }
+	   else if(paramset==string("ad") || paramset==string("a-d") || paramset==string("dlratio-d")) {
+	     sizeEffect->SetModelParSet(MStruct::CircRodsGammaBroadeningEffect::PARAM_SET_aD);
+	     REAL D, theta, a;
+	     cout << "diameter (nm), theta, L/D ratio" << endl;
+	     read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+	     ccin >> D >> theta >> a;
+	     sizeEffect->SetRodDiameter(D,theta);
+	     sizeEffect->SetRodShapePar(a);
+	   }
+	   else if(paramset==string("al") || paramset==string("a-l") || paramset==string("dlratio-l")) {
+	     sizeEffect->SetModelParSet(MStruct::CircRodsGammaBroadeningEffect::PARAM_SET_aL);
+	     REAL L, theta, a;
+	     cout << "length (nm), theta, L/D ratio" << endl;
+	     read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+	     ccin >> L >> theta >> a;
+	     sizeEffect->SetRodLength(L,theta);
+	     sizeEffect->SetRodShapePar(a);
+	   }
+	   else
+	     throw ObjCrystException("Unknown model parameters-set option for CircRodsGamma broadening effect!");
+	   
+	   btype_not_found = false;
+	 }
      	// Dislocation broadening dislocSLvN
      	 if(btype_not_found && ( btype==string("dislocSLvB") || btype==string("dislocSLvB+") ||
 				 btype==string("dislocSLvBplus") || btype==string("dislocSLvBPlus"))) {

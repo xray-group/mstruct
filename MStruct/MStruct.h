@@ -4,7 +4,7 @@
  * MStruct++ - Object-Oriented computer program/library for MicroStructure analysis
  * 					   from powder diffraction data.
  * 
- * Copyright (C) 2009-2011  Zdenek Matej
+ * Copyright (C) 2009-2013  Zdenek Matej, Charles University in Prague
  * 
  * This file is part of MStruct++.
  * 
@@ -551,6 +551,81 @@ public:
 private:
   void InitParameters();
 }; // class SizeBroadeningEffect
+
+/**   \brief Class implementing size broadening from circular (nano)rods.
+   * 
+   * It si assumed that crystallites have shape of rods with Length L and circular basis
+   * of diameter D. Their size is distributed according to the Gamma distribution
+   * in such a way that for a given crystallite size the a = L/D ratio is kept constant.
+   *
+   * It is assumed the rod axis is parallel to a specific crystal direction.
+   *
+   * Then. Let 'sz' be a projection of the unit vector in the direction of the diffraction vector
+   * into the rod axis and 'sx' is its complement. Then for a 'common volume' of a single
+   * crystallite it holds:
+   *   
+   * A(x) = 1/2 * L * D^2 * (1-sz*x/L) * fcirc(t) , where t = sx*x/D ,
+   * fcirc(t) = ArcCos(t) - t * Sqrt(1-t^2) .
+   *
+   * As it is cumberstone to integrate A(x) including exact fcirc(t) function, the 'common
+   * area' of a circle is approximated by the 3rd degree polynomial here.
+   *
+   * Multiple model options are available. The user can chose if the crystallites shape
+   * is refined by changenging both sizes (L,D), or any of them can be fixed, or rather
+   * e.g. the shape parameter (a=L/D) is fixed and a single size parameter is refined.
+   *
+   * For D-L and aD model parameter sets theta is the scale parameter of the Gamma distribution
+   * of rods diameters, whereas for aL-set it is the scale parameter of the corresponding
+   * distribution of rods lengthes.
+   *
+   */
+class CircRodsGammaBroadeningEffect: public ReflectionProfileComponent {
+private:
+  /// Length of (nano)rods (in angstroms)
+  REAL mLength;
+  /// Diameter of (nano)rods (in angstroms)
+  REAL mDiameter;
+  /// Shape parameter of (nano)rods (a = L/D)
+  REAL mLDratio;
+  /// Gamma distribution Scale parameter
+  REAL mTheta;
+  /// Reciprocal (hkl) direction of the rod axis
+  CrystVector_REAL mHKLAxis;
+
+  /// Model parameter set-option
+  int mParamSetOption;
+public:
+  /// Flags for parameters set options
+  static const int PARAM_SET_UNDEFINED = 0; // undefined
+  static const int PARAM_SET_DL        = 1; // model params.: D-diameter, L-length
+  static const int PARAM_SET_aD        = 2; // model params.: a-L/D ratio, D-diameter 
+  static const int PARAM_SET_aL        = 3; // model params.: a-L/D ratio, L-length 
+public:
+  /// Constructor
+  CircRodsGammaBroadeningEffect();
+  
+  CrystVector_REAL GetProfile(const CrystVector_REAL &x,
+			      const REAL xcenter,
+			      const REAL h, const REAL k, const REAL l);
+  REAL GetApproxFWHM(const REAL xcenter,
+		     const REAL h, const REAL k, const REAL l)const;
+  bool IsRealSpaceType()const;
+  bool IsAnisotropic ()const;
+
+  /// Set model parameters-set option (1-DL, 2-aD, 3-aL)
+  void SetModelParSet(const int parSetOption);
+  /// Set reciprocal (hkl) direction as a rod axis
+  void SetRodAxis(const REAL axisH, const REAL axisK, const REAL axisL);
+  /// Set rods mean diameter (in nanometers) and diameter 'scale parameter' of Gamma distribution
+  void SetRodDiameter(const REAL diameter, const REAL theta = 1.);
+  /// Set rods mean length (in nanometers) and length 'scale parameter' of Gamma distribution
+  void SetRodLength(const REAL length, const REAL theta = 1.);
+  /// Set L/D ratio (This has no meaning if params.-set option is set to DL).
+  void SetRodShapePar(const REAL LDratio);
+private:
+  /// (Re)initialise RefinableObj parameters
+  void InitParameters();
+}; // CircRodsGammaBroadeningEffect
 
 /**   \brief Class implementing in an extremely primitive way Rafaja's interference broadening effect.
    *

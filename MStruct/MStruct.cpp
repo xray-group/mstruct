@@ -4,7 +4,7 @@
  * MStruct++ - Object-Oriented computer program/library for MicroStructure analysis
  * 					   from powder diffraction data.
  * 
- * Copyright (C) 2009-2011  Zdenek Matej
+ * Copyright (C) 2009-2013  Zdenek Matej
  * 
  * This file is part of MStruct++.
  * 
@@ -44,6 +44,8 @@
 #include "newmat/newmatap.h" //for matrix equation solution
 #include "newmat/newmatio.h" //in CalcParams subroutine
 
+#include <boost/math/special_functions/gamma.hpp>
+
 #define _USE_MATH_DEFINES
 
 #include <math.h> // <cmath>
@@ -61,8 +63,11 @@
 
 #include <signal.h> // To catch CTRL+C signal during LSQNumObj refinement
 
+// incomplete gamma function as defined in Wolfram Mathematica
+#define gammaW(a,z) (boost::math::gamma_q(a,z)*boost::math::tgamma(a))
+
 bool bsavecalc = false;
-REAL xcenterlimits[2] = {49*DEG2RAD, 50.5*DEG2RAD};
+REAL xcenterlimits[2] = {24.*DEG2RAD, 26.*DEG2RAD};
 
 #define absorption_corr_factor 1.e4
 
@@ -3484,6 +3489,315 @@ void SizeBroadeningEffect::InitParameters()
     tmp.SetDerivStep(0.03);
     this->AddPar(tmp);
   }
+}
+////////////////////////////////////////////////////////////////////////
+//
+//    CircRodsGammaBroadeningEffect
+//
+////////////////////////////////////////////////////////////////////////
+
+CircRodsGammaBroadeningEffect::CircRodsGammaBroadeningEffect()
+  :mLength(1.e4), mDiameter(100.), mTheta(10.), mLDratio(100.), mParamSetOption(0)
+{
+  // Set default name
+  this->SetName("CircRodsGamma");
+
+  mHKLAxis = CrystVector_REAL(3);
+  mHKLAxis(2) = 1.0; // (0,0,1)
+
+  this->InitParameters();
+}
+
+void CircRodsGammaBroadeningEffect::SetModelParSet(const int parSetOption)
+{
+  mParamSetOption = parSetOption;
+  this->InitParameters();
+}
+
+void CircRodsGammaBroadeningEffect::SetRodAxis(const REAL axisH, const REAL axisK, const REAL axisL)
+{
+  mHKLAxis = CrystVector_REAL(3);
+  mHKLAxis(0) = axisH; mHKLAxis(1) = axisK; mHKLAxis(2) = axisL; 
+  mClockMaster.Reset();
+}
+
+void CircRodsGammaBroadeningEffect::SetRodDiameter(const REAL diameter, const REAL theta)
+{
+  if(mParamSetOption==PARAM_SET_UNDEFINED)
+    throw ObjCrystException("CircRodsGammaBroadeningEffect: Model parameters-set undefined!");
+  
+  switch ( mParamSetOption ) {
+  case PARAM_SET_DL:
+    mDiameter = 10.*diameter;
+    mLDratio = mLength/mDiameter;
+    mTheta = 10.*theta;
+    break;
+  case PARAM_SET_aD:
+  case PARAM_SET_aL: 
+    mDiameter = 10.*diameter;
+    mLength = mLDratio*mDiameter;
+    mTheta = 10.*theta;
+    break;
+  default:
+    throw ObjCrystException("CircRodsGammaBroadeningEffect: Model parameters-set unknown!");
+  }
+  mClockMaster.Reset();
+}
+
+void CircRodsGammaBroadeningEffect::SetRodLength(const REAL length, const REAL theta)
+{
+  if(mParamSetOption==PARAM_SET_UNDEFINED)
+    throw ObjCrystException("CircRodsGammaBroadeningEffect: Model parameters-set undefined!");
+  
+  switch ( mParamSetOption ) {
+  case PARAM_SET_DL:
+    mLength = 10.*length;
+    mLDratio = mLength/mDiameter;
+    mTheta = 10.*theta;
+    break;
+  case PARAM_SET_aD:
+  case PARAM_SET_aL:
+    mLength = 10.*length;
+    mDiameter= mLength/mLDratio;
+    mTheta = 10.*theta;
+    break;
+  default:
+    throw ObjCrystException("CircRodsGammaBroadeningEffect: Model parameters-set unknown!");
+  }
+  mClockMaster.Reset();
+}
+
+void CircRodsGammaBroadeningEffect::SetRodShapePar(const REAL LDratio)
+{
+  if(mParamSetOption==PARAM_SET_UNDEFINED)
+    throw ObjCrystException("CircRodsGammaBroadeningEffect: Model parameters-set undefined!");
+  
+  switch ( mParamSetOption ) {
+  case PARAM_SET_DL:
+    throw ObjCrystException("CircRodsGammaBroadeningEffect: Can not set LDratio when using DL-set option!");
+    break;
+  case PARAM_SET_aD:
+    mLDratio = LDratio;
+    mLength = mLDratio*mDiameter;
+  case PARAM_SET_aL:
+    mLDratio = LDratio;
+    mDiameter= mLength/mLDratio;
+    break;
+  default:
+    throw ObjCrystException("CircRodsGammaBroadeningEffect: Model parameters-set unknown!");
+  }
+  mClockMaster.Reset();
+}
+
+CrystVector_REAL CircRodsGammaBroadeningEffect::GetProfile(const CrystVector_REAL &x,
+							   const REAL xcenter,
+							   const REAL h, const REAL k, const REAL l)
+{
+  CrystVector_REAL result(x.numElements());
+
+  if(mParamSetOption==PARAM_SET_UNDEFINED) {
+    result = 1.0; // unknown model - no broadening
+    return result;
+  }
+
+  // actualise model parametrs
+  REAL th; // scale parameter of Gamma distribution (for diameter)
+  switch ( mParamSetOption ) {
+  case PARAM_SET_DL:
+    mLDratio = mLength/mDiameter;
+    th = mTheta;
+    break;
+  case PARAM_SET_aD:
+    mLength = mLDratio*mDiameter;
+    th = mTheta;
+  case PARAM_SET_aL:
+    mDiameter= mLength/mLDratio;
+    th = mTheta/mLDratio;
+    break;
+  default:
+    throw ObjCrystException("CircRodsGammaBroadeningEffect: Model parameters-set unknown!");
+  }
+
+  const Radiation &r = GetParentReflectionProfile().
+    GetParentPowderPatternDiffraction().GetRadiation();
+  
+  // calculate projection of (hkl) vector on rod axis
+  REAL sz, sx;
+  { 
+    const Crystal &crystal = GetParentReflectionProfile().GetParentPowderPatternDiffraction().GetCrystal();
+    REAL xAxis = mHKLAxis(0), yAxis = mHKLAxis(1), zAxis = mHKLAxis(2);
+    crystal.MillerToOrthonormalCoords(xAxis,yAxis,zAxis);
+    REAL xhkl = h, yhkl = k, zhkl = l;
+    crystal.MillerToOrthonormalCoords(xhkl,yhkl,zhkl);
+    sz = fabs(xAxis*xhkl+yAxis*yhkl+zAxis*zhkl)/sqrt(pow(xAxis,2)+pow(yAxis,2)+pow(zAxis,2))/sqrt(pow(xhkl,2)+pow(yhkl,2)+pow(zhkl,2));
+    sx = sqrt(1.-pow(sz,2));
+  }
+
+  const REAL *px = x.data();
+  REAL *pA = result.data();
+  const double alph = mDiameter/2./th;
+  const double gammaAlph = boost::math::tgamma(alph);
+  const double A0 = (2.*mLDratio)*M_PI*boost::math::tgamma(alph+3.)/gammaAlph;
+  for(long i=0; i<x.numElements(); i++) {
+    double x = fabs(*px)/th;
+    if(x<1e-7) { *pA = 1.0; px++; pA++; continue; }
+    double z = ( sx>0 && mLDratio*sx>sz ) ? sx*x/2. : sz*x/(2.*mLDratio);
+    double t = 21.*(128.-41.*M_PI)*sx*sz*x*(gammaW(alph-1.,z)/gammaAlph)
+        + (21.*(2.*mLDratio)*(-128.+41*M_PI)*sx+(-8192+2613*M_PI)*sz)*(gammaW(alph,z)/gammaAlph);
+    t = sx*x*t + ((2.*mLDratio)*(8192.-2613.*M_PI)*sx+2.*(2816.-867.*M_PI)*sz)*(gammaW(alph+1.,z)/gammaAlph);
+    t = sx*x*t + 2.*((2.*mLDratio)*(-2816.+867.*M_PI)*sx-48.*M_PI*sz)*(gammaW(alph+2.,z)/gammaAlph);
+    t = x*t + 96.*(2.*mLDratio)*M_PI*(gammaW(alph+3.,z)/gammaAlph);
+    t *= 1./96.;
+
+    *pA = t/A0;
+    px++; pA++;
+  } // for(i)
+
+  if (bsavecalc && xcenter>=xcenterlimits[0] && xcenter<=xcenterlimits[1]) {
+    ofstream F("profileASrods.dat");
+    F<<"# D="<<mDiameter<<",theta_D="<<th<<",L="<<mLength;
+    F<<",axisHKL="<<mHKLAxis(0)<<","<<mHKLAxis(1)<<","<<mHKLAxis(2);
+    F<<",sz="<<sz;
+    F<<",xcenter="<<xcenter*RAD2DEG<<",h="<<h<<",k="<<k<<",l="<<l<<endl;
+    for(int i=0;i<x.numElements();i++)
+      F<<setw(18)<<x(i)<<setw(18)<<result(i)<<endl;
+    F.close();
+  }
+
+  return result;
+}
+
+REAL CircRodsGammaBroadeningEffect::GetApproxFWHM(const REAL xcenter,
+						  const REAL h, const REAL k, const REAL l) const
+{
+  if(mParamSetOption==PARAM_SET_UNDEFINED) {
+    return 0.0; // unknown model - no broadening
+  }
+
+  // get actual model parametrs
+  REAL diameter, length;
+  switch ( mParamSetOption ) {
+  case PARAM_SET_DL:
+    diameter = mDiameter;
+    length = mLength;
+    break;
+  case PARAM_SET_aD:
+    diameter = mDiameter;
+    length = mLDratio*mDiameter;
+  case PARAM_SET_aL:
+    length = mLength;
+    diameter= mLength/mLDratio;
+    break;
+  default:
+    throw ObjCrystException("CircRodsGammaBroadeningEffect: Model parameters-set unknown!");
+  }
+
+  const Radiation &r = GetParentReflectionProfile().
+    GetParentPowderPatternDiffraction().GetRadiation();
+  
+  // calculate projection of (hkl) vector on rod axis
+  REAL sz, sx;
+  { 
+    const Crystal &crystal = GetParentReflectionProfile().GetParentPowderPatternDiffraction().GetCrystal();
+    REAL xAxis = mHKLAxis(0), yAxis = mHKLAxis(1), zAxis = mHKLAxis(2);
+    crystal.MillerToOrthonormalCoords(xAxis,yAxis,zAxis);
+    REAL xhkl = h, yhkl = k, zhkl = l;
+    crystal.MillerToOrthonormalCoords(xhkl,yhkl,zhkl);
+    sz = fabs(xAxis*xhkl+yAxis*yhkl+zAxis*zhkl)/sqrt(pow(xAxis,2)+pow(yAxis,2)+pow(zAxis,2))/sqrt(pow(xhkl,2)+pow(yhkl,2)+pow(zhkl,2));
+    sx = sqrt(1.-pow(sz,2));
+  }
+
+  REAL szlim = length/sqrt(pow(length,2)+pow(diameter,2));
+  
+  REAL Ld = (sz<=szlim) ? diameter/sx : length/sz;
+
+  return 1.3*r.GetWavelength()(0)/Ld/cos(0.5*xcenter);
+}
+
+bool CircRodsGammaBroadeningEffect::IsRealSpaceType() const
+{
+  return true;
+}
+
+bool CircRodsGammaBroadeningEffect::IsAnisotropic () const
+{
+  return true;
+}
+
+void CircRodsGammaBroadeningEffect::InitParameters()
+{
+  { // Parameters-set maybe changed - remove an old parameters set
+    try {
+      long ii = this->GetParIndex (&mDiameter, true);
+      if (ii != -1) {
+	ObjCryst::RefinablePar &par = this->GetPar(ii);
+	this->RemovePar(&par);
+      }
+      ii = this->GetParIndex (&mLength, true);
+      if (ii != -1) {
+	ObjCryst::RefinablePar &par = this->GetPar(ii);
+	this->RemovePar(&par);
+      }
+      ii = this->GetParIndex (&mTheta, true);
+      if (ii != -1) {
+	ObjCryst::RefinablePar &par = this->GetPar(ii);
+	this->RemovePar(&par);
+      }
+      ii = this->GetParIndex (&mLDratio, true);
+      if (ii != -1) {
+	ObjCryst::RefinablePar &par = this->GetPar(ii);
+	this->RemovePar(&par);
+      }
+    }
+    catch (std::exception &e) {
+      cerr << "< MStruct::CircRodsGammaBroadeningEffect::InitParameters()\n";
+      cerr << "Unexpected exception: " << e.what() << "\n";
+      cerr << "Unexpected exception thrown during removing old parameters from the object.\n >" << endl; 
+      throw ObjCrystException("MStruct::CircRodsGammaBroadeningEffect::InitParameters(): Program error.");
+    }
+  } // removing old parametrs
+
+  // Diameter
+  if (mParamSetOption==PARAM_SET_DL || mParamSetOption==PARAM_SET_aD) {
+    RefinablePar tmp("D", &mDiameter, 2.0, 1.e4,
+                     gpRefParTypeScattDataProfileWidth,
+                     REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false,0.1);
+    tmp.AssignClock(mClockMaster);
+    tmp.SetDerivStep(0.5);
+    this->AddPar(tmp);
+  }
+
+  // Length
+  if (mParamSetOption==PARAM_SET_DL || mParamSetOption==PARAM_SET_aL) {
+    RefinablePar tmp("L", &mLength, 0.0, 1.e4,
+                     gpRefParTypeScattDataProfileWidth,
+                     REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false,0.1);
+    tmp.AssignClock(mClockMaster);
+    tmp.SetDerivStep(0.5);
+    this->AddPar(tmp);
+  }
+
+  // Theta
+  {
+    RefinablePar tmp("Theta", &mTheta, 0.01, 1.e2,
+                     gpRefParTypeScattDataProfileWidth,
+                     REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false,0.1);
+    tmp.AssignClock(mClockMaster);
+    tmp.SetDerivStep(0.1);
+    this->AddPar(tmp);
+  }
+  
+  // LDratio
+  if (mParamSetOption==PARAM_SET_aD || mParamSetOption==PARAM_SET_aL) {
+    RefinablePar tmp("LDratio", &mLDratio, 1.e-4, 1.e4,
+                     gpRefParTypeScattDataProfileWidth,
+                     REFPAR_DERIV_STEP_RELATIVE,true,true,true,false,1.0);
+    tmp.AssignClock(mClockMaster);
+    tmp.SetDerivStep(0.05);
+    this->AddPar(tmp);
+  }
+
+  mClockMaster.Reset();
 }
 
 ////////////////////////////////////////////////////////////////////////
