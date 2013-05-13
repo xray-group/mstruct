@@ -627,6 +627,46 @@ private:
   void InitParameters();
 }; // CircRodsGammaBroadeningEffect
 
+
+/**   \brief Class implementing in an extremely primitive way ....
+   *
+   * TODO
+   *
+   *
+   * ref: to Popa
+   *
+   */
+class StrainSimplePopaAniz: public ReflectionProfileComponent {
+private:
+  /// Scale microstrain parameter 
+  REAL mehhScale;
+  /// Anisotropy coefficients 
+  CrystVector_REAL mehhCoefs;
+  /// Shape parameter (eta0=0 ... Gaussian, eta0=1 ... Cauchy)
+  REAL mEta0;
+
+public:
+  /// Constructor
+  StrainSimplePopaAniz();
+
+  CrystVector_REAL GetProfile(const CrystVector_REAL &x,
+			      const REAL xcenter,
+			      const REAL h, const REAL k, const REAL l);
+  REAL GetApproxFWHM(const REAL xcenter,
+		     const REAL h, const REAL k, const REAL l)const;
+  bool IsRealSpaceType()const;
+  bool IsAnisotropic ()const;
+
+  /// Set microstrain profile parameters (ehh-Scale and shape parameter Eta0)
+  void SetProfileParams(const REAL ehhScale, const REAL eta0 = 0.0);
+  /// Set anisotropy coefficients for the microstrain model
+  void SetPopaCoefs(const CrystVector_REAL &coefs);
+
+private:
+  /// Initialise RefinableObj parameters
+  void InitParameters();
+}; // StrainSimplePopaAniz
+
 /**   \brief Class implementing in an extremely primitive way Rafaja's interference broadening effect.
    *
    * In this simple implementation of the model of Rafaja [1] there is a given coherence

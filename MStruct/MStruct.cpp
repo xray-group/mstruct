@@ -3802,6 +3802,183 @@ void CircRodsGammaBroadeningEffect::InitParameters()
 
 ////////////////////////////////////////////////////////////////////////
 //
+//    StrainSimplePopaAniz
+//
+////////////////////////////////////////////////////////////////////////
+
+StrainSimplePopaAniz::StrainSimplePopaAniz()
+  :mehhScale(0.0), mEta0(0.0)
+{
+  // Set default name
+  this->SetName("StrainSimplePopaAniz");
+
+  mehhCoefs = CrystVector_REAL(9);
+  mehhCoefs = 0.0;
+
+  this->InitParameters();
+}
+
+CrystVector_REAL StrainSimplePopaAniz::GetProfile(const CrystVector_REAL &x,
+						  const REAL xcenter,
+						  const REAL h, const REAL k, const REAL l)
+{
+  CrystVector_REAL profile(x.numElements());
+
+  if(fabs(mehhScale)<1.e-6) { profile = 1.; return profile; }
+
+  const Radiation &rad = GetParentReflectionProfile().
+    GetParentPowderPatternDiffraction().GetRadiation();
+  const REAL Lambda = rad.GetWavelength()(0);
+
+  const REAL factor = cos(0.5*xcenter)/Lambda;
+  
+  // calc Four. coefs
+  // ref: P.Scardi,L.Matteo,J.Appl.Cryst.(1999).32,671-682:Fourier modelling...
+  // size effect
+
+  const REAL *p1 = x.data();
+  REAL *p2 = profile.data();
+
+  const REAL hwhm=GetApproxFWHM(xcenter,h,k,l)/2. * factor; // ds = cos(theta)/Lambda * d(2theta)
+  const REAL factorPhi = 1./sqrt(M_PI*M_LN2); // ? should I use this ???
+  const REAL w = (fabs(mEta0)<FLT_EPSILON) ? 0. : mEta0/(mEta0+factorPhi*(1.-mEta0));
+
+  const REAL factorGsq = M_PI*M_PI*hwhm*hwhm/log(2.);
+  const REAL factorC   = 2.*M_PI*hwhm;
+
+  for(int i=0;i<x.numElements();i++) {
+    double L = *p1++; L = fabs(L);
+    *p2++ = REAL((1.-w)*exp(-factorGsq*L*L)+w*exp(-factorC*L));
+  }
+
+  return profile;
+}
+
+REAL StrainSimplePopaAniz::GetApproxFWHM(const REAL xcenter,
+					 const REAL h, const REAL k, const REAL l) const
+{
+  const Radiation &r = GetParentReflectionProfile().
+    GetParentPowderPatternDiffraction().GetRadiation();
+  
+  const Crystal &crystal = GetParentReflectionProfile().GetParentPowderPatternDiffraction().GetCrystal();
+
+  const REAL phiG = 2.*sqrt(log(2.)/M_PI);
+  const REAL phiC = 2./M_PI;
+
+  REAL ehh = mehhCoefs(0)*pow(h,4) + mehhCoefs(1)*pow(l,4) + mehhCoefs(2)*pow(k,4);
+  ehh += 2.*mehhCoefs(3)*pow(h,2)*pow(l,2) + 2.*mehhCoefs(4)*pow(l,2)*pow(k,2) + 2.*mehhCoefs(5)*pow(h,2)*pow(k,2);
+  ehh += 4.*mehhCoefs(6)*pow(h,3)*l + 4.*mehhCoefs(7)*pow(l,3)*h + 4.*mehhCoefs(8)*pow(k,2)*l*h;
+  
+  REAL h2;
+  {
+    REAL x = h, y = k, z = l;
+    crystal.MillerToOrthonormalCoords(x,y,z);
+    h2 = pow(x,2) + pow(y,2) + pow(z,2);
+  }
+  const REAL aa = crystal.GetLatticePar(0); 
+  ehh *= 1./pow(h2*aa*aa,2);
+
+  ehh *= mehhScale;
+
+  ehh = (ehh>=0.) ? ehh : 0.0; // ehh >= 0.0
+
+  return 4*ehh/((1.-mEta0)/phiG+mEta0/phiC)*tan(0.5*xcenter);
+}
+
+bool StrainSimplePopaAniz::IsRealSpaceType() const
+{
+  return true;
+}
+
+bool StrainSimplePopaAniz::IsAnisotropic () const
+{
+  return true;
+}
+
+void StrainSimplePopaAniz::SetProfileParams(const REAL ehhScale, const REAL eta0)
+{
+  mehhScale = ehhScale;
+  mEta0 = eta0;
+  mClockMaster.Reset();
+}
+
+void StrainSimplePopaAniz::SetPopaCoefs(const CrystVector_REAL &coefs)
+{
+  if(mehhCoefs.numElements()!=coefs.numElements())
+    throw ObjCrystException("MStruct::StrainSimplePopaAniz::SetPopaCoefs(): Invalid set of coefficients.");
+
+  mehhCoefs = coefs;
+  mClockMaster.Reset();
+}
+
+void StrainSimplePopaAniz::InitParameters()
+{
+  { // Parameters-set maybe changed - remove an old parameters set
+    try {
+      long ii = this->GetParIndex (&mehhScale, true);
+      if (ii != -1) {
+	ObjCryst::RefinablePar &par = this->GetPar(ii);
+	this->RemovePar(&par);
+      }
+      ii = this->GetParIndex (&mEta0, true);
+      if (ii != -1) {
+	ObjCryst::RefinablePar &par = this->GetPar(ii);
+	this->RemovePar(&par);
+      }
+      for(int k=0; k<mehhCoefs.numElements(); k++) {
+	ii = this->GetParIndex (mehhCoefs.data()+k, true);
+	if (ii != -1) {
+	  ObjCryst::RefinablePar &par = this->GetPar(ii);
+	  this->RemovePar(&par);
+	}
+      }
+    }
+    catch (std::exception &e) {
+      cerr << "< MStruct::StrainSimplePopaAniz::InitParameters()\n";
+      cerr << "Unexpected exception: " << e.what() << "\n";
+      cerr << "Unexpected exception thrown during removing old parameters from the object.\n >" << endl; 
+      throw ObjCrystException("MStruct::StrainSimplePopaAniz::InitParameters(): Program error.");
+    }
+  } // removing old parametrs
+
+  // Add RefinableObj params
+
+  {// microstrain scale
+    RefinablePar tmp("ehhScale", &mehhScale, 0.0, 1.e2,
+		     gpRefParTypeScattDataProfileWidth,
+		     REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false,1.0);
+    tmp.AssignClock(mClockMaster);
+    tmp.SetDerivStep(0.05);
+    this->AddPar(tmp);
+  }
+
+  { // Eta0
+    RefinablePar tmp("Eta0", &mEta0, 0.0, 1.e0,
+		     gpRefParTypeScattDataProfileWidth,
+		     REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false,1.0);
+    tmp.AssignClock(mClockMaster);
+    tmp.SetDerivStep(0.02);
+    this->AddPar(tmp);
+  }
+
+  // microstrain anisotropy coefs
+  for(int k=0; k<mehhCoefs.numElements(); k++) {
+    // create parameter name
+    ostringstream ss;
+    ss << "ehhE" << k;
+    RefinablePar tmp(ss.str(), mehhCoefs.data()+k, -1.e2, 1.e2,
+		   gpRefParTypeScattDataProfileWidth,
+		   REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false,1.0);
+    tmp.AssignClock(mClockMaster);
+    tmp.SetDerivStep(0.1);
+    this->AddPar(tmp);
+  }
+
+  mClockMaster.Reset();
+}
+
+////////////////////////////////////////////////////////////////////////
+//
 //    InterferenceSimpleSizeBroadeningEffect
 //
 ////////////////////////////////////////////////////////////////////////

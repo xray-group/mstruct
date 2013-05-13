@@ -29,8 +29,8 @@
  */
 
 //#define program_version "0.39-(Fox-r1221)-testing-WCfaults+ExternalLSQConstraints"
-#define program_version "0.94-(Fox-r1221)-develop" // CircRodsGamma
-#define program_version "0.95-(Fox-r1221)-develop"
+//#define program_version "0.94-(Fox-r1221)-develop" // CircRodsGamma
+#define program_version "0.96-(Fox-r1221)-develop"
 
 #include "MStruct.h"
 
@@ -942,6 +942,32 @@ int main (int argc, char *argv[])
 	   }
 	   else
 	     throw ObjCrystException("Unknown model parameters-set option for CircRodsGamma broadening effect!");
+	   
+	   btype_not_found = false;
+	 }
+	// Anisotropic microstrain broadening (simple model according to Popa, ref: TODO) 
+	 if(btype_not_found && ( btype==string("StrainSimpleAniz") ) ) {
+	   MStruct::StrainSimplePopaAniz * strainEffect
+	     = new MStruct::StrainSimplePopaAniz;
+	   strainEffect->SetName(bname);
+	   vReflProfComponents.push_back(strainEffect);
+
+	  // model anisotropy coefficients
+	   int nbCoefs = 9;
+	   CrystVector_REAL coefs(nbCoefs);
+	   cout << "microstrain model coefficients (E1, E2, ...)" << endl;
+	   read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+	   for(int k=0; k<nbCoefs; k++)
+	     ccin >> coefs(k);
+	  
+          // model parameters
+	   REAL ehhScale, eta0;
+	   cout << "microstrain Scale, Eta0 (0...Gaussian, 1...Cauchy)" << endl;
+	   read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+	   ccin >> ehhScale >> eta0;
+
+	   strainEffect->SetPopaCoefs(coefs);
+	   strainEffect->SetProfileParams(ehhScale, eta0);
 	   
 	   btype_not_found = false;
 	 }
