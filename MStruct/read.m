@@ -115,7 +115,7 @@ case 'gnu',
     while 1
         tline = fgetl(fid);
         if ~ischar(tline), break, end    
-        if (length(tline)<1 | tline(1)=='#'), continue, end,
+        if (length(tline)<1 || tline(1)=='#'), continue, end,
         out(end+1,:) = str2num(tline);
     end
     out = out.';

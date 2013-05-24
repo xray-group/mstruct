@@ -72,7 +72,7 @@ if bplotindexes,
         d1 = []; n = 0;
         while logical(1),
             tline = fgetl(fid);
-            if isempty(tline) | (tline(1)=='#' & n>0), break, end,
+            if isempty(tline) || (tline(1)=='#' && n>0), break, end,
             if (tline(1)=='#'), continue, end,
             n = n + 1; d1(n,:) = str2num(tline);
         end,
