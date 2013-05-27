@@ -3878,9 +3878,9 @@ REAL StrainSimplePopaAniz::GetApproxFWHM(const REAL xcenter,
   const REAL aa = crystal.GetLatticePar(0); 
   ehh *= 1./pow(h2*aa*aa,2);
 
-  ehh *= mehhScale;
+  ehh = (ehh>=0.) ? sqrt(ehh) : 0.0; // ehh >= 0.0
 
-  ehh = (ehh>=0.) ? ehh : 0.0; // ehh >= 0.0
+  ehh *= mehhScale;
 
   return 4*ehh/((1.-mEta0)/phiG+mEta0/phiC)*tan(0.5*xcenter);
 }
