@@ -1,152 +1,64 @@
-\subsection{\-Obj\-Cryst\-:\-:\-Simplex\-Obj \-Class \-Reference}
-\label{a00093}\index{\-Obj\-Cryst\-::\-Simplex\-Obj@{\-Obj\-Cryst\-::\-Simplex\-Obj}}
+\subsection{Obj\-Cryst\-:\-:Scattering\-Component Struct Reference}
+\label{a00093}\index{Obj\-Cryst\-::\-Scattering\-Component@{Obj\-Cryst\-::\-Scattering\-Component}}
 
 
-\-Conjugate \-Gradient \-Algorithm object.  
+A scattering position in a crystal, associated with the corresponding occupancy and a pointer to the \doxyref{Scattering\-Power}{p.}{a00097}.  
 
 
-\-Inheritance diagram for \-Obj\-Cryst\-:\-:\-Simplex\-Obj\-:\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[height=2.000000cm]{a00093}
-\end{center}
-\end{figure}
-\subsubsection*{\-Public \-Member \-Functions}
+\subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bf \-Simplex\-Obj} (const string name=\char`\"{}\-Unnamed \-Simplex \-Object\char`\"{})\label{a00093_a8af9110ac672b9b932adf838a853b90b}
+bool {\bfseries operator==} (const {\bf Scattering\-Component} \&rhs) const \label{a00093_a3c90ac5f4f15fd8ab4e1272a542ce4a9}
 
-\begin{DoxyCompactList}\small\item\em \-Constructor. \end{DoxyCompactList}\item 
-virtual void {\bf \-Optimize} (long \&nb\-Steps, const bool silent=false, const \-R\-E\-A\-L finalcost=0, const \-R\-E\-A\-L max\-Time=-\/1)
-\begin{DoxyCompactList}\small\item\em \-Launch optimization (a single run) for \-N steps. \end{DoxyCompactList}\item 
-virtual void {\bf \-Multi\-Run\-Optimize} (long \&nb\-Cycle, long \&nb\-Steps, const bool silent=false, const \-R\-E\-A\-L finalcost=0, const \-R\-E\-A\-L max\-Time=-\/1)
-\begin{DoxyCompactList}\small\item\em \-Launch optimization for multiple runs of \-N steps. \end{DoxyCompactList}\item 
-virtual void {\bf \-X\-M\-L\-Output} (ostream \&os, int indent=0) const 
-\begin{DoxyCompactList}\small\item\em \-Output a description of the object in \-X\-M\-L format to a stream. \end{DoxyCompactList}\item 
-virtual void {\bf \-X\-M\-L\-Input} (istream \&is, const {\bf \-X\-M\-L\-Cryst\-Tag} \&tag)
-\begin{DoxyCompactList}\small\item\em \-Input in \-X\-M\-L format from a stream, restoring the set of refined objects and the associated cost functions. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{\-Private \-Member \-Functions}
+\item 
+bool {\bfseries operator!=} (const {\bf Scattering\-Component} \&rhs) const \label{a00093_a7a2f4b968cc15b1adbfb0dda7e8b3452}
+
+\item 
+void {\bf Print} () const \label{a00093_ae539b046ae25fba220ef58881c2fe9b7}
+
+\begin{DoxyCompactList}\small\item\em Print one line oabout this component. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\-R\-E\-A\-L {\bf \-Generate\-New\-Simplex\-Configuration} (\-Cryst\-Vector\-\_\-\-R\-E\-A\-L \&v\-L\-L\-K, \-Cryst\-Vector\-\_\-long \&v\-Index, unsigned long worst, \-R\-E\-A\-L f)
-\begin{DoxyCompactList}\small\item\em \-Try a new configuration by expanding the worst vertex from the center by a factor f. \end{DoxyCompactList}\end{DoxyCompactItemize}
+R\-E\-A\-L {\bf m\-X}\label{a00093_a5e298bbfa80dc72cbf666bd8007c1a58}
 
+\begin{DoxyCompactList}\small\item\em Coordinates of scattering positions i the crystal with the corresponding occupancy. \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bfseries m\-Y}\label{a00093_a0ad9f5614c3240d3b97310da61180a48}
 
-\subsubsection{\-Detailed \-Description}
-\-Conjugate \-Gradient \-Algorithm object. 
-
-currently does not handle parameters hitting limits, and is not very efficient (uses numerical derivatives) 
-
-\subsubsection{\-Member \-Function \-Documentation}
-\index{\-Obj\-Cryst\-::\-Simplex\-Obj@{\-Obj\-Cryst\-::\-Simplex\-Obj}!\-Generate\-New\-Simplex\-Configuration@{\-Generate\-New\-Simplex\-Configuration}}
-\index{\-Generate\-New\-Simplex\-Configuration@{\-Generate\-New\-Simplex\-Configuration}!ObjCryst::SimplexObj@{\-Obj\-Cryst\-::\-Simplex\-Obj}}
-\paragraph[{\-Generate\-New\-Simplex\-Configuration}]{\setlength{\rightskip}{0pt plus 5cm}\-R\-E\-A\-L {\bf \-Obj\-Cryst\-::\-Simplex\-Obj\-::\-Generate\-New\-Simplex\-Configuration} (
-\begin{DoxyParamCaption}
-\item[{\-Cryst\-Vector\-\_\-\-R\-E\-A\-L \&}]{v\-L\-L\-K, }
-\item[{\-Cryst\-Vector\-\_\-long \&}]{v\-Index, }
-\item[{unsigned long}]{worst, }
-\item[{\-R\-E\-A\-L}]{f}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [private]}}\label{a00093_a5dbafc28130ee7db84587b8288c01830}
-
-
-\-Try a new configuration by expanding the worst vertex from the center by a factor f. 
-
-\-If it is better, store it as new worst. \-Return the new obtained llk \index{\-Obj\-Cryst\-::\-Simplex\-Obj@{\-Obj\-Cryst\-::\-Simplex\-Obj}!\-Multi\-Run\-Optimize@{\-Multi\-Run\-Optimize}}
-\index{\-Multi\-Run\-Optimize@{\-Multi\-Run\-Optimize}!ObjCryst::SimplexObj@{\-Obj\-Cryst\-::\-Simplex\-Obj}}
-\paragraph[{\-Multi\-Run\-Optimize}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-Simplex\-Obj\-::\-Multi\-Run\-Optimize} (
-\begin{DoxyParamCaption}
-\item[{long \&}]{nb\-Cycle, }
-\item[{long \&}]{nb\-Steps, }
-\item[{const bool}]{silent = {\ttfamily false}, }
-\item[{const \-R\-E\-A\-L}]{finalcost = {\ttfamily 0}, }
-\item[{const \-R\-E\-A\-L}]{max\-Time = {\ttfamily -\/1}}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00093_a1c7ae823f9e31169b453f36d15c049b8}
-
-
-\-Launch optimization for multiple runs of \-N steps. 
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em nb\-Cycle,\-:} & the number of runs (cycles) to perform. \-The structure is randomized at the beginning of each cycle. \-If nb\-Cycle==-\/1, this will run indefinitely. \-The nb\-Cycle parameter is decreased after each run. \\
-\hline
-{\em nb\-Steps,\-:} & the number of steps to go. \-This number is modified (decreases!) as the refinement goes on. \\
-\hline
-{\em silent} & \-: if true, absolutely no message should be printed (except debugging) \\
-\hline
-{\em finalcost,\-:} & the optimization will stop if overall cost fallse below this value \\
-\hline
-{\em max\-Time,\-:} & the optimization will stop after the given number of seconds has been spent optimizing (ignored if $<$0). \\
-\hline
-\end{DoxyParams}
-
-
-\-Implements {\bf \-Obj\-Cryst\-::\-Optimization\-Obj} \doxyref{}{p.}{a00055_aa53575dbda2ec3f561bed934beb4ca6f}.
-
-\index{\-Obj\-Cryst\-::\-Simplex\-Obj@{\-Obj\-Cryst\-::\-Simplex\-Obj}!\-Optimize@{\-Optimize}}
-\index{\-Optimize@{\-Optimize}!ObjCryst::SimplexObj@{\-Obj\-Cryst\-::\-Simplex\-Obj}}
-\paragraph[{\-Optimize}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-Simplex\-Obj\-::\-Optimize} (
-\begin{DoxyParamCaption}
-\item[{long \&}]{nb\-Steps, }
-\item[{const bool}]{silent = {\ttfamily false}, }
-\item[{const \-R\-E\-A\-L}]{finalcost = {\ttfamily 0}, }
-\item[{const \-R\-E\-A\-L}]{max\-Time = {\ttfamily -\/1}}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00093_aa8bf4b209e2ce6229722b18ec9911010}
-
-
-\-Launch optimization (a single run) for \-N steps. 
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em nb\-Steps,\-:} & the number of steps to go. \-This number is modified (decreases!) as the refinement goes on. \\
-\hline
-{\em silent} & \-: if true, absolutely no message should be printed (except debugging) \\
-\hline
-{\em finalcost,\-:} & the optimization will stop if overall cost fallse below this value \\
-\hline
-{\em max\-Time,\-:} & the optimization will stop after the given number of seconds has been spent optimizing (ignored if $<$0). \\
-\hline
-\end{DoxyParams}
-
-
-\-Implements {\bf \-Obj\-Cryst\-::\-Optimization\-Obj} \doxyref{}{p.}{a00055_a08c77dc6ec80f63bf067ef2968a0b6dc}.
-
-\index{\-Obj\-Cryst\-::\-Simplex\-Obj@{\-Obj\-Cryst\-::\-Simplex\-Obj}!\-X\-M\-L\-Input@{\-X\-M\-L\-Input}}
-\index{\-X\-M\-L\-Input@{\-X\-M\-L\-Input}!ObjCryst::SimplexObj@{\-Obj\-Cryst\-::\-Simplex\-Obj}}
-\paragraph[{\-X\-M\-L\-Input}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-Simplex\-Obj\-::\-X\-M\-L\-Input} (
-\begin{DoxyParamCaption}
-\item[{istream \&}]{is, }
-\item[{const {\bf \-X\-M\-L\-Cryst\-Tag} \&}]{tag}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00093_ae6ed0602ffdd2db1a10be80820a0a285}
-
-
-\-Input in \-X\-M\-L format from a stream, restoring the set of refined objects and the associated cost functions. 
-
-\-Note that the corresponding objects must have been loaded in memory before, else shit happens. 
-
-\-Implements {\bf \-Obj\-Cryst\-::\-Optimization\-Obj} \doxyref{}{p.}{a00055_aa07aee60f56780e2c56fb20f4a5f48a8}.
-
-\index{\-Obj\-Cryst\-::\-Simplex\-Obj@{\-Obj\-Cryst\-::\-Simplex\-Obj}!\-X\-M\-L\-Output@{\-X\-M\-L\-Output}}
-\index{\-X\-M\-L\-Output@{\-X\-M\-L\-Output}!ObjCryst::SimplexObj@{\-Obj\-Cryst\-::\-Simplex\-Obj}}
-\paragraph[{\-X\-M\-L\-Output}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-Simplex\-Obj\-::\-X\-M\-L\-Output} (
-\begin{DoxyParamCaption}
-\item[{ostream \&}]{os, }
-\item[{int}]{indent = {\ttfamily 0}}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00093_a7111042ca3a7201039a25fe548cb524c}
-
-
-\-Output a description of the object in \-X\-M\-L format to a stream. 
-
-\-This saves the list of refined object and the cost functions, as well as options for the refinement. \-The refined objects are {\bfseries not} saved, so this must be done somewhere else (they must be reloaded before this object). 
-
-\-Implements {\bf \-Obj\-Cryst\-::\-Optimization\-Obj} \doxyref{}{p.}{a00055_a6b7726159bb0d5dad1c7eebaee78f53a}.
-
-
-
-\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-\-Simplex.\-h\end{DoxyCompactItemize}
+R\-E\-A\-L {\bfseries m\-Z}\label{a00093_a6e3cf2fb825a1a6912bf9cebc62d4cf7}
+
+\item 
+R\-E\-A\-L {\bfseries m\-Occupancy}\label{a00093_a845b921b1d5945619b5bfcb87264c125}
+
+\item 
+const {\bf Scattering\-Power} $\ast$ {\bf mp\-Scatt\-Pow}\label{a00093_a1aa0c754e20ac3a0489ed57c0cb31bd3}
+
+\begin{DoxyCompactList}\small\item\em The \doxyref{Scattering\-Power}{p.}{a00097} associated with this position. \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bf m\-Dyn\-Pop\-Corr}
+\begin{DoxyCompactList}\small\item\em Dynamical Population Correction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+A scattering position in a crystal, associated with the corresponding occupancy and a pointer to the \doxyref{Scattering\-Power}{p.}{a00097}. 
+
+Also given is the 
+
+\subsubsection{Member Data Documentation}
+\index{Obj\-Cryst\-::\-Scattering\-Component@{Obj\-Cryst\-::\-Scattering\-Component}!m\-Dyn\-Pop\-Corr@{m\-Dyn\-Pop\-Corr}}
+\index{m\-Dyn\-Pop\-Corr@{m\-Dyn\-Pop\-Corr}!ObjCryst::ScatteringComponent@{Obj\-Cryst\-::\-Scattering\-Component}}
+\paragraph[{m\-Dyn\-Pop\-Corr}]{\setlength{\rightskip}{0pt plus 5cm}R\-E\-A\-L Obj\-Cryst\-::\-Scattering\-Component\-::m\-Dyn\-Pop\-Corr\hspace{0.3cm}{\ttfamily [mutable]}}\label{a00093_a33af12bb3f340af259a8b8450f837efd}
+
+
+Dynamical Population Correction. 
+
+The population of any atom is given by m\-Occupancy$\ast$m\-Dyn\-Pop\-Corr. m\-Popu is the {\itshape real} m\-Occupancy (0$<$.$<$1), and should be the only one used during a refinement. However during a {\itshape model} {\itshape search} for the structure, atoms may fall unexpectedly in a special position or with an overlap of two atoms (the shared oxygen between two polyhedras, for example). In these cases it is necessary to dynamically correct the population during the generation of structural models. See also \doxyref{Crystal\-::\-Calc\-Dyn\-Pop\-Corr}{p.}{a00027_a69975008974c9603ebb794bb6bb20fe8}
+
+\begin{DoxyNote}{Note}
+this parameter is mutable, and is computed by the \doxyref{Crystal}{p.}{a00027} object 
+\end{DoxyNote}
+
+
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Scattering\-Power.\-h\end{DoxyCompactItemize}

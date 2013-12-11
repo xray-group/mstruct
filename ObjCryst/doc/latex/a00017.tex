@@ -1,68 +1,39 @@
-\subsection{Obj\-Cryst\-:\-:C\-I\-F Class Reference}
-\label{a00017}\index{Obj\-Cryst\-::\-C\-I\-F@{Obj\-Cryst\-::\-C\-I\-F}}
+\subsection{Obj\-Cryst\-:\-:W\-X\-Molecule\-:\-:Cell\-Atom Struct Reference}
+\label{a00017}\index{Obj\-Cryst\-::\-W\-X\-Molecule\-::\-Cell\-Atom@{Obj\-Cryst\-::\-W\-X\-Molecule\-::\-Cell\-Atom}}
 
 
-Main \doxyref{C\-I\-F}{p.}{a00017} class -\/ parses the stream and separates data blocks, comments, items, loops.  
+Structure to store the \doxyref{Atom}{p.}{a00015} parameters.  
 
 
-\subsubsection*{Public Member Functions}
-\begin{DoxyCompactItemize}
-\item 
-{\bf C\-I\-F} (std\-::istream \&in, const bool interpret=true, const bool verbose=false)
-\begin{DoxyCompactList}\small\item\em Creates the \doxyref{C\-I\-F}{p.}{a00017} object from a stream. \end{DoxyCompactList}\item 
-void {\bf Parse} (std\-::stringstream \&in)
-\begin{DoxyCompactList}\small\item\em Separate the file in data blocks and parse them to sort tags, loops and comments. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-std\-::map$<$ std\-::string, {\bf C\-I\-F\-Data} $>$ {\bf mv\-Data}\label{a00017_adc6341fa5bbfaf7257752959317a2b57}
+{\bf Mol\-Atom} $\ast$ {\bfseries mp\-Atom}\label{a00017_ad42e078ccf1193f1bda7394a07be31d5}
 
-\begin{DoxyCompactList}\small\item\em The data blocks, after parsing. The key is the name of the data block. \end{DoxyCompactList}\item 
-std\-::list$<$ std\-::string $>$ {\bf mv\-Comment}\label{a00017_ac0cd3903198ad04595488047a046e470}
+\item 
+std\-::string {\bfseries m\-Name}\label{a00017_a6d1f3559b25ffb17b9095dd92b680e51}
 
-\begin{DoxyCompactList}\small\item\em Global comments, outside and data block. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\item 
+const {\bf Scattering\-Power} $\ast$ {\bfseries mp\-Scattering\-Power}\label{a00017_a543efd9bcc607f7ca87ae672bb3ab858}
+
+\item 
+R\-E\-A\-L {\bfseries m\-X}\label{a00017_a78d75f4d42aa474bc6bcf6597bfa999d}
+
+\item 
+R\-E\-A\-L {\bfseries m\-Y}\label{a00017_a744ed5e33a9d2ec36243fc6c5a8c0caf}
+
+\item 
+R\-E\-A\-L {\bfseries m\-Z}\label{a00017_aed30b328634831e4c62971133f6be407}
+
+\item 
+bool {\bf m\-Need\-Update\-U\-I}\label{a00017_ae4923e30e4b7b2a22e2b74b0ac1b6c00}
+
+\begin{DoxyCompactList}\small\item\em True if we need to update the displayed values. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-Main \doxyref{C\-I\-F}{p.}{a00017} class -\/ parses the stream and separates data blocks, comments, items, loops. 
+Structure to store the \doxyref{Atom}{p.}{a00015} parameters. 
 
-All values are stored as string, and Each \doxyref{C\-I\-F}{p.}{a00017} block is stored in a separate \doxyref{C\-I\-F\-Data}{p.}{a00019} object. No interpretaion is made here -\/ this must be done from all \doxyref{C\-I\-F\-Data}{p.}{a00019} objects. 
-
-\subsubsection{Constructor \& Destructor Documentation}
-\index{Obj\-Cryst\-::\-C\-I\-F@{Obj\-Cryst\-::\-C\-I\-F}!C\-I\-F@{C\-I\-F}}
-\index{C\-I\-F@{C\-I\-F}!ObjCryst::CIF@{Obj\-Cryst\-::\-C\-I\-F}}
-\paragraph[{C\-I\-F}]{\setlength{\rightskip}{0pt plus 5cm}Obj\-Cryst\-::\-C\-I\-F\-::\-C\-I\-F (
-\begin{DoxyParamCaption}
-\item[{std\-::istream \&}]{in, }
-\item[{const bool}]{interpret = {\ttfamily true}, }
-\item[{const bool}]{verbose = {\ttfamily false}}
-\end{DoxyParamCaption}
-)}\label{a00017_ad570039a62026b01b0fdbcd9f9480d7a}
-
-
-Creates the \doxyref{C\-I\-F}{p.}{a00017} object from a stream. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em interpret,\-:} & if true, interpret all data blocks. See \doxyref{C\-I\-F\-Data\-::\-Extract\-All()}{p.}{a00019_a406e1448ca864b4d679edde83c6351ab} \\
-\hline
-\end{DoxyParams}
-
-
-\subsubsection{Member Function Documentation}
-\index{Obj\-Cryst\-::\-C\-I\-F@{Obj\-Cryst\-::\-C\-I\-F}!Parse@{Parse}}
-\index{Parse@{Parse}!ObjCryst::CIF@{Obj\-Cryst\-::\-C\-I\-F}}
-\paragraph[{Parse}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-C\-I\-F\-::\-Parse (
-\begin{DoxyParamCaption}
-\item[{std\-::stringstream \&}]{in}
-\end{DoxyParamCaption}
-)}\label{a00017_ad3d151ac993f8afcf4e5f22773df2e0c}
-
-
-Separate the file in data blocks and parse them to sort tags, loops and comments. 
-
-All is stored in the original strings. 
-
-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-C\-I\-F.\-h\end{DoxyCompactItemize}
+wx\-Molecule.\-h\end{DoxyCompactItemize}

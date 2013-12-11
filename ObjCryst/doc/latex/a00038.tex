@@ -1,41 +1,39 @@
-\subsection{\-Obj\-Cryst\-:\-:\-Lorentz\-Corr \-Class \-Reference}
-\label{a00038}\index{\-Obj\-Cryst\-::\-Lorentz\-Corr@{\-Obj\-Cryst\-::\-Lorentz\-Corr}}
+\subsection{Format\-String Class Reference}
+\label{a00038}\index{Format\-String@{Format\-String}}
 
 
-\-Lorentz \-Correction.  
+output a string with a fixed length (adding necessary space or removing excess characters) \-:  
 
 
-\-Inheritance diagram for \-Obj\-Cryst\-:\-:\-Lorentz\-Corr\-:\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[height=2.000000cm]{a00038}
-\end{center}
-\end{figure}
-\subsubsection*{\-Public \-Member \-Functions}
+\subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries \-Lorentz\-Corr} (const {\bf \-Scattering\-Data} \&data)\label{a00038_a9f814b060cfafe4e829dc3977d9a7f1b}
+{\bfseries Format\-String} (const string \&str, const unsigned int width=5)\label{a00038_a89e88ecbdd91c8120ffbfbdc733c9b7b}
 
 \item 
-virtual const string \& {\bf \-Get\-Name} () const \label{a00038_ab57782d9fe860701bb87309742afe2e5}
+int {\bfseries length} () const \label{a00038_a8d9ccf3761a959d82bd705f601ae5360}
 
-\begin{DoxyCompactList}\small\item\em \-Get the name of this object. \end{DoxyCompactList}\item 
-virtual const string \& {\bf \-Get\-Class\-Name} () const \label{a00038_a740bd7f01b62a994ad5bc1c121d1e626}
-
-\begin{DoxyCompactList}\small\item\em \-Get the name of the class. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{\-Protected \-Member \-Functions}
+\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-virtual void {\bf \-Calc\-Corr} () const \label{a00038_adc247e6477f11474c542f2979984d238}
+string {\bfseries m\-String}\label{a00038_a08c22a7bd34d0bcf7c62147cff2a5e85}
 
-\begin{DoxyCompactList}\small\item\em \-Do the computation of corrected intensities. \end{DoxyCompactList}\end{DoxyCompactItemize}
-
-
-\subsubsection{\-Detailed \-Description}
-\-Lorentz \-Correction. 
-
-\-So far, it only considers the correction for equatorial diffraction\-: $ L = \frac{1}{\sin(2\theta)} $ 
-
-\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-\-Scattering\-Corr.\-h\end{DoxyCompactItemize}
+const unsigned int {\bfseries m\-Width}\label{a00038_ae1191d6d25031c2d6e142ce989ff6c74}
+
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+output a string with a fixed length (adding necessary space or removing excess characters) \-: 
+
+
+\begin{DoxyCode}
+os << FormatString(myString,15);
+\end{DoxyCode}
+ 
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+V\-F\-N\-Stream\-Format.\-h\end{DoxyCompactItemize}

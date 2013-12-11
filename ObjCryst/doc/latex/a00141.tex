@@ -1,55 +1,34 @@
-\subsection{\-Obj\-Cryst\-:\-:\-W\-X\-Profile\-Pseudo\-Voigt \-Class \-Reference}
-\label{a00141}\index{\-Obj\-Cryst\-::\-W\-X\-Profile\-Pseudo\-Voigt@{\-Obj\-Cryst\-::\-W\-X\-Profile\-Pseudo\-Voigt}}
+\subsection{Obj\-Cryst\-:\-:wx\-Multi\-Choice\-Dialog\-\_\-\-List\-Box Class Reference}
+\label{a00141}\index{Obj\-Cryst\-::wx\-Multi\-Choice\-Dialog\-\_\-\-List\-Box@{Obj\-Cryst\-::wx\-Multi\-Choice\-Dialog\-\_\-\-List\-Box}}
 
 
-\-Class to display a \-Powder \-Pattern \-Pseudo-\/\-Voigt \-Profile.  
+Provides the same functionnality as wx\-Multi\-Choice\-Dialog, but always using a wx\-List\-Box, which is much easier when selecting a large number of successive choices (using shift-\/click).  
 
 
-\-Inheritance diagram for \-Obj\-Cryst\-:\-:\-W\-X\-Profile\-Pseudo\-Voigt\-:\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[height=3.000000cm]{a00141}
-\end{center}
-\end{figure}
-\subsubsection*{\-Public \-Member \-Functions}
+
+
+Inherits wx\-Dialog.
+
+\subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries \-W\-X\-Profile\-Pseudo\-Voigt} (wx\-Window $\ast$parent, {\bf \-Reflection\-Profile\-Pseudo\-Voigt} $\ast$prof)\label{a00141_a56ea943a8f877deb5a22c50f893787ba}
+{\bfseries wx\-Multi\-Choice\-Dialog\-\_\-\-List\-Box} (wx\-Window $\ast$parent, const wx\-String \&message, const wx\-String \&caption, int n, const wx\-String $\ast$choices)\label{a00141_a3048c7db35d3c35a993ca818f8ec3087}
 
 \item 
-virtual bool {\bf \-On\-Change\-Name} (const int id)
-\begin{DoxyCompactList}\small\item\em \-When a \doxyref{\-W\-X\-Field\-Name}{p.}{a00121} has been changed by the user, it is handled here. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{\-Private \-Attributes}
+wx\-Array\-Int {\bfseries Get\-Selections} () const \label{a00141_a128fb92ed6304bca6df23e9839b0d44d}
+
+\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-{\bf \-Reflection\-Profile\-Pseudo\-Voigt} $\ast$ {\bfseries mp\-Profile}\label{a00141_a698a7e16b570300f6ad4ea258d98a9b3}
+wx\-List\-Box {\bfseries m\-List\-Box}\label{a00141_a145d64abc35498abb940f28ab81aebda}
 
 \end{DoxyCompactItemize}
 
 
-\subsubsection{\-Detailed \-Description}
-\-Class to display a \-Powder \-Pattern \-Pseudo-\/\-Voigt \-Profile. 
+\subsubsection{Detailed Description}
+Provides the same functionnality as wx\-Multi\-Choice\-Dialog, but always using a wx\-List\-Box, which is much easier when selecting a large number of successive choices (using shift-\/click). 
 
-
-
-\subsubsection{\-Member \-Function \-Documentation}
-\index{\-Obj\-Cryst\-::\-W\-X\-Profile\-Pseudo\-Voigt@{\-Obj\-Cryst\-::\-W\-X\-Profile\-Pseudo\-Voigt}!\-On\-Change\-Name@{\-On\-Change\-Name}}
-\index{\-On\-Change\-Name@{\-On\-Change\-Name}!ObjCryst::WXProfilePseudoVoigt@{\-Obj\-Cryst\-::\-W\-X\-Profile\-Pseudo\-Voigt}}
-\paragraph[{\-On\-Change\-Name}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool {\bf \-Obj\-Cryst\-::\-W\-X\-Profile\-Pseudo\-Voigt\-::\-On\-Change\-Name} (
-\begin{DoxyParamCaption}
-\item[{const int}]{id}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00141_a6af548e3f77328ca30fb3a06a50fd40a}
-
-
-\-When a \doxyref{\-W\-X\-Field\-Name}{p.}{a00121} has been changed by the user, it is handled here. 
-
-\-This returns true if the value has been handled (for inheritance purposes). 
-
-\-Implements {\bf \-Obj\-Cryst\-::\-W\-X\-Cryst\-Obj} \doxyref{}{p.}{a00115_a3736357599263df7e550790753c040a3}.
-
-
-
-\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-wx\-Powder\-Pattern.\-h\end{DoxyCompactItemize}
+wx\-Cryst.\-h\end{DoxyCompactItemize}

@@ -1,43 +1,65 @@
-\subsection{Obj\-Cryst\-:\-:Mol\-Z\-Atom Struct Reference}
-\label{a00049}\index{Obj\-Cryst\-::\-Mol\-Z\-Atom@{Obj\-Cryst\-::\-Mol\-Z\-Atom}}
+\subsection{Obj\-Cryst\-:\-:M\-D\-Atom\-Group Struct Reference}
+\label{a00049}\index{Obj\-Cryst\-::\-M\-D\-Atom\-Group@{Obj\-Cryst\-::\-M\-D\-Atom\-Group}}
 
 
-Light-\/weight representation of an atom in the molecule, as a part of a Z-\/matrix.  
+Groups of atoms that can be moved using molecular dynamics principles, taking a list of restraints as ptential.  
 
 
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf M\-D\-Atom\-Group} ()\label{a00049_a078c9456f28fc82789a4d98e91ef0599}
+
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+{\bf M\-D\-Atom\-Group} (std\-::set$<$ {\bf Mol\-Atom} $\ast$ $>$ \&vat, std\-::set$<$ {\bf Mol\-Bond} $\ast$ $>$ \&vb, std\-::set$<$ {\bf Mol\-Bond\-Angle} $\ast$ $>$ \&va, std\-::set$<$ {\bf Mol\-Dihedral\-Angle} $\ast$ $>$ \&vd)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+void {\bf Print} (ostream \&os, bool full=true) const \label{a00049_a99919d489dabf1beae35630069018f4f}
+
+\begin{DoxyCompactList}\small\item\em Print one-\/line list of atoms moved. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-const {\bf Scattering\-Power} $\ast$ {\bfseries mp\-Pow}\label{a00049_a84763284b4efc30c91be13265e905475}
+std\-::set$<$ {\bf Mol\-Atom} $\ast$ $>$ {\bfseries mvp\-Atom}\label{a00049_a300e382447655a3533cb830bb3c4cee3}
 
 \item 
-unsigned long {\bfseries m\-Bond\-Atom}\label{a00049_a0e756b0230126d63f2a7b2a13cc1689c}
+std\-::vector$<$ {\bf Mol\-Bond} $\ast$ $>$ {\bfseries mvp\-Bond}\label{a00049_a6d16a774b6b57b964e37f890a89edac0}
 
 \item 
-unsigned long {\bfseries m\-Bond\-Angle\-Atom}\label{a00049_a9e30bfb98a0ca6c57b9eb3de01a3f263}
+std\-::vector$<$ {\bf Mol\-Bond\-Angle} $\ast$ $>$ {\bfseries mvp\-Bond\-Angle}\label{a00049_a68f73aaab1156d32bc79f368e237eaac}
 
 \item 
-unsigned long {\bfseries m\-Dihedral\-Atom}\label{a00049_a8499371cdbeb7afd5e2e62fbc2a143b5}
-
-\item 
-R\-E\-A\-L {\bfseries m\-Bond\-Length}\label{a00049_a4910c978b6e16302ab25abb31275b6e8}
-
-\item 
-R\-E\-A\-L {\bfseries m\-Bond\-Angle}\label{a00049_a978590d76e45ae341e9d5fea680c1cc3}
-
-\item 
-R\-E\-A\-L {\bfseries m\-Dihedral\-Angle}\label{a00049_af33360b883b663c71d1ec79e4f68c169}
+std\-::vector$<$ {\bf Mol\-Dihedral\-Angle} $\ast$ $>$ {\bfseries mvp\-Dihedral\-Angle}\label{a00049_a274d11d65f45f72eb38d83d589852bf9}
 
 \end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-Light-\/weight representation of an atom in the molecule, as a part of a Z-\/matrix. 
+Groups of atoms that can be moved using molecular dynamics principles, taking a list of restraints as ptential. 
 
-This is used to export the \doxyref{Molecule}{p.}{a00047} structure to a z-\/matrix.
+This is used to move group of atoms for which no adequate stretch mode can be used, such as inside flexible rings. 
 
-\begin{DoxyRefDesc}{Todo}
-\item[{\bf Todo}]\-: some flags could be added to mark the fixed/limited nature of the parameters. \end{DoxyRefDesc}
+\subsubsection{Constructor \& Destructor Documentation}
+\index{Obj\-Cryst\-::\-M\-D\-Atom\-Group@{Obj\-Cryst\-::\-M\-D\-Atom\-Group}!M\-D\-Atom\-Group@{M\-D\-Atom\-Group}}
+\index{M\-D\-Atom\-Group@{M\-D\-Atom\-Group}!ObjCryst::MDAtomGroup@{Obj\-Cryst\-::\-M\-D\-Atom\-Group}}
+\paragraph[{M\-D\-Atom\-Group}]{\setlength{\rightskip}{0pt plus 5cm}Obj\-Cryst\-::\-M\-D\-Atom\-Group\-::\-M\-D\-Atom\-Group (
+\begin{DoxyParamCaption}
+\item[{std\-::set$<$ {\bf Mol\-Atom} $\ast$ $>$ \&}]{vat, }
+\item[{std\-::set$<$ {\bf Mol\-Bond} $\ast$ $>$ \&}]{vb, }
+\item[{std\-::set$<$ {\bf Mol\-Bond\-Angle} $\ast$ $>$ \&}]{va, }
+\item[{std\-::set$<$ {\bf Mol\-Dihedral\-Angle} $\ast$ $>$ \&}]{vd}
+\end{DoxyParamCaption}
+)}\label{a00049_a86dd6c6277666fa607685736bdffbedc}
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vat,\-:} & list of atoms inside the group \\
+\hline
+{\em vb,va,vd,\-:} & list of bond, bond angle and dihedral angle restraints \\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}

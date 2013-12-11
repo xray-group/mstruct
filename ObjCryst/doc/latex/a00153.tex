@@ -1,131 +1,81 @@
-\subsection{\-Obj\-Cryst\-:\-:\-Z\-Atom \-Class \-Reference}
-\label{a00153}\index{\-Obj\-Cryst\-::\-Z\-Atom@{\-Obj\-Cryst\-::\-Z\-Atom}}
+\subsection{Obj\-Cryst\-:\-:W\-X\-Scattering\-Power\-Atom Class Reference}
+\label{a00153}\index{Obj\-Cryst\-::\-W\-X\-Scattering\-Power\-Atom@{Obj\-Cryst\-::\-W\-X\-Scattering\-Power\-Atom}}
 
 
-\-Class for individual atoms in a \doxyref{\-Z\-Scatterer}{p.}{a00156} \-Object.  
+wx\-Cryst class for \doxyref{Scattering\-Power\-Atom}{p.}{a00098}  
 
 
-\subsubsection*{\-Public \-Member \-Functions}
+Inheritance diagram for Obj\-Cryst\-:\-:W\-X\-Scattering\-Power\-Atom\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{a00153}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries \-Z\-Atom} ({\bf \-Z\-Scatterer} \&scatt, const {\bf \-Scattering\-Power} $\ast$pow, const long atom\-Bond=0, const \-R\-E\-A\-L bond\-Length=1, const long atom\-Angle=0, const \-R\-E\-A\-L bond\-Angle=\-M\-\_\-\-P\-I, const long atom\-Dihedral=0, const \-R\-E\-A\-L dihedral\-Angle=\-M\-\_\-\-P\-I, const \-R\-E\-A\-L popu=1., const string \&name=\char`\"{}\char`\"{})\label{a00153_abef15e9b63a090e6cf40a6837ea2ac24}
+{\bfseries W\-X\-Scattering\-Power\-Atom} (wx\-Window $\ast$parent, {\bf Scattering\-Power\-Atom} $\ast$)\label{a00153_a75350a1b1f3227bef2227b39dc5ecd60}
 
 \item 
-const string \& {\bfseries \-Get\-Class\-Name} () const \label{a00153_a24e6825a8f25efa16a1d3489be551989}
+virtual bool {\bf On\-Change\-Name} (const int id)
+\begin{DoxyCompactList}\small\item\em When a \doxyref{W\-X\-Field\-Name}{p.}{a00128} has been changed by the user, it is handled here. \end{DoxyCompactList}\item 
+void {\bfseries On\-Change\-Colour} (wx\-Command\-Event \&event)\label{a00153_ae16457f5748ec8b73538dc4068885954}
 
 \item 
-const string \& {\bfseries \-Get\-Name} () const \label{a00153_a38d201a3d337c5888e9a1eaac96f8a95}
-
-\item 
-void {\bfseries \-Set\-Name} (const string \&)\label{a00153_a6cca6a4b33e91ce1bb1a8912f9ba5a53}
-
-\item 
-const {\bf \-Z\-Scatterer} \& {\bf \-Get\-Z\-Scatterer} () const \label{a00153_a228dcc5c1427564705d4e0e3c1209fd3}
-
-\begin{DoxyCompactList}\small\item\em \-Get the \doxyref{\-Z\-Scatterer}{p.}{a00156} associated to this \doxyref{\-Z\-Atom}{p.}{a00153}. \end{DoxyCompactList}\item 
-{\bf \-Z\-Scatterer} \& {\bf \-Get\-Z\-Scatterer} ()\label{a00153_a75a3c9acc2299bd05ac312767552fc65}
-
-\begin{DoxyCompactList}\small\item\em \-Get the \doxyref{\-Z\-Scatterer}{p.}{a00156} associated to this \doxyref{\-Z\-Atom}{p.}{a00153}. \end{DoxyCompactList}\item 
-long {\bf \-Get\-Z\-Bond\-Atom} () const \label{a00153_a27900cb697c7802f4536b63acffa2abf}
-
-\begin{DoxyCompactList}\small\item\em \-Index of the 1st atom used to define the atom in the \-Z-\/\-Matrix (the one from which the bondlength is calculated) \end{DoxyCompactList}\item 
-long {\bf \-Get\-Z\-Angle\-Atom} () const \label{a00153_ad0bf2b2f3b806aa84a38e2b27834d6c7}
-
-\begin{DoxyCompactList}\small\item\em \-Index of the 2nd atom used to define the atom in the \-Z-\/\-Matrix (the one from which the angle is calculated) \end{DoxyCompactList}\item 
-long {\bf \-Get\-Z\-Dihedral\-Angle\-Atom} () const \label{a00153_ab72688856a2e82cab68e9316b595316f}
-
-\begin{DoxyCompactList}\small\item\em \-Index of the 3rd atom used to define the atom in the \-Z-\/\-Matrix (the one from which the dihedral angle is calculated) \end{DoxyCompactList}\item 
-const \-R\-E\-A\-L \& {\bf \-Get\-Z\-Bond\-Length} () const \label{a00153_a5726da359fe1a86aa0ac2294c580c4f6}
-
-\begin{DoxyCompactList}\small\item\em \-Const access to bondlength parameter. \end{DoxyCompactList}\item 
-const \-R\-E\-A\-L \& {\bf \-Get\-Z\-Angle} () const \label{a00153_a4223fbd5846a55c8ce6b104229b9f1a3}
-
-\begin{DoxyCompactList}\small\item\em \-Const access to the angle parameter. \end{DoxyCompactList}\item 
-const \-R\-E\-A\-L \& {\bf \-Get\-Z\-Dihedral\-Angle} () const \label{a00153_a6335f5ae14e04a11162a8da86d717452}
-
-\begin{DoxyCompactList}\small\item\em \-Const access to the dihedral angle parameter. \end{DoxyCompactList}\item 
-const \-R\-E\-A\-L \& {\bf \-Get\-Occupancy} () const \label{a00153_aae8bd87d1b2e863f15a33fabf583cd24}
-
-\begin{DoxyCompactList}\small\item\em \-Const access to the ocupancy parameter. \end{DoxyCompactList}\item 
-const {\bf \-Scattering\-Power} $\ast$ {\bf \-Get\-Scattering\-Power} () const \label{a00153_a5e3eb98f72f7345930077d060bcf4fea}
-
-\begin{DoxyCompactList}\small\item\em \doxyref{\-Scattering\-Power}{p.}{a00090} for this atom. \end{DoxyCompactList}\item 
-void {\bf \-Set\-Z\-Bond\-Length} (const \-R\-E\-A\-L)\label{a00153_ad4d6d810bc1bb90ae7773ac3889bd035}
-
-\begin{DoxyCompactList}\small\item\em \-Access to bondlength parameter. \end{DoxyCompactList}\item 
-void {\bf \-Set\-Z\-Angle} (const \-R\-E\-A\-L)\label{a00153_a84aef5886287556191d7ca2b949160a7}
-
-\begin{DoxyCompactList}\small\item\em \-Access to the angle parameter. \end{DoxyCompactList}\item 
-void {\bf \-Set\-Z\-Dihedral\-Angle} (const \-R\-E\-A\-L)\label{a00153_a17c32ebb8d2ef87b6e9a3b9323457c9f}
-
-\begin{DoxyCompactList}\small\item\em \-Access to the dihedral angle parameter. \end{DoxyCompactList}\item 
-void {\bf \-Set\-Occupancy} (const \-R\-E\-A\-L)\label{a00153_a75e0ae656bb50d29cc511a5ef87ed45f}
-
-\begin{DoxyCompactList}\small\item\em \-Access to the dihedral angle parameter. \end{DoxyCompactList}\item 
-void {\bf \-Set\-Scattering\-Power} (const {\bf \-Scattering\-Power} $\ast$)\label{a00153_a2ca9cf4a73457c2a2645c780cf3175c1}
-
-\begin{DoxyCompactList}\small\item\em \-Set the \doxyref{\-Scattering\-Power}{p.}{a00090}. \end{DoxyCompactList}\item 
-void {\bfseries \-X\-M\-L\-Output} (ostream \&os, int indent=0) const \label{a00153_a03c3fb8d81c63db45b58ee30e0094c8c}
-
-\item 
-void {\bfseries \-X\-M\-L\-Input} (istream \&is, const {\bf \-X\-M\-L\-Cryst\-Tag} \&tag)\label{a00153_a86561067f1c11ed584f94da62b921356}
-
-\end{DoxyCompactItemize}
-\subsubsection*{\-Private \-Attributes}
+virtual void {\bf Update\-U\-I} (const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em Update the User Interface, if necessary. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-const {\bf \-Scattering\-Power} $\ast$ {\bf mp\-Scatt\-Pow}\label{a00153_a231b9157ac0c1e46f918ceb81e00c5a9}
-
-\begin{DoxyCompactList}\small\item\em \-The \doxyref{\-Scattering\-Power}{p.}{a00090} corresponding to this atom. \end{DoxyCompactList}\item 
-long {\bf m\-Atom\-Bond}
-\begin{DoxyCompactList}\small\item\em \-The index (in the \doxyref{\-Z\-Scatterer}{p.}{a00156}) of the atoms which are used to define the position of this atom. \end{DoxyCompactList}\item 
-long {\bfseries m\-Atom\-Angle}\label{a00153_afbb3f2a1081feba9df47a633d9b3c03c}
+{\bf Scattering\-Power\-Atom} $\ast$ {\bfseries mp\-Scattering\-Power\-Atom}\label{a00153_ac67159595394abeced5050d312048c3b}
 
 \item 
-long {\bfseries m\-Atom\-Dihed}\label{a00153_aeb8e98f1aafff33d594829c2f4fd54dc}
-
-\item 
-\-R\-E\-A\-L {\bf m\-Bond\-Length}\label{a00153_ad0611bc2c841424820de4e22369f92c2}
-
-\begin{DoxyCompactList}\small\item\em \-Bond length, angle and dihedral angle. \end{DoxyCompactList}\item 
-\-R\-E\-A\-L {\bfseries m\-Angle}\label{a00153_a0dbf6bba12d4991a68ca55f358a83fb1}
-
-\item 
-\-R\-E\-A\-L {\bfseries m\-Dihed}\label{a00153_aa589d6f9d9223e49dceee0e43ed6cbd5}
-
-\item 
-\-R\-E\-A\-L {\bfseries m\-Occupancy}\label{a00153_a10981a1df565aa1dda5843fcc6e0737c}
-
-\item 
-string {\bf m\-Name}\label{a00153_ab065278f14855ba84aedad6b3469b95e}
-
-\begin{DoxyCompactList}\small\item\em \-Name for this atom. \end{DoxyCompactList}\item 
-{\bf \-Z\-Scatterer} $\ast$ {\bf mp\-Scatt}\label{a00153_ad04d66e284260a92f94a189e4b8d0241}
-
-\begin{DoxyCompactList}\small\item\em the \doxyref{\-Z\-Scatterer}{p.}{a00156} in which this atom is included. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{\-Friends}
-\begin{DoxyCompactItemize}
-\item 
-class {\bfseries \-Z\-Scatterer}\label{a00153_a1a78ff190d815e7f00791ac526f74e91}
+{\bf W\-X\-Field\-Name} $\ast$ {\bfseries mp\-Field\-Symbol}\label{a00153_ada31b25cf4a32d6a7d959cc0189d4b3c}
 
 \end{DoxyCompactItemize}
 
 
-\subsubsection{\-Detailed \-Description}
-\-Class for individual atoms in a \doxyref{\-Z\-Scatterer}{p.}{a00156} \-Object. 
+\subsubsection{Detailed Description}
+wx\-Cryst class for \doxyref{Scattering\-Power\-Atom}{p.}{a00098} 
 
-\-This class is {\itshape purely\/} {\itshape internal\/} to \doxyref{\-Z\-Scatterer}{p.}{a00156}, so should not be used for any other purpose... 
-
-\subsubsection{\-Member \-Data \-Documentation}
-\index{\-Obj\-Cryst\-::\-Z\-Atom@{\-Obj\-Cryst\-::\-Z\-Atom}!m\-Atom\-Bond@{m\-Atom\-Bond}}
-\index{m\-Atom\-Bond@{m\-Atom\-Bond}!ObjCryst::ZAtom@{\-Obj\-Cryst\-::\-Z\-Atom}}
-\paragraph[{m\-Atom\-Bond}]{\setlength{\rightskip}{0pt plus 5cm}long {\bf \-Obj\-Cryst\-::\-Z\-Atom\-::m\-Atom\-Bond}\hspace{0.3cm}{\ttfamily  [private]}}\label{a00153_a7db82eb57372c450d2001c4b065d98bb}
-
-
-\-The index (in the \doxyref{\-Z\-Scatterer}{p.}{a00156}) of the atoms which are used to define the position of this atom. 
-
+\subsubsection{Member Function Documentation}
+\index{Obj\-Cryst\-::\-W\-X\-Scattering\-Power\-Atom@{Obj\-Cryst\-::\-W\-X\-Scattering\-Power\-Atom}!On\-Change\-Name@{On\-Change\-Name}}
+\index{On\-Change\-Name@{On\-Change\-Name}!ObjCryst::WXScatteringPowerAtom@{Obj\-Cryst\-::\-W\-X\-Scattering\-Power\-Atom}}
+\paragraph[{On\-Change\-Name}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool Obj\-Cryst\-::\-W\-X\-Scattering\-Power\-Atom\-::\-On\-Change\-Name (
+\begin{DoxyParamCaption}
+\item[{const int}]{id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00153_a99081b400737a5e28a7207c8c905f6d5}
 
 
-\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+When a \doxyref{W\-X\-Field\-Name}{p.}{a00128} has been changed by the user, it is handled here. 
+
+This returns true if the value has been handled (for inheritance purposes). 
+
+Reimplemented from {\bf Obj\-Cryst\-::\-W\-X\-Refinable\-Obj} \doxyref{}{p.}{a00150_ad784c1cb9ccb0d0e4ebfbc18a8dbbc19}.
+
+\index{Obj\-Cryst\-::\-W\-X\-Scattering\-Power\-Atom@{Obj\-Cryst\-::\-W\-X\-Scattering\-Power\-Atom}!Update\-U\-I@{Update\-U\-I}}
+\index{Update\-U\-I@{Update\-U\-I}!ObjCryst::WXScatteringPowerAtom@{Obj\-Cryst\-::\-W\-X\-Scattering\-Power\-Atom}}
+\paragraph[{Update\-U\-I}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-W\-X\-Scattering\-Power\-Atom\-::\-Update\-U\-I (
+\begin{DoxyParamCaption}
+\item[{const bool}]{mutexlock = {\ttfamily false}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00153_a727146d4ecd5e1c4e5790a3eab0f0ace}
+
+
+Update the User Interface, if necessary. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mutexlock,\-:} & if true, a Mutex will be used to lock the data shared between main and background thread.\\
+\hline
+\end{DoxyParams}
+The idea is to only use a few Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{Cryst\-Update()}{p.}{a00150_a13e4f37ac098de756b27cdb91d6a0551} and \doxyref{Update\-U\-I()}{p.}{a00153_a727146d4ecd5e1c4e5790a3eab0f0ace}. As sub-\/objects (\doxyref{W\-X\-Field}{p.}{a00126},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
+
+Reimplemented from {\bf Obj\-Cryst\-::\-W\-X\-Refinable\-Obj} \doxyref{}{p.}{a00150_a19a1d057eecafd48710d9a3b770c1b28}.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-\-Z\-Scatterer.\-h\end{DoxyCompactItemize}
+wx\-Scattering\-Power.\-h\end{DoxyCompactItemize}

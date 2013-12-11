@@ -1,21 +1,90 @@
-\begin{DoxyParagraph}{Copyright}
-The Obj\-Cryst++ library is copyright (2000-\/2002) {\tt Vincent F\-A\-V\-R\-E-\/\-N\-I\-C\-O\-L\-I\-N} and (2000-\/2001) The University of Geneva (Switzerland) 
+\begin{DoxyVerb}This project is still in active development, even if I left the Lab of Crystallography
+\end{DoxyVerb}
+ in Geneva to the E\-S\-R\-F. If you encounter some problem with the library, please contact me at {\tt vincefn@users.\-sourceforge.\-net} and I'll try to help.
+
+Also note that if you want to develop something using Obj\-Cryst++, I recommend to contact me so that I can help you and avoid possible conflicts. There are numerous things I want to implement, so an incompatibility is always possible when I had something...
+
+Yuu should also subscribe to the mailing-\/lists at\-: {\tt http\-://sourceforge.\-net/mail/?group\-\_\-id=27546} and most especially the \char`\"{}objcryst-\/devel\char`\"{} and \char`\"{}objcryst-\/announce\char`\"{}.\subsection{Download}\label{a00002_download}
+You can download the \doxyref{Obj\-Cryst}{p.}{a00178} library from the {\tt Obj\-Cryst project page} on Source\-Forge, or from the mirrors\-:
+\begin{DoxyItemize}
+\item {\tt C\-C\-P14 (U\-K)}
+\item {\tt C\-C\-P14 (Ca)}
+\item {\tt C\-C\-P14 (U\-S\-A)}
+\item {\tt University of Geneva}
+
+You will need to download the \doxyref{Obj\-Cryst}{p.}{a00178} tar.\-bz2 (.zip for windows), as well as the 'external libraries' tar.\-gz (.zip) archives (the latter include libraries which are used by this project\-: currently atominfo,sglite and newmat). Simply uncompress both archives in the same directory. This will create the atominfo, sglite and newmat directories, as well as the \doxyref{Obj\-Cryst}{p.}{a00178} directory. This documentation is in Obj\-Cryst/doc/html/
+
+If you want to use the Graphical Interface part of the library (wx\-Cryst), e.\-g. if you want to compile Fox, you will also need to download wx\-Windows from {\tt http\-://www.\-wxwindows.\-org}. Depending on your O\-S, you will need wx\-G\-T\-K-\/2.\-2.\-7 (for Linux), or wx\-M\-S\-W-\/2.\-2.\-7 (for Windows).
+\end{DoxyItemize}\subsection{C\-V\-S Repository}\label{a00002_cvs}
+The cutting-\/edge version of the library can always be obtained through its C\-V\-S repository. Under linux, to download the first time the Obj\-Cryst++ directory, first login in the C\-V\-S repository (give a blank password when asked) and then download the \doxyref{Obj\-Cryst}{p.}{a00178} source\-:
+\begin{DoxyCode}
+*      cvs -d:pserver:anonymous@cvs.objcryst.sourceforge.net:/cvsroot/objcryst login
+*      cvs -d:pserver:anonymous@cvs.objcryst.sourceforge.net:/cvsroot/objcryst checkout ObjCryst
+*      
+\end{DoxyCode}
+ once you have done this once, you can update to the current version by typing\-:
+\begin{DoxyCode}
+*      cvs update 
+\end{DoxyCode}
+ (with a blank password) at the root of the \doxyref{Obj\-Cryst}{p.}{a00178} directory.
+
+For further questions about cvs (doing this under windows, etc...)\-: {\tt http\-://www.\-cvshome.\-org/}\subsection{Compiling}\label{a00002_compile}
+\begin{DoxyParagraph}{A\-N\-S\-I C++ Compliance}
+The Obj\-Cryst++ library makes use of some (relatively) recent C++ features, such as templates, exceptions, mutable members. This implies that you need a compiler with reasonable C++ compliance in order to use this library. Currently tested are the G\-N\-U Compiler gcc on Linux and the Free Borland C++ compiler v5.\-5 under Windows Metrowerks Codewarrior Pro 6 on Mac\-O\-S should work, too, but has not been tested recently. 
 \end{DoxyParagraph}
-\begin{DoxyParagraph}{License}
-This is {\tt free software}, but not public domain. By using it, you agree to the terms of the {\tt G\-P\-L license} (General Public License), which you can find in the top directory of the Obj\-Cryst++ package. Should you wish to use this library in a closed-\/source project, please contact the author for possible conditions. 
+\begin{DoxyParagraph}{Makefiles}
+Under linux (resp. windows), copy the rules-\/gnu.\-mak (resp. rules-\/bc32.\-mak) to rules.\-mak at the root of the \doxyref{Obj\-Cryst}{p.}{a00178} directory. You can edit this file to check the paths and (for Windows) some compiling options.
 \end{DoxyParagraph}
-\begin{DoxyParagraph}{Included libraries}
-Software libraries distributed with this package (but not written by V. Favre-\/\-Nicolin) do not fall under the terms of the above copyright and license\-: these are the atominfo, sglite and newmat package. You should refer to the documentation and legal notes included in their respective directories\-: 
+\subsection{Platforms}\label{a00002_platform}
+\begin{DoxyParagraph}{Linux}
+The library is developped on a Linux computer, using the {\tt G\-N\-U compiler gcc }, version 2.\-95.\-3 (release) or more recent (not tested yet on gcc 3.\-0+). 
 \end{DoxyParagraph}
-\begin{DoxyParagraph}{}
-{\tt The newmat matrix library} (Robert B Davies). This library is only used for matrix S\-V\-D decomposition and inversion in Least Squares methods (Least Squares method was written only for tests purposes... Don't expect anything from it...). 
+\begin{DoxyParagraph}{Windows}
+The library has been tested under windows (N\-T,98) using the {\tt free Borland C++ compiler 5.\-5}. As for the cygwin gcc port, I encountered a few problems with the standard library packaged with it so it does not work now. 
 \end{DoxyParagraph}
-\begin{DoxyParagraph}{}
-{\tt The atominfo library}(Ralf Grosse-\/\-Kunstleve). This library is used to determine the atomic scattering factors for X-\/\-Ray, neutrons, as well as anomalous scattering factors and the atomic number. 
+\begin{DoxyParagraph}{Macintosh}
+The library can also be compiled on Mac\-O\-S, using {\tt Metrowerks Codewarrior Pro 6 } (version 5 should work, too). Note that no tests have been made recently on the macintosh... and absolutely no tests on the wx\-Windows part on the Macintosh (ie so far console only on the Mac).
 \end{DoxyParagraph}
-\begin{DoxyParagraph}{}
-{\tt The Sg\-Lite library}(Ralf Grosse-\/\-Kunstleve). Note that this package is part of the {\tt Py\-M\-O\-L Molecular Graphics System} (used with permission), and is not free software. It is used to derive symmetry operations from a given spacegroup symbol or number.
+\subsection{Compiling wx\-Windows}\label{a00002_wxwindows}
+To use the graphical part of Obj\-Cryst++ (wx\-Cryst), you must first compile wx\-Windows. To do this under Linux, in the wx\-Windows directory\-:
+\begin{DoxyCode}
+*      ./configure --with-opengl --disable-shared
+*      make FINAL=1
+*      
+\end{DoxyCode}
+ (this will take some time)
+
+Under windows, follow the compile instruction for Borland C++ 5.\-5 in the wx\-Windows documentation, and make sure you (i) activate opengl support and (ii) deactivate debug-\/context in setup.\-h. You can leave all other options at default values.\subsection{Example}\label{a00002_example}
+There is a short example in the Obj\-Cryst/example/pbso4 directory. \begin{DoxyParagraph}{Linux}
+Under linux, change to the Obj\-Cryst/example/pbso4 directoryand simply type\-:
+\begin{DoxyCode}
+*      make -f gnu.mak wxcryst=1 opengl=1 debug=0 all 
+\end{DoxyCode}
+
 \end{DoxyParagraph}
-\begin{DoxyParagraph}{}
-{\tt The Blitz++ array library} (Todd Veldhuizen). This library is used for data storage and calculation in arrays and vectors. (Currently it is {\itshape not} used because of the huge memory requirements when compiling blitz++ expressions using the gcc compiler. Instead the \doxyref{Cryst\-Vector}{p.}{a00024} and \doxyref{Cryst\-Matrix}{p.}{a00023} are used, emulating the blitz interface, but without the smart handling of mathematical expressions.) Support for the Blitz++ should come back some time... 
+(use wx\-Cryst=0 if you do not want the Graphical interface, and debug=1 for faster compiling and debugging messages. Not that anytime you change one of these options, you need to clean up all directories\-: type \char`\"{}make -\/f gnu.\-mak clean\char`\"{} at the root of the \doxyref{Obj\-Cryst}{p.}{a00178} directory)
+
+That should compile all necessary libraries and programs. You can try the different example programs, running on Pb\-S\-O4, on neutron and X-\/\-Ray powder diffraction, as well as X-\/\-Ray single crystal (in fact, extracted intensities) \begin{DoxyParagraph}{Windows}
+Under Windows (a D\-O\-S command prompt), change to the Obj\-Cryst/example/pbso4 and do\-:
+\begin{DoxyCode}
+*      make -f bc32.mak all 
+\end{DoxyCode}
+
 \end{DoxyParagraph}
+\subsubsection{example\-\_\-result}\label{a00002_example_result}
+On a 500 Mhz linux box, pbso4-\/xray2 (using only the first 80 reflections and no dynamical occupancy correction), 50000 trials are done in less than 30 s (for 5 independent atoms, each with 4 symetrics (not counting the center of symmetry)\-: that's 80$\ast$50000$\ast$5$\ast$4/27.2 = 2.\-9 10$^\wedge$6 reflection.\-atom per second). For pbso4-\/xray and pbso4-\/neutron, it takes 2 to 3 more time, using only the first 90 degrees of the powder pattern (about 80 reflections again), because a full powder spectrum is generated (applying profiles is slow), and dynamical occupancy correction is used to take special positions into account (computing distances takes a lot of time). On the final structure output, note that the population consists of two factor, the first (1.\-0 here) is the 'real' occupancy of the site, and the second is the dynamical correction due to the fact that several identical atoms overlap (For Pb\-So4, all atoms should be at 0.\-5 dyn corr).\subsection{Fox}\label{a00002_fox}
+To compile Fox, simply go to the Obj\-Cryst/wx\-Cryst directory and do\-:
+\begin{DoxyItemize}
+\item under Linux \-:
+\begin{DoxyCode}
+make -f gnu.mak wxcryst=1 opengl=1 debug=0 all 
+\end{DoxyCode}
+
+\item under windows\-:
+\begin{DoxyCode}
+make -f bc32.mak all 
+\end{DoxyCode}
+
+\end{DoxyItemize}
+
+For both, you will of course need to have compiled wx\-Windows beforehand. 

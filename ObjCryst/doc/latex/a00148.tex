@@ -1,41 +1,56 @@
-\subsection{\-Obj\-Cryst\-:\-:\-W\-X\-Texture\-March\-Dollase \-Class \-Reference}
-\label{a00148}\index{\-Obj\-Cryst\-::\-W\-X\-Texture\-March\-Dollase@{\-Obj\-Cryst\-::\-W\-X\-Texture\-March\-Dollase}}
+\subsection{Obj\-Cryst\-:\-:W\-X\-Profile\-Pseudo\-Voigt Class Reference}
+\label{a00148}\index{Obj\-Cryst\-::\-W\-X\-Profile\-Pseudo\-Voigt@{Obj\-Cryst\-::\-W\-X\-Profile\-Pseudo\-Voigt}}
 
 
-\-Class to display the \-Preferred \-Orientation \-Correction using the \-March-\/\-Dollase parametrization.  
+Class to display a Powder Pattern Pseudo-\/\-Voigt Profile.  
 
 
-\-Inheritance diagram for \-Obj\-Cryst\-:\-:\-W\-X\-Texture\-March\-Dollase\-:\begin{figure}[H]
+Inheritance diagram for Obj\-Cryst\-:\-:W\-X\-Profile\-Pseudo\-Voigt\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=4.000000cm]{a00148}
+\includegraphics[height=3.000000cm]{a00148}
 \end{center}
 \end{figure}
-\subsubsection*{\-Public \-Member \-Functions}
+\subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries \-W\-X\-Texture\-March\-Dollase} (wx\-Window $\ast$parent, {\bf \-Texture\-March\-Dollase} $\ast$)\label{a00148_ab8ab6eceeb0c83bf6dc4b6f775e02905}
+{\bfseries W\-X\-Profile\-Pseudo\-Voigt} (wx\-Window $\ast$parent, {\bf Reflection\-Profile\-Pseudo\-Voigt} $\ast$prof)\label{a00148_a56ea943a8f877deb5a22c50f893787ba}
 
 \item 
-void {\bfseries \-On\-Add\-Texture\-Phase} (wx\-Command\-Event \&\-W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00148_aafd20a474b15713ea0c4fea247a254be}
-
-\item 
-void {\bfseries \-On\-Delete\-Texture\-Phase} (wx\-Command\-Event \&\-W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00148_ae0f2b94788268422e5a2ca215f49387a}
-
-\end{DoxyCompactItemize}
-\subsubsection*{\-Private \-Attributes}
+virtual bool {\bf On\-Change\-Name} (const int id)
+\begin{DoxyCompactList}\small\item\em When a \doxyref{W\-X\-Field\-Name}{p.}{a00128} has been changed by the user, it is handled here. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-{\bf \-Texture\-March\-Dollase} $\ast$ {\bfseries mp\-Texture\-March\-Dollase}\label{a00148_aac7625565230e97c441006ff2f68dd2e}
+{\bf Reflection\-Profile\-Pseudo\-Voigt} $\ast$ {\bfseries mp\-Profile}\label{a00148_a698a7e16b570300f6ad4ea258d98a9b3}
 
 \end{DoxyCompactItemize}
+\subsubsection*{Additional Inherited Members}
 
 
-\subsubsection{\-Detailed \-Description}
-\-Class to display the \-Preferred \-Orientation \-Correction using the \-March-\/\-Dollase parametrization. 
+\subsubsection{Detailed Description}
+Class to display a Powder Pattern Pseudo-\/\-Voigt Profile. 
 
-\-Allows to add phases, and change the parameters. 
 
-\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+
+\subsubsection{Member Function Documentation}
+\index{Obj\-Cryst\-::\-W\-X\-Profile\-Pseudo\-Voigt@{Obj\-Cryst\-::\-W\-X\-Profile\-Pseudo\-Voigt}!On\-Change\-Name@{On\-Change\-Name}}
+\index{On\-Change\-Name@{On\-Change\-Name}!ObjCryst::WXProfilePseudoVoigt@{Obj\-Cryst\-::\-W\-X\-Profile\-Pseudo\-Voigt}}
+\paragraph[{On\-Change\-Name}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool Obj\-Cryst\-::\-W\-X\-Profile\-Pseudo\-Voigt\-::\-On\-Change\-Name (
+\begin{DoxyParamCaption}
+\item[{const int}]{id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00148_a6af548e3f77328ca30fb3a06a50fd40a}
+
+
+When a \doxyref{W\-X\-Field\-Name}{p.}{a00128} has been changed by the user, it is handled here. 
+
+This returns true if the value has been handled (for inheritance purposes). 
+
+Implements {\bf Obj\-Cryst\-::\-W\-X\-Cryst\-Obj} \doxyref{}{p.}{a00122_a3736357599263df7e550790753c040a3}.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
 wx\-Powder\-Pattern.\-h\end{DoxyCompactItemize}

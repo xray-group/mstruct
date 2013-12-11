@@ -1,96 +1,45 @@
-\subsection{Obj\-Cryst\-:\-:P\-D\-F Class Reference}
-\label{a00056}\index{Obj\-Cryst\-::\-P\-D\-F@{Obj\-Cryst\-::\-P\-D\-F}}
+\subsection{Obj\-Cryst\-:\-:Mol\-Z\-Atom Struct Reference}
+\label{a00056}\index{Obj\-Cryst\-::\-Mol\-Z\-Atom@{Obj\-Cryst\-::\-Mol\-Z\-Atom}}
 
 
-Main class for Pair distribution function calculations and comparison to observed one.  
+Light-\/weight representation of an atom in the molecule, as a part of a Z-\/matrix.  
 
 
-Inheritance diagram for Obj\-Cryst\-:\-:P\-D\-F\-:\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[height=2.000000cm]{a00056}
-\end{center}
-\end{figure}
-\subsubsection*{Public Member Functions}
+\subsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-{\bf P\-D\-F} (const {\bf P\-D\-F} \&old)\label{a00056_af5633baa0e58aa65b1a7cf80cfb79712}
+const {\bf Scattering\-Power} $\ast$ {\bfseries mp\-Pow}\label{a00056_a84763284b4efc30c91be13265e905475}
 
-\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
-{\bf $\sim$\-P\-D\-F} ()\label{a00056_adf8dacf02c0b3a6c8f49d86daa25b527}
-
-\begin{DoxyCompactList}\small\item\em \doxyref{Crystal}{p.}{a00020} destructor. \end{DoxyCompactList}\item 
-virtual const string \& {\bf Get\-Class\-Name} () const 
-\begin{DoxyCompactList}\small\item\em Name for this class (\char`\"{}\-Refinable\-Obj\char`\"{}, \char`\"{}\-Crystal\char`\"{},...). \end{DoxyCompactList}\item 
-void {\bf Set\-P\-D\-F\-Obs} (const Cryst\-Vector\-\_\-\-R\-E\-A\-L \&r, const Cryst\-Vector\-\_\-\-R\-E\-A\-L \&obs)\label{a00056_a7ff4d297dca6974e099ad5b45d6b9ffa}
-
-\begin{DoxyCompactList}\small\item\em Experimental data. \end{DoxyCompactList}\item 
-{\bf Radiation\-Type} {\bf Get\-Radiation\-Type} () const \label{a00056_a940341ae04811d1b0bdf87c72ba594b5}
-
-\begin{DoxyCompactList}\small\item\em Get\-Radiation\-Type. \end{DoxyCompactList}\item 
-void {\bf Set\-Radiation\-Type} ({\bf Radiation\-Type} type)\label{a00056_a51d1cebecb13d8e60038fca30547c84e}
-
-\begin{DoxyCompactList}\small\item\em Set\-Radiation\-Type. \end{DoxyCompactList}\item 
-R\-E\-A\-L {\bf Get\-R\-Max} () const \label{a00056_a00503dc494bffe09c7ae85d29e2a339e}
-
-\begin{DoxyCompactList}\small\item\em Cutoff r value. \end{DoxyCompactList}\item 
-const Cryst\-Vector\-\_\-\-R\-E\-A\-L \& {\bf Get\-P\-D\-F\-Calc} () const \label{a00056_a741872ecb602f9721b77c7b255f56876}
-
-\begin{DoxyCompactList}\small\item\em Get the calculated \doxyref{P\-D\-F}{p.}{a00056}. \end{DoxyCompactList}\item 
-const Cryst\-Vector\-\_\-\-R\-E\-A\-L \& {\bf Get\-P\-D\-F\-Obs} () const \label{a00056_a09dcfddbc9ec6bf33726675dad856fe4}
-
-\begin{DoxyCompactList}\small\item\em Get the observed \doxyref{P\-D\-F}{p.}{a00056}. \end{DoxyCompactList}\item 
-const Cryst\-Vector\-\_\-\-R\-E\-A\-L \& {\bf Get\-P\-D\-F\-R} () const \label{a00056_a79778c610b24aee1caedaa011a8ec0fb}
-
-\begin{DoxyCompactList}\small\item\em Get the r coordinates (in Angstroem) for the \doxyref{P\-D\-F}{p.}{a00056}. \end{DoxyCompactList}\item 
-void {\bf Add\-P\-D\-F\-Phase} ({\bf P\-D\-F\-Phase} \&phase)\label{a00056_a4a39ea9bce2350b5786575fc4fc7a9ea}
-
-\begin{DoxyCompactList}\small\item\em Add \doxyref{P\-D\-F}{p.}{a00056} phase. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Private Attributes}
-\begin{DoxyCompactItemize}
 \item 
-{\bf Radiation\-Type} {\bf m\-Radiation\-Type}\label{a00056_af3ab577cb12f62f38fbd3a6d88e242bf}
+unsigned long {\bfseries m\-Bond\-Atom}\label{a00056_a0e756b0230126d63f2a7b2a13cc1689c}
 
-\begin{DoxyCompactList}\small\item\em \doxyref{Radiation}{p.}{a00069} type. \end{DoxyCompactList}\item 
-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf m\-P\-D\-F\-R}\label{a00056_a49cadbd04ae733321638566defc3a246}
+\item 
+unsigned long {\bfseries m\-Bond\-Angle\-Atom}\label{a00056_a9e30bfb98a0ca6c57b9eb3de01a3f263}
 
-\begin{DoxyCompactList}\small\item\em r coordinates (in Angstroem) of the \doxyref{P\-D\-F}{p.}{a00056} \end{DoxyCompactList}\item 
-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf m\-P\-D\-F\-Calc}\label{a00056_a6a907317c064f14614b5c55456de42b0}
+\item 
+unsigned long {\bfseries m\-Dihedral\-Atom}\label{a00056_a8499371cdbeb7afd5e2e62fbc2a143b5}
 
-\begin{DoxyCompactList}\small\item\em The \doxyref{P\-D\-F}{p.}{a00056} itself,calculated. \end{DoxyCompactList}\item 
-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf m\-P\-D\-F\-Obs}\label{a00056_a7cc4d168934d80fdea6f22c3f2789ff3}
+\item 
+R\-E\-A\-L {\bfseries m\-Bond\-Length}\label{a00056_a4910c978b6e16302ab25abb31275b6e8}
 
-\begin{DoxyCompactList}\small\item\em The \doxyref{P\-D\-F}{p.}{a00056} itself,observed. \end{DoxyCompactList}\item 
-std\-::list$<$ std\-::pair$<$ {\bf P\-D\-F\-Phase} \\*
-$\ast$, R\-E\-A\-L $>$ $>$ {\bf mv\-P\-D\-F\-Phase}\label{a00056_aa389a686162b7341ba62a2dffafb0d7b}
+\item 
+R\-E\-A\-L {\bfseries m\-Bond\-Angle}\label{a00056_a978590d76e45ae341e9d5fea680c1cc3}
 
-\begin{DoxyCompactList}\small\item\em Contributions to the \doxyref{P\-D\-F}{p.}{a00056}, with their scale factor. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Additional Inherited Members}
+\item 
+R\-E\-A\-L {\bfseries m\-Dihedral\-Angle}\label{a00056_af33360b883b663c71d1ec79e4f68c169}
+
+\end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-Main class for Pair distribution function calculations and comparison to observed one. 
+Light-\/weight representation of an atom in the molecule, as a part of a Z-\/matrix. 
+
+This is used to export the \doxyref{Molecule}{p.}{a00054} structure to a z-\/matrix.
+
+\begin{DoxyRefDesc}{Todo}
+\item[{\bf Todo}]\-: some flags could be added to mark the fixed/limited nature of the parameters. \end{DoxyRefDesc}
 
 
-
-\subsubsection{Member Function Documentation}
-\index{Obj\-Cryst\-::\-P\-D\-F@{Obj\-Cryst\-::\-P\-D\-F}!Get\-Class\-Name@{Get\-Class\-Name}}
-\index{Get\-Class\-Name@{Get\-Class\-Name}!ObjCryst::PDF@{Obj\-Cryst\-::\-P\-D\-F}}
-\paragraph[{Get\-Class\-Name}]{\setlength{\rightskip}{0pt plus 5cm}virtual const string\& Obj\-Cryst\-::\-P\-D\-F\-::\-Get\-Class\-Name (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00056_a809ab3f4cc8bdd268bd815baedccdc20}
-
-
-Name for this class (\char`\"{}\-Refinable\-Obj\char`\"{}, \char`\"{}\-Crystal\char`\"{},...). 
-
-This is only useful to distinguish different classes when picking up objects from the \doxyref{Refinable\-Obj}{p.}{a00071} Global Registry 
-
-Reimplemented from {\bf Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00071_a62968d90a7a3080738b363934616c019}.
-
-
-
-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-P\-D\-F.\-h\end{DoxyCompactItemize}
+Molecule.\-h\end{DoxyCompactItemize}

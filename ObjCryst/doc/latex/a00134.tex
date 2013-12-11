@@ -1,30 +1,58 @@
-\subsection{\-Obj\-Cryst\-:\-:wx\-Multi\-Choice\-Dialog\-\_\-\-List\-Box \-Class \-Reference}
-\label{a00134}\index{\-Obj\-Cryst\-::wx\-Multi\-Choice\-Dialog\-\_\-\-List\-Box@{\-Obj\-Cryst\-::wx\-Multi\-Choice\-Dialog\-\_\-\-List\-Box}}
+\subsection{Obj\-Cryst\-:\-:W\-X\-Global\-Optim\-Run\-Thread Class Reference}
+\label{a00134}\index{Obj\-Cryst\-::\-W\-X\-Global\-Optim\-Run\-Thread@{Obj\-Cryst\-::\-W\-X\-Global\-Optim\-Run\-Thread}}
 
 
-\-Provides the same functionnality as wx\-Multi\-Choice\-Dialog, but always using a wx\-List\-Box, which is much easier when selecting a large number of successive choices (using shift-\/click).  
+Class for a Global\-Optimization thread.  
 
 
-\subsubsection*{\-Public \-Member \-Functions}
+
+
+Inherits wx\-Thread.
+
+\subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries wx\-Multi\-Choice\-Dialog\-\_\-\-List\-Box} (wx\-Window $\ast$parent, const wx\-String \&message, const wx\-String \&caption, int n, const wx\-String $\ast$choices)\label{a00134_a3048c7db35d3c35a993ca818f8ec3087}
+{\bfseries W\-X\-Global\-Optim\-Run\-Thread} ({\bf Optimization\-Obj} \&global\-Opt\-Obj, long \&nb\-Trial, const R\-E\-A\-L final\-Cost, long \&nb\-Run, const bool multiple=true)\label{a00134_ad4a30391ecd09902d2bde258cf6d7c05}
 
 \item 
-wx\-Array\-Int {\bfseries \-Get\-Selections} () const \label{a00134_a128fb92ed6304bca6df23e9839b0d44d}
+virtual void $\ast$ {\bfseries Entry} ()\label{a00134_a0c5d3f16fc314450619e561d0a68cb56}
+
+\item 
+virtual void {\bfseries On\-Exit} ()\label{a00134_a5f980c9a070545f46381cf573b06e4ff}
 
 \end{DoxyCompactItemize}
-\subsubsection*{\-Private \-Attributes}
+\subsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-wx\-List\-Box {\bfseries m\-List\-Box}\label{a00134_a145d64abc35498abb940f28ab81aebda}
+{\bf Optimization\-Obj} $\ast$ {\bfseries mp\-Global\-Opt\-Obj}\label{a00134_aebc578c18b9dc9492eb9caa6be48592d}
 
-\end{DoxyCompactItemize}
-
-
-\subsubsection{\-Detailed \-Description}
-\-Provides the same functionnality as wx\-Multi\-Choice\-Dialog, but always using a wx\-List\-Box, which is much easier when selecting a large number of successive choices (using shift-\/click). 
-
-\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-wx\-Cryst.\-h\end{DoxyCompactItemize}
+long $\ast$ {\bf mp\-Nb\-Trial}\label{a00134_ace13caa17cbd44768496adfdb36f2766}
+
+\begin{DoxyCompactList}\small\item\em This points to the m\-Nb\-Trial member in \doxyref{W\-X\-Optimization\-Obj}{p.}{a00142}. \end{DoxyCompactList}\item 
+long $\ast$ {\bf mp\-Nb\-Run}\label{a00134_a7b58a2ed60d74cce4a33245126a3c2f0}
+
+\begin{DoxyCompactList}\small\item\em This points to the m\-Nb\-Run member in \doxyref{W\-X\-Optimization\-Obj}{p.}{a00142}. \end{DoxyCompactList}\item 
+const R\-E\-A\-L {\bf m\-Final\-Cost}
+\begin{DoxyCompactList}\small\item\em The value of the cost below which the optimization should stop (0 by default) even if the desired number pf trial has not been reached. \end{DoxyCompactList}\item 
+const bool {\bf m\-Do\-Multiple}\label{a00134_a69ff8f87fc924ec96d79ddee04941813}
+
+\begin{DoxyCompactList}\small\item\em Use multiple Runs ? \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+Class for a Global\-Optimization thread. 
+
+\subsubsection{Member Data Documentation}
+\index{Obj\-Cryst\-::\-W\-X\-Global\-Optim\-Run\-Thread@{Obj\-Cryst\-::\-W\-X\-Global\-Optim\-Run\-Thread}!m\-Final\-Cost@{m\-Final\-Cost}}
+\index{m\-Final\-Cost@{m\-Final\-Cost}!ObjCryst::WXGlobalOptimRunThread@{Obj\-Cryst\-::\-W\-X\-Global\-Optim\-Run\-Thread}}
+\paragraph[{m\-Final\-Cost}]{\setlength{\rightskip}{0pt plus 5cm}const R\-E\-A\-L Obj\-Cryst\-::\-W\-X\-Global\-Optim\-Run\-Thread\-::m\-Final\-Cost\hspace{0.3cm}{\ttfamily [private]}}\label{a00134_a2ef0f785a8cabac94cf245a6b2f39acc}
+
+
+The value of the cost below which the optimization should stop (0 by default) even if the desired number pf trial has not been reached. 
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+wx\-Global\-Optim\-Obj.\-h\end{DoxyCompactItemize}

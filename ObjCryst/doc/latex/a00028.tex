@@ -1,39 +1,39 @@
-\subsection{Format\-Float Class Reference}
-\label{a00028}\index{Format\-Float@{Format\-Float}}
+\subsection{Obj\-Cryst\-:\-:Crystal\-P\-O\-V\-Ray\-Options Struct Reference}
+\label{a00028}\index{Obj\-Cryst\-::\-Crystal\-P\-O\-V\-Ray\-Options@{Obj\-Cryst\-::\-Crystal\-P\-O\-V\-Ray\-Options}}
 
 
-output a number as a formatted float\-:  
+Class to store P\-O\-V-\/\-Ray output options.  
 
 
-\subsubsection*{Public Member Functions}
-\begin{DoxyCompactItemize}
-\item 
-{\bfseries Format\-Float} (const R\-E\-A\-L num, const int width=10, const int precision=4)\label{a00028_a9fbcfe7405d478396858e748dd7df56d}
-
-\end{DoxyCompactItemize}
 \subsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-const R\-E\-A\-L {\bfseries m\-Value}\label{a00028_a09d44759a75e7d27abde5fb4d08870bd}
+R\-E\-A\-L {\bf m\-Xmin}\label{a00028_a12de9193cec7f49031a0c250b01d80d2}
+
+\begin{DoxyCompactList}\small\item\em Display limits in reduced coordinates. \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bfseries m\-Xmax}\label{a00028_a7338c4ff2ab270eafd33aa9a8cc2af9c}
 
 \item 
-const int {\bfseries m\-Width}\label{a00028_a6933d0fb1fb1301fe9572e2048d06ade}
+R\-E\-A\-L {\bfseries m\-Ymin}\label{a00028_a1b91ecd75005d1fee4b4a665fb206ccf}
 
 \item 
-const int {\bfseries m\-Precision}\label{a00028_a2f9e8289795d3d9916873c105f0db4b3}
+R\-E\-A\-L {\bfseries m\-Ymax}\label{a00028_a26b36c5944c2309ac04278a5e832d51b}
 
-\end{DoxyCompactItemize}
+\item 
+R\-E\-A\-L {\bfseries m\-Zmin}\label{a00028_a40b92456cf8a0d1d081315704ba4b4c1}
+
+\item 
+R\-E\-A\-L {\bfseries m\-Zmax}\label{a00028_a5edd263eb7efa26111d5361d676a9a92}
+
+\item 
+bool {\bf m\-Show\-Label}\label{a00028_a27d3053f6520b681d7db841b82fbaf92}
+
+\begin{DoxyCompactList}\small\item\em Show labels ? \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-output a number as a formatted float\-: 
+Class to store P\-O\-V-\/\-Ray output options. 
 
-
-\begin{DoxyCode}
-os << FormatFloat(mynumber,10,4); 
-\end{DoxyCode}
- 
-
-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-V\-F\-N\-Stream\-Format.\-h\end{DoxyCompactItemize}
+General.\-h\end{DoxyCompactItemize}

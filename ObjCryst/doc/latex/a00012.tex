@@ -1,45 +1,55 @@
-\subsection{\-Obj\-Cryst\-:\-:\-W\-X\-Molecule\-:\-:\-Cell\-Bond\-Angle \-Struct \-Reference}
-\label{a00012}\index{\-Obj\-Cryst\-::\-W\-X\-Molecule\-::\-Cell\-Bond\-Angle@{\-Obj\-Cryst\-::\-W\-X\-Molecule\-::\-Cell\-Bond\-Angle}}
+(stars indicate priority/complexity \-: ($\ast$$\ast$$\ast$$\ast$$\ast$,$\ast$$\ast$) is urgent,fairly easy)\subsection{Outside features}\label{a00012_external}
+\begin{DoxyParagraph}{Examples}
+Make a few examples for each feature... 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Compilation}
+Make the library and test programs compilable for other O\-S\&configuration... So far tests have been made on Linux (x86/ppc), Mac\-O\-S and windows (cygwin) Need to work on autoconf and automake (...)
+\end{DoxyParagraph}
+\subsection{Library Features}\label{a00012_general}
+\begin{DoxyParagraph}{Check Results ($\ast$$\ast$$\ast$$\ast$,$\ast$) (in constant progress)}
+Compare Structure Factors with the results of other programs (Jana,...) for a number of different spacegroups. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Save \& restore objects ($\ast$$\ast$$\ast$$\ast$$\ast$$\ast$,$\ast$$\ast$$\ast$) D\-O\-N\-E, using X\-M\-L}
 
-
-\-Structure to store the bond angles current values.  
-
-
-\subsubsection*{\-Public \-Attributes}
-\begin{DoxyCompactItemize}
-\item 
-{\bf \-Mol\-Bond\-Angle} $\ast$ {\bfseries mp\-Bond\-Angle}\label{a00012_a9711c5a7640e45ce9cbe1c8af4822699}
-
-\item 
-std\-::string {\bfseries m\-Atom1}\label{a00012_a9bfcdabb2d228ba85c1ea4cc2edf6815}
-
-\item 
-std\-::string {\bfseries m\-Atom2}\label{a00012_a9674e86f8b3302041a5d63f5a6b52b9c}
-
-\item 
-std\-::string {\bfseries m\-Atom3}\label{a00012_a1fc4b34add18cabf6b6fcb39c2248028}
-
-\item 
-\-R\-E\-A\-L {\bfseries m\-Angle}\label{a00012_a9760c2f566ebdc90c25082113a76bc5c}
-
-\item 
-\-R\-E\-A\-L {\bfseries m\-Angle0}\label{a00012_a34925c45083fa494e49e320d2b19d6c4}
-
-\item 
-\-R\-E\-A\-L {\bfseries m\-Sigma}\label{a00012_a399e20920924fa1af420f681d1459f41}
-
-\item 
-\-R\-E\-A\-L {\bfseries m\-Delta}\label{a00012_adf0dd4873ff10c10d39e5a2ebd691104}
-
-\item 
-bool {\bf m\-Need\-Update\-U\-I}\label{a00012_a765244c2d11b62cfc9a61a81d68e93aa}
-
-\begin{DoxyCompactList}\small\item\em \-True if we need to update the displayed values. \end{DoxyCompactList}\end{DoxyCompactItemize}
-
-
-\subsubsection{\-Detailed \-Description}
-\-Structure to store the bond angles current values. 
-
-\-The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
-\item 
-wx\-Molecule.\-h\end{DoxyCompactItemize}
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Move from atominfo+sglite to cctbx ($\ast$$\ast$$\ast$$\ast$$\ast$$\ast$,$\ast$$\ast$$\ast$)}
+Change to the newest R. Grosse-\/\-Kunstleve library. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{C\-I\-F Import \& Export ($\ast$$\ast$$\ast$$\ast$,$\ast$$\ast$$\ast$$\ast$$\ast$)}
+Ability to export (and import) Crystallographic Info Files. The importing will be much harder, and is not a priority. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Export to other L\-S\-Q refinement programs($\ast$$\ast$$\ast$$\ast$,$\ast$$\ast$)}
+Ability to export for other refinement programs (fullprof, gsas, shellx,...). 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Anisotropic Thermic Factors ($\ast$$\ast$,$\ast$$\ast$$\ast$$\ast$)}
+Add support for anisotropic thermic factors. Spacegroup object should be able to indicate the permutations needed for symetrical atoms. Also determine the constraints between bij (eg beta12=beta13,etc...) The Interface has been written, but no code. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Powder Diffraction Background($\ast$$\ast$,$\ast$$\ast$)}
+Use splines to interpolate background. Automagically determine background by filtering the spectrum. So far only linearly-\/interpolated background is available. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Intensity extraction from powder ($\ast$,$\ast$$\ast$$\ast$)}
+Extract F(hkl) from a powder spectrum. Not so interesting, there already are numerous programs to do this. But the advantage to have it embeded is the possibility to refine and refresh (recycle) these extracted intensities during an optimization. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Multi-\/phase ($\ast$$\ast$$\ast$$\ast$,$\ast$$\ast$) -\/ D\-O\-N\-E}
+Multiple phase for powder diffraction. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Z\-Scatterer import($\ast$$\ast$,$\ast$$\ast$)}
+Import Z-\/\-Matrix from file. Add the possibility to link two existing Z\-Scatterer by linking terminal atoms. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Genetic Algorithm ($\ast$$\ast$$\ast$$\ast$,$\ast$$\ast$$\ast$)}
+And compare the 3 different algorithms on several structures. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Texture ($\ast$$\ast$$\ast$,$\ast$$\ast$$\ast$)}
+Include texture parameters in Powder\-Pattern. Optionnaly, allow multiple textured patterns (that would more difficult).
+\end{DoxyParagraph}
+\subsection{Internal Design of the Library}\label{a00012_internal}
+\begin{DoxyParagraph}{Vector \& arrays (Blitz++ usage,...) ($\ast$$\ast$,$\ast$$\ast$$\ast$)}
+Test again the use of the blitz++ library for vector computing.
+\end{DoxyParagraph}
+\subsection{Wild ideas (interesting possibilities, but no priority given)}\label{a00012_wild}
+\begin{DoxyParagraph}{Amorphous contribution}
+Add amorphous (disordered) contributions to powder spectrum. This could be easily added from the Powder\-Pattern\-Component base class. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Magnetic scattering}
+Add calculations for magnetic scattering (-\/$>$scattering factors) 
+\end{DoxyParagraph}

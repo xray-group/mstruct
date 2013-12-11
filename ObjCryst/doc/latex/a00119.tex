@@ -1,71 +1,35 @@
-\subsection{\-Obj\-Cryst\-:\-:\-W\-X\-Field \-Class \-Reference}
-\label{a00119}\index{\-Obj\-Cryst\-::\-W\-X\-Field@{\-Obj\-Cryst\-::\-W\-X\-Field}}
+\subsection{Obj\-Cryst\-:\-:W\-X\-C\-R\-Y\-S\-T\-\_\-\-I\-D Class Reference}
+\label{a00119}\index{Obj\-Cryst\-::\-W\-X\-C\-R\-Y\-S\-T\-\_\-\-I\-D@{Obj\-Cryst\-::\-W\-X\-C\-R\-Y\-S\-T\-\_\-\-I\-D}}
 
 
-\-This is the abstract base class for all fields, wether they contain a floating-\/point parameter, or a string,...  
+Class to automatically assign a unique wx\-I\-D to each window.  
 
 
-\-Inheritance diagram for \-Obj\-Cryst\-:\-:\-W\-X\-Field\-:\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[height=2.109228cm]{a00119}
-\end{center}
-\end{figure}
-\subsubsection*{\-Public \-Member \-Functions}
+\subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bf \-W\-X\-Field} (wx\-Window $\ast$parent, const string \&label, const int field\-\_\-id)\label{a00119_a750b0a756fd49172806fd5af020a1e07}
+{\bfseries operator long} ()\label{a00119_ad556605a5923122932a3425ca70dea59}
 
-\begin{DoxyCompactList}\small\item\em \-Constructor, specifying the label of the field. \end{DoxyCompactList}\item 
-void {\bf \-Set\-Label} (const string \&)\label{a00119_a0092c7a134e627a4c9b975c339f6d54e}
-
-\begin{DoxyCompactList}\small\item\em \-Change the field's label. \end{DoxyCompactList}\item 
-virtual void {\bf \-Revert} ()=0\label{a00119_a178d6d770d1e3adfa02e27da94b2dffa}
-
-\begin{DoxyCompactList}\small\item\em \-After a user entry, this allows to go back to the last value, if for some reason the entry was rejected (because the object is currently busy, ...) \end{DoxyCompactList}\item 
-virtual bool {\bf \-Set\-Foreground\-Colour} (const wx\-Colour \&colour)
-\begin{DoxyCompactList}\small\item\em \-Change the colour of the field's title. \end{DoxyCompactList}\item 
-virtual void {\bf \-Validate\-User\-Input} ()=0\label{a00119_aa0a7701e04c91832e8fda19b5b2c147a}
-
-\begin{DoxyCompactList}\small\item\em \-This function shall be called when a new value has been entered. \end{DoxyCompactList}\item 
-virtual void {\bf \-Set\-Size} (int width, int height)\label{a00119_a9a77acbfeaa049019e788521bf8e0b50}
-
-\begin{DoxyCompactList}\small\item\em \-Change the size of the field (excluding the title) \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{\-Protected \-Attributes}
+\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-wx\-Box\-Sizer $\ast$ {\bf mp\-Sizer}\label{a00119_a7853a2d4f8b99e97c9959c01e8cce686}
+long {\bfseries m\-Index}\label{a00119_ac93773bc8d556678497dde9ac2af6f60}
 
-\begin{DoxyCompactList}\small\item\em \-The horizontal sizer in which the title, button, fields, are put. \end{DoxyCompactList}\item 
-wx\-Static\-Text $\ast$ {\bf mp\-Label}\label{a00119_a0823abc300be21229f94eb44fc8acfc3}
+\end{DoxyCompactItemize}
+\subsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static long {\bfseries m\-Counter}\label{a00119_aff3ad64b44e0d2193c6a4269026cce61}
 
-\begin{DoxyCompactList}\small\item\em \-The label. \end{DoxyCompactList}\item 
-const int {\bf m\-Id}\label{a00119_aa34f4178c0b17434cbdf757d7997afa9}
-
-\begin{DoxyCompactList}\small\item\em \-The \-Id of this field. \end{DoxyCompactList}\end{DoxyCompactItemize}
-
-
-\subsubsection{\-Detailed \-Description}
-\-This is the abstract base class for all fields, wether they contain a floating-\/point parameter, or a string,... 
-
-\-All \doxyref{\-W\-X\-Field}{p.}{a00119} have a title and an entry field.
-
-\-Note that \doxyref{\-W\-X\-Field\-::\-Cryst\-Update()}{p.}{a00116_a7ac00ae2ae28f1a6fa26e6fa571186b6} and \doxyref{\-W\-X\-Field\-::\-Update\-U\-I()}{p.}{a00116_a3818940b7031ff7e45cf2178c4a99c90} should be done from the parent object. \-Notably using \doxyref{\-W\-X\-Field\-::\-Cryst\-Update}{p.}{a00116_a7ac00ae2ae28f1a6fa26e6fa571186b6}(updateui=true) will not trigger an update of the \-U\-I. 
-
-\subsubsection{\-Member \-Function \-Documentation}
-\index{\-Obj\-Cryst\-::\-W\-X\-Field@{\-Obj\-Cryst\-::\-W\-X\-Field}!\-Set\-Foreground\-Colour@{\-Set\-Foreground\-Colour}}
-\index{\-Set\-Foreground\-Colour@{\-Set\-Foreground\-Colour}!ObjCryst::WXField@{\-Obj\-Cryst\-::\-W\-X\-Field}}
-\paragraph[{\-Set\-Foreground\-Colour}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool {\bf \-Obj\-Cryst\-::\-W\-X\-Field\-::\-Set\-Foreground\-Colour} (
-\begin{DoxyParamCaption}
-\item[{const wx\-Colour \&}]{colour}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00119_a2fd615e41430e4a1ab05e7507ac686c2}
+\end{DoxyCompactItemize}
 
 
-\-Change the colour of the field's title. 
+\subsubsection{Detailed Description}
+Class to automatically assign a unique wx\-I\-D to each window. 
 
-\-Can be used (with parcimony) to clarify the interface. 
 
-\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
 wx\-Cryst.\-h\end{DoxyCompactItemize}

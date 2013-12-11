@@ -1,106 +1,105 @@
-\subsection{\-Obj\-Cryst\-:\-:\-W\-X\-Mol\-Bond\-Angle \-Class \-Reference}
-\label{a00130}\index{\-Obj\-Cryst\-::\-W\-X\-Mol\-Bond\-Angle@{\-Obj\-Cryst\-::\-W\-X\-Mol\-Bond\-Angle}}
+\subsection{Obj\-Cryst\-:\-:W\-X\-Field\-Par$<$ T $>$ Class Template Reference}
+\label{a00130}\index{Obj\-Cryst\-::\-W\-X\-Field\-Par$<$ T $>$@{Obj\-Cryst\-::\-W\-X\-Field\-Par$<$ T $>$}}
 
 
-wx class for \doxyref{\-Mol\-Bond\-Angle}{p.}{a00045} objects  
+A field for a parameter.  
 
 
-\-Inheritance diagram for \-Obj\-Cryst\-:\-:\-W\-X\-Mol\-Bond\-Angle\-:\begin{figure}[H]
+Inheritance diagram for Obj\-Cryst\-:\-:W\-X\-Field\-Par$<$ T $>$\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=2.000000cm]{a00130}
+\includegraphics[height=4.000000cm]{a00130}
 \end{center}
 \end{figure}
-\subsubsection*{\-Public \-Member \-Functions}
+\subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries \-W\-X\-Mol\-Bond\-Angle} (wx\-Window $\ast$parent, {\bf \-Mol\-Bond\-Angle} $\ast$)\label{a00130_a68ea190cdd44105bee5c9d26ddb2c0a8}
+{\bf W\-X\-Field\-Par} (wx\-Window $\ast$parent, const string \&label, const int field\-\_\-id, T $\ast$par, const int hsize=65)\label{a00130_acbd12ff692a7020f7145394379ed462f}
 
-\item 
-virtual void {\bf \-Cryst\-Update} (const bool update\-U\-I=false, const bool mutexlock=false)
-\begin{DoxyCompactList}\small\item\em \-Get new values to be displayed from the underlying object, and raise flag if an \-U\-I update is necessary. \end{DoxyCompactList}\item 
-virtual void {\bf \-Update\-U\-I} (const bool mutexlock=false)
-\begin{DoxyCompactList}\small\item\em \-Update the \-User \-Interface, if necessary. \end{DoxyCompactList}\item 
-void {\bfseries \-On\-Change\-Atom} (wx\-Command\-Event \&)\label{a00130_a141dd6f68b5cab06aae7c396b77bdfd9}
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual void {\bf Cryst\-Update} (const bool update\-U\-I=false, const bool mutexlock=false)\label{a00130_a119a3152a4ab675522341f3d83ff88f0}
 
-\end{DoxyCompactItemize}
-\subsubsection*{\-Private \-Attributes}
+\begin{DoxyCompactList}\small\item\em This gets a new value from the parameter. \end{DoxyCompactList}\item 
+virtual void {\bf Update\-U\-I} (const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em Update the User Interface, if necessary. \end{DoxyCompactList}\item 
+virtual void {\bf Revert} ()\label{a00130_a8896b1a3ba9b901c83d990ac5e0bd6d1}
+
+\begin{DoxyCompactList}\small\item\em After a user entry, this allows to go back to the last value, if for some reason the entry was rejected (because the object is currently busy, ...) \end{DoxyCompactList}\item 
+void {\bf Set\-Human\-Value\-Scale} (const T s)
+\begin{DoxyCompactList}\small\item\em Set Coefficient between the value used by Obj\-Cryst++ and the one to be displayed to the user. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bf \-Mol\-Bond\-Angle} $\ast$ {\bfseries mp\-Mol\-Bond\-Angle}\label{a00130_a5ba15d091ff39b2db4ca69a8c859ba2d}
+virtual void {\bf Read\-New\-Value} ()\label{a00130_aa183a548b6f90955c110104d711e7436}
 
+\begin{DoxyCompactList}\small\item\em Reads the new value when the Enter key is hit. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
 \item 
-wx\-Box\-Sizer $\ast$ {\bfseries mp\-Sizer}\label{a00130_a2ed7ebbecc37d06bf8da9ab7465b910e}
+T $\ast$ {\bf mp\-Value}\label{a00130_ac9b8abe09a3c0b0f993aaa2f0e6c3022}
 
-\item 
-{\bf \-W\-X\-Cryst\-Obj\-Basic\-List} {\bfseries m\-List}\label{a00130_a4f0f9c258f765d1a831a374414b1df09}
+\begin{DoxyCompactList}\small\item\em A pointer to the value displayed. \end{DoxyCompactList}\item 
+T {\bf m\-Value}\label{a00130_a107a4db390c1dfad6b899f84b4930bcd}
 
-\item 
-{\bf \-W\-X\-Field\-Choice} $\ast$ {\bfseries mp\-Field\-Atom1}\label{a00130_a90d48cdaa71d68304fcb02c143a2b9bc}
+\begin{DoxyCompactList}\small\item\em The value displayed. \end{DoxyCompactList}\item 
+T {\bf m\-Value\-Old}\label{a00130_a3d57d6853b52c00725f6148d8f509b21}
 
-\item 
-{\bf \-W\-X\-Field\-Choice} $\ast$ {\bfseries mp\-Field\-Atom2}\label{a00130_a7933d2b25396118a5d828ef3edb6a79a}
-
-\item 
-{\bf \-W\-X\-Field\-Choice} $\ast$ {\bfseries mp\-Field\-Atom3}\label{a00130_a90963c75baa1188be11eb7e895c85594}
-
-\item 
-\-R\-E\-A\-L {\bf m\-Value}\label{a00130_afe256320c1c3332413a6e2bc2257c814}
-
-\begin{DoxyCompactList}\small\item\em \-The current value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Last value. \end{DoxyCompactList}\item 
+T {\bf m\-Human\-Scale}
+\begin{DoxyCompactList}\small\item\em Coefficient between the value used by Obj\-Cryst++ and the one to be displayed to the user. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\subsubsection{\-Detailed \-Description}
-wx class for \doxyref{\-Mol\-Bond\-Angle}{p.}{a00045} objects 
+\subsubsection{Detailed Description}
+\subsubsection*{template$<$class T$>$class Obj\-Cryst\-::\-W\-X\-Field\-Par$<$ T $>$}
 
-\subsubsection{\-Member \-Function \-Documentation}
-\index{\-Obj\-Cryst\-::\-W\-X\-Mol\-Bond\-Angle@{\-Obj\-Cryst\-::\-W\-X\-Mol\-Bond\-Angle}!\-Cryst\-Update@{\-Cryst\-Update}}
-\index{\-Cryst\-Update@{\-Cryst\-Update}!ObjCryst::WXMolBondAngle@{\-Obj\-Cryst\-::\-W\-X\-Mol\-Bond\-Angle}}
-\paragraph[{\-Cryst\-Update}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-W\-X\-Mol\-Bond\-Angle\-::\-Cryst\-Update} (
+A field for a parameter. 
+
+Template version. If the parameter is a \doxyref{Refinable\-Par}{p.}{a00080}, use \doxyref{W\-X\-Field\-Ref\-Par}{p.}{a00132} instead. 
+
+\subsubsection{Member Function Documentation}
+\index{Obj\-Cryst\-::\-W\-X\-Field\-Par@{Obj\-Cryst\-::\-W\-X\-Field\-Par}!Set\-Human\-Value\-Scale@{Set\-Human\-Value\-Scale}}
+\index{Set\-Human\-Value\-Scale@{Set\-Human\-Value\-Scale}!ObjCryst::WXFieldPar@{Obj\-Cryst\-::\-W\-X\-Field\-Par}}
+\paragraph[{Set\-Human\-Value\-Scale}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ void {\bf Obj\-Cryst\-::\-W\-X\-Field\-Par}$<$ T $>$\-::Set\-Human\-Value\-Scale (
 \begin{DoxyParamCaption}
-\item[{const bool}]{update\-U\-I = {\ttfamily false}, }
-\item[{const bool}]{mutexlock = {\ttfamily false}}
+\item[{const T}]{s}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00130_a7ba667b5bb85405b69265a51492c8f4c}
+)}\label{a00130_aea7020b96899dfcd41e568f8705fa2f8}
 
 
-\-Get new values to be displayed from the underlying object, and raise flag if an \-U\-I update is necessary. 
+Set Coefficient between the value used by Obj\-Cryst++ and the one to be displayed to the user. 
 
-\-The actual \-G\-U\-I update is not made here. \doxyref{\-Update\-U\-I()}{p.}{a00130_aff45dee9e236b37fd2013937afbb71b9} should be called separately, from the main thread.
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em update\-U\-I,\-:} & if true, this will call \-Update\-U\-I, either directly (if in the main thread), or by sending a message. \\
-\hline
-{\em mutexlock,\-:} & if true, a \-Mutex will be used to lock the data shared between main and background thread. \-The idea is to only use a few \-Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{\-Cryst\-Update()}{p.}{a00130_a7ba667b5bb85405b69265a51492c8f4c} and \doxyref{\-Update\-U\-I()}{p.}{a00130_aff45dee9e236b37fd2013937afbb71b9}. \-As sub-\/objects (\doxyref{\-W\-X\-Field}{p.}{a00119},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. \\
-\hline
-\end{DoxyParams}
-
-
-\-Implements {\bf \-Obj\-Cryst\-::\-W\-X\-Cryst\-Obj\-Basic} \doxyref{}{p.}{a00116_a7ac00ae2ae28f1a6fa26e6fa571186b6}.
-
-\index{\-Obj\-Cryst\-::\-W\-X\-Mol\-Bond\-Angle@{\-Obj\-Cryst\-::\-W\-X\-Mol\-Bond\-Angle}!\-Update\-U\-I@{\-Update\-U\-I}}
-\index{\-Update\-U\-I@{\-Update\-U\-I}!ObjCryst::WXMolBondAngle@{\-Obj\-Cryst\-::\-W\-X\-Mol\-Bond\-Angle}}
-\paragraph[{\-Update\-U\-I}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-W\-X\-Mol\-Bond\-Angle\-::\-Update\-U\-I} (
+Typically, 180/pi \index{Obj\-Cryst\-::\-W\-X\-Field\-Par@{Obj\-Cryst\-::\-W\-X\-Field\-Par}!Update\-U\-I@{Update\-U\-I}}
+\index{Update\-U\-I@{Update\-U\-I}!ObjCryst::WXFieldPar@{Obj\-Cryst\-::\-W\-X\-Field\-Par}}
+\paragraph[{Update\-U\-I}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ virtual void {\bf Obj\-Cryst\-::\-W\-X\-Field\-Par}$<$ T $>$\-::Update\-U\-I (
 \begin{DoxyParamCaption}
 \item[{const bool}]{mutexlock = {\ttfamily false}}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00130_aff45dee9e236b37fd2013937afbb71b9}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00130_a1777f9713ca5d40c29c5bd3ab5484aff}
 
 
-\-Update the \-User \-Interface, if necessary. 
+Update the User Interface, if necessary. 
 
 
-\begin{DoxyParams}{\-Parameters}
-{\em mutexlock,\-:} & if true, a \-Mutex will be used to lock the data shared between main and background thread.\\
+\begin{DoxyParams}{Parameters}
+{\em mutexlock,\-:} & if true, a Mutex will be used to lock the data shared between main and background thread.\\
 \hline
 \end{DoxyParams}
-\-The idea is to only use a few \-Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{\-Cryst\-Update()}{p.}{a00130_a7ba667b5bb85405b69265a51492c8f4c} and \doxyref{\-Update\-U\-I()}{p.}{a00130_aff45dee9e236b37fd2013937afbb71b9}. \-As sub-\/objects (\doxyref{\-W\-X\-Field}{p.}{a00119},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
+The idea is to only use a few Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{Cryst\-Update()}{p.}{a00130_a119a3152a4ab675522341f3d83ff88f0} and \doxyref{Update\-U\-I()}{p.}{a00130_a1777f9713ca5d40c29c5bd3ab5484aff}. As sub-\/objects (\doxyref{W\-X\-Field}{p.}{a00126},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
 
-\-Implements {\bf \-Obj\-Cryst\-::\-W\-X\-Cryst\-Obj\-Basic} \doxyref{}{p.}{a00116_a3818940b7031ff7e45cf2178c4a99c90}.
+Implements {\bf Obj\-Cryst\-::\-W\-X\-Cryst\-Obj\-Basic} \doxyref{}{p.}{a00123_a3818940b7031ff7e45cf2178c4a99c90}.
 
 
 
-\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\subsubsection{Member Data Documentation}
+\index{Obj\-Cryst\-::\-W\-X\-Field\-Par@{Obj\-Cryst\-::\-W\-X\-Field\-Par}!m\-Human\-Scale@{m\-Human\-Scale}}
+\index{m\-Human\-Scale@{m\-Human\-Scale}!ObjCryst::WXFieldPar@{Obj\-Cryst\-::\-W\-X\-Field\-Par}}
+\paragraph[{m\-Human\-Scale}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ T {\bf Obj\-Cryst\-::\-W\-X\-Field\-Par}$<$ T $>$\-::m\-Human\-Scale\hspace{0.3cm}{\ttfamily [protected]}}\label{a00130_aa37ca90ca40304e967b232e3eef4af12}
+
+
+Coefficient between the value used by Obj\-Cryst++ and the one to be displayed to the user. 
+
+Typically, 180/pi 
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-wx\-Molecule.\-h\end{DoxyCompactItemize}
+wx\-Cryst.\-h\end{DoxyCompactItemize}

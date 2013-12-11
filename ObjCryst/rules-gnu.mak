@@ -146,7 +146,7 @@ ifeq ($(debug),1)
       CPPFLAGS = -g -Wall -D__DEBUG__ 
    endif
    DEPENDFLAGS = ${SEARCHDIRS} ${GL_FLAGS} ${WXCRYSTFLAGS} ${FFTW_FLAGS} ${CLAPACK_FLAGS} ${ZFLAGS}
-   LOADLIBES = -lm -lcryst -lCrystVector -lQuirks -lRefinableObj -lcctbx ${LDNEWMAT} ${PROFILELIB} ${GL_LIB} ${WX_LDFLAGS} ${FFTW_LIB} ${CLAPACK_LIB} ${ZLIB}
+   LOADLIBES = -lm -lcryst -lCrystVector -lQuirks -lRefinableObj -lcctbx ${LDNEWMAT} ${PROFILELIB} ${GL_LIB} ${WX_LDFLAGS} ${FFTW_LIB} ${CLAPACK_LIB} ${ZLIB} -lgsl
 else
 # -march=athlon,pentiumpro
    ifdef RPM_OPT_FLAGS
@@ -161,7 +161,7 @@ else
       CPPFLAGS = -O3 -w -ffast-math -fstrict-aliasing -pipe -fomit-frame-pointer -funroll-loops
    endif
    DEPENDFLAGS = ${SEARCHDIRS} ${GL_FLAGS} ${WXCRYSTFLAGS} ${FFTW_FLAGS} ${CLAPACK_FLAGS} ${ZFLAGS}
-   LOADLIBES = -s -lm -lcryst -lCrystVector -lQuirks -lRefinableObj -lcctbx ${LDNEWMAT} ${PROFILELIB} ${GL_LIB} ${WX_LDFLAGS} ${FFTW_LIB} ${CLAPACK_LIB} ${ZLIB}
+   LOADLIBES = -s -lm -lcryst -lCrystVector -lQuirks -lRefinableObj -lcctbx ${LDNEWMAT} ${PROFILELIB} ${GL_LIB} ${WX_LDFLAGS} ${FFTW_LIB} ${CLAPACK_LIB} ${ZLIB} -lgsl
 endif
 # Add to statically link: -nodefaultlibs -lgcc /usr/lib/libstdc++.a
 

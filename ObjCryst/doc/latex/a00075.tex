@@ -1,233 +1,122 @@
-\subsection{\-Obj\-Cryst\-:\-:\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt \-Class \-Reference}
-\label{a00075}\index{\-Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt@{\-Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt}}
+\subsection{Obj\-Cryst\-:\-:Quaternion Class Reference}
+\label{a00075}\index{Obj\-Cryst\-::\-Quaternion@{Obj\-Cryst\-::\-Quaternion}}
 
 
-\-Double-\/\-Exponential \-Pseudo-\/\-Voigt profile for \-T\-O\-F.  
+A quaternion class, used to represent the orientation of the molecule.  
 
 
-\-Inheritance diagram for \-Obj\-Cryst\-:\-:\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt\-:\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[height=3.000000cm]{a00075}
-\end{center}
-\end{figure}
-\subsubsection*{\-Public \-Member \-Functions}
+\subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bf \-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt} ()\label{a00075_a99d69f5a755094081165c27f8cbc0de2}
+{\bf Quaternion} ()\label{a00075_af5260414dcf9aaeb479370b55542ad58}
 
-\begin{DoxyCompactList}\small\item\em \-Constructor, without unit cell. \end{DoxyCompactList}\item 
-{\bf \-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt} (const {\bf \-Unit\-Cell} \&cell)\label{a00075_a83ca292045467ce5ca2fd5f33f60082b}
+\begin{DoxyCompactList}\small\item\em Default constructor, yields q=(1,0,0,0) \end{DoxyCompactList}\item 
+{\bf Quaternion} (const R\-E\-A\-L q0, const R\-E\-A\-L q1, const R\-E\-A\-L q2, const R\-E\-A\-L q3, bool unit=true)\label{a00075_a7adfabaa48d3f0a8aa056977f8a40492}
 
-\begin{DoxyCompactList}\small\item\em \-Constructor, with unit cell. \end{DoxyCompactList}\item 
-{\bfseries \-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt} (const {\bf \-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt} \&old)\label{a00075_ae4b01c3514699b3ca8981776afd11010}
+\begin{DoxyCompactList}\small\item\em Creates a unit quaternion from its components (normalized automatically) \end{DoxyCompactList}\item 
+{\bf Quaternion} {\bf Get\-Conjugate} () const \label{a00075_a45d3304cc7790cc8d6f3beb46a407c8a}
+
+\begin{DoxyCompactList}\small\item\em Get the conjugate of this quaternion (== the inverse if unit quaternion) \end{DoxyCompactList}\item 
+{\bf Quaternion} {\bf operator$\ast$} (const {\bf Quaternion} \&q) const \label{a00075_a5f3244aba238d4aedc4dbb45a4fa2d69}
+
+\begin{DoxyCompactList}\small\item\em \doxyref{Quaternion}{p.}{a00075} multiplication. \end{DoxyCompactList}\item 
+void {\bfseries operator$\ast$=} (const {\bf Quaternion} \&q)\label{a00075_ac01783b00149b154f0c6701403d72055}
 
 \item 
-virtual \*
-{\bf \-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt} $\ast$ {\bfseries \-Create\-Copy} () const \label{a00075_a495f3877130c4afa1f7456d962b62407}
+void {\bfseries X\-M\-L\-Output} (ostream \&os, int indent=0) const \label{a00075_a709cb217017604ca0796350b2ae644e3}
 
 \item 
-virtual const string \& {\bf \-Get\-Class\-Name} () const 
-\begin{DoxyCompactList}\small\item\em \-Name for this class (\char`\"{}\-Refinable\-Obj\char`\"{}, \char`\"{}\-Crystal\char`\"{},...). \end{DoxyCompactList}\item 
-\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf \-Get\-Profile} (const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \&x, const \-R\-E\-A\-L xcenter, const \-R\-E\-A\-L h, const \-R\-E\-A\-L k, const \-R\-E\-A\-L l)
-\begin{DoxyCompactList}\small\item\em \-Get the reflection profile. \end{DoxyCompactList}\item 
-void {\bf \-Set\-Profile\-Par} (const \-R\-E\-A\-L instrument\-Alpha0, const \-R\-E\-A\-L instrument\-Alpha1, const \-R\-E\-A\-L instrument\-Beta0, const \-R\-E\-A\-L instrument\-Beta1, const \-R\-E\-A\-L gaussian\-Sigma0, const \-R\-E\-A\-L gaussian\-Sigma1, const \-R\-E\-A\-L gaussian\-Sigma2, const \-R\-E\-A\-L lorentzian\-Gamma0, const \-R\-E\-A\-L lorentzian\-Gamma1, const \-R\-E\-A\-L lorentzian\-Gamma2)
-\begin{DoxyCompactList}\small\item\em \-Set reflection profile parameters. \end{DoxyCompactList}\item 
-virtual \-R\-E\-A\-L {\bf \-Get\-Full\-Profile\-Width} (const \-R\-E\-A\-L relative\-Intensity, const \-R\-E\-A\-L xcenter, const \-R\-E\-A\-L h, const \-R\-E\-A\-L k, const \-R\-E\-A\-L l)
-\begin{DoxyCompactList}\small\item\em \-Get the (approximate) full profile width at a given percentage of the profile maximum (e.\-g. \end{DoxyCompactList}\item 
-bool {\bf \-Is\-Anisotropic} () const \label{a00075_a912e47b21ac000e04385058a183aba9b}
+void {\bfseries X\-M\-L\-Input} (istream \&is, const {\bf X\-M\-L\-Cryst\-Tag} \&tag)\label{a00075_afea1afc8fed0f18668374b7e7bd11dce}
 
-\begin{DoxyCompactList}\small\item\em \-Is the profile anisotropic ? \end{DoxyCompactList}\item 
-virtual void {\bf \-X\-M\-L\-Output} (ostream \&os, int indent=0) const 
-\begin{DoxyCompactList}\small\item\em \-Output to stream in well-\/formed \-X\-M\-L. \end{DoxyCompactList}\item 
-virtual void {\bf \-X\-M\-L\-Input} (istream \&is, const {\bf \-X\-M\-L\-Cryst\-Tag} \&tag)
-\begin{DoxyCompactList}\small\item\em \-Input \-From stream. \end{DoxyCompactList}\item 
-void {\bf \-Set\-Unit\-Cell} (const {\bf \-Unit\-Cell} \&cell)
-\begin{DoxyCompactList}\small\item\em \-Set unit cell. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{\-Private \-Member \-Functions}
+\item 
+void {\bf Rotate\-Vector} (R\-E\-A\-L \&v1, R\-E\-A\-L \&v2, R\-E\-A\-L \&v3) const \label{a00075_a50b7dd9fc29bf102e19ca55991a8f657}
+
+\begin{DoxyCompactList}\small\item\em Rotate vector v=(v1,v2,v3). The rotated components are directly written. \end{DoxyCompactList}\item 
+void {\bf Normalize} () const 
+\begin{DoxyCompactList}\small\item\em Re-\/normalize the quaternion to unity. \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bfseries Get\-Norm} () const \label{a00075_a39beed5204c7398e670ae93aefb1c31a}
+
+\item 
+const R\-E\-A\-L \& {\bfseries Q0} () const \label{a00075_a66fc89c6cca64bd1e94789b8aef7e5cc}
+
+\item 
+const R\-E\-A\-L \& {\bfseries Q1} () const \label{a00075_a53b3e3206e570719493a51ffe4ff9587}
+
+\item 
+const R\-E\-A\-L \& {\bfseries Q2} () const \label{a00075_af438a7e1af4cc4d2d8b91feb93b6f3a9}
+
+\item 
+const R\-E\-A\-L \& {\bfseries Q3} () const \label{a00075_adaff60b4982079b9290a84f581bdcc92}
+
+\item 
+R\-E\-A\-L \& {\bfseries Q0} ()\label{a00075_ae7f96ecf853de39a78844c1202dba317}
+
+\item 
+R\-E\-A\-L \& {\bfseries Q1} ()\label{a00075_a7afb9ac56760fc5b4eea48ca052add44}
+
+\item 
+R\-E\-A\-L \& {\bfseries Q2} ()\label{a00075_af2f2c9dfbb6440ee42a51066ddc0231a}
+
+\item 
+R\-E\-A\-L \& {\bfseries Q3} ()\label{a00075_a493592f09ec8f02dfafd1bf4c5c9bc56}
+
+\end{DoxyCompactItemize}
+\subsubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void {\bf \-Init\-Parameters} ()\label{a00075_a32fe8cd36500837396f2ac7070b9f841}
+static {\bf Quaternion} {\bf Rotation\-Quaternion} (const R\-E\-A\-L ang, const R\-E\-A\-L v1, const R\-E\-A\-L v2, const R\-E\-A\-L v3)\label{a00075_a2cf209c3cc21ed46a52aec7a5f106cce}
 
-\begin{DoxyCompactList}\small\item\em \-Initialize parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{\-Private \-Attributes}
+\begin{DoxyCompactList}\small\item\em Create a rotation quaternion around a given vector for a given angle. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\-R\-E\-A\-L {\bfseries m\-Instrument\-Alpha0}\label{a00075_a93fd2450116ca2461fcffc08a2d8e674}
+R\-E\-A\-L {\bf m\-Q0}
+\begin{DoxyCompactList}\small\item\em The components of the quaternion z=(q0,v) with v=(q1,q2,q3) \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bfseries m\-Q1}\label{a00075_ad8a0a4af3b87af3ff7fa9f429b29d538}
 
 \item 
-\-R\-E\-A\-L {\bfseries m\-Instrument\-Alpha1}\label{a00075_a35157f2ea58bd0f5f6ad1620ea227078}
+R\-E\-A\-L {\bfseries m\-Q2}\label{a00075_a8e0d3fd6e900716fd19dd4ca970bbd12}
 
 \item 
-\-R\-E\-A\-L {\bfseries m\-Instrument\-Beta0}\label{a00075_af385ee3d583f76cef00990878844a597}
+R\-E\-A\-L {\bfseries m\-Q3}\label{a00075_a7d70b76441a54466bd783a9ac121d173}
 
 \item 
-\-R\-E\-A\-L {\bfseries m\-Instrument\-Beta1}\label{a00075_a98ce27de2255899ebd7421298b718eb2}
-
-\item 
-\-R\-E\-A\-L {\bfseries m\-Gaussian\-Sigma0}\label{a00075_a78b99801a7ab4823a58cd89fd0400beb}
-
-\item 
-\-R\-E\-A\-L {\bfseries m\-Gaussian\-Sigma1}\label{a00075_ad2914ce7d769b298e51304356a3d13bb}
-
-\item 
-\-R\-E\-A\-L {\bfseries m\-Gaussian\-Sigma2}\label{a00075_a00604d593343a5e9be201f1d488ff975}
-
-\item 
-\-R\-E\-A\-L {\bfseries m\-Lorentzian\-Gamma0}\label{a00075_ac8db724a2bebf7a8414301130cc41ae6}
-
-\item 
-\-R\-E\-A\-L {\bfseries m\-Lorentzian\-Gamma1}\label{a00075_af29ac5bd00450014f504ebd580dc5918}
-
-\item 
-\-R\-E\-A\-L {\bfseries m\-Lorentzian\-Gamma2}\label{a00075_a38b892cfe6e8fde52ef68e04729b0b3e}
-
-\item 
-const {\bf \-Unit\-Cell} $\ast$ {\bfseries mp\-Cell}\label{a00075_ae371d6156d93a9391bcf868c28b1270e}
+bool {\bfseries m\-Is\-Uni\-Quaternion}\label{a00075_a51dbd4da0bd28b4054ea2482e10a26f3}
 
 \end{DoxyCompactItemize}
 
 
-\subsubsection{\-Detailed \-Description}
-\-Double-\/\-Exponential \-Pseudo-\/\-Voigt profile for \-T\-O\-F. 
+\subsubsection{Detailed Description}
+A quaternion class, used to represent the orientation of the molecule. 
 
-\-Ref \-Mark \-Pitt 
+It may or may not be a unit quaternion. 
 
-\subsubsection{\-Member \-Function \-Documentation}
-\index{\-Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt@{\-Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt}!\-Get\-Class\-Name@{\-Get\-Class\-Name}}
-\index{\-Get\-Class\-Name@{\-Get\-Class\-Name}!ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt@{\-Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt}}
-\paragraph[{\-Get\-Class\-Name}]{\setlength{\rightskip}{0pt plus 5cm}virtual const string\& {\bf \-Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt\-::\-Get\-Class\-Name} (
+\subsubsection{Member Function Documentation}
+\index{Obj\-Cryst\-::\-Quaternion@{Obj\-Cryst\-::\-Quaternion}!Normalize@{Normalize}}
+\index{Normalize@{Normalize}!ObjCryst::Quaternion@{Obj\-Cryst\-::\-Quaternion}}
+\paragraph[{Normalize}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-Quaternion\-::\-Normalize (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00075_a5e921c0682e78188e422c006e34df8a0}
+) const}\label{a00075_a155ad4519b9a17e369ef30e2bc72a160}
 
 
-\-Name for this class (\char`\"{}\-Refinable\-Obj\char`\"{}, \char`\"{}\-Crystal\char`\"{},...). 
+Re-\/normalize the quaternion to unity. 
 
-\-This is only useful to distinguish different classes when picking up objects from the \doxyref{\-Refinable\-Obj}{p.}{a00071} \-Global \-Registry 
+This should not be useful, except on individual component input, or after long calculations. And even if wrong, the rotation is independent of the norm of the quaternion.
 
-\-Reimplemented from {\bf \-Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00071_a62968d90a7a3080738b363934616c019}.
+This is markerd const because we use only unit quaternions 
 
-\index{\-Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt@{\-Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt}!\-Get\-Full\-Profile\-Width@{\-Get\-Full\-Profile\-Width}}
-\index{\-Get\-Full\-Profile\-Width@{\-Get\-Full\-Profile\-Width}!ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt@{\-Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt}}
-\paragraph[{\-Get\-Full\-Profile\-Width}]{\setlength{\rightskip}{0pt plus 5cm}virtual \-R\-E\-A\-L {\bf \-Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt\-::\-Get\-Full\-Profile\-Width} (
-\begin{DoxyParamCaption}
-\item[{const \-R\-E\-A\-L}]{relative\-Intensity, }
-\item[{const \-R\-E\-A\-L}]{xcenter, }
-\item[{const \-R\-E\-A\-L}]{h, }
-\item[{const \-R\-E\-A\-L}]{k, }
-\item[{const \-R\-E\-A\-L}]{l}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00075_ac1c2c1f3673f4558eca2c7bee8c3fdea}
+\subsubsection{Member Data Documentation}
+\index{Obj\-Cryst\-::\-Quaternion@{Obj\-Cryst\-::\-Quaternion}!m\-Q0@{m\-Q0}}
+\index{m\-Q0@{m\-Q0}!ObjCryst::Quaternion@{Obj\-Cryst\-::\-Quaternion}}
+\paragraph[{m\-Q0}]{\setlength{\rightskip}{0pt plus 5cm}R\-E\-A\-L Obj\-Cryst\-::\-Quaternion\-::m\-Q0\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}\label{a00075_a4f13c62b89627afaa8f4e08727dbdcdb}
 
 
-\-Get the (approximate) full profile width at a given percentage of the profile maximum (e.\-g. 
+The components of the quaternion z=(q0,v) with v=(q1,q2,q3) 
 
-\-F\-W\-H\-M=\-Get\-Full\-Profile\-Width(0.\-5)). 
+These are mutable so that the quaternion can be normalized in a const method. 
 
-\-Implements {\bf \-Obj\-Cryst\-::\-Reflection\-Profile} \doxyref{}{p.}{a00074_ac6d2a69e63c3efd06f30ab134062bbc0}.
-
-\index{\-Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt@{\-Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt}!\-Get\-Profile@{\-Get\-Profile}}
-\index{\-Get\-Profile@{\-Get\-Profile}!ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt@{\-Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt}}
-\paragraph[{\-Get\-Profile}]{\setlength{\rightskip}{0pt plus 5cm}\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf \-Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt\-::\-Get\-Profile} (
-\begin{DoxyParamCaption}
-\item[{const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \&}]{x, }
-\item[{const \-R\-E\-A\-L}]{xcenter, }
-\item[{const \-R\-E\-A\-L}]{h, }
-\item[{const \-R\-E\-A\-L}]{k, }
-\item[{const \-R\-E\-A\-L}]{l}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00075_ab7c71a3e6156a66f4210fea3086db8d6}
-
-
-\-Get the reflection profile. 
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em x,\-:} & the vector of x coordinates (i.\-e. either 2theta or time-\/of-\/flight) \\
-\hline
-{\em xcenter,\-:} & coordinate (2theta, tof) of the center of the peak \\
-\hline
-{\em h,k,l,\-:} & reflection \-Miller indices \\
-\hline
-\end{DoxyParams}
-\begin{DoxyNote}{\-Note}
-\-: derived classes who need either d\-\_\-hkl or the orthonormal coordinates of the scattering vector should be passed a \doxyref{\-Obj\-Cryst\-::\-Unit\-Cell}{p.}{a00110} object in the constructor so that they can use \doxyref{\-Obj\-Cryst\-::\-Unit\-Cell\-::\-Miller\-To\-Orthonormal\-Coords()}{p.}{a00110_af6efcbafcd761c6f8f4953190e7024d0} 
-\end{DoxyNote}
-
-
-\-Implements {\bf \-Obj\-Cryst\-::\-Reflection\-Profile} \doxyref{}{p.}{a00074_a93a92759349fa242b1c3ed6bb7b24979}.
-
-\index{\-Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt@{\-Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt}!\-Set\-Profile\-Par@{\-Set\-Profile\-Par}}
-\index{\-Set\-Profile\-Par@{\-Set\-Profile\-Par}!ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt@{\-Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt}}
-\paragraph[{\-Set\-Profile\-Par}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt\-::\-Set\-Profile\-Par} (
-\begin{DoxyParamCaption}
-\item[{const \-R\-E\-A\-L}]{instrument\-Alpha0, }
-\item[{const \-R\-E\-A\-L}]{instrument\-Alpha1, }
-\item[{const \-R\-E\-A\-L}]{instrument\-Beta0, }
-\item[{const \-R\-E\-A\-L}]{instrument\-Beta1, }
-\item[{const \-R\-E\-A\-L}]{gaussian\-Sigma0, }
-\item[{const \-R\-E\-A\-L}]{gaussian\-Sigma1, }
-\item[{const \-R\-E\-A\-L}]{gaussian\-Sigma2, }
-\item[{const \-R\-E\-A\-L}]{lorentzian\-Gamma0, }
-\item[{const \-R\-E\-A\-L}]{lorentzian\-Gamma1, }
-\item[{const \-R\-E\-A\-L}]{lorentzian\-Gamma2}
-\end{DoxyParamCaption}
-)}\label{a00075_a056c4179927ced1e55e3529fe54696f6}
-
-
-\-Set reflection profile parameters. 
-
-\index{\-Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt@{\-Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt}!\-Set\-Unit\-Cell@{\-Set\-Unit\-Cell}}
-\index{\-Set\-Unit\-Cell@{\-Set\-Unit\-Cell}!ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt@{\-Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt}}
-\paragraph[{\-Set\-Unit\-Cell}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt\-::\-Set\-Unit\-Cell} (
-\begin{DoxyParamCaption}
-\item[{const {\bf \-Unit\-Cell} \&}]{cell}
-\end{DoxyParamCaption}
-)}\label{a00075_a917d6e23b96ac2a9ffc4b9e45002d505}
-
-
-\-Set unit cell. 
-
-\-This is used to compute d\-\_\-hkl for reflections. \index{\-Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt@{\-Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt}!\-X\-M\-L\-Input@{\-X\-M\-L\-Input}}
-\index{\-X\-M\-L\-Input@{\-X\-M\-L\-Input}!ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt@{\-Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt}}
-\paragraph[{\-X\-M\-L\-Input}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt\-::\-X\-M\-L\-Input} (
-\begin{DoxyParamCaption}
-\item[{istream \&}]{is, }
-\item[{const {\bf \-X\-M\-L\-Cryst\-Tag} \&}]{tag}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00075_a4965f2a8994475187423a7afd6943031}
-
-
-\-Input \-From stream. 
-
-\begin{DoxyRefDesc}{\-Todo}
-\item[{\bf \-Todo}]\-Add an bool \-X\-M\-L\-Input\-Tag(is,tag) function to recognize all the tags from the stream. \-So that each inherited class can use the \-X\-M\-L\-Input\-Tag function from its parent (ie take advantage of inheritance). \-The children class would first try to interpret the tag, then if unsuccessful would pass it to its parent (thus allowing overloading), etc... \end{DoxyRefDesc}
-
-
-\-Implements {\bf \-Obj\-Cryst\-::\-Reflection\-Profile} \doxyref{}{p.}{a00074_a7ad38593ddb4601632beb0a6bcae50f3}.
-
-\index{\-Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt@{\-Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt}!\-X\-M\-L\-Output@{\-X\-M\-L\-Output}}
-\index{\-X\-M\-L\-Output@{\-X\-M\-L\-Output}!ObjCryst::ReflectionProfileDoubleExponentialPseudoVoigt@{\-Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt}}
-\paragraph[{\-X\-M\-L\-Output}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt\-::\-X\-M\-L\-Output} (
-\begin{DoxyParamCaption}
-\item[{ostream \&}]{os, }
-\item[{int}]{indent = {\ttfamily 0}}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00075_a6ec9818370703767da5362960c5b310a}
-
-
-\-Output to stream in well-\/formed \-X\-M\-L. 
-
-\begin{DoxyRefDesc}{\-Todo}
-\item[{\bf \-Todo}]\-Use inheritance.. as for \-X\-M\-L\-Input\-Tag()... \end{DoxyRefDesc}
-
-
-\-Implements {\bf \-Obj\-Cryst\-::\-Reflection\-Profile} \doxyref{}{p.}{a00074_a60e429bb999a8b39f09ef14cdaf5ad0c}.
-
-
-
-\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-\-Reflection\-Profile.\-h\end{DoxyCompactItemize}
+Molecule.\-h\end{DoxyCompactItemize}

@@ -1,37 +1,59 @@
-\subsection{Obj\-Cryst\-:\-:Mol\-Ring Class Reference}
-\label{a00048}\index{Obj\-Cryst\-::\-Mol\-Ring@{Obj\-Cryst\-::\-Mol\-Ring}}
+\subsection{Obj\-Cryst\-:\-:Main\-Tracker Class Reference}
+\label{a00048}\index{Obj\-Cryst\-::\-Main\-Tracker@{Obj\-Cryst\-::\-Main\-Tracker}}
 
 
-Ring class.  
+A class to hold all trackers.  
 
 
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-const std\-::list$<$ {\bf Mol\-Atom} $\ast$ $>$ \& {\bfseries Get\-Atom\-List} () const \label{a00048_af3e9c00f1b215ecb3350b2c1d34a2664}
+void {\bfseries Add\-Tracker} ({\bf Tracker} $\ast$t)\label{a00048_a57cc485e6071733b882ff451d0e4b0c2}
 
 \item 
-std\-::list$<$ {\bf Mol\-Atom} $\ast$ $>$ \& {\bfseries Get\-Atom\-List} ()\label{a00048_a5b78e2a0cca32da2c4d2044187a2acad}
+void {\bfseries Append\-Values} (const long trial)\label{a00048_a364936085e098d0db6241e1ea618e8ad}
 
-\end{DoxyCompactItemize}
+\item 
+void {\bf Clear\-Trackers} ()\label{a00048_a90300f3395141e9245483f0fef1bba33}
+
+\begin{DoxyCompactList}\small\item\em Removes all Trackers. \end{DoxyCompactList}\item 
+void {\bf Clear\-Values} ()\label{a00048_aa641363dfd39e038e091979911d001a8}
+
+\begin{DoxyCompactList}\small\item\em Removes all stored values. \end{DoxyCompactList}\item 
+void {\bf Save\-All} (std\-::ostream \&out) const \label{a00048_a6331f74dd05d975521f7ec5963eed020}
+
+\begin{DoxyCompactList}\small\item\em Will save to a single file if all recorded trial numbers are the same Otherwise ? \end{DoxyCompactList}\item 
+const std\-::set$<$ {\bf Tracker} $\ast$ $>$ \& {\bfseries Get\-Tracker\-List} () const \label{a00048_aa2bc994d1d0c9512b00e6de5d5dd228a}
+
+\item 
+void {\bf Update\-Display} () const \label{a00048_a8f3f9069cc1957663fcddb52376c2f07}
+
+\begin{DoxyCompactList}\small\item\em Update display, if any. \end{DoxyCompactList}\item 
+const {\bf Refinable\-Obj\-Clock} \& {\bf Get\-Clock\-Tracker\-List} () const \label{a00048_a1ed9dc3f6f4e7fae6ce7da58f0a78fc1}
+
+\begin{DoxyCompactList}\small\item\em Get last time a tracker was added. \end{DoxyCompactList}\item 
+const {\bf Refinable\-Obj\-Clock} \& {\bf Get\-Clock\-Values} () const \label{a00048_aa7da65b819f1ba0ec180ee5374eddcf2}
+
+\begin{DoxyCompactList}\small\item\em Get last time values were whanged. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-std\-::list$<$ {\bf Mol\-Atom} $\ast$ $>$ {\bfseries mvp\-Atom}\label{a00048_a8fbd838d8e1b187d268e71596361b4f7}
+std\-::set$<$ {\bf Tracker} $\ast$ $>$ {\bfseries mvp\-Tracker}\label{a00048_a888837e8412f072986a6d3307d1c95a9}
 
-\end{DoxyCompactItemize}
+\item 
+{\bf Refinable\-Obj\-Clock} {\bf m\-Clock\-Tracker\-List}\label{a00048_a06750efaa9482ebb71a043744fb9c6a6}
+
+\begin{DoxyCompactList}\small\item\em Last time a tracker was added. \end{DoxyCompactList}\item 
+{\bf Refinable\-Obj\-Clock} {\bf m\-Clock\-Values}\label{a00048_a83a5fd9e84a64342b2c10e57e3c85df9}
+
+\begin{DoxyCompactList}\small\item\em Last time values were whanged. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-Ring class. 
+A class to hold all trackers. 
 
-\begin{DoxyNote}{Note}
-This class could be used to restrain atom positions for aromatic rings (planar restriction). 
-
-We could also store the aromatic status of the ring. 
-\end{DoxyNote}
-
+All trackers need not have the same 
 
 The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-Molecule.\-h\end{DoxyCompactItemize}
+Tracker.\-h\end{DoxyCompactItemize}

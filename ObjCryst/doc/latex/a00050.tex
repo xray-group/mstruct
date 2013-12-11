@@ -1,388 +1,212 @@
-\subsection{\-Obj\-Cryst\-:\-:\-Monte\-Carlo\-Obj \-Class \-Reference}
-\label{a00050}\index{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj@{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj}}
+\subsection{Obj\-Cryst\-:\-:Mol\-Atom Class Reference}
+\label{a00050}\index{Obj\-Cryst\-::\-Mol\-Atom@{Obj\-Cryst\-::\-Mol\-Atom}}
 
 
-\-Base object for \-Monte-\/\-Carlo \-Global \-Optimization methods.  
+\doxyref{Mol\-Atom}{p.}{a00050} \-: atom inside a \doxyref{Molecule}{p.}{a00054}.  
 
 
-\-Inheritance diagram for \-Obj\-Cryst\-:\-:\-Monte\-Carlo\-Obj\-:\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[height=2.000000cm]{a00050}
-\end{center}
-\end{figure}
-\subsubsection*{\-Public \-Member \-Functions}
+\subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bf \-Monte\-Carlo\-Obj} (const string name=\char`\"{}\char`\"{})\label{a00050_a6ef446b8361a8c53d016f213f0d1e17f}
+{\bf Mol\-Atom} (const R\-E\-A\-L x, const R\-E\-A\-L y, const R\-E\-A\-L z, const {\bf Scattering\-Power} $\ast$p\-Pow, const string \&name, {\bf Molecule} \&parent)
+\begin{DoxyCompactList}\small\item\em Constructor for a \doxyref{Mol\-Atom}{p.}{a00050}. \end{DoxyCompactList}\item 
+virtual {\bf $\sim$\-Mol\-Atom} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void {\bfseries Set\-Name} (const string \&name)\label{a00050_ac25d454197829303bbc0c6550c7bed1e}
 
-\begin{DoxyCompactList}\small\item\em \-Constructor. \end{DoxyCompactList}\item 
-{\bf \-Monte\-Carlo\-Obj} (const bool internal\-Use\-Only)
-\begin{DoxyCompactList}\small\item\em \-Constructor. \end{DoxyCompactList}\item 
-virtual {\bf $\sim$\-Monte\-Carlo\-Obj} ()\label{a00050_a7f928d56e60a279085c67e78dc334f39}
-
-\begin{DoxyCompactList}\small\item\em \-Destructor. \end{DoxyCompactList}\item 
-void {\bf \-Set\-Algorithm\-Simul\-Annealing} (const {\bf \-Annealing\-Schedule} schedule\-Temp, const \-R\-E\-A\-L t\-Max, const \-R\-E\-A\-L t\-Min, const {\bf \-Annealing\-Schedule} schedule\-Mutation=\-A\-N\-N\-E\-A\-L\-I\-N\-G\-\_\-\-C\-O\-N\-S\-T\-A\-N\-T, const \-R\-E\-A\-L mut\-Max=16., const \-R\-E\-A\-L mut\-Min=.\-125, const long nb\-Trial\-Retry=0, const \-R\-E\-A\-L min\-Cost\-Retry=0.)
-\begin{DoxyCompactList}\small\item\em \-Set the refinement method to simulated \-Annealing. \end{DoxyCompactList}\item 
-void {\bf \-Set\-Algorithm\-Parall\-Tempering} (const {\bf \-Annealing\-Schedule} schedule\-Temp, const \-R\-E\-A\-L t\-Max, const \-R\-E\-A\-L t\-Min, const {\bf \-Annealing\-Schedule} schedule\-Mutation=\-A\-N\-N\-E\-A\-L\-I\-N\-G\-\_\-\-C\-O\-N\-S\-T\-A\-N\-T, const \-R\-E\-A\-L mut\-Max=16., const \-R\-E\-A\-L mut\-Min=.\-125)
-\begin{DoxyCompactList}\small\item\em \-Set the refinement method to \-Parallel \-Tempering. \end{DoxyCompactList}\item 
-virtual void {\bf \-Optimize} (long \&nb\-Steps, const bool silent=false, const \-R\-E\-A\-L finalcost=0, const \-R\-E\-A\-L max\-Time=-\/1)
-\begin{DoxyCompactList}\small\item\em \-Launch optimization (a single run) for \-N steps. \end{DoxyCompactList}\item 
-virtual void {\bf \-Multi\-Run\-Optimize} (long \&nb\-Cycle, long \&nb\-Steps, const bool silent=false, const \-R\-E\-A\-L finalcost=0, const \-R\-E\-A\-L max\-Time=-\/1)
-\begin{DoxyCompactList}\small\item\em \-Launch optimization for multiple runs of \-N steps. \end{DoxyCompactList}\item 
-void {\bf \-Run\-Simulated\-Annealing} (long \&nb\-Steps, const bool silent=false, const \-R\-E\-A\-L finalcost=0, const \-R\-E\-A\-L max\-Time=-\/1)
 \item 
-void {\bf \-Run\-Parallel\-Tempering} (long \&nb\-Steps, const bool silent=false, const \-R\-E\-A\-L finalcost=0, const \-R\-E\-A\-L max\-Time=-\/1)
+const string \& {\bfseries Get\-Name} () const \label{a00050_a65d16c95f4cc7b8009b72ac8cb933c1c}
+
 \item 
-virtual void {\bf \-X\-M\-L\-Output} (ostream \&os, int indent=0) const 
-\begin{DoxyCompactList}\small\item\em \-Output a description of the object in \-X\-M\-L format to a stream. \end{DoxyCompactList}\item 
-virtual void {\bf \-X\-M\-L\-Input} (istream \&is, const {\bf \-X\-M\-L\-Cryst\-Tag} \&tag)
-\begin{DoxyCompactList}\small\item\em \-Input in \-X\-M\-L format from a stream, restoring the set of refined objects and the associated cost functions. \end{DoxyCompactList}\item 
-virtual const string {\bf \-Get\-Class\-Name} () const \label{a00050_a8093d58ee8d609cf89a52455df240882}
+string \& {\bfseries Get\-Name} ()\label{a00050_a84abc06691835b602488b10e89e6532f}
 
-\begin{DoxyCompactList}\small\item\em \-Get the name for this class type. \end{DoxyCompactList}\item 
-{\bf \-L\-S\-Q\-Num\-Obj} \& {\bf \-Get\-L\-S\-Q\-Obj} ()\label{a00050_a517ee30d65b11c5172f4643aac8a8128}
+\item 
+const {\bf Molecule} \& {\bfseries Get\-Molecule} () const \label{a00050_a71a5369e57ac5a763a36e78b702f85ce}
 
-\begin{DoxyCompactList}\small\item\em \-Access to the builtin \-L\-S\-Q optimization object. \end{DoxyCompactList}\item 
-const {\bf \-L\-S\-Q\-Num\-Obj} \& {\bf \-Get\-L\-S\-Q\-Obj} () const \label{a00050_a695d603e54e12bbf9cd6efa6282ee948}
+\item 
+{\bf Molecule} \& {\bfseries Get\-Molecule} ()\label{a00050_a7cc19830ad1c0be8c7ef456d1bc96f7a}
 
-\begin{DoxyCompactList}\small\item\em \-Access to the builtin \-L\-S\-Q optimization object. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{\-Protected \-Member \-Functions}
+\item 
+const R\-E\-A\-L \& {\bfseries X} () const \label{a00050_a5d4b01f59fc7ef3efca0e88b64b0a392}
+
+\item 
+const R\-E\-A\-L \& {\bfseries Y} () const \label{a00050_a92da05bc18ad568996443f023fe83540}
+
+\item 
+const R\-E\-A\-L \& {\bfseries Z} () const \label{a00050_ac21d89a0913be8f834c836c637ae4b6c}
+
+\item 
+R\-E\-A\-L \& {\bfseries X} ()\label{a00050_a51fceb52778a723f2344bab915dbf732}
+
+\item 
+R\-E\-A\-L \& {\bfseries Y} ()\label{a00050_a46bb8cfc174c6c64c05b3748e8661f6a}
+
+\item 
+R\-E\-A\-L \& {\bfseries Z} ()\label{a00050_a8c97f56e512ed7a7476101366ce7942c}
+
+\item 
+R\-E\-A\-L {\bfseries Get\-X} () const \label{a00050_a77014c411e808229b937489da81beb59}
+
+\item 
+R\-E\-A\-L {\bfseries Get\-Y} () const \label{a00050_a676965d9d8b4fa5ec7718387c957d996}
+
+\item 
+R\-E\-A\-L {\bfseries Get\-Z} () const \label{a00050_a1d8a4e4922843e2c601f3b6f9c64c303}
+
+\item 
+R\-E\-A\-L {\bfseries Get\-Occupancy} () const \label{a00050_ad0945615bcbe0623d99261ee8ef0dab7}
+
+\item 
+void {\bfseries Set\-Occupancy} (const R\-E\-A\-L)\label{a00050_a10c532deb02e46211868c8bff6237a57}
+
+\item 
+bool {\bf Is\-Dummy} () const 
+\begin{DoxyCompactList}\small\item\em Returns true if this is a dummy atom, i.\-e. \end{DoxyCompactList}\item 
+const {\bf Scattering\-Power} \& {\bfseries Get\-Scattering\-Power} () const \label{a00050_acf7340c3da60a04b0245fda93b92a674}
+
+\item 
+void {\bfseries Set\-Scattering\-Power} (const {\bf Scattering\-Power} \&)\label{a00050_aedf49d98c4759f96d2ca438e7d60c482}
+
+\item 
+virtual void {\bfseries X\-M\-L\-Output} (ostream \&os, int indent=0) const \label{a00050_ad8fbbdcd2120ffae9569c9f09f4151ff}
+
+\item 
+virtual void {\bfseries X\-M\-L\-Input} (istream \&is, const {\bf X\-M\-L\-Cryst\-Tag} \&tag)\label{a00050_a89b3f56dc2b926212f2067452ecc7688}
+
+\item 
+void {\bf Set\-Is\-In\-Ring} (const bool r) const 
+\begin{DoxyCompactList}\small\item\em Flag this atom as being in a ring (or not). \end{DoxyCompactList}\item 
+bool {\bfseries Is\-In\-Ring} () const \label{a00050_ae9c6870de5c35fb8e333628e3a788479}
+
+\end{DoxyCompactItemize}
+{\bf }\par
 \begin{DoxyCompactItemize}
 \item 
-virtual void {\bf \-New\-Configuration} (const {\bf \-Ref\-Par\-Type} $\ast$type={\bf gp\-Ref\-Par\-Type\-Obj\-Cryst})
-\begin{DoxyCompactList}\small\item\em \-Make a random change in the configuration. \end{DoxyCompactList}\item 
-virtual void {\bf \-Init\-Options} ()\label{a00050_aa9c005fcbe5c600efe2dee1a2c7697a4}
+void {\bf Set\-X} (const R\-E\-A\-L) const 
+\begin{DoxyCompactList}\small\item\em Set the X,Y,Z coordinate -\/ this is const because sometimes their coordinate must be changed even though the atom does not move, if the atom is part of a rigid group (its position is then described by a combination of atomic cooordinates, plus a global translation and rotation... \end{DoxyCompactList}\item 
+void {\bfseries Set\-Y} (const R\-E\-A\-L) const \label{a00050_a18bbddb5f5de159b94755aa3d92e35c6}
 
-\begin{DoxyCompactList}\small\item\em \-Initialization of options. \end{DoxyCompactList}\item 
-virtual void {\bf \-Init\-L\-S\-Q} (const bool use\-Full\-Powder\-Pattern\-Profile=true)
-\begin{DoxyCompactList}\small\item\em \-Prepare m\-L\-S\-Q for least-\/squares refinement during the global optimization. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{\-Protected \-Attributes}
+\item 
+void {\bfseries Set\-Z} (const R\-E\-A\-L) const \label{a00050_a9e20c5cfb9b606c2fa0e0c0a9797504c}
+
+\end{DoxyCompactItemize}
+
+\subsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-{\bf \-Ref\-Obj\-Opt} {\bf m\-Global\-Optim\-Type}
-\begin{DoxyCompactList}\small\item\em \-Method used for the global optimization. \end{DoxyCompactList}\item 
-\-R\-E\-A\-L {\bf m\-Current\-Cost}\label{a00050_a96805488cd133249ec1c24c67d3a2dda}
+string {\bf m\-Name}\label{a00050_a9b5acff7bfa3e693a0ffb294f625da4a}
 
-\begin{DoxyCompactList}\small\item\em \-Current value of the cost function. \end{DoxyCompactList}\item 
-{\bf \-Ref\-Obj\-Opt} {\bf m\-Save\-Tracked\-Data}\label{a00050_ac782f38b1343464aa3db886873798107}
+\begin{DoxyCompactList}\small\item\em Name for this atom. \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bf m\-X}
+\begin{DoxyCompactList}\small\item\em Cartesian oordinates in the \doxyref{Molecule}{p.}{a00054} reference frame. \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bfseries m\-Y}\label{a00050_a9b2dced49b3f7bc7c7796bcd6f9ea744}
 
-\begin{DoxyCompactList}\small\item\em \-Option to save the evolution of tracked data (cost functions, likelihhod, individual parameters,...) \end{DoxyCompactList}\item 
-\-R\-E\-A\-L {\bf m\-Temperature}\label{a00050_a17997726361536481a041fb5736fedb9}
+\item 
+R\-E\-A\-L {\bfseries m\-Z}\label{a00050_a97e87a6f7313a4c35f5ac7a36fb973e3}
 
-\begin{DoxyCompactList}\small\item\em \-Current temperature for annealing. \end{DoxyCompactList}\item 
-\-R\-E\-A\-L {\bf m\-Temperature\-Max}\label{a00050_a1256bc3d6ceae83f8b36de6141a8945d}
+\item 
+R\-E\-A\-L {\bf m\-Occupancy}\label{a00050_ab2ec9204d2dbe32fbdddcf86a5976bb5}
 
-\begin{DoxyCompactList}\small\item\em \-Beginning temperature for annealing. \end{DoxyCompactList}\item 
-\-R\-E\-A\-L {\bf m\-Temperature\-Min}\label{a00050_a8ba61158d22cd66be193aabcd41dd9f6}
+\begin{DoxyCompactList}\small\item\em Occupancy. \end{DoxyCompactList}\item 
+const {\bf Scattering\-Power} $\ast$ {\bf mp\-Scatt\-Pow}\label{a00050_a03d1229197681392ce1528d812ce6390}
 
-\begin{DoxyCompactList}\small\item\em \-Lower temperature. \end{DoxyCompactList}\item 
-{\bf \-Ref\-Obj\-Opt} {\bf m\-Annealing\-Schedule\-Temp}\label{a00050_ae630f1608e3be9b01159d0780980eb08}
+\begin{DoxyCompactList}\small\item\em \doxyref{Scattering\-Power}{p.}{a00097}. \end{DoxyCompactList}\item 
+{\bf Molecule} $\ast$ {\bf mp\-Mol}\label{a00050_a56eeb020f2b23d601f68b2fdd6160366}
 
-\begin{DoxyCompactList}\small\item\em \-Schedule for the annealing. \end{DoxyCompactList}\item 
-\-R\-E\-A\-L {\bf m\-Temperature\-Gamma}\label{a00050_af1a7aeb7079f01175fbef95b31ca47af}
+\begin{DoxyCompactList}\small\item\em Parent \doxyref{Molecule}{p.}{a00054}. \end{DoxyCompactList}\item 
+bool {\bf m\-Is\-In\-Ring}\label{a00050_a3bc8679a02465375d92d7fc3410dbb2e}
 
-\begin{DoxyCompactList}\small\item\em \-Gamma for the 'gamma' temperature schedule. \end{DoxyCompactList}\item 
-\-R\-E\-A\-L {\bf m\-Mutation\-Amplitude}
-\begin{DoxyCompactList}\small\item\em \-Mutation amplitude. \end{DoxyCompactList}\item 
-\-R\-E\-A\-L {\bf m\-Mutation\-Amplitude\-Max}\label{a00050_ae56181bde6b87eeeb24a6fdd1428a0b9}
-
-\begin{DoxyCompactList}\small\item\em \-Mutation amplitude at the beginning of the optimization. \end{DoxyCompactList}\item 
-\-R\-E\-A\-L {\bf m\-Mutation\-Amplitude\-Min}\label{a00050_a6f4e6631d2079c0ac3f82a271a6ad3ec}
-
-\begin{DoxyCompactList}\small\item\em \-Mutation amplitude at the end of the optimization. \end{DoxyCompactList}\item 
-{\bf \-Ref\-Obj\-Opt} {\bf m\-Annealing\-Schedule\-Mutation}\label{a00050_a5bb4e03ae2221be34131f4c0f108271e}
-
-\begin{DoxyCompactList}\small\item\em \-Schedule for the annealing. \end{DoxyCompactList}\item 
-\-R\-E\-A\-L {\bf m\-Mutation\-Amplitude\-Gamma}\label{a00050_a1cfbd1b4fc984a06a02c5102a9dcfcd3}
-
-\begin{DoxyCompactList}\small\item\em \-Gamma for the 'gamma' \-Mutation amplitude schedule. \end{DoxyCompactList}\item 
-long {\bf m\-Nb\-Trial\-Retry}
-\begin{DoxyCompactList}\small\item\em \-Number of trials before testing if we are below the given minimum cost. \end{DoxyCompactList}\item 
-\-R\-E\-A\-L {\bf m\-Min\-Cost\-Retry}\label{a00050_a9a45d65ee6522c4dc159a91fdb4c1661}
-
-\begin{DoxyCompactList}\small\item\em \-Cost to reach unless an automatic randomization and retry is done. \end{DoxyCompactList}\item 
-{\bf \-L\-S\-Q\-Num\-Obj} {\bf m\-L\-S\-Q}\label{a00050_a36b4c13151172e24108d6578d63d1125}
-
-\begin{DoxyCompactList}\small\item\em \-Least squares object. \end{DoxyCompactList}\item 
-{\bf \-Ref\-Obj\-Opt} {\bf m\-Auto\-L\-S\-Q}\label{a00050_a3d6e159362a2f93d5a2883e60f1710d8}
-
-\begin{DoxyCompactList}\small\item\em \-Option to run automatic least-\/squares refinements. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Is the atom in a ring ? \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\subsubsection{\-Detailed \-Description}
-\-Base object for \-Monte-\/\-Carlo \-Global \-Optimization methods. 
+\subsubsection{Detailed Description}
+\doxyref{Mol\-Atom}{p.}{a00050} \-: atom inside a \doxyref{Molecule}{p.}{a00054}. 
 
-\-The algorithm is quite simple, whith two type of optimizations, either simulated \-Annealing or \-Parallel \-Tempering, the latter being recommanded for most real-\/world optimizations. 
+This keeps coordinates, recorded in a cartesian frame (in Angstroem), the associated scattering power and it also keeps in a list of all bonds in which this atom is involved.
 
-\subsubsection{\-Constructor \& \-Destructor \-Documentation}
-\index{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj@{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj}!\-Monte\-Carlo\-Obj@{\-Monte\-Carlo\-Obj}}
-\index{\-Monte\-Carlo\-Obj@{\-Monte\-Carlo\-Obj}!ObjCryst::MonteCarloObj@{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj}}
-\paragraph[{\-Monte\-Carlo\-Obj}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Obj\-Cryst\-::\-Monte\-Carlo\-Obj\-::\-Monte\-Carlo\-Obj} (
-\begin{DoxyParamCaption}
-\item[{const bool}]{internal\-Use\-Only}
-\end{DoxyParamCaption}
-)}\label{a00050_a503419b4b79fdb5ae41928656a888ec8}
-
-
-\-Constructor. 
-
-\-Using internal\-Use\-Only=true will avoid registering the the object to any registry, and thus (for example) no display will be created, nor will this object be automatically be saved. 
-
-\subsubsection{\-Member \-Function \-Documentation}
-\index{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj@{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj}!\-Init\-L\-S\-Q@{\-Init\-L\-S\-Q}}
-\index{\-Init\-L\-S\-Q@{\-Init\-L\-S\-Q}!ObjCryst::MonteCarloObj@{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj}}
-\paragraph[{\-Init\-L\-S\-Q}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-Monte\-Carlo\-Obj\-::\-Init\-L\-S\-Q} (
-\begin{DoxyParamCaption}
-\item[{const bool}]{use\-Full\-Powder\-Pattern\-Profile = {\ttfamily true}}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [protected, virtual]}}\label{a00050_abe55c9dd193cca72bf5b947a6eaf7fdd}
-
-
-\-Prepare m\-L\-S\-Q for least-\/squares refinement during the global optimization. 
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em use\-Full\-Powder\-Pattern\-Profile,\-:} & if true, the refinement will use the full profile version of powder patterns, otherwise only the integrated powder pattern will be used (faster). \\
-\hline
-\end{DoxyParams}
-\index{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj@{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj}!\-Multi\-Run\-Optimize@{\-Multi\-Run\-Optimize}}
-\index{\-Multi\-Run\-Optimize@{\-Multi\-Run\-Optimize}!ObjCryst::MonteCarloObj@{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj}}
-\paragraph[{\-Multi\-Run\-Optimize}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-Monte\-Carlo\-Obj\-::\-Multi\-Run\-Optimize} (
-\begin{DoxyParamCaption}
-\item[{long \&}]{nb\-Cycle, }
-\item[{long \&}]{nb\-Steps, }
-\item[{const bool}]{silent = {\ttfamily false}, }
-\item[{const \-R\-E\-A\-L}]{finalcost = {\ttfamily 0}, }
-\item[{const \-R\-E\-A\-L}]{max\-Time = {\ttfamily -\/1}}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00050_ae1689aa2dd5867499768328df935334d}
-
-
-\-Launch optimization for multiple runs of \-N steps. 
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em nb\-Cycle,\-:} & the number of runs (cycles) to perform. \-The structure is randomized at the beginning of each cycle. \-If nb\-Cycle==-\/1, this will run indefinitely. \-The nb\-Cycle parameter is decreased after each run. \\
-\hline
-{\em nb\-Steps,\-:} & the number of steps to go. \-This number is modified (decreases!) as the refinement goes on. \\
-\hline
-{\em silent} & \-: if true, absolutely no message should be printed (except debugging) \\
-\hline
-{\em finalcost,\-:} & the optimization will stop if overall cost fallse below this value \\
-\hline
-{\em max\-Time,\-:} & the optimization will stop after the given number of seconds has been spent optimizing (ignored if $<$0). \\
-\hline
-\end{DoxyParams}
-
-
-\-Implements {\bf \-Obj\-Cryst\-::\-Optimization\-Obj} \doxyref{}{p.}{a00055_aa53575dbda2ec3f561bed934beb4ca6f}.
-
-\index{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj@{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj}!\-New\-Configuration@{\-New\-Configuration}}
-\index{\-New\-Configuration@{\-New\-Configuration}!ObjCryst::MonteCarloObj@{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj}}
-\paragraph[{\-New\-Configuration}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-Monte\-Carlo\-Obj\-::\-New\-Configuration} (
-\begin{DoxyParamCaption}
-\item[{const {\bf \-Ref\-Par\-Type} $\ast$}]{type = {\ttfamily {\bf gp\-Ref\-Par\-Type\-Obj\-Cryst}}}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [protected, virtual]}}\label{a00050_a8f177c8ada9f3cf392f8e8706eeae28b}
-
-
-\-Make a random change in the configuration. 
-
-\-This just generates a new configuration with random changes (according to current parameters). \-The new configuration is {\itshape not\/} tested {\itshape in\/} {\itshape this\/} {\itshape function\/} vs temperature\-: this should be done in the \doxyref{\-Optimization\-Obj\-::\-Optimize()}{p.}{a00055_a08c77dc6ec80f63bf067ef2968a0b6dc} function, which also chooses whether to revert to the previous configuration.
-
-\-Random moves are made by the objects and not by this function, because the new configuration can be specific (like, for example, permutations between some of the parameters (atoms)).
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em type,\-:} & can be used to restrict the move to a given category of parameters. \\
-\hline
-\end{DoxyParams}
-\index{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj@{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj}!\-Optimize@{\-Optimize}}
-\index{\-Optimize@{\-Optimize}!ObjCryst::MonteCarloObj@{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj}}
-\paragraph[{\-Optimize}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-Monte\-Carlo\-Obj\-::\-Optimize} (
-\begin{DoxyParamCaption}
-\item[{long \&}]{nb\-Steps, }
-\item[{const bool}]{silent = {\ttfamily false}, }
-\item[{const \-R\-E\-A\-L}]{finalcost = {\ttfamily 0}, }
-\item[{const \-R\-E\-A\-L}]{max\-Time = {\ttfamily -\/1}}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00050_aef060de8a302fb8c4e607e00667d7b49}
-
-
-\-Launch optimization (a single run) for \-N steps. 
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em nb\-Steps,\-:} & the number of steps to go. \-This number is modified (decreases!) as the refinement goes on. \\
-\hline
-{\em silent} & \-: if true, absolutely no message should be printed (except debugging) \\
-\hline
-{\em finalcost,\-:} & the optimization will stop if overall cost fallse below this value \\
-\hline
-{\em max\-Time,\-:} & the optimization will stop after the given number of seconds has been spent optimizing (ignored if $<$0). \\
-\hline
-\end{DoxyParams}
-
-
-\-Implements {\bf \-Obj\-Cryst\-::\-Optimization\-Obj} \doxyref{}{p.}{a00055_a08c77dc6ec80f63bf067ef2968a0b6dc}.
-
-\index{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj@{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj}!\-Run\-Parallel\-Tempering@{\-Run\-Parallel\-Tempering}}
-\index{\-Run\-Parallel\-Tempering@{\-Run\-Parallel\-Tempering}!ObjCryst::MonteCarloObj@{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj}}
-\paragraph[{\-Run\-Parallel\-Tempering}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Obj\-Cryst\-::\-Monte\-Carlo\-Obj\-::\-Run\-Parallel\-Tempering} (
-\begin{DoxyParamCaption}
-\item[{long \&}]{nb\-Steps, }
-\item[{const bool}]{silent = {\ttfamily false}, }
-\item[{const \-R\-E\-A\-L}]{finalcost = {\ttfamily 0}, }
-\item[{const \-R\-E\-A\-L}]{max\-Time = {\ttfamily -\/1}}
-\end{DoxyParamCaption}
-)}\label{a00050_a707045b814adb938fa5a1d8485074d21}
-\-Do a single \-Parallel \-Tempering run. \-This is called by \-Optimize(...) and \doxyref{\-Multi\-Run\-Optimize()}{p.}{a00050_ae1689aa2dd5867499768328df935334d}, which must also prepare the optimization (\doxyref{\-Prepare\-Ref\-Par\-List()}{p.}{a00055_a2f11f520bc1bd0b70f8aea98d3f8224c}, etc..). \index{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj@{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj}!\-Run\-Simulated\-Annealing@{\-Run\-Simulated\-Annealing}}
-\index{\-Run\-Simulated\-Annealing@{\-Run\-Simulated\-Annealing}!ObjCryst::MonteCarloObj@{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj}}
-\paragraph[{\-Run\-Simulated\-Annealing}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Obj\-Cryst\-::\-Monte\-Carlo\-Obj\-::\-Run\-Simulated\-Annealing} (
-\begin{DoxyParamCaption}
-\item[{long \&}]{nb\-Steps, }
-\item[{const bool}]{silent = {\ttfamily false}, }
-\item[{const \-R\-E\-A\-L}]{finalcost = {\ttfamily 0}, }
-\item[{const \-R\-E\-A\-L}]{max\-Time = {\ttfamily -\/1}}
-\end{DoxyParamCaption}
-)}\label{a00050_a80c15a8ba385e2e0f3e8a52451898fde}
-\-Do a single simulated annealing run. \-This is called by \-Optimize(...) and \doxyref{\-Multi\-Run\-Optimize()}{p.}{a00050_ae1689aa2dd5867499768328df935334d}, which must also prepare the optimization (\doxyref{\-Prepare\-Ref\-Par\-List()}{p.}{a00055_a2f11f520bc1bd0b70f8aea98d3f8224c}, etc..). \index{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj@{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj}!\-Set\-Algorithm\-Parall\-Tempering@{\-Set\-Algorithm\-Parall\-Tempering}}
-\index{\-Set\-Algorithm\-Parall\-Tempering@{\-Set\-Algorithm\-Parall\-Tempering}!ObjCryst::MonteCarloObj@{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj}}
-\paragraph[{\-Set\-Algorithm\-Parall\-Tempering}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Obj\-Cryst\-::\-Monte\-Carlo\-Obj\-::\-Set\-Algorithm\-Parall\-Tempering} (
-\begin{DoxyParamCaption}
-\item[{const {\bf \-Annealing\-Schedule}}]{schedule\-Temp, }
-\item[{const \-R\-E\-A\-L}]{t\-Max, }
-\item[{const \-R\-E\-A\-L}]{t\-Min, }
-\item[{const {\bf \-Annealing\-Schedule}}]{schedule\-Mutation = {\ttfamily \-A\-N\-N\-E\-A\-L\-I\-N\-G\-\_\-\-C\-O\-N\-S\-T\-A\-N\-T}, }
-\item[{const \-R\-E\-A\-L}]{mut\-Max = {\ttfamily 16.}, }
-\item[{const \-R\-E\-A\-L}]{mut\-Min = {\ttfamily .125}}
-\end{DoxyParamCaption}
-)}\label{a00050_a54c7ad3cb78846c82c65d6a6db27801a}
-
-
-\-Set the refinement method to \-Parallel \-Tempering. 
-
-\-The refinement begins at max and finishes at min temperature.
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em schedule\-Temp,\-:} & temperature schedule \\
-\hline
-{\em t\-Max,t\-Min,\-:} & \-Max and \-Min temperatures. \-See \-Annealing\-Schedule. \\
-\hline
-{\em schedule\-Mutation,\-:} & the mutation schedule. \-For each new configuration, the variation of each refinable parameter is less than its \-Refinable\-Par\-::\-Global\-Optim\-Step(), multiplied by the current mutation amplitude. \-By default this mutation is equal to 1., but making bigger steps can be a good idea at the beginning of the refinement. \-Thus you can choose a schedule for the amplitude, exactly like for the temperature. \\
-\hline
-{\em mut\-Max,mut\-Min,\-:} & \-Max and \-Min mutation amplitudes. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyWarning}{\-Warning}
-do not use the 'smart' option for the temperature schedule, it is not yet implemented. \-Later it will be used to set the temperatures as a function of the amplitude schedule, so that we keep accepted move between 30\% and 70\%. 
-\end{DoxyWarning}
-\begin{DoxyNote}{\-Note}
-this will be removed when we separate the different algorithms in different classes. 
+\begin{DoxyNote}{Note}
+maybe it's not a great idea to keep a reference of bonds for this atom in here 
 \end{DoxyNote}
-\index{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj@{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj}!\-Set\-Algorithm\-Simul\-Annealing@{\-Set\-Algorithm\-Simul\-Annealing}}
-\index{\-Set\-Algorithm\-Simul\-Annealing@{\-Set\-Algorithm\-Simul\-Annealing}!ObjCryst::MonteCarloObj@{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj}}
-\paragraph[{\-Set\-Algorithm\-Simul\-Annealing}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Obj\-Cryst\-::\-Monte\-Carlo\-Obj\-::\-Set\-Algorithm\-Simul\-Annealing} (
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\index{Obj\-Cryst\-::\-Mol\-Atom@{Obj\-Cryst\-::\-Mol\-Atom}!Mol\-Atom@{Mol\-Atom}}
+\index{Mol\-Atom@{Mol\-Atom}!ObjCryst::MolAtom@{Obj\-Cryst\-::\-Mol\-Atom}}
+\paragraph[{Mol\-Atom}]{\setlength{\rightskip}{0pt plus 5cm}Obj\-Cryst\-::\-Mol\-Atom\-::\-Mol\-Atom (
 \begin{DoxyParamCaption}
-\item[{const {\bf \-Annealing\-Schedule}}]{schedule\-Temp, }
-\item[{const \-R\-E\-A\-L}]{t\-Max, }
-\item[{const \-R\-E\-A\-L}]{t\-Min, }
-\item[{const {\bf \-Annealing\-Schedule}}]{schedule\-Mutation = {\ttfamily \-A\-N\-N\-E\-A\-L\-I\-N\-G\-\_\-\-C\-O\-N\-S\-T\-A\-N\-T}, }
-\item[{const \-R\-E\-A\-L}]{mut\-Max = {\ttfamily 16.}, }
-\item[{const \-R\-E\-A\-L}]{mut\-Min = {\ttfamily .125}, }
-\item[{const long}]{nb\-Trial\-Retry = {\ttfamily 0}, }
-\item[{const \-R\-E\-A\-L}]{min\-Cost\-Retry = {\ttfamily 0.}}
+\item[{const R\-E\-A\-L}]{x, }
+\item[{const R\-E\-A\-L}]{y, }
+\item[{const R\-E\-A\-L}]{z, }
+\item[{const {\bf Scattering\-Power} $\ast$}]{p\-Pow, }
+\item[{const string \&}]{name, }
+\item[{{\bf Molecule} \&}]{parent}
 \end{DoxyParamCaption}
-)}\label{a00050_ac094251dbd02a4709dd4afb29d8454e5}
+)}\label{a00050_a4a96ce5bd91d7b46e53fe8bbc95fa243}
 
 
-\-Set the refinement method to simulated \-Annealing. 
+Constructor for a \doxyref{Mol\-Atom}{p.}{a00050}. 
 
-\-Note that \-Parellel \-Tempering is more efficient to get out of local minima, so you sould rather use that method.
-
-\-The refinement begins at max and finishes at min temperature.
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em schedule\-Temp,\-:} & temperature schedule. \-See \-Annealing\-Schedule. \\
-\hline
-{\em t\-Max,t\-Min,\-:} & \-Max and \-Min temperatures. \\
-\hline
-{\em schedule\-Mutation,\-:} & the mutation schedule. \-For each new configuration, the variation of each refinable parameter is less than its \-Refinable\-Par\-::\-Global\-Optim\-Step(), multiplied by the current mutation amplitude. \-By default this mutation is equal to 1., but making bigger steps is a good idea at the beginning of the refinement (for higher temperatures). \-See \-Annealing\-Schedule. \-See \-Annealing\-Schedule. \\
-\hline
-{\em mut\-Max,mut\-Min,\-:} & \-Max and \-Min mutation amplitudes. \\
-\hline
-{\em min\-Cost\-Retry,nb\-Trial\-Retry,\-:} & if after nb\-Trial\-Retry, the cost function is still above min\-Cost\-Retry, then start again from a random configuration. \-No randomization is made if nb\-Trial\-Retry $<$= 0. \\
-\hline
-{\em max\-Nb\-Trial\-Since\-Best,\-:} & if more than max\-Nb\-Trial\-Since\-Best trials have been made since the best configuration was recorded, then revert to that configuration. \-This should be large enough to have an ergodic search (the default is never to revert..)\\
-\hline
-\end{DoxyParams}
-\begin{DoxyWarning}{\-Warning}
-do not use the 'smart' option for the temperature schedule, it is not yet implemented. \-Later it will be used to set the temperatures as a function of the amplitude schedule, so that we accept between 30\% and 70\% moves. 
-\end{DoxyWarning}
-\begin{DoxyNote}{\-Note}
-this will be removed when we separate the different algorithms in different classes. 
-\end{DoxyNote}
-\index{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj@{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj}!\-X\-M\-L\-Input@{\-X\-M\-L\-Input}}
-\index{\-X\-M\-L\-Input@{\-X\-M\-L\-Input}!ObjCryst::MonteCarloObj@{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj}}
-\paragraph[{\-X\-M\-L\-Input}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-Monte\-Carlo\-Obj\-::\-X\-M\-L\-Input} (
+\index{Obj\-Cryst\-::\-Mol\-Atom@{Obj\-Cryst\-::\-Mol\-Atom}!$\sim$\-Mol\-Atom@{$\sim$\-Mol\-Atom}}
+\index{$\sim$\-Mol\-Atom@{$\sim$\-Mol\-Atom}!ObjCryst::MolAtom@{Obj\-Cryst\-::\-Mol\-Atom}}
+\paragraph[{$\sim$\-Mol\-Atom}]{\setlength{\rightskip}{0pt plus 5cm}virtual Obj\-Cryst\-::\-Mol\-Atom\-::$\sim$\-Mol\-Atom (
 \begin{DoxyParamCaption}
-\item[{istream \&}]{is, }
-\item[{const {\bf \-X\-M\-L\-Cryst\-Tag} \&}]{tag}
+{}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00050_a2f9428857b1d26bbdac08d59debb9f52}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00050_a1f9c680d749ee2c61917fbb29da5dcf4}
 
 
-\-Input in \-X\-M\-L format from a stream, restoring the set of refined objects and the associated cost functions. 
+Destructor. 
 
-\-Note that the corresponding objects must have been loaded in memory before, else shit happens. 
+Tells the parent \doxyref{Molecule}{p.}{a00054} and all Bond that it is being destroyed. 
 
-\-Implements {\bf \-Obj\-Cryst\-::\-Optimization\-Obj} \doxyref{}{p.}{a00055_aa07aee60f56780e2c56fb20f4a5f48a8}.
-
-\index{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj@{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj}!\-X\-M\-L\-Output@{\-X\-M\-L\-Output}}
-\index{\-X\-M\-L\-Output@{\-X\-M\-L\-Output}!ObjCryst::MonteCarloObj@{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj}}
-\paragraph[{\-X\-M\-L\-Output}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-Monte\-Carlo\-Obj\-::\-X\-M\-L\-Output} (
+\subsubsection{Member Function Documentation}
+\index{Obj\-Cryst\-::\-Mol\-Atom@{Obj\-Cryst\-::\-Mol\-Atom}!Is\-Dummy@{Is\-Dummy}}
+\index{Is\-Dummy@{Is\-Dummy}!ObjCryst::MolAtom@{Obj\-Cryst\-::\-Mol\-Atom}}
+\paragraph[{Is\-Dummy}]{\setlength{\rightskip}{0pt plus 5cm}bool Obj\-Cryst\-::\-Mol\-Atom\-::\-Is\-Dummy (
 \begin{DoxyParamCaption}
-\item[{ostream \&}]{os, }
-\item[{int}]{indent = {\ttfamily 0}}
+{}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00050_a619eb171e5fe384be4d37f999dde8e0f}
+) const}\label{a00050_abdbf729debbc3a441ccad8ecf2c6a282}
 
 
-\-Output a description of the object in \-X\-M\-L format to a stream. 
+Returns true if this is a dummy atom, i.\-e. 
 
-\-This saves the list of refined object and the cost functions, as well as options for the refinement. \-The refined objects are {\bfseries not} saved, so this must be done somewhere else (they must be reloaded before this object). 
+without an associated scattering power.
 
-\-Implements {\bf \-Obj\-Cryst\-::\-Optimization\-Obj} \doxyref{}{p.}{a00055_a6b7726159bb0d5dad1c7eebaee78f53a}.
-
-
-
-\subsubsection{\-Member \-Data \-Documentation}
-\index{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj@{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj}!m\-Global\-Optim\-Type@{m\-Global\-Optim\-Type}}
-\index{m\-Global\-Optim\-Type@{m\-Global\-Optim\-Type}!ObjCryst::MonteCarloObj@{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj}}
-\paragraph[{m\-Global\-Optim\-Type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Ref\-Obj\-Opt} {\bf \-Obj\-Cryst\-::\-Monte\-Carlo\-Obj\-::m\-Global\-Optim\-Type}\hspace{0.3cm}{\ttfamily  [protected]}}\label{a00050_af5ab36ab840b6654f6738c30712b2f95}
-
-
-\-Method used for the global optimization. 
-
-\-Should be removed when we switch to using several classes for different algorithms. \index{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj@{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj}!m\-Mutation\-Amplitude@{m\-Mutation\-Amplitude}}
-\index{m\-Mutation\-Amplitude@{m\-Mutation\-Amplitude}!ObjCryst::MonteCarloObj@{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj}}
-\paragraph[{m\-Mutation\-Amplitude}]{\setlength{\rightskip}{0pt plus 5cm}\-R\-E\-A\-L {\bf \-Obj\-Cryst\-::\-Monte\-Carlo\-Obj\-::m\-Mutation\-Amplitude}\hspace{0.3cm}{\ttfamily  [protected]}}\label{a00050_afb02263e40ec89621bffe34ca859be96}
+Dummy atoms can be used to mark positions, or for restraints. \index{Obj\-Cryst\-::\-Mol\-Atom@{Obj\-Cryst\-::\-Mol\-Atom}!Set\-Is\-In\-Ring@{Set\-Is\-In\-Ring}}
+\index{Set\-Is\-In\-Ring@{Set\-Is\-In\-Ring}!ObjCryst::MolAtom@{Obj\-Cryst\-::\-Mol\-Atom}}
+\paragraph[{Set\-Is\-In\-Ring}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-Mol\-Atom\-::\-Set\-Is\-In\-Ring (
+\begin{DoxyParamCaption}
+\item[{const bool}]{r}
+\end{DoxyParamCaption}
+) const}\label{a00050_a74a751f11661824b78b7b9d51cee71cf}
 
 
-\-Mutation amplitude. 
+Flag this atom as being in a ring (or not). 
 
-\-From .25 to 64. \-Random moves will have a maximum amplitude equal to this amplitude multiplied by the \-Global optimization step defined for each \doxyref{\-Refinable\-Par}{p.}{a00073}. \-Large amplitude should be used at the beginning of the refinement (high temeratures). \index{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj@{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj}!m\-Nb\-Trial\-Retry@{m\-Nb\-Trial\-Retry}}
-\index{m\-Nb\-Trial\-Retry@{m\-Nb\-Trial\-Retry}!ObjCryst::MonteCarloObj@{\-Obj\-Cryst\-::\-Monte\-Carlo\-Obj}}
-\paragraph[{m\-Nb\-Trial\-Retry}]{\setlength{\rightskip}{0pt plus 5cm}long {\bf \-Obj\-Cryst\-::\-Monte\-Carlo\-Obj\-::m\-Nb\-Trial\-Retry}\hspace{0.3cm}{\ttfamily  [protected]}}\label{a00050_a22e972f1cb525f9dc5336fd1f47fa93b}
+This is a const method because the existence of a ring is only a consequence of the connectivity of the \doxyref{Molecule}{p.}{a00054}. \index{Obj\-Cryst\-::\-Mol\-Atom@{Obj\-Cryst\-::\-Mol\-Atom}!Set\-X@{Set\-X}}
+\index{Set\-X@{Set\-X}!ObjCryst::MolAtom@{Obj\-Cryst\-::\-Mol\-Atom}}
+\paragraph[{Set\-X}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-Mol\-Atom\-::\-Set\-X (
+\begin{DoxyParamCaption}
+\item[{const R\-E\-A\-L}]{}
+\end{DoxyParamCaption}
+) const}\label{a00050_a993ef08d14ccf4a88046e294f9dc333a}
 
 
-\-Number of trials before testing if we are below the given minimum cost. 
+Set the X,Y,Z coordinate -\/ this is const because sometimes their coordinate must be changed even though the atom does not move, if the atom is part of a rigid group (its position is then described by a combination of atomic cooordinates, plus a global translation and rotation... 
 
-\-If $<$=0, this will be ignored. 
 
-\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+
+\subsubsection{Member Data Documentation}
+\index{Obj\-Cryst\-::\-Mol\-Atom@{Obj\-Cryst\-::\-Mol\-Atom}!m\-X@{m\-X}}
+\index{m\-X@{m\-X}!ObjCryst::MolAtom@{Obj\-Cryst\-::\-Mol\-Atom}}
+\paragraph[{m\-X}]{\setlength{\rightskip}{0pt plus 5cm}R\-E\-A\-L Obj\-Cryst\-::\-Mol\-Atom\-::m\-X\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}\label{a00050_a217bda060e7d3b5e5b2b7f37e11ef4e0}
+
+
+Cartesian oordinates in the \doxyref{Molecule}{p.}{a00054} reference frame. 
+
+mutable because they may need to be changed when in a rigid group, even though the end position of the atom remains the same. 
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-\-Global\-Optim\-Obj.\-h\end{DoxyCompactItemize}
+Molecule.\-h\end{DoxyCompactItemize}

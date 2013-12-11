@@ -1,74 +1,58 @@
-\subsection{\-Obj\-Cryst\-:\-:\-Scattering\-Corr \-Class \-Reference}
-\label{a00088}\index{\-Obj\-Cryst\-::\-Scattering\-Corr@{\-Obj\-Cryst\-::\-Scattering\-Corr}}
+\subsection{Obj\-Cryst\-:\-:Restraint Class Reference}
+\label{a00088}\index{Obj\-Cryst\-::\-Restraint@{Obj\-Cryst\-::\-Restraint}}
 
 
-\-Base class to compute all kind of corrections to intensities\-: \-Lorentz, \-Polar, absorption, texcture, extinction, etc...  
+\doxyref{Restraint}{p.}{a00088}\-: generic class for a restraint of a given model.  
 
 
-\-Inheritance diagram for \-Obj\-Cryst\-:\-:\-Scattering\-Corr\-:\begin{figure}[H]
+Inheritance diagram for Obj\-Cryst\-:\-:Restraint\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=1.056604cm]{a00088}
+\includegraphics[height=1.573034cm]{a00088}
 \end{center}
 \end{figure}
-\subsubsection*{\-Public \-Member \-Functions}
+\subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bf \-Scattering\-Corr} (const {\bf \-Scattering\-Data} \&data)\label{a00088_ac1e37a73b0a107f66d1b1d75b9db9c47}
+{\bf Restraint} ()\label{a00088_ac916c489ee14891b38bf9a877d9e0d03}
 
-\begin{DoxyCompactList}\small\item\em \-Constructor, with the associated \doxyref{\-Scattering\-Data}{p.}{a00089} object. \end{DoxyCompactList}\item 
-virtual const string \& {\bf \-Get\-Name} () const =0\label{a00088_adb2782d4e32cbcb89e2e69b3c8ad66fb}
+\begin{DoxyCompactList}\small\item\em Default constructor, sets \doxyref{Ref\-Par\-Type}{p.}{a00087} to gp\-Ref\-Par\-Type\-Obj\-Cryst. \end{DoxyCompactList}\item 
+{\bf Restraint} (const {\bf Ref\-Par\-Type} $\ast$type)\label{a00088_a5fd37c4a5f20a41dcacb78b0af3b8a7d}
 
-\begin{DoxyCompactList}\small\item\em \-Get the name of this object. \end{DoxyCompactList}\item 
-virtual const string \& {\bf \-Get\-Class\-Name} () const =0\label{a00088_a6d72e7a6ffff0c16d86930d9e72c6673}
+\begin{DoxyCompactList}\small\item\em constructor specifying the type \end{DoxyCompactList}\item 
+virtual const {\bf Ref\-Par\-Type} $\ast$ {\bfseries Get\-Type} () const \label{a00088_aaa8b94f207f2e77f58754236af929a57}
 
-\begin{DoxyCompactList}\small\item\em \-Get the name of the class. \end{DoxyCompactList}\item 
-const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \& {\bf \-Get\-Corr} () const 
-\begin{DoxyCompactList}\small\item\em \-Get the vector of corrections for all reflections. \end{DoxyCompactList}\item 
-const {\bf \-Refinable\-Obj\-Clock} \& {\bf \-Get\-Clock\-Corr} () const \label{a00088_a4c5bead3a47202db88495e3d123c5927}
+\item 
+virtual void {\bfseries Set\-Type} (const {\bf Ref\-Par\-Type} $\ast$type)\label{a00088_ab9dc55ae087d99cd30e9915ffb6e5371}
 
-\begin{DoxyCompactList}\small\item\em \-Get the value of the clock corresponding to the last time the correction was actually computed. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{\-Protected \-Member \-Functions}
+\item 
+virtual R\-E\-A\-L {\bf Get\-Log\-Likelihood} () const \label{a00088_adac7d5d594f6d0c26aa7a15b0bb1c73c}
+
+\begin{DoxyCompactList}\small\item\em Get -\/ln(likelihood) for this restraint. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-virtual void {\bf \-Calc\-Corr} () const =0\label{a00088_a437a916156f6d88c76cb01ca4c748c89}
+const {\bf Ref\-Par\-Type} $\ast$ {\bfseries mp\-Ref\-Par\-Type}\label{a00088_a4f87437f4e2e44c1f3ca2039c54b202f}
 
-\begin{DoxyCompactList}\small\item\em \-Do the computation of corrected intensities. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{\-Protected \-Attributes}
-\begin{DoxyCompactItemize}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+\doxyref{Restraint}{p.}{a00088}\-: generic class for a restraint of a given model. 
+
+This defines only the category (\doxyref{Ref\-Par\-Type}{p.}{a00087}) of restraint, and the function to access the log(likelihood) associated to this restraint and the current model.
+
+By default\-: -\/log(likelihood)=0, and the function must be overloaded for \char`\"{}real\char`\"{} restraints.
+
+\begin{DoxyNote}{Note}
+the log(likelihood) {\itshape must} always include the normalization term, so that variances can also optimized during the maximum likelihood optimization. e.\-g.\-:
+\begin{DoxyItemize}
+\item $ P=\frac{1}{\sqrt{2\pi\sigma^2}}e^{\frac{-(calc-expected)^2}{\sigma^2}}$
+\item $ -\log(P)= \log\left(\sqrt{2\pi\sigma^2}\right) + \left(\frac{calc-expected}{\sigma} \right)^2$
+\end{DoxyItemize}
+\end{DoxyNote}
+forgetting the normalization term would result in making the optimization diverge towards infinite variances. 
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-const {\bf \-Scattering\-Data} $\ast$ {\bf mp\-Data}\label{a00088_a0fa066328104835ff72ddf98687c8513}
-
-\begin{DoxyCompactList}\small\item\em \-The associated \doxyref{\-Scattering\-Data}{p.}{a00089} object. \end{DoxyCompactList}\item 
-\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf m\-Corr}\label{a00088_a7669922ac4bbdfb826748148d4016088}
-
-\begin{DoxyCompactList}\small\item\em \-The vector of correction to intensities. \end{DoxyCompactList}\item 
-{\bf \-Refinable\-Obj\-Clock} {\bf m\-Clock\-Corr\-Calc}\label{a00088_aa969418138a9d1867797857318d6f303}
-
-\begin{DoxyCompactList}\small\item\em \-The clock marking the last time the correction was calculated. \end{DoxyCompactList}\end{DoxyCompactItemize}
-
-
-\subsubsection{\-Detailed \-Description}
-\-Base class to compute all kind of corrections to intensities\-: \-Lorentz, \-Polar, absorption, texcture, extinction, etc... 
-
-\-The computed intensities are to be multiplied by all the \doxyref{\-Scattering\-Corr}{p.}{a00088} calculated.
-
-\-This is an abstract base class. 
-
-\subsubsection{\-Member \-Function \-Documentation}
-\index{\-Obj\-Cryst\-::\-Scattering\-Corr@{\-Obj\-Cryst\-::\-Scattering\-Corr}!\-Get\-Corr@{\-Get\-Corr}}
-\index{\-Get\-Corr@{\-Get\-Corr}!ObjCryst::ScatteringCorr@{\-Obj\-Cryst\-::\-Scattering\-Corr}}
-\paragraph[{\-Get\-Corr}]{\setlength{\rightskip}{0pt plus 5cm}const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L\& {\bf \-Obj\-Cryst\-::\-Scattering\-Corr\-::\-Get\-Corr} (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const}\label{a00088_a50395369eb93155bf278453ba158f8cb}
-
-
-\-Get the vector of corrections for all reflections. 
-
-\-Calculated values must be multiplied by these values. 
-
-\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
-\item 
-\-Scattering\-Corr.\-h\end{DoxyCompactItemize}
+Refinable\-Obj.\-h\end{DoxyCompactItemize}

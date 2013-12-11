@@ -1,27 +1,36 @@
-\subsection{\-Obj\-Cryst\-:\-:\-Optimization\-Obj\-:\-:\-Log\-Likelihood\-Stats \-Struct \-Reference}
-\label{a00037}\index{\-Obj\-Cryst\-::\-Optimization\-Obj\-::\-Log\-Likelihood\-Stats@{\-Obj\-Cryst\-::\-Optimization\-Obj\-::\-Log\-Likelihood\-Stats}}
+\subsection{Format\-Int Class Reference}
+\label{a00037}\index{Format\-Int@{Format\-Int}}
 
 
-\-Statistics about each object contributing to the overall \-Log(likelihood)  
+output a number as a formatted integer\-:  
 
 
-\subsubsection*{\-Public \-Attributes}
+\subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\-R\-E\-A\-L {\bf m\-Last\-Log\-Likelihood}\label{a00037_ab7ca39bcc656b2c92cfde1dedc33b7d0}
+{\bfseries Format\-Int} (const long num, const int width=5)\label{a00037_a6c6098db56c85ccb7bfea46810d493c7}
 
-\begin{DoxyCompactList}\small\item\em \-Previous log(likelihood) \end{DoxyCompactList}\item 
-\-R\-E\-A\-L {\bf m\-Total\-Log\-Likelihood}\label{a00037_a2bcf5607d7bf66fc816cc8e550eef463}
-
-\begin{DoxyCompactList}\small\item\em \-Total \-Log(\-Likelihood), to compute the average. \end{DoxyCompactList}\item 
-\-R\-E\-A\-L {\bf m\-Total\-Log\-Likelihood\-Delta\-Sq}\label{a00037_a0b6e826d8f5e0e5a99abc1d52caa6876}
-
-\begin{DoxyCompactList}\small\item\em total of (\-Delta(\-Log(\-Likelihood)))$^\wedge$2 between successive trials \end{DoxyCompactList}\end{DoxyCompactItemize}
-
-
-\subsubsection{\-Detailed \-Description}
-\-Statistics about each object contributing to the overall \-Log(likelihood) 
-
-\-The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
 \item 
-\-Global\-Optim\-Obj.\-h\end{DoxyCompactItemize}
+const long {\bfseries m\-Value}\label{a00037_a712caad7abfc009c6cff31d68b0dc4ed}
+
+\item 
+const int {\bfseries m\-Width}\label{a00037_aa98e381e2fb22e64fe2a61c8e56686ba}
+
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+output a number as a formatted integer\-: 
+
+
+\begin{DoxyCode}
+os << FormatInt(mynumber,5);
+\end{DoxyCode}
+ 
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+V\-F\-N\-Stream\-Format.\-h\end{DoxyCompactItemize}

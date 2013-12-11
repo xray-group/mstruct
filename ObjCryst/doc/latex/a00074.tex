@@ -1,138 +1,42 @@
-\subsection{\-Obj\-Cryst\-:\-:\-Reflection\-Profile \-Class \-Reference}
-\label{a00074}\index{\-Obj\-Cryst\-::\-Reflection\-Profile@{\-Obj\-Cryst\-::\-Reflection\-Profile}}
+\subsection{Obj\-Cryst\-:\-:Powder\-Slit\-Aperture\-Corr Class Reference}
+\label{a00074}\index{Obj\-Cryst\-::\-Powder\-Slit\-Aperture\-Corr@{Obj\-Cryst\-::\-Powder\-Slit\-Aperture\-Corr}}
 
 
-\-Abstract base class for reflection profiles.  
+Slit aperture correction (for powder)  
 
 
-\-Inheritance diagram for \-Obj\-Cryst\-:\-:\-Reflection\-Profile\-:\begin{figure}[H]
+Inheritance diagram for Obj\-Cryst\-:\-:Powder\-Slit\-Aperture\-Corr\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=2.434783cm]{a00074}
+\includegraphics[height=2.000000cm]{a00074}
 \end{center}
 \end{figure}
-\subsubsection*{\-Public \-Member \-Functions}
+\subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries \-Reflection\-Profile} (const {\bf \-Reflection\-Profile} \&old)\label{a00074_a4647aa58d8e98429b10c54499b9b050e}
+{\bfseries Powder\-Slit\-Aperture\-Corr} (const {\bf Scattering\-Data} \&data)\label{a00074_a8c7814fd23c9e2fe96a904ea41137caf}
 
 \item 
-virtual {\bf \-Reflection\-Profile} $\ast$ {\bfseries \-Create\-Copy} () const =0\label{a00074_a620f88c536f3c13881262efd155cc504}
+virtual const string \& {\bf Get\-Name} () const \label{a00074_a395cb337777d1c3fdd283f03c9a06e27}
 
+\begin{DoxyCompactList}\small\item\em Get the name of this object. \end{DoxyCompactList}\item 
+virtual const string \& {\bf Get\-Class\-Name} () const \label{a00074_a36c1dd123d3f951ba140796f47a68fbb}
+
+\begin{DoxyCompactList}\small\item\em Get the name of the class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
 \item 
-virtual \-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf \-Get\-Profile} (const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \&x, const \-R\-E\-A\-L xcenter, const \-R\-E\-A\-L h, const \-R\-E\-A\-L k, const \-R\-E\-A\-L l)=0
-\begin{DoxyCompactList}\small\item\em \-Get the reflection profile. \end{DoxyCompactList}\item 
-virtual \-R\-E\-A\-L {\bf \-Get\-Full\-Profile\-Width} (const \-R\-E\-A\-L relative\-Intensity, const \-R\-E\-A\-L xcenter, const \-R\-E\-A\-L h, const \-R\-E\-A\-L k, const \-R\-E\-A\-L l)=0
-\begin{DoxyCompactList}\small\item\em \-Get the (approximate) full profile width at a given percentage of the profile maximum (e.\-g. \end{DoxyCompactList}\item 
-virtual bool {\bf \-Is\-Anisotropic} () const \label{a00074_ad1c2083adc170bc0d84b44f17b79d008}
+virtual void {\bf Calc\-Corr} () const \label{a00074_ae7b2fecebc30de79ccc54f5237ec67f7}
 
-\begin{DoxyCompactList}\small\item\em \-Is the profile anisotropic ? \end{DoxyCompactList}\item 
-virtual void {\bf \-X\-M\-L\-Output} (ostream \&os, int indent=0) const =0
-\begin{DoxyCompactList}\small\item\em \-Output to stream in well-\/formed \-X\-M\-L. \end{DoxyCompactList}\item 
-virtual void {\bf \-X\-M\-L\-Input} (istream \&is, const {\bf \-X\-M\-L\-Cryst\-Tag} \&tag)=0
-\begin{DoxyCompactList}\small\item\em \-Input \-From stream. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Do the computation of corrected intensities. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Additional Inherited Members}
 
 
-\subsubsection{\-Detailed \-Description}
-\-Abstract base class for reflection profiles. 
+\subsubsection{Detailed Description}
+Slit aperture correction (for powder) 
 
-\subsubsection{\-Member \-Function \-Documentation}
-\index{\-Obj\-Cryst\-::\-Reflection\-Profile@{\-Obj\-Cryst\-::\-Reflection\-Profile}!\-Get\-Full\-Profile\-Width@{\-Get\-Full\-Profile\-Width}}
-\index{\-Get\-Full\-Profile\-Width@{\-Get\-Full\-Profile\-Width}!ObjCryst::ReflectionProfile@{\-Obj\-Cryst\-::\-Reflection\-Profile}}
-\paragraph[{\-Get\-Full\-Profile\-Width}]{\setlength{\rightskip}{0pt plus 5cm}virtual \-R\-E\-A\-L {\bf \-Obj\-Cryst\-::\-Reflection\-Profile\-::\-Get\-Full\-Profile\-Width} (
-\begin{DoxyParamCaption}
-\item[{const \-R\-E\-A\-L}]{relative\-Intensity, }
-\item[{const \-R\-E\-A\-L}]{xcenter, }
-\item[{const \-R\-E\-A\-L}]{h, }
-\item[{const \-R\-E\-A\-L}]{k, }
-\item[{const \-R\-E\-A\-L}]{l}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{a00074_ac6d2a69e63c3efd06f30ab134062bbc0}
+This correction takes into account the fact that diffraction rings (cones) have a portion of the ring proportionnal to $ SlitAp = \frac{1}{\sin(\theta)} $ which falls into the detector (due to slits in the direction perpendicular to the incident beam/ detector plane). 
 
-
-\-Get the (approximate) full profile width at a given percentage of the profile maximum (e.\-g. 
-
-\-F\-W\-H\-M=\-Get\-Full\-Profile\-Width(0.\-5)). 
-
-\-Implemented in {\bf \-Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt} \doxyref{}{p.}{a00075_ac1c2c1f3673f4558eca2c7bee8c3fdea}, and {\bf \-Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt} \doxyref{}{p.}{a00076_abacd734b6ff73b4fc5e6c4a5cba62eb6}.
-
-\index{\-Obj\-Cryst\-::\-Reflection\-Profile@{\-Obj\-Cryst\-::\-Reflection\-Profile}!\-Get\-Profile@{\-Get\-Profile}}
-\index{\-Get\-Profile@{\-Get\-Profile}!ObjCryst::ReflectionProfile@{\-Obj\-Cryst\-::\-Reflection\-Profile}}
-\paragraph[{\-Get\-Profile}]{\setlength{\rightskip}{0pt plus 5cm}virtual \-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf \-Obj\-Cryst\-::\-Reflection\-Profile\-::\-Get\-Profile} (
-\begin{DoxyParamCaption}
-\item[{const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \&}]{x, }
-\item[{const \-R\-E\-A\-L}]{xcenter, }
-\item[{const \-R\-E\-A\-L}]{h, }
-\item[{const \-R\-E\-A\-L}]{k, }
-\item[{const \-R\-E\-A\-L}]{l}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{a00074_a93a92759349fa242b1c3ed6bb7b24979}
-
-
-\-Get the reflection profile. 
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em x,\-:} & the vector of x coordinates (i.\-e. either 2theta or time-\/of-\/flight) \\
-\hline
-{\em xcenter,\-:} & coordinate (2theta, tof) of the center of the peak \\
-\hline
-{\em h,k,l,\-:} & reflection \-Miller indices \\
-\hline
-\end{DoxyParams}
-\begin{DoxyNote}{\-Note}
-\-: derived classes who need either d\-\_\-hkl or the orthonormal coordinates of the scattering vector should be passed a \doxyref{\-Obj\-Cryst\-::\-Unit\-Cell}{p.}{a00110} object in the constructor so that they can use \doxyref{\-Obj\-Cryst\-::\-Unit\-Cell\-::\-Miller\-To\-Orthonormal\-Coords()}{p.}{a00110_af6efcbafcd761c6f8f4953190e7024d0} 
-\end{DoxyNote}
-
-
-\-Implemented in {\bf \-Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt} \doxyref{}{p.}{a00075_ab7c71a3e6156a66f4210fea3086db8d6}, and {\bf \-Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt} \doxyref{}{p.}{a00076_a14ba03c411e8b3d2d4f5af46e6504658}.
-
-\index{\-Obj\-Cryst\-::\-Reflection\-Profile@{\-Obj\-Cryst\-::\-Reflection\-Profile}!\-X\-M\-L\-Input@{\-X\-M\-L\-Input}}
-\index{\-X\-M\-L\-Input@{\-X\-M\-L\-Input}!ObjCryst::ReflectionProfile@{\-Obj\-Cryst\-::\-Reflection\-Profile}}
-\paragraph[{\-X\-M\-L\-Input}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-Reflection\-Profile\-::\-X\-M\-L\-Input} (
-\begin{DoxyParamCaption}
-\item[{istream \&}]{is, }
-\item[{const {\bf \-X\-M\-L\-Cryst\-Tag} \&}]{tag}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{a00074_a7ad38593ddb4601632beb0a6bcae50f3}
-
-
-\-Input \-From stream. 
-
-\begin{DoxyRefDesc}{\-Todo}
-\item[{\bf \-Todo}]\-Add an bool \-X\-M\-L\-Input\-Tag(is,tag) function to recognize all the tags from the stream. \-So that each inherited class can use the \-X\-M\-L\-Input\-Tag function from its parent (ie take advantage of inheritance). \-The children class would first try to interpret the tag, then if unsuccessful would pass it to its parent (thus allowing overloading), etc... \end{DoxyRefDesc}
-
-
-\-Reimplemented from {\bf \-Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00071_ac13a4045c3f187879443c8615c38d623}.
-
-
-
-\-Implemented in {\bf \-Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt} \doxyref{}{p.}{a00075_a4965f2a8994475187423a7afd6943031}, and {\bf \-Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt} \doxyref{}{p.}{a00076_a8c63700610f511503eae297c8161f311}.
-
-\index{\-Obj\-Cryst\-::\-Reflection\-Profile@{\-Obj\-Cryst\-::\-Reflection\-Profile}!\-X\-M\-L\-Output@{\-X\-M\-L\-Output}}
-\index{\-X\-M\-L\-Output@{\-X\-M\-L\-Output}!ObjCryst::ReflectionProfile@{\-Obj\-Cryst\-::\-Reflection\-Profile}}
-\paragraph[{\-X\-M\-L\-Output}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-Reflection\-Profile\-::\-X\-M\-L\-Output} (
-\begin{DoxyParamCaption}
-\item[{ostream \&}]{os, }
-\item[{int}]{indent = {\ttfamily 0}}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{a00074_a60e429bb999a8b39f09ef14cdaf5ad0c}
-
-
-\-Output to stream in well-\/formed \-X\-M\-L. 
-
-\begin{DoxyRefDesc}{\-Todo}
-\item[{\bf \-Todo}]\-Use inheritance.. as for \-X\-M\-L\-Input\-Tag()... \end{DoxyRefDesc}
-
-
-\-Reimplemented from {\bf \-Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00071_a7b9b6ed0f8dcf753d398c35e073de973}.
-
-
-
-\-Implemented in {\bf \-Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt} \doxyref{}{p.}{a00075_a6ec9818370703767da5362960c5b310a}, and {\bf \-Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt} \doxyref{}{p.}{a00076_ac0438d3a1827accbdf2375e7355f18e5}.
-
-
-
-\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-\-Reflection\-Profile.\-h\end{DoxyCompactItemize}
+Scattering\-Corr.\-h\end{DoxyCompactItemize}

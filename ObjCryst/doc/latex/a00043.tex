@@ -1,212 +1,33 @@
-\subsection{Obj\-Cryst\-:\-:Mol\-Atom Class Reference}
-\label{a00043}\index{Obj\-Cryst\-::\-Mol\-Atom@{Obj\-Cryst\-::\-Mol\-Atom}}
+\subsection{Obj\-Cryst\-:\-:Peak\-List\-:\-:hkl0 Struct Reference}
+\label{a00043}\index{Obj\-Cryst\-::\-Peak\-List\-::hkl0@{Obj\-Cryst\-::\-Peak\-List\-::hkl0}}
 
 
-\doxyref{Mol\-Atom}{p.}{a00043} \-: atom inside a \doxyref{Molecule}{p.}{a00047}.  
+One set of Miller indices, a possible indexation for a reflection.  
 
 
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bf Mol\-Atom} (const R\-E\-A\-L x, const R\-E\-A\-L y, const R\-E\-A\-L z, const {\bf Scattering\-Power} $\ast$p\-Pow, const string \&name, {\bf Molecule} \&parent)
-\begin{DoxyCompactList}\small\item\em Constructor for a \doxyref{Mol\-Atom}{p.}{a00043}. \end{DoxyCompactList}\item 
-virtual {\bf $\sim$\-Mol\-Atom} ()
-\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
-void {\bfseries Set\-Name} (const string \&name)\label{a00043_ac25d454197829303bbc0c6550c7bed1e}
-
-\item 
-const string \& {\bfseries Get\-Name} () const \label{a00043_a65d16c95f4cc7b8009b72ac8cb933c1c}
-
-\item 
-string \& {\bfseries Get\-Name} ()\label{a00043_a84abc06691835b602488b10e89e6532f}
-
-\item 
-const {\bf Molecule} \& {\bfseries Get\-Molecule} () const \label{a00043_a71a5369e57ac5a763a36e78b702f85ce}
-
-\item 
-{\bf Molecule} \& {\bfseries Get\-Molecule} ()\label{a00043_a7cc19830ad1c0be8c7ef456d1bc96f7a}
-
-\item 
-const R\-E\-A\-L \& {\bfseries X} () const \label{a00043_a5d4b01f59fc7ef3efca0e88b64b0a392}
-
-\item 
-const R\-E\-A\-L \& {\bfseries Y} () const \label{a00043_a92da05bc18ad568996443f023fe83540}
-
-\item 
-const R\-E\-A\-L \& {\bfseries Z} () const \label{a00043_ac21d89a0913be8f834c836c637ae4b6c}
-
-\item 
-R\-E\-A\-L \& {\bfseries X} ()\label{a00043_a51fceb52778a723f2344bab915dbf732}
-
-\item 
-R\-E\-A\-L \& {\bfseries Y} ()\label{a00043_a46bb8cfc174c6c64c05b3748e8661f6a}
-
-\item 
-R\-E\-A\-L \& {\bfseries Z} ()\label{a00043_a8c97f56e512ed7a7476101366ce7942c}
-
-\item 
-R\-E\-A\-L {\bfseries Get\-X} () const \label{a00043_a77014c411e808229b937489da81beb59}
-
-\item 
-R\-E\-A\-L {\bfseries Get\-Y} () const \label{a00043_a676965d9d8b4fa5ec7718387c957d996}
-
-\item 
-R\-E\-A\-L {\bfseries Get\-Z} () const \label{a00043_a1d8a4e4922843e2c601f3b6f9c64c303}
-
-\item 
-R\-E\-A\-L {\bfseries Get\-Occupancy} () const \label{a00043_ad0945615bcbe0623d99261ee8ef0dab7}
-
-\item 
-void {\bfseries Set\-Occupancy} (const R\-E\-A\-L)\label{a00043_a10c532deb02e46211868c8bff6237a57}
-
-\item 
-bool {\bf Is\-Dummy} () const 
-\begin{DoxyCompactList}\small\item\em Returns true if this is a dummy atom, i.\-e. \end{DoxyCompactList}\item 
-const {\bf Scattering\-Power} \& {\bfseries Get\-Scattering\-Power} () const \label{a00043_acf7340c3da60a04b0245fda93b92a674}
-
-\item 
-void {\bfseries Set\-Scattering\-Power} (const {\bf Scattering\-Power} \&)\label{a00043_aedf49d98c4759f96d2ca438e7d60c482}
-
-\item 
-virtual void {\bfseries X\-M\-L\-Output} (ostream \&os, int indent=0) const \label{a00043_ad8fbbdcd2120ffae9569c9f09f4151ff}
-
-\item 
-virtual void {\bfseries X\-M\-L\-Input} (istream \&is, const {\bf X\-M\-L\-Cryst\-Tag} \&tag)\label{a00043_a89b3f56dc2b926212f2067452ecc7688}
-
-\item 
-void {\bf Set\-Is\-In\-Ring} (const bool r) const 
-\begin{DoxyCompactList}\small\item\em Flag this atom as being in a ring (or not). \end{DoxyCompactList}\item 
-bool {\bfseries Is\-In\-Ring} () const \label{a00043_ae9c6870de5c35fb8e333628e3a788479}
+{\bfseries hkl0} (const int {\bf h}=0, const int k=0, const int l=0)\label{a00043_aba6db797121bd215eaa442ca9c17e0bc}
 
 \end{DoxyCompactItemize}
-{\bf }\par
+\subsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-void {\bf Set\-X} (const R\-E\-A\-L) const 
-\begin{DoxyCompactList}\small\item\em Set the X,Y,Z coordinate -\/ this is const because sometimes their coordinate must be changed even though the atom does not move, if the atom is part of a rigid group (its position is then described by a combination of atomic cooordinates, plus a global translation and rotation... \end{DoxyCompactList}\item 
-void {\bfseries Set\-Y} (const R\-E\-A\-L) const \label{a00043_a18bbddb5f5de159b94755aa3d92e35c6}
+int {\bf h}\label{a00043_a6cd45adccc4cce119c0a1f724a8b23f2}
+
+\begin{DoxyCompactList}\small\item\em Miller indices. \end{DoxyCompactList}\item 
+int {\bfseries k}\label{a00043_a5b4b0cfe066f3028edbf510f989b717b}
 
 \item 
-void {\bfseries Set\-Z} (const R\-E\-A\-L) const \label{a00043_a9e20c5cfb9b606c2fa0e0c0a9797504c}
+int {\bfseries l}\label{a00043_a4465980d0e2e202ab5f7415facf71892}
 
 \end{DoxyCompactItemize}
-
-\subsubsection*{Private Attributes}
-\begin{DoxyCompactItemize}
-\item 
-string {\bf m\-Name}\label{a00043_a9b5acff7bfa3e693a0ffb294f625da4a}
-
-\begin{DoxyCompactList}\small\item\em Name for this atom. \end{DoxyCompactList}\item 
-R\-E\-A\-L {\bf m\-X}
-\begin{DoxyCompactList}\small\item\em Cartesian oordinates in the \doxyref{Molecule}{p.}{a00047} reference frame. \end{DoxyCompactList}\item 
-R\-E\-A\-L {\bfseries m\-Y}\label{a00043_a9b2dced49b3f7bc7c7796bcd6f9ea744}
-
-\item 
-R\-E\-A\-L {\bfseries m\-Z}\label{a00043_a97e87a6f7313a4c35f5ac7a36fb973e3}
-
-\item 
-R\-E\-A\-L {\bf m\-Occupancy}\label{a00043_ab2ec9204d2dbe32fbdddcf86a5976bb5}
-
-\begin{DoxyCompactList}\small\item\em Occupancy. \end{DoxyCompactList}\item 
-const {\bf Scattering\-Power} $\ast$ {\bf mp\-Scatt\-Pow}\label{a00043_a03d1229197681392ce1528d812ce6390}
-
-\begin{DoxyCompactList}\small\item\em \doxyref{Scattering\-Power}{p.}{a00090}. \end{DoxyCompactList}\item 
-{\bf Molecule} $\ast$ {\bf mp\-Mol}\label{a00043_a56eeb020f2b23d601f68b2fdd6160366}
-
-\begin{DoxyCompactList}\small\item\em Parent \doxyref{Molecule}{p.}{a00047}. \end{DoxyCompactList}\item 
-bool {\bf m\-Is\-In\-Ring}\label{a00043_a3bc8679a02465375d92d7fc3410dbb2e}
-
-\begin{DoxyCompactList}\small\item\em Is the atom in a ring ? \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-\doxyref{Mol\-Atom}{p.}{a00043} \-: atom inside a \doxyref{Molecule}{p.}{a00047}. 
+One set of Miller indices, a possible indexation for a reflection. 
 
-This keeps coordinates, recorded in a cartesian frame (in Angstroem), the associated scattering power and it also keeps in a list of all bonds in which this atom is involved.
-
-\begin{DoxyNote}{Note}
-maybe it's not a great idea to keep a reference of bonds for this atom in here 
-\end{DoxyNote}
-
-
-\subsubsection{Constructor \& Destructor Documentation}
-\index{Obj\-Cryst\-::\-Mol\-Atom@{Obj\-Cryst\-::\-Mol\-Atom}!Mol\-Atom@{Mol\-Atom}}
-\index{Mol\-Atom@{Mol\-Atom}!ObjCryst::MolAtom@{Obj\-Cryst\-::\-Mol\-Atom}}
-\paragraph[{Mol\-Atom}]{\setlength{\rightskip}{0pt plus 5cm}Obj\-Cryst\-::\-Mol\-Atom\-::\-Mol\-Atom (
-\begin{DoxyParamCaption}
-\item[{const R\-E\-A\-L}]{x, }
-\item[{const R\-E\-A\-L}]{y, }
-\item[{const R\-E\-A\-L}]{z, }
-\item[{const {\bf Scattering\-Power} $\ast$}]{p\-Pow, }
-\item[{const string \&}]{name, }
-\item[{{\bf Molecule} \&}]{parent}
-\end{DoxyParamCaption}
-)}\label{a00043_a4a96ce5bd91d7b46e53fe8bbc95fa243}
-
-
-Constructor for a \doxyref{Mol\-Atom}{p.}{a00043}. 
-
-\index{Obj\-Cryst\-::\-Mol\-Atom@{Obj\-Cryst\-::\-Mol\-Atom}!$\sim$\-Mol\-Atom@{$\sim$\-Mol\-Atom}}
-\index{$\sim$\-Mol\-Atom@{$\sim$\-Mol\-Atom}!ObjCryst::MolAtom@{Obj\-Cryst\-::\-Mol\-Atom}}
-\paragraph[{$\sim$\-Mol\-Atom}]{\setlength{\rightskip}{0pt plus 5cm}virtual Obj\-Cryst\-::\-Mol\-Atom\-::$\sim$\-Mol\-Atom (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00043_a1f9c680d749ee2c61917fbb29da5dcf4}
-
-
-Destructor. 
-
-Tells the parent \doxyref{Molecule}{p.}{a00047} and all Bond that it is being destroyed. 
-
-\subsubsection{Member Function Documentation}
-\index{Obj\-Cryst\-::\-Mol\-Atom@{Obj\-Cryst\-::\-Mol\-Atom}!Is\-Dummy@{Is\-Dummy}}
-\index{Is\-Dummy@{Is\-Dummy}!ObjCryst::MolAtom@{Obj\-Cryst\-::\-Mol\-Atom}}
-\paragraph[{Is\-Dummy}]{\setlength{\rightskip}{0pt plus 5cm}bool Obj\-Cryst\-::\-Mol\-Atom\-::\-Is\-Dummy (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const}\label{a00043_abdbf729debbc3a441ccad8ecf2c6a282}
-
-
-Returns true if this is a dummy atom, i.\-e. 
-
-without an associated scattering power.
-
-Dummy atoms can be used to mark positions, or for restraints. \index{Obj\-Cryst\-::\-Mol\-Atom@{Obj\-Cryst\-::\-Mol\-Atom}!Set\-Is\-In\-Ring@{Set\-Is\-In\-Ring}}
-\index{Set\-Is\-In\-Ring@{Set\-Is\-In\-Ring}!ObjCryst::MolAtom@{Obj\-Cryst\-::\-Mol\-Atom}}
-\paragraph[{Set\-Is\-In\-Ring}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-Mol\-Atom\-::\-Set\-Is\-In\-Ring (
-\begin{DoxyParamCaption}
-\item[{const bool}]{r}
-\end{DoxyParamCaption}
-) const}\label{a00043_a74a751f11661824b78b7b9d51cee71cf}
-
-
-Flag this atom as being in a ring (or not). 
-
-This is a const method because the existence of a ring is only a consequence of the connectivity of the \doxyref{Molecule}{p.}{a00047}. \index{Obj\-Cryst\-::\-Mol\-Atom@{Obj\-Cryst\-::\-Mol\-Atom}!Set\-X@{Set\-X}}
-\index{Set\-X@{Set\-X}!ObjCryst::MolAtom@{Obj\-Cryst\-::\-Mol\-Atom}}
-\paragraph[{Set\-X}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-Mol\-Atom\-::\-Set\-X (
-\begin{DoxyParamCaption}
-\item[{const R\-E\-A\-L}]{}
-\end{DoxyParamCaption}
-) const}\label{a00043_a993ef08d14ccf4a88046e294f9dc333a}
-
-
-Set the X,Y,Z coordinate -\/ this is const because sometimes their coordinate must be changed even though the atom does not move, if the atom is part of a rigid group (its position is then described by a combination of atomic cooordinates, plus a global translation and rotation... 
-
-
-
-\subsubsection{Member Data Documentation}
-\index{Obj\-Cryst\-::\-Mol\-Atom@{Obj\-Cryst\-::\-Mol\-Atom}!m\-X@{m\-X}}
-\index{m\-X@{m\-X}!ObjCryst::MolAtom@{Obj\-Cryst\-::\-Mol\-Atom}}
-\paragraph[{m\-X}]{\setlength{\rightskip}{0pt plus 5cm}R\-E\-A\-L Obj\-Cryst\-::\-Mol\-Atom\-::m\-X\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}\label{a00043_a217bda060e7d3b5e5b2b7f37e11ef4e0}
-
-
-Cartesian oordinates in the \doxyref{Molecule}{p.}{a00047} reference frame. 
-
-mutable because they may need to be changed when in a rigid group, even though the end position of the atom remains the same. 
-
-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-Molecule.\-h\end{DoxyCompactItemize}
+Indexing.\-h\end{DoxyCompactItemize}

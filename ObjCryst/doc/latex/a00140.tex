@@ -1,55 +1,59 @@
-\subsection{\-Obj\-Cryst\-:\-:\-W\-X\-Profile\-Double\-Exponential\-Pseudo\-Voigt \-Class \-Reference}
-\label{a00140}\index{\-Obj\-Cryst\-::\-W\-X\-Profile\-Double\-Exponential\-Pseudo\-Voigt@{\-Obj\-Cryst\-::\-W\-X\-Profile\-Double\-Exponential\-Pseudo\-Voigt}}
+\subsection{Obj\-Cryst\-:\-:W\-X\-Monte\-Carlo\-Obj Class Reference}
+\label{a00140}\index{Obj\-Cryst\-::\-W\-X\-Monte\-Carlo\-Obj@{Obj\-Cryst\-::\-W\-X\-Monte\-Carlo\-Obj}}
 
 
-\-Class to display a \-Powder \-Pattern \-Pseudo-\/\-Voigt \-Profile.  
+Class for Graphical interface to Monte-\/\-Carlo objects (Simulated Annealing, Parallel Tempering)  
 
 
-\-Inheritance diagram for \-Obj\-Cryst\-:\-:\-W\-X\-Profile\-Double\-Exponential\-Pseudo\-Voigt\-:\begin{figure}[H]
+Inheritance diagram for Obj\-Cryst\-:\-:W\-X\-Monte\-Carlo\-Obj\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=3.000000cm]{a00140}
+\includegraphics[height=4.000000cm]{a00140}
 \end{center}
 \end{figure}
-\subsubsection*{\-Public \-Member \-Functions}
+\subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries \-W\-X\-Profile\-Double\-Exponential\-Pseudo\-Voigt} (wx\-Window $\ast$parent, {\bf \-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt} $\ast$prof)\label{a00140_ac12d36c7d203b3574c2954be0cc4257b}
+{\bfseries W\-X\-Monte\-Carlo\-Obj} (wx\-Window $\ast$parent, {\bf Monte\-Carlo\-Obj} $\ast$)\label{a00140_a7f065d157d74531110e16c7d8081a95c}
 
 \item 
-virtual bool {\bf \-On\-Change\-Name} (const int id)
-\begin{DoxyCompactList}\small\item\em \-When a \doxyref{\-W\-X\-Field\-Name}{p.}{a00121} has been changed by the user, it is handled here. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{\-Private \-Attributes}
+virtual void {\bfseries On\-Run\-Optimization} (wx\-Command\-Event \&event)\label{a00140_a098a0d500afd4106725f308b4a5938a5}
+
+\item 
+void {\bf Update\-Display\-Nb\-Trial} ()\label{a00140_acbceaa3d0ad0a5936d79a4322eca4df3}
+
+\begin{DoxyCompactList}\small\item\em Called during optimization, to show the user something's still going on... \end{DoxyCompactList}\item 
+virtual {\bf Optimization\-Obj} \& {\bfseries Get\-Optimization\-Obj} ()\label{a00140_a82f53dc7990c736211df87a47c0104eb}
+
+\item 
+virtual const {\bf Optimization\-Obj} \& {\bfseries Get\-Optimization\-Obj} () const \label{a00140_a9d58c53f79b831360d3dc09eb8da5213}
+
+\item 
+void {\bfseries On\-L\-S\-Q\-Refine} (wx\-Command\-Event \&event)\label{a00140_aa7c362490aa3761ae1426f2fe111d622}
+
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-{\bf \-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt} $\ast$ {\bfseries mp\-Profile}\label{a00140_ac3fb4cd92f80222a1034a36dca5d69b0}
+{\bf Monte\-Carlo\-Obj} $\ast$ {\bf mp\-Monte\-Carlo\-Obj}\label{a00140_aabf6054ded526d3420f94f15e4041c96}
+
+\begin{DoxyCompactList}\small\item\em The algorithm object. \end{DoxyCompactList}\item 
+long {\bf m\-Nb\-Trial}\label{a00140_ae94ccb980fabf593aabe68c6c824f110}
+
+\begin{DoxyCompactList}\small\item\em The number of trials asked by the user. \end{DoxyCompactList}\item 
+long {\bf m\-Nb\-Run}\label{a00140_a60b17ba417b67f8c621b5b714d68e3b0}
+
+\begin{DoxyCompactList}\small\item\em The number of cycles. \end{DoxyCompactList}\item 
+{\bf W\-X\-Field\-Par}$<$ long $>$ $\ast$ {\bfseries mp\-W\-X\-Field\-Nb\-Trial}\label{a00140_a33e32f028bdeb510fbd9885eeafab809}
 
 \end{DoxyCompactItemize}
 
 
-\subsubsection{\-Detailed \-Description}
-\-Class to display a \-Powder \-Pattern \-Pseudo-\/\-Voigt \-Profile. 
+\subsubsection{Detailed Description}
+Class for Graphical interface to Monte-\/\-Carlo objects (Simulated Annealing, Parallel Tempering) 
 
 
 
-\subsubsection{\-Member \-Function \-Documentation}
-\index{\-Obj\-Cryst\-::\-W\-X\-Profile\-Double\-Exponential\-Pseudo\-Voigt@{\-Obj\-Cryst\-::\-W\-X\-Profile\-Double\-Exponential\-Pseudo\-Voigt}!\-On\-Change\-Name@{\-On\-Change\-Name}}
-\index{\-On\-Change\-Name@{\-On\-Change\-Name}!ObjCryst::WXProfileDoubleExponentialPseudoVoigt@{\-Obj\-Cryst\-::\-W\-X\-Profile\-Double\-Exponential\-Pseudo\-Voigt}}
-\paragraph[{\-On\-Change\-Name}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool {\bf \-Obj\-Cryst\-::\-W\-X\-Profile\-Double\-Exponential\-Pseudo\-Voigt\-::\-On\-Change\-Name} (
-\begin{DoxyParamCaption}
-\item[{const int}]{id}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00140_adbfe19fda83e06f57047c064dbdd6ba3}
-
-
-\-When a \doxyref{\-W\-X\-Field\-Name}{p.}{a00121} has been changed by the user, it is handled here. 
-
-\-This returns true if the value has been handled (for inheritance purposes). 
-
-\-Implements {\bf \-Obj\-Cryst\-::\-W\-X\-Cryst\-Obj} \doxyref{}{p.}{a00115_a3736357599263df7e550790753c040a3}.
-
-
-
-\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-wx\-Powder\-Pattern.\-h\end{DoxyCompactItemize}
+wx\-Global\-Optim\-Obj.\-h\end{DoxyCompactItemize}

@@ -1,67 +1,74 @@
-\subsection{Obj\-Cryst\-:\-:M\-D\-Atom\-Group Struct Reference}
-\label{a00042}\index{Obj\-Cryst\-::\-M\-D\-Atom\-Group@{Obj\-Cryst\-::\-M\-D\-Atom\-Group}}
+\subsection{Obj\-Cryst\-:\-:Peak\-List\-:\-:hkl Struct Reference}
+\label{a00042}\index{Obj\-Cryst\-::\-Peak\-List\-::hkl@{Obj\-Cryst\-::\-Peak\-List\-::hkl}}
 
 
-Groups of atoms that can be moved using molecular dynamics principles, taking a list of restraints as ptential.  
+One observed diffraction line, to be indexed.  
 
 
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bf M\-D\-Atom\-Group} ()\label{a00042_a078c9456f28fc82789a4d98e91ef0599}
+{\bfseries hkl} (const float {\bf dobs}=1.\-0, const float {\bf iobs}=0.\-0, const float {\bf dobssigma}=0.\-0, const float {\bf iobssigma}=0.\-0, const int {\bf h}=0, const int k=0, const int l=0, const float {\bf d2calc}=0)\label{a00042_a8c23626fff887e4eae3941b76dfa39e6}
 
-\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
-{\bf M\-D\-Atom\-Group} (std\-::set$<$ {\bf Mol\-Atom} $\ast$ $>$ \&vat, std\-::set$<$ {\bf Mol\-Bond} $\ast$ $>$ \&vb, std\-::set$<$ {\bf Mol\-Bond\-Angle} $\ast$ $>$ \&va, std\-::set$<$ {\bf Mol\-Dihedral\-Angle} $\ast$ $>$ \&vd)
-\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
-void {\bf Print} (ostream \&os, bool full=true) const \label{a00042_a99919d489dabf1beae35630069018f4f}
-
-\begin{DoxyCompactList}\small\item\em Print one-\/line list of atoms moved. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{DoxyCompactItemize}
 \subsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-std\-::set$<$ {\bf Mol\-Atom} $\ast$ $>$ {\bfseries mvp\-Atom}\label{a00042_a300e382447655a3533cb830bb3c4cee3}
+float {\bf dobs}\label{a00042_a55f08e63e4fb2b1144a443ff9af6f417}
+
+\begin{DoxyCompactList}\small\item\em Observed peak position 1/d. \end{DoxyCompactList}\item 
+float {\bf dobssigma}\label{a00042_a8faeba0e940c91c2fcc26076eb4a3a9d}
+
+\begin{DoxyCompactList}\small\item\em Error on peak position. \end{DoxyCompactList}\item 
+float {\bf d2obs}\label{a00042_ae3ff81cbc0c1ee35afb879446cf4069a}
+
+\begin{DoxyCompactList}\small\item\em Observed peak position 1/d$^\wedge$2. \end{DoxyCompactList}\item 
+float {\bf d2obsmin}\label{a00042_a7bbdbab34e41397933140b0b0114389f}
+
+\begin{DoxyCompactList}\small\item\em Min value for observed peak position 1/(d+disgma/2)$^\wedge$2. \end{DoxyCompactList}\item 
+float {\bf d2obsmax}\label{a00042_a437e9b76b38092c298b4f4aa64b45a9e}
+
+\begin{DoxyCompactList}\small\item\em Min value for observed peak position 1/(d-\/disgma/2)$^\wedge$2. \end{DoxyCompactList}\item 
+float {\bf iobs}\label{a00042_a84f98b9cf3b479c563d49dbb87e42700}
+
+\begin{DoxyCompactList}\small\item\em Observed peak intensity. \end{DoxyCompactList}\item 
+float {\bf iobssigma}\label{a00042_aec948131b33d0f5a1c898119d131e0d8}
+
+\begin{DoxyCompactList}\small\item\em Error on observed peak intensity. \end{DoxyCompactList}\item 
+int {\bf h}\label{a00042_ac0ab3e1d9bacbeb86c581adc48b61d51}
+
+\begin{DoxyCompactList}\small\item\em Miller indices, after line is indexed. \end{DoxyCompactList}\item 
+int {\bfseries k}\label{a00042_a2833fb7b4399c1bb5b4c18cdde593bc8}
 
 \item 
-std\-::vector$<$ {\bf Mol\-Bond} $\ast$ $>$ {\bfseries mvp\-Bond}\label{a00042_a6d16a774b6b57b964e37f890a89edac0}
+int {\bfseries l}\label{a00042_abcbb5600968e6e6ba8cf3249ea347b1f}
 
 \item 
-std\-::vector$<$ {\bf Mol\-Bond\-Angle} $\ast$ $>$ {\bfseries mvp\-Bond\-Angle}\label{a00042_a68f73aaab1156d32bc79f368e237eaac}
+std\-::list$<$ {\bf hkl0} $>$ {\bf v\-Dic\-Vol\-H\-K\-L}\label{a00042_aac462f11d462e446b70a008118ee979a}
 
-\item 
-std\-::vector$<$ {\bf Mol\-Dihedral\-Angle} $\ast$ $>$ {\bfseries mvp\-Dihedral\-Angle}\label{a00042_a274d11d65f45f72eb38d83d589852bf9}
+\begin{DoxyCompactList}\small\item\em Possible Miller indices, stored during a dichotomy search. \end{DoxyCompactList}\item 
+bool {\bf is\-Indexed}\label{a00042_ac326ec57ba6dd5026512ddb9b9d317c8}
 
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Is this line indexed ? \end{DoxyCompactList}\item 
+bool {\bf is\-Spurious}\label{a00042_a2e7a78636f1ece663db539279ac03837}
+
+\begin{DoxyCompactList}\small\item\em Is this an impurity line ? \end{DoxyCompactList}\item 
+unsigned long {\bf stats}\label{a00042_a39d25f8e470547a4da7a9e1d3cf9a4fc}
+
+\begin{DoxyCompactList}\small\item\em Indexing statistics. \end{DoxyCompactList}\item 
+float {\bf d2calc}\label{a00042_a16036f6dea4f34c7715bafa41e08d913}
+
+\begin{DoxyCompactList}\small\item\em Calculated position, 1/d$^\wedge$2. \end{DoxyCompactList}\item 
+float {\bf d2diff}\label{a00042_a66ae3d76c7c2173e27a142ebfcb99162}
+
+\begin{DoxyCompactList}\small\item\em 1/d$^\wedge$2 difference, obs-\/calc \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-Groups of atoms that can be moved using molecular dynamics principles, taking a list of restraints as ptential. 
+One observed diffraction line, to be indexed. 
 
-This is used to move group of atoms for which no adequate stretch mode can be used, such as inside flexible rings. 
-
-\subsubsection{Constructor \& Destructor Documentation}
-\index{Obj\-Cryst\-::\-M\-D\-Atom\-Group@{Obj\-Cryst\-::\-M\-D\-Atom\-Group}!M\-D\-Atom\-Group@{M\-D\-Atom\-Group}}
-\index{M\-D\-Atom\-Group@{M\-D\-Atom\-Group}!ObjCryst::MDAtomGroup@{Obj\-Cryst\-::\-M\-D\-Atom\-Group}}
-\paragraph[{M\-D\-Atom\-Group}]{\setlength{\rightskip}{0pt plus 5cm}Obj\-Cryst\-::\-M\-D\-Atom\-Group\-::\-M\-D\-Atom\-Group (
-\begin{DoxyParamCaption}
-\item[{std\-::set$<$ {\bf Mol\-Atom} $\ast$ $>$ \&}]{vat, }
-\item[{std\-::set$<$ {\bf Mol\-Bond} $\ast$ $>$ \&}]{vb, }
-\item[{std\-::set$<$ {\bf Mol\-Bond\-Angle} $\ast$ $>$ \&}]{va, }
-\item[{std\-::set$<$ {\bf Mol\-Dihedral\-Angle} $\ast$ $>$ \&}]{vd}
-\end{DoxyParamCaption}
-)}\label{a00042_a86dd6c6277666fa607685736bdffbedc}
-
-
-Constructor. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em vat,\-:} & list of atoms inside the group \\
-\hline
-{\em vb,va,vd,\-:} & list of bond, bond angle and dihedral angle restraints \\
-\hline
-\end{DoxyParams}
 
 
 The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-Molecule.\-h\end{DoxyCompactItemize}
+Indexing.\-h\end{DoxyCompactItemize}

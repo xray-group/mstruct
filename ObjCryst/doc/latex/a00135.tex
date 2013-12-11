@@ -1,150 +1,101 @@
-\subsection{\-Obj\-Cryst\-:\-:\-W\-X\-Optimization\-Obj \-Class \-Reference}
-\label{a00135}\index{\-Obj\-Cryst\-::\-W\-X\-Optimization\-Obj@{\-Obj\-Cryst\-::\-W\-X\-Optimization\-Obj}}
+\subsection{Obj\-Cryst\-:\-:W\-X\-Mol\-Atom Class Reference}
+\label{a00135}\index{Obj\-Cryst\-::\-W\-X\-Mol\-Atom@{Obj\-Cryst\-::\-W\-X\-Mol\-Atom}}
 
 
-\-W\-X \-Class for a \-Global \-Optimization objects.  
+wx class for \doxyref{Mol\-Atom}{p.}{a00050} objects  
 
 
-\-Inheritance diagram for \-Obj\-Cryst\-:\-:\-W\-X\-Optimization\-Obj\-:\begin{figure}[H]
+Inheritance diagram for Obj\-Cryst\-:\-:W\-X\-Mol\-Atom\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=4.000000cm]{a00135}
+\includegraphics[height=2.000000cm]{a00135}
 \end{center}
 \end{figure}
-\subsubsection*{\-Public \-Member \-Functions}
+\subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries \-W\-X\-Optimization\-Obj} (wx\-Window $\ast$parent, {\bf \-Optimization\-Obj} $\ast$)\label{a00135_a2b86113122800cbad785f564ea63472c}
+{\bfseries W\-X\-Mol\-Atom} (wx\-Window $\ast$parent, {\bf Mol\-Atom} $\ast$)\label{a00135_ae921caf4a024c3d5a3823fe06032dbc0}
 
 \item 
-virtual void {\bf \-Cryst\-Update} (const bool update\-U\-I=false, const bool mutexlock=false)
-\begin{DoxyCompactList}\small\item\em \-Get new values to be displayed from the underlying object, and raise flag if an \-U\-I update is necessary. \end{DoxyCompactList}\item 
-virtual bool {\bf \-On\-Change\-Name} (const int id)
-\begin{DoxyCompactList}\small\item\em \-When a \doxyref{\-W\-X\-Field\-Name}{p.}{a00121} has been changed by the user, it is handled here. \end{DoxyCompactList}\item 
-virtual void {\bfseries \-On\-Save} ()\label{a00135_a3730c9efbfe125a8604e33eab7883e52}
+virtual void {\bf Cryst\-Update} (const bool update\-U\-I=false, const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em Get new values to be displayed from the underlying object, and raise flag if an U\-I update is necessary. \end{DoxyCompactList}\item 
+virtual void {\bf Update\-U\-I} (const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em Update the User Interface, if necessary. \end{DoxyCompactList}\item 
+void {\bfseries On\-Change\-Scatt\-Pow} (wx\-Command\-Event \&)\label{a00135_a81b5ddf74808c63edf2407410d1cd56d}
 
-\item 
-virtual void {\bfseries \-On\-Load} ()\label{a00135_ad226225c41c879d8c303c58ec02c42b2}
-
-\item 
-virtual void {\bf \-On\-Add\-Refined\-Object} (wx\-Command\-Event \&\-W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00135_a93752ccd2f1890810d1ba665a2938e28}
-
-\begin{DoxyCompactList}\small\item\em \-From the menu. \end{DoxyCompactList}\item 
-virtual void {\bf \-Add\-Refined\-Object} ({\bf \-Refinable\-Obj} \&obj)\label{a00135_af20e969788a63a435ed000cbccacd8a0}
-
-\begin{DoxyCompactList}\small\item\em \-Added by the library. \end{DoxyCompactList}\item 
-virtual void {\bf \-On\-Remove\-Refined\-Object} (wx\-Command\-Event \&\-W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00135_a9e4c7004d9ee44ff178f0320f03228ad}
-
-\begin{DoxyCompactList}\small\item\em \-From the menu. \end{DoxyCompactList}\item 
-virtual void {\bf \-On\-Run\-Optimization} (wx\-Command\-Event \&\-W\-X\-U\-N\-U\-S\-E\-D(event))=0\label{a00135_a2bb10adb92cdc1863e2d127a46d9e539}
-
-\begin{DoxyCompactList}\small\item\em \-Launches the optimization run. \end{DoxyCompactList}\item 
-virtual void {\bfseries \-On\-Stop\-Optimization} (wx\-Command\-Event \&\-W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00135_ad702dfbdcbd286fa1fd170a603fc2e3c}
-
-\item 
-virtual {\bf \-Optimization\-Obj} \& {\bfseries \-Get\-Optimization\-Obj} ()=0\label{a00135_a04ff5892f40615e1cc70468d1c280833}
-
-\item 
-virtual const {\bf \-Optimization\-Obj} \& {\bfseries \-Get\-Optimization\-Obj} () const =0\label{a00135_a4cc44f99a1ec15bdfa306764535ae5ee}
-
-\item 
-virtual void {\bfseries \-On\-Update\-U\-I} (wx\-Update\-U\-I\-Event \&event)\label{a00135_ad3ebaaca81aca1687e96892632d83115}
-
-\item 
-virtual void {\bf \-Update\-U\-I} (const bool mutexlock=false)
-\begin{DoxyCompactList}\small\item\em \-Update the \-User \-Interface, if necessary. \end{DoxyCompactList}\item 
-virtual void {\bf \-On\-Browse\-Param\-Set} (wx\-Command\-Event \&\-W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00135_a882c751ec16640663127cc55972e87e2}
-
-\begin{DoxyCompactList}\small\item\em \-Opens a window where the stored parameter set can be selected. \end{DoxyCompactList}\item 
-virtual void {\bf \-On\-Select\-Param\-Set} (wx\-Command\-Event \&\-W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00135_a00f5aa7c1b1873f1e428826bb394a632}
-
-\begin{DoxyCompactList}\small\item\em \-Restore one parameter set. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{\-Protected \-Attributes}
+\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-{\bf \-W\-X\-Cryst\-Menu\-Bar} $\ast$ {\bfseries mp\-Menu\-Bar}\label{a00135_a9c134db8f0540b11a084d023498a3e11}
+{\bf Mol\-Atom} $\ast$ {\bfseries mp\-Mol\-Atom}\label{a00135_a1169b933dfa4cb1dbfbe7f9755f2f614}
 
 \item 
-{\bf \-W\-X\-Global\-Optim\-Run\-Thread} $\ast$ {\bfseries mp\-Global\-Optim\-Run\-Thread}\label{a00135_a77948d4f4d727eed7810f70839a2a67b}
+wx\-Box\-Sizer $\ast$ {\bfseries mp\-Sizer}\label{a00135_a124eb1c9a7e0b14114f0d6210b1e2acc}
 
 \item 
-{\bf \-W\-X\-Field\-Par}$<$ long $>$ $\ast$ {\bfseries mp\-W\-X\-Field\-Nb\-Trial}\label{a00135_a1d259e14ad80189d3d8f6402de0768dc}
+{\bf W\-X\-Cryst\-Obj\-Basic\-List} {\bfseries m\-List}\label{a00135_aecf34795a532ce4aae6a1ec054d64685}
 
 \item 
-{\bf \-Refinable\-Obj\-Clock} {\bf m\-Clock\-Param\-Set\-Window}\label{a00135_ae4a2dd55a8d8e9de1dd5888d2a9c4f72}
+{\bf W\-X\-Field\-String} $\ast$ {\bfseries mp\-Field\-Name}\label{a00135_ab3e4e55eec0f1b9c2cc4d060b2e84a6d}
 
-\begin{DoxyCompactList}\small\item\em \-Record when the window giving the list of recorded parameter set was created. \end{DoxyCompactList}\item 
-wx\-List\-Box $\ast$ {\bf mpwx\-Param\-Set\-List}\label{a00135_afb4d3681ab182d0d1a064a3794437731}
+\item 
+{\bf W\-X\-Field\-Choice} $\ast$ {\bfseries mp\-Field\-Scatt\-Power}\label{a00135_a74333960d604050356b215b8ef14eb47}
 
-\begin{DoxyCompactList}\small\item\em \-Window giving the list of recorded parameter sets. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{DoxyCompactItemize}
+\subsubsection*{Additional Inherited Members}
 
 
-\subsubsection{\-Detailed \-Description}
-\-W\-X \-Class for a \-Global \-Optimization objects. 
+\subsubsection{Detailed Description}
+wx class for \doxyref{Mol\-Atom}{p.}{a00050} objects 
 
-\subsubsection{\-Member \-Function \-Documentation}
-\index{\-Obj\-Cryst\-::\-W\-X\-Optimization\-Obj@{\-Obj\-Cryst\-::\-W\-X\-Optimization\-Obj}!\-Cryst\-Update@{\-Cryst\-Update}}
-\index{\-Cryst\-Update@{\-Cryst\-Update}!ObjCryst::WXOptimizationObj@{\-Obj\-Cryst\-::\-W\-X\-Optimization\-Obj}}
-\paragraph[{\-Cryst\-Update}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-W\-X\-Optimization\-Obj\-::\-Cryst\-Update} (
+\subsubsection{Member Function Documentation}
+\index{Obj\-Cryst\-::\-W\-X\-Mol\-Atom@{Obj\-Cryst\-::\-W\-X\-Mol\-Atom}!Cryst\-Update@{Cryst\-Update}}
+\index{Cryst\-Update@{Cryst\-Update}!ObjCryst::WXMolAtom@{Obj\-Cryst\-::\-W\-X\-Mol\-Atom}}
+\paragraph[{Cryst\-Update}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-W\-X\-Mol\-Atom\-::\-Cryst\-Update (
 \begin{DoxyParamCaption}
 \item[{const bool}]{update\-U\-I = {\ttfamily false}, }
 \item[{const bool}]{mutexlock = {\ttfamily false}}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00135_a440befb33ae526a51eb9a7f3d9739d3e}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00135_aaca6492a7c5382d07946ebb88e051f7f}
 
 
-\-Get new values to be displayed from the underlying object, and raise flag if an \-U\-I update is necessary. 
+Get new values to be displayed from the underlying object, and raise flag if an U\-I update is necessary. 
 
-\-The actual \-G\-U\-I update is not made here. \doxyref{\-Update\-U\-I()}{p.}{a00135_adbaf395e3e68e7605da0805e0e6465a0} should be called separately, from the main thread.
+The actual G\-U\-I update is not made here. \doxyref{Update\-U\-I()}{p.}{a00135_aa11b0794a07ac4c8066228a4c625e13e} should be called separately, from the main thread.
 
 
-\begin{DoxyParams}{\-Parameters}
-{\em update\-U\-I,\-:} & if true, this will call \-Update\-U\-I, either directly (if in the main thread), or by sending a message. \\
+\begin{DoxyParams}{Parameters}
+{\em update\-U\-I,\-:} & if true, this will call Update\-U\-I, either directly (if in the main thread), or by sending a message. \\
 \hline
-{\em mutexlock,\-:} & if true, a \-Mutex will be used to lock the data shared between main and background thread. \-The idea is to only use a few \-Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{\-Cryst\-Update()}{p.}{a00135_a440befb33ae526a51eb9a7f3d9739d3e} and \doxyref{\-Update\-U\-I()}{p.}{a00135_adbaf395e3e68e7605da0805e0e6465a0}. \-As sub-\/objects (\doxyref{\-W\-X\-Field}{p.}{a00119},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. \\
+{\em mutexlock,\-:} & if true, a Mutex will be used to lock the data shared between main and background thread. The idea is to only use a few Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{Cryst\-Update()}{p.}{a00135_aaca6492a7c5382d07946ebb88e051f7f} and \doxyref{Update\-U\-I()}{p.}{a00135_aa11b0794a07ac4c8066228a4c625e13e}. As sub-\/objects (\doxyref{W\-X\-Field}{p.}{a00126},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. \\
 \hline
 \end{DoxyParams}
 
 
-\-Reimplemented from {\bf \-Obj\-Cryst\-::\-W\-X\-Cryst\-Obj} \doxyref{}{p.}{a00115_a2e5de90ae4d1ca8feb65b88debf6d3cb}.
+Implements {\bf Obj\-Cryst\-::\-W\-X\-Cryst\-Obj\-Basic} \doxyref{}{p.}{a00123_a7ac00ae2ae28f1a6fa26e6fa571186b6}.
 
-\index{\-Obj\-Cryst\-::\-W\-X\-Optimization\-Obj@{\-Obj\-Cryst\-::\-W\-X\-Optimization\-Obj}!\-On\-Change\-Name@{\-On\-Change\-Name}}
-\index{\-On\-Change\-Name@{\-On\-Change\-Name}!ObjCryst::WXOptimizationObj@{\-Obj\-Cryst\-::\-W\-X\-Optimization\-Obj}}
-\paragraph[{\-On\-Change\-Name}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool {\bf \-Obj\-Cryst\-::\-W\-X\-Optimization\-Obj\-::\-On\-Change\-Name} (
-\begin{DoxyParamCaption}
-\item[{const int}]{id}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00135_a19a866ffdeaba16f73fe3af78dbffa58}
-
-
-\-When a \doxyref{\-W\-X\-Field\-Name}{p.}{a00121} has been changed by the user, it is handled here. 
-
-\-This returns true if the value has been handled (for inheritance purposes). 
-
-\-Implements {\bf \-Obj\-Cryst\-::\-W\-X\-Cryst\-Obj} \doxyref{}{p.}{a00115_a3736357599263df7e550790753c040a3}.
-
-\index{\-Obj\-Cryst\-::\-W\-X\-Optimization\-Obj@{\-Obj\-Cryst\-::\-W\-X\-Optimization\-Obj}!\-Update\-U\-I@{\-Update\-U\-I}}
-\index{\-Update\-U\-I@{\-Update\-U\-I}!ObjCryst::WXOptimizationObj@{\-Obj\-Cryst\-::\-W\-X\-Optimization\-Obj}}
-\paragraph[{\-Update\-U\-I}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-W\-X\-Optimization\-Obj\-::\-Update\-U\-I} (
+\index{Obj\-Cryst\-::\-W\-X\-Mol\-Atom@{Obj\-Cryst\-::\-W\-X\-Mol\-Atom}!Update\-U\-I@{Update\-U\-I}}
+\index{Update\-U\-I@{Update\-U\-I}!ObjCryst::WXMolAtom@{Obj\-Cryst\-::\-W\-X\-Mol\-Atom}}
+\paragraph[{Update\-U\-I}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-W\-X\-Mol\-Atom\-::\-Update\-U\-I (
 \begin{DoxyParamCaption}
 \item[{const bool}]{mutexlock = {\ttfamily false}}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00135_adbaf395e3e68e7605da0805e0e6465a0}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00135_aa11b0794a07ac4c8066228a4c625e13e}
 
 
-\-Update the \-User \-Interface, if necessary. 
+Update the User Interface, if necessary. 
 
 
-\begin{DoxyParams}{\-Parameters}
-{\em mutexlock,\-:} & if true, a \-Mutex will be used to lock the data shared between main and background thread.\\
+\begin{DoxyParams}{Parameters}
+{\em mutexlock,\-:} & if true, a Mutex will be used to lock the data shared between main and background thread.\\
 \hline
 \end{DoxyParams}
-\-The idea is to only use a few \-Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{\-Cryst\-Update()}{p.}{a00135_a440befb33ae526a51eb9a7f3d9739d3e} and \doxyref{\-Update\-U\-I()}{p.}{a00135_adbaf395e3e68e7605da0805e0e6465a0}. \-As sub-\/objects (\doxyref{\-W\-X\-Field}{p.}{a00119},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
+The idea is to only use a few Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{Cryst\-Update()}{p.}{a00135_aaca6492a7c5382d07946ebb88e051f7f} and \doxyref{Update\-U\-I()}{p.}{a00135_aa11b0794a07ac4c8066228a4c625e13e}. As sub-\/objects (\doxyref{W\-X\-Field}{p.}{a00126},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
 
-\-Reimplemented from {\bf \-Obj\-Cryst\-::\-W\-X\-Cryst\-Obj} \doxyref{}{p.}{a00115_a093c04eb7b70ff063b80427779c7c456}.
+Implements {\bf Obj\-Cryst\-::\-W\-X\-Cryst\-Obj\-Basic} \doxyref{}{p.}{a00123_a3818940b7031ff7e45cf2178c4a99c90}.
 
 
 
-\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-wx\-Global\-Optim\-Obj.\-h\end{DoxyCompactItemize}
+wx\-Molecule.\-h\end{DoxyCompactItemize}

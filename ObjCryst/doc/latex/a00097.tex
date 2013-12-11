@@ -1,99 +1,521 @@
-\subsection{Obj\-Cryst\-:\-:Stretch\-Mode Struct Reference}
-\label{a00097}\index{Obj\-Cryst\-::\-Stretch\-Mode@{Obj\-Cryst\-::\-Stretch\-Mode}}
+\subsection{Obj\-Cryst\-:\-:Scattering\-Power Class Reference}
+\label{a00097}\index{Obj\-Cryst\-::\-Scattering\-Power@{Obj\-Cryst\-::\-Scattering\-Power}}
 
 
-Abstract base Stretch Mode for \doxyref{Molecule}{p.}{a00047} objects.  
+Abstract Base Class to describe the scattering power of any \doxyref{Scatterer}{p.}{a00092} component in a crystal.  
 
 
-Inheritance diagram for Obj\-Cryst\-:\-:Stretch\-Mode\-:\begin{figure}[H]
+Inheritance diagram for Obj\-Cryst\-:\-:Scattering\-Power\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=1.302326cm]{a00097}
+\includegraphics[height=2.666667cm]{a00097}
 \end{center}
 \end{figure}
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-virtual void {\bf Calc\-Deriv} (const bool derivllk=true) const =0
-\begin{DoxyCompactList}\small\item\em Calculate the derivative of the \doxyref{Molecule}{p.}{a00047}'s Log(likelihood) and atomic positions versus a change of the bond length. \end{DoxyCompactList}\item 
-virtual void {\bf Print} (ostream \&os, bool full=true) const =0\label{a00097_a78c180042fce5981fe0e97071d986362}
+{\bfseries Scattering\-Power} (const {\bf Scattering\-Power} \&old)\label{a00097_a40d392b01f277a90affc2825ffa2e28d}
 
-\begin{DoxyCompactList}\small\item\em Print one-\/line list of atoms moved. \end{DoxyCompactList}\item 
-virtual void {\bf Stretch} (const R\-E\-A\-L change)=0\label{a00097_a1f3e7e8fc43baed619b61203ea77c143}
+\item 
+virtual const string \& {\bf Get\-Class\-Name} () const 
+\begin{DoxyCompactList}\small\item\em Name for this class (\char`\"{}\-Refinable\-Obj\char`\"{}, \char`\"{}\-Crystal\char`\"{},...). \end{DoxyCompactList}\item 
+virtual void {\bfseries operator=} (const {\bf Scattering\-Power} \&rhs)\label{a00097_a1db56ac3b61b4f5d1f70dbf65fff114a}
 
-\begin{DoxyCompactList}\small\item\em Move the atoms according to this mode. \end{DoxyCompactList}\item 
-virtual void {\bf Random\-Stretch} (const R\-E\-A\-L amplitude)=0\label{a00097_a459057c6cd3d2cb1010676b54ebfe988}
+\item 
+virtual Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf Get\-Scattering\-Factor} (const {\bf Scattering\-Data} \&data, const int spg\-Sym\-Pos\-Index=-\/1) const =0
+\begin{DoxyCompactList}\small\item\em Get the Scattering factor for all reflections of a given \doxyref{Scattering\-Data}{p.}{a00096} object. \end{DoxyCompactList}\item 
+virtual R\-E\-A\-L {\bf Get\-Forward\-Scattering\-Factor} (const {\bf Radiation\-Type}) const =0
+\begin{DoxyCompactList}\small\item\em Get the scattering factor at (0,0,0). \end{DoxyCompactList}\item 
+virtual Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf Get\-Temperature\-Factor} (const {\bf Scattering\-Data} \&data, const int spg\-Sym\-Pos\-Index=-\/1) const =0
+\begin{DoxyCompactList}\small\item\em Get the temperature factor for all reflections of a given \doxyref{Scattering\-Data}{p.}{a00096} object. \end{DoxyCompactList}\item 
+virtual Cryst\-Matrix\-\_\-\-R\-E\-A\-L {\bf Get\-Resonant\-Scatt\-Fact\-Real} (const {\bf Scattering\-Data} \&data, const int spg\-Sym\-Pos\-Index=-\/1) const =0
+\begin{DoxyCompactList}\small\item\em Get the real part of the resonant scattering factor. \end{DoxyCompactList}\item 
+virtual Cryst\-Matrix\-\_\-\-R\-E\-A\-L {\bf Get\-Resonant\-Scatt\-Fact\-Imag} (const {\bf Scattering\-Data} \&data, const int spg\-Sym\-Pos\-Index=-\/1) const =0
+\begin{DoxyCompactList}\small\item\em Get the imaginary part of the resonant scattering factor. \end{DoxyCompactList}\item 
+virtual bool {\bf Is\-Scattering\-Factor\-Anisotropic} () const \label{a00097_a0d099ca049eebbf23a31fb32b4229d4a}
 
-\begin{DoxyCompactList}\small\item\em Move the atoms according to this mode, randomly. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Public Attributes}
+\begin{DoxyCompactList}\small\item\em Is the scattering factor anisotropic ? \end{DoxyCompactList}\item 
+virtual bool {\bf Is\-Temperature\-Factor\-Anisotropic} () const \label{a00097_a602947d2e968b88f208d3507bd8a093d}
+
+\begin{DoxyCompactList}\small\item\em Is the thermic factor anisotropic ? \end{DoxyCompactList}\item 
+virtual bool {\bf Is\-Resonant\-Scattering\-Anisotropic} () const \label{a00097_ac8f88b96383b0b97812913427d0c65f1}
+
+\begin{DoxyCompactList}\small\item\em Are the resonant scattering terms anisotropic ? \end{DoxyCompactList}\item 
+virtual const string \& {\bf Get\-Symbol} () const 
+\begin{DoxyCompactList}\small\item\em Symbol for this Scattering power (the atom name for atoms) \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bf Get\-Biso} () const 
+\begin{DoxyCompactList}\small\item\em Returns the isotropic temperature B factor. \end{DoxyCompactList}\item 
+R\-E\-A\-L \& {\bf Get\-Biso} ()
+\begin{DoxyCompactList}\small\item\em Returns the isotropic temperature B factor. \end{DoxyCompactList}\item 
+virtual void {\bf Set\-Biso} (const R\-E\-A\-L new\-B)
+\begin{DoxyCompactList}\small\item\em Sets the isotropic temperature B factor. \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bf Get\-Bij} (const size\-\_\-t \&i, const size\-\_\-t \&j) const \label{a00097_aab538c7888aa57c38236bd01c9252965}
+
+\begin{DoxyCompactList}\small\item\em Returns the anisotropic temperature B factor for (i, j) pair. \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bf Get\-Bij} (const size\-\_\-t \&idx) const 
+\begin{DoxyCompactList}\small\item\em Returns the anisotropic temperature B factor for given index. \end{DoxyCompactList}\item 
+virtual void {\bf Set\-Bij} (const size\-\_\-t \&i, const size\-\_\-t \&j, const R\-E\-A\-L new\-B)\label{a00097_a8c947f00897876d91f68617772a20dad}
+
+\begin{DoxyCompactList}\small\item\em Sets the anisotropic temperature B factor for (i, j) pair. \end{DoxyCompactList}\item 
+virtual void {\bf Set\-Bij} (const size\-\_\-t \&idx, const R\-E\-A\-L new\-B)
+\begin{DoxyCompactList}\small\item\em Sets the anisotropic temperature B factor for given index. \end{DoxyCompactList}\item 
+bool {\bf Is\-Isotropic} () const \label{a00097_a05909fe082739c6be397299813418618}
+
+\begin{DoxyCompactList}\small\item\em Returns true if the scattering power is isotropic, else false. \end{DoxyCompactList}\item 
+long {\bf Get\-Dyn\-Pop\-Corr\-Index} () const 
+\begin{DoxyCompactList}\small\item\em Get the number identifying this kind of scatterer, used to decide whether two scatterers are equivalent, for the dynamical occupancy correction. \end{DoxyCompactList}\item 
+long {\bf Get\-Nb\-Scattering\-Power} () const \label{a00097_af7cf02d1229e45220953b345a6f6d427}
+
+\begin{DoxyCompactList}\small\item\em Total number of \doxyref{Scattering\-Power}{p.}{a00097} object. \end{DoxyCompactList}\item 
+const {\bf Refinable\-Obj\-Clock} \& {\bf Get\-Last\-Change\-Clock} () const \label{a00097_aac5f03782e5b08b3e60254b1fe0aad4a}
+
+\begin{DoxyCompactList}\small\item\em Obj\-Cryst\-Clock time when the last modification was made to the object. \end{DoxyCompactList}\item 
+const string \& {\bf Get\-Colour\-Name} () const \label{a00097_acbe6442c66fcb7760b2684ec4d9456cd}
+
+\begin{DoxyCompactList}\small\item\em Get the (P\-O\-V-\/\-Ray) name associated to the color (if any) \end{DoxyCompactList}\item 
+const float $\ast$ {\bf Get\-Colour\-R\-G\-B} () const \label{a00097_a5a992fe0ab82ddc79f184bbb12d6aaa0}
+
+\begin{DoxyCompactList}\small\item\em Get the float[3] array of R\-G\-B components defining the colour of this scattering power. \end{DoxyCompactList}\item 
+void {\bf Set\-Colour} (const string \&color\-Name)\label{a00097_ac48cb91ee4361a14d829227023479514}
+
+\begin{DoxyCompactList}\small\item\em Set the colour from the associated P\-O\-V-\/\-Ray name. \end{DoxyCompactList}\item 
+void {\bf Set\-Colour} (const float r, const float g, const float b)\label{a00097_a312da0ad4d8229baf7d6ab7ff9c45a3c}
+
+\begin{DoxyCompactList}\small\item\em Set the colour from R\-G\-B components (all between 0 and 1.) \end{DoxyCompactList}\item 
+virtual R\-E\-A\-L {\bf Get\-Radius} () const =0
+\begin{DoxyCompactList}\small\item\em Return the physical radius of this type of scatterer (for 3\-D display purposes). \end{DoxyCompactList}\item 
+virtual void {\bf Get\-Gene\-Group} (const {\bf Refinable\-Obj} \&obj, Cryst\-Vector\-\_\-uint \&group\-Index, unsigned int \&first\-Group) const 
+\begin{DoxyCompactList}\small\item\em Get the gene group assigned to each parameter. \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bf Get\-Maximum\-Likelihood\-Position\-Error} () const 
+\begin{DoxyCompactList}\small\item\em Maximum Likelihood\-: get the estimated error (sigma) on the positions for this kind of element. \end{DoxyCompactList}\item 
+void {\bf Set\-Maximum\-Likelihood\-Position\-Error} (const R\-E\-A\-L mle)
+\begin{DoxyCompactList}\small\item\em Maximum Likelihood\-: set the estimated error (sigma) on the positions for this kind of element. \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bf Get\-Maximum\-Likelihood\-Nb\-Ghost\-Atom} () const \label{a00097_a23031fcb8c8c79d0e086da6aaadcd40c}
+
+\begin{DoxyCompactList}\small\item\em Maximum Likelihood\-: get the number of ghost elements per asymmetric unit. \end{DoxyCompactList}\item 
+void {\bf Set\-Maximum\-Likelihood\-Nb\-Ghost\-Atom} (const R\-E\-A\-L nb)\label{a00097_aa3343885c4b3b9d41c386f7d8aaacd63}
+
+\begin{DoxyCompactList}\small\item\em Maximum Likelihood\-: set the number of ghost elements per asymmetric unit. \end{DoxyCompactList}\item 
+const {\bf Refinable\-Obj\-Clock} \& {\bf Get\-Maximum\-Likelihood\-Par\-Clock} () const 
+\begin{DoxyCompactList}\small\item\em Get the clock value for the last change on the maximum likelihood parameters (positionnal error, number of ghost atoms). \end{DoxyCompactList}\item 
+virtual R\-E\-A\-L {\bfseries Get\-Formal\-Charge} () const \label{a00097_a04f10b6898e5242548a6980b99a55bb9}
+
+\item 
+virtual void {\bfseries Set\-Formal\-Charge} (const R\-E\-A\-L charge)\label{a00097_a98c9fe3af63a4093a354bb814730aa76}
+
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-std\-::map$<$ const {\bf Mol\-Bond} $\ast$, R\-E\-A\-L $>$ {\bf mvp\-Broken\-Bond}\label{a00097_a6628812c69f20a7a18a7a3759b5c961c}
+virtual void {\bfseries Init\-Ref\-Par\-List} ()=0\label{a00097_a963cfe56b67286007bb93c7962e72b5c}
 
-\begin{DoxyCompactList}\small\item\em List of bond restraints affected by this mode The key is the restraint, the value is the derivative of the L\-L\-K associated. \end{DoxyCompactList}\item 
-std\-::map$<$ const {\bf Mol\-Bond\-Angle} \\*
-$\ast$, R\-E\-A\-L $>$ {\bf mvp\-Broken\-Bond\-Angle}\label{a00097_a2a46f6bd997850be6736e4b5746deeed}
+\item 
+virtual void {\bf Init} ()\label{a00097_ac39b1294c085edac4c7180b4373a73c0}
 
-\begin{DoxyCompactList}\small\item\em List of bond angle restraints modified by this mode The key is the restraint, the value is the derivative of the L\-L\-K associated. \end{DoxyCompactList}\item 
-std\-::map$<$ const \\*
-{\bf Mol\-Dihedral\-Angle} $\ast$, R\-E\-A\-L $>$ {\bf mvp\-Broken\-Dihedral\-Angle}\label{a00097_a84257bc829a3d612b68046d33685e59e}
+\begin{DoxyCompactList}\small\item\em Initialization of the object, used by all constructors, and operator=. \end{DoxyCompactList}\item 
+virtual void {\bf Init\-R\-G\-B\-Colour} ()\label{a00097_a24c0c49adab2efe6af63c4915d861577}
 
-\begin{DoxyCompactList}\small\item\em List of dihedral angle restraints modified by this mode The key is the restraint, the value is the derivative of the L\-L\-K associated. \end{DoxyCompactList}\item 
-R\-E\-A\-L {\bf m\-L\-L\-K\-Deriv}\label{a00097_ac6614921c015de3f6d67b22ae512a66c}
+\begin{DoxyCompactList}\small\item\em Get R\-G\-B Colour coordinates from Colour Name. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+long {\bf m\-Dyn\-Pop\-Corr\-Index}
+\begin{DoxyCompactList}\small\item\em number identifying this kind of scatterer, for the dynamical occupancy correction. \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bf m\-Biso}\label{a00097_aad32a210a13475061a2cda7525e05501}
 
-\begin{DoxyCompactList}\small\item\em Derivative of the \doxyref{Molecule}{p.}{a00047}'s Log(likelihood) versus a change of the bond length. \end{DoxyCompactList}\item 
-std\-::map$<$ const {\bf Mol\-Atom} $\ast$, {\bf X\-Y\-Z} $>$ {\bf m\-Deriv\-X\-Y\-Z}\label{a00097_a4a25093e177c56be142acc954149c110}
+\begin{DoxyCompactList}\small\item\em Temperature isotropic B factor. \end{DoxyCompactList}\item 
+bool {\bf m\-Is\-Isotropic}\label{a00097_a312928a0ead2f2bff84156e772752fe1}
 
-\begin{DoxyCompactList}\small\item\em Derivative of the atomic positions versus a change of the bond length. \end{DoxyCompactList}\item 
-{\bf Molecule} $\ast$ {\bf mp\-Mol}\label{a00097_a380bd0aef1e5be1f681364e0f754f3e3}
+\begin{DoxyCompactList}\small\item\em Is the scattering isotropic ? \end{DoxyCompactList}\item 
+Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf m\-Beta}\label{a00097_a02a4524640e2d23805df26b114be680f}
 
-\begin{DoxyCompactList}\small\item\em The \doxyref{Molecule}{p.}{a00047} corresponding to this stretch mode. \end{DoxyCompactList}\item 
-R\-E\-A\-L {\bf m\-Base\-Amplitude}
-\begin{DoxyCompactList}\small\item\em The recommended change amplitude, for a base global optimization displacement, to obtain an average 0.\-1 Angstroem displacement. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Anisotropic Beta(ij) \end{DoxyCompactList}\item 
+{\bf Refinable\-Obj\-Clock} {\bf m\-Clock}\label{a00097_a7b2e1854b0799312da38819cebf13672}
+
+\begin{DoxyCompactList}\small\item\em Clock. \end{DoxyCompactList}\item 
+string {\bf m\-Colour\-Name}\label{a00097_a0726f45b1f31f338326a28345b57738e}
+
+\begin{DoxyCompactList}\small\item\em Colour for this \doxyref{Scattering\-Power}{p.}{a00097} (from P\-O\-V\-Ray) \end{DoxyCompactList}\item 
+float {\bf m\-Colour\-R\-G\-B} [3]\label{a00097_a00cf7e1fbe362a96be4a22c8b454fd29}
+
+\begin{DoxyCompactList}\small\item\em Colour for this \doxyref{Scattering\-Power}{p.}{a00097} using R\-G\-B. \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bf m\-Maximum\-Likelihood\-Position\-Error}\label{a00097_a20aa001aad26734367838792eff09682}
+
+\begin{DoxyCompactList}\small\item\em estimated error (sigma) on the positions for this type of element. \end{DoxyCompactList}\item 
+{\bf Refinable\-Obj\-Clock} {\bfseries m\-Maximum\-Likelihood\-Par\-Clock}\label{a00097_a727c82cdb03968dba28c5f7549860093}
+
+\item 
+R\-E\-A\-L {\bf m\-Maximum\-Likelihood\-Nb\-Ghost}
+\begin{DoxyCompactList}\small\item\em Number of ghost atoms in the asymmetric unit. \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bf m\-Formal\-Charge}
+\begin{DoxyCompactList}\small\item\em Formal Charge. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-Abstract base Stretch Mode for \doxyref{Molecule}{p.}{a00047} objects. 
+Abstract Base Class to describe the scattering power of any \doxyref{Scatterer}{p.}{a00092} component in a crystal. 
 
+This includes\-:
+\begin{DoxyItemize}
+\item the scattering factor,
+\item the temperature factor
+\item real and imaginary parts of the resonant scattering factor.
+\end{DoxyItemize}
+
+The interface is independent of the radiation type.
+
+This base class is designed to handle both isotropic and anisotropic versions of scattering, temperature and anomalous factors.
+
+\begin{DoxyRefDesc}{Todo}
+\item[{\bf Todo}]Anisotropic scattering (temperature factor especially) code, using derived classes 
+
+Clarify organization by removing any 'real' data from the top, abstract base class (eg remove Biso and Betaij), and by creating derived classes. Optionnaly 3 classes (used as members of \doxyref{Scattering\-Power}{p.}{a00097}) could be created, Temperature\-Factor, Scattering\-Factor, and Resonant\-Scattering\-Factor. In any way the design of this class should not evolve, so that code using the \doxyref{Scattering\-Power}{p.}{a00097} interface will remain compatible whatever modifications are made. \end{DoxyRefDesc}
 
 
 \subsubsection{Member Function Documentation}
-\index{Obj\-Cryst\-::\-Stretch\-Mode@{Obj\-Cryst\-::\-Stretch\-Mode}!Calc\-Deriv@{Calc\-Deriv}}
-\index{Calc\-Deriv@{Calc\-Deriv}!ObjCryst::StretchMode@{Obj\-Cryst\-::\-Stretch\-Mode}}
-\paragraph[{Calc\-Deriv}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Stretch\-Mode\-::\-Calc\-Deriv (
+\index{Obj\-Cryst\-::\-Scattering\-Power@{Obj\-Cryst\-::\-Scattering\-Power}!Get\-Bij@{Get\-Bij}}
+\index{Get\-Bij@{Get\-Bij}!ObjCryst::ScatteringPower@{Obj\-Cryst\-::\-Scattering\-Power}}
+\paragraph[{Get\-Bij}]{\setlength{\rightskip}{0pt plus 5cm}R\-E\-A\-L Obj\-Cryst\-::\-Scattering\-Power\-::\-Get\-Bij (
 \begin{DoxyParamCaption}
-\item[{const bool}]{derivllk = {\ttfamily true}}
+\item[{const size\-\_\-t \&}]{idx}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{a00097_a5b5ab5f9819c047a49719a330722d419}
+) const}\label{a00097_abc78b680e9cd6a38b875731363978477}
 
 
-Calculate the derivative of the \doxyref{Molecule}{p.}{a00047}'s Log(likelihood) and atomic positions versus a change of the bond length. 
+Returns the anisotropic temperature B factor for given index. 
 
-The result is stored in m\-L\-L\-K\-Deriv and m\-L\-L\-K\-Deriv\-X\-Y\-Z, as well as in the various lists of restraints broken by this mode.
+0 -\/$>$ (1, 1) 1 -\/$>$ (2, 2) 2 -\/$>$ (3, 3) 3 -\/$>$ (1, 2) 4 -\/$>$ (1, 3) 5 -\/$>$ (2, 3) \index{Obj\-Cryst\-::\-Scattering\-Power@{Obj\-Cryst\-::\-Scattering\-Power}!Get\-Biso@{Get\-Biso}}
+\index{Get\-Biso@{Get\-Biso}!ObjCryst::ScatteringPower@{Obj\-Cryst\-::\-Scattering\-Power}}
+\paragraph[{Get\-Biso}]{\setlength{\rightskip}{0pt plus 5cm}R\-E\-A\-L Obj\-Cryst\-::\-Scattering\-Power\-::\-Get\-Biso (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{a00097_ac3e116b2d956c229b11c98c837e042d8}
+
+
+Returns the isotropic temperature B factor. 
+
+\index{Obj\-Cryst\-::\-Scattering\-Power@{Obj\-Cryst\-::\-Scattering\-Power}!Get\-Biso@{Get\-Biso}}
+\index{Get\-Biso@{Get\-Biso}!ObjCryst::ScatteringPower@{Obj\-Cryst\-::\-Scattering\-Power}}
+\paragraph[{Get\-Biso}]{\setlength{\rightskip}{0pt plus 5cm}R\-E\-A\-L\& Obj\-Cryst\-::\-Scattering\-Power\-::\-Get\-Biso (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{a00097_ace567e5b32673e14521ae262388dfed6}
+
+
+Returns the isotropic temperature B factor. 
+
+\index{Obj\-Cryst\-::\-Scattering\-Power@{Obj\-Cryst\-::\-Scattering\-Power}!Get\-Class\-Name@{Get\-Class\-Name}}
+\index{Get\-Class\-Name@{Get\-Class\-Name}!ObjCryst::ScatteringPower@{Obj\-Cryst\-::\-Scattering\-Power}}
+\paragraph[{Get\-Class\-Name}]{\setlength{\rightskip}{0pt plus 5cm}virtual const string\& Obj\-Cryst\-::\-Scattering\-Power\-::\-Get\-Class\-Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00097_ac31cc4135011046f93d49f4173aee3ee}
+
+
+Name for this class (\char`\"{}\-Refinable\-Obj\char`\"{}, \char`\"{}\-Crystal\char`\"{},...). 
+
+This is only useful to distinguish different classes when picking up objects from the \doxyref{Refinable\-Obj}{p.}{a00078} Global Registry 
+
+Reimplemented from {\bf Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00078_a62968d90a7a3080738b363934616c019}.
+
+
+
+Reimplemented in {\bf Obj\-Cryst\-::\-Scattering\-Power\-Atom} \doxyref{}{p.}{a00098_a87fcc8fe4871d1b9b6ec08af5f353657}, and {\bf Obj\-Cryst\-::\-Scattering\-Power\-Sphere} \doxyref{}{p.}{a00099_a57e85d29926fe93da66041a43583e893}.
+
+\index{Obj\-Cryst\-::\-Scattering\-Power@{Obj\-Cryst\-::\-Scattering\-Power}!Get\-Dyn\-Pop\-Corr\-Index@{Get\-Dyn\-Pop\-Corr\-Index}}
+\index{Get\-Dyn\-Pop\-Corr\-Index@{Get\-Dyn\-Pop\-Corr\-Index}!ObjCryst::ScatteringPower@{Obj\-Cryst\-::\-Scattering\-Power}}
+\paragraph[{Get\-Dyn\-Pop\-Corr\-Index}]{\setlength{\rightskip}{0pt plus 5cm}long Obj\-Cryst\-::\-Scattering\-Power\-::\-Get\-Dyn\-Pop\-Corr\-Index (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{a00097_ae3d48856abf5c8ef9dea6204309897bc}
+
+
+Get the number identifying this kind of scatterer, used to decide whether two scatterers are equivalent, for the dynamical occupancy correction. 
+
+\index{Obj\-Cryst\-::\-Scattering\-Power@{Obj\-Cryst\-::\-Scattering\-Power}!Get\-Forward\-Scattering\-Factor@{Get\-Forward\-Scattering\-Factor}}
+\index{Get\-Forward\-Scattering\-Factor@{Get\-Forward\-Scattering\-Factor}!ObjCryst::ScatteringPower@{Obj\-Cryst\-::\-Scattering\-Power}}
+\paragraph[{Get\-Forward\-Scattering\-Factor}]{\setlength{\rightskip}{0pt plus 5cm}virtual R\-E\-A\-L Obj\-Cryst\-::\-Scattering\-Power\-::\-Get\-Forward\-Scattering\-Factor (
+\begin{DoxyParamCaption}
+\item[{const {\bf Radiation\-Type}}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{a00097_a854b51b9b08e96af0fe7986fe372c50c}
+
+
+Get the scattering factor at (0,0,0). 
+
+Used for scatterer (electron, nucleus) density generation. 
+
+Implemented in {\bf Obj\-Cryst\-::\-Scattering\-Power\-Atom} \doxyref{}{p.}{a00098_ab979c1f31fd03b0f10f0afd625be722e}, {\bf Obj\-Cryst\-::\-Scattering\-Power\-Sphere} \doxyref{}{p.}{a00099_a9bd142cc8112495d41393b4faffc4fcd}, and {\bf Obj\-Cryst\-::\-Global\-Scattering\-Power} \doxyref{}{p.}{a00041_a33c01c7512929a947e6489df41edf7b3}.
+
+\index{Obj\-Cryst\-::\-Scattering\-Power@{Obj\-Cryst\-::\-Scattering\-Power}!Get\-Gene\-Group@{Get\-Gene\-Group}}
+\index{Get\-Gene\-Group@{Get\-Gene\-Group}!ObjCryst::ScatteringPower@{Obj\-Cryst\-::\-Scattering\-Power}}
+\paragraph[{Get\-Gene\-Group}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Scattering\-Power\-::\-Get\-Gene\-Group (
+\begin{DoxyParamCaption}
+\item[{const {\bf Refinable\-Obj} \&}]{obj, }
+\item[{Cryst\-Vector\-\_\-uint \&}]{group\-Index, }
+\item[{unsigned int \&}]{first\-Group}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00097_aae98160e01ecb2098cf4777126860aa5}
+
+
+Get the gene group assigned to each parameter. 
+
+Each parameter (a {\itshape gene} in terms of genetic algorithms) can be assigned to a gene group. Thus when mating two configurations, genes will be exchanged by groups. By default (in the base Refinabe\-Obj class), each parameter is alone in its group. Derived classes can group genes for a better s$\ast$$\ast$ life.
+
+The number identifying a gene group only has a meaning in a given object. It can also change on subsequent calls, and thus is not unique.
 
 
 \begin{DoxyParams}{Parameters}
-{\em derivllk,\-:} & if false, the derivative of the overall llk will not be computed, only the derivative of the atomic positions. \\
+{\em obj} & the , supplied by an algorithm class (\doxyref{Optimization\-Obj}{p.}{a00062},..), which contains a list of parameters, some of which (but possibly all or none) are parameters belonging to this object. \\
+\hline
+{\em group\-Index} & a vector of unsigned integers, one for each parameter in the input object, giving an unsigned integer value as gene group index. At the beginning this vector should contain only zeros (no group assigned). \\
+\hline
+{\em first\-Group} & this is the number of groups which have already been assigned, plus one. The gene groups returned by this object will start from this value, and increment {\bfseries first\-Group} for each gene group used, so that different \doxyref{Refinable\-Obj}{p.}{a00078} cannot share a gene group. \\
 \hline
 \end{DoxyParams}
+\begin{DoxyNote}{Note}
+this function is not optimized, and should only be called at the beginning of a refinement. 
+\end{DoxyNote}
 
 
-Implemented in {\bf Obj\-Cryst\-::\-Stretch\-Mode\-Twist} \doxyref{}{p.}{a00102_afd1ac754d10507e1c9bed829a4eaeb79}, {\bf Obj\-Cryst\-::\-Stretch\-Mode\-Torsion} \doxyref{}{p.}{a00101_abecf1074b05ba13fd938667399df110e}, {\bf Obj\-Cryst\-::\-Stretch\-Mode\-Bond\-Angle} \doxyref{}{p.}{a00098_acdc082c4cb5b4f38fed6049bf7b1eb9c}, and {\bf Obj\-Cryst\-::\-Stretch\-Mode\-Bond\-Length} \doxyref{}{p.}{a00099_a72bab02ebf84cbf65cf2703e74c1e02e}.
+Reimplemented from {\bf Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00078_ad59c8ad2b0d7ee59fa3f399a54f05e54}.
+
+\index{Obj\-Cryst\-::\-Scattering\-Power@{Obj\-Cryst\-::\-Scattering\-Power}!Get\-Maximum\-Likelihood\-Par\-Clock@{Get\-Maximum\-Likelihood\-Par\-Clock}}
+\index{Get\-Maximum\-Likelihood\-Par\-Clock@{Get\-Maximum\-Likelihood\-Par\-Clock}!ObjCryst::ScatteringPower@{Obj\-Cryst\-::\-Scattering\-Power}}
+\paragraph[{Get\-Maximum\-Likelihood\-Par\-Clock}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Refinable\-Obj\-Clock}\& Obj\-Cryst\-::\-Scattering\-Power\-::\-Get\-Maximum\-Likelihood\-Par\-Clock (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{a00097_a63af7f309f1d9e03245f84ba21b1dc4e}
+
+
+Get the clock value for the last change on the maximum likelihood parameters (positionnal error, number of ghost atoms). 
+
+\index{Obj\-Cryst\-::\-Scattering\-Power@{Obj\-Cryst\-::\-Scattering\-Power}!Get\-Maximum\-Likelihood\-Position\-Error@{Get\-Maximum\-Likelihood\-Position\-Error}}
+\index{Get\-Maximum\-Likelihood\-Position\-Error@{Get\-Maximum\-Likelihood\-Position\-Error}!ObjCryst::ScatteringPower@{Obj\-Cryst\-::\-Scattering\-Power}}
+\paragraph[{Get\-Maximum\-Likelihood\-Position\-Error}]{\setlength{\rightskip}{0pt plus 5cm}R\-E\-A\-L Obj\-Cryst\-::\-Scattering\-Power\-::\-Get\-Maximum\-Likelihood\-Position\-Error (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{a00097_a34a36179228e07e92a85da9d17376649}
+
+
+Maximum Likelihood\-: get the estimated error (sigma) on the positions for this kind of element. 
+
+\index{Obj\-Cryst\-::\-Scattering\-Power@{Obj\-Cryst\-::\-Scattering\-Power}!Get\-Radius@{Get\-Radius}}
+\index{Get\-Radius@{Get\-Radius}!ObjCryst::ScatteringPower@{Obj\-Cryst\-::\-Scattering\-Power}}
+\paragraph[{Get\-Radius}]{\setlength{\rightskip}{0pt plus 5cm}virtual R\-E\-A\-L Obj\-Cryst\-::\-Scattering\-Power\-::\-Get\-Radius (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{a00097_ac44860aca21734844379ddec87622f7b}
+
+
+Return the physical radius of this type of scatterer (for 3\-D display purposes). 
+
+\begin{DoxyWarning}{Warning}
+this may be removed later. 
+\end{DoxyWarning}
+
+
+Implemented in {\bf Obj\-Cryst\-::\-Scattering\-Power\-Atom} \doxyref{}{p.}{a00098_a38cdad845523d408f473cdea050841a0}, {\bf Obj\-Cryst\-::\-Scattering\-Power\-Sphere} \doxyref{}{p.}{a00099_a1f4b091f0990b959acb0645fd575a080}, and {\bf Obj\-Cryst\-::\-Global\-Scattering\-Power} \doxyref{}{p.}{a00041_aadef1e0a463f70f4f70dba3d12dba9ed}.
+
+\index{Obj\-Cryst\-::\-Scattering\-Power@{Obj\-Cryst\-::\-Scattering\-Power}!Get\-Resonant\-Scatt\-Fact\-Imag@{Get\-Resonant\-Scatt\-Fact\-Imag}}
+\index{Get\-Resonant\-Scatt\-Fact\-Imag@{Get\-Resonant\-Scatt\-Fact\-Imag}!ObjCryst::ScatteringPower@{Obj\-Cryst\-::\-Scattering\-Power}}
+\paragraph[{Get\-Resonant\-Scatt\-Fact\-Imag}]{\setlength{\rightskip}{0pt plus 5cm}virtual Cryst\-Matrix\-\_\-\-R\-E\-A\-L Obj\-Cryst\-::\-Scattering\-Power\-::\-Get\-Resonant\-Scatt\-Fact\-Imag (
+\begin{DoxyParamCaption}
+\item[{const {\bf Scattering\-Data} \&}]{data, }
+\item[{const int}]{spg\-Sym\-Pos\-Index = {\ttfamily -\/1}}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{a00097_a9bc5d86bf76116f645b43d46f2a9771c}
+
+
+Get the imaginary part of the resonant scattering factor. 
+
+\begin{DoxyReturn}{Returns}
+a matrix where each row corresponds to each wavelength (currently only monochromatic experiments are made so there is only one row), and each column corresponds to each reflection {\itshape only} if the scattering term is anisotropic, which is not the case so far... 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em data,\-:} & the \doxyref{Scattering\-Data}{p.}{a00096} object, giving access to all the reflections, and a list of wavelengths. \\
+\hline
+{\em spg\-Sym\-Pos\-Index,\-:} & if the \doxyref{Scattering\-Power}{p.}{a00097} is anisotropic, then the different symmetrics will not have the same scattering power for all reflections. This parameter is the index of the symmetric position in the Spacegroup. If spg\-Sym\-Pos\-Index=-\/1, the isotropic values are returned. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+There is no anisotropic code yet, so spg\-Sym\-Pos\-Index is simply ignored so far , but the design of this function is general for any anisotropic scattering. 
+\end{DoxyWarning}
+
+
+Implemented in {\bf Obj\-Cryst\-::\-Scattering\-Power\-Atom} \doxyref{}{p.}{a00098_a18e0f4ec2008406f6b6f770abada9b88}, {\bf Obj\-Cryst\-::\-Scattering\-Power\-Sphere} \doxyref{}{p.}{a00099_aee221744487a1c29023399b71e855c06}, and {\bf Obj\-Cryst\-::\-Global\-Scattering\-Power} \doxyref{}{p.}{a00041_af3b5eefc24e2c60843793cdfbc240a11}.
+
+\index{Obj\-Cryst\-::\-Scattering\-Power@{Obj\-Cryst\-::\-Scattering\-Power}!Get\-Resonant\-Scatt\-Fact\-Real@{Get\-Resonant\-Scatt\-Fact\-Real}}
+\index{Get\-Resonant\-Scatt\-Fact\-Real@{Get\-Resonant\-Scatt\-Fact\-Real}!ObjCryst::ScatteringPower@{Obj\-Cryst\-::\-Scattering\-Power}}
+\paragraph[{Get\-Resonant\-Scatt\-Fact\-Real}]{\setlength{\rightskip}{0pt plus 5cm}virtual Cryst\-Matrix\-\_\-\-R\-E\-A\-L Obj\-Cryst\-::\-Scattering\-Power\-::\-Get\-Resonant\-Scatt\-Fact\-Real (
+\begin{DoxyParamCaption}
+\item[{const {\bf Scattering\-Data} \&}]{data, }
+\item[{const int}]{spg\-Sym\-Pos\-Index = {\ttfamily -\/1}}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{a00097_a42c1302254787d13b9e0f2210315291a}
+
+
+Get the real part of the resonant scattering factor. 
+
+\begin{DoxyReturn}{Returns}
+a matrix where each row corresponds to each wavelength (currently only monochromatic experiments are made so there is only one row), and each column corresponds to each reflection {\itshape only} if the scattering term is anisotropic, which is not the case so far... 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em data,\-:} & the \doxyref{Scattering\-Data}{p.}{a00096} object, giving access to all the reflections and a list of wavelengths). \\
+\hline
+{\em spg\-Sym\-Pos\-Index,\-:} & if the \doxyref{Scattering\-Power}{p.}{a00097} is anisotropic, then the different symmetrics will not have the same scattering power for all reflections. This parameter is the index of the symmetric position in the Spacegroup. If spg\-Sym\-Pos\-Index=-\/1, the isotropic values are returned. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+There is no anisotropic code yet, so spg\-Sym\-Pos\-Index is simply ignored so far , but the design of this function is general for any anisotropic scattering. 
+\end{DoxyWarning}
+
+
+Implemented in {\bf Obj\-Cryst\-::\-Scattering\-Power\-Atom} \doxyref{}{p.}{a00098_a538841350c5a7147f7be607dd3ef5b72}, {\bf Obj\-Cryst\-::\-Scattering\-Power\-Sphere} \doxyref{}{p.}{a00099_a064671bfd711ef108be7a1528e52cd46}, and {\bf Obj\-Cryst\-::\-Global\-Scattering\-Power} \doxyref{}{p.}{a00041_a9ddb16c057b744df58473fd2880baa3c}.
+
+\index{Obj\-Cryst\-::\-Scattering\-Power@{Obj\-Cryst\-::\-Scattering\-Power}!Get\-Scattering\-Factor@{Get\-Scattering\-Factor}}
+\index{Get\-Scattering\-Factor@{Get\-Scattering\-Factor}!ObjCryst::ScatteringPower@{Obj\-Cryst\-::\-Scattering\-Power}}
+\paragraph[{Get\-Scattering\-Factor}]{\setlength{\rightskip}{0pt plus 5cm}virtual Cryst\-Vector\-\_\-\-R\-E\-A\-L Obj\-Cryst\-::\-Scattering\-Power\-::\-Get\-Scattering\-Factor (
+\begin{DoxyParamCaption}
+\item[{const {\bf Scattering\-Data} \&}]{data, }
+\item[{const int}]{spg\-Sym\-Pos\-Index = {\ttfamily -\/1}}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{a00097_af18f3eaaf45af87bc3a2a0ff21bc34b6}
+
+
+Get the Scattering factor for all reflections of a given \doxyref{Scattering\-Data}{p.}{a00096} object. 
+
+\begin{DoxyReturn}{Returns}
+a vector with the scattering factor for all reflections, in the same order as in the \doxyref{Scattering\-Data}{p.}{a00096} object. This format is independent of the radiation type (X-\/\-Ray, neutron..). 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em data,\-:} & the \doxyref{Scattering\-Data}{p.}{a00096} object, giving access to all the reflections. \\
+\hline
+{\em spg\-Sym\-Pos\-Index,\-:} & if the \doxyref{Scattering\-Power}{p.}{a00097} is anisotropic, then the different symmetrics will not have the same scattering power for all reflections. This parameter is the index of the symmetric position in the Spacegroup. If spg\-Sym\-Pos\-Index=-\/1, the isotropic values are returned. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+There is no anisotropic code yet, so spg\-Sym\-Pos\-Index is simply ignored so far , but the design of this function is general for any anisotropic scattering. 
+\end{DoxyWarning}
+
+
+Implemented in {\bf Obj\-Cryst\-::\-Scattering\-Power\-Atom} \doxyref{}{p.}{a00098_a1c1733e6f6aab65fbe033b877cac5ae8}, {\bf Obj\-Cryst\-::\-Scattering\-Power\-Sphere} \doxyref{}{p.}{a00099_a073f08b17ba89e0ac5ed8e1a61cb04fe}, and {\bf Obj\-Cryst\-::\-Global\-Scattering\-Power} \doxyref{}{p.}{a00041_acd525a54e45dc3c70fb5445b8b9b5a8c}.
+
+\index{Obj\-Cryst\-::\-Scattering\-Power@{Obj\-Cryst\-::\-Scattering\-Power}!Get\-Symbol@{Get\-Symbol}}
+\index{Get\-Symbol@{Get\-Symbol}!ObjCryst::ScatteringPower@{Obj\-Cryst\-::\-Scattering\-Power}}
+\paragraph[{Get\-Symbol}]{\setlength{\rightskip}{0pt plus 5cm}virtual const string\& Obj\-Cryst\-::\-Scattering\-Power\-::\-Get\-Symbol (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00097_a5cdd13d241974a6e6f0d3803256a3d10}
+
+
+Symbol for this Scattering power (the atom name for atoms) 
+
+
+
+Reimplemented in {\bf Obj\-Cryst\-::\-Scattering\-Power\-Atom} \doxyref{}{p.}{a00098_a0b21c0253564cb40353171b182f50ecf}.
+
+\index{Obj\-Cryst\-::\-Scattering\-Power@{Obj\-Cryst\-::\-Scattering\-Power}!Get\-Temperature\-Factor@{Get\-Temperature\-Factor}}
+\index{Get\-Temperature\-Factor@{Get\-Temperature\-Factor}!ObjCryst::ScatteringPower@{Obj\-Cryst\-::\-Scattering\-Power}}
+\paragraph[{Get\-Temperature\-Factor}]{\setlength{\rightskip}{0pt plus 5cm}virtual Cryst\-Vector\-\_\-\-R\-E\-A\-L Obj\-Cryst\-::\-Scattering\-Power\-::\-Get\-Temperature\-Factor (
+\begin{DoxyParamCaption}
+\item[{const {\bf Scattering\-Data} \&}]{data, }
+\item[{const int}]{spg\-Sym\-Pos\-Index = {\ttfamily -\/1}}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{a00097_a3df723db77380c82ecff5f7050490255}
+
+
+Get the temperature factor for all reflections of a given \doxyref{Scattering\-Data}{p.}{a00096} object. 
+
+\begin{DoxyReturn}{Returns}
+a vector with the temperature factor for all reflections, in the same order as in the \doxyref{Scattering\-Data}{p.}{a00096} object. 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em data,\-:} & the \doxyref{Scattering\-Data}{p.}{a00096} object, giving access to all the reflections. \\
+\hline
+{\em spg\-Sym\-Pos\-Index,\-:} & if the \doxyref{Scattering\-Power}{p.}{a00097} is anisotropic, then the different symmetrics will not have the same scattering power for all reflections. This parameter is the index of the symmetric position in the Spacegroup. If spg\-Sym\-Pos\-Index=-\/1, the isotropic values are returned. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+There is no anisotropic code yet, so spg\-Sym\-Pos\-Index is simply ignored so far , but the design of this function is general for any anisotropic scattering. 
+\end{DoxyWarning}
+
+
+Implemented in {\bf Obj\-Cryst\-::\-Scattering\-Power\-Atom} \doxyref{}{p.}{a00098_aefe7a8b036c3f5a4a2b781b527dfa8c3}, {\bf Obj\-Cryst\-::\-Scattering\-Power\-Sphere} \doxyref{}{p.}{a00099_a3927291a20f5807c2ec6a9ae3627005d}, and {\bf Obj\-Cryst\-::\-Global\-Scattering\-Power} \doxyref{}{p.}{a00041_a48da59604bb5a35fdac09087bc0fcff4}.
+
+\index{Obj\-Cryst\-::\-Scattering\-Power@{Obj\-Cryst\-::\-Scattering\-Power}!Set\-Bij@{Set\-Bij}}
+\index{Set\-Bij@{Set\-Bij}!ObjCryst::ScatteringPower@{Obj\-Cryst\-::\-Scattering\-Power}}
+\paragraph[{Set\-Bij}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Scattering\-Power\-::\-Set\-Bij (
+\begin{DoxyParamCaption}
+\item[{const size\-\_\-t \&}]{idx, }
+\item[{const R\-E\-A\-L}]{new\-B}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00097_a50b648d97ebb1ab97b39195b098eff50}
+
+
+Sets the anisotropic temperature B factor for given index. 
+
+0 -\/$>$ (1, 1) 1 -\/$>$ (2, 2) 2 -\/$>$ (3, 3) 3 -\/$>$ (1, 2) 4 -\/$>$ (1, 3) 5 -\/$>$ (2, 3) \index{Obj\-Cryst\-::\-Scattering\-Power@{Obj\-Cryst\-::\-Scattering\-Power}!Set\-Biso@{Set\-Biso}}
+\index{Set\-Biso@{Set\-Biso}!ObjCryst::ScatteringPower@{Obj\-Cryst\-::\-Scattering\-Power}}
+\paragraph[{Set\-Biso}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Scattering\-Power\-::\-Set\-Biso (
+\begin{DoxyParamCaption}
+\item[{const R\-E\-A\-L}]{new\-B}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00097_a179266106b89bcbb4885f9f20ce315c3}
+
+
+Sets the isotropic temperature B factor. 
+
+\index{Obj\-Cryst\-::\-Scattering\-Power@{Obj\-Cryst\-::\-Scattering\-Power}!Set\-Maximum\-Likelihood\-Position\-Error@{Set\-Maximum\-Likelihood\-Position\-Error}}
+\index{Set\-Maximum\-Likelihood\-Position\-Error@{Set\-Maximum\-Likelihood\-Position\-Error}!ObjCryst::ScatteringPower@{Obj\-Cryst\-::\-Scattering\-Power}}
+\paragraph[{Set\-Maximum\-Likelihood\-Position\-Error}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-Scattering\-Power\-::\-Set\-Maximum\-Likelihood\-Position\-Error (
+\begin{DoxyParamCaption}
+\item[{const R\-E\-A\-L}]{mle}
+\end{DoxyParamCaption}
+)}\label{a00097_aeba30efe61155572ffdada1121578bc9}
+
+
+Maximum Likelihood\-: set the estimated error (sigma) on the positions for this kind of element. 
 
 
 
 \subsubsection{Member Data Documentation}
-\index{Obj\-Cryst\-::\-Stretch\-Mode@{Obj\-Cryst\-::\-Stretch\-Mode}!m\-Base\-Amplitude@{m\-Base\-Amplitude}}
-\index{m\-Base\-Amplitude@{m\-Base\-Amplitude}!ObjCryst::StretchMode@{Obj\-Cryst\-::\-Stretch\-Mode}}
-\paragraph[{m\-Base\-Amplitude}]{\setlength{\rightskip}{0pt plus 5cm}R\-E\-A\-L Obj\-Cryst\-::\-Stretch\-Mode\-::m\-Base\-Amplitude}\label{a00097_aa8dc03e2bd6840d13964dd6751c39fae}
+\index{Obj\-Cryst\-::\-Scattering\-Power@{Obj\-Cryst\-::\-Scattering\-Power}!m\-Dyn\-Pop\-Corr\-Index@{m\-Dyn\-Pop\-Corr\-Index}}
+\index{m\-Dyn\-Pop\-Corr\-Index@{m\-Dyn\-Pop\-Corr\-Index}!ObjCryst::ScatteringPower@{Obj\-Cryst\-::\-Scattering\-Power}}
+\paragraph[{m\-Dyn\-Pop\-Corr\-Index}]{\setlength{\rightskip}{0pt plus 5cm}long Obj\-Cryst\-::\-Scattering\-Power\-::m\-Dyn\-Pop\-Corr\-Index\hspace{0.3cm}{\ttfamily [protected]}}\label{a00097_a0266da1d92ec3d14989a2d4047710c4b}
 
 
-The recommended change amplitude, for a base global optimization displacement, to obtain an average 0.\-1 Angstroem displacement. 
+number identifying this kind of scatterer, for the dynamical occupancy correction. 
 
-This is learnt at the beginning of an optimization.
+Right now it is the atomic number. \index{Obj\-Cryst\-::\-Scattering\-Power@{Obj\-Cryst\-::\-Scattering\-Power}!m\-Formal\-Charge@{m\-Formal\-Charge}}
+\index{m\-Formal\-Charge@{m\-Formal\-Charge}!ObjCryst::ScatteringPower@{Obj\-Cryst\-::\-Scattering\-Power}}
+\paragraph[{m\-Formal\-Charge}]{\setlength{\rightskip}{0pt plus 5cm}R\-E\-A\-L Obj\-Cryst\-::\-Scattering\-Power\-::m\-Formal\-Charge\hspace{0.3cm}{\ttfamily [protected]}}\label{a00097_a030be52e5ba5540bf068e6be4ccb190e}
 
-This can be superseeded to respect any restraint. 
 
-The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+Formal Charge. 
+
+This can be used for bond valence analysis, or energy calculations.
+
+Default value is 0. \index{Obj\-Cryst\-::\-Scattering\-Power@{Obj\-Cryst\-::\-Scattering\-Power}!m\-Maximum\-Likelihood\-Nb\-Ghost@{m\-Maximum\-Likelihood\-Nb\-Ghost}}
+\index{m\-Maximum\-Likelihood\-Nb\-Ghost@{m\-Maximum\-Likelihood\-Nb\-Ghost}!ObjCryst::ScatteringPower@{Obj\-Cryst\-::\-Scattering\-Power}}
+\paragraph[{m\-Maximum\-Likelihood\-Nb\-Ghost}]{\setlength{\rightskip}{0pt plus 5cm}R\-E\-A\-L Obj\-Cryst\-::\-Scattering\-Power\-::m\-Maximum\-Likelihood\-Nb\-Ghost\hspace{0.3cm}{\ttfamily [protected]}}\label{a00097_a53eeb0a26003df0bcf604817e2fbadf7}
+
+
+Number of ghost atoms in the asymmetric unit. 
+
+These contribute to the variance of the structure factor, but not to the structure factor as the uncertainty on their position is infinite. 
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-Molecule.\-h\end{DoxyCompactItemize}
+Scattering\-Power.\-h\end{DoxyCompactItemize}

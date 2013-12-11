@@ -1,101 +1,72 @@
-\subsection{\-Obj\-Cryst\-:\-:\-L\-S\-Q\-Regularization\-Operator \-Class \-Reference}
-\label{a00040}\index{\-Obj\-Cryst\-::\-L\-S\-Q\-Regularization\-Operator@{\-Obj\-Cryst\-::\-L\-S\-Q\-Regularization\-Operator}}
+\subsection{Format\-Vert\-Vector\-H\-K\-L\-Floats$<$ T $>$ Class Template Reference}
+\label{a00040}\index{Format\-Vert\-Vector\-H\-K\-L\-Floats$<$ T $>$@{Format\-Vert\-Vector\-H\-K\-L\-Floats$<$ T $>$}}
 
 
-\-Simple \-Regularization \-Operator for the \-Least-\/\-Squares \-Refinement.  
+Output vectors as column arrays, with the first 3 columns printed as integers.  
 
 
-\subsubsection*{\-Public \-Member \-Functions}
+\subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bf \-L\-S\-Q\-Regularization\-Operator} (std\-::string obj\-Name=\char`\"{}\-Unnamed \-L\-S\-Q \-Regularization \-Obj\char`\"{})\label{a00040_a8b50ee303228c67b0291497edbec4a4d}
+{\bfseries Format\-Vert\-Vector\-H\-K\-L\-Floats} (const {\bf Cryst\-Vector}$<$ T $>$ \&h, const {\bf Cryst\-Vector}$<$ T $>$ \&k, const {\bf Cryst\-Vector}$<$ T $>$ \&l, const int width=10, const int precision=4)\label{a00040_a756d9392ef5de6a60c4016355abb9c60}
 
-\begin{DoxyCompactList}\small\item\em \-Constructor. \end{DoxyCompactList}\item 
-{\bf \-L\-S\-Q\-Regularization\-Operator} (const {\bf \-L\-S\-Q\-Regularization\-Operator} \&)\label{a00040_a3a7df3e9372bd0b5824b3eb46479a479}
+\item 
+{\bfseries Format\-Vert\-Vector\-H\-K\-L\-Floats} (const {\bf Cryst\-Vector}$<$ T $>$ \&h, const {\bf Cryst\-Vector}$<$ T $>$ \&k, const {\bf Cryst\-Vector}$<$ T $>$ \&l, const {\bf Cryst\-Vector}$<$ T $>$ \&m, const int width=10, const int precision=4)\label{a00040_aed8eabc1be1d3b77f315bdba7f1c7a51}
 
-\begin{DoxyCompactList}\small\item\em \-Copy constructor. \end{DoxyCompactList}\item 
-{\bf $\sim$\-L\-S\-Q\-Regularization\-Operator} ()\label{a00040_a09d06b5ad20ded0c5361dfac53e79d78}
+\item 
+{\bfseries Format\-Vert\-Vector\-H\-K\-L\-Floats} (const {\bf Cryst\-Vector}$<$ T $>$ \&h, const {\bf Cryst\-Vector}$<$ T $>$ \&k, const {\bf Cryst\-Vector}$<$ T $>$ \&l, const {\bf Cryst\-Vector}$<$ T $>$ \&m, const {\bf Cryst\-Vector}$<$ T $>$ \&n, const int width=10, const int precision=4)\label{a00040_a9eef871c527f51272a10734481a91ad3}
 
-\begin{DoxyCompactList}\small\item\em \-Descructor. \end{DoxyCompactList}\item 
-const string \& {\bf \-Get\-Class\-Name} () const \label{a00040_a865c08041f893e4ea216c229713af113}
+\item 
+{\bfseries Format\-Vert\-Vector\-H\-K\-L\-Floats} (const {\bf Cryst\-Vector}$<$ T $>$ \&h, const {\bf Cryst\-Vector}$<$ T $>$ \&k, const {\bf Cryst\-Vector}$<$ T $>$ \&l, const {\bf Cryst\-Vector}$<$ T $>$ \&m, const {\bf Cryst\-Vector}$<$ T $>$ \&n, const {\bf Cryst\-Vector}$<$ T $>$ \&o, const int width=10, const int precision=4)\label{a00040_aeb5312e5a9216a8da858d78cacef378e}
 
-\begin{DoxyCompactList}\small\item\em \-Name for this class (\char`\"{}\-L\-S\-Q\-Regularization\-Operator\char`\"{},...) \end{DoxyCompactList}\item 
-const string \& {\bf \-Get\-Name} () const \label{a00040_a81bf5bbfe83d8a18ebe2371cad6a9d5c}
+\item 
+{\bfseries Format\-Vert\-Vector\-H\-K\-L\-Floats} (const {\bf Cryst\-Vector}$<$ T $>$ \&h, const {\bf Cryst\-Vector}$<$ T $>$ \&k, const {\bf Cryst\-Vector}$<$ T $>$ \&l, const {\bf Cryst\-Vector}$<$ T $>$ \&m, const {\bf Cryst\-Vector}$<$ T $>$ \&n, const {\bf Cryst\-Vector}$<$ T $>$ \&o, const {\bf Cryst\-Vector}$<$ T $>$ \&p, const int width=10, const int precision=4)\label{a00040_a8de77f081efb4ee9662eb0ee20727e1c}
 
-\begin{DoxyCompactList}\small\item\em \-Name of the object. \end{DoxyCompactList}\item 
-const \-Cryst\-Matrix\-\_\-\-R\-E\-A\-L \& {\bf \-Get\-Regularization\-Operator\-Matrix} () const 
-\begin{DoxyCompactList}\small\item\em \-Get the matrix reprezenting the regularization operator. \end{DoxyCompactList}\item 
-const std\-::vector$<$ const \*
-{\bf \-Refinable\-Par} $\ast$ $>$ \& {\bf \-Get\-Param\-List} () const \label{a00040_ab03f9a1f27efa7c7d0d1bf67621611ec}
+\item 
+{\bfseries Format\-Vert\-Vector\-H\-K\-L\-Floats} (const {\bf Cryst\-Vector}$<$ T $>$ \&h, const {\bf Cryst\-Vector}$<$ T $>$ \&k, const {\bf Cryst\-Vector}$<$ T $>$ \&l, const {\bf Cryst\-Vector}$<$ T $>$ \&m, const {\bf Cryst\-Vector}$<$ T $>$ \&n, const {\bf Cryst\-Vector}$<$ T $>$ \&o, const {\bf Cryst\-Vector}$<$ T $>$ \&p, const {\bf Cryst\-Vector}$<$ T $>$ \&q, const int width=10, const int precision=4)\label{a00040_acb9f12201a79cd8e7007a9d25da07ff4}
 
-\begin{DoxyCompactList}\small\item\em \-Get the list of parameters. \-This list links the matrix elements with the appropriate parameters. \end{DoxyCompactList}\item 
-\-R\-E\-A\-L {\bf \-Get\-Regularization\-Operator\-Weight} () const \label{a00040_ad4e1749323861d214ebd51a3f0771698}
+\item 
+{\bfseries Format\-Vert\-Vector\-H\-K\-L\-Floats} (const {\bf Cryst\-Vector}$<$ T $>$ \&h, const {\bf Cryst\-Vector}$<$ T $>$ \&k, const {\bf Cryst\-Vector}$<$ T $>$ \&l, const {\bf Cryst\-Vector}$<$ T $>$ \&m, const {\bf Cryst\-Vector}$<$ T $>$ \&n, const {\bf Cryst\-Vector}$<$ T $>$ \&o, const {\bf Cryst\-Vector}$<$ T $>$ \&p, const {\bf Cryst\-Vector}$<$ T $>$ \&q, const {\bf Cryst\-Vector}$<$ T $>$ \&r, const int width=10, const int precision=4)\label{a00040_a8d5ee53cb53c61b1909657e1e696b86b}
 
-\begin{DoxyCompactList}\small\item\em \-Get the weighting factor of the regularization operator in the minimized \-Chi\-Sq quantity. \end{DoxyCompactList}\item 
-void {\bf \-Set\-Regularization\-Operator\-Matrix} (const \-Cryst\-Matrix\-\_\-\-R\-E\-A\-L \&matrix)
-\begin{DoxyCompactList}\small\item\em \-Set the matrix reprezenting the regularization operator. \end{DoxyCompactList}\item 
-void {\bf \-Set\-Param\-List} (const std\-::vector$<$ const {\bf \-Refinable\-Par} $\ast$ $>$ \&param\-List)\label{a00040_ad50b39cbdbe2a65dc3eb27e6fbe91852}
+\item 
+{\bfseries Format\-Vert\-Vector\-H\-K\-L\-Floats} (const {\bf Cryst\-Vector}$<$ T $>$ \&h, const {\bf Cryst\-Vector}$<$ T $>$ \&k, const {\bf Cryst\-Vector}$<$ T $>$ \&l, const {\bf Cryst\-Vector}$<$ T $>$ \&m, const {\bf Cryst\-Vector}$<$ T $>$ \&n, const {\bf Cryst\-Vector}$<$ T $>$ \&o, const {\bf Cryst\-Vector}$<$ T $>$ \&p, const {\bf Cryst\-Vector}$<$ T $>$ \&q, const {\bf Cryst\-Vector}$<$ T $>$ \&r, const {\bf Cryst\-Vector}$<$ T $>$ \&s, const int width=10, const int precision=4)\label{a00040_a7db9be5bdbb73648664b87151e736ecd}
 
-\begin{DoxyCompactList}\small\item\em \-Set the list of parameters on which the operator is working. \-This list links the matrix elements with the appropriate parameters. \end{DoxyCompactList}\item 
-void {\bf \-Set\-Regularization\-Operator\-Weight} (const \-R\-E\-A\-L \-Lambda)\label{a00040_a2db1acb17c357632879a913845320d4b}
+\item 
+{\bfseries Format\-Vert\-Vector\-H\-K\-L\-Floats} (const {\bf Cryst\-Vector}$<$ T $>$ \&h, const {\bf Cryst\-Vector}$<$ T $>$ \&k, const {\bf Cryst\-Vector}$<$ T $>$ \&l, const {\bf Cryst\-Vector}$<$ T $>$ \&m, const {\bf Cryst\-Vector}$<$ T $>$ \&n, const {\bf Cryst\-Vector}$<$ T $>$ \&o, const {\bf Cryst\-Vector}$<$ T $>$ \&p, const {\bf Cryst\-Vector}$<$ T $>$ \&q, const {\bf Cryst\-Vector}$<$ T $>$ \&r, const {\bf Cryst\-Vector}$<$ T $>$ \&s, const {\bf Cryst\-Vector}$<$ T $>$ \&t, const int width=10, const int precision=4)\label{a00040_a4447e13944800430f8dfd62561620ddf}
 
-\begin{DoxyCompactList}\small\item\em \-Set the weighting factor of the regularization operator in the minimized \-Chi\-Sq quantity. \end{DoxyCompactList}\item 
-\-R\-E\-A\-L {\bf \-Get\-Value} () const \label{a00040_aeb8bc1b35e57b0e892d8229d2539f99c}
+\item 
+{\bfseries Format\-Vert\-Vector\-H\-K\-L\-Floats} (const {\bf Cryst\-Vector}$<$ T $>$ \&h, const {\bf Cryst\-Vector}$<$ T $>$ \&k, const {\bf Cryst\-Vector}$<$ T $>$ \&l, const {\bf Cryst\-Vector}$<$ T $>$ \&m, const {\bf Cryst\-Vector}$<$ T $>$ \&n, const {\bf Cryst\-Vector}$<$ T $>$ \&o, const {\bf Cryst\-Vector}$<$ T $>$ \&p, const {\bf Cryst\-Vector}$<$ T $>$ \&q, const {\bf Cryst\-Vector}$<$ T $>$ \&r, const {\bf Cryst\-Vector}$<$ T $>$ \&s, const {\bf Cryst\-Vector}$<$ T $>$ \&t, const {\bf Cryst\-Vector}$<$ T $>$ \&u, const int width=10, const int precision=4)\label{a00040_a565928926675ff9bda3642f99121cc61}
 
-\begin{DoxyCompactList}\small\item\em \-Get (non-\/weighted) value of \-Regularization \-Operator applied to the current parameters set. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{\-Private \-Attributes}
+\item 
+{\bfseries Format\-Vert\-Vector\-H\-K\-L\-Floats} (std\-::vector$<$ const {\bf Cryst\-Vector}$<$ T $>$ $\ast$ $>$ \&v, const int width=10, const int precision=4)\label{a00040_a9be8620f71ff33ec8488c88c65c4cf02}
+
+\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-std\-::string {\bf m\-Name}\label{a00040_ae42bb2fcf0165b72dd8ac7e01551777c}
+std\-::vector$<$ const {\bf Cryst\-Vector}\\*
+$<$ T $>$ $\ast$ $>$ {\bfseries mvp\-Vectors}\label{a00040_adf1d4ac745168890122eb8258a15d2c7}
 
-\begin{DoxyCompactList}\small\item\em \-Name of the object. \end{DoxyCompactList}\item 
-std\-::vector$<$ const {\bf \-Refinable\-Par} $\ast$ $>$ {\bf m\-Param\-List}\label{a00040_a214df1f8fe0ff9bb78734ad6df8026dc}
-
-\begin{DoxyCompactList}\small\item\em \-List of parameters on which the regularization operator is working. \end{DoxyCompactList}\item 
-\-Cryst\-Matrix\-\_\-\-R\-E\-A\-L {\bf m\-Reg\-Op\-Matrix}\label{a00040_ae2b41c7ba63db54c93666942b0e6ed6e}
-
-\begin{DoxyCompactList}\small\item\em \-Regularization operator matrix. \end{DoxyCompactList}\item 
-\-R\-E\-A\-L {\bf m\-Lambda}\label{a00040_a91f10e972493d31b80d160dd78b8c299}
-
-\begin{DoxyCompactList}\small\item\em \-Weight of the regularization operator. \end{DoxyCompactList}\end{DoxyCompactItemize}
-
-
-\subsubsection{\-Detailed \-Description}
-\-Simple \-Regularization \-Operator for the \-Least-\/\-Squares \-Refinement. 
-
-\-During the common \-L\-S\-Q refinement a \-Chi\-Sq value representing the difference of observed and simulated data is minimized. \-The matter of this object is to provide an operator that is used to regularize refinement solution in some way. \-For example it is assumed that the solution should be smooth. \-This means a that each model parameter from a given group of parametres, representing e.\-g. a continous function, should not differ much from neighbouring parameters in the group. \-Such a condition can be expressed as an additional operator that should be optimised. \-Hence insteed of minimizing only the \-Chi\-Sq value the quantity\-: \-Chi\-Sq(a0+da) + \-Lambda $\ast$ (a0+da)$\ast$\-H$\ast$(a0+da)
-
-is minimised now. \-Here a0 ... states for a vector of model parameters, da ... is the mutation of model parameters refined by \-L\-S\-Qs, \-Lambda ... is the weighting factor and \-H ... is the symmetric regularization operator. 
-
-\subsubsection{\-Member \-Function \-Documentation}
-\index{\-Obj\-Cryst\-::\-L\-S\-Q\-Regularization\-Operator@{\-Obj\-Cryst\-::\-L\-S\-Q\-Regularization\-Operator}!\-Get\-Regularization\-Operator\-Matrix@{\-Get\-Regularization\-Operator\-Matrix}}
-\index{\-Get\-Regularization\-Operator\-Matrix@{\-Get\-Regularization\-Operator\-Matrix}!ObjCryst::LSQRegularizationOperator@{\-Obj\-Cryst\-::\-L\-S\-Q\-Regularization\-Operator}}
-\paragraph[{\-Get\-Regularization\-Operator\-Matrix}]{\setlength{\rightskip}{0pt plus 5cm}const \-Cryst\-Matrix\-\_\-\-R\-E\-A\-L\& {\bf \-Obj\-Cryst\-::\-L\-S\-Q\-Regularization\-Operator\-::\-Get\-Regularization\-Operator\-Matrix} (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const}\label{a00040_ad3e5d82946631d708bb0c518664071ba}
-
-
-\-Get the matrix reprezenting the regularization operator. 
-
-\-The elements of the matrix descibe relations between parameters returned by \-Get\-Params\-List(). \-Hence this list defines the order of matrix rows and columns.
-
-\-The matrix is symmetric. \-The lower triangular part of the matrix should be used preferably (becouse of compatibility with \-Newmat). \index{\-Obj\-Cryst\-::\-L\-S\-Q\-Regularization\-Operator@{\-Obj\-Cryst\-::\-L\-S\-Q\-Regularization\-Operator}!\-Set\-Regularization\-Operator\-Matrix@{\-Set\-Regularization\-Operator\-Matrix}}
-\index{\-Set\-Regularization\-Operator\-Matrix@{\-Set\-Regularization\-Operator\-Matrix}!ObjCryst::LSQRegularizationOperator@{\-Obj\-Cryst\-::\-L\-S\-Q\-Regularization\-Operator}}
-\paragraph[{\-Set\-Regularization\-Operator\-Matrix}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Obj\-Cryst\-::\-L\-S\-Q\-Regularization\-Operator\-::\-Set\-Regularization\-Operator\-Matrix} (
-\begin{DoxyParamCaption}
-\item[{const \-Cryst\-Matrix\-\_\-\-R\-E\-A\-L \&}]{matrix}
-\end{DoxyParamCaption}
-)}\label{a00040_a3c17e6bb0c82ab0d37508a55c2947106}
-
-
-\-Set the matrix reprezenting the regularization operator. 
-
-\-The elements of the matrix descibe relations between parameters returned by \-Get\-Params\-List(). \-Hence this list defines the order of matrix rows and columns.
-
-\-The matrix must be symmetric. \-The lower triangular part of the matrix should be used preferably (becouse of compatibility with \-Newmat). 
-
-\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-\-L\-S\-Q\-Num\-Obj.\-h\end{DoxyCompactItemize}
+const int {\bfseries m\-Width}\label{a00040_a47d65c09249a2efaacfc37c490f25115}
+
+\item 
+const int {\bfseries m\-Precision}\label{a00040_a82aa77621492dcd761a755c9d707cb9e}
+
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+\subsubsection*{template$<$class T$>$class Format\-Vert\-Vector\-H\-K\-L\-Floats$<$ T $>$}
+
+Output vectors as column arrays, with the first 3 columns printed as integers. 
+
+
+\begin{DoxyCode}
+cout << FormatVertVectorHKLFloats<REAL>(vH,vK,vL,vIobs,vIcalc,vSigma,12,4);
+\end{DoxyCode}
+ 
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+V\-F\-N\-Stream\-Format.\-h\end{DoxyCompactItemize}

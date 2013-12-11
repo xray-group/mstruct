@@ -1,240 +1,223 @@
-\subsection{\-Obj\-Cryst\-:\-:\-W\-X\-Powder\-Pattern\-Graph \-Class \-Reference}
-\label{a00139}\index{\-Obj\-Cryst\-::\-W\-X\-Powder\-Pattern\-Graph@{\-Obj\-Cryst\-::\-W\-X\-Powder\-Pattern\-Graph}}
+\subsection{Obj\-Cryst\-:\-:W\-X\-Molecule Class Reference}
+\label{a00139}\index{Obj\-Cryst\-::\-W\-X\-Molecule@{Obj\-Cryst\-::\-W\-X\-Molecule}}
 
 
-\-Class to display a \-Powder \-Pattern (calc,obs) in a graphic window.  
+wx\-Cryst class for \doxyref{Molecule}{p.}{a00054} objects  
 
 
-\subsubsection*{\-Public \-Member \-Functions}
+Inheritance diagram for Obj\-Cryst\-:\-:W\-X\-Molecule\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=5.000000cm]{a00139}
+\end{center}
+\end{figure}
+\subsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-{\bf \-W\-X\-Powder\-Pattern\-Graph} (wx\-Frame $\ast$frame, {\bf \-W\-X\-Powder\-Pattern} $\ast$parent)\label{a00139_af3cafd773b977799e463c5e86267a9ac}
-
-\begin{DoxyCompactList}\small\item\em \-Constructor. \-The top frame should have a \-Status bar with two fields (at least) \end{DoxyCompactList}\item 
-void {\bf \-On\-Paint} (wx\-Paint\-Event \&\-W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00139_a7d0e648db65d7ce2657e23bbc699399b}
-
-\begin{DoxyCompactList}\small\item\em \-Redraw the spectrum. \end{DoxyCompactList}\item 
-void {\bf \-On\-Mouse} (wx\-Mouse\-Event \&event)\label{a00139_a5834ca4f7461f6094c61fa566bf2214e}
-
-\begin{DoxyCompactList}\small\item\em \-Display the \-Theta and intensity values at the mouse position, in the status bar. \end{DoxyCompactList}\item 
-void {\bf \-On\-Mouse\-Wheel} (wx\-Mouse\-Event \&event)\label{a00139_af3da54e21ca379363feaf67facf3f55c}
-
-\begin{DoxyCompactList}\small\item\em \-Wheel wan be used to scroll the pattern. \end{DoxyCompactList}\item 
-void {\bf \-On\-Update} (wx\-Command\-Event \&\-W\-X\-U\-N\-U\-S\-E\-D(event))
-\begin{DoxyCompactList}\small\item\em \-Update the powder spectrum, at the user's request. \end{DoxyCompactList}\item 
-void {\bf \-Set\-Pattern} (const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \&obs, const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \&calc, const \-R\-E\-A\-L ttheta\-Min, const \-R\-E\-A\-L ttheta\-Step, const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \&sigma, const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \&chi2\-Cumul)
-\begin{DoxyCompactList}\small\item\em \-Update the pattern. \end{DoxyCompactList}\item 
-void {\bf \-Set\-Pattern} (const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \&x, const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \&obs, const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \&calc, const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \&sigma, const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \&chi2\-Cumul)
-\begin{DoxyCompactList}\small\item\em \-Update the pattern. \end{DoxyCompactList}\item 
-void {\bf \-On\-Redraw\-New\-Pattern} (wx\-Update\-U\-I\-Event \&\-W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00139_ac15e3c9c014c8213eb368393f29ccefd}
-
-\begin{DoxyCompactList}\small\item\em \-Redraw the pattern (special function to ensure complete redrawing under windows...) \end{DoxyCompactList}\item 
-void {\bfseries \-On\-Toggle\-Label} (wx\-Command\-Event \&\-W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00139_aa7a732762311a3b0f7f96c5eefda859c}
+struct {\bf Cell\-Atom}
+\begin{DoxyCompactList}\small\item\em Structure to store the \doxyref{Atom}{p.}{a00015} parameters. \end{DoxyCompactList}\item 
+struct {\bf Cell\-Bond}
+\begin{DoxyCompactList}\small\item\em Structure to store the bond current values. \end{DoxyCompactList}\item 
+struct {\bf Cell\-Bond\-Angle}
+\begin{DoxyCompactList}\small\item\em Structure to store the bond angles current values. \end{DoxyCompactList}\item 
+struct {\bf Cell\-Dihedral\-Angle}
+\begin{DoxyCompactList}\small\item\em Structure to store the dihedral angles current values. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries W\-X\-Molecule} (wx\-Window $\ast$parent, {\bf Molecule} $\ast$)\label{a00139_a57731ea0ecff7d010fab0ff1c1c32481}
 
 \item 
-void {\bfseries \-On\-Find\-Peaks} (wx\-Command\-Event \&\-W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00139_ae1f0d5362783460a37fd83c7fb85b548}
+void {\bfseries On\-Menu\-Optimize\-Conformation} (wx\-Command\-Event \&W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00139_a34831556ec0bdc84b5b7cfe94a934baa}
 
 \item 
-void {\bfseries \-On\-Load\-Peaks} (wx\-Command\-Event \&\-W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00139_a52682cde801fa2ff54d2e20323f7fa0c}
+void {\bfseries On\-Menu\-Print\-Restraint\-Status} (wx\-Command\-Event \&W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00139_ac209109374534a4ec8d0e61eafdddfe0}
 
 \item 
-void {\bfseries \-On\-Save\-Peaks} (wx\-Command\-Event \&\-W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00139_adec77e69c18a7db9b6f72ae3d5b5a5d3}
+void {\bfseries On\-Menu\-Add\-Atom} (wx\-Command\-Event \&W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00139_a427efdff9bdcdb346e8ee85baf555257}
 
 \item 
-void {\bf \-On\-Change\-Peak} (wx\-Command\-Event \&\-W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00139_a5d57b3210273cd01e39294b92e09288e}
-
-\begin{DoxyCompactList}\small\item\em \-Add or remove peak. \end{DoxyCompactList}\item 
-void {\bfseries \-On\-Index} (wx\-Command\-Event \&\-W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00139_ad23e59a23f5fcd0fc0969bbbed88505d}
+void {\bfseries On\-Menu\-Add\-Bond} (wx\-Command\-Event \&W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00139_a1f1372073b5fdb46415ee490fb627869}
 
 \item 
-void {\bfseries \-On\-Change\-Scale} (wx\-Command\-Event \&event)\label{a00139_a7519dff1a7d09067ea54ccbef94a6f49}
+void {\bfseries On\-Menu\-Add\-Angle} (wx\-Command\-Event \&W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00139_ad7ee1e9b2e45220a0e58dedbd9ca5b64}
 
 \item 
-void {\bf \-On\-Le\-Bail} (wx\-Command\-Event \&event)\label{a00139_a909ce5f24733f476ab284a0e90920896}
-
-\begin{DoxyCompactList}\small\item\em \-Profile fitting \& \-Le \-Bail intensity extraction. \end{DoxyCompactList}\item 
-void {\bfseries \-On\-Key\-Down} (wx\-Key\-Event \&event)\label{a00139_a98a2e3ca8c8056219a1e038b4ba4e82e}
+void {\bfseries On\-Menu\-Add\-Dihedral\-Angle} (wx\-Command\-Event \&W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00139_ad133de384874dd6fd70c17bb449cf13f}
 
 \item 
-void {\bfseries \-On\-Size} (wx\-Size\-Event \&event)\label{a00139_a81db7a517c4b47bed982eb714ca0cc32}
+void {\bfseries On\-Menu\-Add\-Rigid\-Group} (wx\-Command\-Event \&W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00139_a5b9eca62a8f3703c42cc664e02533066}
 
 \item 
-{\bf \-W\-X\-Powder\-Pattern} \& {\bfseries \-Get\-W\-X\-Powder\-Pattern} ()\label{a00139_aba890a3f62cef16608d213a0c4e40815}
+void {\bfseries On\-Menu\-Rigidfy\-With\-Dihedral\-Angles} (wx\-Command\-Event \&W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00139_adda44dc2550db73e8441765eb39d74b5}
 
 \item 
-const {\bf \-W\-X\-Powder\-Pattern} \& {\bfseries \-Get\-W\-X\-Powder\-Pattern} () const \label{a00139_a26c6bbd53d27f75a761beef34a623a0b}
+void {\bfseries On\-Menu\-Remove\-Atom} (wx\-Command\-Event \&W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00139_ac4eeca65577162ccf83650be1963e24a}
+
+\item 
+void {\bfseries On\-Menu\-Remove\-Bond} (wx\-Command\-Event \&W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00139_ae1405b673f0c1c1339d0eea853332a74}
+
+\item 
+void {\bfseries On\-Menu\-Remove\-Angle} (wx\-Command\-Event \&W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00139_a63c66c48faf827070ee62fc6e03f8861}
+
+\item 
+void {\bfseries On\-Menu\-Remove\-Dihedral\-Angle} (wx\-Command\-Event \&W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00139_aba87db72c513cd77e9824cd174288e7e}
+
+\item 
+void {\bfseries On\-Menu\-Remove\-Rigid\-Group} (wx\-Command\-Event \&W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00139_aa22db407d0f3881ee4dd7810e4d8b2d6}
+
+\item 
+void {\bfseries On\-Menu\-Set\-Limits} (wx\-Command\-Event \&event)\label{a00139_a62766f2621cf0b02fc43d9837ffd1e9e}
+
+\item 
+void {\bfseries On\-Menu\-Show\-Restraint\-Window} (wx\-Command\-Event \&event)\label{a00139_a04c1ba4eea3c12e616845fddfe5553e1}
+
+\item 
+void {\bfseries On\-Menu\-Set\-Delta\-Sigma} (wx\-Command\-Event \&event)\label{a00139_a2ea30924e60e764ebe5a2068903a0dac}
+
+\item 
+void {\bfseries On\-Change\-Center\-Atom} (wx\-Command\-Event \&event)\label{a00139_a6c7d9eedb57c708ab7beee02e899e0bc}
+
+\item 
+void {\bfseries On\-Edit\-Grid\-Atom} (wx\-Grid\-Event \&e)\label{a00139_aaa33600d60e0216ecd47af8430b072fd}
+
+\item 
+void {\bfseries On\-Edit\-Grid\-Bond\-Length} (wx\-Grid\-Event \&e)\label{a00139_ac0d973e42c5124e8718cebc58174f4f3}
+
+\item 
+void {\bfseries On\-Edit\-Grid\-Bond\-Angle} (wx\-Grid\-Event \&e)\label{a00139_a47e7c95b206903ca007793631788e0f0}
+
+\item 
+void {\bfseries On\-Edit\-Grid\-Dihedral\-Angle} (wx\-Grid\-Event \&e)\label{a00139_a69fadbe109e32276089a3bf26e7eaf16}
+
+\item 
+void {\bfseries On\-Edit\-Grid\-Rigid\-Group} (wx\-Grid\-Event \&e)\label{a00139_a5f73ebb7b6c64ef34f53cc8fd37f2033}
+
+\item 
+void {\bfseries On\-Menu\-Export2\-Z\-Matrix} (wx\-Command\-Event \&event)\label{a00139_a6f8e8e6d48d8ddba22e88c7057e2aa67}
+
+\item 
+void {\bfseries On\-Menu\-Test} (wx\-Command\-Event \&event)\label{a00139_ac17b49db6e8c89663229bf3e488f99c0}
+
+\item 
+void {\bfseries On\-Menu\-Rotate} (wx\-Command\-Event \&event)\label{a00139_a9d2d15ae3f047e5c96b7457b0eeb28b0}
+
+\item 
+void {\bf Notify\-Delete\-List\-Win} (W\-X\-Mol\-Scrolled\-Window $\ast$win)\label{a00139_a0f40875a760fc29cb92db426fbdf21ce}
+
+\begin{DoxyCompactList}\small\item\em Notify that either the bond, bond angle or dihedral angle list window has been destroyed. \end{DoxyCompactList}\item 
+virtual void {\bf Cryst\-Update} (const bool update\-U\-I=false, const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em Get new values to be displayed from the underlying object, and raise flag if an U\-I update is necessary. \end{DoxyCompactList}\item 
+virtual void {\bf Update\-U\-I} (const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em Update the User Interface, if necessary. \end{DoxyCompactList}\item 
+virtual bool {\bfseries Enable} (bool enable=true)\label{a00139_aef6c57327979fc0325ae375d74ad3816}
 
 \end{DoxyCompactItemize}
-\subsubsection*{\-Private \-Member \-Functions}
+\subsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-void {\bf \-Reset\-Axis\-Limits} ()\label{a00139_addc3ae52db58c5d2e9fcfa43cefab938}
-
-\begin{DoxyCompactList}\small\item\em \-Reset the limits of the axis to full range. \end{DoxyCompactList}\item 
-long {\bf \-Data2\-Screen\-X} (const \-R\-E\-A\-L x) const \label{a00139_a1398197dd808d8cc6604e745f471679d}
-
-\begin{DoxyCompactList}\small\item\em \-Convert \-X data (2theta) coordinate to screen coordinate (pixel) \end{DoxyCompactList}\item 
-long {\bf \-Point2\-Screen\-X} (const long x) const \label{a00139_ab8331b71e3ae7d070cbdc86ad8dfdaf3}
-
-\begin{DoxyCompactList}\small\item\em \-Convert \-X data (as data point index) to screen coordinate (pixel) \end{DoxyCompactList}\item 
-long {\bf \-Data2\-Screen\-Y} (const \-R\-E\-A\-L y) const \label{a00139_a0e71c7c9c575145f2e5cd89cc6d15eec}
-
-\begin{DoxyCompactList}\small\item\em \-Convert \-Y data (intensity) coordinate to screen coordinate (pixel) \end{DoxyCompactList}\item 
-\-R\-E\-A\-L {\bf \-Screen2\-Data\-X} (const long x) const \label{a00139_af051bd2e6d24d3cffd82a00349a3f230}
-
-\begin{DoxyCompactList}\small\item\em \-Convert \-X screen coordinate (pixel) to data (2theta) coordinate. \end{DoxyCompactList}\item 
-\-R\-E\-A\-L {\bf \-Screen2\-Data\-Y} (const long y) const \label{a00139_ac647e1eff7a2c9912143a759258b6ef0}
-
-\begin{DoxyCompactList}\small\item\em \-Convert \-Y screen coordinate (pixel) to data (intensity) coordinate. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{\-Private \-Attributes}
-\begin{DoxyCompactItemize}
-\item 
-{\bf \-W\-X\-Powder\-Pattern} $\ast$ {\bfseries mp\-Pattern}\label{a00139_a90eb1ad3adee1c7c807a472469c8f7b0}
+{\bf Molecule} $\ast$ {\bfseries mp\-Molecule}\label{a00139_a3d5a1323ddeee01cc840cec36df9d352}
 
 \item 
-\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf m\-X}\label{a00139_af95fb5a801b6f725fcabdaf859d37790}
-
-\begin{DoxyCompactList}\small\item\em \-Data vectors (\-Note that when x coordinates are 2theta, they are stored in degrees here) \end{DoxyCompactList}\item 
-\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bfseries m\-Obs}\label{a00139_aed3480ca6d3feca95cea4fb7fedc149c}
+W\-X\-Mol\-Scrolled\-Window $\ast$ {\bfseries mp\-Atom\-Win}\label{a00139_a812459ac0516bfcdc3a218f959004db3}
 
 \item 
-\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bfseries m\-Calc}\label{a00139_abf0beaf237c7586e9aa515ee88e4a60f}
+W\-X\-Mol\-Scrolled\-Window $\ast$ {\bfseries mp\-Bond\-Win}\label{a00139_a637bc57f107529a6d81a08f65a49a478}
 
 \item 
-\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bfseries m2theta}\label{a00139_a3ef1357a0f11831d727b769351b35d77}
+W\-X\-Mol\-Scrolled\-Window $\ast$ {\bfseries mp\-Angle\-Win}\label{a00139_a984646e23692a9150d426362a47e1de7}
 
 \item 
-\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bfseries m\-Sigma}\label{a00139_a949a67abc84a79f74ca7226db60bb810}
+W\-X\-Mol\-Scrolled\-Window $\ast$ {\bfseries mp\-Dihedral\-Angle\-Win}\label{a00139_aec3ae75f631d7a2aa943f455ba7115ab}
 
 \item 
-\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bfseries m\-Chi2\-Cumul}\label{a00139_afc26e874ba706e5f71a172f9a68731ac}
+W\-X\-Mol\-Scrolled\-Window $\ast$ {\bfseries mp\-Rigid\-Group\-Win}\label{a00139_a88334f0090f722ade05b3a7658e5b18f}
 
 \item 
-const long {\bfseries m\-Margin}\label{a00139_a78db004349f8de2d9025270cb90ac0d3}
+std\-::list$<$ {\bf Cell\-Atom} $>$ {\bf mvp\-Atom}\label{a00139_a400319bb4a94ca5d1b23310dee604b21}
 
-\item 
-const \-R\-E\-A\-L {\bfseries m\-Diff\-Percent\-Shift}\label{a00139_a156731f6a5d70076777cdf9ee7d66358}
+\begin{DoxyCompactList}\small\item\em Displayed list of atoms. \end{DoxyCompactList}\item 
+std\-::list$<$ {\bf Cell\-Bond} $>$ {\bf mvp\-Bond}\label{a00139_a49e995cb6e10871a18da635bf5c73ff2}
 
-\item 
-\-R\-E\-A\-L {\bfseries m\-Max\-Intensity}\label{a00139_af1431cd070dfbb3c2c87f757ec439834}
+\begin{DoxyCompactList}\small\item\em Displayed list of bonds, in the order they appear. \end{DoxyCompactList}\item 
+std\-::list$<$ {\bf Cell\-Bond\-Angle} $>$ {\bf mvp\-Bond\-Angle}\label{a00139_a435f90f7c190400e997f97b78c38bd26}
 
-\item 
-\-R\-E\-A\-L {\bfseries m\-Min\-Intensity}\label{a00139_a87a8536b3cb13226c1aba836a5505c58}
+\begin{DoxyCompactList}\small\item\em Displayed list of bond angle. \end{DoxyCompactList}\item 
+std\-::list$<$ {\bf Cell\-Dihedral\-Angle} $>$ {\bf mvp\-Dihedral\-Angle}\label{a00139_a110d6571aa8efdd18a5ce90856898ad8}
 
-\item 
-\-R\-E\-A\-L {\bfseries m\-Min\-X}\label{a00139_a6d76e10825f8db18816b76b239f9ed22}
+\begin{DoxyCompactList}\small\item\em Displayed list of Dihedral angles. \end{DoxyCompactList}\item 
+std\-::list$<$ Cell\-Rigid\-Group $>$ {\bf mvp\-Rigid\-Group}\label{a00139_a01efbd492b9c455984f2826e4bd82f7a}
 
-\item 
-\-R\-E\-A\-L {\bfseries m\-Max\-X}\label{a00139_a61a38be5e972d1847f35435bdb503d52}
+\begin{DoxyCompactList}\small\item\em Displayed list of Dihedral angles. \end{DoxyCompactList}\item 
+bool {\bf m\-Is\-Self\-Updating}
+\begin{DoxyCompactList}\small\item\em Flag to indicate whether we are updating values in the wx\-Grid data. \end{DoxyCompactList}\item 
+{\bf W\-X\-Field\-Choice} $\ast$ {\bf mp\-Field\-Center\-Atom}\label{a00139_a1fb2931404174a9ec3b37f42c5cd7590}
 
-\item 
-wx\-Frame $\ast$ {\bfseries mp\-Parent\-Frame}\label{a00139_a056cd4771b8806ea0f4aa00c2dfa08a4}
-
-\item 
-\-Cryst\-Mutex {\bf m\-Mutex}\label{a00139_a223ea690caa93e1a75a071265d1ebca4}
-
-\begin{DoxyCompactList}\small\item\em \-Mutex to lock the pattern and associated data. \end{DoxyCompactList}\item 
-wx\-Menu $\ast$ {\bf mp\-Pop\-Up\-Menu}\label{a00139_ae8dda5031ccf0ed3bebb665c4ed88d63}
-
-\begin{DoxyCompactList}\small\item\em \-Pop-\/up menu. \end{DoxyCompactList}\item 
-bool {\bf m\-Is\-Dragging}\label{a00139_a53082fc8e1b71916817f6b2615f03ac6}
-
-\begin{DoxyCompactList}\small\item\em \-Are we within a dragging event ? \end{DoxyCompactList}\item 
-\-R\-E\-A\-L {\bf m\-Dragging\-X0}\label{a00139_a2a3316244eebd91990218eec7f4f8501}
-
-\begin{DoxyCompactList}\small\item\em \-Remember coordinates at the beginning of the dragging. \end{DoxyCompactList}\item 
-\-R\-E\-A\-L {\bfseries m\-Dragging\-Intensity0}\label{a00139_a16d736b05e10a8d81e68f367563d07f9}
-
-\item 
-{\bf \-Refinable\-Obj\-Clock} {\bf m\-Clock\-Axis\-Limits}
-\begin{DoxyCompactList}\small\item\em \-Clock corresponding to when the graph limits where last changed. \end{DoxyCompactList}\item 
-bool {\bf m\-Display\-Label}\label{a00139_acd3a3f08c92f4dacf13ac5f482292ea5}
-
-\begin{DoxyCompactList}\small\item\em \-Display labels ? \end{DoxyCompactList}\item 
-bool {\bf m\-Display\-Peak}\label{a00139_a157e0b86a16b5dd1d1cb83aa5678d524}
-
-\begin{DoxyCompactList}\small\item\em \-Display peaks ? \end{DoxyCompactList}\item 
-list$<$ list$<$ pair$<$ const \-R\-E\-A\-L,const \*
-string $>$ $>$ $>$ {\bf mv\-Label\-List}\label{a00139_a3c84db457bf7b0b3a1ee554adf9fef46}
-
-\begin{DoxyCompactList}\small\item\em \-The lists of labels for all components of the powder pattern. \end{DoxyCompactList}\item 
-{\bf \-Peak\-List} {\bf m\-Peak\-List}\label{a00139_a2769d6403af18c004cce19ef7f3d0b76}
-
-\begin{DoxyCompactList}\small\item\em \-List of observed peak positions. \end{DoxyCompactList}\item 
-long {\bf m\-X\-Scale}\label{a00139_ac83aa432bf671b1a9392b762b88a4e25}
-
-\begin{DoxyCompactList}\small\item\em \-Scaling options for x and y axis x\-: 0 data (2theta, tof) ; 1\-: 1/d ; 2\-: 2pi/d y\-: 0 linear ; 1\-: sqrt(\-I) ; 2\-: log10(\-I) \end{DoxyCompactList}\item 
-long {\bfseries m\-Y\-Scale}\label{a00139_aad7118ced0af0e324bd2434ef4b45150}
-
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Center atom. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Additional Inherited Members}
 
 
-\subsubsection{\-Detailed \-Description}
-\-Class to display a \-Powder \-Pattern (calc,obs) in a graphic window. 
+\subsubsection{Detailed Description}
+wx\-Cryst class for \doxyref{Molecule}{p.}{a00054} objects 
 
-\-So far only displays calc and obs patterns. \begin{DoxyRefDesc}{\-Todo}
-\item[{\bf \-Todo}]display the difference pattern. \-Allow to zoom. \-Display reflection positions for crystalline phases. \end{DoxyRefDesc}
-
-
-\subsubsection{\-Member \-Function \-Documentation}
-\index{\-Obj\-Cryst\-::\-W\-X\-Powder\-Pattern\-Graph@{\-Obj\-Cryst\-::\-W\-X\-Powder\-Pattern\-Graph}!\-On\-Update@{\-On\-Update}}
-\index{\-On\-Update@{\-On\-Update}!ObjCryst::WXPowderPatternGraph@{\-Obj\-Cryst\-::\-W\-X\-Powder\-Pattern\-Graph}}
-\paragraph[{\-On\-Update}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Obj\-Cryst\-::\-W\-X\-Powder\-Pattern\-Graph\-::\-On\-Update} (
+\subsubsection{Member Function Documentation}
+\index{Obj\-Cryst\-::\-W\-X\-Molecule@{Obj\-Cryst\-::\-W\-X\-Molecule}!Cryst\-Update@{Cryst\-Update}}
+\index{Cryst\-Update@{Cryst\-Update}!ObjCryst::WXMolecule@{Obj\-Cryst\-::\-W\-X\-Molecule}}
+\paragraph[{Cryst\-Update}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-W\-X\-Molecule\-::\-Cryst\-Update (
 \begin{DoxyParamCaption}
-\item[{wx\-Command\-Event \&}]{\-W\-X\-U\-N\-U\-S\-E\-Devent}
+\item[{const bool}]{update\-U\-I = {\ttfamily false}, }
+\item[{const bool}]{mutexlock = {\ttfamily false}}
 \end{DoxyParamCaption}
-)}\label{a00139_a89fe469c2774080b89e5fe43ded2e412}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00139_a4d8fe8698ddc741c34b613643dec87b0}
 
 
-\-Update the powder spectrum, at the user's request. 
+Get new values to be displayed from the underlying object, and raise flag if an U\-I update is necessary. 
 
-\-This calls the \doxyref{\-W\-X\-Powder\-Pattern\-::\-Cryst\-Update()}{p.}{a00136_a90f999b4aab7ed134db388c532b1d63e}. \index{\-Obj\-Cryst\-::\-W\-X\-Powder\-Pattern\-Graph@{\-Obj\-Cryst\-::\-W\-X\-Powder\-Pattern\-Graph}!\-Set\-Pattern@{\-Set\-Pattern}}
-\index{\-Set\-Pattern@{\-Set\-Pattern}!ObjCryst::WXPowderPatternGraph@{\-Obj\-Cryst\-::\-W\-X\-Powder\-Pattern\-Graph}}
-\paragraph[{\-Set\-Pattern}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Obj\-Cryst\-::\-W\-X\-Powder\-Pattern\-Graph\-::\-Set\-Pattern} (
+The actual G\-U\-I update is not made here. \doxyref{Update\-U\-I()}{p.}{a00139_ae932cbbd6d7e55d319f1b4eb169c63ef} should be called separately, from the main thread.
+
+
+\begin{DoxyParams}{Parameters}
+{\em update\-U\-I,\-:} & if true, this will call Update\-U\-I, either directly (if in the main thread), or by sending a message. \\
+\hline
+{\em mutexlock,\-:} & if true, a Mutex will be used to lock the data shared between main and background thread. The idea is to only use a few Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{Cryst\-Update()}{p.}{a00139_a4d8fe8698ddc741c34b613643dec87b0} and \doxyref{Update\-U\-I()}{p.}{a00139_ae932cbbd6d7e55d319f1b4eb169c63ef}. As sub-\/objects (\doxyref{W\-X\-Field}{p.}{a00126},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from {\bf Obj\-Cryst\-::\-W\-X\-Refinable\-Obj} \doxyref{}{p.}{a00150_a13e4f37ac098de756b27cdb91d6a0551}.
+
+\index{Obj\-Cryst\-::\-W\-X\-Molecule@{Obj\-Cryst\-::\-W\-X\-Molecule}!Update\-U\-I@{Update\-U\-I}}
+\index{Update\-U\-I@{Update\-U\-I}!ObjCryst::WXMolecule@{Obj\-Cryst\-::\-W\-X\-Molecule}}
+\paragraph[{Update\-U\-I}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-W\-X\-Molecule\-::\-Update\-U\-I (
 \begin{DoxyParamCaption}
-\item[{const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \&}]{obs, }
-\item[{const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \&}]{calc, }
-\item[{const \-R\-E\-A\-L}]{ttheta\-Min, }
-\item[{const \-R\-E\-A\-L}]{ttheta\-Step, }
-\item[{const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \&}]{sigma, }
-\item[{const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \&}]{chi2\-Cumul}
+\item[{const bool}]{mutexlock = {\ttfamily false}}
 \end{DoxyParamCaption}
-)}\label{a00139_a6a35318893c5a0f03d2d05b0bab9f1a8}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00139_ae932cbbd6d7e55d319f1b4eb169c63ef}
 
 
-\-Update the pattern. 
-
-\-This is called by the \doxyref{\-W\-X\-Powder\-Pattern}{p.}{a00136} parent.
-
-\begin{DoxyRefDesc}{\-Deprecated}
-\item[{\bf \-Deprecated}]\-Rather, use the new \doxyref{\-W\-X\-Powder\-Pattern\-Graph\-::\-Set\-Pattern()}{p.}{a00139_a6a35318893c5a0f03d2d05b0bab9f1a8} which takes a full vector of x coordinates rather than min \& step \end{DoxyRefDesc}
-\index{\-Obj\-Cryst\-::\-W\-X\-Powder\-Pattern\-Graph@{\-Obj\-Cryst\-::\-W\-X\-Powder\-Pattern\-Graph}!\-Set\-Pattern@{\-Set\-Pattern}}
-\index{\-Set\-Pattern@{\-Set\-Pattern}!ObjCryst::WXPowderPatternGraph@{\-Obj\-Cryst\-::\-W\-X\-Powder\-Pattern\-Graph}}
-\paragraph[{\-Set\-Pattern}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Obj\-Cryst\-::\-W\-X\-Powder\-Pattern\-Graph\-::\-Set\-Pattern} (
-\begin{DoxyParamCaption}
-\item[{const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \&}]{x, }
-\item[{const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \&}]{obs, }
-\item[{const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \&}]{calc, }
-\item[{const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \&}]{sigma, }
-\item[{const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \&}]{chi2\-Cumul}
-\end{DoxyParamCaption}
-)}\label{a00139_af74825c7f7b2c132b9942a684b0311fe}
+Update the User Interface, if necessary. 
 
 
-\-Update the pattern. 
+\begin{DoxyParams}{Parameters}
+{\em mutexlock,\-:} & if true, a Mutex will be used to lock the data shared between main and background thread.\\
+\hline
+\end{DoxyParams}
+The idea is to only use a few Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{Cryst\-Update()}{p.}{a00139_a4d8fe8698ddc741c34b613643dec87b0} and \doxyref{Update\-U\-I()}{p.}{a00139_ae932cbbd6d7e55d319f1b4eb169c63ef}. As sub-\/objects (\doxyref{W\-X\-Field}{p.}{a00126},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
 
-\-This is called by the \doxyref{\-W\-X\-Powder\-Pattern}{p.}{a00136} parent. 
-
-\subsubsection{\-Member \-Data \-Documentation}
-\index{\-Obj\-Cryst\-::\-W\-X\-Powder\-Pattern\-Graph@{\-Obj\-Cryst\-::\-W\-X\-Powder\-Pattern\-Graph}!m\-Clock\-Axis\-Limits@{m\-Clock\-Axis\-Limits}}
-\index{m\-Clock\-Axis\-Limits@{m\-Clock\-Axis\-Limits}!ObjCryst::WXPowderPatternGraph@{\-Obj\-Cryst\-::\-W\-X\-Powder\-Pattern\-Graph}}
-\paragraph[{m\-Clock\-Axis\-Limits}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Refinable\-Obj\-Clock} {\bf \-Obj\-Cryst\-::\-W\-X\-Powder\-Pattern\-Graph\-::m\-Clock\-Axis\-Limits}\hspace{0.3cm}{\ttfamily  [private]}}\label{a00139_aca612848cb3be006e7cae23d5909e425}
+Reimplemented from {\bf Obj\-Cryst\-::\-W\-X\-Refinable\-Obj} \doxyref{}{p.}{a00150_a19a1d057eecafd48710d9a3b770c1b28}.
 
 
-\-Clock corresponding to when the graph limits where last changed. 
 
-\-This is compared to \doxyref{\-Powder\-Pattern\-::\-Get\-Clock\-Powder\-Pattern\-Par()}{p.}{a00062_a5d6d5ba62523890c5481473814110109} to know if these parameter need to be reset. 
+\subsubsection{Member Data Documentation}
+\index{Obj\-Cryst\-::\-W\-X\-Molecule@{Obj\-Cryst\-::\-W\-X\-Molecule}!m\-Is\-Self\-Updating@{m\-Is\-Self\-Updating}}
+\index{m\-Is\-Self\-Updating@{m\-Is\-Self\-Updating}!ObjCryst::WXMolecule@{Obj\-Cryst\-::\-W\-X\-Molecule}}
+\paragraph[{m\-Is\-Self\-Updating}]{\setlength{\rightskip}{0pt plus 5cm}bool Obj\-Cryst\-::\-W\-X\-Molecule\-::m\-Is\-Self\-Updating\hspace{0.3cm}{\ttfamily [private]}}\label{a00139_ac4f6aa1555229aa3e175a5b1597926bd}
 
-\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+
+Flag to indicate whether we are updating values in the wx\-Grid data. 
+
+(enabled in wx\-Molecule\-::\-Update\-U\-I()). 
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-wx\-Powder\-Pattern.\-h\end{DoxyCompactItemize}
+wx\-Molecule.\-h\end{DoxyCompactItemize}

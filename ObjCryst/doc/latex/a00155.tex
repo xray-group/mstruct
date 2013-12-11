@@ -1,98 +1,42 @@
-\subsection{\-Obj\-Cryst\-:\-:\-Z\-Polyhedron \-Class \-Reference}
-\label{a00155}\index{\-Obj\-Cryst\-::\-Z\-Polyhedron@{\-Obj\-Cryst\-::\-Z\-Polyhedron}}
+\subsection{Obj\-Cryst\-:\-:W\-X\-Texture\-March\-Dollase Class Reference}
+\label{a00155}\index{Obj\-Cryst\-::\-W\-X\-Texture\-March\-Dollase@{Obj\-Cryst\-::\-W\-X\-Texture\-March\-Dollase}}
 
 
-\doxyref{\-Z\-Polyhedron}{p.}{a00155}\-: a \doxyref{\-Scatterer}{p.}{a00085} to describe polyhedras such as octahedron, tetrahedron, square plane, etc...  
+Class to display the Preferred Orientation Correction using the March-\/\-Dollase parametrization.  
 
 
-\-Inheritance diagram for \-Obj\-Cryst\-:\-:\-Z\-Polyhedron\-:\begin{figure}[H]
+Inheritance diagram for Obj\-Cryst\-:\-:W\-X\-Texture\-March\-Dollase\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=4.000000cm]{a00155}
 \end{center}
 \end{figure}
-\subsubsection*{\-Public \-Member \-Functions}
+\subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bf \-Z\-Polyhedron} (const \-Regular\-Polyhedra\-Type type, {\bf \-Crystal} \&cryst, const \-R\-E\-A\-L x, const \-R\-E\-A\-L y, const \-R\-E\-A\-L z, const string \&name, const {\bf \-Scattering\-Power} $\ast$central\-Atom\-Pow, const {\bf \-Scattering\-Power} $\ast$periph\-Atom\-Pow, const \-R\-E\-A\-L central\-Periph\-Dist, const \-R\-E\-A\-L ligand\-Popu=1, const \-R\-E\-A\-L phi=0., const \-R\-E\-A\-L chi=0., const \-R\-E\-A\-L psi=0.)
-\begin{DoxyCompactList}\small\item\em \doxyref{\-Z\-Polyhedron}{p.}{a00155} constructor. \end{DoxyCompactList}\item 
-{\bf \-Z\-Polyhedron} (const {\bf \-Z\-Polyhedron} \&)\label{a00155_a7d9b825ac03903e63d072c53fc791f50}
+{\bfseries W\-X\-Texture\-March\-Dollase} (wx\-Window $\ast$parent, {\bf Texture\-March\-Dollase} $\ast$)\label{a00155_ab8ab6eceeb0c83bf6dc4b6f775e02905}
 
-\begin{DoxyCompactList}\small\item\em \-Copy \-Constructor. \end{DoxyCompactList}\item 
-virtual {\bf \-Z\-Polyhedron} $\ast$ {\bf \-Create\-Copy} () const 
+\item 
+void {\bfseries On\-Add\-Texture\-Phase} (wx\-Command\-Event \&W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00155_aafd20a474b15713ea0c4fea247a254be}
+
+\item 
+void {\bfseries On\-Delete\-Texture\-Phase} (wx\-Command\-Event \&W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00155_ae0f2b94788268422e5a2ca215f49387a}
+
 \end{DoxyCompactItemize}
-\subsubsection*{\-Private \-Attributes}
+\subsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\-Regular\-Polyhedra\-Type {\bfseries m\-Polyhedra\-Type}\label{a00155_aa41437829f14e36030818f54ddb26faf}
+{\bf Texture\-March\-Dollase} $\ast$ {\bfseries mp\-Texture\-March\-Dollase}\label{a00155_aac7625565230e97c441006ff2f68dd2e}
 
 \end{DoxyCompactItemize}
+\subsubsection*{Additional Inherited Members}
 
 
-\subsubsection{\-Detailed \-Description}
-\doxyref{\-Z\-Polyhedron}{p.}{a00155}\-: a \doxyref{\-Scatterer}{p.}{a00085} to describe polyhedras such as octahedron, tetrahedron, square plane, etc... 
+\subsubsection{Detailed Description}
+Class to display the Preferred Orientation Correction using the March-\/\-Dollase parametrization. 
 
-\-These are \doxyref{\-Z\-Scatterer}{p.}{a00156} objects, so that even if they are initialized with constraints, these can be removed to make any configuration. 
+Allows to add phases, and change the parameters. 
 
-\subsubsection{\-Constructor \& \-Destructor \-Documentation}
-\index{\-Obj\-Cryst\-::\-Z\-Polyhedron@{\-Obj\-Cryst\-::\-Z\-Polyhedron}!\-Z\-Polyhedron@{\-Z\-Polyhedron}}
-\index{\-Z\-Polyhedron@{\-Z\-Polyhedron}!ObjCryst::ZPolyhedron@{\-Obj\-Cryst\-::\-Z\-Polyhedron}}
-\paragraph[{\-Z\-Polyhedron}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Obj\-Cryst\-::\-Z\-Polyhedron\-::\-Z\-Polyhedron} (
-\begin{DoxyParamCaption}
-\item[{const \-Regular\-Polyhedra\-Type}]{type, }
-\item[{{\bf \-Crystal} \&}]{cryst, }
-\item[{const \-R\-E\-A\-L}]{x, }
-\item[{const \-R\-E\-A\-L}]{y, }
-\item[{const \-R\-E\-A\-L}]{z, }
-\item[{const string \&}]{name, }
-\item[{const {\bf \-Scattering\-Power} $\ast$}]{central\-Atom\-Pow, }
-\item[{const {\bf \-Scattering\-Power} $\ast$}]{periph\-Atom\-Pow, }
-\item[{const \-R\-E\-A\-L}]{central\-Periph\-Dist, }
-\item[{const \-R\-E\-A\-L}]{ligand\-Popu = {\ttfamily 1}, }
-\item[{const \-R\-E\-A\-L}]{phi = {\ttfamily 0.}, }
-\item[{const \-R\-E\-A\-L}]{chi = {\ttfamily 0.}, }
-\item[{const \-R\-E\-A\-L}]{psi = {\ttfamily 0.}}
-\end{DoxyParamCaption}
-)}\label{a00155_a624314fc85edd2b27e572e33c1487bed}
-
-
-\doxyref{\-Z\-Polyhedron}{p.}{a00155} constructor. 
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em type} & \-: \-O\-C\-T\-A\-H\-E\-D\-R\-O\-N, \-T\-E\-T\-R\-A\-H\-E\-D\-R\-O\-N,... \\
-\hline
-{\em cryst} & \-: a crystal is necessary to transform the orthornormal coordinates (in which the relative atom positions are computed) to fractional ones. \\
-\hline
-{\em x,y,z} & \-: {\itshape fractional\/} coordinates of the center of the polyhedra \\
-\hline
-{\em name} & \-: name of the \-Polyhedra ('\-W\-O6','\-Ta\-Se4\-\_\-a', '\-Tetra01'...). \-The name can have {\itshape any\/} format but spaces should be avoided, since it will generate problems when reading the names from a file. \-And there must {\bfseries not} be identical name for two scatterers in a given crystal object. \\
-\hline
-{\em periph\-Atom\-Pow,central\-Atom\-Pow,\-:} & the \doxyref{\-Scattering\-Power}{p.}{a00090} corresponding to the central and peripheral atoms, respectively. \\
-\hline
-{\em central\-Periph\-Dist,\-:} & the distance, in angstroems, from the central to the peripheral atoms \\
-\hline
-{\em ligand\-Popu} & \-: the relative population of ligand atoms, equal to 1/n if ligand atoms are shared by n polyhedra. \-If you are using the '\-Dynamical \-Polpulation \-Correction', then keep this parameter to 1. \\
-\hline
-{\em phi,chi,psi,\-:} & initial angles for this polyhedron \\
-\hline
-\end{DoxyParams}
-
-
-\subsubsection{\-Member \-Function \-Documentation}
-\index{\-Obj\-Cryst\-::\-Z\-Polyhedron@{\-Obj\-Cryst\-::\-Z\-Polyhedron}!\-Create\-Copy@{\-Create\-Copy}}
-\index{\-Create\-Copy@{\-Create\-Copy}!ObjCryst::ZPolyhedron@{\-Obj\-Cryst\-::\-Z\-Polyhedron}}
-\paragraph[{\-Create\-Copy}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf \-Z\-Polyhedron}$\ast$ {\bf \-Obj\-Cryst\-::\-Z\-Polyhedron\-::\-Create\-Copy} (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00155_a83436a907a22d794259e5fea9b7670ce}
-so-\/called \-Virtual copy constructor, needed to make copies of arrays of \-Scatterers 
-
-\-Reimplemented from {\bf \-Obj\-Cryst\-::\-Z\-Scatterer} \doxyref{}{p.}{a00156_a6cf9f5891cf87e865efa971d36599d24}.
-
-
-
-\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-\-Z\-Scatterer.\-h\end{DoxyCompactItemize}
+wx\-Powder\-Pattern.\-h\end{DoxyCompactItemize}

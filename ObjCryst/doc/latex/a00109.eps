@@ -5,7 +5,7 @@
 %%For: 
 %Magnification: 1.00
 %%Orientation: Portrait
-%%BoundingBox: 0 0 500 402.685
+%%BoundingBox: 0 0 500 227.272727
 %%Pages: 0
 %%BeginSetup
 %%EndSetup
@@ -19,12 +19,12 @@
 /marginwidth 10 def
 /distx 20 def
 /disty 40 def
-/boundaspect 1.24167 def  % aspect ratio of the BoundingBox (width/height)
+/boundaspect 2.200000 def  % aspect ratio of the BoundingBox (width/height)
 /boundx 500 def
 /boundy boundx boundaspect div def
 /xspacing 0 def
 /yspacing 0 def
-/rows 3 def
+/rows 2 def
 /cols 1 def
 /scalefactor 0 def
 /boxfont /Times-Roman findfont fontheight scalefont def
@@ -173,9 +173,8 @@
 
 boxfont setfont
 1 boundaspect scale
-(ObjCryst::UnitCell) cw
-(ObjCryst::RefinableObj) cw
-(ObjCryst::Crystal) cw
+(ObjCryst::StretchModeTwist) cw
+(ObjCryst::StretchMode) cw
 /boxwidth boxwidth marginwidth 2 mul add def
 /xspacing boxwidth distx add def
 /yspacing boxheight disty add def
@@ -187,17 +186,12 @@ boundx scalefactor div boundy scalefactor div scale
 
 % ----- classes -----
 
- (ObjCryst::UnitCell) 0 1 box
- (ObjCryst::RefinableObj) 0 2 box
- (ObjCryst::Crystal) 0 0 box
+ (ObjCryst::StretchModeTwist) 0.000000 0.000000 box
+ (ObjCryst::StretchMode) 0.000000 1.000000 box
 
 % ----- relations -----
 
 solid
-0 0 1 out
+0 0.000000 0.000000 out
 solid
-1 0 2 in
-solid
-1 0 0.25 out
-solid
-0 0 0.75 in
+1 0.000000 1.000000 in

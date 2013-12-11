@@ -1,55 +1,21 @@
-(stars indicate priority/complexity \-: ($\ast$$\ast$$\ast$$\ast$$\ast$,$\ast$$\ast$) is urgent,fairly easy)\subsection{Outside features}\label{a00006_external}
-\begin{DoxyParagraph}{Examples}
-Make a few examples for each feature... 
+\begin{DoxyParagraph}{Reusability }
+The {\bfseries encapsulation} of data and {\bfseries inheritance} (and other features such as templates) allows a much better reusability of the code\-: adding new procedures does not require to understand how other function works, since these are only accessed through the object interface. And inheritance allows to create new object types (say new diffraction experiments) while re-\/using computing code from the base object\-: for example all diffraction analysis involves the computing of geometrical structure factors ( geometrical meaning before taking scattering power into account), so that different diffraction ( X-\/\-Ray, neutron, electron, single crystal or powder) can re-\/use this code. See \doxyref{The Design of Obj\-Cryst++}{p.}{a00008} for examples on how to use inheritance to create new classes using inheritance.
 \end{DoxyParagraph}
-\begin{DoxyParagraph}{Compilation}
-Make the library and test programs compilable for other O\-S\&configuration... So far tests have been made on Linux (x86/ppc), Mac\-O\-S and windows (cygwin) Need to work on autoconf and automake (...)
+\begin{DoxyParagraph}{Philosophy}
+Re-\/usability in Object-\/oriented programming can be achieved by designing a base class interface which can be re-\/used for all derived classes using inheritance. It is much better than having isolated functions or small classes, since not only old code can be re-\/used, but the new code is compatible with the old because it has a common interface.. (of course the base interface must be well written and that is delicate to achieve... Hope I did not do too bad a job of it...).
 \end{DoxyParagraph}
-\subsection{Library Features}\label{a00006_general}
-\begin{DoxyParagraph}{Check Results ($\ast$$\ast$$\ast$$\ast$,$\ast$) (in constant progress)}
-Compare Structure Factors with the results of other programs (Jana,...) for a number of different spacegroups. 
+\begin{DoxyParagraph}{Performance }
+Although it has long been considered that the price of O\-O\-P was a slower execution speed, modern scientific \& computing libraries have made that wrong, and c++ is now widely used for large-\/scale computations. A short explanation is that c++ is both a high-\/level language (object-\/oriented), and low-\/level since it uses pointers and thus programming can be very close to assembly. This latter point is a boon for numerically-\/intensive programs. 
 \end{DoxyParagraph}
-\begin{DoxyParagraph}{Save \& restore objects ($\ast$$\ast$$\ast$$\ast$$\ast$$\ast$,$\ast$$\ast$$\ast$) D\-O\-N\-E, using X\-M\-L}
-
+\begin{DoxyParagraph}{}
+For good examples of numerically intensive calculations using c++, you take a look at\-: 
 \end{DoxyParagraph}
-\begin{DoxyParagraph}{Move from atominfo+sglite to cctbx ($\ast$$\ast$$\ast$$\ast$$\ast$$\ast$,$\ast$$\ast$$\ast$)}
-Change to the newest R. Grosse-\/\-Kunstleve library. 
+\begin{DoxyParagraph}{}
+-\/$>$ The home page for Scientific Computing in Object-\/\-Oriented Languages\-: {\tt http\-://www.\-oonumerics.\-org/} 
 \end{DoxyParagraph}
-\begin{DoxyParagraph}{C\-I\-F Import \& Export ($\ast$$\ast$$\ast$$\ast$,$\ast$$\ast$$\ast$$\ast$$\ast$)}
-Ability to export (and import) Crystallographic Info Files. The importing will be much harder, and is not a priority. 
+\begin{DoxyParagraph}{}
+-\/$>$ {\bfseries P\-O\-O\-M\-A} ({\tt http\-://www.\-acl.\-lanl.\-gov/pooma/})Parallel Object-\/\-Oriented Methods and Applications 
 \end{DoxyParagraph}
-\begin{DoxyParagraph}{Export to other L\-S\-Q refinement programs($\ast$$\ast$$\ast$$\ast$,$\ast$$\ast$)}
-Ability to export for other refinement programs (fullprof, gsas, shellx,...). 
-\end{DoxyParagraph}
-\begin{DoxyParagraph}{Anisotropic Thermic Factors ($\ast$$\ast$,$\ast$$\ast$$\ast$$\ast$)}
-Add support for anisotropic thermic factors. Spacegroup object should be able to indicate the permutations needed for symetrical atoms. Also determine the constraints between bij (eg beta12=beta13,etc...) The Interface has been written, but no code. 
-\end{DoxyParagraph}
-\begin{DoxyParagraph}{Powder Diffraction Background($\ast$$\ast$,$\ast$$\ast$)}
-Use splines to interpolate background. Automagically determine background by filtering the spectrum. So far only linearly-\/interpolated background is available. 
-\end{DoxyParagraph}
-\begin{DoxyParagraph}{Intensity extraction from powder ($\ast$,$\ast$$\ast$$\ast$)}
-Extract F(hkl) from a powder spectrum. Not so interesting, there already are numerous programs to do this. But the advantage to have it embeded is the possibility to refine and refresh (recycle) these extracted intensities during an optimization. 
-\end{DoxyParagraph}
-\begin{DoxyParagraph}{Multi-\/phase ($\ast$$\ast$$\ast$$\ast$,$\ast$$\ast$) -\/ D\-O\-N\-E}
-Multiple phase for powder diffraction. 
-\end{DoxyParagraph}
-\begin{DoxyParagraph}{Z\-Scatterer import($\ast$$\ast$,$\ast$$\ast$)}
-Import Z-\/\-Matrix from file. Add the possibility to link two existing Z\-Scatterer by linking terminal atoms. 
-\end{DoxyParagraph}
-\begin{DoxyParagraph}{Genetic Algorithm ($\ast$$\ast$$\ast$$\ast$,$\ast$$\ast$$\ast$)}
-And compare the 3 different algorithms on several structures. 
-\end{DoxyParagraph}
-\begin{DoxyParagraph}{Texture ($\ast$$\ast$$\ast$,$\ast$$\ast$$\ast$)}
-Include texture parameters in Powder\-Pattern. Optionnaly, allow multiple textured patterns (that would more difficult).
-\end{DoxyParagraph}
-\subsection{Internal Design of the Library}\label{a00006_internal}
-\begin{DoxyParagraph}{Vector \& arrays (Blitz++ usage,...) ($\ast$$\ast$,$\ast$$\ast$$\ast$)}
-Test again the use of the blitz++ library for vector computing.
-\end{DoxyParagraph}
-\subsection{Wild ideas (interesting possibilities, but no priority given)}\label{a00006_wild}
-\begin{DoxyParagraph}{Amorphous contribution}
-Add amorphous (disordered) contributions to powder spectrum. This could be easily added from the Powder\-Pattern\-Component base class. 
-\end{DoxyParagraph}
-\begin{DoxyParagraph}{Magnetic scattering}
-Add calculations for magnetic scattering (-\/$>$scattering factors) 
+\begin{DoxyParagraph}{}
+-\/$>$ {\bfseries Blitz++} home page ({\tt http\-://www.\-oonumerics.\-org/blitz/})\-: a 'smart' array computing library which yields performance on par with that of fortran. 
 \end{DoxyParagraph}

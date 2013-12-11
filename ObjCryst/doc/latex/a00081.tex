@@ -1,58 +1,139 @@
-\subsection{\-Obj\-Cryst\-:\-:\-Restraint \-Class \-Reference}
-\label{a00081}\index{\-Obj\-Cryst\-::\-Restraint@{\-Obj\-Cryst\-::\-Restraint}}
+\subsection{Obj\-Cryst\-:\-:Reflection\-Profile Class Reference}
+\label{a00081}\index{Obj\-Cryst\-::\-Reflection\-Profile@{Obj\-Cryst\-::\-Reflection\-Profile}}
 
 
-\doxyref{\-Restraint}{p.}{a00081}\-: generic class for a restraint of a given model.  
+Abstract base class for reflection profiles.  
 
 
-\-Inheritance diagram for \-Obj\-Cryst\-:\-:\-Restraint\-:\begin{figure}[H]
+Inheritance diagram for Obj\-Cryst\-:\-:Reflection\-Profile\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=1.573034cm]{a00081}
+\includegraphics[height=2.434783cm]{a00081}
 \end{center}
 \end{figure}
-\subsubsection*{\-Public \-Member \-Functions}
+\subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bf \-Restraint} ()\label{a00081_ac916c489ee14891b38bf9a877d9e0d03}
-
-\begin{DoxyCompactList}\small\item\em \-Default constructor, sets \doxyref{\-Ref\-Par\-Type}{p.}{a00080} to gp\-Ref\-Par\-Type\-Obj\-Cryst. \end{DoxyCompactList}\item 
-{\bf \-Restraint} (const {\bf \-Ref\-Par\-Type} $\ast$type)\label{a00081_a5fd37c4a5f20a41dcacb78b0af3b8a7d}
-
-\begin{DoxyCompactList}\small\item\em constructor specifying the type \end{DoxyCompactList}\item 
-virtual const {\bf \-Ref\-Par\-Type} $\ast$ {\bfseries \-Get\-Type} () const \label{a00081_aaa8b94f207f2e77f58754236af929a57}
+{\bfseries Reflection\-Profile} (const {\bf Reflection\-Profile} \&old)\label{a00081_a4647aa58d8e98429b10c54499b9b050e}
 
 \item 
-virtual void {\bfseries \-Set\-Type} (const {\bf \-Ref\-Par\-Type} $\ast$type)\label{a00081_ab9dc55ae087d99cd30e9915ffb6e5371}
+virtual {\bf Reflection\-Profile} $\ast$ {\bfseries Create\-Copy} () const =0\label{a00081_a620f88c536f3c13881262efd155cc504}
 
 \item 
-virtual \-R\-E\-A\-L {\bf \-Get\-Log\-Likelihood} () const \label{a00081_adac7d5d594f6d0c26aa7a15b0bb1c73c}
+virtual Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf Get\-Profile} (const Cryst\-Vector\-\_\-\-R\-E\-A\-L \&x, const R\-E\-A\-L xcenter, const R\-E\-A\-L h, const R\-E\-A\-L k, const R\-E\-A\-L l)=0
+\begin{DoxyCompactList}\small\item\em Get the reflection profile. \end{DoxyCompactList}\item 
+virtual R\-E\-A\-L {\bf Get\-Full\-Profile\-Width} (const R\-E\-A\-L relative\-Intensity, const R\-E\-A\-L xcenter, const R\-E\-A\-L h, const R\-E\-A\-L k, const R\-E\-A\-L l)=0
+\begin{DoxyCompactList}\small\item\em Get the (approximate) full profile width at a given percentage of the profile maximum (e.\-g. \end{DoxyCompactList}\item 
+virtual bool {\bf Is\-Anisotropic} () const \label{a00081_ad1c2083adc170bc0d84b44f17b79d008}
 
-\begin{DoxyCompactList}\small\item\em \-Get -\/ln(likelihood) for this restraint. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{\-Private \-Attributes}
-\begin{DoxyCompactItemize}
-\item 
-const {\bf \-Ref\-Par\-Type} $\ast$ {\bfseries mp\-Ref\-Par\-Type}\label{a00081_a4f87437f4e2e44c1f3ca2039c54b202f}
+\begin{DoxyCompactList}\small\item\em Is the profile anisotropic ? \end{DoxyCompactList}\item 
+virtual void {\bf X\-M\-L\-Output} (ostream \&os, int indent=0) const =0
+\begin{DoxyCompactList}\small\item\em Output to stream in well-\/formed X\-M\-L. \end{DoxyCompactList}\item 
+virtual void {\bf X\-M\-L\-Input} (istream \&is, const {\bf X\-M\-L\-Cryst\-Tag} \&tag)=0
+\begin{DoxyCompactList}\small\item\em Input From stream. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Additional Inherited Members}
 
-\end{DoxyCompactItemize}
+
+\subsubsection{Detailed Description}
+Abstract base class for reflection profiles. 
+
+\subsubsection{Member Function Documentation}
+\index{Obj\-Cryst\-::\-Reflection\-Profile@{Obj\-Cryst\-::\-Reflection\-Profile}!Get\-Full\-Profile\-Width@{Get\-Full\-Profile\-Width}}
+\index{Get\-Full\-Profile\-Width@{Get\-Full\-Profile\-Width}!ObjCryst::ReflectionProfile@{Obj\-Cryst\-::\-Reflection\-Profile}}
+\paragraph[{Get\-Full\-Profile\-Width}]{\setlength{\rightskip}{0pt plus 5cm}virtual R\-E\-A\-L Obj\-Cryst\-::\-Reflection\-Profile\-::\-Get\-Full\-Profile\-Width (
+\begin{DoxyParamCaption}
+\item[{const R\-E\-A\-L}]{relative\-Intensity, }
+\item[{const R\-E\-A\-L}]{xcenter, }
+\item[{const R\-E\-A\-L}]{h, }
+\item[{const R\-E\-A\-L}]{k, }
+\item[{const R\-E\-A\-L}]{l}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{a00081_ac6d2a69e63c3efd06f30ab134062bbc0}
 
 
-\subsubsection{\-Detailed \-Description}
-\doxyref{\-Restraint}{p.}{a00081}\-: generic class for a restraint of a given model. 
+Get the (approximate) full profile width at a given percentage of the profile maximum (e.\-g. 
 
-\-This defines only the category (\doxyref{\-Ref\-Par\-Type}{p.}{a00080}) of restraint, and the function to access the log(likelihood) associated to this restraint and the current model.
+F\-W\-H\-M=Get\-Full\-Profile\-Width(0.\-5)). 
 
-\-By default\-: -\/log(likelihood)=0, and the function must be overloaded for \char`\"{}real\char`\"{} restraints.
+Implemented in {\bf Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt} \doxyref{}{p.}{a00082_ac1c2c1f3673f4558eca2c7bee8c3fdea}, and {\bf Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt} \doxyref{}{p.}{a00083_abacd734b6ff73b4fc5e6c4a5cba62eb6}.
 
-\begin{DoxyNote}{\-Note}
-the log(likelihood) {\itshape must\/} always include the normalization term, so that variances can also optimized during the maximum likelihood optimization. e.\-g.\-:
-\begin{DoxyItemize}
-\item $ P=\frac{1}{\sqrt{2\pi\sigma^2}}e^{\frac{-(calc-expected)^2}{\sigma^2}}$
-\item $ -\log(P)= \log\left(\sqrt{2\pi\sigma^2}\right) + \left(\frac{calc-expected}{\sigma} \right)^2$
-\end{DoxyItemize}
+\index{Obj\-Cryst\-::\-Reflection\-Profile@{Obj\-Cryst\-::\-Reflection\-Profile}!Get\-Profile@{Get\-Profile}}
+\index{Get\-Profile@{Get\-Profile}!ObjCryst::ReflectionProfile@{Obj\-Cryst\-::\-Reflection\-Profile}}
+\paragraph[{Get\-Profile}]{\setlength{\rightskip}{0pt plus 5cm}virtual Cryst\-Vector\-\_\-\-R\-E\-A\-L Obj\-Cryst\-::\-Reflection\-Profile\-::\-Get\-Profile (
+\begin{DoxyParamCaption}
+\item[{const Cryst\-Vector\-\_\-\-R\-E\-A\-L \&}]{x, }
+\item[{const R\-E\-A\-L}]{xcenter, }
+\item[{const R\-E\-A\-L}]{h, }
+\item[{const R\-E\-A\-L}]{k, }
+\item[{const R\-E\-A\-L}]{l}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{a00081_a93a92759349fa242b1c3ed6bb7b24979}
+
+
+Get the reflection profile. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x,\-:} & the vector of x coordinates (i.\-e. either 2theta or time-\/of-\/flight) \\
+\hline
+{\em xcenter,\-:} & coordinate (2theta, tof) of the center of the peak \\
+\hline
+{\em h,k,l,\-:} & reflection Miller indices \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+\-: derived classes who need either d\-\_\-hkl or the orthonormal coordinates of the scattering vector should be passed a \doxyref{Obj\-Cryst\-::\-Unit\-Cell}{p.}{a00117} object in the constructor so that they can use \doxyref{Obj\-Cryst\-::\-Unit\-Cell\-::\-Miller\-To\-Orthonormal\-Coords()}{p.}{a00117_af6efcbafcd761c6f8f4953190e7024d0} 
 \end{DoxyNote}
-forgetting the normalization term would result in making the optimization diverge towards infinite variances. 
 
-\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+
+Implemented in {\bf Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt} \doxyref{}{p.}{a00082_ab7c71a3e6156a66f4210fea3086db8d6}, and {\bf Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt} \doxyref{}{p.}{a00083_a14ba03c411e8b3d2d4f5af46e6504658}.
+
+\index{Obj\-Cryst\-::\-Reflection\-Profile@{Obj\-Cryst\-::\-Reflection\-Profile}!X\-M\-L\-Input@{X\-M\-L\-Input}}
+\index{X\-M\-L\-Input@{X\-M\-L\-Input}!ObjCryst::ReflectionProfile@{Obj\-Cryst\-::\-Reflection\-Profile}}
+\paragraph[{X\-M\-L\-Input}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Reflection\-Profile\-::\-X\-M\-L\-Input (
+\begin{DoxyParamCaption}
+\item[{istream \&}]{is, }
+\item[{const {\bf X\-M\-L\-Cryst\-Tag} \&}]{tag}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{a00081_a7ad38593ddb4601632beb0a6bcae50f3}
+
+
+Input From stream. 
+
+\begin{DoxyRefDesc}{Todo}
+\item[{\bf Todo}]Add an bool X\-M\-L\-Input\-Tag(is,tag) function to recognize all the tags from the stream. So that each inherited class can use the X\-M\-L\-Input\-Tag function from its parent (ie take advantage of inheritance). The children class would first try to interpret the tag, then if unsuccessful would pass it to its parent (thus allowing overloading), etc... \end{DoxyRefDesc}
+
+
+Reimplemented from {\bf Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00078_ac13a4045c3f187879443c8615c38d623}.
+
+
+
+Implemented in {\bf Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt} \doxyref{}{p.}{a00082_a4965f2a8994475187423a7afd6943031}, and {\bf Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt} \doxyref{}{p.}{a00083_a8c63700610f511503eae297c8161f311}.
+
+\index{Obj\-Cryst\-::\-Reflection\-Profile@{Obj\-Cryst\-::\-Reflection\-Profile}!X\-M\-L\-Output@{X\-M\-L\-Output}}
+\index{X\-M\-L\-Output@{X\-M\-L\-Output}!ObjCryst::ReflectionProfile@{Obj\-Cryst\-::\-Reflection\-Profile}}
+\paragraph[{X\-M\-L\-Output}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Reflection\-Profile\-::\-X\-M\-L\-Output (
+\begin{DoxyParamCaption}
+\item[{ostream \&}]{os, }
+\item[{int}]{indent = {\ttfamily 0}}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{a00081_a60e429bb999a8b39f09ef14cdaf5ad0c}
+
+
+Output to stream in well-\/formed X\-M\-L. 
+
+\begin{DoxyRefDesc}{Todo}
+\item[{\bf Todo}]Use inheritance.. as for X\-M\-L\-Input\-Tag()... \end{DoxyRefDesc}
+
+
+Reimplemented from {\bf Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00078_a7b9b6ed0f8dcf753d398c35e073de973}.
+
+
+
+Implemented in {\bf Obj\-Cryst\-::\-Reflection\-Profile\-Double\-Exponential\-Pseudo\-Voigt} \doxyref{}{p.}{a00082_a6ec9818370703767da5362960c5b310a}, and {\bf Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt} \doxyref{}{p.}{a00083_ac0438d3a1827accbdf2375e7355f18e5}.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-\-Refinable\-Obj.\-h\end{DoxyCompactItemize}
+Reflection\-Profile.\-h\end{DoxyCompactItemize}

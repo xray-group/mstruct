@@ -1,39 +1,118 @@
-\subsection{Format\-String Class Reference}
-\label{a00031}\index{Format\-String@{Format\-String}}
+\subsection{Cryst\-Vector$<$ T $>$ Class Template Reference}
+\label{a00031}\index{Cryst\-Vector$<$ T $>$@{Cryst\-Vector$<$ T $>$}}
 
 
-output a string with a fixed length (adding necessary space or removing excess characters) \-:  
+Vector library (Blitz++ mimic) for Obj\-Cryst++.  
 
 
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries Format\-String} (const string \&str, const unsigned int width=5)\label{a00031_a89e88ecbdd91c8120ffbfbdc733c9b7b}
+{\bfseries Cryst\-Vector} (const long nb\-Elements)\label{a00031_acc1f58f22cbc277dd3ed69583abad959}
 
 \item 
-int {\bfseries length} () const \label{a00031_a8d9ccf3761a959d82bd705f601ae5360}
+{\bfseries Cryst\-Vector} (const {\bf Cryst\-Vector} \&old)\label{a00031_a3c796d63fafeee6a9d214536957cf3c9}
+
+\item 
+void {\bfseries operator=} (const {\bf Cryst\-Vector} \&old)\label{a00031_a89708875b6c53d500c19c99b84d02f8a}
+
+\item 
+{\footnotesize template$<$class U $>$ }\\void {\bfseries operator=} (const {\bf Cryst\-Vector}$<$ U $>$ \&old)\label{a00031_a8eb89869790a21467967129944248fbd}
+
+\item 
+{\footnotesize template$<$class U $>$ }\\{\bfseries operator Cryst\-Vector$<$ U $>$} () const \label{a00031_a2a70ca4700bca5417b602597a4fcfff8}
+
+\item 
+void {\bfseries reference} ({\bf Cryst\-Vector} \&old)\label{a00031_ad5d417beb2ab400eaa1a9556ec9a64f2}
+
+\item 
+long {\bfseries num\-Elements} () const \label{a00031_ace14c03e7d1b51d49ac5f10ffaaf0c40}
+
+\item 
+T {\bfseries sum} () const \label{a00031_ad588bd536a91bc8e7ee4bd7ad8ad1883}
+
+\item 
+T {\bfseries min} () const \label{a00031_a5289dca8753176f466b6988662fb9801}
+
+\item 
+T {\bfseries max} () const \label{a00031_a5d23eb80ff479100a9b65a3aa62de48b}
+
+\item 
+unsigned long {\bf imin} (const unsigned long start=0, const unsigned long finish=0) const \label{a00031_a7eafc1c142ecda5047b076a52fe8391b}
+
+\begin{DoxyCompactList}\small\item\em Find index of minimum, between start and end (if start==end, use full vector) \end{DoxyCompactList}\item 
+unsigned long {\bf imax} (const unsigned long start=0, const unsigned long finish=0) const \label{a00031_af75afcbf01dc79ac19a6705996d4ca01}
+
+\begin{DoxyCompactList}\small\item\em Find index of maximum, between start and end (if start==end, use full vector) \end{DoxyCompactList}\item 
+T $\ast$ {\bfseries data} ()\label{a00031_a40d80c8692aac9e1c705d7f60e795275}
+
+\item 
+const T $\ast$ {\bfseries data} () const \label{a00031_ad3dffbbb5b5be9a3da26c2e122f110ea}
+
+\item 
+void {\bfseries resize} (const long new\-Nb\-Elements)\label{a00031_ab1765dd06bec2086b6f51540f023cd09}
+
+\item 
+void {\bfseries resize\-And\-Preserve} (const long new\-Nb\-Elements)\label{a00031_a9270bfb8548cde6f525906919058c816}
+
+\item 
+void {\bfseries operator$\ast$=} (const T num)\label{a00031_ac6960250df7bec44a8f583fffc2fe440}
+
+\item 
+void {\bfseries operator$\ast$=} (const {\bf Cryst\-Vector} \&vect)\label{a00031_a6b8335e04364cbc24a352314a8bb495b}
+
+\item 
+void {\bfseries operator/=} (const T num)\label{a00031_a40b9ab22eae2b5503315ba8df2eb66b7}
+
+\item 
+void {\bfseries operator/=} (const {\bf Cryst\-Vector} \&vect)\label{a00031_a1d03e858d034cdcdc5017c935f2abf21}
+
+\item 
+void {\bfseries operator+=} (const T num)\label{a00031_a555db5dc4586f16776a7c7f85ab1c55a}
+
+\item 
+void {\bfseries operator+=} (const {\bf Cryst\-Vector} \&vect)\label{a00031_a48d593976114ca7a7324c32777f6609d}
+
+\item 
+void {\bfseries operator-\/=} (const {\bf Cryst\-Vector} \&vect)\label{a00031_a7e0b418e32820b39046aa6b24f29ebc3}
+
+\item 
+void {\bfseries operator=} (const T num)\label{a00031_ab0ccd3c73e6306422842b3f25d475025}
+
+\item 
+T {\bfseries operator()} (const long i) const \label{a00031_a8445144b6230c9c67eb11328e80ac421}
+
+\item 
+T \& {\bfseries operator()} (const long i)\label{a00031_a579917e862109b801e0a7fed161def03}
 
 \end{DoxyCompactItemize}
-\subsubsection*{Public Attributes}
+\subsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-string {\bfseries m\-String}\label{a00031_a08c22a7bd34d0bcf7c62147cff2a5e85}
+T $\ast$ {\bfseries mp\-Data}\label{a00031_a14439d04b28df90b9e9f2cec3f3f243e}
 
 \item 
-const unsigned int {\bfseries m\-Width}\label{a00031_ae1191d6d25031c2d6e142ce989ff6c74}
+long {\bfseries m\-Num\-Elements}\label{a00031_a8843ca29dceb2a4c30e4589253de6728}
+
+\item 
+bool {\bfseries m\-Is\-Areference}\label{a00031_ab48a31b9bdb489c6da5ed9ffd2ddb60b}
 
 \end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-output a string with a fixed length (adding necessary space or removing excess characters) \-: 
+\subsubsection*{template$<$class T$>$class Cryst\-Vector$<$ T $>$}
 
+Vector library (Blitz++ mimic) for Obj\-Cryst++. 
 
-\begin{DoxyCode}
-os << FormatString(myString,15);
-\end{DoxyCode}
- 
+The \doxyref{Cryst\-Vector}{p.}{a00031} library is not a new array computation library, despite the appearances. Obj\-Cryst++ should used the {\tt Blitz++ array library} , which yields excellent performance {\itshape and} simple array expressions. Unfortunately, the memory required to {\itshape compile} the library using gcc is far too high to be reasonable when using complex expressions and optimizing code. So until this has changed, The \doxyref{Cryst\-Vector}{p.}{a00031} and \doxyref{Cryst\-Matrix}{p.}{a00030} library have been created, and these emulate (supposedly exactly) the Blitz++ interface (but not the smart handling of mathematical expressions, so pointers must be used). For documentation about these two libraries you should read the {\tt Blitz++ documentation}. \doxyref{Cryst\-Vector}{p.}{a00031} and \doxyref{Cryst\-Matrix}{p.}{a00030} use the same kind of storage in memory.
+
+You can use Cryst\-Vector\-\_\-\-R\-E\-A\-L, Cryst\-Vector\-\_\-long,etc... to declare 1\-D vectors. Macros ensure (well, should) ensure compatibility with Blitz++. (as of april 2001 support of blitz++ is broken).
+
+\begin{DoxyRefDesc}{Todo}
+\item[{\bf Todo}]check again Blitz++ support in newer gcc versions. \end{DoxyRefDesc}
+
 
 The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-V\-F\-N\-Stream\-Format.\-h\end{DoxyCompactItemize}
+Cryst\-Vector.\-h\end{DoxyCompactItemize}

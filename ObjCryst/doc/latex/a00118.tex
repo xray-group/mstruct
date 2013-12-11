@@ -1,147 +1,65 @@
-\subsection{\-Obj\-Cryst\-:\-:\-W\-X\-Diffraction\-Single\-Crystal \-Class \-Reference}
-\label{a00118}\index{\-Obj\-Cryst\-::\-W\-X\-Diffraction\-Single\-Crystal@{\-Obj\-Cryst\-::\-W\-X\-Diffraction\-Single\-Crystal}}
+\subsection{Obj\-Cryst\-:\-:W\-X\-Atom Class Reference}
+\label{a00118}\index{Obj\-Cryst\-::\-W\-X\-Atom@{Obj\-Cryst\-::\-W\-X\-Atom}}
 
 
-\-W\-X \-Class for \doxyref{\-Diffraction\-Data\-Single\-Crystal}{p.}{a00026} objects.  
+wx\-Cryst class for Atoms  
 
 
-\-Inheritance diagram for \-Obj\-Cryst\-:\-:\-W\-X\-Diffraction\-Single\-Crystal\-:\begin{figure}[H]
+Inheritance diagram for Obj\-Cryst\-:\-:W\-X\-Atom\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=4.000000cm]{a00118}
+\includegraphics[height=5.000000cm]{a00118}
 \end{center}
 \end{figure}
-\subsubsection*{\-Public \-Member \-Functions}
+\subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries \-W\-X\-Diffraction\-Single\-Crystal} (wx\-Window $\ast$parent, {\bf \-Diffraction\-Data\-Single\-Crystal} $\ast$)\label{a00118_afa08ecf9a4981696d954ca7f45180437}
+{\bfseries W\-X\-Atom} (wx\-Window $\ast$parent, {\bf Atom} $\ast$)\label{a00118_ad5013fde76bd65b8327976ee3d7b4538}
 
 \item 
-virtual void {\bf \-Cryst\-Update} (const bool update\-U\-I=false, const bool mutexlock=false)
-\begin{DoxyCompactList}\small\item\em \-Get new values to be displayed from the underlying object, and raise flag if an \-U\-I update is necessary. \end{DoxyCompactList}\item 
-virtual void {\bf \-Update\-U\-I} (const bool mutexlock=false)
-\begin{DoxyCompactList}\small\item\em \-Update the \-User \-Interface, if necessary. \end{DoxyCompactList}\item 
-void {\bf \-Notify\-Delete\-Graph} ()\label{a00118_a52503c26f8efb76d0d00568a5119f8d1}
+void {\bfseries On\-Change\-Scatt\-Pow} (wx\-Command\-Event \&W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00118_a761d4b22d56c314568884ce001ae53d5}
 
-\begin{DoxyCompactList}\small\item\em \-For the mp\-Graph to tell its owner it was deleted. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{\-Private \-Member \-Functions}
+\item 
+virtual void {\bf Update\-U\-I} (const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em Update the User Interface, if necessary. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-void {\bfseries \-On\-Menu\-Simulate} (wx\-Command\-Event \&\-W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00118_abb0cf6ec0ccc65d3b180fd0257cbc2ce}
+{\bf Atom} $\ast$ {\bfseries mp\-Atom}\label{a00118_ab4e8f3bee82f37e9ba24138d6015df04}
 
 \item 
-void {\bfseries \-On\-Menu\-Import} (wx\-Command\-Event \&event)\label{a00118_a9d8383d61561ca20475d797e37a10eba}
-
-\item 
-void {\bfseries \-On\-Menu\-Save\-H\-K\-L\-Iobs\-Icalc} (wx\-Command\-Event \&\-W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00118_a6681273899696ea7a7d15d478184ce4f}
-
-\item 
-void {\bfseries \-On\-Menu\-Save\-H\-K\-L\-Fcalc} (wx\-Command\-Event \&\-W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00118_a0800caa6fbbe81cd9060e71bacfadf43}
-
-\item 
-void {\bfseries \-On\-Menu\-Set\-Wavelength} (wx\-Command\-Event \&event)\label{a00118_ad7c65d7ece4e3ed9f66027a0eaa4b86a}
-
-\item 
-void {\bfseries \-On\-Menu\-Show\-Graph} (wx\-Command\-Event \&event)\label{a00118_a5567f7f3bb232bab136b2534ab82ab4d}
-
-\item 
-void {\bfseries \-On\-Change\-Crystal} (wx\-Command\-Event \&\-W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00118_adb878f28fc6abfc0d57d62eb9a134964}
+{\bf W\-X\-Field\-Choice} $\ast$ {\bfseries mp\-Field\-Scatt\-Power}\label{a00118_a9dd98ddab95fa288885099d719d22084}
 
 \end{DoxyCompactItemize}
-\subsubsection*{\-Private \-Attributes}
-\begin{DoxyCompactItemize}
-\item 
-{\bf \-W\-X\-Field\-Choice} $\ast$ {\bfseries mp\-Field\-Crystal}\label{a00118_ad267dfc3c399ebaf634e28a13df24477}
-
-\item 
-{\bf \-Diffraction\-Data\-Single\-Crystal} $\ast$ {\bfseries mp\-Data}\label{a00118_a144e44ade061e1ed151f891de77c0661}
-
-\item 
-\-R\-E\-A\-L {\bfseries m\-Chi2}\label{a00118_ad83d8469a67ac3f7586b8a30553972fa}
-
-\item 
-\-R\-E\-A\-L {\bfseries m\-Go\-F}\label{a00118_ab8a3f2922842d16e0a175352c9dc4b56}
-
-\item 
-\-R\-E\-A\-L {\bfseries m\-Rwp}\label{a00118_ac7ff65557c0e38a9c706a30312d1ace4}
-
-\item 
-\-R\-E\-A\-L {\bfseries m\-Rp}\label{a00118_a4f09f9d7bd9fe022094ff8be2b6f9063}
-
-\item 
-\-W\-X\-Multi\-Graph $\ast$ {\bfseries mp\-Graph}\label{a00118_a7d40f7e157c631f047f2ef06f606bf59}
-
-\item 
-unsigned long {\bfseries m\-Grap\-Id\-Obs}\label{a00118_a6a4fe70ca9131d39d4acb4850e044d27}
-
-\item 
-unsigned long {\bfseries m\-Grap\-Id\-Calc}\label{a00118_a46a1d6c2e2b2692fe323549a391491e6}
-
-\item 
-valarray$<$ float $>$ {\bf m\-Iobs}\label{a00118_a0f4e1acb9d9a69b039a0879f6407183a}
-
-\begin{DoxyCompactList}\small\item\em \-Copy of the data for graph display. \end{DoxyCompactList}\item 
-valarray$<$ float $>$ {\bfseries m\-Icalc}\label{a00118_a9e02244cee598b0407e885d9a68ca376}
-
-\item 
-valarray$<$ float $>$ {\bfseries m\-X}\label{a00118_ab32baf33607cbdefa04b155e85004d9e}
-
-\end{DoxyCompactItemize}
+\subsubsection*{Additional Inherited Members}
 
 
-\subsubsection{\-Detailed \-Description}
-\-W\-X \-Class for \doxyref{\-Diffraction\-Data\-Single\-Crystal}{p.}{a00026} objects. 
+\subsubsection{Detailed Description}
+wx\-Cryst class for Atoms 
 
-
-
-\subsubsection{\-Member \-Function \-Documentation}
-\index{\-Obj\-Cryst\-::\-W\-X\-Diffraction\-Single\-Crystal@{\-Obj\-Cryst\-::\-W\-X\-Diffraction\-Single\-Crystal}!\-Cryst\-Update@{\-Cryst\-Update}}
-\index{\-Cryst\-Update@{\-Cryst\-Update}!ObjCryst::WXDiffractionSingleCrystal@{\-Obj\-Cryst\-::\-W\-X\-Diffraction\-Single\-Crystal}}
-\paragraph[{\-Cryst\-Update}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-W\-X\-Diffraction\-Single\-Crystal\-::\-Cryst\-Update} (
-\begin{DoxyParamCaption}
-\item[{const bool}]{update\-U\-I = {\ttfamily false}, }
-\item[{const bool}]{mutexlock = {\ttfamily false}}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00118_a79a9bb91f352c12bfb3a1ebd60267cbc}
-
-
-\-Get new values to be displayed from the underlying object, and raise flag if an \-U\-I update is necessary. 
-
-\-The actual \-G\-U\-I update is not made here. \doxyref{\-Update\-U\-I()}{p.}{a00118_a6419580548c5f35434e0128b62f5b4e6} should be called separately, from the main thread.
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em update\-U\-I,\-:} & if true, this will call \-Update\-U\-I, either directly (if in the main thread), or by sending a message. \\
-\hline
-{\em mutexlock,\-:} & if true, a \-Mutex will be used to lock the data shared between main and background thread. \-The idea is to only use a few \-Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{\-Cryst\-Update()}{p.}{a00118_a79a9bb91f352c12bfb3a1ebd60267cbc} and \doxyref{\-Update\-U\-I()}{p.}{a00118_a6419580548c5f35434e0128b62f5b4e6}. \-As sub-\/objects (\doxyref{\-W\-X\-Field}{p.}{a00119},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. \\
-\hline
-\end{DoxyParams}
-
-
-\-Reimplemented from {\bf \-Obj\-Cryst\-::\-W\-X\-Refinable\-Obj} \doxyref{}{p.}{a00143_a13e4f37ac098de756b27cdb91d6a0551}.
-
-\index{\-Obj\-Cryst\-::\-W\-X\-Diffraction\-Single\-Crystal@{\-Obj\-Cryst\-::\-W\-X\-Diffraction\-Single\-Crystal}!\-Update\-U\-I@{\-Update\-U\-I}}
-\index{\-Update\-U\-I@{\-Update\-U\-I}!ObjCryst::WXDiffractionSingleCrystal@{\-Obj\-Cryst\-::\-W\-X\-Diffraction\-Single\-Crystal}}
-\paragraph[{\-Update\-U\-I}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-W\-X\-Diffraction\-Single\-Crystal\-::\-Update\-U\-I} (
+\subsubsection{Member Function Documentation}
+\index{Obj\-Cryst\-::\-W\-X\-Atom@{Obj\-Cryst\-::\-W\-X\-Atom}!Update\-U\-I@{Update\-U\-I}}
+\index{Update\-U\-I@{Update\-U\-I}!ObjCryst::WXAtom@{Obj\-Cryst\-::\-W\-X\-Atom}}
+\paragraph[{Update\-U\-I}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-W\-X\-Atom\-::\-Update\-U\-I (
 \begin{DoxyParamCaption}
 \item[{const bool}]{mutexlock = {\ttfamily false}}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00118_a6419580548c5f35434e0128b62f5b4e6}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00118_a5509a746fb1a6d918b6cbde8453d6a44}
 
 
-\-Update the \-User \-Interface, if necessary. 
+Update the User Interface, if necessary. 
 
 
-\begin{DoxyParams}{\-Parameters}
-{\em mutexlock,\-:} & if true, a \-Mutex will be used to lock the data shared between main and background thread.\\
+\begin{DoxyParams}{Parameters}
+{\em mutexlock,\-:} & if true, a Mutex will be used to lock the data shared between main and background thread.\\
 \hline
 \end{DoxyParams}
-\-The idea is to only use a few \-Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{\-Cryst\-Update()}{p.}{a00118_a79a9bb91f352c12bfb3a1ebd60267cbc} and \doxyref{\-Update\-U\-I()}{p.}{a00118_a6419580548c5f35434e0128b62f5b4e6}. \-As sub-\/objects (\doxyref{\-W\-X\-Field}{p.}{a00119},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
+The idea is to only use a few Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{Cryst\-Update()}{p.}{a00150_a13e4f37ac098de756b27cdb91d6a0551} and \doxyref{Update\-U\-I()}{p.}{a00118_a5509a746fb1a6d918b6cbde8453d6a44}. As sub-\/objects (\doxyref{W\-X\-Field}{p.}{a00126},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
 
-\-Reimplemented from {\bf \-Obj\-Cryst\-::\-W\-X\-Refinable\-Obj} \doxyref{}{p.}{a00143_a19a1d057eecafd48710d9a3b770c1b28}.
+Reimplemented from {\bf Obj\-Cryst\-::\-W\-X\-Refinable\-Obj} \doxyref{}{p.}{a00150_a19a1d057eecafd48710d9a3b770c1b28}.
 
 
 
-\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-wx\-Diffraction\-Single\-Crystal.\-h\end{DoxyCompactItemize}
+wx\-Atom.\-h\end{DoxyCompactItemize}

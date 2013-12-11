@@ -1,85 +1,47 @@
-\subsection{Obj\-Cryst\-:\-:Powder\-Pattern\-Diffraction Class Reference}
-\label{a00066}\index{Obj\-Cryst\-::\-Powder\-Pattern\-Diffraction@{Obj\-Cryst\-::\-Powder\-Pattern\-Diffraction}}
+\subsection{Obj\-Cryst\-:\-:P\-D\-F\-Phase Class Reference}
+\label{a00066}\index{Obj\-Cryst\-::\-P\-D\-F\-Phase@{Obj\-Cryst\-::\-P\-D\-F\-Phase}}
 
 
-Class to compute the contribution to a powder pattern from a crystalline phase.  
+Contribution to a \doxyref{P\-D\-F}{p.}{a00063}.  
 
 
-Inheritance diagram for Obj\-Cryst\-:\-:Powder\-Pattern\-Diffraction\-:\begin{figure}[H]
+Inheritance diagram for Obj\-Cryst\-:\-:P\-D\-F\-Phase\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=3.000000cm]{a00066}
 \end{center}
 \end{figure}
-\subsubsection*{Classes}
-\begin{DoxyCompactItemize}
-\item 
-struct {\bf Refl\-Profile}
-\begin{DoxyCompactList}\small\item\em Profile of a single reflection. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries Powder\-Pattern\-Diffraction} (const {\bf Powder\-Pattern\-Diffraction} \&)\label{a00066_a66a5dbb3c4a169bea2fd738b8e2ad4b1}
+{\bf P\-D\-F\-Phase} (const {\bf P\-D\-F} \&pdf)\label{a00066_ab6f8534a6578b281cf5bb5334e838db1}
 
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+const Cryst\-Vector\-\_\-\-R\-E\-A\-L \& {\bf Get\-P\-D\-F\-Calc} () const \label{a00066_a67fe93ef0be6b5c64697a542e9b829e8}
+
+\begin{DoxyCompactList}\small\item\em Get the calculated \doxyref{P\-D\-F}{p.}{a00063}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
 \item 
-virtual {\bf Powder\-Pattern\-Diffraction} $\ast$ {\bf Create\-Copy} () const \label{a00066_ab288a964d5259f2b239c49eb3efdd5bb}
+virtual void {\bf Calc\-P\-D\-F} () const =0\label{a00066_a072386e6d1b75fa364e6bb9551685567}
 
-\begin{DoxyCompactList}\small\item\em So-\/called virtual copy constructor. \end{DoxyCompactList}\item 
-virtual const string \& {\bf Get\-Class\-Name} () const 
-\begin{DoxyCompactList}\small\item\em Name for this class (\char`\"{}\-Refinable\-Obj\char`\"{}, \char`\"{}\-Crystal\char`\"{},...). \end{DoxyCompactList}\item 
-virtual void {\bf Set\-Parent\-Powder\-Pattern} ({\bf Powder\-Pattern} \&)
-\begin{DoxyCompactList}\small\item\em Set the \doxyref{Powder\-Pattern}{p.}{a00062} object which uses this component. \end{DoxyCompactList}\item 
-virtual const Cryst\-Vector\-\_\-\-R\-E\-A\-L \& {\bf Get\-Powder\-Pattern\-Calc} () const 
-\begin{DoxyCompactList}\small\item\em Get the calculated powder pattern for this component. \end{DoxyCompactList}\item 
-virtual pair$<$ const \\*
-Cryst\-Vector\-\_\-\-R\-E\-A\-L $\ast$, const \\*
-{\bf Refinable\-Obj\-Clock} $\ast$ $>$ {\bf Get\-Powder\-Pattern\-Integrated\-Calc} () const 
-\begin{DoxyCompactList}\small\item\em Get the integrated values of the powder pattern. \end{DoxyCompactList}\item 
-void {\bf Set\-Reflection\-Profile\-Par} (const {\bf Reflection\-Profile\-Type} prof, const R\-E\-A\-L fwhm\-Caglioti\-W, const R\-E\-A\-L fwhm\-Caglioti\-U=0, const R\-E\-A\-L fwhm\-Caglioti\-V=0, const R\-E\-A\-L eta0=0.\-5, const R\-E\-A\-L eta1=0.)
-\begin{DoxyCompactList}\small\item\em Set reflection profile parameters. \end{DoxyCompactList}\item 
-void {\bf Set\-Profile} ({\bf Reflection\-Profile} $\ast$prof)
-\begin{DoxyCompactList}\small\item\em Assign a new profile. \end{DoxyCompactList}\item 
-const {\bf Reflection\-Profile} \& {\bf Get\-Profile} () const \label{a00066_a36737a2dbb8be2af46f5c314171b419a}
-
-\begin{DoxyCompactList}\small\item\em Get reflection profile. \end{DoxyCompactList}\item 
-{\bf Reflection\-Profile} \& {\bf Get\-Profile} ()\label{a00066_a8f82b16e1d676f468475317afaddfdd8}
-
-\begin{DoxyCompactList}\small\item\em Get reflection profile. \end{DoxyCompactList}\item 
-virtual void {\bfseries Gen\-H\-K\-L\-Full\-Space} ()\label{a00066_a8d40f85ebf29e8f57c369ec2111650a4}
-
+\begin{DoxyCompactList}\small\item\em Calculate the pdf. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
 \item 
-virtual void {\bf X\-M\-L\-Output} (ostream \&os, int indent=0) const 
-\begin{DoxyCompactList}\small\item\em Output to stream in well-\/formed X\-M\-L. \end{DoxyCompactList}\item 
-virtual void {\bf X\-M\-L\-Input} (istream \&is, const {\bf X\-M\-L\-Cryst\-Tag} \&tag)
-\begin{DoxyCompactList}\small\item\em Input From stream. \end{DoxyCompactList}\item 
-virtual void {\bf Get\-Gene\-Group} (const {\bf Refinable\-Obj} \&obj, Cryst\-Vector\-\_\-uint \&group\-Index, unsigned int \&first\-Group) const 
-\begin{DoxyCompactList}\small\item\em Get the gene group assigned to each parameter. \end{DoxyCompactList}\item 
-virtual void {\bf Begin\-Optimization} (const bool allow\-Approximations=false, const bool enable\-Restraints=false)
-\begin{DoxyCompactList}\small\item\em This should be called by any optimization class at the begining of an optimization. \end{DoxyCompactList}\item 
-virtual void {\bf End\-Optimization} ()
-\begin{DoxyCompactList}\small\item\em This should be called by any optimization class at the end of an optimization. \end{DoxyCompactList}\item 
-virtual void {\bf Set\-Approximation\-Flag} (const bool allow)
-\begin{DoxyCompactList}\small\item\em Enable or disable numerical approximations. \end{DoxyCompactList}\item 
-virtual const {\bf Radiation} \& {\bf Get\-Radiation} () const \label{a00066_a56744e8d8a61966b2acdc7c4ad9d4e85}
+const {\bf P\-D\-F} $\ast$ {\bf mp\-P\-D\-F}\label{a00066_af78b7394beb2e1839d6cc75b700be0f6}
 
-\begin{DoxyCompactList}\small\item\em Get the radiation object for this data. \end{DoxyCompactList}\item 
-virtual const Cryst\-Vector\-\_\-\-R\-E\-A\-L \& {\bf Get\-Powder\-Pattern\-Calc\-Variance} () const 
-\begin{DoxyCompactList}\small\item\em Get the variance associated to each point of the calculated powder pattern, for this component. \end{DoxyCompactList}\item 
-virtual pair$<$ const \\*
-Cryst\-Vector\-\_\-\-R\-E\-A\-L $\ast$, const \\*
-{\bf Refinable\-Obj\-Clock} $\ast$ $>$ {\bf Get\-Powder\-Pattern\-Integrated\-Calc\-Variance} () const 
-\begin{DoxyCompactList}\small\item\em Get the variance associated to each point of the calculated powder pattern, for this component (integrated version). \end{DoxyCompactList}\item 
-virtual bool {\bf Has\-Powder\-Pattern\-Calc\-Variance} () const \label{a00066_ad0c57e0e2664e498e887d29698875cf0}
+\begin{DoxyCompactList}\small\item\em Parent \doxyref{P\-D\-F}{p.}{a00063}. \end{DoxyCompactList}\item 
+Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf m\-P\-D\-F\-Calc}\label{a00066_a39fa93f83ac731cfa4ee69f8add3e70d}
 
-\begin{DoxyCompactList}\small\item\em Does this component have a variance associated with each calculated point ? i.\-e., do we use maximum likelihood to take into account incomplete models ? \end{DoxyCompactList}\item 
-virtual void {\bf Set\-Crystal} ({\bf Crystal} \&crystal)
-\begin{DoxyCompactList}\small\item\em Set the crystal for this experiment. \end{DoxyCompactList}\item 
-void {\bf Set\-Extraction\-Mode} (const bool extract=true, const bool init=false)
-\begin{DoxyCompactList}\small\item\em Prepare intensity extraction (Le Bail or Pawley) \end{DoxyCompactList}\item 
-bool {\bf Get\-Extraction\-Mode} () const \label{a00066_add445d5800c4728a43c3c8a8bbea085d}
+\begin{DoxyCompactList}\small\item\em The calculated \doxyref{P\-D\-F}{p.}{a00063}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
-\begin{DoxyCompactList}\small\item\em Return true if in extraction mode, i.\-e. using extracted intensities instead of computed structure factors. \end{DoxyCompactList}\item 
-void {\bf Extract\-Le\-Bail} (unsigned int nbcycle=1)
-\begin{DoxyCompactList}\small\item\em Extract intensities using Le Bail method. \end{DoxyCompactList}\item 
-virtual long {\bf Get\-Nb\-Refl\-Below\-Max\-Sin\-Theta\-Ov\-Lambda} () const 
-\begin{DoxyCompactList}\small\item\em Recalc, and get the number of reflections which should be actually used, due to the maximuml sin(theta)/lambda value set. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+\subsubsection{Detailed Description}
+Contribution to a \doxyref{P\-D\-F}{p.}{a00063}. 
+
+Right now this can only be a \doxyref{P\-D\-F\-Crystal}{p.}{a00065}. 
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+P\-D\-F.\-h\end{DoxyCompactItemize}

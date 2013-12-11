@@ -1,33 +1,41 @@
-\subsection{Obj\-Cryst\-:\-:Peak\-List\-:\-:hkl0 Struct Reference}
-\label{a00036}\index{Obj\-Cryst\-::\-Peak\-List\-::hkl0@{Obj\-Cryst\-::\-Peak\-List\-::hkl0}}
+\subsection{Format\-Horiz\-Vector$<$ T $>$ Class Template Reference}
+\label{a00036}\index{Format\-Horiz\-Vector$<$ T $>$@{Format\-Horiz\-Vector$<$ T $>$}}
 
 
-One set of Miller indices, a possible indexation for a reflection.  
+Format vector as horiz array\-:  
 
 
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries hkl0} (const int {\bf h}=0, const int k=0, const int l=0)\label{a00036_aba6db797121bd215eaa442ca9c17e0bc}
+{\bfseries Format\-Horiz\-Vector} (const {\bf Cryst\-Vector}$<$ T $>$ \&f\-Vect, const int width=10, const int precision=4)\label{a00036_a547a7cbadc52884eb1d0149ab62f6715}
 
 \end{DoxyCompactItemize}
 \subsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-int {\bf h}\label{a00036_a6cd45adccc4cce119c0a1f724a8b23f2}
-
-\begin{DoxyCompactList}\small\item\em Miller indices. \end{DoxyCompactList}\item 
-int {\bfseries k}\label{a00036_a5b4b0cfe066f3028edbf510f989b717b}
+const {\bf Cryst\-Vector}$<$ T $>$ $\ast$ {\bfseries mp\-Vectors}\label{a00036_a73b7421467798780d9c1d67424b3a876}
 
 \item 
-int {\bfseries l}\label{a00036_a4465980d0e2e202ab5f7415facf71892}
+const int {\bfseries m\-Width}\label{a00036_a3142a01d912b28c5fb2ff261915d80ba}
+
+\item 
+const int {\bfseries m\-Precision}\label{a00036_ac1ca600c08c0dd17acd9d1d5721d4b57}
 
 \end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-One set of Miller indices, a possible indexation for a reflection. 
+\subsubsection*{template$<$class T$>$class Format\-Horiz\-Vector$<$ T $>$}
 
-The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+Format vector as horiz array\-: 
+
+
+\begin{DoxyCode}
+os << FormatHorizVector<REAL>(vect,8,3);
+\end{DoxyCode}
+ 
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-Indexing.\-h\end{DoxyCompactItemize}
+V\-F\-N\-Stream\-Format.\-h\end{DoxyCompactItemize}

@@ -5,7 +5,7 @@
 %%For: 
 %Magnification: 1.00
 %%Orientation: Portrait
-%%BoundingBox: 0 0 500 188.323917
+%%BoundingBox: 0 0 500 336.134454
 %%Pages: 0
 %%BeginSetup
 %%EndSetup
@@ -19,13 +19,13 @@
 /marginwidth 10 def
 /distx 20 def
 /disty 40 def
-/boundaspect 2.655000 def  % aspect ratio of the BoundingBox (width/height)
+/boundaspect 1.487500 def  % aspect ratio of the BoundingBox (width/height)
 /boundx 500 def
 /boundy boundx boundaspect div def
 /xspacing 0 def
 /yspacing 0 def
-/rows 5 def
-/cols 3 def
+/rows 4 def
+/cols 1 def
 /scalefactor 0 def
 /boxfont /Times-Roman findfont fontheight scalefont def
 
@@ -173,13 +173,10 @@
 
 boxfont setfont
 1 boundaspect scale
-(ObjCryst::WXScatterer) cw
+(ObjCryst::WXPowderPatternDiffraction) cw
 (ObjCryst::WXRefinableObj) cw
 (ObjCryst::WXCrystObj) cw
 (ObjCryst::WXCrystObjBasic) cw
-(ObjCryst::WXAtom) cw
-(ObjCryst::WXMolecule) cw
-(ObjCryst::WXZScatterer) cw
 /boxwidth boxwidth marginwidth 2 mul add def
 /xspacing boxwidth distx add def
 /yspacing boxheight disty add def
@@ -191,35 +188,22 @@ boundx scalefactor div boundy scalefactor div scale
 
 % ----- classes -----
 
- (ObjCryst::WXScatterer) 1.000000 1.000000 box
- (ObjCryst::WXRefinableObj) 1.000000 2.000000 box
- (ObjCryst::WXCrystObj) 1.000000 3.000000 box
- (ObjCryst::WXCrystObjBasic) 1.000000 4.000000 box
- (ObjCryst::WXAtom) 0.000000 0.000000 box
- (ObjCryst::WXMolecule) 1.000000 0.000000 box
- (ObjCryst::WXZScatterer) 2.000000 0.000000 box
+ (ObjCryst::WXPowderPatternDiffraction) 0.000000 0.000000 box
+ (ObjCryst::WXRefinableObj) 0.000000 1.000000 box
+ (ObjCryst::WXCrystObj) 0.000000 2.000000 box
+ (ObjCryst::WXCrystObjBasic) 0.000000 3.000000 box
 
 % ----- relations -----
 
 solid
-0 1.000000 1.000000 out
+0 0.000000 0.000000 out
 solid
-1 1.000000 2.000000 in
+1 0.000000 1.000000 in
 solid
-0 1.000000 2.000000 out
+0 0.000000 1.000000 out
 solid
-1 1.000000 3.000000 in
+1 0.000000 2.000000 in
 solid
-0 1.000000 3.000000 out
+0 0.000000 2.000000 out
 solid
-1 1.000000 4.000000 in
-solid
-1 1.000000 0.250000 out
-solid
-0.000000 2.000000 1.000000 conn
-solid
-0 0.000000 0.750000 in
-solid
-0 1.000000 0.750000 in
-solid
-0 2.000000 0.750000 in
+1 0.000000 3.000000 in

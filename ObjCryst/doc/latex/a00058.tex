@@ -1,65 +1,33 @@
-\subsection{Obj\-Cryst\-:\-:P\-D\-F\-Crystal Class Reference}
-\label{a00058}\index{Obj\-Cryst\-::\-P\-D\-F\-Crystal@{Obj\-Cryst\-::\-P\-D\-F\-Crystal}}
+\subsection{Obj\-Cryst\-:\-:Crystal\-:\-:Neighbour Struct Reference}
+\label{a00058}\index{Obj\-Cryst\-::\-Crystal\-::\-Neighbour@{Obj\-Cryst\-::\-Crystal\-::\-Neighbour}}
 
 
-Class for Pair Distribution Function calculations for a single \doxyref{Crystal}{p.}{a00020} object.  
+Interatomic distance for a given neighbour.  
 
 
-Inheritance diagram for Obj\-Cryst\-:\-:P\-D\-F\-Crystal\-:\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[height=3.000000cm]{a00058}
-\end{center}
-\end{figure}
-\subsubsection*{Classes}
-\begin{DoxyCompactItemize}
-\item 
-struct {\bf pdf\-Atom}
-\begin{DoxyCompactList}\small\item\em Container of temp data for each atom. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bf P\-D\-F\-Crystal} (const {\bf P\-D\-F} \&pdf, const {\bf Crystal} \&cryst)\label{a00058_a00392955dc22562f102b5161201df88e}
+{\bfseries Neighbour} (const unsigned long neighbour\-Index, const int sym, const R\-E\-A\-L dist2)\label{a00058_af3dfe5fb08c8c73dc5e804439b0e46c9}
 
-\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Private Member Functions}
+\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-void {\bf Init} (const {\bf P\-D\-F} \&pdf, const {\bf Crystal} \&cryst)\label{a00058_a5e7fb06483b4aadc0228e12a5b276c73}
+unsigned long {\bf m\-Neighbour\-Index}\label{a00058_a00b603db2329cf55dd6bc66cf76e54ad}
 
-\begin{DoxyCompactList}\small\item\em Initialize all parameters. \end{DoxyCompactList}\item 
-virtual void {\bf Calc\-P\-D\-F} () const \label{a00058_ae946de60882c4a7280846eb93c2352ad}
+\begin{DoxyCompactList}\small\item\em The number associated to the neighbour (its index in the \doxyref{Crystal}{p.}{a00027}'s scattering component list) \end{DoxyCompactList}\item 
+unsigned int {\bf m\-Neighbour\-Symmetry\-Index}\label{a00058_a6ccf11f6f5ad2641cfeb22c8339fa2e5}
 
-\begin{DoxyCompactList}\small\item\em Calculate the pdf. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Private Attributes}
-\begin{DoxyCompactItemize}
-\item 
-const {\bf Crystal} $\ast$ {\bf mp\-Crystal}\label{a00058_a553166f4ad640d508ef772957df10152}
+\begin{DoxyCompactList}\small\item\em The symmetry position associated to the neighbour (its index in the \doxyref{Crystal}{p.}{a00027}'s scattering component list) \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bf m\-Dist2}\label{a00058_ac4b4d41dc4899ce7520d6b178602e2d3}
 
-\begin{DoxyCompactList}\small\item\em The \doxyref{Crystal}{p.}{a00020}. \end{DoxyCompactList}\item 
-R\-E\-A\-L {\bf m\-Delta1}\label{a00058_a66b186679e2698a45ce157a8d09c3467}
-
-\begin{DoxyCompactList}\small\item\em Parameters affecting the width \& intensity of peaks. \end{DoxyCompactList}\item 
-R\-E\-A\-L {\bfseries m\-Delta2}\label{a00058_a5ebeca9d72162fee9243dea5c6b850ab}
-
-\item 
-R\-E\-A\-L {\bfseries m\-Qbroad}\label{a00058_ae7f15c23f3c9e5709613168abb0225ac}
-
-\item 
-R\-E\-A\-L {\bfseries m\-Qdamp}\label{a00058_a1137bb1d85ea2fa6829d1e839d01333c}
-
-\item 
-std\-::vector$<$ {\bf pdf\-Atom} $>$ {\bf mv\-P\-D\-F\-Atom}\label{a00058_a54a3a6f101577914637d33727b770d37}
-
-\begin{DoxyCompactList}\small\item\em List of all temp data. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Additional Inherited Members}
+\begin{DoxyCompactList}\small\item\em The squared distance, in square Angstroems. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-Class for Pair Distribution Function calculations for a single \doxyref{Crystal}{p.}{a00020} object. 
+Interatomic distance for a given neighbour. 
 
-
-
-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-P\-D\-F.\-h\end{DoxyCompactItemize}
+Crystal.\-h\end{DoxyCompactItemize}

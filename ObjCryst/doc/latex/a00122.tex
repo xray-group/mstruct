@@ -1,119 +1,197 @@
-\subsection{\-Obj\-Cryst\-:\-:\-W\-X\-Field\-Option \-Class \-Reference}
-\label{a00122}\index{\-Obj\-Cryst\-::\-W\-X\-Field\-Option@{\-Obj\-Cryst\-::\-W\-X\-Field\-Option}}
+\subsection{Obj\-Cryst\-:\-:W\-X\-Cryst\-Obj Class Reference}
+\label{a00122}\index{Obj\-Cryst\-::\-W\-X\-Cryst\-Obj@{Obj\-Cryst\-::\-W\-X\-Cryst\-Obj}}
 
 
-\-W\-X representation of a \-Ref\-Obj option. \-This displays the names of the different choices.  
+Base class for all displayed \doxyref{Obj\-Cryst}{p.}{a00178} objects (with a title, and a sizer to stack objects).  
 
 
-\-Inheritance diagram for \-Obj\-Cryst\-:\-:\-W\-X\-Field\-Option\-:\begin{figure}[H]
+Inheritance diagram for Obj\-Cryst\-:\-:W\-X\-Cryst\-Obj\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=3.000000cm]{a00122}
+\includegraphics[height=8.369565cm]{a00122}
 \end{center}
 \end{figure}
-\subsubsection*{\-Public \-Member \-Functions}
+\subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries \-W\-X\-Field\-Option} (wx\-Window $\ast$parent, const int field\-\_\-id, {\bf \-Ref\-Obj\-Opt} $\ast$option)\label{a00122_a2cd2f40e31d3c634b2d62d5f85de8274}
+{\bf W\-X\-Cryst\-Obj} (wx\-Window $\ast$parent, int orient=wx\-H\-O\-R\-I\-Z\-O\-N\-T\-A\-L, bool show\-Name=true)\label{a00122_aee6a4d5c3a1dfa315e5520f56621c153}
+
+\begin{DoxyCompactList}\small\item\em Constructor, with a. \end{DoxyCompactList}\item 
+void {\bf On\-Toggle\-Collapse} (wx\-Command\-Event \&W\-X\-U\-N\-U\-S\-E\-D(event))
+\begin{DoxyCompactList}\small\item\em Only display the title, and collapse everything else. \end{DoxyCompactList}\item 
+virtual bool {\bf On\-Change\-Name} (const int id)=0
+\begin{DoxyCompactList}\small\item\em When a \doxyref{W\-X\-Field\-Name}{p.}{a00128} has been changed by the user, it is handled here. \end{DoxyCompactList}\item 
+virtual void {\bf Cryst\-Update} (const bool update\-U\-I=false, const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em Get new values to be displayed from the underlying object, and raise flag if an U\-I update is necessary. \end{DoxyCompactList}\item 
+virtual void {\bf Update\-U\-I} (const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em Update the User Interface, if necessary. \end{DoxyCompactList}\item 
+virtual void {\bfseries On\-Enable} (wx\-Update\-U\-I\-Event \&event)\label{a00122_a862e490ea63c3f4e81e727dd76c11f50}
 
 \item 
-void {\bfseries \-On\-Update\-U\-I} (wx\-Update\-U\-I\-Event \&\-W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00122_abddd97d3a27a4ec41fe39e0a6b632346}
+virtual bool {\bfseries Enable} (bool enable)\label{a00122_adb1428e6b8fea322ec93212af80d17d3}
 
 \item 
-void {\bf \-On\-Choice} (wx\-Command\-Event \&\-W\-X\-U\-N\-U\-S\-E\-D(event))
-\begin{DoxyCompactList}\small\item\em \-When a new value is entered. \end{DoxyCompactList}\item 
-virtual void {\bf \-Cryst\-Update} (const bool update\-U\-I=false, const bool mutexlock=false)
-\begin{DoxyCompactList}\small\item\em \-Get new values to be displayed from the underlying object, and raise flag if an \-U\-I update is necessary. \end{DoxyCompactList}\item 
-virtual void {\bf \-Update\-U\-I} (const bool mutexlock=false)
-\begin{DoxyCompactList}\small\item\em \-Update the \-User \-Interface, if necessary. \end{DoxyCompactList}\item 
-void {\bf \-Revert} ()\label{a00122_a8caf4ac439d8c702583ceda0612618ab}
-
-\begin{DoxyCompactList}\small\item\em \-After a user entry, this allows to go back to the last value, if for some reason the entry was rejected (because the object is currently busy, ...) \end{DoxyCompactList}\item 
-virtual void {\bf \-Validate\-User\-Input} ()\label{a00122_a8336001d58c58e185325a520e2c17311}
-
-\begin{DoxyCompactList}\small\item\em \-Does nothing. \-Any user input is directly validated (\-On\-Choice). \end{DoxyCompactList}\item 
-virtual void {\bf \-Set\-Tool\-Tip} (const wx\-String \&tip)\label{a00122_ae867012ac2cbe29152197495a31b07a2}
-
-\begin{DoxyCompactList}\small\item\em \-Set tooltip for this window. \-It will be activated when going over the choice field. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{\-Protected \-Attributes}
+virtual void {\bf Bottom\-Layout} ({\bf W\-X\-Cryst\-Obj\-Basic} $\ast$p\-Child)
+\begin{DoxyCompactList}\small\item\em Ask for a new Layout with recalculated size hints, because a child has been changed or added. \end{DoxyCompactList}\item 
+virtual void {\bf Add\-Child} ({\bf W\-X\-Cryst\-Obj\-Basic} $\ast$p\-Child, bool do\-Bottom\-Layout=true)
+\begin{DoxyCompactList}\small\item\em Notify that a new children has been added, also adding it to the correct sizer (which can be the top sizer or not). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-int {\bfseries m\-Choice}\label{a00122_a9250ff51e632d03805b802f9938f44ae}
+wx\-Box\-Sizer $\ast$ {\bf mp\-Top\-Sizer}\label{a00122_aaa27c0ed63bd119b55b884dc274c71bc}
 
-\item 
-int {\bfseries m\-Choice\-Old}\label{a00122_a3eeda225deeac7161bafb23340639aba}
+\begin{DoxyCompactList}\small\item\em Top sizer including the title and \doxyref{W\-X\-Cryst\-Obj\-::mp\-Sizer}{p.}{a00122_a0fcc77bbdc5c4c3e191f96e15e82ef86}. \end{DoxyCompactList}\item 
+wx\-Box\-Sizer $\ast$ {\bf mp\-Sizer}\label{a00122_a0fcc77bbdc5c4c3e191f96e15e82ef86}
 
-\item 
-{\bf \-Ref\-Obj\-Opt} $\ast$ {\bfseries mp\-Option}\label{a00122_a02d2cebdc3f8f6f3da24aebea176ca16}
+\begin{DoxyCompactList}\small\item\em Sizer including all sub-\/objects. \end{DoxyCompactList}\item 
+{\bf W\-X\-Field\-Name} $\ast$ {\bf mp\-W\-X\-Title}\label{a00122_a047ca586b293087e62eaa2054ce6164e}
 
-\item 
-wx\-Choice $\ast$ {\bfseries mp\-List}\label{a00122_a9e1a3036f23fa841195fbfd98c26fae4}
+\begin{DoxyCompactList}\small\item\em The title. \end{DoxyCompactList}\item 
+bool {\bf m\-Is\-Expanded}\label{a00122_a0ad5527d3992a9aa86b1f1475c213521}
 
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em To be used for collapsing the sub-\/objects. \end{DoxyCompactList}\item 
+{\bf W\-X\-Cryst\-Obj\-Basic\-List} {\bf m\-List}\label{a00122_a2ec7c27e1a75da178e402c6166301126}
+
+\begin{DoxyCompactList}\small\item\em All windows but the title and collapse button are in this list. \end{DoxyCompactList}\item 
+wx\-Button $\ast$ {\bf mp\-Collapse\-Button}\label{a00122_abdcafc600137d8c8603dc5af76476eea}
+
+\begin{DoxyCompactList}\small\item\em The collapse button. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\subsubsection{\-Detailed \-Description}
-\-W\-X representation of a \-Ref\-Obj option. \-This displays the names of the different choices. 
+\subsubsection{Detailed Description}
+Base class for all displayed \doxyref{Obj\-Cryst}{p.}{a00178} objects (with a title, and a sizer to stack objects). 
 
-\subsubsection{\-Member \-Function \-Documentation}
-\index{\-Obj\-Cryst\-::\-W\-X\-Field\-Option@{\-Obj\-Cryst\-::\-W\-X\-Field\-Option}!\-Cryst\-Update@{\-Cryst\-Update}}
-\index{\-Cryst\-Update@{\-Cryst\-Update}!ObjCryst::WXFieldOption@{\-Obj\-Cryst\-::\-W\-X\-Field\-Option}}
-\paragraph[{\-Cryst\-Update}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-W\-X\-Field\-Option\-::\-Cryst\-Update} (
+A button (which should be used to collapse the object) is used to create an indentation for the sub-\/objects.
+
+\begin{DoxyRefDesc}{Todo}
+\item[{\bf Todo}]Allow the objects to be collabsable. The difficulty is that even if the object is not shown, it is not removed by the Sizer as long as it is not deleted... Needs some testing ! Otherwise it would also be possible to delete and re-\/create sub-\/objects when collapsing, but that would be more difficult. \end{DoxyRefDesc}
+
+
+\subsubsection{Member Function Documentation}
+\index{Obj\-Cryst\-::\-W\-X\-Cryst\-Obj@{Obj\-Cryst\-::\-W\-X\-Cryst\-Obj}!Add\-Child@{Add\-Child}}
+\index{Add\-Child@{Add\-Child}!ObjCryst::WXCrystObj@{Obj\-Cryst\-::\-W\-X\-Cryst\-Obj}}
+\paragraph[{Add\-Child}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-W\-X\-Cryst\-Obj\-::\-Add\-Child (
+\begin{DoxyParamCaption}
+\item[{{\bf W\-X\-Cryst\-Obj\-Basic} $\ast$}]{p\-Child, }
+\item[{bool}]{do\-Bottom\-Layout = {\ttfamily true}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00122_a0e0790010b9be47e533998a61f27fa1a}
+
+
+Notify that a new children has been added, also adding it to the correct sizer (which can be the top sizer or not). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em do\-Bottom\-Layout} & ask for a new Layout of the window and of its parents. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from {\bf Obj\-Cryst\-::\-W\-X\-Cryst\-Obj\-Basic} \doxyref{}{p.}{a00123_ae346606a6dbb6aeffe89fc16de380b81}.
+
+\index{Obj\-Cryst\-::\-W\-X\-Cryst\-Obj@{Obj\-Cryst\-::\-W\-X\-Cryst\-Obj}!Bottom\-Layout@{Bottom\-Layout}}
+\index{Bottom\-Layout@{Bottom\-Layout}!ObjCryst::WXCrystObj@{Obj\-Cryst\-::\-W\-X\-Cryst\-Obj}}
+\paragraph[{Bottom\-Layout}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-W\-X\-Cryst\-Obj\-::\-Bottom\-Layout (
+\begin{DoxyParamCaption}
+\item[{{\bf W\-X\-Cryst\-Obj\-Basic} $\ast$}]{p\-Child}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00122_a8fcadf77f9216819c62384d0c03bd710}
+
+
+Ask for a new Layout with recalculated size hints, because a child has been changed or added. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\-Child,\-:} & the modified child. If null, this will mean we are asking for a new layout of the window itself (useful when a sub-\/window is deleted). \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from {\bf Obj\-Cryst\-::\-W\-X\-Cryst\-Obj\-Basic} \doxyref{}{p.}{a00123_afbd0ece297950eda664fa819c240a318}.
+
+\index{Obj\-Cryst\-::\-W\-X\-Cryst\-Obj@{Obj\-Cryst\-::\-W\-X\-Cryst\-Obj}!Cryst\-Update@{Cryst\-Update}}
+\index{Cryst\-Update@{Cryst\-Update}!ObjCryst::WXCrystObj@{Obj\-Cryst\-::\-W\-X\-Cryst\-Obj}}
+\paragraph[{Cryst\-Update}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-W\-X\-Cryst\-Obj\-::\-Cryst\-Update (
 \begin{DoxyParamCaption}
 \item[{const bool}]{update\-U\-I = {\ttfamily false}, }
 \item[{const bool}]{mutexlock = {\ttfamily false}}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00122_a146ec591b9da6df9ea68fe7f80144ef0}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00122_a2e5de90ae4d1ca8feb65b88debf6d3cb}
 
 
-\-Get new values to be displayed from the underlying object, and raise flag if an \-U\-I update is necessary. 
+Get new values to be displayed from the underlying object, and raise flag if an U\-I update is necessary. 
 
-\-The actual \-G\-U\-I update is not made here. \doxyref{\-Update\-U\-I()}{p.}{a00122_adcb0b8495d2a0d03d7e2093bec17545e} should be called separately, from the main thread.
+The actual G\-U\-I update is not made here. \doxyref{Update\-U\-I()}{p.}{a00122_a093c04eb7b70ff063b80427779c7c456} should be called separately, from the main thread.
 
 
-\begin{DoxyParams}{\-Parameters}
-{\em update\-U\-I,\-:} & if true, this will call \-Update\-U\-I, either directly (if in the main thread), or by sending a message. \\
+\begin{DoxyParams}{Parameters}
+{\em update\-U\-I,\-:} & if true, this will call Update\-U\-I, either directly (if in the main thread), or by sending a message. \\
 \hline
-{\em mutexlock,\-:} & if true, a \-Mutex will be used to lock the data shared between main and background thread. \-The idea is to only use a few \-Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{\-Cryst\-Update()}{p.}{a00122_a146ec591b9da6df9ea68fe7f80144ef0} and \doxyref{\-Update\-U\-I()}{p.}{a00122_adcb0b8495d2a0d03d7e2093bec17545e}. \-As sub-\/objects (\doxyref{\-W\-X\-Field}{p.}{a00119},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. \\
+{\em mutexlock,\-:} & if true, a Mutex will be used to lock the data shared between main and background thread. The idea is to only use a few Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{Cryst\-Update()}{p.}{a00122_a2e5de90ae4d1ca8feb65b88debf6d3cb} and \doxyref{Update\-U\-I()}{p.}{a00122_a093c04eb7b70ff063b80427779c7c456}. As sub-\/objects (\doxyref{W\-X\-Field}{p.}{a00126},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. \\
 \hline
 \end{DoxyParams}
 
 
-\-Implements {\bf \-Obj\-Cryst\-::\-W\-X\-Cryst\-Obj\-Basic} \doxyref{}{p.}{a00116_a7ac00ae2ae28f1a6fa26e6fa571186b6}.
+Implements {\bf Obj\-Cryst\-::\-W\-X\-Cryst\-Obj\-Basic} \doxyref{}{p.}{a00123_a7ac00ae2ae28f1a6fa26e6fa571186b6}.
 
-\index{\-Obj\-Cryst\-::\-W\-X\-Field\-Option@{\-Obj\-Cryst\-::\-W\-X\-Field\-Option}!\-On\-Choice@{\-On\-Choice}}
-\index{\-On\-Choice@{\-On\-Choice}!ObjCryst::WXFieldOption@{\-Obj\-Cryst\-::\-W\-X\-Field\-Option}}
-\paragraph[{\-On\-Choice}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Obj\-Cryst\-::\-W\-X\-Field\-Option\-::\-On\-Choice} (
+
+
+Reimplemented in {\bf Obj\-Cryst\-::\-W\-X\-Powder\-Pattern\-Background} \doxyref{}{p.}{a00144_adacc1d5b1efe6eaf6a7a6a2d544c5e81}, {\bf Obj\-Cryst\-::\-W\-X\-Molecule} \doxyref{}{p.}{a00139_a4d8fe8698ddc741c34b613643dec87b0}, {\bf Obj\-Cryst\-::\-W\-X\-Refinable\-Obj} \doxyref{}{p.}{a00150_a13e4f37ac098de756b27cdb91d6a0551}, {\bf Obj\-Cryst\-::\-W\-X\-Crystal} \doxyref{}{p.}{a00120_a55d7dc41da5c6d4360609d2eac91f39b}, {\bf Obj\-Cryst\-::\-W\-X\-Optimization\-Obj} \doxyref{}{p.}{a00142_a440befb33ae526a51eb9a7f3d9739d3e}, {\bf Obj\-Cryst\-::\-W\-X\-Powder\-Pattern} \doxyref{}{p.}{a00143_a90f999b4aab7ed134db388c532b1d63e}, and {\bf Obj\-Cryst\-::\-W\-X\-Diffraction\-Single\-Crystal} \doxyref{}{p.}{a00125_a79a9bb91f352c12bfb3a1ebd60267cbc}.
+
+\index{Obj\-Cryst\-::\-W\-X\-Cryst\-Obj@{Obj\-Cryst\-::\-W\-X\-Cryst\-Obj}!On\-Change\-Name@{On\-Change\-Name}}
+\index{On\-Change\-Name@{On\-Change\-Name}!ObjCryst::WXCrystObj@{Obj\-Cryst\-::\-W\-X\-Cryst\-Obj}}
+\paragraph[{On\-Change\-Name}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool Obj\-Cryst\-::\-W\-X\-Cryst\-Obj\-::\-On\-Change\-Name (
 \begin{DoxyParamCaption}
-\item[{wx\-Command\-Event \&}]{\-W\-X\-U\-N\-U\-S\-E\-Devent}
+\item[{const int}]{id}
 \end{DoxyParamCaption}
-)}\label{a00122_a3e6b1207ac284497de28a4ede07df048}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{a00122_a3736357599263df7e550790753c040a3}
 
 
-\-When a new value is entered. 
+When a \doxyref{W\-X\-Field\-Name}{p.}{a00128} has been changed by the user, it is handled here. 
 
-\-The \-Field reads the new value, then forwards the event to its owner, who will take care of anything that must be done. \index{\-Obj\-Cryst\-::\-W\-X\-Field\-Option@{\-Obj\-Cryst\-::\-W\-X\-Field\-Option}!\-Update\-U\-I@{\-Update\-U\-I}}
-\index{\-Update\-U\-I@{\-Update\-U\-I}!ObjCryst::WXFieldOption@{\-Obj\-Cryst\-::\-W\-X\-Field\-Option}}
-\paragraph[{\-Update\-U\-I}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-W\-X\-Field\-Option\-::\-Update\-U\-I} (
+This returns true if the value has been handled (for inheritance purposes). 
+
+Implemented in {\bf Obj\-Cryst\-::\-W\-X\-Profile\-Double\-Exponential\-Pseudo\-Voigt} \doxyref{}{p.}{a00147_adbfe19fda83e06f57047c064dbdd6ba3}, {\bf Obj\-Cryst\-::\-W\-X\-Profile\-Pseudo\-Voigt} \doxyref{}{p.}{a00148_a6af548e3f77328ca30fb3a06a50fd40a}, {\bf Obj\-Cryst\-::\-W\-X\-Refinable\-Obj} \doxyref{}{p.}{a00150_ad784c1cb9ccb0d0e4ebfbc18a8dbbc19}, {\bf Obj\-Cryst\-::\-W\-X\-Registry$<$ T $>$} \doxyref{}{p.}{a00151_add68cfae172f6d78a3261927a5977474}, {\bf Obj\-Cryst\-::\-W\-X\-Registry$<$ Obj\-Cryst\-::\-Scatterer $>$} \doxyref{}{p.}{a00151_add68cfae172f6d78a3261927a5977474}, {\bf Obj\-Cryst\-::\-W\-X\-Registry$<$ Obj\-Cryst\-::\-Powder\-Pattern\-Component $>$} \doxyref{}{p.}{a00151_add68cfae172f6d78a3261927a5977474}, {\bf Obj\-Cryst\-::\-W\-X\-Registry$<$ Obj\-Cryst\-::\-Z\-Atom $>$} \doxyref{}{p.}{a00151_add68cfae172f6d78a3261927a5977474}, {\bf Obj\-Cryst\-::\-W\-X\-Registry$<$ Obj\-Cryst\-::\-Scattering\-Power $>$} \doxyref{}{p.}{a00151_add68cfae172f6d78a3261927a5977474}, {\bf Obj\-Cryst\-::\-W\-X\-Crystal} \doxyref{}{p.}{a00120_a7a15c2d1b5f5997ace336724fc396892}, {\bf Obj\-Cryst\-::\-W\-X\-Optimization\-Obj} \doxyref{}{p.}{a00142_a19a866ffdeaba16f73fe3af78dbffa58}, {\bf Obj\-Cryst\-::\-W\-X\-Scattering\-Power\-Atom} \doxyref{}{p.}{a00153_a99081b400737a5e28a7207c8c905f6d5}, and {\bf Obj\-Cryst\-::\-W\-X\-Scattering\-Power\-Sphere} \doxyref{}{p.}{a00154_a54f201d096de63b349e8979d69d6933a}.
+
+\index{Obj\-Cryst\-::\-W\-X\-Cryst\-Obj@{Obj\-Cryst\-::\-W\-X\-Cryst\-Obj}!On\-Toggle\-Collapse@{On\-Toggle\-Collapse}}
+\index{On\-Toggle\-Collapse@{On\-Toggle\-Collapse}!ObjCryst::WXCrystObj@{Obj\-Cryst\-::\-W\-X\-Cryst\-Obj}}
+\paragraph[{On\-Toggle\-Collapse}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-W\-X\-Cryst\-Obj\-::\-On\-Toggle\-Collapse (
+\begin{DoxyParamCaption}
+\item[{wx\-Command\-Event \&}]{W\-X\-U\-N\-U\-S\-E\-Devent}
+\end{DoxyParamCaption}
+)}\label{a00122_ae55c3091101cae5d79e5aacb77c48856}
+
+
+Only display the title, and collapse everything else. 
+
+\begin{DoxyRefDesc}{Bug}
+\item[{\bf Bug}]\-: the windows do collapse, but the size of the window is not changed, so it is pretty useless so far... \end{DoxyRefDesc}
+\index{Obj\-Cryst\-::\-W\-X\-Cryst\-Obj@{Obj\-Cryst\-::\-W\-X\-Cryst\-Obj}!Update\-U\-I@{Update\-U\-I}}
+\index{Update\-U\-I@{Update\-U\-I}!ObjCryst::WXCrystObj@{Obj\-Cryst\-::\-W\-X\-Cryst\-Obj}}
+\paragraph[{Update\-U\-I}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-W\-X\-Cryst\-Obj\-::\-Update\-U\-I (
 \begin{DoxyParamCaption}
 \item[{const bool}]{mutexlock = {\ttfamily false}}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00122_adcb0b8495d2a0d03d7e2093bec17545e}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00122_a093c04eb7b70ff063b80427779c7c456}
 
 
-\-Update the \-User \-Interface, if necessary. 
+Update the User Interface, if necessary. 
 
 
-\begin{DoxyParams}{\-Parameters}
-{\em mutexlock,\-:} & if true, a \-Mutex will be used to lock the data shared between main and background thread.\\
+\begin{DoxyParams}{Parameters}
+{\em mutexlock,\-:} & if true, a Mutex will be used to lock the data shared between main and background thread.\\
 \hline
 \end{DoxyParams}
-\-The idea is to only use a few \-Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{\-Cryst\-Update()}{p.}{a00122_a146ec591b9da6df9ea68fe7f80144ef0} and \doxyref{\-Update\-U\-I()}{p.}{a00122_adcb0b8495d2a0d03d7e2093bec17545e}. \-As sub-\/objects (\doxyref{\-W\-X\-Field}{p.}{a00119},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
+The idea is to only use a few Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{Cryst\-Update()}{p.}{a00122_a2e5de90ae4d1ca8feb65b88debf6d3cb} and \doxyref{Update\-U\-I()}{p.}{a00122_a093c04eb7b70ff063b80427779c7c456}. As sub-\/objects (\doxyref{W\-X\-Field}{p.}{a00126},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
 
-\-Implements {\bf \-Obj\-Cryst\-::\-W\-X\-Cryst\-Obj\-Basic} \doxyref{}{p.}{a00116_a3818940b7031ff7e45cf2178c4a99c90}.
+Implements {\bf Obj\-Cryst\-::\-W\-X\-Cryst\-Obj\-Basic} \doxyref{}{p.}{a00123_a3818940b7031ff7e45cf2178c4a99c90}.
 
 
 
-\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+Reimplemented in {\bf Obj\-Cryst\-::\-W\-X\-Powder\-Pattern\-Diffraction} \doxyref{}{p.}{a00145_a0f7d965eea526ddce53d5bda8487b3fa}, {\bf Obj\-Cryst\-::\-W\-X\-Powder\-Pattern\-Background} \doxyref{}{p.}{a00144_a11c6de5af2d72bcfc276838a2d62c32e}, {\bf Obj\-Cryst\-::\-W\-X\-Molecule} \doxyref{}{p.}{a00139_ae932cbbd6d7e55d319f1b4eb169c63ef}, {\bf Obj\-Cryst\-::\-W\-X\-Refinable\-Obj} \doxyref{}{p.}{a00150_a19a1d057eecafd48710d9a3b770c1b28}, {\bf Obj\-Cryst\-::\-W\-X\-Crystal} \doxyref{}{p.}{a00120_a62946717943682dc2ac07ea4584030f4}, {\bf Obj\-Cryst\-::\-W\-X\-Powder\-Pattern} \doxyref{}{p.}{a00143_aaeace05033eaea9499398825fc8244da}, {\bf Obj\-Cryst\-::\-W\-X\-Optimization\-Obj} \doxyref{}{p.}{a00142_adbaf395e3e68e7605da0805e0e6465a0}, {\bf Obj\-Cryst\-::\-W\-X\-Atom} \doxyref{}{p.}{a00118_a5509a746fb1a6d918b6cbde8453d6a44}, {\bf Obj\-Cryst\-::\-W\-X\-Diffraction\-Single\-Crystal} \doxyref{}{p.}{a00125_a6419580548c5f35434e0128b62f5b4e6}, {\bf Obj\-Cryst\-::\-W\-X\-Scattering\-Power\-Atom} \doxyref{}{p.}{a00153_a727146d4ecd5e1c4e5790a3eab0f0ace}, and {\bf Obj\-Cryst\-::\-W\-X\-Scattering\-Power\-Sphere} \doxyref{}{p.}{a00154_a95d4f9b618ffbd4885294806b12b066c}.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-wx\-Refinable\-Obj.\-h\end{DoxyCompactItemize}
+wx\-Cryst.\-h\end{DoxyCompactItemize}

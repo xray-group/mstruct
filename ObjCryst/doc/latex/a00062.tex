@@ -1,1159 +1,402 @@
-\subsection{\-Obj\-Cryst\-:\-:\-Powder\-Pattern \-Class \-Reference}
-\label{a00062}\index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
+\subsection{Obj\-Cryst\-:\-:Optimization\-Obj Class Reference}
+\label{a00062}\index{Obj\-Cryst\-::\-Optimization\-Obj@{Obj\-Cryst\-::\-Optimization\-Obj}}
 
 
-\-Powder pattern class, with an observed pattern and several calculated components to modelize the pattern.  
+Base object for Optimization methods.  
 
 
-\-Inheritance diagram for \-Obj\-Cryst\-:\-:\-Powder\-Pattern\-:\begin{figure}[H]
+Inheritance diagram for Obj\-Cryst\-:\-:Optimization\-Obj\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{a00062}
 \end{center}
 \end{figure}
-\subsubsection*{\-Public \-Member \-Functions}
+\subsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries \-Powder\-Pattern} (const {\bf \-Powder\-Pattern} \&)\label{a00062_a6815f5a573037f29f5d7c5975c7d2360}
-
-\item 
-virtual const string \& {\bf \-Get\-Class\-Name} () const 
-\begin{DoxyCompactList}\small\item\em \-Name for this class (\char`\"{}\-Refinable\-Obj\char`\"{}, \char`\"{}\-Crystal\char`\"{},...). \end{DoxyCompactList}\item 
-void {\bf \-Add\-Powder\-Pattern\-Component} ({\bf \-Powder\-Pattern\-Component} \&)
-\begin{DoxyCompactList}\small\item\em \-Add a component (phase, backround) to this pattern. \end{DoxyCompactList}\item 
-unsigned int {\bf \-Get\-Nb\-Powder\-Pattern\-Component} () const \label{a00062_a6751e000cff31e66b311658bf24ab128}
-
-\begin{DoxyCompactList}\small\item\em \-Number of components. \end{DoxyCompactList}\item 
-const {\bf \-Powder\-Pattern\-Component} \& {\bf \-Get\-Powder\-Pattern\-Component} (const string \&name) const \label{a00062_a88f56291e21538d47a2bbfa44f8c17d0}
-
-\begin{DoxyCompactList}\small\item\em \-Access to a component of the powder pattern. \end{DoxyCompactList}\item 
-const {\bf \-Powder\-Pattern\-Component} \& {\bf \-Get\-Powder\-Pattern\-Component} (const int) const \label{a00062_ade54c0692377440cd110c88c11814326}
-
-\begin{DoxyCompactList}\small\item\em \-Access to a component of the powder pattern. \end{DoxyCompactList}\item 
-{\bf \-Powder\-Pattern\-Component} \& {\bf \-Get\-Powder\-Pattern\-Component} (const string \&name)\label{a00062_a75532455e2ffad2cf483038887d43308}
-
-\begin{DoxyCompactList}\small\item\em \-Access to a component of the powder pattern. \end{DoxyCompactList}\item 
-{\bf \-Powder\-Pattern\-Component} \& {\bf \-Get\-Powder\-Pattern\-Component} (const int)\label{a00062_a06da395985ebd3c1e8f7dfd34f87a8fc}
-
-\begin{DoxyCompactList}\small\item\em \-Access to a component of the powder pattern. \end{DoxyCompactList}\item 
-\-R\-E\-A\-L {\bf \-Get\-Scale\-Factor} (const int i) const \label{a00062_aa3db77c0b1ad916d480594e4453300e5}
-
-\begin{DoxyCompactList}\small\item\em \-Access to the scale factor of components (will be 1 for background components) \end{DoxyCompactList}\item 
-\-R\-E\-A\-L {\bf \-Get\-Scale\-Factor} (const {\bf \-Powder\-Pattern\-Component} \&comp) const \label{a00062_a14138c76f7cd9ee605432eb886c8cc12}
-
-\begin{DoxyCompactList}\small\item\em \-Access to the scale factor of components (will be 1 for background components) \end{DoxyCompactList}\item 
-void {\bf \-Set\-Scale\-Factor} (const int i, \-R\-E\-A\-L s)\label{a00062_a62f0bbe83a48154e23e8698e86545bb2}
-
-\begin{DoxyCompactList}\small\item\em \-Access to the scale factor of components (will be 1 for background components) \end{DoxyCompactList}\item 
-void {\bf \-Set\-Scale\-Factor} (const {\bf \-Powder\-Pattern\-Component} \&comp, \-R\-E\-A\-L s)\label{a00062_a23c3b15a62b104c8d3d5253d9975467f}
-
-\begin{DoxyCompactList}\small\item\em \-Access to the scale factor of components (will be 1 for background components) \end{DoxyCompactList}\item 
-void {\bf \-Set\-Powder\-Pattern\-Par} (const \-R\-E\-A\-L min, const \-R\-E\-A\-L step, unsigned long nb\-Point)
-\begin{DoxyCompactList}\small\item\em the powder pattern angular range \& resolution parameter. \end{DoxyCompactList}\item 
-void {\bf \-Set\-Powder\-Pattern\-X} (const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \&x)
-\begin{DoxyCompactList}\small\item\em \-Set the x coordinate of the powder pattern \-: either the 2theta or time-\/of-\/flight values for each recorded point. \end{DoxyCompactList}\item 
-unsigned long {\bf \-Get\-Nb\-Point} () const \label{a00062_aa3a5a69a31b83735b015b28ef09e1722}
-
-\begin{DoxyCompactList}\small\item\em \-Number of points ? \end{DoxyCompactList}\item 
-unsigned long {\bf \-Get\-Nb\-Point\-Used} () const \label{a00062_a0eb7f2167b25f58e4abcf4a4fa02ac2a}
-
-\begin{DoxyCompactList}\small\item\em \-Number of points actually calculated (below the chosen max(sin(theta)/lambda)) ? \end{DoxyCompactList}\item 
-const {\bf \-Refinable\-Obj\-Clock} \& {\bf \-Get\-Clock\-Nb\-Point\-Used} () const \label{a00062_a6ae58ee1b78cfd6cc7d0681fe162f683}
-
-\begin{DoxyCompactList}\small\item\em \-Clock corresponding to the last time the number of points used was changed. \end{DoxyCompactList}\item 
-void {\bf \-Set\-Radiation} (const {\bf \-Radiation} \&radiation)\label{a00062_a78eed04935e86eded8ee11470fcb9232}
-
-\begin{DoxyCompactList}\small\item\em \-Set the radiation. \end{DoxyCompactList}\item 
-const {\bf \-Radiation} \& {\bf \-Get\-Radiation} () const \label{a00062_aba39d0bd3780080f7730cb6aa368234a}
-
-\begin{DoxyCompactList}\small\item\em \-Neutron or x-\/ray experiment ? \end{DoxyCompactList}\item 
-{\bf \-Radiation} \& {\bf \-Get\-Radiation} ()\label{a00062_afc35a7b3cf68dae1830970b25e6e711f}
-
-\begin{DoxyCompactList}\small\item\em \-Neutron or x-\/ray experiment ? \end{DoxyCompactList}\item 
-void {\bf \-Set\-Radiation\-Type} (const {\bf \-Radiation\-Type} radiation)\label{a00062_ad3def5314d887649c311a6519d3f6e28}
-
-\begin{DoxyCompactList}\small\item\em \-Set the radiation type. \end{DoxyCompactList}\item 
-{\bf \-Radiation\-Type} {\bf \-Get\-Radiation\-Type} () const \label{a00062_a544895eb42e2817b35ad8adceac1cc4e}
-
-\begin{DoxyCompactList}\small\item\em \-Neutron or x-\/ray experiment ? \end{DoxyCompactList}\item 
-void {\bf \-Set\-Wavelength} (const \-R\-E\-A\-L lambda)
-\begin{DoxyCompactList}\small\item\em \-Set the wavelength of the experiment (in \-Angstroems). \end{DoxyCompactList}\item 
-void {\bf \-Set\-Wavelength} (const string \&\-X\-Ray\-Tube\-Element\-Name, const \-R\-E\-A\-L alpha12ratio=0.\-5)
-\begin{DoxyCompactList}\small\item\em \-Set the wavelength of the experiment to that of an \-X-\/\-Ray tube. \end{DoxyCompactList}\item 
-void {\bf \-Set\-Energy} (const \-R\-E\-A\-L energy)\label{a00062_a09820e4b8d5a7b7f0e68963cb62a20d9}
-
-\begin{DoxyCompactList}\small\item\em \-Set the energy of the experiment [in ke\-V, lambda(\-A)=12398/\-E(ke\-V)]. \end{DoxyCompactList}\item 
-\-R\-E\-A\-L {\bf \-Get\-Wavelength} () const \label{a00062_aad186f62e923f41eee3786e60444355d}
-
-\begin{DoxyCompactList}\small\item\em wavelength of the experiment (in \-Angstroems) \end{DoxyCompactList}\item 
-const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \& {\bf \-Get\-Powder\-Pattern\-Calc} () const \label{a00062_ad65306dc5835e3592c13ca7c11a8b106}
-
-\begin{DoxyCompactList}\small\item\em \-Get the calculated powder pattern. \end{DoxyCompactList}\item 
-const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \& {\bf \-Get\-Powder\-Pattern\-Obs} () const \label{a00062_a577f950d9d2d5e69dfdd31e8da0ab27a}
-
-\begin{DoxyCompactList}\small\item\em \-Get the observed powder pattern. \end{DoxyCompactList}\item 
-const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \& {\bf \-Get\-Powder\-Pattern\-Obs\-Sigma} () const \label{a00062_a05fa458401478e02a2e762deddfda4c2}
-
-\begin{DoxyCompactList}\small\item\em \-Get the sigma for each point of the observed powder pattern. \end{DoxyCompactList}\item 
-const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \& {\bf \-Get\-Powder\-Pattern\-Variance} () const \label{a00062_af96377fff84b5bec7a2cd448587e7766}
-
-\begin{DoxyCompactList}\small\item\em \-Get the variance (obs+model) for each point of the powder pattern. \end{DoxyCompactList}\item 
-const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \& {\bf \-Get\-Powder\-Pattern\-Weight} () const \label{a00062_a41d74e9506222fbd22b32d606de23441}
-
-\begin{DoxyCompactList}\small\item\em \-Get the weight for each point of the powder pattern. \end{DoxyCompactList}\item 
-\-R\-E\-A\-L {\bf \-Get\-Powder\-Pattern\-X\-Min} () const \label{a00062_a64ac562e1ca45f5419c5b7d08afe6146}
-
-\begin{DoxyCompactList}\small\item\em \-Get the \-Minimum 2theta. \end{DoxyCompactList}\item 
-\-R\-E\-A\-L {\bf \-Get\-Powder\-Pattern\-X\-Step} () const 
-\begin{DoxyCompactList}\small\item\em \-Get the average step in 2theta. \end{DoxyCompactList}\item 
-\-R\-E\-A\-L {\bf \-Get\-Powder\-Pattern\-X\-Max} () const \label{a00062_acd2151cd3d2673b210336fe8baf6c5ee}
-
-\begin{DoxyCompactList}\small\item\em \-Get the maximum 2theta. \end{DoxyCompactList}\item 
-const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \& {\bf \-Get\-Powder\-Pattern\-X} () const \label{a00062_ac37115cfe0ea3f7bd6f80b0068bcc94e}
-
-\begin{DoxyCompactList}\small\item\em \-Get the vector of \-X (2theta or time-\/of-\/flight) coordinates. \end{DoxyCompactList}\item 
-const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \& {\bf \-Get\-Chi2\-Cumul} () const 
-\begin{DoxyCompactList}\small\item\em \-Get the powder pattern cumulative \-Chi$^\wedge$2. \end{DoxyCompactList}\item 
-const {\bf \-Refinable\-Obj\-Clock} \& {\bf \-Get\-Clock\-Powder\-Pattern\-Calc} () const \label{a00062_ac99938787425e9e564413d55187583e5}
-
-\begin{DoxyCompactList}\small\item\em \-Last time the pattern was calculated. \end{DoxyCompactList}\item 
-const {\bf \-Refinable\-Obj\-Clock} \& {\bf \-Get\-Clock\-Powder\-Pattern\-Par} () const \label{a00062_a5d6d5ba62523890c5481473814110109}
-
-\begin{DoxyCompactList}\small\item\em \-When were the pattern parameters (2theta range, step) changed ? \end{DoxyCompactList}\item 
-const {\bf \-Refinable\-Obj\-Clock} \& {\bf \-Get\-Clock\-Powder\-Pattern\-Radiation} () const \label{a00062_a53829d29d8af6528ecb182ff27f27919}
-
-\begin{DoxyCompactList}\small\item\em \-When were the radiation parameter (radiation type, wavelength) changed ? \end{DoxyCompactList}\item 
-const {\bf \-Refinable\-Obj\-Clock} \& {\bf \-Get\-Clock\-Powder\-Pattern\-X\-Corr} () const \label{a00062_abdc02543b8651a966d0a676a70971865}
-
-\begin{DoxyCompactList}\small\item\em \-When were the parameters for 2theta/\-T\-O\-F correction (zero, transparency, displacement) last changed ? \end{DoxyCompactList}\item 
-void {\bf \-Set\-X\-Zero} (const \-R\-E\-A\-L new\-Zero)\label{a00062_a5f0a77781549a546e5e2b9dc76f14622}
-
-\begin{DoxyCompactList}\small\item\em \-Change \-Zero in x (2theta,tof) \end{DoxyCompactList}\item 
-void {\bf \-Set2\-Theta\-Displacement} (const \-R\-E\-A\-L displacement)\label{a00062_aee018af94fbc876762ccd98b0c8cb982}
-
-\begin{DoxyCompactList}\small\item\em \-Change displacement correction $ (2\theta)_{obs} = (2\theta)_{real} + a\cos(\theta) $. \end{DoxyCompactList}\item 
-void {\bf \-Set2\-Theta\-Transparency} (const \-R\-E\-A\-L transparency)\label{a00062_a7520df007f0e2058201c81f6bf6122ff}
-
-\begin{DoxyCompactList}\small\item\em \-Change transparency correction $ (2\theta)_{obs} = (2\theta)_{real} + b\sin(2\theta) $. \end{DoxyCompactList}\item 
-void {\bf \-Import\-Powder\-Pattern\-Fullprof} (const string \&fullprof\-File\-Name)
-\begin{DoxyCompactList}\small\item\em \-Import fullprof-\/style diffraction data. \end{DoxyCompactList}\item 
-void {\bf \-Import\-Powder\-Pattern\-P\-S\-I\-\_\-\-D\-M\-C} (const string \&filename)\label{a00062_a1ccba50e0df8ec4fb53c262b72ef384f}
-
-\begin{DoxyCompactList}\small\item\em \-Import powder pattern, format \-D\-M\-C from \-P\-S\-I. \end{DoxyCompactList}\item 
-void {\bf \-Import\-Powder\-Pattern\-I\-L\-L\-\_\-\-D1\-A5} (const string \&filename)\label{a00062_a900f73bf552e7e6264638dd6ed6276a1}
-
-\begin{DoxyCompactList}\small\item\em \-Import powder pattern, format from \-I\-L\-L \-D1\-A/\-D2\-B (format without counter info) \end{DoxyCompactList}\item 
-void {\bf \-Import\-Powder\-Pattern\-Xdd} (const string \&file\-Name)
-\begin{DoxyCompactList}\small\item\em \-Import $\ast$.xdd diffraction data (\-Topas,...). \end{DoxyCompactList}\item 
-void {\bf \-Import\-Powder\-Pattern\-Sietronics\-C\-P\-I} (const string \&file\-Name)
-\begin{DoxyCompactList}\small\item\em \-Import $\ast$.cpi \-Sietronics diffraction data. \end{DoxyCompactList}\item 
-void {\bf \-Import\-Powder\-Pattern2\-Theta\-Obs\-Sigma} (const string \&file\-Name, const int nb\-Skip=0)
-\begin{DoxyCompactList}\small\item\em \-Import file with 3 columns 2\-Theta \-Iobs \-Sigma. \end{DoxyCompactList}\item 
-void {\bf \-Import\-Powder\-Pattern\-Fullprof4} (const string \&file\-Name)
-\begin{DoxyCompactList}\small\item\em \-Import diffraction data from a file, with the first line has 2\-Theta\-Min, step, 2theta\-Max, and the following lines alternate 10 \-Iobs and 10 sigma. \end{DoxyCompactList}\item 
-void {\bf \-Import\-Powder\-Pattern\-Multi\-Detector\-L\-L\-B\-G42} (const string \&file\-Name)
-\begin{DoxyCompactList}\small\item\em diffraction data in a multi-\/detector format (fullprof format \#6). \end{DoxyCompactList}\item 
-void {\bf \-Import\-Powder\-Pattern2\-Theta\-Obs} (const string \&file\-Name, const int nb\-Skip=0)
-\begin{DoxyCompactList}\small\item\em \-Import file with 2 columns 2\-Theta \-Iobs. \end{DoxyCompactList}\item 
-void {\bf \-Import\-Powder\-Pattern\-T\-O\-F\-\_\-\-I\-S\-I\-S\-\_\-\-X\-Y\-Sigma} (const string \&file\-Name)
-\begin{DoxyCompactList}\small\item\em \-Import \-T\-O\-F file (\-I\-S\-I\-S type, 3 columns t, \-Iobs, sigma(\-Iobs)) \end{DoxyCompactList}\item 
-void {\bf \-Import\-Powder\-Pattern\-G\-S\-A\-S} (const string \&file\-Name)
-\begin{DoxyCompactList}\small\item\em \-Import \-G\-S\-A\-S standard powder pattern data (see \-G\-S\-A\-S manual). \end{DoxyCompactList}\item 
-void {\bf \-Import\-Powder\-Pattern\-C\-I\-F} (const {\bf \-C\-I\-F} \&cif)\label{a00062_a50348c3084e39c0c8f46a3ddccc03e1f}
-
-\begin{DoxyCompactList}\small\item\em \-Import \doxyref{\-C\-I\-F}{p.}{a00017} powder pattern data. \end{DoxyCompactList}\item 
-void {\bf \-Set\-Powder\-Pattern\-Obs} (const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \&obs)
-\begin{DoxyCompactList}\small\item\em \-Set observed powder pattern from vector array. \end{DoxyCompactList}\item 
-void {\bf \-Save\-Powder\-Pattern} (const string \&filename=\char`\"{}powder\-Pattern.\-out\char`\"{}) const 
-\begin{DoxyCompactList}\small\item\em \-Save powder pattern to one file, text format, 3 columns theta \-Iobs \-Icalc. \end{DoxyCompactList}\item 
-void {\bf \-Print\-Obs\-Calc\-Data} (ostream \&os=cout) const \label{a00062_ab5319864b297bf008d239145730b04b5}
-
-\begin{DoxyCompactList}\small\item\em \-Print to thee screen/console the observed and calculated pattern (long, mostly useful for debugging) \end{DoxyCompactList}\item 
-\-R\-E\-A\-L {\bf \-Get\-R} () const 
-\begin{DoxyCompactList}\small\item\em \-Unweighted \-R-\/factor. \end{DoxyCompactList}\item 
-\-R\-E\-A\-L {\bfseries \-Get\-Integrated\-R} () const \label{a00062_a68f3f82a5bba57b7f011c528747ce337}
-
-\item 
-\-R\-E\-A\-L {\bf \-Get\-Rw} () const 
-\begin{DoxyCompactList}\small\item\em \-Get the weighted \-R-\/factor. \end{DoxyCompactList}\item 
-\-R\-E\-A\-L {\bfseries \-Get\-Integrated\-Rw} () const \label{a00062_a44215fd267e85dd3e77b437687ed98cc}
-
-\item 
-\-R\-E\-A\-L {\bf \-Get\-Chi2} () const 
-\begin{DoxyCompactList}\small\item\em \-Return conventionnal \-Chi$^\wedge$2. \end{DoxyCompactList}\item 
-\-R\-E\-A\-L {\bf \-Get\-Integrated\-Chi2} () const 
-\begin{DoxyCompactList}\small\item\em \-Return integrated \-Chi$^\wedge$2. \end{DoxyCompactList}\item 
-\-R\-E\-A\-L {\bf \-Get\-Chi2\-\_\-\-Option} () const \label{a00062_a92f59c2a608b63a166ee2e002540ae75}
-
-\begin{DoxyCompactList}\small\item\em \-Return the conventionnal or integrated \-Chi$^\wedge$2, depending on the option. \end{DoxyCompactList}\item 
-void {\bf \-Fit\-Scale\-Factor\-For\-R} () const \label{a00062_abe0341d5a09b6a9c44d1c91d47c5153f}
-
-\begin{DoxyCompactList}\small\item\em \-Fit the scale(s) factor of each component to minimize \-R. \end{DoxyCompactList}\item 
-void {\bfseries \-Fit\-Scale\-Factor\-For\-Integrated\-R} () const \label{a00062_a1c68a9d2b723641f460fa8ebc48070ca}
-
-\item 
-void {\bf \-Fit\-Scale\-Factor\-For\-Rw} () const \label{a00062_aee42df6a7994844b9aec9c67b63ae693}
-
-\begin{DoxyCompactList}\small\item\em \-Fit the scale(s) factor of each component to minimize \-Rw. \end{DoxyCompactList}\item 
-void {\bfseries \-Fit\-Scale\-Factor\-For\-Integrated\-Rw} () const \label{a00062_a6eb8195658e125d5ecb0ea5891fe2595}
-
-\item 
-void {\bf \-Set\-Sigma\-To\-Sqrt\-Iobs} ()\label{a00062_a1f2397ca48de524cb3916103eb83a267}
-
-\begin{DoxyCompactList}\small\item\em \-Set sigma=sqrt(\-Iobs) \end{DoxyCompactList}\item 
-void {\bf \-Set\-Weight\-To\-Inv\-Sigma\-Sq} (const \-R\-E\-A\-L min\-Relat\-Sigma=1e-\/3)
-\begin{DoxyCompactList}\small\item\em \-Set w = 1/sigma$^\wedge$2. \end{DoxyCompactList}\item 
-void {\bf \-Set\-Weight\-To\-Unit} ()\label{a00062_a57bbc965281ecca08c5f6bc0d0076e00}
-
-\begin{DoxyCompactList}\small\item\em \-Set w = 1. \end{DoxyCompactList}\item 
-void {\bf \-Set\-Weight\-Polynomial} (const \-R\-E\-A\-L a, const \-R\-E\-A\-L b, const \-R\-E\-A\-L c, const \-R\-E\-A\-L min\-Relat\-Iobs=1e-\/3)
-\begin{DoxyCompactList}\small\item\em \-Set w = 1/(a+ \-Iobs + b$\ast$\-Iobs$^\wedge$2+c$\ast$\-Iobs$^\wedge$3) \end{DoxyCompactList}\item 
-void {\bf \-Add\-Excluded\-Region} (const \-R\-E\-A\-L min2\-Theta, const \-R\-E\-A\-L max2theta)
-\begin{DoxyCompactList}\small\item\em \-Add an \-Exclusion region, in 2theta, which will be ignored when computing \-R's \-X\-M\-L\-Input values must be, as always, in radians. \end{DoxyCompactList}\item 
-virtual void {\bf \-Begin\-Optimization} (const bool allow\-Approximations=false, const bool enable\-Restraints=false)
-\begin{DoxyCompactList}\small\item\em \-This should be called by any optimization class at the begining of an optimization. \end{DoxyCompactList}\item 
-virtual void {\bf \-Global\-Opt\-Random\-Move} (const \-R\-E\-A\-L mutation\-Amplitude, const {\bf \-Ref\-Par\-Type} $\ast$type={\bf gp\-Ref\-Par\-Type\-Obj\-Cryst})
-\begin{DoxyCompactList}\small\item\em \-Make a random move of the current configuration. \end{DoxyCompactList}\item 
-virtual \-R\-E\-A\-L {\bf \-Get\-Log\-Likelihood} () const 
-\begin{DoxyCompactList}\small\item\em \-Get -\/log(likelihood) of the current configuration for the object. \end{DoxyCompactList}\item 
-virtual unsigned int {\bf \-Get\-Nb\-L\-S\-Q\-Function} () const \label{a00062_a2d2660f3e10f7df990762fb43c0754ac}
-
-\begin{DoxyCompactList}\small\item\em \-Number of \-L\-S\-Q functions. \end{DoxyCompactList}\item 
-virtual const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \& {\bf \-Get\-L\-S\-Q\-Calc} (const unsigned int) const \label{a00062_a6ef6fbc13720b0dcdd3088bd3139a9bb}
-
-\begin{DoxyCompactList}\small\item\em \-Get the current calculated value for the \-L\-S\-Q function. \end{DoxyCompactList}\item 
-virtual const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \& {\bf \-Get\-L\-S\-Q\-Obs} (const unsigned int) const \label{a00062_ae80221740ac8000fecff6cdc941c7881}
-
-\begin{DoxyCompactList}\small\item\em \-Get the observed values for the \-L\-S\-Q function. \end{DoxyCompactList}\item 
-virtual const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \& {\bf \-Get\-L\-S\-Q\-Weight} (const unsigned int) const \label{a00062_a8b54821ac48a0eaefaa69162e866471e}
-
-\begin{DoxyCompactList}\small\item\em \-Get the weight values for the \-L\-S\-Q function. \end{DoxyCompactList}\item 
-virtual void {\bf \-X\-M\-L\-Output} (ostream \&os, int indent=0) const 
-\begin{DoxyCompactList}\small\item\em \-Output to stream in well-\/formed \-X\-M\-L. \end{DoxyCompactList}\item 
-virtual void {\bf \-X\-M\-L\-Input} (istream \&is, const {\bf \-X\-M\-L\-Cryst\-Tag} \&tag)
-\begin{DoxyCompactList}\small\item\em \-Input \-From stream. \end{DoxyCompactList}\item 
-void {\bf \-Prepare} ()
-\item 
-virtual void {\bf \-Get\-Gene\-Group} (const {\bf \-Refinable\-Obj} \&obj, \-Cryst\-Vector\-\_\-uint \&group\-Index, unsigned int \&first\-Group) const 
-\begin{DoxyCompactList}\small\item\em \-Get the gene group assigned to each parameter. \end{DoxyCompactList}\item 
-virtual void {\bf \-Set\-Max\-Sin\-Theta\-Ov\-Lambda} (const \-R\-E\-A\-L max)
-\begin{DoxyCompactList}\small\item\em \-Set the maximum value for sin(theta)/lambda. \end{DoxyCompactList}\item 
-\-R\-E\-A\-L {\bf \-Get\-Max\-Sin\-Theta\-Ov\-Lambda} () const \label{a00062_a4d779670e3ac85bf1ddb17b4d2d3b294}
-
-\begin{DoxyCompactList}\small\item\em \-Get the maximum value for sin(theta)/lambda. \end{DoxyCompactList}\item 
-const \-Cryst\-Vector\-\_\-long \& {\bf \-Get\-Integrated\-Profile\-Min} () const \label{a00062_ab1474a1d0cd2c655384c23a78a1ea110}
-
-\begin{DoxyCompactList}\small\item\em \-Get the list of first pixels for the integration intervals. \end{DoxyCompactList}\item 
-const \-Cryst\-Vector\-\_\-long \& {\bf \-Get\-Integrated\-Profile\-Max} () const \label{a00062_af1e56a7c30bdcc7053da429fb74ff628}
-
-\begin{DoxyCompactList}\small\item\em \-Get the list of last pixels for the integration intervals. \end{DoxyCompactList}\item 
-const {\bf \-Refinable\-Obj\-Clock} \& {\bf \-Get\-Integrated\-Profile\-Limits\-Clock} () const \label{a00062_a986e0c8bcb2f0d920bc35a8cc542a008}
-
-\begin{DoxyCompactList}\small\item\em \-When were the integration intervals last changed ? \end{DoxyCompactList}\item 
-\-R\-E\-A\-L {\bf \-X2\-X\-Corr} (const \-R\-E\-A\-L x) const 
-\begin{DoxyCompactList}\small\item\em \-Get the experimental x (2theta, tof) from the theoretical value, taking into account all corrections (zero, transparency,..). \end{DoxyCompactList}\item 
-\-R\-E\-A\-L {\bf \-X2\-Pixel\-Corr} (const \-R\-E\-A\-L x) const 
-\begin{DoxyCompactList}\small\item\em \-Get the pixel number on the experimental pattern, from the theoretical (uncorrected) x coordinate, taking into account all corrections. \end{DoxyCompactList}\item 
-\-R\-E\-A\-L {\bf \-X2\-Pixel} (const \-R\-E\-A\-L x) const 
-\begin{DoxyCompactList}\small\item\em \-Get the pixel number on the experimental pattern, corresponding to a given (experimental) x coordinate. \end{DoxyCompactList}\item 
-\-R\-E\-A\-L {\bf \-S\-T\-O\-L2\-X} (const \-R\-E\-A\-L stol) const 
-\begin{DoxyCompactList}\small\item\em \-Convert sin(theta)/lambda to \-X (i.\-e. \end{DoxyCompactList}\item 
-\-R\-E\-A\-L {\bf \-X2\-S\-T\-O\-L} (const \-R\-E\-A\-L x) const 
-\begin{DoxyCompactList}\small\item\em \-Convert \-X (either 2theta or \-T\-O\-F) to sin(theta)/lambda, depending on the type of radiation. \end{DoxyCompactList}\item 
-\-R\-E\-A\-L {\bf \-S\-T\-O\-L2\-Pixel} (const \-R\-E\-A\-L stol) const 
-\begin{DoxyCompactList}\small\item\em \-Convert sin(theta)/lambda to pixel, depending on the type of radiation. \end{DoxyCompactList}\item 
-{\bf \-Peak\-List} {\bf \-Find\-Peaks} (const float dmin=2.\-0, const float maxratio=0.\-01, const unsigned int maxpeak=100)\label{a00062_ad9de9c25681448972d968ec992534a2f}
-
-\begin{DoxyCompactList}\small\item\em \-Find peaks in the pattern. \end{DoxyCompactList}\item 
-const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \& {\bf \-Get\-Scale\-Factor} () const \label{a00062_adf389913f29eafe30d54fb778a3a75b8}
-
-\begin{DoxyCompactList}\small\item\em \-Access the scale factors (see \-Powder\-Pattern\-::m\-Scale\-Factor) \end{DoxyCompactList}\item 
-\-Cryst\-Vector\-\_\-\-R\-E\-A\-L \& {\bf \-Get\-Scale\-Factor} ()\label{a00062_a27cc704339074a3a92395c2d632fc101}
-
-\begin{DoxyCompactList}\small\item\em \-Access the scale factors (see \-Powder\-Pattern\-::m\-Scale\-Factor) \end{DoxyCompactList}\item 
-void {\bf \-Export\-Fullprof} (const std\-::string \&prefix) const 
-\begin{DoxyCompactList}\small\item\em \-Export powder pattern \& crystal structure in \-Fullprof format. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{\-Protected \-Member \-Functions}
+struct {\bf Log\-Likelihood\-Stats}
+\begin{DoxyCompactList}\small\item\em Statistics about each object contributing to the overall Log(likelihood) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void {\bf \-Calc\-Powder\-Pattern} () const \label{a00062_aeec384d7b4c64208705e335b1d777078}
+{\bf Optimization\-Obj} (const string name=\char`\"{}\char`\"{})\label{a00062_a939444ac47768e16d205bebbc247cc12}
 
-\begin{DoxyCompactList}\small\item\em \-Calc the powder pattern. \end{DoxyCompactList}\item 
-void {\bf \-Calc\-Powder\-Pattern\-Integrated} () const \label{a00062_a4e83fb08b877615a285203e7b64d11f5}
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual {\bf $\sim$\-Optimization\-Obj} ()\label{a00062_a6fdf1e7158254a3c0a21b33e6ed5ffb5}
 
-\begin{DoxyCompactList}\small\item\em \-Calc the integrated powder pattern. \end{DoxyCompactList}\item 
-virtual void {\bf \-Init} ()\label{a00062_af621257d23b5f61b692005b4cbf16548}
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+virtual void {\bf Randomize\-Starting\-Config} ()
+\begin{DoxyCompactList}\small\item\em Randomize starting configuration. \end{DoxyCompactList}\item 
+virtual void {\bf Optimize} (long \&nb\-Steps, const bool silent=false, const R\-E\-A\-L finalcost=0, const R\-E\-A\-L max\-Time=-\/1)=0
+\begin{DoxyCompactList}\small\item\em Launch optimization (a single run) for N steps. \end{DoxyCompactList}\item 
+virtual void {\bf Multi\-Run\-Optimize} (long \&nb\-Cycle, long \&nb\-Steps, const bool silent=false, const R\-E\-A\-L finalcost=0, const R\-E\-A\-L max\-Time=-\/1)=0
+\begin{DoxyCompactList}\small\item\em Launch optimization for multiple runs of N steps. \end{DoxyCompactList}\item 
+void {\bf Fix\-All\-Par} ()\label{a00062_af8b3cef84c6bcca37cdc4bfde9ecde45}
 
-\begin{DoxyCompactList}\small\item\em \-Init parameters and options. \end{DoxyCompactList}\item 
-void {\bf \-Prepare\-Integrated\-Rfactor} () const \label{a00062_aaadcc6843ef4cbb5ea93adb376adca3b}
+\begin{DoxyCompactList}\small\item\em Fix all parameters. \end{DoxyCompactList}\item 
+void {\bf Set\-Par\-Is\-Fixed} (const string \&par\-Name, const bool fix)\label{a00062_aca3e1d2c6ace92f1a3a67da2455eac39}
 
-\begin{DoxyCompactList}\small\item\em \-Prepare the calculation of the integrated \-R-\/factors. \end{DoxyCompactList}\item 
-void {\bf \-Calc\-Nb\-Point\-Used} () const \label{a00062_ae0bab5e34ba3f4e3c31314950406a183}
+\begin{DoxyCompactList}\small\item\em Fix one parameter. \end{DoxyCompactList}\item 
+void {\bf Set\-Par\-Is\-Fixed} (const {\bf Ref\-Par\-Type} $\ast$type, const bool fix)\label{a00062_a12a66416a701cbf0db17de3bfafdec99}
 
-\begin{DoxyCompactList}\small\item\em \-Calculate the number of points of the pattern actually used, from the maximum value of sin(theta)/lambda. \end{DoxyCompactList}\item 
-virtual void {\bf \-Init\-Options} ()\label{a00062_a58e00018fd044e5175518600bb6086f4}
+\begin{DoxyCompactList}\small\item\em Fix one family of parameters. \end{DoxyCompactList}\item 
+void {\bf Un\-Fix\-All\-Par} ()\label{a00062_adb016adacaa7a2a15e40cfb746705bdd}
 
-\begin{DoxyCompactList}\small\item\em \-Initialize options. \end{DoxyCompactList}\item 
-\-Number of points actually due \*
-to the maximum value of {\bfseries sin} (theta)/lambda.\-mutable unsigned long m\-Nb\-Point\-Used\label{a00062_aff2984de220b14affbc74582bb0ee76b}
+\begin{DoxyCompactList}\small\item\em Un\-Fix All parameters. \end{DoxyCompactList}\item 
+void {\bf Set\-Par\-Is\-Used} (const string \&par\-Name, const bool use)\label{a00062_ab2f87becfb73eb00d8f7c3ff25435c0d}
+
+\begin{DoxyCompactList}\small\item\em Set a parameter to be used. \end{DoxyCompactList}\item 
+void {\bf Set\-Par\-Is\-Used} (const {\bf Ref\-Par\-Type} $\ast$type, const bool use)\label{a00062_a73c29f094ad0a4923a2873388fc1eb93}
+
+\begin{DoxyCompactList}\small\item\em Set a family of parameters to be used. \end{DoxyCompactList}\item 
+void {\bf Set\-Limits\-Relative} (const string \&par\-Name, const R\-E\-A\-L min, const R\-E\-A\-L max)\label{a00062_a78113a7741eeda2263a27adcc24497c0}
+
+\begin{DoxyCompactList}\small\item\em Change the relative limits for a parameter from its name. \end{DoxyCompactList}\item 
+void {\bf Set\-Limits\-Relative} (const {\bf Ref\-Par\-Type} $\ast$type, const R\-E\-A\-L min, const R\-E\-A\-L max)\label{a00062_a0437fb441bebe91879de98efcb82865e}
+
+\begin{DoxyCompactList}\small\item\em Change the relative limits for a family of parameter. \end{DoxyCompactList}\item 
+void {\bf Set\-Limits\-Absolute} (const string \&par\-Name, const R\-E\-A\-L min, const R\-E\-A\-L max)\label{a00062_ad0bc0b36d1525526c55dc6642109d0b4}
+
+\begin{DoxyCompactList}\small\item\em Change the absolute limits for a parameter from its name. \end{DoxyCompactList}\item 
+void {\bf Set\-Limits\-Absolute} (const {\bf Ref\-Par\-Type} $\ast$type, const R\-E\-A\-L min, const R\-E\-A\-L max)\label{a00062_ade59b2e1d698ff7ba93ac5aa88187c58}
+
+\begin{DoxyCompactList}\small\item\em Change the absolute limits for a family of parameter. \end{DoxyCompactList}\item 
+virtual R\-E\-A\-L {\bf Get\-Log\-Likelihood} () const 
+\begin{DoxyCompactList}\small\item\em The optimized (minimized, actually) function. \end{DoxyCompactList}\item 
+void {\bf Stop\-After\-Cycle} ()\label{a00062_a288306acc3189c4fcaca398d11b32e4e}
+
+\begin{DoxyCompactList}\small\item\em Stop after the current cycle. U\-Sed for interactive refinement. \end{DoxyCompactList}\item 
+virtual void {\bf Display\-Report} ()\label{a00062_af09e8a9cd1b7f7f29bf57d027e08fc54}
+
+\begin{DoxyCompactList}\small\item\em Show report to the user during refinement. Used for G\-U\-I update. \end{DoxyCompactList}\item 
+void {\bf Add\-Refinable\-Obj} ({\bf Refinable\-Obj} \&)\label{a00062_a05e7019188763202126f9f83a31e1673}
+
+\begin{DoxyCompactList}\small\item\em Add a refined object. All sub-\/objects are also added. \end{DoxyCompactList}\item 
+{\bf Refinable\-Obj} \& {\bf Get\-Full\-Refinable\-Obj} (const bool rebuild=true)
+\begin{DoxyCompactList}\small\item\em Get the \doxyref{Refinable\-Obj}{p.}{a00078} with all the parameters from all refined objects. \end{DoxyCompactList}\item 
+virtual void {\bf X\-M\-L\-Output} (ostream \&os, int indent=0) const =0
+\begin{DoxyCompactList}\small\item\em Output a description of the object in X\-M\-L format to a stream. \end{DoxyCompactList}\item 
+virtual void {\bf X\-M\-L\-Input} (istream \&is, const {\bf X\-M\-L\-Cryst\-Tag} \&tag)=0
+\begin{DoxyCompactList}\small\item\em Input in X\-M\-L format from a stream, restoring the set of refined objects and the associated cost functions. \end{DoxyCompactList}\item 
+const string \& {\bf Get\-Name} () const \label{a00062_af595745274e554956834f885d7a1dc71}
+
+\begin{DoxyCompactList}\small\item\em Get the name for this object. \end{DoxyCompactList}\item 
+void {\bf Set\-Name} (const string \&)\label{a00062_a076dc80d878fc4ab5e5491f54642382e}
+
+\begin{DoxyCompactList}\small\item\em Set the name for this object. \end{DoxyCompactList}\item 
+virtual const string {\bf Get\-Class\-Name} () const \label{a00062_a2f00b2c3eb874d966bbb778a0d81abb1}
+
+\begin{DoxyCompactList}\small\item\em Get the name for this class type. \end{DoxyCompactList}\item 
+virtual void {\bf Print} () const \label{a00062_a55e92db45821ed13288d6852055c0003}
+
+\begin{DoxyCompactList}\small\item\em Print some information about this object. \end{DoxyCompactList}\item 
+void {\bf Restore\-Best\-Configuration} ()\label{a00062_a25a4ea1cf717a7d62ecf2cdbee87fa7a}
+
+\begin{DoxyCompactList}\small\item\em Restore the Best configuration. \end{DoxyCompactList}\item 
+bool {\bf Is\-Optimizing} () const \label{a00062_a02d12183cd9d167358717b87ada6ba1f}
+
+\begin{DoxyCompactList}\small\item\em Are we busy optimizing ? \end{DoxyCompactList}\item 
+void {\bf Tag\-New\-Best\-Config} ()\label{a00062_a99ca4e2216b0fd93ab335c35a99ca895}
+
+\begin{DoxyCompactList}\small\item\em During a global optimization, tell all objects that the current config is the latest \char`\"{}best\char`\"{} config. \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bf Get\-Last\-Optim\-Elapsed\-Time} () const \label{a00062_af9bb37804ee3012cb05ffc217584db42}
+
+\begin{DoxyCompactList}\small\item\em Get the elapsed time (in seconds) during the last optimization. \end{DoxyCompactList}\item 
+{\bf Main\-Tracker} \& {\bf Get\-Main\-Tracker} ()\label{a00062_af8328b810bc37e45881e19948da7d2d7}
+
+\begin{DoxyCompactList}\small\item\em Get the \doxyref{Main\-Tracker}{p.}{a00048}. \end{DoxyCompactList}\item 
+const {\bf Main\-Tracker} \& {\bf Get\-Main\-Tracker} () const \label{a00062_a737490fc1ac0b30fc3bb3a5bb8061a8b}
+
+\begin{DoxyCompactList}\small\item\em Get the \doxyref{Main\-Tracker}{p.}{a00048}. \end{DoxyCompactList}\item 
+{\bf Ref\-Obj\-Opt} \& {\bfseries Get\-X\-M\-L\-Auto\-Save\-Option} ()\label{a00062_a82e4adbc7b5d3374f7c414a0e89c25fd}
 
 \item 
-\-Number of integration \*
-intervals actually due to the \*
-maximum value of {\bfseries sin} (theta)/lambda.\-mutable unsigned long m\-Nb\-Integration\-Used\label{a00062_ab4a812e1e87df37d43f46e9d6aa35573}
+const {\bf Ref\-Obj\-Opt} \& {\bfseries Get\-X\-M\-L\-Auto\-Save\-Option} () const \label{a00062_a0a37e6bcce21926e13a3f57882e971b0}
 
 \item 
-\-Clock recording the last time \*
-the number of points {\bfseries used} (\-Powder\-Pattern\-::m\-Nb\-Point\-Used) was changed.\-mutable {\bf \-Refinable\-Obj\-Clock} m\-Clock\-Nb\-Point\-Used\label{a00062_a927ace4cea0826ffbba8145adca07998}
+const R\-E\-A\-L \& {\bf Get\-Best\-Cost} () const \label{a00062_a56c9ec94e7632c8b3f36e3a837c02594}
 
-\end{DoxyCompactItemize}
-\subsubsection*{\-Protected \-Attributes}
+\begin{DoxyCompactList}\small\item\em Access to current best cost. \end{DoxyCompactList}\item 
+R\-E\-A\-L \& {\bf Get\-Best\-Cost} ()\label{a00062_a894882f10bd768e3e57ffdfa9f9df7fe}
+
+\begin{DoxyCompactList}\small\item\em Access to current best cost. \end{DoxyCompactList}\item 
+virtual void {\bf Begin\-Optimization} (const bool allow\-Approximations=false, const bool enable\-Restraints=false)\label{a00062_a13c12dbdc72825f892c3d48dd2b6cfe3}
+
+\begin{DoxyCompactList}\small\item\em Begin optimization for all objects. \end{DoxyCompactList}\item 
+virtual void {\bf End\-Optimization} ()\label{a00062_a37c2335ad867152121253996daaebc6e}
+
+\begin{DoxyCompactList}\small\item\em End optimization for all objects. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf m\-Powder\-Pattern\-Calc}
-\begin{DoxyCompactList}\small\item\em \-The calculated powder pattern. \end{DoxyCompactList}\item 
-\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf m\-Powder\-Pattern\-Integrated\-Calc}\label{a00062_abf4b59b588e54dd6504722a4e8700c43}
-
-\begin{DoxyCompactList}\small\item\em \-The calculated powder pattern, integrated. \end{DoxyCompactList}\item 
-\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf m\-Powder\-Pattern\-Background\-Calc}
-\begin{DoxyCompactList}\small\item\em \-The calculated powder pattern part which corresponds to 'background' (eg non-\/scalable components). \end{DoxyCompactList}\item 
-\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf m\-Powder\-Pattern\-Background\-Integrated\-Calc}\label{a00062_a18da34aac86b27d5511268113b5f9260}
-
-\begin{DoxyCompactList}\small\item\em \-The calculated powder pattern part which corresponds to 'background' (eg non-\/scalable components), integrated. \end{DoxyCompactList}\item 
-\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf m\-Powder\-Pattern\-Obs}\label{a00062_aa7de3fc187edf28b3688569866b00700}
-
-\begin{DoxyCompactList}\small\item\em \-The observed powder pattern. \end{DoxyCompactList}\item 
-\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf m\-Powder\-Pattern\-Obs\-Sigma}\label{a00062_ab0468caae908a520555da3b104714129}
-
-\begin{DoxyCompactList}\small\item\em \-The sigma of the observed pattern. \end{DoxyCompactList}\item 
-\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf m\-Powder\-Pattern\-Weight}\label{a00062_a65da6b3a338951905cf52aa4b22f9324}
-
-\begin{DoxyCompactList}\small\item\em \-The weight for each point of the pattern. \end{DoxyCompactList}\item 
-\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf m\-Powder\-Pattern\-Variance}
-\begin{DoxyCompactList}\small\item\em \-The complete variance associated to each point of the powder pattern, taking into account observation and model errors. \end{DoxyCompactList}\item 
-\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf m\-Powder\-Pattern\-Variance\-Integrated}
-\begin{DoxyCompactList}\small\item\em \-The complete variance associated to each point of the powder pattern, taking into account observation and model errors. \end{DoxyCompactList}\item 
-\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf m\-Chi2\-Cumul}\label{a00062_a0ed58eb5c5c33166838c1d57aa26ddae}
-
-\begin{DoxyCompactList}\small\item\em \-The cumulative \-Chi$^\wedge$2 (integrated or not, depending on the option) \end{DoxyCompactList}\item 
-\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf m\-Powder\-Pattern\-Used\-Calc}\label{a00062_a4857b149efae6be6014648718d1cf62c}
-
-\begin{DoxyCompactList}\small\item\em \-The calculated powder pattern. \-Cropped to the maximum sin(theta)/lambda for \-L\-S\-Q. \end{DoxyCompactList}\item 
-\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf m\-Powder\-Pattern\-Used\-Obs}\label{a00062_a5390f7b642a104f692b459ad50de14e1}
-
-\begin{DoxyCompactList}\small\item\em \-The calculated powder pattern. \-Cropped to the maximum sin(theta)/lambda for \-L\-S\-Q. \end{DoxyCompactList}\item 
-\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf m\-Powder\-Pattern\-Used\-Weight}\label{a00062_ab1afb9ea500e8ba4d91178033ad7d18c}
-
-\begin{DoxyCompactList}\small\item\em \-The weight for each point of the pattern. \-Cropped to the maximum sin(theta)/lambda for \-L\-S\-Q. \end{DoxyCompactList}\item 
-\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf m\-X}
-\begin{DoxyCompactList}\small\item\em \-Vector of x coordinates (either 2theta or time-\/of-\/flight) for the pattern. \end{DoxyCompactList}\item 
-bool {\bf m\-Is\-X\-Ascending}\label{a00062_ae28448d544d8d581ec9ee1ff357790b0}
-
-\begin{DoxyCompactList}\small\item\em \-Is the m\-X vector sorted in ascending order ? (true for 2theta, false for \-T\-O\-F) \end{DoxyCompactList}\item 
-unsigned long {\bf m\-Nb\-Point}\label{a00062_a19b60b359851708470a639767f98931e}
-
-\begin{DoxyCompactList}\small\item\em \-Number of points in the pattern. \end{DoxyCompactList}\item 
-{\bf \-Radiation} {\bf m\-Radiation}\label{a00062_a05765f5848b8f408c98061501d576da1}
-
-\begin{DoxyCompactList}\small\item\em \-The \doxyref{\-Radiation}{p.}{a00069} corresponding to this experiment. \end{DoxyCompactList}\item 
-{\bf \-Refinable\-Obj\-Clock} {\bf m\-Clock\-Powder\-Pattern\-Par}\label{a00062_ae346e0d2354a37cbaad34c2d053f52be}
-
-\begin{DoxyCompactList}\small\item\em \-When were the pattern parameters (2theta or time-\/of-\/flight range) changed ? \end{DoxyCompactList}\item 
-{\bf \-Refinable\-Obj\-Clock} {\bf m\-Clock\-Powder\-Pattern\-Radiation}\label{a00062_afb844ef286aa8109960c1de1fa7f1972}
-
-\begin{DoxyCompactList}\small\item\em \-When were the radiation parameter (radiation type, wavelength) changed ? \end{DoxyCompactList}\item 
-{\bf \-Refinable\-Obj\-Clock} {\bf m\-Clock\-Powder\-Pattern\-Calc}\label{a00062_aafa1a93644c2c7b5e30dcf6c2d0c7b94}
-
-\begin{DoxyCompactList}\small\item\em \-When was the powder pattern last computed ? \end{DoxyCompactList}\item 
-{\bf \-Refinable\-Obj\-Clock} {\bf m\-Clock\-Powder\-Pattern\-Integrated\-Calc}\label{a00062_a8eae5432b9c084a5416ecc46330faaf7}
-
-\begin{DoxyCompactList}\small\item\em \-When was the powder pattern (integrated) last computed ? \end{DoxyCompactList}\item 
-{\bf \-Refinable\-Obj\-Clock} {\bf m\-Clock\-Powder\-Pattern\-X\-Corr}\label{a00062_ae1e38d5d59428ee4658f7bf8e49416a3}
-
-\begin{DoxyCompactList}\small\item\em \-Corrections to 2\-Theta. \end{DoxyCompactList}\item 
-{\bf \-Refinable\-Obj\-Clock} {\bf m\-Clock\-Scale\-Factor}\label{a00062_abcd57fa3c97fd3434daa137a619b65e2}
-
-\begin{DoxyCompactList}\small\item\em \-Last modification of the scale factor. \end{DoxyCompactList}\item 
-\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf m\-Excluded\-Region\-Min\-X}\label{a00062_a65c938b76b08552e2147135aa269dd8e}
-
-\begin{DoxyCompactList}\small\item\em \-Min coordinate for for all excluded regions. \end{DoxyCompactList}\item 
-\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf m\-Excluded\-Region\-Max\-X}\label{a00062_a77a9cb2e80edd777eac9b56fe68e95ef}
-
-\begin{DoxyCompactList}\small\item\em \-Max coordinate for 2theta for all excluded regions. \end{DoxyCompactList}\item 
-\-R\-E\-A\-L {\bf m\-X\-Zero}\label{a00062_ae4722ceea4440d27a7de6115f70705ab}
-
-\begin{DoxyCompactList}\small\item\em \-Zero correction \-: $ (2\theta)_{obs} = (2\theta)_{real} +(2\theta)_{0}$ \-Thus m\-Powder\-Pattern2\-Theta\-Min=(m\-Powder\-Pattern2\-Theta\-Min-\/m2\-Theta\-Zero) \end{DoxyCompactList}\item 
-\-R\-E\-A\-L {\bf m\-Max\-Sin\-Theta\-Ov\-Lambda}
-\begin{DoxyCompactList}\small\item\em \-Displacement correction \-: $ (2\theta)_{obs} = (2\theta)_{real} + \frac{a}{\cos(\theta)} $ \-R\-E\-A\-L m2\-Theta\-Displacement; \-Transparency correction \-: $ (2\theta)_{obs} = (2\theta)_{real} + b\sin(2\theta) $ \-R\-E\-A\-L m2\-Theta\-Transparency; \-Time \-Of \-Flight (\-T\-O\-F) parameters \-: $ t = DIFC*\frac{\sin(\theta)}{\lambda} + DIFA*\left(\frac{\sin(\theta)}{\lambda}\right)^2 + mXZero$ \-R\-E\-A\-L m\-D\-I\-F\-C,m\-D\-I\-F\-A; \-Components of the powder pattern \-The components (crystalline phases, background,...) of the powder pattern \doxyref{\-Obj\-Registry$<$\-Powder\-Pattern\-Component$>$}{p.}{a00054} m\-Powder\-Pattern\-Component\-Registry; \-The scale factors for each component. \end{DoxyCompactList}\item 
-\-Number of points actually {\bfseries used}\label{a00062_ad709ac89cea3bf5eb5d29f7beb429794}
-
+void {\bf Prepare\-Ref\-Par\-List} ()
 \item 
-\-Number of integration \*
-intervals actually {\bfseries used}\label{a00062_ae6d9f72cbed814c222921f274db95280}
+virtual void {\bf Init\-Options} ()\label{a00062_a0d7f6ae8f6ef49b59f0bc5b4794931e9}
 
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Initialization of options. \end{DoxyCompactList}\item 
+virtual void {\bf Update\-Display} ()
+\begin{DoxyCompactList}\small\item\em Update Display (if any display is available), when a new 'relevant' configuration is reached. \end{DoxyCompactList}\item 
+void {\bf Build\-Recursive\-Ref\-Obj\-List} ()
+\begin{DoxyCompactList}\small\item\em (Re)build \doxyref{Optimization\-Obj\-::m\-Recursive\-Refined\-Obj\-List}{p.}{a00062_a0e6a9e9d4d12ed73c582da36190f110f}, if an object has been added or modified. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Refinable\-Obj} {\bf m\-Ref\-Par\-List}
+\begin{DoxyCompactList}\small\item\em The refinable par list used during refinement. \end{DoxyCompactList}\item 
+string {\bf m\-Name}\label{a00062_a9fa42c95df26834a9f369af61eb10ea6}
 
+\begin{DoxyCompactList}\small\item\em Name of the Global\-Optimization object. \end{DoxyCompactList}\item 
+string {\bf m\-Save\-File\-Name}\label{a00062_a2694dd9fc6ab088e3d79e0c9e0358311}
 
-\subsubsection{\-Detailed \-Description}
-\-Powder pattern class, with an observed pattern and several calculated components to modelize the pattern. 
+\begin{DoxyCompactList}\small\item\em File name where refinement info is saved (N\-O\-T U\-S\-E\-D so far...) \end{DoxyCompactList}\item 
+long {\bf m\-Nb\-Trial}\label{a00062_af47650ca783520dd0100077b08271c79}
 
-\-This can also be used for simulation, using a fake \-Iobs. \-Supports multiple phases. 
+\begin{DoxyCompactList}\small\item\em Number of trials so far. \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bf m\-Best\-Cost}\label{a00062_a495926a48dd408a3b92de8a6b33f815a}
 
-\subsubsection{\-Member \-Function \-Documentation}
-\index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!\-Add\-Excluded\-Region@{\-Add\-Excluded\-Region}}
-\index{\-Add\-Excluded\-Region@{\-Add\-Excluded\-Region}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{\-Add\-Excluded\-Region}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::\-Add\-Excluded\-Region} (
-\begin{DoxyParamCaption}
-\item[{const \-R\-E\-A\-L}]{min2\-Theta, }
-\item[{const \-R\-E\-A\-L}]{max2theta}
-\end{DoxyParamCaption}
-)}\label{a00062_a964850cf74baa499f823e85447959790}
+\begin{DoxyCompactList}\small\item\em Best value of the cost function so far. \end{DoxyCompactList}\item 
+long {\bf m\-Best\-Par\-Saved\-Set\-Index}\label{a00062_aa9c2d238f7b60c7ea3bd715bf145b5d3}
 
+\begin{DoxyCompactList}\small\item\em Index of the 'best' saved parameter set. \end{DoxyCompactList}\item 
+unsigned long {\bf m\-Context}\label{a00062_a7139f75c5b214ea00f99c2e4c25b2b34}
 
-\-Add an \-Exclusion region, in 2theta, which will be ignored when computing \-R's \-X\-M\-L\-Input values must be, as always, in radians. 
+\begin{DoxyCompactList}\small\item\em The current 'context', in the case the optimization is run in different parallel contexts. \end{DoxyCompactList}\item 
+map$<$ unsigned long, map$<$ const \\*
+{\bf Refinable\-Obj} \\*
+$\ast$, {\bf Log\-Likelihood\-Stats} $>$ $>$ {\bf mv\-Context\-Obj\-Stats}\label{a00062_a1b33baa71f4e0b182bae66766608425f}
 
-\-Does not work yet with integrated \-R factors. \-Note that the pattern is still computed in these regions. \-They are only ignored by statistics functions (\-R, \-Rws). \index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!\-Add\-Powder\-Pattern\-Component@{\-Add\-Powder\-Pattern\-Component}}
-\index{\-Add\-Powder\-Pattern\-Component@{\-Add\-Powder\-Pattern\-Component}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{\-Add\-Powder\-Pattern\-Component}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::\-Add\-Powder\-Pattern\-Component} (
-\begin{DoxyParamCaption}
-\item[{{\bf \-Powder\-Pattern\-Component} \&}]{}
-\end{DoxyParamCaption}
-)}\label{a00062_a0190046adad7091ca0d7818b1ced7bb2}
+\begin{DoxyCompactList}\small\item\em Statistics for each context (mutable for dynamic update during optimization) \end{DoxyCompactList}\item 
+map$<$ const {\bf Refinable\-Obj} \\*
+$\ast$, Dynamic\-Obj\-Weight $>$ {\bf mv\-Obj\-Weight}\label{a00062_a4b1120b0a6fc24c82c273152722f672c}
 
+\begin{DoxyCompactList}\small\item\em Weights for each objects in each context (mutable for dynamic update during optimization) \end{DoxyCompactList}\item 
+std\-::vector$<$ pair$<$ long, R\-E\-A\-L $>$ $>$ {\bf mv\-Saved\-Param\-Set}
+\begin{DoxyCompactList}\small\item\em List of saved parameter sets. \end{DoxyCompactList}\item 
+bool {\bf m\-Is\-Optimizing}\label{a00062_a712048cd592825ce31ced1120733345b}
 
-\-Add a component (phase, backround) to this pattern. 
+\begin{DoxyCompactList}\small\item\em True if a refinement is being done. For multi-\/threaded environment. \end{DoxyCompactList}\item 
+bool {\bf m\-Stop\-After\-Cycle}\label{a00062_abec493a46c9e57c7e71e886bcae601fb}
 
-\-It must have been allocated in the heap. \-The pattern parameters (2theta min, step, nbpoints, wavelength, radiation type) of the component are automatically changed to that of the \doxyref{\-Powder\-Pattern}{p.}{a00062} object. \index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!\-Begin\-Optimization@{\-Begin\-Optimization}}
-\index{\-Begin\-Optimization@{\-Begin\-Optimization}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{\-Begin\-Optimization}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::\-Begin\-Optimization} (
-\begin{DoxyParamCaption}
-\item[{const bool}]{allow\-Approximations = {\ttfamily false}, }
-\item[{const bool}]{enable\-Restraints = {\ttfamily false}}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00062_a8e29b6186253d686c4f078906592df7b}
+\begin{DoxyCompactList}\small\item\em If true, then stop at the end of the cycle. Used in multi-\/threaded environment. \end{DoxyCompactList}\item 
+{\bf Obj\-Registry}$<$ {\bf Refinable\-Obj} $>$ {\bf m\-Refined\-Obj\-List}\label{a00062_a73f491b5c8a0ae5f087e496916f76016}
 
+\begin{DoxyCompactList}\small\item\em The refined objects. \end{DoxyCompactList}\item 
+{\bf Obj\-Registry}$<$ {\bf Refinable\-Obj} $>$ {\bf m\-Recursive\-Refined\-Obj\-List}
+\begin{DoxyCompactList}\small\item\em The refined objects, recursively including all sub-\/objects. \end{DoxyCompactList}\item 
+{\bf Ref\-Obj\-Opt} {\bf m\-X\-M\-L\-Auto\-Save}\label{a00062_a94038e1c477b1efa6417c13106d6bc89}
 
-\-This should be called by any optimization class at the begining of an optimization. 
+\begin{DoxyCompactList}\small\item\em Periodic save of complete environment as an xml file. \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bf m\-Last\-Optim\-Time}\label{a00062_abf309e1b2248a7e1d3744d4b20d15bfd}
 
-\-This will also check that everything is ready, eg call the \doxyref{\-Refinable\-Obj\-::\-Prepare()}{p.}{a00071_a48d11671e7f8699f7bc24077585c5e0f} function. \-This also affects all sub-\/objects. \begin{DoxyNote}{\-Note}
-this may be called several time for some objects which are used by several other objects, or for nested optimizations (e.\-g. least-\/squares optimizations inside a global one).
-
-\doxyref{\-End\-Optimization()}{p.}{a00071_ab0035f6164cb24ace67b51b11993a851} must be called at the end of the optimization, the same number of time \doxyref{\-Begin\-Optimization()}{p.}{a00062_a8e29b6186253d686c4f078906592df7b} was called !
-\end{DoxyNote}
-
-\begin{DoxyParams}{\-Parameters}
-{\em allow\-Approximations,\-:} & if true, then the object can use faster but less precise functions during the optimization. \-This is useful for global optimization not using derivatives. \\
-\hline
-{\em enable\-Restraints\-:$\backslash$xrefitem} & deprecated 28. \\
-\hline
-\end{DoxyParams}
-
-
-\-Reimplemented from {\bf \-Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00071_ababd8f2916e41a20d2c1b21f6ffefe96}.
-
-\index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!\-Export\-Fullprof@{\-Export\-Fullprof}}
-\index{\-Export\-Fullprof@{\-Export\-Fullprof}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{\-Export\-Fullprof}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::\-Export\-Fullprof} (
-\begin{DoxyParamCaption}
-\item[{const std\-::string \&}]{prefix}
-\end{DoxyParamCaption}
-) const}\label{a00062_ab2ca32b0ae9d02c057c3e37b253314bb}
+\begin{DoxyCompactList}\small\item\em The time elapsed after the last optimization, in seconds. \end{DoxyCompactList}\item 
+{\bf Main\-Tracker} {\bf m\-Main\-Tracker}
+\begin{DoxyCompactList}\small\item\em \doxyref{Main\-Tracker}{p.}{a00048} object to track the evolution of cost functions, likelihood, and individual parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\-Export powder pattern \& crystal structure in \-Fullprof format. 
+\subsubsection{Detailed Description}
+Base object for Optimization methods. 
 
-\-This will create two files -\/ the .pcr file (including the crystal structure and all pattern parameters), and the .dat file with the powder pattern, written using the \char`\"{}\-Ins=10\char`\"{} file format. 
-\begin{DoxyParams}{\-Parameters}
-{\em prefix,\-:} & the prefix used to output the two files, 'prefix'.pcr and 'prefix'.dat\\
-\hline
-\end{DoxyParams}
-\begin{DoxyNote}{\-Note}
-\-: in development. \-Only supports constant wavelength neutron \& \-X-\/ray patterns. 
-\end{DoxyNote}
-\index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!\-Get\-Chi2@{\-Get\-Chi2}}
-\index{\-Get\-Chi2@{\-Get\-Chi2}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{\-Get\-Chi2}]{\setlength{\rightskip}{0pt plus 5cm}\-R\-E\-A\-L {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::\-Get\-Chi2} (
+This is an abstract base class, derived for Monte-\/\-Cralo type algorithms (Simulated Annealing \& Parallel Tempering), and hopefully soon for Genetic Algorithms.
+
+\begin{DoxyRemark}{Remarks}
+Instead of keeping a copy of the list of parameters here, maybe it would be better to delegate all parameter handling to the refined objects (they would also have to keep in memory the saved parameter sets, so that could be difficult to administrate...). 
+\end{DoxyRemark}
+
+
+\subsubsection{Member Function Documentation}
+\index{Obj\-Cryst\-::\-Optimization\-Obj@{Obj\-Cryst\-::\-Optimization\-Obj}!Build\-Recursive\-Ref\-Obj\-List@{Build\-Recursive\-Ref\-Obj\-List}}
+\index{Build\-Recursive\-Ref\-Obj\-List@{Build\-Recursive\-Ref\-Obj\-List}!ObjCryst::OptimizationObj@{Obj\-Cryst\-::\-Optimization\-Obj}}
+\paragraph[{Build\-Recursive\-Ref\-Obj\-List}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-Optimization\-Obj\-::\-Build\-Recursive\-Ref\-Obj\-List (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const}\label{a00062_a96de1d1c8239548e8fad099d99b8a420}
+)\hspace{0.3cm}{\ttfamily [protected]}}\label{a00062_a7c819c5f8fc52caafd97ea9d468da2be}
 
 
-\-Return conventionnal \-Chi$^\wedge$2. 
+(Re)build \doxyref{Optimization\-Obj\-::m\-Recursive\-Refined\-Obj\-List}{p.}{a00062_a0e6a9e9d4d12ed73c582da36190f110f}, if an object has been added or modified. 
 
-\begin{DoxyReturn}{\-Returns}
-$ \chi^2 = \sum_i w_i \left(I_i^{obs}-I_i^{calc} \right)^2 $ 
-\end{DoxyReturn}
-\index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!\-Get\-Chi2\-Cumul@{\-Get\-Chi2\-Cumul}}
-\index{\-Get\-Chi2\-Cumul@{\-Get\-Chi2\-Cumul}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{\-Get\-Chi2\-Cumul}]{\setlength{\rightskip}{0pt plus 5cm}const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L\& {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::\-Get\-Chi2\-Cumul} (
+If no object has been added and no sub-\/object has been added/removed, then nothing is done. \index{Obj\-Cryst\-::\-Optimization\-Obj@{Obj\-Cryst\-::\-Optimization\-Obj}!Get\-Full\-Refinable\-Obj@{Get\-Full\-Refinable\-Obj}}
+\index{Get\-Full\-Refinable\-Obj@{Get\-Full\-Refinable\-Obj}!ObjCryst::OptimizationObj@{Obj\-Cryst\-::\-Optimization\-Obj}}
+\paragraph[{Get\-Full\-Refinable\-Obj}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Refinable\-Obj}\& Obj\-Cryst\-::\-Optimization\-Obj\-::\-Get\-Full\-Refinable\-Obj (
+\begin{DoxyParamCaption}
+\item[{const bool}]{rebuild = {\ttfamily true}}
+\end{DoxyParamCaption}
+)}\label{a00062_afef162d94382a93fe037fac1b5d3ef03}
+
+
+Get the \doxyref{Refinable\-Obj}{p.}{a00078} with all the parameters from all refined objects. 
+
+If rebuild=true, prepare again the list of objects/parameters. \index{Obj\-Cryst\-::\-Optimization\-Obj@{Obj\-Cryst\-::\-Optimization\-Obj}!Get\-Log\-Likelihood@{Get\-Log\-Likelihood}}
+\index{Get\-Log\-Likelihood@{Get\-Log\-Likelihood}!ObjCryst::OptimizationObj@{Obj\-Cryst\-::\-Optimization\-Obj}}
+\paragraph[{Get\-Log\-Likelihood}]{\setlength{\rightskip}{0pt plus 5cm}virtual R\-E\-A\-L Obj\-Cryst\-::\-Optimization\-Obj\-::\-Get\-Log\-Likelihood (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const}\label{a00062_a93114b9db1bfa862fdd8497ddf023547}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00062_a0f317f235e6e5cb1867cc7c5870f510f}
 
 
-\-Get the powder pattern cumulative \-Chi$^\wedge$2. 
+The optimized (minimized, actually) function. 
 
-\-Depending on the chosen option, it will be calculated in an integrated manner or not.
+This function is the weighted sum of the chosen Cost Functions for the refined objects. \index{Obj\-Cryst\-::\-Optimization\-Obj@{Obj\-Cryst\-::\-Optimization\-Obj}!Multi\-Run\-Optimize@{Multi\-Run\-Optimize}}
+\index{Multi\-Run\-Optimize@{Multi\-Run\-Optimize}!ObjCryst::OptimizationObj@{Obj\-Cryst\-::\-Optimization\-Obj}}
+\paragraph[{Multi\-Run\-Optimize}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Optimization\-Obj\-::\-Multi\-Run\-Optimize (
+\begin{DoxyParamCaption}
+\item[{long \&}]{nb\-Cycle, }
+\item[{long \&}]{nb\-Steps, }
+\item[{const bool}]{silent = {\ttfamily false}, }
+\item[{const R\-E\-A\-L}]{finalcost = {\ttfamily 0}, }
+\item[{const R\-E\-A\-L}]{max\-Time = {\ttfamily -\/1}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{a00062_aa53575dbda2ec3f561bed934beb4ca6f}
 
-\-The vector is recomputed on every call, so this is {\itshape slow\/}. \index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!\-Get\-Class\-Name@{\-Get\-Class\-Name}}
-\index{\-Get\-Class\-Name@{\-Get\-Class\-Name}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{\-Get\-Class\-Name}]{\setlength{\rightskip}{0pt plus 5cm}virtual const string\& {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::\-Get\-Class\-Name} (
+
+Launch optimization for multiple runs of N steps. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nb\-Cycle,\-:} & the number of runs (cycles) to perform. The structure is randomized at the beginning of each cycle. If nb\-Cycle==-\/1, this will run indefinitely. The nb\-Cycle parameter is decreased after each run. \\
+\hline
+{\em nb\-Steps,\-:} & the number of steps to go. This number is modified (decreases!) as the refinement goes on. \\
+\hline
+{\em silent} & \-: if true, absolutely no message should be printed (except debugging) \\
+\hline
+{\em finalcost,\-:} & the optimization will stop if overall cost fallse below this value \\
+\hline
+{\em max\-Time,\-:} & the optimization will stop after the given number of seconds has been spent optimizing (ignored if $<$0). \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in {\bf Obj\-Cryst\-::\-Monte\-Carlo\-Obj} \doxyref{}{p.}{a00057_ae1689aa2dd5867499768328df935334d}, and {\bf Obj\-Cryst\-::\-Simplex\-Obj} \doxyref{}{p.}{a00100_a1c7ae823f9e31169b453f36d15c049b8}.
+
+\index{Obj\-Cryst\-::\-Optimization\-Obj@{Obj\-Cryst\-::\-Optimization\-Obj}!Optimize@{Optimize}}
+\index{Optimize@{Optimize}!ObjCryst::OptimizationObj@{Obj\-Cryst\-::\-Optimization\-Obj}}
+\paragraph[{Optimize}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Optimization\-Obj\-::\-Optimize (
+\begin{DoxyParamCaption}
+\item[{long \&}]{nb\-Steps, }
+\item[{const bool}]{silent = {\ttfamily false}, }
+\item[{const R\-E\-A\-L}]{finalcost = {\ttfamily 0}, }
+\item[{const R\-E\-A\-L}]{max\-Time = {\ttfamily -\/1}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{a00062_a08c77dc6ec80f63bf067ef2968a0b6dc}
+
+
+Launch optimization (a single run) for N steps. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nb\-Steps,\-:} & the number of steps to go. This number is modified (decreases!) as the refinement goes on. \\
+\hline
+{\em silent} & \-: if true, absolutely no message should be printed (except debugging) \\
+\hline
+{\em finalcost,\-:} & the optimization will stop if overall cost fallse below this value \\
+\hline
+{\em max\-Time,\-:} & the optimization will stop after the given number of seconds has been spent optimizing (ignored if $<$0). \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in {\bf Obj\-Cryst\-::\-Monte\-Carlo\-Obj} \doxyref{}{p.}{a00057_aef060de8a302fb8c4e607e00667d7b49}, and {\bf Obj\-Cryst\-::\-Simplex\-Obj} \doxyref{}{p.}{a00100_aa8bf4b209e2ce6229722b18ec9911010}.
+
+\index{Obj\-Cryst\-::\-Optimization\-Obj@{Obj\-Cryst\-::\-Optimization\-Obj}!Prepare\-Ref\-Par\-List@{Prepare\-Ref\-Par\-List}}
+\index{Prepare\-Ref\-Par\-List@{Prepare\-Ref\-Par\-List}!ObjCryst::OptimizationObj@{Obj\-Cryst\-::\-Optimization\-Obj}}
+\paragraph[{Prepare\-Ref\-Par\-List}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-Optimization\-Obj\-::\-Prepare\-Ref\-Par\-List (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00062_a20dadada4d5b428c5122d4c75fb49164}
-
-
-\-Name for this class (\char`\"{}\-Refinable\-Obj\char`\"{}, \char`\"{}\-Crystal\char`\"{},...). 
-
-\-This is only useful to distinguish different classes when picking up objects from the \doxyref{\-Refinable\-Obj}{p.}{a00071} \-Global \-Registry 
-
-\-Reimplemented from {\bf \-Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00071_a62968d90a7a3080738b363934616c019}.
-
-\index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!\-Get\-Gene\-Group@{\-Get\-Gene\-Group}}
-\index{\-Get\-Gene\-Group@{\-Get\-Gene\-Group}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{\-Get\-Gene\-Group}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::\-Get\-Gene\-Group} (
-\begin{DoxyParamCaption}
-\item[{const {\bf \-Refinable\-Obj} \&}]{obj, }
-\item[{\-Cryst\-Vector\-\_\-uint \&}]{group\-Index, }
-\item[{unsigned int \&}]{first\-Group}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00062_ad3b643041cc61a3d39765bd7c268d6bc}
-
-
-\-Get the gene group assigned to each parameter. 
-
-\-Each parameter (a {\itshape gene\/} in terms of genetic algorithms) can be assigned to a gene group. \-Thus when mating two configurations, genes will be exchanged by groups. \-By default (in the base \-Refinabe\-Obj class), each parameter is alone in its group. \-Derived classes can group genes for a better s$\ast$$\ast$ life.
-
-\-The number identifying a gene group only has a meaning in a given object. \-It can also change on subsequent calls, and thus is not unique.
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em obj} & the , supplied by an algorithm class (\doxyref{\-Optimization\-Obj}{p.}{a00055},..), which contains a list of parameters, some of which (but possibly all or none) are parameters belonging to this object. \\
-\hline
-{\em group\-Index} & a vector of unsigned integers, one for each parameter in the input object, giving an unsigned integer value as gene group index. \-At the beginning this vector should contain only zeros (no group assigned). \\
-\hline
-{\em first\-Group} & this is the number of groups which have already been assigned, plus one. \-The gene groups returned by this object will start from this value, and increment {\bfseries first\-Group} for each gene group used, so that different \doxyref{\-Refinable\-Obj}{p.}{a00071} cannot share a gene group. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyNote}{\-Note}
-this function is not optimized, and should only be called at the beginning of a refinement. 
-\end{DoxyNote}
-
-
-\-Reimplemented from {\bf \-Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00071_ad59c8ad2b0d7ee59fa3f399a54f05e54}.
-
-\index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!\-Get\-Integrated\-Chi2@{\-Get\-Integrated\-Chi2}}
-\index{\-Get\-Integrated\-Chi2@{\-Get\-Integrated\-Chi2}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{\-Get\-Integrated\-Chi2}]{\setlength{\rightskip}{0pt plus 5cm}\-R\-E\-A\-L {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::\-Get\-Integrated\-Chi2} (
+)\hspace{0.3cm}{\ttfamily [protected]}}\label{a00062_a2f11f520bc1bd0b70f8aea98d3f8224c}
+Prepare m\-Ref\-Par\-List for the refinement \index{Obj\-Cryst\-::\-Optimization\-Obj@{Obj\-Cryst\-::\-Optimization\-Obj}!Randomize\-Starting\-Config@{Randomize\-Starting\-Config}}
+\index{Randomize\-Starting\-Config@{Randomize\-Starting\-Config}!ObjCryst::OptimizationObj@{Obj\-Cryst\-::\-Optimization\-Obj}}
+\paragraph[{Randomize\-Starting\-Config}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Optimization\-Obj\-::\-Randomize\-Starting\-Config (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const}\label{a00062_aae204d24cf18b10e40faa7a5560011de}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00062_a04ac9f4d67eb8823b78b00f222a5a29c}
 
 
-\-Return integrated \-Chi$^\wedge$2. 
+Randomize starting configuration. 
 
-\index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!\-Get\-Log\-Likelihood@{\-Get\-Log\-Likelihood}}
-\index{\-Get\-Log\-Likelihood@{\-Get\-Log\-Likelihood}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{\-Get\-Log\-Likelihood}]{\setlength{\rightskip}{0pt plus 5cm}virtual \-R\-E\-A\-L {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::\-Get\-Log\-Likelihood} (
+Only affects limited and periodic parameters. \index{Obj\-Cryst\-::\-Optimization\-Obj@{Obj\-Cryst\-::\-Optimization\-Obj}!Update\-Display@{Update\-Display}}
+\index{Update\-Display@{Update\-Display}!ObjCryst::OptimizationObj@{Obj\-Cryst\-::\-Optimization\-Obj}}
+\paragraph[{Update\-Display}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Optimization\-Obj\-::\-Update\-Display (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00062_a40363370a5a3e82d445fc3f1d653fd63}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\label{a00062_a3658f0e6232756d68b8b17256f27a9bd}
 
 
-\-Get -\/log(likelihood) of the current configuration for the object. 
+Update Display (if any display is available), when a new 'relevant' configuration is reached. 
 
-\-By default (no likelihood evaluation available), this is equal to 0.
-
-\-This call should not be recursive, it is the task of the algorithm to get the sum of likelihoods for all objects invlolved.
-
-\begin{DoxyNote}{\-Note}
-contrary to the old \char`\"{}\-Cost Function\char`\"{} approach, with log(\-Likelihood) there is no 'choice' of cost function, so that it is the task of the object to give the optimized likelihood (possibly with user options).
-\end{DoxyNote}
-\begin{DoxyWarning}{\-Warning}
-\-: this is in under heavy development, so expect changes... 
-\end{DoxyWarning}
-
-
-\-Reimplemented from {\bf \-Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00071_a9a9a5ea2b997cd36b44ed35c2bab3245}.
-
-\index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!\-Get\-Powder\-Pattern\-X\-Step@{\-Get\-Powder\-Pattern\-X\-Step}}
-\index{\-Get\-Powder\-Pattern\-X\-Step@{\-Get\-Powder\-Pattern\-X\-Step}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{\-Get\-Powder\-Pattern\-X\-Step}]{\setlength{\rightskip}{0pt plus 5cm}\-R\-E\-A\-L {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::\-Get\-Powder\-Pattern\-X\-Step} (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const}\label{a00062_ad4b20493be0077170b2870aeca474455}
-
-
-\-Get the average step in 2theta. 
-
-\begin{DoxyWarning}{\-Warning}
-\-: this will only return (2\-Theta\-Max-\/2\-Theta\-Min)/(nb\-Points-\/1), so this is the 2theta step only if the step is fixed.
-\end{DoxyWarning}
-\begin{DoxyRefDesc}{\-Deprecated}
-\item[{\bf \-Deprecated}]\end{DoxyRefDesc}
-\index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!\-Get\-R@{\-Get\-R}}
-\index{\-Get\-R@{\-Get\-R}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{\-Get\-R}]{\setlength{\rightskip}{0pt plus 5cm}\-R\-E\-A\-L {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::\-Get\-R} (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const}\label{a00062_a761c704aab8ad2b326f6b287ba837a5c}
-
-
-\-Unweighted \-R-\/factor. 
-
-\begin{DoxyReturn}{\-Returns}
-$ R= \sqrt {\frac{\sum_i \left( I_i^{obs}-I_i^{calc} \right)^2} {\sum_i (I_i^{obs})^2} }$ 
-\end{DoxyReturn}
-\index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!\-Get\-Rw@{\-Get\-Rw}}
-\index{\-Get\-Rw@{\-Get\-Rw}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{\-Get\-Rw}]{\setlength{\rightskip}{0pt plus 5cm}\-R\-E\-A\-L {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::\-Get\-Rw} (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const}\label{a00062_aa756bdaad051400d841989bc6e9bef55}
-
-
-\-Get the weighted \-R-\/factor. 
-
-\begin{DoxyReturn}{\-Returns}
-$ R_{w}= \sqrt {\frac{\sum_i w_i\left( I_i^{obs}-I_i^{calc} \right)^2} {\sum_i w_i (I_i^{obs})^2} }$ 
-\end{DoxyReturn}
-\index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!\-Global\-Opt\-Random\-Move@{\-Global\-Opt\-Random\-Move}}
-\index{\-Global\-Opt\-Random\-Move@{\-Global\-Opt\-Random\-Move}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{\-Global\-Opt\-Random\-Move}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::\-Global\-Opt\-Random\-Move} (
-\begin{DoxyParamCaption}
-\item[{const \-R\-E\-A\-L}]{mutation\-Amplitude, }
-\item[{const {\bf \-Ref\-Par\-Type} $\ast$}]{type = {\ttfamily {\bf gp\-Ref\-Par\-Type\-Obj\-Cryst}}}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00062_a35119a32e043f1b9e003cfe1ed18a1b1}
-
-
-\-Make a random move of the current configuration. 
-
-\-This is for global optimization algorithms. the moves for each parameter are less than their global optimization step, multiplied by the mutation amplitude.
-
-\begin{DoxyWarning}{\-Warning}
-\-: this makes a random move for the parameter declared for this object, and it is the duty of the object to decide whether the included objects should be moved and how. (eg an algorithm should only call for a move with the top object, and this object decides how he and his sub-\/objects moves). \-By default (\doxyref{\-Refinable\-Obj}{p.}{a00071} implementation) all included objects are moved recursively.
-\end{DoxyWarning}
-\doxyref{\-Refinable\-Obj}{p.}{a00071}\-:\-: 
-\begin{DoxyParams}{\-Parameters}
-{\em mutation\-Amplitude,\-:} & multiplier for the maximum move amplitude, for all parameters \\
-\hline
-{\em type,\-:} & restrain the change exclusively to parameters of a given type (same type or descendant from this \doxyref{\-Ref\-Par\-Type}{p.}{a00080}). \\
-\hline
-\end{DoxyParams}
-
-
-\-Reimplemented from {\bf \-Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00071_a18375c8525ae38c481ba77e9cf9d67c1}.
-
-\index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!\-Import\-Powder\-Pattern2\-Theta\-Obs@{\-Import\-Powder\-Pattern2\-Theta\-Obs}}
-\index{\-Import\-Powder\-Pattern2\-Theta\-Obs@{\-Import\-Powder\-Pattern2\-Theta\-Obs}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{\-Import\-Powder\-Pattern2\-Theta\-Obs}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::\-Import\-Powder\-Pattern2\-Theta\-Obs} (
-\begin{DoxyParamCaption}
-\item[{const string \&}]{file\-Name, }
-\item[{const int}]{nb\-Skip = {\ttfamily 0}}
-\end{DoxyParamCaption}
-)}\label{a00062_a1c817b8e20b03b216323933e01e6fb00}
-
-
-\-Import file with 2 columns 2\-Theta \-Iobs. 
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em file\-Name,\-:} & the filename (surprise!) \\
-\hline
-{\em nb\-Skip,\-:} & the number of lines to skip at the beginning of the file (default=0) \\
-\hline
-\end{DoxyParams}
-\index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!\-Import\-Powder\-Pattern2\-Theta\-Obs\-Sigma@{\-Import\-Powder\-Pattern2\-Theta\-Obs\-Sigma}}
-\index{\-Import\-Powder\-Pattern2\-Theta\-Obs\-Sigma@{\-Import\-Powder\-Pattern2\-Theta\-Obs\-Sigma}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{\-Import\-Powder\-Pattern2\-Theta\-Obs\-Sigma}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::\-Import\-Powder\-Pattern2\-Theta\-Obs\-Sigma} (
-\begin{DoxyParamCaption}
-\item[{const string \&}]{file\-Name, }
-\item[{const int}]{nb\-Skip = {\ttfamily 0}}
-\end{DoxyParamCaption}
-)}\label{a00062_aee56a2f23b8af5c855ceae82c246f242}
-
-
-\-Import file with 3 columns 2\-Theta \-Iobs \-Sigma. 
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em file\-Name,\-:} & the filename (surprise!) \\
-\hline
-{\em nb\-Skip,\-:} & the number of lines to skip at the beginning of the file (default=0) \\
-\hline
-\end{DoxyParams}
-\index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!\-Import\-Powder\-Pattern\-Fullprof@{\-Import\-Powder\-Pattern\-Fullprof}}
-\index{\-Import\-Powder\-Pattern\-Fullprof@{\-Import\-Powder\-Pattern\-Fullprof}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{\-Import\-Powder\-Pattern\-Fullprof}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::\-Import\-Powder\-Pattern\-Fullprof} (
-\begin{DoxyParamCaption}
-\item[{const string \&}]{fullprof\-File\-Name}
-\end{DoxyParamCaption}
-)}\label{a00062_a4499e38a96db3f3c0abdb6d30f3400e1}
-
-
-\-Import fullprof-\/style diffraction data. 
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em fullprof\-File\-Name,\-:} & filename \\
-\hline
-\end{DoxyParams}
-\index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!\-Import\-Powder\-Pattern\-Fullprof4@{\-Import\-Powder\-Pattern\-Fullprof4}}
-\index{\-Import\-Powder\-Pattern\-Fullprof4@{\-Import\-Powder\-Pattern\-Fullprof4}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{\-Import\-Powder\-Pattern\-Fullprof4}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::\-Import\-Powder\-Pattern\-Fullprof4} (
-\begin{DoxyParamCaption}
-\item[{const string \&}]{file\-Name}
-\end{DoxyParamCaption}
-)}\label{a00062_a272b9fd71a6925eb9e1a991e488259b4}
-
-
-\-Import diffraction data from a file, with the first line has 2\-Theta\-Min, step, 2theta\-Max, and the following lines alternate 10 \-Iobs and 10 sigma. 
-
-\-Ends with null entries (to fill last \-Iobs line to reach last sigme line).
-
-\-That's fullprof format \#4. 
-\begin{DoxyParams}{\-Parameters}
-{\em file\-Name,\-:} & filename \\
-\hline
-\end{DoxyParams}
-\index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!\-Import\-Powder\-Pattern\-G\-S\-A\-S@{\-Import\-Powder\-Pattern\-G\-S\-A\-S}}
-\index{\-Import\-Powder\-Pattern\-G\-S\-A\-S@{\-Import\-Powder\-Pattern\-G\-S\-A\-S}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{\-Import\-Powder\-Pattern\-G\-S\-A\-S}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::\-Import\-Powder\-Pattern\-G\-S\-A\-S} (
-\begin{DoxyParamCaption}
-\item[{const string \&}]{file\-Name}
-\end{DoxyParamCaption}
-)}\label{a00062_a78be27d8764377f99e324a7181eac633}
-
-
-\-Import \-G\-S\-A\-S standard powder pattern data (see \-G\-S\-A\-S manual). 
-
-\begin{DoxyWarning}{\-Warning}
-\-: partial support (only \-C\-O\-N\-S\-T-\/constant wavelength-\/ data so far) 
-\end{DoxyWarning}
-\index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!\-Import\-Powder\-Pattern\-Multi\-Detector\-L\-L\-B\-G42@{\-Import\-Powder\-Pattern\-Multi\-Detector\-L\-L\-B\-G42}}
-\index{\-Import\-Powder\-Pattern\-Multi\-Detector\-L\-L\-B\-G42@{\-Import\-Powder\-Pattern\-Multi\-Detector\-L\-L\-B\-G42}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{\-Import\-Powder\-Pattern\-Multi\-Detector\-L\-L\-B\-G42}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::\-Import\-Powder\-Pattern\-Multi\-Detector\-L\-L\-B\-G42} (
-\begin{DoxyParamCaption}
-\item[{const string \&}]{file\-Name}
-\end{DoxyParamCaption}
-)}\label{a00062_abfc7890a1853583957284fc1a2644855}
-
-
-diffraction data in a multi-\/detector format (fullprof format \#6). 
-
-\-First line is text. \-Third entry of second line is the 2theta step. \-Third line has the 2thetamin, fourth line has monitors and temperatures. \-Then each line has ten pairs (\-I2,\-I8)of \-Nb\-Counters,intensity. \-Ends with negative entries. 
-\begin{DoxyParams}{\-Parameters}
-{\em file\-Name,\-:} & filename \\
-\hline
-\end{DoxyParams}
-\index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!\-Import\-Powder\-Pattern\-Sietronics\-C\-P\-I@{\-Import\-Powder\-Pattern\-Sietronics\-C\-P\-I}}
-\index{\-Import\-Powder\-Pattern\-Sietronics\-C\-P\-I@{\-Import\-Powder\-Pattern\-Sietronics\-C\-P\-I}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{\-Import\-Powder\-Pattern\-Sietronics\-C\-P\-I}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::\-Import\-Powder\-Pattern\-Sietronics\-C\-P\-I} (
-\begin{DoxyParamCaption}
-\item[{const string \&}]{file\-Name}
-\end{DoxyParamCaption}
-)}\label{a00062_adabe6381d8d1189abcf420f69a41cc81}
-
-
-\-Import $\ast$.cpi \-Sietronics diffraction data. 
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em file\-Name,\-:} & filename \\
-\hline
-\end{DoxyParams}
-\index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!\-Import\-Powder\-Pattern\-T\-O\-F\-\_\-\-I\-S\-I\-S\-\_\-\-X\-Y\-Sigma@{\-Import\-Powder\-Pattern\-T\-O\-F\-\_\-\-I\-S\-I\-S\-\_\-\-X\-Y\-Sigma}}
-\index{\-Import\-Powder\-Pattern\-T\-O\-F\-\_\-\-I\-S\-I\-S\-\_\-\-X\-Y\-Sigma@{\-Import\-Powder\-Pattern\-T\-O\-F\-\_\-\-I\-S\-I\-S\-\_\-\-X\-Y\-Sigma}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{\-Import\-Powder\-Pattern\-T\-O\-F\-\_\-\-I\-S\-I\-S\-\_\-\-X\-Y\-Sigma}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::\-Import\-Powder\-Pattern\-T\-O\-F\-\_\-\-I\-S\-I\-S\-\_\-\-X\-Y\-Sigma} (
-\begin{DoxyParamCaption}
-\item[{const string \&}]{file\-Name}
-\end{DoxyParamCaption}
-)}\label{a00062_a9d7209065acb5a992129cf6a2b14b526}
-
-
-\-Import \-T\-O\-F file (\-I\-S\-I\-S type, 3 columns t, \-Iobs, sigma(\-Iobs)) 
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em file\-Name,\-:} & the filename \\
-\hline
-\end{DoxyParams}
-\index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!\-Import\-Powder\-Pattern\-Xdd@{\-Import\-Powder\-Pattern\-Xdd}}
-\index{\-Import\-Powder\-Pattern\-Xdd@{\-Import\-Powder\-Pattern\-Xdd}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{\-Import\-Powder\-Pattern\-Xdd}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::\-Import\-Powder\-Pattern\-Xdd} (
-\begin{DoxyParamCaption}
-\item[{const string \&}]{file\-Name}
-\end{DoxyParamCaption}
-)}\label{a00062_a4a8e1dc893c04a4451327d3f48f21d0e}
-
-
-\-Import $\ast$.xdd diffraction data (\-Topas,...). 
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em file\-Name,\-:} & filename \\
-\hline
-\end{DoxyParams}
-\index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!\-Prepare@{\-Prepare}}
-\index{\-Prepare@{\-Prepare}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{\-Prepare}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::\-Prepare} (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00062_ae03f4d2f08e749e4f494eb78050dbffe}
-\-Prepare everything (if necessary) for an optimization/calculation. 
-
-\-Reimplemented from {\bf \-Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00071_a48d11671e7f8699f7bc24077585c5e0f}.
-
-\index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!\-Save\-Powder\-Pattern@{\-Save\-Powder\-Pattern}}
-\index{\-Save\-Powder\-Pattern@{\-Save\-Powder\-Pattern}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{\-Save\-Powder\-Pattern}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::\-Save\-Powder\-Pattern} (
-\begin{DoxyParamCaption}
-\item[{const string \&}]{filename = {\ttfamily \char`\"{}powder\-Pattern.out\char`\"{}}}
-\end{DoxyParamCaption}
-) const}\label{a00062_a9d47390be9f1a5a47ea141d2708b8992}
-
-
-\-Save powder pattern to one file, text format, 3 columns theta \-Iobs \-Icalc. 
-
-\-If \-Iobs is missing, the column is omitted.
-
-\begin{DoxyRefDesc}{\-Todo}
-\item[{\bf \-Todo}]export in other formats (.prf,...), with a list of reflection position for all phases... \end{DoxyRefDesc}
-\index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!\-Set\-Max\-Sin\-Theta\-Ov\-Lambda@{\-Set\-Max\-Sin\-Theta\-Ov\-Lambda}}
-\index{\-Set\-Max\-Sin\-Theta\-Ov\-Lambda@{\-Set\-Max\-Sin\-Theta\-Ov\-Lambda}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{\-Set\-Max\-Sin\-Theta\-Ov\-Lambda}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::\-Set\-Max\-Sin\-Theta\-Ov\-Lambda} (
-\begin{DoxyParamCaption}
-\item[{const \-R\-E\-A\-L}]{max}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00062_a2b7b3ba4d020f3cf77409116ab0c7782}
-
-
-\-Set the maximum value for sin(theta)/lambda. 
-
-\-All data (reflections,..) still exist but are ignored for all calculations. \index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!\-Set\-Powder\-Pattern\-Obs@{\-Set\-Powder\-Pattern\-Obs}}
-\index{\-Set\-Powder\-Pattern\-Obs@{\-Set\-Powder\-Pattern\-Obs}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{\-Set\-Powder\-Pattern\-Obs}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::\-Set\-Powder\-Pattern\-Obs} (
-\begin{DoxyParamCaption}
-\item[{const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \&}]{obs}
-\end{DoxyParamCaption}
-)}\label{a00062_a8562e190d277379e6e18d43f3d616976}
-
-
-\-Set observed powder pattern from vector array. 
-
-\-Note\-: powder pattern parameters must have been set before calling this function, for example by calling \-Diffraction\-Data\-Powder\-::\-Init\-Powder\-Pattern\-Par(). \index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!\-Set\-Powder\-Pattern\-Par@{\-Set\-Powder\-Pattern\-Par}}
-\index{\-Set\-Powder\-Pattern\-Par@{\-Set\-Powder\-Pattern\-Par}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{\-Set\-Powder\-Pattern\-Par}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::\-Set\-Powder\-Pattern\-Par} (
-\begin{DoxyParamCaption}
-\item[{const \-R\-E\-A\-L}]{min, }
-\item[{const \-R\-E\-A\-L}]{step, }
-\item[{unsigned long}]{nb\-Point}
-\end{DoxyParamCaption}
-)}\label{a00062_adb92497ec0c6793c1cb74fc1bf9914e2}
-
-
-the powder pattern angular range \& resolution parameter. 
-
-this will affect all components (phases) of the pattern.
-
-\-Use this with caution, as the number of points must be correct with respect to the observed data (\-Iobs).
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em min,\-:} & min 2theta (in radians) or time-\/of-\/flight (in microseconds) value, \\
-\hline
-{\em step,\-:} & step (assumed constant) in 2theta or time-\/of-\/flight (in microseconds). \\
-\hline
-{\em nb\-Points,\-:} & number of points in the pattern.\\
-\hline
-\end{DoxyParams}
-\begin{DoxyWarning}{\-Warning}
-\-: use only this for constant-\/step patterns. \-Otherwise, use \doxyref{\-Powder\-Pattern\-::\-Set\-Powder\-Pattern\-X()}{p.}{a00062_a64170b8ead948e9b8569e1613d849583} 
-\end{DoxyWarning}
-\index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!\-Set\-Powder\-Pattern\-X@{\-Set\-Powder\-Pattern\-X}}
-\index{\-Set\-Powder\-Pattern\-X@{\-Set\-Powder\-Pattern\-X}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{\-Set\-Powder\-Pattern\-X}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::\-Set\-Powder\-Pattern\-X} (
-\begin{DoxyParamCaption}
-\item[{const \-Cryst\-Vector\-\_\-\-R\-E\-A\-L \&}]{x}
-\end{DoxyParamCaption}
-)}\label{a00062_a64170b8ead948e9b8569e1613d849583}
-
-
-\-Set the x coordinate of the powder pattern \-: either the 2theta or time-\/of-\/flight values for each recorded point. 
-
-\-The step need not be constant, but the variation must be strictly monotonous.
-
-2theta must be in radians and time-\/of-\/flight in microseconds \index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!\-Set\-Wavelength@{\-Set\-Wavelength}}
-\index{\-Set\-Wavelength@{\-Set\-Wavelength}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{\-Set\-Wavelength}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::\-Set\-Wavelength} (
-\begin{DoxyParamCaption}
-\item[{const \-R\-E\-A\-L}]{lambda}
-\end{DoxyParamCaption}
-)}\label{a00062_aea1c5351f710f2a91844b0f29b7b04aa}
-
-
-\-Set the wavelength of the experiment (in \-Angstroems). 
-
-\begin{DoxyNote}{\-Note}
-\-: this is only useful for a monochromatic (\-X-\/\-Ray or neutron) powder pattern. 
-\end{DoxyNote}
-\index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!\-Set\-Wavelength@{\-Set\-Wavelength}}
-\index{\-Set\-Wavelength@{\-Set\-Wavelength}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{\-Set\-Wavelength}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::\-Set\-Wavelength} (
-\begin{DoxyParamCaption}
-\item[{const string \&}]{\-X\-Ray\-Tube\-Element\-Name, }
-\item[{const \-R\-E\-A\-L}]{alpha12ratio = {\ttfamily 0.5}}
-\end{DoxyParamCaption}
-)}\label{a00062_a9638b42f38dd82522593e1e01b6629c6}
-
-
-\-Set the wavelength of the experiment to that of an \-X-\/\-Ray tube. 
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em \-X\-Ray\-Tube\-Element\-Name} & \-: name of the anticathode element name. \-Known ones are \-Cr, \-Fe, \-Cu, \-Mo, \-Ag. \\
-\hline
-{\em alpha2\-Alpha2ratio,\-:} & \-Kalpha2/\-Kalpha1 ratio (0.\-5 by default)\\
-\hline
-\end{DoxyParams}
-\-Alpha1 and alpha2 wavelength are taken from \-R. \-Grosse-\/\-Kunstleve package, and the average wavelength is calculated using the alpha2/alpha1 weight. \-All structure factors computation are made using the average wavelength, and for powder diffraction, profiles are output at the alpha1 and alpha2 ratio for the calculated pattern.
-
-\-N\-O\-T\-E \-: if the name of the wavelength is generic (eg\char`\"{}\-Cu\char`\"{}), then the program considers that there are both \-Alpha1 and \-Alpha2, and thus automatically changes the \-Wavelength\-Type to \-W\-A\-V\-E\-L\-E\-N\-G\-T\-H\-\_\-\-A\-L\-P\-H\-A12. \-If instead either alpha1 or alpha2 (eg \char`\"{}\-Cu\-A1\char`\"{}) is asked for, the \-Wavelength\-Type is set to \-W\-A\-V\-E\-L\-E\-N\-G\-T\-H\-\_\-\-M\-O\-N\-O\-C\-H\-R\-O\-M\-A\-T\-I\-C. \-In both cases, the radiation type is set to \-X-\/\-Ray. \index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!\-Set\-Weight\-Polynomial@{\-Set\-Weight\-Polynomial}}
-\index{\-Set\-Weight\-Polynomial@{\-Set\-Weight\-Polynomial}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{\-Set\-Weight\-Polynomial}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::\-Set\-Weight\-Polynomial} (
-\begin{DoxyParamCaption}
-\item[{const \-R\-E\-A\-L}]{a, }
-\item[{const \-R\-E\-A\-L}]{b, }
-\item[{const \-R\-E\-A\-L}]{c, }
-\item[{const \-R\-E\-A\-L}]{min\-Relat\-Iobs = {\ttfamily 1e-\/3}}
-\end{DoxyParamCaption}
-)}\label{a00062_a3648701bed1a9ba0b576241226e06032}
-
-
-\-Set w = 1/(a+ \-Iobs + b$\ast$\-Iobs$^\wedge$2+c$\ast$\-Iobs$^\wedge$3) 
-
-\-To filter too small or null intensities\-: if \-Iobs $<$ [min\-Relat\-Iobs $\ast$ max(\-Iobs)], then use \-Iobs=min\-Relat\-Iobs $\ast$ max(\-Iobs) to compute the weight.
-
-\-Typical values\-: a=2$\ast$min(\-Iobs) b=2/max(\-Iobs) c=0 \index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!\-Set\-Weight\-To\-Inv\-Sigma\-Sq@{\-Set\-Weight\-To\-Inv\-Sigma\-Sq}}
-\index{\-Set\-Weight\-To\-Inv\-Sigma\-Sq@{\-Set\-Weight\-To\-Inv\-Sigma\-Sq}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{\-Set\-Weight\-To\-Inv\-Sigma\-Sq}]{\setlength{\rightskip}{0pt plus 5cm}void {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::\-Set\-Weight\-To\-Inv\-Sigma\-Sq} (
-\begin{DoxyParamCaption}
-\item[{const \-R\-E\-A\-L}]{min\-Relat\-Sigma = {\ttfamily 1e-\/3}}
-\end{DoxyParamCaption}
-)}\label{a00062_add7d97cdb7610f7553b95c2eeefcd172}
-
-
-\-Set w = 1/sigma$^\wedge$2. 
-
-\-To filter too small or null intensities \-:\-If sigma$<$ min\-Relat\-Sigma$\ast$ max(sigma), then w=1/(min\-Relat\-Sigma$\ast$ max(sigma))$^\wedge$2 \index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!\-S\-T\-O\-L2\-Pixel@{\-S\-T\-O\-L2\-Pixel}}
-\index{\-S\-T\-O\-L2\-Pixel@{\-S\-T\-O\-L2\-Pixel}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{\-S\-T\-O\-L2\-Pixel}]{\setlength{\rightskip}{0pt plus 5cm}\-R\-E\-A\-L {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::\-S\-T\-O\-L2\-Pixel} (
-\begin{DoxyParamCaption}
-\item[{const \-R\-E\-A\-L}]{stol}
-\end{DoxyParamCaption}
-) const}\label{a00062_acea2e9e61825c9d68f73352cc5373215}
-
-
-\-Convert sin(theta)/lambda to pixel, depending on the type of radiation. 
-
-\-This does not take into account any zero/transparency, etc... correction \index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!\-S\-T\-O\-L2\-X@{\-S\-T\-O\-L2\-X}}
-\index{\-S\-T\-O\-L2\-X@{\-S\-T\-O\-L2\-X}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{\-S\-T\-O\-L2\-X}]{\setlength{\rightskip}{0pt plus 5cm}\-R\-E\-A\-L {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::\-S\-T\-O\-L2\-X} (
-\begin{DoxyParamCaption}
-\item[{const \-R\-E\-A\-L}]{stol}
-\end{DoxyParamCaption}
-) const}\label{a00062_a432996a6cc82b3029e5615b1d144a0dd}
-
-
-\-Convert sin(theta)/lambda to \-X (i.\-e. 
-
-either to 2theta or to \-T\-O\-F), depending on the type of radiation.
-
-\-This does not take into account any zero/transparency, etc... correction \index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!\-X2\-Pixel@{\-X2\-Pixel}}
-\index{\-X2\-Pixel@{\-X2\-Pixel}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{\-X2\-Pixel}]{\setlength{\rightskip}{0pt plus 5cm}\-R\-E\-A\-L {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::\-X2\-Pixel} (
-\begin{DoxyParamCaption}
-\item[{const \-R\-E\-A\-L}]{x}
-\end{DoxyParamCaption}
-) const}\label{a00062_a352e6d6afb489c2c24e811fa8b70d801}
-
-
-\-Get the pixel number on the experimental pattern, corresponding to a given (experimental) x coordinate. 
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em x,\-:} & the x (2theta, tof) value. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{\-Returns}
-the x (2theta, tof) value as it appears on the pattern.
-\end{DoxyReturn}
-\begin{DoxyWarning}{\-Warning}
-\-: this can be real slow, especially for non-\/fixed steps.
-
-\-: this returns the exact pixel coordinate, as a floating-\/point value, and {\itshape not\/} the closest pixel coordinate. 
-\end{DoxyWarning}
-\index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!\-X2\-Pixel\-Corr@{\-X2\-Pixel\-Corr}}
-\index{\-X2\-Pixel\-Corr@{\-X2\-Pixel\-Corr}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{\-X2\-Pixel\-Corr}]{\setlength{\rightskip}{0pt plus 5cm}\-R\-E\-A\-L {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::\-X2\-Pixel\-Corr} (
-\begin{DoxyParamCaption}
-\item[{const \-R\-E\-A\-L}]{x}
-\end{DoxyParamCaption}
-) const}\label{a00062_a53607c581d6322d3902663c4338d66b7}
-
-
-\-Get the pixel number on the experimental pattern, from the theoretical (uncorrected) x coordinate, taking into account all corrections. 
-
-(zero, transparency,..). 
-\begin{DoxyParams}{\-Parameters}
-{\em x,\-:} & the theoretical x (2theta, tof) value. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{\-Returns}
-the x (2theta, tof) value as it appears on the pattern.
-\end{DoxyReturn}
-\begin{DoxyWarning}{\-Warning}
-\-: this can be real slow, especially for non-\/fixed steps.
-
-\-: this returns the exact pixel coordinate, as a floating-\/point value, and {\itshape not\/} the closest pixel coordinate. 
-\end{DoxyWarning}
-\index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!\-X2\-S\-T\-O\-L@{\-X2\-S\-T\-O\-L}}
-\index{\-X2\-S\-T\-O\-L@{\-X2\-S\-T\-O\-L}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{\-X2\-S\-T\-O\-L}]{\setlength{\rightskip}{0pt plus 5cm}\-R\-E\-A\-L {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::\-X2\-S\-T\-O\-L} (
-\begin{DoxyParamCaption}
-\item[{const \-R\-E\-A\-L}]{x}
-\end{DoxyParamCaption}
-) const}\label{a00062_a0f6a97d56244a3e03b6742bec5e4199f}
-
-
-\-Convert \-X (either 2theta or \-T\-O\-F) to sin(theta)/lambda, depending on the type of radiation. 
-
-\-This does not take into account any zero/transparency, etc... correction \index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!\-X2\-X\-Corr@{\-X2\-X\-Corr}}
-\index{\-X2\-X\-Corr@{\-X2\-X\-Corr}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{\-X2\-X\-Corr}]{\setlength{\rightskip}{0pt plus 5cm}\-R\-E\-A\-L {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::\-X2\-X\-Corr} (
-\begin{DoxyParamCaption}
-\item[{const \-R\-E\-A\-L}]{x}
-\end{DoxyParamCaption}
-) const}\label{a00062_a4c39ce0ed469d514cdec31efeb7a49a4}
-
-
-\-Get the experimental x (2theta, tof) from the theoretical value, taking into account all corrections (zero, transparency,..). 
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em ttheta,\-:} & the theoretical x (2theta, tof) value. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{\-Returns}
-the x (2theta, tof) value as it appears on the pattern. 
-\end{DoxyReturn}
-\index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!\-X\-M\-L\-Input@{\-X\-M\-L\-Input}}
-\index{\-X\-M\-L\-Input@{\-X\-M\-L\-Input}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{\-X\-M\-L\-Input}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::\-X\-M\-L\-Input} (
+This calls all \doxyref{Refinable\-Obj\-::\-Update\-Display()}{p.}{a00078_ab74e2cead734fe1e652c5add46c5e116} \index{Obj\-Cryst\-::\-Optimization\-Obj@{Obj\-Cryst\-::\-Optimization\-Obj}!X\-M\-L\-Input@{X\-M\-L\-Input}}
+\index{X\-M\-L\-Input@{X\-M\-L\-Input}!ObjCryst::OptimizationObj@{Obj\-Cryst\-::\-Optimization\-Obj}}
+\paragraph[{X\-M\-L\-Input}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Optimization\-Obj\-::\-X\-M\-L\-Input (
 \begin{DoxyParamCaption}
 \item[{istream \&}]{is, }
-\item[{const {\bf \-X\-M\-L\-Cryst\-Tag} \&}]{tag}
+\item[{const {\bf X\-M\-L\-Cryst\-Tag} \&}]{tag}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00062_ae80f37cee10c08e6acb02300fe30c894}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{a00062_aa07aee60f56780e2c56fb20f4a5f48a8}
 
 
-\-Input \-From stream. 
+Input in X\-M\-L format from a stream, restoring the set of refined objects and the associated cost functions. 
 
-\begin{DoxyRefDesc}{\-Todo}
-\item[{\bf \-Todo}]\-Add an bool \-X\-M\-L\-Input\-Tag(is,tag) function to recognize all the tags from the stream. \-So that each inherited class can use the \-X\-M\-L\-Input\-Tag function from its parent (ie take advantage of inheritance). \-The children class would first try to interpret the tag, then if unsuccessful would pass it to its parent (thus allowing overloading), etc... \end{DoxyRefDesc}
+Note that the corresponding objects must have been loaded in memory before, else shit happens. 
 
+Implemented in {\bf Obj\-Cryst\-::\-Monte\-Carlo\-Obj} \doxyref{}{p.}{a00057_a2f9428857b1d26bbdac08d59debb9f52}, and {\bf Obj\-Cryst\-::\-Simplex\-Obj} \doxyref{}{p.}{a00100_ae6ed0602ffdd2db1a10be80820a0a285}.
 
-\-Reimplemented from {\bf \-Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00071_ac13a4045c3f187879443c8615c38d623}.
-
-\index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!\-X\-M\-L\-Output@{\-X\-M\-L\-Output}}
-\index{\-X\-M\-L\-Output@{\-X\-M\-L\-Output}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{\-X\-M\-L\-Output}]{\setlength{\rightskip}{0pt plus 5cm}virtual void {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::\-X\-M\-L\-Output} (
+\index{Obj\-Cryst\-::\-Optimization\-Obj@{Obj\-Cryst\-::\-Optimization\-Obj}!X\-M\-L\-Output@{X\-M\-L\-Output}}
+\index{X\-M\-L\-Output@{X\-M\-L\-Output}!ObjCryst::OptimizationObj@{Obj\-Cryst\-::\-Optimization\-Obj}}
+\paragraph[{X\-M\-L\-Output}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Optimization\-Obj\-::\-X\-M\-L\-Output (
 \begin{DoxyParamCaption}
 \item[{ostream \&}]{os, }
 \item[{int}]{indent = {\ttfamily 0}}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{a00062_a85e8803b7680a6d3b5463990fee76c6f}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{a00062_a6b7726159bb0d5dad1c7eebaee78f53a}
 
 
-\-Output to stream in well-\/formed \-X\-M\-L. 
+Output a description of the object in X\-M\-L format to a stream. 
 
-\begin{DoxyRefDesc}{\-Todo}
-\item[{\bf \-Todo}]\-Use inheritance.. as for \-X\-M\-L\-Input\-Tag()... \end{DoxyRefDesc}
+This saves the list of refined object and the cost functions, as well as options for the refinement. The refined objects are {\bfseries not} saved, so this must be done somewhere else (they must be reloaded before this object). 
 
-
-\-Reimplemented from {\bf \-Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00071_a7b9b6ed0f8dcf753d398c35e073de973}.
+Implemented in {\bf Obj\-Cryst\-::\-Monte\-Carlo\-Obj} \doxyref{}{p.}{a00057_a619eb171e5fe384be4d37f999dde8e0f}, and {\bf Obj\-Cryst\-::\-Simplex\-Obj} \doxyref{}{p.}{a00100_a7111042ca3a7201039a25fe548cb524c}.
 
 
 
-\subsubsection{\-Member \-Data \-Documentation}
-\index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!m\-Max\-Sin\-Theta\-Ov\-Lambda@{m\-Max\-Sin\-Theta\-Ov\-Lambda}}
-\index{m\-Max\-Sin\-Theta\-Ov\-Lambda@{m\-Max\-Sin\-Theta\-Ov\-Lambda}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{m\-Max\-Sin\-Theta\-Ov\-Lambda}]{\setlength{\rightskip}{0pt plus 5cm}\-R\-E\-A\-L {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::m\-Max\-Sin\-Theta\-Ov\-Lambda}\hspace{0.3cm}{\ttfamily  [protected]}}\label{a00062_a5af69d404bd80c279935990a24edec0b}
+\subsubsection{Member Data Documentation}
+\index{Obj\-Cryst\-::\-Optimization\-Obj@{Obj\-Cryst\-::\-Optimization\-Obj}!m\-Main\-Tracker@{m\-Main\-Tracker}}
+\index{m\-Main\-Tracker@{m\-Main\-Tracker}!ObjCryst::OptimizationObj@{Obj\-Cryst\-::\-Optimization\-Obj}}
+\paragraph[{m\-Main\-Tracker}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Main\-Tracker} Obj\-Cryst\-::\-Optimization\-Obj\-::m\-Main\-Tracker\hspace{0.3cm}{\ttfamily [protected]}}\label{a00062_abe2f9a9812abe0f4a6c414457b5b2967}
 
 
-\-Displacement correction \-: $ (2\theta)_{obs} = (2\theta)_{real} + \frac{a}{\cos(\theta)} $ \-R\-E\-A\-L m2\-Theta\-Displacement; \-Transparency correction \-: $ (2\theta)_{obs} = (2\theta)_{real} + b\sin(2\theta) $ \-R\-E\-A\-L m2\-Theta\-Transparency; \-Time \-Of \-Flight (\-T\-O\-F) parameters \-: $ t = DIFC*\frac{\sin(\theta)}{\lambda} + DIFA*\left(\frac{\sin(\theta)}{\lambda}\right)^2 + mXZero$ \-R\-E\-A\-L m\-D\-I\-F\-C,m\-D\-I\-F\-A; \-Components of the powder pattern \-The components (crystalline phases, background,...) of the powder pattern \doxyref{\-Obj\-Registry$<$\-Powder\-Pattern\-Component$>$}{p.}{a00054} m\-Powder\-Pattern\-Component\-Registry; \-The scale factors for each component. 
+\doxyref{Main\-Tracker}{p.}{a00048} object to track the evolution of cost functions, likelihood, and individual parameters. 
 
-\-For unscalable phases, this is set to 1 (constant).
-
-\-This is mutable because generally we use the 'best' scale factor, but it should not be... mutable \-Cryst\-Vector\-\_\-\-R\-E\-A\-L m\-Scale\-Factor;
-
-\-Use faster, less precise functions ? bool m\-Use\-Fast\-Less\-Precise\-Func;
-
-\-For statistics \-Should \-Statistics (\-R, \-Rw,..) exclude the background ? bool m\-Statistics\-Exclude\-Background; \-To compute scale factors, which are the components (phases) that can be scaled ? mutable \-Cryst\-Vector\-\_\-int m\-Scalable\-Component\-Index; 
-
-\-Used to fit the components' scale factors mutable \-Cryst\-Matrix\-\_\-\-R\-E\-A\-L m\-Fit\-Scale\-Factor\-M,m\-Fit\-Scale\-Factor\-B,m\-Fit\-Scale\-Factor\-X;
-
-\-Use \-Integrated profiles for \-Chi$^\wedge$2, \-R, \-Rwp... \doxyref{\-Ref\-Obj\-Opt}{p.}{a00078} m\-Opt\-Profile\-Integration;
-
-\-Integrated \-R-\/factors mutable \-Cryst\-Vector\-\_\-long m\-Integrated\-Pattern\-Min,m\-Integrated\-Pattern\-Max; mutable \-Cryst\-Vector\-\_\-\-R\-E\-A\-L m\-Integrated\-Obs; mutable \-Cryst\-Vector\-\_\-\-R\-E\-A\-L m\-Integrated\-Weight; mutable \-Cryst\-Vector\-\_\-\-R\-E\-A\-L m\-Integrated\-Weight\-Obs; mutable \-Cryst\-Vector\-\_\-\-R\-E\-A\-L m\-Integrated\-Variance\-Obs; mutable \doxyref{\-Refinable\-Obj\-Clock}{p.}{a00072} m\-Clock\-Integrated\-Factors\-Prep; \-Statistical indicators mutable \-R\-E\-A\-L m\-Chi2,m\-Integrated\-Chi2; \-This is the logarithm of the part of log(\-Likelihood) which corresponds to the normalization terms of gaussian distribution for each obs/calc point. \-In practice, this is the sum of 1/2$\ast$log(2pi$\ast$sig(i)$^\wedge$2), although we discard the 2pi terms. mutable \-R\-E\-A\-L m\-Chi2\-Like\-Norm,m\-Integrated\-Chi2\-Like\-Norm; mutable \-R\-E\-A\-L m\-R; mutable \-R\-E\-A\-L m\-Rw; \-Clock the last time \-Chi$^\wedge$2 was computed mutable \doxyref{\-Refinable\-Obj\-Clock}{p.}{a00072} m\-Clock\-Chi2,m\-Clock\-Integrated\-Chi2; /$\ast$$\ast$ \-Maximum sin(theta)/lambda for all calculations (10 by default).
-
-\-This keeps all data in memory, but only the part which is below the max is calculated. \index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!m\-Powder\-Pattern\-Background\-Calc@{m\-Powder\-Pattern\-Background\-Calc}}
-\index{m\-Powder\-Pattern\-Background\-Calc@{m\-Powder\-Pattern\-Background\-Calc}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{m\-Powder\-Pattern\-Background\-Calc}]{\setlength{\rightskip}{0pt plus 5cm}\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::m\-Powder\-Pattern\-Background\-Calc}\hspace{0.3cm}{\ttfamily  [mutable, protected]}}\label{a00062_aa38c508b5516a2b4e357b7116e0b11da}
+\index{Obj\-Cryst\-::\-Optimization\-Obj@{Obj\-Cryst\-::\-Optimization\-Obj}!m\-Recursive\-Refined\-Obj\-List@{m\-Recursive\-Refined\-Obj\-List}}
+\index{m\-Recursive\-Refined\-Obj\-List@{m\-Recursive\-Refined\-Obj\-List}!ObjCryst::OptimizationObj@{Obj\-Cryst\-::\-Optimization\-Obj}}
+\paragraph[{m\-Recursive\-Refined\-Obj\-List}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Obj\-Registry}$<${\bf Refinable\-Obj}$>$ Obj\-Cryst\-::\-Optimization\-Obj\-::m\-Recursive\-Refined\-Obj\-List\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [protected]}}\label{a00062_a0e6a9e9d4d12ed73c582da36190f110f}
 
 
-\-The calculated powder pattern part which corresponds to 'background' (eg non-\/scalable components). 
+The refined objects, recursively including all sub-\/objects. 
 
-\-It is already included in m\-Powder\-Pattern\-Calc \index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!m\-Powder\-Pattern\-Calc@{m\-Powder\-Pattern\-Calc}}
-\index{m\-Powder\-Pattern\-Calc@{m\-Powder\-Pattern\-Calc}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{m\-Powder\-Pattern\-Calc}]{\setlength{\rightskip}{0pt plus 5cm}\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::m\-Powder\-Pattern\-Calc}\hspace{0.3cm}{\ttfamily  [mutable, protected]}}\label{a00062_a039c845ac70b5118f5090077a5ef7f70}
-
-
-\-The calculated powder pattern. 
-
-\-It is mutable since it is completely defined by other parameters (eg it is not an 'independent parameter') \index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!m\-Powder\-Pattern\-Variance@{m\-Powder\-Pattern\-Variance}}
-\index{m\-Powder\-Pattern\-Variance@{m\-Powder\-Pattern\-Variance}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{m\-Powder\-Pattern\-Variance}]{\setlength{\rightskip}{0pt plus 5cm}\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::m\-Powder\-Pattern\-Variance}\hspace{0.3cm}{\ttfamily  [mutable, protected]}}\label{a00062_ac962c591539d06c65ce32e56580029c2}
+This is mutable, since it is a function of m\-Refined\-Obj\-List only. \index{Obj\-Cryst\-::\-Optimization\-Obj@{Obj\-Cryst\-::\-Optimization\-Obj}!m\-Ref\-Par\-List@{m\-Ref\-Par\-List}}
+\index{m\-Ref\-Par\-List@{m\-Ref\-Par\-List}!ObjCryst::OptimizationObj@{Obj\-Cryst\-::\-Optimization\-Obj}}
+\paragraph[{m\-Ref\-Par\-List}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Refinable\-Obj} Obj\-Cryst\-::\-Optimization\-Obj\-::m\-Ref\-Par\-List\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [protected]}}\label{a00062_a9cf13c38f24b4b2ddd6cb239286053af}
 
 
-\-The complete variance associated to each point of the powder pattern, taking into account observation and model errors. 
+The refinable par list used during refinement. 
 
-\index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!m\-Powder\-Pattern\-Variance\-Integrated@{m\-Powder\-Pattern\-Variance\-Integrated}}
-\index{m\-Powder\-Pattern\-Variance\-Integrated@{m\-Powder\-Pattern\-Variance\-Integrated}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{m\-Powder\-Pattern\-Variance\-Integrated}]{\setlength{\rightskip}{0pt plus 5cm}\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::m\-Powder\-Pattern\-Variance\-Integrated}\hspace{0.3cm}{\ttfamily  [mutable, protected]}}\label{a00062_a7c7192cf095beca2d515a15f4c57d227}
-
-
-\-The complete variance associated to each point of the powder pattern, taking into account observation and model errors. 
-
-\-Integrated. \index{\-Obj\-Cryst\-::\-Powder\-Pattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}!m\-X@{m\-X}}
-\index{m\-X@{m\-X}!ObjCryst::PowderPattern@{\-Obj\-Cryst\-::\-Powder\-Pattern}}
-\paragraph[{m\-X}]{\setlength{\rightskip}{0pt plus 5cm}\-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf \-Obj\-Cryst\-::\-Powder\-Pattern\-::m\-X}\hspace{0.3cm}{\ttfamily  [protected]}}\label{a00062_ac71a81d157387c2bdb7791cfa6d18e64}
+Only a condensed version of all objects. This is useful to keep an history of modifications, and to restore previous values. \begin{DoxyRemark}{Remarks}
+maybe this should be completely delegated to the refined objetcs. 
+\end{DoxyRemark}
+\index{Obj\-Cryst\-::\-Optimization\-Obj@{Obj\-Cryst\-::\-Optimization\-Obj}!mv\-Saved\-Param\-Set@{mv\-Saved\-Param\-Set}}
+\index{mv\-Saved\-Param\-Set@{mv\-Saved\-Param\-Set}!ObjCryst::OptimizationObj@{Obj\-Cryst\-::\-Optimization\-Obj}}
+\paragraph[{mv\-Saved\-Param\-Set}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$pair$<$long,R\-E\-A\-L$>$ $>$ Obj\-Cryst\-::\-Optimization\-Obj\-::mv\-Saved\-Param\-Set\hspace{0.3cm}{\ttfamily [protected]}}\label{a00062_a9063bb2fa6a6f0938295be2ffe2bfe84}
 
 
-\-Vector of x coordinates (either 2theta or time-\/of-\/flight) for the pattern. 
+List of saved parameter sets. 
 
-\-Stored in ascending order for 2theta, and descending for \-T\-O\-F, i.\-e. always in ascending order for the corresponding sin(theta)/lambda. 
+This is used to save possible solutions during the optimization, so that the user can check them afterwards.
 
-\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+The first member of each pair is the {\itshape index} of the parameter set, and the second is the overall cost for that set. 
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-\-Powder\-Pattern.\-h\end{DoxyCompactItemize}
+Global\-Optim\-Obj.\-h\end{DoxyCompactItemize}

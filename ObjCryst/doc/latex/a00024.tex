@@ -1,118 +1,68 @@
-\subsection{Cryst\-Vector$<$ T $>$ Class Template Reference}
-\label{a00024}\index{Cryst\-Vector$<$ T $>$@{Cryst\-Vector$<$ T $>$}}
+\subsection{Obj\-Cryst\-:\-:C\-I\-F Class Reference}
+\label{a00024}\index{Obj\-Cryst\-::\-C\-I\-F@{Obj\-Cryst\-::\-C\-I\-F}}
 
 
-Vector library (Blitz++ mimic) for Obj\-Cryst++.  
+Main \doxyref{C\-I\-F}{p.}{a00024} class -\/ parses the stream and separates data blocks, comments, items, loops.  
 
 
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries Cryst\-Vector} (const long nb\-Elements)\label{a00024_acc1f58f22cbc277dd3ed69583abad959}
-
-\item 
-{\bfseries Cryst\-Vector} (const {\bf Cryst\-Vector} \&old)\label{a00024_a3c796d63fafeee6a9d214536957cf3c9}
-
-\item 
-void {\bfseries operator=} (const {\bf Cryst\-Vector} \&old)\label{a00024_a89708875b6c53d500c19c99b84d02f8a}
-
-\item 
-{\footnotesize template$<$class U $>$ }\\void {\bfseries operator=} (const {\bf Cryst\-Vector}$<$ U $>$ \&old)\label{a00024_a8eb89869790a21467967129944248fbd}
-
-\item 
-{\footnotesize template$<$class U $>$ }\\{\bfseries operator Cryst\-Vector$<$ U $>$} () const \label{a00024_a2a70ca4700bca5417b602597a4fcfff8}
-
-\item 
-void {\bfseries reference} ({\bf Cryst\-Vector} \&old)\label{a00024_ad5d417beb2ab400eaa1a9556ec9a64f2}
-
-\item 
-long {\bfseries num\-Elements} () const \label{a00024_ace14c03e7d1b51d49ac5f10ffaaf0c40}
-
-\item 
-T {\bfseries sum} () const \label{a00024_ad588bd536a91bc8e7ee4bd7ad8ad1883}
-
-\item 
-T {\bfseries min} () const \label{a00024_a5289dca8753176f466b6988662fb9801}
-
-\item 
-T {\bfseries max} () const \label{a00024_a5d23eb80ff479100a9b65a3aa62de48b}
-
-\item 
-unsigned long {\bf imin} (const unsigned long start=0, const unsigned long finish=0) const \label{a00024_a7eafc1c142ecda5047b076a52fe8391b}
-
-\begin{DoxyCompactList}\small\item\em Find index of minimum, between start and end (if start==end, use full vector) \end{DoxyCompactList}\item 
-unsigned long {\bf imax} (const unsigned long start=0, const unsigned long finish=0) const \label{a00024_af75afcbf01dc79ac19a6705996d4ca01}
-
-\begin{DoxyCompactList}\small\item\em Find index of maximum, between start and end (if start==end, use full vector) \end{DoxyCompactList}\item 
-T $\ast$ {\bfseries data} ()\label{a00024_a40d80c8692aac9e1c705d7f60e795275}
-
-\item 
-const T $\ast$ {\bfseries data} () const \label{a00024_ad3dffbbb5b5be9a3da26c2e122f110ea}
-
-\item 
-void {\bfseries resize} (const long new\-Nb\-Elements)\label{a00024_ab1765dd06bec2086b6f51540f023cd09}
-
-\item 
-void {\bfseries resize\-And\-Preserve} (const long new\-Nb\-Elements)\label{a00024_a9270bfb8548cde6f525906919058c816}
-
-\item 
-void {\bfseries operator$\ast$=} (const T num)\label{a00024_ac6960250df7bec44a8f583fffc2fe440}
-
-\item 
-void {\bfseries operator$\ast$=} (const {\bf Cryst\-Vector} \&vect)\label{a00024_a6b8335e04364cbc24a352314a8bb495b}
-
-\item 
-void {\bfseries operator/=} (const T num)\label{a00024_a40b9ab22eae2b5503315ba8df2eb66b7}
-
-\item 
-void {\bfseries operator/=} (const {\bf Cryst\-Vector} \&vect)\label{a00024_a1d03e858d034cdcdc5017c935f2abf21}
-
-\item 
-void {\bfseries operator+=} (const T num)\label{a00024_a555db5dc4586f16776a7c7f85ab1c55a}
-
-\item 
-void {\bfseries operator+=} (const {\bf Cryst\-Vector} \&vect)\label{a00024_a48d593976114ca7a7324c32777f6609d}
-
-\item 
-void {\bfseries operator-\/=} (const {\bf Cryst\-Vector} \&vect)\label{a00024_a7e0b418e32820b39046aa6b24f29ebc3}
-
-\item 
-void {\bfseries operator=} (const T num)\label{a00024_ab0ccd3c73e6306422842b3f25d475025}
-
-\item 
-T {\bfseries operator()} (const long i) const \label{a00024_a8445144b6230c9c67eb11328e80ac421}
-
-\item 
-T \& {\bfseries operator()} (const long i)\label{a00024_a579917e862109b801e0a7fed161def03}
-
-\end{DoxyCompactItemize}
-\subsubsection*{Private Attributes}
+{\bf C\-I\-F} (std\-::istream \&in, const bool interpret=true, const bool verbose=false)
+\begin{DoxyCompactList}\small\item\em Creates the \doxyref{C\-I\-F}{p.}{a00024} object from a stream. \end{DoxyCompactList}\item 
+void {\bf Parse} (std\-::stringstream \&in)
+\begin{DoxyCompactList}\small\item\em Separate the file in data blocks and parse them to sort tags, loops and comments. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-T $\ast$ {\bfseries mp\-Data}\label{a00024_a14439d04b28df90b9e9f2cec3f3f243e}
+std\-::map$<$ std\-::string, {\bf C\-I\-F\-Data} $>$ {\bf mv\-Data}\label{a00024_adc6341fa5bbfaf7257752959317a2b57}
 
-\item 
-long {\bfseries m\-Num\-Elements}\label{a00024_a8843ca29dceb2a4c30e4589253de6728}
+\begin{DoxyCompactList}\small\item\em The data blocks, after parsing. The key is the name of the data block. \end{DoxyCompactList}\item 
+std\-::list$<$ std\-::string $>$ {\bf mv\-Comment}\label{a00024_ac0cd3903198ad04595488047a046e470}
 
-\item 
-bool {\bfseries m\-Is\-Areference}\label{a00024_ab48a31b9bdb489c6da5ed9ffd2ddb60b}
-
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Global comments, outside and data block. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-\subsubsection*{template$<$class T$>$class Cryst\-Vector$<$ T $>$}
+Main \doxyref{C\-I\-F}{p.}{a00024} class -\/ parses the stream and separates data blocks, comments, items, loops. 
 
-Vector library (Blitz++ mimic) for Obj\-Cryst++. 
+All values are stored as string, and Each \doxyref{C\-I\-F}{p.}{a00024} block is stored in a separate \doxyref{C\-I\-F\-Data}{p.}{a00026} object. No interpretaion is made here -\/ this must be done from all \doxyref{C\-I\-F\-Data}{p.}{a00026} objects. 
 
-The \doxyref{Cryst\-Vector}{p.}{a00024} library is not a new array computation library, despite the appearances. Obj\-Cryst++ should used the {\tt Blitz++ array library} , which yields excellent performance {\itshape and} simple array expressions. Unfortunately, the memory required to {\itshape compile} the library using gcc is far too high to be reasonable when using complex expressions and optimizing code. So until this has changed, The \doxyref{Cryst\-Vector}{p.}{a00024} and \doxyref{Cryst\-Matrix}{p.}{a00023} library have been created, and these emulate (supposedly exactly) the Blitz++ interface (but not the smart handling of mathematical expressions, so pointers must be used). For documentation about these two libraries you should read the {\tt Blitz++ documentation}. \doxyref{Cryst\-Vector}{p.}{a00024} and \doxyref{Cryst\-Matrix}{p.}{a00023} use the same kind of storage in memory.
+\subsubsection{Constructor \& Destructor Documentation}
+\index{Obj\-Cryst\-::\-C\-I\-F@{Obj\-Cryst\-::\-C\-I\-F}!C\-I\-F@{C\-I\-F}}
+\index{C\-I\-F@{C\-I\-F}!ObjCryst::CIF@{Obj\-Cryst\-::\-C\-I\-F}}
+\paragraph[{C\-I\-F}]{\setlength{\rightskip}{0pt plus 5cm}Obj\-Cryst\-::\-C\-I\-F\-::\-C\-I\-F (
+\begin{DoxyParamCaption}
+\item[{std\-::istream \&}]{in, }
+\item[{const bool}]{interpret = {\ttfamily true}, }
+\item[{const bool}]{verbose = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}\label{a00024_ad570039a62026b01b0fdbcd9f9480d7a}
 
-You can use Cryst\-Vector\-\_\-\-R\-E\-A\-L, Cryst\-Vector\-\_\-long,etc... to declare 1\-D vectors. Macros ensure (well, should) ensure compatibility with Blitz++. (as of april 2001 support of blitz++ is broken).
 
-\begin{DoxyRefDesc}{Todo}
-\item[{\bf Todo}]check again Blitz++ support in newer gcc versions. \end{DoxyRefDesc}
+Creates the \doxyref{C\-I\-F}{p.}{a00024} object from a stream. 
 
+
+\begin{DoxyParams}{Parameters}
+{\em interpret,\-:} & if true, interpret all data blocks. See \doxyref{C\-I\-F\-Data\-::\-Extract\-All()}{p.}{a00026_a406e1448ca864b4d679edde83c6351ab} \\
+\hline
+\end{DoxyParams}
+
+
+\subsubsection{Member Function Documentation}
+\index{Obj\-Cryst\-::\-C\-I\-F@{Obj\-Cryst\-::\-C\-I\-F}!Parse@{Parse}}
+\index{Parse@{Parse}!ObjCryst::CIF@{Obj\-Cryst\-::\-C\-I\-F}}
+\paragraph[{Parse}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-C\-I\-F\-::\-Parse (
+\begin{DoxyParamCaption}
+\item[{std\-::stringstream \&}]{in}
+\end{DoxyParamCaption}
+)}\label{a00024_ad3d151ac993f8afcf4e5f22773df2e0c}
+
+
+Separate the file in data blocks and parse them to sort tags, loops and comments. 
+
+All is stored in the original strings. 
 
 The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-Cryst\-Vector.\-h\end{DoxyCompactItemize}
+C\-I\-F.\-h\end{DoxyCompactItemize}

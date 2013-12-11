@@ -1,59 +1,33 @@
-\subsection{\-Obj\-Cryst\-:\-:\-Tracker \-Class \-Reference}
-\label{a00107}\index{\-Obj\-Cryst\-::\-Tracker@{\-Obj\-Cryst\-::\-Tracker}}
+\subsection{Obj\-Cryst\-:\-:Molecule\-:\-:Stretch\-Mode\-Group Struct Reference}
+\label{a00107}\index{Obj\-Cryst\-::\-Molecule\-::\-Stretch\-Mode\-Group@{Obj\-Cryst\-::\-Molecule\-::\-Stretch\-Mode\-Group}}
 
 
-\-A class to track the variation of parameters as a function of a number of cycles/trials.  
+Group of concurrent Stretch\-Modes (affecting common restraints) A given stretch mode can only belong to one group.  
 
 
-\-Inheritance diagram for \-Obj\-Cryst\-:\-:\-Tracker\-:\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[height=2.000000cm]{a00107}
-\end{center}
-\end{figure}
-\subsubsection*{\-Public \-Member \-Functions}
+\subsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries \-Tracker} (const std\-::string \&name)\label{a00107_a57d89249ba910902e6ef6a33dcd3ee8c}
+std\-::set$<$ {\bf Stretch\-Mode} $\ast$ $>$ {\bfseries mvp\-Stretch\-Mode}\label{a00107_a63c54cd06ab4a7b838cc686214d41750}
 
 \item 
-const std\-::string \& {\bfseries \-Get\-Name} () const \label{a00107_ad93197775f7d0a3b52eb199a9ed1c958}
+std\-::set$<$ const {\bf Mol\-Bond} $\ast$ $>$ {\bfseries mvp\-Broken\-Bond}\label{a00107_a3f6e58dc0887b43c2187080b27e2836f}
 
 \item 
-void {\bfseries \-Append\-Value} (const long trial)\label{a00107_ae50d08700a131d280f8a19a58274bfe7}
+std\-::set$<$ const {\bf Mol\-Bond\-Angle} $\ast$ $>$ {\bfseries mvp\-Broken\-Bond\-Angle}\label{a00107_a2b325fc86d71b14c62efc683e05b0fe0}
 
 \item 
-void {\bf \-Clear} ()\label{a00107_abdac1cff42cfd8d66e10977a5a9066b3}
-
-\begin{DoxyCompactList}\small\item\em \-Removes all stored values. \end{DoxyCompactList}\item 
-const std\-::map$<$ long, \-R\-E\-A\-L $>$ \& {\bfseries \-Get\-Values} () const \label{a00107_a882fe8d7c193662613d4a9ab262a2417}
-
-\item 
-std\-::map$<$ long, \-R\-E\-A\-L $>$ \& {\bfseries \-Get\-Values} ()\label{a00107_a4f889b0d29a403c597040c5b88f4ffa8}
-
-\end{DoxyCompactItemize}
-\subsubsection*{\-Protected \-Member \-Functions}
-\begin{DoxyCompactItemize}
-\item 
-virtual \-R\-E\-A\-L {\bfseries \-Read\-Value} ()=0\label{a00107_a14096d99b76d3ffac16553f6434f97ce}
-
-\end{DoxyCompactItemize}
-\subsubsection*{\-Protected \-Attributes}
-\begin{DoxyCompactItemize}
-\item 
-std\-::map$<$ long, \-R\-E\-A\-L $>$ {\bfseries mv\-Values}\label{a00107_adcd7db9240b7c6432a1fe2f0daec2d24}
-
-\item 
-std\-::string {\bfseries m\-Name}\label{a00107_a64fee6086f7c35c89c72d703903a1b26}
+std\-::set$<$ const \\*
+{\bf Mol\-Dihedral\-Angle} $\ast$ $>$ {\bfseries mvp\-Broken\-Dihedral\-Angle}\label{a00107_aaaee134991cbfe70408dc4b310981c63}
 
 \end{DoxyCompactItemize}
 
 
-\subsubsection{\-Detailed \-Description}
-\-A class to track the variation of parameters as a function of a number of cycles/trials. 
+\subsubsection{Detailed Description}
+Group of concurrent Stretch\-Modes (affecting common restraints) A given stretch mode can only belong to one group. 
 
-\-This is an abstract base class. 
 
-\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-\-Tracker.\-h\end{DoxyCompactItemize}
+Molecule.\-h\end{DoxyCompactItemize}

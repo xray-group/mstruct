@@ -1,33 +1,79 @@
-\subsection{\-Obj\-Cryst\-:\-:\-W\-X\-Scatterer \-Class \-Reference}
-\label{a00145}\index{\-Obj\-Cryst\-::\-W\-X\-Scatterer@{\-Obj\-Cryst\-::\-W\-X\-Scatterer}}
+\subsection{Obj\-Cryst\-:\-:W\-X\-Powder\-Pattern\-Diffraction Class Reference}
+\label{a00145}\index{Obj\-Cryst\-::\-W\-X\-Powder\-Pattern\-Diffraction@{Obj\-Cryst\-::\-W\-X\-Powder\-Pattern\-Diffraction}}
 
 
-base wx\-Cryst class for \-Scatterers  
+Class to display a Powder Pattern for a crystalline phase.  
 
 
-\-Inheritance diagram for \-Obj\-Cryst\-:\-:\-W\-X\-Scatterer\-:\begin{figure}[H]
+Inheritance diagram for Obj\-Cryst\-:\-:W\-X\-Powder\-Pattern\-Diffraction\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=5.000000cm]{a00145}
+\includegraphics[height=4.000000cm]{a00145}
 \end{center}
 \end{figure}
-\subsubsection*{\-Public \-Member \-Functions}
+\subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries \-W\-X\-Scatterer} (wx\-Window $\ast$parent, {\bf \-Scatterer} $\ast$)\label{a00145_a43a37c79f9dca837a55fe024a06fddd6}
+{\bfseries W\-X\-Powder\-Pattern\-Diffraction} (wx\-Window $\ast$parent, {\bf Powder\-Pattern\-Diffraction} $\ast$)\label{a00145_a80b93a4fef92bd7d220c4ef68e7b2b96}
 
-\end{DoxyCompactItemize}
-\subsubsection*{\-Protected \-Attributes}
+\item 
+void {\bfseries On\-Change\-Crystal} (wx\-Command\-Event \&W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00145_a06cb78cb0b2baabcfea21e033aa9b883}
+
+\item 
+void {\bfseries On\-Menu\-Save\-H\-K\-L\-Fcalc} (wx\-Command\-Event \&W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00145_ae1d383b5f8652c8afc532b6cda85b028}
+
+\item 
+void {\bfseries On\-Change\-Profile} (wx\-Command\-Event \&event)\label{a00145_af5fc36c337651fa01199564e25ef0e58}
+
+\item 
+virtual void {\bf Update\-U\-I} (const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em Update the User Interface, if necessary. \end{DoxyCompactList}\item 
+void {\bf On\-Le\-Bail} (wx\-Command\-Event \&event)\label{a00145_a1908f947ba675ae16a6b620286c0b0ae}
+
+\begin{DoxyCompactList}\small\item\em Perform Le Bail extraction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-{\bf \-Scatterer} $\ast$ {\bfseries mp\-Scatterer}\label{a00145_a60b8f362b1735a8942e2991994d5c862}
+{\bf Powder\-Pattern\-Diffraction} $\ast$ {\bfseries mp\-Powder\-Pattern\-Diffraction}\label{a00145_a7c91a1822f644938a2dba6c0445990fd}
+
+\item 
+{\bf W\-X\-Field\-Choice} $\ast$ {\bfseries mp\-Field\-Crystal}\label{a00145_ad469625fbbe001edf69218142eb28a2a}
+
+\item 
+wx\-Check\-Box $\ast$ {\bfseries mp\-Profile\-Fitting\-Mode}\label{a00145_ac1592170999a9b2151d1f316e97adc1f}
 
 \end{DoxyCompactItemize}
+\subsubsection*{Additional Inherited Members}
 
 
-\subsubsection{\-Detailed \-Description}
-base wx\-Cryst class for \-Scatterers 
+\subsubsection{Detailed Description}
+Class to display a Powder Pattern for a crystalline phase. 
 
-\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+Allows to choose the \doxyref{Crystal}{p.}{a00027}, as well as the profile associated to this crystalline phase. 
+
+\subsubsection{Member Function Documentation}
+\index{Obj\-Cryst\-::\-W\-X\-Powder\-Pattern\-Diffraction@{Obj\-Cryst\-::\-W\-X\-Powder\-Pattern\-Diffraction}!Update\-U\-I@{Update\-U\-I}}
+\index{Update\-U\-I@{Update\-U\-I}!ObjCryst::WXPowderPatternDiffraction@{Obj\-Cryst\-::\-W\-X\-Powder\-Pattern\-Diffraction}}
+\paragraph[{Update\-U\-I}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-W\-X\-Powder\-Pattern\-Diffraction\-::\-Update\-U\-I (
+\begin{DoxyParamCaption}
+\item[{const bool}]{mutexlock = {\ttfamily false}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00145_a0f7d965eea526ddce53d5bda8487b3fa}
+
+
+Update the User Interface, if necessary. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mutexlock,\-:} & if true, a Mutex will be used to lock the data shared between main and background thread.\\
+\hline
+\end{DoxyParams}
+The idea is to only use a few Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{Cryst\-Update()}{p.}{a00150_a13e4f37ac098de756b27cdb91d6a0551} and \doxyref{Update\-U\-I()}{p.}{a00145_a0f7d965eea526ddce53d5bda8487b3fa}. As sub-\/objects (\doxyref{W\-X\-Field}{p.}{a00126},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
+
+Reimplemented from {\bf Obj\-Cryst\-::\-W\-X\-Refinable\-Obj} \doxyref{}{p.}{a00150_a19a1d057eecafd48710d9a3b770c1b28}.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-wx\-Scatterer.\-h\end{DoxyCompactItemize}
+wx\-Powder\-Pattern.\-h\end{DoxyCompactItemize}

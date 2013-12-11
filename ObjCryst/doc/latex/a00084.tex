@@ -1,54 +1,27 @@
-\subsection{\-Obj\-Cryst\-:\-:\-W\-X\-Crystal\-:\-:\-Row\-Scatt\-Pow \-Struct \-Reference}
-\label{a00084}\index{\-Obj\-Cryst\-::\-W\-X\-Crystal\-::\-Row\-Scatt\-Pow@{\-Obj\-Cryst\-::\-W\-X\-Crystal\-::\-Row\-Scatt\-Pow}}
+\subsection{Obj\-Cryst\-:\-:Powder\-Pattern\-Diffraction\-:\-:Refl\-Profile Struct Reference}
+\label{a00084}\index{Obj\-Cryst\-::\-Powder\-Pattern\-Diffraction\-::\-Refl\-Profile@{Obj\-Cryst\-::\-Powder\-Pattern\-Diffraction\-::\-Refl\-Profile}}
 
 
-\-Structure to store the scattering power parameters.  
+Profile of a single reflection.  
 
 
-\subsubsection*{\-Public \-Attributes}
+\subsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-std\-::string {\bfseries m\-Name}\label{a00084_aaff5df78e44468ceaa7ee98088322cd6}
+long {\bf first}\label{a00084_a0074278f5c7c2db3636f12398983c27b}
 
+\begin{DoxyCompactList}\small\item\em First point of the pattern for which the profile is calculated. \end{DoxyCompactList}\item 
+long {\bf last}\label{a00084_a5c046412417d8bd818643b2e85bdfa81}
+
+\begin{DoxyCompactList}\small\item\em Last point of the pattern for which the profile is calculated. \end{DoxyCompactList}\item 
+Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf profile}\label{a00084_ac0babcc11d71c583bc1bd809d984cd6e}
+
+\begin{DoxyCompactList}\small\item\em The profile. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsubsection{Detailed Description}
+Profile of a single reflection. 
+
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-\-R\-E\-A\-L {\bf m\-Biso}\label{a00084_a113c7f507461cdce97417be2ce89c70f}
-
-\begin{DoxyCompactList}\small\item\em \-Last displayed values. \end{DoxyCompactList}\item 
-\-R\-E\-A\-L {\bfseries m\-Formal\-Charge}\label{a00084_a8d821d61d7a4c2cb49d43238643236dc}
-
-\item 
-\-R\-E\-A\-L {\bfseries m\-R}\label{a00084_a94c3494f460db87d1de194ed011456ee}
-
-\item 
-\-R\-E\-A\-L {\bfseries m\-G}\label{a00084_a7bfca1f0a4ba197b0788636e8f13bec4}
-
-\item 
-\-R\-E\-A\-L {\bfseries m\-B}\label{a00084_ae6477b327330701a23ce1c036aee4059}
-
-\item 
-\-R\-E\-A\-L {\bfseries m\-Maximum\-Likelihood\-Error}\label{a00084_a2a590e5bfb8ba1ef43fe55dc6bbd8b70}
-
-\item 
-\-R\-E\-A\-L {\bfseries m\-Nb\-Ghost\-Atoms}\label{a00084_a83b5f5447f19b2e1fdd91d2ed3b4ec32}
-
-\item 
-std\-::vector$<$ \-R\-E\-A\-L $>$ {\bf mv\-Anti\-Bump\-Distance}\label{a00084_a8fe9f826b395b40e671ef7f8a0427343}
-
-\begin{DoxyCompactList}\small\item\em \-Last displayed values for antibump. \end{DoxyCompactList}\item 
-std\-::vector$<$ \-R\-E\-A\-L $>$ {\bf mv\-Bond\-Valence\-Ro}\label{a00084_ae02d7507960b535b29ad6e1fbaf70066}
-
-\begin{DoxyCompactList}\small\item\em \-Last displayed values for bond valence. \end{DoxyCompactList}\item 
-bool {\bf m\-Need\-Update\-U\-I}\label{a00084_ac63f66d901578d4b9074336a63eb4f6f}
-
-\begin{DoxyCompactList}\small\item\em \-True if we need to update the displayed values. \end{DoxyCompactList}\item 
-int {\bf m\-Idx}\label{a00084_a8de50d30238e0f61e625a2ca61640161}
-
-\begin{DoxyCompactList}\small\item\em \-Current position in the list of rows or columns. \end{DoxyCompactList}\end{DoxyCompactItemize}
-
-
-\subsubsection{\-Detailed \-Description}
-\-Structure to store the scattering power parameters. 
-
-\-The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
-\item 
-wx\-Crystal.\-h\end{DoxyCompactItemize}
+Powder\-Pattern.\-h\end{DoxyCompactItemize}

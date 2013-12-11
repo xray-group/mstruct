@@ -1,33 +1,153 @@
-\subsection{Obj\-Cryst\-:\-:Molecule\-:\-:Stretch\-Mode\-Group Struct Reference}
-\label{a00100}\index{Obj\-Cryst\-::\-Molecule\-::\-Stretch\-Mode\-Group@{Obj\-Cryst\-::\-Molecule\-::\-Stretch\-Mode\-Group}}
+\subsection{Obj\-Cryst\-:\-:Simplex\-Obj Class Reference}
+\label{a00100}\index{Obj\-Cryst\-::\-Simplex\-Obj@{Obj\-Cryst\-::\-Simplex\-Obj}}
 
 
-Group of concurrent Stretch\-Modes (affecting common restraints) A given stretch mode can only belong to one group.  
+Conjugate Gradient Algorithm object.  
 
 
-\subsubsection*{Public Attributes}
+Inheritance diagram for Obj\-Cryst\-:\-:Simplex\-Obj\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{a00100}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-std\-::set$<$ {\bf Stretch\-Mode} $\ast$ $>$ {\bfseries mvp\-Stretch\-Mode}\label{a00100_a63c54cd06ab4a7b838cc686214d41750}
+{\bf Simplex\-Obj} (const string name=\char`\"{}Unnamed Simplex Object\char`\"{})\label{a00100_a8af9110ac672b9b932adf838a853b90b}
 
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual void {\bf Optimize} (long \&nb\-Steps, const bool silent=false, const R\-E\-A\-L finalcost=0, const R\-E\-A\-L max\-Time=-\/1)
+\begin{DoxyCompactList}\small\item\em Launch optimization (a single run) for N steps. \end{DoxyCompactList}\item 
+virtual void {\bf Multi\-Run\-Optimize} (long \&nb\-Cycle, long \&nb\-Steps, const bool silent=false, const R\-E\-A\-L finalcost=0, const R\-E\-A\-L max\-Time=-\/1)
+\begin{DoxyCompactList}\small\item\em Launch optimization for multiple runs of N steps. \end{DoxyCompactList}\item 
+virtual void {\bf X\-M\-L\-Output} (ostream \&os, int indent=0) const 
+\begin{DoxyCompactList}\small\item\em Output a description of the object in X\-M\-L format to a stream. \end{DoxyCompactList}\item 
+virtual void {\bf X\-M\-L\-Input} (istream \&is, const {\bf X\-M\-L\-Cryst\-Tag} \&tag)
+\begin{DoxyCompactList}\small\item\em Input in X\-M\-L format from a stream, restoring the set of refined objects and the associated cost functions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
 \item 
-std\-::set$<$ const {\bf Mol\-Bond} $\ast$ $>$ {\bfseries mvp\-Broken\-Bond}\label{a00100_a3f6e58dc0887b43c2187080b27e2836f}
-
-\item 
-std\-::set$<$ const {\bf Mol\-Bond\-Angle} $\ast$ $>$ {\bfseries mvp\-Broken\-Bond\-Angle}\label{a00100_a2b325fc86d71b14c62efc683e05b0fe0}
-
-\item 
-std\-::set$<$ const \\*
-{\bf Mol\-Dihedral\-Angle} $\ast$ $>$ {\bfseries mvp\-Broken\-Dihedral\-Angle}\label{a00100_aaaee134991cbfe70408dc4b310981c63}
-
-\end{DoxyCompactItemize}
+R\-E\-A\-L {\bf Generate\-New\-Simplex\-Configuration} (Cryst\-Vector\-\_\-\-R\-E\-A\-L \&v\-L\-L\-K, Cryst\-Vector\-\_\-long \&v\-Index, unsigned long worst, R\-E\-A\-L f)
+\begin{DoxyCompactList}\small\item\em Try a new configuration by expanding the worst vertex from the center by a factor f. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Additional Inherited Members}
 
 
 \subsubsection{Detailed Description}
-Group of concurrent Stretch\-Modes (affecting common restraints) A given stretch mode can only belong to one group. 
+Conjugate Gradient Algorithm object. 
+
+currently does not handle parameters hitting limits, and is not very efficient (uses numerical derivatives) 
+
+\subsubsection{Member Function Documentation}
+\index{Obj\-Cryst\-::\-Simplex\-Obj@{Obj\-Cryst\-::\-Simplex\-Obj}!Generate\-New\-Simplex\-Configuration@{Generate\-New\-Simplex\-Configuration}}
+\index{Generate\-New\-Simplex\-Configuration@{Generate\-New\-Simplex\-Configuration}!ObjCryst::SimplexObj@{Obj\-Cryst\-::\-Simplex\-Obj}}
+\paragraph[{Generate\-New\-Simplex\-Configuration}]{\setlength{\rightskip}{0pt plus 5cm}R\-E\-A\-L Obj\-Cryst\-::\-Simplex\-Obj\-::\-Generate\-New\-Simplex\-Configuration (
+\begin{DoxyParamCaption}
+\item[{Cryst\-Vector\-\_\-\-R\-E\-A\-L \&}]{v\-L\-L\-K, }
+\item[{Cryst\-Vector\-\_\-long \&}]{v\-Index, }
+\item[{unsigned long}]{worst, }
+\item[{R\-E\-A\-L}]{f}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\label{a00100_a5dbafc28130ee7db84587b8288c01830}
+
+
+Try a new configuration by expanding the worst vertex from the center by a factor f. 
+
+If it is better, store it as new worst. Return the new obtained llk \index{Obj\-Cryst\-::\-Simplex\-Obj@{Obj\-Cryst\-::\-Simplex\-Obj}!Multi\-Run\-Optimize@{Multi\-Run\-Optimize}}
+\index{Multi\-Run\-Optimize@{Multi\-Run\-Optimize}!ObjCryst::SimplexObj@{Obj\-Cryst\-::\-Simplex\-Obj}}
+\paragraph[{Multi\-Run\-Optimize}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Simplex\-Obj\-::\-Multi\-Run\-Optimize (
+\begin{DoxyParamCaption}
+\item[{long \&}]{nb\-Cycle, }
+\item[{long \&}]{nb\-Steps, }
+\item[{const bool}]{silent = {\ttfamily false}, }
+\item[{const R\-E\-A\-L}]{finalcost = {\ttfamily 0}, }
+\item[{const R\-E\-A\-L}]{max\-Time = {\ttfamily -\/1}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00100_a1c7ae823f9e31169b453f36d15c049b8}
+
+
+Launch optimization for multiple runs of N steps. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nb\-Cycle,\-:} & the number of runs (cycles) to perform. The structure is randomized at the beginning of each cycle. If nb\-Cycle==-\/1, this will run indefinitely. The nb\-Cycle parameter is decreased after each run. \\
+\hline
+{\em nb\-Steps,\-:} & the number of steps to go. This number is modified (decreases!) as the refinement goes on. \\
+\hline
+{\em silent} & \-: if true, absolutely no message should be printed (except debugging) \\
+\hline
+{\em finalcost,\-:} & the optimization will stop if overall cost fallse below this value \\
+\hline
+{\em max\-Time,\-:} & the optimization will stop after the given number of seconds has been spent optimizing (ignored if $<$0). \\
+\hline
+\end{DoxyParams}
+
+
+Implements {\bf Obj\-Cryst\-::\-Optimization\-Obj} \doxyref{}{p.}{a00062_aa53575dbda2ec3f561bed934beb4ca6f}.
+
+\index{Obj\-Cryst\-::\-Simplex\-Obj@{Obj\-Cryst\-::\-Simplex\-Obj}!Optimize@{Optimize}}
+\index{Optimize@{Optimize}!ObjCryst::SimplexObj@{Obj\-Cryst\-::\-Simplex\-Obj}}
+\paragraph[{Optimize}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Simplex\-Obj\-::\-Optimize (
+\begin{DoxyParamCaption}
+\item[{long \&}]{nb\-Steps, }
+\item[{const bool}]{silent = {\ttfamily false}, }
+\item[{const R\-E\-A\-L}]{finalcost = {\ttfamily 0}, }
+\item[{const R\-E\-A\-L}]{max\-Time = {\ttfamily -\/1}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00100_aa8bf4b209e2ce6229722b18ec9911010}
+
+
+Launch optimization (a single run) for N steps. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nb\-Steps,\-:} & the number of steps to go. This number is modified (decreases!) as the refinement goes on. \\
+\hline
+{\em silent} & \-: if true, absolutely no message should be printed (except debugging) \\
+\hline
+{\em finalcost,\-:} & the optimization will stop if overall cost fallse below this value \\
+\hline
+{\em max\-Time,\-:} & the optimization will stop after the given number of seconds has been spent optimizing (ignored if $<$0). \\
+\hline
+\end{DoxyParams}
+
+
+Implements {\bf Obj\-Cryst\-::\-Optimization\-Obj} \doxyref{}{p.}{a00062_a08c77dc6ec80f63bf067ef2968a0b6dc}.
+
+\index{Obj\-Cryst\-::\-Simplex\-Obj@{Obj\-Cryst\-::\-Simplex\-Obj}!X\-M\-L\-Input@{X\-M\-L\-Input}}
+\index{X\-M\-L\-Input@{X\-M\-L\-Input}!ObjCryst::SimplexObj@{Obj\-Cryst\-::\-Simplex\-Obj}}
+\paragraph[{X\-M\-L\-Input}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Simplex\-Obj\-::\-X\-M\-L\-Input (
+\begin{DoxyParamCaption}
+\item[{istream \&}]{is, }
+\item[{const {\bf X\-M\-L\-Cryst\-Tag} \&}]{tag}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00100_ae6ed0602ffdd2db1a10be80820a0a285}
+
+
+Input in X\-M\-L format from a stream, restoring the set of refined objects and the associated cost functions. 
+
+Note that the corresponding objects must have been loaded in memory before, else shit happens. 
+
+Implements {\bf Obj\-Cryst\-::\-Optimization\-Obj} \doxyref{}{p.}{a00062_aa07aee60f56780e2c56fb20f4a5f48a8}.
+
+\index{Obj\-Cryst\-::\-Simplex\-Obj@{Obj\-Cryst\-::\-Simplex\-Obj}!X\-M\-L\-Output@{X\-M\-L\-Output}}
+\index{X\-M\-L\-Output@{X\-M\-L\-Output}!ObjCryst::SimplexObj@{Obj\-Cryst\-::\-Simplex\-Obj}}
+\paragraph[{X\-M\-L\-Output}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Simplex\-Obj\-::\-X\-M\-L\-Output (
+\begin{DoxyParamCaption}
+\item[{ostream \&}]{os, }
+\item[{int}]{indent = {\ttfamily 0}}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00100_a7111042ca3a7201039a25fe548cb524c}
+
+
+Output a description of the object in X\-M\-L format to a stream. 
+
+This saves the list of refined object and the cost functions, as well as options for the refinement. The refined objects are {\bfseries not} saved, so this must be done somewhere else (they must be reloaded before this object). 
+
+Implements {\bf Obj\-Cryst\-::\-Optimization\-Obj} \doxyref{}{p.}{a00062_a6b7726159bb0d5dad1c7eebaee78f53a}.
 
 
 
-The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-Molecule.\-h\end{DoxyCompactItemize}
+Simplex.\-h\end{DoxyCompactItemize}

@@ -1,37 +1,49 @@
-\subsection{ci\-\_\-char\-\_\-traits Struct Reference}
-\label{a00016}\index{ci\-\_\-char\-\_\-traits@{ci\-\_\-char\-\_\-traits}}
+\subsection{Obj\-Cryst\-:\-:Crystal\-:\-:Bump\-Merge\-Par Struct Reference}
+\label{a00016}\index{Obj\-Cryst\-::\-Crystal\-::\-Bump\-Merge\-Par@{Obj\-Cryst\-::\-Crystal\-::\-Bump\-Merge\-Par}}
 
 
-Case-\/insensitive string class From\-: Guru of the Week \#29 e.\-g.  
+Storage for anti-\/bump/merge parameters.  
 
 
-\subsubsection*{Static Public Member Functions}
+\subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static bool {\bfseries eq} (char c1, char c2)\label{a00016_ab7affd067081a44149cbdb5ddbd6388a}
-
+{\bf Bump\-Merge\-Par} (const R\-E\-A\-L dist, const bool can\-Overlap=false)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
 \item 
-static bool {\bfseries ne} (char c1, char c2)\label{a00016_a37eaee352a01e9557c164f58c7d0ae36}
+R\-E\-A\-L {\bf m\-Dist2}\label{a00016_ae8bcf4fc5d270caaa7cd48026489d11d}
 
-\item 
-static bool {\bfseries lt} (char c1, char c2)\label{a00016_a2658e35e7ccccd43faea5922aeea2855}
+\begin{DoxyCompactList}\small\item\em The squared antibump interatomic distance. \end{DoxyCompactList}\item 
+bool {\bf m\-Can\-Overlap}\label{a00016_acd7b70bc57775c4fc8b33b520f82b98c}
 
-\item 
-static int {\bfseries compare} (const char $\ast$s1, const char $\ast$s2, size\-\_\-t n)\label{a00016_aee3f3e6230d9e98ed5a820bb7d05c443}
-
-\item 
-static const char $\ast$ {\bfseries find} (const char $\ast$s, int n, char a)\label{a00016_a5968fc0112d4a24e2fa74da3700357b1}
-
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Can the two atoms completely overlap ? \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-Case-\/insensitive string class From\-: Guru of the Week \#29 e.\-g. 
+Storage for anti-\/bump/merge parameters. 
 
-\-: {\tt http\-://gcc.\-gnu.\-org/onlinedocs/libstdc++/21\-\_\-strings/gotw29a.\-txt}
+\subsubsection{Constructor \& Destructor Documentation}
+\index{Obj\-Cryst\-::\-Crystal\-::\-Bump\-Merge\-Par@{Obj\-Cryst\-::\-Crystal\-::\-Bump\-Merge\-Par}!Bump\-Merge\-Par@{Bump\-Merge\-Par}}
+\index{Bump\-Merge\-Par@{Bump\-Merge\-Par}!ObjCryst::Crystal::BumpMergePar@{Obj\-Cryst\-::\-Crystal\-::\-Bump\-Merge\-Par}}
+\paragraph[{Bump\-Merge\-Par}]{\setlength{\rightskip}{0pt plus 5cm}Obj\-Cryst\-::\-Crystal\-::\-Bump\-Merge\-Par\-::\-Bump\-Merge\-Par (
+\begin{DoxyParamCaption}
+\item[{const R\-E\-A\-L}]{dist, }
+\item[{const bool}]{can\-Overlap = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}\label{a00016_ac4da8697127de078e7ef7092c49de0ab}
 
-Public domain. 
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dist,\-:} & the bump/merge distance in Angstroems \\
+\hline
+\end{DoxyParams}
+
 
 The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-ci\-\_\-string.\-h\end{DoxyCompactItemize}
+Crystal.\-h\end{DoxyCompactItemize}
