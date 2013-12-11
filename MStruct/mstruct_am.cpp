@@ -52,7 +52,8 @@
 #include <stdlib.h> // rand, srand
 #include <time.h> // time
 
-#include <boost/algorithm/string.hpp>
+//#include <boost/algorithm/string.hpp>
+#include <boost/algorithm/string/case_conv.hpp>
 
 using namespace ObjCryst;
 
@@ -198,6 +199,9 @@ int main (int argc, char *argv[])
 				break;
 			case 19:
 			        val = MStruct::mstruct_test9(argc, argv, imp_file);
+				break;
+			case 20:
+			        val = MStruct::mstruct_test10(argc, argv, imp_file);
 				break;	
 			default:
 				cout << "Job/test type not recognised!" << endl;
@@ -1070,7 +1074,28 @@ int main (int argc, char *argv[])
        			 = new MStruct::FaultsBroadeningEffectWC11m23;
        		faultsEffect->SetName(bname);
        		vReflProfComponents.push_back(faultsEffect);
-       		
+	 // model options
+	  string approx_type;
+	  cout << "approximation type (simple,b_TPA_unaff)" << endl;
+	  read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+       	  ccin >> approx_type;
+
+	 // convert approximation type string to lowercase
+       	  for_each( approx_type.begin() , approx_type.end() , char2lower() );
+       	  
+       	  if ( approx_type==string("simple") ) {
+	    faultsEffect->SetModelApproxType(MStruct::FaultsBroadeningEffectWC11m23::APPROX_MODEL_SIMPLE);
+	  } else if ( approx_type==string("b_tpa_unaff") || approx_type==string("b_ppt_unaff") ) {
+	    faultsEffect->SetModelApproxType(MStruct::FaultsBroadeningEffectWC11m23::APPROX_MODEL_BROKEN_TPA_UNAFFECTED);
+	  } else {
+	    cerr << "< Application: unknown input option\n";
+	    cerr << "\t"<<"Can not set model approximation type ="<<approx_type;
+	    cerr << " "<<"for object name: "<<bname;
+	    cerr << " and "<<"type: MStruct::FaultsBroadeningEffectWC11m23.\n";
+	    cerr << "\t"<<"Unknown or unsupported model approximation type. >\n";
+	    throw ObjCrystException("Application: Wrong input argument.");
+	  }
+
        	 // parameters
        	  REAL alpha;
        	  cout << "alpha" << endl;

@@ -40,6 +40,7 @@
 #include "cctbx/sgtbx/rot_mx_info.h"
 #include "scitbx/vec3.h"
 #include "cctbx/eltbx/tiny_pse.h"
+#include "cctbx/eltbx/xray_scattering.h"
 
 #include "newmat/newmatap.h" //for matrix equation solution
 #include "newmat/newmatio.h" //in CalcParams subroutine
@@ -63,11 +64,15 @@
 
 #include <signal.h> // To catch CTRL+C signal during LSQNumObj refinement
 
+#include <gsl/gsl_sf_expint.h> // GSL included for development purposes of FaultsBroadeningEffectWC11m23
+#include <gsl/gsl_errno.h>
+
 // incomplete gamma function as defined in Wolfram Mathematica
 #define gammaW(a,z) (boost::math::gamma_q(a,z)*boost::math::tgamma(a))
 
 bool bsavecalc = false;
-REAL xcenterlimits[2] = {24.*DEG2RAD, 26.*DEG2RAD};
+//REAL xcenterlimits[2] = {30.*DEG2RAD, 32.*DEG2RAD};
+REAL xcenterlimits[2] = {71.5*DEG2RAD, 74.5*DEG2RAD};
 
 #define absorption_corr_factor 1.e4
 
@@ -89,6 +94,27 @@ double func_daw(const double x);
 double erfc(const double x);// in C99, but not in VC++....
    // defined later in this file
 #endif
+
+// --- NR routies ----------------------------------------------------------------
+namespace NR {
+
+#define IMIN(a,b) (((a)<=(b)) ? (a) : (b))
+#define IMAX(a,b) (((a)>=(b)) ? (a) : (b))
+
+void polint(float xa[], float ya[], int n, float x, float *y, float *dy);
+void dftcor(float w, float delta, float a, float b, float endpts[],
+	    float *corre, float *corim, float *corfac);
+void dftint(float (*func)(float), float a, float b, float w, float *cosint,
+	    float *sinint);
+void vdftint(float (*func)(float,void*), void *params, float a, float b, float w[], unsigned int nw,
+	     float cosint[], float sinint[], bool recalc, unsigned int ndft, unsigned int mm);
+
+float* vector(unsigned int n);
+void* free_vector(float* v);
+void nrerror(const char error_text[]);
+
+}
+// --- NR routies (end) ----------------------------------------------------------
 
 //#define __DEBUG__ZDENEK__
 
@@ -994,6 +1020,1128 @@ void PowderPatternBackgroundChebyshev::Init()
 		this->AddPar(tmp);
   }
 }
+
+void printDataXY(std::ostream &s, const CrystVector_REAL &x, const CrystVector_REAL &y)
+{
+  long nb = x.numElements();
+  const REAL *px = x.data();
+  const REAL *py = y.data();
+  
+  s << "#" << setw(15) << "x" << setw(16) << "y" << "\n";
+  //s << std::scientific << std::setprecision(6);
+  s << std::fixed << std::showpoint << std::setprecision(6);
+  for(unsigned int j=0; j<nb; j++) {
+    s << std::setw(16) << (*px) << " "; px++;
+    s << std::setw(16) << (*py) << "\n"; py++;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////
+//
+//    TurbostraticHexStructWB
+//
+////////////////////////////////////////////////////////////////////////
+
+TurbostraticHexStructWB::TurbostraticHexStructWB()
+  :mLattA(2.461), mLattC(6.88), mBiso(0.0), mOccup(1.0), mLa(20.0), mLc(10.0),
+   mVarLa(0.0), mVarLc(0.0), mOptI00lScale(0),
+   mpAtomScatterer(NULL), mpAtomScattererGaussian(NULL), mQ(0), mfsq(0), mHajduZMKL(0),
+   //mFlagCorrections(TurbostraticHexStructWB::TurbostraticHexStructWB::FLAG_INCOH_SCATT_CORR),
+   mFlagCorrections(0x5),
+   mIncScatt(0), mItotalScatt(0), mItotalCorr(0),
+   mRuland_ac(0.53), mRuland_dqmax(3.05), mRuland_b(0.007), mRuland_D(1.5e-3),
+   mDoubleScattTab("doubleScatCarbon-Cu-tab.dat"),
+   mInstrFuncTab("instrFuncCarbon-Cu-tab.dat", 1.54056)
+{
+  mIsScalable = true;
+
+  // TODO:: generalise
+  mpAtomScatterer = new ObjCryst::ScatteringPowerAtom ("C", "C", 0.0);
+  cctbx::eltbx::xray_scattering::wk1995 wk95t(mpAtomScatterer->GetSymbol());
+  mpAtomScattererGaussian = new cctbx::eltbx::xray_scattering::gaussian(wk95t.fetch());
+
+  // Data taken from Hajdu (1972), Milan's compton.m, scat ampl - PDFgetX - Weissmayer (1995) data
+  mHajduZMKL.resize(4); mHajduZMKL(0) = 6.0; mHajduZMKL(1) = 0.4972; mHajduZMKL(2) = 1.8438; mHajduZMKL(3) = 7.8917;
+
+  // initialise Absorption correction TODO:: Generalise
+  mAbsorptionCorr.SetAbsorptionCorrParams( 1.e6, 0.0, 1.9, 10.0*DEG2RAD );  
+  // Polarization correction is set later in Prepare() when Radiation is available
+
+  this->InitParameters();
+}
+
+TurbostraticHexStructWB::TurbostraticHexStructWB(const TurbostraticHexStructWB &old)
+  :PowderPatternBackgroundBase( old ),
+   mDoubleScattTab( old.mDoubleScattTab ), // TODO:  copy also vector content Hajdu etc.
+   mAbsorptionCorr( old.mAbsorptionCorr ),
+   mInstrFuncTab( old.mInstrFuncTab )
+{
+  mIsScalable = true;
+
+  // TODO:: generalise
+  if ( old.mpAtomScatterer != NULL ) { mpAtomScatterer = new ObjCryst::ScatteringPowerAtom (*old.mpAtomScatterer);  }
+  if ( old.mpAtomScattererGaussian != NULL ) {
+    cctbx::eltbx::xray_scattering::wk1995 wk95t(mpAtomScatterer->GetSymbol());
+    mpAtomScattererGaussian = new cctbx::eltbx::xray_scattering::gaussian(wk95t.fetch());
+  }
+
+  // Polarization correction is set later in Prepare() when Radiation is available
+
+  this->InitParameters();
+}
+
+TurbostraticHexStructWB::~TurbostraticHexStructWB()
+{
+  if ( mpAtomScatterer != NULL ) { delete mpAtomScatterer; mpAtomScatterer = NULL; }
+  if ( mpAtomScattererGaussian != NULL ) { delete mpAtomScattererGaussian; mpAtomScattererGaussian = NULL; }
+}
+
+const string& TurbostraticHexStructWB::GetClassName()const
+{
+  static const string className = "MStruct::TurbostraticHexStructWB";
+  return className;
+}
+
+void TurbostraticHexStructWB::Prepare()
+{
+  // get radiation and wavelength
+  const ObjCryst::Radiation & rad = GetParentPowderPattern().GetRadiation();
+  const REAL Lambda = rad.GetWavelength()(0);
+  
+  // set radiation for Polarization correction
+  mPolarizationCorr.SetRadiation( rad );
+
+  // prepare (internal) calculation Q-vector (now use the fixed-step one)
+  if( mQ.numElements()==0 ||
+      mClockPowderPatternCalc < GetClockPowderPatternSinTheta() ||
+      mClockPowderPatternCalc < GetParentPowderPattern().GetClockPowderPatternRadiation() ) {
+
+    REAL minQ = 4*M_PI*sin(GetParentPowderPattern().GetPowderPatternXMin()/2.)/Lambda;
+    REAL maxQ = 4*M_PI*sin(GetParentPowderPattern().GetPowderPatternXMax()/2.)/Lambda;
+    REAL stepQ = 0.005; // 2pi/A
+    long nbQ = ceil((maxQ-minQ)/stepQ)+1;
+
+    CrystVector_REAL Q(nbQ);
+    for(long j=0; j<nbQ; j++)
+      Q(j) = minQ + j*stepQ;
+    
+    this->SetQ(Q); // setting Q
+  }
+  
+  this->CalcFSq(); // (preparing) calculating |f|^2
+  this->CalcIncScatt(); // (preparing) calculating IncScatt
+  this->CalcItotalCorr(); // (preparing) calculating total scattering intensity corrections (polarization, absorption, Lorentz, ...)
+
+  // debug-purposes
+  std::ofstream fs("mstruct-TurbostraticHexStructWB-ItotalCorr.txt");
+  printDataXY( fs, mQ, mItotalCorr );
+  fs.close();
+}
+
+void TurbostraticHexStructWB::SetQ(const CrystVector_REAL &Q)
+{
+  mQ = Q;
+  mClockFSqCalc.Reset(); // force recalculation
+  mClockItotalScattCalc.Reset();
+  mClockIncScattCalc.Reset();
+  mClockItotalCorrCalc.Reset();
+  mClockPowderPatternCalc.Reset();
+}
+
+void TurbostraticHexStructWB::CalcFSq()
+{
+  if ( mClockFSqCalc > GetClockPowderPatternSinTheta() &&
+       mClockFSqCalc > GetParentPowderPattern().GetClockPowderPatternRadiation() )
+    return; // mfsq is up to data
+
+  cout << "Calculating |f|^2\n"; // debug-purposes
+
+  // get radiation (and wavelength)
+  const ObjCryst::Radiation & rad = GetParentPowderPattern().GetRadiation();
+  
+  // check if X-rays (other types are not supported)
+  if ( rad.GetRadiationType() != RAD_XRAY ) {
+    throw ObjCrystException("MStruct::TurbostraticHexStructWB::CalcFSq(): Wrong radiation type. Only X-rays supported.");
+  } // TODO:: implement also for neutrons and electrons (or better include in ScatteringData formalism) (consider also Iincoherent)
+  
+  // --- Calculate (atomic) scattering factors ---
+  mfsq.resize( mQ.numElements() );
+
+  if ( mpAtomScattererGaussian==NULL ) {
+    mfsq = 1.0; //:KLUDGE:  Should never happen
+    mClockFSqCalc.Click();
+    return;
+  }
+  
+  const long nb = mQ.numElements();
+  const REAL *pQ = mQ.data();
+  REAL sf;
+  for(long i=0; i<nb; i++) {
+    sf = mpAtomScattererGaussian->at_stol((*pQ)/(4.*M_PI)); // sin(th)/lambda
+    mfsq(i) = sf*sf;
+    pQ++;
+  }
+  mClockFSqCalc.Click();
+
+  std::ofstream s("mstruct-TurbostraticHexStructWB-fsq.txt"); // debug-purposes
+  printDataXY(s, mQ, mfsq);
+  s.close();
+}
+
+void TurbostraticHexStructWB::CalcIncScatt()
+{
+  if ( mClockIncScattCalc > GetClockPowderPatternSinTheta() &&
+       mClockIncScattCalc > GetParentPowderPattern().GetClockPowderPatternRadiation() )
+    return; // mIncScatt is up to data
+
+  // get radiation (and wavelength)
+  const ObjCryst::Radiation & rad = GetParentPowderPattern().GetRadiation();
+  const REAL Lambda = rad.GetWavelength()(0);
+
+  cout << "Calculating Incoherent scattering\n"; // debug-purposes
+  
+  mIncScatt.resize( mQ.numElements() );
+
+  if ( (mFlagCorrections & 0x1) != 1 ) { // incoherent scattering not required
+    mIncScatt = 0.;
+    mClockIncScattCalc.Click();
+    return;
+  }
+ 
+  this->CalcFSq(); // be sure |f|^2 is prepared
+  
+  // --- Calculate incoherent scattering ---
+  
+  const long nb = mQ.numElements();
+  const REAL *pQ = mQ.data();
+  const REAL *pfsq = mfsq.data();
+  REAL *pInc = mIncScatt.data();
+
+  for(long i=0; i<nb; i++) {
+    REAL s = (*pQ)/(4.*M_PI); // sin(th)/lambda
+    (*pInc) = (mHajduZMKL(0) - (*pfsq)/mHajduZMKL(0))*(1.-mHajduZMKL(1)*(exp(-mHajduZMKL(2)*s)-exp(-mHajduZMKL(3)*s)));
+    pQ++; pfsq++; pInc++;
+  }
+
+  // --- Breit-Dirac correction ---
+  if ( (mFlagCorrections & 0x3) == 0x3 ) { // Breit-Dirac recoil correction for incoherent scattering required
+    cout << "Calculating Breit-Dirac correction\n"; // debug-purposes
+
+    const REAL compLambda = 2.4263102175e-2; // (1/A) Compton wavelength = h/(me*c)
+    
+    const long nb = mQ.numElements();
+    const REAL *pQ = mQ.data();
+    REAL *pInc = mIncScatt.data();
+    
+    for(long i=0; i<nb; i++) {
+      REAL s = (*pQ)/(4.*M_PI); // sin(th)/lambda
+      REAL dx = 2.*compLambda*(s*s)*Lambda; // corr = 1 + dx
+      (*pInc) *= ( fabs(dx)>1.e-4 ) ? 1./((1.+dx)*(1.+dx)) : (1.-2.*dx);
+      pQ++; pInc++;
+    }
+  } // Breit-Dirac
+
+  // --- Ruland correction ---
+  if ( (mFlagCorrections & 0x5) == 0x5 ) { // Ruland monochromator correction for incoherent scattering required
+    cout << "Calculating Ruland correction\n"; // debug-purposes
+
+    const long nb = mQ.numElements();
+    const REAL *pQ = mQ.data();
+    REAL *pInc = mIncScatt.data();
+
+    for(long i=0; i<nb; i++) {
+      REAL ss = (*pQ)/(2.*M_PI); // 2*sin(th)/lambda
+      REAL dLambda = (Lambda*Lambda)/137.*ss*mRuland_dqmax*(ss*ss)/(mRuland_ac*mRuland_ac+ss*ss);
+      (*pInc) *= 1./(1.+dLambda/mRuland_b);
+      REAL dLambdac = ( M_PI/137.*(ss*ss) - mRuland_D ) * (Lambda*Lambda);
+      (*pInc) *= 1./(1.+(M_PI*dLambdac/(dLambda+mRuland_b))*(M_PI*dLambdac/(dLambda+mRuland_b)));
+      pQ++; pInc++;
+    }
+    
+  } // Ruland
+
+  mClockIncScattCalc.Click();
+
+  std::ofstream s("mstruct-TurbostraticHexStructWB-IncScatt.txt"); // debug-purposes
+  printDataXY(s, mQ, mIncScatt);
+  s.close();
+}
+
+void TurbostraticHexStructWB::CalcItotalCorr()
+{
+  if ( mClockItotalCorrCalc > GetClockPowderPatternSinTheta() &&
+       mClockItotalCorrCalc > GetParentPowderPattern().GetClockPowderPatternRadiation() )
+    return; // mItotalCorr is up to data
+
+  // get radiation (and wavelength) (to convert Q => 2Theta)
+  const ObjCryst::Radiation & rad = GetParentPowderPattern().GetRadiation();
+  const REAL Lambda = rad.GetWavelength()(0);
+
+  cout << "Calculating total scattering intensity corrections\n"; // debug-purposes
+  
+  mItotalCorr.resize( mQ.numElements() );
+  CrystVector_REAL tth( mQ.numElements() ); // most effects are 2Theta-related
+  
+  { // Q => tth
+    REAL *pQ = mQ.data();
+    REAL *ptth = tth.data();
+
+    for(long i=0; i<mQ.numElements(); i++) {
+      (*ptth) = 2.*asin((*pQ)/(4.*M_PI)*Lambda); // (rad)
+      pQ++; ptth++;
+    }
+  }
+  
+  mItotalCorr = 1.;
+  
+  // Lorentz correction
+  //  mItotalCorr *= mLorentzCorr.GetCorr( tth );
+
+  // Polarization correction
+  //  mItotalCorr *= mPolarizationCorr.GetCorr( tth );
+
+  // Absorption correction
+  mItotalCorr *= mAbsorptionCorr.GetCorr( tth );
+}
+
+const CrystVector_REAL & TurbostraticHexStructWB::CalcItotalScatt() const
+{
+  if ( mItotalScatt.numElements()==mQ.numElements() &&
+       mi0Calculator.mClockLayerParams<mClockItotalScattCalc &&
+       mi00lCalculator.mClockInterLayerParams<mClockItotalScattCalc )
+    return mItotalScatt; // TODO:: reconsider
+  
+  return mItotalScatt;
+}
+
+void TurbostraticHexStructWB::CalcPowderPattern()const
+{
+  if (mClockPowderPatternCalc>mClockMaster) return;
+
+  // this powder pattern component has no parameters (it is only scalable).
+  // All necessary clocks are included in the master clocks
+  
+  TAU_PROFILE("MStruct::TurbostraticHexStructWB::CalcPowderPattern()","void ()",TAU_DEFAULT);
+  VFN_DEBUG_MESSAGE("MStruct::TurbostraticHexStructWB::CalcPowderPattern()",3);
+   
+  const unsigned long nb = mpParentPowderPattern->GetNbPoint();
+  mPowderPatternCalc.resize(nb);
+	
+  REAL *p2 = mPowderPatternCalc.data();
+  
+  try {
+    
+    const REAL *p1 = mpParentPowderPattern->GetPowderPatternX().data();
+    if(!mUseVariableSlitIntensityCorr) {
+      for(unsigned long i=0; i<nb; i++) { *p2 = 1.; p1++; p2++; }
+    } else {
+      const REAL *p3 = GetPowderPatternSinTheta().data();
+      for(unsigned long i=0; i<nb; i++) { *p2 = (*p3); p1++; p2++; p3++; }
+    }	
+
+  }
+ 
+  catch (std::exception &e) {
+    cerr << "< MStruct::TurbostraticHexStructWB::CalcPowderPattern()\n";
+    cerr << "Unexpected exception: " << e.what() << "\n";
+    cerr << "Unexpected exception thrown during calcualtion of the powder pattern.\n >" << endl; 
+    throw ObjCrystException("MStruct::TurbostraticHexStructWB::CalcPowderPattern(): Program error.");
+  }
+
+  // ------ TESTING ---
+  
+  // ------------
+
+  VFN_DEBUG_MESSAGE("MStruct::TurbostraticCarbonWB::CalcPowderPattern()",3);
+  #ifdef USE_BACKGROUND_MAXLIKE_ERROR
+  {
+    mPowderPatternCalcVariance.resize(nb);
+    const REAL step=mModelVariance*mModelVariance/(REAL)nbPoint;
+    REAL var=0;
+    REAL *p=mPowderPatternCalcVariance.data();
+    for(long i=0;i<nb;i++) {*p++ = var;var +=step;}
+  }
+  mClockPowderPatternVarianceCalc.Click();
+  #endif
+  
+  /*switch ( mParamSetOption ) {
+  case PARAM_SET_DL:
+    mDiameter = 10.*diameter;
+    mLDratio = mLength/mDiameter;
+    mTheta = 10.*theta;
+    break;
+  case PARAM_SET_aD:
+  case PARAM_SET_aL: 
+    mDiameter = 10.*diameter;
+    mLength = mLDratio*mDiameter;
+    mTheta = 10.*theta;
+    break;
+  default:
+    throw ObjCrystException("CircRodsGammaBroadeningEffect: Model parameters-set unknown!");
+  }*/
+
+  mClockPowderPatternCalc.Click();
+  VFN_DEBUG_MESSAGE("MStruct::TurbostraticHexStructWB::CalcPowderPattern():End",3);	
+}
+
+void TurbostraticHexStructWB::InitParameters()
+{
+  //mLattA(2.461), mLattC(6.88), mBiso(0.0). mOccup(1.0), mLa(20.0), mLc(10.0),
+  // mVarLa(0.0), mVarLc(0.0)
+
+  { // lattice parameter a
+    RefinablePar tmp("a",&mLattA,0.01,1.e3,
+		     gpRefParTypeUnitCell,REFPAR_DERIV_STEP_ABSOLUTE,
+		     false,true,true,false,1.0);
+    tmp.AssignClock(mi0Calculator.mClockLayerParams);
+    tmp.SetDerivStep(0.001);
+    this->AddPar(tmp);
+  }
+  
+  { // lattice parameter c
+    RefinablePar tmp("c",&mLattC,0.01,1.e3,
+		     gpRefParTypeUnitCell,REFPAR_DERIV_STEP_ABSOLUTE,
+		     false,true,true,false,1.0);
+    tmp.AssignClock(mi00lCalculator.mClockInterLayerParams);
+    tmp.SetDerivStep(0.001);
+    this->AddPar(tmp);
+  }
+
+  { // isotropic Debyw-Waller (temperature) factor
+    RefinablePar tmp("Biso",&mBiso,0.0,1.e2,
+		     gpRefParTypeScattPowTemperatureIso,REFPAR_DERIV_STEP_ABSOLUTE,
+		     false,true,true,false,1.0);
+    //tmp.AssignClock(mClockIntensityParams); TODO::
+    tmp.SetDerivStep(0.02);
+    this->AddPar(tmp);
+  }
+  
+  { // lattice sites occupancy
+    RefinablePar tmp("Occup",&mOccup,0.0,1.0,
+		     gpRefParTypeScattOccup,REFPAR_DERIV_STEP_ABSOLUTE,
+		     true,true,true,false,1.0);
+    //tmp.AssignClock(mClockIntensityParams); TODO::
+    tmp.SetDerivStep(0.005);
+    this->AddPar(tmp);
+  }
+  
+  { // mean layer diameter (La)
+    RefinablePar tmp("La",&mLa,mLattA,1.e3,
+		     gpRefParTypeScattDataProfileWidth,REFPAR_DERIV_STEP_ABSOLUTE,
+		     false,true,true,false,1.0);
+    tmp.AssignClock(mi0Calculator.mClockLayerParams); // TODO:: connect aslo with InterLayer
+    tmp.SetDerivStep(2*mLattA);
+    this->AddPar(tmp);
+  }
+
+  { // mean cluster size in c-direction (Lc)
+    RefinablePar tmp("Lc",&mLc,0.0,1.e3,
+		     gpRefParTypeScattDataProfileWidth,REFPAR_DERIV_STEP_ABSOLUTE,
+		     false,true,true,false,1.0);
+    tmp.AssignClock(mi00lCalculator.mClockInterLayerParams);
+    tmp.SetDerivStep(0.75*mLattC);
+    this->AddPar(tmp);
+  }
+
+  { // layer size variance (varLa)
+    RefinablePar tmp("varLa",&mVarLa,0.0,1.e2,
+		     gpRefParTypeScattDataProfileWidth,REFPAR_DERIV_STEP_ABSOLUTE,
+		     true,true,true,false,1.0);
+    tmp.AssignClock(mi0Calculator.mClockLayerParams);// TODO:: connect aslo with InterLayer
+    tmp.SetDerivStep(0.2);
+    this->AddPar(tmp);
+  }
+  
+  { // variance of cluster size in c-direction (varLc)
+    RefinablePar tmp("varLc",&mVarLc,0.0,1.e2,
+		     gpRefParTypeScattDataProfileWidth,REFPAR_DERIV_STEP_ABSOLUTE,
+		     true,true,true,false,1.0);
+    tmp.AssignClock(mi00lCalculator.mClockInterLayerParams);
+    tmp.SetDerivStep(0.2);
+    this->AddPar(tmp);
+  }
+}
+
+////////////////////////////////////////////////////////////////////////
+//
+//    TurbostraticHexStructWB::i0Calculator
+//
+////////////////////////////////////////////////////////////////////////
+
+TurbostraticHexStructWB::i0Calculator::i0Calculator()
+  :mNatoms(0), mAtoms(NULL), mdr(0.0001), mNbins(0), mHist(NULL),
+   mQ(0), mi0(0), mSincQr(0,0), mSincQrNeedRecalc(true)
+{
+}
+
+TurbostraticHexStructWB::i0Calculator::~i0Calculator()
+{
+  mi0.resize(0);
+  mQ.resize(0);
+  mSincQr.resize(0,0); mSincQrNeedRecalc = true;
+  if (mHist != NULL) free( (void*) mHist ); { mHist = NULL; mNbins = 0; }
+  if (mAtoms != NULL) free( (void*) mAtoms ); { mAtoms = NULL; mNatoms = 0; }
+}
+
+void TurbostraticHexStructWB::i0Calculator::CreateHexLayerAtoms(float lattA, float La)
+{
+  /* recalculation between hexagons and circle - size of hexagon as defined by Liu */
+  unsigned int nHex = (unsigned int) ceil( La/(lattA*sqrt(3.))-2./sqrt(3.) ); // TODO:: check (consult) this formula (???)
+  
+  float *atomsHex = (float*) malloc( 2*6*(nHex+1)*(nHex+1) * sizeof(float) );
+  
+  float u1, v1, x, y;
+  const float thr = 0.333333333333;
+  float c = cos(M_PI/3), s = sin(M_PI/3);
+  float *p = atomsHex;
+  unsigned int nCirc = 0; /* count atoms inside circle of radius = La/2 */
+  float R2 = La*La/4.;
+  float a0 = lattA;
+
+  for(unsigned int m=0; m<=nHex; m++)
+    for(unsigned int n=0; n<=nHex; n++) {
+      u1 = m + thr; v1 = n + 2*thr;
+      x = u1; y = v1; /* (u1,v1) */
+      *p = (x - c*y)*lattA; *(p+1) = s*y*lattA; if ((*p)*(*p)+(*(p+1))*(*(p+1))<R2) nCirc++; p += 2;
+      x = -v1; y = u1-v1; /* (-v1,u1-v1) */
+      *p = (x - c*y)*lattA; *(p+1) = s*y*lattA; if ((*p)*(*p)+(*(p+1))*(*(p+1))<R2) nCirc++; p += 2;
+      x = -u1+v1; y = -u1; /* (-u1+v1,-u1) */
+      *p = (x - c*y)*lattA; *(p+1) = s*y*lattA; if ((*p)*(*p)+(*(p+1))*(*(p+1))<R2) nCirc++; p += 2;
+      u1 = m + 2*thr; v1 = n + thr;
+      x = u1; y = v1; /* (u1,v1) */
+      *p = (x - c*y)*lattA; *(p+1) = s*y*lattA; if ((*p)*(*p)+(*(p+1))*(*(p+1))<R2) nCirc++; p += 2;
+      x = -v1; y = u1-v1; /* (-v1,u1-v1) */
+      *p = (x - c*y)*lattA; *(p+1) = s*y*lattA; if ((*p)*(*p)+(*(p+1))*(*(p+1))<R2) nCirc++; p += 2;
+      x = -u1+v1; y = -u1; /* (-u1+v1,-u1) */
+      *p = (x - c*y)*lattA; *(p+1) = s*y*lattA; if ((*p)*(*p)+(*(p+1))*(*(p+1))<R2) nCirc++; p += 2;
+    }
+
+  /* accepting only atoms inside circle of radius = La/2 */
+  if ( nCirc != mNatoms ) { // reallocate memory
+    mNatoms = nCirc;
+    mAtoms = (float*) realloc( (void*) mAtoms, 2*mNatoms* sizeof(float) );
+  }
+
+  p = atomsHex;
+  float *p2 = mAtoms;
+  for(unsigned int m=0; m<6*(nHex+1)*(nHex+1); m++) {
+    x = *p; p++; y = *p; p++;
+    if( (x*x+y*y)<R2 ) {
+      *p2 = x; p2++; *p2 = y; p2++;
+    }
+  }
+
+  free( (void*) atomsHex ); atomsHex = NULL;
+}
+
+void TurbostraticHexStructWB::i0Calculator::PrintAtoms(std::ostream &s) const
+{
+  s << "#" << setw(15) << "x(A)" << setw(16) << "y(A)" << "\n";
+  s << std::scientific << std::setprecision(6);
+  float *p = mAtoms;
+  for(unsigned int j=0; j<mNatoms; j++) {
+    s << std::setw(16) << (*p); p++;
+    s << std::setw(16) << (*p) << "\n"; p++;
+  }
+}
+
+void TurbostraticHexStructWB::i0Calculator::AccumHist2d(float rmax, const bool tidy, const bool throwerr)
+{
+  unsigned int m, n, nr;
+  float xm, ym, xn, yn, r;
+  float *pm, *pn;
+
+  if (tidy) {
+    /* reinitialise histogram data, reallocate memory if needed */
+    unsigned int newNbins = (unsigned int) ceil(rmax/mdr);
+    if ( mHist==NULL || newNbins != mNbins ) {
+      mNbins = newNbins;
+      mHist = (unsigned int *) realloc( mHist, mNbins*sizeof(unsigned int) );
+      // loop over all bins
+      unsigned int *ph = mHist;
+      for(m=0; m<mNbins; m++) {
+	(*ph) = 0; ph++;
+      }
+      mSincQrNeedRecalc = true; // need also reinitialise sinc(Qr) matrix
+    }
+  }
+
+  /* loop over all atoms */
+  pm = mAtoms;
+  for(m=0; m<mNatoms; m++) {
+    xm = *pm; pm++; ym = *pm; pm++;
+    pn = mAtoms + 2*(m+1);
+    for(n=m+1; n<mNatoms; n++) { /* loop over all other atoms (lower triangular matrix part) */
+      xn = *pn; pn++; yn = *pn; pn++;
+      r = sqrt( (xm-xn)*(xm-xn) + (ym-yn)*(ym-yn) );
+      nr = (unsigned int) (r/mdr + 0.5);
+      if( nr<mNbins )
+	mHist[nr]++;
+      else if (throwerr) /* error - distance out of histogram range */
+	throw new std::range_error("TurbostraticHexStructWB::i0Calculator::AccumHist2d error: distance out of histogram range");
+    } /* n */
+  } /* m */
+}
+
+void TurbostraticHexStructWB::i0Calculator::PrintHistogram(std::ostream &s) const
+{
+  s << "#" << setw(15) << "D1(A)" << setw(16) << "D2(A)";
+  s << setw(16) << "distrib" << "\n";
+  s << std::scientific << std::setprecision(6);
+  unsigned int *p = mHist;
+  for(unsigned int j=0; j<mNbins; j++) {
+    s << std::setw(16) << j*mdr << std::setw(16) << (j+1)*mdr;
+    s << std::setw(16) << (*p) << "\n"; p++;
+  }
+}
+
+void TurbostraticHexStructWB::i0Calculator::SetQ(const REAL Qmin, const REAL Qmax, const REAL La0, const int NperRefl)
+{
+  if ( Qmin>=Qmax ) throw new std::invalid_argument("TurbostraticHexStructWB::i0Calculator::SetQ error: Qmin >= Qmax");  
+  unsigned int nQ = (unsigned int) ( (Qmax-Qmin)/(2*M_PI/La0/NperRefl) + 0.5 ) + 1;
+  const REAL dQ = (Qmax-Qmin)/(nQ-1);
+
+  mQ = CrystVector_REAL( nQ );
+  
+  REAL *p1 = mQ.data();
+  for(unsigned int m=0; m<nQ; m++) {
+    (*p1) = Qmin + m*dQ; p1++;
+  }
+  
+  mSincQrNeedRecalc = true;
+  mClockPatternCalc.Reset(); // force recalculation
+}
+
+void TurbostraticHexStructWB::i0Calculator::SetQ(const CrystVector_REAL& Q)
+{
+  mQ = Q;
+  mSincQrNeedRecalc = true;
+  mClockPatternCalc.Reset(); // force recalculation
+}
+
+void TurbostraticHexStructWB::i0Calculator::CalcI0()
+{
+  // do we need reinitialise sinc(Qr) matrix?
+  if ( mSincQrNeedRecalc ) {
+    mSincQr.resize( mQ.numElements(), mNbins );
+    
+    const REAL sth = 1./6.;
+
+    REAL *pSinc = mSincQr.data();
+    for(unsigned int jQ=0; jQ<mQ.numElements(); jQ++) {
+      REAL Q = mQ(jQ);
+      for(unsigned int jHist=0; jHist<mNbins; jHist++) {
+	REAL x = (jHist+0.5)*mdr * Q;
+	if ( x<0.01 ) {
+	  x = x*x;
+	  (*pSinc) = (1. - sth*x + 0.05*sth*x*x);
+	} else {
+	  (*pSinc) = sin(x)/x;
+	}
+	pSinc++;
+      }
+    }
+    mSincQrNeedRecalc = false;
+  }
+
+  // calculate i0 for all Q
+  mi0.resize( mQ.numElements() );
+  REAL *pSinc = mSincQr.data();
+  for(unsigned int jQ=0; jQ<mQ.numElements(); jQ++) {
+    REAL ii0 = 0.0;
+    unsigned int *pHist = mHist;
+    for(unsigned int jHist=0; jHist<mNbins; jHist++) {
+      if ( (*pHist)>0 ) {
+	ii0 += (*pHist) * (*pSinc);
+      }
+      pHist++; pSinc++;
+    } // jHist
+    mi0(jQ) = 1. + 2./mNatoms * ii0;
+  } // jQ
+}
+
+void TurbostraticHexStructWB::i0Calculator::PrintI0(std::ostream &s) const
+{
+  s << "#" << setw(15) << "Q(1/A)" << setw(16) << "i0(0)" << "\n";
+  //s << std::scientific << std::setprecision(6);
+  s << std::showpoint << std::fixed << std::setprecision(6);
+  const REAL *pQ = mQ.data(); const REAL *pData = mi0.data();
+  for(unsigned int j=0; j<mQ.numElements(); j++) {
+    s << std::setw(16) << (*pQ); pQ++;
+    s << std::setw(16) << (*pData) << "\n"; pData++;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////
+//
+//    TurbostraticHexStructWB::i00lCalculator
+//
+////////////////////////////////////////////////////////////////////////
+
+TurbostraticHexStructWB::i00lCalculator::i00lCalculator()
+  :mQ(0), miq(0,0), mi00l(0), mM(0),
+   musedLattC(6.88), musedLa(20.), mNeedRecalc(true),
+   mabSteps(1024), mDFToversampl(8)
+{
+}
+
+TurbostraticHexStructWB::i00lCalculator::~i00lCalculator()
+{
+  mi00l.resize(0);
+  miq.resize(0,0);
+  mQ.resize(0);
+  mM = 0;
+}
+
+void TurbostraticHexStructWB::i00lCalculator::SetQ(const REAL Qmin, const REAL Qmax, const REAL Lc0, const int NperRefl)
+{
+  if ( Qmin>=Qmax ) throw new std::invalid_argument("TurbostraticHexStructWB::i00lCalculator::SetQ error: Qmin >= Qmax");  
+  unsigned int nQ = (unsigned int) ( (Qmax-Qmin)/(2*M_PI/Lc0/NperRefl) + 0.5 ) + 1;
+  const REAL dQ = (Qmax-Qmin)/(nQ-1);
+
+  mQ = CrystVector_REAL( nQ );
+  
+  REAL *p1 = mQ.data();
+  for(unsigned int m=0; m<nQ; m++) {
+    (*p1) = Qmin + m*dQ; p1++;
+  }
+  
+  mNeedRecalc = true;
+  mClockPatternCalc.Reset(); // force recalculation
+}
+
+void TurbostraticHexStructWB::i00lCalculator::SetQ(const CrystVector_REAL& Q)
+{
+  mQ = Q;
+  mNeedRecalc = true;
+  mClockPatternCalc.Reset(); // force recalculation
+}
+
+// auxilliary functions and structures for Warren-Bodenstain integration using NR-DFT(FFTW)
+float WBIntegFn (float r, void* p);
+struct WBIntegParams { float rmin; float La; };
+
+float WBIntegFn (float r, void* p)
+{
+  struct WBIntegParams * params = (struct WBIntegParams *)p;
+
+  float u;
+
+  if ( fabs(r-(params->rmin))<1e-3 )
+    u = sqrt(2. * (params->rmin) * fabs(r-(params->rmin)))/(params->La);
+  else
+    u = sqrt( r*r - (params->rmin)*(params->rmin) )/(params->La);
+
+  if ( fabs(u)<1e-3 )
+    u = M_PI/2. + u*(-2. + u*u/3.);
+  else if ( fabs(u-1.)<1e-3 )
+    u = sqrt(2.)*pow(fabs(1.-u),1.5)*(4./3.+0.2*fabs(1.-u));
+  else
+    u = acos(u) - u * sqrt(1.-u*u);
+  
+  return u;
+}
+
+const CrystMatrix_REAL & TurbostraticHexStructWB::i00lCalculator::CalcIq(const unsigned int M,
+									 const REAL lattC,
+									 const REAL La)
+{
+  // check if we need recalculate data
+  if ( !mNeedRecalc && lattC==musedLattC && La==musedLa && (M-1)<miq.rows() && miq.cols()==mQ.numElements() ) {
+    return miq; // note: returned matrix can have more rows than M
+  }
+
+  // do we need to recalculate the whole matrix (q0=0) or only add new rows (q0=mM-1)
+  unsigned int q0 = ( mNeedRecalc || miq.cols()!=mQ.numElements() || !(lattC==musedLattC && La==musedLa) ) ? 0 : (mM-1);
+  
+  // do we need add new rows
+  if ( (M-1)>miq.rows() ) {
+    miq.resizeAndPreserve( M-1, mQ.numElements() );
+  }
+  
+  bool not_float = (sizeof(REAL) != sizeof(float));
+
+  unsigned int nQ = mQ.numElements();
+  float *Q = (float*)( (not_float) ? malloc( nQ*sizeof(float) ) : mQ.data() );
+  float *cosint = (float*) malloc( nQ*sizeof(float) );
+  float *sinintbuf = (float*)( (not_float) ? malloc( nQ*sizeof(float) ) : NULL );
+
+  std::cout << "Calculating i(q) for q = " << (q0+1) << " ... " << (M-1) << "\n"; // TODO: REMOVE
+
+  // recalcualte data
+  for(unsigned int q=(q0+1); q<=(M-1); q++) {
+    
+    float rmin = q * lattC/2.;
+    float rmax = sqrt( La*La + rmin*rmin );
+    struct WBIntegParams params = { rmin, La };
+
+    float *sinint = (float*)( (not_float) ? sinintbuf : (miq.data()+(q-1)*nQ) );
+
+    NR::vdftint( &WBIntegFn, (void*)&params, rmin, rmax, Q, nQ, cosint, sinint, true, mabSteps*mDFToversampl, mabSteps);
+    // note: there is not "true" only in case when solely Q (Qmax) was changed
+
+    if (not_float) { // copy result
+      float *p1 = sinint;
+      REAL *p2 = miq.data()+(q-1)*nQ;
+      for(unsigned int m=0; m<nQ; m++) {
+	(*p2) = (REAL)(*p1); p1++; p2++;
+      }
+    }
+  }
+
+  musedLattC = lattC;
+  musedLa = La;
+  mM = M;
+  
+  NR::vdftint( NULL, NULL, 0.0, 1.0, Q, nQ, NULL, NULL, true, mabSteps*mDFToversampl, mabSteps); /* cleanup */
+  if ( not_float && (Q != NULL) ) { free((void*)Q); Q = NULL; }
+  if ( cosint != NULL ) { free((void*)cosint); cosint = NULL; }
+  if ( not_float && (sinintbuf != NULL) ) { free((void*)sinintbuf); sinintbuf = NULL; }
+
+  mNeedRecalc = false;
+
+  return miq;
+}
+
+const CrystVector_REAL & TurbostraticHexStructWB::i00lCalculator::CalcI00l(const unsigned int M, const REAL lattC, const REAL La)
+{
+  // recalculate matrix of i(q) integrals (if necessary)
+  CalcIq(M, lattC, La);
+  
+  const unsigned int n = mQ.numElements();
+  mi00l.resizeAndPreserve(n);
+  mi00l = 0.0;
+
+  for(unsigned int q=1; q<=(mM-1); q++) {
+    const REAL *p1 = miq.data() + (q-1)*n;
+    const REAL *p2 = mQ.data();
+    REAL *p3 = mi00l.data();
+    
+    for(unsigned int j=0; j<n; j++) {
+       if ( fabs(*p2)<1e-3 ) {
+	 (*p3) = M_PI*(0.25*La)*(0.25*La)*(M-1);
+       } else {
+	 (*p3) += 2.*(1.-REAL(q)/mM) * (*p1)/(*p2);
+       }
+       p1++; p2++; p3++;
+    }
+  }
+
+  return mi00l; // normalised to 1/4*pi*(La/2)^2 in Q=0
+}
+
+void TurbostraticHexStructWB::i00lCalculator::PrintIq(std::ostream &s) const
+{
+  s << "#" << std::setw(15) << "Q(1/A)";
+  for(unsigned int q=1; q<=(mM-1); q++) {
+    std::ostringstream sstr;
+    sstr << "i(" << q <<  ")";
+    s << std::setw(16) << sstr.str();
+  }
+  s << "\n";
+  //s << std::scientific << std::setprecision(6);
+  s << std::showpoint << std::fixed << std::setprecision(6);
+  const REAL *pQ = mQ.data();
+  for(unsigned int j=0; j<mQ.numElements(); j++) {
+    s << std::setw(16) << (*pQ); pQ++;
+    for(unsigned int q=1; q<=(mM-1); q++)
+      s << setw(16) << miq(q-1,j);
+    s << "\n";
+  }
+}
+
+void TurbostraticHexStructWB::i00lCalculator::PrintI00l(std::ostream &s) const
+{
+  s << "#" << setw(15) << "Q(1/A)" << setw(16) << "i00l(0)" << "\n";
+  //s << std::scientific << std::setprecision(6);
+  s << std::showpoint << std::fixed << std::setprecision(6);
+  const REAL *pQ = mQ.data(); const REAL *pData = mi00l.data();
+  for(unsigned int j=0; j<mQ.numElements(); j++) {
+    s << std::setw(16) << (*pQ); pQ++;
+    s << std::setw(16) << (*pData) << "\n"; pData++;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////
+//
+//    TurbostraticHexStructWB::WarrenDoubleScatteringTable
+//
+////////////////////////////////////////////////////////////////////////
+
+TurbostraticHexStructWB::WarrenDoubleScatteringTable::WarrenDoubleScatteringTable(const string & tablefilename)
+{
+  // --- load interpolation table ---
+  // open file
+  std::ifstream fs(tablefilename.c_str());
+
+  if ( !fs.is_open() ) {
+    std::ostringstream ss;
+    ss << "TurbostraticHexStructWB::WarrenDoubleScatteringTable::WarrenDoubleScatteringTable: Can not open table-file: " << tablefilename;
+    throw ObjCrystException(ss.str());
+  }
+  
+  // find number of table rows
+  long nb = 0;
+  while ( fs.good() ) {
+    REAL x, y; fs >> x >> y; nb++;
+  }
+  nb--;
+  fs.close(); // close file
+
+  // allocate space
+  mX.resize(nb); mY.resize(nb);
+
+  // reopen file
+  fs.open(tablefilename.c_str());
+
+  if ( !fs.is_open() ) {
+    std::ostringstream ss;
+    ss << "TurbostraticHexStructWB::WarrenDoubleScatteringTable::WarrenDoubleScatteringTable: Can not open table-file: " << tablefilename;
+    throw ObjCrystException(ss.str());
+  }
+  
+  // read data
+  for(long i=0; i<nb; i++) {
+    fs >> mX[i] >> mY[i];
+    mX[i] = mX[i] * M_PI/180.; // (deg) -> (rad)
+  }
+  fs.close(); // close file
+  
+  cout << "TurbostraticHexStructWB::WarrenDoubleScatteringTable: loaded " << nb << " points from file: " << tablefilename.c_str() << "\n";
+  
+  // --- allocate and initialise gsl resources ---
+  mgsl_acc = gsl_interp_accel_alloc ();
+  mgsl_spline = gsl_spline_alloc (gsl_interp_cspline, mX.size() );
+
+  gsl_spline_init ( mgsl_spline, mX.data(), mY.data(), mX.size() );
+}
+
+TurbostraticHexStructWB::WarrenDoubleScatteringTable::~WarrenDoubleScatteringTable()
+{
+  // destroy gsl resources
+  if ( mgsl_spline != NULL ) { gsl_spline_free (mgsl_spline); mgsl_spline = NULL; }
+  if ( mgsl_acc != NULL ) { gsl_interp_accel_free (mgsl_acc); mgsl_acc = NULL; }
+}
+
+TurbostraticHexStructWB::WarrenDoubleScatteringTable::WarrenDoubleScatteringTable(const TurbostraticHexStructWB::WarrenDoubleScatteringTable & old)
+  :mX(old.mX), mY(old.mY)
+{
+  // --- allocate and initialise gsl resources ---
+  mgsl_acc = gsl_interp_accel_alloc ();
+  mgsl_spline = gsl_spline_alloc (gsl_interp_cspline, mX.size() );
+
+  gsl_spline_init ( mgsl_spline, mX.data(), mY.data(), mX.size() );
+}
+
+CrystVector_REAL TurbostraticHexStructWB::WarrenDoubleScatteringTable::GetCorr (const CrystVector_REAL & tth) const
+{
+  CrystVector_REAL corr( tth.numElements() );
+  
+  const long nb = tth.numElements();
+  const REAL *ptth = tth.data();
+  REAL *pCorr = corr.data();
+  
+  for(long i=0; i< nb; i++) {
+    (*pCorr) = (REAL) gsl_spline_eval (mgsl_spline, double(*ptth), mgsl_acc);
+    ptth++; pCorr++;
+  }
+  
+  return corr;
+}
+
+////////////////////////////////////////////////////////////////////////
+//
+//    TurbostraticHexStructWB::PolarizationCorr
+//
+////////////////////////////////////////////////////////////////////////
+
+TurbostraticHexStructWB::PolarizationCorr::PolarizationCorr()
+  :mpRadiation(NULL)
+{
+}
+
+void TurbostraticHexStructWB::PolarizationCorr::SetRadiation(const ObjCryst::Radiation & rad)
+{
+  // check if X-rays (other types are not supported)
+  if ( rad.GetRadiationType() != RAD_XRAY ) {
+    throw ObjCrystException("TurbostraticHexStructWB::PolarizationCorr::SetRadiation: Wrong radiation type. Only X-rays supported.");
+  } // TODO:: implement also for neutrons and electrons (or better include in ScatteringData formalism)
+
+  mpRadiation = &rad;
+}
+
+CrystVector_REAL TurbostraticHexStructWB::PolarizationCorr::GetCorr (CrystVector_REAL & tth) const
+{
+  if ( mpRadiation == NULL )
+    throw ObjCrystException("TurbostraticHexStructWB::PolarizationCorr::GetCorr: No Radiation object set.");
+
+  CrystVector_REAL corr( tth.numElements() );
+
+  const REAL f = mpRadiation->GetLinearPolarRate();
+  const REAL A = ((1-f)/(1+f));
+ 
+  const long nb = tth.numElements();
+  const REAL *ptth = tth.data();
+  REAL *pCorr = corr.data();
+
+  for(long i=0; i<nb; i++) {
+    (*pCorr) =(1.+A*(0.5+0.5*cos(2*(*ptth))))/(1.+A); // cos(4th)
+    ptth++; pCorr++;
+  }
+  
+  return corr;
+}
+
+////////////////////////////////////////////////////////////////////////
+//
+//    TurbostraticHexStructWB::AbsorptionCorr
+//
+////////////////////////////////////////////////////////////////////////
+TurbostraticHexStructWB::AbsorptionCorr::AbsorptionCorr()
+ : mOmega(-1.), mAbsFactor(1.), mThickness(-1.), mDepth(0.)
+{
+}
+
+TurbostraticHexStructWB::AbsorptionCorr::AbsorptionCorr(const TurbostraticHexStructWB::AbsorptionCorr & old)
+ : mOmega(old.mOmega), mAbsFactor(old.mAbsFactor), mThickness(old.mThickness), mDepth(old.mDepth)
+{
+}
+
+void TurbostraticHexStructWB::AbsorptionCorr::SetAbsorptionCorrParams(REAL thickness, REAL depth,
+								      REAL absfactor, REAL omega)
+{
+  mOmega = omega;
+  mThickness = thickness*10.; // nm -> A
+  mDepth = depth*10.; // nm -> A
+  mAbsFactor = absfactor*1.e-8; // cm -> A
+  //mClockCorrCalc.Reset();
+}
+
+CrystVector_REAL TurbostraticHexStructWB::AbsorptionCorr::GetCorr (CrystVector_REAL & tth) const
+{
+  CrystVector_REAL corr( tth.numElements() );
+
+  const long nb = tth.numElements();
+  const REAL *ptth = tth.data();
+  REAL *pCorr = corr.data();
+
+  for(long i=0; i<nb; i++) {
+
+    REAL omega = (mOmega>0.) ? mOmega : (*ptth)/2.;
+    REAL tp = 1./(1./sin(omega) + 1./sin((*ptth)-omega))/mAbsFactor;
+    REAL corr = (mThickness>=0.) ? tp*(1.-exp(-mThickness/tp))*exp(-mDepth/tp) : tp*exp(-mDepth/tp);
+    
+    if (mOmega*RAD2DEG<=-1.999) // Bragg-Brentano with variable slits
+      corr = corr/absorption_corr_factor;
+    else
+      corr = corr/sin(omega)/absorption_corr_factor;
+    
+    (*pCorr) = corr;
+    ptth++; pCorr++;
+  }
+
+  return corr;
+}
+
+////////////////////////////////////////////////////////////////////////
+//
+//    TurbostraticHexStructWB::LorentzCorr
+//
+////////////////////////////////////////////////////////////////////////
+
+CrystVector_REAL TurbostraticHexStructWB::LorentzCorr::GetCorr (CrystVector_REAL & tth) const
+{
+  CrystVector_REAL corr( tth.numElements() );
+
+  const long nb = tth.numElements();
+  const REAL *ptth = tth.data();
+  REAL *pCorr = corr.data();
+
+  for(long i=0; i<nb; i++) {
+    (*pCorr) = 1./sin((*ptth)); // 1/sin(2th)
+    ptth++; pCorr++;
+  }
+  
+  return corr;
+}
+
+////////////////////////////////////////////////////////////////////////
+//
+//    TurbostraticHexStructWB::InstrFuncTable
+//
+////////////////////////////////////////////////////////////////////////
+
+TurbostraticHexStructWB::InstrFuncTable::InstrFuncTable(const string & tablefilename, const REAL Lambda)
+  : mQ(0), mY(0)
+{
+  // --- load table with interpolated profile ---
+  // open file
+  std::ifstream fs(tablefilename.c_str());
+
+  if ( !fs.is_open() ) {
+    std::ostringstream ss;
+    ss << "TurbostraticHexStructWB::InstrFuncTable::InstrFuncTable: Can not open table-file: " << tablefilename;
+    throw ObjCrystException(ss.str());
+  }
+  
+  // find number of table rows
+  long nb = 0;
+  while ( fs.good() ) {
+    REAL x, y; fs >> x >> y; nb++;
+  }
+  nb--;
+  fs.close(); // close file
+
+  // allocate space
+  mQraw.resize(nb); mYraw.resize(nb);
+
+  // reopen file
+  fs.open(tablefilename.c_str());
+
+  if ( !fs.is_open() ) {
+    std::ostringstream ss;
+    ss << "TurbostraticHexStructWB::InstrFuncTable::InstrFuncTable: Can not open table-file: " << tablefilename;
+    throw ObjCrystException(ss.str());
+  }
+  
+  // read data
+  for(long i=0; i<nb; i++) {
+    fs >> mQraw[i] >> mYraw[i];
+    mQraw[i] = 4.*M_PI*sin( mQraw[i]/2. * M_PI/180. ) / Lambda; // Q = 2pi * s
+  }
+  fs.close(); // close file
+  
+  cout << "TurbostraticHexStructWB::InstrFuncTable: loaded " << nb << " points from file: " << tablefilename.c_str() << "\n";
+  
+  // --- allocate and initialise gsl resources ---
+  mgsl_acc = gsl_interp_accel_alloc ();
+  mgsl_spline = gsl_spline_alloc (gsl_interp_cspline, mQraw.size() );
+
+  gsl_spline_init ( mgsl_spline, mQraw.data(), mYraw.data(), mQraw.size() );
+}
+
+TurbostraticHexStructWB::InstrFuncTable::~InstrFuncTable()
+{
+  // destroy gsl resources
+  if ( mgsl_spline != NULL ) { gsl_spline_free (mgsl_spline); mgsl_spline = NULL; }
+  if ( mgsl_acc != NULL ) { gsl_interp_accel_free (mgsl_acc); mgsl_acc = NULL; }
+}
+
+TurbostraticHexStructWB::InstrFuncTable::InstrFuncTable(const TurbostraticHexStructWB::InstrFuncTable & old)
+  : mQraw(old.mQraw), mYraw(old.mYraw), mQ(old.mQ), mY(old.mY)
+{
+  // --- allocate and initialise gsl resources ---
+  mgsl_acc = gsl_interp_accel_alloc ();
+  mgsl_spline = gsl_spline_alloc (gsl_interp_cspline, mQraw.size() );
+
+  gsl_spline_init ( mgsl_spline, mQraw.data(), mYraw.data(), mQraw.size() );
+}
+
+////////////////////////////////////////////////////////////////////////
+//
+//    PowderPattern
+//
+////////////////////////////////////////////////////////////////////////
 
 // PowderPattern
 PowderPattern::PowderPattern()
@@ -6804,7 +7952,7 @@ void FaultsBroadeningEffectFCCBaloghUngar::GetSubComponentsPar(const REAL alpha,
 // FaultsBroadeningEffectWC11m23
 
 FaultsBroadeningEffectWC11m23::FaultsBroadeningEffectWC11m23()
-  : mAlpha(0.), mpUnitCell(0)
+  : mAlpha(0.), mModelApproxType(APPROX_MODEL_SIMPLE), mpUnitCell(0)
 {
   InitParameters ();
 }
@@ -6832,12 +7980,16 @@ CrystVector_REAL FaultsBroadeningEffectWC11m23::GetProfile (const CrystVector_RE
 
   // Get all symmetry equivalent reflections
   CrystMatrix_REAL equivRefl = mpUnitCell->GetSpaceGroup().GetAllEquivRefl(h,k,l,false,false);
+  /*for(int irefl = 0; irefl<equivRefl.rows(); irefl++) {
+    equivRefl(irefl,3) = fabs(equivRefl(irefl,0)-equivRefl(irefl,1))/sqrt(3.)/aa/s0;
+  }
+  cout << equivRefl << '\n';*/
 
   // Calculation
 
   // nb of points and vector for calc. result
   int nbPoints = x.numElements(); 
-  CrystVector_REAL profile(nbPoints);
+  CrystVector_REAL profile(2*nbPoints);
 
   // A very straighforward implementation (a little bit ineffective)
 
@@ -6845,19 +7997,83 @@ CrystVector_REAL FaultsBroadeningEffectWC11m23::GetProfile (const CrystVector_RE
 
   // for each component
   for(int irefl = 0; irefl<equivRefl.rows(); irefl++) {
-    if( (int(equivRefl(irefl,0)+equivRefl(irefl,1)+equivRefl(irefl,2)) & 1)
-	&& (fabs(equivRefl(irefl,0)-equivRefl(irefl,1))>1.e-4) ) {
-      // affected component
-      const REAL B = log(1-2*mAlpha)* fabs(equivRefl(irefl,0)-equivRefl(irefl,1))/2./aa/s0 *1./sqrt(3.)/aa;
-      const REAL *p1 = x.data();
-      REAL *p2 = profile.data();
-      for(int i=0; i<nbPoints; i++, p1++, p2++)
-	*p2 += exp(B*fabs(*p1));
-    } else
-      profile += 1.; // unaffected component
+    if (int(equivRefl(irefl,0)+equivRefl(irefl,1)+equivRefl(irefl,2)) & 1)
+      if (fabs(equivRefl(irefl,0)-equivRefl(irefl,1))>1.e-4) {
+	// (directly) affected component
+	const REAL B = log(1-2*mAlpha)* fabs(equivRefl(irefl,0)-equivRefl(irefl,1))/3./pow(aa,2)/s0;
+	//const REAL B = log(1-2*mAlpha)* fabs(equivRefl(irefl,0)-equivRefl(irefl,1))/sqrt(3.)/aa/s0 *1./sqrt(3.)/aa;
+	//const REAL B = log(1-2*mAlpha)* fabs(equivRefl(irefl,0)-equivRefl(irefl,1))/2./aa/s0 *1./sqrt(3.)/aa;
+	const REAL *p1 = x.data(); REAL *p2 = profile.data();
+	for(int i=0; i<nbPoints; i++, p1++) {
+	  *p2 += exp(B*fabs(*p1)); p2 += 2;
+	}
+      } else if(mModelApproxType==APPROX_MODEL_BROKEN_TPA_UNAFFECTED) {
+	// component affected throught TPA violation
+	const REAL *p1 = x.data(); REAL *p2 = profile.data();
+	for(int i=0; i<nbPoints; i++, p1++) {
+	  const REAL hwhm = -log(1-2*mAlpha)/sqrt(3.)/aa; // streak hwhm in recip.space 
+	  if ( (fabs(*p1)<1e-7) || (hwhm<1e-4) ) { *p2 += 1.0; p2 += 2; continue; }
+	  const REAL sq = sqrt( pow(2*M_PI*s0,2) - pow(hwhm,2) );
+	  REAL c = cos( (*p1) * sq );
+	  REAL s = sin( (*p1) * sq );
+	  gsl_sf_result res;
+	  REAL Cip;
+	  if ((fabs(*p1) * (2*M_PI*s0+sq))>0.04) {
+	    gsl_sf_Ci_e( fabs(*p1) * (2*M_PI*s0+sq), &res);
+	    Cip = res.val;
+	  } else {
+	    REAL xx = fabs(*p1) * (2*M_PI*s0+sq);
+	    Cip = (xx>1e-8) ? (0.57721566490153 + log(xx) - 0.25*pow(xx,2) + pow(xx,4)/96.) : -22.;
+	  }
+	  //gsl_sf_Ci_e( fabs(*p1) * (2*M_PI*s0+sq), &res); REAL Cip = res.val;
+	  gsl_sf_Si_e(     (*p1) * (2*M_PI*s0+sq), &res); REAL Sip = res.val;
+	  REAL Cim;
+	  if ((fabs(*p1) * (2*M_PI*s0-sq))>0.04) {
+	    gsl_sf_Ci_e( fabs(*p1) * (2*M_PI*s0-sq), &res);
+	    Cim = res.val;
+	  } else {
+	    REAL xx = fabs(*p1) * (2*M_PI*s0-sq);
+	    Cim = (xx>1e-8) ? (0.57721566490153 + log(xx) - 0.25*pow(xx,2) + pow(xx,4)/96.) : -22.;
+	  }
+	  //gsl_sf_Ci_e( fabs(*p1) * (2*M_PI*s0-sq), &res); REAL Cim = res.val;
+	  gsl_sf_Si_e(     (*p1) * (2*M_PI*s0-sq), &res); REAL Sim = res.val;
+	  REAL Tre = (c*Cim - s*Sim) - (c*Cip + s*Sip) + ( (*p1)>0. ? M_PI*s : -M_PI*s );
+	  REAL Tim = (c*Sim + s*Cim) - (c*Sip - s*Cip);
+	  //REAL A0 = log( (2*M_PI*s0+sq)/(2*M_PI*s0-sq) );
+	  REAL A0 = pow( hwhm/(2*M_PI*s0), 2 ); A0 = (A0>1.e-6) ? log( (2*M_PI*s0+sq)/(2*M_PI*s0-sq) ) : log( 4./A0 -2. - A0/4 );
+	  if (isnan(A0)) {
+	    cerr<< "A0 is NaN\n";
+	    cout<< "2pi*s0: " << 2*M_PI*s0 << ", hwhm: " << hwhm << ", sq: " <<sq<<", (2*M_PI*s0+sq)/(2*M_PI*s0-sq): " << (2*M_PI*s0+sq)/(2*M_PI*s0-sq) << endl;
+	    exit(-1);
+	  }
+	  *p2 += -(cos(2*M_PI*s0*(*p1))*Tre + sin(2*M_PI*s0*(*p1))*Tim)/A0; p2++;
+	  *p2 += -(cos(2*M_PI*s0*(*p1))*Tim - sin(2*M_PI*s0*(*p1))*Tre)/A0; p2++;
+	}
+      } else {
+	// component only affected throught TPA violation but this is effect SWITCHED OFF
+	const REAL *p1 = x.data(); REAL *p2 = profile.data();
+	for(int i=0; i<nbPoints; i++, p1++) {	
+	  *p2 += 1.0; p2 += 2;
+	}
+      }
+    else {
+      // unaffected component
+      const REAL *p1 = x.data(); REAL *p2 = profile.data();
+      for(int i=0; i<nbPoints; i++, p1++) {	
+	*p2 += 1.0; p2 += 2;
+      }
+    }
   } // irefl
 
   profile *= 1./equivRefl.rows();
+
+  if (bsavecalc && xcenter>=xcenterlimits[0] && xcenter<=xcenterlimits[1]) {
+    ofstream F("profileAWC1m100.dat");
+    F<<"# xcenter="<<xcenter*RAD2DEG<<", hkl=("<<h<<","<<k<<","<<l<<"), alpha="<<mAlpha<<endl;
+    for(int i=0;i<nbPoints;i++)
+      F<<setw(18)<<x(i)<<setw(18)<<profile(2*i)<<setw(18)<<profile(2*i+1)<<endl;
+    F.close();
+  }
 
   return profile;
 }
@@ -6895,11 +8111,16 @@ REAL FaultsBroadeningEffectWC11m23::GetApproxFWHM (const REAL xcenter, const REA
 
   // for each component
   for(int irefl = 0; irefl<equivRefl.rows(); irefl++) {
-    if( (int(equivRefl(irefl,0)+equivRefl(irefl,1)+equivRefl(irefl,2)) & 1)
-	&& (fabs(equivRefl(irefl,0)-equivRefl(irefl,1))>1.e-4) ) {
-      // affected component
-      fwhm += -log(1-2*mAlpha)* fabs(equivRefl(irefl,0)-equivRefl(irefl,1))/2./aa/s0 *1./sqrt(3.)/aa;
-    }
+    if (int(equivRefl(irefl,0)+equivRefl(irefl,1)+equivRefl(irefl,2)) & 1)
+      if (fabs(equivRefl(irefl,0)-equivRefl(irefl,1))>1.e-4) {
+	// directly affected component
+	fwhm += -log(1-2*mAlpha)* fabs(equivRefl(irefl,0)-equivRefl(irefl,1))/3./pow(aa,2)/s0;
+	//fwhm += -log(1-2*mAlpha)* fabs(equivRefl(irefl,0)-equivRefl(irefl,1))/2./aa/s0 *1./sqrt(3.)/aa;
+      } else {
+	// component affected throught TPA violation
+	const REAL hwhm = -log(1-2*mAlpha)/sqrt(3.)/aa; // streak hwhm in recip.space 
+	fwhm += 0.5*pow(hwhm,2)/s0;
+      }
   } // irefl
 
   fwhm *= 1./equivRefl.rows()/2./M_PI * Lambda/cos(0.5*xcenter);
@@ -6985,6 +8206,12 @@ void FaultsBroadeningEffectWC11m23::SetAuxParameters () const
  	     can not be checked. >" << endl; 
     throw ;
   }
+}
+
+void FaultsBroadeningEffectWC11m23::SetModelApproxType(const int type)
+{
+  mModelApproxType = type;
+  mClockMaster.Click();
 }
 
 // PseudoVoigtBroadeningEffect
@@ -8034,7 +9261,8 @@ REAL ReflectionProfile::GetFullProfileWidth (const REAL relativeIntensity,
 					     const REAL l)
 {
   // copy of code in ObjCryst files (ReflectionProfile.cpp)
-  VFN_DEBUG_ENTRY("MStruct::ReflectionProfile::GetFullProfileWidth()",10)
+  VFN_DEBUG_ENTRY("MStruct::ReflectionProfile::GetFullProfileWidth("<<relativeIntensity<<","<<xcenter*RAD2DEG
+		  <<","<<h<<","<<k<<","<<l<<")",10)
   const int nb=100; // 1000
   const int halfnb=nb/2;
   CrystVector_REAL x(nb);
@@ -8076,6 +9304,12 @@ REAL ReflectionProfile::GetFullProfileWidth (const REAL relativeIntensity,
     }
     VFN_DEBUG_MESSAGE("MStruct::ReflectionProfile::GetFullProfileWidth():"<<max<<","<<test
 		      <<endl<<FormatVertVector<REAL>(x,prof),10)
+    #ifdef __DEBUG__
+      if (isnan(max) || isnan(test)) {
+	cerr << "Error: NaN in MStruct::ReflectionProfile::GetFullProfileWidth()\n";
+	exit(-1);
+      }
+    #endif
     n*=2.0;
     //if(n>200) exit(0);
   }
@@ -12662,3 +13896,250 @@ double erfc(const double x)// in C99, but not in VC++....
 }
 
 #endif
+
+/* --- Fourier Integrals calculation using DFT with attenuation and endpoint corrections ------------
+ *
+ *  Routines for integration of oscillatory (cos, sin) functions
+ *  in finite intervals (a,b) using dftcorr and dftint routines from
+ *  Numerical Recipes and using FFTW.
+ * 
+ *
+ *  References:
+ *  [1] William H. Press, Saul A. Teukolsky, William T. Vetterling, Brian P. Flannery,
+ *      Numerical Recipes in C, Cambridge University Press, 1992
+ *  [2] www.fftw.org
+ */
+
+namespace NR {
+
+float* vector(unsigned int n)
+/* Allocate new float array */
+{
+  return (float*) malloc( n*sizeof(float) );
+}
+
+void* free_vector(float* v)
+/* Free memory associated with vector */
+{
+  free (v); v = NULL;
+  return (void*) v;
+}
+
+void nrerror(const char error_text[])
+/* Numerical Recipes error */
+{
+  std::cerr << "NR Error: " << error_text << "\n";
+  /* TODO:: We should rather throw an exception */
+  exit(-1);
+}
+
+void dftcor(float w, float delta, float a, float b, float endpts[],
+	    float *corre, float *corim, float *corfac)
+/* For an integral approximated by a discrete Fourier transform, this routine computes the cor-
+   rection factor that multiplies the DFT and the endpoint correction to be added. Input is the
+   angular frequency w, stepsize delta, lower and upper limits of the integral a and b, while the
+   array endpts contains the first 4 and last 4 function values. The correction factor W (θ) is
+   returned as corfac, while the real and imaginary parts of the endpoint correction are returned
+   as corre and corim. */
+{
+  void nrerror(const char error_text[]);
+  float a0i,a0r,a1i,a1r,a2i,a2r,a3i,a3r,arg,c,cl,cr,s,sl,sr,t;
+  float t2,t4,t6;
+  double cth,ctth,spth2,sth,sth4i,stth,th,th2,th4,tmth2,tth4i;
+    
+  th=w*delta;
+  /*if (a >= b || th < 0.0e0 || th > 3.1416e0) nrerror("bad arguments to dftcor");*/
+  if (a >= b || th < 0.0e0 || th > (float)M_PI) nrerror("bad arguments to dftcor");
+  if (fabs(th) < 5.0e-2) { /* Use series. */
+    t=th;
+    t2=t*t;
+    t4=t2*t2;
+    t6=t4*t2;
+    *corfac=1.0-(11.0/720.0)*t4+(23.0/15120.0)*t6;
+    a0r=(-2.0/3.0)+t2/45.0+(103.0/15120.0)*t4-(169.0/226800.0)*t6;
+    a1r=(7.0/24.0)-(7.0/180.0)*t2+(5.0/3456.0)*t4-(7.0/259200.0)*t6;
+    a2r=(-1.0/6.0)+t2/45.0-(5.0/6048.0)*t4+t6/64800.0;
+    a3r=(1.0/24.0)-t2/180.0+(5.0/24192.0)*t4-t6/259200.0;
+    a0i=t*(2.0/45.0+(2.0/105.0)*t2-(8.0/2835.0)*t4+(86.0/467775.0)*t6);
+    a1i=t*(7.0/72.0-t2/168.0+(11.0/72576.0)*t4-(13.0/5987520.0)*t6);
+    a2i=t*(-7.0/90.0+t2/210.0-(11.0/90720.0)*t4+(13.0/7484400.0)*t6);
+    a3i=t*(7.0/360.0-t2/840.0+(11.0/362880.0)*t4-(13.0/29937600.0)*t6);
+  } else { /* Use trigonometric formulas in double precision. */
+    cth=cos(th);
+    sth=sin(th);
+    ctth=cth*cth-sth*sth;
+    stth=2.0e0*sth*cth;
+    th2=th*th;
+    th4=th2*th2;
+    tmth2=3.0e0-th2;
+    spth2=6.0e0+th2;
+    sth4i=1.0/(6.0e0*th4);
+    tth4i=2.0e0*sth4i;
+    *corfac=tth4i*spth2*(3.0e0-4.0e0*cth+ctth);
+    a0r=sth4i*(-42.0e0+5.0e0*th2+spth2*(8.0e0*cth-ctth));
+    a0i=sth4i*(th*(-12.0e0+6.0e0*th2)+spth2*stth);
+    a1r=sth4i*(14.0e0*tmth2-7.0e0*spth2*cth);
+    a1i=sth4i*(30.0e0*th-5.0e0*spth2*sth);
+    a2r=tth4i*(-4.0e0*tmth2+2.0e0*spth2*cth);
+    a2i=tth4i*(-12.0e0*th+2.0e0*spth2*sth);
+    a3r=sth4i*(2.0e0*tmth2-spth2*cth);
+    a3i=sth4i*(6.0e0*th-spth2*sth);
+  }
+  cl=a0r*endpts[0]+a1r*endpts[1]+a2r*endpts[2]+a3r*endpts[3];
+  sl=a0i*endpts[0]+a1i*endpts[1]+a2i*endpts[2]+a3i*endpts[3];
+  cr=a0r*endpts[7]+a1r*endpts[6]+a2r*endpts[5]+a3r*endpts[4];
+  sr = -a0i*endpts[7]-a1i*endpts[6]-a2i*endpts[5]-a3i*endpts[4];
+  arg=w*(b-a);
+  c=cos(arg);
+  s=sin(arg);
+  *corre=cl+c*cr-s*sr;
+  *corim=sl+s*cr+c*sr;
+} /* dftcorr */
+
+void vdftint(float (*func)(float,void*), void *params, float a, float b, float w[], unsigned int nw,
+	     float cosint[], float sinint[], bool recalc, unsigned int ndft, unsigned int mm)
+/* Example program illustrating how to use the routine dftcor. The user supplies
+   an external function func that returns the quantity h(t). The routine then
+   returns int_a^b cos(ωt)h(t) dt as cosint and int_a^b sin(ωt)h(t) dt as sinint.
+   This is a vector version of the routine from NR. It returns the integral values
+   for a vector of ω frequencies with length nw.
+   If the procedure is called by the NULL handle to the integrated function
+   a cleanup of dynamically allocated structures is done. */
+{
+  void dftcor(float w, float delta, float a, float b, float endpts[],
+	      float *corre, float *corim, float *corfac);
+  void polint(float xa[], float ya[], int n, float x, float *y, float *dy);
+  static int init=0;
+  int j,jw,nn;
+  static float aold = -1.e30,bold = -1.e30,delta,(*funcold)(float,void*);
+  static float endpts[8];
+  float c,cdft,cerr,corfac,corim,corre,en,s;
+  float sdft,serr,*cpol,*spol,*xpol;
+  static double *data = NULL;
+  static fftw_complex *dft = NULL;
+  fftw_plan dftplan;
+  static unsigned int ndftold = 0, mmold = 0;
+  static unsigned int mpol = 6;
+
+  if (init == 1 && func == NULL) {      /* auxilliary structures cleanup */
+    //if (data != NULL) { fftw_free(data); data = NULL; }
+    //if (dft != NULL) { fftw_free(dft); dft = NULL; }
+    //fftw_destroy_plan(dftplan); /* destroy also a plan */
+    init = 0;
+    return;
+  } else if (func == NULL) {
+    return;
+  }
+
+  if (func != NULL && (init != 1 || ndft != ndftold)) { /* auxilliary structures initialisation */
+    if (data != NULL) { fftw_free(data); data = NULL; } /* cleanup first */
+    if (dft != NULL) { fftw_free(dft); dft = NULL; }
+    /* dynamic allocation of auxilliary structures */
+    data = (double*)fftw_malloc(sizeof(double) * ndft);
+    dft = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * (ndft/2+1));
+    /* create also FFTW plan */
+    if (init == 1) fftw_destroy_plan(dftplan); /* destroy an old plan */
+    dftplan = fftw_plan_dft_r2c_1d(ndft, data, dft, FFTW_ESTIMATE);
+    /* note: ndftold actualised later */ 
+  }
+
+  cpol=vector(mpol);
+  spol=vector(mpol);
+  xpol=vector(mpol);  
+  if (init != 1 || recalc || a != aold || b != bold || func != funcold || ndft != ndftold || mm != mmold) {
+    /* Do we need to initialize? */
+    init=1;
+    aold=a;
+    bold=b;
+    if (mm>ndft) nrerror("bad arguments to vdftint: M can not be greater than NDFT");
+    if (4*mm>ndft) { std::cerr << "NR Warning: " << "possible bad arguments to vdftint: there should be significant oversampling in DFT (NDFT>=4M)" << "\n"; }
+    ndftold = ndft;
+    mmold = mm;
+    funcold=func;
+    delta=(b-a)/mm;
+    /* Load the function values into the data array. */
+    for (j=0;j<mm+1;j++)
+      data[j]=(*func)(a+j*delta,params);
+    for (j=mm+1;j<ndft;j++) /* Zero pad the rest of the data array. */
+      data[j]=0.0;
+    for (j=0;j<4;j++) { /* Load the endpoints. */
+      endpts[j]=data[j];
+      endpts[j+4]=data[mm-3+j];
+    }
+    fftw_execute(dftplan); /* real data dft */
+  }
+  /* Now interpolate on the DFT result for the desired frequency. If the frequency is an ωn ,
+     i.e., the quantity en is an integer, then cdft=data[2*en-1], sdft=data[2*en], and you
+     could omit the interpolation. */
+  for(jw=0; jw<nw; jw++) {
+    en=w[jw]*delta*ndft/(2.*M_PI);
+    nn=IMIN(IMAX((int)(en-0.5*mpol+1.0),0),ndft/2-mpol+1); /* Leftmost point for the */
+    for (j=0;j<mpol;j++,nn++) {                            /* interpolation. */
+      cpol[j]= (float)dft[nn][0];
+      spol[j]=-(float)dft[nn][1]; /* fftw computes Xj*exp(-2pi*I*j*k/n) */
+      xpol[j]=nn;
+    }
+    polint(xpol,cpol,mpol,en,&cdft,&cerr);
+    polint(xpol,spol,mpol,en,&sdft,&serr);
+    dftcor(w[jw],delta,a,b,endpts,&corre,&corim,&corfac); /* Now get the endpoint correction and */
+    cdft *= corfac;                                       /* the multiplicative factor W (θ). */
+    sdft *= corfac;
+    cdft += corre;
+    sdft += corim;
+    c=delta*cos(w[jw]*a);      /* Finally multiply by ∆ and exp(iωa). */
+    s=delta*sin(w[jw]*a);
+    cosint[jw]=c*cdft-s*sdft;
+    sinint[jw]=s*cdft+c*sdft;
+  }
+  free_vector(cpol);
+  free_vector(spol);
+  free_vector(xpol);
+}
+
+/* transformed according to http://www.ngs.noaa.gov/gps-toolbox/sp3intrp/polint.c */
+void polint(float xa[], float ya[], int n, float x, float *y, float *dy)
+/* Given arrays xa[1..n] and ya[1..n], and given a value x, this routine returns a value y, and
+an error estimate dy. If P(x) is the polynomial of degree N − 1 such that P(xai)=yai,
+i=1,...,n, then the returned value y=P(x). */
+{
+  int i,m,ns=0;
+  float den,dif,dift,ho,hp,w;
+  float *c,*d;
+
+  dif=fabs(x-xa[0]);
+  c=vector(n);
+  d=vector(n);
+  for (i=0;i<n;i++) { /* Here we find the index ns of the closest table entry, */
+    if ( (dift=fabs(x-xa[i])) < dif) {
+      ns=i;
+      dif=dift;
+    }
+    c[i]=ya[i]; /* and initialize the tableau of c’s and d’s. */
+    d[i]=ya[i];
+  }
+  *y=ya[ns--]; /* This is the initial approximation to y. */
+  for (m=0;m<n-1;m++) {   /* For each column of the tableau, */
+    for (i=0;i<n-m-1;i++) { /* we loop over the current c’s and d’s and update */
+      ho=xa[i]-x;         /* them. */
+      hp=xa[i+m+1]-x;
+      w=c[i+1]-d[i];
+      if ( (den=ho-hp) == 0.0) nrerror("Error in routine polint");
+      /* This error can occur only if two input xa’s are (to within roundoff) identical. */
+      den=w/den;
+      d[i]=hp*den; /* Here the c’s and d’s are updated. */
+      c[i]=ho*den;
+    }
+    *y += (*dy=(2*(ns+1) < (n-m-1) ? c[ns+1] : d[ns--])); // !!!
+    /* After each column in the tableau is completed, we decide which correction, c or d,
+       we want to add to our accumulating value of y, i.e., which path to take through the
+       tableau—forking up or down. We do this in such a way as to take the most “straight
+       line” route through the tableau to its apex, updating ns accordingly to keep track of
+       where we are. This route keeps the partial approximations centered (insofar as possible)
+       on the target x. The last dy added is thus the error indication. */
+  }
+  free_vector(d);
+  free_vector(c);
+}
+
+} // namecapce NR
+/* ------------------------------------------------------------------------------------------------ */

@@ -36,6 +36,8 @@ extern bool bsavecalc;
 #include <vector>
 #include <utility>
 
+#include <gsl/gsl_spline.h>
+
 namespace RotationTB {
 
 /** The auxilliary function calculates the Euler rotation angles
@@ -281,6 +283,393 @@ protected:
 	/// Argument 'X' of the Chebyshev polynomial T_n(X) functions. (X or sin(Theta))
 	int mXFunctionType;
 };
+
+
+/** TurbostraticHexStructWB: class to represnt scattering from turbostratic hexagonal layered structures
+ *  (e.g. turbostratic-Carbon black).
+ *
+ * It calculates (x-ray) scattering from turbostratic hexagonal layered (e.g. graphite) structures using
+ * approximations introduced by Warren & Bodenstein (1965).
+ *
+ * More precisely: The Debye interference terms within the single layer are calcualted from Debye formula
+ * by direct summation. The interlayer interference terms are simulated using the integral appraximation
+ * of Warren & Bodenstein (1965).
+ *
+ * The model includes also distribution of atomic clasters dimensions and several corrections.
+ * 
+ * ref: [1] B.E. Warren, P. Bodenstein, The Diffraction Pattern of Fine Particle Carbon Blacks,
+ *          Acta Cryst. (1965), 18, 282-286.
+ *      [2] R. Diamond, X-ray diffraction data for large aromatic molecules, Acta Cryst. (1957), 10, 359-364.
+ *      [3] Z.Q. Li, C.J. Lu, Z.P. Xia, Y. Zhou, Z. Luo, Carbon (2007), 45, 1686-1695.
+ *      [4] M. Dopita1 et al., TODO:: to be submitted.
+ *
+ */
+class TurbostraticHexStructWB: public PowderPatternBackgroundBase
+{
+
+private:
+  /// (graphite) layer a-lattice parameter
+  REAL mLattA;
+  /// (graphite) interlayer c-lattice parameter
+  REAL mLattC;
+  /// Isotropic temperature factor
+  REAL mBiso;
+  /// atom site accupancy
+  REAL mOccup;
+  /// Mean layer diameter
+  REAL mLa;
+  /// Mean cluster size in c-axis direction (if <= then lattC/2 a single layer is assumed)
+  REAL mLc;
+  /// Variance of layer size (if zero a layer of given size is assumed)
+  REAL mVarLa;
+  /// Variance of cluster size in c-direction (if zero appropiente precise number of layers is assumed)
+  REAL mVarLc;
+  /// Flags for parameters set options
+  int mOptI00lScale;
+  /// Pointer to atomic scattering power
+  ObjCryst::ScatteringPowerAtom *mpAtomScatterer;
+  /// POinter to atomic scattering power gaussian object
+  cctbx::eltbx::xray_scattering::gaussian *mpAtomScattererGaussian;
+  /// Q = 2pi*s vector where pattern is calculated
+  CrystVector_REAL mQ;
+  /// Vector of absolute scattering factor squared |f(s)|^2
+  CrystVector_REAL mfsq;
+  /** \brief Incoherent scattering correction parameters
+   *
+   *  Parmaters to calculate contribution of the incoherent scattering
+   *  according to Hajdu (1972).
+   *
+   *  ref: [Hajdu] F. Hajdu, Acta Cryst. A 28, (1972), 250-252
+   */
+  CrystVector_REAL mHajduZMKL;
+  /// Flag which corrections should be included
+  unsigned int mFlagCorrections;
+  /// Vector of precalculated incoherent scattering intensity including Hajdu, Breit-Dirac and Ruland corrections
+  CrystVector_REAL mIncScatt;
+  /// Vector of calculated total scattered intensity (on inernal Q-vector)
+  mutable CrystVector_REAL mItotalScatt;
+  /// Vector of intensity corrections (on inernal Q-vector)
+  CrystVector_REAL mItotalCorr;
+  /// Clocks when (atomic) scattering factors |f|^2 (on internal Q-vector) were calculated
+  ObjCryst::RefinableObjClock mClockFSqCalc;
+  /// Clocks when total scattered intensity (on internal Q-vector) was calculated
+  mutable ObjCryst::RefinableObjClock mClockItotalScattCalc;
+  /// Clocks when incoherently scattered intensity (on internal Q-vector) was calculated
+  ObjCryst::RefinableObjClock mClockIncScattCalc;
+  /// Clocks when total intensity caorrections were calculated
+  ObjCryst::RefinableObjClock mClockItotalCorrCalc;
+  /** \brief Ruland correction parameter (ac)
+   *
+   *  Ruland correction parameters should be applied if scattered intensity is monochromatised.
+   *  According to Ruland (1964) the attenuation function
+   *
+   *    Q = [ (1+dlambda/b)*(1+(pi*dlabdac/(dlambda+b))^2) ]^(-1)
+   *
+   *    dlambda = lambda^2*s/c * dqmax*s^2/(ac^2+s^2), dlambdac = 2h*sin(th)^2/(me*c) - D*lambda^2
+   *
+   *    ( c=137, me = 1, h = 2*pi, D = 1.5e-3 )
+   *
+   *  has 3 parameters:
+   *
+   *    ac = 0.53 (1/A) and dqmax = 3.05 (for Carbon) and b = 0.007 (A) for LiF-mono
+   *
+   *  and constant    D = 1.5e-3 .
+   *
+   *  ref: [Ruland] W. Ruland, Brit.J.Appl.Phys. 15, (1964), 1301.
+   */
+  REAL mRuland_ac; // (1/A)
+  REAL mRuland_dqmax;
+  REAL mRuland_b; // (A)
+  REAL mRuland_D;
+
+public:
+  /// Constructor
+  TurbostraticHexStructWB();
+  /// Copy constructor
+  TurbostraticHexStructWB(const TurbostraticHexStructWB &);
+  /// Destructor
+  virtual ~TurbostraticHexStructWB();
+  /// Name of this class (MStruct::TurbostraticHexStructWB)
+  virtual const string& GetClassName()const;
+  /// Set vector Q=2pi*s on which internally the scattered intensity is calculated
+  void SetQ(const CrystVector_REAL &Q);
+  /// (Re)Calculate totaly scattered intensity (including corrections) on internal Q-vector
+  const CrystVector_REAL & CalcItotalScatt()const;
+protected:
+  /// Calc powder pattern.
+  virtual void CalcPowderPattern()const;
+private:
+  /// Initialise object (model) parameters
+  void InitParameters();
+  /// Called before the pattern is calculated for the first time
+  virtual void Prepare();
+  /// Calculate (atomic) structure |f|^2 factors (on internal Q-vector)
+  void CalcFSq();
+  /// Calculate incoherent scattering (on internal Q-vector)
+  void CalcIncScatt();
+  /// Calculate total intensity corrections (absorption, polarization) (on internal Q-vector)
+  void CalcItotalCorr();
+protected:
+
+  /// Inner class for calculation of (hk0) intensity from the single layer
+  class i0Calculator
+  {
+  public:
+    /// Constructor
+    i0Calculator();
+    /// Destructor
+    virtual ~i0Calculator();
+    /// Generate a list of coordinates of atoms in a hexagonal layer (lattice param. lattA, diameter La) 
+    void CreateHexLayerAtoms(float lattA, float La);
+    /// Print atoms coordinates
+    void PrintAtoms(std::ostream &s) const;
+    /** \brief Accumulate histogram of distances between atoms in 2d layer.
+     * 
+     * Argument rmax is the maximum distance in the histogram.
+     * If tidy argument is false(default), the histogram is added to the
+     * existing one. If it is true, the histogram is reinitialised (set
+     * to zero) before computation and also memory is reallocated if needed.
+     * Throwerr argument indicates if an exception should be signalised
+     * when there are atoms at a distance out of histogram range.
+     */
+    void AccumHist2d(float rmax, const bool tidy=false, const bool throwerr=true);
+    /// Print histogram
+    void PrintHistogram(std::ostream &s) const;
+    /** \brief Sets calculation Q-grid.
+     *
+     * Sets Q-grid (Q = 2 pi *s) used for calculation. The simulation range is
+     * [Qmin, Qmax] and the step is optimised so that there are about NperRefl
+     * points per reflection from a layer of size La0.
+     */
+    void SetQ(const REAL Qmin, const REAL Qmax, const REAL La0, const int NperRefl = 25);
+    /// Sets calculation Q-grid.
+    void SetQ(const CrystVector_REAL &Q);
+    /* \brief Calculate scatttered intensity i(0) from the actual histogram data
+     *
+     *   Calculates scattered intensity i(0) from a sample of atoms with interatomic distances
+     *   represented by histogram.
+     *
+     *         i(0) = 1. + 2./NATOMS * SUM(r>0) hist(r)*sin(Q*r)/(Q*r)
+     */
+    void CalcI0();
+    /// Print actual i0 data
+    void PrintI0(std::ostream &s) const;
+  public:
+    /// Clocks when layer parameters (lattA, La) have been changed last time
+    ObjCryst::RefinableObjClock mClockLayerParams;
+  private:
+    /// number of generated layer atoms
+    unsigned int mNatoms;
+    /// list of layer atoms coordinates (xi,yi,size=2*Natoms)
+    float *mAtoms;
+    /// histogram bin width
+    REAL mdr;
+    /// number of histogram bins
+    unsigned int mNbins;
+    /// accumulated histogram of interatomic distances
+    unsigned int *mHist;
+    /// i(0) intensity is calaculated in these Q-points
+    CrystVector_REAL mQ;
+    /// Calculated i(0) intensity
+    CrystVector_REAL mi0;
+    /// Clocks i(0) pattern was calculated last time
+    ObjCryst::RefinableObjClock mClockPatternCalc;
+    /// Auxilliary matrix of precalculated sinc(Qr) values
+    CrystMatrix_REAL mSincQr;
+    /// Flag if the sinc(Qr) matrix need to be reinitialised
+    bool mSincQrNeedRecalc;
+  friend class TurbostraticHexStructWB;
+  }; // i0Calculator
+
+  /** \brief Inner class for calculation of (00l) intensity from turbostratic structures
+   *
+   * The object encapsulates calculation of (00l) components of intensity scattered by
+   * turbostratic layerd structures using method of Warren & Bodenstein (1965),
+   *
+   * We calculate the interference terms between layers separated by q*c0/2, where
+   * q is an integer number by the Warren-Bodenstein integral
+   *
+   *     i(q) = Int(rmin,rmax) [acos(u) - u * sqrt(1-u^2)] sin(Qr) dr ,
+   *
+   * where rmin = (q*c0/2) , rmax = sqrt[La^2+(q*c0/2)^2] and u = sqrt[r^2-(q*c0/2)^2]/La.
+   * i(00l) intensity from M layers is then calculated from the Warren-Bodenstein sum
+   *  
+   *  i(00l) = 1/Q * [(1-1/M)*2*i(1) + (1-2/M)*2*i(3) + ...] = 1/Q * sum(q,1,M-1) (1-q/M)*i(q) .
+   *
+   * The method using discrete Fourier transform (DFT,FFTW) with endpoint corrections as 
+   * described in [ref. NR] is utilised for calculation of i(q).
+   *
+   *  i(00l) is normalised to i(00l,Q=0) = 1/4 * pi * (La/2)^2 .
+   *
+   * ref.: [NR] William H. Press, Saul A. Teukolsky, William T. Vetterling, Brian P. Flannery,
+   *            Numerical Recipes in C, Cambridge University Press, 1992
+   *     [FFTW] www.fftw.org
+   */
+  class i00lCalculator
+  {
+  public:
+    /// Constructor
+    i00lCalculator();
+    /// Destructor
+    virtual ~i00lCalculator();
+    /** \brief Sets calculation Q-grid.
+     *
+     * Sets Q-grid (Q = 2 pi *s) used for calculation. The simulation range is
+     * [Qmin, Qmax] and the step is optimised so that there are about NperRefl
+     * points per reflection from a structure of size Lc0 in the layers
+     * stacking direction.
+     */
+    void SetQ(const REAL Qmin, const REAL Qmax, const REAL Lc0, const int NperRefl = 25);
+    /// Sets calculation Q-grid.
+    void SetQ(const CrystVector_REAL &Q);
+    /// Calculate WB integrals i(q) for M layers separated by lattC/2 and of size La
+    const CrystMatrix_REAL & CalcIq(const unsigned int M, const REAL lattC, const REAL La);
+    /// Calculate pattern i00l(Q) - properly scaled sum of WB integrals
+    const CrystVector_REAL & CalcI00l(const unsigned int M, const REAL lattC, const REAL La);
+    /// Print calculated i(q) integrals
+    void PrintIq(std::ostream &s) const;
+    /// Print i00l(Q) profile. The profile must be calculated first.
+    void PrintI00l(std::ostream &s) const;
+  public:
+    /// Clocks when structure parameters (lattC, La, Lc) have been changed last time
+    ObjCryst::RefinableObjClock mClockInterLayerParams;
+  private:
+    /// Q = (2 pi * s) grid for calculation
+    CrystVector_REAL mQ;
+    /// Matrix of calcuated i(q) integrals
+    CrystMatrix_REAL miq;
+    /// Calculated i00l(Q) intensity
+    CrystVector_REAL mi00l;
+    /// Number of layers
+    unsigned int mM;
+    /// Actual LattC-parameter used for calculation
+    REAL musedLattC;
+    /// Actual La-size used for calclation
+    REAL musedLa;
+    /// Flag i(q) integrals and so also i00l must be recalculated
+    bool mNeedRecalc;
+    /// Clocks i00l pattern was calculated last time
+    ObjCryst::RefinableObjClock mClockPatternCalc;
+    /// Number of intervals the (rmin, rmax) integration range is divided
+    unsigned int mabSteps;
+    /// Oversamplig factor for DFT (shoud be at least 8, ndft=DFToversampl*abSteps)
+    unsigned int mDFToversampl;
+  friend class TurbostraticHexStructWB;
+  }; // i00lCalculator
+
+  /** WarrenDoubleScatteringTable - double scattering correction
+   *
+   *  Implements double scattering correction for Carbon and Cu-Kalpha radiation.
+   *  It is just a temporary solution. It requires a table generated by Milan
+   *  according to Warren and only interpolates within this table.
+   *
+   *  // TODO:: generalise, should it should be rather 2th than Q related ?
+   */
+  class WarrenDoubleScatteringTable {
+  private:
+    std::vector<double> mX;
+    std::vector<double> mY;
+    gsl_interp_accel *mgsl_acc;
+    gsl_spline *mgsl_spline;
+  public:
+    /// Constructor - reiquires name of file with interpolation data
+    WarrenDoubleScatteringTable(const string & tablefilename);
+    /// Copy constructor
+    WarrenDoubleScatteringTable(const WarrenDoubleScatteringTable &);
+    /// Destructor
+    virtual ~WarrenDoubleScatteringTable();
+    /// Copy constructor
+    /// Get double scattering correction for tth(rad), calculated by table-data interpolation
+    CrystVector_REAL GetCorr (const CrystVector_REAL & tth) const;
+  }; // WarrenDoubleScatteringTable
+
+  class PolarizationCorr {
+  private:
+    /// polarization rate of the incident beam
+    const ObjCryst::Radiation *mpRadiation;
+  public:
+    /// Constructor
+    PolarizationCorr();
+    /// Set radiation object
+    void SetRadiation(const ObjCryst::Radiation & rad);
+    /// Get vector of intensity corrections
+    CrystVector_REAL GetCorr (CrystVector_REAL & tth) const;
+  }; // PolarizationCorr
+
+  class AbsorptionCorr {
+  private:
+    REAL mOmega;
+    REAL mAbsFactor;
+    REAL mThickness;
+    REAL mDepth;
+  public:
+    /// Constructor
+    AbsorptionCorr();
+    /// Copy constructor
+    AbsorptionCorr(const TurbostraticHexStructWB::AbsorptionCorr & old);
+    /// Set absoption correction parameters: thickness (nm), depth (nm), absfactor (1/cm), omega (rad)
+    void SetAbsorptionCorrParams( REAL thickness, REAL depth, REAL absfactor, REAL omega);
+    /// Get vector of intensity corrections
+    CrystVector_REAL GetCorr (CrystVector_REAL & tth) const;
+  }; // AbsorptionCorr
+
+  class LorentzCorr {
+  public:
+    /// Get vector of intensity corrections
+    CrystVector_REAL GetCorr (CrystVector_REAL & tth) const;
+  }; // LorentzCorr
+
+  /**  \brief InstrFuncTable - instrumental function represented by an interpolated profile
+   *
+   *  Class implements an instrumental broadening described by measured or precalculated
+   *  profile stored in the table. The object load the raw data table and encapsulates
+   *  convolution with intensity pattern on the given equidistant Q-grid.
+   *
+   *  The class itself with the MSTRUCT is not much valuable. However, it should
+   *  assure full compatibility with Milan's Matlab code.
+   */
+  class InstrFuncTable {
+    std::vector<double> mQraw;
+    std::vector<double> mYraw;
+    std::vector<double> mQ;
+    std::vector<double> mY;
+    gsl_interp_accel *mgsl_acc;
+    gsl_spline *mgsl_spline;
+  public:
+    /// Constructor - reiquires name of file with interpolation data
+    InstrFuncTable(const string & tablefilename, const REAL Lambda=1.54056);
+    /// Copy constructor
+    InstrFuncTable(const InstrFuncTable &);
+    /// Destructor
+    virtual ~InstrFuncTable();
+  };
+
+public:
+  /// i0Calculator
+  i0Calculator mi0Calculator;
+  /// i00lCalculator
+  i00lCalculator mi00lCalculator;
+  /// Table for double scattering correction
+  WarrenDoubleScatteringTable mDoubleScattTab;
+  /// Polarization correction
+  PolarizationCorr mPolarizationCorr;
+  /// Lorentz correction
+  LorentzCorr mLorentzCorr;
+  /// Absorption correction
+  AbsorptionCorr mAbsorptionCorr;
+  /// Instrumental line broadening profile
+  InstrFuncTable mInstrFuncTab;
+
+public:  
+  /// Options constants
+  static const int OPTION_I00L_SCALE_NORMAL   = 0; // i00l intensity normalised to (M-1)*N
+  static const int OPTION_I00L_SCALE_WBCARBON = 1; // i00l intensity nomralised as in [WB]
+  /// Flags constants
+  static const unsigned int FLAG_INCOH_SCATT_CORR = 0x0007; // use incoherent scattering correction
+  static const unsigned int FLAG_BREIT_DIRAC_CORR = 0x0003; // use Breit-Dirac correction
+  static const unsigned int FLAG_RULAND_CORR      = 0x0005; // use Ruland correction
+}; // TurbostraticHexStructWB
+
 
 // PowderPattern
 class PowderPattern: public ObjCryst::PowderPattern {
@@ -1279,6 +1668,8 @@ class FaultsBroadeningEffectWC11m23: public ReflectionProfileComponent {
 private:
   /// Fault probability
   REAL mAlpha;
+  /// Approximation model type
+  int mModelApproxType;
 public:
   /// Constructor
   FaultsBroadeningEffectWC11m23();
@@ -1296,6 +1687,8 @@ public:
   void SetProfilePar (const REAL alpha);
   /// Set parent reflection profile (needed for proper functionality, TODO:: Why the parent virtual method is not satisfactory?)
   void SetParentReflectionProfile (const ReflectionProfile &s);
+  /// Set model approximation type 
+  void SetModelApproxType(const int type);
 private:
   /// Initialise object (refinable) parameters
   void InitParameters ();
@@ -1306,6 +1699,11 @@ private:
   mutable const ObjCryst::UnitCell *mpUnitCell;
   /// Object auxilliary data clock (When they were modified/updated last time?)
   mutable ObjCryst::RefinableObjClock mClockAuxParams;
+public:
+  /// Approximation model simple
+  static const int APPROX_MODEL_SIMPLE = 0;
+  /// Broken Tangent Plane Approximation on UNAffected reflections model
+  static const int APPROX_MODEL_BROKEN_TPA_UNAFFECTED = 1;
 }; // class FaultsBroadeningEffectWCHagege11m23
 
 class PseudoVoigtBroadeningEffectA: public ReflectionProfileComponent {

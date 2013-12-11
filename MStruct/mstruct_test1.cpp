@@ -909,6 +909,116 @@ int mstruct_test9(int argc, char* argv[], std::istream &iss)
 
 } // mstruct_test9
 
+int mstruct_test10(int argc, char* argv[], std::istream &iss)
+{
+  // testing class TurbostraticHexStructWB
+  cout << "/*** This is TurbostraticHexStructWB TEST ***/\n";
+  
+  TurbostraticHexStructWB turboStructEffect;
+  turboStructEffect.SetName("diffData_tCarbon");
+
+  // input-string-stream to which the input is translated to ignore comments etc. 
+  istringstream ccin;
+
+  {
+    std::ofstream s1("mstruct-TurbostraticHexStructWB-atoms.txt");
+    turboStructEffect.mi0Calculator.CreateHexLayerAtoms( 2.461, 20.0 );
+    turboStructEffect.mi0Calculator.PrintAtoms(s1);
+    s1.close();
+  }
+  
+  /*  {
+    std::ofstream s1("mstruct-TurbostraticHexStructWB-atoms-30.txt");
+    turboStructEffect.mi0Calculator.CreateHexLayerAtoms( 2.461, 30.0 );
+    turboStructEffect.mi0Calculator.PrintAtoms(s1);
+    s1.close();
+    }*/
+  
+  {
+    std::ofstream s1("mstruct-TurbostraticHexStructWB-hist.txt");
+    turboStructEffect.mi0Calculator.AccumHist2d( 20.0, true, true );
+    turboStructEffect.mi0Calculator.PrintHistogram(s1);
+    s1.close();
+  }
+  
+  {
+    std::cout << "float(" << sizeof(float) << "): " << std::numeric_limits<float>::min() << ", " << std::numeric_limits<float>::max() << '\n';
+    std::cout << "double(" << sizeof(double) << "): " << std::numeric_limits<double>::min() << ", " << std::numeric_limits<double>::max() << '\n';
+    std::cout << "REAL(" << sizeof(REAL) <<"): " << std::numeric_limits<REAL>::min() << ", " << std::numeric_limits<REAL>::max() << '\n';
+
+    unsigned int nQ = 1024;
+    REAL Qmax = 4*M_PI*sin(140.*M_PI/360.)/1.54;
+    REAL dQ = Qmax/nQ;
+    CrystVector_REAL Q(nQ);
+    
+    for(int m=0; m<nQ; m++)
+      Q(m) = m*dQ;
+
+    std::ofstream s1("mstruct-TurbostraticHexStructWB-i0.txt");
+    /*turboStructEffect.mi0Calculator.SetQ( 4*M_PI*sin(  0.*M_PI/360.)/1.54,
+					  4*M_PI*sin(140.*M_PI/360.)/1.54,
+					  20.0, 40);*/
+    turboStructEffect.mi0Calculator.SetQ(Q);
+    //turboStructEffect.mi0Calculator.CalcI0();
+    //turboStructEffect.mi0Calculator.PrintI0(s1);
+    s1.close();
+    /*for(int i=0; i<10; i++)
+      turboStructEffect.mi0Calculator.CalcI0();*/
+   
+    turboStructEffect.mi00lCalculator.SetQ(Q);
+    //std::cout << "i00lCalculator.CalcIq - start" << std::endl;
+    //turboStructEffect.mi00lCalculator.CalcIq(2, 6.88, 20.0);
+    turboStructEffect.mi00lCalculator.CalcIq(5, 6.88, 20.0);
+    //std::cout << "i00lCalculator.CalcIq - end" << std::endl;
+    
+    s1.open("mstruct-TurbostraticHexStructWB-iq.txt");
+    turboStructEffect.mi00lCalculator.PrintIq(s1);
+    s1.close();
+    
+    //turboStructEffect.mi00lCalculator.SetQ(Q);
+    //turboStructEffect.mi00lCalculator.CalcIq(5, 6.88, 20.0);
+    
+    s1.open("mstruct-TurbostraticHexStructWB-i00l.txt");
+    turboStructEffect.mi00lCalculator.CalcI00l(12, 6.88, 20.0);
+    turboStructEffect.mi00lCalculator.PrintI00l(s1);
+    s1.close();
+  }
+
+  {
+    // create PowderPattern Object
+    MStruct::PowderPattern * pattern = new MStruct::PowderPattern;
+    // set radiation
+    pattern->SetWavelength("CuA1");
+    //pattern->GetRadiation().SetLinearPolarRate(0.0); // no monochromator - no polarization
+    REAL tthmono = 45.*DEG2RAD; // LiF (monochromator)
+    REAL A = cos(tthmono)*cos(tthmono);
+    REAL f = (1.-A)/(1.+A);
+    pattern->GetRadiation().SetLinearPolarRate(f);
+    // add Background/TotalScattering phase
+    pattern->AddPowderPatternComponent(turboStructEffect);
+
+    // force switch of Imag-Scattering-Factor
+    //.SetIsIgnoringImagScattFact(false);
+
+    pattern->SetPowderPatternPar(0.0, 140.*M_PI/180./1024, 1025);
+    {
+      CrystVector_REAL t(pattern->GetNbPoint());
+      t = 0.;
+      pattern->SetPowderPatternObs(t);
+    }
+    pattern->SetWeightToUnit();
+    pattern->SetScaleFactor(turboStructEffect, 1.0);
+    pattern->Prepare();
+    pattern->GetPowderPatternCalc();
+
+    pattern->SavePowderPattern("powderPattern.dat");
+  }
+
+  cout << " End of program." << endl ;
+
+  return 0;
+} // mstruct_test10
+
 } // namespace MStruct
 
 
