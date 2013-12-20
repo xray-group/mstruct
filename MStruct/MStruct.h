@@ -1016,6 +1016,123 @@ private:
   void InitParameters();
 }; // CircRodsGammaBroadeningEffect
 
+/**   \brief Class implementing size broadening from oval/elliptical (nano)rods.
+   * 
+   * It is assumed that crystallites have shape of rods with Length (L) and oval like (elliptical)
+   * basis of major axis diameter (D) and flattening factor (f) (i.e. the semin-minor axis length
+   * b = (1-f)*D/2. The size of rods is distributed according to the Gamma distribution in such
+   * a way that for a given crystallite size the aL = L/D ratio and basal ellipse flattening are
+   * kept constant.
+   *
+   * The coordinate system is defined by two prescribed (direct space) crystal directions. The first
+   * one is the rod axis, which is parallel to z-axis of the coordinate system. The x-axis lies in
+   * a common plane of the rod axis and the second specified crystal direction (not necessary to be
+   * perpendicular to rod axis). The third complement direction forms y-axis.
+   *
+   * An additional model parameter (psiD) defines a rotation of the basal ellipse major axis
+   * from the x-axis around the z-axis by angle psiD.
+   *
+   * Let 'sx','sy' and 'sz' be projections of a unit vector in the direction of the diffraction
+   * vector into coordinate system axes. Then for a 'common volume' of a single crystallite
+   * it holds:
+   *   
+   * A(x) = 1/2 * L * D^2 * (1-sz*x/L) * fcirc(t) , where t = sqrt[(sa/aa)^2+(sb/ab)^2]*x/D ,
+   * fcirc(t) = ArcCos(t) - t * Sqrt(1-t^2) .
+   *
+   * Here the ellipse semi-major axis length a = aa*D/2 (aa=1) and semi-minor axis b = ab*D/2.
+   * 'sa' and 'sb' have meaning of (sx,sy) 'shift' projections into axes of the rotated ellipse.
+   *
+   *     (sa,sb)' = [cos(psiD),sin(psiD);-sin(psiD),cos(psiD)] * (sx,sy)'
+   *
+   * As it is cumberstone to integrate A(x) including exact fcirc(t) function, the 'common
+   * area' of a circle is approximated by the 3rd degree polynomial here.
+   *
+   * Multiple model options are available. The user can chose if the crystallites shape
+   * is refined by changenging both sizes (L,D) and the flattening factor (f), or all three
+   * dimensions (Da,Db,L) can be refined. Any of choosen parameter can be kept fixed, or e.g.
+   * the shape parameter (aL=L/D) is fixed and basal dimensions are refined.
+   *
+   * For D-L* and aD* model parameter sets theta is the scale parameter of the Gamma distribution
+   * of rods diameters, whereas for aL-set it is the scale parameter of the corresponding
+   * distribution of rods lengthes.
+   *
+   */
+class EllipRodsGammaBroadeningEffect: public ReflectionProfileComponent {
+private:
+  /// Length of (nano)rods (in angstroms)
+  REAL mLength;
+  /// major axis Diameter of (nano)rods (in angstroms)
+  REAL mDiameterA;
+  /// minor axis Diameter of (nano)rods (in angstroms)
+  REAL mDiameterB;
+  /// Shape parameter of (nano)rods (aL = L/D)
+  REAL mLDratio;
+  /// Basal ellipse flattening factor
+  REAL mFlatteningFactor;
+  /// Gamma distribution Scale parameter
+  REAL mTheta;
+  /// Direct space (hkl) direction of the rod axis
+  CrystVector_REAL mRodAxis;
+  /// Direct space (hkl) direction of the second (basal x) axis
+  CrystVector_REAL mBasalXAxis;
+  /// Rotation angle of basal ellipse major axis from x-axis
+  REAL mPsiD;
+
+  /// Model parameter set-option
+  int mParamSetOption;
+public:
+  /// Flags for parameters set options
+  static const int PARAM_SET_UNDEFINED = 0; // undefined
+  static const int PARAM_SET_DLf       = 1; // model params.: D-diameter, L-length, f-flattening
+  static const int PARAM_SET_aDf       = 2; // model params.: a-L/D ratio, D-diameter, f-flattening
+  static const int PARAM_SET_aLf       = 3; // model params.: a-L/D ratio, L-length, f-flattening
+  static const int PARAM_SET_DDL       = 4; // model params.: Da-major, Db-minor diameter, L-length
+  static const int PARAM_SET_aDD       = 5; // model params.: a-L/D ratio, Da-major, Db-minor diameter
+  
+public:
+  /// Constructor
+  EllipRodsGammaBroadeningEffect();
+  
+  CrystVector_REAL GetProfile(const CrystVector_REAL &x,
+			      const REAL xcenter,
+			      const REAL h, const REAL k, const REAL l);
+  /// Calculate integral breadth (using analytical formula)
+  REAL GetBeta(const REAL xcenter,
+		     const REAL h, const REAL k, const REAL l)const;
+  REAL GetApproxFWHM(const REAL xcenter,
+		     const REAL h, const REAL k, const REAL l)const;
+  bool IsRealSpaceType()const;
+  bool IsAnisotropic ()const;
+
+  /// Set model parameters-set option (1-DLf, 2-aDf, 3-aLf, 4-DDL, 5-aDD)
+  void SetModelParSet(const int parSetOption);
+  /// Set direct space (hkl) direction as a rod axis
+  void SetRodAxis(const REAL axisH, const REAL axisK, const REAL axisL);
+  /// Set direct space (hkl) direction as a secondary axis
+  void SetRodSecondaryAxis(const REAL axisH, const REAL axisK, const REAL axisL);
+  /// Set rod major diameter (in nanometers) and diameter 'scale parameter' of Gamma distribution
+  void SetRodMajorDiameter(const REAL diameter, const REAL theta = 1.);
+  /// Set rod mean length (in nanometers) and length 'scale parameter' of Gamma distribution
+  void SetRodLength(const REAL length, const REAL theta = 1.);
+  /// Set rod diameters (in nanometers) (This has no meaning if params.-set option is not set to DDL or aDD)
+  void SetRodDiameters(const REAL diameterA, const REAL diameterB, const REAL theta = 1.);
+  /// Set L/D ratio (This has no meaning if params.-set option is set to DLf or DDL)
+  void SetRodShapePar(const REAL LDratio);
+  /// Set rod basal ellipse flattening factor (This has no meaning if params.-set option is set to DLL or aDD)
+  void SetRodShapeFlattening(const REAL factor);
+  /// Set rotation angle of basal ellipse major-axis
+  void SetRodBasalRotation(const REAL psiD);
+private:
+  /// (Re)initialise RefinableObj parameters
+  void InitParameters();
+  /// (Re)calculate projection matrix from diffraction vector reciprocal (h,k,l) coordinates to (sx,sy,sz)
+  void CalculateProjectionMatrix() const;
+private:
+  /// Projection matrix from diffraction vector reciprocal (h,k,l) coordinates to crystallite basis (sx,sy,sz)
+  mutable CrystMatrix_REAL mProjectionMatrix;
+  mutable bool mProjectionMatrixInitialised;
+}; // EllipRodsGammaBroadeningEffect
+
 
 /**   \brief Class implementing in an extremely primitive way ....
    *

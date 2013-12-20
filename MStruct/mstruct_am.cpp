@@ -29,8 +29,8 @@
  */
 
 //#define program_version "0.39-(Fox-r1221)-testing-WCfaults+ExternalLSQConstraints"
-//#define program_version "0.94-(Fox-r1221)-develop" // CircRodsGamma
-#define program_version "0.96-(Fox-r1221)-develop"
+#define program_version "0.104-(Fox-r1221)-develop-EllipRodsGamma(testing)" // EllipRodsGamma
+//#define program_version "0.96-(Fox-r1221)-develop"
 
 #include "MStruct.h"
 
@@ -121,6 +121,7 @@ int main (int argc, char *argv[])
       cout << "version: " << program_version << "\n";
       cout << "mstruct  Copyright (C) 2009-2013 Zdenek Matej, Charles University in Prague\n";
       cout << "e-mail: matej@karlov.mff.cuni.cz\n";
+      cout << "web: <http://xray.cz/mstruct/>\n";
       cout << "License GNU GPL: <http://gnu.org/licenses/gpl.html>.\n";
       cout << "This program comes with ABSOLUTELY NO WARRANTY;\n";
       cout << "This is free software, and you are welcome to redistribute it.\n";
@@ -946,6 +947,93 @@ int main (int argc, char *argv[])
 	   }
 	   else
 	     throw ObjCrystException("Unknown model parameters-set option for CircRodsGamma broadening effect!");
+	   
+	   btype_not_found = false;
+	 }
+	// Size broadening from oval/elliptical rods with Gamma size-distribution
+	 if(btype_not_found && (btype==string("EllipRodsGamma") || btype==string("OvalRodsGamma"))) {
+	   MStruct::EllipRodsGammaBroadeningEffect * sizeEffect
+	     = new MStruct::EllipRodsGammaBroadeningEffect;
+	   sizeEffect->SetName(bname);
+	   vReflProfComponents.push_back(sizeEffect);
+
+	  // rod axis
+	   REAL hh, kk, ll;
+	   cout << "[hkl] fractional coordinates of the rod axis (direct space direction)" << endl;
+	   read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+	   ccin >> hh >> kk >> ll;
+	   sizeEffect->SetRodAxis(hh,kk,ll);
+	   
+	  // secondary axis
+	   cout << "[hkl] fractional coordinates of the secondary axis" << endl;
+	   read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+	   ccin >> hh >> kk >> ll;
+	   sizeEffect->SetRodSecondaryAxis(hh,kk,ll);
+	   
+          // basal ellipse rotation
+	   REAL psiD;
+	   cout << "angle(deg) of rotation of basal ellipse (basal twist)" << endl;
+	   read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+	   ccin >> psiD;
+	   sizeEffect->SetRodBasalRotation(psiD*M_PI/180.);
+
+	  // model parameters-set
+	   string paramset;
+	   cout << "choice of parameters set (DLf, aDf, aLf, DDL, aDD)" << endl;
+	   read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+	   ccin >> paramset;
+
+	   boost::algorithm::to_lower(paramset);
+	   if(paramset==string("dlf") || paramset==string("d-l-f")) {
+	     sizeEffect->SetModelParSet(MStruct::EllipRodsGammaBroadeningEffect::PARAM_SET_DLf);
+	     REAL D, theta, L, f;
+	     cout << "diameter (nm), theta, length (nm), flattening (0.-for circle)" << endl;
+	     read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+	     ccin >> D >> theta >> L >> f;
+	     sizeEffect->SetRodLength(L);
+	     sizeEffect->SetRodMajorDiameter(D,theta);
+	     sizeEffect->SetRodShapeFlattening(f);
+	   }
+	   else if(paramset==string("adf") || paramset==string("a-d-f") || paramset==string("dlratio-d-flatt")) {
+	     sizeEffect->SetModelParSet(MStruct::EllipRodsGammaBroadeningEffect::PARAM_SET_aDf);
+	     REAL D, theta, aL, f;
+	     cout << "diameter (nm), theta, L/D ratio, flattening (0.-for circle)" << endl;
+	     read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+	     ccin >> D >> theta >> aL >> f;
+	     sizeEffect->SetRodMajorDiameter(D,theta);
+	     sizeEffect->SetRodShapePar(aL);
+	     sizeEffect->SetRodShapeFlattening(f);
+	   }
+	   else if(paramset==string("alf") || paramset==string("a-l-f") || paramset==string("dlratio-l-flatt")) {
+	     sizeEffect->SetModelParSet(MStruct::EllipRodsGammaBroadeningEffect::PARAM_SET_aLf);
+	     REAL L, theta, aL, f;
+	     cout << "length (nm), theta, L/D ratio, flattening (0.-for circle)" << endl;
+	     read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+	     ccin >> L >> theta >> aL >> f;
+	     sizeEffect->SetRodLength(L,theta);
+	     sizeEffect->SetRodShapePar(aL);
+	     sizeEffect->SetRodShapeFlattening(f);
+	   }
+	   else if(paramset==string("ddl") || paramset==string("d-d-l") || paramset==string("da-db-l")) {
+	     sizeEffect->SetModelParSet(MStruct::EllipRodsGammaBroadeningEffect::PARAM_SET_DDL);
+	     REAL Da, theta, Db, L;
+	     cout << "diameter-A (nm), theta, diameter-B (nm), length (nm)" << endl;
+	     read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+	     ccin >> Da >> theta >> Db >> L;
+	     sizeEffect->SetRodLength(L);
+	     sizeEffect->SetRodDiameters(Da,Db,theta);
+	   }
+	   else if(paramset==string("add") || paramset==string("a-d-d") || paramset==string("dlratio-da-db")) {
+	     sizeEffect->SetModelParSet(MStruct::EllipRodsGammaBroadeningEffect::PARAM_SET_aDD);
+	     REAL Da, theta, Db, aL;
+	     cout << "diameter-A (nm), theta, diameter-B (nm), L/D ratio" << endl;
+	     read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+	     ccin >> Da >> theta >> Db >> aL;
+	     sizeEffect->SetRodShapePar(aL);
+	     sizeEffect->SetRodDiameters(Da,Db,theta);
+	   }
+	   else
+	     throw ObjCrystException("Unknown model parameters-set option for EllipRodsGamma broadening effect!");
 	   
 	   btype_not_found = false;
 	 }
@@ -2161,7 +2249,7 @@ int main (int argc, char *argv[])
     */
    }
 
-   if(0) { // sV
+   if(1) { // sV
   // Save calculated intensities
    ofstream f("phase1_par.txt");
    vDiffData[0]->PrintHKLInfo(f);

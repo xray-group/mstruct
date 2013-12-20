@@ -72,7 +72,7 @@
 
 bool bsavecalc = false;
 //REAL xcenterlimits[2] = {30.*DEG2RAD, 32.*DEG2RAD};
-REAL xcenterlimits[2] = {71.5*DEG2RAD, 74.5*DEG2RAD};
+REAL xcenterlimits[2] = {11*DEG2RAD, 12*DEG2RAD};
 
 #define absorption_corr_factor 1.e4
 
@@ -1377,7 +1377,7 @@ void TurbostraticHexStructWB::CalcPowderPattern()const
     mTheta = 10.*theta;
     break;
   default:
-    throw ObjCrystException("CircRodsGammaBroadeningEffect: Model parameters-set unknown!");
+    throw ObjCrystException("EllipRodsGammaBroadeningEffect: Model parameters-set unknown!");
   }*/
 
   mClockPowderPatternCalc.Click();
@@ -4517,7 +4517,6 @@ void PowderPatternDiffraction::CalcIntensityCorr () const
   mIntensityCorrTheta = mTheta;
   mClock2IntensityCorr.Click();
   VFN_DEBUG_MESSAGE("PowderPatternDiffraction::CalcIntensityCorr():finished",10)
-
 }
 
 // ReflectionProfileComponent
@@ -4638,6 +4637,7 @@ void SizeBroadeningEffect::InitParameters()
     this->AddPar(tmp);
   }
 }
+
 ////////////////////////////////////////////////////////////////////////
 //
 //    CircRodsGammaBroadeningEffect
@@ -4946,6 +4946,596 @@ void CircRodsGammaBroadeningEffect::InitParameters()
   }
 
   mClockMaster.Reset();
+}
+
+////////////////////////////////////////////////////////////////////////
+//
+//    EllipRodsGammaBroadeningEffect
+//
+////////////////////////////////////////////////////////////////////////
+
+EllipRodsGammaBroadeningEffect::EllipRodsGammaBroadeningEffect()
+  :mLength(1.e4), mDiameterA(100.), mDiameterB(100.), mFlatteningFactor(0.),
+   mTheta(10.), mPsiD(0.), mLDratio(100.), mParamSetOption(0), mProjectionMatrixInitialised(false)
+{
+  // Set default name
+  this->SetName("EllipRodsGamma");
+
+  mRodAxis = CrystVector_REAL(3);
+  mRodAxis(2) = 1.0; // [0,0,1] direct sapce diraction
+  mBasalXAxis = CrystVector_REAL(3);
+  mBasalXAxis(0) = 1.0; // [1,0,0] direct space direction
+
+  this->InitParameters();
+}
+
+void EllipRodsGammaBroadeningEffect::SetModelParSet(const int parSetOption)
+{
+  mParamSetOption = parSetOption;
+  this->InitParameters();
+}
+
+void EllipRodsGammaBroadeningEffect::SetRodAxis(const REAL axisH, const REAL axisK, const REAL axisL)
+{
+  mRodAxis = CrystVector_REAL(3);
+  mRodAxis(0) = axisH; mRodAxis(1) = axisK; mRodAxis(2) = axisL;
+  mProjectionMatrixInitialised = false; // recalculate projection matrix
+  this->CalculateProjectionMatrix();
+  mClockMaster.Reset();
+}
+
+void EllipRodsGammaBroadeningEffect::SetRodSecondaryAxis(const REAL axisH, const REAL axisK, const REAL axisL)
+{
+  mBasalXAxis = CrystVector_REAL(3);
+  mBasalXAxis(0) = axisH; mBasalXAxis(1) = axisK; mBasalXAxis(2) = axisL;
+  mProjectionMatrixInitialised = false; // recalculate projection matrix
+  this->CalculateProjectionMatrix();
+  mClockMaster.Reset();
+}
+
+void EllipRodsGammaBroadeningEffect::SetRodMajorDiameter(const REAL diameter, const REAL theta)
+{
+  if(mParamSetOption==PARAM_SET_UNDEFINED)
+    throw ObjCrystException("EllipRodsGammaBroadeningEffect: Model parameters-set undefined!");
+  
+  switch ( mParamSetOption ) {
+  case PARAM_SET_DLf:
+    mDiameterA = 10.*diameter;
+    mDiameterB = (1.-mFlatteningFactor)*mDiameterA;
+    mLDratio = mLength/mDiameterA;
+    mTheta = 10.*theta;
+    break;
+  case PARAM_SET_aDf:
+  case PARAM_SET_aLf:
+    mDiameterA = 10.*diameter;
+    mDiameterB = (1.-mFlatteningFactor)*mDiameterA;
+    mLength = mLDratio*mDiameterA;
+    mTheta = 10.*theta;
+    break;
+  case PARAM_SET_DDL:
+  case PARAM_SET_aDD:
+    throw ObjCrystException("EllipRodsGammaBroadeningEffect: Can not set single Diameter when using DDL or aDD-set option!");
+    break;
+  default:
+    throw ObjCrystException("EllipRodsGammaBroadeningEffect: Model parameters-set unknown!");
+  }
+  mClockMaster.Reset();
+}
+
+void EllipRodsGammaBroadeningEffect::SetRodDiameters(const REAL diameterA, const REAL diameterB, const REAL theta)
+{
+  if(mParamSetOption==PARAM_SET_UNDEFINED)
+    throw ObjCrystException("EllipRodsGammaBroadeningEffect: Model parameters-set undefined!");
+  
+  switch ( mParamSetOption ) {
+  case PARAM_SET_DDL:
+    mDiameterA = 10.*diameterA;
+    mDiameterB = 10.*diameterB;
+    mFlatteningFactor = 1. - mDiameterB/mDiameterA;
+    mLDratio = mLength/mDiameterA;
+    mTheta = 10.*theta;
+    break;
+  case PARAM_SET_aDD:
+    mDiameterA = 10.*diameterA;
+    mDiameterB = 10.*diameterB;
+    mFlatteningFactor = 1. - mDiameterB/mDiameterA;
+    mLength = mLDratio*mDiameterA;
+    mTheta = 10.*theta;
+    break;
+  default:
+    throw ObjCrystException("EllipRodsGammaBroadeningEffect: Both ellipse diameters can be set only with DDL or aDD-set option!!");
+  }
+  mClockMaster.Reset();
+}
+
+void EllipRodsGammaBroadeningEffect::SetRodLength(const REAL length, const REAL theta)
+{
+  if(mParamSetOption==PARAM_SET_UNDEFINED)
+    throw ObjCrystException("EllipRodsGammaBroadeningEffect: Model parameters-set undefined!");
+  
+  switch ( mParamSetOption ) {
+  case PARAM_SET_DLf:
+  case PARAM_SET_DDL:
+    mLength = 10.*length;
+    mLDratio = mLength/mDiameterA;
+    mTheta = 10.*theta;
+    break;
+  case PARAM_SET_aDf:
+  case PARAM_SET_aLf:
+  case PARAM_SET_aDD:
+    mLength = 10.*length;
+    mDiameterA = mLength/mLDratio;
+    mDiameterB = (1.-mFlatteningFactor)*mDiameterA;
+    mTheta = 10.*theta;
+    break;
+  default:
+    throw ObjCrystException("EllipRodsGammaBroadeningEffect: Model parameters-set unknown!");
+  }
+  mClockMaster.Reset();
+}
+
+void EllipRodsGammaBroadeningEffect::SetRodShapePar(const REAL LDratio)
+{
+  if(mParamSetOption==PARAM_SET_UNDEFINED)
+    throw ObjCrystException("EllipRodsGammaBroadeningEffect: Model parameters-set undefined!");
+  
+  switch ( mParamSetOption ) {
+  case PARAM_SET_DLf:
+  case PARAM_SET_DDL:
+    throw ObjCrystException("EllipRodsGammaBroadeningEffect: Can not set LDratio when using DLf or DDL-set option!");
+    break;
+  case PARAM_SET_aDf:
+  case PARAM_SET_aDD:
+    mLDratio = LDratio;
+    mLength = mLDratio*mDiameterA;
+    break;
+  case PARAM_SET_aLf:
+    mLDratio = LDratio;
+    mDiameterA = mLength/mLDratio;
+    mDiameterB = (1.-mFlatteningFactor)*mDiameterA;
+    break;
+  default:
+    throw ObjCrystException("EllipRodsGammaBroadeningEffect: Model parameters-set unknown!");
+  }
+  mClockMaster.Reset();
+}
+
+void EllipRodsGammaBroadeningEffect::SetRodShapeFlattening(const REAL factor)
+{
+  if(mParamSetOption==PARAM_SET_UNDEFINED)
+    throw ObjCrystException("EllipRodsGammaBroadeningEffect: Model parameters-set undefined!");
+  
+  switch ( mParamSetOption ) {
+  case PARAM_SET_DLf:
+  case PARAM_SET_aLf:
+  case PARAM_SET_aDf:
+    mFlatteningFactor = factor;
+    mDiameterB = (1.-mFlatteningFactor)*mDiameterA;
+    break;
+  default:
+    throw ObjCrystException("EllipRodsGammaBroadeningEffect: Flattening factor can not be set when using DDL or aDD-set option!");
+  }
+  mClockMaster.Reset();
+}
+
+void EllipRodsGammaBroadeningEffect::SetRodBasalRotation(const REAL psiD)
+{
+  mPsiD = psiD;
+  mClockMaster.Reset();
+}
+
+CrystVector_REAL EllipRodsGammaBroadeningEffect::GetProfile(const CrystVector_REAL &x,
+							   const REAL xcenter,
+							   const REAL h, const REAL k, const REAL l)
+{
+  CrystVector_REAL result(x.numElements());
+
+  if(mParamSetOption==PARAM_SET_UNDEFINED) {
+    result = 1.0; // unknown model - no broadening
+    return result;
+  }
+
+  // actualise model parametrs
+  REAL th; // scale parameter of Gamma distribution (for diameter)
+  switch ( mParamSetOption ) {
+  case PARAM_SET_DLf:
+    mLDratio = mLength/mDiameterA;
+    mDiameterB = (1.-mFlatteningFactor)*mDiameterA;
+    th = mTheta;
+    break;
+  case PARAM_SET_aDf:
+    mLength = mLDratio*mDiameterA;
+    mDiameterB = (1.-mFlatteningFactor)*mDiameterA;
+    th = mTheta;
+    break;
+  case PARAM_SET_aLf:
+    mDiameterA = mLength/mLDratio;
+    mDiameterB = (1.-mFlatteningFactor)*mDiameterA;
+    th = mTheta/mLDratio;
+    break;
+  case PARAM_SET_DDL:
+    mFlatteningFactor = 1.-mDiameterB/mDiameterA;
+    mLDratio = mLength/mDiameterA;
+    th = mTheta;
+    break;
+  case PARAM_SET_aDD:
+    mFlatteningFactor = 1.-mDiameterB/mDiameterA;
+    mLength = mLDratio*mDiameterA;
+    th = mTheta;
+    break;
+  default:
+    throw ObjCrystException("EllipRodsGammaBroadeningEffect: Model parameters-set unknown!");
+  }
+
+  const Radiation &r = GetParentReflectionProfile().
+    GetParentPowderPatternDiffraction().GetRadiation();
+
+  // actualise projection matrix
+  if( !mProjectionMatrixInitialised ) {
+    this->CalculateProjectionMatrix();
+    if( !mProjectionMatrixInitialised )
+      throw ObjCrystException("EllipRodsGammaBroadeningEffect: Can not calculate projection matrix!");
+  }
+
+  // calculate projection of (hkl) vector on crystal reference axes
+  REAL sz, sx, sy;
+  { 
+    CrystMatrix_REAL hkl = CrystMatrix_REAL(3,1);
+    hkl(0,0) = h; hkl(1,0) = k; hkl(2,0) = l;
+    CrystMatrix_REAL vs = RotationTB::MatrixMult( mProjectionMatrix, hkl );
+    REAL s0 = sqrt( pow(vs(0,0),2)+pow(vs(1,0),2)+pow(vs(2,0),2) );
+    sz = vs(2,0)/s0; sx = vs(0,0)/s0; sy = vs(1,0)/s0; 
+  }
+
+  // ellipse-rod model paramters
+  const REAL sa =  sx*cos(mPsiD) + sy*sin(mPsiD);
+  const REAL sb = -sx*sin(mPsiD) + sy*cos(mPsiD);
+  const REAL aa = 1.;
+  const REAL ab = 1. - mFlatteningFactor;
+  const REAL aL = mLDratio;
+  
+  // rod-model (fcirc-approximation) constants
+  const double a1 = 1./48.*(-2816.+867.*M_PI);
+  const double a3 = -112.+287.*M_PI/8.;
+  const double a2 = -(M_PI/2.+a1+a3);
+
+  const REAL sp = sqrt( pow(sa/aa,2) + pow(sb/ab,2) );
+  const double u0 = ( sp>0 && mLDratio*sp>sz ) ? sp : sz/mLDratio;
+
+  const REAL *px = x.data();
+  REAL *pA = result.data();
+  const double alph = mDiameterA/th;
+  const double gammaAlph = boost::math::tgamma(alph);
+  const double A0 = aL*M_PI*boost::math::tgamma(alph+3.)/gammaAlph;
+  for(long i=0; i<x.numElements(); i++) {
+    double x = fabs(*px)/th;
+    if(x<1e-7) { *pA = 1.0; px++; pA++; continue; }
+    double u = u0*x;
+    double t = -a3*sp*sz*x*(gammaW(alph-1.,u)/gammaAlph)
+      +(a3*aL*sp-a2*sz)*(gammaW(alph,u)/gammaAlph);
+    t = sp*x*t + (a2*aL*sp-a1*sz)*(gammaW(alph+1.,u)/gammaAlph);
+    t = 2.*sp*x*t + (2.*a1*aL*sp-M_PI*sz)*(gammaW(alph+2.,u)/gammaAlph);
+    t = x*t + aL*M_PI*(gammaW(alph+3.,u)/gammaAlph);
+    *pA = t/A0;
+    px++; pA++;
+  } // for(i)
+
+  if (bsavecalc && xcenter>=xcenterlimits[0] && xcenter<=xcenterlimits[1]) {
+    ofstream F("profileASrods.dat");
+    F<<"# D="<<mDiameterA<<",theta_D="<<th<<",L="<<mLength;
+    F<<",rodAxisHKL="<<mRodAxis(0)<<","<<mRodAxis(1)<<","<<mRodAxis(2);
+    F<<",rodScndHKL="<<mBasalXAxis(0)<<","<<mBasalXAxis(1)<<","<<mBasalXAxis(2);
+    F<<",sz="<<sz;
+    F<<",sx="<<sx<<",sy="<<sy<<",sp="<<sp;
+    F<<",xcenter="<<xcenter*RAD2DEG<<",h="<<h<<",k="<<k<<",l="<<l<<endl;
+    for(int i=0;i<x.numElements();i++)
+      F<<setw(18)<<x(i)<<setw(18)<<result(i)<<endl;
+    F.close();
+  }
+  
+  return result;
+}
+
+REAL EllipRodsGammaBroadeningEffect::GetBeta(const REAL xcenter,
+					     const REAL h, const REAL k, const REAL l) const
+{
+  if(mParamSetOption==PARAM_SET_UNDEFINED) {
+    return 0.0; // unknown model - no broadening
+  }
+
+  // get actual model parametrs
+  REAL diamA, diamB, ffactor, length, aL;
+  REAL th; // scale parameter of Gamma distribution (for diameter)
+  switch ( mParamSetOption ) {
+  case PARAM_SET_DLf:
+    diamA = mDiameterA; length = mLength; ffactor = mFlatteningFactor;
+    aL = length/diamA;
+    diamB = (1.-ffactor)*diamA;
+    th = mTheta;
+    break;
+  case PARAM_SET_aDf:
+    aL = mLDratio; diamA = mDiameterA; ffactor = mFlatteningFactor;
+    length = aL*diamA;
+    diamB = (1.-ffactor)*diamA;
+    th = mTheta;
+    break;
+  case PARAM_SET_aLf:
+    aL = mLDratio; length = mLength; ffactor = mFlatteningFactor;
+    diamA = length/aL;
+    diamB = (1.-ffactor)*diamA;
+    th = mTheta/mLDratio;
+    break;
+  case PARAM_SET_DDL:
+    diamA = mDiameterA; diamB = mDiameterB; length = aL*diamA;
+    ffactor = 1.-diamB/diamA;
+    aL = length/diamA;
+    th = mTheta;
+    break;
+  case PARAM_SET_aDD:
+    aL = mLDratio; diamA = mDiameterA; diamB = mDiameterB;
+    ffactor = 1.-diamB/diamA;
+    length = aL*diamA;
+    th = mTheta;
+    break;
+  default:
+    throw ObjCrystException("EllipRodsGammaBroadeningEffect: Model parameters-set unknown!");
+  }
+
+  // actualise projection matrix
+  if( !mProjectionMatrixInitialised ) {
+    this->CalculateProjectionMatrix();
+    if( !mProjectionMatrixInitialised )
+      throw ObjCrystException("EllipRodsGammaBroadeningEffect: Can not calculate projection matrix!");
+  }
+
+  // calculate projection of (hkl) vector on crystal reference axes
+  REAL sz, sx, sy;
+  { 
+    CrystMatrix_REAL hkl = CrystMatrix_REAL(3,1);
+    hkl(0,0) = h; hkl(1,0) = k; hkl(2,0) = l;
+    CrystMatrix_REAL vs = RotationTB::MatrixMult( mProjectionMatrix, hkl );
+    REAL s0 = sqrt( pow(vs(0,0),2)+pow(vs(1,0),2)+pow(vs(2,0),2) );
+    sz = vs(2,0)/s0; sx = vs(0,0)/s0; sy = vs(1,0)/s0; 
+  }
+
+  // ellipse-rod model paramters
+  const REAL sa =  sx*cos(mPsiD) + sy*sin(mPsiD);
+  const REAL sb = -sx*sin(mPsiD) + sy*cos(mPsiD);
+  const REAL aa = 1.;
+  const REAL ab = 1. - ffactor;
+  
+  // rod-model (fcirc-approximation) constants
+  const double a1 = 1./48.*(-2816.+867.*M_PI);
+  const double a3 = -112.+287.*M_PI/8.;
+  const double a2 = -(M_PI/2.+a1+a3);
+
+  const REAL sp = sqrt( pow(sa/aa,2) + pow(sb/ab,2) );
+
+  REAL beta;
+
+  if( sp>0 && aL*sp>sz ) {
+    // basal dimensions are more important
+    beta = 15.*aL*M_PI*(sp*sp)/(5.*aL*(6.*a1+4.*a2+3.*a3+6.*M_PI)*sp-(20.*a1+15.*a2+12.*a3+15.*M_PI)*sz);
+  } else {
+    // rod-length (dick-height) is important
+    beta = 15.*M_PI*pow(sz,4)/aL/(3.*a3*pow(aL*sp,3)+5.*a2*pow(aL*sp,2)*sz+10.*a1*aL*sp*pow(sz,2)+15.*M_PI*pow(sz,3));
+  }
+  beta *= 1./(diamA+3*mTheta);
+
+  return beta;
+}
+
+REAL EllipRodsGammaBroadeningEffect::GetApproxFWHM(const REAL xcenter,
+						   const REAL h, const REAL k, const REAL l) const
+{
+  // calculate integral breadth
+  REAL beta = GetBeta(xcenter,h,k,l);
+  
+  const Radiation &r = GetParentReflectionProfile().
+    GetParentPowderPatternDiffraction().GetRadiation();
+
+  // assuming Lorentzian-like shape
+  return 2./M_PI*beta*r.GetWavelength()(0)/cos(0.5*xcenter);
+}
+
+bool EllipRodsGammaBroadeningEffect::IsRealSpaceType() const
+{
+  return true;
+}
+
+bool EllipRodsGammaBroadeningEffect::IsAnisotropic () const
+{
+  return true;
+}
+
+void EllipRodsGammaBroadeningEffect::InitParameters()
+{
+  { // Parameters-set maybe changed - remove an old parameters set
+    try {
+      long ii = this->GetParIndex (&mDiameterA, true);
+      if (ii != -1) {
+	ObjCryst::RefinablePar &par = this->GetPar(ii);
+	this->RemovePar(&par);
+      }
+      ii = this->GetParIndex (&mDiameterB, true);
+      if (ii != -1) {
+	ObjCryst::RefinablePar &par = this->GetPar(ii);
+	this->RemovePar(&par);
+      }
+      ii = this->GetParIndex (&mLength, true);
+      if (ii != -1) {
+	ObjCryst::RefinablePar &par = this->GetPar(ii);
+	this->RemovePar(&par);
+      }
+      ii = this->GetParIndex (&mTheta, true);
+      if (ii != -1) {
+	ObjCryst::RefinablePar &par = this->GetPar(ii);
+	this->RemovePar(&par);
+      }
+      ii = this->GetParIndex (&mLDratio, true);
+      if (ii != -1) {
+	ObjCryst::RefinablePar &par = this->GetPar(ii);
+	this->RemovePar(&par);
+      }
+      ii = this->GetParIndex (&mFlatteningFactor, true);
+      if (ii != -1) {
+	ObjCryst::RefinablePar &par = this->GetPar(ii);
+	this->RemovePar(&par);
+      }
+      ii = this->GetParIndex (&mPsiD, true);
+      if (ii != -1) {
+	ObjCryst::RefinablePar &par = this->GetPar(ii);
+	this->RemovePar(&par);
+      }
+    }
+    catch (std::exception &e) {
+      cerr << "< MStruct::EllipRodsGammaBroadeningEffect::InitParameters()\n";
+      cerr << "Unexpected exception: " << e.what() << "\n";
+      cerr << "Unexpected exception thrown during removing old parameters from the object.\n >" << endl; 
+      throw ObjCrystException("MStruct::EllipRodsGammaBroadeningEffect::InitParameters(): Program error.");
+    }
+  } // removing old parametrs
+
+  // DiameterA-D
+  if (mParamSetOption==PARAM_SET_DLf || mParamSetOption==PARAM_SET_aDf) {
+    RefinablePar tmp("D", &mDiameterA, 2.0, 1.e4,
+                     gpRefParTypeScattDataProfileWidth,
+                     REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false,0.1);
+    tmp.AssignClock(mClockMaster);
+    tmp.SetDerivStep(0.5);
+    this->AddPar(tmp);
+  }
+
+  // DiameterA, DiameterB
+  if (mParamSetOption==PARAM_SET_DDL || mParamSetOption==PARAM_SET_aDD) {
+    {
+	RefinablePar tmp("Da", &mDiameterA, 2.0, 1.e4,
+			 gpRefParTypeScattDataProfileWidth,
+			 REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false,0.1);
+	tmp.AssignClock(mClockMaster);
+	tmp.SetDerivStep(0.5);
+	this->AddPar(tmp);
+    }
+    {
+	RefinablePar tmp("Db", &mDiameterB, 2.0, 1.e4,
+			 gpRefParTypeScattDataProfileWidth,
+			 REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false,0.1);
+	tmp.AssignClock(mClockMaster);
+	tmp.SetDerivStep(0.5);
+	this->AddPar(tmp);
+    }
+  }
+
+  // Length
+  if (mParamSetOption==PARAM_SET_DLf || mParamSetOption==PARAM_SET_aLf || mParamSetOption==PARAM_SET_DDL) {
+    RefinablePar tmp("L", &mLength, 0.0, 1.e4,
+                     gpRefParTypeScattDataProfileWidth,
+                     REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false,0.1);
+    tmp.AssignClock(mClockMaster);
+    tmp.SetDerivStep(0.5);
+    this->AddPar(tmp);
+  }
+
+  // Theta
+  {
+    RefinablePar tmp("Theta", &mTheta, 0.01, 1.e2,
+                     gpRefParTypeScattDataProfileWidth,
+                     REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false,0.1);
+    tmp.AssignClock(mClockMaster);
+    tmp.SetDerivStep(0.1);
+    this->AddPar(tmp);
+  }
+  
+  // Flattening factor
+  if (mParamSetOption==PARAM_SET_DLf || mParamSetOption==PARAM_SET_aDf || mParamSetOption==PARAM_SET_aLf) {
+    RefinablePar tmp("Flattening", &mFlatteningFactor, -1., 1.,
+                     gpRefParTypeScattDataProfileWidth,
+                     REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false,1.0);
+    tmp.AssignClock(mClockMaster);
+    tmp.SetDerivStep(0.01);
+    this->AddPar(tmp);
+  }
+  
+  // LDratio
+  if (mParamSetOption==PARAM_SET_aDf || mParamSetOption==PARAM_SET_aLf || mParamSetOption==PARAM_SET_aDD) {
+    RefinablePar tmp("LDratio", &mLDratio, 1.e-4, 1.e4,
+                     gpRefParTypeScattDataProfileWidth,
+                     REFPAR_DERIV_STEP_RELATIVE,true,true,true,false,1.0);
+    tmp.AssignClock(mClockMaster);
+    tmp.SetDerivStep(0.05);
+    this->AddPar(tmp);
+  }
+
+  // PsiD
+  {
+    RefinablePar tmp("BasalTwist", &mPsiD, 0., M_PI,
+                     gpRefParTypeScattDataProfileWidth,
+                     REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,true,180./M_PI);
+    tmp.AssignClock(mClockMaster);
+    tmp.SetDerivStep(0.05*M_PI/180.);
+    this->AddPar(tmp);
+  }
+
+  mClockMaster.Reset();
+}
+
+void EllipRodsGammaBroadeningEffect::CalculateProjectionMatrix() const
+{  
+  if(mParamSetOption==PARAM_SET_UNDEFINED) {
+    return; // unknown model - no broadening
+  }
+
+  const Crystal *pCrystal = NULL;
+  try {
+    // get crystal (unit cell) object
+    pCrystal = &(GetParentReflectionProfile().GetParentPowderPatternDiffraction().GetCrystal());
+  } catch (std::exception &e) {
+    cerr << "< MStruct::EllipRodsGammaBroadeningEffect::CalculateProjectionMatrix()\n";
+    cerr << "Exception occured when accessing Crystal object: " << e.what() << "\n";
+    cerr << "Maybe the EllipRodsGammaBroadeningEffect and broadening models have not been yet fully initialised (constructed).\n";
+    cerr << "Try to call this method after the effect is fully integrated in the objects hierarchy. \n >" << endl; 
+    throw ObjCrystException("EllipRodsGammaBroadeningEffect::CalculateProjectionMatrix(): Program error.");
+  }
+
+  CrystVector_REAL t;
+  REAL t1;
+
+  // get (real space) orthonormal cartesian coordinates of rod axis (z0)
+  CrystVector_REAL z0 = mRodAxis;
+  pCrystal->FractionalToOrthonormalCoords(z0(0),z0(1),z0(2));
+  // normalize
+  t = z0; t *= t; z0 /= sqrt( t.sum() ); 
+  
+  // get (real space) orthonormal cartesian coordinates of the secondary axis (a0)
+  CrystVector_REAL a0 = mBasalXAxis;
+  pCrystal->FractionalToOrthonormalCoords(a0(0),a0(1),a0(2));
+  // normalize
+  t = a0; t *= t; a0 /= sqrt( t.sum() );
+
+  // get (real space) x0-axis of crystal reference system
+  t = a0; t *= z0; t1 = t.sum(); // scalar product of a0 and z0
+  t = z0; t *= t1; // z0*(scalar product of a0 and z0)
+  CrystVector_REAL x0 = a0;
+  x0 -= t; // a0-z0*dot(a0,z0)
+
+  // get (real space) y0-axis, y0 = vect(z0,x0)
+  CrystVector_REAL y0 = CrystVector_REAL(3);
+  y0(0) = z0(1)*x0(2) - z0(2)-x0(1);
+  y0(1) = z0(2)*x0(0) - z0(0)*x0(2);
+  y0(2) = z0(0)*x0(1) - z0(1)*x0(0);
+  
+  // convert vectors coordinates back to fractional
+  pCrystal->OrthonormalToFractionalCoords(x0(0),x0(1),x0(2));
+  pCrystal->OrthonormalToFractionalCoords(y0(0),y0(1),y0(2));
+  pCrystal->OrthonormalToFractionalCoords(z0(0),z0(1),z0(2));
+
+  // projection matrix from Miller H,K,L indices to crystal reference sytem coordinatex (sx,sy,sz)
+  mProjectionMatrix = CrystMatrix_REAL(3,3);
+  mProjectionMatrix(0,0) = x0(0); mProjectionMatrix(0,1) = x0(1); mProjectionMatrix(0,2) = x0(2);
+  mProjectionMatrix(1,0) = y0(0); mProjectionMatrix(1,1) = y0(1); mProjectionMatrix(1,2) = y0(2);
+  mProjectionMatrix(2,0) = z0(0); mProjectionMatrix(2,1) = z0(1); mProjectionMatrix(2,2) = z0(2);
+
+  mProjectionMatrixInitialised = true;
 }
 
 ////////////////////////////////////////////////////////////////////////
