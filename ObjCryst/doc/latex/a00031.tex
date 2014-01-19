@@ -1,117 +1,92 @@
-\subsection{Cryst\-Vector$<$ T $>$ Class Template Reference}
-\label{a00031}\index{Cryst\-Vector$<$ T $>$@{Cryst\-Vector$<$ T $>$}}
+\subsection{Cubic\-Spline Class Reference}
+\label{a00031}\index{Cubic\-Spline@{Cubic\-Spline}}
 
 
-Vector library (Blitz++ mimic) for Obj\-Cryst++.  
+Cubic spline interpolation.  
 
 
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries Cryst\-Vector} (const long nb\-Elements)\label{a00031_acc1f58f22cbc277dd3ed69583abad959}
+{\bf Cubic\-Spline} ()\label{a00031_a3eee74ae159c9473a6d15512ddc68d25}
+
+\begin{DoxyCompactList}\small\item\em Default constructor -\/ \doxyref{Cubic\-Spline\-::\-Init()}{p.}{a00031_a2a9501b0f12aafa8f7cd3c3c4e842a91} should be called afterwards. \end{DoxyCompactList}\item 
+{\bf Cubic\-Spline} (const Cryst\-Vector\-\_\-\-R\-E\-A\-L \&x, const Cryst\-Vector\-\_\-\-R\-E\-A\-L \&y, const R\-E\-A\-L yp1, const R\-E\-A\-L ypn)\label{a00031_a2f6cf405f4b630e857225ce16a34efe2}
+
+\begin{DoxyCompactList}\small\item\em Spline with given extremum derivatives. \end{DoxyCompactList}\item 
+{\bf Cubic\-Spline} (const R\-E\-A\-L $\ast$px, const R\-E\-A\-L $\ast$py, const unsigned long nb\-Points, const R\-E\-A\-L yp1, const R\-E\-A\-L ypn)\label{a00031_a2f1c6e1d34287f8581a7dad044afa62c}
+
+\begin{DoxyCompactList}\small\item\em Spline with given extremum derivatives. \end{DoxyCompactList}\item 
+{\bf Cubic\-Spline} (const Cryst\-Vector\-\_\-\-R\-E\-A\-L \&x, const Cryst\-Vector\-\_\-\-R\-E\-A\-L \&y)\label{a00031_ad2b267f8e9318a4a0d841ad1b07592f6}
+
+\begin{DoxyCompactList}\small\item\em Natural cubic spline. \end{DoxyCompactList}\item 
+{\bf Cubic\-Spline} (const R\-E\-A\-L $\ast$px, const R\-E\-A\-L $\ast$py, const unsigned long nb\-Points)\label{a00031_a7f5839dfe86ee680fd2d554d0c04221b}
+
+\begin{DoxyCompactList}\small\item\em Natural cubic spline. \end{DoxyCompactList}\item 
+void {\bf Init} (const Cryst\-Vector\-\_\-\-R\-E\-A\-L \&x, const Cryst\-Vector\-\_\-\-R\-E\-A\-L \&y, const R\-E\-A\-L yp1, const R\-E\-A\-L ypn)\label{a00031_a2a9501b0f12aafa8f7cd3c3c4e842a91}
+
+\begin{DoxyCompactList}\small\item\em Spline with given extremum derivatives. \end{DoxyCompactList}\item 
+void {\bf Init} (const R\-E\-A\-L $\ast$px, const R\-E\-A\-L $\ast$py, const unsigned long nb\-Points, const R\-E\-A\-L yp1, const R\-E\-A\-L ypn)\label{a00031_aa1ed1465ea9734c0ed05b04f9ae7c47b}
+
+\begin{DoxyCompactList}\small\item\em Spline with given extremum derivatives. \end{DoxyCompactList}\item 
+void {\bf Init} (const Cryst\-Vector\-\_\-\-R\-E\-A\-L \&x, const Cryst\-Vector\-\_\-\-R\-E\-A\-L \&y)\label{a00031_a84962d14bf6ff65bfacb6cd427e07391}
+
+\begin{DoxyCompactList}\small\item\em Natural cubic spline. \end{DoxyCompactList}\item 
+void {\bf Init} (const R\-E\-A\-L $\ast$px, const R\-E\-A\-L $\ast$py, const unsigned long nb\-Points)\label{a00031_afbdb1826d76b9d0c469d91f99a1c815a}
+
+\begin{DoxyCompactList}\small\item\em Natural cubic spline. \end{DoxyCompactList}\item 
+Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf operator()} (const Cryst\-Vector\-\_\-\-R\-E\-A\-L \&x) const \label{a00031_a6cf4ca8b1143fc2b7aa9ba861e446c68}
+
+\begin{DoxyCompactList}\small\item\em Get spline value at a series of point -\/ x is assumed to be sorted by increasing values. \end{DoxyCompactList}\item 
+Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf operator()} (const R\-E\-A\-L min, const R\-E\-A\-L step, const long nbpoint) const \label{a00031_ae2bec1a4a4284bf1938d522860aecfa1}
+
+\begin{DoxyCompactList}\small\item\em Get spline value on a range of values with a fixed step. \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bf operator()} (const R\-E\-A\-L x) const \label{a00031_a9752d18c5d0785295bcabcb0c84c10b3}
+
+\begin{DoxyCompactList}\small\item\em Get spline value at one point. \end{DoxyCompactList}\item 
+Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf Derivative} (const Cryst\-Vector\-\_\-\-R\-E\-A\-L \&x) const \label{a00031_a4a49b6f8678f9ea148d93b895e6b1aa3}
+
+\begin{DoxyCompactList}\small\item\em Get spline first derivative value at a series of point -\/ x is assumed to be sorted by increasing values. \end{DoxyCompactList}\item 
+Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf Derivative} (const R\-E\-A\-L min, const R\-E\-A\-L step, const long nbpoint) const \label{a00031_a33ee652b24511bfcc4d6f315dfb061b7}
+
+\begin{DoxyCompactList}\small\item\em Get spline first derivative value on a range of values with a fixed step. \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bf Derivative} (const R\-E\-A\-L x) const \label{a00031_ab02d0e431f4e21def441e95676c3ace4}
+
+\begin{DoxyCompactList}\small\item\em Get spline first derivative value at one point. \end{DoxyCompactList}\item 
+Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf Second\-Derivative} (const Cryst\-Vector\-\_\-\-R\-E\-A\-L \&x) const \label{a00031_a1036dadb6b3b3838cf771198e76e781b}
+
+\begin{DoxyCompactList}\small\item\em Get spline second derivative value at a series of point -\/ x is assumed to be sorted by increasing values. \end{DoxyCompactList}\item 
+Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf Second\-Derivative} (const R\-E\-A\-L min, const R\-E\-A\-L step, const long nbpoint) const \label{a00031_aefa6e588128d8902f1528e5cb37cda7e}
+
+\begin{DoxyCompactList}\small\item\em Get spline second derivative value on a range of values with a fixed step. \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bf Second\-Derivative} (const R\-E\-A\-L x) const \label{a00031_a2aed3474e8778f5b8a7942662b10a2d1}
+
+\begin{DoxyCompactList}\small\item\em Get spline second derivative value at one point. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries Init\-Spline} (const R\-E\-A\-L yp1, const R\-E\-A\-L ypn)\label{a00031_a3172bad30da398f0e815f277f5847ea7}
 
 \item 
-{\bfseries Cryst\-Vector} (const {\bf Cryst\-Vector} \&old)\label{a00031_a3c796d63fafeee6a9d214536957cf3c9}
-
-\item 
-void {\bfseries operator=} (const {\bf Cryst\-Vector} \&old)\label{a00031_a89708875b6c53d500c19c99b84d02f8a}
-
-\item 
-{\footnotesize template$<$class U $>$ }\\void {\bfseries operator=} (const {\bf Cryst\-Vector}$<$ U $>$ \&old)\label{a00031_a8eb89869790a21467967129944248fbd}
-
-\item 
-{\footnotesize template$<$class U $>$ }\\{\bfseries operator Cryst\-Vector$<$ U $>$} () const \label{a00031_a2a70ca4700bca5417b602597a4fcfff8}
-
-\item 
-void {\bfseries reference} ({\bf Cryst\-Vector} \&old)\label{a00031_ad5d417beb2ab400eaa1a9556ec9a64f2}
-
-\item 
-long {\bfseries num\-Elements} () const \label{a00031_ace14c03e7d1b51d49ac5f10ffaaf0c40}
-
-\item 
-T {\bfseries sum} () const \label{a00031_ad588bd536a91bc8e7ee4bd7ad8ad1883}
-
-\item 
-T {\bfseries min} () const \label{a00031_a5289dca8753176f466b6988662fb9801}
-
-\item 
-T {\bfseries max} () const \label{a00031_a5d23eb80ff479100a9b65a3aa62de48b}
-
-\item 
-unsigned long {\bf imin} (const unsigned long start=0, const unsigned long finish=0) const \label{a00031_a7eafc1c142ecda5047b076a52fe8391b}
-
-\begin{DoxyCompactList}\small\item\em Find index of minimum, between start and end (if start==end, use full vector) \end{DoxyCompactList}\item 
-unsigned long {\bf imax} (const unsigned long start=0, const unsigned long finish=0) const \label{a00031_af75afcbf01dc79ac19a6705996d4ca01}
-
-\begin{DoxyCompactList}\small\item\em Find index of maximum, between start and end (if start==end, use full vector) \end{DoxyCompactList}\item 
-T $\ast$ {\bfseries data} ()\label{a00031_a40d80c8692aac9e1c705d7f60e795275}
-
-\item 
-const T $\ast$ {\bfseries data} () const \label{a00031_ad3dffbbb5b5be9a3da26c2e122f110ea}
-
-\item 
-void {\bfseries resize} (const long new\-Nb\-Elements)\label{a00031_ab1765dd06bec2086b6f51540f023cd09}
-
-\item 
-void {\bfseries resize\-And\-Preserve} (const long new\-Nb\-Elements)\label{a00031_a9270bfb8548cde6f525906919058c816}
-
-\item 
-void {\bfseries operator$\ast$=} (const T num)\label{a00031_ac6960250df7bec44a8f583fffc2fe440}
-
-\item 
-void {\bfseries operator$\ast$=} (const {\bf Cryst\-Vector} \&vect)\label{a00031_a6b8335e04364cbc24a352314a8bb495b}
-
-\item 
-void {\bfseries operator/=} (const T num)\label{a00031_a40b9ab22eae2b5503315ba8df2eb66b7}
-
-\item 
-void {\bfseries operator/=} (const {\bf Cryst\-Vector} \&vect)\label{a00031_a1d03e858d034cdcdc5017c935f2abf21}
-
-\item 
-void {\bfseries operator+=} (const T num)\label{a00031_a555db5dc4586f16776a7c7f85ab1c55a}
-
-\item 
-void {\bfseries operator+=} (const {\bf Cryst\-Vector} \&vect)\label{a00031_a48d593976114ca7a7324c32777f6609d}
-
-\item 
-void {\bfseries operator-\/=} (const {\bf Cryst\-Vector} \&vect)\label{a00031_a7e0b418e32820b39046aa6b24f29ebc3}
-
-\item 
-void {\bfseries operator=} (const T num)\label{a00031_ab0ccd3c73e6306422842b3f25d475025}
-
-\item 
-T {\bfseries operator()} (const long i) const \label{a00031_a8445144b6230c9c67eb11328e80ac421}
-
-\item 
-T \& {\bfseries operator()} (const long i)\label{a00031_a579917e862109b801e0a7fed161def03}
+void {\bfseries Init\-Natural\-Spline} ()\label{a00031_ad421702f49be1d812e57d467cde5af8b}
 
 \end{DoxyCompactItemize}
 \subsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-T $\ast$ {\bfseries mp\-Data}\label{a00031_a14439d04b28df90b9e9f2cec3f3f243e}
+Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bfseries m\-X}\label{a00031_a19cb8a2f8f22acbec80677372853ca12}
 
 \item 
-long {\bfseries m\-Num\-Elements}\label{a00031_a8843ca29dceb2a4c30e4589253de6728}
+Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bfseries m\-Y}\label{a00031_aa745b561ac1d17f7089b8ffa061b512a}
 
 \item 
-bool {\bfseries m\-Is\-Areference}\label{a00031_ab48a31b9bdb489c6da5ed9ffd2ddb60b}
+Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bfseries m\-Ysecond}\label{a00031_a21894736c52a8b12f070e20b51a4f64d}
 
 \end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-\subsubsection*{template$<$class T$>$class Cryst\-Vector$<$ T $>$}
-
-Vector library (Blitz++ mimic) for Obj\-Cryst++. 
-
-The \doxyref{Cryst\-Vector}{p.}{a00031} library is not a new array computation library, despite the appearances. Obj\-Cryst++ should used the {\tt Blitz++ array library} , which yields excellent performance {\itshape and} simple array expressions. Unfortunately, the memory required to {\itshape compile} the library using gcc is far too high to be reasonable when using complex expressions and optimizing code. So until this has changed, The \doxyref{Cryst\-Vector}{p.}{a00031} and \doxyref{Cryst\-Matrix}{p.}{a00030} library have been created, and these emulate (supposedly exactly) the Blitz++ interface (but not the smart handling of mathematical expressions, so pointers must be used). For documentation about these two libraries you should read the {\tt Blitz++ documentation}. \doxyref{Cryst\-Vector}{p.}{a00031} and \doxyref{Cryst\-Matrix}{p.}{a00030} use the same kind of storage in memory.
-
-You can use Cryst\-Vector\-\_\-\-R\-E\-A\-L, Cryst\-Vector\-\_\-long,etc... to declare 1\-D vectors. Macros ensure (well, should) ensure compatibility with Blitz++. (as of april 2001 support of blitz++ is broken).
-
-\begin{DoxyRefDesc}{Todo}
-\item[{\bf Todo}]check again Blitz++ support in newer gcc versions. \end{DoxyRefDesc}
-
+Cubic spline interpolation. 
 
 The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 

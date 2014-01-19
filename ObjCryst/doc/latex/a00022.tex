@@ -1,47 +1,41 @@
-\subsection{Chronometer Class Reference}
-\label{a00022}\index{Chronometer@{Chronometer}}
+\subsection{ci\-\_\-char\-\_\-traits Struct Reference}
+\label{a00022}\index{ci\-\_\-char\-\_\-traits@{ci\-\_\-char\-\_\-traits}}
 
 
-Simple chronometer class, with microsecond precision.  
+Case-\/insensitive string class From\-: Guru of the Week \#29 e.\-g.  
 
 
-\subsubsection*{Public Member Functions}
+
+
+Inherits char\-\_\-traits$<$ char $>$.
+
+\subsubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void {\bfseries start} ()\label{a00022_aef429cdb6aae70bf6a8b540e426efb96}
+static bool {\bfseries eq} (char c1, char c2)\label{a00022_ab7affd067081a44149cbdb5ddbd6388a}
 
 \item 
-void {\bfseries pause} ()\label{a00022_a5ec9df9b8c17e695bc5cce5607df0380}
+static bool {\bfseries ne} (char c1, char c2)\label{a00022_a37eaee352a01e9557c164f58c7d0ae36}
 
 \item 
-void {\bfseries resume} ()\label{a00022_ac98118472c0cc0691d9891e1173f86a9}
+static bool {\bfseries lt} (char c1, char c2)\label{a00022_a2658e35e7ccccd43faea5922aeea2855}
 
 \item 
-void {\bfseries print} ()\label{a00022_a249f804f5f815299ecdb999fb3b10229}
+static int {\bfseries compare} (const char $\ast$s1, const char $\ast$s2, size\-\_\-t n)\label{a00022_aee3f3e6230d9e98ed5a820bb7d05c443}
 
 \item 
-float {\bfseries seconds} ()\label{a00022_aec1d1b7317d9ad05e923b65855b6a49b}
-
-\end{DoxyCompactItemize}
-\subsubsection*{Private Attributes}
-\begin{DoxyCompactItemize}
-\item 
-bool {\bfseries m\-Paused}\label{a00022_a690e9d4287d4780546da0199f16b92ac}
-
-\item 
-boost\-::posix\-\_\-time\-::ptime {\bfseries m\-Time0}\label{a00022_ad9d1b8f615bfac6a1133202047fe3d48}
-
-\item 
-boost\-::posix\-\_\-time\-::ptime {\bfseries m\-Time1}\label{a00022_a1f74a906486b1a1d3d69519a41d9e33c}
+static const char $\ast$ {\bfseries find} (const char $\ast$s, int n, char a)\label{a00022_a5968fc0112d4a24e2fa74da3700357b1}
 
 \end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-Simple chronometer class, with microsecond precision. 
+Case-\/insensitive string class From\-: Guru of the Week \#29 e.\-g. 
 
-Reported time correspond to {\itshape real} time, i.\-e. not the time the program has been running independently from other programs. 
+\-: {\tt http\-://gcc.\-gnu.\-org/onlinedocs/libstdc++/21\-\_\-strings/gotw29a.\-txt}
 
-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+Public domain. 
+
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-Chronometer.\-h\end{DoxyCompactItemize}
+ci\-\_\-string.\-h\end{DoxyCompactItemize}

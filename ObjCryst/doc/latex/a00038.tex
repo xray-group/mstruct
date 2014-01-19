@@ -1,36 +1,66 @@
-\subsection{Format\-String Class Reference}
-\label{a00038}\index{Format\-String@{Format\-String}}
+\subsection{Format\-Vert\-Vector$<$ T $>$ Class Template Reference}
+\label{a00038}\index{Format\-Vert\-Vector$<$ T $>$@{Format\-Vert\-Vector$<$ T $>$}}
 
 
-output a string with a fixed length (adding necessary space or removing excess characters) \-:  
+output one or several vectors as (a) column(s)\-:  
 
 
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries Format\-String} (const string \&str, const unsigned int width=5)\label{a00038_a89e88ecbdd91c8120ffbfbdc733c9b7b}
+{\bfseries Format\-Vert\-Vector} (const {\bf Cryst\-Vector}$<$ T $>$ \&f\-Vect, const int width=10, const int precision=4)\label{a00038_a98c9a8033613546d279d6fe85d110a58}
 
 \item 
-int {\bfseries length} () const \label{a00038_a8d9ccf3761a959d82bd705f601ae5360}
+{\bfseries Format\-Vert\-Vector} (const {\bf Cryst\-Vector}$<$ T $>$ \&f\-Vect1, const {\bf Cryst\-Vector}$<$ T $>$ \&f\-Vect2, const int width=10, const int precision=4)\label{a00038_ae38ce51142cfd8d432f50f0b32914517}
+
+\item 
+{\bfseries Format\-Vert\-Vector} (const {\bf Cryst\-Vector}$<$ T $>$ \&f\-Vect1, const {\bf Cryst\-Vector}$<$ T $>$ \&f\-Vect2, const {\bf Cryst\-Vector}$<$ T $>$ \&f\-Vect3, const int width=10, const int precision=4)\label{a00038_ab06976e94d4a2d562c9a2ab379a03872}
+
+\item 
+{\bfseries Format\-Vert\-Vector} (const {\bf Cryst\-Vector}$<$ T $>$ \&f\-Vect1, const {\bf Cryst\-Vector}$<$ T $>$ \&f\-Vect2, const {\bf Cryst\-Vector}$<$ T $>$ \&f\-Vect3, const {\bf Cryst\-Vector}$<$ T $>$ \&f\-Vect4, const int width=10, const int precision=4)\label{a00038_a14984e7538dd2a3d46b796060ebc46cf}
+
+\item 
+{\bfseries Format\-Vert\-Vector} (const {\bf Cryst\-Vector}$<$ T $>$ \&f\-Vect1, const {\bf Cryst\-Vector}$<$ T $>$ \&f\-Vect2, const {\bf Cryst\-Vector}$<$ T $>$ \&f\-Vect3, const {\bf Cryst\-Vector}$<$ T $>$ \&f\-Vect4, const {\bf Cryst\-Vector}$<$ T $>$ \&f\-Vect5, const int width=10, const int precision=4)\label{a00038_af76de06df0cd4f9e3574ae1e3e1f24d3}
+
+\item 
+{\bfseries Format\-Vert\-Vector} (const {\bf Cryst\-Vector}$<$ T $>$ \&f\-Vect1, const {\bf Cryst\-Vector}$<$ T $>$ \&f\-Vect2, const {\bf Cryst\-Vector}$<$ T $>$ \&f\-Vect3, const {\bf Cryst\-Vector}$<$ T $>$ \&f\-Vect4, const {\bf Cryst\-Vector}$<$ T $>$ \&f\-Vect5, const {\bf Cryst\-Vector}$<$ T $>$ \&f\-Vect6, const int width=10, const int precision=4)\label{a00038_a41bd6bc4c5befd4e6fe1dade4ad87a57}
+
+\item 
+{\bfseries Format\-Vert\-Vector} (const {\bf Cryst\-Vector}$<$ T $>$ $\ast$p\-Vect, const int nb\-Vect, const int width=10, const int precision=4)\label{a00038_affdcb56b538bee3033cf89177e2eaa4e}
+
+\item 
+{\bfseries Format\-Vert\-Vector} (const {\bf Cryst\-Vector}$<$ T $>$ \&f\-Vect1, const {\bf Cryst\-Vector}$<$ T $>$ $\ast$p\-Vect, const int nb\-Vect, const int width=10, const int precision=4)\label{a00038_a6ca2c9a79903a6d4ba997d413ed8a238}
 
 \end{DoxyCompactItemize}
 \subsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-string {\bfseries m\-String}\label{a00038_a08c22a7bd34d0bcf7c62147cff2a5e85}
+const {\bf Cryst\-Vector}$<$ T $>$ $\ast$$\ast$ {\bfseries mp\-Vectors}\label{a00038_a373ff434e999897fb583bd4534f18167}
 
 \item 
-const unsigned int {\bfseries m\-Width}\label{a00038_ae1191d6d25031c2d6e142ce989ff6c74}
+const int {\bfseries m\-Nb\-Vectors}\label{a00038_a4f7519552502a0968432d19fd2b0df4b}
+
+\item 
+const int {\bfseries m\-Width}\label{a00038_a0ea4d4aae7292f4e5421558156f4ba9e}
+
+\item 
+const int {\bfseries m\-Precision}\label{a00038_ad64d9a4b653d32862fa7abcc08972249}
 
 \end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-output a string with a fixed length (adding necessary space or removing excess characters) \-: 
+\subsubsection*{template$<$class T$>$class Format\-Vert\-Vector$<$ T $>$}
+
+output one or several vectors as (a) column(s)\-: 
 
 
 \begin{DoxyCode}
-os << FormatString(myString,15);
+os << FormatVertVector<REAL>(vect,8,3);
+os << FormatVertVector<REAL>(vect1,vect2,vetc3,12,6);
+\textcolor{comment}{// For 7 vectors with width 12 and precision 4,}
+\textcolor{comment}{// pVect being a pointer to an array of 7 vectors:}
+os << FormatVertVector<REAL>(pVect,7,12,4);
 \end{DoxyCode}
  
 

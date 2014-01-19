@@ -1,11 +1,11 @@
-\subsection{Obj\-Cryst\-:\-:Stretch\-Mode\-Bond\-Angle Struct Reference}
-\label{a00105}\index{Obj\-Cryst\-::\-Stretch\-Mode\-Bond\-Angle@{Obj\-Cryst\-::\-Stretch\-Mode\-Bond\-Angle}}
+\subsection{Obj\-Cryst\-:\-:Stretch\-Mode\-Bond\-Length Struct Reference}
+\label{a00105}\index{Obj\-Cryst\-::\-Stretch\-Mode\-Bond\-Length@{Obj\-Cryst\-::\-Stretch\-Mode\-Bond\-Length}}
 
 
-Atoms moved when changing a bond angle.  
+Group of atoms for random moves changing a bond length.  
 
 
-Inheritance diagram for Obj\-Cryst\-:\-:Stretch\-Mode\-Bond\-Angle\-:\begin{figure}[H]
+Inheritance diagram for Obj\-Cryst\-:\-:Stretch\-Mode\-Bond\-Length\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{a00105}
@@ -14,76 +14,64 @@ Inheritance diagram for Obj\-Cryst\-:\-:Stretch\-Mode\-Bond\-Angle\-:\begin{figu
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bf Stretch\-Mode\-Bond\-Angle} ({\bf Mol\-Atom} \&at0, {\bf Mol\-Atom} \&at1, {\bf Mol\-Atom} \&at2, const {\bf Mol\-Bond\-Angle} $\ast$p\-Bond\-Angle)\label{a00105_aa1fbf3238722b663b083c999cf1b5c57}
+{\bf Stretch\-Mode\-Bond\-Length} ({\bf Mol\-Atom} \&at0, {\bf Mol\-Atom} \&at1, const {\bf Mol\-Bond} $\ast$p\-Bond)\label{a00105_aa04e0fdc910b1fcbb25de4de51d32455}
 
-\begin{DoxyCompactList}\small\item\em Constructor If p\-Bond\-Angle!=0, the bond angle length restraint is respected. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Constructor If p\-Bond!=0, the bond length restraint is respected. \end{DoxyCompactList}\item 
 virtual void {\bf Calc\-Deriv} (const bool derivllk=true) const 
-\begin{DoxyCompactList}\small\item\em Calculate the derivative of the \doxyref{Molecule}{p.}{a00054}'s Log(likelihood) and atomic positions versus a change of the bond length. \end{DoxyCompactList}\item 
-virtual void {\bf Print} (ostream \&os, bool full=true) const \label{a00105_a77e72910a64e3351a05a2f7ac47033c0}
+\begin{DoxyCompactList}\small\item\em Calculate the derivative of the \doxyref{Molecule}{p.}{a00053}'s Log(likelihood) and atomic positions versus a change of the bond length. \end{DoxyCompactList}\item 
+virtual void {\bf Print} (ostream \&os, bool full=true) const \label{a00105_a37f862548c4540b2a34d435a18518564}
 
 \begin{DoxyCompactList}\small\item\em Print one-\/line list of atoms moved. \end{DoxyCompactList}\item 
-virtual void {\bf Stretch} (const R\-E\-A\-L change)\label{a00105_aff6934e2b0a048d164228348f87f544d}
+virtual void {\bf Stretch} (const R\-E\-A\-L change)\label{a00105_a65db454973b827a24f5ef35e654650ea}
 
 \begin{DoxyCompactList}\small\item\em Move the atoms according to this mode. \end{DoxyCompactList}\item 
-virtual void {\bf Random\-Stretch} (const R\-E\-A\-L amplitude)\label{a00105_a7e3006f5ecd0d683ec669475c5f21394}
+virtual void {\bf Random\-Stretch} (const R\-E\-A\-L amplitude)\label{a00105_a41e0165a10a248a1af200e217739e585}
 
 \begin{DoxyCompactList}\small\item\em Move the atoms according to this mode, randomly. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-{\bf Mol\-Atom} $\ast$ {\bf mp\-Atom0}\label{a00105_a63bc5bb54f0d298fb47b7bf86e8c2ff5}
+{\bf Mol\-Atom} $\ast$ {\bf mp\-Atom0}\label{a00105_a3ddf1478c2b932ad976d33eda56dd35a}
 
-\begin{DoxyCompactList}\small\item\em The first atom. \end{DoxyCompactList}\item 
-{\bf Mol\-Atom} $\ast$ {\bf mp\-Atom1}\label{a00105_aa5b52fcece40cd41c93eeb8b1dfec939}
+\begin{DoxyCompactList}\small\item\em The first atom (fixed). \end{DoxyCompactList}\item 
+{\bf Mol\-Atom} $\ast$ {\bf mp\-Atom1}\label{a00105_aef858d1c7ca2ee9c09e88f8464337b31}
 
-\begin{DoxyCompactList}\small\item\em The second atom. \end{DoxyCompactList}\item 
-{\bf Mol\-Atom} $\ast$ {\bf mp\-Atom2}\label{a00105_a08c6b4fde05610d0242bfd7b4a6acc3f}
+\begin{DoxyCompactList}\small\item\em The second atom (first atom moved) \end{DoxyCompactList}\item 
+const {\bf Mol\-Bond} $\ast$ {\bf mp\-Bond}\label{a00105_a6fc92ed5334db0589d860f32254cac93}
 
-\begin{DoxyCompactList}\small\item\em The third atom. \end{DoxyCompactList}\item 
-const {\bf Mol\-Bond\-Angle} $\ast$ {\bf mp\-Bond\-Angle}\label{a00105_ab173d155feb360d0b95b5cd35f346da5}
+\begin{DoxyCompactList}\small\item\em The (optional) bond length which this stretch mode should respect. \end{DoxyCompactList}\item 
+set$<$ {\bf Mol\-Atom} $\ast$ $>$ {\bf mv\-Translated\-Atom\-List}\label{a00105_ac18eef8c47f6ac752c00f1f93216a6ee}
 
-\begin{DoxyCompactList}\small\item\em The (optional) bond angle restraint which this stretch mode should respect. \end{DoxyCompactList}\item 
-set$<$ {\bf Mol\-Atom} $\ast$ $>$ {\bf mv\-Rotated\-Atom\-List}
-\begin{DoxyCompactList}\small\item\em The set of atoms that are to be rotated around the direction going through at1 and perpendicular to the at0-\/at1-\/at2 plane. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em The set of atoms that are to be translated, including at1. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-Atoms moved when changing a bond angle. 
+Group of atoms for random moves changing a bond length. 
 
-This should be merged (or have an inheritance relation) with \doxyref{Mol\-Bond\-Angle}{p.}{a00052}. 
+This should be merged (or have an inheritance relation) with \doxyref{Mol\-Bond}{p.}{a00050}. 
 
 \subsubsection{Member Function Documentation}
-\index{Obj\-Cryst\-::\-Stretch\-Mode\-Bond\-Angle@{Obj\-Cryst\-::\-Stretch\-Mode\-Bond\-Angle}!Calc\-Deriv@{Calc\-Deriv}}
-\index{Calc\-Deriv@{Calc\-Deriv}!ObjCryst::StretchModeBondAngle@{Obj\-Cryst\-::\-Stretch\-Mode\-Bond\-Angle}}
-\paragraph[{Calc\-Deriv}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Stretch\-Mode\-Bond\-Angle\-::\-Calc\-Deriv (
+\index{Obj\-Cryst\-::\-Stretch\-Mode\-Bond\-Length@{Obj\-Cryst\-::\-Stretch\-Mode\-Bond\-Length}!Calc\-Deriv@{Calc\-Deriv}}
+\index{Calc\-Deriv@{Calc\-Deriv}!ObjCryst::StretchModeBondLength@{Obj\-Cryst\-::\-Stretch\-Mode\-Bond\-Length}}
+\paragraph[{Calc\-Deriv}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Stretch\-Mode\-Bond\-Length\-::\-Calc\-Deriv (
 \begin{DoxyParamCaption}
 \item[{const bool}]{derivllk = {\ttfamily true}}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00105_acdc082c4cb5b4f38fed6049bf7b1eb9c}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00105_a72bab02ebf84cbf65cf2703e74c1e02e}
 
 
-Calculate the derivative of the \doxyref{Molecule}{p.}{a00054}'s Log(likelihood) and atomic positions versus a change of the bond length. 
+Calculate the derivative of the \doxyref{Molecule}{p.}{a00053}'s Log(likelihood) and atomic positions versus a change of the bond length. 
 
 The result is stored in m\-L\-L\-K\-Deriv and m\-L\-L\-K\-Deriv\-X\-Y\-Z, as well as in the various lists of restraints broken by this mode.
 
 
 \begin{DoxyParams}{Parameters}
-{\em derivllk,\-:} & if false, the derivative of the overall llk will not be computed, only the derivative of the atomic positions. \\
+{\em derivllk} & if false, the derivative of the overall llk will not be computed, only the derivative of the atomic positions. \\
 \hline
 \end{DoxyParams}
 
 
-Implements {\bf Obj\-Cryst\-::\-Stretch\-Mode} \doxyref{}{p.}{a00104_a5b5ab5f9819c047a49719a330722d419}.
-
-
-
-\subsubsection{Member Data Documentation}
-\index{Obj\-Cryst\-::\-Stretch\-Mode\-Bond\-Angle@{Obj\-Cryst\-::\-Stretch\-Mode\-Bond\-Angle}!mv\-Rotated\-Atom\-List@{mv\-Rotated\-Atom\-List}}
-\index{mv\-Rotated\-Atom\-List@{mv\-Rotated\-Atom\-List}!ObjCryst::StretchModeBondAngle@{Obj\-Cryst\-::\-Stretch\-Mode\-Bond\-Angle}}
-\paragraph[{mv\-Rotated\-Atom\-List}]{\setlength{\rightskip}{0pt plus 5cm}set$<${\bf Mol\-Atom} $\ast$$>$ Obj\-Cryst\-::\-Stretch\-Mode\-Bond\-Angle\-::mv\-Rotated\-Atom\-List}\label{a00105_a1d70964f33ea3a594efd2c3a595816a6}
-
-
-The set of atoms that are to be rotated around the direction going through at1 and perpendicular to the at0-\/at1-\/at2 plane. 
+Implements {\bf Obj\-Cryst\-::\-Stretch\-Mode} \doxyref{}{p.}{a00103_a5b5ab5f9819c047a49719a330722d419}.
 
 
 

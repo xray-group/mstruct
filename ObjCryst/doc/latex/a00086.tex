@@ -1,73 +1,78 @@
-\subsection{Obj\-Cryst\-:\-:Ref\-Obj\-Option$<$ T $>$ Class Template Reference}
-\label{a00086}\index{Obj\-Cryst\-::\-Ref\-Obj\-Option$<$ T $>$@{Obj\-Cryst\-::\-Ref\-Obj\-Option$<$ T $>$}}
+\subsection{Obj\-Cryst\-:\-:Ref\-Par\-Type Class Reference}
+\label{a00086}\index{Obj\-Cryst\-::\-Ref\-Par\-Type@{Obj\-Cryst\-::\-Ref\-Par\-Type}}
 
 
-Class for options of \doxyref{Refinable\-Obj}{p.}{a00078}, templated so that we can warn the object that something has been changed.  
+class of refinable parameter types.  
 
 
-Inheritance diagram for Obj\-Cryst\-:\-:Ref\-Obj\-Option$<$ T $>$\-:\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[height=2.000000cm]{a00086}
-\end{center}
-\end{figure}
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bf Ref\-Obj\-Option} (T $\ast$obj)
-\begin{DoxyCompactList}\small\item\em Constructor for the option. \end{DoxyCompactList}\item 
-void {\bfseries Init} (const int nb\-Choice, const string $\ast$name, const string $\ast$choice\-Names, void(T\-::$\ast$fp)(const int))\label{a00086_a8369dfcf480e3d788f2ec097a161ab9b}
+{\bf Ref\-Par\-Type} (const string \&name)
+\begin{DoxyCompactList}\small\item\em Create a {\itshape top} parameter type. \end{DoxyCompactList}\item 
+{\bf Ref\-Par\-Type} (const {\bf Ref\-Par\-Type} $\ast$parent, const string \&name)\label{a00086_a390f7a24ccff7cc557a26f7b2a120566}
 
+\begin{DoxyCompactList}\small\item\em create a children type. \end{DoxyCompactList}\item 
+{\bf $\sim$\-Ref\-Par\-Type} ()\label{a00086_a46519355b2de6a3f1a0f32c3b3c5a84d}
+
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+bool {\bf Is\-Descendant\-From\-Or\-Same\-As} (const {\bf Ref\-Par\-Type} $\ast$type) const \label{a00086_a023686ecd57ef99599d03e3e515b78cd}
+
+\begin{DoxyCompactList}\small\item\em Returns true if the parameter is a descendant of 'type'. \end{DoxyCompactList}\item 
+bool {\bf operator==} (const {\bf Ref\-Par\-Type} $\ast$parent) const \label{a00086_a327807a0879388c73dbfe050b50982ae}
+
+\begin{DoxyCompactList}\small\item\em returns true if the two types are the same. \end{DoxyCompactList}\item 
+const string \& {\bf Get\-Name} () const \label{a00086_a6ef864a2d7855bc96339434872c4debe}
+
+\begin{DoxyCompactList}\small\item\em Get the name for this parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
 \item 
-virtual void {\bfseries Set\-Choice} (const int choice)\label{a00086_ac4d0be41e98e1b65b22673203e6c9495}
+void {\bf Init\-Id} ()\label{a00086_a929f680e5b161133c5701771233bdcc0}
 
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Get a Unique id (\doxyref{Ref\-Par\-Type\-::m\-Id}{p.}{a00086_a9e93e2f4cbd029fd11fd965d5ec72842}) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-T $\ast$ {\bf mp\-Obj}\label{a00086_a76e1fae7a6f442c05aed8aa0f0f2fb05}
+const {\bf Ref\-Par\-Type} $\ast$ {\bf mp\-Parent}\label{a00086_abd3cbb0f24e903f10addff974e6829bb}
 
-\begin{DoxyCompactList}\small\item\em The object which uses this option. \end{DoxyCompactList}\item 
-void(T\-::$\ast$ {\bf mfp\-Set\-New\-Value} )(const int)
-\begin{DoxyCompactList}\small\item\em The pointer to the member function to be used when the choice is changed, to notify immediately the object. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Additional Inherited Members}
+\begin{DoxyCompactList}\small\item\em the parent for this \doxyref{Ref\-Par\-Type}{p.}{a00086} (we could easily allow several...) \end{DoxyCompactList}\item 
+const string {\bf m\-Name}\label{a00086_acc75b58e4b6af356dad4677492fdfda4}
+
+\begin{DoxyCompactList}\small\item\em The name/description for this parameter type. \end{DoxyCompactList}\item 
+unsigned long {\bf m\-Id}\label{a00086_a9e93e2f4cbd029fd11fd965d5ec72842}
+
+\begin{DoxyCompactList}\small\item\em The unique number identifying this type. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-\subsubsection*{template$<$class T$>$class Obj\-Cryst\-::\-Ref\-Obj\-Option$<$ T $>$}
+class of refinable parameter types. 
 
-Class for options of \doxyref{Refinable\-Obj}{p.}{a00078}, templated so that we can warn the object that something has been changed. 
+This is used to categorize all parameters, to be able to modify a complete category of parameters (fix/unfix, set limits,...). The types are organized as a tree.
 
-N\-O\-T U\-S\-E\-D S\-O F\-A\-R. 
+Parameters should be allocated globally in the heap, so we only use pointers in the interface.
+
+\begin{DoxyNote}{Note}
+when modifying (fixing, changing limits) for a given \doxyref{Ref\-Par\-Type}{p.}{a00086} (ie a 'family' of parameters), it affects all \doxyref{Refinable\-Par}{p.}{a00079} of this type {\itshape and} the parameters belonging to the children of this \doxyref{Ref\-Par\-Type}{p.}{a00086}. eg fixing for the type \char`\"{}gp\-Ref\-Par\-Type\-Scatt\char`\"{} will fix all the derived postionnal, orientationnal, and population parameters for the scatterers.
+\end{DoxyNote}
+\begin{DoxyRemark}{Remarks}
+In the future, why not use a tree with multiple inheritance ?? It would be easy to allow multiple parents... But beware of loops... 
+\end{DoxyRemark}
+
 
 \subsubsection{Constructor \& Destructor Documentation}
-\index{Obj\-Cryst\-::\-Ref\-Obj\-Option@{Obj\-Cryst\-::\-Ref\-Obj\-Option}!Ref\-Obj\-Option@{Ref\-Obj\-Option}}
-\index{Ref\-Obj\-Option@{Ref\-Obj\-Option}!ObjCryst::RefObjOption@{Obj\-Cryst\-::\-Ref\-Obj\-Option}}
-\paragraph[{Ref\-Obj\-Option}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ {\bf Obj\-Cryst\-::\-Ref\-Obj\-Option}$<$ T $>$\-::{\bf Ref\-Obj\-Option} (
+\index{Obj\-Cryst\-::\-Ref\-Par\-Type@{Obj\-Cryst\-::\-Ref\-Par\-Type}!Ref\-Par\-Type@{Ref\-Par\-Type}}
+\index{Ref\-Par\-Type@{Ref\-Par\-Type}!ObjCryst::RefParType@{Obj\-Cryst\-::\-Ref\-Par\-Type}}
+\paragraph[{Ref\-Par\-Type}]{\setlength{\rightskip}{0pt plus 5cm}Obj\-Cryst\-::\-Ref\-Par\-Type\-::\-Ref\-Par\-Type (
 \begin{DoxyParamCaption}
-\item[{T $\ast$}]{obj}
+\item[{const string \&}]{name}
 \end{DoxyParamCaption}
-)}\label{a00086_a501cc1ee9602c16d9ccbda004ddae5c3}
+)}\label{a00086_a31d4f6797fa0a4b43d12203f89dbdb5c}
 
 
-Constructor for the option. 
+Create a {\itshape top} parameter type. 
 
-
-\begin{DoxyParams}{Parameters}
-{\em obj,\-:} & the \\
-\hline
-\end{DoxyParams}
-
-
-\subsubsection{Member Data Documentation}
-\index{Obj\-Cryst\-::\-Ref\-Obj\-Option@{Obj\-Cryst\-::\-Ref\-Obj\-Option}!mfp\-Set\-New\-Value@{mfp\-Set\-New\-Value}}
-\index{mfp\-Set\-New\-Value@{mfp\-Set\-New\-Value}!ObjCryst::RefObjOption@{Obj\-Cryst\-::\-Ref\-Obj\-Option}}
-\paragraph[{mfp\-Set\-New\-Value}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ void(T\-::$\ast$ {\bf Obj\-Cryst\-::\-Ref\-Obj\-Option}$<$ T $>$\-::mfp\-Set\-New\-Value)(const int)\hspace{0.3cm}{\ttfamily [private]}}\label{a00086_a460ca91a71b4083e29ec394fe8c9127e}
-
-
-The pointer to the member function to be used when the choice is changed, to notify immediately the object. 
-
-If null, the value is just recorded and no notification is done. 
+(in \doxyref{Obj\-Cryst}{p.}{a00177}, there is only one, the \char`\"{}\-Obj\-Cryst\char`\"{} category. 
 
 The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 

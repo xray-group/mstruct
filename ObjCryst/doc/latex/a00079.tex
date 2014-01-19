@@ -1,136 +1,534 @@
-\subsection{Obj\-Cryst\-:\-:Refinable\-Obj\-Clock Class Reference}
-\label{a00079}\index{Obj\-Cryst\-::\-Refinable\-Obj\-Clock@{Obj\-Cryst\-::\-Refinable\-Obj\-Clock}}
+\subsection{Obj\-Cryst\-:\-:Refinable\-Par Class Reference}
+\label{a00079}\index{Obj\-Cryst\-::\-Refinable\-Par@{Obj\-Cryst\-::\-Refinable\-Par}}
 
 
-We need to record exactly when refinable objects have been modified for the last time (to avoid re-\/computation), and to do that we need a precise time.  
+Generic class for parameters of refinable objects.  
 
 
+Inheritance diagram for Obj\-Cryst\-:\-:Refinable\-Par\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{a00079}
+\end{center}
+\end{figure}
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-bool {\bfseries operator$<$} (const {\bf Refinable\-Obj\-Clock} \&rhs) const \label{a00079_af203aa15b04bbbf9e926858b0ebfd559}
+void {\bf X\-M\-L\-Output} (ostream \&os, const string \&name, int indent=0) const 
+\begin{DoxyCompactList}\small\item\em X\-M\-L\-Output to stream in well-\/formed X\-M\-L. \end{DoxyCompactList}\item 
+void {\bf X\-M\-L\-Output} (ostream \&os, int indent=0) const 
+\begin{DoxyCompactList}\small\item\em X\-M\-L\-Output to stream in well-\/formed X\-M\-L. \end{DoxyCompactList}\item 
+void {\bf X\-M\-L\-Input} (istream \&is, const {\bf X\-M\-L\-Cryst\-Tag} \&tag)
+\begin{DoxyCompactList}\small\item\em X\-M\-L\-Input From stream. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{Indent}{\bf Destructor \& Constructors}\par
+\begin{DoxyCompactItemize}
+\item 
+{\bf Refinable\-Par} ()\label{a00079_ae358698d7ab55d87df8af8781946f293}
+
+\begin{DoxyCompactList}\small\item\em Default Constructor. \end{DoxyCompactList}\item 
+{\bf Refinable\-Par} (const string \&name, R\-E\-A\-L $\ast$ref\-Par, const R\-E\-A\-L min, const R\-E\-A\-L max, const {\bf Ref\-Par\-Type} $\ast$type, {\bf Ref\-Par\-Deriv\-Step\-Model} deriv\-Mode=R\-E\-F\-P\-A\-R\-\_\-\-D\-E\-R\-I\-V\-\_\-\-S\-T\-E\-P\-\_\-\-R\-E\-L\-A\-T\-I\-V\-E, const bool has\-Limits=true, const bool is\-Fixed=false, const bool is\-Used=true, const bool is\-Periodic=false, const R\-E\-A\-L human\-Scale=1., R\-E\-A\-L period=1.)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+{\bf Refinable\-Par} (const {\bf Refinable\-Par} \&ref)\label{a00079_a99cdc4550c46d90daf63b7f2e6d8d3c3}
+
+\begin{DoxyCompactList}\small\item\em Copy Constructor. \end{DoxyCompactList}\item 
+{\bfseries $\sim$\-Refinable\-Par} ()\label{a00079_ada37c0119416edb03732703afaf737a1}
 
 \item 
-bool {\bfseries operator$<$=} (const {\bf Refinable\-Obj\-Clock} \&rhs) const \label{a00079_a26ef3758051252268530a9c06a9a3ae2}
+void {\bf Init} (const string \&name, R\-E\-A\-L $\ast$ref\-Par, const R\-E\-A\-L min, const R\-E\-A\-L max, const {\bf Ref\-Par\-Type} $\ast$type, {\bf Ref\-Par\-Deriv\-Step\-Model} deriv\-Mode=R\-E\-F\-P\-A\-R\-\_\-\-D\-E\-R\-I\-V\-\_\-\-S\-T\-E\-P\-\_\-\-R\-E\-L\-A\-T\-I\-V\-E, const bool has\-Limits=true, const bool is\-Fixed=false, const bool is\-Used=true, const bool is\-Periodic=false, const R\-E\-A\-L human\-Scale=1., R\-E\-A\-L period=1.)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+void {\bf Copy\-Attributes} (const {\bf Refinable\-Par} \&)
+\begin{DoxyCompactList}\small\item\em Copy all attributes (limits, flags, etc...) from another \doxyref{Refinable\-Par}{p.}{a00079} object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf Access \& change the current value of the parameter}\par
+\begin{DoxyCompactItemize}
+\item 
+R\-E\-A\-L {\bf Get\-Value} () const 
+\begin{DoxyCompactList}\small\item\em of the parameter. \end{DoxyCompactList}\item 
+const R\-E\-A\-L $\ast$ {\bf Get\-Pointer} () const 
+\begin{DoxyCompactList}\small\item\em Access to a const pointer to the refined value. \end{DoxyCompactList}\item 
+void {\bf Set\-Value} (const R\-E\-A\-L value)
+\begin{DoxyCompactList}\small\item\em of the parameter. \end{DoxyCompactList}\item 
+const R\-E\-A\-L \& {\bf Get\-Human\-Value} () const \label{a00079_ae1ffe41bcce38c1dc9bf0d649fc06adc}
+
+\begin{DoxyCompactList}\small\item\em Current value of parameter, scaled if necessary (for angles) to a human-\/understandable value. \end{DoxyCompactList}\item 
+void {\bf Set\-Human\-Value} (const R\-E\-A\-L \&)\label{a00079_a6bb727ce1de6de9e56c46be1ba75f8b9}
+
+\begin{DoxyCompactList}\small\item\em Current value of parameter, scaled if necessary (for angles) to a human-\/understandable value. \end{DoxyCompactList}\item 
+void {\bf Mutate} (const R\-E\-A\-L mutate\-Value)
+\begin{DoxyCompactList}\small\item\em Add the given amount to the parameter current value. \end{DoxyCompactList}\item 
+void {\bf Mutate\-To} (const R\-E\-A\-L new\-Value)
+\begin{DoxyCompactList}\small\item\em Change the current value to the given one. \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bfseries Get\-Sigma} () const \label{a00079_aa47f29ee29133f35d3217cfd68b02d57}
 
 \item 
-bool {\bfseries operator$>$} (const {\bf Refinable\-Obj\-Clock} \&rhs) const \label{a00079_aba92f5f5e5f64ff526171f86d25ff26e}
+R\-E\-A\-L {\bfseries Get\-Human\-Sigma} () const \label{a00079_a932c8eeab6494b0d67984736560b5b46}
 
 \item 
-bool {\bfseries operator$>$=} (const {\bf Refinable\-Obj\-Clock} \&rhs) const \label{a00079_ae81def7c84ec054c569779f097e94b09}
+void {\bfseries Set\-Sigma} (const R\-E\-A\-L)\label{a00079_af199d90bd14333483929aab3a898ae39}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf General info}\par
+\begin{DoxyCompactItemize}
+\item 
+string {\bf Get\-Name} () const \label{a00079_a0daa7c9ec87518347736e4fa6e45a333}
+
+\begin{DoxyCompactList}\small\item\em Get the parameter's name. \end{DoxyCompactList}\item 
+void {\bf Set\-Name} (const string \&)\label{a00079_ac8e91083b8d0c3fe1d3f349122756abb}
+
+\begin{DoxyCompactList}\small\item\em Set the name of the parameter. It should be unique in the \doxyref{Refinable\-Obj}{p.}{a00077}. \end{DoxyCompactList}\item 
+void {\bfseries Print} () const \label{a00079_a829f3712a893e3284dfc461d6e7bf016}
 
 \item 
-void {\bf Click} ()\label{a00079_a980b7dc70decc75c58eba0a55d73fc6d}
+bool {\bfseries Is\-Fixed} () const \label{a00079_a11f0f58b66d069ae9353cd944a0b90ee}
 
-\begin{DoxyCompactList}\small\item\em Record an event for this clock (generally, the 'time' an object has been modified, or some computation has been made) \end{DoxyCompactList}\item 
-void {\bf Reset} ()\label{a00079_a0b0c15d465647c470eb120d6d6ee54d6}
+\item 
+void {\bfseries Set\-Is\-Fixed} (const bool)\label{a00079_a57690ad69493beb8f2b8976c10833640}
 
-\begin{DoxyCompactList}\small\item\em Reset a Clock to 0, to force an update. \end{DoxyCompactList}\item 
-void {\bf Print} () const \label{a00079_a59c97c073a2e39b22663d4c2d6f15ad7}
+\item 
+bool {\bfseries Is\-Limited} () const \label{a00079_ab2421bf2583d6583bc1cf0e1a65ce574}
 
-\begin{DoxyCompactList}\small\item\em Print clock value. Only for debugging purposes. \end{DoxyCompactList}\item 
-void {\bf Print\-Static} () const \label{a00079_a8e91505568e04e47acb6e160337bad8d}
+\item 
+void {\bfseries Set\-Is\-Limited} (const bool)\label{a00079_a90c20ed99e6782b6a5abc6d5a6abb105}
 
-\begin{DoxyCompactList}\small\item\em Print current general clock value. Only for debugging purposes. \end{DoxyCompactList}\item 
-void {\bf Print\-Parents\-Recursive} (const string \&tab=\char`\"{}\textbackslash{}t\char`\"{}, const string \&indent=\char`\"{}\char`\"{}) const \label{a00079_a4b2eee836ee57b9f5c8da02cd50d17fd}
+\item 
+bool {\bf Is\-Used} () const \label{a00079_aa71a1c66f87d910c352286e2ef51c9c9}
 
-\begin{DoxyCompactList}\small\item\em bla, bla \end{DoxyCompactList}\item 
-void {\bf Add\-Child} (const {\bf Refinable\-Obj\-Clock} \&)
-\begin{DoxyCompactList}\small\item\em Add a 'child' clock. \end{DoxyCompactList}\item 
-void {\bf Remove\-Child} (const {\bf Refinable\-Obj\-Clock} \&)\label{a00079_a7aff0bea53eea6500afa4ff153deb8ca}
+\begin{DoxyCompactList}\small\item\em Is the parameter used (if not, it is simply irrelevant in the model) ? \end{DoxyCompactList}\item 
+void {\bf Set\-Is\-Used} (const bool)\label{a00079_aea29e6822f1a6215c274cacf5c58e7ce}
 
-\begin{DoxyCompactList}\small\item\em remove a child clock. This also tells the child clock to remove the parent. \end{DoxyCompactList}\item 
-void {\bf Add\-Parent} ({\bf Refinable\-Obj\-Clock} \&) const 
-\begin{DoxyCompactList}\small\item\em Add a 'parent' clock. \end{DoxyCompactList}\item 
-void {\bf Remove\-Parent} ({\bf Refinable\-Obj\-Clock} \&) const \label{a00079_a839dd63acca71853d58abff6a2268248}
+\begin{DoxyCompactList}\small\item\em Is the parameter used (if not, it is simply irrelevant in the model) ? \end{DoxyCompactList}\item 
+bool {\bfseries Is\-Periodic} () const \label{a00079_a886b2db23080365ef90870e846a27dfa}
 
-\begin{DoxyCompactList}\small\item\em remove a parent clock \end{DoxyCompactList}\item 
-void {\bf operator=} (const {\bf Refinable\-Obj\-Clock} \&rhs)
-\begin{DoxyCompactList}\small\item\em This will (i) set the clock to the same values as the rhs clock, but will not change the list of children and parent clocks. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\item 
+void {\bfseries Set\-Is\-Periodic} (const bool, R\-E\-A\-L period=1)\label{a00079_a3e131a39649e853afb121ce5c9b5ebe1}
+
+\item 
+R\-E\-A\-L {\bf Get\-Human\-Scale} () const \label{a00079_a97fb48bd2b4d6845d5543573dad84aea}
+
+\begin{DoxyCompactList}\small\item\em Human scale for this parameter \-: for angles, this is equal to 180/pi. \end{DoxyCompactList}\item 
+void {\bf Set\-Human\-Scale} (const R\-E\-A\-L)\label{a00079_a05a23549ca32b4745dee0a1bb539830e}
+
+\begin{DoxyCompactList}\small\item\em Human scale for this parameter \-: for angles, this is equal to 180/pi. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf Min, max values}\par
+\begin{DoxyCompactItemize}
+\item 
+R\-E\-A\-L {\bf Get\-Min} () const \label{a00079_a27d046a98b774ff373aec8a6aeca31ae}
+
+\begin{DoxyCompactList}\small\item\em Minimum value allowed (if limited or periodic) \end{DoxyCompactList}\item 
+void {\bf Set\-Min} (const R\-E\-A\-L)\label{a00079_a82ece8fe469cfc3582f7d5d899928630}
+
+\begin{DoxyCompactList}\small\item\em Set the Minimum value allowed (if limited) \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bf Get\-Human\-Min} () const \label{a00079_a8f9a61e06332dd459ed55c117b9c7475}
+
+\begin{DoxyCompactList}\small\item\em Get the minimum value allowed (if limited) \end{DoxyCompactList}\item 
+void {\bf Set\-Human\-Min} (const R\-E\-A\-L)\label{a00079_ad4ba7c4c6d1c46c9334dcc0673df4fb2}
+
+\begin{DoxyCompactList}\small\item\em Set the minimum value allowed (if limited) \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bf Get\-Max} () const \label{a00079_ab1e49d10dd00c3ba156d2adb9d0dc6b3}
+
+\begin{DoxyCompactList}\small\item\em Get the maximum value allowed (if limited) \end{DoxyCompactList}\item 
+void {\bf Set\-Max} (const R\-E\-A\-L)\label{a00079_a33f45d527d405da957ddc513e5a3099f}
+
+\begin{DoxyCompactList}\small\item\em Get the maximum value allowed (if limited) \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bf Get\-Human\-Max} () const \label{a00079_ad4a7468d788806cd893fcca83534eb83}
+
+\begin{DoxyCompactList}\small\item\em Get the maximum value allowed (if limited) \end{DoxyCompactList}\item 
+void {\bf Set\-Human\-Max} (const R\-E\-A\-L)\label{a00079_ade6c83881319be43feb679b4896766bd}
+
+\begin{DoxyCompactList}\small\item\em Get the maximum value allowed (if limited) \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bf Get\-Period} () const \label{a00079_a2bc0ba973f3e0e5eb93be0a0ebc29c93}
+
+\begin{DoxyCompactList}\small\item\em Get the period (if periodic) \end{DoxyCompactList}\item 
+void {\bf Set\-Period} (const R\-E\-A\-L)\label{a00079_a97b23ea6b624bbe517c29b5ef00b5f5b}
+
+\begin{DoxyCompactList}\small\item\em Set the period value (if periodic) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf Steps during refinement}\par
+\begin{DoxyCompactItemize}
+\item 
+R\-E\-A\-L {\bf Get\-Deriv\-Step} () const \label{a00079_a8ba4cbee715d51c85ce5147ce9cf45db}
+
+\begin{DoxyCompactList}\small\item\em Fixed step to use to compute numerical derivative. \end{DoxyCompactList}\item 
+void {\bf Set\-Deriv\-Step} (const R\-E\-A\-L)\label{a00079_a3156b809e45a6314a680bbe3dec1a573}
+
+\begin{DoxyCompactList}\small\item\em Fixed step to use to compute numerical derivative. \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bf Get\-Global\-Optim\-Step} () const \label{a00079_a2fb1982abc56de79e7dd79ee6bbd0e3f}
+
+\begin{DoxyCompactList}\small\item\em Maximum step to use during Global Optimization algorithms. \end{DoxyCompactList}\item 
+void {\bf Set\-Global\-Optim\-Step} (const R\-E\-A\-L)\label{a00079_aa0eccaf87210097fb9e5239a97f9dcd1}
+
+\begin{DoxyCompactList}\small\item\em Maximum step to use during Global Optimization algorithms. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf Parameter's Clock}\par
+\begin{DoxyCompactItemize}
+\item 
+void {\bf Assign\-Clock} ({\bf Refinable\-Obj\-Clock} \&clock)
+\item 
+const {\bf Refinable\-Obj\-Clock} \& {\bf Get\-Clock} () const \label{a00079_a18c0d07d6795a1016af3bda5cca694a2}
+
+\begin{DoxyCompactList}\small\item\em Get a constant reference to the clock assigned to this parameter. \end{DoxyCompactList}\item 
+{\bf Refinable\-Obj\-Clock} \& {\bf Get\-Clock} ()\label{a00079_ad6495758297cf923c8746cb3734fc838}
+
+\begin{DoxyCompactList}\small\item\em Get a reference to the clock assigned to this parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf Change Limits}\par
+\begin{DoxyCompactItemize}
+\item 
+void {\bf Set\-Limits\-Absolute} (const R\-E\-A\-L min, const R\-E\-A\-L max)\label{a00079_aad4275aa946de7b60aaf3353971663dd}
+
+\begin{DoxyCompactList}\small\item\em Change the limits for this object, giving absolute new limits. \end{DoxyCompactList}\item 
+void {\bf Set\-Limits\-Relative} (const R\-E\-A\-L min, const R\-E\-A\-L max)
+\begin{DoxyCompactList}\small\item\em Change the limits for this object, giving relative new limits (eg giving -\/.\-1 and +.1 will set new limits at the current value + min and current value + max) Thus min should logically be $<$0 and max $>$0. \end{DoxyCompactList}\item 
+void {\bf Set\-Limits\-Proportional} (const R\-E\-A\-L min, const R\-E\-A\-L max)
+\begin{DoxyCompactList}\small\item\em Change the limits for this object, proportionnaly to the current value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
 \subsubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-bool {\bfseries Has\-Parent} (const {\bf Refinable\-Obj\-Clock} \&) const \label{a00079_a357ae3038e8868f0859b8a19eaa7ca74}
+void {\bf Click} ()\label{a00079_a3dc5a8cf7fb9d3c800fe6dd494054d92}
 
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Click the Clock ! to telle the \doxyref{Refinable\-Obj}{p.}{a00077} it has been modified. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-unsigned long {\bfseries m\-Tick0}\label{a00079_afb3155736116dcfa92fb60fc5149c4b3}
+string {\bf m\-Name}\label{a00079_afe5091b81dec1c77b7ec98f473f40698}
+
+\begin{DoxyCompactList}\small\item\em name of the refinable parameter \end{DoxyCompactList}\item 
+R\-E\-A\-L $\ast$ {\bf mp\-Value}\label{a00079_a8bfbe4ae25c98850480c70a2cde259dc}
+
+\begin{DoxyCompactList}\small\item\em Pointer to the refinable value. \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bf m\-Min}\label{a00079_a303f811dfa1a8592ed2a72c489eabe1e}
+
+\begin{DoxyCompactList}\small\item\em Hard lower and upper limits. \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bfseries m\-Max}\label{a00079_ae16a4a1d93b0f86e683f2a51ab4d627f}
 
 \item 
-unsigned long {\bfseries m\-Tick1}\label{a00079_a1e9c5e13f97fbdf208d9737f3f97e13e}
+bool {\bf m\-Has\-Limits}\label{a00079_a867316e66708e8d7efb64b9064f5241a}
 
-\item 
-std\-::set$<$ const \\*
-{\bf Refinable\-Obj\-Clock} $\ast$ $>$ {\bf mv\-Child}\label{a00079_a21c9b5772bf58885ab48168b381fd9b5}
+\begin{DoxyCompactList}\small\item\em Does the refinable parameter need limits (min and max) ? \end{DoxyCompactList}\item 
+bool {\bf m\-Is\-Fixed}\label{a00079_acf1638fe7459af0df2f64279115f6091}
 
-\begin{DoxyCompactList}\small\item\em List of 'child' clocks, which will click this clock whenever they are clicked. \end{DoxyCompactList}\item 
-std\-::set$<$ {\bf Refinable\-Obj\-Clock} $\ast$ $>$ {\bf mv\-Parent}
-\begin{DoxyCompactList}\small\item\em List of parent clocks, which will be clicked whenever this one is. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Static Private Attributes}
+\begin{DoxyCompactList}\small\item\em is the parameter currently fixed ? \end{DoxyCompactList}\item 
+bool {\bf m\-Is\-Used}\label{a00079_a9d6d609d62226ba7c6fe1a1fd694b77d}
+
+\begin{DoxyCompactList}\small\item\em Is the parameter currently used ? \end{DoxyCompactList}\item 
+bool {\bf m\-Is\-Periodic}
+\begin{DoxyCompactList}\small\item\em Is the parameter periodic ? If this is the case, then when using the \doxyref{Refinable\-Par\-::\-Mutate()}{p.}{a00079_abd6a06bbb5eb59d80515ebdad2612da8} function, if the parameter goes beyond its limits, it will be shifted by the value of its period. \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bf m\-Period}\label{a00079_ae33430ff688a0a5e4e907ab8bbee0ecd}
+
+\begin{DoxyCompactList}\small\item\em Period value (if relevant) \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bf m\-Global\-Optim\-Step}\label{a00079_a3d5465cf22c3080f856825c29f45e201}
+
+\begin{DoxyCompactList}\small\item\em Step to use for global method search (simulated annealing,...) \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bf m\-Deriv\-Step}\label{a00079_a07c0acd9afc24e5945bfa8a9e940002d}
+
+\begin{DoxyCompactList}\small\item\em Step to use for numerical derivative calculation. \end{DoxyCompactList}\item 
+{\bf Ref\-Par\-Deriv\-Step\-Model} {\bf m\-Ref\-Par\-Deriv\-Step\-Model}\label{a00079_adb6f88fa2781510eef3e024accda52ed}
+
+\begin{DoxyCompactList}\small\item\em Model followed for derivation. \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bf m\-Sigma}\label{a00079_a943363b2a00d01575668ad6d3e27dafb}
+
+\begin{DoxyCompactList}\small\item\em Calculated sigma on value. \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bf m\-Human\-Scale}
+\begin{DoxyCompactList}\small\item\em Scale to be used to display 'human' value. \end{DoxyCompactList}\item 
+bool {\bf m\-Has\-Assigned\-Clock}\label{a00079_a32ec16db6ad86efc4bd14dcfbb0e9712}
+
+\begin{DoxyCompactList}\small\item\em Is there a clock associated with this parameter ? If yes, then it must \doxyref{Click()}{p.}{a00079_a3dc5a8cf7fb9d3c800fe6dd494054d92} it each time it is modified. \end{DoxyCompactList}\item 
+{\bf Refinable\-Obj\-Clock} $\ast$ {\bfseries mp\-Clock}\label{a00079_a3c6145e3df75637040f0b2e64ec00382}
+
+\end{DoxyCompactItemize}
+\subsubsection*{Friends}
 \begin{DoxyCompactItemize}
 \item 
-static unsigned long {\bfseries ms\-Tick0}\label{a00079_a1e892e36ab9383e7fed98f7dc1cabfe3}
-
-\item 
-static unsigned long {\bfseries ms\-Tick1}\label{a00079_a08f28d7209740d0649d69d2d6b5602f1}
+class {\bfseries Refinable\-Obj}\label{a00079_a4b004207cfa15cef5b32be20104e3eaf}
 
 \end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-We need to record exactly when refinable objects have been modified for the last time (to avoid re-\/computation), and to do that we need a precise time. 
+Generic class for parameters of refinable objects. 
 
-Since the clock() function is not precise enough (and is architecture-\/dependant), we use a custom time, which records the number of events in the program which uses the library. This is purely internal, so don't worry about it...
+These must be continuous.
 
-The clock values have nothing to do with 'time' as any normal person undertands it. 
+\begin{DoxyRefDesc}{Todo}
+\item[{\bf Todo}]\-: define parameters using equations between parameters. 
+
+\-: for complex objects with lots of parameters, give the possibility to define vectors of parameters, all with the same properties, to reduce memory usage. \end{DoxyRefDesc}
+
+
+\subsubsection{Constructor \& Destructor Documentation}
+\index{Obj\-Cryst\-::\-Refinable\-Par@{Obj\-Cryst\-::\-Refinable\-Par}!Refinable\-Par@{Refinable\-Par}}
+\index{Refinable\-Par@{Refinable\-Par}!ObjCryst::RefinablePar@{Obj\-Cryst\-::\-Refinable\-Par}}
+\paragraph[{Refinable\-Par}]{\setlength{\rightskip}{0pt plus 5cm}Obj\-Cryst\-::\-Refinable\-Par\-::\-Refinable\-Par (
+\begin{DoxyParamCaption}
+\item[{const string \&}]{name, }
+\item[{R\-E\-A\-L $\ast$}]{ref\-Par, }
+\item[{const R\-E\-A\-L}]{min, }
+\item[{const R\-E\-A\-L}]{max, }
+\item[{const {\bf Ref\-Par\-Type} $\ast$}]{type, }
+\item[{{\bf Ref\-Par\-Deriv\-Step\-Model}}]{deriv\-Mode = {\ttfamily REFPAR\-\_\-DERIV\-\_\-STEP\-\_\-RELATIVE}, }
+\item[{const bool}]{has\-Limits = {\ttfamily true}, }
+\item[{const bool}]{is\-Fixed = {\ttfamily false}, }
+\item[{const bool}]{is\-Used = {\ttfamily true}, }
+\item[{const bool}]{is\-Periodic = {\ttfamily false}, }
+\item[{const R\-E\-A\-L}]{human\-Scale = {\ttfamily 1.}, }
+\item[{R\-E\-A\-L}]{period = {\ttfamily 1.}}
+\end{DoxyParamCaption}
+)}\label{a00079_ac82759679653390c868ca7cbcb7e572c}
+
+
+Constructor. 
+
+\begin{DoxyParagraph}{name\-: the name of the parameter}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{ref\-Par\-: the address of the refined parameter}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{min,max\-: the minimum \& maximum value for this parameter. Only used}
+if the parameter is limited. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{type\-: the type (category) of refinable parameter. This is used to (de)activate}
+groups of parameters. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{deriv\-Mode\-: to compute numerical (partial) derivatives, the step used is either}
+an absolute (fixed) value, or it can be proportionnal to the current value of the parameter. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{has\-Limits\-: if true, then the parameter cannot exceed its limits.}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{is\-Fixed\-: if true, the parameter cannot be refined.}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{is\-Used\-: if false, then the parameter does not affect in any way the refined object,}
+and thus is simply ignored and should never appear to the user. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{is\-Periodic\-: if true, then when the parameter exceeds one of its limits, it is}
+shifted by the period (=max-\/min), in order to be back to the allowed [min,max] range. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{human\-Scale\-:this is the scale which should be used to display the value to the}
+end program user. This is mostly used for angles\-: the values are stored in radians, so that a scale equal to 180/pi must be used for a 'human-\/understandable' value. Use the Refinable\-Par\-::\-Human\-Value() in order to get this value. By default it is equal to 1.\-0 (no scaling required). 
+\end{DoxyParagraph}
+
 
 \subsubsection{Member Function Documentation}
-\index{Obj\-Cryst\-::\-Refinable\-Obj\-Clock@{Obj\-Cryst\-::\-Refinable\-Obj\-Clock}!Add\-Child@{Add\-Child}}
-\index{Add\-Child@{Add\-Child}!ObjCryst::RefinableObjClock@{Obj\-Cryst\-::\-Refinable\-Obj\-Clock}}
-\paragraph[{Add\-Child}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-Refinable\-Obj\-Clock\-::\-Add\-Child (
+\index{Obj\-Cryst\-::\-Refinable\-Par@{Obj\-Cryst\-::\-Refinable\-Par}!Assign\-Clock@{Assign\-Clock}}
+\index{Assign\-Clock@{Assign\-Clock}!ObjCryst::RefinablePar@{Obj\-Cryst\-::\-Refinable\-Par}}
+\paragraph[{Assign\-Clock}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-Refinable\-Par\-::\-Assign\-Clock (
 \begin{DoxyParamCaption}
-\item[{const {\bf Refinable\-Obj\-Clock} \&}]{}
+\item[{{\bf Refinable\-Obj\-Clock} \&}]{clock}
 \end{DoxyParamCaption}
-)}\label{a00079_a4be5b7b2f802d67000098a89939ffaf1}
-
-
-Add a 'child' clock. 
-
-Whenever a child clock is clicked, it will also click its parent. This function takes care of adding itself to the list of parent in the children clock. \index{Obj\-Cryst\-::\-Refinable\-Obj\-Clock@{Obj\-Cryst\-::\-Refinable\-Obj\-Clock}!Add\-Parent@{Add\-Parent}}
-\index{Add\-Parent@{Add\-Parent}!ObjCryst::RefinableObjClock@{Obj\-Cryst\-::\-Refinable\-Obj\-Clock}}
-\paragraph[{Add\-Parent}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-Refinable\-Obj\-Clock\-::\-Add\-Parent (
+)}\label{a00079_ab03f6bffb78dd812136a73b94b64ee6e}
+Assign a clock to this parameter. Any time this parameter is modified, the clock will be ticked ! \index{Obj\-Cryst\-::\-Refinable\-Par@{Obj\-Cryst\-::\-Refinable\-Par}!Copy\-Attributes@{Copy\-Attributes}}
+\index{Copy\-Attributes@{Copy\-Attributes}!ObjCryst::RefinablePar@{Obj\-Cryst\-::\-Refinable\-Par}}
+\paragraph[{Copy\-Attributes}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-Refinable\-Par\-::\-Copy\-Attributes (
 \begin{DoxyParamCaption}
-\item[{{\bf Refinable\-Obj\-Clock} \&}]{}
+\item[{const {\bf Refinable\-Par} \&}]{}
 \end{DoxyParamCaption}
-) const}\label{a00079_acf4669fb94666b357004617f0c41a6d2}
+)}\label{a00079_a5882aec9561125f6e81b81f175031652}
 
 
-Add a 'parent' clock. 
+Copy all attributes (limits, flags, etc...) from another \doxyref{Refinable\-Par}{p.}{a00079} object. 
 
-Whenever a clock is clicked, all parent clocks also are. \index{Obj\-Cryst\-::\-Refinable\-Obj\-Clock@{Obj\-Cryst\-::\-Refinable\-Obj\-Clock}!operator=@{operator=}}
-\index{operator=@{operator=}!ObjCryst::RefinableObjClock@{Obj\-Cryst\-::\-Refinable\-Obj\-Clock}}
-\paragraph[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-Refinable\-Obj\-Clock\-::operator= (
+This is useful in \doxyref{Refinable\-Obj}{p.}{a00077} copy constructors. Everything is copied but the pointer to the value refined, and the pointer to the clock. \index{Obj\-Cryst\-::\-Refinable\-Par@{Obj\-Cryst\-::\-Refinable\-Par}!Get\-Pointer@{Get\-Pointer}}
+\index{Get\-Pointer@{Get\-Pointer}!ObjCryst::RefinablePar@{Obj\-Cryst\-::\-Refinable\-Par}}
+\paragraph[{Get\-Pointer}]{\setlength{\rightskip}{0pt plus 5cm}const R\-E\-A\-L$\ast$ Obj\-Cryst\-::\-Refinable\-Par\-::\-Get\-Pointer (
 \begin{DoxyParamCaption}
-\item[{const {\bf Refinable\-Obj\-Clock} \&}]{rhs}
+{}
 \end{DoxyParamCaption}
-)}\label{a00079_a91eda9a56505c36e5f060672e4959a58}
+) const}\label{a00079_a128e04b0731ed791ecc3afc228d6f17e}
 
 
-This will (i) set the clock to the same values as the rhs clock, but will not change the list of children and parent clocks. 
+Access to a const pointer to the refined value. 
 
-This will afterwards \doxyref{Click()}{p.}{a00079_a980b7dc70decc75c58eba0a55d73fc6d} the clock to notify parents. 
+This can be used to identify the parameter \index{Obj\-Cryst\-::\-Refinable\-Par@{Obj\-Cryst\-::\-Refinable\-Par}!Get\-Value@{Get\-Value}}
+\index{Get\-Value@{Get\-Value}!ObjCryst::RefinablePar@{Obj\-Cryst\-::\-Refinable\-Par}}
+\paragraph[{Get\-Value}]{\setlength{\rightskip}{0pt plus 5cm}R\-E\-A\-L Obj\-Cryst\-::\-Refinable\-Par\-::\-Get\-Value (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{a00079_ad27e4b5ed56bdf316c8d322537a7c85a}
+
+
+of the parameter. 
+
+Use the The \doxyref{Mutate()}{p.}{a00079_abd6a06bbb5eb59d80515ebdad2612da8} and \doxyref{Mutate\-To()}{p.}{a00079_a696f87a0a129cfd270144532d664d093} function to change this value. \index{Obj\-Cryst\-::\-Refinable\-Par@{Obj\-Cryst\-::\-Refinable\-Par}!Init@{Init}}
+\index{Init@{Init}!ObjCryst::RefinablePar@{Obj\-Cryst\-::\-Refinable\-Par}}
+\paragraph[{Init}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-Refinable\-Par\-::\-Init (
+\begin{DoxyParamCaption}
+\item[{const string \&}]{name, }
+\item[{R\-E\-A\-L $\ast$}]{ref\-Par, }
+\item[{const R\-E\-A\-L}]{min, }
+\item[{const R\-E\-A\-L}]{max, }
+\item[{const {\bf Ref\-Par\-Type} $\ast$}]{type, }
+\item[{{\bf Ref\-Par\-Deriv\-Step\-Model}}]{deriv\-Mode = {\ttfamily REFPAR\-\_\-DERIV\-\_\-STEP\-\_\-RELATIVE}, }
+\item[{const bool}]{has\-Limits = {\ttfamily true}, }
+\item[{const bool}]{is\-Fixed = {\ttfamily false}, }
+\item[{const bool}]{is\-Used = {\ttfamily true}, }
+\item[{const bool}]{is\-Periodic = {\ttfamily false}, }
+\item[{const R\-E\-A\-L}]{human\-Scale = {\ttfamily 1.}, }
+\item[{R\-E\-A\-L}]{period = {\ttfamily 1.}}
+\end{DoxyParamCaption}
+)}\label{a00079_a58cbd1b3c3ada8383ddb444f879a9495}
+
+
+Constructor. 
+
+\begin{DoxyParagraph}{name\-: the name of the parameter}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{ref\-Par\-: the address of the refined parameter}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{min,max\-: the minimum \& maximum value for this parameter. Only used}
+if the parameter is limited. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{type\-: the type (category) of refinable parameter. This is used to (de)activate}
+groups of parameters. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{deriv\-Mode\-: to compute numerical (partial) derivatives, the step used is either}
+an absolute (fixed) value, or it can be proportionnal to the current value of the parameter. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{has\-Limits\-: if true, then the parameter cannot exceed its limits.}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{is\-Fixed\-: if true, the parameter cannot be refined.}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{is\-Used\-: if false, then the parameter does not affect in any way the refined object,}
+and thus is simply ignored and should never appear to the user. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{is\-Periodic\-: if true, then when the parameter exceeds one of its limits, it is}
+shifted by the period (=max-\/min), in order to be back to the allowed [min,max] range. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{human\-Scale\-:this is the scale which should be used to display the value to the}
+end program user. This is mostly used for angles\-: the values are stored in radians, so that a scale equal to 180/pi must be used for a 'human-\/understandable' value. Use the Refinable\-Par\-::\-Human\-Value() in order to get this value. By default it is equal to 1.\-0 (no scaling required). 
+\end{DoxyParagraph}
+\index{Obj\-Cryst\-::\-Refinable\-Par@{Obj\-Cryst\-::\-Refinable\-Par}!Mutate@{Mutate}}
+\index{Mutate@{Mutate}!ObjCryst::RefinablePar@{Obj\-Cryst\-::\-Refinable\-Par}}
+\paragraph[{Mutate}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-Refinable\-Par\-::\-Mutate (
+\begin{DoxyParamCaption}
+\item[{const R\-E\-A\-L}]{mutate\-Value}
+\end{DoxyParamCaption}
+)}\label{a00079_abd6a06bbb5eb59d80515ebdad2612da8}
+
+
+Add the given amount to the parameter current value. 
+
+If limit is hit, set to limit. If the limit is hit {\itshape and} the parameter is periodic, shift by period to bring back to allowed values. \begin{DoxyWarning}{Warning}
+Will throw an exception if the parameter is defined by an equation. 
+\end{DoxyWarning}
+\index{Obj\-Cryst\-::\-Refinable\-Par@{Obj\-Cryst\-::\-Refinable\-Par}!Mutate\-To@{Mutate\-To}}
+\index{Mutate\-To@{Mutate\-To}!ObjCryst::RefinablePar@{Obj\-Cryst\-::\-Refinable\-Par}}
+\paragraph[{Mutate\-To}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-Refinable\-Par\-::\-Mutate\-To (
+\begin{DoxyParamCaption}
+\item[{const R\-E\-A\-L}]{new\-Value}
+\end{DoxyParamCaption}
+)}\label{a00079_a696f87a0a129cfd270144532d664d093}
+
+
+Change the current value to the given one. 
+
+If the limit is hit, then set to the limit (unless the pameter is periodic, then shift by the period amount back to allowed values). \begin{DoxyWarning}{Warning}
+Will throw an exception if the parameter is defined by an equation. 
+\end{DoxyWarning}
+\index{Obj\-Cryst\-::\-Refinable\-Par@{Obj\-Cryst\-::\-Refinable\-Par}!Set\-Limits\-Proportional@{Set\-Limits\-Proportional}}
+\index{Set\-Limits\-Proportional@{Set\-Limits\-Proportional}!ObjCryst::RefinablePar@{Obj\-Cryst\-::\-Refinable\-Par}}
+\paragraph[{Set\-Limits\-Proportional}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-Refinable\-Par\-::\-Set\-Limits\-Proportional (
+\begin{DoxyParamCaption}
+\item[{const R\-E\-A\-L}]{min, }
+\item[{const R\-E\-A\-L}]{max}
+\end{DoxyParamCaption}
+)}\label{a00079_afb15606bb24a5fbb144d07843bb11f97}
+
+
+Change the limits for this object, proportionnaly to the current value. 
+
+min should be $<$ 1. and max $>$ 1. \index{Obj\-Cryst\-::\-Refinable\-Par@{Obj\-Cryst\-::\-Refinable\-Par}!Set\-Limits\-Relative@{Set\-Limits\-Relative}}
+\index{Set\-Limits\-Relative@{Set\-Limits\-Relative}!ObjCryst::RefinablePar@{Obj\-Cryst\-::\-Refinable\-Par}}
+\paragraph[{Set\-Limits\-Relative}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-Refinable\-Par\-::\-Set\-Limits\-Relative (
+\begin{DoxyParamCaption}
+\item[{const R\-E\-A\-L}]{min, }
+\item[{const R\-E\-A\-L}]{max}
+\end{DoxyParamCaption}
+)}\label{a00079_ad445354c927f8df95443a55174e7bb7d}
+
+
+Change the limits for this object, giving relative new limits (eg giving -\/.\-1 and +.1 will set new limits at the current value + min and current value + max) Thus min should logically be $<$0 and max $>$0. 
+
+\index{Obj\-Cryst\-::\-Refinable\-Par@{Obj\-Cryst\-::\-Refinable\-Par}!Set\-Value@{Set\-Value}}
+\index{Set\-Value@{Set\-Value}!ObjCryst::RefinablePar@{Obj\-Cryst\-::\-Refinable\-Par}}
+\paragraph[{Set\-Value}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-Refinable\-Par\-::\-Set\-Value (
+\begin{DoxyParamCaption}
+\item[{const R\-E\-A\-L}]{value}
+\end{DoxyParamCaption}
+)}\label{a00079_a55a87d842fc046b2f4b3c03c92e53052}
+
+
+of the parameter. 
+
+Use the The \doxyref{Mutate()}{p.}{a00079_abd6a06bbb5eb59d80515ebdad2612da8} and \doxyref{Mutate\-To()}{p.}{a00079_a696f87a0a129cfd270144532d664d093} function to change this value. \index{Obj\-Cryst\-::\-Refinable\-Par@{Obj\-Cryst\-::\-Refinable\-Par}!X\-M\-L\-Input@{X\-M\-L\-Input}}
+\index{X\-M\-L\-Input@{X\-M\-L\-Input}!ObjCryst::RefinablePar@{Obj\-Cryst\-::\-Refinable\-Par}}
+\paragraph[{X\-M\-L\-Input}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-Refinable\-Par\-::\-X\-M\-L\-Input (
+\begin{DoxyParamCaption}
+\item[{istream \&}]{is, }
+\item[{const {\bf X\-M\-L\-Cryst\-Tag} \&}]{tag}
+\end{DoxyParamCaption}
+)}\label{a00079_af6fcabe9e97e0aabacef7a9bee5d1106}
+
+
+X\-M\-L\-Input From stream. 
+
+\index{Obj\-Cryst\-::\-Refinable\-Par@{Obj\-Cryst\-::\-Refinable\-Par}!X\-M\-L\-Output@{X\-M\-L\-Output}}
+\index{X\-M\-L\-Output@{X\-M\-L\-Output}!ObjCryst::RefinablePar@{Obj\-Cryst\-::\-Refinable\-Par}}
+\paragraph[{X\-M\-L\-Output}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-Refinable\-Par\-::\-X\-M\-L\-Output (
+\begin{DoxyParamCaption}
+\item[{ostream \&}]{os, }
+\item[{const string \&}]{name, }
+\item[{int}]{indent = {\ttfamily 0}}
+\end{DoxyParamCaption}
+) const}\label{a00079_ae8271536206b603c717c5fa793b2310c}
+
+
+X\-M\-L\-Output to stream in well-\/formed X\-M\-L. 
+
+this will save the fixed \& limited flags, as well as limits 
+\begin{DoxyParams}{Parameters}
+{\em name} & the name to use instead of the Ref\-Par name. \\
+\hline
+\end{DoxyParams}
+\index{Obj\-Cryst\-::\-Refinable\-Par@{Obj\-Cryst\-::\-Refinable\-Par}!X\-M\-L\-Output@{X\-M\-L\-Output}}
+\index{X\-M\-L\-Output@{X\-M\-L\-Output}!ObjCryst::RefinablePar@{Obj\-Cryst\-::\-Refinable\-Par}}
+\paragraph[{X\-M\-L\-Output}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-Refinable\-Par\-::\-X\-M\-L\-Output (
+\begin{DoxyParamCaption}
+\item[{ostream \&}]{os, }
+\item[{int}]{indent = {\ttfamily 0}}
+\end{DoxyParamCaption}
+) const}\label{a00079_a7105a845ac12a49b0a5fcb41a4e6cbde}
+
+
+X\-M\-L\-Output to stream in well-\/formed X\-M\-L. 
+
+this will save the fixed \& limited flags, as well as limits. In this function the name used is that of the Ref\-Par. 
 
 \subsubsection{Member Data Documentation}
-\index{Obj\-Cryst\-::\-Refinable\-Obj\-Clock@{Obj\-Cryst\-::\-Refinable\-Obj\-Clock}!mv\-Parent@{mv\-Parent}}
-\index{mv\-Parent@{mv\-Parent}!ObjCryst::RefinableObjClock@{Obj\-Cryst\-::\-Refinable\-Obj\-Clock}}
-\paragraph[{mv\-Parent}]{\setlength{\rightskip}{0pt plus 5cm}std\-::set$<${\bf Refinable\-Obj\-Clock}$\ast$$>$ Obj\-Cryst\-::\-Refinable\-Obj\-Clock\-::mv\-Parent\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}\label{a00079_a0804f9b1555db8ee4be7353f268035ca}
+\index{Obj\-Cryst\-::\-Refinable\-Par@{Obj\-Cryst\-::\-Refinable\-Par}!m\-Human\-Scale@{m\-Human\-Scale}}
+\index{m\-Human\-Scale@{m\-Human\-Scale}!ObjCryst::RefinablePar@{Obj\-Cryst\-::\-Refinable\-Par}}
+\paragraph[{m\-Human\-Scale}]{\setlength{\rightskip}{0pt plus 5cm}R\-E\-A\-L Obj\-Cryst\-::\-Refinable\-Par\-::m\-Human\-Scale\hspace{0.3cm}{\ttfamily [private]}}\label{a00079_a1a0b4a89d0d106fe43d4ada7c44e4cd9}
 
 
-List of parent clocks, which will be clicked whenever this one is. 
+Scale to be used to display 'human' value. 
 
-This is a mutable list since reporting to parent clocks does not change the vlaue of the clock. 
+This is for angular parameters\-: the computer stores values in radians, whil the user only understands degrees. So a scale factor of 180/pi is necessary. \index{Obj\-Cryst\-::\-Refinable\-Par@{Obj\-Cryst\-::\-Refinable\-Par}!m\-Is\-Periodic@{m\-Is\-Periodic}}
+\index{m\-Is\-Periodic@{m\-Is\-Periodic}!ObjCryst::RefinablePar@{Obj\-Cryst\-::\-Refinable\-Par}}
+\paragraph[{m\-Is\-Periodic}]{\setlength{\rightskip}{0pt plus 5cm}bool Obj\-Cryst\-::\-Refinable\-Par\-::m\-Is\-Periodic\hspace{0.3cm}{\ttfamily [private]}}\label{a00079_a15b4dfefc764d205251606a64155b677}
+
+
+Is the parameter periodic ? If this is the case, then when using the \doxyref{Refinable\-Par\-::\-Mutate()}{p.}{a00079_abd6a06bbb5eb59d80515ebdad2612da8} function, if the parameter goes beyond its limits, it will be shifted by the value of its period. 
+
+
 
 The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 

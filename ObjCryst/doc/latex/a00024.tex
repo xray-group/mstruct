@@ -1,68 +1,42 @@
-\subsection{Obj\-Cryst\-:\-:C\-I\-F Class Reference}
-\label{a00024}\index{Obj\-Cryst\-::\-C\-I\-F@{Obj\-Cryst\-::\-C\-I\-F}}
+\subsection{Obj\-Cryst\-:\-:C\-I\-F\-Data\-:\-:C\-I\-F\-Atom Struct Reference}
+\label{a00024}\index{Obj\-Cryst\-::\-C\-I\-F\-Data\-::\-C\-I\-F\-Atom@{Obj\-Cryst\-::\-C\-I\-F\-Data\-::\-C\-I\-F\-Atom}}
 
 
-Main \doxyref{C\-I\-F}{p.}{a00024} class -\/ parses the stream and separates data blocks, comments, items, loops.  
+\doxyref{Atom}{p.}{a00014} record.  
 
 
-\subsubsection*{Public Member Functions}
-\begin{DoxyCompactItemize}
-\item 
-{\bf C\-I\-F} (std\-::istream \&in, const bool interpret=true, const bool verbose=false)
-\begin{DoxyCompactList}\small\item\em Creates the \doxyref{C\-I\-F}{p.}{a00024} object from a stream. \end{DoxyCompactList}\item 
-void {\bf Parse} (std\-::stringstream \&in)
-\begin{DoxyCompactList}\small\item\em Separate the file in data blocks and parse them to sort tags, loops and comments. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-std\-::map$<$ std\-::string, {\bf C\-I\-F\-Data} $>$ {\bf mv\-Data}\label{a00024_adc6341fa5bbfaf7257752959317a2b57}
+std\-::string {\bf m\-Label}\label{a00024_a32f3b29fdecc1ea4ed42fd2f588f7dc2}
 
-\begin{DoxyCompactList}\small\item\em The data blocks, after parsing. The key is the name of the data block. \end{DoxyCompactList}\item 
-std\-::list$<$ std\-::string $>$ {\bf mv\-Comment}\label{a00024_ac0cd3903198ad04595488047a046e470}
+\begin{DoxyCompactList}\small\item\em Label of the atom, or empty string (\-\_\-atom\-\_\-site\-\_\-label). \end{DoxyCompactList}\item 
+std\-::string {\bf m\-Symbol}\label{a00024_a70e19874d95cb054f2e6b4da29716708}
 
-\begin{DoxyCompactList}\small\item\em Global comments, outside and data block. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Symbol of the atom, or empty string (\-\_\-atom\-\_\-type\-\_\-symbol or \-\_\-atom\-\_\-site\-\_\-type\-\_\-symbol). \end{DoxyCompactList}\item 
+std\-::vector$<$ float $>$ {\bf m\-Coord\-Frac}\label{a00024_a0fb94664112092c339319ac149bf8410}
+
+\begin{DoxyCompactList}\small\item\em Fractionnal coordinates ({\itshape atom\-\_\-site\-\_\-fract}\{x,y,z\}) or empty vector. \end{DoxyCompactList}\item 
+std\-::vector$<$ float $>$ {\bf m\-Coord\-Cart}
+\begin{DoxyCompactList}\small\item\em Cartesian coordinates in Angstroem ({\itshape atom\-\_\-site\-\_\-\-Cartn}\{x,y,z\}) or empty vector. \end{DoxyCompactList}\item 
+float {\bf m\-Occupancy}\label{a00024_a95523357bde2b4dc4779e2e1a0bebba5}
+
+\begin{DoxyCompactList}\small\item\em Site occupancy, or -\/1. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-Main \doxyref{C\-I\-F}{p.}{a00024} class -\/ parses the stream and separates data blocks, comments, items, loops. 
+\doxyref{Atom}{p.}{a00014} record. 
 
-All values are stored as string, and Each \doxyref{C\-I\-F}{p.}{a00024} block is stored in a separate \doxyref{C\-I\-F\-Data}{p.}{a00026} object. No interpretaion is made here -\/ this must be done from all \doxyref{C\-I\-F\-Data}{p.}{a00026} objects. 
-
-\subsubsection{Constructor \& Destructor Documentation}
-\index{Obj\-Cryst\-::\-C\-I\-F@{Obj\-Cryst\-::\-C\-I\-F}!C\-I\-F@{C\-I\-F}}
-\index{C\-I\-F@{C\-I\-F}!ObjCryst::CIF@{Obj\-Cryst\-::\-C\-I\-F}}
-\paragraph[{C\-I\-F}]{\setlength{\rightskip}{0pt plus 5cm}Obj\-Cryst\-::\-C\-I\-F\-::\-C\-I\-F (
-\begin{DoxyParamCaption}
-\item[{std\-::istream \&}]{in, }
-\item[{const bool}]{interpret = {\ttfamily true}, }
-\item[{const bool}]{verbose = {\ttfamily false}}
-\end{DoxyParamCaption}
-)}\label{a00024_ad570039a62026b01b0fdbcd9f9480d7a}
+\subsubsection{Member Data Documentation}
+\index{Obj\-Cryst\-::\-C\-I\-F\-Data\-::\-C\-I\-F\-Atom@{Obj\-Cryst\-::\-C\-I\-F\-Data\-::\-C\-I\-F\-Atom}!m\-Coord\-Cart@{m\-Coord\-Cart}}
+\index{m\-Coord\-Cart@{m\-Coord\-Cart}!ObjCryst::CIFData::CIFAtom@{Obj\-Cryst\-::\-C\-I\-F\-Data\-::\-C\-I\-F\-Atom}}
+\paragraph[{m\-Coord\-Cart}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$float$>$ Obj\-Cryst\-::\-C\-I\-F\-Data\-::\-C\-I\-F\-Atom\-::m\-Coord\-Cart}\label{a00024_a0d0447f70b4bfa0227733a1b3cf51727}
 
 
-Creates the \doxyref{C\-I\-F}{p.}{a00024} object from a stream. 
+Cartesian coordinates in Angstroem ({\itshape atom\-\_\-site\-\_\-\-Cartn}\{x,y,z\}) or empty vector. 
 
+Transformation to fractionnal coordinates currently assumes \char`\"{}a parallel to x; b in the plane of y and z\char`\"{} (see \-\_\-atom\-\_\-sites\-\_\-\-Cartn\-\_\-transform\-\_\-axes) 
 
-\begin{DoxyParams}{Parameters}
-{\em interpret,\-:} & if true, interpret all data blocks. See \doxyref{C\-I\-F\-Data\-::\-Extract\-All()}{p.}{a00026_a406e1448ca864b4d679edde83c6351ab} \\
-\hline
-\end{DoxyParams}
-
-
-\subsubsection{Member Function Documentation}
-\index{Obj\-Cryst\-::\-C\-I\-F@{Obj\-Cryst\-::\-C\-I\-F}!Parse@{Parse}}
-\index{Parse@{Parse}!ObjCryst::CIF@{Obj\-Cryst\-::\-C\-I\-F}}
-\paragraph[{Parse}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-C\-I\-F\-::\-Parse (
-\begin{DoxyParamCaption}
-\item[{std\-::stringstream \&}]{in}
-\end{DoxyParamCaption}
-)}\label{a00024_ad3d151ac993f8afcf4e5f22773df2e0c}
-
-
-Separate the file in data blocks and parse them to sort tags, loops and comments. 
-
-All is stored in the original strings. 
-
-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
 C\-I\-F.\-h\end{DoxyCompactItemize}

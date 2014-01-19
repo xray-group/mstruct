@@ -1,60 +1,65 @@
-\subsection{Obj\-Cryst\-:\-:P\-D\-F\-Crystal\-:\-:pdf\-Atom Struct Reference}
-\label{a00064}\index{Obj\-Cryst\-::\-P\-D\-F\-Crystal\-::pdf\-Atom@{Obj\-Cryst\-::\-P\-D\-F\-Crystal\-::pdf\-Atom}}
+\subsection{Obj\-Cryst\-:\-:P\-D\-F\-Crystal Class Reference}
+\label{a00064}\index{Obj\-Cryst\-::\-P\-D\-F\-Crystal@{Obj\-Cryst\-::\-P\-D\-F\-Crystal}}
 
 
-Container of temp data for each atom.  
+Class for Pair Distribution Function calculations for a single \doxyref{Crystal}{p.}{a00026} object.  
 
 
+Inheritance diagram for Obj\-Cryst\-:\-:P\-D\-F\-Crystal\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{a00064}
+\end{center}
+\end{figure}
+\subsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf pdf\-Atom}
+\begin{DoxyCompactList}\small\item\em Container of temp data for each atom. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bf pdf\-Atom} ()\label{a00064_a3909167af1d0f03dd62d1a7b07524aaa}
+{\bf P\-D\-F\-Crystal} (const {\bf P\-D\-F} \&pdf, const {\bf Crystal} \&cryst)\label{a00064_a00392955dc22562f102b5161201df88e}
 
-\begin{DoxyCompactList}\small\item\em default constructor \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Public Attributes}
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-R\-E\-A\-L {\bf fx0}\label{a00064_a64a01ae0646a38e7ec6aacc32879293b}
+void {\bf Init} (const {\bf P\-D\-F} \&pdf, const {\bf Crystal} \&cryst)\label{a00064_a5e7fb06483b4aadc0228e12a5b276c73}
 
-\begin{DoxyCompactList}\small\item\em Fractionnal \& cartesian unique coordinates. \end{DoxyCompactList}\item 
-R\-E\-A\-L {\bfseries fy0}\label{a00064_a842098b3e4c330de75d81360430bff2b}
+\begin{DoxyCompactList}\small\item\em Initialize all parameters. \end{DoxyCompactList}\item 
+virtual void {\bf Calc\-P\-D\-F} () const \label{a00064_ae946de60882c4a7280846eb93c2352ad}
+
+\begin{DoxyCompactList}\small\item\em Calculate the pdf. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const {\bf Crystal} $\ast$ {\bf mp\-Crystal}\label{a00064_a553166f4ad640d508ef772957df10152}
+
+\begin{DoxyCompactList}\small\item\em The \doxyref{Crystal}{p.}{a00026}. \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bf m\-Delta1}\label{a00064_a66b186679e2698a45ce157a8d09c3467}
+
+\begin{DoxyCompactList}\small\item\em Parameters affecting the width \& intensity of peaks. \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bfseries m\-Delta2}\label{a00064_a5ebeca9d72162fee9243dea5c6b850ab}
 
 \item 
-R\-E\-A\-L {\bfseries fz0}\label{a00064_a869b4043afffd73fa4691075b9cf49fb}
+R\-E\-A\-L {\bfseries m\-Qbroad}\label{a00064_ae7f15c23f3c9e5709613168abb0225ac}
 
 \item 
-R\-E\-A\-L {\bfseries x0}\label{a00064_a684db85285aafa127dcc2b3ab1ee705e}
+R\-E\-A\-L {\bfseries m\-Qdamp}\label{a00064_a1137bb1d85ea2fa6829d1e839d01333c}
 
 \item 
-R\-E\-A\-L {\bfseries y0}\label{a00064_a33fc5fb326d440de0c4e27a45eac3bee}
+std\-::vector$<$ {\bf pdf\-Atom} $>$ {\bf mv\-P\-D\-F\-Atom}\label{a00064_a54a3a6f101577914637d33727b770d37}
 
-\item 
-R\-E\-A\-L {\bfseries z0}\label{a00064_a62c30b98c58028facfcac46ca7773754}
-
-\item 
-const {\bf Scattering\-Power} $\ast$ {\bf p\-Scatt\-Pow}\label{a00064_ac9fb4e85c6a68222212b4e0fc35dc45d}
-
-\begin{DoxyCompactList}\small\item\em The scattering power. \end{DoxyCompactList}\item 
-R\-E\-A\-L {\bf occup\-Bi}\label{a00064_aba908a68756273eda5261980e574dfef}
-
-\begin{DoxyCompactList}\small\item\em Scattering amplitudes, multiplied by occupancy. \end{DoxyCompactList}\item 
-bool {\bf has\-Changed}\label{a00064_a273d054875caabd824b8d1f4ee12cc22}
-
-\begin{DoxyCompactList}\small\item\em Has this atom changed since last time ? \end{DoxyCompactList}\item 
-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf x}\label{a00064_a807d379b04bd1c18c64b8636060577bf}
-
-\begin{DoxyCompactList}\small\item\em List of all equivalent \& translated positions, in cartesian coordinates. \end{DoxyCompactList}\item 
-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bfseries y}\label{a00064_ad9a1f5bf4df655fc3208eca9f655677f}
-
-\item 
-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bfseries z}\label{a00064_a2cd91f3033cf28f48664c84ecff25fcc}
-
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em List of all temp data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Additional Inherited Members}
 
 
 \subsubsection{Detailed Description}
-Container of temp data for each atom. 
+Class for Pair Distribution Function calculations for a single \doxyref{Crystal}{p.}{a00026} object. 
 
-The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
 P\-D\-F.\-h\end{DoxyCompactItemize}

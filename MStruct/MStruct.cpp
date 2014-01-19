@@ -46,6 +46,7 @@
 #include "newmat/newmatio.h" //in CalcParams subroutine
 
 #include <boost/math/special_functions/gamma.hpp>
+#include <boost/algorithm/string.hpp>
 
 #define _USE_MATH_DEFINES
 
@@ -4525,7 +4526,7 @@ mpParentReflectionProfile(0)
 {}
 
 void ReflectionProfileComponent::SetParentReflectionProfile
-                    (const ReflectionProfile& s) {
+                    (ReflectionProfile& s) {
   //if(mpParentPowderPatternDiffraction!=0) 
   //    mClockMaster.RemoveChild(mpParentPowderPattern->GetIntegratedProfileLimitsClock());
    mpParentReflectionProfile = &s;
@@ -4536,6 +4537,10 @@ void ReflectionProfileComponent::SetParentReflectionProfile
 }
 
 const ReflectionProfile& ReflectionProfileComponent::GetParentReflectionProfile()const {
+  return *mpParentReflectionProfile;
+}
+
+ReflectionProfile& ReflectionProfileComponent::GetParentReflectionProfile() {
   return *mpParentReflectionProfile;
 }
 
@@ -5748,7 +5753,7 @@ InterferenceSimpleSizeBroadeningEffect::InterferenceSimpleSizeBroadeningEffect()
   }
 }
 
-void InterferenceSimpleSizeBroadeningEffect::SetParentReflectionProfile(const ReflectionProfile& s) {
+void InterferenceSimpleSizeBroadeningEffect::SetParentReflectionProfile(ReflectionProfile& s) {
   // call parent method
   this->ReflectionProfileComponent::SetParentReflectionProfile(s);
   // set parent reflection profiles of both broadening effects
@@ -7173,7 +7178,7 @@ DislocationBroadeningEffectSvB::DislocationBroadeningEffectSvB()
   InitParameters(false);
 }
 
-void DislocationBroadeningEffectSvB::SetParentReflectionProfile(const ReflectionProfile &s)
+void DislocationBroadeningEffectSvB::SetParentReflectionProfile(ReflectionProfile &s)
 {
   // Call the superclass method to ensure functionality.
   ReflectionProfileComponent::SetParentReflectionProfile(s);
@@ -7691,7 +7696,7 @@ mAlpha(0.), mBeta(0.), mpUnitCell(0)
 	InitParameters();
 }
 
-void FaultsBroadeningEffectFCC::SetParentReflectionProfile(const ReflectionProfile &s)
+void FaultsBroadeningEffectFCC::SetParentReflectionProfile(ReflectionProfile &s)
 {
 	// Call the superclass method to ensure functionality.
 	ReflectionProfileComponent::SetParentReflectionProfile(s);
@@ -7924,7 +7929,7 @@ mAlpha(0.), mBeta(0.), mpUnitCell(0)
 	InitParameters();
 }
 
-void FaultsBroadeningEffectVelteropFCC::SetParentReflectionProfile(const ReflectionProfile &s)
+void FaultsBroadeningEffectVelteropFCC::SetParentReflectionProfile(ReflectionProfile &s)
 {
 	// Call the superclass method to ensure functionality.
 	ReflectionProfileComponent::SetParentReflectionProfile(s);
@@ -8147,8 +8152,8 @@ REAL FaultsBroadeningEffectVelteropFCC::GetApproxFWHM(const REAL xcenter,
 			if(mSign(igroup)!=0) tsum += mAbsL0(igroup);
 		
 		// FWHM - Warren formula (in reciprocal space units)
-		fwhm += (1.5*mAlpha+mBeta)/(h*h+k*k+l*l)/s0/mCount.sum()*tsum;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
-		
+		fwhm += (1.5*mAlpha+mBeta)/(h*h+k*k+l*l)/s0/mCount.sum()*tsum;
+
 		tsum = 0.;
 		
 		for(int igroup=0; igroup<mSign.numElements(); igroup++)
@@ -8739,7 +8744,7 @@ void FaultsBroadeningEffectWC11m23::SetProfilePar (const REAL alpha)
   mClockMaster.Click();
 }
 
-void FaultsBroadeningEffectWC11m23::SetParentReflectionProfile (const ReflectionProfile &s)
+void FaultsBroadeningEffectWC11m23::SetParentReflectionProfile (ReflectionProfile &s)
 {
   // Call the superclass method to ensure functionality
   ReflectionProfileComponent::SetParentReflectionProfile(s);
@@ -9090,9 +9095,13 @@ CrystVector_REAL PseudoVoigtBroadeningEffectA::GetProfile(
 REAL PseudoVoigtBroadeningEffectA::GetApproxFWHM(const REAL xcenter,
 			 const REAL h, const REAL k, const REAL l)const
 {
-  return sqrt( mCagliotiW
-              +mCagliotiV*tan(xcenter/2.0)
-              +mCagliotiU*pow(tan(xcenter/2.0),2));
+  const REAL fwhm = sqrt( mCagliotiW
+		    +mCagliotiV*tan(xcenter/2.0)
+		    +mCagliotiU*pow(tan(xcenter/2.0),2));
+  const REAL asym = (xcenter<mAsymXMax) ? 
+                    mAsym0+mAsym1/sin(xcenter)+mAsym2/pow(sin(xcenter),(REAL)2.) : 1.;
+  
+  return fwhm*0.25*(2.+asym+1./asym);
 }
 
 bool PseudoVoigtBroadeningEffectA::IsRealSpaceType()const {
@@ -9192,15 +9201,18 @@ void PseudoVoigtBroadeningEffectA::InitParameters()
 
 // HKLPseudoVoigtBroadeningEffectA
 HKLPseudoVoigtBroadeningEffectA::HKLPseudoVoigtBroadeningEffectA()
+  :mParamsFileName("")
 {}
 
 HKLPseudoVoigtBroadeningEffectA::~HKLPseudoVoigtBroadeningEffectA()
 {
+  // clear reflection store
   for(int i=0;i<mReflStore.size();i++) {
     HKLProfilePar *pData=(HKLProfilePar*)mReflStore.at(i).data;
     this->RemovePar(&(this->GetPar(&(pData->dx))));
     this->RemovePar(&(this->GetPar(&(pData->fwhm))));
     this->RemovePar(&(this->GetPar(&(pData->eta))));
+    this->RemovePar(&(this->GetPar(&(pData->asym))));
     delete pData;
   }
   mReflStore.clear();
@@ -9212,10 +9224,7 @@ CrystVector_REAL HKLPseudoVoigtBroadeningEffectA::GetProfile(
 				     const REAL h, const REAL k, const REAL l)
 {
   int nbPoints = x.numElements(); 
-  CrystVector_REAL profile(nbPoints);
- 
-  const REAL *p1 = x.data();
-  REAL *p2 = profile.data();
+  CrystVector_REAL profile;
 
   // try to find (hkl) reflection in the "store"
   int ind = mReflStore.find((int)h,(int)k,(int)l,xcenter);
@@ -9224,7 +9233,7 @@ CrystVector_REAL HKLPseudoVoigtBroadeningEffectA::GetProfile(
   if(ind>=0) {
   
     const HKLProfilePar *pData= (HKLProfilePar*) mReflStore.at(ind).data;
-
+    
     // get radiation and wavelength
     const Radiation &rad = GetParentReflectionProfile().
       GetParentPowderPatternDiffraction().GetRadiation();
@@ -9240,26 +9249,98 @@ CrystVector_REAL HKLPseudoVoigtBroadeningEffectA::GetProfile(
     const REAL ni = pData->eta;
     const REAL w = (abs(ni)<FLT_EPSILON) ? 0. : 1./(1.+factorPhi*(1.-ni)/ni);
 
-    const REAL factorG = M_PI*M_PI*hwhm*hwhm/log(2.);
+    const REAL factorGsq = M_PI*M_PI*hwhm*hwhm/log(2.);
     const REAL factorC = 2.*M_PI*hwhm;
 
-    for(int i=0;i<nbPoints;i++) {
-      double L = *p1++; L = abs(L);
-      *p2++ = REAL((1.-w)*exp(-factorG*L*L)+w*exp(-factorC*L)); 
-    }
+    const bool is_asym = fabs(pData->asym-1.)>=0.0001;
+    profile.resize((is_asym==true) ? 2*nbPoints : nbPoints);
+
+    const REAL *p1 = x.data();
+    REAL *p2 = profile.data();
+
+    if( !is_asym ) {
+      
+      for(int i=0;i<nbPoints;i++) {
+	double L = *p1++; L = abs(L);
+	*p2++ = REAL((1.-w)*exp(-factorGsq*L*L)+w*exp(-factorC*L)); 
+      }
+
+    } else { // is asymmetric
+    
+      // left side
+      const REAL c1 = 2.*pData->asym/(1.+pData->asym);
+      const REAL factorG1 = sqrt(factorGsq)*c1;
+      const REAL factorG1sq = factorG1*factorG1;
+      const REAL factorC1 = factorC*c1;
+
+      // right side
+      const REAL c2 = 2./(1.+pData->asym);
+      const REAL factorG2 = sqrt(factorGsq)*c2;
+      const REAL factorG2sq = factorG2*factorG2;
+      const REAL factorC2 = factorC*c2;
+
+      for(int i=0;i<nbPoints;i++) {
+	double L = *p1++;
+	// -- real part --
+	// left side
+	*p2  = REAL((1.-w)*exp(-factorG1sq*L*L)+w*exp(-factorC1*fabs(L)))*c1;
+	// right side
+	*p2 += REAL((1.-w)*exp(-factorG2sq*L*L)+w*exp(-factorC2*fabs(L)))*c2;
+
+	p2++;
+
+	// -- imaginary part --
+	double arg1, arg2,arg3;
+	
+	// left side
+	arg1 = factorG1*L;
+	arg2 = factorC1*L;
+	arg3 = -arg2;
+	
+	*p2  = -REAL((1.-w)*M_2_SQRTPI*func_daw(arg1)+w*((fabs(arg2)<1.e-5) ? 0. : (exp(-arg2)*func_ei(arg2)-exp(-arg3)*func_ei(arg3)))/M_PI)*c1;
+	
+	// right side
+	arg1 = factorG2*L;
+	arg2 = factorC2*L;
+	arg3 = -arg2;
+	
+	*p2 += REAL((1.-w)*M_2_SQRTPI*func_daw(arg1)+w*((fabs(arg2)<1.e-5) ? 0. : (exp(-arg2)*func_ei(arg2)-exp(-arg3)*func_ei(arg3)))/M_PI)*c2;
+
+	p2++;
+
+      } // for(int i=0;i<nbPoints;i++)  
+
+      profile *= 0.5;
+
+    } // is asymmetric
 
   } else {
     // delta function
-    for(int i=0;i<nbPoints;i++) {*p2++ = 1.;p1++;}
+    profile.resize(nbPoints);
+    const REAL *p1 = x.data();
+    REAL *p2 = profile.data();
+    for(int i=0;i<nbPoints;i++) {*p2++ = 1.; p1++;}
   }
-
 
   if (bsavecalc && xcenter>=xcenterlimits[0] && xcenter<=xcenterlimits[1]) {
     ofstream F("profileAGhkl.dat");
-    F<<"# dx="<<0.<<",fwhm="<<0.<<",eta="<<0.;
-    F<<",xcenter="<<xcenter*RAD2DEG<<",(HKL)=("<<h<<" "<<k<<" "<<l<<")"<<endl;
-    for(int i=0;i<nbPoints;i++)
-      F<<setw(18)<<x(i)<<setw(18)<<profile(i)<<endl;
+    bool asym = false;
+    if(ind<0) {
+      F<<"# dx="<<0.<<",fwhm="<<0.<<",eta="<<0.<<",asym="<<1.;
+      F<<",xcenter="<<xcenter*RAD2DEG<<",(HKL)=("<<h<<" "<<k<<" "<<l<<")"<<endl;
+    } else {
+      const HKLProfilePar *pData= (HKLProfilePar*) mReflStore.at(ind).data;
+      F<<"# dx="<<pData->dx<<",fwhm="<<pData->fwhm<<",eta="<<pData->eta<<",asym="<<pData->asym;
+      F<<",xcenter="<<xcenter*RAD2DEG<<",(HKL)=("<<h<<" "<<k<<" "<<l<<")"<<endl;
+      asym = fabs(pData->asym-1.)>=0.0001;
+    }
+    if(!asym) { 
+      for(int i=0;i<nbPoints;i++)
+	F<<setw(18)<<x(i)<<setw(18)<<profile(i)<<setw(18)<<0.0<<endl;
+    } else {
+      for(int i=0;i<nbPoints;i++)
+	F<<setw(18)<<x(i)<<setw(18)<<profile(2*i)<<setw(18)<<profile(2*i+1)<<endl;
+    }
     F.close();
   }
 
@@ -9277,7 +9358,7 @@ REAL HKLPseudoVoigtBroadeningEffectA::GetApproxFWHM(const REAL xcenter,
   // if refl. found use stored params else return 0. for delta function
   if(ind>=0) {
     const HKLProfilePar *pData= (HKLProfilePar*) mReflStore.at(ind).data;
-    fwhm= pData->fwhm;
+    fwhm= pData->fwhm*0.25*(2.+pData->asym+1./pData->asym);
   }
 
   return fwhm;
@@ -9288,10 +9369,12 @@ bool HKLPseudoVoigtBroadeningEffectA::IsRealSpaceType()const {
 }
 
 void HKLPseudoVoigtBroadeningEffectA::SetProfilePar(int h,int k,int l,
-						    REAL dx,REAL fwhm,REAL eta,
+						    REAL dx,REAL fwhm,REAL eta,REAL asym,
 						    bool dx_fixed,
 						    bool fwhm_fixed,
-						    bool eta_fixed)
+						    bool eta_fixed,
+						    bool asym_fixed,
+						    string func, std::vector<string> effects)
 {
   // try to find (hkl) reflection in the "store"
   int ind = mReflStore.find(h,k,l,0.);
@@ -9346,6 +9429,16 @@ void HKLPseudoVoigtBroadeningEffectA::SetProfilePar(int h,int k,int l,
     tmp.SetDerivStep(0.05);
     this->AddPar(tmp);
     }
+
+    {
+    RefinablePar tmp(string(name+"_asym").c_str(),&(pData->asym),0.1,15.,
+		     gpRefParTypeScattDataProfileWidth, // TODO:: change this
+		     REFPAR_DERIV_STEP_ABSOLUTE,
+		     true,false,false,false,1.);
+    tmp.AssignClock(mClockMaster);
+    tmp.SetDerivStep(0.05);
+    this->AddPar(tmp);
+    }
   }
   
   // Is this refl currently used by ScatteringData object?
@@ -9379,6 +9472,28 @@ void HKLPseudoVoigtBroadeningEffectA::SetProfilePar(int h,int k,int l,
   par.SetIsUsed(isused);
   }
 
+  {
+  RefinablePar &par = GetPar(string(name+"_asym"));
+  par.SetValue(asym);
+  par.SetIsFixed(asym_fixed);
+  par.SetIsUsed(isused);
+  }
+
+  // set profile function type and list of disabled effects
+  pData->func = func;
+  pData->effects = effects;
+
+  // register disabled component by parent reflection profile
+  REAL x = 0.;
+  { // calculate reflection center
+    REAL xx = h, yy = k, zz = l;
+    this->GetParentReflectionProfile().GetParentPowderPatternDiffraction().GetCrystal().MillerToOrthonormalCoords(xx,yy,zz);
+    x = sqrt( pow(xx,2)+pow(yy,2)+pow(zz,2) )/2; // x=1/(2d)=STOL
+    x = this->GetParentReflectionProfile().GetParentPowderPatternDiffraction().GetParentPowderPattern().STOL2X(x);
+    x = this->GetParentReflectionProfile().GetParentPowderPatternDiffraction().GetParentPowderPattern().X2XCorr(x);
+  }
+  this->GetParentReflectionProfile().RegisterHKLDisabledComponents(h,k,l,x,effects,this);
+
   mClockMaster.Click();
 }
 
@@ -9397,6 +9512,143 @@ REAL HKLPseudoVoigtBroadeningEffectA::GetPositionCorr(const REAL xcenter,
   }
 
   return xcorr;
+}
+
+void HKLPseudoVoigtBroadeningEffectA::SetParametersFile(const string &filename)
+{
+  if( !filename.empty() )
+    mParamsFileName = filename; // set the filename
+  else {
+    // set empty file
+    mParamsFileName = "";
+    // clear reflection store
+    for(int i=0;i<mReflStore.size();i++) {
+      HKLProfilePar *pData=(HKLProfilePar*)mReflStore.at(i).data;
+      this->RemovePar(&(this->GetPar(&(pData->dx))));
+      this->RemovePar(&(this->GetPar(&(pData->fwhm))));
+      this->RemovePar(&(this->GetPar(&(pData->eta))));
+      this->RemovePar(&(this->GetPar(&(pData->asym))));
+      delete pData;
+    }
+    mReflStore.clear();
+    // TODO:: remove list of disabeled effects
+  }
+}
+
+void HKLPseudoVoigtBroadeningEffectA::LoadParametersFile()
+{
+  cout << "HKLEffect: Loading HKLEffect params file\n";
+
+  if( mParamsFileName.empty() )
+    return; // nothing to load
+
+  ifstream f(mParamsFileName.c_str());
+
+  string line;
+  while (getline(f,line)) {  
+    if (line.empty()) break;
+    
+    boost::trim(line); // trim
+
+    if (line.at(0)=='#') continue;
+    if (line.at(0)=='@') {
+      // take the first word on line
+      istringstream s(line);
+      string word;
+      s >> word;
+      // conver to lowercase
+      boost::to_lower(word);
+      // compare strings
+      if( word.compare("@end")==0 ) break;
+    }
+    
+    int h, k, l, fdtth, ffwhm, feta, fasym;
+    REAL dtth, fwhm, eta, asym;
+    string func;
+    std::vector<string> effects;
+    
+    istringstream s(line);
+    s >> h >> k >> l >> func >> dtth >> fdtth >> fwhm >> ffwhm >> eta >> feta;
+    if (s.fail()==true) break; // the above fields are obligatory
+    s >> asym >> fasym; // asym and disabled-effects are optional
+    if (s.fail()==true) { asym=1.0; fasym=1; }
+
+    while(true) {
+      string word;
+      s >> word;
+      if( s.fail()==true ) break;
+      // clear effect name (remove spaces and commas)
+      boost::erase_all(word, " ");
+      boost::erase_all(word, ",");
+      // add effect
+      if( !word.empty() ) effects.push_back( word );
+    }
+    
+    //this->SetHKLIntensityCorrParams(h,k,l,corr,fixed==1);
+    this->SetProfilePar(h,k,l,dtth*DEG2RAD,fwhm*DEG2RAD,eta,asym,
+			fdtth>0,ffwhm>0,feta>0,fasym>0,func,effects);
+  }
+
+  f.close();
+}
+
+void HKLPseudoVoigtBroadeningEffectA::SaveParametersFile()
+{
+  cout << "HKLEffect: Saving HKLEffect params file\n";
+
+  if(mParamsFileName.empty())
+    return;
+
+  // copy content of the file
+  ostringstream s;
+  {
+    char buffer[1024];
+    ifstream f(mParamsFileName.c_str());
+    while(f.getline(buffer,1022)) s << buffer << '\n';
+    f.close();
+  }
+
+  // --- write parameters into file --- 
+  ofstream f(mParamsFileName.c_str());
+
+  // --- write time-stamp ---
+  {
+    time_t now = time(0);
+    f << "# " << ctime(&now); // ctime string already terminated with '\n'
+  }
+
+  // --- write header ---
+  f << "#    h   k   l     func     dtth(deg) fixed     fwhm(deg) fixed     eta fixed     asym fixed     disabled-effects\n";
+
+  // --- write data for all reflections ---
+  for(int i=0;i<mReflStore.size();i++) {
+    const ReflData &reflData = mReflStore.at(i);
+    HKLProfilePar *pData=(HKLProfilePar*)reflData.data;
+    f << setw(6) << reflData.H << " " << setw(3) << reflData.K << " " << setw(3) << reflData.L; // h k l
+    f << " " << setw(8) << pData->func; // func
+    f << " " << setw(13) << std::setprecision(4) << std::fixed << pData->dx*RAD2DEG
+      << " " << setw(5) << this->GetPar(&(pData->dx)).IsFixed(); // dtth
+    f << " " << setw(13) << std::setprecision(3) << std::fixed << pData->fwhm*RAD2DEG
+      << " " << setw(5) << this->GetPar(&(pData->fwhm)).IsFixed(); // fwhm
+    f << " " << setw(7) << std::setprecision(2) << std::fixed << pData->eta
+      << " " << setw(5) << this->GetPar(&(pData->eta)).IsFixed(); // eta
+    f << " " << setw(8) << std::setprecision(2) << std::fixed << pData->asym
+      << " " << setw(5) << this->GetPar(&(pData->asym)).IsFixed(); // asym
+    f << "     "; // effects
+    for(int i=0; i<pData->effects.size(); i++) {
+      if(i>0) f << ",";
+      f << pData->effects.at(i);
+    }
+    f << "\n";
+  }
+
+  // --- write end stamp ---
+  f << "@end" << "\n";
+
+  // save original file content at the end of the file
+  f<<'\n'<< s.str();
+
+  f.close();
 }
 
 // ReflectionProfile
@@ -9429,6 +9681,30 @@ mpParentPowderPatternDiffraction(old.mpParentPowderPatternDiffraction)
 {
   this->mClockMaster.AddChild( mClockStressCorrQ );
   InitParameters();
+
+  // create deep copy of DisabledEffectsStore
+  mDisabledEffectsStore.clear();
+  for(long i=0; i<old.mDisabledEffectsStore.size(); i++) {
+    const ReflData &reflDataOld = old.mDisabledEffectsStore.at(i);
+    
+    // create deep copy of DisabledEffectsList
+    const DisabledEffectsList *pEffectsListOld = (DisabledEffectsList*)reflDataOld.data;
+    DisabledEffectsList *pEffectsListNew = new DisabledEffectsList;
+    for(long j=0; j<pEffectsListOld->list.size(); j++) {
+      const ReflectionProfileComponent *pDisabledCompOld = pEffectsListOld->list.at(j).first;
+      const ObjCryst::RefinableObj *pRegistringObjOld = pEffectsListOld->list.at(j).second;
+      
+      ReflectionProfileComponent *pDisabledCompNew = &( this->GetReflectionProfileComponent(pDisabledCompOld->GetName()) );
+      ObjCryst::RefinableObj *pRegistringObjNew =
+	( pRegistringObjOld!=NULL ) ? &( this->GetReflectionProfileComponent(pRegistringObjOld->GetName()) ) : NULL;
+      
+      // register new effect into list
+      pEffectsListNew->list.push_back( std::make_pair(pDisabledCompNew,pRegistringObjNew) );
+    }
+
+    // insert list into new store
+    mDisabledEffectsStore.add( reflDataOld.H, reflDataOld.K, reflDataOld.L, reflDataOld.x, (void*)pEffectsListNew );
+  }
 }
   
 ReflectionProfile* ReflectionProfile::CreateCopy()const
@@ -9450,6 +9726,7 @@ ReflectionProfile::~ReflectionProfile()
     delete pData;
   }
   mReflStore.clear();
+  mDisabledEffectsStore.clear();
 }
 
 const string& ReflectionProfile::GetClassName () const
@@ -9482,6 +9759,97 @@ const ReflectionProfileComponent &  ReflectionProfile::GetReflectionProfileCompo
 { return mReflectionProfileComponentRegistry.GetObj(objName); }
 ReflectionProfileComponent &  ReflectionProfile::GetReflectionProfileComponent (const string &objName)
 { return mReflectionProfileComponentRegistry.GetObj(objName); }
+
+void ReflectionProfile::RegisterHKLDisabledComponents (long h,long k,long l,REAL x,
+						       const vector<string> effects,
+						       const ObjCryst::RefinableObj *pRegisteringObj)
+{
+  cout << "Info: RegisterHKLDisabledComponents called\n";
+
+  // find (h,k,l) reflection in mDisabledEffectsStore
+  int ind = mDisabledEffectsStore.find(h, k, l, x);
+
+  DisabledEffectsList *pDisabledEffectsList = NULL;
+  if(ind>=0) // reflection already in use
+    pDisabledEffectsList = (DisabledEffectsList*) mDisabledEffectsStore.at(ind).data;
+  else { // add reflection to store
+    pDisabledEffectsList = new DisabledEffectsList;
+    mDisabledEffectsStore.add(h,k,l,x,(void*)pDisabledEffectsList);
+  }
+  
+  // for all effects in specified effects list
+  for(int ieff=0; ieff<effects.size(); ieff++) {
+
+    string effect = effects.at(ieff);
+    boost::to_lower(effect); // lowercase
+    if( effect.compare("all")!=0 && effect.compare("all_not_instr")!=0 ) {
+      // --- if not 'all' and not 'all_not_instr' ---
+      const ReflectionProfileComponent *pEffect = &( GetReflectionProfileComponent( effects.at(ieff) ) ); // case sensitive, pointer comparison
+      // check if not already registred
+      bool registered = false;
+      for(int ireg=0; ireg<pDisabledEffectsList->list.size(); ireg++)
+	if( pEffect ==  pDisabledEffectsList->list.at(ireg).first &&
+	    pRegisteringObj == pDisabledEffectsList->list.at(ireg).second ) {
+	  registered = true;
+	  break;
+	}
+      if( !registered ) { // register new one
+	pDisabledEffectsList->list.push_back( make_pair(pEffect,pRegisteringObj) );
+	cout << "Info: Registering component (" << pEffect->GetName() << ", by " << ((pRegisteringObj!=NULL) ? pRegisteringObj->GetName() : "NULL");
+	cout << ") to be disabled for hkl = " << h << " " << k << " " << l << "\n";
+      }
+    } else {
+      cout << "Info: all or all_not_instr\n";
+      // --- if all, or all_not_instr ---
+      const bool not_instr = effect.compare("all_not_instr")==0; // also 'not_instr'?
+      const ReflectionProfileComponent *pInstrComp = (not_instr) ? &( GetReflectionProfileComponent("instrProfile") ) : NULL; // auxiliary pointer
+      cout << "Info: pInstrComp: " << pInstrComp << "\n";
+      // for all components
+      for(int icomp=0; icomp<GeReflectionProfileComponentNb(); icomp++) {
+	const ReflectionProfileComponent *pComp = &( GetReflectionProfileComponent(icomp) );
+	cout << "Info: CompName: " << pComp->GetName() << ": " << pComp << "\n";
+	// except registering component
+	if( (ObjCryst::RefinableObj*)pComp == pRegisteringObj ) continue;
+	// or instrumental component (optionally)
+	if( not_instr && (pInstrComp == pComp) ) continue;
+	// register component
+	// check if not already registred
+	bool registered = false;
+	for(int ireg=0; ireg<pDisabledEffectsList->list.size(); ireg++)
+	  if( pComp ==  pDisabledEffectsList->list.at(ireg).first &&
+	      pRegisteringObj == pDisabledEffectsList->list.at(ireg).second ) {
+	    registered = true;
+	    break;
+	  }
+	if( !registered ) { // register new one
+	  pDisabledEffectsList->list.push_back( make_pair(pComp,pRegisteringObj) );
+	  cout << "Info: Registering component (" << pComp->GetName() << ", by " << ((pRegisteringObj!=NULL) ? pRegisteringObj->GetName() : "NULL");
+	  cout << ") to be disabled for hkl = " << h << " " << k << " " << l << "\n";
+	}
+      } // icomp
+    } // if all, or all_not_instr
+  } // ieff
+}
+
+bool ReflectionProfile::IsHKLReflectionProfileComponentDisabled(long h,long k,long l,REAL x,const ReflectionProfileComponent &comp)const
+{
+  // try to find (hkl) reflection in mDisabledEffectsStore
+  int ind = mDisabledEffectsStore.find(h,k,l,x);
+  if(ind<0) // reflection not found
+    return false;
+  
+  // check if effect included in disabled effects list
+  const DisabledEffectsList *pDisabledEffectsList = (DisabledEffectsList*) mDisabledEffectsStore.at(ind).data;
+  if(pDisabledEffectsList==NULL)
+    return false;
+
+  for(int ieff=0; ieff<pDisabledEffectsList->list.size(); ieff++)
+    if( pDisabledEffectsList->list.at(ieff).first == &comp ) {
+      return true;
+    }
+
+  return false;
+}
 
 bool ReflectionProfile::PrepareForCalc(const CrystVector_REAL &x,
 				       const REAL xcenter, 
@@ -9520,8 +9888,9 @@ bool ReflectionProfile::PrepareForCalc(const CrystVector_REAL &x,
 	// if not, the calculation grid will be changed
 	REAL fwhm = 0.;
 	for(int icomp=0;icomp<mReflectionProfileComponentRegistry.GetNb();icomp++) {
-    const ReflectionProfileComponent &comp = mReflectionProfileComponentRegistry.GetObj(icomp);
-		fwhm += comp.GetApproxFWHM(xcenter,h,k,l);
+	  const ReflectionProfileComponent &comp = mReflectionProfileComponentRegistry.GetObj(icomp);
+	  if ( this->IsHKLReflectionProfileComponentDisabled(h,k,l,xcenter,comp) ) continue;
+	  fwhm += comp.GetApproxFWHM(xcenter,h,k,l);
 	}
 	fwhm *= cos(xcenter/2)/mLambda;
 	if(fwhm>std::numeric_limits<REAL>::epsilon() && fwhm/mds<10) {
@@ -9668,6 +10037,7 @@ CrystVector_REAL ReflectionProfile::GetProfile (const CrystVector_REAL &x,
   for(int k=0;k<mReflectionProfileComponentRegistry.GetNb();k++) {
     ReflectionProfileComponent &comp = mReflectionProfileComponentRegistry.GetObj(k);
     if (!comp.IsRealSpaceType()) continue;
+    if (this->IsHKLReflectionProfileComponentDisabled(H,K,L,xcenter,comp)) continue;
     fwhm += comp.GetApproxFWHM(xcenter,H,K,L);
     CrystVector_REAL profile=comp.GetProfile(mvL,xcenter,H,K,L);
     const REAL *p=profile.data();
@@ -9735,6 +10105,7 @@ CrystVector_REAL ReflectionProfile::GetProfile (const CrystVector_REAL &x,
   for(int k=0;k<mReflectionProfileComponentRegistry.GetNb();k++) {
     ReflectionProfileComponent &comp = mReflectionProfileComponentRegistry.GetObj(k);
     if (comp.IsRealSpaceType()) continue;
+    if (this->IsHKLReflectionProfileComponentDisabled(H,K,L,xcenter,comp)) continue;
     REAL fwhm1 = comp.GetApproxFWHM(xcenter,H,K,L);
     CrystVector_REAL profile=( (fwhm1*factor>=mds) || (mReflectionProfileComponentRegistry.GetNb()==1) ) //nonsence ???!!!						
     							? comp.GetProfile(mvs,xcenter,H,K,L)
@@ -9802,6 +10173,7 @@ CrystVector_REAL ReflectionProfile::GetProfile (const CrystVector_REAL &x,
   // add postion corr of all components - not necessary to recalc always
   for(int k=0;k<mReflectionProfileComponentRegistry.GetNb();k++) {
     ReflectionProfileComponent &comp = mReflectionProfileComponentRegistry.GetObj(k);
+    if (this->IsHKLReflectionProfileComponentDisabled(H,K,L,xcenter,comp)) continue;
     xcorr += comp.GetPositionCorr(xcenter,H,K,L);
   }
   
@@ -9839,6 +10211,7 @@ REAL ReflectionProfile::GetApproxFWHM(const REAL xcenter,
   // sum appprox. FWHMs from all effects
   for(int k=0;k<mReflectionProfileComponentRegistry.GetNb();k++) {
     const ReflectionProfileComponent &comp = mReflectionProfileComponentRegistry.GetObj(k);
+    if (this->IsHKLReflectionProfileComponentDisabled(h,k,l,xcenter,comp)) continue;
     fwhm += comp.GetApproxFWHM(xcenter,h,k,l);
   }
 

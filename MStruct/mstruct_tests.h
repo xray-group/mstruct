@@ -67,4 +67,5 @@ struct char2upper : public std::unary_function<char, void> {
 // them are returned in the output vector.
 std::vector< void* > read_line ( std::istringstream &iss, std::istream &is = std::cin, const bool load_objects=true);
 
+
 #endif /* __MSTRUCT_TESTS__ */

@@ -1,238 +1,27 @@
-\subsection{Obj\-Cryst\-:\-:Reflection\-Profile\-Pseudo\-Voigt Class Reference}
-\label{a00083}\index{Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt@{Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt}}
+\subsection{Obj\-Cryst\-:\-:Powder\-Pattern\-Diffraction\-:\-:Refl\-Profile Struct Reference}
+\label{a00083}\index{Obj\-Cryst\-::\-Powder\-Pattern\-Diffraction\-::\-Refl\-Profile@{Obj\-Cryst\-::\-Powder\-Pattern\-Diffraction\-::\-Refl\-Profile}}
 
 
-Pseudo-\/\-Voigt reflection profile.  
+Profile of a single reflection.  
 
 
-Inheritance diagram for Obj\-Cryst\-:\-:Reflection\-Profile\-Pseudo\-Voigt\-:\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[height=3.000000cm]{a00083}
-\end{center}
-\end{figure}
-\subsubsection*{Public Member Functions}
+\subsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries Reflection\-Profile\-Pseudo\-Voigt} (const {\bf Reflection\-Profile\-Pseudo\-Voigt} \&old)\label{a00083_a00e4ab294a17b1cf082567eccad9807f}
+long {\bf first}\label{a00083_a0074278f5c7c2db3636f12398983c27b}
 
-\item 
-virtual \\*
-{\bf Reflection\-Profile\-Pseudo\-Voigt} $\ast$ {\bfseries Create\-Copy} () const \label{a00083_a76d51b0e7499eb3c2e1adf6a3f8ecede}
+\begin{DoxyCompactList}\small\item\em First point of the pattern for which the profile is calculated. \end{DoxyCompactList}\item 
+long {\bf last}\label{a00083_a5c046412417d8bd818643b2e85bdfa81}
 
-\item 
-virtual const string \& {\bf Get\-Class\-Name} () const 
-\begin{DoxyCompactList}\small\item\em Name for this class (\char`\"{}\-Refinable\-Obj\char`\"{}, \char`\"{}\-Crystal\char`\"{},...). \end{DoxyCompactList}\item 
-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf Get\-Profile} (const Cryst\-Vector\-\_\-\-R\-E\-A\-L \&x, const R\-E\-A\-L xcenter, const R\-E\-A\-L h, const R\-E\-A\-L k, const R\-E\-A\-L l)
-\begin{DoxyCompactList}\small\item\em Get the reflection profile. \end{DoxyCompactList}\item 
-void {\bf Set\-Profile\-Par} (const R\-E\-A\-L fwhm\-Caglioti\-W, const R\-E\-A\-L fwhm\-Caglioti\-U=0, const R\-E\-A\-L fwhm\-Caglioti\-V=0, const R\-E\-A\-L eta0=0.\-5, const R\-E\-A\-L eta1=0.)
-\begin{DoxyCompactList}\small\item\em Set reflection profile parameters. \end{DoxyCompactList}\item 
-virtual R\-E\-A\-L {\bf Get\-Full\-Profile\-Width} (const R\-E\-A\-L relative\-Intensity, const R\-E\-A\-L xcenter, const R\-E\-A\-L h, const R\-E\-A\-L k, const R\-E\-A\-L l)
-\begin{DoxyCompactList}\small\item\em Get the (approximate) full profile width at a given percentage of the profile maximum (e.\-g. \end{DoxyCompactList}\item 
-bool {\bf Is\-Anisotropic} () const \label{a00083_ad8b48ea19ac65f866340435d0bb803a8}
+\begin{DoxyCompactList}\small\item\em Last point of the pattern for which the profile is calculated. \end{DoxyCompactList}\item 
+Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf profile}\label{a00083_ac0babcc11d71c583bc1bd809d984cd6e}
 
-\begin{DoxyCompactList}\small\item\em Is the profile anisotropic ? \end{DoxyCompactList}\item 
-virtual void {\bf X\-M\-L\-Output} (ostream \&os, int indent=0) const 
-\begin{DoxyCompactList}\small\item\em Output to stream in well-\/formed X\-M\-L. \end{DoxyCompactList}\item 
-virtual void {\bf X\-M\-L\-Input} (istream \&is, const {\bf X\-M\-L\-Cryst\-Tag} \&tag)
-\begin{DoxyCompactList}\small\item\em Input From stream. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Private Member Functions}
-\begin{DoxyCompactItemize}
-\item 
-void {\bf Init\-Parameters} ()\label{a00083_a25cbe274ffdb207497ab0b35572b6b1c}
-
-\begin{DoxyCompactList}\small\item\em Initialize parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Private Attributes}
-\begin{DoxyCompactItemize}
-\item 
-R\-E\-A\-L {\bf m\-Caglioti\-U}\label{a00083_a673b093480af5c202c6885a7381ab209}
-
-\begin{DoxyCompactList}\small\item\em F\-W\-H\-M parameters, following Caglioti's law. \end{DoxyCompactList}\item 
-R\-E\-A\-L {\bfseries m\-Caglioti\-V}\label{a00083_a727ceb0ddc156c759feae234a8e85361}
-
-\item 
-R\-E\-A\-L {\bfseries m\-Caglioti\-W}\label{a00083_ac1ec2efab75fc0c90da3adc059808f5d}
-
-\item 
-R\-E\-A\-L {\bf m\-Pseudo\-Voigt\-Eta0}\label{a00083_ad7823645fa4e2a23b827a2c2ac6e9d41}
-
-\begin{DoxyCompactList}\small\item\em Pseudo-\/\-Voigt mixing parameter \-: eta=eta0 +2$\ast$theta$\ast$eta1 eta=1 -\/$>$ pure Lorentzian ; eta=0 -\/$>$ pure Gaussian. \end{DoxyCompactList}\item 
-R\-E\-A\-L {\bfseries m\-Pseudo\-Voigt\-Eta1}\label{a00083_a7065eed2c8989cb1e868388a47623fbc}
-
-\item 
-R\-E\-A\-L {\bf m\-Asym\-Berar\-Baldinozzi\-A0}
-\begin{DoxyCompactList}\small\item\em Asymmetry parameters, following the Bérar \& Baldinozzi approach ( Bérar \& baldinozzi, J. \end{DoxyCompactList}\item 
-R\-E\-A\-L {\bfseries m\-Asym\-Berar\-Baldinozzi\-A1}\label{a00083_aaffc4c0aad8121b584d0c2c52cc88d02}
-
-\item 
-R\-E\-A\-L {\bfseries m\-Asym\-Berar\-Baldinozzi\-B0}\label{a00083_a26bf261e7225525149cde98f80a54003}
-
-\item 
-R\-E\-A\-L {\bfseries m\-Asym\-Berar\-Baldinozzi\-B1}\label{a00083_a8fb40fba7f7e3bfcb5da9cf018bda761}
-
-\item 
-R\-E\-A\-L {\bf m\-Asym0}
-\begin{DoxyCompactList}\small\item\em Asymmetry parameters, following the analytical function for asymmetric pseudo-\/voigt given by (e.\-g.) Toraya in J. \end{DoxyCompactList}\item 
-R\-E\-A\-L {\bfseries m\-Asym1}\label{a00083_ac76b3e06b3b75864775fb7a149044b1f}
-
-\item 
-R\-E\-A\-L {\bfseries m\-Asym2}\label{a00083_a81c1c2a4a5a064c4a21027364f340eb2}
-
-\end{DoxyCompactItemize}
-\subsubsection*{Additional Inherited Members}
+\begin{DoxyCompactList}\small\item\em The profile. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-Pseudo-\/\-Voigt reflection profile. 
+Profile of a single reflection. 
 
-\subsubsection{Member Function Documentation}
-\index{Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt@{Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt}!Get\-Class\-Name@{Get\-Class\-Name}}
-\index{Get\-Class\-Name@{Get\-Class\-Name}!ObjCryst::ReflectionProfilePseudoVoigt@{Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt}}
-\paragraph[{Get\-Class\-Name}]{\setlength{\rightskip}{0pt plus 5cm}virtual const string\& Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt\-::\-Get\-Class\-Name (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00083_a55628cdadc249b7973f2a6471d478e76}
-
-
-Name for this class (\char`\"{}\-Refinable\-Obj\char`\"{}, \char`\"{}\-Crystal\char`\"{},...). 
-
-This is only useful to distinguish different classes when picking up objects from the \doxyref{Refinable\-Obj}{p.}{a00078} Global Registry 
-
-Reimplemented from {\bf Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00078_a62968d90a7a3080738b363934616c019}.
-
-\index{Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt@{Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt}!Get\-Full\-Profile\-Width@{Get\-Full\-Profile\-Width}}
-\index{Get\-Full\-Profile\-Width@{Get\-Full\-Profile\-Width}!ObjCryst::ReflectionProfilePseudoVoigt@{Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt}}
-\paragraph[{Get\-Full\-Profile\-Width}]{\setlength{\rightskip}{0pt plus 5cm}virtual R\-E\-A\-L Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt\-::\-Get\-Full\-Profile\-Width (
-\begin{DoxyParamCaption}
-\item[{const R\-E\-A\-L}]{relative\-Intensity, }
-\item[{const R\-E\-A\-L}]{xcenter, }
-\item[{const R\-E\-A\-L}]{h, }
-\item[{const R\-E\-A\-L}]{k, }
-\item[{const R\-E\-A\-L}]{l}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00083_abacd734b6ff73b4fc5e6c4a5cba62eb6}
-
-
-Get the (approximate) full profile width at a given percentage of the profile maximum (e.\-g. 
-
-F\-W\-H\-M=Get\-Full\-Profile\-Width(0.\-5)). 
-
-Implements {\bf Obj\-Cryst\-::\-Reflection\-Profile} \doxyref{}{p.}{a00081_ac6d2a69e63c3efd06f30ab134062bbc0}.
-
-\index{Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt@{Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt}!Get\-Profile@{Get\-Profile}}
-\index{Get\-Profile@{Get\-Profile}!ObjCryst::ReflectionProfilePseudoVoigt@{Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt}}
-\paragraph[{Get\-Profile}]{\setlength{\rightskip}{0pt plus 5cm}Cryst\-Vector\-\_\-\-R\-E\-A\-L Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt\-::\-Get\-Profile (
-\begin{DoxyParamCaption}
-\item[{const Cryst\-Vector\-\_\-\-R\-E\-A\-L \&}]{x, }
-\item[{const R\-E\-A\-L}]{xcenter, }
-\item[{const R\-E\-A\-L}]{h, }
-\item[{const R\-E\-A\-L}]{k, }
-\item[{const R\-E\-A\-L}]{l}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00083_a14ba03c411e8b3d2d4f5af46e6504658}
-
-
-Get the reflection profile. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em x,\-:} & the vector of x coordinates (i.\-e. either 2theta or time-\/of-\/flight) \\
-\hline
-{\em xcenter,\-:} & coordinate (2theta, tof) of the center of the peak \\
-\hline
-{\em h,k,l,\-:} & reflection Miller indices \\
-\hline
-\end{DoxyParams}
-\begin{DoxyNote}{Note}
-\-: derived classes who need either d\-\_\-hkl or the orthonormal coordinates of the scattering vector should be passed a \doxyref{Obj\-Cryst\-::\-Unit\-Cell}{p.}{a00117} object in the constructor so that they can use \doxyref{Obj\-Cryst\-::\-Unit\-Cell\-::\-Miller\-To\-Orthonormal\-Coords()}{p.}{a00117_af6efcbafcd761c6f8f4953190e7024d0} 
-\end{DoxyNote}
-
-
-Implements {\bf Obj\-Cryst\-::\-Reflection\-Profile} \doxyref{}{p.}{a00081_a93a92759349fa242b1c3ed6bb7b24979}.
-
-\index{Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt@{Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt}!Set\-Profile\-Par@{Set\-Profile\-Par}}
-\index{Set\-Profile\-Par@{Set\-Profile\-Par}!ObjCryst::ReflectionProfilePseudoVoigt@{Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt}}
-\paragraph[{Set\-Profile\-Par}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt\-::\-Set\-Profile\-Par (
-\begin{DoxyParamCaption}
-\item[{const R\-E\-A\-L}]{fwhm\-Caglioti\-W, }
-\item[{const R\-E\-A\-L}]{fwhm\-Caglioti\-U = {\ttfamily 0}, }
-\item[{const R\-E\-A\-L}]{fwhm\-Caglioti\-V = {\ttfamily 0}, }
-\item[{const R\-E\-A\-L}]{eta0 = {\ttfamily 0.5}, }
-\item[{const R\-E\-A\-L}]{eta1 = {\ttfamily 0.}}
-\end{DoxyParamCaption}
-)}\label{a00083_a41d53cb9c852d564d06c5ccb3ddfbcca}
-
-
-Set reflection profile parameters. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em fwhm\-Caglioti\-W,fwhm\-Caglioti\-U,fwhm\-Caglioti\-V} & \-: these are the U,V and W parameters in the Caglioti's law \-: $ fwhm^2= U \tan^2(\theta) + V \tan(\theta) +W $ if only W is given, the width is constant \\
-\hline
-{\em eta0,eta1,\-:} & these are the mixing parameters. \\
-\hline
-\end{DoxyParams}
-\index{Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt@{Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt}!X\-M\-L\-Input@{X\-M\-L\-Input}}
-\index{X\-M\-L\-Input@{X\-M\-L\-Input}!ObjCryst::ReflectionProfilePseudoVoigt@{Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt}}
-\paragraph[{X\-M\-L\-Input}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt\-::\-X\-M\-L\-Input (
-\begin{DoxyParamCaption}
-\item[{istream \&}]{is, }
-\item[{const {\bf X\-M\-L\-Cryst\-Tag} \&}]{tag}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00083_a8c63700610f511503eae297c8161f311}
-
-
-Input From stream. 
-
-\begin{DoxyRefDesc}{Todo}
-\item[{\bf Todo}]Add an bool X\-M\-L\-Input\-Tag(is,tag) function to recognize all the tags from the stream. So that each inherited class can use the X\-M\-L\-Input\-Tag function from its parent (ie take advantage of inheritance). The children class would first try to interpret the tag, then if unsuccessful would pass it to its parent (thus allowing overloading), etc... \end{DoxyRefDesc}
-
-
-Implements {\bf Obj\-Cryst\-::\-Reflection\-Profile} \doxyref{}{p.}{a00081_a7ad38593ddb4601632beb0a6bcae50f3}.
-
-\index{Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt@{Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt}!X\-M\-L\-Output@{X\-M\-L\-Output}}
-\index{X\-M\-L\-Output@{X\-M\-L\-Output}!ObjCryst::ReflectionProfilePseudoVoigt@{Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt}}
-\paragraph[{X\-M\-L\-Output}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt\-::\-X\-M\-L\-Output (
-\begin{DoxyParamCaption}
-\item[{ostream \&}]{os, }
-\item[{int}]{indent = {\ttfamily 0}}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00083_ac0438d3a1827accbdf2375e7355f18e5}
-
-
-Output to stream in well-\/formed X\-M\-L. 
-
-\begin{DoxyRefDesc}{Todo}
-\item[{\bf Todo}]Use inheritance.. as for X\-M\-L\-Input\-Tag()... \end{DoxyRefDesc}
-
-
-Implements {\bf Obj\-Cryst\-::\-Reflection\-Profile} \doxyref{}{p.}{a00081_a60e429bb999a8b39f09ef14cdaf5ad0c}.
-
-
-
-\subsubsection{Member Data Documentation}
-\index{Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt@{Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt}!m\-Asym0@{m\-Asym0}}
-\index{m\-Asym0@{m\-Asym0}!ObjCryst::ReflectionProfilePseudoVoigt@{Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt}}
-\paragraph[{m\-Asym0}]{\setlength{\rightskip}{0pt plus 5cm}R\-E\-A\-L Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt\-::m\-Asym0\hspace{0.3cm}{\ttfamily [private]}}\label{a00083_a7f9d8d69ac06851dfb5c5006bd89ba1e}
-
-
-Asymmetry parameters, following the analytical function for asymmetric pseudo-\/voigt given by (e.\-g.) Toraya in J. 
-
-Appl. Cryst 23(1990),485-\/491 \index{Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt@{Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt}!m\-Asym\-Berar\-Baldinozzi\-A0@{m\-Asym\-Berar\-Baldinozzi\-A0}}
-\index{m\-Asym\-Berar\-Baldinozzi\-A0@{m\-Asym\-Berar\-Baldinozzi\-A0}!ObjCryst::ReflectionProfilePseudoVoigt@{Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt}}
-\paragraph[{m\-Asym\-Berar\-Baldinozzi\-A0}]{\setlength{\rightskip}{0pt plus 5cm}R\-E\-A\-L Obj\-Cryst\-::\-Reflection\-Profile\-Pseudo\-Voigt\-::m\-Asym\-Berar\-Baldinozzi\-A0\hspace{0.3cm}{\ttfamily [private]}}\label{a00083_ad9ddcfe78550879029ad31e62b63374d}
-
-
-Asymmetry parameters, following the Bérar \& Baldinozzi approach ( Bérar \& baldinozzi, J. 
-
-Appl. Cryst 26 (1993), 128-\/129)
-
-\begin{DoxyNote}{Note}
-\-: these are not used right now. 
-\end{DoxyNote}
-
-
-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-Reflection\-Profile.\-h\end{DoxyCompactItemize}
+Powder\-Pattern.\-h\end{DoxyCompactItemize}

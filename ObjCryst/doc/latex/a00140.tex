@@ -1,59 +1,34 @@
-\subsection{Obj\-Cryst\-:\-:W\-X\-Monte\-Carlo\-Obj Class Reference}
-\label{a00140}\index{Obj\-Cryst\-::\-W\-X\-Monte\-Carlo\-Obj@{Obj\-Cryst\-::\-W\-X\-Monte\-Carlo\-Obj}}
+\subsection{Obj\-Cryst\-:\-:wx\-Multi\-Choice\-Dialog\-\_\-\-List\-Box Class Reference}
+\label{a00140}\index{Obj\-Cryst\-::wx\-Multi\-Choice\-Dialog\-\_\-\-List\-Box@{Obj\-Cryst\-::wx\-Multi\-Choice\-Dialog\-\_\-\-List\-Box}}
 
 
-Class for Graphical interface to Monte-\/\-Carlo objects (Simulated Annealing, Parallel Tempering)  
+Provides the same functionnality as wx\-Multi\-Choice\-Dialog, but always using a wx\-List\-Box, which is much easier when selecting a large number of successive choices (using shift-\/click).  
 
 
-Inheritance diagram for Obj\-Cryst\-:\-:W\-X\-Monte\-Carlo\-Obj\-:\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[height=4.000000cm]{a00140}
-\end{center}
-\end{figure}
+
+
+Inherits wx\-Dialog.
+
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries W\-X\-Monte\-Carlo\-Obj} (wx\-Window $\ast$parent, {\bf Monte\-Carlo\-Obj} $\ast$)\label{a00140_a7f065d157d74531110e16c7d8081a95c}
+{\bfseries wx\-Multi\-Choice\-Dialog\-\_\-\-List\-Box} (wx\-Window $\ast$parent, const wx\-String \&message, const wx\-String \&caption, int n, const wx\-String $\ast$choices)\label{a00140_a3048c7db35d3c35a993ca818f8ec3087}
 
 \item 
-virtual void {\bfseries On\-Run\-Optimization} (wx\-Command\-Event \&event)\label{a00140_a098a0d500afd4106725f308b4a5938a5}
-
-\item 
-void {\bf Update\-Display\-Nb\-Trial} ()\label{a00140_acbceaa3d0ad0a5936d79a4322eca4df3}
-
-\begin{DoxyCompactList}\small\item\em Called during optimization, to show the user something's still going on... \end{DoxyCompactList}\item 
-virtual {\bf Optimization\-Obj} \& {\bfseries Get\-Optimization\-Obj} ()\label{a00140_a82f53dc7990c736211df87a47c0104eb}
-
-\item 
-virtual const {\bf Optimization\-Obj} \& {\bfseries Get\-Optimization\-Obj} () const \label{a00140_a9d58c53f79b831360d3dc09eb8da5213}
-
-\item 
-void {\bfseries On\-L\-S\-Q\-Refine} (wx\-Command\-Event \&event)\label{a00140_aa7c362490aa3761ae1426f2fe111d622}
+wx\-Array\-Int {\bfseries Get\-Selections} () const \label{a00140_a128fb92ed6304bca6df23e9839b0d44d}
 
 \end{DoxyCompactItemize}
-\subsubsection*{Protected Attributes}
+\subsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-{\bf Monte\-Carlo\-Obj} $\ast$ {\bf mp\-Monte\-Carlo\-Obj}\label{a00140_aabf6054ded526d3420f94f15e4041c96}
-
-\begin{DoxyCompactList}\small\item\em The algorithm object. \end{DoxyCompactList}\item 
-long {\bf m\-Nb\-Trial}\label{a00140_ae94ccb980fabf593aabe68c6c824f110}
-
-\begin{DoxyCompactList}\small\item\em The number of trials asked by the user. \end{DoxyCompactList}\item 
-long {\bf m\-Nb\-Run}\label{a00140_a60b17ba417b67f8c621b5b714d68e3b0}
-
-\begin{DoxyCompactList}\small\item\em The number of cycles. \end{DoxyCompactList}\item 
-{\bf W\-X\-Field\-Par}$<$ long $>$ $\ast$ {\bfseries mp\-W\-X\-Field\-Nb\-Trial}\label{a00140_a33e32f028bdeb510fbd9885eeafab809}
+wx\-List\-Box {\bfseries m\-List\-Box}\label{a00140_a145d64abc35498abb940f28ab81aebda}
 
 \end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-Class for Graphical interface to Monte-\/\-Carlo objects (Simulated Annealing, Parallel Tempering) 
-
-
+Provides the same functionnality as wx\-Multi\-Choice\-Dialog, but always using a wx\-List\-Box, which is much easier when selecting a large number of successive choices (using shift-\/click). 
 
 The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-wx\-Global\-Optim\-Obj.\-h\end{DoxyCompactItemize}
+wx\-Cryst.\-h\end{DoxyCompactItemize}

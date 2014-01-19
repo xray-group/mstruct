@@ -1,440 +1,65 @@
-\subsection{Obj\-Cryst\-:\-:Unit\-Cell Class Reference}
-\label{a00117}\index{Obj\-Cryst\-::\-Unit\-Cell@{Obj\-Cryst\-::\-Unit\-Cell}}
+\subsection{Obj\-Cryst\-:\-:W\-X\-Atom Class Reference}
+\label{a00117}\index{Obj\-Cryst\-::\-W\-X\-Atom@{Obj\-Cryst\-::\-W\-X\-Atom}}
 
 
-Unit Cell class\-: Unit cell with spacegroup information.  
+wx\-Cryst class for Atoms  
 
 
-Inheritance diagram for Obj\-Cryst\-:\-:Unit\-Cell\-:\begin{figure}[H]
+Inheritance diagram for Obj\-Cryst\-:\-:W\-X\-Atom\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=3.000000cm]{a00117}
+\includegraphics[height=5.000000cm]{a00117}
 \end{center}
 \end{figure}
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bf Unit\-Cell} ()\label{a00117_a51e806f8efcbc6f9f01212ed6ba159c9}
+{\bfseries W\-X\-Atom} (wx\-Window $\ast$parent, {\bf Atom} $\ast$)\label{a00117_ad5013fde76bd65b8327976ee3d7b4538}
 
-\begin{DoxyCompactList}\small\item\em Default Constructor. \end{DoxyCompactList}\item 
-{\bf Unit\-Cell} (const R\-E\-A\-L a, const R\-E\-A\-L b, const R\-E\-A\-L c, const string \&Space\-Group\-Id)
-\begin{DoxyCompactList}\small\item\em \doxyref{Unit\-Cell}{p.}{a00117} Constructor (orthorombic) \end{DoxyCompactList}\item 
-{\bf Unit\-Cell} (const R\-E\-A\-L a, const R\-E\-A\-L b, const R\-E\-A\-L c, const R\-E\-A\-L alpha, const R\-E\-A\-L beta, const R\-E\-A\-L gamma, const string \&Space\-Group\-Id)
-\begin{DoxyCompactList}\small\item\em \doxyref{Unit\-Cell}{p.}{a00117} Constructor (triclinic) \end{DoxyCompactList}\item 
-{\bf Unit\-Cell} (const {\bf Unit\-Cell} \&old\-Cryst)\label{a00117_a891da67e4f9c2aab210b8b7b0b1986cd}
-
-\begin{DoxyCompactList}\small\item\em \doxyref{Unit\-Cell}{p.}{a00117} copy constructor. \end{DoxyCompactList}\item 
-{\bf $\sim$\-Unit\-Cell} ()\label{a00117_aab63f4f8527568531f015721a48b6da5}
-
-\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
-virtual const string \& {\bf Get\-Class\-Name} () const 
-\begin{DoxyCompactList}\small\item\em Name for this class (\char`\"{}\-Refinable\-Obj\char`\"{}, \char`\"{}\-Crystal\char`\"{},...). \end{DoxyCompactList}\item 
-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf Get\-Lattice\-Par} () const 
-\begin{DoxyCompactList}\small\item\em Lattice parameters (a,b,c,alpha,beta,gamma) as a 6-\/element vector in Angstroems and radians. \end{DoxyCompactList}\item 
-R\-E\-A\-L {\bf Get\-Lattice\-Par} (const int which\-Par) const 
-\begin{DoxyCompactList}\small\item\em Return one of the 6 Lattice parameters, 0$<$= which\-Par $<$6 (a,b,c,alpha,beta,gamma), returned in Angstroems and radians. \end{DoxyCompactList}\item 
-const {\bf Refinable\-Obj\-Clock} \& {\bf Get\-Clock\-Lattice\-Par} () const \label{a00117_aa288a03401b377173b0e04918aadaf64}
-
-\begin{DoxyCompactList}\small\item\em last time the Lattice parameters were changed \end{DoxyCompactList}\item 
-const Cryst\-Matrix\-\_\-\-R\-E\-A\-L \& {\bf Get\-B\-Matrix} () const 
-\begin{DoxyCompactList}\small\item\em Get the 'B' matrix (\doxyref{Unit\-Cell\-::m\-B\-Matrix}{p.}{a00117_a091db52d0111d8e145a3834fd51dad14})for the \doxyref{Unit\-Cell}{p.}{a00117} (orthogonalization matrix for the given lattice, in the reciprocal space) \end{DoxyCompactList}\item 
-const Cryst\-Matrix\-\_\-\-R\-E\-A\-L \& {\bf Get\-Orth\-Matrix} () const 
-\begin{DoxyCompactList}\small\item\em Get the orthogonalization matrix (\doxyref{Unit\-Cell\-::m\-Orth\-Matrix}{p.}{a00117_a339a2f9f13a875944b88dbb29515e3b8})for the \doxyref{Unit\-Cell}{p.}{a00117} in real space. \end{DoxyCompactList}\item 
-const {\bf Refinable\-Obj\-Clock} \& {\bf Get\-Clock\-Metric\-Matrix} () const \label{a00117_a0e741b964c28c3cdb4b1268843ce4671}
-
-\begin{DoxyCompactList}\small\item\em last time the metric matrices were changed \end{DoxyCompactList}\item 
-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf Get\-Orthonormal\-Coords} (const R\-E\-A\-L x, const R\-E\-A\-L y, const R\-E\-A\-L z) const 
-\begin{DoxyCompactList}\small\item\em Get orthonormal cartesian coordinates for a set of (x,y,z) fractional coordinates. \end{DoxyCompactList}\item 
-void {\bf Fractional\-To\-Orthonormal\-Coords} (R\-E\-A\-L \&x, R\-E\-A\-L \&y, R\-E\-A\-L \&z) const 
-\begin{DoxyCompactList}\small\item\em Get orthonormal cartesian coordinates for a set of (x,y,z) fractional coordinates. \end{DoxyCompactList}\item 
-void {\bf Orthonormal\-To\-Fractional\-Coords} (R\-E\-A\-L \&x, R\-E\-A\-L \&y, R\-E\-A\-L \&z) const 
-\begin{DoxyCompactList}\small\item\em Get fractional cartesian coordinates for a set of (x,y,z) orthonormal coordinates. \end{DoxyCompactList}\item 
-void {\bf Miller\-To\-Orthonormal\-Coords} (R\-E\-A\-L \&x, R\-E\-A\-L \&y, R\-E\-A\-L \&z) const 
-\begin{DoxyCompactList}\small\item\em Get Miller H,K, L indices from orthonormal coordinates in reciprocal space. \end{DoxyCompactList}\item 
-void {\bf Orthonormal\-To\-Miller\-Coords} (R\-E\-A\-L \&x, R\-E\-A\-L \&y, R\-E\-A\-L \&z) const 
-\begin{DoxyCompactList}\small\item\em Get orthonormal coordinates given a set of H,K, L indices in reciprocal space. \end{DoxyCompactList}\item 
-virtual void {\bf Print} (ostream \&os=cout) const 
-\begin{DoxyCompactList}\small\item\em Prints some info about the \doxyref{Unit\-Cell}{p.}{a00117}. \end{DoxyCompactList}\item 
-const {\bf Space\-Group} \& {\bf Get\-Space\-Group} () const \label{a00117_af2fb384b78f90b482b164d1975b471ed}
-
-\begin{DoxyCompactList}\small\item\em Access to the \doxyref{Space\-Group}{p.}{a00102} object. \end{DoxyCompactList}\item 
-{\bf Space\-Group} \& {\bf Get\-Space\-Group} ()\label{a00117_a0431c2c1fa2899ee8e40e8a5a6c262ba}
-
-\begin{DoxyCompactList}\small\item\em Access to the \doxyref{Space\-Group}{p.}{a00102} object. \end{DoxyCompactList}\item 
-R\-E\-A\-L {\bf Get\-Volume} () const \label{a00117_ac86797b54e6fbb48f9250f0636505d35}
-
-\begin{DoxyCompactList}\small\item\em Volume of Unit Cell (in Angstroems) \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Protected Member Functions}
-\begin{DoxyCompactItemize}
 \item 
-virtual void {\bf Init} (const R\-E\-A\-L a, const R\-E\-A\-L b, const R\-E\-A\-L c, const R\-E\-A\-L alpha, const R\-E\-A\-L beta, const R\-E\-A\-L gamma, const string \&Space\-Group\-Id, const string \&name)
-\begin{DoxyCompactList}\small\item\em Init all \doxyref{Unit\-Cell}{p.}{a00117} parameters. \end{DoxyCompactList}\item 
-void {\bf Init\-Ref\-Par\-List} ()
-\begin{DoxyCompactList}\small\item\em Prepare the refinable parameters list. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Private Member Functions}
-\begin{DoxyCompactItemize}
+void {\bfseries On\-Change\-Scatt\-Pow} (wx\-Command\-Event \&W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00117_a761d4b22d56c314568884ce001ae53d5}
+
 \item 
-virtual void {\bf Init\-Options} ()
-\begin{DoxyCompactList}\small\item\em Init options. \end{DoxyCompactList}\item 
-void {\bf Init\-Matrices} () const 
-\item 
-void {\bf Update\-Lattice\-Par} ()
-\end{DoxyCompactItemize}
+virtual void {\bf Update\-U\-I} (const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em Update the User Interface, if necessary. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf m\-Cell\-Dim}
-\begin{DoxyCompactList}\small\item\em a,b and c in Angstroems, angles (stored) in radians For cubic, rhomboedric Unit\-Cells, only the 'a' parameter is relevant. \end{DoxyCompactList}\item 
-{\bf Space\-Group} {\bf m\-Space\-Group}\label{a00117_a7901e4687d5f577e059be11a2e699e77}
+{\bf Atom} $\ast$ {\bfseries mp\-Atom}\label{a00117_ab4e8f3bee82f37e9ba24138d6015df04}
 
-\begin{DoxyCompactList}\small\item\em The space group of the \doxyref{Unit\-Cell}{p.}{a00117}. \end{DoxyCompactList}\item 
-Cryst\-Matrix\-\_\-\-R\-E\-A\-L {\bf m\-B\-Matrix}
-\begin{DoxyCompactList}\small\item\em B Matrix (Orthogonalization matrix for reciprocal space) \[ B= \left[ \begin {array}{ccc} a^* & b^*\cos(\gamma^*) & c^*\cos(\beta^*) \\ 0 & b^*\sin(\gamma^*) & -c^*\sin(\beta^*)\cos(\alpha) \\ 0 & 0 & \frac{1}{c}\end{array} \right]\] \[ \left[ \begin{array}{c} k_x \\ k_y \\ k_z \end{array} \right]_{orthonormal} = B \times \left[ \begin{array}{c} h \\ k \\ l \end{array}\right]_{integer} \]. \end{DoxyCompactList}\item 
-Cryst\-Matrix\-\_\-\-R\-E\-A\-L {\bf m\-B\-Matrix\-Invert}\label{a00117_ab46b7e57dac0df8ca67cda8e52fcc87d}
-
-\begin{DoxyCompactList}\small\item\em inverse of B Matrix (i.\-e. inverse of orthogonalization matrix for direct space) \end{DoxyCompactList}\item 
-Cryst\-Matrix\-\_\-\-R\-E\-A\-L {\bf m\-Orth\-Matrix}
-\begin{DoxyCompactList}\small\item\em Eucl Matrix (Orthogonalization matrix for direct space) \[ M_{orth}= \left[ \begin {array}{ccc} a & b\cos(\gamma) & c\cos(\beta) \\ 0 & b\sin(\gamma) & -c\sin(\beta)\cos(\alpha^*) \\ 0 & 0 & \frac{1}{c^*}\end{array} \right]\] \[ \left[ \begin{array}{c} x \\ y \\ z \end{array} \right]_{orthonormal} = M_{orth} \times \left[ \begin{array}{c} x \\ y \\ z \end{array} \right]_{fractional coords}\]. \end{DoxyCompactList}\item 
-Cryst\-Matrix\-\_\-\-R\-E\-A\-L {\bf m\-Orth\-Matrix\-Invert}\label{a00117_a0fca2b4c0d50565d44a959a55ed9ee60}
-
-\begin{DoxyCompactList}\small\item\em inverse of Eucl Matrix (i.\-e. inverse of de-\/orthogonalization matrix for direct space) \end{DoxyCompactList}\item 
-{\bf Refinable\-Obj\-Clock} {\bf m\-Clock\-Lattice\-Par}\label{a00117_a8118ef7b2dda884b3562c5b8b0792c27}
-
-\begin{DoxyCompactList}\small\item\em Last time lattice parameters were changed. \end{DoxyCompactList}\item 
-{\bf Refinable\-Obj\-Clock} {\bf m\-Clock\-Metric\-Matrix}
 \item 
-{\bf Refinable\-Obj\-Clock} {\bf m\-Clock\-Lattice\-Par\-Update}
-\item 
-{\bf Ref\-Obj\-Opt} {\bf m\-Constrain\-Lattice\-To\-Space\-Group}
-\begin{DoxyCompactList}\small\item\em Option to override lattice parameters constraints from spacegroup choice. \end{DoxyCompactList}\end{DoxyCompactItemize}
+{\bf W\-X\-Field\-Choice} $\ast$ {\bfseries mp\-Field\-Scatt\-Power}\label{a00117_a9dd98ddab95fa288885099d719d22084}
+
+\end{DoxyCompactItemize}
 \subsubsection*{Additional Inherited Members}
 
 
 \subsubsection{Detailed Description}
-Unit Cell class\-: Unit cell with spacegroup information. 
-
-\subsubsection{Constructor \& Destructor Documentation}
-\index{Obj\-Cryst\-::\-Unit\-Cell@{Obj\-Cryst\-::\-Unit\-Cell}!Unit\-Cell@{Unit\-Cell}}
-\index{Unit\-Cell@{Unit\-Cell}!ObjCryst::UnitCell@{Obj\-Cryst\-::\-Unit\-Cell}}
-\paragraph[{Unit\-Cell}]{\setlength{\rightskip}{0pt plus 5cm}Obj\-Cryst\-::\-Unit\-Cell\-::\-Unit\-Cell (
-\begin{DoxyParamCaption}
-\item[{const R\-E\-A\-L}]{a, }
-\item[{const R\-E\-A\-L}]{b, }
-\item[{const R\-E\-A\-L}]{c, }
-\item[{const string \&}]{Space\-Group\-Id}
-\end{DoxyParamCaption}
-)}\label{a00117_ade3fec2bf55893d193be14001bd74f72}
-
-
-\doxyref{Unit\-Cell}{p.}{a00117} Constructor (orthorombic) 
-
-
-\begin{DoxyParams}{Parameters}
-{\em a,b,c} & \-: unit cell dimension, in angstroems \\
-\hline
-{\em Space\-Group\-Id,\-:} & space group symbol or number \\
-\hline
-\end{DoxyParams}
-\index{Obj\-Cryst\-::\-Unit\-Cell@{Obj\-Cryst\-::\-Unit\-Cell}!Unit\-Cell@{Unit\-Cell}}
-\index{Unit\-Cell@{Unit\-Cell}!ObjCryst::UnitCell@{Obj\-Cryst\-::\-Unit\-Cell}}
-\paragraph[{Unit\-Cell}]{\setlength{\rightskip}{0pt plus 5cm}Obj\-Cryst\-::\-Unit\-Cell\-::\-Unit\-Cell (
-\begin{DoxyParamCaption}
-\item[{const R\-E\-A\-L}]{a, }
-\item[{const R\-E\-A\-L}]{b, }
-\item[{const R\-E\-A\-L}]{c, }
-\item[{const R\-E\-A\-L}]{alpha, }
-\item[{const R\-E\-A\-L}]{beta, }
-\item[{const R\-E\-A\-L}]{gamma, }
-\item[{const string \&}]{Space\-Group\-Id}
-\end{DoxyParamCaption}
-)}\label{a00117_a9bb20fbe0be4e8296d400eed4dc3ae3d}
-
-
-\doxyref{Unit\-Cell}{p.}{a00117} Constructor (triclinic) 
-
-
-\begin{DoxyParams}{Parameters}
-{\em a,b,c} & \-: unit cell dimension, in angstroems \\
-\hline
-{\em alpha,beta,gamma} & \-: unit cell angles, in radians. \\
-\hline
-{\em Space\-Group\-Id,\-:} & space group symbol or number \\
-\hline
-\end{DoxyParams}
-
+wx\-Cryst class for Atoms 
 
 \subsubsection{Member Function Documentation}
-\index{Obj\-Cryst\-::\-Unit\-Cell@{Obj\-Cryst\-::\-Unit\-Cell}!Fractional\-To\-Orthonormal\-Coords@{Fractional\-To\-Orthonormal\-Coords}}
-\index{Fractional\-To\-Orthonormal\-Coords@{Fractional\-To\-Orthonormal\-Coords}!ObjCryst::UnitCell@{Obj\-Cryst\-::\-Unit\-Cell}}
-\paragraph[{Fractional\-To\-Orthonormal\-Coords}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-Unit\-Cell\-::\-Fractional\-To\-Orthonormal\-Coords (
+\index{Obj\-Cryst\-::\-W\-X\-Atom@{Obj\-Cryst\-::\-W\-X\-Atom}!Update\-U\-I@{Update\-U\-I}}
+\index{Update\-U\-I@{Update\-U\-I}!ObjCryst::WXAtom@{Obj\-Cryst\-::\-W\-X\-Atom}}
+\paragraph[{Update\-U\-I}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-W\-X\-Atom\-::\-Update\-U\-I (
 \begin{DoxyParamCaption}
-\item[{R\-E\-A\-L \&}]{x, }
-\item[{R\-E\-A\-L \&}]{y, }
-\item[{R\-E\-A\-L \&}]{z}
+\item[{const bool}]{mutexlock = {\ttfamily false}}
 \end{DoxyParamCaption}
-) const}\label{a00117_ae20464d04ceb2f0647d20e414dbd6d47}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00117_a5509a746fb1a6d918b6cbde8453d6a44}
 
 
-Get orthonormal cartesian coordinates for a set of (x,y,z) fractional coordinates. 
-
-X,y and z input are changed to Amgstroems values The convention is taken following \-: e1 is chosen along a, e2 in the (a,b) plane, then e3 is along c$\ast$ \index{Obj\-Cryst\-::\-Unit\-Cell@{Obj\-Cryst\-::\-Unit\-Cell}!Get\-B\-Matrix@{Get\-B\-Matrix}}
-\index{Get\-B\-Matrix@{Get\-B\-Matrix}!ObjCryst::UnitCell@{Obj\-Cryst\-::\-Unit\-Cell}}
-\paragraph[{Get\-B\-Matrix}]{\setlength{\rightskip}{0pt plus 5cm}const Cryst\-Matrix\-\_\-\-R\-E\-A\-L\& Obj\-Cryst\-::\-Unit\-Cell\-::\-Get\-B\-Matrix (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const}\label{a00117_a775a8aab4731aefd0f0c58ddd63a1e0b}
-
-
-Get the 'B' matrix (\doxyref{Unit\-Cell\-::m\-B\-Matrix}{p.}{a00117_a091db52d0111d8e145a3834fd51dad14})for the \doxyref{Unit\-Cell}{p.}{a00117} (orthogonalization matrix for the given lattice, in the reciprocal space) 
-
-The convention is taken following Giacovazzo, \char`\"{}\-Fundamentals of Crystallography\char`\"{}, p.\-69 \char`\"{}e1 is chosen along a$\ast$, e2 in the (a$\ast$,b$\ast$) plane, then e3 is along c\char`\"{}. \index{Obj\-Cryst\-::\-Unit\-Cell@{Obj\-Cryst\-::\-Unit\-Cell}!Get\-Class\-Name@{Get\-Class\-Name}}
-\index{Get\-Class\-Name@{Get\-Class\-Name}!ObjCryst::UnitCell@{Obj\-Cryst\-::\-Unit\-Cell}}
-\paragraph[{Get\-Class\-Name}]{\setlength{\rightskip}{0pt plus 5cm}virtual const string\& Obj\-Cryst\-::\-Unit\-Cell\-::\-Get\-Class\-Name (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00117_ac3b3c2e007083bf6f329eb11a6b610d1}
-
-
-Name for this class (\char`\"{}\-Refinable\-Obj\char`\"{}, \char`\"{}\-Crystal\char`\"{},...). 
-
-This is only useful to distinguish different classes when picking up objects from the \doxyref{Refinable\-Obj}{p.}{a00078} Global Registry 
-
-Reimplemented from {\bf Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00078_a62968d90a7a3080738b363934616c019}.
-
-
-
-Reimplemented in {\bf Obj\-Cryst\-::\-Crystal} \doxyref{}{p.}{a00027_ad1f69a5fb8981a2cf0eeb6245728af6d}.
-
-\index{Obj\-Cryst\-::\-Unit\-Cell@{Obj\-Cryst\-::\-Unit\-Cell}!Get\-Lattice\-Par@{Get\-Lattice\-Par}}
-\index{Get\-Lattice\-Par@{Get\-Lattice\-Par}!ObjCryst::UnitCell@{Obj\-Cryst\-::\-Unit\-Cell}}
-\paragraph[{Get\-Lattice\-Par}]{\setlength{\rightskip}{0pt plus 5cm}Cryst\-Vector\-\_\-\-R\-E\-A\-L Obj\-Cryst\-::\-Unit\-Cell\-::\-Get\-Lattice\-Par (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const}\label{a00117_a948453b5081a4ed078d3ca604aa4a3d2}
-
-
-Lattice parameters (a,b,c,alpha,beta,gamma) as a 6-\/element vector in Angstroems and radians. 
-
-\index{Obj\-Cryst\-::\-Unit\-Cell@{Obj\-Cryst\-::\-Unit\-Cell}!Get\-Lattice\-Par@{Get\-Lattice\-Par}}
-\index{Get\-Lattice\-Par@{Get\-Lattice\-Par}!ObjCryst::UnitCell@{Obj\-Cryst\-::\-Unit\-Cell}}
-\paragraph[{Get\-Lattice\-Par}]{\setlength{\rightskip}{0pt plus 5cm}R\-E\-A\-L Obj\-Cryst\-::\-Unit\-Cell\-::\-Get\-Lattice\-Par (
-\begin{DoxyParamCaption}
-\item[{const int}]{which\-Par}
-\end{DoxyParamCaption}
-) const}\label{a00117_a39cb70f464aa82437ec3ac2821b21ab2}
-
-
-Return one of the 6 Lattice parameters, 0$<$= which\-Par $<$6 (a,b,c,alpha,beta,gamma), returned in Angstroems and radians. 
-
-\index{Obj\-Cryst\-::\-Unit\-Cell@{Obj\-Cryst\-::\-Unit\-Cell}!Get\-Orth\-Matrix@{Get\-Orth\-Matrix}}
-\index{Get\-Orth\-Matrix@{Get\-Orth\-Matrix}!ObjCryst::UnitCell@{Obj\-Cryst\-::\-Unit\-Cell}}
-\paragraph[{Get\-Orth\-Matrix}]{\setlength{\rightskip}{0pt plus 5cm}const Cryst\-Matrix\-\_\-\-R\-E\-A\-L\& Obj\-Cryst\-::\-Unit\-Cell\-::\-Get\-Orth\-Matrix (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const}\label{a00117_ae15303f8d50c3bad08c6c93c3f10d557}
-
-
-Get the orthogonalization matrix (\doxyref{Unit\-Cell\-::m\-Orth\-Matrix}{p.}{a00117_a339a2f9f13a875944b88dbb29515e3b8})for the \doxyref{Unit\-Cell}{p.}{a00117} in real space. 
-
-\index{Obj\-Cryst\-::\-Unit\-Cell@{Obj\-Cryst\-::\-Unit\-Cell}!Get\-Orthonormal\-Coords@{Get\-Orthonormal\-Coords}}
-\index{Get\-Orthonormal\-Coords@{Get\-Orthonormal\-Coords}!ObjCryst::UnitCell@{Obj\-Cryst\-::\-Unit\-Cell}}
-\paragraph[{Get\-Orthonormal\-Coords}]{\setlength{\rightskip}{0pt plus 5cm}Cryst\-Vector\-\_\-\-R\-E\-A\-L Obj\-Cryst\-::\-Unit\-Cell\-::\-Get\-Orthonormal\-Coords (
-\begin{DoxyParamCaption}
-\item[{const R\-E\-A\-L}]{x, }
-\item[{const R\-E\-A\-L}]{y, }
-\item[{const R\-E\-A\-L}]{z}
-\end{DoxyParamCaption}
-) const}\label{a00117_ae3896560b2c862ce0e5fab5d44e77f6e}
-
-
-Get orthonormal cartesian coordinates for a set of (x,y,z) fractional coordinates. 
-
-Results are given in Angstroems. The convention is taken following \-: e1 is chosen along a, e2 in the (a,b) plane, then e3 is along c$\ast$ \index{Obj\-Cryst\-::\-Unit\-Cell@{Obj\-Cryst\-::\-Unit\-Cell}!Init@{Init}}
-\index{Init@{Init}!ObjCryst::UnitCell@{Obj\-Cryst\-::\-Unit\-Cell}}
-\paragraph[{Init}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Unit\-Cell\-::\-Init (
-\begin{DoxyParamCaption}
-\item[{const R\-E\-A\-L}]{a, }
-\item[{const R\-E\-A\-L}]{b, }
-\item[{const R\-E\-A\-L}]{c, }
-\item[{const R\-E\-A\-L}]{alpha, }
-\item[{const R\-E\-A\-L}]{beta, }
-\item[{const R\-E\-A\-L}]{gamma, }
-\item[{const string \&}]{Space\-Group\-Id, }
-\item[{const string \&}]{name}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\label{a00117_a6a98cc147e6b4471d30ff6b736c95e42}
-
-
-Init all \doxyref{Unit\-Cell}{p.}{a00117} parameters. 
+Update the User Interface, if necessary. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em a,b,c} & \-: unit cell dimension, in angstroems \\
-\hline
-{\em alpha,beta,gamma} & \-: unit cell angles \\
-\hline
-{\em Spc\-Group,\-:} & space group number (1..230) \\
-\hline
-{\em name,\-:} & name for the \doxyref{Unit\-Cell}{p.}{a00117}, \-: '(Ta\-Se4)2\-I' \\
+{\em mutexlock} & if true, a Mutex will be used to lock the data shared between main and background thread.\\
 \hline
 \end{DoxyParams}
+The idea is to only use a few Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{Cryst\-Update()}{p.}{a00149_a13e4f37ac098de756b27cdb91d6a0551} and \doxyref{Update\-U\-I()}{p.}{a00117_a5509a746fb1a6d918b6cbde8453d6a44}. As sub-\/objects (\doxyref{W\-X\-Field}{p.}{a00125},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
 
+Reimplemented from {\bf Obj\-Cryst\-::\-W\-X\-Refinable\-Obj} \doxyref{}{p.}{a00149_a19a1d057eecafd48710d9a3b770c1b28}.
 
-Reimplemented in {\bf Obj\-Cryst\-::\-Crystal} \doxyref{}{p.}{a00027_aefcd0d1032e5b93de47b4b93d530ed5b}.
-
-\index{Obj\-Cryst\-::\-Unit\-Cell@{Obj\-Cryst\-::\-Unit\-Cell}!Init\-Matrices@{Init\-Matrices}}
-\index{Init\-Matrices@{Init\-Matrices}!ObjCryst::UnitCell@{Obj\-Cryst\-::\-Unit\-Cell}}
-\paragraph[{Init\-Matrices}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-Unit\-Cell\-::\-Init\-Matrices (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [private]}}\label{a00117_ae85e22d8f514315847ae326da5a57ba1}
-.Init the (de)orthogonalization matrices. They are re-\/computed only if parameters have changed since last call. \index{Obj\-Cryst\-::\-Unit\-Cell@{Obj\-Cryst\-::\-Unit\-Cell}!Init\-Options@{Init\-Options}}
-\index{Init\-Options@{Init\-Options}!ObjCryst::UnitCell@{Obj\-Cryst\-::\-Unit\-Cell}}
-\paragraph[{Init\-Options}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Unit\-Cell\-::\-Init\-Options (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}\label{a00117_a12460955ce7bb73812c3f3f798d8bfd8}
-
-
-Init options. 
-
-Need only be done once per \doxyref{Unit\-Cell}{p.}{a00117}. 
-
-Reimplemented in {\bf Obj\-Cryst\-::\-Crystal} \doxyref{}{p.}{a00027_a6f824ecc64553f3b3d15d0db9bf5982d}.
-
-\index{Obj\-Cryst\-::\-Unit\-Cell@{Obj\-Cryst\-::\-Unit\-Cell}!Init\-Ref\-Par\-List@{Init\-Ref\-Par\-List}}
-\index{Init\-Ref\-Par\-List@{Init\-Ref\-Par\-List}!ObjCryst::UnitCell@{Obj\-Cryst\-::\-Unit\-Cell}}
-\paragraph[{Init\-Ref\-Par\-List}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-Unit\-Cell\-::\-Init\-Ref\-Par\-List (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [protected]}}\label{a00117_a50170ade8b76500a86b99cd6caa06808}
-
-
-Prepare the refinable parameters list. 
-
-This is called once when creating the \doxyref{Unit\-Cell}{p.}{a00117}. \index{Obj\-Cryst\-::\-Unit\-Cell@{Obj\-Cryst\-::\-Unit\-Cell}!Miller\-To\-Orthonormal\-Coords@{Miller\-To\-Orthonormal\-Coords}}
-\index{Miller\-To\-Orthonormal\-Coords@{Miller\-To\-Orthonormal\-Coords}!ObjCryst::UnitCell@{Obj\-Cryst\-::\-Unit\-Cell}}
-\paragraph[{Miller\-To\-Orthonormal\-Coords}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-Unit\-Cell\-::\-Miller\-To\-Orthonormal\-Coords (
-\begin{DoxyParamCaption}
-\item[{R\-E\-A\-L \&}]{x, }
-\item[{R\-E\-A\-L \&}]{y, }
-\item[{R\-E\-A\-L \&}]{z}
-\end{DoxyParamCaption}
-) const}\label{a00117_af6efcbafcd761c6f8f4953190e7024d0}
-
-
-Get Miller H,K, L indices from orthonormal coordinates in reciprocal space. 
-
-Result is stored into x,y and z \index{Obj\-Cryst\-::\-Unit\-Cell@{Obj\-Cryst\-::\-Unit\-Cell}!Orthonormal\-To\-Fractional\-Coords@{Orthonormal\-To\-Fractional\-Coords}}
-\index{Orthonormal\-To\-Fractional\-Coords@{Orthonormal\-To\-Fractional\-Coords}!ObjCryst::UnitCell@{Obj\-Cryst\-::\-Unit\-Cell}}
-\paragraph[{Orthonormal\-To\-Fractional\-Coords}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-Unit\-Cell\-::\-Orthonormal\-To\-Fractional\-Coords (
-\begin{DoxyParamCaption}
-\item[{R\-E\-A\-L \&}]{x, }
-\item[{R\-E\-A\-L \&}]{y, }
-\item[{R\-E\-A\-L \&}]{z}
-\end{DoxyParamCaption}
-) const}\label{a00117_ad7bf6451efd13b4d326f0cdf9c5f5603}
-
-
-Get fractional cartesian coordinates for a set of (x,y,z) orthonormal coordinates. 
-
-Result is stored into x,y and z The convention is taken following \-: e1 is chosen along a, e2 in the (a,b) plane, then e3 is along c$\ast$ \index{Obj\-Cryst\-::\-Unit\-Cell@{Obj\-Cryst\-::\-Unit\-Cell}!Orthonormal\-To\-Miller\-Coords@{Orthonormal\-To\-Miller\-Coords}}
-\index{Orthonormal\-To\-Miller\-Coords@{Orthonormal\-To\-Miller\-Coords}!ObjCryst::UnitCell@{Obj\-Cryst\-::\-Unit\-Cell}}
-\paragraph[{Orthonormal\-To\-Miller\-Coords}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-Unit\-Cell\-::\-Orthonormal\-To\-Miller\-Coords (
-\begin{DoxyParamCaption}
-\item[{R\-E\-A\-L \&}]{x, }
-\item[{R\-E\-A\-L \&}]{y, }
-\item[{R\-E\-A\-L \&}]{z}
-\end{DoxyParamCaption}
-) const}\label{a00117_a22de4f6b2443df36d79b2316fdd01436}
-
-
-Get orthonormal coordinates given a set of H,K, L indices in reciprocal space. 
-
-Result is stored into x,y and z \index{Obj\-Cryst\-::\-Unit\-Cell@{Obj\-Cryst\-::\-Unit\-Cell}!Print@{Print}}
-\index{Print@{Print}!ObjCryst::UnitCell@{Obj\-Cryst\-::\-Unit\-Cell}}
-\paragraph[{Print}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Unit\-Cell\-::\-Print (
-\begin{DoxyParamCaption}
-\item[{ostream \&}]{os = {\ttfamily cout}}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00117_adf564cd9521473be30d073d1660fa3ee}
-
-
-Prints some info about the \doxyref{Unit\-Cell}{p.}{a00117}. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em os} & the stream to which the information is outputed (default=cout) \\
-\hline
-\end{DoxyParams}
-
-
-Reimplemented in {\bf Obj\-Cryst\-::\-Crystal} \doxyref{}{p.}{a00027_ac4a7086d3757be4bbe2484f549a1b0fc}.
-
-\index{Obj\-Cryst\-::\-Unit\-Cell@{Obj\-Cryst\-::\-Unit\-Cell}!Update\-Lattice\-Par@{Update\-Lattice\-Par}}
-\index{Update\-Lattice\-Par@{Update\-Lattice\-Par}!ObjCryst::UnitCell@{Obj\-Cryst\-::\-Unit\-Cell}}
-\paragraph[{Update\-Lattice\-Par}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-Unit\-Cell\-::\-Update\-Lattice\-Par (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [private]}}\label{a00117_a82cd8866825c80b3d6bc34246fd3a761}
-Update cell parameters for tetragonal, trigonal, hexagonal, cubic lattices. Also set angular parameters for those group which need it. This is needed during Refinement, since for example in a quadratic spg, only a is refined and we need to have b=a... 
-
-\subsubsection{Member Data Documentation}
-\index{Obj\-Cryst\-::\-Unit\-Cell@{Obj\-Cryst\-::\-Unit\-Cell}!m\-B\-Matrix@{m\-B\-Matrix}}
-\index{m\-B\-Matrix@{m\-B\-Matrix}!ObjCryst::UnitCell@{Obj\-Cryst\-::\-Unit\-Cell}}
-\paragraph[{m\-B\-Matrix}]{\setlength{\rightskip}{0pt plus 5cm}Cryst\-Matrix\-\_\-\-R\-E\-A\-L Obj\-Cryst\-::\-Unit\-Cell\-::m\-B\-Matrix\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}\label{a00117_a091db52d0111d8e145a3834fd51dad14}
-
-
-B Matrix (Orthogonalization matrix for reciprocal space) \[ B= \left[ \begin {array}{ccc} a^* & b^*\cos(\gamma^*) & c^*\cos(\beta^*) \\ 0 & b^*\sin(\gamma^*) & -c^*\sin(\beta^*)\cos(\alpha) \\ 0 & 0 & \frac{1}{c}\end{array} \right]\] \[ \left[ \begin{array}{c} k_x \\ k_y \\ k_z \end{array} \right]_{orthonormal} = B \times \left[ \begin{array}{c} h \\ k \\ l \end{array}\right]_{integer} \]. 
-
-\begin{DoxyNote}{Note}
-this matrix is and must remain upper triangular. this is assumed for some optimizations. 
-\end{DoxyNote}
-\index{Obj\-Cryst\-::\-Unit\-Cell@{Obj\-Cryst\-::\-Unit\-Cell}!m\-Cell\-Dim@{m\-Cell\-Dim}}
-\index{m\-Cell\-Dim@{m\-Cell\-Dim}!ObjCryst::UnitCell@{Obj\-Cryst\-::\-Unit\-Cell}}
-\paragraph[{m\-Cell\-Dim}]{\setlength{\rightskip}{0pt plus 5cm}Cryst\-Vector\-\_\-\-R\-E\-A\-L Obj\-Cryst\-::\-Unit\-Cell\-::m\-Cell\-Dim\hspace{0.3cm}{\ttfamily [private]}}\label{a00117_a0fc905b26b1d9f140ed491b1a7b24234}
-
-
-a,b and c in Angstroems, angles (stored) in radians For cubic, rhomboedric Unit\-Cells, only the 'a' parameter is relevant. 
-
-For quadratic and hexagonal Unit\-Cells, only a and c parameters are relevant. The M\-U\-T\-A\-B\-L\-E is temporary ! It should not be ! \index{Obj\-Cryst\-::\-Unit\-Cell@{Obj\-Cryst\-::\-Unit\-Cell}!m\-Clock\-Lattice\-Par\-Update@{m\-Clock\-Lattice\-Par\-Update}}
-\index{m\-Clock\-Lattice\-Par\-Update@{m\-Clock\-Lattice\-Par\-Update}!ObjCryst::UnitCell@{Obj\-Cryst\-::\-Unit\-Cell}}
-\paragraph[{m\-Clock\-Lattice\-Par\-Update}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Refinable\-Obj\-Clock} Obj\-Cryst\-::\-Unit\-Cell\-::m\-Clock\-Lattice\-Par\-Update\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}\label{a00117_aa1d9d1869aecdaf26451d066a6f60173}
-Last time the lattice parameters whre updated \index{Obj\-Cryst\-::\-Unit\-Cell@{Obj\-Cryst\-::\-Unit\-Cell}!m\-Clock\-Metric\-Matrix@{m\-Clock\-Metric\-Matrix}}
-\index{m\-Clock\-Metric\-Matrix@{m\-Clock\-Metric\-Matrix}!ObjCryst::UnitCell@{Obj\-Cryst\-::\-Unit\-Cell}}
-\paragraph[{m\-Clock\-Metric\-Matrix}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Refinable\-Obj\-Clock} Obj\-Cryst\-::\-Unit\-Cell\-::m\-Clock\-Metric\-Matrix\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}\label{a00117_a5937ae62209bea154e50f6831de79853}
-Last time metric matrices were computed \index{Obj\-Cryst\-::\-Unit\-Cell@{Obj\-Cryst\-::\-Unit\-Cell}!m\-Constrain\-Lattice\-To\-Space\-Group@{m\-Constrain\-Lattice\-To\-Space\-Group}}
-\index{m\-Constrain\-Lattice\-To\-Space\-Group@{m\-Constrain\-Lattice\-To\-Space\-Group}!ObjCryst::UnitCell@{Obj\-Cryst\-::\-Unit\-Cell}}
-\paragraph[{m\-Constrain\-Lattice\-To\-Space\-Group}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Ref\-Obj\-Opt} Obj\-Cryst\-::\-Unit\-Cell\-::m\-Constrain\-Lattice\-To\-Space\-Group\hspace{0.3cm}{\ttfamily [private]}}\label{a00117_ab2efe02096ce9d38aeca69fd9315e6f3}
-
-
-Option to override lattice parameters constraints from spacegroup choice. 
-
-\begin{DoxyWarning}{Warning}
-E\-X\-P\-E\-R\-I\-M\-E\-N\-T\-A\-L
-\end{DoxyWarning}
-Normally lattice parameters are constrained by the space group choice (e.\-g. a=b=c and angles =90° for cubic spacegroups). Using this option allows you to override this, and choose any lattice parameter. T\-His works as long as symmetry operations are applied to fractionnal coordinates.
-
-This is useful duting global optimization when searching the structure in a \doxyref{Unit\-Cell}{p.}{a00117} which has (or is expected to have) a known pseudo-\/crystallographic symmetry, to reduce dramatically the number of parameters. Of course for final refinement the 'real' symmetry should be imposed. \index{Obj\-Cryst\-::\-Unit\-Cell@{Obj\-Cryst\-::\-Unit\-Cell}!m\-Orth\-Matrix@{m\-Orth\-Matrix}}
-\index{m\-Orth\-Matrix@{m\-Orth\-Matrix}!ObjCryst::UnitCell@{Obj\-Cryst\-::\-Unit\-Cell}}
-\paragraph[{m\-Orth\-Matrix}]{\setlength{\rightskip}{0pt plus 5cm}Cryst\-Matrix\-\_\-\-R\-E\-A\-L Obj\-Cryst\-::\-Unit\-Cell\-::m\-Orth\-Matrix\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}\label{a00117_a339a2f9f13a875944b88dbb29515e3b8}
-
-
-Eucl Matrix (Orthogonalization matrix for direct space) \[ M_{orth}= \left[ \begin {array}{ccc} a & b\cos(\gamma) & c\cos(\beta) \\ 0 & b\sin(\gamma) & -c\sin(\beta)\cos(\alpha^*) \\ 0 & 0 & \frac{1}{c^*}\end{array} \right]\] \[ \left[ \begin{array}{c} x \\ y \\ z \end{array} \right]_{orthonormal} = M_{orth} \times \left[ \begin{array}{c} x \\ y \\ z \end{array} \right]_{fractional coords}\]. 
-
-\begin{DoxyNote}{Note}
-this matrix is and must remain upper triangular. this is assumed for some optimizations. 
-\end{DoxyNote}
 
 
 The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-Unit\-Cell.\-h\end{DoxyCompactItemize}
+wx\-Atom.\-h\end{DoxyCompactItemize}

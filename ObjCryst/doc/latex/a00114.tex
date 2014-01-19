@@ -1,11 +1,11 @@
-\subsection{Obj\-Cryst\-:\-:Tracker Class Reference}
-\label{a00114}\index{Obj\-Cryst\-::\-Tracker@{Obj\-Cryst\-::\-Tracker}}
+\subsection{Obj\-Cryst\-:\-:Tracker\-Object$<$ T $>$ Class Template Reference}
+\label{a00114}\index{Obj\-Cryst\-::\-Tracker\-Object$<$ T $>$@{Obj\-Cryst\-::\-Tracker\-Object$<$ T $>$}}
 
 
-A class to track the variation of parameters as a function of a number of cycles/trials.  
+\doxyref{Tracker}{p.}{a00113} for objects (\doxyref{Refinable\-Obj}{p.}{a00077}, \doxyref{Crystal}{p.}{a00026}, \doxyref{Powder\-Pattern}{p.}{a00068}, Ref\-Par,...)  
 
 
-Inheritance diagram for Obj\-Cryst\-:\-:Tracker\-:\begin{figure}[H]
+Inheritance diagram for Obj\-Cryst\-:\-:Tracker\-Object$<$ T $>$\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{a00114}
@@ -14,45 +14,33 @@ Inheritance diagram for Obj\-Cryst\-:\-:Tracker\-:\begin{figure}[H]
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries Tracker} (const std\-::string \&name)\label{a00114_a57d89249ba910902e6ef6a33dcd3ee8c}
-
-\item 
-const std\-::string \& {\bfseries Get\-Name} () const \label{a00114_ad93197775f7d0a3b52eb199a9ed1c958}
-
-\item 
-void {\bfseries Append\-Value} (const long trial)\label{a00114_ae50d08700a131d280f8a19a58274bfe7}
-
-\item 
-void {\bf Clear} ()\label{a00114_abdac1cff42cfd8d66e10977a5a9066b3}
-
-\begin{DoxyCompactList}\small\item\em Removes all stored values. \end{DoxyCompactList}\item 
-const std\-::map$<$ long, R\-E\-A\-L $>$ \& {\bfseries Get\-Values} () const \label{a00114_a882fe8d7c193662613d4a9ab262a2417}
-
-\item 
-std\-::map$<$ long, R\-E\-A\-L $>$ \& {\bfseries Get\-Values} ()\label{a00114_a4f889b0d29a403c597040c5b88f4ffa8}
+{\bfseries Tracker\-Object} (const std\-::string \&name, const T \&obj, R\-E\-A\-L(T\-::$\ast$f)() const)\label{a00114_a2309c151aec16dfac6d851f5dd531504}
 
 \end{DoxyCompactItemize}
-\subsubsection*{Protected Member Functions}
+\subsubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-virtual R\-E\-A\-L {\bfseries Read\-Value} ()=0\label{a00114_a14096d99b76d3ffac16553f6434f97ce}
+R\-E\-A\-L {\bfseries Read\-Value} ()\label{a00114_a7e55a34fdcfedb2c6c8a671332a6fc7a}
 
 \end{DoxyCompactItemize}
-\subsubsection*{Protected Attributes}
+\subsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-std\-::map$<$ long, R\-E\-A\-L $>$ {\bfseries mv\-Values}\label{a00114_adcd7db9240b7c6432a1fe2f0daec2d24}
+const T $\ast$ {\bfseries mp\-Obj}\label{a00114_af3365fd691f602db752df66aafbf5520}
 
 \item 
-std\-::string {\bfseries m\-Name}\label{a00114_a64fee6086f7c35c89c72d703903a1b26}
+R\-E\-A\-L(T\-::$\ast$ {\bfseries mfp} )() const \label{a00114_a5179813fa67eb55033ac57f1dcd02eb9}
 
 \end{DoxyCompactItemize}
+\subsubsection*{Additional Inherited Members}
 
 
 \subsubsection{Detailed Description}
-A class to track the variation of parameters as a function of a number of cycles/trials. 
+\subsubsection*{template$<$class T$>$class Obj\-Cryst\-::\-Tracker\-Object$<$ T $>$}
 
-This is an abstract base class. 
+\doxyref{Tracker}{p.}{a00113} for objects (\doxyref{Refinable\-Obj}{p.}{a00077}, \doxyref{Crystal}{p.}{a00026}, \doxyref{Powder\-Pattern}{p.}{a00068}, Ref\-Par,...) 
+
+
 
 The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 

@@ -1,119 +1,116 @@
-\subsection{Cryst\-Array3\-D$<$ T $>$ Class Template Reference}
-\label{a00029}\index{Cryst\-Array3\-D$<$ T $>$@{Cryst\-Array3\-D$<$ T $>$}}
+\subsection{Cryst\-Matrix$<$ T $>$ Class Template Reference}
+\label{a00029}\index{Cryst\-Matrix$<$ T $>$@{Cryst\-Matrix$<$ T $>$}}
 
 
-3\-D Vector (Blitz++ mimic) for Obj\-Cryst++  
+2\-D Vector library (Blitz++ mimic) for Obj\-Cryst++  
 
 
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries Cryst\-Array3\-D} (const long z\-Size, const long y\-Size, const long x\-Size)\label{a00029_ad4ec05dc1208057b2ecabd8e8f2289f2}
+{\bfseries Cryst\-Matrix} (const long y\-Size, const long x\-Size)\label{a00029_a8efa69213a1bb63c9b5b88cd4c162aec}
 
 \item 
-{\bfseries Cryst\-Array3\-D} (const {\bf Cryst\-Array3\-D} \&old)\label{a00029_a7dabbca0551384e792bf898522073015}
+{\bfseries Cryst\-Matrix} (const {\bf Cryst\-Matrix} \&old)\label{a00029_afa851ee3fa092891cb6c90d6deda4abc}
 
 \item 
-void {\bfseries operator=} (const {\bf Cryst\-Array3\-D} \&old)\label{a00029_aafcbba0c2e2e64710f25d4706a18aff1}
+void {\bfseries operator=} (const {\bf Cryst\-Matrix} \&old)\label{a00029_ac268742edcc4262683e7e66be62a032c}
 
 \item 
-void {\bfseries reference} ({\bf Cryst\-Array3\-D} \&old)\label{a00029_ac9c03573514355402c5da9c9bcb593aa}
+void {\bfseries reference} ({\bf Cryst\-Matrix} \&old)\label{a00029_ab5c414985f04c70ab8300a9873fe383c}
 
 \item 
-long {\bfseries num\-Elements} () const \label{a00029_a188469a35af7b4060cfd8c0009b106ba}
+long {\bfseries num\-Elements} () const \label{a00029_a6f15c6cb68646a505850c2466d96d851}
 
 \item 
-T {\bfseries sum} () const \label{a00029_ad02f8908c0c683e6c5681a6251b3b3ef}
+T {\bfseries sum} () const \label{a00029_ac3392a70a349875b5c0fa84640b3a7ed}
 
 \item 
-T {\bfseries min} () const \label{a00029_a0a0042adf867cfc3d5235dc7608524b4}
+T {\bfseries min} () const \label{a00029_a8cc1b6c0d049d9cd99a83b909abd2568}
 
 \item 
-T {\bfseries max} () const \label{a00029_a160bf8c198eee8c7ad615b0d7e3b36c0}
+T {\bfseries max} () const \label{a00029_a49ceb4488c973a9f459761fe8d4e3f4e}
 
 \item 
-long {\bfseries rows} () const \label{a00029_acb714370370850b93c3a9df1ff1ff714}
+long {\bfseries rows} () const \label{a00029_adbc8ce2c59bb6ea20f3724e049a2b5fe}
 
 \item 
-long {\bfseries cols} () const \label{a00029_a3b93ba2c331059226cf3ba71bf0ee073}
+long {\bfseries cols} () const \label{a00029_afd2e1a8ba1cb06ff717a80e36fbf9017}
 
 \item 
-long {\bfseries depth} () const \label{a00029_a566512878ac310ca14aea3b1caab7928}
+T $\ast$ {\bfseries data} ()\label{a00029_ac826366ce5da1606ba4f064d7851acf2}
 
 \item 
-T $\ast$ {\bfseries data} ()\label{a00029_ac566777560641de36e2cf6184429c07a}
+const T $\ast$ {\bfseries data} () const \label{a00029_a95feb15c65f3690971fea9a815a92862}
 
 \item 
-const T $\ast$ {\bfseries data} () const \label{a00029_abb62a47d55e244dd13e55a3c222003f5}
+void {\bfseries resize} (const long y\-Size, const long x\-Size)\label{a00029_a8101d474998f112760f93583ace9428d}
 
 \item 
-void {\bfseries resize} (const long z\-Size, const long y\-Size, const long x\-Size)\label{a00029_a5d2f2a6cb1815b7ccc26d7baa89f162f}
+void {\bfseries resize\-And\-Preserve} (const long y\-Size, const long x\-Size)\label{a00029_a974a4a41cb958343c8f5705d1c517678}
 
 \item 
-void {\bfseries resize\-And\-Preserve} (const long z\-Size, const long y\-Size, const long x\-Size)\label{a00029_aaaf6b3b51d14fb97f294f522ad88d129}
+void {\bfseries operator$\ast$=} (const T num)\label{a00029_a67a1e3b60fb4430d464d5fed033fb8a1}
 
 \item 
-void {\bfseries operator=} (const T num)\label{a00029_a180dbc373520a3050f28c6d15f9d3127}
+void {\bfseries operator$\ast$=} (const {\bf Cryst\-Matrix} \&vect)\label{a00029_a0b5df33a84d358d43694dcd712a00cc5}
 
 \item 
-void {\bfseries operator$\ast$=} (const T num)\label{a00029_adbb26a696ca1426cbe68f0ac03c19e42}
+void {\bfseries operator/=} (const T num)\label{a00029_a56176f2c83e397dcc5ec5b97d0c49422}
 
 \item 
-void {\bfseries operator$\ast$=} (const {\bf Cryst\-Array3\-D} \&vect)\label{a00029_afa5e6378de16ffe99735641959ba8c71}
+void {\bfseries operator+=} (const T num)\label{a00029_ab3ea287ef4232a7623164435426e0060}
 
 \item 
-void {\bfseries operator/=} (const T num)\label{a00029_ae09d581b3bd395eef7bc5a3d0fe358d8}
+void {\bfseries operator-\/=} (const T num)\label{a00029_a9cefdbb9ebb808d21a2e2e8949641839}
 
 \item 
-void {\bfseries operator+=} (const T num)\label{a00029_a4c3a4526fc22e48a1794811b795b025e}
+List\-Initializer\-Switch {\bfseries operator=} (const T num)\label{a00029_a91b62f3f5e54ef9318e396ea34e0a151}
 
 \item 
-void {\bfseries operator-\/=} (const T num)\label{a00029_adcebc860353f85fa88001a5e12fc9d09}
+T {\bfseries operator()} (const long i) const \label{a00029_a13d6388a402cf475ea0c2115bb5722f9}
 
 \item 
-T {\bfseries operator()} (const long i) const \label{a00029_a130625c785330dab16d6a656a30a6647}
+T {\bfseries operator()} (const long row, const long col) const \label{a00029_a5e535ee17f5f6deff881752da62e470e}
 
 \item 
-T {\bfseries operator()} (const long depth, const long row, const long col) const \label{a00029_a9f5aa6cf692ba6755a87c750dba8f99d}
+T \& {\bfseries operator()} (const long i)\label{a00029_ac971dfc553773adf0ee2aaadad5ed860}
 
 \item 
-T \& {\bfseries operator()} (const long i)\label{a00029_a0f31bbbbee83042c88fe0437fb015892}
+T \& {\bfseries operator()} (const long i, const long j)\label{a00029_af9e43d7e4a04fbe5d55688544aaa55b8}
 
 \item 
-T \& {\bfseries operator()} (const long depth, const long row, const long col)\label{a00029_affb0c1dcd69cc4e0388f5b8bc4cdf6d2}
+{\bf Cryst\-Matrix} {\bfseries transpose} (const int dim1, const int dim2) const \label{a00029_ad362480be9841756dbd8d8e8f9fd7180}
 
 \end{DoxyCompactItemize}
 \subsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-T $\ast$ {\bfseries mp\-Data}\label{a00029_ab3d5b11715773cb704f6f4bded48d037}
+T $\ast$ {\bfseries mp\-Data}\label{a00029_ad4589250a66601dea026a26798146b64}
 
 \item 
-long {\bfseries m\-Num\-Elements}\label{a00029_acfedf846348008cdc454680eab6fe39d}
+long {\bfseries m\-Num\-Elements}\label{a00029_a761330d340b333f69f43fd0227c4a0b4}
 
 \item 
-long {\bfseries m\-X\-Size}\label{a00029_a74a117a6a8530bd27fdcb0970f7b63f4}
+long {\bfseries m\-X\-Size}\label{a00029_a704714863b9f5e72eba0ea915960ec41}
 
 \item 
-long {\bfseries m\-Y\-Size}\label{a00029_a3adeb73429e3f1c6ad733e79e928a2b4}
+long {\bfseries m\-Y\-Size}\label{a00029_a310c17ccc241926dfdb633c8dc93d5c0}
 
 \item 
-long {\bfseries m\-Z\-Size}\label{a00029_a4dd37579fffa5a1129658972816e4547}
-
-\item 
-bool {\bfseries m\-Is\-Areference}\label{a00029_a8e5ea60c4bd30f00c408df5c2e68f442}
+bool {\bfseries m\-Is\-Areference}\label{a00029_aa6cf3caeb89fe7aa0db2a9c658a84fc2}
 
 \end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-\subsubsection*{template$<$class T$>$class Cryst\-Array3\-D$<$ T $>$}
+\subsubsection*{template$<$class T$>$class Cryst\-Matrix$<$ T $>$}
 
-3\-D Vector (Blitz++ mimic) for Obj\-Cryst++ 
+2\-D Vector library (Blitz++ mimic) for Obj\-Cryst++ 
 
-The \doxyref{Cryst\-Vector}{p.}{a00031} library is not a new array computation library, despite the appearances. Obj\-Cryst++ should used the {\tt Blitz++ array library} , which yields excellent performance {\itshape and} simple array expressions. Unfortunately, the memory required to {\itshape compile} the library using gcc is far too high to be reasonable when using complex expressions and optimizing code. So until this has changed, The \doxyref{Cryst\-Vector}{p.}{a00031} and \doxyref{Cryst\-Matrix}{p.}{a00030} library have been created, and these emulate (supposedly exactly) the Blitz++ interface (but not the smart handling of mathematical expressions, so pointers must be used). For documentation about these two libraries you should read the {\tt Blitz++ documentation}. \doxyref{Cryst\-Vector}{p.}{a00031} and \doxyref{Cryst\-Matrix}{p.}{a00030} use the same kind of storage in memory.
+The \doxyref{Cryst\-Vector}{p.}{a00030} library is not a new array computation library, despite the appearances. Obj\-Cryst++ should used the {\tt Blitz++ array library} , which yields excellent performance {\itshape and} simple array expressions. Unfortunately, the memory required to {\itshape compile} the library using gcc is far too high to be reasonable when using complex expressions and optimizing code. So until this has changed, The \doxyref{Cryst\-Vector}{p.}{a00030} and \doxyref{Cryst\-Matrix}{p.}{a00029} library have been created, and these emulate (supposedly exactly) the Blitz++ interface (but not the smart handling of mathematical expressions, so pointers must be used). For documentation about these two libraries you should read the {\tt Blitz++ documentation}. \doxyref{Cryst\-Vector}{p.}{a00030} and \doxyref{Cryst\-Matrix}{p.}{a00029} use the same kind of storage in memory.
 
-You can use Cryst\-Array3\-D\-\_\-\-R\-E\-A\-L, Cryst\-Array3\-D\-\_\-long,etc... to declare 3\-D vectors. Macros ensure (well, should) ensure compatibility with Blitz++. (as of april 2001 support of blitz++ is broken). 
+You can use Cryst\-Matrix\-\_\-\-R\-E\-A\-L, Cryst\-Matrix\-\_\-long,etc... to declare 2\-D vectors. Macros ensure (well, should) ensure compatibility with Blitz++. (as of april 2001 support of blitz++ is broken). 
 
 The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 

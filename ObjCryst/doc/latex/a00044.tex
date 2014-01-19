@@ -1,27 +1,42 @@
-\subsection{Obj\-Cryst\-:\-:Optimization\-Obj\-:\-:Log\-Likelihood\-Stats Struct Reference}
-\label{a00044}\index{Obj\-Cryst\-::\-Optimization\-Obj\-::\-Log\-Likelihood\-Stats@{Obj\-Cryst\-::\-Optimization\-Obj\-::\-Log\-Likelihood\-Stats}}
+\subsection{Obj\-Cryst\-:\-:Lorentz\-Corr Class Reference}
+\label{a00044}\index{Obj\-Cryst\-::\-Lorentz\-Corr@{Obj\-Cryst\-::\-Lorentz\-Corr}}
 
 
-Statistics about each object contributing to the overall Log(likelihood)  
+Lorentz Correction.  
 
 
-\subsubsection*{Public Attributes}
+Inheritance diagram for Obj\-Cryst\-:\-:Lorentz\-Corr\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{a00044}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-R\-E\-A\-L {\bf m\-Last\-Log\-Likelihood}\label{a00044_ab7ca39bcc656b2c92cfde1dedc33b7d0}
+{\bfseries Lorentz\-Corr} (const {\bf Scattering\-Data} \&data)\label{a00044_a9f814b060cfafe4e829dc3977d9a7f1b}
 
-\begin{DoxyCompactList}\small\item\em Previous log(likelihood) \end{DoxyCompactList}\item 
-R\-E\-A\-L {\bf m\-Total\-Log\-Likelihood}\label{a00044_a2bcf5607d7bf66fc816cc8e550eef463}
+\item 
+virtual const string \& {\bf Get\-Name} () const \label{a00044_ab57782d9fe860701bb87309742afe2e5}
 
-\begin{DoxyCompactList}\small\item\em Total Log(\-Likelihood), to compute the average. \end{DoxyCompactList}\item 
-R\-E\-A\-L {\bf m\-Total\-Log\-Likelihood\-Delta\-Sq}\label{a00044_a0b6e826d8f5e0e5a99abc1d52caa6876}
+\begin{DoxyCompactList}\small\item\em Get the name of this object. \end{DoxyCompactList}\item 
+virtual const string \& {\bf Get\-Class\-Name} () const \label{a00044_a740bd7f01b62a994ad5bc1c121d1e626}
 
-\begin{DoxyCompactList}\small\item\em total of (Delta(Log(\-Likelihood)))$^\wedge$2 between successive trials \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Get the name of the class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void {\bf Calc\-Corr} () const \label{a00044_adc247e6477f11474c542f2979984d238}
+
+\begin{DoxyCompactList}\small\item\em Do the computation of corrected intensities. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Additional Inherited Members}
 
 
 \subsubsection{Detailed Description}
-Statistics about each object contributing to the overall Log(likelihood) 
+Lorentz Correction. 
 
-The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+So far, it only considers the correction for equatorial diffraction\-: $ L = \frac{1}{\sin(2\theta)} $ 
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-Global\-Optim\-Obj.\-h\end{DoxyCompactItemize}
+Scattering\-Corr.\-h\end{DoxyCompactItemize}

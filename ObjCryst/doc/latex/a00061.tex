@@ -1,211 +1,402 @@
-\subsection{Obj\-Cryst\-:\-:Obj\-Registry$<$ T $>$ Class Template Reference}
-\label{a00061}\index{Obj\-Cryst\-::\-Obj\-Registry$<$ T $>$@{Obj\-Cryst\-::\-Obj\-Registry$<$ T $>$}}
+\subsection{Obj\-Cryst\-:\-:Optimization\-Obj Class Reference}
+\label{a00061}\index{Obj\-Cryst\-::\-Optimization\-Obj@{Obj\-Cryst\-::\-Optimization\-Obj}}
 
 
-Object Registry.  
+Base object for Optimization methods.  
 
 
+Inheritance diagram for Obj\-Cryst\-:\-:Optimization\-Obj\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{a00061}
+\end{center}
+\end{figure}
+\subsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf Log\-Likelihood\-Stats}
+\begin{DoxyCompactList}\small\item\em Statistics about each object contributing to the overall Log(likelihood) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries Obj\-Registry} (const string \&name)\label{a00061_a5c31340787c7d1c91c64e201a06a9c4d}
+{\bf Optimization\-Obj} (const string name=\char`\"{}\char`\"{})\label{a00061_a939444ac47768e16d205bebbc247cc12}
+
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual {\bf $\sim$\-Optimization\-Obj} ()\label{a00061_a6fdf1e7158254a3c0a21b33e6ed5ffb5}
+
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+virtual void {\bf Randomize\-Starting\-Config} ()
+\begin{DoxyCompactList}\small\item\em Randomize starting configuration. \end{DoxyCompactList}\item 
+virtual void {\bf Optimize} (long \&nb\-Steps, const bool silent=false, const R\-E\-A\-L finalcost=0, const R\-E\-A\-L max\-Time=-\/1)=0
+\begin{DoxyCompactList}\small\item\em Launch optimization (a single run) for N steps. \end{DoxyCompactList}\item 
+virtual void {\bf Multi\-Run\-Optimize} (long \&nb\-Cycle, long \&nb\-Steps, const bool silent=false, const R\-E\-A\-L finalcost=0, const R\-E\-A\-L max\-Time=-\/1)=0
+\begin{DoxyCompactList}\small\item\em Launch optimization for multiple runs of N steps. \end{DoxyCompactList}\item 
+void {\bf Fix\-All\-Par} ()\label{a00061_af8b3cef84c6bcca37cdc4bfde9ecde45}
+
+\begin{DoxyCompactList}\small\item\em Fix all parameters. \end{DoxyCompactList}\item 
+void {\bf Set\-Par\-Is\-Fixed} (const string \&par\-Name, const bool fix)\label{a00061_aca3e1d2c6ace92f1a3a67da2455eac39}
+
+\begin{DoxyCompactList}\small\item\em Fix one parameter. \end{DoxyCompactList}\item 
+void {\bf Set\-Par\-Is\-Fixed} (const {\bf Ref\-Par\-Type} $\ast$type, const bool fix)\label{a00061_a12a66416a701cbf0db17de3bfafdec99}
+
+\begin{DoxyCompactList}\small\item\em Fix one family of parameters. \end{DoxyCompactList}\item 
+void {\bf Un\-Fix\-All\-Par} ()\label{a00061_adb016adacaa7a2a15e40cfb746705bdd}
+
+\begin{DoxyCompactList}\small\item\em Un\-Fix All parameters. \end{DoxyCompactList}\item 
+void {\bf Set\-Par\-Is\-Used} (const string \&par\-Name, const bool use)\label{a00061_ab2f87becfb73eb00d8f7c3ff25435c0d}
+
+\begin{DoxyCompactList}\small\item\em Set a parameter to be used. \end{DoxyCompactList}\item 
+void {\bf Set\-Par\-Is\-Used} (const {\bf Ref\-Par\-Type} $\ast$type, const bool use)\label{a00061_a73c29f094ad0a4923a2873388fc1eb93}
+
+\begin{DoxyCompactList}\small\item\em Set a family of parameters to be used. \end{DoxyCompactList}\item 
+void {\bf Set\-Limits\-Relative} (const string \&par\-Name, const R\-E\-A\-L min, const R\-E\-A\-L max)\label{a00061_a78113a7741eeda2263a27adcc24497c0}
+
+\begin{DoxyCompactList}\small\item\em Change the relative limits for a parameter from its name. \end{DoxyCompactList}\item 
+void {\bf Set\-Limits\-Relative} (const {\bf Ref\-Par\-Type} $\ast$type, const R\-E\-A\-L min, const R\-E\-A\-L max)\label{a00061_a0437fb441bebe91879de98efcb82865e}
+
+\begin{DoxyCompactList}\small\item\em Change the relative limits for a family of parameter. \end{DoxyCompactList}\item 
+void {\bf Set\-Limits\-Absolute} (const string \&par\-Name, const R\-E\-A\-L min, const R\-E\-A\-L max)\label{a00061_ad0bc0b36d1525526c55dc6642109d0b4}
+
+\begin{DoxyCompactList}\small\item\em Change the absolute limits for a parameter from its name. \end{DoxyCompactList}\item 
+void {\bf Set\-Limits\-Absolute} (const {\bf Ref\-Par\-Type} $\ast$type, const R\-E\-A\-L min, const R\-E\-A\-L max)\label{a00061_ade59b2e1d698ff7ba93ac5aa88187c58}
+
+\begin{DoxyCompactList}\small\item\em Change the absolute limits for a family of parameter. \end{DoxyCompactList}\item 
+virtual R\-E\-A\-L {\bf Get\-Log\-Likelihood} () const 
+\begin{DoxyCompactList}\small\item\em The optimized (minimized, actually) function. \end{DoxyCompactList}\item 
+void {\bf Stop\-After\-Cycle} ()\label{a00061_a288306acc3189c4fcaca398d11b32e4e}
+
+\begin{DoxyCompactList}\small\item\em Stop after the current cycle. U\-Sed for interactive refinement. \end{DoxyCompactList}\item 
+virtual void {\bf Display\-Report} ()\label{a00061_af09e8a9cd1b7f7f29bf57d027e08fc54}
+
+\begin{DoxyCompactList}\small\item\em Show report to the user during refinement. Used for G\-U\-I update. \end{DoxyCompactList}\item 
+void {\bf Add\-Refinable\-Obj} ({\bf Refinable\-Obj} \&)\label{a00061_a05e7019188763202126f9f83a31e1673}
+
+\begin{DoxyCompactList}\small\item\em Add a refined object. All sub-\/objects are also added. \end{DoxyCompactList}\item 
+{\bf Refinable\-Obj} \& {\bf Get\-Full\-Refinable\-Obj} (const bool rebuild=true)
+\begin{DoxyCompactList}\small\item\em Get the \doxyref{Refinable\-Obj}{p.}{a00077} with all the parameters from all refined objects. \end{DoxyCompactList}\item 
+virtual void {\bf X\-M\-L\-Output} (ostream \&os, int indent=0) const =0
+\begin{DoxyCompactList}\small\item\em Output a description of the object in X\-M\-L format to a stream. \end{DoxyCompactList}\item 
+virtual void {\bf X\-M\-L\-Input} (istream \&is, const {\bf X\-M\-L\-Cryst\-Tag} \&tag)=0
+\begin{DoxyCompactList}\small\item\em Input in X\-M\-L format from a stream, restoring the set of refined objects and the associated cost functions. \end{DoxyCompactList}\item 
+const string \& {\bf Get\-Name} () const \label{a00061_af595745274e554956834f885d7a1dc71}
+
+\begin{DoxyCompactList}\small\item\em Get the name for this object. \end{DoxyCompactList}\item 
+void {\bf Set\-Name} (const string \&)\label{a00061_a076dc80d878fc4ab5e5491f54642382e}
+
+\begin{DoxyCompactList}\small\item\em Set the name for this object. \end{DoxyCompactList}\item 
+virtual const string {\bf Get\-Class\-Name} () const \label{a00061_a2f00b2c3eb874d966bbb778a0d81abb1}
+
+\begin{DoxyCompactList}\small\item\em Get the name for this class type. \end{DoxyCompactList}\item 
+virtual void {\bf Print} () const \label{a00061_a55e92db45821ed13288d6852055c0003}
+
+\begin{DoxyCompactList}\small\item\em Print some information about this object. \end{DoxyCompactList}\item 
+void {\bf Restore\-Best\-Configuration} ()\label{a00061_a25a4ea1cf717a7d62ecf2cdbee87fa7a}
+
+\begin{DoxyCompactList}\small\item\em Restore the Best configuration. \end{DoxyCompactList}\item 
+bool {\bf Is\-Optimizing} () const \label{a00061_a02d12183cd9d167358717b87ada6ba1f}
+
+\begin{DoxyCompactList}\small\item\em Are we busy optimizing ? \end{DoxyCompactList}\item 
+void {\bf Tag\-New\-Best\-Config} ()\label{a00061_a99ca4e2216b0fd93ab335c35a99ca895}
+
+\begin{DoxyCompactList}\small\item\em During a global optimization, tell all objects that the current config is the latest \char`\"{}best\char`\"{} config. \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bf Get\-Last\-Optim\-Elapsed\-Time} () const \label{a00061_af9bb37804ee3012cb05ffc217584db42}
+
+\begin{DoxyCompactList}\small\item\em Get the elapsed time (in seconds) during the last optimization. \end{DoxyCompactList}\item 
+{\bf Main\-Tracker} \& {\bf Get\-Main\-Tracker} ()\label{a00061_af8328b810bc37e45881e19948da7d2d7}
+
+\begin{DoxyCompactList}\small\item\em Get the \doxyref{Main\-Tracker}{p.}{a00047}. \end{DoxyCompactList}\item 
+const {\bf Main\-Tracker} \& {\bf Get\-Main\-Tracker} () const \label{a00061_a737490fc1ac0b30fc3bb3a5bb8061a8b}
+
+\begin{DoxyCompactList}\small\item\em Get the \doxyref{Main\-Tracker}{p.}{a00047}. \end{DoxyCompactList}\item 
+{\bf Ref\-Obj\-Opt} \& {\bfseries Get\-X\-M\-L\-Auto\-Save\-Option} ()\label{a00061_a82e4adbc7b5d3374f7c414a0e89c25fd}
 
 \item 
-void {\bf Register} (T \&obj)\label{a00061_aa5f3f9586f5fbbedd804d0e730c66c71}
-
-\begin{DoxyCompactList}\small\item\em Register a new object. Already registered objects are skipped. \end{DoxyCompactList}\item 
-void {\bf De\-Register} (T \&obj)\label{a00061_a31d6f5073615294d6b0f68759f1895c9}
-
-\begin{DoxyCompactList}\small\item\em De-\/register an object. \end{DoxyCompactList}\item 
-void {\bf De\-Register} (const string \&obj\-Name)\label{a00061_a33fc97d104af353a8a3c82ad82237b65}
-
-\begin{DoxyCompactList}\small\item\em De-\/register an object from its name. \end{DoxyCompactList}\item 
-void {\bf De\-Register\-All} ()\label{a00061_a2a379536cc636a8a1716720be7485e30}
-
-\begin{DoxyCompactList}\small\item\em De-\/register {\itshape all} objects from the list. \end{DoxyCompactList}\item 
-void {\bf Delete\-All} ()\label{a00061_adb16bd04fdeecf675d20c765e2b4d99f}
-
-\begin{DoxyCompactList}\small\item\em Delete all objects in the registry.. Use with caution !! \end{DoxyCompactList}\item 
-T \& {\bf Get\-Obj} (const unsigned int i)
-\begin{DoxyCompactList}\small\item\em Get object \#i in the registry. \end{DoxyCompactList}\item 
-const T \& {\bf Get\-Obj} (const unsigned int i) const 
-\begin{DoxyCompactList}\small\item\em Get object \#i in the registry. \end{DoxyCompactList}\item 
-T \& {\bf Get\-Obj} (const string \&obj\-Name)
-\begin{DoxyCompactList}\small\item\em Get an object from its name in the registry. \end{DoxyCompactList}\item 
-const T \& {\bf Get\-Obj} (const string \&obj\-Name) const 
-\begin{DoxyCompactList}\small\item\em Get an object from its name in the registry. \end{DoxyCompactList}\item 
-T \& {\bf Get\-Obj} (const string \&obj\-Name, const string \&class\-Name)
-\begin{DoxyCompactList}\small\item\em Get an object from its name in the registry. \end{DoxyCompactList}\item 
-const T \& {\bf Get\-Obj} (const string \&obj\-Name, const string \&class\-Name) const 
-\begin{DoxyCompactList}\small\item\em Get an object from its name in the registry. \end{DoxyCompactList}\item 
-long {\bf Get\-Nb} () const \label{a00061_ad33e94ae782a6d5e278f9bf9cd59b837}
-
-\begin{DoxyCompactList}\small\item\em Get the index of an object in the registry, from its name Warning\-: it can change if an object is removed from the registry. \end{DoxyCompactList}\item 
-void {\bfseries Print} () const \label{a00061_aca5c20c48291ceeb51f310d7d9ff707d}
+const {\bf Ref\-Obj\-Opt} \& {\bfseries Get\-X\-M\-L\-Auto\-Save\-Option} () const \label{a00061_a0a37e6bcce21926e13a3f57882e971b0}
 
 \item 
-void {\bfseries Set\-Name} (const string \&)\label{a00061_a91258ba46872ec4bd6ad61499db42f11}
+const R\-E\-A\-L \& {\bf Get\-Best\-Cost} () const \label{a00061_a56c9ec94e7632c8b3f36e3a837c02594}
 
-\item 
-const string \& {\bfseries Get\-Name} () const \label{a00061_a99093d57740cc93d8db2c526f58ad3db}
+\begin{DoxyCompactList}\small\item\em Access to current best cost. \end{DoxyCompactList}\item 
+R\-E\-A\-L \& {\bf Get\-Best\-Cost} ()\label{a00061_a894882f10bd768e3e57ffdfa9f9df7fe}
 
-\item 
-long {\bf Find} (const string \&obj\-Name) const 
-\begin{DoxyCompactList}\small\item\em Find the number of an object in the registry from its name (slow !) The search starts at the {\itshape end} of the registry. \end{DoxyCompactList}\item 
-long {\bf Find} (const string \&obj\-Name, const string \&class\-Name, const bool nothrow=false) const 
-\begin{DoxyCompactList}\small\item\em Find the number of an object in the registry from its name (slow !) The search starts at the {\itshape end} of the registry. \end{DoxyCompactList}\item 
-long {\bf Find} (const T \&obj) const 
-\begin{DoxyCompactList}\small\item\em Find the number of an object in the registry The search starts at the {\itshape end} of the registry. \end{DoxyCompactList}\item 
-long {\bf Find} (const T $\ast$pobj) const 
-\begin{DoxyCompactList}\small\item\em Find the number of an object in the registry The search starts at the {\itshape end} of the registry. \end{DoxyCompactList}\item 
-const {\bf Refinable\-Obj\-Clock} \& {\bf Get\-Registry\-Clock} () const \label{a00061_ab44e0e3c62ae214c5fedb9c9c3e15a1b}
+\begin{DoxyCompactList}\small\item\em Access to current best cost. \end{DoxyCompactList}\item 
+virtual void {\bf Begin\-Optimization} (const bool allow\-Approximations=false, const bool enable\-Restraints=false)\label{a00061_a13c12dbdc72825f892c3d48dd2b6cfe3}
 
-\begin{DoxyCompactList}\small\item\em Last time an object was added or removed from the registry. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Private Attributes}
+\begin{DoxyCompactList}\small\item\em Begin optimization for all objects. \end{DoxyCompactList}\item 
+virtual void {\bf End\-Optimization} ()\label{a00061_a37c2335ad867152121253996daaebc6e}
+
+\begin{DoxyCompactList}\small\item\em End optimization for all objects. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-vector$<$ T $\ast$ $>$ {\bf mvp\-Registry}\label{a00061_aa889e29226999aa9f9036a6c7a996394}
+void {\bf Prepare\-Ref\-Par\-List} ()
+\item 
+virtual void {\bf Init\-Options} ()\label{a00061_a0d7f6ae8f6ef49b59f0bc5b4794931e9}
 
-\begin{DoxyCompactList}\small\item\em The registry of objects. \end{DoxyCompactList}\item 
-string {\bf m\-Name}\label{a00061_a3acdd6614851bca37afb9fbee57b7172}
+\begin{DoxyCompactList}\small\item\em Initialization of options. \end{DoxyCompactList}\item 
+virtual void {\bf Update\-Display} ()
+\begin{DoxyCompactList}\small\item\em Update Display (if any display is available), when a new 'relevant' configuration is reached. \end{DoxyCompactList}\item 
+void {\bf Build\-Recursive\-Ref\-Obj\-List} ()
+\begin{DoxyCompactList}\small\item\em (Re)build \doxyref{Optimization\-Obj\-::m\-Recursive\-Refined\-Obj\-List}{p.}{a00061_a0e6a9e9d4d12ed73c582da36190f110f}, if an object has been added or modified. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Refinable\-Obj} {\bf m\-Ref\-Par\-List}
+\begin{DoxyCompactList}\small\item\em The refinable par list used during refinement. \end{DoxyCompactList}\item 
+string {\bf m\-Name}\label{a00061_a9fa42c95df26834a9f369af61eb10ea6}
 
-\begin{DoxyCompactList}\small\item\em Name of this registry. \end{DoxyCompactList}\item 
-{\bf Refinable\-Obj\-Clock} {\bf m\-List\-Clock}\label{a00061_a3f834108dbb1dc828744596017fa740a}
+\begin{DoxyCompactList}\small\item\em Name of the Global\-Optimization object. \end{DoxyCompactList}\item 
+string {\bf m\-Save\-File\-Name}\label{a00061_a2694dd9fc6ab088e3d79e0c9e0358311}
 
-\begin{DoxyCompactList}\small\item\em Last time an object was added or removed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em File name where refinement info is saved (N\-O\-T U\-S\-E\-D so far...) \end{DoxyCompactList}\item 
+long {\bf m\-Nb\-Trial}\label{a00061_af47650ca783520dd0100077b08271c79}
+
+\begin{DoxyCompactList}\small\item\em Number of trials so far. \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bf m\-Best\-Cost}\label{a00061_a495926a48dd408a3b92de8a6b33f815a}
+
+\begin{DoxyCompactList}\small\item\em Best value of the cost function so far. \end{DoxyCompactList}\item 
+long {\bf m\-Best\-Par\-Saved\-Set\-Index}\label{a00061_aa9c2d238f7b60c7ea3bd715bf145b5d3}
+
+\begin{DoxyCompactList}\small\item\em Index of the 'best' saved parameter set. \end{DoxyCompactList}\item 
+unsigned long {\bf m\-Context}\label{a00061_a7139f75c5b214ea00f99c2e4c25b2b34}
+
+\begin{DoxyCompactList}\small\item\em The current 'context', in the case the optimization is run in different parallel contexts. \end{DoxyCompactList}\item 
+map$<$ unsigned long, map$<$ const \\*
+{\bf Refinable\-Obj} \\*
+$\ast$, {\bf Log\-Likelihood\-Stats} $>$ $>$ {\bf mv\-Context\-Obj\-Stats}\label{a00061_a1b33baa71f4e0b182bae66766608425f}
+
+\begin{DoxyCompactList}\small\item\em Statistics for each context (mutable for dynamic update during optimization) \end{DoxyCompactList}\item 
+map$<$ const {\bf Refinable\-Obj} \\*
+$\ast$, Dynamic\-Obj\-Weight $>$ {\bf mv\-Obj\-Weight}\label{a00061_a4b1120b0a6fc24c82c273152722f672c}
+
+\begin{DoxyCompactList}\small\item\em Weights for each objects in each context (mutable for dynamic update during optimization) \end{DoxyCompactList}\item 
+std\-::vector$<$ pair$<$ long, R\-E\-A\-L $>$ $>$ {\bf mv\-Saved\-Param\-Set}
+\begin{DoxyCompactList}\small\item\em List of saved parameter sets. \end{DoxyCompactList}\item 
+bool {\bf m\-Is\-Optimizing}\label{a00061_a712048cd592825ce31ced1120733345b}
+
+\begin{DoxyCompactList}\small\item\em True if a refinement is being done. For multi-\/threaded environment. \end{DoxyCompactList}\item 
+bool {\bf m\-Stop\-After\-Cycle}\label{a00061_abec493a46c9e57c7e71e886bcae601fb}
+
+\begin{DoxyCompactList}\small\item\em If true, then stop at the end of the cycle. Used in multi-\/threaded environment. \end{DoxyCompactList}\item 
+{\bf Obj\-Registry}$<$ {\bf Refinable\-Obj} $>$ {\bf m\-Refined\-Obj\-List}\label{a00061_a73f491b5c8a0ae5f087e496916f76016}
+
+\begin{DoxyCompactList}\small\item\em The refined objects. \end{DoxyCompactList}\item 
+{\bf Obj\-Registry}$<$ {\bf Refinable\-Obj} $>$ {\bf m\-Recursive\-Refined\-Obj\-List}
+\begin{DoxyCompactList}\small\item\em The refined objects, recursively including all sub-\/objects. \end{DoxyCompactList}\item 
+{\bf Ref\-Obj\-Opt} {\bf m\-X\-M\-L\-Auto\-Save}\label{a00061_a94038e1c477b1efa6417c13106d6bc89}
+
+\begin{DoxyCompactList}\small\item\em Periodic save of complete environment as an xml file. \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bf m\-Last\-Optim\-Time}\label{a00061_abf309e1b2248a7e1d3744d4b20d15bfd}
+
+\begin{DoxyCompactList}\small\item\em The time elapsed after the last optimization, in seconds. \end{DoxyCompactList}\item 
+{\bf Main\-Tracker} {\bf m\-Main\-Tracker}
+\begin{DoxyCompactList}\small\item\em \doxyref{Main\-Tracker}{p.}{a00047} object to track the evolution of cost functions, likelihood, and individual parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-\subsubsection*{template$<$class T$>$class Obj\-Cryst\-::\-Obj\-Registry$<$ T $>$}
+Base object for Optimization methods. 
 
-Object Registry. 
+This is an abstract base class, derived for Monte-\/\-Cralo type algorithms (Simulated Annealing \& Parallel Tempering), and hopefully soon for Genetic Algorithms.
 
-This class is used to keep a list of all object of a given class at the global level, or inside another object. This is primarily aimed for the derivative of the \doxyref{Refinable\-Obj}{p.}{a00078} class but it can be used for {\itshape any} class that has Get\-Name() and Get\-Class\-Name() function. This class now uses a vector$<$$>$ approach from the S\-T\-L.
-
-\begin{DoxyWarning}{Warning}
-the order of the objects in the registry can change (every time an object is de-\/registered).
-\end{DoxyWarning}
-\begin{DoxyRefDesc}{Todo}
-\item[{\bf Todo}](?) create two derived classes with the same interface, one which is a const registry (the 'client' registry for \doxyref{Refinable\-Obj}{p.}{a00078}), and one which has a non-\/const access to the registered objects (the 'sub-\/objects' in \doxyref{Refinable\-Obj}{p.}{a00078}). \end{DoxyRefDesc}
+\begin{DoxyRemark}{Remarks}
+Instead of keeping a copy of the list of parameters here, maybe it would be better to delegate all parameter handling to the refined objects (they would also have to keep in memory the saved parameter sets, so that could be difficult to administrate...). 
+\end{DoxyRemark}
 
 
 \subsubsection{Member Function Documentation}
-\index{Obj\-Cryst\-::\-Obj\-Registry@{Obj\-Cryst\-::\-Obj\-Registry}!Find@{Find}}
-\index{Find@{Find}!ObjCryst::ObjRegistry@{Obj\-Cryst\-::\-Obj\-Registry}}
-\paragraph[{Find}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ long {\bf Obj\-Cryst\-::\-Obj\-Registry}$<$ T $>$\-::Find (
+\index{Obj\-Cryst\-::\-Optimization\-Obj@{Obj\-Cryst\-::\-Optimization\-Obj}!Build\-Recursive\-Ref\-Obj\-List@{Build\-Recursive\-Ref\-Obj\-List}}
+\index{Build\-Recursive\-Ref\-Obj\-List@{Build\-Recursive\-Ref\-Obj\-List}!ObjCryst::OptimizationObj@{Obj\-Cryst\-::\-Optimization\-Obj}}
+\paragraph[{Build\-Recursive\-Ref\-Obj\-List}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-Optimization\-Obj\-::\-Build\-Recursive\-Ref\-Obj\-List (
 \begin{DoxyParamCaption}
-\item[{const string \&}]{obj\-Name}
+{}
 \end{DoxyParamCaption}
-) const}\label{a00061_a1d45b1d1601ebeab14b00794433b4b77}
+)\hspace{0.3cm}{\ttfamily [protected]}}\label{a00061_a7c819c5f8fc52caafd97ea9d468da2be}
 
 
-Find the number of an object in the registry from its name (slow !) The search starts at the {\itshape end} of the registry. 
+(Re)build \doxyref{Optimization\-Obj\-::m\-Recursive\-Refined\-Obj\-List}{p.}{a00061_a0e6a9e9d4d12ed73c582da36190f110f}, if an object has been added or modified. 
 
-\index{Obj\-Cryst\-::\-Obj\-Registry@{Obj\-Cryst\-::\-Obj\-Registry}!Find@{Find}}
-\index{Find@{Find}!ObjCryst::ObjRegistry@{Obj\-Cryst\-::\-Obj\-Registry}}
-\paragraph[{Find}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ long {\bf Obj\-Cryst\-::\-Obj\-Registry}$<$ T $>$\-::Find (
+If no object has been added and no sub-\/object has been added/removed, then nothing is done. \index{Obj\-Cryst\-::\-Optimization\-Obj@{Obj\-Cryst\-::\-Optimization\-Obj}!Get\-Full\-Refinable\-Obj@{Get\-Full\-Refinable\-Obj}}
+\index{Get\-Full\-Refinable\-Obj@{Get\-Full\-Refinable\-Obj}!ObjCryst::OptimizationObj@{Obj\-Cryst\-::\-Optimization\-Obj}}
+\paragraph[{Get\-Full\-Refinable\-Obj}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Refinable\-Obj}\& Obj\-Cryst\-::\-Optimization\-Obj\-::\-Get\-Full\-Refinable\-Obj (
 \begin{DoxyParamCaption}
-\item[{const string \&}]{obj\-Name, }
-\item[{const string \&}]{class\-Name, }
-\item[{const bool}]{nothrow = {\ttfamily false}}
+\item[{const bool}]{rebuild = {\ttfamily true}}
 \end{DoxyParamCaption}
-) const}\label{a00061_a29cec1c80dd01ea448967fbe863f88cd}
+)}\label{a00061_afef162d94382a93fe037fac1b5d3ef03}
 
 
-Find the number of an object in the registry from its name (slow !) The search starts at the {\itshape end} of the registry. 
+Get the \doxyref{Refinable\-Obj}{p.}{a00077} with all the parameters from all refined objects. 
 
-Also check the class of the object (inheritance...). use nothrow=true to avoid having an exception thrown if no object is found (instead the index returned will be -\/1) \index{Obj\-Cryst\-::\-Obj\-Registry@{Obj\-Cryst\-::\-Obj\-Registry}!Find@{Find}}
-\index{Find@{Find}!ObjCryst::ObjRegistry@{Obj\-Cryst\-::\-Obj\-Registry}}
-\paragraph[{Find}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ long {\bf Obj\-Cryst\-::\-Obj\-Registry}$<$ T $>$\-::Find (
+If rebuild=true, prepare again the list of objects/parameters. \index{Obj\-Cryst\-::\-Optimization\-Obj@{Obj\-Cryst\-::\-Optimization\-Obj}!Get\-Log\-Likelihood@{Get\-Log\-Likelihood}}
+\index{Get\-Log\-Likelihood@{Get\-Log\-Likelihood}!ObjCryst::OptimizationObj@{Obj\-Cryst\-::\-Optimization\-Obj}}
+\paragraph[{Get\-Log\-Likelihood}]{\setlength{\rightskip}{0pt plus 5cm}virtual R\-E\-A\-L Obj\-Cryst\-::\-Optimization\-Obj\-::\-Get\-Log\-Likelihood (
 \begin{DoxyParamCaption}
-\item[{const T \&}]{obj}
+{}
 \end{DoxyParamCaption}
-) const}\label{a00061_ad391fd540afa24cab0c9c86dbb9321b4}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00061_a0f317f235e6e5cb1867cc7c5870f510f}
 
 
-Find the number of an object in the registry The search starts at the {\itshape end} of the registry. 
+The optimized (minimized, actually) function. 
 
-\index{Obj\-Cryst\-::\-Obj\-Registry@{Obj\-Cryst\-::\-Obj\-Registry}!Find@{Find}}
-\index{Find@{Find}!ObjCryst::ObjRegistry@{Obj\-Cryst\-::\-Obj\-Registry}}
-\paragraph[{Find}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ long {\bf Obj\-Cryst\-::\-Obj\-Registry}$<$ T $>$\-::Find (
+This function is the weighted sum of the chosen Cost Functions for the refined objects. \index{Obj\-Cryst\-::\-Optimization\-Obj@{Obj\-Cryst\-::\-Optimization\-Obj}!Multi\-Run\-Optimize@{Multi\-Run\-Optimize}}
+\index{Multi\-Run\-Optimize@{Multi\-Run\-Optimize}!ObjCryst::OptimizationObj@{Obj\-Cryst\-::\-Optimization\-Obj}}
+\paragraph[{Multi\-Run\-Optimize}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Optimization\-Obj\-::\-Multi\-Run\-Optimize (
 \begin{DoxyParamCaption}
-\item[{const T $\ast$}]{pobj}
+\item[{long \&}]{nb\-Cycle, }
+\item[{long \&}]{nb\-Steps, }
+\item[{const bool}]{silent = {\ttfamily false}, }
+\item[{const R\-E\-A\-L}]{finalcost = {\ttfamily 0}, }
+\item[{const R\-E\-A\-L}]{max\-Time = {\ttfamily -\/1}}
 \end{DoxyParamCaption}
-) const}\label{a00061_a930648ad32b8e884614604fa729b8111}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{a00061_aa53575dbda2ec3f561bed934beb4ca6f}
 
 
-Find the number of an object in the registry The search starts at the {\itshape end} of the registry. 
+Launch optimization for multiple runs of N steps. 
 
-\index{Obj\-Cryst\-::\-Obj\-Registry@{Obj\-Cryst\-::\-Obj\-Registry}!Get\-Obj@{Get\-Obj}}
-\index{Get\-Obj@{Get\-Obj}!ObjCryst::ObjRegistry@{Obj\-Cryst\-::\-Obj\-Registry}}
-\paragraph[{Get\-Obj}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ T\& {\bf Obj\-Cryst\-::\-Obj\-Registry}$<$ T $>$\-::Get\-Obj (
+
+\begin{DoxyParams}{Parameters}
+{\em nb\-Cycle} & the number of runs (cycles) to perform. The structure is randomized at the beginning of each cycle. If nb\-Cycle==-\/1, this will run indefinitely. The nb\-Cycle parameter is decreased after each run. \\
+\hline
+{\em nb\-Steps} & the number of steps to go. This number is modified (decreases!) as the refinement goes on. \\
+\hline
+{\em silent} & \-: if true, absolutely no message should be printed (except debugging) \\
+\hline
+{\em finalcost} & the optimization will stop if overall cost fallse below this value \\
+\hline
+{\em max\-Time} & the optimization will stop after the given number of seconds has been spent optimizing (ignored if $<$0). \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in {\bf Obj\-Cryst\-::\-Monte\-Carlo\-Obj} \doxyref{}{p.}{a00056_ae1689aa2dd5867499768328df935334d}, and {\bf Obj\-Cryst\-::\-Simplex\-Obj} \doxyref{}{p.}{a00099_a1c7ae823f9e31169b453f36d15c049b8}.
+
+\index{Obj\-Cryst\-::\-Optimization\-Obj@{Obj\-Cryst\-::\-Optimization\-Obj}!Optimize@{Optimize}}
+\index{Optimize@{Optimize}!ObjCryst::OptimizationObj@{Obj\-Cryst\-::\-Optimization\-Obj}}
+\paragraph[{Optimize}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Optimization\-Obj\-::\-Optimize (
 \begin{DoxyParamCaption}
-\item[{const unsigned int}]{i}
+\item[{long \&}]{nb\-Steps, }
+\item[{const bool}]{silent = {\ttfamily false}, }
+\item[{const R\-E\-A\-L}]{finalcost = {\ttfamily 0}, }
+\item[{const R\-E\-A\-L}]{max\-Time = {\ttfamily -\/1}}
 \end{DoxyParamCaption}
-)}\label{a00061_aeaed0bb7536fd757c5d8beb37917682e}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{a00061_a08c77dc6ec80f63bf067ef2968a0b6dc}
 
 
-Get object \#i in the registry. 
+Launch optimization (a single run) for N steps. 
 
-Use with caution. The order of the objects changes as objects are added and removed. \index{Obj\-Cryst\-::\-Obj\-Registry@{Obj\-Cryst\-::\-Obj\-Registry}!Get\-Obj@{Get\-Obj}}
-\index{Get\-Obj@{Get\-Obj}!ObjCryst::ObjRegistry@{Obj\-Cryst\-::\-Obj\-Registry}}
-\paragraph[{Get\-Obj}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ const T\& {\bf Obj\-Cryst\-::\-Obj\-Registry}$<$ T $>$\-::Get\-Obj (
+
+\begin{DoxyParams}{Parameters}
+{\em nb\-Steps} & the number of steps to go. This number is modified (decreases!) as the refinement goes on. \\
+\hline
+{\em silent} & \-: if true, absolutely no message should be printed (except debugging) \\
+\hline
+{\em finalcost} & the optimization will stop if overall cost fallse below this value \\
+\hline
+{\em max\-Time} & the optimization will stop after the given number of seconds has been spent optimizing (ignored if $<$0). \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in {\bf Obj\-Cryst\-::\-Monte\-Carlo\-Obj} \doxyref{}{p.}{a00056_aef060de8a302fb8c4e607e00667d7b49}, and {\bf Obj\-Cryst\-::\-Simplex\-Obj} \doxyref{}{p.}{a00099_aa8bf4b209e2ce6229722b18ec9911010}.
+
+\index{Obj\-Cryst\-::\-Optimization\-Obj@{Obj\-Cryst\-::\-Optimization\-Obj}!Prepare\-Ref\-Par\-List@{Prepare\-Ref\-Par\-List}}
+\index{Prepare\-Ref\-Par\-List@{Prepare\-Ref\-Par\-List}!ObjCryst::OptimizationObj@{Obj\-Cryst\-::\-Optimization\-Obj}}
+\paragraph[{Prepare\-Ref\-Par\-List}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-Optimization\-Obj\-::\-Prepare\-Ref\-Par\-List (
 \begin{DoxyParamCaption}
-\item[{const unsigned int}]{i}
+{}
 \end{DoxyParamCaption}
-) const}\label{a00061_af01d9e524b33a1d6e871b665b100a0a5}
-
-
-Get object \#i in the registry. 
-
-Use with caution. The order of the objects changes as objects are added and removed. \index{Obj\-Cryst\-::\-Obj\-Registry@{Obj\-Cryst\-::\-Obj\-Registry}!Get\-Obj@{Get\-Obj}}
-\index{Get\-Obj@{Get\-Obj}!ObjCryst::ObjRegistry@{Obj\-Cryst\-::\-Obj\-Registry}}
-\paragraph[{Get\-Obj}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ T\& {\bf Obj\-Cryst\-::\-Obj\-Registry}$<$ T $>$\-::Get\-Obj (
+)\hspace{0.3cm}{\ttfamily [protected]}}\label{a00061_a2f11f520bc1bd0b70f8aea98d3f8224c}
+Prepare m\-Ref\-Par\-List for the refinement \index{Obj\-Cryst\-::\-Optimization\-Obj@{Obj\-Cryst\-::\-Optimization\-Obj}!Randomize\-Starting\-Config@{Randomize\-Starting\-Config}}
+\index{Randomize\-Starting\-Config@{Randomize\-Starting\-Config}!ObjCryst::OptimizationObj@{Obj\-Cryst\-::\-Optimization\-Obj}}
+\paragraph[{Randomize\-Starting\-Config}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Optimization\-Obj\-::\-Randomize\-Starting\-Config (
 \begin{DoxyParamCaption}
-\item[{const string \&}]{obj\-Name}
+{}
 \end{DoxyParamCaption}
-)}\label{a00061_a995e76c573306aaf53931bd98954dd28}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00061_a04ac9f4d67eb8823b78b00f222a5a29c}
 
 
-Get an object from its name in the registry. 
+Randomize starting configuration. 
 
-The search starts at the {\itshape end} of the registry. \index{Obj\-Cryst\-::\-Obj\-Registry@{Obj\-Cryst\-::\-Obj\-Registry}!Get\-Obj@{Get\-Obj}}
-\index{Get\-Obj@{Get\-Obj}!ObjCryst::ObjRegistry@{Obj\-Cryst\-::\-Obj\-Registry}}
-\paragraph[{Get\-Obj}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ const T\& {\bf Obj\-Cryst\-::\-Obj\-Registry}$<$ T $>$\-::Get\-Obj (
+Only affects limited and periodic parameters. \index{Obj\-Cryst\-::\-Optimization\-Obj@{Obj\-Cryst\-::\-Optimization\-Obj}!Update\-Display@{Update\-Display}}
+\index{Update\-Display@{Update\-Display}!ObjCryst::OptimizationObj@{Obj\-Cryst\-::\-Optimization\-Obj}}
+\paragraph[{Update\-Display}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Optimization\-Obj\-::\-Update\-Display (
 \begin{DoxyParamCaption}
-\item[{const string \&}]{obj\-Name}
+{}
 \end{DoxyParamCaption}
-) const}\label{a00061_a05d7ac98414b6779d57dbcfdb1863548}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\label{a00061_a3658f0e6232756d68b8b17256f27a9bd}
 
 
-Get an object from its name in the registry. 
+Update Display (if any display is available), when a new 'relevant' configuration is reached. 
 
-The search starts at the {\itshape end} of the registry. \index{Obj\-Cryst\-::\-Obj\-Registry@{Obj\-Cryst\-::\-Obj\-Registry}!Get\-Obj@{Get\-Obj}}
-\index{Get\-Obj@{Get\-Obj}!ObjCryst::ObjRegistry@{Obj\-Cryst\-::\-Obj\-Registry}}
-\paragraph[{Get\-Obj}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ T\& {\bf Obj\-Cryst\-::\-Obj\-Registry}$<$ T $>$\-::Get\-Obj (
+This calls all \doxyref{Refinable\-Obj\-::\-Update\-Display()}{p.}{a00077_ab74e2cead734fe1e652c5add46c5e116} \index{Obj\-Cryst\-::\-Optimization\-Obj@{Obj\-Cryst\-::\-Optimization\-Obj}!X\-M\-L\-Input@{X\-M\-L\-Input}}
+\index{X\-M\-L\-Input@{X\-M\-L\-Input}!ObjCryst::OptimizationObj@{Obj\-Cryst\-::\-Optimization\-Obj}}
+\paragraph[{X\-M\-L\-Input}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Optimization\-Obj\-::\-X\-M\-L\-Input (
 \begin{DoxyParamCaption}
-\item[{const string \&}]{obj\-Name, }
-\item[{const string \&}]{class\-Name}
+\item[{istream \&}]{is, }
+\item[{const {\bf X\-M\-L\-Cryst\-Tag} \&}]{tag}
 \end{DoxyParamCaption}
-)}\label{a00061_a79a5b5ef19d4ca2d0ebb80bbcf9168f6}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{a00061_aa07aee60f56780e2c56fb20f4a5f48a8}
 
 
-Get an object from its name in the registry. 
+Input in X\-M\-L format from a stream, restoring the set of refined objects and the associated cost functions. 
 
-The search starts at the {\itshape end} of the registry. Also check the class of the object. \index{Obj\-Cryst\-::\-Obj\-Registry@{Obj\-Cryst\-::\-Obj\-Registry}!Get\-Obj@{Get\-Obj}}
-\index{Get\-Obj@{Get\-Obj}!ObjCryst::ObjRegistry@{Obj\-Cryst\-::\-Obj\-Registry}}
-\paragraph[{Get\-Obj}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ const T\& {\bf Obj\-Cryst\-::\-Obj\-Registry}$<$ T $>$\-::Get\-Obj (
+Note that the corresponding objects must have been loaded in memory before, else shit happens. 
+
+Implemented in {\bf Obj\-Cryst\-::\-Monte\-Carlo\-Obj} \doxyref{}{p.}{a00056_a2f9428857b1d26bbdac08d59debb9f52}, and {\bf Obj\-Cryst\-::\-Simplex\-Obj} \doxyref{}{p.}{a00099_ae6ed0602ffdd2db1a10be80820a0a285}.
+
+\index{Obj\-Cryst\-::\-Optimization\-Obj@{Obj\-Cryst\-::\-Optimization\-Obj}!X\-M\-L\-Output@{X\-M\-L\-Output}}
+\index{X\-M\-L\-Output@{X\-M\-L\-Output}!ObjCryst::OptimizationObj@{Obj\-Cryst\-::\-Optimization\-Obj}}
+\paragraph[{X\-M\-L\-Output}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Optimization\-Obj\-::\-X\-M\-L\-Output (
 \begin{DoxyParamCaption}
-\item[{const string \&}]{obj\-Name, }
-\item[{const string \&}]{class\-Name}
+\item[{ostream \&}]{os, }
+\item[{int}]{indent = {\ttfamily 0}}
 \end{DoxyParamCaption}
-) const}\label{a00061_aebefd3c2e131d58d1c4fe60942ea56be}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{a00061_a6b7726159bb0d5dad1c7eebaee78f53a}
 
 
-Get an object from its name in the registry. 
+Output a description of the object in X\-M\-L format to a stream. 
 
-The search starts at the {\itshape end} of the registry. Also check the class of the object. 
+This saves the list of refined object and the cost functions, as well as options for the refinement. The refined objects are {\bfseries not} saved, so this must be done somewhere else (they must be reloaded before this object). 
+
+Implemented in {\bf Obj\-Cryst\-::\-Monte\-Carlo\-Obj} \doxyref{}{p.}{a00056_a619eb171e5fe384be4d37f999dde8e0f}, and {\bf Obj\-Cryst\-::\-Simplex\-Obj} \doxyref{}{p.}{a00099_a7111042ca3a7201039a25fe548cb524c}.
+
+
+
+\subsubsection{Member Data Documentation}
+\index{Obj\-Cryst\-::\-Optimization\-Obj@{Obj\-Cryst\-::\-Optimization\-Obj}!m\-Main\-Tracker@{m\-Main\-Tracker}}
+\index{m\-Main\-Tracker@{m\-Main\-Tracker}!ObjCryst::OptimizationObj@{Obj\-Cryst\-::\-Optimization\-Obj}}
+\paragraph[{m\-Main\-Tracker}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Main\-Tracker} Obj\-Cryst\-::\-Optimization\-Obj\-::m\-Main\-Tracker\hspace{0.3cm}{\ttfamily [protected]}}\label{a00061_abe2f9a9812abe0f4a6c414457b5b2967}
+
+
+\doxyref{Main\-Tracker}{p.}{a00047} object to track the evolution of cost functions, likelihood, and individual parameters. 
+
+\index{Obj\-Cryst\-::\-Optimization\-Obj@{Obj\-Cryst\-::\-Optimization\-Obj}!m\-Recursive\-Refined\-Obj\-List@{m\-Recursive\-Refined\-Obj\-List}}
+\index{m\-Recursive\-Refined\-Obj\-List@{m\-Recursive\-Refined\-Obj\-List}!ObjCryst::OptimizationObj@{Obj\-Cryst\-::\-Optimization\-Obj}}
+\paragraph[{m\-Recursive\-Refined\-Obj\-List}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Obj\-Registry}$<${\bf Refinable\-Obj}$>$ Obj\-Cryst\-::\-Optimization\-Obj\-::m\-Recursive\-Refined\-Obj\-List\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [protected]}}\label{a00061_a0e6a9e9d4d12ed73c582da36190f110f}
+
+
+The refined objects, recursively including all sub-\/objects. 
+
+This is mutable, since it is a function of m\-Refined\-Obj\-List only. \index{Obj\-Cryst\-::\-Optimization\-Obj@{Obj\-Cryst\-::\-Optimization\-Obj}!m\-Ref\-Par\-List@{m\-Ref\-Par\-List}}
+\index{m\-Ref\-Par\-List@{m\-Ref\-Par\-List}!ObjCryst::OptimizationObj@{Obj\-Cryst\-::\-Optimization\-Obj}}
+\paragraph[{m\-Ref\-Par\-List}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Refinable\-Obj} Obj\-Cryst\-::\-Optimization\-Obj\-::m\-Ref\-Par\-List\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [protected]}}\label{a00061_a9cf13c38f24b4b2ddd6cb239286053af}
+
+
+The refinable par list used during refinement. 
+
+Only a condensed version of all objects. This is useful to keep an history of modifications, and to restore previous values. \begin{DoxyRemark}{Remarks}
+maybe this should be completely delegated to the refined objetcs. 
+\end{DoxyRemark}
+\index{Obj\-Cryst\-::\-Optimization\-Obj@{Obj\-Cryst\-::\-Optimization\-Obj}!mv\-Saved\-Param\-Set@{mv\-Saved\-Param\-Set}}
+\index{mv\-Saved\-Param\-Set@{mv\-Saved\-Param\-Set}!ObjCryst::OptimizationObj@{Obj\-Cryst\-::\-Optimization\-Obj}}
+\paragraph[{mv\-Saved\-Param\-Set}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$pair$<$long,R\-E\-A\-L$>$ $>$ Obj\-Cryst\-::\-Optimization\-Obj\-::mv\-Saved\-Param\-Set\hspace{0.3cm}{\ttfamily [protected]}}\label{a00061_a9063bb2fa6a6f0938295be2ffe2bfe84}
+
+
+List of saved parameter sets. 
+
+This is used to save possible solutions during the optimization, so that the user can check them afterwards.
+
+The first member of each pair is the {\itshape index} of the parameter set, and the second is the overall cost for that set. 
 
 The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-Refinable\-Obj.\-h\end{DoxyCompactItemize}
+Global\-Optim\-Obj.\-h\end{DoxyCompactItemize}

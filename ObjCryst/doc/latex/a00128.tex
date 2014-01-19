@@ -1,11 +1,11 @@
-\subsection{Obj\-Cryst\-:\-:W\-X\-Field\-Name Class Reference}
-\label{a00128}\index{Obj\-Cryst\-::\-W\-X\-Field\-Name@{Obj\-Cryst\-::\-W\-X\-Field\-Name}}
+\subsection{Obj\-Cryst\-:\-:W\-X\-Field\-Option Class Reference}
+\label{a00128}\index{Obj\-Cryst\-::\-W\-X\-Field\-Option@{Obj\-Cryst\-::\-W\-X\-Field\-Option}}
 
 
-A field with the name of a \doxyref{W\-X\-Cryst\-Obj}{p.}{a00122}.  
+W\-X representation of a Ref\-Obj option. This displays the names of the different choices.  
 
 
-Inheritance diagram for Obj\-Cryst\-:\-:W\-X\-Field\-Name\-:\begin{figure}[H]
+Inheritance diagram for Obj\-Cryst\-:\-:W\-X\-Field\-Option\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=3.000000cm]{a00128}
@@ -14,136 +14,106 @@ Inheritance diagram for Obj\-Cryst\-:\-:W\-X\-Field\-Name\-:\begin{figure}[H]
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries W\-X\-Field\-Name} (wx\-Window $\ast$parent, const string \&label, {\bf W\-X\-Cryst\-Obj} $\ast$owner, const int field\-\_\-id, const int hsize=50, bool is\-Editable=true)\label{a00128_a7d6ee70f302497016a1c7faaa3b65633}
+{\bfseries W\-X\-Field\-Option} (wx\-Window $\ast$parent, const int field\-\_\-id, {\bf Ref\-Obj\-Opt} $\ast$option)\label{a00128_a2cd2f40e31d3c634b2d62d5f85de8274}
 
 \item 
-void {\bf On\-Enter} (wx\-Command\-Event \&event)
-\begin{DoxyCompactList}\small\item\em When a new value is entered (must type it and then hit the 'enter' key). \end{DoxyCompactList}\item 
-void {\bf On\-Text} (wx\-Command\-Event \&W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00128_adddf5bb83b5ccceed120466118a3a650}
+void {\bfseries On\-Update\-U\-I} (wx\-Update\-U\-I\-Event \&W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00128_abddd97d3a27a4ec41fe39e0a6b632346}
 
-\begin{DoxyCompactList}\small\item\em Records when text is entered (either from self-\/updating or user input) \end{DoxyCompactList}\item 
-void {\bf Set\-Value} (const string \&)
-\begin{DoxyCompactList}\small\item\em This actually posts an Update\-U\-I event, so that it is safe to call it from a non-\/graphic thread. \end{DoxyCompactList}\item 
-const string {\bf Get\-Value} () const \label{a00128_a04bd6cfb6f8c71c236dee5de937c381e}
-
-\begin{DoxyCompactList}\small\item\em Get the current name. \end{DoxyCompactList}\item 
+\item 
+void {\bf On\-Choice} (wx\-Command\-Event \&W\-X\-U\-N\-U\-S\-E\-D(event))
+\begin{DoxyCompactList}\small\item\em When a new value is entered. \end{DoxyCompactList}\item 
 virtual void {\bf Cryst\-Update} (const bool update\-U\-I=false, const bool mutexlock=false)
-\begin{DoxyCompactList}\small\item\em This does nothing. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Get new values to be displayed from the underlying object, and raise flag if an U\-I update is necessary. \end{DoxyCompactList}\item 
 virtual void {\bf Update\-U\-I} (const bool mutexlock=false)
 \begin{DoxyCompactList}\small\item\em Update the User Interface, if necessary. \end{DoxyCompactList}\item 
-void {\bf Revert} ()\label{a00128_a59ce32e9b9860b6cc6a0833f9d96b753}
+void {\bf Revert} ()\label{a00128_a8caf4ac439d8c702583ceda0612618ab}
 
 \begin{DoxyCompactList}\small\item\em After a user entry, this allows to go back to the last value, if for some reason the entry was rejected (because the object is currently busy, ...) \end{DoxyCompactList}\item 
-virtual void {\bf Validate\-User\-Input} ()\label{a00128_a6139dacad8add55be1b3edaf17c52f31}
+virtual void {\bf Validate\-User\-Input} ()\label{a00128_a8336001d58c58e185325a520e2c17311}
 
-\begin{DoxyCompactList}\small\item\em This function shall be called when a new value has been entered. \end{DoxyCompactList}\item 
-virtual void {\bf Set\-Size} (int width, int height)\label{a00128_a9a2de3cc4be9b91672142f305e66384a}
+\begin{DoxyCompactList}\small\item\em Does nothing. Any user input is directly validated (On\-Choice). \end{DoxyCompactList}\item 
+virtual void {\bf Set\-Tool\-Tip} (const wx\-String \&tip)\label{a00128_ae867012ac2cbe29152197495a31b07a2}
 
-\begin{DoxyCompactList}\small\item\em Change the size of the field (excluding the title) \end{DoxyCompactList}\item 
-virtual void {\bf Set\-Tool\-Tip} (const wx\-String \&tip)\label{a00128_a81816b854a98c0a0b41f5e8ddb4f6ddc}
-
-\begin{DoxyCompactList}\small\item\em Set tooltip for this window. It will be activated when going over the entry field. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Set tooltip for this window. It will be activated when going over the choice field. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-{\bf W\-X\-Cryst\-Obj} $\ast$ {\bf mp\-W\-X\-Obj}\label{a00128_aeba41442b5b3c426315c2278169a6a41}
+int {\bfseries m\-Choice}\label{a00128_a9250ff51e632d03805b802f9938f44ae}
 
-\begin{DoxyCompactList}\small\item\em The \doxyref{W\-X\-Cryst\-Obj}{p.}{a00122} whose name is shown here. \end{DoxyCompactList}\item 
-string {\bf m\-Value}\label{a00128_aa39d895ae2ddba6475338fe753a94465}
+\item 
+int {\bfseries m\-Choice\-Old}\label{a00128_a3eeda225deeac7161bafb23340639aba}
 
-\begin{DoxyCompactList}\small\item\em Last name displayed. \end{DoxyCompactList}\item 
-wx\-Text\-Ctrl $\ast$ {\bf mp\-Field}\label{a00128_a0d475cb9a61594ce430ce594f01a3829}
+\item 
+{\bf Ref\-Obj\-Opt} $\ast$ {\bfseries mp\-Option}\label{a00128_a02d2cebdc3f8f6f3da24aebea176ca16}
 
-\begin{DoxyCompactList}\small\item\em The text window. \end{DoxyCompactList}\item 
-string {\bf m\-Value\-Old}
-\begin{DoxyCompactList}\small\item\em Last name displayed, before the value was changed by the user. \end{DoxyCompactList}\item 
-bool {\bf m\-Is\-Self\-Updating}
-\begin{DoxyCompactList}\small\item\em Set to true if the Field is being updated, so that no 'E\-V\-T\-\_\-\-T\-E\-X\-T' is understood as user input. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\item 
+wx\-Choice $\ast$ {\bfseries mp\-List}\label{a00128_a9e1a3036f23fa841195fbfd98c26fae4}
+
+\end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-A field with the name of a \doxyref{W\-X\-Cryst\-Obj}{p.}{a00122}. 
-
-Updating must be done by the \doxyref{W\-X\-Cryst\-Obj}{p.}{a00122} owner. For a simple string field linked directly to a string, use \doxyref{Obj\-Cryst\-::\-W\-X\-Field\-String}{p.}{a00133} 
+W\-X representation of a Ref\-Obj option. This displays the names of the different choices. 
 
 \subsubsection{Member Function Documentation}
-\index{Obj\-Cryst\-::\-W\-X\-Field\-Name@{Obj\-Cryst\-::\-W\-X\-Field\-Name}!Cryst\-Update@{Cryst\-Update}}
-\index{Cryst\-Update@{Cryst\-Update}!ObjCryst::WXFieldName@{Obj\-Cryst\-::\-W\-X\-Field\-Name}}
-\paragraph[{Cryst\-Update}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-W\-X\-Field\-Name\-::\-Cryst\-Update (
+\index{Obj\-Cryst\-::\-W\-X\-Field\-Option@{Obj\-Cryst\-::\-W\-X\-Field\-Option}!Cryst\-Update@{Cryst\-Update}}
+\index{Cryst\-Update@{Cryst\-Update}!ObjCryst::WXFieldOption@{Obj\-Cryst\-::\-W\-X\-Field\-Option}}
+\paragraph[{Cryst\-Update}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-W\-X\-Field\-Option\-::\-Cryst\-Update (
 \begin{DoxyParamCaption}
 \item[{const bool}]{update\-U\-I = {\ttfamily false}, }
 \item[{const bool}]{mutexlock = {\ttfamily false}}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00128_a538a45567f480e1716ca3b593a1d0ed2}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00128_a146ec591b9da6df9ea68fe7f80144ef0}
 
 
-This does nothing. 
+Get new values to be displayed from the underlying object, and raise flag if an U\-I update is necessary. 
 
-Updates should be done by the owner in the particular case of names. 
+The actual G\-U\-I update is not made here. \doxyref{Update\-U\-I()}{p.}{a00128_adcb0b8495d2a0d03d7e2093bec17545e} should be called separately, from the main thread.
 
-Implements {\bf Obj\-Cryst\-::\-W\-X\-Cryst\-Obj\-Basic} \doxyref{}{p.}{a00123_a7ac00ae2ae28f1a6fa26e6fa571186b6}.
 
-\index{Obj\-Cryst\-::\-W\-X\-Field\-Name@{Obj\-Cryst\-::\-W\-X\-Field\-Name}!On\-Enter@{On\-Enter}}
-\index{On\-Enter@{On\-Enter}!ObjCryst::WXFieldName@{Obj\-Cryst\-::\-W\-X\-Field\-Name}}
-\paragraph[{On\-Enter}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-W\-X\-Field\-Name\-::\-On\-Enter (
+\begin{DoxyParams}{Parameters}
+{\em update\-U\-I} & if true, this will call Update\-U\-I, either directly (if in the main thread), or by sending a message. \\
+\hline
+{\em mutexlock} & if true, a Mutex will be used to lock the data shared between main and background thread. The idea is to only use a few Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{Cryst\-Update()}{p.}{a00128_a146ec591b9da6df9ea68fe7f80144ef0} and \doxyref{Update\-U\-I()}{p.}{a00128_adcb0b8495d2a0d03d7e2093bec17545e}. As sub-\/objects (\doxyref{W\-X\-Field}{p.}{a00125},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. \\
+\hline
+\end{DoxyParams}
+
+
+Implements {\bf Obj\-Cryst\-::\-W\-X\-Cryst\-Obj\-Basic} \doxyref{}{p.}{a00122_a7ac00ae2ae28f1a6fa26e6fa571186b6}.
+
+\index{Obj\-Cryst\-::\-W\-X\-Field\-Option@{Obj\-Cryst\-::\-W\-X\-Field\-Option}!On\-Choice@{On\-Choice}}
+\index{On\-Choice@{On\-Choice}!ObjCryst::WXFieldOption@{Obj\-Cryst\-::\-W\-X\-Field\-Option}}
+\paragraph[{On\-Choice}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-W\-X\-Field\-Option\-::\-On\-Choice (
 \begin{DoxyParamCaption}
-\item[{wx\-Command\-Event \&}]{event}
+\item[{wx\-Command\-Event \&}]{W\-X\-U\-N\-U\-S\-E\-Devent}
 \end{DoxyParamCaption}
-)}\label{a00128_aedb19a5c1028d7956a42ccc3b6864481}
+)}\label{a00128_a3e6b1207ac284497de28a4ede07df048}
 
 
-When a new value is entered (must type it and then hit the 'enter' key). 
+When a new value is entered. 
 
-The Field reads the new value, then forwards the event to its owner, who will take care of anything that must be done. \index{Obj\-Cryst\-::\-W\-X\-Field\-Name@{Obj\-Cryst\-::\-W\-X\-Field\-Name}!Set\-Value@{Set\-Value}}
-\index{Set\-Value@{Set\-Value}!ObjCryst::WXFieldName@{Obj\-Cryst\-::\-W\-X\-Field\-Name}}
-\paragraph[{Set\-Value}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-W\-X\-Field\-Name\-::\-Set\-Value (
-\begin{DoxyParamCaption}
-\item[{const string \&}]{}
-\end{DoxyParamCaption}
-)}\label{a00128_a31c2d4ae66874976d03fb3dc1f61e781}
-
-
-This actually posts an Update\-U\-I event, so that it is safe to call it from a non-\/graphic thread. 
-
-\index{Obj\-Cryst\-::\-W\-X\-Field\-Name@{Obj\-Cryst\-::\-W\-X\-Field\-Name}!Update\-U\-I@{Update\-U\-I}}
-\index{Update\-U\-I@{Update\-U\-I}!ObjCryst::WXFieldName@{Obj\-Cryst\-::\-W\-X\-Field\-Name}}
-\paragraph[{Update\-U\-I}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-W\-X\-Field\-Name\-::\-Update\-U\-I (
+The Field reads the new value, then forwards the event to its owner, who will take care of anything that must be done. \index{Obj\-Cryst\-::\-W\-X\-Field\-Option@{Obj\-Cryst\-::\-W\-X\-Field\-Option}!Update\-U\-I@{Update\-U\-I}}
+\index{Update\-U\-I@{Update\-U\-I}!ObjCryst::WXFieldOption@{Obj\-Cryst\-::\-W\-X\-Field\-Option}}
+\paragraph[{Update\-U\-I}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-W\-X\-Field\-Option\-::\-Update\-U\-I (
 \begin{DoxyParamCaption}
 \item[{const bool}]{mutexlock = {\ttfamily false}}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00128_a490d3cd6888b9fd6c59dabe031e17440}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00128_adcb0b8495d2a0d03d7e2093bec17545e}
 
 
 Update the User Interface, if necessary. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em mutexlock,\-:} & if true, a Mutex will be used to lock the data shared between main and background thread.\\
+{\em mutexlock} & if true, a Mutex will be used to lock the data shared between main and background thread.\\
 \hline
 \end{DoxyParams}
-The idea is to only use a few Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{Cryst\-Update()}{p.}{a00128_a538a45567f480e1716ca3b593a1d0ed2} and \doxyref{Update\-U\-I()}{p.}{a00128_a490d3cd6888b9fd6c59dabe031e17440}. As sub-\/objects (\doxyref{W\-X\-Field}{p.}{a00126},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
+The idea is to only use a few Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{Cryst\-Update()}{p.}{a00128_a146ec591b9da6df9ea68fe7f80144ef0} and \doxyref{Update\-U\-I()}{p.}{a00128_adcb0b8495d2a0d03d7e2093bec17545e}. As sub-\/objects (\doxyref{W\-X\-Field}{p.}{a00125},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
 
-Implements {\bf Obj\-Cryst\-::\-W\-X\-Cryst\-Obj\-Basic} \doxyref{}{p.}{a00123_a3818940b7031ff7e45cf2178c4a99c90}.
-
-
-
-\subsubsection{Member Data Documentation}
-\index{Obj\-Cryst\-::\-W\-X\-Field\-Name@{Obj\-Cryst\-::\-W\-X\-Field\-Name}!m\-Is\-Self\-Updating@{m\-Is\-Self\-Updating}}
-\index{m\-Is\-Self\-Updating@{m\-Is\-Self\-Updating}!ObjCryst::WXFieldName@{Obj\-Cryst\-::\-W\-X\-Field\-Name}}
-\paragraph[{m\-Is\-Self\-Updating}]{\setlength{\rightskip}{0pt plus 5cm}bool Obj\-Cryst\-::\-W\-X\-Field\-Name\-::m\-Is\-Self\-Updating\hspace{0.3cm}{\ttfamily [protected]}}\label{a00128_a55d08ae80f82be85b66e66c4ded8eeb5}
+Implements {\bf Obj\-Cryst\-::\-W\-X\-Cryst\-Obj\-Basic} \doxyref{}{p.}{a00122_a3818940b7031ff7e45cf2178c4a99c90}.
 
 
-Set to true if the Field is being updated, so that no 'E\-V\-T\-\_\-\-T\-E\-X\-T' is understood as user input. 
-
-\index{Obj\-Cryst\-::\-W\-X\-Field\-Name@{Obj\-Cryst\-::\-W\-X\-Field\-Name}!m\-Value\-Old@{m\-Value\-Old}}
-\index{m\-Value\-Old@{m\-Value\-Old}!ObjCryst::WXFieldName@{Obj\-Cryst\-::\-W\-X\-Field\-Name}}
-\paragraph[{m\-Value\-Old}]{\setlength{\rightskip}{0pt plus 5cm}string Obj\-Cryst\-::\-W\-X\-Field\-Name\-::m\-Value\-Old\hspace{0.3cm}{\ttfamily [protected]}}\label{a00128_a4df82f08ebf86ee9cbc981c57a197202}
-
-
-Last name displayed, before the value was changed by the user. 
-
-Not used yet, could be useful for undo. 
 
 The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-wx\-Cryst.\-h\end{DoxyCompactItemize}
+wx\-Refinable\-Obj.\-h\end{DoxyCompactItemize}

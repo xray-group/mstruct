@@ -1,35 +1,211 @@
-\subsection{Obj\-Cryst\-:\-:Obj\-Cryst\-Exception Class Reference}
-\label{a00060}\index{Obj\-Cryst\-::\-Obj\-Cryst\-Exception@{Obj\-Cryst\-::\-Obj\-Cryst\-Exception}}
+\subsection{Obj\-Cryst\-:\-:Obj\-Registry$<$ T $>$ Class Template Reference}
+\label{a00060}\index{Obj\-Cryst\-::\-Obj\-Registry$<$ T $>$@{Obj\-Cryst\-::\-Obj\-Registry$<$ T $>$}}
 
 
-Exception class for Obj\-Cryst++ library.  
+Object Registry.  
 
 
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries Obj\-Cryst\-Exception} (const string \&message)\label{a00060_ad678d8fd5936912af76bb39b7d68fdde}
+{\bfseries Obj\-Registry} (const string \&name)\label{a00060_a5c31340787c7d1c91c64e201a06a9c4d}
 
-\end{DoxyCompactItemize}
-\subsubsection*{Public Attributes}
+\item 
+void {\bf Register} (T \&obj)\label{a00060_aa5f3f9586f5fbbedd804d0e730c66c71}
+
+\begin{DoxyCompactList}\small\item\em Register a new object. Already registered objects are skipped. \end{DoxyCompactList}\item 
+void {\bf De\-Register} (T \&obj)\label{a00060_a31d6f5073615294d6b0f68759f1895c9}
+
+\begin{DoxyCompactList}\small\item\em De-\/register an object. \end{DoxyCompactList}\item 
+void {\bf De\-Register} (const string \&obj\-Name)\label{a00060_a33fc97d104af353a8a3c82ad82237b65}
+
+\begin{DoxyCompactList}\small\item\em De-\/register an object from its name. \end{DoxyCompactList}\item 
+void {\bf De\-Register\-All} ()\label{a00060_a2a379536cc636a8a1716720be7485e30}
+
+\begin{DoxyCompactList}\small\item\em De-\/register {\itshape all} objects from the list. \end{DoxyCompactList}\item 
+void {\bf Delete\-All} ()\label{a00060_adb16bd04fdeecf675d20c765e2b4d99f}
+
+\begin{DoxyCompactList}\small\item\em Delete all objects in the registry.. Use with caution !! \end{DoxyCompactList}\item 
+T \& {\bf Get\-Obj} (const unsigned int i)
+\begin{DoxyCompactList}\small\item\em Get object \#i in the registry. \end{DoxyCompactList}\item 
+const T \& {\bf Get\-Obj} (const unsigned int i) const 
+\begin{DoxyCompactList}\small\item\em Get object \#i in the registry. \end{DoxyCompactList}\item 
+T \& {\bf Get\-Obj} (const string \&obj\-Name)
+\begin{DoxyCompactList}\small\item\em Get an object from its name in the registry. \end{DoxyCompactList}\item 
+const T \& {\bf Get\-Obj} (const string \&obj\-Name) const 
+\begin{DoxyCompactList}\small\item\em Get an object from its name in the registry. \end{DoxyCompactList}\item 
+T \& {\bf Get\-Obj} (const string \&obj\-Name, const string \&class\-Name)
+\begin{DoxyCompactList}\small\item\em Get an object from its name in the registry. \end{DoxyCompactList}\item 
+const T \& {\bf Get\-Obj} (const string \&obj\-Name, const string \&class\-Name) const 
+\begin{DoxyCompactList}\small\item\em Get an object from its name in the registry. \end{DoxyCompactList}\item 
+long {\bf Get\-Nb} () const \label{a00060_ad33e94ae782a6d5e278f9bf9cd59b837}
+
+\begin{DoxyCompactList}\small\item\em Get the index of an object in the registry, from its name Warning\-: it can change if an object is removed from the registry. \end{DoxyCompactList}\item 
+void {\bfseries Print} () const \label{a00060_aca5c20c48291ceeb51f310d7d9ff707d}
+
+\item 
+void {\bfseries Set\-Name} (const string \&)\label{a00060_a91258ba46872ec4bd6ad61499db42f11}
+
+\item 
+const string \& {\bfseries Get\-Name} () const \label{a00060_a99093d57740cc93d8db2c526f58ad3db}
+
+\item 
+long {\bf Find} (const string \&obj\-Name) const 
+\begin{DoxyCompactList}\small\item\em Find the number of an object in the registry from its name (slow !) The search starts at the {\itshape end} of the registry. \end{DoxyCompactList}\item 
+long {\bf Find} (const string \&obj\-Name, const string \&class\-Name, const bool nothrow=false) const 
+\begin{DoxyCompactList}\small\item\em Find the number of an object in the registry from its name (slow !) The search starts at the {\itshape end} of the registry. \end{DoxyCompactList}\item 
+long {\bf Find} (const T \&obj) const 
+\begin{DoxyCompactList}\small\item\em Find the number of an object in the registry The search starts at the {\itshape end} of the registry. \end{DoxyCompactList}\item 
+long {\bf Find} (const T $\ast$pobj) const 
+\begin{DoxyCompactList}\small\item\em Find the number of an object in the registry The search starts at the {\itshape end} of the registry. \end{DoxyCompactList}\item 
+const {\bf Refinable\-Obj\-Clock} \& {\bf Get\-Registry\-Clock} () const \label{a00060_ab44e0e3c62ae214c5fedb9c9c3e15a1b}
+
+\begin{DoxyCompactList}\small\item\em Last time an object was added or removed from the registry. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-string {\bfseries message}\label{a00060_ad92e8d5369de58b6764f7c940dc7f0a6}
+vector$<$ T $\ast$ $>$ {\bf mvp\-Registry}\label{a00060_aa889e29226999aa9f9036a6c7a996394}
 
-\end{DoxyCompactItemize}
-\subsubsection*{Static Public Attributes}
-\begin{DoxyCompactItemize}
-\item 
-static bool {\bfseries verbose}\label{a00060_aa764ea2ee67edf7343b795cb8571b3c9}
+\begin{DoxyCompactList}\small\item\em The registry of objects. \end{DoxyCompactList}\item 
+string {\bf m\-Name}\label{a00060_a3acdd6614851bca37afb9fbee57b7172}
 
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Name of this registry. \end{DoxyCompactList}\item 
+{\bf Refinable\-Obj\-Clock} {\bf m\-List\-Clock}\label{a00060_a3f834108dbb1dc828744596017fa740a}
+
+\begin{DoxyCompactList}\small\item\em Last time an object was added or removed. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-Exception class for Obj\-Cryst++ library. 
+\subsubsection*{template$<$class T$>$class Obj\-Cryst\-::\-Obj\-Registry$<$ T $>$}
+
+Object Registry. 
+
+This class is used to keep a list of all object of a given class at the global level, or inside another object. This is primarily aimed for the derivative of the \doxyref{Refinable\-Obj}{p.}{a00077} class but it can be used for {\itshape any} class that has Get\-Name() and Get\-Class\-Name() function. This class now uses a vector$<$$>$ approach from the S\-T\-L.
+
+\begin{DoxyWarning}{Warning}
+the order of the objects in the registry can change (every time an object is de-\/registered).
+\end{DoxyWarning}
+\begin{DoxyRefDesc}{Todo}
+\item[{\bf Todo}](?) create two derived classes with the same interface, one which is a const registry (the 'client' registry for \doxyref{Refinable\-Obj}{p.}{a00077}), and one which has a non-\/const access to the registered objects (the 'sub-\/objects' in \doxyref{Refinable\-Obj}{p.}{a00077}). \end{DoxyRefDesc}
 
 
+\subsubsection{Member Function Documentation}
+\index{Obj\-Cryst\-::\-Obj\-Registry@{Obj\-Cryst\-::\-Obj\-Registry}!Find@{Find}}
+\index{Find@{Find}!ObjCryst::ObjRegistry@{Obj\-Cryst\-::\-Obj\-Registry}}
+\paragraph[{Find}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ long {\bf Obj\-Cryst\-::\-Obj\-Registry}$<$ T $>$\-::Find (
+\begin{DoxyParamCaption}
+\item[{const string \&}]{obj\-Name}
+\end{DoxyParamCaption}
+) const}\label{a00060_a1d45b1d1601ebeab14b00794433b4b77}
+
+
+Find the number of an object in the registry from its name (slow !) The search starts at the {\itshape end} of the registry. 
+
+\index{Obj\-Cryst\-::\-Obj\-Registry@{Obj\-Cryst\-::\-Obj\-Registry}!Find@{Find}}
+\index{Find@{Find}!ObjCryst::ObjRegistry@{Obj\-Cryst\-::\-Obj\-Registry}}
+\paragraph[{Find}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ long {\bf Obj\-Cryst\-::\-Obj\-Registry}$<$ T $>$\-::Find (
+\begin{DoxyParamCaption}
+\item[{const string \&}]{obj\-Name, }
+\item[{const string \&}]{class\-Name, }
+\item[{const bool}]{nothrow = {\ttfamily false}}
+\end{DoxyParamCaption}
+) const}\label{a00060_a29cec1c80dd01ea448967fbe863f88cd}
+
+
+Find the number of an object in the registry from its name (slow !) The search starts at the {\itshape end} of the registry. 
+
+Also check the class of the object (inheritance...). use nothrow=true to avoid having an exception thrown if no object is found (instead the index returned will be -\/1) \index{Obj\-Cryst\-::\-Obj\-Registry@{Obj\-Cryst\-::\-Obj\-Registry}!Find@{Find}}
+\index{Find@{Find}!ObjCryst::ObjRegistry@{Obj\-Cryst\-::\-Obj\-Registry}}
+\paragraph[{Find}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ long {\bf Obj\-Cryst\-::\-Obj\-Registry}$<$ T $>$\-::Find (
+\begin{DoxyParamCaption}
+\item[{const T \&}]{obj}
+\end{DoxyParamCaption}
+) const}\label{a00060_ad391fd540afa24cab0c9c86dbb9321b4}
+
+
+Find the number of an object in the registry The search starts at the {\itshape end} of the registry. 
+
+\index{Obj\-Cryst\-::\-Obj\-Registry@{Obj\-Cryst\-::\-Obj\-Registry}!Find@{Find}}
+\index{Find@{Find}!ObjCryst::ObjRegistry@{Obj\-Cryst\-::\-Obj\-Registry}}
+\paragraph[{Find}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ long {\bf Obj\-Cryst\-::\-Obj\-Registry}$<$ T $>$\-::Find (
+\begin{DoxyParamCaption}
+\item[{const T $\ast$}]{pobj}
+\end{DoxyParamCaption}
+) const}\label{a00060_a930648ad32b8e884614604fa729b8111}
+
+
+Find the number of an object in the registry The search starts at the {\itshape end} of the registry. 
+
+\index{Obj\-Cryst\-::\-Obj\-Registry@{Obj\-Cryst\-::\-Obj\-Registry}!Get\-Obj@{Get\-Obj}}
+\index{Get\-Obj@{Get\-Obj}!ObjCryst::ObjRegistry@{Obj\-Cryst\-::\-Obj\-Registry}}
+\paragraph[{Get\-Obj}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ T\& {\bf Obj\-Cryst\-::\-Obj\-Registry}$<$ T $>$\-::Get\-Obj (
+\begin{DoxyParamCaption}
+\item[{const unsigned int}]{i}
+\end{DoxyParamCaption}
+)}\label{a00060_aeaed0bb7536fd757c5d8beb37917682e}
+
+
+Get object \#i in the registry. 
+
+Use with caution. The order of the objects changes as objects are added and removed. \index{Obj\-Cryst\-::\-Obj\-Registry@{Obj\-Cryst\-::\-Obj\-Registry}!Get\-Obj@{Get\-Obj}}
+\index{Get\-Obj@{Get\-Obj}!ObjCryst::ObjRegistry@{Obj\-Cryst\-::\-Obj\-Registry}}
+\paragraph[{Get\-Obj}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ const T\& {\bf Obj\-Cryst\-::\-Obj\-Registry}$<$ T $>$\-::Get\-Obj (
+\begin{DoxyParamCaption}
+\item[{const unsigned int}]{i}
+\end{DoxyParamCaption}
+) const}\label{a00060_af01d9e524b33a1d6e871b665b100a0a5}
+
+
+Get object \#i in the registry. 
+
+Use with caution. The order of the objects changes as objects are added and removed. \index{Obj\-Cryst\-::\-Obj\-Registry@{Obj\-Cryst\-::\-Obj\-Registry}!Get\-Obj@{Get\-Obj}}
+\index{Get\-Obj@{Get\-Obj}!ObjCryst::ObjRegistry@{Obj\-Cryst\-::\-Obj\-Registry}}
+\paragraph[{Get\-Obj}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ T\& {\bf Obj\-Cryst\-::\-Obj\-Registry}$<$ T $>$\-::Get\-Obj (
+\begin{DoxyParamCaption}
+\item[{const string \&}]{obj\-Name}
+\end{DoxyParamCaption}
+)}\label{a00060_a995e76c573306aaf53931bd98954dd28}
+
+
+Get an object from its name in the registry. 
+
+The search starts at the {\itshape end} of the registry. \index{Obj\-Cryst\-::\-Obj\-Registry@{Obj\-Cryst\-::\-Obj\-Registry}!Get\-Obj@{Get\-Obj}}
+\index{Get\-Obj@{Get\-Obj}!ObjCryst::ObjRegistry@{Obj\-Cryst\-::\-Obj\-Registry}}
+\paragraph[{Get\-Obj}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ const T\& {\bf Obj\-Cryst\-::\-Obj\-Registry}$<$ T $>$\-::Get\-Obj (
+\begin{DoxyParamCaption}
+\item[{const string \&}]{obj\-Name}
+\end{DoxyParamCaption}
+) const}\label{a00060_a05d7ac98414b6779d57dbcfdb1863548}
+
+
+Get an object from its name in the registry. 
+
+The search starts at the {\itshape end} of the registry. \index{Obj\-Cryst\-::\-Obj\-Registry@{Obj\-Cryst\-::\-Obj\-Registry}!Get\-Obj@{Get\-Obj}}
+\index{Get\-Obj@{Get\-Obj}!ObjCryst::ObjRegistry@{Obj\-Cryst\-::\-Obj\-Registry}}
+\paragraph[{Get\-Obj}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ T\& {\bf Obj\-Cryst\-::\-Obj\-Registry}$<$ T $>$\-::Get\-Obj (
+\begin{DoxyParamCaption}
+\item[{const string \&}]{obj\-Name, }
+\item[{const string \&}]{class\-Name}
+\end{DoxyParamCaption}
+)}\label{a00060_a79a5b5ef19d4ca2d0ebb80bbcf9168f6}
+
+
+Get an object from its name in the registry. 
+
+The search starts at the {\itshape end} of the registry. Also check the class of the object. \index{Obj\-Cryst\-::\-Obj\-Registry@{Obj\-Cryst\-::\-Obj\-Registry}!Get\-Obj@{Get\-Obj}}
+\index{Get\-Obj@{Get\-Obj}!ObjCryst::ObjRegistry@{Obj\-Cryst\-::\-Obj\-Registry}}
+\paragraph[{Get\-Obj}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T$>$ const T\& {\bf Obj\-Cryst\-::\-Obj\-Registry}$<$ T $>$\-::Get\-Obj (
+\begin{DoxyParamCaption}
+\item[{const string \&}]{obj\-Name, }
+\item[{const string \&}]{class\-Name}
+\end{DoxyParamCaption}
+) const}\label{a00060_aebefd3c2e131d58d1c4fe60942ea56be}
+
+
+Get an object from its name in the registry. 
+
+The search starts at the {\itshape end} of the registry. Also check the class of the object. 
 
 The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-General.\-h\end{DoxyCompactItemize}
+Refinable\-Obj.\-h\end{DoxyCompactItemize}

@@ -1,47 +1,99 @@
-\subsection{Obj\-Cryst\-:\-:Speed\-Test\-Report Struct Reference}
-\label{a00103}\index{Obj\-Cryst\-::\-Speed\-Test\-Report@{Obj\-Cryst\-::\-Speed\-Test\-Report}}
+\subsection{Obj\-Cryst\-:\-:Stretch\-Mode Struct Reference}
+\label{a00103}\index{Obj\-Cryst\-::\-Stretch\-Mode@{Obj\-Cryst\-::\-Stretch\-Mode}}
 
 
-Structure to hold the results of a speedtest (see \doxyref{Obj\-Cryst\-::\-Speed\-Test()}{p.}{a00178_a775b62d07c596365d2f2d021dca408db})  
+Abstract base Stretch Mode for \doxyref{Molecule}{p.}{a00053} objects.  
 
 
+Inheritance diagram for Obj\-Cryst\-:\-:Stretch\-Mode\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.302326cm]{a00103}
+\end{center}
+\end{figure}
+\subsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void {\bf Calc\-Deriv} (const bool derivllk=true) const =0
+\begin{DoxyCompactList}\small\item\em Calculate the derivative of the \doxyref{Molecule}{p.}{a00053}'s Log(likelihood) and atomic positions versus a change of the bond length. \end{DoxyCompactList}\item 
+virtual void {\bf Print} (ostream \&os, bool full=true) const =0\label{a00103_a78c180042fce5981fe0e97071d986362}
+
+\begin{DoxyCompactList}\small\item\em Print one-\/line list of atoms moved. \end{DoxyCompactList}\item 
+virtual void {\bf Stretch} (const R\-E\-A\-L change)=0\label{a00103_a1f3e7e8fc43baed619b61203ea77c143}
+
+\begin{DoxyCompactList}\small\item\em Move the atoms according to this mode. \end{DoxyCompactList}\item 
+virtual void {\bf Random\-Stretch} (const R\-E\-A\-L amplitude)=0\label{a00103_a459057c6cd3d2cb1010676b54ebfe988}
+
+\begin{DoxyCompactList}\small\item\em Move the atoms according to this mode, randomly. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-unsigned int {\bf m\-Nb\-Atom}\label{a00103_a584ea20a9991658acac8f15ea6d2a670}
+std\-::map$<$ const {\bf Mol\-Bond} $\ast$, R\-E\-A\-L $>$ {\bf mvp\-Broken\-Bond}\label{a00103_a6628812c69f20a7a18a7a3759b5c961c}
 
-\begin{DoxyCompactList}\small\item\em Total number of unique atoms in the test structure. \end{DoxyCompactList}\item 
-int {\bf m\-Nb\-Atom\-Type}\label{a00103_a755747dca57629b616b12341c110ff7e}
+\begin{DoxyCompactList}\small\item\em List of bond restraints affected by this mode The key is the restraint, the value is the derivative of the L\-L\-K associated. \end{DoxyCompactList}\item 
+std\-::map$<$ const {\bf Mol\-Bond\-Angle} \\*
+$\ast$, R\-E\-A\-L $>$ {\bf mvp\-Broken\-Bond\-Angle}\label{a00103_a2a46f6bd997850be6736e4b5746deeed}
 
-\begin{DoxyCompactList}\small\item\em Total number of atom types in the test structure. \end{DoxyCompactList}\item 
-string {\bf m\-Spacegroup}\label{a00103_a73ae4759ba51ae06a745af9040398ccf}
+\begin{DoxyCompactList}\small\item\em List of bond angle restraints modified by this mode The key is the restraint, the value is the derivative of the L\-L\-K associated. \end{DoxyCompactList}\item 
+std\-::map$<$ const \\*
+{\bf Mol\-Dihedral\-Angle} $\ast$, R\-E\-A\-L $>$ {\bf mvp\-Broken\-Dihedral\-Angle}\label{a00103_a84257bc829a3d612b68046d33685e59e}
 
-\begin{DoxyCompactList}\small\item\em The symbol for the spacegroup. \end{DoxyCompactList}\item 
-{\bf Radiation\-Type} {\bf m\-Radiation}\label{a00103_a9407361e047413bd993828c9cfca4cdf}
+\begin{DoxyCompactList}\small\item\em List of dihedral angle restraints modified by this mode The key is the restraint, the value is the derivative of the L\-L\-K associated. \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bf m\-L\-L\-K\-Deriv}\label{a00103_ac6614921c015de3f6d67b22ae512a66c}
 
-\begin{DoxyCompactList}\small\item\em The type of radiation used. \end{DoxyCompactList}\item 
-unsigned long {\bf m\-Nb\-Reflections}\label{a00103_a4fde54cf3f02e5f564df92cc8eabd36e}
+\begin{DoxyCompactList}\small\item\em Derivative of the \doxyref{Molecule}{p.}{a00053}'s Log(likelihood) versus a change of the bond length. \end{DoxyCompactList}\item 
+std\-::map$<$ const {\bf Mol\-Atom} $\ast$, {\bf X\-Y\-Z} $>$ {\bf m\-Deriv\-X\-Y\-Z}\label{a00103_a4a25093e177c56be142acc954149c110}
 
-\begin{DoxyCompactList}\small\item\em The total number of reflections used for the tests. \end{DoxyCompactList}\item 
-unsigned int {\bf m\-Data\-Type}\label{a00103_af3bb170b1d4ae3e1b484704b6c3d923c}
+\begin{DoxyCompactList}\small\item\em Derivative of the atomic positions versus a change of the bond length. \end{DoxyCompactList}\item 
+{\bf Molecule} $\ast$ {\bf mp\-Mol}\label{a00103_a380bd0aef1e5be1f681364e0f754f3e3}
 
-\begin{DoxyCompactList}\small\item\em data\-Type\-: 0= single crystal, 1= powder pattern (1 background + 1 crystal phase) \end{DoxyCompactList}\item 
-R\-E\-A\-L {\bf m\-Bogo\-M\-R\-A\-P\-S}\label{a00103_ac7497f01fce186e1370bffdbc2f6433c}
-
-\begin{DoxyCompactList}\small\item\em Million of Reflections-\/\-Atoms computed Per Second (considering all atoms in the unit cell) \end{DoxyCompactList}\item 
-R\-E\-A\-L {\bf m\-Bogo\-M\-R\-A\-P\-S\-\_\-reduced}\label{a00103_a76d9645d24f787e53856512fbb918603}
-
-\begin{DoxyCompactList}\small\item\em Million of Reflections-\/\-Atoms computed Per Second (considering all atoms in the unit cell, except those deduced by a center of symmetry or a lattice translation) \end{DoxyCompactList}\item 
-R\-E\-A\-L {\bf m\-Bogo\-S\-P\-S}\label{a00103_ab45c0262f0cad316b2f3e8e74a8a5fd4}
-
-\begin{DoxyCompactList}\small\item\em Number of Structures evaluated Per Second. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em The \doxyref{Molecule}{p.}{a00053} corresponding to this stretch mode. \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bf m\-Base\-Amplitude}
+\begin{DoxyCompactList}\small\item\em The recommended change amplitude, for a base global optimization displacement, to obtain an average 0.\-1 Angstroem displacement. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-Structure to hold the results of a speedtest (see \doxyref{Obj\-Cryst\-::\-Speed\-Test()}{p.}{a00178_a775b62d07c596365d2f2d021dca408db}) 
+Abstract base Stretch Mode for \doxyref{Molecule}{p.}{a00053} objects. 
 
 
+
+\subsubsection{Member Function Documentation}
+\index{Obj\-Cryst\-::\-Stretch\-Mode@{Obj\-Cryst\-::\-Stretch\-Mode}!Calc\-Deriv@{Calc\-Deriv}}
+\index{Calc\-Deriv@{Calc\-Deriv}!ObjCryst::StretchMode@{Obj\-Cryst\-::\-Stretch\-Mode}}
+\paragraph[{Calc\-Deriv}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Stretch\-Mode\-::\-Calc\-Deriv (
+\begin{DoxyParamCaption}
+\item[{const bool}]{derivllk = {\ttfamily true}}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}\label{a00103_a5b5ab5f9819c047a49719a330722d419}
+
+
+Calculate the derivative of the \doxyref{Molecule}{p.}{a00053}'s Log(likelihood) and atomic positions versus a change of the bond length. 
+
+The result is stored in m\-L\-L\-K\-Deriv and m\-L\-L\-K\-Deriv\-X\-Y\-Z, as well as in the various lists of restraints broken by this mode.
+
+
+\begin{DoxyParams}{Parameters}
+{\em derivllk} & if false, the derivative of the overall llk will not be computed, only the derivative of the atomic positions. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in {\bf Obj\-Cryst\-::\-Stretch\-Mode\-Twist} \doxyref{}{p.}{a00108_afd1ac754d10507e1c9bed829a4eaeb79}, {\bf Obj\-Cryst\-::\-Stretch\-Mode\-Torsion} \doxyref{}{p.}{a00107_abecf1074b05ba13fd938667399df110e}, {\bf Obj\-Cryst\-::\-Stretch\-Mode\-Bond\-Angle} \doxyref{}{p.}{a00104_acdc082c4cb5b4f38fed6049bf7b1eb9c}, and {\bf Obj\-Cryst\-::\-Stretch\-Mode\-Bond\-Length} \doxyref{}{p.}{a00105_a72bab02ebf84cbf65cf2703e74c1e02e}.
+
+
+
+\subsubsection{Member Data Documentation}
+\index{Obj\-Cryst\-::\-Stretch\-Mode@{Obj\-Cryst\-::\-Stretch\-Mode}!m\-Base\-Amplitude@{m\-Base\-Amplitude}}
+\index{m\-Base\-Amplitude@{m\-Base\-Amplitude}!ObjCryst::StretchMode@{Obj\-Cryst\-::\-Stretch\-Mode}}
+\paragraph[{m\-Base\-Amplitude}]{\setlength{\rightskip}{0pt plus 5cm}R\-E\-A\-L Obj\-Cryst\-::\-Stretch\-Mode\-::m\-Base\-Amplitude}\label{a00103_aa8dc03e2bd6840d13964dd6751c39fae}
+
+
+The recommended change amplitude, for a base global optimization displacement, to obtain an average 0.\-1 Angstroem displacement. 
+
+This is learnt at the beginning of an optimization.
+
+This can be superseeded to respect any restraint. 
 
 The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-test.\-h\end{DoxyCompactItemize}
+Molecule.\-h\end{DoxyCompactItemize}

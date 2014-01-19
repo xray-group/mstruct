@@ -1,37 +1,45 @@
-\subsection{Obj\-Cryst\-:\-:Mol\-Ring Class Reference}
-\label{a00055}\index{Obj\-Cryst\-::\-Mol\-Ring@{Obj\-Cryst\-::\-Mol\-Ring}}
+\subsection{Obj\-Cryst\-:\-:Mol\-Z\-Atom Struct Reference}
+\label{a00055}\index{Obj\-Cryst\-::\-Mol\-Z\-Atom@{Obj\-Cryst\-::\-Mol\-Z\-Atom}}
 
 
-Ring class.  
+Light-\/weight representation of an atom in the molecule, as a part of a Z-\/matrix.  
 
 
-\subsubsection*{Public Member Functions}
+\subsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-const std\-::list$<$ {\bf Mol\-Atom} $\ast$ $>$ \& {\bfseries Get\-Atom\-List} () const \label{a00055_af3e9c00f1b215ecb3350b2c1d34a2664}
+const {\bf Scattering\-Power} $\ast$ {\bfseries mp\-Pow}\label{a00055_a84763284b4efc30c91be13265e905475}
 
 \item 
-std\-::list$<$ {\bf Mol\-Atom} $\ast$ $>$ \& {\bfseries Get\-Atom\-List} ()\label{a00055_a5b78e2a0cca32da2c4d2044187a2acad}
+unsigned long {\bfseries m\-Bond\-Atom}\label{a00055_a0e756b0230126d63f2a7b2a13cc1689c}
 
-\end{DoxyCompactItemize}
-\subsubsection*{Private Attributes}
-\begin{DoxyCompactItemize}
 \item 
-std\-::list$<$ {\bf Mol\-Atom} $\ast$ $>$ {\bfseries mvp\-Atom}\label{a00055_a8fbd838d8e1b187d268e71596361b4f7}
+unsigned long {\bfseries m\-Bond\-Angle\-Atom}\label{a00055_a9e30bfb98a0ca6c57b9eb3de01a3f263}
+
+\item 
+unsigned long {\bfseries m\-Dihedral\-Atom}\label{a00055_a8499371cdbeb7afd5e2e62fbc2a143b5}
+
+\item 
+R\-E\-A\-L {\bfseries m\-Bond\-Length}\label{a00055_a4910c978b6e16302ab25abb31275b6e8}
+
+\item 
+R\-E\-A\-L {\bfseries m\-Bond\-Angle}\label{a00055_a978590d76e45ae341e9d5fea680c1cc3}
+
+\item 
+R\-E\-A\-L {\bfseries m\-Dihedral\-Angle}\label{a00055_af33360b883b663c71d1ec79e4f68c169}
 
 \end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-Ring class. 
+Light-\/weight representation of an atom in the molecule, as a part of a Z-\/matrix. 
 
-\begin{DoxyNote}{Note}
-This class could be used to restrain atom positions for aromatic rings (planar restriction). 
+This is used to export the \doxyref{Molecule}{p.}{a00053} structure to a z-\/matrix.
 
-We could also store the aromatic status of the ring. 
-\end{DoxyNote}
+\begin{DoxyRefDesc}{Todo}
+\item[{\bf Todo}]\-: some flags could be added to mark the fixed/limited nature of the parameters. \end{DoxyRefDesc}
 
 
-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
 Molecule.\-h\end{DoxyCompactItemize}

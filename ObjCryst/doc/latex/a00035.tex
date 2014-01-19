@@ -1,36 +1,38 @@
-\subsection{Format\-Float Class Reference}
-\label{a00035}\index{Format\-Float@{Format\-Float}}
+\subsection{Format\-Horiz\-Vector$<$ T $>$ Class Template Reference}
+\label{a00035}\index{Format\-Horiz\-Vector$<$ T $>$@{Format\-Horiz\-Vector$<$ T $>$}}
 
 
-output a number as a formatted float\-:  
+Format vector as horiz array\-:  
 
 
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries Format\-Float} (const R\-E\-A\-L num, const int width=10, const int precision=4)\label{a00035_a9fbcfe7405d478396858e748dd7df56d}
+{\bfseries Format\-Horiz\-Vector} (const {\bf Cryst\-Vector}$<$ T $>$ \&f\-Vect, const int width=10, const int precision=4)\label{a00035_a547a7cbadc52884eb1d0149ab62f6715}
 
 \end{DoxyCompactItemize}
 \subsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-const R\-E\-A\-L {\bfseries m\-Value}\label{a00035_a09d44759a75e7d27abde5fb4d08870bd}
+const {\bf Cryst\-Vector}$<$ T $>$ $\ast$ {\bfseries mp\-Vectors}\label{a00035_a73b7421467798780d9c1d67424b3a876}
 
 \item 
-const int {\bfseries m\-Width}\label{a00035_a6933d0fb1fb1301fe9572e2048d06ade}
+const int {\bfseries m\-Width}\label{a00035_a3142a01d912b28c5fb2ff261915d80ba}
 
 \item 
-const int {\bfseries m\-Precision}\label{a00035_a2f9e8289795d3d9916873c105f0db4b3}
+const int {\bfseries m\-Precision}\label{a00035_ac1ca600c08c0dd17acd9d1d5721d4b57}
 
 \end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-output a number as a formatted float\-: 
+\subsubsection*{template$<$class T$>$class Format\-Horiz\-Vector$<$ T $>$}
+
+Format vector as horiz array\-: 
 
 
 \begin{DoxyCode}
-os << FormatFloat(mynumber,10,4); 
+os << FormatHorizVector<REAL>(vect,8,3);
 \end{DoxyCode}
  
 

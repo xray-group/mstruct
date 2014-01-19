@@ -1,101 +1,59 @@
-\subsection{Obj\-Cryst\-:\-:L\-S\-Q\-Regularization\-Operator Class Reference}
-\label{a00047}\index{Obj\-Cryst\-::\-L\-S\-Q\-Regularization\-Operator@{Obj\-Cryst\-::\-L\-S\-Q\-Regularization\-Operator}}
+\subsection{Obj\-Cryst\-:\-:Main\-Tracker Class Reference}
+\label{a00047}\index{Obj\-Cryst\-::\-Main\-Tracker@{Obj\-Cryst\-::\-Main\-Tracker}}
 
 
-Simple Regularization Operator for the Least-\/\-Squares Refinement.  
+A class to hold all trackers.  
 
 
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bf L\-S\-Q\-Regularization\-Operator} (std\-::string obj\-Name=\char`\"{}Unnamed L\-S\-Q Regularization Obj\char`\"{})\label{a00047_a8b50ee303228c67b0291497edbec4a4d}
+void {\bfseries Add\-Tracker} ({\bf Tracker} $\ast$t)\label{a00047_a57cc485e6071733b882ff451d0e4b0c2}
 
-\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
-{\bf L\-S\-Q\-Regularization\-Operator} (const {\bf L\-S\-Q\-Regularization\-Operator} \&)\label{a00047_a3a7df3e9372bd0b5824b3eb46479a479}
+\item 
+void {\bfseries Append\-Values} (const long trial)\label{a00047_a364936085e098d0db6241e1ea618e8ad}
 
-\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
-{\bf $\sim$\-L\-S\-Q\-Regularization\-Operator} ()\label{a00047_a09d06b5ad20ded0c5361dfac53e79d78}
+\item 
+void {\bf Clear\-Trackers} ()\label{a00047_a90300f3395141e9245483f0fef1bba33}
 
-\begin{DoxyCompactList}\small\item\em Descructor. \end{DoxyCompactList}\item 
-const string \& {\bf Get\-Class\-Name} () const \label{a00047_a865c08041f893e4ea216c229713af113}
+\begin{DoxyCompactList}\small\item\em Removes all Trackers. \end{DoxyCompactList}\item 
+void {\bf Clear\-Values} ()\label{a00047_aa641363dfd39e038e091979911d001a8}
 
-\begin{DoxyCompactList}\small\item\em Name for this class (\char`\"{}\-L\-S\-Q\-Regularization\-Operator\char`\"{},...) \end{DoxyCompactList}\item 
-const string \& {\bf Get\-Name} () const \label{a00047_a81bf5bbfe83d8a18ebe2371cad6a9d5c}
+\begin{DoxyCompactList}\small\item\em Removes all stored values. \end{DoxyCompactList}\item 
+void {\bf Save\-All} (std\-::ostream \&out) const \label{a00047_a6331f74dd05d975521f7ec5963eed020}
 
-\begin{DoxyCompactList}\small\item\em Name of the object. \end{DoxyCompactList}\item 
-const Cryst\-Matrix\-\_\-\-R\-E\-A\-L \& {\bf Get\-Regularization\-Operator\-Matrix} () const 
-\begin{DoxyCompactList}\small\item\em Get the matrix reprezenting the regularization operator. \end{DoxyCompactList}\item 
-const std\-::vector$<$ const \\*
-{\bf Refinable\-Par} $\ast$ $>$ \& {\bf Get\-Param\-List} () const \label{a00047_ab03f9a1f27efa7c7d0d1bf67621611ec}
+\begin{DoxyCompactList}\small\item\em Will save to a single file if all recorded trial numbers are the same Otherwise ? \end{DoxyCompactList}\item 
+const std\-::set$<$ {\bf Tracker} $\ast$ $>$ \& {\bfseries Get\-Tracker\-List} () const \label{a00047_aa2bc994d1d0c9512b00e6de5d5dd228a}
 
-\begin{DoxyCompactList}\small\item\em Get the list of parameters. This list links the matrix elements with the appropriate parameters. \end{DoxyCompactList}\item 
-R\-E\-A\-L {\bf Get\-Regularization\-Operator\-Weight} () const \label{a00047_ad4e1749323861d214ebd51a3f0771698}
+\item 
+void {\bf Update\-Display} () const \label{a00047_a8f3f9069cc1957663fcddb52376c2f07}
 
-\begin{DoxyCompactList}\small\item\em Get the weighting factor of the regularization operator in the minimized Chi\-Sq quantity. \end{DoxyCompactList}\item 
-void {\bf Set\-Regularization\-Operator\-Matrix} (const Cryst\-Matrix\-\_\-\-R\-E\-A\-L \&matrix)
-\begin{DoxyCompactList}\small\item\em Set the matrix reprezenting the regularization operator. \end{DoxyCompactList}\item 
-void {\bf Set\-Param\-List} (const std\-::vector$<$ const {\bf Refinable\-Par} $\ast$ $>$ \&param\-List)\label{a00047_ad50b39cbdbe2a65dc3eb27e6fbe91852}
+\begin{DoxyCompactList}\small\item\em Update display, if any. \end{DoxyCompactList}\item 
+const {\bf Refinable\-Obj\-Clock} \& {\bf Get\-Clock\-Tracker\-List} () const \label{a00047_a1ed9dc3f6f4e7fae6ce7da58f0a78fc1}
 
-\begin{DoxyCompactList}\small\item\em Set the list of parameters on which the operator is working. This list links the matrix elements with the appropriate parameters. \end{DoxyCompactList}\item 
-void {\bf Set\-Regularization\-Operator\-Weight} (const R\-E\-A\-L Lambda)\label{a00047_a2db1acb17c357632879a913845320d4b}
+\begin{DoxyCompactList}\small\item\em Get last time a tracker was added. \end{DoxyCompactList}\item 
+const {\bf Refinable\-Obj\-Clock} \& {\bf Get\-Clock\-Values} () const \label{a00047_aa7da65b819f1ba0ec180ee5374eddcf2}
 
-\begin{DoxyCompactList}\small\item\em Set the weighting factor of the regularization operator in the minimized Chi\-Sq quantity. \end{DoxyCompactList}\item 
-R\-E\-A\-L {\bf Get\-Value} () const \label{a00047_aeb8bc1b35e57b0e892d8229d2539f99c}
-
-\begin{DoxyCompactList}\small\item\em Get (non-\/weighted) value of Regularization Operator applied to the current parameters set. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Get last time values were whanged. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-std\-::string {\bf m\-Name}\label{a00047_ae42bb2fcf0165b72dd8ac7e01551777c}
+std\-::set$<$ {\bf Tracker} $\ast$ $>$ {\bfseries mvp\-Tracker}\label{a00047_a888837e8412f072986a6d3307d1c95a9}
 
-\begin{DoxyCompactList}\small\item\em Name of the object. \end{DoxyCompactList}\item 
-std\-::vector$<$ const {\bf Refinable\-Par} $\ast$ $>$ {\bf m\-Param\-List}\label{a00047_a214df1f8fe0ff9bb78734ad6df8026dc}
+\item 
+{\bf Refinable\-Obj\-Clock} {\bf m\-Clock\-Tracker\-List}\label{a00047_a06750efaa9482ebb71a043744fb9c6a6}
 
-\begin{DoxyCompactList}\small\item\em List of parameters on which the regularization operator is working. \end{DoxyCompactList}\item 
-Cryst\-Matrix\-\_\-\-R\-E\-A\-L {\bf m\-Reg\-Op\-Matrix}\label{a00047_ae2b41c7ba63db54c93666942b0e6ed6e}
+\begin{DoxyCompactList}\small\item\em Last time a tracker was added. \end{DoxyCompactList}\item 
+{\bf Refinable\-Obj\-Clock} {\bf m\-Clock\-Values}\label{a00047_a83a5fd9e84a64342b2c10e57e3c85df9}
 
-\begin{DoxyCompactList}\small\item\em Regularization operator matrix. \end{DoxyCompactList}\item 
-R\-E\-A\-L {\bf m\-Lambda}\label{a00047_a91f10e972493d31b80d160dd78b8c299}
-
-\begin{DoxyCompactList}\small\item\em Weight of the regularization operator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Last time values were whanged. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-Simple Regularization Operator for the Least-\/\-Squares Refinement. 
+A class to hold all trackers. 
 
-During the common L\-S\-Q refinement a Chi\-Sq value representing the difference of observed and simulated data is minimized. The matter of this object is to provide an operator that is used to regularize refinement solution in some way. For example it is assumed that the solution should be smooth. This means a that each model parameter from a given group of parametres, representing e.\-g. a continous function, should not differ much from neighbouring parameters in the group. Such a condition can be expressed as an additional operator that should be optimised. Hence insteed of minimizing only the Chi\-Sq value the quantity\-: Chi\-Sq(a0+da) + Lambda $\ast$ (a0+da)$\ast$\-H$\ast$(a0+da)
-
-is minimised now. Here a0 ... states for a vector of model parameters, da ... is the mutation of model parameters refined by L\-S\-Qs, Lambda ... is the weighting factor and H ... is the symmetric regularization operator. 
-
-\subsubsection{Member Function Documentation}
-\index{Obj\-Cryst\-::\-L\-S\-Q\-Regularization\-Operator@{Obj\-Cryst\-::\-L\-S\-Q\-Regularization\-Operator}!Get\-Regularization\-Operator\-Matrix@{Get\-Regularization\-Operator\-Matrix}}
-\index{Get\-Regularization\-Operator\-Matrix@{Get\-Regularization\-Operator\-Matrix}!ObjCryst::LSQRegularizationOperator@{Obj\-Cryst\-::\-L\-S\-Q\-Regularization\-Operator}}
-\paragraph[{Get\-Regularization\-Operator\-Matrix}]{\setlength{\rightskip}{0pt plus 5cm}const Cryst\-Matrix\-\_\-\-R\-E\-A\-L\& Obj\-Cryst\-::\-L\-S\-Q\-Regularization\-Operator\-::\-Get\-Regularization\-Operator\-Matrix (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const}\label{a00047_ad3e5d82946631d708bb0c518664071ba}
-
-
-Get the matrix reprezenting the regularization operator. 
-
-The elements of the matrix descibe relations between parameters returned by Get\-Params\-List(). Hence this list defines the order of matrix rows and columns.
-
-The matrix is symmetric. The lower triangular part of the matrix should be used preferably (becouse of compatibility with Newmat). \index{Obj\-Cryst\-::\-L\-S\-Q\-Regularization\-Operator@{Obj\-Cryst\-::\-L\-S\-Q\-Regularization\-Operator}!Set\-Regularization\-Operator\-Matrix@{Set\-Regularization\-Operator\-Matrix}}
-\index{Set\-Regularization\-Operator\-Matrix@{Set\-Regularization\-Operator\-Matrix}!ObjCryst::LSQRegularizationOperator@{Obj\-Cryst\-::\-L\-S\-Q\-Regularization\-Operator}}
-\paragraph[{Set\-Regularization\-Operator\-Matrix}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-L\-S\-Q\-Regularization\-Operator\-::\-Set\-Regularization\-Operator\-Matrix (
-\begin{DoxyParamCaption}
-\item[{const Cryst\-Matrix\-\_\-\-R\-E\-A\-L \&}]{matrix}
-\end{DoxyParamCaption}
-)}\label{a00047_a3c17e6bb0c82ab0d37508a55c2947106}
-
-
-Set the matrix reprezenting the regularization operator. 
-
-The elements of the matrix descibe relations between parameters returned by Get\-Params\-List(). Hence this list defines the order of matrix rows and columns.
-
-The matrix must be symmetric. The lower triangular part of the matrix should be used preferably (becouse of compatibility with Newmat). 
+All trackers need not have the same 
 
 The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-L\-S\-Q\-Num\-Obj.\-h\end{DoxyCompactItemize}
+Tracker.\-h\end{DoxyCompactItemize}

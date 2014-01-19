@@ -1,56 +1,101 @@
-\subsection{Obj\-Cryst\-:\-:W\-X\-Profile\-Pseudo\-Voigt Class Reference}
-\label{a00148}\index{Obj\-Cryst\-::\-W\-X\-Profile\-Pseudo\-Voigt@{Obj\-Cryst\-::\-W\-X\-Profile\-Pseudo\-Voigt}}
+\subsection{Obj\-Cryst\-:\-:W\-X\-Radiation Class Reference}
+\label{a00148}\index{Obj\-Cryst\-::\-W\-X\-Radiation@{Obj\-Cryst\-::\-W\-X\-Radiation}}
 
 
-Class to display a Powder Pattern Pseudo-\/\-Voigt Profile.  
+W\-X Class for \doxyref{Radiation}{p.}{a00075}.  
 
 
-Inheritance diagram for Obj\-Cryst\-:\-:W\-X\-Profile\-Pseudo\-Voigt\-:\begin{figure}[H]
+Inheritance diagram for Obj\-Cryst\-:\-:W\-X\-Radiation\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=3.000000cm]{a00148}
+\includegraphics[height=2.000000cm]{a00148}
 \end{center}
 \end{figure}
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries W\-X\-Profile\-Pseudo\-Voigt} (wx\-Window $\ast$parent, {\bf Reflection\-Profile\-Pseudo\-Voigt} $\ast$prof)\label{a00148_a56ea943a8f877deb5a22c50f893787ba}
+{\bfseries W\-X\-Radiation} (wx\-Window $\ast$parent, {\bf Radiation} $\ast$)\label{a00148_ac437d3e356a2abf0fde3a1c7f0d1a7b9}
 
 \item 
-virtual bool {\bf On\-Change\-Name} (const int id)
-\begin{DoxyCompactList}\small\item\em When a \doxyref{W\-X\-Field\-Name}{p.}{a00128} has been changed by the user, it is handled here. \end{DoxyCompactList}\end{DoxyCompactItemize}
+virtual void {\bf Cryst\-Update} (const bool update\-U\-I=false, const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em Get new values to be displayed from the underlying object, and raise flag if an U\-I update is necessary. \end{DoxyCompactList}\item 
+virtual void {\bf Update\-U\-I} (const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em Update the User Interface, if necessary. \end{DoxyCompactList}\item 
+virtual void {\bfseries On\-Update\-U\-I} (wx\-Update\-U\-I\-Event \&W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00148_a7482c20d73e2034b03e766b716ed679d}
+
+\end{DoxyCompactItemize}
 \subsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-{\bf Reflection\-Profile\-Pseudo\-Voigt} $\ast$ {\bfseries mp\-Profile}\label{a00148_a698a7e16b570300f6ad4ea258d98a9b3}
+{\bf Radiation} $\ast$ {\bfseries mp\-Radiation}\label{a00148_a0795a6c0f8b969e1081701da5e120a80}
+
+\item 
+{\bf W\-X\-Field\-Option} $\ast$ {\bfseries mp\-Field\-Rad\-Type}\label{a00148_a939f654b38e382113d7bac2bfa277a36}
+
+\item 
+{\bf W\-X\-Field\-Option} $\ast$ {\bfseries mp\-Field\-Wavelength\-Type}\label{a00148_a3574e203b7a6f86e02de67377373449f}
+
+\item 
+wx\-Box\-Sizer $\ast$ {\bfseries mp\-Sizer}\label{a00148_a44960ff17154f4252879fcf9e38e6efa}
+
+\item 
+{\bf W\-X\-Cryst\-Obj\-Basic\-List} {\bfseries m\-List}\label{a00148_addc5245e6a03fa1cc32f07ea25530d7b}
 
 \end{DoxyCompactItemize}
 \subsubsection*{Additional Inherited Members}
 
 
 \subsubsection{Detailed Description}
-Class to display a Powder Pattern Pseudo-\/\-Voigt Profile. 
-
-
+W\-X Class for \doxyref{Radiation}{p.}{a00075}. 
 
 \subsubsection{Member Function Documentation}
-\index{Obj\-Cryst\-::\-W\-X\-Profile\-Pseudo\-Voigt@{Obj\-Cryst\-::\-W\-X\-Profile\-Pseudo\-Voigt}!On\-Change\-Name@{On\-Change\-Name}}
-\index{On\-Change\-Name@{On\-Change\-Name}!ObjCryst::WXProfilePseudoVoigt@{Obj\-Cryst\-::\-W\-X\-Profile\-Pseudo\-Voigt}}
-\paragraph[{On\-Change\-Name}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool Obj\-Cryst\-::\-W\-X\-Profile\-Pseudo\-Voigt\-::\-On\-Change\-Name (
+\index{Obj\-Cryst\-::\-W\-X\-Radiation@{Obj\-Cryst\-::\-W\-X\-Radiation}!Cryst\-Update@{Cryst\-Update}}
+\index{Cryst\-Update@{Cryst\-Update}!ObjCryst::WXRadiation@{Obj\-Cryst\-::\-W\-X\-Radiation}}
+\paragraph[{Cryst\-Update}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-W\-X\-Radiation\-::\-Cryst\-Update (
 \begin{DoxyParamCaption}
-\item[{const int}]{id}
+\item[{const bool}]{update\-U\-I = {\ttfamily false}, }
+\item[{const bool}]{mutexlock = {\ttfamily false}}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00148_a6af548e3f77328ca30fb3a06a50fd40a}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00148_a4322f775f359d04aa5db2288a40f6de5}
 
 
-When a \doxyref{W\-X\-Field\-Name}{p.}{a00128} has been changed by the user, it is handled here. 
+Get new values to be displayed from the underlying object, and raise flag if an U\-I update is necessary. 
 
-This returns true if the value has been handled (for inheritance purposes). 
+The actual G\-U\-I update is not made here. \doxyref{Update\-U\-I()}{p.}{a00148_a993c35c331f833bb5f049d536747779b} should be called separately, from the main thread.
 
-Implements {\bf Obj\-Cryst\-::\-W\-X\-Cryst\-Obj} \doxyref{}{p.}{a00122_a3736357599263df7e550790753c040a3}.
+
+\begin{DoxyParams}{Parameters}
+{\em update\-U\-I} & if true, this will call Update\-U\-I, either directly (if in the main thread), or by sending a message. \\
+\hline
+{\em mutexlock} & if true, a Mutex will be used to lock the data shared between main and background thread. The idea is to only use a few Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{Cryst\-Update()}{p.}{a00148_a4322f775f359d04aa5db2288a40f6de5} and \doxyref{Update\-U\-I()}{p.}{a00148_a993c35c331f833bb5f049d536747779b}. As sub-\/objects (\doxyref{W\-X\-Field}{p.}{a00125},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. \\
+\hline
+\end{DoxyParams}
+
+
+Implements {\bf Obj\-Cryst\-::\-W\-X\-Cryst\-Obj\-Basic} \doxyref{}{p.}{a00122_a7ac00ae2ae28f1a6fa26e6fa571186b6}.
+
+\index{Obj\-Cryst\-::\-W\-X\-Radiation@{Obj\-Cryst\-::\-W\-X\-Radiation}!Update\-U\-I@{Update\-U\-I}}
+\index{Update\-U\-I@{Update\-U\-I}!ObjCryst::WXRadiation@{Obj\-Cryst\-::\-W\-X\-Radiation}}
+\paragraph[{Update\-U\-I}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-W\-X\-Radiation\-::\-Update\-U\-I (
+\begin{DoxyParamCaption}
+\item[{const bool}]{mutexlock = {\ttfamily false}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00148_a993c35c331f833bb5f049d536747779b}
+
+
+Update the User Interface, if necessary. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mutexlock} & if true, a Mutex will be used to lock the data shared between main and background thread.\\
+\hline
+\end{DoxyParams}
+The idea is to only use a few Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{Cryst\-Update()}{p.}{a00148_a4322f775f359d04aa5db2288a40f6de5} and \doxyref{Update\-U\-I()}{p.}{a00148_a993c35c331f833bb5f049d536747779b}. As sub-\/objects (\doxyref{W\-X\-Field}{p.}{a00125},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
+
+Implements {\bf Obj\-Cryst\-::\-W\-X\-Cryst\-Obj\-Basic} \doxyref{}{p.}{a00122_a3818940b7031ff7e45cf2178c4a99c90}.
 
 
 
 The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-wx\-Powder\-Pattern.\-h\end{DoxyCompactItemize}
+wx\-Radiation.\-h\end{DoxyCompactItemize}

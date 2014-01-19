@@ -1,33 +1,81 @@
-\subsection{Obj\-Cryst\-:\-:W\-X\-Scatterer Class Reference}
-\label{a00152}\index{Obj\-Cryst\-::\-W\-X\-Scatterer@{Obj\-Cryst\-::\-W\-X\-Scatterer}}
+\subsection{Obj\-Cryst\-:\-:W\-X\-Scattering\-Power\-Atom Class Reference}
+\label{a00152}\index{Obj\-Cryst\-::\-W\-X\-Scattering\-Power\-Atom@{Obj\-Cryst\-::\-W\-X\-Scattering\-Power\-Atom}}
 
 
-base wx\-Cryst class for Scatterers  
+wx\-Cryst class for \doxyref{Scattering\-Power\-Atom}{p.}{a00097}  
 
 
-Inheritance diagram for Obj\-Cryst\-:\-:W\-X\-Scatterer\-:\begin{figure}[H]
+Inheritance diagram for Obj\-Cryst\-:\-:W\-X\-Scattering\-Power\-Atom\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=5.000000cm]{a00152}
+\includegraphics[height=4.000000cm]{a00152}
 \end{center}
 \end{figure}
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries W\-X\-Scatterer} (wx\-Window $\ast$parent, {\bf Scatterer} $\ast$)\label{a00152_a43a37c79f9dca837a55fe024a06fddd6}
+{\bfseries W\-X\-Scattering\-Power\-Atom} (wx\-Window $\ast$parent, {\bf Scattering\-Power\-Atom} $\ast$)\label{a00152_a75350a1b1f3227bef2227b39dc5ecd60}
 
-\end{DoxyCompactItemize}
+\item 
+virtual bool {\bf On\-Change\-Name} (const int id)
+\begin{DoxyCompactList}\small\item\em When a \doxyref{W\-X\-Field\-Name}{p.}{a00127} has been changed by the user, it is handled here. \end{DoxyCompactList}\item 
+void {\bfseries On\-Change\-Colour} (wx\-Command\-Event \&event)\label{a00152_ae16457f5748ec8b73538dc4068885954}
+
+\item 
+virtual void {\bf Update\-U\-I} (const bool mutexlock=false)
+\begin{DoxyCompactList}\small\item\em Update the User Interface, if necessary. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-{\bf Scatterer} $\ast$ {\bfseries mp\-Scatterer}\label{a00152_a60b8f362b1735a8942e2991994d5c862}
+{\bf Scattering\-Power\-Atom} $\ast$ {\bfseries mp\-Scattering\-Power\-Atom}\label{a00152_ac67159595394abeced5050d312048c3b}
+
+\item 
+{\bf W\-X\-Field\-Name} $\ast$ {\bfseries mp\-Field\-Symbol}\label{a00152_ada31b25cf4a32d6a7d959cc0189d4b3c}
 
 \end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-base wx\-Cryst class for Scatterers 
+wx\-Cryst class for \doxyref{Scattering\-Power\-Atom}{p.}{a00097} 
+
+\subsubsection{Member Function Documentation}
+\index{Obj\-Cryst\-::\-W\-X\-Scattering\-Power\-Atom@{Obj\-Cryst\-::\-W\-X\-Scattering\-Power\-Atom}!On\-Change\-Name@{On\-Change\-Name}}
+\index{On\-Change\-Name@{On\-Change\-Name}!ObjCryst::WXScatteringPowerAtom@{Obj\-Cryst\-::\-W\-X\-Scattering\-Power\-Atom}}
+\paragraph[{On\-Change\-Name}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool Obj\-Cryst\-::\-W\-X\-Scattering\-Power\-Atom\-::\-On\-Change\-Name (
+\begin{DoxyParamCaption}
+\item[{const int}]{id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00152_a99081b400737a5e28a7207c8c905f6d5}
+
+
+When a \doxyref{W\-X\-Field\-Name}{p.}{a00127} has been changed by the user, it is handled here. 
+
+This returns true if the value has been handled (for inheritance purposes). 
+
+Reimplemented from {\bf Obj\-Cryst\-::\-W\-X\-Refinable\-Obj} \doxyref{}{p.}{a00149_ad784c1cb9ccb0d0e4ebfbc18a8dbbc19}.
+
+\index{Obj\-Cryst\-::\-W\-X\-Scattering\-Power\-Atom@{Obj\-Cryst\-::\-W\-X\-Scattering\-Power\-Atom}!Update\-U\-I@{Update\-U\-I}}
+\index{Update\-U\-I@{Update\-U\-I}!ObjCryst::WXScatteringPowerAtom@{Obj\-Cryst\-::\-W\-X\-Scattering\-Power\-Atom}}
+\paragraph[{Update\-U\-I}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-W\-X\-Scattering\-Power\-Atom\-::\-Update\-U\-I (
+\begin{DoxyParamCaption}
+\item[{const bool}]{mutexlock = {\ttfamily false}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00152_a727146d4ecd5e1c4e5790a3eab0f0ace}
+
+
+Update the User Interface, if necessary. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mutexlock} & if true, a Mutex will be used to lock the data shared between main and background thread.\\
+\hline
+\end{DoxyParams}
+The idea is to only use a few Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{Cryst\-Update()}{p.}{a00149_a13e4f37ac098de756b27cdb91d6a0551} and \doxyref{Update\-U\-I()}{p.}{a00152_a727146d4ecd5e1c4e5790a3eab0f0ace}. As sub-\/objects (\doxyref{W\-X\-Field}{p.}{a00125},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
+
+Reimplemented from {\bf Obj\-Cryst\-::\-W\-X\-Refinable\-Obj} \doxyref{}{p.}{a00149_a19a1d057eecafd48710d9a3b770c1b28}.
+
+
 
 The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-wx\-Scatterer.\-h\end{DoxyCompactItemize}
+wx\-Scattering\-Power.\-h\end{DoxyCompactItemize}

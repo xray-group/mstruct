@@ -1,64 +1,46 @@
-\subsection{Obj\-Cryst\-:\-:P\-D\-F\-Crystal Class Reference}
-\label{a00065}\index{Obj\-Cryst\-::\-P\-D\-F\-Crystal@{Obj\-Cryst\-::\-P\-D\-F\-Crystal}}
+\subsection{Obj\-Cryst\-:\-:P\-D\-F\-Phase Class Reference}
+\label{a00065}\index{Obj\-Cryst\-::\-P\-D\-F\-Phase@{Obj\-Cryst\-::\-P\-D\-F\-Phase}}
 
 
-Class for Pair Distribution Function calculations for a single \doxyref{Crystal}{p.}{a00027} object.  
+Contribution to a \doxyref{P\-D\-F}{p.}{a00062}.  
 
 
-Inheritance diagram for Obj\-Cryst\-:\-:P\-D\-F\-Crystal\-:\begin{figure}[H]
+Inheritance diagram for Obj\-Cryst\-:\-:P\-D\-F\-Phase\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=3.000000cm]{a00065}
 \end{center}
 \end{figure}
-\subsubsection*{Classes}
-\begin{DoxyCompactItemize}
-\item 
-struct {\bf pdf\-Atom}
-\begin{DoxyCompactList}\small\item\em Container of temp data for each atom. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bf P\-D\-F\-Crystal} (const {\bf P\-D\-F} \&pdf, const {\bf Crystal} \&cryst)\label{a00065_a00392955dc22562f102b5161201df88e}
+{\bf P\-D\-F\-Phase} (const {\bf P\-D\-F} \&pdf)\label{a00065_ab6f8534a6578b281cf5bb5334e838db1}
 
-\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Private Member Functions}
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+const Cryst\-Vector\-\_\-\-R\-E\-A\-L \& {\bf Get\-P\-D\-F\-Calc} () const \label{a00065_a67fe93ef0be6b5c64697a542e9b829e8}
+
+\begin{DoxyCompactList}\small\item\em Get the calculated \doxyref{P\-D\-F}{p.}{a00062}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void {\bf Init} (const {\bf P\-D\-F} \&pdf, const {\bf Crystal} \&cryst)\label{a00065_a5e7fb06483b4aadc0228e12a5b276c73}
-
-\begin{DoxyCompactList}\small\item\em Initialize all parameters. \end{DoxyCompactList}\item 
-virtual void {\bf Calc\-P\-D\-F} () const \label{a00065_ae946de60882c4a7280846eb93c2352ad}
+virtual void {\bf Calc\-P\-D\-F} () const =0\label{a00065_a072386e6d1b75fa364e6bb9551685567}
 
 \begin{DoxyCompactList}\small\item\em Calculate the pdf. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Private Attributes}
+\subsubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-const {\bf Crystal} $\ast$ {\bf mp\-Crystal}\label{a00065_a553166f4ad640d508ef772957df10152}
+const {\bf P\-D\-F} $\ast$ {\bf mp\-P\-D\-F}\label{a00065_af78b7394beb2e1839d6cc75b700be0f6}
 
-\begin{DoxyCompactList}\small\item\em The \doxyref{Crystal}{p.}{a00027}. \end{DoxyCompactList}\item 
-R\-E\-A\-L {\bf m\-Delta1}\label{a00065_a66b186679e2698a45ce157a8d09c3467}
+\begin{DoxyCompactList}\small\item\em Parent \doxyref{P\-D\-F}{p.}{a00062}. \end{DoxyCompactList}\item 
+Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf m\-P\-D\-F\-Calc}\label{a00065_a39fa93f83ac731cfa4ee69f8add3e70d}
 
-\begin{DoxyCompactList}\small\item\em Parameters affecting the width \& intensity of peaks. \end{DoxyCompactList}\item 
-R\-E\-A\-L {\bfseries m\-Delta2}\label{a00065_a5ebeca9d72162fee9243dea5c6b850ab}
-
-\item 
-R\-E\-A\-L {\bfseries m\-Qbroad}\label{a00065_ae7f15c23f3c9e5709613168abb0225ac}
-
-\item 
-R\-E\-A\-L {\bfseries m\-Qdamp}\label{a00065_a1137bb1d85ea2fa6829d1e839d01333c}
-
-\item 
-std\-::vector$<$ {\bf pdf\-Atom} $>$ {\bf mv\-P\-D\-F\-Atom}\label{a00065_a54a3a6f101577914637d33727b770d37}
-
-\begin{DoxyCompactList}\small\item\em List of all temp data. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Additional Inherited Members}
+\begin{DoxyCompactList}\small\item\em The calculated \doxyref{P\-D\-F}{p.}{a00062}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-Class for Pair Distribution Function calculations for a single \doxyref{Crystal}{p.}{a00027} object. 
+Contribution to a \doxyref{P\-D\-F}{p.}{a00062}. 
 
-
+Right now this can only be a \doxyref{P\-D\-F\-Crystal}{p.}{a00064}. 
 
 The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 

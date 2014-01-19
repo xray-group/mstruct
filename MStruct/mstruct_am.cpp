@@ -1622,21 +1622,36 @@ int main (int argc, char *argv[])
 
   // HKL peak profile params
    for(int iphase=0; iphase<nbphases; iphase++) {
-   	 	if(vHKLEffect[iphase]==NULL) continue;
-   	 	cout << "nb of peaks with preset profiles - phase: " << vPhasesNames[iphase] << endl;
-   	 	int nbprofs;
-   	 	read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
-   	 	ccin >> nbprofs;
-   	 // read hkl diffraction params
-   		for(int iprof=0; iprof<nbprofs; iprof++) {
-     		cout << "hkl,d2Theta(deg),fwhm(deg),eta,code(111)?" << endl;
-    		REAL dx, fwhm, eta;
-     		int h,k,l,code;
-     		read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
-     		ccin >> h >> k >> l >> dx >> fwhm >> eta >> code;
-     		int b1=code/100, b2=(code-100*b1)/10, b3=(code-100*b1-10*b2);
-     		vHKLEffect[iphase]->SetProfilePar(h,k,l,dx*DEG2RAD,fwhm*DEG2RAD,eta,b1==0,b2==0,b3==0);
-   		}
+     if(vHKLEffect[iphase]==NULL) continue;
+     cout << "(nb of peaks with preset profiles)/(name of parameters file, flag, intensity) - phase: " << vPhasesNames[iphase] << endl;
+     string str;
+     read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+     ccin >> str; // read first word on the line (either number or string)
+     cout << "HKLEffect: str:" << str.c_str() << "\n";
+     char *endptr;
+     long nbprofs = strtol(str.c_str(),&endptr,10);
+     cout << "HKLEffect: nbprofs:" << nbprofs << "\n";
+     cout << "HKLEffect: endptr:" << (void*)endptr << "\n";
+     if(endptr==NULL && nbprofs>=0) { // first word is a nonegative number
+       // read hkl diffraction params
+       for(int iprof=0; iprof<nbprofs; iprof++) {
+	 cout << "hkl,d2Theta(deg),fwhm(deg),eta,code(111)?" << endl;
+	 REAL dx, fwhm, eta;
+	 int h,k,l,code;
+	 read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+	 ccin >> h >> k >> l >> dx >> fwhm >> eta >> code;
+	 int b1=code/100, b2=(code-100*b1)/10, b3=(code-100*b1-10*b2);
+	 vHKLEffect[iphase]->SetProfilePar(h,k,l,dx*DEG2RAD,fwhm*DEG2RAD,eta,1.0,b1==0,b2==0,b3==0,true);
+       }
+     } else { // first word is a string (or negative integer)
+       vHKLEffect[iphase]->SetParametersFile( str.c_str() );
+       int flag; // (0-don't use,1-generate,2-free strong,3-read)
+       REAL relIntensity; // relative intensity level for generate option
+       ccin >> flag >> relIntensity;
+       cout << "HKLEffect: flag:" << flag << "\n";
+       if(flag==3) // option == read
+	 vHKLEffect[iphase]->LoadParametersFile();
+     }
    }
   
   // re-load all Size Distribututions for all effects (unfortunatelly distributions are earlier automatically fixed)
@@ -2173,22 +2188,27 @@ int main (int argc, char *argv[])
 	   }
 	 }
 
-  // save IhklCorr params from file
+  // save IhklCorr params to file
    for(int iphase=0; iphase<nbphases; iphase++) { 
-   	 if(vHKLChoice[iphase]>0) {
+     if(vHKLChoice[iphase]>0) {
        vDiffData[iphase]->WriteHKLIntensityCorrToFile(string(string("Ihkl_")+vPhasesNames[iphase]+string(".dat")).c_str());
        if(vHKLChoicePrint[iphase]>0) {
        	 cout << "HKL Intensity Corrections for phase: " << vPhasesNames[iphase] << '\n';
        	 cout << "*********************************************************************\n";
        	 vDiffData[iphase]->PrintHKLIntensityCorr(cout);
        }
-   	 }
+     }
    	
-   	// save size distributions
-	  // loop over all stored SizeDistribBroadeningEffect objects
-   	 for(unsigned int ieffect=0; ieffect<vSizeDistribEffect.size(); ieffect++)
-   	 	 vSizeDistribEffect[ieffect]->WriteDistributionToFile(vSizeDistribFileName[ieffect].c_str());
+     // save size distributions
+     // loop over all stored SizeDistribBroadeningEffect objects
+     for(unsigned int ieffect=0; ieffect<vSizeDistribEffect.size(); ieffect++)
+       vSizeDistribEffect[ieffect]->WriteDistributionToFile(vSizeDistribFileName[ieffect].c_str());
+
+     // save HKLPseudoVoigtBroadeningEffect parameters
+     if(vHKLEffect[iphase]!=NULL)
+       vHKLEffect[iphase]->SaveParametersFile();
    }
+
   // Save the powder pattern in text format
    data.SavePowderPattern(filename.c_str());
 

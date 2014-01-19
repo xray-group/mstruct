@@ -1,76 +1,74 @@
-\subsection{Obj\-Cryst\-:\-:Scattering\-Component\-List Class Reference}
-\label{a00094}\index{Obj\-Cryst\-::\-Scattering\-Component\-List@{Obj\-Cryst\-::\-Scattering\-Component\-List}}
+\subsection{Obj\-Cryst\-:\-:Scattering\-Corr Class Reference}
+\label{a00094}\index{Obj\-Cryst\-::\-Scattering\-Corr@{Obj\-Cryst\-::\-Scattering\-Corr}}
 
 
-list of scattering positions in a crystal, associated with the corresponding occupancy and a pointer to the \doxyref{Scattering\-Power}{p.}{a00097}.  
+Base class to compute all kind of corrections to intensities\-: Lorentz, Polar, absorption, texcture, extinction, etc...  
 
 
+Inheritance diagram for Obj\-Cryst\-:\-:Scattering\-Corr\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.056604cm]{a00094}
+\end{center}
+\end{figure}
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries Scattering\-Component\-List} (const long nb\-Component)\label{a00094_a5d75cfe634f123de9c84c928dfea1eaa}
+{\bf Scattering\-Corr} (const {\bf Scattering\-Data} \&data)\label{a00094_ac1e37a73b0a107f66d1b1d75b9db9c47}
 
+\begin{DoxyCompactList}\small\item\em Constructor, with the associated \doxyref{Scattering\-Data}{p.}{a00095} object. \end{DoxyCompactList}\item 
+virtual const string \& {\bf Get\-Name} () const =0\label{a00094_adb2782d4e32cbcb89e2e69b3c8ad66fb}
+
+\begin{DoxyCompactList}\small\item\em Get the name of this object. \end{DoxyCompactList}\item 
+virtual const string \& {\bf Get\-Class\-Name} () const =0\label{a00094_a6d72e7a6ffff0c16d86930d9e72c6673}
+
+\begin{DoxyCompactList}\small\item\em Get the name of the class. \end{DoxyCompactList}\item 
+const Cryst\-Vector\-\_\-\-R\-E\-A\-L \& {\bf Get\-Corr} () const 
+\begin{DoxyCompactList}\small\item\em Get the vector of corrections for all reflections. \end{DoxyCompactList}\item 
+const {\bf Refinable\-Obj\-Clock} \& {\bf Get\-Clock\-Corr} () const \label{a00094_a4c5bead3a47202db88495e3d123c5927}
+
+\begin{DoxyCompactList}\small\item\em Get the value of the clock corresponding to the last time the correction was actually computed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
 \item 
-{\bfseries Scattering\-Component\-List} (const {\bf Scattering\-Component\-List} \&old)\label{a00094_ac1b58052220493fab0712ebc9d8bc481}
+virtual void {\bf Calc\-Corr} () const =0\label{a00094_a437a916156f6d88c76cb01ca4c748c89}
 
-\item 
-void {\bf Reset} ()
-\begin{DoxyCompactList}\small\item\em Reset the list. \end{DoxyCompactList}\item 
-const {\bf Scattering\-Component} \& {\bf operator()} (const long i) const \label{a00094_ac5245c446a41fd40ee1e312480023536}
-
-\begin{DoxyCompactList}\small\item\em Access to a component. \end{DoxyCompactList}\item 
-{\bf Scattering\-Component} \& {\bfseries operator()} (const long i)\label{a00094_a414a8c4bfcdc598826ca04720ce576a5}
-
-\item 
-long {\bf Get\-Nb\-Component} () const \label{a00094_a94c1375420b97a79594af7859cb968a6}
-
-\begin{DoxyCompactList}\small\item\em Number of components. \end{DoxyCompactList}\item 
-void {\bf operator=} (const {\bf Scattering\-Component\-List} \&rhs)\label{a00094_a93c5514484bd8d32a346e1c4a155a4a3}
-
-\begin{DoxyCompactList}\small\item\em Assignement operator. \end{DoxyCompactList}\item 
-bool {\bf operator==} (const {\bf Scattering\-Component\-List} \&rhs) const \label{a00094_ada4b582d2e62c807e99417c5cee4a8ce}
-
-\begin{DoxyCompactList}\small\item\em Compare two lists. \end{DoxyCompactList}\item 
-void {\bf operator+=} (const {\bf Scattering\-Component\-List} \&rhs)\label{a00094_a423df65157ec66cda8f5542116bc63f8}
-
-\begin{DoxyCompactList}\small\item\em Add another list of components. \end{DoxyCompactList}\item 
-void {\bf operator+=} (const {\bf Scattering\-Component} \&rhs)\label{a00094_a36ea90b4b48c473af0bee85402479f82}
-
-\begin{DoxyCompactList}\small\item\em Add component. \end{DoxyCompactList}\item 
-void {\bf operator++} ()\label{a00094_a8524c2bc3633441b2a808b2908ce99ec}
-
-\begin{DoxyCompactList}\small\item\em Add component (the whole list should be updated after that) \end{DoxyCompactList}\item 
-void {\bf operator-\/-\/} ()\label{a00094_afb399786cc9031db1cbf95df2868831b}
-
-\begin{DoxyCompactList}\small\item\em Remove component (the whole list should be updated after that) \end{DoxyCompactList}\item 
-void {\bf Print} () const \label{a00094_a3e7855dd6cbc411de63cbe14feef70cf}
-
-\begin{DoxyCompactList}\small\item\em Print the list of Scattering components. For debugging. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Do the computation of corrected intensities. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-vector$<$ {\bf Scattering\-Component} $>$ {\bf mv\-Scatt\-Comp}\label{a00094_a191cb4df412bb4294a4e300313e35c3f}
+const {\bf Scattering\-Data} $\ast$ {\bf mp\-Data}\label{a00094_a0fa066328104835ff72ddf98687c8513}
 
-\begin{DoxyCompactList}\small\item\em The vector of components. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em The associated \doxyref{Scattering\-Data}{p.}{a00095} object. \end{DoxyCompactList}\item 
+Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf m\-Corr}\label{a00094_a7669922ac4bbdfb826748148d4016088}
+
+\begin{DoxyCompactList}\small\item\em The vector of correction to intensities. \end{DoxyCompactList}\item 
+{\bf Refinable\-Obj\-Clock} {\bf m\-Clock\-Corr\-Calc}\label{a00094_aa969418138a9d1867797857318d6f303}
+
+\begin{DoxyCompactList}\small\item\em The clock marking the last time the correction was calculated. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-list of scattering positions in a crystal, associated with the corresponding occupancy and a pointer to the \doxyref{Scattering\-Power}{p.}{a00097}. 
+Base class to compute all kind of corrections to intensities\-: Lorentz, Polar, absorption, texcture, extinction, etc... 
+
+The computed intensities are to be multiplied by all the \doxyref{Scattering\-Corr}{p.}{a00094} calculated.
+
+This is an abstract base class. 
 
 \subsubsection{Member Function Documentation}
-\index{Obj\-Cryst\-::\-Scattering\-Component\-List@{Obj\-Cryst\-::\-Scattering\-Component\-List}!Reset@{Reset}}
-\index{Reset@{Reset}!ObjCryst::ScatteringComponentList@{Obj\-Cryst\-::\-Scattering\-Component\-List}}
-\paragraph[{Reset}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-Scattering\-Component\-List\-::\-Reset (
+\index{Obj\-Cryst\-::\-Scattering\-Corr@{Obj\-Cryst\-::\-Scattering\-Corr}!Get\-Corr@{Get\-Corr}}
+\index{Get\-Corr@{Get\-Corr}!ObjCryst::ScatteringCorr@{Obj\-Cryst\-::\-Scattering\-Corr}}
+\paragraph[{Get\-Corr}]{\setlength{\rightskip}{0pt plus 5cm}const Cryst\-Vector\-\_\-\-R\-E\-A\-L\& Obj\-Cryst\-::\-Scattering\-Corr\-::\-Get\-Corr (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}\label{a00094_a512dcd4870c53b3f98ad6e7b04be9801}
+) const}\label{a00094_a50395369eb93155bf278453ba158f8cb}
 
 
-Reset the list. 
+Get the vector of corrections for all reflections. 
 
-This does {\bfseries not} free the memory, but simply forgets that there already are some entries. 
+Calculated values must be multiplied by these values. 
 
 The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-Scattering\-Power.\-h\end{DoxyCompactItemize}
+Scattering\-Corr.\-h\end{DoxyCompactItemize}

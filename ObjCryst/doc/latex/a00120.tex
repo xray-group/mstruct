@@ -1,208 +1,107 @@
-\subsection{Obj\-Cryst\-:\-:W\-X\-Crystal Class Reference}
-\label{a00120}\index{Obj\-Cryst\-::\-W\-X\-Crystal@{Obj\-Cryst\-::\-W\-X\-Crystal}}
+\subsection{Obj\-Cryst\-:\-:W\-X\-Cryst\-Menu\-Bar Class Reference}
+\label{a00120}\index{Obj\-Cryst\-::\-W\-X\-Cryst\-Menu\-Bar@{Obj\-Cryst\-::\-W\-X\-Cryst\-Menu\-Bar}}
 
 
-wx\-Cryst class for Crystals  
+Our own local menu bar, using buttons and Popup menus.  
 
 
-Inheritance diagram for Obj\-Cryst\-:\-:W\-X\-Crystal\-:\begin{figure}[H]
+Inheritance diagram for Obj\-Cryst\-:\-:W\-X\-Cryst\-Menu\-Bar\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=4.000000cm]{a00120}
+\includegraphics[height=2.000000cm]{a00120}
 \end{center}
 \end{figure}
-\subsubsection*{Classes}
-\begin{DoxyCompactItemize}
-\item 
-struct {\bf Row\-Scatt\-Pow}
-\begin{DoxyCompactList}\small\item\em Structure to store the scattering power parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries W\-X\-Crystal} (wx\-Window $\ast$parent, {\bf Crystal} $\ast$)\label{a00120_a9bbb656f4842a4a406f0402ac8f63176}
+{\bf W\-X\-Cryst\-Menu\-Bar} (wx\-Window $\ast$parent, {\bf W\-X\-Cryst\-Obj} $\ast$owner)\label{a00120_aaa68b57dce657185fe3a93c19ecc648a}
 
-\item 
+\begin{DoxyCompactList}\small\item\em Ctor. \end{DoxyCompactList}\item 
+void {\bf Add\-Menu} (const string \&name, const int menu\-Id, const string \&help=\char`\"{}\char`\"{})\label{a00120_a99b2ca415d2bb4b670433557b1d42a5d}
+
+\begin{DoxyCompactList}\small\item\em Add a menu. \end{DoxyCompactList}\item 
+wx\-Menu \& {\bf Get\-Menu} (const int menu\-Id)\label{a00120_a9a378d85bab72be5faec773730df4505}
+
+\begin{DoxyCompactList}\small\item\em Get access to a menu. \end{DoxyCompactList}\item 
+void {\bf Add\-Menu\-Item} (const int menu\-Id, int id, const string \&item, const string \&help=\char`\"{}\char`\"{}, const bool checkable=false)\label{a00120_a689d06fe301f17b5e8940286d107340a}
+
+\begin{DoxyCompactList}\small\item\em Add an entry to a menu. \end{DoxyCompactList}\item 
+void {\bf Add\-Menu\-Item} (const int menu\-Id, int id, const wx\-String \&item, wx\-Menu $\ast$sub\-Menu, const wx\-String \&help\-String=\-\_\-\-T(\char`\"{}\char`\"{}))\label{a00120_a8d8e212441d2df35499e13bc38c7c463}
+
+\begin{DoxyCompactList}\small\item\em Add a sub-\/menu to a menu. \end{DoxyCompactList}\item 
 virtual void {\bf Cryst\-Update} (const bool update\-U\-I=false, const bool mutexlock=false)
 \begin{DoxyCompactList}\small\item\em Get new values to be displayed from the underlying object, and raise flag if an U\-I update is necessary. \end{DoxyCompactList}\item 
-void {\bfseries On\-Menu\-Save\-C\-I\-F} (wx\-Command\-Event \&W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00120_aa47d254619150f39a21a775dd91a1081}
-
-\item 
-void {\bfseries On\-Menu\-Save\-Text} (wx\-Command\-Event \&W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00120_afa772ec8c7732267bb00d1e2c8e56e24}
-
-\item 
-void {\bfseries On\-Menu\-Add\-Scatt\-Pow\-Atom} (wx\-Command\-Event \&W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00120_aee65ba76d76a0f1f57b666c1c78dd904}
-
-\item 
-void {\bfseries On\-Menu\-Add\-Scatt\-Pow\-Sphere} (wx\-Command\-Event \&W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00120_ad2736f43a904f9e66b27697dad2f1540}
-
-\item 
-void {\bfseries On\-Menu\-Remove\-Scatt\-Pow} (wx\-Command\-Event \&W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00120_a096f5d8a036b6e4b5365921ec82fb161}
-
-\item 
-void {\bfseries On\-Menu\-Add\-Scatterer} (wx\-Command\-Event \&event)\label{a00120_a6e3a438881dcaba21a06e6f4d52720bf}
-
-\item 
-void {\bfseries On\-Menu\-Remove\-Scatterer} (wx\-Command\-Event \&W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00120_a3e0d4ba6153c064ee7adf90f58718448}
-
-\item 
-void {\bfseries On\-Menu\-Duplicate\-Scatterer} (wx\-Command\-Event \&W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00120_aab02a7fb32d2e10fa4070abd94a566e8}
-
-\item 
-void {\bfseries On\-Menu\-Import\-Molecule\-From\-Fenske\-Hall\-Z\-Matrix} (wx\-Command\-Event \&event)\label{a00120_ac07540c36d5d22ddb92bf8a3baf0d0cf}
-
-\item 
-void {\bfseries On\-Menu\-Atoms2\-Molecule} (wx\-Command\-Event \&event)\label{a00120_a7a75a3369ac7fddcff066e916819db45}
-
-\item 
-void {\bfseries On\-Menu\-Set\-Relative\-X\-Y\-Z\-Limits} (wx\-Command\-Event \&W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00120_acc56021ce6c9cc37fed3b640d66a47f0}
-
-\item 
-void {\bfseries On\-Menu\-Test\-Random\-Moves} (wx\-Command\-Event \&event)\label{a00120_a76ee9b2376daa9712be7d2ad3c99fcbf}
-
-\item 
-bool {\bf On\-Change\-Name} (const int id)
-\begin{DoxyCompactList}\small\item\em When a \doxyref{W\-X\-Field\-Name}{p.}{a00128} has been changed by the user, it is handled here. \end{DoxyCompactList}\item 
-void {\bf Update\-U\-I} (const bool mutexlock=false)
+virtual void {\bf Update\-U\-I} (const bool mutexlock=false)
 \begin{DoxyCompactList}\small\item\em Update the User Interface, if necessary. \end{DoxyCompactList}\item 
-{\bf Crystal} \& {\bfseries Get\-Crystal} ()\label{a00120_a955ab79ac70a8f435883e30f934ff64b}
+void {\bf On\-Popup\-Menu} (wx\-Command\-Event \&event)\label{a00120_ade8539411ad2badf7ca0d84c982d1e1e}
 
-\item 
-const {\bf Crystal} \& {\bfseries Get\-Crystal} () const \label{a00120_af1dbc10e82dd1acdb2f6c5d191762f8e}
+\begin{DoxyCompactList}\small\item\em Event handler to popu the menu when the button is clicked. \end{DoxyCompactList}\item 
+virtual void {\bf Set\-Tool\-Tip} (const wx\-String \&tip, long menu=0)\label{a00120_ad0ddf5302f5425ffcdcd4bf3681987dd}
 
-\item 
-void {\bfseries On\-Menu\-Show\-Scatt\-Pow\-Window} (wx\-Command\-Event \&event)\label{a00120_ac465646e9c0913dba290a4c7408f55b9}
-
-\item 
-void {\bfseries On\-Edit\-Grid\-Scatt\-Pow} (wx\-Grid\-Event \&e)\label{a00120_a64c183898c7dd7c70bbc519c2b702c41}
-
-\item 
-void {\bfseries On\-Edit\-Grid\-Scatt\-Pow\-Anti\-Bump} (wx\-Grid\-Event \&e)\label{a00120_ac07a2e102a02f9eb5124251b7a476053}
-
-\item 
-void {\bfseries On\-Edit\-Grid\-Scatt\-Pow\-Bond\-Valence} (wx\-Grid\-Event \&e)\label{a00120_a55c19dde9c0755aae39f70c67333dbb9}
-
-\item 
-void {\bfseries Notify\-Delete\-List\-Win} (W\-X\-Crystal\-Scrolled\-Grid\-Window $\ast$win)\label{a00120_a1fce0127f95af7257a3383ba5c3179cc}
-
-\item 
-virtual bool {\bfseries Enable} (bool enable=true)\label{a00120_a125e01082f3ad2e2bdb6560b3ce7109c}
-
-\end{DoxyCompactItemize}
-\subsubsection*{Private Attributes}
+\begin{DoxyCompactList}\small\item\em Set tooltip for each menu. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-{\bf Crystal} $\ast$ {\bfseries mp\-Crystal}\label{a00120_a8229bc7315cf419684260684f7ef4fbd}
+wx\-Box\-Sizer $\ast$ {\bf mp\-Sizer}\label{a00120_a082b747b0a157df1dbe86349450f3f7a}
 
-\item 
-{\bf W\-X\-Field\-Name} $\ast$ {\bf mp\-Field\-Spacegroup}\label{a00120_aee061815eab857c61fcba554554fd695}
+\begin{DoxyCompactList}\small\item\em The sizer of the menu. \end{DoxyCompactList}\item 
+std\-::map$<$ long, pair$<$ wx\-Menu \\*
+$\ast$, wx\-Button $\ast$ $>$ $>$ {\bf mvp\-Menu}\label{a00120_a73b92cea8b7a55c69d3c552771505560}
 
-\begin{DoxyCompactList}\small\item\em \doxyref{Space\-Group}{p.}{a00102}. \end{DoxyCompactList}\item 
-{\bf W\-X\-Registry}$<$ {\bf Scatterer} $>$ $\ast$ {\bf mp\-W\-X\-Scatterer\-Registry}\label{a00120_acf00224693fb4edfba63630175cf28ae}
-
-\begin{DoxyCompactList}\small\item\em Scatterers. \end{DoxyCompactList}\item 
-{\bf W\-X\-Registry}$<$ {\bf Scattering\-Power} $>$ $\ast$ {\bf mp\-W\-X\-Scattering\-Power\-Registry}\label{a00120_a71bf017ea6116ff834875c17076d91f1}
-
-\begin{DoxyCompactList}\small\item\em Scattering Powers. \end{DoxyCompactList}\item 
-W\-X\-Crystal\-Scrolled\-Grid\-Window $\ast$ {\bfseries mp\-Scatt\-Pow\-Win}\label{a00120_af6b71a9ac50a2fdd5201dc640dfac769}
-
-\item 
-W\-X\-Crystal\-Scrolled\-Grid\-Window $\ast$ {\bfseries mp\-Anti\-Bump\-Win}\label{a00120_a28325b27c4d04f1c9976b0dce737c661}
-
-\item 
-W\-X\-Crystal\-Scrolled\-Grid\-Window $\ast$ {\bfseries mp\-Bond\-Valence\-Win}\label{a00120_abbb575639f92c56b096fa96a507f2278}
-
-\item 
-std\-::map$<$ {\bf Scattering\-Power\-Atom} \\*
-$\ast$, {\bf Row\-Scatt\-Pow} $>$ {\bfseries mvp\-Row\-Scatt\-Pow}\label{a00120_a8188bc4bff5b0acc10d3ffc769774902}
-
-\item 
-bool {\bf m\-Is\-Self\-Updating}
-\begin{DoxyCompactList}\small\item\em Flag to indicate that we are updating values in the wx\-Grid data, and that it is not the user inputing data. \end{DoxyCompactList}\item 
-wx\-Mutex {\bf m\-Mutex\-G\-L\-Update}\label{a00120_aeb528ac1aaae3687c3524cda59cafc17}
-
-\begin{DoxyCompactList}\small\item\em Mutex used when updating the Open\-G\-L display List, between background and main thread. \end{DoxyCompactList}\item 
-wx\-Condition $\ast$ {\bf mp\-Condition\-G\-L\-Update}\label{a00120_a63ff54465c7eca2c8984eef7b7861bba}
-
-\begin{DoxyCompactList}\small\item\em wx\-Condition used when updating the Open\-G\-L display List, between background and main thread \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Additional Inherited Members}
+\begin{DoxyCompactList}\small\item\em List of menus, first is the menu Id and second is a pair of $<$pointer to the menu, pointer to the button of the menu$>$ \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-wx\-Cryst class for Crystals 
+Our own local menu bar, using buttons and Popup menus. 
 
 \subsubsection{Member Function Documentation}
-\index{Obj\-Cryst\-::\-W\-X\-Crystal@{Obj\-Cryst\-::\-W\-X\-Crystal}!Cryst\-Update@{Cryst\-Update}}
-\index{Cryst\-Update@{Cryst\-Update}!ObjCryst::WXCrystal@{Obj\-Cryst\-::\-W\-X\-Crystal}}
-\paragraph[{Cryst\-Update}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-W\-X\-Crystal\-::\-Cryst\-Update (
+\index{Obj\-Cryst\-::\-W\-X\-Cryst\-Menu\-Bar@{Obj\-Cryst\-::\-W\-X\-Cryst\-Menu\-Bar}!Cryst\-Update@{Cryst\-Update}}
+\index{Cryst\-Update@{Cryst\-Update}!ObjCryst::WXCrystMenuBar@{Obj\-Cryst\-::\-W\-X\-Cryst\-Menu\-Bar}}
+\paragraph[{Cryst\-Update}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-W\-X\-Cryst\-Menu\-Bar\-::\-Cryst\-Update (
 \begin{DoxyParamCaption}
 \item[{const bool}]{update\-U\-I = {\ttfamily false}, }
 \item[{const bool}]{mutexlock = {\ttfamily false}}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00120_a55d7dc41da5c6d4360609d2eac91f39b}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00120_ac0c3dead0da352d0c7e439508bc40303}
 
 
 Get new values to be displayed from the underlying object, and raise flag if an U\-I update is necessary. 
 
-The actual G\-U\-I update is not made here. \doxyref{Update\-U\-I()}{p.}{a00120_a62946717943682dc2ac07ea4584030f4} should be called separately, from the main thread.
+The actual G\-U\-I update is not made here. \doxyref{Update\-U\-I()}{p.}{a00120_acc23d478cb50225e17fb5b6dc29fce7b} should be called separately, from the main thread.
 
 
 \begin{DoxyParams}{Parameters}
-{\em update\-U\-I,\-:} & if true, this will call Update\-U\-I, either directly (if in the main thread), or by sending a message. \\
+{\em update\-U\-I} & if true, this will call Update\-U\-I, either directly (if in the main thread), or by sending a message. \\
 \hline
-{\em mutexlock,\-:} & if true, a Mutex will be used to lock the data shared between main and background thread. The idea is to only use a few Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{Cryst\-Update()}{p.}{a00120_a55d7dc41da5c6d4360609d2eac91f39b} and \doxyref{Update\-U\-I()}{p.}{a00120_a62946717943682dc2ac07ea4584030f4}. As sub-\/objects (\doxyref{W\-X\-Field}{p.}{a00126},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. \\
+{\em mutexlock} & if true, a Mutex will be used to lock the data shared between main and background thread. The idea is to only use a few Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{Cryst\-Update()}{p.}{a00120_ac0c3dead0da352d0c7e439508bc40303} and \doxyref{Update\-U\-I()}{p.}{a00120_acc23d478cb50225e17fb5b6dc29fce7b}. As sub-\/objects (\doxyref{W\-X\-Field}{p.}{a00125},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. \\
 \hline
 \end{DoxyParams}
 
 
-Reimplemented from {\bf Obj\-Cryst\-::\-W\-X\-Refinable\-Obj} \doxyref{}{p.}{a00150_a13e4f37ac098de756b27cdb91d6a0551}.
+Implements {\bf Obj\-Cryst\-::\-W\-X\-Cryst\-Obj\-Basic} \doxyref{}{p.}{a00122_a7ac00ae2ae28f1a6fa26e6fa571186b6}.
 
-\index{Obj\-Cryst\-::\-W\-X\-Crystal@{Obj\-Cryst\-::\-W\-X\-Crystal}!On\-Change\-Name@{On\-Change\-Name}}
-\index{On\-Change\-Name@{On\-Change\-Name}!ObjCryst::WXCrystal@{Obj\-Cryst\-::\-W\-X\-Crystal}}
-\paragraph[{On\-Change\-Name}]{\setlength{\rightskip}{0pt plus 5cm}bool Obj\-Cryst\-::\-W\-X\-Crystal\-::\-On\-Change\-Name (
-\begin{DoxyParamCaption}
-\item[{const int}]{id}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00120_a7a15c2d1b5f5997ace336724fc396892}
-
-
-When a \doxyref{W\-X\-Field\-Name}{p.}{a00128} has been changed by the user, it is handled here. 
-
-This returns true if the value has been handled (for inheritance purposes). 
-
-Reimplemented from {\bf Obj\-Cryst\-::\-W\-X\-Refinable\-Obj} \doxyref{}{p.}{a00150_ad784c1cb9ccb0d0e4ebfbc18a8dbbc19}.
-
-\index{Obj\-Cryst\-::\-W\-X\-Crystal@{Obj\-Cryst\-::\-W\-X\-Crystal}!Update\-U\-I@{Update\-U\-I}}
-\index{Update\-U\-I@{Update\-U\-I}!ObjCryst::WXCrystal@{Obj\-Cryst\-::\-W\-X\-Crystal}}
-\paragraph[{Update\-U\-I}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-W\-X\-Crystal\-::\-Update\-U\-I (
+\index{Obj\-Cryst\-::\-W\-X\-Cryst\-Menu\-Bar@{Obj\-Cryst\-::\-W\-X\-Cryst\-Menu\-Bar}!Update\-U\-I@{Update\-U\-I}}
+\index{Update\-U\-I@{Update\-U\-I}!ObjCryst::WXCrystMenuBar@{Obj\-Cryst\-::\-W\-X\-Cryst\-Menu\-Bar}}
+\paragraph[{Update\-U\-I}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-W\-X\-Cryst\-Menu\-Bar\-::\-Update\-U\-I (
 \begin{DoxyParamCaption}
 \item[{const bool}]{mutexlock = {\ttfamily false}}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00120_a62946717943682dc2ac07ea4584030f4}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00120_acc23d478cb50225e17fb5b6dc29fce7b}
 
 
 Update the User Interface, if necessary. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em mutexlock,\-:} & if true, a Mutex will be used to lock the data shared between main and background thread.\\
+{\em mutexlock} & if true, a Mutex will be used to lock the data shared between main and background thread.\\
 \hline
 \end{DoxyParams}
-The idea is to only use a few Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{Cryst\-Update()}{p.}{a00120_a55d7dc41da5c6d4360609d2eac91f39b} and \doxyref{Update\-U\-I()}{p.}{a00120_a62946717943682dc2ac07ea4584030f4}. As sub-\/objects (\doxyref{W\-X\-Field}{p.}{a00126},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
+The idea is to only use a few Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{Cryst\-Update()}{p.}{a00120_ac0c3dead0da352d0c7e439508bc40303} and \doxyref{Update\-U\-I()}{p.}{a00120_acc23d478cb50225e17fb5b6dc29fce7b}. As sub-\/objects (\doxyref{W\-X\-Field}{p.}{a00125},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
 
-Reimplemented from {\bf Obj\-Cryst\-::\-W\-X\-Refinable\-Obj} \doxyref{}{p.}{a00150_a19a1d057eecafd48710d9a3b770c1b28}.
-
-
-
-\subsubsection{Member Data Documentation}
-\index{Obj\-Cryst\-::\-W\-X\-Crystal@{Obj\-Cryst\-::\-W\-X\-Crystal}!m\-Is\-Self\-Updating@{m\-Is\-Self\-Updating}}
-\index{m\-Is\-Self\-Updating@{m\-Is\-Self\-Updating}!ObjCryst::WXCrystal@{Obj\-Cryst\-::\-W\-X\-Crystal}}
-\paragraph[{m\-Is\-Self\-Updating}]{\setlength{\rightskip}{0pt plus 5cm}bool Obj\-Cryst\-::\-W\-X\-Crystal\-::m\-Is\-Self\-Updating\hspace{0.3cm}{\ttfamily [private]}}\label{a00120_aca9ce07774d493962db6b30ebff20f0b}
-
-
-Flag to indicate that we are updating values in the wx\-Grid data, and that it is not the user inputing data. 
+Implements {\bf Obj\-Cryst\-::\-W\-X\-Cryst\-Obj\-Basic} \doxyref{}{p.}{a00122_a3818940b7031ff7e45cf2178c4a99c90}.
 
 
 
 The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-wx\-Crystal.\-h\end{DoxyCompactItemize}
+wx\-Cryst.\-h\end{DoxyCompactItemize}

@@ -1,216 +1,84 @@
-\subsection{Obj\-Cryst\-:\-:Texture\-March\-Dollase Class Reference}
-\label{a00111}\index{Obj\-Cryst\-::\-Texture\-March\-Dollase@{Obj\-Cryst\-::\-Texture\-March\-Dollase}}
+\subsection{Obj\-Cryst\-:\-:Texture\-Phase\-March\-Dollase Struct Reference}
+\label{a00111}\index{Obj\-Cryst\-::\-Texture\-Phase\-March\-Dollase@{Obj\-Cryst\-::\-Texture\-Phase\-March\-Dollase}}
 
 
-Texture correction using the March-\/\-Dollase model.  
+One texture phase for the March-\/\-Dollase model.  
 
 
-Inheritance diagram for Obj\-Cryst\-:\-:Texture\-March\-Dollase\-:\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[height=2.000000cm]{a00111}
-\end{center}
-\end{figure}
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries Texture\-March\-Dollase} (const {\bf Scattering\-Data} \&data)\label{a00111_a68c09384efe47c70c8f43fb877dfc571}
+{\bfseries Texture\-Phase\-March\-Dollase} (const R\-E\-A\-L f, const R\-E\-A\-L c, const R\-E\-A\-L h, const R\-E\-A\-L k, const R\-E\-A\-L l, {\bf Texture\-March\-Dollase} \&)\label{a00111_a7a17886446b42d17ba97c5f9752fd3f4}
 
 \item 
-virtual const string \& {\bf Get\-Name} () const \label{a00111_a8be04714cbb7f98307fa90b044360e35}
-
-\begin{DoxyCompactList}\small\item\em Get the name of this object. \end{DoxyCompactList}\item 
-virtual const string \& {\bf Get\-Class\-Name} () const \label{a00111_a2b1002c1ed071f53b2a6f1b953527cc2}
-
-\begin{DoxyCompactList}\small\item\em Get the name of the class. \end{DoxyCompactList}\item 
-void {\bfseries Add\-Phase} (const R\-E\-A\-L fraction, const R\-E\-A\-L coeff\-March, const R\-E\-A\-L h, const R\-E\-A\-L k, const R\-E\-A\-L l)\label{a00111_a88fe286c7547b841edecc905b1a95b84}
+const string \& {\bfseries Get\-Class\-Name} () const \label{a00111_a79ab7a2e0e08bfa79e056ad5e790bf80}
 
 \item 
-void {\bfseries Set\-Phase\-Par} (const unsigned int i, const R\-E\-A\-L fraction, const R\-E\-A\-L coeff\-March, const R\-E\-A\-L h, const R\-E\-A\-L k, const R\-E\-A\-L l)\label{a00111_ae5cb3330830822cb4ce7d23083296c53}
+const string \& {\bfseries Get\-Name} () const \label{a00111_abc2b62f55a51617adef8bc3cc40e9e34}
 
 \item 
-void {\bfseries Delete\-Phase} (const unsigned int i)\label{a00111_a7290f7949ee2c4e302017f24d3994da1}
+void {\bfseries Set\-Par} (const R\-E\-A\-L f, const R\-E\-A\-L c, const R\-E\-A\-L h, const R\-E\-A\-L k, const R\-E\-A\-L l)\label{a00111_aab4457580c005e68901acb9ce34d5090}
 
 \item 
-unsigned int {\bfseries Get\-Nb\-Phase} () const \label{a00111_ae3f55de726d50dbf86d7daa4c629a7df}
+void {\bfseries X\-M\-L\-Output} (ostream \&os, int indent=0) const \label{a00111_a126f46830b9bfcf6932526f5909e8655}
 
 \item 
-R\-E\-A\-L {\bfseries Get\-Fraction} (const unsigned int i) const \label{a00111_a02e5f7f948832765eba593759c62dcb4}
-
-\item 
-R\-E\-A\-L {\bfseries Get\-March\-Coeff} (const unsigned int i) const \label{a00111_ae2f4479ae167d57ab66d952bb9fa8702}
-
-\item 
-R\-E\-A\-L {\bfseries Get\-Phase\-H} (const unsigned int i) const \label{a00111_af93dff2dfc82d85dd1d6b6e343fc20e0}
-
-\item 
-R\-E\-A\-L {\bfseries Get\-Phase\-K} (const unsigned int i) const \label{a00111_a33eba37e0060eb34ea56fe997886966f}
-
-\item 
-R\-E\-A\-L {\bfseries Get\-Phase\-L} (const unsigned int i) const \label{a00111_a39111e8d14fe437bc5638909fe9b50bf}
-
-\item 
-virtual void {\bf Global\-Opt\-Random\-Move} (const R\-E\-A\-L mutation\-Amplitude, const {\bf Ref\-Par\-Type} $\ast$type={\bf gp\-Ref\-Par\-Type\-Obj\-Cryst})
-\begin{DoxyCompactList}\small\item\em Make a random move of the current configuration. \end{DoxyCompactList}\item 
-virtual R\-E\-A\-L {\bfseries Get\-Biasing\-Cost} () const \label{a00111_a37b873011cdb7443876f2954a00d1fe1}
-
-\item 
-virtual void {\bf X\-M\-L\-Output} (ostream \&os, int indent=0) const 
-\begin{DoxyCompactList}\small\item\em Output to stream in well-\/formed X\-M\-L. \end{DoxyCompactList}\item 
-virtual void {\bf X\-M\-L\-Input} (istream \&is, const {\bf X\-M\-L\-Cryst\-Tag} \&tag)
-\begin{DoxyCompactList}\small\item\em Input From stream. \end{DoxyCompactList}\item 
-virtual void {\bf Begin\-Optimization} (const bool allow\-Approximations=false, const bool enable\-Restraints=false)
-\begin{DoxyCompactList}\small\item\em This should be called by any optimization class at the begining of an optimization. \end{DoxyCompactList}\item 
-virtual void {\bf Tag\-New\-Best\-Config} () const 
-\begin{DoxyCompactList}\small\item\em During a global optimization, tells the object that the current config is the latest \char`\"{}best\char`\"{} config. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Protected Member Functions}
-\begin{DoxyCompactItemize}
-\item 
-virtual void {\bf Calc\-Corr} () const \label{a00111_a1c2c3c1fe88571b2a5b771ab86128240}
-
-\begin{DoxyCompactList}\small\item\em Do the computation of corrected intensities. \end{DoxyCompactList}\item 
-void {\bfseries Delete\-All\-Phase} ()\label{a00111_a2c81cc2848f052c2900d135631a7e5ba}
+void {\bfseries X\-M\-L\-Input} (istream \&is, const {\bf X\-M\-L\-Cryst\-Tag} \&tag)\label{a00111_a8163897408ab5d08ccaf5ddb9ffd4254}
 
 \end{DoxyCompactItemize}
-\subsubsection*{Protected Attributes}
+\subsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-{\bf Obj\-Registry}\\*
-$<$ {\bf Texture\-Phase\-March\-Dollase} $>$ {\bfseries m\-Phase\-Registry}\label{a00111_a5036a20bd0edc8c003c317ca3d11bd85}
+R\-E\-A\-L {\bfseries m\-Fraction}\label{a00111_a9059c8d95baeb8bba194188167fd6ba3}
 
 \item 
-{\bf Refinable\-Obj\-Clock} {\bfseries m\-Clock\-Texture\-Par}\label{a00111_aa2c0a0db3b5c9178d1d61125ac72349e}
+R\-E\-A\-L {\bfseries m\-March\-Coeff}\label{a00111_af54a682c4bea01ad89bf09c234e25f92}
 
 \item 
-unsigned long {\bf m\-Nb\-Refl\-Used}
-\begin{DoxyCompactList}\small\item\em Number of reflexion for which the calculation is actually done. \end{DoxyCompactList}\end{DoxyCompactItemize}
+R\-E\-A\-L {\bfseries m\-H}\label{a00111_ad22aba0c945d8bbcb3238f1059410b5a}
+
+\item 
+R\-E\-A\-L {\bfseries m\-K}\label{a00111_ad06c88aedc5968653bc895601c6d5754}
+
+\item 
+R\-E\-A\-L {\bfseries m\-L}\label{a00111_ae20d183c75da02534d4ef887166ed99d}
+
+\item 
+R\-E\-A\-L {\bf m\-Norm}\label{a00111_a3affb0c886c88243f76a7d38f30e10f3}
+
+\begin{DoxyCompactList}\small\item\em Norm of the (H\-K\-L) vector, to keep it constant during optimization. \end{DoxyCompactList}\item 
+{\bf Texture\-March\-Dollase} $\ast$ {\bf mp\-Texture\-March\-Dollase}\label{a00111_acf640da43b88a1955cd490fb64f1d1c6}
+
+\begin{DoxyCompactList}\small\item\em The parent \doxyref{Texture\-March\-Dollase}{p.}{a00110} object. \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bf m\-Bias\-Fraction}
+\begin{DoxyCompactList}\small\item\em Values of parameters towards which the optimization is biased (if biasing is used). \end{DoxyCompactList}\item 
+R\-E\-A\-L {\bfseries m\-Bias\-March\-Coeff}\label{a00111_a0dd475c57d0188d354bc25c5778b0172}
+
+\item 
+R\-E\-A\-L {\bfseries m\-Bias\-H}\label{a00111_adc4211e8726249e9a4ea1fecbdd3d00d}
+
+\item 
+R\-E\-A\-L {\bfseries m\-Bias\-K}\label{a00111_a55bf867c3441f8732c8d39f7f3c506cd}
+
+\item 
+R\-E\-A\-L {\bfseries m\-Bias\-L}\label{a00111_acccb771167b38f058b2b5f409023ee55}
+
+\end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-Texture correction using the March-\/\-Dollase model. 
-
-This can include several phases. 
-
-\subsubsection{Member Function Documentation}
-\index{Obj\-Cryst\-::\-Texture\-March\-Dollase@{Obj\-Cryst\-::\-Texture\-March\-Dollase}!Begin\-Optimization@{Begin\-Optimization}}
-\index{Begin\-Optimization@{Begin\-Optimization}!ObjCryst::TextureMarchDollase@{Obj\-Cryst\-::\-Texture\-March\-Dollase}}
-\paragraph[{Begin\-Optimization}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Texture\-March\-Dollase\-::\-Begin\-Optimization (
-\begin{DoxyParamCaption}
-\item[{const bool}]{allow\-Approximations = {\ttfamily false}, }
-\item[{const bool}]{enable\-Restraints = {\ttfamily false}}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00111_a73f6148d035bbdeb98b0115d76fe48a8}
-
-
-This should be called by any optimization class at the begining of an optimization. 
-
-This will also check that everything is ready, eg call the \doxyref{Refinable\-Obj\-::\-Prepare()}{p.}{a00078_a48d11671e7f8699f7bc24077585c5e0f} function. This also affects all sub-\/objects. \begin{DoxyNote}{Note}
-this may be called several time for some objects which are used by several other objects, or for nested optimizations (e.\-g. least-\/squares optimizations inside a global one).
-
-\doxyref{End\-Optimization()}{p.}{a00078_ab0035f6164cb24ace67b51b11993a851} must be called at the end of the optimization, the same number of time \doxyref{Begin\-Optimization()}{p.}{a00111_a73f6148d035bbdeb98b0115d76fe48a8} was called !
-\end{DoxyNote}
-
-\begin{DoxyParams}{Parameters}
-{\em allow\-Approximations,\-:} & if true, then the object can use faster but less precise functions during the optimization. This is useful for global optimization not using derivatives. \\
-\hline
-{\em enable\-Restraints\-:\textbackslash{}xrefitem} & deprecated 28. \\
-\hline
-\end{DoxyParams}
-
-
-Reimplemented from {\bf Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00078_ababd8f2916e41a20d2c1b21f6ffefe96}.
-
-\index{Obj\-Cryst\-::\-Texture\-March\-Dollase@{Obj\-Cryst\-::\-Texture\-March\-Dollase}!Global\-Opt\-Random\-Move@{Global\-Opt\-Random\-Move}}
-\index{Global\-Opt\-Random\-Move@{Global\-Opt\-Random\-Move}!ObjCryst::TextureMarchDollase@{Obj\-Cryst\-::\-Texture\-March\-Dollase}}
-\paragraph[{Global\-Opt\-Random\-Move}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Texture\-March\-Dollase\-::\-Global\-Opt\-Random\-Move (
-\begin{DoxyParamCaption}
-\item[{const R\-E\-A\-L}]{mutation\-Amplitude, }
-\item[{const {\bf Ref\-Par\-Type} $\ast$}]{type = {\ttfamily {\bf gp\-Ref\-Par\-Type\-Obj\-Cryst}}}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00111_a43d8d96c3f14d9d01145dfbefb759e6a}
-
-
-Make a random move of the current configuration. 
-
-This is for global optimization algorithms. the moves for each parameter are less than their global optimization step, multiplied by the mutation amplitude.
-
-\begin{DoxyWarning}{Warning}
-\-: this makes a random move for the parameter declared for this object, and it is the duty of the object to decide whether the included objects should be moved and how. (eg an algorithm should only call for a move with the top object, and this object decides how he and his sub-\/objects moves). By default (\doxyref{Refinable\-Obj}{p.}{a00078} implementation) all included objects are moved recursively.
-\end{DoxyWarning}
-\doxyref{Refinable\-Obj}{p.}{a00078}\-:\-: 
-\begin{DoxyParams}{Parameters}
-{\em mutation\-Amplitude,\-:} & multiplier for the maximum move amplitude, for all parameters \\
-\hline
-{\em type,\-:} & restrain the change exclusively to parameters of a given type (same type or descendant from this \doxyref{Ref\-Par\-Type}{p.}{a00087}). \\
-\hline
-\end{DoxyParams}
-
-
-Reimplemented from {\bf Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00078_a18375c8525ae38c481ba77e9cf9d67c1}.
-
-\index{Obj\-Cryst\-::\-Texture\-March\-Dollase@{Obj\-Cryst\-::\-Texture\-March\-Dollase}!Tag\-New\-Best\-Config@{Tag\-New\-Best\-Config}}
-\index{Tag\-New\-Best\-Config@{Tag\-New\-Best\-Config}!ObjCryst::TextureMarchDollase@{Obj\-Cryst\-::\-Texture\-March\-Dollase}}
-\paragraph[{Tag\-New\-Best\-Config}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Texture\-March\-Dollase\-::\-Tag\-New\-Best\-Config (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00111_a972d51af36bfd317f794c87841c58b5a}
-
-
-During a global optimization, tells the object that the current config is the latest \char`\"{}best\char`\"{} config. 
-
-This can be used by the object to make more intellingent random moves (use with caution\-: highly experimental !). 
-
-Reimplemented from {\bf Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00078_a3cb4cc924d39576618184eccd4321cf6}.
-
-\index{Obj\-Cryst\-::\-Texture\-March\-Dollase@{Obj\-Cryst\-::\-Texture\-March\-Dollase}!X\-M\-L\-Input@{X\-M\-L\-Input}}
-\index{X\-M\-L\-Input@{X\-M\-L\-Input}!ObjCryst::TextureMarchDollase@{Obj\-Cryst\-::\-Texture\-March\-Dollase}}
-\paragraph[{X\-M\-L\-Input}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Texture\-March\-Dollase\-::\-X\-M\-L\-Input (
-\begin{DoxyParamCaption}
-\item[{istream \&}]{is, }
-\item[{const {\bf X\-M\-L\-Cryst\-Tag} \&}]{tag}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00111_a26ae81ce2e09c173d200c9a61cb67161}
-
-
-Input From stream. 
-
-\begin{DoxyRefDesc}{Todo}
-\item[{\bf Todo}]Add an bool X\-M\-L\-Input\-Tag(is,tag) function to recognize all the tags from the stream. So that each inherited class can use the X\-M\-L\-Input\-Tag function from its parent (ie take advantage of inheritance). The children class would first try to interpret the tag, then if unsuccessful would pass it to its parent (thus allowing overloading), etc... \end{DoxyRefDesc}
-
-
-Reimplemented from {\bf Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00078_ac13a4045c3f187879443c8615c38d623}.
-
-\index{Obj\-Cryst\-::\-Texture\-March\-Dollase@{Obj\-Cryst\-::\-Texture\-March\-Dollase}!X\-M\-L\-Output@{X\-M\-L\-Output}}
-\index{X\-M\-L\-Output@{X\-M\-L\-Output}!ObjCryst::TextureMarchDollase@{Obj\-Cryst\-::\-Texture\-March\-Dollase}}
-\paragraph[{X\-M\-L\-Output}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Texture\-March\-Dollase\-::\-X\-M\-L\-Output (
-\begin{DoxyParamCaption}
-\item[{ostream \&}]{os, }
-\item[{int}]{indent = {\ttfamily 0}}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00111_a09d994c3344a276ba65563fb9f1b45ca}
-
-
-Output to stream in well-\/formed X\-M\-L. 
-
-\begin{DoxyRefDesc}{Todo}
-\item[{\bf Todo}]Use inheritance.. as for X\-M\-L\-Input\-Tag()... \end{DoxyRefDesc}
-
-
-Reimplemented from {\bf Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00078_a7b9b6ed0f8dcf753d398c35e073de973}.
-
-
+One texture phase for the March-\/\-Dollase model. 
 
 \subsubsection{Member Data Documentation}
-\index{Obj\-Cryst\-::\-Texture\-March\-Dollase@{Obj\-Cryst\-::\-Texture\-March\-Dollase}!m\-Nb\-Refl\-Used@{m\-Nb\-Refl\-Used}}
-\index{m\-Nb\-Refl\-Used@{m\-Nb\-Refl\-Used}!ObjCryst::TextureMarchDollase@{Obj\-Cryst\-::\-Texture\-March\-Dollase}}
-\paragraph[{m\-Nb\-Refl\-Used}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long Obj\-Cryst\-::\-Texture\-March\-Dollase\-::m\-Nb\-Refl\-Used\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [protected]}}\label{a00111_a243ea853b7d3179f9474386ed296783c}
+\index{Obj\-Cryst\-::\-Texture\-Phase\-March\-Dollase@{Obj\-Cryst\-::\-Texture\-Phase\-March\-Dollase}!m\-Bias\-Fraction@{m\-Bias\-Fraction}}
+\index{m\-Bias\-Fraction@{m\-Bias\-Fraction}!ObjCryst::TexturePhaseMarchDollase@{Obj\-Cryst\-::\-Texture\-Phase\-March\-Dollase}}
+\paragraph[{m\-Bias\-Fraction}]{\setlength{\rightskip}{0pt plus 5cm}R\-E\-A\-L Obj\-Cryst\-::\-Texture\-Phase\-March\-Dollase\-::m\-Bias\-Fraction\hspace{0.3cm}{\ttfamily [mutable]}}\label{a00111_a0d17e8aa20d149c741c1afd95edf56da}
 
 
-Number of reflexion for which the calculation is actually done. 
+Values of parameters towards which the optimization is biased (if biasing is used). 
 
-This is automaticaly updated during Calc\-Corr, from the parent \doxyref{Scattering\-Data\-::\-Get\-Max\-Sin\-Theta\-Ov\-Lambda()}{p.}{a00096_ad682b6879c751fd4d241a198b1893e6e} 
+These are normally dynamically updated to the last \char`\"{}best\char`\"{} values found. 
 
-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
 Scattering\-Corr.\-h\end{DoxyCompactItemize}

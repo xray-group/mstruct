@@ -907,9 +907,10 @@ class ReflectionProfile;
 class ReflectionProfileComponent: virtual public ObjCryst::RefinableObj {
 public:
   ReflectionProfileComponent();
-  virtual void SetParentReflectionProfile(const ReflectionProfile &);
+  virtual void SetParentReflectionProfile(ReflectionProfile &);
   virtual const ReflectionProfile& GetParentReflectionProfile()const;
-  
+  virtual ReflectionProfile& GetParentReflectionProfile();
+
   virtual CrystVector_REAL GetProfile(const CrystVector_REAL &x,
 				      const REAL xcenter,
 				      const REAL h, const REAL k,
@@ -921,7 +922,7 @@ public:
   virtual REAL GetPositionCorr(const REAL xcenter,
 			       const REAL h, const REAL k, const REAL l)const;
 protected:
-  const ReflectionProfile *mpParentReflectionProfile;
+  ReflectionProfile *mpParentReflectionProfile;
 }; // class ReflectionProfileComponent
 
 class SizeBroadeningEffect: public ReflectionProfileComponent {
@@ -1215,7 +1216,7 @@ public:
   /// Constructor
   InterferenceSimpleSizeBroadeningEffect();
   /// Overloaded parent method sets parent reflection profile also for both internal effects
-  void SetParentReflectionProfile(const ReflectionProfile&);
+  void SetParentReflectionProfile(ReflectionProfile&);
   /// Calculate diffraction profile
   CrystVector_REAL GetProfile(const CrystVector_REAL &x,
 			      const REAL xcenter,
@@ -1585,7 +1586,7 @@ private:
 	bool mIsIntialised;
 public:
 	DislocationBroadeningEffectSvB();
-	void SetParentReflectionProfile(const ReflectionProfile &);
+	void SetParentReflectionProfile(ReflectionProfile &);
 	CrystVector_REAL GetProfile(const CrystVector_REAL &x,
 			      const REAL xcenter,
 			      const REAL h, const REAL k, const REAL l);
@@ -1671,7 +1672,7 @@ protected:
 	REAL mBeta;
 public:
 	FaultsBroadeningEffectFCC();
-	virtual void SetParentReflectionProfile(const ReflectionProfile &);
+	virtual void SetParentReflectionProfile(ReflectionProfile &);
 	virtual CrystVector_REAL GetProfile(const CrystVector_REAL &x,
 			      								  				const REAL xcenter,
 			      													const REAL h=0, const REAL k=0, const REAL l=0)=0;
@@ -1704,7 +1705,7 @@ private:
 	REAL mBeta;
 public:
 	FaultsBroadeningEffectVelteropFCC();
-	void SetParentReflectionProfile(const ReflectionProfile &);
+	void SetParentReflectionProfile(ReflectionProfile &);
 	CrystVector_REAL GetProfile(const CrystVector_REAL &x,
 			      								  const REAL xcenter,
 			      									const REAL h, const REAL k, const REAL l);
@@ -1803,7 +1804,7 @@ public:
   /// Set effect parameters - fault probability (alpha)
   void SetProfilePar (const REAL alpha);
   /// Set parent reflection profile (needed for proper functionality, TODO:: Why the parent virtual method is not satisfactory?)
-  void SetParentReflectionProfile (const ReflectionProfile &s);
+  void SetParentReflectionProfile (ReflectionProfile &s);
   /// Set model approximation type 
   void SetModelApproxType(const int type);
 private:
@@ -1874,9 +1875,13 @@ public:
     REAL dx;
     REAL fwhm;
     REAL eta;
+    REAL asym;
+    string func;
+    std::vector<string> effects;
   };
 private:
   ReflStore mReflStore;
+  string mParamsFileName;
 public:
   HKLPseudoVoigtBroadeningEffectA();
   virtual ~HKLPseudoVoigtBroadeningEffectA();
@@ -1886,10 +1891,15 @@ public:
   REAL GetApproxFWHM(const REAL xcenter,
 		     const REAL h, const REAL k, const REAL l)const;
   bool IsRealSpaceType()const;
-  void SetProfilePar(int h,int k,int l,REAL dx,REAL fwhm,REAL eta,bool dx_fixed=true,
-		     bool fwhm_fixed=true,bool eta_fixed=true);
+  void SetProfilePar(int h,int k,int l,REAL dx,REAL fwhm,REAL eta,REAL asym=1.0,
+		     bool dx_fixed=true,bool fwhm_fixed=true,bool eta_fixed=true,bool asym_fixed=true,
+		     string func="pV", std::vector<string> effects=std::vector<string>());
   REAL GetPositionCorr(const REAL xcenter,
 		       const REAL h, const REAL k, const REAL l)const;
+
+  void SetParametersFile(const string &filename="");
+  void LoadParametersFile();
+  void SaveParametersFile();  
 }; // class HKLPseudoVoigtBroadeningEffectA
 
 class ReflectionProfile: public ObjCryst::ReflectionProfile {
@@ -1899,6 +1909,10 @@ public:
     REAL s1, s0, ds;
     int N;
     vector<double> vProfile;
+  };
+  class DisabledEffectsList {
+  public:
+    vector< pair< const ReflectionProfileComponent*, const ObjCryst::RefinableObj* > > list; // pair< disabled_effect*, registring_object* >
   };
 protected:
   const ObjCryst::UnitCell* mpUnitCell;
@@ -1922,6 +1936,7 @@ protected:
   CrystVector_REAL mvs;
   ReflStore mReflStore;
   ObjCryst::RefinableObjClock mClockReflectionProfileCalc;
+  ReflStore mDisabledEffectsStore;
 protected:
   ObjCryst::ObjRegistry<ReflectionProfileComponent> mReflectionProfileComponentRegistry;
   const ObjCryst::PowderPatternDiffraction* mpParentPowderPatternDiffraction;
@@ -1938,6 +1953,8 @@ public:
   ReflectionProfileComponent & GetReflectionProfileComponent (long );
   const ReflectionProfileComponent & GetReflectionProfileComponent (const string &objName) const;
   ReflectionProfileComponent & GetReflectionProfileComponent (const string &objName);
+  void RegisterHKLDisabledComponents (long h,long k,long l,REAL x,const vector<string> effects, const ObjCryst::RefinableObj *pRegisteringObj=NULL);
+  bool IsHKLReflectionProfileComponentDisabled (long h,long k,long l,REAL x,const ReflectionProfileComponent &comp)const;
 
   virtual void SetParentPowderPatternDiffraction(const ObjCryst::PowderPatternDiffraction &);
   virtual const ObjCryst::PowderPatternDiffraction& GetParentPowderPatternDiffraction()const;

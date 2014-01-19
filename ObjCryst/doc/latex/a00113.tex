@@ -1,11 +1,11 @@
-\subsection{Obj\-Cryst\-:\-:T\-O\-F\-Corr Class Reference}
-\label{a00113}\index{Obj\-Cryst\-::\-T\-O\-F\-Corr@{Obj\-Cryst\-::\-T\-O\-F\-Corr}}
+\subsection{Obj\-Cryst\-:\-:Tracker Class Reference}
+\label{a00113}\index{Obj\-Cryst\-::\-Tracker@{Obj\-Cryst\-::\-Tracker}}
 
 
-Time-\/\-Of-\/\-Flight Correction.  
+A class to track the variation of parameters as a function of a number of cycles/trials.  
 
 
-Inheritance diagram for Obj\-Cryst\-:\-:T\-O\-F\-Corr\-:\begin{figure}[H]
+Inheritance diagram for Obj\-Cryst\-:\-:Tracker\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{a00113}
@@ -14,31 +14,46 @@ Inheritance diagram for Obj\-Cryst\-:\-:T\-O\-F\-Corr\-:\begin{figure}[H]
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries T\-O\-F\-Corr} (const {\bf Scattering\-Data} \&data)\label{a00113_afceb96fa351306b6bb3ca787dc56d5fc}
+{\bfseries Tracker} (const std\-::string \&name)\label{a00113_a57d89249ba910902e6ef6a33dcd3ee8c}
 
 \item 
-virtual const string \& {\bf Get\-Name} () const \label{a00113_a6638348a144ef78b7d40448869c8c220}
+const std\-::string \& {\bfseries Get\-Name} () const \label{a00113_ad93197775f7d0a3b52eb199a9ed1c958}
 
-\begin{DoxyCompactList}\small\item\em Get the name of this object. \end{DoxyCompactList}\item 
-virtual const string \& {\bf Get\-Class\-Name} () const \label{a00113_a9eecdda6f5d0ae119334e54043d1d7d6}
+\item 
+void {\bfseries Append\-Value} (const long trial)\label{a00113_ae50d08700a131d280f8a19a58274bfe7}
 
-\begin{DoxyCompactList}\small\item\em Get the name of the class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\item 
+void {\bf Clear} ()\label{a00113_abdac1cff42cfd8d66e10977a5a9066b3}
+
+\begin{DoxyCompactList}\small\item\em Removes all stored values. \end{DoxyCompactList}\item 
+const std\-::map$<$ long, R\-E\-A\-L $>$ \& {\bfseries Get\-Values} () const \label{a00113_a882fe8d7c193662613d4a9ab262a2417}
+
+\item 
+std\-::map$<$ long, R\-E\-A\-L $>$ \& {\bfseries Get\-Values} ()\label{a00113_a4f889b0d29a403c597040c5b88f4ffa8}
+
+\end{DoxyCompactItemize}
 \subsubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-virtual void {\bf Calc\-Corr} () const \label{a00113_ae0a0c31d2edc029708722f00e05a5edf}
+virtual R\-E\-A\-L {\bfseries Read\-Value} ()=0\label{a00113_a14096d99b76d3ffac16553f6434f97ce}
 
-\begin{DoxyCompactList}\small\item\em Do the computation of corrected intensities. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Additional Inherited Members}
+\end{DoxyCompactItemize}
+\subsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\-::map$<$ long, R\-E\-A\-L $>$ {\bfseries mv\-Values}\label{a00113_adcd7db9240b7c6432a1fe2f0daec2d24}
+
+\item 
+std\-::string {\bfseries m\-Name}\label{a00113_a64fee6086f7c35c89c72d703903a1b26}
+
+\end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-Time-\/\-Of-\/\-Flight Correction. 
+A class to track the variation of parameters as a function of a number of cycles/trials. 
 
-$ T = d^4\sin(\theta) $
-
-The  angle of the detector is ignored, as it is just a scale factor. 
+This is an abstract base class. 
 
 The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-Scattering\-Corr.\-h\end{DoxyCompactItemize}
+Tracker.\-h\end{DoxyCompactItemize}

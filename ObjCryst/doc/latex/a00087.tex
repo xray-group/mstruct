@@ -1,78 +1,57 @@
-\subsection{Obj\-Cryst\-:\-:Ref\-Par\-Type Class Reference}
-\label{a00087}\index{Obj\-Cryst\-::\-Ref\-Par\-Type@{Obj\-Cryst\-::\-Ref\-Par\-Type}}
+\subsection{Obj\-Cryst\-:\-:Restraint Class Reference}
+\label{a00087}\index{Obj\-Cryst\-::\-Restraint@{Obj\-Cryst\-::\-Restraint}}
 
 
-class of refinable parameter types.  
+\doxyref{Restraint}{p.}{a00087}\-: generic class for a restraint of a given model.  
 
 
+Inheritance diagram for Obj\-Cryst\-:\-:Restraint\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.573034cm]{a00087}
+\end{center}
+\end{figure}
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bf Ref\-Par\-Type} (const string \&name)
-\begin{DoxyCompactList}\small\item\em Create a {\itshape top} parameter type. \end{DoxyCompactList}\item 
-{\bf Ref\-Par\-Type} (const {\bf Ref\-Par\-Type} $\ast$parent, const string \&name)\label{a00087_a390f7a24ccff7cc557a26f7b2a120566}
+{\bf Restraint} ()\label{a00087_ac916c489ee14891b38bf9a877d9e0d03}
 
-\begin{DoxyCompactList}\small\item\em create a children type. \end{DoxyCompactList}\item 
-{\bf $\sim$\-Ref\-Par\-Type} ()\label{a00087_a46519355b2de6a3f1a0f32c3b3c5a84d}
+\begin{DoxyCompactList}\small\item\em Default constructor, sets \doxyref{Ref\-Par\-Type}{p.}{a00086} to gp\-Ref\-Par\-Type\-Obj\-Cryst. \end{DoxyCompactList}\item 
+{\bf Restraint} (const {\bf Ref\-Par\-Type} $\ast$type)\label{a00087_a5fd37c4a5f20a41dcacb78b0af3b8a7d}
 
-\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
-bool {\bf Is\-Descendant\-From\-Or\-Same\-As} (const {\bf Ref\-Par\-Type} $\ast$type) const \label{a00087_a023686ecd57ef99599d03e3e515b78cd}
+\begin{DoxyCompactList}\small\item\em constructor specifying the type \end{DoxyCompactList}\item 
+virtual const {\bf Ref\-Par\-Type} $\ast$ {\bfseries Get\-Type} () const \label{a00087_aaa8b94f207f2e77f58754236af929a57}
 
-\begin{DoxyCompactList}\small\item\em Returns true if the parameter is a descendant of 'type'. \end{DoxyCompactList}\item 
-bool {\bf operator==} (const {\bf Ref\-Par\-Type} $\ast$parent) const \label{a00087_a327807a0879388c73dbfe050b50982ae}
-
-\begin{DoxyCompactList}\small\item\em returns true if the two types are the same. \end{DoxyCompactList}\item 
-const string \& {\bf Get\-Name} () const \label{a00087_a6ef864a2d7855bc96339434872c4debe}
-
-\begin{DoxyCompactList}\small\item\em Get the name for this parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Private Member Functions}
-\begin{DoxyCompactItemize}
 \item 
-void {\bf Init\-Id} ()\label{a00087_a929f680e5b161133c5701771233bdcc0}
+virtual void {\bfseries Set\-Type} (const {\bf Ref\-Par\-Type} $\ast$type)\label{a00087_ab9dc55ae087d99cd30e9915ffb6e5371}
 
-\begin{DoxyCompactList}\small\item\em Get a Unique id (\doxyref{Ref\-Par\-Type\-::m\-Id}{p.}{a00087_a9e93e2f4cbd029fd11fd965d5ec72842}) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\item 
+virtual R\-E\-A\-L {\bf Get\-Log\-Likelihood} () const \label{a00087_adac7d5d594f6d0c26aa7a15b0bb1c73c}
+
+\begin{DoxyCompactList}\small\item\em Get -\/ln(likelihood) for this restraint. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-const {\bf Ref\-Par\-Type} $\ast$ {\bf mp\-Parent}\label{a00087_abd3cbb0f24e903f10addff974e6829bb}
+const {\bf Ref\-Par\-Type} $\ast$ {\bfseries mp\-Ref\-Par\-Type}\label{a00087_a4f87437f4e2e44c1f3ca2039c54b202f}
 
-\begin{DoxyCompactList}\small\item\em the parent for this \doxyref{Ref\-Par\-Type}{p.}{a00087} (we could easily allow several...) \end{DoxyCompactList}\item 
-const string {\bf m\-Name}\label{a00087_acc75b58e4b6af356dad4677492fdfda4}
-
-\begin{DoxyCompactList}\small\item\em The name/description for this parameter type. \end{DoxyCompactList}\item 
-unsigned long {\bf m\-Id}\label{a00087_a9e93e2f4cbd029fd11fd965d5ec72842}
-
-\begin{DoxyCompactList}\small\item\em The unique number identifying this type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-class of refinable parameter types. 
+\doxyref{Restraint}{p.}{a00087}\-: generic class for a restraint of a given model. 
 
-This is used to categorize all parameters, to be able to modify a complete category of parameters (fix/unfix, set limits,...). The types are organized as a tree.
+This defines only the category (\doxyref{Ref\-Par\-Type}{p.}{a00086}) of restraint, and the function to access the log(likelihood) associated to this restraint and the current model.
 
-Parameters should be allocated globally in the heap, so we only use pointers in the interface.
+By default\-: -\/log(likelihood)=0, and the function must be overloaded for \char`\"{}real\char`\"{} restraints.
 
 \begin{DoxyNote}{Note}
-when modifying (fixing, changing limits) for a given \doxyref{Ref\-Par\-Type}{p.}{a00087} (ie a 'family' of parameters), it affects all \doxyref{Refinable\-Par}{p.}{a00080} of this type {\itshape and} the parameters belonging to the children of this \doxyref{Ref\-Par\-Type}{p.}{a00087}. eg fixing for the type \char`\"{}gp\-Ref\-Par\-Type\-Scatt\char`\"{} will fix all the derived postionnal, orientationnal, and population parameters for the scatterers.
+the log(likelihood) {\itshape must} always include the normalization term, so that variances can also optimized during the maximum likelihood optimization. e.\-g.\-:
+\begin{DoxyItemize}
+\item $ P=\frac{1}{\sqrt{2\pi\sigma^2}}e^{\frac{-(calc-expected)^2}{\sigma^2}}$
+\item $ -\log(P)= \log\left(\sqrt{2\pi\sigma^2}\right) + \left(\frac{calc-expected}{\sigma} \right)^2$
+\end{DoxyItemize}
 \end{DoxyNote}
-\begin{DoxyRemark}{Remarks}
-In the future, why not use a tree with multiple inheritance ?? It would be easy to allow multiple parents... But beware of loops... 
-\end{DoxyRemark}
-
-
-\subsubsection{Constructor \& Destructor Documentation}
-\index{Obj\-Cryst\-::\-Ref\-Par\-Type@{Obj\-Cryst\-::\-Ref\-Par\-Type}!Ref\-Par\-Type@{Ref\-Par\-Type}}
-\index{Ref\-Par\-Type@{Ref\-Par\-Type}!ObjCryst::RefParType@{Obj\-Cryst\-::\-Ref\-Par\-Type}}
-\paragraph[{Ref\-Par\-Type}]{\setlength{\rightskip}{0pt plus 5cm}Obj\-Cryst\-::\-Ref\-Par\-Type\-::\-Ref\-Par\-Type (
-\begin{DoxyParamCaption}
-\item[{const string \&}]{name}
-\end{DoxyParamCaption}
-)}\label{a00087_a31d4f6797fa0a4b43d12203f89dbdb5c}
-
-
-Create a {\itshape top} parameter type. 
-
-(in \doxyref{Obj\-Cryst}{p.}{a00178}, there is only one, the \char`\"{}\-Obj\-Cryst\char`\"{} category. 
+forgetting the normalization term would result in making the optimization diverge towards infinite variances. 
 
 The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 

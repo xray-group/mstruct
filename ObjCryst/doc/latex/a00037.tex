@@ -1,33 +1,36 @@
-\subsection{Format\-Int Class Reference}
-\label{a00037}\index{Format\-Int@{Format\-Int}}
+\subsection{Format\-String Class Reference}
+\label{a00037}\index{Format\-String@{Format\-String}}
 
 
-output a number as a formatted integer\-:  
+output a string with a fixed length (adding necessary space or removing excess characters) \-:  
 
 
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries Format\-Int} (const long num, const int width=5)\label{a00037_a6c6098db56c85ccb7bfea46810d493c7}
+{\bfseries Format\-String} (const string \&str, const unsigned int width=5)\label{a00037_a89e88ecbdd91c8120ffbfbdc733c9b7b}
+
+\item 
+int {\bfseries length} () const \label{a00037_a8d9ccf3761a959d82bd705f601ae5360}
 
 \end{DoxyCompactItemize}
 \subsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-const long {\bfseries m\-Value}\label{a00037_a712caad7abfc009c6cff31d68b0dc4ed}
+string {\bfseries m\-String}\label{a00037_a08c22a7bd34d0bcf7c62147cff2a5e85}
 
 \item 
-const int {\bfseries m\-Width}\label{a00037_aa98e381e2fb22e64fe2a61c8e56686ba}
+const unsigned int {\bfseries m\-Width}\label{a00037_ae1191d6d25031c2d6e142ce989ff6c74}
 
 \end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-output a number as a formatted integer\-: 
+output a string with a fixed length (adding necessary space or removing excess characters) \-: 
 
 
 \begin{DoxyCode}
-os << FormatInt(mynumber,5);
+os << FormatString(myString,15);
 \end{DoxyCode}
  
 

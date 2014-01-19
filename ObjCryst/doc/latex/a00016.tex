@@ -1,49 +1,39 @@
-\subsection{Obj\-Cryst\-:\-:Crystal\-:\-:Bump\-Merge\-Par Struct Reference}
-\label{a00016}\index{Obj\-Cryst\-::\-Crystal\-::\-Bump\-Merge\-Par@{Obj\-Cryst\-::\-Crystal\-::\-Bump\-Merge\-Par}}
+\subsection{Obj\-Cryst\-:\-:W\-X\-Molecule\-:\-:Cell\-Atom Struct Reference}
+\label{a00016}\index{Obj\-Cryst\-::\-W\-X\-Molecule\-::\-Cell\-Atom@{Obj\-Cryst\-::\-W\-X\-Molecule\-::\-Cell\-Atom}}
 
 
-Storage for anti-\/bump/merge parameters.  
+Structure to store the \doxyref{Atom}{p.}{a00014} parameters.  
 
 
-\subsubsection*{Public Member Functions}
-\begin{DoxyCompactItemize}
-\item 
-{\bf Bump\-Merge\-Par} (const R\-E\-A\-L dist, const bool can\-Overlap=false)
-\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-R\-E\-A\-L {\bf m\-Dist2}\label{a00016_ae8bcf4fc5d270caaa7cd48026489d11d}
+{\bf Mol\-Atom} $\ast$ {\bfseries mp\-Atom}\label{a00016_ad42e078ccf1193f1bda7394a07be31d5}
 
-\begin{DoxyCompactList}\small\item\em The squared antibump interatomic distance. \end{DoxyCompactList}\item 
-bool {\bf m\-Can\-Overlap}\label{a00016_acd7b70bc57775c4fc8b33b520f82b98c}
+\item 
+std\-::string {\bfseries m\-Name}\label{a00016_a6d1f3559b25ffb17b9095dd92b680e51}
 
-\begin{DoxyCompactList}\small\item\em Can the two atoms completely overlap ? \end{DoxyCompactList}\end{DoxyCompactItemize}
+\item 
+const {\bf Scattering\-Power} $\ast$ {\bfseries mp\-Scattering\-Power}\label{a00016_a543efd9bcc607f7ca87ae672bb3ab858}
+
+\item 
+R\-E\-A\-L {\bfseries m\-X}\label{a00016_a78d75f4d42aa474bc6bcf6597bfa999d}
+
+\item 
+R\-E\-A\-L {\bfseries m\-Y}\label{a00016_a744ed5e33a9d2ec36243fc6c5a8c0caf}
+
+\item 
+R\-E\-A\-L {\bfseries m\-Z}\label{a00016_aed30b328634831e4c62971133f6be407}
+
+\item 
+bool {\bf m\-Need\-Update\-U\-I}\label{a00016_ae4923e30e4b7b2a22e2b74b0ac1b6c00}
+
+\begin{DoxyCompactList}\small\item\em True if we need to update the displayed values. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-Storage for anti-\/bump/merge parameters. 
-
-\subsubsection{Constructor \& Destructor Documentation}
-\index{Obj\-Cryst\-::\-Crystal\-::\-Bump\-Merge\-Par@{Obj\-Cryst\-::\-Crystal\-::\-Bump\-Merge\-Par}!Bump\-Merge\-Par@{Bump\-Merge\-Par}}
-\index{Bump\-Merge\-Par@{Bump\-Merge\-Par}!ObjCryst::Crystal::BumpMergePar@{Obj\-Cryst\-::\-Crystal\-::\-Bump\-Merge\-Par}}
-\paragraph[{Bump\-Merge\-Par}]{\setlength{\rightskip}{0pt plus 5cm}Obj\-Cryst\-::\-Crystal\-::\-Bump\-Merge\-Par\-::\-Bump\-Merge\-Par (
-\begin{DoxyParamCaption}
-\item[{const R\-E\-A\-L}]{dist, }
-\item[{const bool}]{can\-Overlap = {\ttfamily false}}
-\end{DoxyParamCaption}
-)}\label{a00016_ac4da8697127de078e7ef7092c49de0ab}
-
-
-Constructor. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em dist,\-:} & the bump/merge distance in Angstroems \\
-\hline
-\end{DoxyParams}
-
+Structure to store the \doxyref{Atom}{p.}{a00014} parameters. 
 
 The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-Crystal.\-h\end{DoxyCompactItemize}
+wx\-Molecule.\-h\end{DoxyCompactItemize}

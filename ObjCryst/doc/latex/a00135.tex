@@ -1,11 +1,11 @@
-\subsection{Obj\-Cryst\-:\-:W\-X\-Mol\-Atom Class Reference}
-\label{a00135}\index{Obj\-Cryst\-::\-W\-X\-Mol\-Atom@{Obj\-Cryst\-::\-W\-X\-Mol\-Atom}}
+\subsection{Obj\-Cryst\-:\-:W\-X\-Mol\-Bond Class Reference}
+\label{a00135}\index{Obj\-Cryst\-::\-W\-X\-Mol\-Bond@{Obj\-Cryst\-::\-W\-X\-Mol\-Bond}}
 
 
-wx class for \doxyref{Mol\-Atom}{p.}{a00050} objects  
+wx class for \doxyref{Mol\-Bond}{p.}{a00050} objects  
 
 
-Inheritance diagram for Obj\-Cryst\-:\-:W\-X\-Mol\-Atom\-:\begin{figure}[H]
+Inheritance diagram for Obj\-Cryst\-:\-:W\-X\-Mol\-Bond\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{a00135}
@@ -14,85 +14,94 @@ Inheritance diagram for Obj\-Cryst\-:\-:W\-X\-Mol\-Atom\-:\begin{figure}[H]
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries W\-X\-Mol\-Atom} (wx\-Window $\ast$parent, {\bf Mol\-Atom} $\ast$)\label{a00135_ae921caf4a024c3d5a3823fe06032dbc0}
+{\bfseries W\-X\-Mol\-Bond} (wx\-Window $\ast$parent, {\bf Mol\-Bond} $\ast$)\label{a00135_ad25266fcbb6d661b6074a60561fb476e}
 
 \item 
 virtual void {\bf Cryst\-Update} (const bool update\-U\-I=false, const bool mutexlock=false)
 \begin{DoxyCompactList}\small\item\em Get new values to be displayed from the underlying object, and raise flag if an U\-I update is necessary. \end{DoxyCompactList}\item 
 virtual void {\bf Update\-U\-I} (const bool mutexlock=false)
 \begin{DoxyCompactList}\small\item\em Update the User Interface, if necessary. \end{DoxyCompactList}\item 
-void {\bfseries On\-Change\-Scatt\-Pow} (wx\-Command\-Event \&)\label{a00135_a81b5ddf74808c63edf2407410d1cd56d}
+void {\bfseries On\-Change\-Atom} (wx\-Command\-Event \&)\label{a00135_ae173f51f403c779ae5ae55323a155aa0}
 
-\end{DoxyCompactItemize}
+\item 
+void {\bf On\-Toggle\-Free} (wx\-Command\-Event \&W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00135_a49309d4c0e1e06cdccf1e63c66470151}
+
+\begin{DoxyCompactList}\small\item\em Toggle the 'free' status of the bond. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-{\bf Mol\-Atom} $\ast$ {\bfseries mp\-Mol\-Atom}\label{a00135_a1169b933dfa4cb1dbfbe7f9755f2f614}
+{\bf Mol\-Bond} $\ast$ {\bfseries mp\-Mol\-Bond}\label{a00135_a97bba228c0074a1491f69c27dbbecb9b}
 
 \item 
-wx\-Box\-Sizer $\ast$ {\bfseries mp\-Sizer}\label{a00135_a124eb1c9a7e0b14114f0d6210b1e2acc}
+wx\-Box\-Sizer $\ast$ {\bfseries mp\-Sizer}\label{a00135_a8ce20cea10501f40e6a765d0925f8dba}
 
 \item 
-{\bf W\-X\-Cryst\-Obj\-Basic\-List} {\bfseries m\-List}\label{a00135_aecf34795a532ce4aae6a1ec054d64685}
+{\bf W\-X\-Cryst\-Obj\-Basic\-List} {\bfseries m\-List}\label{a00135_a4069adca5aea196db1109a5cc5d73ca8}
 
 \item 
-{\bf W\-X\-Field\-String} $\ast$ {\bfseries mp\-Field\-Name}\label{a00135_ab3e4e55eec0f1b9c2cc4d060b2e84a6d}
+{\bf W\-X\-Field\-Choice} $\ast$ {\bfseries mp\-Field\-Atom1}\label{a00135_a824179d701fd3751654bd7b151f81def}
 
 \item 
-{\bf W\-X\-Field\-Choice} $\ast$ {\bfseries mp\-Field\-Scatt\-Power}\label{a00135_a74333960d604050356b215b8ef14eb47}
+{\bf W\-X\-Field\-Choice} $\ast$ {\bfseries mp\-Field\-Atom2}\label{a00135_a9f965a2cddb09e8d3afa18f3bcce45e3}
 
-\end{DoxyCompactItemize}
+\item 
+wx\-Check\-Box $\ast$ {\bfseries mp\-Button\-Free}\label{a00135_a6261b63350b321ebac1dae167f2d5e71}
+
+\item 
+R\-E\-A\-L {\bf m\-Value}\label{a00135_aa255ae94481e76a2cb9944b8db070f65}
+
+\begin{DoxyCompactList}\small\item\em The current value. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Additional Inherited Members}
 
 
 \subsubsection{Detailed Description}
-wx class for \doxyref{Mol\-Atom}{p.}{a00050} objects 
+wx class for \doxyref{Mol\-Bond}{p.}{a00050} objects 
 
 \subsubsection{Member Function Documentation}
-\index{Obj\-Cryst\-::\-W\-X\-Mol\-Atom@{Obj\-Cryst\-::\-W\-X\-Mol\-Atom}!Cryst\-Update@{Cryst\-Update}}
-\index{Cryst\-Update@{Cryst\-Update}!ObjCryst::WXMolAtom@{Obj\-Cryst\-::\-W\-X\-Mol\-Atom}}
-\paragraph[{Cryst\-Update}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-W\-X\-Mol\-Atom\-::\-Cryst\-Update (
+\index{Obj\-Cryst\-::\-W\-X\-Mol\-Bond@{Obj\-Cryst\-::\-W\-X\-Mol\-Bond}!Cryst\-Update@{Cryst\-Update}}
+\index{Cryst\-Update@{Cryst\-Update}!ObjCryst::WXMolBond@{Obj\-Cryst\-::\-W\-X\-Mol\-Bond}}
+\paragraph[{Cryst\-Update}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-W\-X\-Mol\-Bond\-::\-Cryst\-Update (
 \begin{DoxyParamCaption}
 \item[{const bool}]{update\-U\-I = {\ttfamily false}, }
 \item[{const bool}]{mutexlock = {\ttfamily false}}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00135_aaca6492a7c5382d07946ebb88e051f7f}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00135_aafd526e2bc24ec749c191a2b8e717a0f}
 
 
 Get new values to be displayed from the underlying object, and raise flag if an U\-I update is necessary. 
 
-The actual G\-U\-I update is not made here. \doxyref{Update\-U\-I()}{p.}{a00135_aa11b0794a07ac4c8066228a4c625e13e} should be called separately, from the main thread.
+The actual G\-U\-I update is not made here. \doxyref{Update\-U\-I()}{p.}{a00135_a2b84cac0f51c4aa5f53f3d1a69bc63fb} should be called separately, from the main thread.
 
 
 \begin{DoxyParams}{Parameters}
-{\em update\-U\-I,\-:} & if true, this will call Update\-U\-I, either directly (if in the main thread), or by sending a message. \\
+{\em update\-U\-I} & if true, this will call Update\-U\-I, either directly (if in the main thread), or by sending a message. \\
 \hline
-{\em mutexlock,\-:} & if true, a Mutex will be used to lock the data shared between main and background thread. The idea is to only use a few Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{Cryst\-Update()}{p.}{a00135_aaca6492a7c5382d07946ebb88e051f7f} and \doxyref{Update\-U\-I()}{p.}{a00135_aa11b0794a07ac4c8066228a4c625e13e}. As sub-\/objects (\doxyref{W\-X\-Field}{p.}{a00126},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. \\
+{\em mutexlock} & if true, a Mutex will be used to lock the data shared between main and background thread. The idea is to only use a few Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{Cryst\-Update()}{p.}{a00135_aafd526e2bc24ec749c191a2b8e717a0f} and \doxyref{Update\-U\-I()}{p.}{a00135_a2b84cac0f51c4aa5f53f3d1a69bc63fb}. As sub-\/objects (\doxyref{W\-X\-Field}{p.}{a00125},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. \\
 \hline
 \end{DoxyParams}
 
 
-Implements {\bf Obj\-Cryst\-::\-W\-X\-Cryst\-Obj\-Basic} \doxyref{}{p.}{a00123_a7ac00ae2ae28f1a6fa26e6fa571186b6}.
+Implements {\bf Obj\-Cryst\-::\-W\-X\-Cryst\-Obj\-Basic} \doxyref{}{p.}{a00122_a7ac00ae2ae28f1a6fa26e6fa571186b6}.
 
-\index{Obj\-Cryst\-::\-W\-X\-Mol\-Atom@{Obj\-Cryst\-::\-W\-X\-Mol\-Atom}!Update\-U\-I@{Update\-U\-I}}
-\index{Update\-U\-I@{Update\-U\-I}!ObjCryst::WXMolAtom@{Obj\-Cryst\-::\-W\-X\-Mol\-Atom}}
-\paragraph[{Update\-U\-I}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-W\-X\-Mol\-Atom\-::\-Update\-U\-I (
+\index{Obj\-Cryst\-::\-W\-X\-Mol\-Bond@{Obj\-Cryst\-::\-W\-X\-Mol\-Bond}!Update\-U\-I@{Update\-U\-I}}
+\index{Update\-U\-I@{Update\-U\-I}!ObjCryst::WXMolBond@{Obj\-Cryst\-::\-W\-X\-Mol\-Bond}}
+\paragraph[{Update\-U\-I}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-W\-X\-Mol\-Bond\-::\-Update\-U\-I (
 \begin{DoxyParamCaption}
 \item[{const bool}]{mutexlock = {\ttfamily false}}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00135_aa11b0794a07ac4c8066228a4c625e13e}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00135_a2b84cac0f51c4aa5f53f3d1a69bc63fb}
 
 
 Update the User Interface, if necessary. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em mutexlock,\-:} & if true, a Mutex will be used to lock the data shared between main and background thread.\\
+{\em mutexlock} & if true, a Mutex will be used to lock the data shared between main and background thread.\\
 \hline
 \end{DoxyParams}
-The idea is to only use a few Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{Cryst\-Update()}{p.}{a00135_aaca6492a7c5382d07946ebb88e051f7f} and \doxyref{Update\-U\-I()}{p.}{a00135_aa11b0794a07ac4c8066228a4c625e13e}. As sub-\/objects (\doxyref{W\-X\-Field}{p.}{a00126},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
+The idea is to only use a few Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{Cryst\-Update()}{p.}{a00135_aafd526e2bc24ec749c191a2b8e717a0f} and \doxyref{Update\-U\-I()}{p.}{a00135_a2b84cac0f51c4aa5f53f3d1a69bc63fb}. As sub-\/objects (\doxyref{W\-X\-Field}{p.}{a00125},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
 
-Implements {\bf Obj\-Cryst\-::\-W\-X\-Cryst\-Obj\-Basic} \doxyref{}{p.}{a00123_a3818940b7031ff7e45cf2178c4a99c90}.
+Implements {\bf Obj\-Cryst\-::\-W\-X\-Cryst\-Obj\-Basic} \doxyref{}{p.}{a00122_a3818940b7031ff7e45cf2178c4a99c90}.
 
 
 

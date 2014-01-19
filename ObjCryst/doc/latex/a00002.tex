@@ -1,39 +1,36 @@
-\begin{DoxyVerb}This project is still in active development, even if I left the Lab of Crystallography
-\end{DoxyVerb}
- in Geneva to the E\-S\-R\-F. If you encounter some problem with the library, please contact me at {\tt vincefn@users.\-sourceforge.\-net} and I'll try to help.
+This project is still in active development, even if I left the Lab of Crystallography in Geneva to the E\-S\-R\-F. If you encounter some problem with the library, please contact me at {\tt vincefn@users.\-sourceforge.\-net} and I'll try to help.
 
 Also note that if you want to develop something using Obj\-Cryst++, I recommend to contact me so that I can help you and avoid possible conflicts. There are numerous things I want to implement, so an incompatibility is always possible when I had something...
 
 Yuu should also subscribe to the mailing-\/lists at\-: {\tt http\-://sourceforge.\-net/mail/?group\-\_\-id=27546} and most especially the \char`\"{}objcryst-\/devel\char`\"{} and \char`\"{}objcryst-\/announce\char`\"{}.\subsection{Download}\label{a00002_download}
-You can download the \doxyref{Obj\-Cryst}{p.}{a00178} library from the {\tt Obj\-Cryst project page} on Source\-Forge, or from the mirrors\-:
+You can download the \doxyref{Obj\-Cryst}{p.}{a00177} library from the {\tt Obj\-Cryst project page} on Source\-Forge, or from the mirrors\-:
 \begin{DoxyItemize}
 \item {\tt C\-C\-P14 (U\-K)}
 \item {\tt C\-C\-P14 (Ca)}
 \item {\tt C\-C\-P14 (U\-S\-A)}
 \item {\tt University of Geneva}
 
-You will need to download the \doxyref{Obj\-Cryst}{p.}{a00178} tar.\-bz2 (.zip for windows), as well as the 'external libraries' tar.\-gz (.zip) archives (the latter include libraries which are used by this project\-: currently atominfo,sglite and newmat). Simply uncompress both archives in the same directory. This will create the atominfo, sglite and newmat directories, as well as the \doxyref{Obj\-Cryst}{p.}{a00178} directory. This documentation is in Obj\-Cryst/doc/html/
+You will need to download the \doxyref{Obj\-Cryst}{p.}{a00177} tar.\-bz2 (.zip for windows), as well as the 'external libraries' tar.\-gz (.zip) archives (the latter include libraries which are used by this project\-: currently atominfo,sglite and newmat). Simply uncompress both archives in the same directory. This will create the atominfo, sglite and newmat directories, as well as the \doxyref{Obj\-Cryst}{p.}{a00177} directory. This documentation is in Obj\-Cryst/doc/html/
 
 If you want to use the Graphical Interface part of the library (wx\-Cryst), e.\-g. if you want to compile Fox, you will also need to download wx\-Windows from {\tt http\-://www.\-wxwindows.\-org}. Depending on your O\-S, you will need wx\-G\-T\-K-\/2.\-2.\-7 (for Linux), or wx\-M\-S\-W-\/2.\-2.\-7 (for Windows).
 \end{DoxyItemize}\subsection{C\-V\-S Repository}\label{a00002_cvs}
-The cutting-\/edge version of the library can always be obtained through its C\-V\-S repository. Under linux, to download the first time the Obj\-Cryst++ directory, first login in the C\-V\-S repository (give a blank password when asked) and then download the \doxyref{Obj\-Cryst}{p.}{a00178} source\-:
+The cutting-\/edge version of the library can always be obtained through its C\-V\-S repository. Under linux, to download the first time the Obj\-Cryst++ directory, first login in the C\-V\-S repository (give a blank password when asked) and then download the \doxyref{Obj\-Cryst}{p.}{a00177} source\-:
 \begin{DoxyCode}
-*      cvs -d:pserver:anonymous@cvs.objcryst.sourceforge.net:/cvsroot/objcryst login
-*      cvs -d:pserver:anonymous@cvs.objcryst.sourceforge.net:/cvsroot/objcryst checkout ObjCryst
-*      
+cvs -d:pserver:anonymous@cvs.objcryst.sourceforge.net:/cvsroot/objcryst login
+cvs -d:pserver:anonymous@cvs.objcryst.sourceforge.net:/cvsroot/objcryst checkout ObjCryst
 \end{DoxyCode}
  once you have done this once, you can update to the current version by typing\-:
 \begin{DoxyCode}
-*      cvs update 
+cvs update 
 \end{DoxyCode}
- (with a blank password) at the root of the \doxyref{Obj\-Cryst}{p.}{a00178} directory.
+ (with a blank password) at the root of the \doxyref{Obj\-Cryst}{p.}{a00177} directory.
 
 For further questions about cvs (doing this under windows, etc...)\-: {\tt http\-://www.\-cvshome.\-org/}\subsection{Compiling}\label{a00002_compile}
 \begin{DoxyParagraph}{A\-N\-S\-I C++ Compliance}
 The Obj\-Cryst++ library makes use of some (relatively) recent C++ features, such as templates, exceptions, mutable members. This implies that you need a compiler with reasonable C++ compliance in order to use this library. Currently tested are the G\-N\-U Compiler gcc on Linux and the Free Borland C++ compiler v5.\-5 under Windows Metrowerks Codewarrior Pro 6 on Mac\-O\-S should work, too, but has not been tested recently. 
 \end{DoxyParagraph}
 \begin{DoxyParagraph}{Makefiles}
-Under linux (resp. windows), copy the rules-\/gnu.\-mak (resp. rules-\/bc32.\-mak) to rules.\-mak at the root of the \doxyref{Obj\-Cryst}{p.}{a00178} directory. You can edit this file to check the paths and (for Windows) some compiling options.
+Under linux (resp. windows), copy the rules-\/gnu.\-mak (resp. rules-\/bc32.\-mak) to rules.\-mak at the root of the \doxyref{Obj\-Cryst}{p.}{a00177} directory. You can edit this file to check the paths and (for Windows) some compiling options.
 \end{DoxyParagraph}
 \subsection{Platforms}\label{a00002_platform}
 \begin{DoxyParagraph}{Linux}
@@ -48,9 +45,8 @@ The library can also be compiled on Mac\-O\-S, using {\tt Metrowerks Codewarrior
 \subsection{Compiling wx\-Windows}\label{a00002_wxwindows}
 To use the graphical part of Obj\-Cryst++ (wx\-Cryst), you must first compile wx\-Windows. To do this under Linux, in the wx\-Windows directory\-:
 \begin{DoxyCode}
-*      ./configure --with-opengl --disable-shared
-*      make FINAL=1
-*      
+./configure --with-opengl --disable-shared
+make FINAL=1
 \end{DoxyCode}
  (this will take some time)
 
@@ -58,16 +54,16 @@ Under windows, follow the compile instruction for Borland C++ 5.\-5 in the wx\-W
 There is a short example in the Obj\-Cryst/example/pbso4 directory. \begin{DoxyParagraph}{Linux}
 Under linux, change to the Obj\-Cryst/example/pbso4 directoryand simply type\-:
 \begin{DoxyCode}
-*      make -f gnu.mak wxcryst=1 opengl=1 debug=0 all 
+make -f gnu.mak wxcryst=1 opengl=1 debug=0 all 
 \end{DoxyCode}
 
 \end{DoxyParagraph}
-(use wx\-Cryst=0 if you do not want the Graphical interface, and debug=1 for faster compiling and debugging messages. Not that anytime you change one of these options, you need to clean up all directories\-: type \char`\"{}make -\/f gnu.\-mak clean\char`\"{} at the root of the \doxyref{Obj\-Cryst}{p.}{a00178} directory)
+(use wx\-Cryst=0 if you do not want the Graphical interface, and debug=1 for faster compiling and debugging messages. Not that anytime you change one of these options, you need to clean up all directories\-: type \char`\"{}make -\/f gnu.\-mak clean\char`\"{} at the root of the \doxyref{Obj\-Cryst}{p.}{a00177} directory)
 
 That should compile all necessary libraries and programs. You can try the different example programs, running on Pb\-S\-O4, on neutron and X-\/\-Ray powder diffraction, as well as X-\/\-Ray single crystal (in fact, extracted intensities) \begin{DoxyParagraph}{Windows}
 Under Windows (a D\-O\-S command prompt), change to the Obj\-Cryst/example/pbso4 and do\-:
 \begin{DoxyCode}
-*      make -f bc32.mak all 
+make -f bc32.mak all 
 \end{DoxyCode}
 
 \end{DoxyParagraph}

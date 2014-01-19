@@ -1,388 +1,49 @@
-\subsection{Obj\-Cryst\-:\-:Atom Class Reference}
-\label{a00015}\index{Obj\-Cryst\-::\-Atom@{Obj\-Cryst\-::\-Atom}}
+\subsection{Obj\-Cryst\-:\-:Crystal\-:\-:Bump\-Merge\-Par Struct Reference}
+\label{a00015}\index{Obj\-Cryst\-::\-Crystal\-::\-Bump\-Merge\-Par@{Obj\-Cryst\-::\-Crystal\-::\-Bump\-Merge\-Par}}
 
 
-The basic atom scatterer, in a crystal.  
+Storage for anti-\/bump/merge parameters.  
 
 
-Inheritance diagram for Obj\-Cryst\-:\-:Atom\-:\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[height=3.000000cm]{a00015}
-\end{center}
-\end{figure}
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bf Atom} ()
-\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
-{\bf Atom} (const R\-E\-A\-L x, const R\-E\-A\-L y, const R\-E\-A\-L z, const string \&name, const {\bf Scattering\-Power} $\ast$pow)
-\begin{DoxyCompactList}\small\item\em \doxyref{Atom}{p.}{a00015} constructor. \end{DoxyCompactList}\item 
-{\bf Atom} (const R\-E\-A\-L x, const R\-E\-A\-L y, const R\-E\-A\-L z, const string \&name, const {\bf Scattering\-Power} $\ast$pow, const R\-E\-A\-L popu)
-\begin{DoxyCompactList}\small\item\em \doxyref{Atom}{p.}{a00015} constructor. \end{DoxyCompactList}\item 
-{\bf Atom} (const {\bf Atom} \&old)\label{a00015_a4882db30ef33e70582b354db8e76a07c}
-
-\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
-virtual {\bf Atom} $\ast$ {\bf Create\-Copy} () const 
-\item 
-{\bf $\sim$\-Atom} ()\label{a00015_a86039a28098c9b48e7f4f57636a7e55d}
-
-\begin{DoxyCompactList}\small\item\em Destructor... \end{DoxyCompactList}\item 
-virtual const string \& {\bf Get\-Class\-Name} () const 
-\begin{DoxyCompactList}\small\item\em Name for this class (\char`\"{}\-Refinable\-Obj\char`\"{}, \char`\"{}\-Crystal\char`\"{},...). \end{DoxyCompactList}\item 
-virtual void {\bfseries operator=} (const {\bf Atom} \&rhs)\label{a00015_afc87e2009e5a0ad02311ff072b4f3b3e}
-
-\item 
-void {\bf Init} (const R\-E\-A\-L x, const R\-E\-A\-L y, const R\-E\-A\-L z, const string \&name, const {\bf Scattering\-Power} $\ast$pow, const R\-E\-A\-L popu=1)
-\begin{DoxyCompactList}\small\item\em initialize the atom (used for arrays of atoms). \end{DoxyCompactList}\item 
-virtual int {\bf Get\-Nb\-Component} () const \label{a00015_a7739a016c88ab32355e67b1c03fe97f0}
-
-\begin{DoxyCompactList}\small\item\em Number of components in the scatterer (eg number of point scatterers) \end{DoxyCompactList}\item 
-virtual const \\*
-{\bf Scattering\-Component\-List} \& {\bf Get\-Scattering\-Component\-List} () const 
-\begin{DoxyCompactList}\small\item\em Get the list of all scattering components for this scatterer. \end{DoxyCompactList}\item 
-virtual string {\bf Get\-Component\-Name} (const int i) const 
-\begin{DoxyCompactList}\small\item\em Name for the i-\/th component of this scatterer. \end{DoxyCompactList}\item 
-virtual void {\bf Print} () const \label{a00015_a6c6836c4aa9d1510d64c7916d6ad47e2}
-
-\begin{DoxyCompactList}\small\item\em Print some info about the scatterer (ideally this should be one line...). \end{DoxyCompactList}\item 
-R\-E\-A\-L {\bf Get\-Mass} () const 
-\begin{DoxyCompactList}\small\item\em Returns the molar mass of the atom. \end{DoxyCompactList}\item 
-R\-E\-A\-L {\bf Get\-Radius} () const 
-\begin{DoxyCompactList}\small\item\em Returns the radius (in Angstroems) of the atom. \end{DoxyCompactList}\item 
-virtual ostream \& {\bf P\-O\-V\-Ray\-Description} (ostream \&os, const {\bf Crystal\-P\-O\-V\-Ray\-Options} \&options) const 
-\begin{DoxyCompactList}\small\item\em X\-M\-L\-Output a description of the scatterer for P\-O\-V\-Ray. \end{DoxyCompactList}\item 
-virtual void {\bf G\-L\-Init\-Display\-List} (const bool only\-Independent\-Atoms=false, const R\-E\-A\-L x\-Min=-\/.\-1, const R\-E\-A\-L x\-Max=1.\-1, const R\-E\-A\-L y\-Min=-\/.\-1, const R\-E\-A\-L y\-Max=1.\-1, const R\-E\-A\-L z\-Min=-\/.\-1, const R\-E\-A\-L z\-Max=1.\-1, const bool display\-Enantiomer=false, const bool display\-Names=false) const 
-\item 
-bool {\bf Is\-Dummy} () const \label{a00015_a672b84cd14db777c2f449d52671a3b15}
-
-\begin{DoxyCompactList}\small\item\em Is this a dummy atom ? (ie no \doxyref{Scattering\-Power}{p.}{a00097}) Dummy atoms should not exist ! \end{DoxyCompactList}\item 
-virtual void {\bf X\-M\-L\-Output} (ostream \&os, int indent=0) const 
-\begin{DoxyCompactList}\small\item\em Output to stream in well-\/formed X\-M\-L. \end{DoxyCompactList}\item 
-virtual void {\bf X\-M\-L\-Input} (istream \&is, const {\bf X\-M\-L\-Cryst\-Tag} \&tag)
-\begin{DoxyCompactList}\small\item\em Input From stream. \end{DoxyCompactList}\item 
-const {\bf Scattering\-Power} \& {\bf Get\-Scattering\-Power} () const \label{a00015_a63893a902cb731f552cb573c58ec94bb}
-
-\begin{DoxyCompactList}\small\item\em Get the \doxyref{Scattering\-Power\-Atom}{p.}{a00098} corresponding to this atom. \end{DoxyCompactList}\item 
-virtual void {\bf Get\-Gene\-Group} (const {\bf Refinable\-Obj} \&obj, Cryst\-Vector\-\_\-uint \&group\-Index, unsigned int \&first\-Group) const 
-\begin{DoxyCompactList}\small\item\em Get the gene group assigned to each parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Private Member Functions}
+{\bf Bump\-Merge\-Par} (const R\-E\-A\-L dist, const bool can\-Overlap=false)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-virtual void {\bf Init\-Ref\-Par\-List} ()\label{a00015_a72fe4868d70c8068483ba635029bbc86}
+R\-E\-A\-L {\bf m\-Dist2}\label{a00015_ae8bcf4fc5d270caaa7cd48026489d11d}
 
-\begin{DoxyCompactList}\small\item\em Prepare refinable parameters for the scatterer object. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Private Attributes}
-\begin{DoxyCompactItemize}
-\item 
-{\bf Scattering\-Component\-List} {\bf m\-Scatt\-Comp\-List}\label{a00015_aa9fc76a4412ca0726a478612caf02ead}
+\begin{DoxyCompactList}\small\item\em The squared antibump interatomic distance. \end{DoxyCompactList}\item 
+bool {\bf m\-Can\-Overlap}\label{a00015_acd7b70bc57775c4fc8b33b520f82b98c}
 
-\begin{DoxyCompactList}\small\item\em The list of scattering components. \end{DoxyCompactList}\item 
-const {\bf Scattering\-Power} $\ast$ {\bf mp\-Scatt\-Pow\-Atom}\label{a00015_a2ca524de2384b4beb111db9ed789f9fc}
-
-\begin{DoxyCompactList}\small\item\em The \doxyref{Scattering\-Power\-Atom}{p.}{a00098} associated to that atom. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsubsection*{Additional Inherited Members}
+\begin{DoxyCompactList}\small\item\em Can the two atoms completely overlap ? \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-The basic atom scatterer, in a crystal. 
-
-This class records the position of the atom, and has a pointer to its \doxyref{Scattering\-Power\-Atom}{p.}{a00098}.
-
-\begin{DoxyNote}{Note}
-there can be 'Dummy' atoms, for which the used symbol is \char`\"{}\-X\char`\"{}, and which have no scattering power (use with caution\-: dummy atoms are only supposed to be used within \doxyref{Z\-Scatterer}{p.}{a00163}) 
-\end{DoxyNote}
-
+Storage for anti-\/bump/merge parameters. 
 
 \subsubsection{Constructor \& Destructor Documentation}
-\index{Obj\-Cryst\-::\-Atom@{Obj\-Cryst\-::\-Atom}!Atom@{Atom}}
-\index{Atom@{Atom}!ObjCryst::Atom@{Obj\-Cryst\-::\-Atom}}
-\paragraph[{Atom}]{\setlength{\rightskip}{0pt plus 5cm}Obj\-Cryst\-::\-Atom\-::\-Atom (
+\index{Obj\-Cryst\-::\-Crystal\-::\-Bump\-Merge\-Par@{Obj\-Cryst\-::\-Crystal\-::\-Bump\-Merge\-Par}!Bump\-Merge\-Par@{Bump\-Merge\-Par}}
+\index{Bump\-Merge\-Par@{Bump\-Merge\-Par}!ObjCryst::Crystal::BumpMergePar@{Obj\-Cryst\-::\-Crystal\-::\-Bump\-Merge\-Par}}
+\paragraph[{Bump\-Merge\-Par}]{\setlength{\rightskip}{0pt plus 5cm}Obj\-Cryst\-::\-Crystal\-::\-Bump\-Merge\-Par\-::\-Bump\-Merge\-Par (
 \begin{DoxyParamCaption}
-{}
+\item[{const R\-E\-A\-L}]{dist, }
+\item[{const bool}]{can\-Overlap = {\ttfamily false}}
 \end{DoxyParamCaption}
-)}\label{a00015_afa78c541a05f1210e9913c4591752042}
+)}\label{a00015_ac4da8697127de078e7ef7092c49de0ab}
 
 
-Default constructor. 
-
-The \doxyref{Atom}{p.}{a00015} {\itshape must} be initialized thereafter using \doxyref{Atom\-::\-Init()}{p.}{a00015_ab05ef76113333041255789dba4bb60cd} \index{Obj\-Cryst\-::\-Atom@{Obj\-Cryst\-::\-Atom}!Atom@{Atom}}
-\index{Atom@{Atom}!ObjCryst::Atom@{Obj\-Cryst\-::\-Atom}}
-\paragraph[{Atom}]{\setlength{\rightskip}{0pt plus 5cm}Obj\-Cryst\-::\-Atom\-::\-Atom (
-\begin{DoxyParamCaption}
-\item[{const R\-E\-A\-L}]{x, }
-\item[{const R\-E\-A\-L}]{y, }
-\item[{const R\-E\-A\-L}]{z, }
-\item[{const string \&}]{name, }
-\item[{const {\bf Scattering\-Power} $\ast$}]{pow}
-\end{DoxyParamCaption}
-)}\label{a00015_a8f37e515c9e847ba20cc1033cd54e7b8}
-
-
-\doxyref{Atom}{p.}{a00015} constructor. 
+Constructor. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em x,y,z} & \-: {\itshape fractional} coordinates of the atom \\
-\hline
-{\em pow} & \-: the \doxyref{Scattering\-Power}{p.}{a00097} associated to this atom. Must be allocated separately. \\
-\hline
-{\em name} & \-: name of the atom ('Ta1','Sm2', 'Tungsten\-\_\-1'...). The name can have {\itshape any} format but spaces should be avoided. \\
-\hline
-\end{DoxyParams}
-\index{Obj\-Cryst\-::\-Atom@{Obj\-Cryst\-::\-Atom}!Atom@{Atom}}
-\index{Atom@{Atom}!ObjCryst::Atom@{Obj\-Cryst\-::\-Atom}}
-\paragraph[{Atom}]{\setlength{\rightskip}{0pt plus 5cm}Obj\-Cryst\-::\-Atom\-::\-Atom (
-\begin{DoxyParamCaption}
-\item[{const R\-E\-A\-L}]{x, }
-\item[{const R\-E\-A\-L}]{y, }
-\item[{const R\-E\-A\-L}]{z, }
-\item[{const string \&}]{name, }
-\item[{const {\bf Scattering\-Power} $\ast$}]{pow, }
-\item[{const R\-E\-A\-L}]{popu}
-\end{DoxyParamCaption}
-)}\label{a00015_a1a4253d4b5ea4d8777963a43c7817e87}
-
-
-\doxyref{Atom}{p.}{a00015} constructor. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em x,y,z} & \-: {\itshape fractional} coordinates of the atom \\
-\hline
-{\em popu} & \-: the population of the atom (0.\-0-\/$>$1.\-0) This should take into account the multiplicity of the atom. For an atom in group P2 and on the 2 axis, this should be set to 0.\-5, {\bfseries unless} you are using the dynamical occupancy correction (recommended for global optimizations). See \doxyref{Crystal\-::\-Calc\-Dyn\-Pop\-Corr()}{p.}{a00027_a69975008974c9603ebb794bb6bb20fe8} and \doxyref{Crystal\-::m\-Use\-Dyn\-Pop\-Corr}{p.}{a00027_aa75ade2fea9a50b3e6fb08773f607a13}\\
-\hline
-{\em pow} & \-: the \doxyref{Scattering\-Power}{p.}{a00097} associated to this atom. Must be allocated separatly. \\
-\hline
-{\em name} & \-: name of the atom ('Ta1','Sm2', 'Tungsten\-\_\-1'...). The name can have {\itshape any} format but spaces should be avoided (just a precaution) \\
+{\em dist} & the bump/merge distance in Angstroems \\
 \hline
 \end{DoxyParams}
 
 
-\subsubsection{Member Function Documentation}
-\index{Obj\-Cryst\-::\-Atom@{Obj\-Cryst\-::\-Atom}!Create\-Copy@{Create\-Copy}}
-\index{Create\-Copy@{Create\-Copy}!ObjCryst::Atom@{Obj\-Cryst\-::\-Atom}}
-\paragraph[{Create\-Copy}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf Atom}$\ast$ Obj\-Cryst\-::\-Atom\-::\-Create\-Copy (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00015_af5215404ae1f180ed84046700845f92a}
-so-\/called Virtual copy constructor, needed to make copies of arrays of Scatterers 
-
-Implements {\bf Obj\-Cryst\-::\-Scatterer} \doxyref{}{p.}{a00092_a4d374adcff97163a24492d362f6def73}.
-
-\index{Obj\-Cryst\-::\-Atom@{Obj\-Cryst\-::\-Atom}!Get\-Class\-Name@{Get\-Class\-Name}}
-\index{Get\-Class\-Name@{Get\-Class\-Name}!ObjCryst::Atom@{Obj\-Cryst\-::\-Atom}}
-\paragraph[{Get\-Class\-Name}]{\setlength{\rightskip}{0pt plus 5cm}virtual const string\& Obj\-Cryst\-::\-Atom\-::\-Get\-Class\-Name (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00015_a9f0d1cb7c3b1db1baf84076e5da0ca0e}
-
-
-Name for this class (\char`\"{}\-Refinable\-Obj\char`\"{}, \char`\"{}\-Crystal\char`\"{},...). 
-
-This is only useful to distinguish different classes when picking up objects from the \doxyref{Refinable\-Obj}{p.}{a00078} Global Registry 
-
-Reimplemented from {\bf Obj\-Cryst\-::\-Scatterer} \doxyref{}{p.}{a00092_a374fc1bb2887ab1f61d456326d97c05f}.
-
-\index{Obj\-Cryst\-::\-Atom@{Obj\-Cryst\-::\-Atom}!Get\-Component\-Name@{Get\-Component\-Name}}
-\index{Get\-Component\-Name@{Get\-Component\-Name}!ObjCryst::Atom@{Obj\-Cryst\-::\-Atom}}
-\paragraph[{Get\-Component\-Name}]{\setlength{\rightskip}{0pt plus 5cm}virtual string Obj\-Cryst\-::\-Atom\-::\-Get\-Component\-Name (
-\begin{DoxyParamCaption}
-\item[{const int}]{i}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00015_a88fed92945210af0e6cf28e34fa545f4}
-
-
-Name for the i-\/th component of this scatterer. 
-
-If the component is an \doxyref{Atom}{p.}{a00015}, Then the name is that of the atom. Else, it is the name of the scatterer plus the component number in the scatterer plus the name of the \doxyref{Scattering\-Power}{p.}{a00097}. \begin{DoxyNote}{Note}
-It would be better to return a reference, but we don't want to keep a name for all components... Weeelll, needs some more thinking... see what performance hit results (if any).
-\end{DoxyNote}
-\begin{DoxyRefDesc}{Bug}
-\item[{\bf Bug}]does not take into account dummy atoms !! \end{DoxyRefDesc}
-
-
-Implements {\bf Obj\-Cryst\-::\-Scatterer} \doxyref{}{p.}{a00092_a42bdf508da6a90859a5a61e16c27d47e}.
-
-\index{Obj\-Cryst\-::\-Atom@{Obj\-Cryst\-::\-Atom}!Get\-Gene\-Group@{Get\-Gene\-Group}}
-\index{Get\-Gene\-Group@{Get\-Gene\-Group}!ObjCryst::Atom@{Obj\-Cryst\-::\-Atom}}
-\paragraph[{Get\-Gene\-Group}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Atom\-::\-Get\-Gene\-Group (
-\begin{DoxyParamCaption}
-\item[{const {\bf Refinable\-Obj} \&}]{obj, }
-\item[{Cryst\-Vector\-\_\-uint \&}]{group\-Index, }
-\item[{unsigned int \&}]{first\-Group}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00015_a01645142310cf68d21b50ec514a0af77}
-
-
-Get the gene group assigned to each parameter. 
-
-Each parameter (a {\itshape gene} in terms of genetic algorithms) can be assigned to a gene group. Thus when mating two configurations, genes will be exchanged by groups. By default (in the base Refinabe\-Obj class), each parameter is alone in its group. Derived classes can group genes for a better s$\ast$$\ast$ life.
-
-The number identifying a gene group only has a meaning in a given object. It can also change on subsequent calls, and thus is not unique.
-
-
-\begin{DoxyParams}{Parameters}
-{\em obj} & the , supplied by an algorithm class (\doxyref{Optimization\-Obj}{p.}{a00062},..), which contains a list of parameters, some of which (but possibly all or none) are parameters belonging to this object. \\
-\hline
-{\em group\-Index} & a vector of unsigned integers, one for each parameter in the input object, giving an unsigned integer value as gene group index. At the beginning this vector should contain only zeros (no group assigned). \\
-\hline
-{\em first\-Group} & this is the number of groups which have already been assigned, plus one. The gene groups returned by this object will start from this value, and increment {\bfseries first\-Group} for each gene group used, so that different \doxyref{Refinable\-Obj}{p.}{a00078} cannot share a gene group. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyNote}{Note}
-this function is not optimized, and should only be called at the beginning of a refinement. 
-\end{DoxyNote}
-
-
-Reimplemented from {\bf Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00078_ad59c8ad2b0d7ee59fa3f399a54f05e54}.
-
-\index{Obj\-Cryst\-::\-Atom@{Obj\-Cryst\-::\-Atom}!Get\-Mass@{Get\-Mass}}
-\index{Get\-Mass@{Get\-Mass}!ObjCryst::Atom@{Obj\-Cryst\-::\-Atom}}
-\paragraph[{Get\-Mass}]{\setlength{\rightskip}{0pt plus 5cm}R\-E\-A\-L Obj\-Cryst\-::\-Atom\-::\-Get\-Mass (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const}\label{a00015_afbdf315ca2363179e5227fe47d7f9106}
-
-
-Returns the molar mass of the atom. 
-
-Values are extracted from the 'atominfo' package, which uses data from the C\-R\-C Handbook of Chemistry \& Physics, 63rd \& 70th editions The Mass is actually extracted from the \doxyref{Scattering\-Power\-Atom}{p.}{a00098}. \index{Obj\-Cryst\-::\-Atom@{Obj\-Cryst\-::\-Atom}!Get\-Radius@{Get\-Radius}}
-\index{Get\-Radius@{Get\-Radius}!ObjCryst::Atom@{Obj\-Cryst\-::\-Atom}}
-\paragraph[{Get\-Radius}]{\setlength{\rightskip}{0pt plus 5cm}R\-E\-A\-L Obj\-Cryst\-::\-Atom\-::\-Get\-Radius (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const}\label{a00015_ac0e9f074ecf5a20cf73752d38d7cc453}
-
-
-Returns the radius (in Angstroems) of the atom. 
-
-Values are extracted from the 'atominfo' package, which uses data from the I\-C\-S\-D/\-C\-R\-Y\-S\-T\-I\-N Manual The Radius is extracted from the \doxyref{Scattering\-Power\-Atom}{p.}{a00098}. \index{Obj\-Cryst\-::\-Atom@{Obj\-Cryst\-::\-Atom}!Get\-Scattering\-Component\-List@{Get\-Scattering\-Component\-List}}
-\index{Get\-Scattering\-Component\-List@{Get\-Scattering\-Component\-List}!ObjCryst::Atom@{Obj\-Cryst\-::\-Atom}}
-\paragraph[{Get\-Scattering\-Component\-List}]{\setlength{\rightskip}{0pt plus 5cm}virtual const {\bf Scattering\-Component\-List}\& Obj\-Cryst\-::\-Atom\-::\-Get\-Scattering\-Component\-List (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00015_a3483660b1d08b113af61d708ecff8d1a}
-
-
-Get the list of all scattering components for this scatterer. 
-
-This is the most important function of this class, giving the list of scattering positions along with the associated \doxyref{Scattering\-Power}{p.}{a00097}. 
-
-Implements {\bf Obj\-Cryst\-::\-Scatterer} \doxyref{}{p.}{a00092_aca0e08e3793cc69d31fce53e481c2a67}.
-
-\index{Obj\-Cryst\-::\-Atom@{Obj\-Cryst\-::\-Atom}!G\-L\-Init\-Display\-List@{G\-L\-Init\-Display\-List}}
-\index{G\-L\-Init\-Display\-List@{G\-L\-Init\-Display\-List}!ObjCryst::Atom@{Obj\-Cryst\-::\-Atom}}
-\paragraph[{G\-L\-Init\-Display\-List}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Atom\-::\-G\-L\-Init\-Display\-List (
-\begin{DoxyParamCaption}
-\item[{const bool}]{no\-Symmetrics = {\ttfamily false}, }
-\item[{const R\-E\-A\-L}]{x\-Min = {\ttfamily -\/.1}, }
-\item[{const R\-E\-A\-L}]{x\-Max = {\ttfamily 1.1}, }
-\item[{const R\-E\-A\-L}]{y\-Min = {\ttfamily -\/.1}, }
-\item[{const R\-E\-A\-L}]{y\-Max = {\ttfamily 1.1}, }
-\item[{const R\-E\-A\-L}]{z\-Min = {\ttfamily -\/.1}, }
-\item[{const R\-E\-A\-L}]{z\-Max = {\ttfamily 1.1}, }
-\item[{const bool}]{display\-Enantiomer = {\ttfamily false}, }
-\item[{const bool}]{display\-Names = {\ttfamily false}}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00015_a14e239415f6923d83ceff1347b89393b}
-Create an Open\-G\-L Display List of the scatterer. This should only be called by a \doxyref{Crystal}{p.}{a00027} object.
-
-
-\begin{DoxyParams}{Parameters}
-{\em no\-Symmetrics,\-:} & if false (the default), then all symmetrics are shown in the 3\-D display, within the limits defined by the min/max parameters \textbackslash{} param x\-Min,x\-Max,y\-Min,y\-Max,z\-Min,z\-Max\-: in fractionnal coordinates, the region in which we want scaterrer to be displayed. The test is made on the center of the scatterer (eg a \doxyref{Z\-Scatterer}{p.}{a00163} (molecule) will not be 'cut' on the border). \\
-\hline
-{\em display\-Names,\-:} & if true, only the names of the scatterers will be displayed, at the position of the scatterers (to actually see them, they will have to be translated with respect to the drawing of the scatterers). \\
-\hline
-\end{DoxyParams}
-
-
-Implements {\bf Obj\-Cryst\-::\-Scatterer} \doxyref{}{p.}{a00092_a4eaf9cf9780bef83e40155810db120a0}.
-
-\index{Obj\-Cryst\-::\-Atom@{Obj\-Cryst\-::\-Atom}!Init@{Init}}
-\index{Init@{Init}!ObjCryst::Atom@{Obj\-Cryst\-::\-Atom}}
-\paragraph[{Init}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-Atom\-::\-Init (
-\begin{DoxyParamCaption}
-\item[{const R\-E\-A\-L}]{x, }
-\item[{const R\-E\-A\-L}]{y, }
-\item[{const R\-E\-A\-L}]{z, }
-\item[{const string \&}]{name, }
-\item[{const {\bf Scattering\-Power} $\ast$}]{pow, }
-\item[{const R\-E\-A\-L}]{popu = {\ttfamily 1}}
-\end{DoxyParamCaption}
-)}\label{a00015_ab05ef76113333041255789dba4bb60cd}
-
-
-initialize the atom (used for arrays of atoms). 
-
-
-\begin{DoxyParams}{Parameters}
-{\em x,y,z} & \-: {\itshape fractional} coordinates of the atom \\
-\hline
-{\em pow} & \-: the \doxyref{Scattering\-Power}{p.}{a00097} associated to this atom. Must be allocated separately. \\
-\hline
-{\em name} & \-: name of the atom ('Ta1','Sm2', 'Tungsten\-\_\-1'...). \\
-\hline
-\end{DoxyParams}
-\index{Obj\-Cryst\-::\-Atom@{Obj\-Cryst\-::\-Atom}!P\-O\-V\-Ray\-Description@{P\-O\-V\-Ray\-Description}}
-\index{P\-O\-V\-Ray\-Description@{P\-O\-V\-Ray\-Description}!ObjCryst::Atom@{Obj\-Cryst\-::\-Atom}}
-\paragraph[{P\-O\-V\-Ray\-Description}]{\setlength{\rightskip}{0pt plus 5cm}virtual ostream\& Obj\-Cryst\-::\-Atom\-::\-P\-O\-V\-Ray\-Description (
-\begin{DoxyParamCaption}
-\item[{ostream \&}]{os, }
-\item[{const {\bf Crystal\-P\-O\-V\-Ray\-Options} \&}]{options}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00015_a2994321bc2974d853f36b011d23a94b3}
-
-
-X\-M\-L\-Output a description of the scatterer for P\-O\-V\-Ray. 
-
-
-
-Implements {\bf Obj\-Cryst\-::\-Scatterer} \doxyref{}{p.}{a00092_a708cc857f82c9af4cbdf4d9334449d0f}.
-
-\index{Obj\-Cryst\-::\-Atom@{Obj\-Cryst\-::\-Atom}!X\-M\-L\-Input@{X\-M\-L\-Input}}
-\index{X\-M\-L\-Input@{X\-M\-L\-Input}!ObjCryst::Atom@{Obj\-Cryst\-::\-Atom}}
-\paragraph[{X\-M\-L\-Input}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Atom\-::\-X\-M\-L\-Input (
-\begin{DoxyParamCaption}
-\item[{istream \&}]{is, }
-\item[{const {\bf X\-M\-L\-Cryst\-Tag} \&}]{tag}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00015_a08fe773b05dd0dc748b8008636b56187}
-
-
-Input From stream. 
-
-\begin{DoxyRefDesc}{Todo}
-\item[{\bf Todo}]Add an bool X\-M\-L\-Input\-Tag(is,tag) function to recognize all the tags from the stream. So that each inherited class can use the X\-M\-L\-Input\-Tag function from its parent (ie take advantage of inheritance). The children class would first try to interpret the tag, then if unsuccessful would pass it to its parent (thus allowing overloading), etc... \end{DoxyRefDesc}
-
-
-Reimplemented from {\bf Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00078_ac13a4045c3f187879443c8615c38d623}.
-
-\index{Obj\-Cryst\-::\-Atom@{Obj\-Cryst\-::\-Atom}!X\-M\-L\-Output@{X\-M\-L\-Output}}
-\index{X\-M\-L\-Output@{X\-M\-L\-Output}!ObjCryst::Atom@{Obj\-Cryst\-::\-Atom}}
-\paragraph[{X\-M\-L\-Output}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Atom\-::\-X\-M\-L\-Output (
-\begin{DoxyParamCaption}
-\item[{ostream \&}]{os, }
-\item[{int}]{indent = {\ttfamily 0}}
-\end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [virtual]}}\label{a00015_a83bd4047affa8c4de3126465595b77cb}
-
-
-Output to stream in well-\/formed X\-M\-L. 
-
-\begin{DoxyRefDesc}{Todo}
-\item[{\bf Todo}]Use inheritance.. as for X\-M\-L\-Input\-Tag()... \end{DoxyRefDesc}
-
-
-Reimplemented from {\bf Obj\-Cryst\-::\-Refinable\-Obj} \doxyref{}{p.}{a00078_a7b9b6ed0f8dcf753d398c35e073de973}.
-
-
-
-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
 \item 
-Atom.\-h\end{DoxyCompactItemize}
+Crystal.\-h\end{DoxyCompactItemize}
