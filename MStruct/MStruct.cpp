@@ -730,15 +730,15 @@ void PowderPatternBackgroundInvX::CalcPowderPattern()const
 PowderPatternBackgroundChebyshev::PowderPatternBackgroundChebyshev()
 :mChebyshevCoef(0), mChebyshevPolynomials(0,0)
 {
-	mIsScalable = false,	
-	Init();
+  mIsScalable = false;	
+  Init();
 }
 
 PowderPatternBackgroundChebyshev::PowderPatternBackgroundChebyshev(const PowderPatternBackgroundChebyshev &old)
 :PowderPatternBackgroundBase(old),mChebyshevCoef(old.mChebyshevCoef),mChebyshevPolynomials(0,0)
 {
-	mIsScalable = false,
-	Init();
+  mIsScalable = false;
+  Init();
 }
 
 const string& PowderPatternBackgroundChebyshev::GetClassName()const
@@ -931,7 +931,7 @@ void PowderPatternBackgroundChebyshev::CalcChebyshevPolynomials()const
   			const REAL *p1 = mChebyshevPolynomials.data()+(m-3)*nb;
   			const REAL *p2 = mChebyshevPolynomials.data()+(m-2)*nb;
   			REAL *p3 = mChebyshevPolynomials.data()+(m-1)*nb;
-  			for(unsigned long i=0; i<nb; i++) { *p3 = 2*(*p0)*(*p2) - (*p1); p1++; p2++; p3++; }
+  			for(unsigned long i=0; i<nb; i++) { *p3 = 2*(*p0)*(*p2) - (*p1); p0++; p1++; p2++; p3++; }
   		}
   	}
   		
@@ -1035,6 +1035,448 @@ void printDataXY(std::ostream &s, const CrystVector_REAL &x, const CrystVector_R
     s << std::setw(16) << (*px) << " "; px++;
     s << std::setw(16) << (*py) << "\n"; py++;
   }
+}
+
+////////////////////////////////////////////////////////////////////////
+//
+//    LocalBackgroundChebyshev
+//
+////////////////////////////////////////////////////////////////////////
+
+LocalBackgroundChebyshev::LocalBackgroundChebyshev()
+{
+  mIsScalable = false;	
+  Init();
+}
+
+LocalBackgroundChebyshev::LocalBackgroundChebyshev(const LocalBackgroundChebyshev &old)
+  :PowderPatternBackgroundBase(old),mXmin(old.mXmin),mXmax(old.mXmax),
+   mChebyshevCoef(old.mChebyshevCoef),mChebyshevPolynomials()
+{
+  mChebyshevPolynomials.resize( mChebyshevCoef.size(), CrystMatrix_REAL(0,0) );
+  mIsScalable = false;
+  Init();
+}
+
+const string& LocalBackgroundChebyshev::GetClassName()const
+{
+  static const string className = "MStruct::LocalBackgroundChebyshev";
+  return className;
+}
+
+int LocalBackgroundChebyshev::AddSegment(const REAL xmin, const REAL xmax)
+{
+  mXmin.resizeAndPreserve( mXmin.numElements()+1 ); mXmin( mXmin.numElements()-1 ) = xmin;
+  mXmax.resizeAndPreserve( mXmax.numElements()+1 ); mXmax( mXmax.numElements()-1 ) = xmax;
+  // we will need to rebuild parameters here, hence remove all parameters first and reinit them later
+  std::vector< CrystVector_long > pFixed; // we need to restore refinement status after reinitialisation
+  try {
+    for(int iseg=0; iseg<mChebyshevCoef.size(); iseg++) {
+      pFixed.push_back( CrystVector_long( mChebyshevCoef[iseg].numElements() ) );
+      for(int i=0; i<mChebyshevCoef[iseg].numElements(); i++) {
+	ObjCryst::RefinablePar &par = this->GetPar(mChebyshevCoef[iseg].data()+i);
+	pFixed[iseg](i) = par.IsFixed();
+	this->RemovePar(&par);
+      } // i
+    } // iseg
+  }
+  catch (std::exception &e) {
+    cerr << "< MStruct::LocalBackgroundChebyshev::SetCoefficients()\n";
+    cerr << "Unexpected exception: " << e.what() << "\n";
+    cerr << "Unexpected exception thrown during removing old parameters from the object.\n >" << endl; 
+    throw ObjCrystException("MStruct::LocalBackgroundChebyshev::SetCoefficients(): Program error.");
+  }
+  // add new coefficients (this can reallocate old parmeters)
+  mChebyshevCoef.push_back( CrystVector_REAL(0) );
+  Init(); // reinit
+  // restore parameters refinement status
+  for(int iseg=0; iseg<mChebyshevCoef.size()-1; iseg++) { // last record assumed to be empty
+    for(int i=0; i<mChebyshevCoef[iseg].numElements(); i++) {
+      ObjCryst::RefinablePar &par = this->GetPar(mChebyshevCoef[iseg].data()+i);
+      par.SetIsFixed(pFixed[iseg](i)==1);
+    } // i
+  } // iseg
+  mChebyshevPolynomials.push_back( CrystMatrix_REAL(0,0) );
+
+  return mChebyshevCoef.size()-1;
+}
+
+void LocalBackgroundChebyshev::SetCoefficients(const int nseg, const CrystVector_REAL &coef,
+					       const CrystVector_long &coef_flags)
+{
+  VFN_DEBUG_MESSAGE("MStruct::LocalBackgroundChebyshev::SetCoefficients(...):Begin",11);
+  
+  // check input
+  if( nseg>= mChebyshevCoef.size() )
+    throw ObjCrystException("LocalBackgroundChebyshev::SetCoefficients: Not so many segments defined!");
+
+  bool rebuild = ( coef.numElements() != mChebyshevCoef[nseg].numElements() );
+  
+  if (rebuild) {
+    // Number of params. has changed. The old params. have to be removed.
+    try {
+      for(int i=0; i<mChebyshevCoef[nseg].numElements(); i++) {
+	ObjCryst::RefinablePar &par = this->GetPar(mChebyshevCoef[nseg].data()+i);
+	this->RemovePar(&par);
+      } // i
+    }
+    catch (std::exception &e) {
+      cerr << "< MStruct::LocalBackgroundChebyshev::SetCoefficients()\n";
+      cerr << "Unexpected exception: " << e.what() << "\n";
+      cerr << "Unexpected exception thrown during removing old parameters from the object.\n >" << endl; 
+      throw ObjCrystException("MStruct::LocalBackgroundChebyshev::SetCoefficients(): Program error.");
+    }
+  }
+	
+  // set new coeficients
+  mChebyshevCoef[nseg] = coef;
+
+  mClockMaster.Click(); // Values of the used Chebyshev polynomials has to be recomputed
+	
+  if (rebuild) {
+    // Number of params. has changed. Object has to be reinitialsied.
+    Init(nseg);
+    // Order of the Chebyshev polynomials changed - force Chebyshev polynomials values recalc
+    mClockChebyshevPolynomialsCalc.Reset();
+  }
+
+  // optionally set coefficients refinement status
+  if( coef_flags.numElements() == mChebyshevCoef[nseg].numElements() ) {
+    for(int i=0; i<mChebyshevCoef[nseg].numElements(); i++)
+      this->GetPar(mChebyshevCoef[nseg].data()+i).SetIsFixed( coef_flags(i)==1 );
+  }
+
+  VFN_DEBUG_MESSAGE("MStruct::LocalBackgroundChebyshev::SetCoefficients(...):End",11);
+}
+
+const CrystVector_REAL& LocalBackgroundChebyshev::GetCoefficients(const int nseg)const
+{
+  // check input
+  if( nseg>=mChebyshevCoef.size() )
+    throw ObjCrystException("LocalBackgroundChebyshev::GetCoefficients: Not so many segments defined!");
+
+  return mChebyshevCoef[nseg];
+}
+
+void LocalBackgroundChebyshev::GetLimits(const int segment, REAL &xmin, REAL &xmax)const
+{
+  if( segment>=mXmin.numElements() ) {
+    cerr << "< MStruct::LocalBackgroundChebyshev::GetLimits(int,...)\n";
+    cerr << "Bad input segment value: " << segment << ".\n >" << endl; 
+    throw ObjCrystException("MStruct::LocalBackgroundChebyshev::GetLimits(int,...): Bad input argument.");
+  }
+
+  xmin = mXmin(segment);
+  xmax = mXmax(segment);
+}
+
+void LocalBackgroundChebyshev::SetXFunctionType(const int type)
+{
+  if( (type!=FUNCTION_OF_X) && (type!=FUNCTION_OF_SIN_TH) ) {
+    cerr << "< MStruct::LocalBackgroundChebyshev::SetXFunctionType(int)\n";
+    cerr << "Bad input argument 'type': " << type << ".\n >" << endl; 
+    throw ObjCrystException("MStruct::LocalBackgroundChebyshev::SetXFunctionType(int): Bad input argument.");
+  }
+	
+  mXFunctionType = type;
+  mClockMaster.Click();
+  // Order of the Chebyshev polynomials changed - force Chebyshev polynomials values recalc
+  mClockChebyshevPolynomialsCalc.Reset();
+}
+
+void LocalBackgroundChebyshev::CalcChebyshevPolynomials()const
+{
+  TAU_PROFILE("MStruct::LocalBackgroundChebyshev::CalcChebyshevPolynomials()","void ()",TAU_DEFAULT);
+  VFN_DEBUG_MESSAGE("MStruct::LocalBackgroundChebyshev::CalcChebyshevPolynomials():Begin",3);
+	
+  // Recalaculate Chebyshev polynomials values if necessary.
+  //   ChebyshevPolynomials have to be recalculated also in the case that an order of the highest
+  //   used polynomial or the 'X'-function type is changed. It is assumend that
+  //   recalculation is forced by mClockChebyshevPolynomialsCalc-reset in such cases.
+  if ( (mClockChebyshevPolynomialsCalc < mpParentPowderPattern->GetClockPowderPatternPar()) ||
+       (mClockChebyshevPolynomialsCalc < mpParentPowderPattern->GetClockPowderPatternRadiation()) ) {
+    VFN_DEBUG_MESSAGE("MStruct::LocalBackgroundChebyshev::CalcChebyshevPolynomials():Recalculating Chebyshev polynomials matrix",3);
+  
+    // note: now we are strongly ineffective:
+    //   1) polynomials for all segments have to be recalculated
+    //   2) values for all data points are stored (they are zero outside segments)
+
+    for(int iseg=0; iseg<mChebyshevCoef.size(); iseg++) {
+      
+      const unsigned long nb = mpParentPowderPattern->GetNbPoint();
+      const CrystVector_REAL &rCoef = mChebyshevCoef[iseg];
+      CrystMatrix_REAL &rData = mChebyshevPolynomials[iseg];
+      const unsigned long M = rCoef.numElements();
+      const REAL xmin = mXmin(iseg);
+      const REAL xmax = mXmax(iseg);
+
+      // values of the zero-order Chybyshev polynomial are not stored
+      rData.resize(M-1,nb);
+  		
+      if (M>1) {
+	// the first order (x)
+	{
+	  if(mXFunctionType==FUNCTION_OF_X) {
+	    const REAL min = 0.; //mpParentPowderPattern->GetPowderPatternX().GetXMin()/2;
+	    const REAL max = 2*M_PI; //mpParentPowderPattern->GetPowderPatternX().GetXMax()/2;
+	    // TODO:: make usable also for TOF data
+	    const REAL s = 0.5*(max-min);
+	    const REAL x0 = 0.5*(max+min);
+	    const REAL *p1 = mpParentPowderPattern->GetPowderPatternX().data();
+	    REAL *p2 = rData.data();
+	    unsigned long i=0;
+	    for(; i<nb; i++) { if(*p1>=xmin) break; *p2 = 0.; p1++; p2++; }
+	    for(; i<nb; i++) { if(*p1>xmax) break; *p2 = ((*p1)-x0)/s; p1++; p2++; }
+	    for(; i<nb; i++) { *p2 = 0.; p1++; p2++; }
+	  } else if(mXFunctionType==FUNCTION_OF_SIN_TH) {
+	    const REAL *p1 = mpParentPowderPattern->GetPowderPatternX().data();
+	    REAL *p2 = rData.data();
+	    const REAL *p3 = GetPowderPatternSinTheta().data();
+	    unsigned long i=0;
+	    for(; i<nb; i++) { if(*p1>=xmin) break; *p2 = 0.; p1++; p2++; p3++; }
+	    for(; i<nb; i++) { if(*p1>xmax) break; *p2 = (*p3); p1++; p2++; p3++; }
+	    for(; i<nb; i++) { *p2 = 0.; p1++; p2++; p3++; }
+	  } else {
+	    cerr << "< MStruct::LocalBackgroundChebyshev::CalcChebyshevPolynomials()\n";
+	    cerr << "Unexpected/unsupported x-function type: "<< mXFunctionType <<".\n >" << endl; 
+	    throw ObjCrystException("MStruct::LocalBackgroundChebyshev::CalcChebyshevPolynomials(): Program error.");
+	  }
+	}
+  	// the second order (2 * x^2 - 1)
+  	if (M>2) {
+	  const REAL *px = mpParentPowderPattern->GetPowderPatternX().data();
+	  const REAL *p1 = rData.data();
+	  REAL *p2 = rData.data() + nb;
+	  unsigned long i=0;
+	  for(; i<nb; i++) { if(*px>=xmin) break; *p2 = 0.; p1++; p2++; px++; }
+	  for(; i<nb; i++) { if(*px>xmax) break; *p2 = 2.*pow((*p1),2) - 1.; p1++; p2++; px++; }
+	  for(; i<nb; i++) { *p2 = 0.; p1++; p2++; px++; }
+	}
+	// higher orders (recurrence formula: Tn+1(x) = 2 * x * Tn(x) - Tn-1(x))
+	for (unsigned long m=3; m<M; m++) {
+	  const REAL *p0 = rData.data();
+	  const REAL *p1 = rData.data()+(m-3)*nb;
+	  const REAL *p2 = rData.data()+(m-2)*nb;
+	  REAL *p3 = rData.data()+(m-1)*nb;
+	  const REAL *px = mpParentPowderPattern->GetPowderPatternX().data();
+	  unsigned long i=0;
+	  for(; i<nb; i++) { if(*px>=xmin) break; *p3 = 0.; p0++; p1++; p2++; p3++; px++; }
+	  for(; i<nb; i++) { if(*px>xmax) break; *p3 = 2*(*p0)*(*p2) - (*p1); p0++; p1++; p2++; p3++; px++; }
+	  for(; i<nb; i++) { *p3 = 0.; p0++; p1++; p2++; p3++; px++; }
+	}
+      } // if(M>1)
+  	
+    } //iseg
+    mClockChebyshevPolynomialsCalc.Click();
+  }
+	
+  VFN_DEBUG_MESSAGE("MStruct::LocalBackgroundChebyshev::CalcChebyshevPolynomials():End",3);
+}
+
+const CrystVector_REAL& LocalBackgroundChebyshev::GetLSQDeriv(const unsigned int nfunc, RefinablePar& par)
+{
+  // check LSQ func. nb. 
+  if(nfunc!=0) {
+    cerr << "< MStruct::LocalBackgroundChebyshev::GetLSQDeriv(...)\n";
+    cerr << "LSQ func. nb.: " << nfunc << ", Parameter: " << par.GetName() << "\n";
+    par.Print();
+    cerr << "Unexpected/unsupported LSQ func. nb.\n >" << endl; 
+    throw ObjCrystException("MStruct::LocalBackgroundChebyshev::GetLSQDeriv(...): Bad argument.");
+  }
+  
+  // find parameter
+  vector< ObjCryst::RefinablePar* >::iterator result;
+  result = find( mvpRefPar.begin(), mvpRefPar.end(), &par );
+ 
+  if( result == mvpRefPar.end() ) {
+    cerr << "< MStruct::LocalBackgroundChebyshev::GetLSQDeriv(...)\n";
+    cerr << "LSQ func. nb.: " << nfunc << ", Parameter: " << par.GetName() << "\n";
+    par.Print();
+    cerr << "Specified RefinableParameter was not found in the list of parameters.\n >" << endl; 
+    throw ObjCrystException("MStruct::LocalBackgroundChebyshev::GetLSQDeriv(...): Bad argument.");
+  }
+  
+  // identify parameter (Bkg_Coef_Lseg_nb), (seg)?, (nb)?
+  string str = string(par.GetName());
+  string::size_type loc;
+  loc = str.find("Bkg_Coef_L", 0); // Bkg_Coef_L*_*
+  if( loc == string::npos ) {
+    cerr << "< MStruct::LocalBackgroundChebyshev::GetLSQDeriv(...)\n";
+    cerr << "LSQ func. nb.: " << nfunc << ", Parameter: " << par.GetName() << "\n";
+    par.Print();
+    cerr << "Specified RefinableParameter was not identified.\n >" << endl; 
+    throw ObjCrystException("MStruct::LocalBackgroundChebyshev::GetLSQDeriv(...): Bad argument.");
+  }
+  
+  // using rest of the parameter name
+  istringstream ss(str.substr(loc+10));
+
+  // segment number
+  int iseg = - 1;
+  ss >> iseg;
+  
+  loc = str.find("_", loc+10); // Bkg_Coef_L*_*
+  if( loc == string::npos ) {
+    cerr << "< MStruct::LocalBackgroundChebyshev::GetLSQDeriv(...)\n";
+    cerr << "LSQ func. nb.: " << nfunc << ", Parameter: " << par.GetName() << "\n";
+    par.Print();
+    cerr << "Specified RefinableParameter was not identified.\n >" << endl; 
+    throw ObjCrystException("MStruct::LocalBackgroundChebyshev::GetLSQDeriv(...): Bad argument.");
+  }
+
+  // using rest of the parameter name
+  ss.str(str.substr(loc+1));
+
+  // Chebyshev coefficient number
+  int coef_nb = -1;
+  ss >> coef_nb;
+  
+  // check the Chebyshev coefficient number
+  if( (iseg<0) || (iseg>=mChebyshevCoef.size()) || (coef_nb<0) || (coef_nb>=mChebyshevCoef[iseg].numElements()) ) {
+    cerr << "< MStruct::LocalBackgroundChebyshev::GetLSQDeriv(...)\n";
+    cerr << "LSQ func. nb.: " << nfunc << ", Parameter: " << par.GetName() << "\n";
+    par.Print();
+    cerr << "Identified Coefficient: (nseg="<<iseg<<", ncoef="<< coef_nb <<") cound not be accepted.\n";
+    throw ObjCrystException("MStruct::LocalBackgroundChebyshev::GetLSQDeriv(...): Bad argument.");
+  }
+  
+  VFN_DEBUG_MESSAGE("LocalBackgroundChebyshev::GetLSQDeriv(...): "<<
+		    "Background (seg. nb.: " << iseg << ") coeff. nb: "<< coef_nb,11)
+		      
+  // calculate derivative (return the Chebyshev polynomial)
+  const unsigned long nb = mpParentPowderPattern->GetNbPoint();
+  mLSQDeriv.resize(nb);
+  
+  // zero order coef.
+
+  if(coef_nb==0) {
+    // not stored in mChebyshevPolynomials
+    const REAL xmin = mXmin(iseg);
+    const REAL xmax = mXmax(iseg);
+    const REAL *p1 = mpParentPowderPattern->GetPowderPatternX().data();
+    REAL *p2 = mLSQDeriv.data();
+    unsigned long i=0;
+    for(; i<nb; i++) { if(*p1>=xmin) break; *p2 = 0.; p1++; p2++; }
+    for(; i<nb; i++) { if(*p1>xmax) break; *p2 = 1.0; p1++; p2++; }
+    for(; i<nb; i++) { *p2 = 0.; p1++; p2++; }
+  }
+  // higher order coef.
+  else {
+    CalcChebyshevPolynomials(); // update (if necessary)
+    const REAL *p1 = mChebyshevPolynomials[iseg].data() + (coef_nb-1)*nb; // row with data
+    REAL *p2 = mLSQDeriv.data();
+    for(unsigned long i=0; i<nb; i++) { *p2 = (*p1); p1++; p2++; }
+  }
+  
+  // variable slit intesity corr.
+  if( mUseVariableSlitIntensityCorr )
+    mLSQDeriv *= GetPowderPatternSinTheta();
+		
+  return mLSQDeriv;
+}
+
+void LocalBackgroundChebyshev::CalcPowderPattern()const
+{
+  if (mClockPowderPatternCalc>mClockMaster) return;
+  
+  TAU_PROFILE("MStruct::LocalBackgroundChebyshev::CalcPowderPattern()","void ()",TAU_DEFAULT);
+  VFN_DEBUG_MESSAGE("MStruct::LocalBackgroundChebyshev::CalcPowderPattern():Begin",3);
+
+  try {
+	  
+    const unsigned long nb = mpParentPowderPattern->GetNbPoint();
+    mPowderPatternCalc.resize(nb);
+
+    // Recalaculate Chebyshev polynomials values if necessary.
+    CalcChebyshevPolynomials();
+
+    // calcualtion
+    mPowderPatternCalc = 0.;
+    
+    bool isNonzero = false;
+
+    // add data for each segment
+    for(int iseg=0; iseg<mChebyshevCoef.size(); iseg++) {
+      
+      // note: This is strongly ineffected. mChebyshevPolynomials stores in fact data for all the
+      // pattern for all segments, but data are zeros outside the corresponding segments.
+      const CrystVector_REAL rCoef = mChebyshevCoef[iseg];
+      const CrystMatrix_REAL rData = mChebyshevPolynomials[iseg];
+      const unsigned long M = rCoef.numElements();
+      const REAL xmin = mXmin(iseg);
+      const REAL xmax = mXmax(iseg);
+
+      if( M>0 ) isNonzero = true;
+
+      // zero-order
+      if (M>0) {
+	const REAL *p1 = mpParentPowderPattern->GetPowderPatternX().data();
+	REAL *p2 = mPowderPatternCalc.data();
+	if (abs(rCoef(0))>1e-6) {
+	  unsigned long i=0;
+	  for(; i<nb; i++) { if(*p1>=xmin) break; *p2 = 0.; p1++; p2++; }
+	  for(; i<nb; i++) { if(*p1>xmax) break; *p2 = rCoef(0); p1++; p2++; }
+	  for(; i<nb; i++) { *p2 = 0.; p1++; p2++; }
+	}
+      }
+		
+      // higher orders
+      for (unsigned long m=1; m<M; m++) {
+	const REAL *p1 = rData.data()+(m-1)*nb;
+	REAL *p2 = mPowderPatternCalc.data();
+	if (abs(rCoef(m))>1e-6)
+	  for(unsigned long i=0; i<nb; i++) { *p2 += (*p1)*rCoef(m); p1++; p2++; }
+      }
+    }
+		
+    // variable slit intesity corr.
+    if ( mUseVariableSlitIntensityCorr && isNonzero )
+      mPowderPatternCalc *= GetPowderPatternSinTheta();
+		
+  }
+  catch (std::exception &e) {
+    cerr << "< MStruct::LocalBackgroundChebyshev::CalcPowderPattern()\n";
+    cerr << "Unexpected exception: " << e.what() << "\n";
+    cerr << "Unexpected exception thrown during calcualtion of the powder pattern background.\n >" << endl; 
+    throw;
+  }
+	
+  VFN_DEBUG_MESSAGE("MStruct::LocalBackgroundChebyshev::CalcPowderPattern()",3);
+  #ifdef USE_BACKGROUND_MAXLIKE_ERROR
+  {
+    mPowderPatternCalcVariance.resize(nb);
+    const REAL step=mModelVariance*mModelVariance/(REAL)nbPoint;
+    REAL var=0;
+    REAL *p=mPowderPatternCalcVariance.data();
+    for(long i=0;i<nb;i++) {*p++ = var;var +=step;}
+  }
+  mClockPowderPatternVarianceCalc.Click();
+  #endif
+  mClockPowderPatternCalc.Click();
+  VFN_DEBUG_MESSAGE("MStruct::LocalBackgroundChebyshev::CalcPowderPattern():End",3);	
+}
+
+void LocalBackgroundChebyshev::Init(const int segment)
+{
+  // add parameters (coefficients of the Chebyshev polynomials)
+  
+  // for each segment
+  for(int iseg=0; iseg<mChebyshevCoef.size(); iseg++) {
+    if(segment>=0 && segment!=iseg) continue;
+    for(int i=0; i<mChebyshevCoef[iseg].numElements(); i++) {
+      // create parameter name
+      ostringstream ss; // Bkg_Coef_L*_*
+      ss << "Bkg_Coef_L" << iseg << "_" << i;
+      // create a new parameter
+      RefinablePar tmp(ss.str(),mChebyshevCoef[iseg].data()+i,-100000.,100000.,
+		       gpRefParTypeObjCryst,REFPAR_DERIV_STEP_ABSOLUTE,
+		       false,true,true,false,1.);
+      tmp.AssignClock(mClockMaster);
+      tmp.SetDerivStep(1.0);
+      //tmp.SetGlobalOptimStep(.05);
+      this->AddPar(tmp);
+    } // i
+  } // iseg
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -2448,6 +2890,17 @@ const CrystVector_REAL& PowderPattern::GetLSQDeriv(const unsigned int n, Refinab
     }
   }
   
+  // "Bkg_Coef_L*"
+  if(bnotcalculated) {
+    loc = str.find("Bkg_Coef_L", 0);
+    if (loc != string::npos) {
+      VFN_DEBUG_MESSAGE("MStruct::PowderPattern::GetLSQDerivative: "<<
+			"Derivative for Local Chebyshev polynomial bkg. coef. detected: "<< str,11)
+      mLSQDeriv = GetPowderPatternComponent("localBkg_Chebyshev").GetLSQDeriv(n,par);
+      bnotcalculated = false;
+    }
+  }
+
   // "Scale_"
   if(bnotcalculated) {
     
@@ -8794,11 +9247,11 @@ void FaultsBroadeningEffectWC11m23::SetAuxParameters () const
   catch(std::exception &e) {
     cout << "< MStruct::FaultsBroadeningEffectWC11m23::SetAuxParameters()\n";
     cout << "exception: " << e.what() << "\n";
-    cout << "The Object can not be properly initialised.\n \
-             Maybe a parent ReflectionProfile object of this broadenig component,\n \					\
-	     its parent PowderpatterDiffraction object, or Crystal object\n \
-	     have not been set yet. Without them a cell type and other data\n \
- 	     can not be checked. >" << endl; 
+    cout << "The Object can not be properly initialised.\n";
+    cout << "Maybe a parent ReflectionProfile object of this broadenig component,\n";
+    cout << "its parent PowderpatterDiffraction object, or Crystal object\n";
+    cout << "have not been set yet. Without them a cell type and other data\n";
+    cout << "can not be checked. >" << endl;
     throw ;
   }
 }
@@ -9201,7 +9654,7 @@ void PseudoVoigtBroadeningEffectA::InitParameters()
 
 // HKLPseudoVoigtBroadeningEffectA
 HKLPseudoVoigtBroadeningEffectA::HKLPseudoVoigtBroadeningEffectA()
-  :mParamsFileName("")
+  :mParamsFileName(""), mpLocalBkgComponent(NULL)
 {}
 
 HKLPseudoVoigtBroadeningEffectA::~HKLPseudoVoigtBroadeningEffectA()
@@ -9537,8 +9990,6 @@ void HKLPseudoVoigtBroadeningEffectA::SetParametersFile(const string &filename)
 
 void HKLPseudoVoigtBroadeningEffectA::LoadParametersFile()
 {
-  cout << "HKLEffect: Loading HKLEffect params file\n";
-
   if( mParamsFileName.empty() )
     return; // nothing to load
 
@@ -9560,6 +10011,10 @@ void HKLPseudoVoigtBroadeningEffectA::LoadParametersFile()
       boost::to_lower(word);
       // compare strings
       if( word.compare("@end")==0 ) break;
+      if( word.compare("@local_bkg_chebyshev")==0 ) {
+	this->AddLocalBackground( line ); // add local background
+	continue;
+      }
     }
     
     int h, k, l, fdtth, ffwhm, feta, fasym;
@@ -9594,8 +10049,6 @@ void HKLPseudoVoigtBroadeningEffectA::LoadParametersFile()
 
 void HKLPseudoVoigtBroadeningEffectA::SaveParametersFile()
 {
-  cout << "HKLEffect: Saving HKLEffect params file\n";
-
   if(mParamsFileName.empty())
     return;
 
@@ -9642,6 +10095,31 @@ void HKLPseudoVoigtBroadeningEffectA::SaveParametersFile()
     f << "\n";
   }
 
+  // --- chebyshev local background parameters ---
+  if( mpLocalBkgComponent!=NULL && mLocalBkgSegments.size()>0 ) {
+    f << "#                    tth-min tth-max  nb        c(i) f ...\n"; // print header
+
+    for(int i=0; i<mLocalBkgSegments.size(); i++) {
+      int iseg = mLocalBkgSegments[i];
+    
+      REAL xmin, xmax;
+      mpLocalBkgComponent->GetLimits(iseg,xmin,xmax);
+      const CrystVector_REAL &coef = mpLocalBkgComponent->GetCoefficients(iseg);
+      
+      f << "@local_bkg_chebyshev " << fixed << setprecision(3) << setw(7) << xmin*RAD2DEG << "  " << xmax*RAD2DEG << "   " << coef.numElements();
+
+      f << scientific << setprecision(3);
+      for(int j=0; j<coef.numElements(); j++) {
+	// value
+	f << "  " << setw(10) << coef(j);
+	// find parameters to get its fixed status
+	if( mpLocalBkgComponent->GetPar(coef.data()+j).IsFixed() ) f << " " << 1; else f << " " << 0;
+      }
+      
+      f << "\n";
+    }
+  } // chebyshev local background
+
   // --- write end stamp ---
   f << "@end" << "\n";
 
@@ -9649,6 +10127,52 @@ void HKLPseudoVoigtBroadeningEffectA::SaveParametersFile()
   f<<'\n'<< s.str();
 
   f.close();
+}
+
+int HKLPseudoVoigtBroadeningEffectA::AddLocalBackground(const string &optline)
+{
+  if( mpLocalBkgComponent==NULL ) {
+    // find LocalBackgroundChebyshev component in the parent PowderPatter object
+    ObjCryst::PowderPattern &pattern = GetParentReflectionProfile().
+                                       GetParentPowderPatternDiffraction().
+                                       GetParentPowderPattern();
+  
+    int icomp = 0;
+    for(; icomp<pattern.GetNbPowderPatternComponent(); icomp++) {
+      string classname = pattern.GetPowderPatternComponent(icomp).GetClassName();
+      if (classname.compare("MStruct::LocalBackgroundChebyshev")==0) break;
+    }
+
+    if( icomp==pattern.GetNbPowderPatternComponent() ) {
+      cout << "Warning: HKLPseudoVoigtBroadeningEffectA::AddLocalBackground(...) could not add a local background segment,\n";
+      cout << "         because there was no MStruct::LocalBackgroundChebyshev component found in the parent pattern object.\n";
+      cout << "         Check if there is any 'local_chebyshev' background component defined in the main parameter-file.\n";
+      return -1; // nothing added
+    }
+    
+    mpLocalBkgComponent = &((MStruct::LocalBackgroundChebyshev&)(pattern.GetPowderPatternComponent(icomp)));
+  }
+
+  MStruct::LocalBackgroundChebyshev &bkgComponent = *mpLocalBkgComponent;
+
+  REAL xmin, xmax;
+  int ncoef;
+
+  istringstream iss( optline.substr(20) );
+  iss >> xmin >> xmax >> ncoef;
+
+  CrystVector_REAL coef(ncoef);
+  CrystVector_long coef_flags(ncoef);
+  for(int i=0; i<ncoef; i++)
+    iss >> coef(i) >> coef_flags(i);
+  
+  int iseg = bkgComponent.AddSegment(xmin*DEG2RAD, xmax*DEG2RAD);
+  bkgComponent.SetCoefficients(iseg, coef, coef_flags);
+
+  // add segment to local background list
+  mLocalBkgSegments.push_back(iseg);
+
+  return iseg;
 }
 
 // ReflectionProfile
@@ -9764,8 +10288,6 @@ void ReflectionProfile::RegisterHKLDisabledComponents (long h,long k,long l,REAL
 						       const vector<string> effects,
 						       const ObjCryst::RefinableObj *pRegisteringObj)
 {
-  cout << "Info: RegisterHKLDisabledComponents called\n";
-
   // find (h,k,l) reflection in mDisabledEffectsStore
   int ind = mDisabledEffectsStore.find(h, k, l, x);
 
@@ -9795,19 +10317,14 @@ void ReflectionProfile::RegisterHKLDisabledComponents (long h,long k,long l,REAL
 	}
       if( !registered ) { // register new one
 	pDisabledEffectsList->list.push_back( make_pair(pEffect,pRegisteringObj) );
-	cout << "Info: Registering component (" << pEffect->GetName() << ", by " << ((pRegisteringObj!=NULL) ? pRegisteringObj->GetName() : "NULL");
-	cout << ") to be disabled for hkl = " << h << " " << k << " " << l << "\n";
       }
     } else {
-      cout << "Info: all or all_not_instr\n";
       // --- if all, or all_not_instr ---
       const bool not_instr = effect.compare("all_not_instr")==0; // also 'not_instr'?
       const ReflectionProfileComponent *pInstrComp = (not_instr) ? &( GetReflectionProfileComponent("instrProfile") ) : NULL; // auxiliary pointer
-      cout << "Info: pInstrComp: " << pInstrComp << "\n";
       // for all components
       for(int icomp=0; icomp<GeReflectionProfileComponentNb(); icomp++) {
 	const ReflectionProfileComponent *pComp = &( GetReflectionProfileComponent(icomp) );
-	cout << "Info: CompName: " << pComp->GetName() << ": " << pComp << "\n";
 	// except registering component
 	if( (ObjCryst::RefinableObj*)pComp == pRegisteringObj ) continue;
 	// or instrumental component (optionally)
@@ -9823,8 +10340,6 @@ void ReflectionProfile::RegisterHKLDisabledComponents (long h,long k,long l,REAL
 	  }
 	if( !registered ) { // register new one
 	  pDisabledEffectsList->list.push_back( make_pair(pComp,pRegisteringObj) );
-	  cout << "Info: Registering component (" << pComp->GetName() << ", by " << ((pRegisteringObj!=NULL) ? pRegisteringObj->GetName() : "NULL");
-	  cout << ") to be disabled for hkl = " << h << " " << k << " " << l << "\n";
 	}
       } // icomp
     } // if all, or all_not_instr
@@ -9989,7 +10504,7 @@ bool ReflectionProfile::PrepareForCalc(const CrystVector_REAL &x,
 }
 
 void ReflectionProfile::SetParentPowderPatternDiffraction
-                     (const ObjCryst::PowderPatternDiffraction& s) {
+                     (ObjCryst::PowderPatternDiffraction& s) {
   //if(mpParentPowderPatternDiffraction!=0) 
   //    mClockMaster.RemoveChild(mpParentPowderPattern->GetIntegratedProfileLimitsClock());
    mpParentPowderPatternDiffraction = &s;
@@ -10006,6 +10521,9 @@ const ObjCryst::PowderPatternDiffraction& ReflectionProfile::GetParentPowderPatt
   return *mpParentPowderPatternDiffraction;
 }
 
+ObjCryst::PowderPatternDiffraction& ReflectionProfile::GetParentPowderPatternDiffraction() {
+  return *mpParentPowderPatternDiffraction;
+}
 
 //void ReflectionProfile::SetProfilePar(const REAL m, const REAL sigma)
 //{}

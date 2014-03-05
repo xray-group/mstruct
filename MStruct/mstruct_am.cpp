@@ -62,6 +62,7 @@ namespace MStruct {
 #define BACKGROUND_INTERPOLATED    0
 #define BACKGROUND_INVX            1
 #define BACKGROUND_CHEBYSHEV       2
+#define BACKGROUND_CHEBYSHEV_LOCAL 3
 
 class PowderPatternBackground : public ObjCryst::PowderPatternBackground {
 public:
@@ -359,6 +360,17 @@ int main (int argc, char *argv[])
    	 	 	   	
    	 	 	   	 btype_not_found = false;
    	 	 	 } // chebyshev background
+
+			 if ( btype_not_found && str==string("chebyshev_local") ) {
+   	 	 	 	// nothing to be read here   		 		 
+   		 		 v_bkg_type_ids.push_back( BACKGROUND_CHEBYSHEV_LOCAL );
+   		 		 v_bkg_strings.push_back(""); // empty string
+   		 		 v_bkg_type_ints.push_back( bkg_type ); 
+   		 		 v_bkg_params.push_back( CrystVector_REAL(0) );
+   		 		 v_bkg_params_flags.push_back( CrystVector_long(0) );
+   	 	 	   	
+   	 	 	   	 btype_not_found = false;
+   	 	 	 } // local chebyshev background
    	 	 	 
    	 	 	// Type of the given broadening not found
  			 if(btype_not_found) {
@@ -470,7 +482,18 @@ int main (int argc, char *argv[])
    			 bkgData->UseVariableSlitIntensityCorr(omega*RAD2DEG<=-1.999);
    			 vBackgroundComponents.push_back(bkgData);
    	 	   }
-   	 	   break; 
+   	 	   break;
+		 case BACKGROUND_CHEBYSHEV_LOCAL:
+   	 	   {
+   	 	   	 MStruct::LocalBackgroundChebyshev * bkgData= new MStruct::LocalBackgroundChebyshev;
+   			 bkgData->SetName("localBkg_Chebyshev");
+   			 data.AddPowderPatternComponent(*bkgData);   		      
+   			 
+   			 bkgData->SetXFunctionType(v_bkg_type_ints[icomp]);
+   			 bkgData->UseVariableSlitIntensityCorr(omega*RAD2DEG<=-1.999);
+   			 vBackgroundComponents.push_back(bkgData);
+   	 	   }
+   	 	   break;  
    	 	 default:
    	 	   cerr << "< main(...)\n";
 				 cerr << "Program logical error during creating background objects.\n >" << endl; 
@@ -1627,12 +1650,9 @@ int main (int argc, char *argv[])
      string str;
      read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
      ccin >> str; // read first word on the line (either number or string)
-     cout << "HKLEffect: str:" << str.c_str() << "\n";
      char *endptr;
      long nbprofs = strtol(str.c_str(),&endptr,10);
-     cout << "HKLEffect: nbprofs:" << nbprofs << "\n";
-     cout << "HKLEffect: endptr:" << (void*)endptr << "\n";
-     if(endptr==NULL && nbprofs>=0) { // first word is a nonegative number
+     if((*endptr=='\0') && nbprofs>=0) { // first word is a nonegative number
        // read hkl diffraction params
        for(int iprof=0; iprof<nbprofs; iprof++) {
 	 cout << "hkl,d2Theta(deg),fwhm(deg),eta,code(111)?" << endl;
@@ -1648,7 +1668,6 @@ int main (int argc, char *argv[])
        int flag; // (0-don't use,1-generate,2-free strong,3-read)
        REAL relIntensity; // relative intensity level for generate option
        ccin >> flag >> relIntensity;
-       cout << "HKLEffect: flag:" << flag << "\n";
        if(flag==3) // option == read
 	 vHKLEffect[iphase]->LoadParametersFile();
      }
@@ -1711,6 +1730,13 @@ int main (int argc, char *argv[])
        				   param.Print();
      				 }
    				 }
+   	 	   }
+   	 	   break;
+	          case BACKGROUND_CHEBYSHEV_LOCAL:
+   	 	   {
+		     cout << "Local Chebyshev background component: " << vBackgroundComponents[icomp]->GetName() << endl;
+		     cout << "This background component may not have any parameters.\n";
+		     cout << "Use @local_bkg_chebyshev tag to define new local backgrounds." << endl;	 
    	 	   }
    	 	   break;
    	 	  case BACKGROUND_INVX:
@@ -1915,6 +1941,11 @@ int main (int argc, char *argv[])
        need_refParList_update = true;
 
      } // if @LSQConstraint
+
+     // @local_bkg_chebyshev
+     if( strncmp(keyword.c_str(),"@local_bkg_chebyshev",19)==0 ) {
+       // not implemented
+     } // if @local_bkg_chebyshev
 
      read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
    }

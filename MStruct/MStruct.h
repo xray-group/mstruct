@@ -242,48 +242,105 @@ protected:
 class PowderPatternBackgroundChebyshev: public PowderPatternBackgroundBase
 {
 public:
-	/// Constructor
-	PowderPatternBackgroundChebyshev();
-	/// Copy constructor
-	PowderPatternBackgroundChebyshev(const PowderPatternBackgroundChebyshev &);
-	/// Name of this class (MStruct:: PowderPatternBackgroundChebyshev)
-	virtual const string& GetClassName()const; 
-	/** Set Chebyshev polynomial coefficients.
+  /// Constructor
+  PowderPatternBackgroundChebyshev();
+  /// Copy constructor
+  PowderPatternBackgroundChebyshev(const PowderPatternBackgroundChebyshev &);
+  /// Name of this class (MStruct:: PowderPatternBackgroundChebyshev)
+  virtual const string& GetClassName()const; 
+  /** Set Chebyshev polynomial coefficients.
     *
     * The order of coefficients in the input vector is same as the order of
     * the involved Chebyshev polynomials Tn(x):
     *  b(x) = coef(0)*T0(x) + coef(1)*T1(x) + ... 
     *  
     */
-	void SetCoefficients(const CrystVector_REAL &coef);
-	/// Get current Chebyshev polynomial coefficients
-	const CrystVector_REAL& GetCoefficients()const;
-	/// Symbol for the 1/X type of the background function.
-	static const int FUNCTION_OF_X = 0;
-	/// Symbol for the 1/sin(Theta) type of the background function.
-	static const int FUNCTION_OF_SIN_TH = 1;
-	/// Set type of the argument of the 'InvX=1/X' function. (X or sin(Theta))
-	void SetXFunctionType(const int type = FUNCTION_OF_X);
-	/// Get the first derivative values for the LSQ function, for a given parameter.
-	virtual const CrystVector_REAL& GetLSQDeriv(const unsigned int, ObjCryst::RefinablePar &);
+  void SetCoefficients(const CrystVector_REAL &coef);
+  /// Get current Chebyshev polynomial coefficients
+  const CrystVector_REAL& GetCoefficients()const;
+  /// Symbol for the 1/X type of the background function.
+  static const int FUNCTION_OF_X = 0;
+  /// Symbol for the 1/sin(Theta) type of the background function.
+  static const int FUNCTION_OF_SIN_TH = 1;
+  /// Set type of the argument of the 'InvX=1/X' function. (X or sin(Theta))
+  void SetXFunctionType(const int type = FUNCTION_OF_X);
+  /// Get the first derivative values for the LSQ function, for a given parameter.
+  virtual const CrystVector_REAL& GetLSQDeriv(const unsigned int, ObjCryst::RefinablePar &);
 protected:
-	/// Calc values of the Chebyshev polynomials. (Update mChebyshevPolynomials matrix.)
-	void CalcChebyshevPolynomials()const;
-	/// Calc the powder pattern.
-	virtual void CalcPowderPattern()const;
-	/// Init parameters and options.
-	void Init();
+  /// Calc values of the Chebyshev polynomials. (Update mChebyshevPolynomials matrix.)
+  void CalcChebyshevPolynomials()const;
+  /// Calc the powder pattern.
+  virtual void CalcPowderPattern()const;
+  /// Init parameters and options.
+  void Init();
 protected:
-	/// Chebyshev polynomials coefficients approximating background.
-	CrystVector_REAL mChebyshevCoef;
-	/// Precalculated values of the used Chebyshev polynomials in the current data points.
-	mutable CrystMatrix_REAL mChebyshevPolynomials;
-	/// When were values of the used Chebyshev polynomials last computed ?
-	mutable ObjCryst::RefinableObjClock mClockChebyshevPolynomialsCalc;
-	/// Argument 'X' of the Chebyshev polynomial T_n(X) functions. (X or sin(Theta))
-	int mXFunctionType;
+  /// Chebyshev polynomials coefficients approximating background.
+  CrystVector_REAL mChebyshevCoef;
+  /// Precalculated values of the used Chebyshev polynomials in the current data points.
+  mutable CrystMatrix_REAL mChebyshevPolynomials;
+  /// When were values of the used Chebyshev polynomials last computed ?
+  mutable ObjCryst::RefinableObjClock mClockChebyshevPolynomialsCalc;
+  /// Argument 'X' of the Chebyshev polynomial T_n(X) functions. (X or sin(Theta))
+  int mXFunctionType;
 };
 
+/** LocalBackgroundChebyshev : class to represent a noncontinuous piecewice Chebyshev polynomial background.
+ *
+ */
+class LocalBackgroundChebyshev: public PowderPatternBackgroundBase
+{
+public:
+  /// Constructor
+  LocalBackgroundChebyshev();
+  /// Copy constructor
+  LocalBackgroundChebyshev(const LocalBackgroundChebyshev &);
+  /// Name of this class (MStruct::LocalBackgroundChebyshev)
+  virtual const string& GetClassName()const;
+  /// Add new background segment limitted by (xmin,xmax). Returns segemnt number.
+  int AddSegment(const REAL xmin, const REAL xmax);
+  /** Set Chebyshev polynomial coefficients for a single segment
+    *
+    * The order of coefficients in the input vector is same as the order of
+    * the Chebyshev polynomials Tn(x): b(x) = coef(0)*T0(x) + coef(1)*T1(x) + ... 
+    * 
+    * Coefficients refinement status can be set by a vector of integers (1...fixed).
+    *
+    */
+  void SetCoefficients(const int segment, const CrystVector_REAL &coef,
+		       const CrystVector_long &coef_flags = CrystVector_long(0));
+  /// Get current Chebyshev polynomial coefficients for a given segment
+  const CrystVector_REAL& GetCoefficients(const int segment)const;
+  /// Get limits for a given segment
+  void GetLimits(const int segment, REAL &xmin, REAL &xmax)const;
+  /// Symbol for the 1/X type of the background function.
+  static const int FUNCTION_OF_X = 0;
+  /// Symbol for the 1/sin(Theta) type of the background function.
+  static const int FUNCTION_OF_SIN_TH = 1;
+  /// Set argument type of the polynomial. (X or sin(Theta))
+  void SetXFunctionType(const int type = FUNCTION_OF_X);
+  /// Get the first derivative values for the LSQ function, for a given parameter.
+  virtual const CrystVector_REAL& GetLSQDeriv(const unsigned int, ObjCryst::RefinablePar &);
+protected:
+  /// Calc values of the Chebyshev polynomials. (Update mChebyshevPolynomials matrices.)
+  void CalcChebyshevPolynomials()const;
+  /// Calc the powder pattern.
+  virtual void CalcPowderPattern()const;
+  /// Init parameters and options. If nonnegative segment nb supplied only parameters of this segments are initialised.
+  void Init(const int segment=-1);
+protected:
+  /// Lower limits for each segment
+  CrystVector_REAL mXmin;
+  /// Upper limits for each segment
+  CrystVector_REAL mXmax;
+  /// Chebyshev polynomials coefficients approximating background
+  std::vector< CrystVector_REAL > mChebyshevCoef;
+  /// Precalculated values of Chebyshev polynomials in current data points
+  mutable std::vector< CrystMatrix_REAL > mChebyshevPolynomials;
+  /// When were values of used Chebyshev polynomials last computed ?
+  mutable ObjCryst::RefinableObjClock mClockChebyshevPolynomialsCalc;
+  /// Argument 'X' of the Chebyshev polynomial T_n(X) functions. (X or sin(Theta))
+  int mXFunctionType;
+};
 
 /** TurbostraticHexStructWB: class to represnt scattering from turbostratic hexagonal layered structures
  *  (e.g. turbostratic-Carbon black).
@@ -1882,6 +1939,10 @@ public:
 private:
   ReflStore mReflStore;
   string mParamsFileName;
+  /// Pointer to ChebyshevLocalBackground scattering component (NULL if none used)
+  MStruct::LocalBackgroundChebyshev *mpLocalBkgComponent;
+  /// List of identifiers to local background segments under specified in parameters file
+  std::vector<int> mLocalBkgSegments;
 public:
   HKLPseudoVoigtBroadeningEffectA();
   virtual ~HKLPseudoVoigtBroadeningEffectA();
@@ -1899,7 +1960,8 @@ public:
 
   void SetParametersFile(const string &filename="");
   void LoadParametersFile();
-  void SaveParametersFile();  
+  void SaveParametersFile();
+  int AddLocalBackground(const string &optline);
 }; // class HKLPseudoVoigtBroadeningEffectA
 
 class ReflectionProfile: public ObjCryst::ReflectionProfile {
@@ -1939,7 +2001,7 @@ protected:
   ReflStore mDisabledEffectsStore;
 protected:
   ObjCryst::ObjRegistry<ReflectionProfileComponent> mReflectionProfileComponentRegistry;
-  const ObjCryst::PowderPatternDiffraction* mpParentPowderPatternDiffraction;
+  ObjCryst::PowderPatternDiffraction* mpParentPowderPatternDiffraction;
 public:
   ReflectionProfile(const ObjCryst::UnitCell& cell, const ObjCryst::Radiation& radiation);
   ReflectionProfile(const ReflectionProfile &old);
@@ -1956,8 +2018,9 @@ public:
   void RegisterHKLDisabledComponents (long h,long k,long l,REAL x,const vector<string> effects, const ObjCryst::RefinableObj *pRegisteringObj=NULL);
   bool IsHKLReflectionProfileComponentDisabled (long h,long k,long l,REAL x,const ReflectionProfileComponent &comp)const;
 
-  virtual void SetParentPowderPatternDiffraction(const ObjCryst::PowderPatternDiffraction &);
+  virtual void SetParentPowderPatternDiffraction(ObjCryst::PowderPatternDiffraction &);
   virtual const ObjCryst::PowderPatternDiffraction& GetParentPowderPatternDiffraction()const;
+  virtual ObjCryst::PowderPatternDiffraction& GetParentPowderPatternDiffraction();
   //void SetProfilePar(const REAL m, const REAL sigma);
 
   bool IsAnisotropic()const;
