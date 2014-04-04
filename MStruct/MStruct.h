@@ -342,7 +342,7 @@ protected:
   int mXFunctionType;
 };
 
-/** TurbostraticHexStructWB: class to represnt scattering from turbostratic hexagonal layered structures
+/** TurbostraticHexStructWB: class to represent scattering from turbostratic hexagonal layered structures
  *  (e.g. turbostratic-Carbon black).
  *
  * It calculates (x-ray) scattering from turbostratic hexagonal layered (e.g. graphite) structures using
@@ -369,8 +369,10 @@ private:
   REAL mLattA;
   /// (graphite) interlayer c-lattice parameter
   REAL mLattC;
-  /// Isotropic temperature factor
-  REAL mBiso;
+  /// Temperature factor related to the mean square displacements in graphitic plane
+  REAL mBisoA;
+  /// Temperature factor related to the mean square displacements in c-direction
+  REAL mBisoC;
   /// atom site accupancy
   REAL mOccup;
   /// Mean layer diameter
@@ -381,6 +383,10 @@ private:
   REAL mVarLa;
   /// Variance of cluster size in c-direction (if zero appropiente precise number of layers is assumed)
   REAL mVarLc;
+  /// Fraction of disordered ("not organized") atoms
+  REAL mFracDisorder;
+  /// Flags for effects included
+  int mOptScattEffects;
   /// Flags for parameters set options
   int mOptI00lScale;
   /// Pointer to atomic scattering power
@@ -389,8 +395,10 @@ private:
   cctbx::eltbx::xray_scattering::gaussian *mpAtomScattererGaussian;
   /// Q = 2pi*s vector where pattern is calculated
   CrystVector_REAL mQ;
+  /// Powder pattern (theoretical) X-points at internal Q-calculation grid Q = (2 pi * s)
+  CrystVector_REAL mXQ;
   /// Vector of absolute scattering factor squared |f(s)|^2
-  CrystVector_REAL mfsq;
+  mutable CrystVector_REAL mfsq;
   /** \brief Incoherent scattering correction parameters
    *
    *  Parmaters to calculate contribution of the incoherent scattering
@@ -402,17 +410,17 @@ private:
   /// Flag which corrections should be included
   unsigned int mFlagCorrections;
   /// Vector of precalculated incoherent scattering intensity including Hajdu, Breit-Dirac and Ruland corrections
-  CrystVector_REAL mIncScatt;
+  mutable CrystVector_REAL mIncScatt;
   /// Vector of calculated total scattered intensity (on inernal Q-vector)
   mutable CrystVector_REAL mItotalScatt;
   /// Vector of intensity corrections (on inernal Q-vector)
   CrystVector_REAL mItotalCorr;
   /// Clocks when (atomic) scattering factors |f|^2 (on internal Q-vector) were calculated
-  ObjCryst::RefinableObjClock mClockFSqCalc;
+  mutable ObjCryst::RefinableObjClock mClockFSqCalc;
   /// Clocks when total scattered intensity (on internal Q-vector) was calculated
   mutable ObjCryst::RefinableObjClock mClockItotalScattCalc;
   /// Clocks when incoherently scattered intensity (on internal Q-vector) was calculated
-  ObjCryst::RefinableObjClock mClockIncScattCalc;
+  mutable ObjCryst::RefinableObjClock mClockIncScattCalc;
   /// Clocks when total intensity caorrections were calculated
   ObjCryst::RefinableObjClock mClockItotalCorrCalc;
   /** \brief Ruland correction parameter (ac)
@@ -461,9 +469,9 @@ private:
   /// Called before the pattern is calculated for the first time
   virtual void Prepare();
   /// Calculate (atomic) structure |f|^2 factors (on internal Q-vector)
-  void CalcFSq();
+  void CalcFSq()const;
   /// Calculate incoherent scattering (on internal Q-vector)
-  void CalcIncScatt();
+  void CalcIncScatt()const;
   /// Calculate total intensity corrections (absorption, polarization) (on internal Q-vector)
   void CalcItotalCorr();
 protected:
@@ -508,7 +516,7 @@ protected:
      *
      *         i(0) = 1. + 2./NATOMS * SUM(r>0) hist(r)*sin(Q*r)/(Q*r)
      */
-    void CalcI0();
+    const CrystVector_REAL & CalcI0();
     /// Print actual i0 data
     void PrintI0(std::ostream &s) const;
   public:
@@ -589,7 +597,7 @@ protected:
     void PrintI00l(std::ostream &s) const;
   public:
     /// Clocks when structure parameters (lattC, La, Lc) have been changed last time
-    ObjCryst::RefinableObjClock mClockInterLayerParams;
+    ObjCryst::RefinableObjClock mClockInterLayersParams;
   private:
     /// Q = (2 pi * s) grid for calculation
     CrystVector_REAL mQ;
@@ -599,14 +607,14 @@ protected:
     CrystVector_REAL mi00l;
     /// Number of layers
     unsigned int mM;
+    /// Clocks i00l pattern was calculated last time
+    ObjCryst::RefinableObjClock mClockPatternCalc;
     /// Actual LattC-parameter used for calculation
     REAL musedLattC;
     /// Actual La-size used for calclation
     REAL musedLa;
     /// Flag i(q) integrals and so also i00l must be recalculated
     bool mNeedRecalc;
-    /// Clocks i00l pattern was calculated last time
-    ObjCryst::RefinableObjClock mClockPatternCalc;
     /// Number of intervals the (rmin, rmax) integration range is divided
     unsigned int mabSteps;
     /// Oversamplig factor for DFT (shoud be at least 8, ndft=DFToversampl*abSteps)
@@ -703,9 +711,9 @@ protected:
 
 public:
   /// i0Calculator
-  i0Calculator mi0Calculator;
+  mutable i0Calculator mi0Calculator;
   /// i00lCalculator
-  i00lCalculator mi00lCalculator;
+  mutable i00lCalculator mi00lCalculator;
   /// Table for double scattering correction
   WarrenDoubleScatteringTable mDoubleScattTab;
   /// Polarization correction
@@ -725,6 +733,14 @@ public:
   static const unsigned int FLAG_INCOH_SCATT_CORR = 0x0007; // use incoherent scattering correction
   static const unsigned int FLAG_BREIT_DIRAC_CORR = 0x0003; // use Breit-Dirac correction
   static const unsigned int FLAG_RULAND_CORR      = 0x0005; // use Ruland correction
+  /// Scattering Effects flags
+  static const unsigned int FLAG_DISCARD_ALL      = 0;  // discard all effects
+  static const unsigned int FLAG_ADD_I_HK0        = 1;  // add hk0 intensity
+  static const unsigned int FLAG_ADD_I_00L        = 2;  // add 00l intensity
+  static const unsigned int FLAG_ADD_TEMP_DIFFUSE = 4;  // add temperature diffuse scattering
+  static const unsigned int FLAG_ADD_ATOM_SCATT   = 8;  // include atomic scattering factor modulation
+  static const unsigned int FLAG_ADD_INCOH        = 16; // add incoherent scattering
+  static const unsigned int FLAG_ADD_ICORR        = 32; // include intensity corrections (basorption, polarizatino, etc.)
 }; // TurbostraticHexStructWB
 
 

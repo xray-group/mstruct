@@ -958,7 +958,7 @@ int mstruct_test10(int argc, char* argv[], std::istream &iss)
     /*turboStructEffect.mi0Calculator.SetQ( 4*M_PI*sin(  0.*M_PI/360.)/1.54,
 					  4*M_PI*sin(140.*M_PI/360.)/1.54,
 					  20.0, 40);*/
-    turboStructEffect.mi0Calculator.SetQ(Q);
+    turboStructEffect.mi0Calculator.SetQ(Q);    
     //turboStructEffect.mi0Calculator.CalcI0();
     //turboStructEffect.mi0Calculator.PrintI0(s1);
     s1.close();
@@ -968,7 +968,23 @@ int mstruct_test10(int argc, char* argv[], std::istream &iss)
     turboStructEffect.mi00lCalculator.SetQ(Q);
     //std::cout << "i00lCalculator.CalcIq - start" << std::endl;
     //turboStructEffect.mi00lCalculator.CalcIq(2, 6.88, 20.0);
-    turboStructEffect.mi00lCalculator.CalcIq(5, 6.88, 20.0);
+    CrystMatrix_REAL mIq = turboStructEffect.mi00lCalculator.CalcIq(5, 6.88, 20.0);
+    std::ofstream sf("MStruct-turboStructEffect-iq.txt");
+    turboStructEffect.mi00lCalculator.PrintIq(sf);
+    sf.close();
+    /*for(int i=0; i<mIq.rows(); i++) {
+      std::ostringstream ss;
+      ss << "MStruct-turboStructEffect-iq-" << (i+1) << ".txt";
+      std::ofstream sf(ss.str().c_str());
+      sf << "#    Q    iq\n";
+      CrystVecto
+      for(int j=0; j<mIq.cols(); j++) {
+	cout << std::fixed << std::showpoint << std::setprecision(5) << turboStructEffect.mi00lCalculator.mQ(j);
+	cout << "  ";
+	cout << std::scientific << std::showpoint << std::setprecision(4) << mIq(i,j);
+      }
+      sf.close();
+      }*/
     //std::cout << "i00lCalculator.CalcIq - end" << std::endl;
     
     s1.open("mstruct-TurbostraticHexStructWB-iq.txt");
@@ -979,7 +995,8 @@ int mstruct_test10(int argc, char* argv[], std::istream &iss)
     //turboStructEffect.mi00lCalculator.CalcIq(5, 6.88, 20.0);
     
     s1.open("mstruct-TurbostraticHexStructWB-i00l.txt");
-    turboStructEffect.mi00lCalculator.CalcI00l(12, 6.88, 20.0);
+    turboStructEffect.mi00lCalculator.CalcI00l(5, 6.88, 20.0);
+    //turboStructEffect.mi00lCalculator.CalcI00l(12, 6.88, 20.0);
     turboStructEffect.mi00lCalculator.PrintI00l(s1);
     s1.close();
   }
@@ -990,6 +1007,7 @@ int mstruct_test10(int argc, char* argv[], std::istream &iss)
     // set radiation
     pattern->SetWavelength("CuA1");
     //pattern->GetRadiation().SetLinearPolarRate(0.0); // no monochromator - no polarization
+    cout << "Lambda: " << std::fixed << std::setprecision(7) << pattern->GetRadiation().GetWavelength()(0) << "\n";
     REAL tthmono = 45.*DEG2RAD; // LiF (monochromator)
     REAL A = cos(tthmono)*cos(tthmono);
     REAL f = (1.-A)/(1.+A);
@@ -1000,7 +1018,8 @@ int mstruct_test10(int argc, char* argv[], std::istream &iss)
     // force switch of Imag-Scattering-Factor
     //.SetIsIgnoringImagScattFact(false);
 
-    pattern->SetPowderPatternPar(0.0, 140.*M_PI/180./1024, 1025);
+    //pattern->SetPowderPatternPar(0.0, 140.*M_PI/180./1024, 1025);
+    pattern->SetPowderPatternPar(15.0*M_PI/180., 0.05*M_PI/180., int((140.-15.)/0.05)+1);
     {
       CrystVector_REAL t(pattern->GetNbPoint());
       t = 0.;
@@ -1008,6 +1027,7 @@ int mstruct_test10(int argc, char* argv[], std::istream &iss)
     }
     pattern->SetWeightToUnit();
     pattern->SetScaleFactor(turboStructEffect, 1.0);
+
     pattern->Prepare();
     pattern->GetPowderPatternCalc();
 
