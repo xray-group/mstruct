@@ -19,11 +19,11 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License`
- * along with MStruct++.  If not, see <http://www.gnu.org/licenses/>.
+ * along with MStruct++. If not, see <http://www.gnu.org/licenses/>.
  * 
  */
  
-#ifdef MSVC
+#ifdef MSCV
 #pragma warning(disable : 4996)
 #endif // MSVC
 
@@ -88,6 +88,10 @@ double func_ei(const double x);
 double func_daw(const double x);
 
 void interp1(const CrystVector_REAL &x, const CrystVector_REAL &y, const CrystVector_REAL &xi, CrystVector_REAL &yi);
+
+void lognormDistribDopita(CrystVector_REAL &x, CrystVector_REAL &p,
+			  const REAL mean, const REAL var,
+			  const int nbins, const REAL ptrunc = 0.05, const bool binteger=false);
 
 // already defined in the file ReflectionProfile.cpp
 #if defined(_MSC_VER) || defined(__BORLANDC__)
@@ -1488,13 +1492,13 @@ void LocalBackgroundChebyshev::Init(const int segment)
 ////////////////////////////////////////////////////////////////////////
 
 TurbostraticHexStructWB::TurbostraticHexStructWB()
-  :mLattA(2.461), mLattC(6.88), mBisoA(0.), mBisoC(0.), mOccup(1.), mLa(20.), mLc(20.),
-   mVarLa(0.), mVarLc(0.), mFracDisorder(0.), mOptScattEffects(~0), mOptI00lScale(0),
+  :mLattA(2.461), mLattC(6.88), mBisoA(0.3948), mBisoC(0.3948), mOccup(1.), mLa(200.), mLc(21.00),
+   mVarLa(0.), mVarLc(0.), mFracDisorder(0.0), mOptScattEffects(~0), mOptI00lScale(0),
    mpAtomScatterer(NULL), mpAtomScattererGaussian(NULL), mQ(0), mfsq(0), mHajduZMKL(0),
    //mFlagCorrections(TurbostraticHexStructWB::TurbostraticHexStructWB::FLAG_INCOH_SCATT_CORR),
-   mFlagCorrections(0x5),
+   mFlagIncohScattCorrections(0x5),
    mIncScatt(0), mItotalScatt(0), mItotalCorr(0),
-   mRuland_ac(0.53), mRuland_dqmax(3.05), mRuland_b(0.007), mRuland_D(1.5e-3),
+   mRuland_ac(0.53), mRuland_dqmax(3.05), mRuland_b(0.03), mRuland_D(1.5e-3),
    mDoubleScattTab("doubleScatCarbon-Cu-tab.dat"),
    mInstrFuncTab("instrFuncCarbon-Cu-tab.dat", 1.54056)
 {
@@ -1512,7 +1516,9 @@ TurbostraticHexStructWB::TurbostraticHexStructWB()
   mAbsorptionCorr.SetAbsorptionCorrParams( 1.e6, 0.0, 1.9, 10.0*DEG2RAD );  
   // Polarization correction is set later in Prepare() when Radiation is available
 
-  mOptScattEffects = FLAG_DISCARD_ALL | FLAG_ADD_I_00L | FLAG_ADD_ATOM_SCATT;
+  //mOptScattEffects = FLAG_DISCARD_ALL | FLAG_ADD_ATOM_SCATT | FLAG_ADD_I_HK0;
+  mOptScattEffects = FLAG_DISCARD_ALL | FLAG_ADD_ATOM_SCATT | FLAG_ADD_I_00L | FLAG_ADD_I_HK0 | FLAG_ADD_TEMP_DIFFUSE | FLAG_ADD_INCOH;
+  mOptScattEffects |= FLAG_ADD_ICORR | FLAG_POLARIZATION_CORR | FLAG_ABSORPTION_CORR;
 
   this->InitParameters();
 }
@@ -1655,7 +1661,7 @@ void TurbostraticHexStructWB::CalcIncScatt()const
   
   mIncScatt.resize( mQ.numElements() );
 
-  if ( (mFlagCorrections & 0x1) != 1 ) { // incoherent scattering not required
+  if ( (mFlagIncohScattCorrections & 0x1) != 1 ) { // incoherent scattering not required
     mIncScatt = 0.;
     mClockIncScattCalc.Click();
     return;
@@ -1677,7 +1683,7 @@ void TurbostraticHexStructWB::CalcIncScatt()const
   }
 
   // --- Breit-Dirac correction ---
-  if ( (mFlagCorrections & 0x3) == 0x3 ) { // Breit-Dirac recoil correction for incoherent scattering required
+  if ( (mFlagIncohScattCorrections & 0x3) == 0x3 ) { // Breit-Dirac recoil correction for incoherent scattering required
     cout << "Calculating Breit-Dirac correction\n"; // debug-purposes
 
     const REAL compLambda = 2.4263102175e-2; // (1/A) Compton wavelength = h/(me*c)
@@ -1695,7 +1701,7 @@ void TurbostraticHexStructWB::CalcIncScatt()const
   } // Breit-Dirac
 
   // --- Ruland correction ---
-  if ( (mFlagCorrections & 0x5) == 0x5 ) { // Ruland monochromator correction for incoherent scattering required
+  if ( (mFlagIncohScattCorrections & 0x5) == 0x5 ) { // Ruland monochromator correction for incoherent scattering required
     cout << "Calculating Ruland correction\n"; // debug-purposes
 
     const long nb = mQ.numElements();
@@ -1720,7 +1726,7 @@ void TurbostraticHexStructWB::CalcIncScatt()const
   s.close();
 }
 
-void TurbostraticHexStructWB::CalcItotalCorr()
+void TurbostraticHexStructWB::CalcItotalCorr()const
 {
   if ( mClockItotalCorrCalc > GetClockPowderPatternSinTheta() &&
        mClockItotalCorrCalc > GetParentPowderPattern().GetClockPowderPatternRadiation() )
@@ -1736,7 +1742,7 @@ void TurbostraticHexStructWB::CalcItotalCorr()
   CrystVector_REAL tth( mQ.numElements() ); // most effects are 2Theta-related
   
   { // Q => tth
-    REAL *pQ = mQ.data();
+    const REAL *pQ = mQ.data();
     REAL *ptth = tth.data();
 
     for(long i=0; i<mQ.numElements(); i++) {
@@ -1748,13 +1754,19 @@ void TurbostraticHexStructWB::CalcItotalCorr()
   mItotalCorr = 1.;
   
   // Lorentz correction
-  //  mItotalCorr *= mLorentzCorr.GetCorr( tth );
+  if( mOptScattEffects & FLAG_LORENTZ_CORR ) {
+    mItotalCorr *= mLorentzCorr.GetCorr( tth );
+  }
 
   // Polarization correction
-  //  mItotalCorr *= mPolarizationCorr.GetCorr( tth );
+  if( mOptScattEffects & FLAG_POLARIZATION_CORR ) {
+    mItotalCorr *= mPolarizationCorr.GetCorr( tth );
+  }
 
   // Absorption correction
-  mItotalCorr *= mAbsorptionCorr.GetCorr( tth );
+  if( mOptScattEffects & FLAG_ABSORPTION_CORR ) {
+    mItotalCorr *= mAbsorptionCorr.GetCorr( tth );
+  }
   
   mClockItotalCorrCalc.Click();
 }
@@ -1788,6 +1800,10 @@ const CrystVector_REAL & TurbostraticHexStructWB::CalcItotalScatt()const
     
     // graphitic layer parameters have changed
     if( mi0Calculator.mClockLayerParams>=mi0Calculator.mClockPatternCalc) {
+      CrystVector_REAL size, distrib;
+      lognormDistribDopita(size, distrib, 10., 0.1, 11, 0.05, false);
+      lognormDistribDopita(size, distrib, 10., 3.0, 11, 0.05, false);
+      lognormDistribDopita(size, distrib, 200., 8000.0, 11, 0.05, false);
       mi0Calculator.CreateHexLayerAtoms( mLattA, mLa );
       mi0Calculator.AccumHist2d( 2.*mLa, true, true );
       // calculate Ihk0 intensity
@@ -1824,8 +1840,13 @@ const CrystVector_REAL & TurbostraticHexStructWB::CalcItotalScatt()const
     p2 = mi00lCalculator.mi00l.data();
     p3 = mItotalScatt.data();
     a = mBisoC/(8.*M_PI*M_PI);
+    REAL natoms = ( mOptScattEffects & FLAG_ADD_I_HK0 ) ? mi0Calculator.mNatoms : ( M_PI/sqrt(3.)*(mLa/mLattA)*(mLa/mLattA) );
+    REAL scale = natoms*16./M_PI/(mLa*mLa);
+    cout << "mi0Calculator.mNatoms: " << mi0Calculator.mNatoms << "\n";
+    cout << "natoms: " << natoms << "\n";
+    cout << "scale: " << scale << "\n";
     for(long i=0; i<mQ.numElements(); i++) {
-      *p3 += (*p2)*exp(-a*(*p1)*(*p1));
+      *p3 += scale*(*p2)*exp(-a*(*p1)*(*p1));
       p1++; p2++; p3++;
     }
   } // I00l
@@ -1837,7 +1858,8 @@ const CrystVector_REAL & TurbostraticHexStructWB::CalcItotalScatt()const
     p3 = mItotalScatt.data();
     a = (2.*mBisoA+mBisoC)/3./(8.*M_PI*M_PI); // mean Biso
     for(long i=0; i<mQ.numElements(); i++) {
-      *p3 += -exp(-a*(*p1)*(*p1)); // I = DS - 1
+      REAL t = a*(*p1)*(*p1);
+      *p3 += (abs(t)<1.e-4) ? t : (1.-exp(-t)); // I = DS - 1 <--> DS
       p1++; p3++;
     }
   } // temp. diffuse
@@ -1860,7 +1882,8 @@ const CrystVector_REAL & TurbostraticHexStructWB::CalcItotalScatt()const
 
   // --- corrections (polarization, absorption, multiple scattering) ---
   if( mOptScattEffects & FLAG_ADD_ICORR ) {
-    ;
+    this->CalcItotalCorr(); // calculate total scattering intensity correctios (polarization, absorption)
+    mItotalScatt *= mItotalCorr;
   } // intensity corrections
 
   mClockItotalScattCalc.Click();
@@ -2030,7 +2053,8 @@ void TurbostraticHexStructWB::InitParameters()
 ////////////////////////////////////////////////////////////////////////
 
 TurbostraticHexStructWB::i0Calculator::i0Calculator()
-  :mNatoms(0), mAtoms(NULL), mdr(0.01), mNbins(0), mHist(NULL), // TODO: check mdr 0.0001->0.01
+  :mNatoms(0), mAtoms(NULL), mdr(0.01), mNbins(0), mHist(NULL),
+   // TODO: check mdr 0.0001->0.01 (indroduces well visible medium frquency oscillations)
    mQ(0), mi0(0), mSincQr(0,0), mSincQrNeedRecalc(true)
 {
 }
@@ -15506,6 +15530,66 @@ double erfc(const double x)// in C99, but not in VC++....
 }
 
 #endif
+
+// void lognormDistribDopita(x,p,mean,var,nbins,ptrunc,binteger) - lognormal distribution
+//
+// Calculates log-normal distribution p(x) according to algorithm of M. Dopita for
+// simulation of scattering from hexagonal layered Carbon-black structures.
+// 
+// Subroutine will generate a list of "sizes" (x) and "probabilities" whith which
+// they occure (p). The list should have (odd number) of bins. The lowest relative
+// (with respect to pdf maximum) probability occurance in (pseudohistogram) should
+// be ptrunc and if binteger is true the "sizes" have to be integer numbers
+// (this means within method of Dopita, they are rounded to integer numbers).
+//
+// April 16, 2014, Zdenek Matej
+//------------------------------------------------------------------------
+
+void lognormDistribDopita(CrystVector_REAL &x, CrystVector_REAL &p,
+			  const REAL mean, const REAL var,
+			  const int nbins, const REAL ptrunc, const bool binteger)
+{
+  // calculate log-normal distribution parameters (M,S)
+  REAL fM = mean*mean/sqrt(var+mean*mean); // (A)
+  REAL fS = sqrt(log(1.+var/(mean*mean)));
+ 
+  // calculate truncation limits
+  REAL xmin, xmax;
+  {
+    REAL xm = fM*exp(-fS*fS); // pdf maximum (x-value)
+    REAL pmax = 1./sqrt(2.*M_PI)/fS/xm*exp(-(log(xm/fM)*log(xm/fM))/(2.*fS*fS));
+
+    REAL a = 1.;
+    REAL b = 2.*(fS*fS-log(fM));
+    REAL c = log(fM)*log(fM)+2*fS*fS*log(ptrunc*pmax*fS*sqrt(2.*M_PI));
+
+    REAL q;
+    if (abs(b)<1e-6) {
+      q = -sqrt(-a*c);
+    } else {
+      q = sqrt(b*b-4.*a*c); // q = -0.5*(b+sign(b)*sqrt(b^2-4*a*c));
+      q *= (b>0) ? 1. : -1.; q += b; q *= -0.5;
+    }
+    REAL x1 = exp( q/a );
+    REAL x2 = exp( c/q );
+    if(x2>x1) {
+      xmin = x1; xmax = x2;
+    } else {
+      xmin = x2; xmax = x1;
+    }
+  } // xmin, xmax
+
+  // test
+  REAL ymin = 1./sqrt(2.*M_PI)/fS/xmin*exp(-(log(xmin/fM)*log(xmin/fM))/(2.*fS*fS));
+  REAL ymax = 1./sqrt(2.*M_PI)/fS/xmax*exp(-(log(xmax/fM)*log(xmax/fM))/(2.*fS*fS));
+  REAL xm = fM*exp(-fS*fS); // pdf maximum (x-value)
+  REAL pmax = 1./sqrt(2.*M_PI)/fS/xm*exp(-(log(xm/fM)*log(xm/fM))/(2.*fS*fS));
+
+  cout << "xmin: (" << xmin << ", " << ymin/pmax << ")\n";
+  cout << "xmax: (" << xmax << ", " << ymax/pmax << ")\n";
+
+  
+}
 
 // void interp1(x,y,xi,yi) - interpolate (x,y) data at xi points
 //

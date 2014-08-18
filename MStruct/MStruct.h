@@ -4,7 +4,7 @@
  * MStruct++ - Object-Oriented computer program/library for MicroStructure analysis
  * 					   from powder diffraction data.
  * 
- * Copyright (C) 2009-2013  Zdenek Matej, Charles University in Prague
+ * Copyright (C) 2009-2014  Zdenek Matej, Charles University in Prague
  * 
  * This file is part of MStruct++.
  * 
@@ -19,7 +19,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with MStruct++.  If not, see <http://www.gnu.org/licenses/>.
+ * along with MStruct++. If not, see <http://www.gnu.org/licenses/>.
  * 
  */
  
@@ -391,7 +391,7 @@ private:
   int mOptI00lScale;
   /// Pointer to atomic scattering power
   ObjCryst::ScatteringPowerAtom *mpAtomScatterer;
-  /// POinter to atomic scattering power gaussian object
+  /// Pointer to atomic scattering power gaussian object
   cctbx::eltbx::xray_scattering::gaussian *mpAtomScattererGaussian;
   /// Q = 2pi*s vector where pattern is calculated
   CrystVector_REAL mQ;
@@ -408,13 +408,13 @@ private:
    */
   CrystVector_REAL mHajduZMKL;
   /// Flag which corrections should be included
-  unsigned int mFlagCorrections;
+  unsigned int mFlagIncohScattCorrections;
   /// Vector of precalculated incoherent scattering intensity including Hajdu, Breit-Dirac and Ruland corrections
   mutable CrystVector_REAL mIncScatt;
   /// Vector of calculated total scattered intensity (on inernal Q-vector)
   mutable CrystVector_REAL mItotalScatt;
   /// Vector of intensity corrections (on inernal Q-vector)
-  CrystVector_REAL mItotalCorr;
+  mutable CrystVector_REAL mItotalCorr;
   /// Clocks when (atomic) scattering factors |f|^2 (on internal Q-vector) were calculated
   mutable ObjCryst::RefinableObjClock mClockFSqCalc;
   /// Clocks when total scattered intensity (on internal Q-vector) was calculated
@@ -422,7 +422,7 @@ private:
   /// Clocks when incoherently scattered intensity (on internal Q-vector) was calculated
   mutable ObjCryst::RefinableObjClock mClockIncScattCalc;
   /// Clocks when total intensity caorrections were calculated
-  ObjCryst::RefinableObjClock mClockItotalCorrCalc;
+  mutable ObjCryst::RefinableObjClock mClockItotalCorrCalc;
   /** \brief Ruland correction parameter (ac)
    *
    *  Ruland correction parameters should be applied if scattered intensity is monochromatised.
@@ -473,7 +473,7 @@ private:
   /// Calculate incoherent scattering (on internal Q-vector)
   void CalcIncScatt()const;
   /// Calculate total intensity corrections (absorption, polarization) (on internal Q-vector)
-  void CalcItotalCorr();
+  void CalcItotalCorr()const;
 protected:
 
   /// Inner class for calculation of (hk0) intensity from the single layer
@@ -741,6 +741,10 @@ public:
   static const unsigned int FLAG_ADD_ATOM_SCATT   = 8;  // include atomic scattering factor modulation
   static const unsigned int FLAG_ADD_INCOH        = 16; // add incoherent scattering
   static const unsigned int FLAG_ADD_ICORR        = 32; // include intensity corrections (basorption, polarizatino, etc.)
+  /// Total scattering corrections
+  static const unsigned int FLAG_ABSORPTION_CORR   =  64; // use absorption correction
+  static const unsigned int FLAG_POLARIZATION_CORR = 128; // use polarization correction
+  static const unsigned int FLAG_LORENTZ_CORR      = 256; // use Lorentz correction
 }; // TurbostraticHexStructWB
 
 

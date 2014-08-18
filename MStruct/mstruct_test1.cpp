@@ -968,7 +968,7 @@ int mstruct_test10(int argc, char* argv[], std::istream &iss)
     turboStructEffect.mi00lCalculator.SetQ(Q);
     //std::cout << "i00lCalculator.CalcIq - start" << std::endl;
     //turboStructEffect.mi00lCalculator.CalcIq(2, 6.88, 20.0);
-    CrystMatrix_REAL mIq = turboStructEffect.mi00lCalculator.CalcIq(5, 6.88, 20.0);
+    CrystMatrix_REAL mIq = turboStructEffect.mi00lCalculator.CalcIq(2, 6.88, 200.0);
     std::ofstream sf("MStruct-turboStructEffect-iq.txt");
     turboStructEffect.mi00lCalculator.PrintIq(sf);
     sf.close();
@@ -1008,18 +1008,21 @@ int mstruct_test10(int argc, char* argv[], std::istream &iss)
     pattern->SetWavelength("CuA1");
     //pattern->GetRadiation().SetLinearPolarRate(0.0); // no monochromator - no polarization
     cout << "Lambda: " << std::fixed << std::setprecision(7) << pattern->GetRadiation().GetWavelength()(0) << "\n";
-    REAL tthmono = 45.*DEG2RAD; // LiF (monochromator)
+    REAL tthmono = 28.*DEG2RAD; // LiF (monochromator)->45., Milan->28.
     REAL A = cos(tthmono)*cos(tthmono);
     REAL f = (1.-A)/(1.+A);
     pattern->GetRadiation().SetLinearPolarRate(f);
     // add Background/TotalScattering phase
     pattern->AddPowderPatternComponent(turboStructEffect);
-
+    // set TotalScattering phase Polarization and Absorption corrections parameters
+    // thickness = 1.e6 nm (1cm), depth = 0, absfactor = 9.2 1/cm , omega = -1 deg
+    turboStructEffect.mAbsorptionCorr.SetAbsorptionCorrParams( 1.e6, 0., 9.2, -1.*DEG2RAD);
+    
     // force switch of Imag-Scattering-Factor
     //.SetIsIgnoringImagScattFact(false);
 
     //pattern->SetPowderPatternPar(0.0, 140.*M_PI/180./1024, 1025);
-    pattern->SetPowderPatternPar(15.0*M_PI/180., 0.05*M_PI/180., int((140.-15.)/0.05)+1);
+    pattern->SetPowderPatternPar(10.0*M_PI/180., 0.05*M_PI/180., int((150.-10.)/0.05)+1);
     {
       CrystVector_REAL t(pattern->GetNbPoint());
       t = 0.;
