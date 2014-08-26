@@ -1492,11 +1492,11 @@ void LocalBackgroundChebyshev::Init(const int segment)
 ////////////////////////////////////////////////////////////////////////
 
 TurbostraticHexStructWB::TurbostraticHexStructWB()
-  :mLattA(2.461), mLattC(6.88), mBisoA(0.3948), mBisoC(0.3948), mOccup(1.), mLa(200.), mLc(21.00),
+  :mLattA(2.461), mLattC(6.88), mBisoA(0.3948), mBisoC(0.3948), mOccup(1.), mLa(20.), mLc(21.00),
    mVarLa(0.), mVarLc(0.), mFracDisorder(0.0), mOptScattEffects(~0), mOptI00lScale(0),
    mpAtomScatterer(NULL), mpAtomScattererGaussian(NULL), mQ(0), mfsq(0), mHajduZMKL(0),
-   //mFlagCorrections(TurbostraticHexStructWB::TurbostraticHexStructWB::FLAG_INCOH_SCATT_CORR),
-   mFlagIncohScattCorrections(0x5),
+   mFlagIncohScattCorrections(FLAG_INCOH_SCATT_CORR),
+   //mFlagIncohScattCorrections(0x5),
    mIncScatt(0), mItotalScatt(0), mItotalCorr(0),
    mRuland_ac(0.53), mRuland_dqmax(3.05), mRuland_b(0.03), mRuland_D(1.5e-3),
    mDoubleScattTab("doubleScatCarbon-Cu-tab.dat"),
@@ -1512,12 +1512,17 @@ TurbostraticHexStructWB::TurbostraticHexStructWB()
   // Data taken from Hajdu (1972), Milan's compton.m, scat ampl - PDFgetX - Weissmayer (1995) data
   mHajduZMKL.resize(4); mHajduZMKL(0) = 6.0; mHajduZMKL(1) = 0.4972; mHajduZMKL(2) = 1.8438; mHajduZMKL(3) = 7.8917;
 
+  /*mBisoC = 0.000;
+    mBisoA = 0.000;*/
+
   // initialise Absorption correction TODO:: Generalise
   mAbsorptionCorr.SetAbsorptionCorrParams( 1.e6, 0.0, 1.9, 10.0*DEG2RAD );  
   // Polarization correction is set later in Prepare() when Radiation is available
 
-  //mOptScattEffects = FLAG_DISCARD_ALL | FLAG_ADD_ATOM_SCATT | FLAG_ADD_I_HK0;
-  mOptScattEffects = FLAG_DISCARD_ALL | FLAG_ADD_ATOM_SCATT | FLAG_ADD_I_00L | FLAG_ADD_I_HK0 | FLAG_ADD_TEMP_DIFFUSE | FLAG_ADD_INCOH;
+  mOptScattEffects = FLAG_DISCARD_ALL | FLAG_ADD_ATOM_SCATT | FLAG_ADD_I_HK0;
+  mOptScattEffects |= FLAG_ADD_I_00L | FLAG_ADD_INCOH | FLAG_ADD_TEMP_DIFFUSE;
+  //mOptScattEffects =FLAG_DISCARD_ALL | FLAG_ADD_ATOM_SCATT | FLAG_ADD_I_00L;
+  //mOptScattEffects = FLAG_DISCARD_ALL | FLAG_ADD_ATOM_SCATT | FLAG_ADD_I_00L | FLAG_ADD_I_HK0 | FLAG_ADD_TEMP_DIFFUSE | FLAG_ADD_INCOH;
   mOptScattEffects |= FLAG_ADD_ICORR | FLAG_POLARIZATION_CORR | FLAG_ABSORPTION_CORR;
 
   this->InitParameters();
@@ -1801,9 +1806,9 @@ const CrystVector_REAL & TurbostraticHexStructWB::CalcItotalScatt()const
     // graphitic layer parameters have changed
     if( mi0Calculator.mClockLayerParams>=mi0Calculator.mClockPatternCalc) {
       CrystVector_REAL size, distrib;
-      lognormDistribDopita(size, distrib, 10., 0.1, 11, 0.05, false);
+      /*lognormDistribDopita(size, distrib, 10., 0.1, 11, 0.05, false);
       lognormDistribDopita(size, distrib, 10., 3.0, 11, 0.05, false);
-      lognormDistribDopita(size, distrib, 200., 8000.0, 11, 0.05, false);
+      lognormDistribDopita(size, distrib, 200., 8000.0, 11, 0.05, false);*/
       mi0Calculator.CreateHexLayerAtoms( mLattA, mLa );
       mi0Calculator.AccumHist2d( 2.*mLa, true, true );
       // calculate Ihk0 intensity
@@ -2053,8 +2058,9 @@ void TurbostraticHexStructWB::InitParameters()
 ////////////////////////////////////////////////////////////////////////
 
 TurbostraticHexStructWB::i0Calculator::i0Calculator()
-  :mNatoms(0), mAtoms(NULL), mdr(0.01), mNbins(0), mHist(NULL),
+  :mNatoms(0), mAtoms(NULL), mdr(0.001), mNbins(0), mHist(NULL),
    // TODO: check mdr 0.0001->0.01 (indroduces well visible medium frquency oscillations)
+   //       0.001 looks quite reasonbaly, however memory requrements are huge
    mQ(0), mi0(0), mSincQr(0,0), mSincQrNeedRecalc(true)
 {
 }
@@ -6079,9 +6085,10 @@ void EllipRodsGammaBroadeningEffect::InitParameters()
 
   // PsiD
   {
-    RefinablePar tmp("BasalTwist", &mPsiD, 0., M_PI,
+    RefinablePar tmp("BasalTwist", &mPsiD, -M_PI/2., M_PI/2.,
+    //RefinablePar tmp("BasalTwist", &mPsiD, 0., M_PI,
                      gpRefParTypeScattDataProfileWidth,
-                     REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,true,180./M_PI);
+                     REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,true,180./M_PI,M_PI);
     tmp.AssignClock(mClockMaster);
     tmp.SetDerivStep(0.05*M_PI/180.);
     this->AddPar(tmp);

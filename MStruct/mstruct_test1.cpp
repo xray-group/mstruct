@@ -968,7 +968,7 @@ int mstruct_test10(int argc, char* argv[], std::istream &iss)
     turboStructEffect.mi00lCalculator.SetQ(Q);
     //std::cout << "i00lCalculator.CalcIq - start" << std::endl;
     //turboStructEffect.mi00lCalculator.CalcIq(2, 6.88, 20.0);
-    CrystMatrix_REAL mIq = turboStructEffect.mi00lCalculator.CalcIq(2, 6.88, 200.0);
+    CrystMatrix_REAL mIq = turboStructEffect.mi00lCalculator.CalcIq(2, 6.88, 20.0);
     std::ofstream sf("MStruct-turboStructEffect-iq.txt");
     turboStructEffect.mi00lCalculator.PrintIq(sf);
     sf.close();
