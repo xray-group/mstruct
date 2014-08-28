@@ -91,7 +91,8 @@ void interp1(const CrystVector_REAL &x, const CrystVector_REAL &y, const CrystVe
 
 void lognormDistribDopita(CrystVector_REAL &x, CrystVector_REAL &p,
 			  const REAL mean, const REAL var,
-			  const int nbins, const REAL ptrunc = 0.05, const bool binteger=false);
+			  const int nbins, const REAL ptrunc = 0.05,
+			  const bool bround=false, const REAL multiplier=1.);
 
 // already defined in the file ReflectionProfile.cpp
 #if defined(_MSC_VER) || defined(__BORLANDC__)
@@ -1801,22 +1802,37 @@ const CrystVector_REAL & TurbostraticHexStructWB::CalcItotalScatt()const
   REAL a = 0.0;;
   
   // --- Ihk0 ---
-  if( mOptScattEffects & FLAG_ADD_I_HK0 ) {
-    
+  if( mOptScattEffects & FLAG_ADD_I_HK0 ) {    
     // graphitic layer parameters have changed
     if( mi0Calculator.mClockLayerParams>=mi0Calculator.mClockPatternCalc) {
-      CrystVector_REAL size, distrib;
-      /*lognormDistribDopita(size, distrib, 10., 0.1, 11, 0.05, false);
-      lognormDistribDopita(size, distrib, 10., 3.0, 11, 0.05, false);
-      lognormDistribDopita(size, distrib, 200., 8000.0, 11, 0.05, false);*/
-      mi0Calculator.CreateHexLayerAtoms( mLattA, mLa );
-      mi0Calculator.AccumHist2d( 2.*mLa, true, true );
-      // calculate Ihk0 intensity
-      mi0Calculator.CalcI0();
-      cout << "mi0 calculated" << endl;
+      // do we have a single La or a distribution
+      if( abs(mVarLa)>1.e-4 ) {
+	// --- La-distribution ---
+	// generate distribution
+	int nbins = 11;
+	CrystVector_REAL size, distrib;
+	lognormDistribDopita(size, distrib, mLa, mVarLa, nbins, 0.05, false);
+	// calculate Ihk0 intensity weighted by the probability function
+	for(int ibin=0; ibin<nbins; ibin++) {
+	  // generate layer and calculate histogram (TODO:: this can be markedly optimised)
+	  mi0Calculator.CreateHexLayerAtoms( size(ibin), mLa );
+	  mi0Calculator.AccumHist2d( 2.*size(nbins-1), ibin==0, distrib(ibin), true );
+	}
+	// calculate Ihk0 intensity
+	mi0Calculator.CalcI0(); 
+      } else {
+	// --- single La ---
+	// generate layer and calculate histogram
+	mi0Calculator.CreateHexLayerAtoms( mLattA, mLa );
+	mi0Calculator.AccumHist2d( 2.*mLa, true, 1., true );
+	// calculate Ihk0 intensity
+	mi0Calculator.CalcI0(); 
+      }
+      
+      /*cout << "mi0 calculated" << endl; // TODO:: delete here
       std::ofstream ss("hist-x.txt");
       mi0Calculator.PrintHistogram(ss);
-      ss.close();
+      ss.close();*/
     }
 
     // add intensity including temperature factors
@@ -2136,7 +2152,7 @@ void TurbostraticHexStructWB::i0Calculator::PrintAtoms(std::ostream &s) const
   }
 }
 
-void TurbostraticHexStructWB::i0Calculator::AccumHist2d(float rmax, const bool tidy, const bool throwerr)
+void TurbostraticHexStructWB::i0Calculator::AccumHist2d(float rmax, const bool tidy, const REAL mult, const bool throwerr)
 {
   unsigned int m, n, nr;
   float xm, ym, xn, yn, r;
@@ -15538,23 +15554,25 @@ double erfc(const double x)// in C99, but not in VC++....
 
 #endif
 
-// void lognormDistribDopita(x,p,mean,var,nbins,ptrunc,binteger) - lognormal distribution
+// void lognormDistribDopita(x,p,mean,var,nbins,ptrunc,bround,multiplier) - lognormal distribution
 //
 // Calculates log-normal distribution p(x) according to algorithm of M. Dopita for
 // simulation of scattering from hexagonal layered Carbon-black structures.
 // 
-// Subroutine will generate a list of "sizes" (x) and "probabilities" whith which
-// they occure (p). The list should have (odd number) of bins. The lowest relative
+// Subroutine will generate a list of "sizes" (x) and "probabilities" of their 
+// occurance (p). The list should have (odd number) of bins. The lowest relative
 // (with respect to pdf maximum) probability occurance in (pseudohistogram) should
-// be ptrunc and if binteger is true the "sizes" have to be integer numbers
-// (this means within method of Dopita, they are rounded to integer numbers).
+// be ptrunc and if bround is true the "sizes" have to be integer multiplaiers
+// of the next parameter (this means within method of Dopita, they are rounded to
+// integer numbers).
 //
 // April 16, 2014, Zdenek Matej
 //------------------------------------------------------------------------
 
 void lognormDistribDopita(CrystVector_REAL &x, CrystVector_REAL &p,
 			  const REAL mean, const REAL var,
-			  const int nbins, const REAL ptrunc, const bool binteger)
+			  const int nbins, const REAL ptrunc,
+			  const bool bround, const REAL multiplier)
 {
   // calculate log-normal distribution parameters (M,S)
   REAL fM = mean*mean/sqrt(var+mean*mean); // (A)
@@ -15595,7 +15613,28 @@ void lognormDistribDopita(CrystVector_REAL &x, CrystVector_REAL &p,
   cout << "xmin: (" << xmin << ", " << ymin/pmax << ")\n";
   cout << "xmax: (" << xmax << ", " << ymax/pmax << ")\n";
 
-  
+  // nbins must be odd
+  if (!(nbins & 1))
+    throw ObjCrystException("lognormDistribDopita: Number of bins must be odd!");
+
+  // generate x-grid
+  x.resize( nbins );
+  p.resize( nbins );
+
+  // xSmall
+  for(int k=0; k<=(nbins-1)/2; k++) {
+    x(k) = xmin + (mean-xmin)/((nbins-1)/2)*k;
+  }
+  // xBigg
+  for(int k=1; k<=(nbins-1)/2; k++) {
+    x((nbins-1)/2+k) = mean + (xmax-mean)/((nbins-1)/2)*k;
+  }
+
+  if (bround)
+    for(int k=0; k<x.numElements(); k++)
+      x(k) = round(x(k)/multiplier)*multiplier;
+
+  cout << x << "\n";
 }
 
 // void interp1(x,y,xi,yi) - interpolate (x,y) data at xi points

@@ -494,10 +494,12 @@ protected:
      * If tidy argument is false(default), the histogram is added to the
      * existing one. If it is true, the histogram is reinitialised (set
      * to zero) before computation and also memory is reallocated if needed.
-     * Throwerr argument indicates if an exception should be signalised
-     * when there are atoms at a distance out of histogram range.
+     * Histogram values are always multiplied by mult-factor before they are
+     * added to the final histogram. Throwerr argument indicates if an
+     * exception should be signalised when there are atoms at a distance
+     * out of histogram range.
      */
-    void AccumHist2d(float rmax, const bool tidy=false, const bool throwerr=true);
+    void AccumHist2d(float rmax, const bool tidy=false, const REAL mult=1., const bool throwerr=true);
     /// Print histogram
     void PrintHistogram(std::ostream &s) const;
     /** \brief Sets calculation Q-grid.
