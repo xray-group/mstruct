@@ -96,11 +96,21 @@ void lognormDistribDopita(CrystVector_REAL &x, CrystVector_REAL &p,
 
 // already defined in the file ReflectionProfile.cpp
 #if defined(_MSC_VER) || defined(__BORLANDC__)
+
+#include <boost/math/special_functions/round.hpp>
+#define round(x) boost::math::round(x)
+
 #undef min // Predefined macros.... (wx?)
 #undef max
 
 double erfc(const double x);// in C99, but not in VC++....
    // defined later in this file
+
+// very nasty solution (volatile to rounding errors)
+double erf(const double x) { return 1.-erfc(x); }
+
+#define isnan _isnan
+
 #endif
 
 // --- NR routies ----------------------------------------------------------------
@@ -15953,7 +15963,7 @@ void vdftint(float (*func)(float,void*), void *params, float a, float b, float w
   float sdft,serr,*cpol,*spol,*xpol;
   static double *data = NULL;
   static fftw_complex *dft = NULL;
-  fftw_plan dftplan;
+  static fftw_plan dftplan;
   static unsigned int ndftold = 0, mmold = 0;
   static unsigned int mpol = 6;
 

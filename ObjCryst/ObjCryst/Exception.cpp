@@ -41,7 +41,6 @@ ObjCrystException::ObjCrystException() : message()
 
 ObjCrystException::ObjCrystException(const string & _message)
 {
-
    if (!ObjCrystException::verbose)
    {
        message = _message;
@@ -50,13 +49,13 @@ ObjCrystException::ObjCrystException(const string & _message)
 
    static bool inException;
    cout << "LibCryst ++ exception thrown!!" << endl;
-   cout << "  Message: " + message <<endl;
+   cout << "  Message: " + _message <<endl;
    if(false==inException)
    {
       inException=true;
       string saveFileName="ObjCryst";
       time_t date=time(0);
-      char strDate[40];
+      char strDate[40]; // 40->60 (Win %Z: Either the time-zone name or time zone abbreviation, depending on registry settings)
       strftime(strDate,sizeof(strDate),"%Y-%m-%d_%H-%M-%S",gmtime(&date));//%Y-%m-%dT%H:%M:%S%Z
       saveFileName=saveFileName+strDate+".xml";
       cout << "Attempting to save ObjCryst++ environment to file:"<<saveFileName<<endl;

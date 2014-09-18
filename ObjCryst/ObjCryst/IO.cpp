@@ -93,7 +93,7 @@ void XMLCrystFileSaveGlobal(ostream &out)
    VFN_DEBUG_ENTRY("XMLCrystFileSaveGlobal(ostream)",5)  
    XMLCrystTag tag("ObjCryst");
    time_t date=time(0);
-   char strDate[40];
+   char strDate[60]; // 40->60 (Win %Z: Either the time-zone name or time zone abbreviation, depending on registry settings)
    strftime(strDate,sizeof(strDate),"%Y-%m-%dT%H:%M:%S%Z",gmtime(&date));//%Y-%m-%dT%H:%M:%S%Z
    tag.AddAttribute("Date",strDate);
    tag.AddAttribute("Revision","1013");
