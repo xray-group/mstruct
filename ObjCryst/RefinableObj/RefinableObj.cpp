@@ -1835,6 +1835,7 @@ REAL RefinableObj::GetLogLikelihood()const
 const CrystVector_REAL& RefinableObj::GetLSQCalc(const unsigned int) const
 {
    throw ObjCrystException("Error: called RefinableObj::GetLSQCalc()");
+   cout < "called\n";
    CrystVector_REAL *noWarning=new CrystVector_REAL;
    return *noWarning;
 }
@@ -1862,7 +1863,7 @@ const CrystVector_REAL& RefinableObj::GetLSQDeriv(const unsigned int n, Refinabl
    mLSQDeriv -=this->GetLSQCalc(n);
    par.Mutate(par.GetDerivStep());
    mLSQDeriv /= par.GetDerivStep()*2; // Zdenek
-   return mLSQDeriv;*/
+   return mLSQDeriv;*/	
    REAL d1 = par.GetValue(); // Zdenek
    par.Mutate(par.GetDerivStep());
    REAL d2 = par.GetValue();

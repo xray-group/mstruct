@@ -1,4 +1,4 @@
-/*  ObjCryst++ Object-Oriented Crystallographic Library
+/* ObjCryst++ Object-Oriented Crystallographic Library
     (c) 2000-2002 Vincent Favre-Nicolin vincefn@users.sourceforge.net
         2000-2001 University of Geneva (Switzerland)
 
