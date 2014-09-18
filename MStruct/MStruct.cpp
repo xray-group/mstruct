@@ -1500,6 +1500,7 @@ TurbostraticHexStructWB::TurbostraticHexStructWB()
    //mFlagIncohScattCorrections(0x5),
    mIncScatt(0), mItotalScatt(0), mItotalCorr(0),
    mRuland_ac(0.53), mRuland_dqmax(3.05), mRuland_b(0.03), mRuland_D(1.5e-3),
+   mi00lstore(0),
    mDoubleScattTab("doubleScatCarbon-Cu-tab.dat"),
    mInstrFuncTab("instrFuncCarbon-Cu-tab.dat", 1.54056)
 {
@@ -1526,6 +1527,9 @@ TurbostraticHexStructWB::TurbostraticHexStructWB()
   //mOptScattEffects = FLAG_DISCARD_ALL | FLAG_ADD_ATOM_SCATT | FLAG_ADD_I_00L | FLAG_ADD_I_HK0 | FLAG_ADD_TEMP_DIFFUSE | FLAG_ADD_INCOH;
   mOptScattEffects |= FLAG_ADD_ICORR | FLAG_POLARIZATION_CORR | FLAG_ABSORPTION_CORR;
 
+  mClockMaster.AddChild( mi0Calculator.mClockLayerParams );
+  mClockMaster.AddChild( mi00lCalculator.mClockInterLayerParams );
+  
   this->InitParameters();
 }
 
@@ -1559,6 +1563,29 @@ const string& TurbostraticHexStructWB::GetClassName()const
 {
   static const string className = "MStruct::TurbostraticHexStructWB";
   return className;
+}
+
+void TurbostraticHexStructWB::SetLayerParameters(const REAL La, const REAL varLa,
+						 const REAL lattA, const REAL BISOa)
+{
+  this->GetPar(&mLa).SetHumanValue( La );
+  this->GetPar(&mVarLa).SetHumanValue( varLa );
+  this->GetPar(&mLattA).SetHumanValue( lattA );
+  this->GetPar(&mBisoA).SetHumanValue( BISOa );
+}
+
+void TurbostraticHexStructWB::SetInterLayerParameters(const REAL Lc, const REAL varLc,
+						      const REAL lattC, const REAL BISOc)
+{
+  this->GetPar(&mLc).SetHumanValue( Lc );
+  this->GetPar(&mVarLc).SetHumanValue( varLc );
+  this->GetPar(&mLattC).SetHumanValue( lattC );
+  this->GetPar(&mBisoC).SetHumanValue( BISOc );
+}
+
+void TurbostraticHexStructWB::SetFractionDisorder(const REAL fracDisorder)
+{
+  this->GetPar(&mFracDisorder).SetHumanValue( fracDisorder );
 }
 
 void TurbostraticHexStructWB::Prepare()
@@ -1782,7 +1809,7 @@ const CrystVector_REAL & TurbostraticHexStructWB::CalcItotalScatt()const
   if ( mItotalScatt.numElements()==mQ.numElements() &&
        mClockMaster<mClockItotalScattCalc && // Biso, occ, fracDisorder, ...
        mi0Calculator.mClockLayerParams<mClockItotalScattCalc && // lattA, La, ...
-       mi00lCalculator.mClockInterLayersParams<mClockItotalScattCalc) // lattC, Lc, ...
+       mi00lCalculator.mClockInterLayerParams<mClockItotalScattCalc) // lattC, Lc, ...
     return mItotalScatt;
 
   // number of points on calculation grid has changed
@@ -1793,6 +1820,9 @@ const CrystVector_REAL & TurbostraticHexStructWB::CalcItotalScatt()const
     mClockItotalScattCalc.Reset();
   }
   
+  cout << "La: " << mLa << ", varLa: " << mVarLa << ", BISOa=" << mBisoA << "\n";
+  cout << "Lc: " << mLc << ", varLc: " << mVarLc << ", BISOc=" << mBisoC << "\n";
+
   mItotalScatt = 0.; // zero output array
 
   // declare important pointers and constants
@@ -1813,18 +1843,29 @@ const CrystVector_REAL & TurbostraticHexStructWB::CalcItotalScatt()const
 	CrystVector_REAL size, distrib;
 	lognormDistribDopita(size, distrib, mLa, mVarLa, nbins, 0.05, false);
 	// calculate Ihk0 intensity weighted by the probability function
+	mNatoms = 0.;
 	for(int ibin=0; ibin<nbins; ibin++) {
 	  // generate layer and calculate histogram (TODO:: this can be markedly optimised)
-	  mi0Calculator.CreateHexLayerAtoms( size(ibin), mLa );
+	  mi0Calculator.CreateHexLayerAtoms( mLattA, size(ibin) );
+	  cout << "size: " << size(ibin) << ", nb. atoms: " << mi0Calculator.mNatoms << "\n";
 	  mi0Calculator.AccumHist2d( 2.*size(nbins-1), ibin==0, distrib(ibin), true );
+	  mNatoms += mi0Calculator.mNatoms*distrib(ibin);
 	}
 	// calculate Ihk0 intensity
+	std::ofstream s1("mstruct-TurbostraticHexStructWB-histX.txt");
+	mi0Calculator.PrintHistogram(s1);
+	s1.close();
 	mi0Calculator.CalcI0(); 
       } else {
 	// --- single La ---
+	cout << "single La mode\n";
 	// generate layer and calculate histogram
 	mi0Calculator.CreateHexLayerAtoms( mLattA, mLa );
+	mNatoms = mi0Calculator.mNatoms;
 	mi0Calculator.AccumHist2d( 2.*mLa, true, 1., true );
+	std::ofstream s1("mstruct-TurbostraticHexStructWB-histX.txt");
+	mi0Calculator.PrintHistogram(s1);
+	s1.close();
 	// calculate Ihk0 intensity
 	mi0Calculator.CalcI0(); 
       }
@@ -1849,19 +1890,41 @@ const CrystVector_REAL & TurbostraticHexStructWB::CalcItotalScatt()const
   // --- I00l ---
   if( mOptScattEffects & FLAG_ADD_I_00L ) {
     // model parameters in c-direction have been modified
-    if( mi00lCalculator.mClockInterLayersParams>=mi00lCalculator.mClockPatternCalc ||
+    if( mi00lCalculator.mClockInterLayerParams>=mi00lCalculator.mClockPatternCalc ||
 	mi0Calculator.mClockLayerParams>=mi0Calculator.mClockPatternCalc ) { // depends also on La
-      // calculate I00l intensity
-      mi00lCalculator.CalcI00l( (unsigned int)round(2.*mLc/mLattC), mLattC, mLa );
-      cout << "mi00l calculated" << endl;
+      
+      // do we have a single Lc or a distribution
+      if( abs(mVarLc)>1.e-4 ) {
+	// --- Lc-distribution ---
+	// generate distribution
+	int nbins = 11;
+	CrystVector_REAL size, distrib;
+	lognormDistribDopita(size, distrib, mLc, mVarLc, nbins, 0.05, true, mLattC/2.);
+	// final nb. of bins (can be smaller)
+	nbins = size.numElements();
+	// calculate I00l intensity weighted by the probability function
+	mi00lstore.resize(mQ.numElements());
+	mi00lstore = 0.;
+	for(int ibin=nbins-1; ibin>=0; ibin--) {
+	  // calculate sum of integrals for the given number of layers
+	  // (approximation: we assume same <La> for all layers)
+	  CrystVector_REAL i00lt = mi00lCalculator.CalcI00l( (unsigned int)round(2.*size(ibin)/mLattC), mLattC, mLa );
+	  i00lt *= distrib(ibin);
+	  mi00lstore += i00lt;
+	}
+      } else {
+	// --- single Lc ---
+	// calculate I00l intensity
+	mi00lstore = mi00lCalculator.CalcI00l( (unsigned int)round(2.*mLc/mLattC), mLattC, mLa );
+      }
     }
 
     // add intensity including temperature factors
     p1 = mQ.data();
-    p2 = mi00lCalculator.mi00l.data();
+    p2 = mi00lstore.data();
     p3 = mItotalScatt.data();
     a = mBisoC/(8.*M_PI*M_PI);
-    REAL natoms = ( mOptScattEffects & FLAG_ADD_I_HK0 ) ? mi0Calculator.mNatoms : ( M_PI/sqrt(3.)*(mLa/mLattA)*(mLa/mLattA) );
+    REAL natoms = ( mOptScattEffects & FLAG_ADD_I_HK0 ) ? mNatoms : ( M_PI/sqrt(3.)*(mLa/mLattA)*(mLa/mLattA) );
     REAL scale = natoms*16./M_PI/(mLa*mLa);
     cout << "mi0Calculator.mNatoms: " << mi0Calculator.mNatoms << "\n";
     cout << "natoms: " << natoms << "\n";
@@ -1908,13 +1971,30 @@ const CrystVector_REAL & TurbostraticHexStructWB::CalcItotalScatt()const
   } // intensity corrections
 
   mClockItotalScattCalc.Click();
-  
+   
+  std::ofstream sf("MStruct-ItotalScatt.txt");
+  for(int i=0; i<mItotalScatt.numElements(); i++) {
+    sf << std::fixed << std::showpoint << std::setprecision(5) << mQ(i);
+    sf << "  ";
+    sf << std::scientific << std::showpoint << std::setprecision(4) << mItotalScatt(i) << "\n";
+  }
+  sf.close();
+
   return mItotalScatt;
 }
 
 void TurbostraticHexStructWB::CalcPowderPattern()const
 {
+  cout << "mi00lCalculator.mClockInterLayerParams: ";
+  mi00lCalculator.mClockInterLayerParams.Print();
+  cout << "mClockPowderPatternCalc: ";
+  mClockPowderPatternCalc.Print();
+  cout << "mi00lCalculator.mClockPatternCalc: ";
+  mi00lCalculator.mClockPatternCalc.Print();
+
   if (mClockPowderPatternCalc>mClockMaster &&
+      mClockPowderPatternCalc>mi0Calculator.mClockLayerParams &&
+      mClockPowderPatternCalc>mi00lCalculator.mClockInterLayerParams &&
       mClockPowderPatternCalc>GetParentPowderPattern().GetClockPowderPatternXCorr()) return;
   
   TAU_PROFILE("MStruct::TurbostraticHexStructWB::CalcPowderPattern()","void ()",TAU_DEFAULT);
@@ -1932,18 +2012,16 @@ void TurbostraticHexStructWB::CalcPowderPattern()const
     CrystVector_REAL XQcorr(mXQ.numElements());
     const REAL *pXQ = mXQ.data();
     REAL *pXQcorr = XQcorr.data();
-    for(unsigned long i=0; i<mXQ.numElements(); i++) { *pXQcorr = GetParentPowderPattern().X2XCorr( *pXQ ); pXQ++; pXQcorr++; }
+    for(long i=0; i<mXQ.numElements(); i++) { *pXQcorr = GetParentPowderPattern().X2XCorr( *pXQ ); pXQ++; pXQcorr++; }
 
     // interpolate calculated pattern on experimental data points
     interp1( XQcorr, mItotalScatt, GetParentPowderPattern().GetPowderPatternX(), mPowderPatternCalc );
 
     // apply variable slit intensity correction
-    REAL *p2 = mPowderPatternCalc.data();
     if(mUseVariableSlitIntensityCorr) {
-      const REAL *p1 = mpParentPowderPattern->GetPowderPatternX().data();
       const REAL *p2 = GetPowderPatternSinTheta().data();
       REAL *p3 = mPowderPatternCalc.data();
-      for(unsigned long i=0; i<nb; i++) { *p3 *= (*p2); p1++; p2++; p3++; }
+      for(unsigned long i=0; i<nb; i++) { *p3 *= (*p2); p2++; p3++; }
     }
 
   }
@@ -1989,7 +2067,7 @@ void TurbostraticHexStructWB::InitParameters()
     RefinablePar tmp("c",&mLattC,0.01,1.e3,
 		     gpRefParTypeUnitCell,REFPAR_DERIV_STEP_ABSOLUTE,
 		     false,true,true,false,1.0);
-    tmp.AssignClock(mi00lCalculator.mClockInterLayersParams);
+    tmp.AssignClock(mi00lCalculator.mClockInterLayerParams);
     tmp.SetDerivStep(0.001);
     this->AddPar(tmp);
   }
@@ -2024,7 +2102,7 @@ void TurbostraticHexStructWB::InitParameters()
   { // mean layer diameter (La)
     RefinablePar tmp("La",&mLa,mLattA,1.e3,
 		     gpRefParTypeScattDataProfileWidth,REFPAR_DERIV_STEP_ABSOLUTE,
-		     false,true,true,false,1.0);
+		     false,true,true,false,0.1);
     tmp.AssignClock(mi0Calculator.mClockLayerParams); // TODO:: connect aslo with InterLayer
     tmp.SetDerivStep(2*mLattA);
     this->AddPar(tmp);
@@ -2033,26 +2111,26 @@ void TurbostraticHexStructWB::InitParameters()
   { // mean cluster size in c-direction (Lc)
     RefinablePar tmp("Lc",&mLc,0.0,1.e3,
 		     gpRefParTypeScattDataProfileWidth,REFPAR_DERIV_STEP_ABSOLUTE,
-		     false,true,true,false,1.0);
-    tmp.AssignClock(mi00lCalculator.mClockInterLayersParams);
+		     false,true,true,false,0.1);
+    tmp.AssignClock(mi00lCalculator.mClockInterLayerParams);
     tmp.SetDerivStep(0.75*mLattC);
     this->AddPar(tmp);
   }
 
   { // layer size variance (varLa)
-    RefinablePar tmp("varLa",&mVarLa,0.0,1.e2,
+    RefinablePar tmp("varLa",&mVarLa,0.0,1.e4,
 		     gpRefParTypeScattDataProfileWidth,REFPAR_DERIV_STEP_ABSOLUTE,
-		     true,true,true,false,1.0);
+		     true,true,true,false,0.01);
     tmp.AssignClock(mi0Calculator.mClockLayerParams);// TODO:: connect aslo with InterLayer
     tmp.SetDerivStep(0.2);
     this->AddPar(tmp);
   }
   
   { // variance of cluster size in c-direction (varLc)
-    RefinablePar tmp("varLc",&mVarLc,0.0,1.e2,
+    RefinablePar tmp("varLc",&mVarLc,0.0,1.e4,
 		     gpRefParTypeScattDataProfileWidth,REFPAR_DERIV_STEP_ABSOLUTE,
-		     true,true,true,false,1.0);
-    tmp.AssignClock(mi00lCalculator.mClockInterLayersParams);
+		     true,true,true,false,0.01);
+    tmp.AssignClock(mi00lCalculator.mClockInterLayerParams);
     tmp.SetDerivStep(0.2);
     this->AddPar(tmp);
   }
@@ -2074,7 +2152,7 @@ void TurbostraticHexStructWB::InitParameters()
 ////////////////////////////////////////////////////////////////////////
 
 TurbostraticHexStructWB::i0Calculator::i0Calculator()
-  :mNatoms(0), mAtoms(NULL), mdr(0.001), mNbins(0), mHist(NULL),
+  :mNatoms(0), mAtoms(NULL), mdr(0.001), mNbins(0), mHist(NULL), mHistAuxUnScaled(NULL),
    // TODO: check mdr 0.0001->0.01 (indroduces well visible medium frquency oscillations)
    //       0.001 looks quite reasonbaly, however memory requrements are huge
    mQ(0), mi0(0), mSincQr(0,0), mSincQrNeedRecalc(true)
@@ -2086,7 +2164,8 @@ TurbostraticHexStructWB::i0Calculator::~i0Calculator()
   mi0.resize(0);
   mQ.resize(0);
   mSincQr.resize(0,0); mSincQrNeedRecalc = true;
-  if (mHist != NULL) free( (void*) mHist ); { mHist = NULL; mNbins = 0; }
+  if (mHist != NULL) free( (void*) mHist ); { mHist = NULL; }
+  if (mHist != NULL) free( (void*) mHistAuxUnScaled ); { mHistAuxUnScaled = NULL; }
   if (mAtoms != NULL) free( (void*) mAtoms ); { mAtoms = NULL; mNatoms = 0; }
 }
 
@@ -2103,7 +2182,6 @@ void TurbostraticHexStructWB::i0Calculator::CreateHexLayerAtoms(float lattA, flo
   float *p = atomsHex;
   unsigned int nCirc = 0; /* count atoms inside circle of radius = La/2 */
   float R2 = La*La/4.;
-  float a0 = lattA;
 
   for(unsigned int m=0; m<=nHex; m++)
     for(unsigned int n=0; n<=nHex; n++) {
@@ -2139,6 +2217,14 @@ void TurbostraticHexStructWB::i0Calculator::CreateHexLayerAtoms(float lattA, flo
   }
 
   free( (void*) atomsHex ); atomsHex = NULL;
+
+  // check if there are any atoms
+  if( mNatoms==0 && La>1.e-4 ) {
+    // create at least one atom at center
+    mAtoms = (float*) realloc( (void*) mAtoms, 2* sizeof(float) );
+    *mAtoms = 0.; *(mAtoms+1) = 0.;
+    mNatoms = 1;
+  }
 }
 
 void TurbostraticHexStructWB::i0Calculator::PrintAtoms(std::ostream &s) const
@@ -2161,16 +2247,23 @@ void TurbostraticHexStructWB::i0Calculator::AccumHist2d(float rmax, const bool t
   if (tidy) {
     /* reinitialise histogram data, reallocate memory if needed */
     unsigned int newNbins = (unsigned int) ceil(rmax/mdr);
-    if ( mHist==NULL || newNbins != mNbins ) {
+    if ( mHist==NULL || mHistAuxUnScaled==NULL || newNbins != mNbins ) {
       mNbins = newNbins;
-      mHist = (unsigned int *) realloc( mHist, mNbins*sizeof(unsigned int) );
-      // loop over all bins
-      unsigned int *ph = mHist;
-      for(m=0; m<mNbins; m++) {
-	(*ph) = 0; ph++;
-      }
+      mHist = (REAL *) realloc( mHist, mNbins*sizeof(REAL) );
+      mHistAuxUnScaled = (unsigned int *) realloc( mHistAuxUnScaled, mNbins*sizeof(unsigned int) );
       mSincQrNeedRecalc = true; // need also reinitialise sinc(Qr) matrix
     }
+    // loop over all bins
+    REAL *ph = mHist;
+    for(m=0; m<mNbins; m++) {
+      (*ph) = 0.; ph++;
+    }
+  }
+
+  // loop over all bins
+  unsigned int *phaux = mHistAuxUnScaled;
+  for(m=0; m<mNbins; m++) {
+    (*phaux) = 0; phaux++;
   }
 
   /* loop over all atoms */
@@ -2183,11 +2276,18 @@ void TurbostraticHexStructWB::i0Calculator::AccumHist2d(float rmax, const bool t
       r = sqrt( (xm-xn)*(xm-xn) + (ym-yn)*(ym-yn) );
       nr = (unsigned int) (r/mdr + 0.5);
       if( nr<mNbins )
-	mHist[nr]++;
+	mHistAuxUnScaled[nr]++;
       else if (throwerr) /* error - distance out of histogram range */
 	throw new std::range_error("TurbostraticHexStructWB::i0Calculator::AccumHist2d error: distance out of histogram range");
     } /* n */
   } /* m */
+
+  // loop over all bins
+  REAL *ph = mHist;
+  phaux = mHistAuxUnScaled;
+  for(m=0; m<mNbins; m++) {
+    (*ph) += REAL(*phaux)/mNatoms*mult; phaux++; ph++;
+  }
 }
 
 void TurbostraticHexStructWB::i0Calculator::PrintHistogram(std::ostream &s) const
@@ -2195,7 +2295,7 @@ void TurbostraticHexStructWB::i0Calculator::PrintHistogram(std::ostream &s) cons
   s << "#" << setw(15) << "D1(A)" << setw(16) << "D2(A)";
   s << setw(16) << "distrib" << "\n";
   s << std::scientific << std::setprecision(6);
-  unsigned int *p = mHist;
+  REAL *p = mHist;
   for(unsigned int j=0; j<mNbins; j++) {
     s << std::setw(16) << j*mdr << std::setw(16) << (j+1)*mdr;
     s << std::setw(16) << (*p) << "\n"; p++;
@@ -2256,14 +2356,14 @@ const CrystVector_REAL & TurbostraticHexStructWB::i0Calculator::CalcI0()
   REAL *pSinc = mSincQr.data();
   for(unsigned int jQ=0; jQ<mQ.numElements(); jQ++) {
     REAL ii0 = 0.0;
-    unsigned int *pHist = mHist;
+    REAL *pHist = mHist;
     for(unsigned int jHist=0; jHist<mNbins; jHist++) {
-      if ( (*pHist)>0 ) {
+      if ( (*pHist)>0. ) {
 	ii0 += (*pHist) * (*pSinc);
       }
       pHist++; pSinc++;
     } // jHist
-    mi0(jQ) = 1. + 2./mNatoms * ii0;
+    mi0(jQ) = 1. + 2. * ii0;
   } // jQ
   
   return mi0;
@@ -2429,7 +2529,7 @@ const CrystVector_REAL & TurbostraticHexStructWB::i00lCalculator::CalcI00l(const
   mi00l = 0.0;
   cout << "mQ.numElements(): " << mQ.numElements() << "\n";
 
-  for(unsigned int q=1; q<=(mM-1); q++) {
+  for(unsigned int q=1; q<=(M-1); q++) {
     const REAL *p1 = miq.data() + (q-1)*n;
     const REAL *p2 = mQ.data();
     REAL *p3 = mi00l.data();
@@ -2438,7 +2538,7 @@ const CrystVector_REAL & TurbostraticHexStructWB::i00lCalculator::CalcI00l(const
        if ( fabs(*p2)<1e-3 ) {
 	 (*p3) = M_PI*(0.25*La)*(0.25*La)*(M-1);
        } else {
-	 (*p3) += 2.*(1.-REAL(q)/mM) * (*p1)/(*p2);
+	 (*p3) += 2.*(1.-REAL(q)/M) * (*p1)/(*p2);
        }
        p1++; p2++; p3++;
     }
@@ -15556,15 +15656,15 @@ double erfc(const double x)// in C99, but not in VC++....
 
 // void lognormDistribDopita(x,p,mean,var,nbins,ptrunc,bround,multiplier) - lognormal distribution
 //
-// Calculates log-normal distribution p(x) according to algorithm of M. Dopita for
-// simulation of scattering from hexagonal layered Carbon-black structures.
+// Calculates log-normal distribution p(x) according to modified algorithm of M. Dopita
+// for simulation of scattering from hexagonal layered Carbon-black structures.
 // 
 // Subroutine will generate a list of "sizes" (x) and "probabilities" of their 
-// occurance (p). The list should have (odd number) of bins. The lowest relative
-// (with respect to pdf maximum) probability occurance in (pseudohistogram) should
-// be ptrunc and if bround is true the "sizes" have to be integer multiplaiers
-// of the next parameter (this means within method of Dopita, they are rounded to
-// integer numbers).
+// occurance (p). The list should have (odd number) of bins (however the final
+// number can be lower if bround is true and does not need to be odd). The
+// lowest relative (with respect to pdf maximum) probability occurance in
+// (pseudohistogram) should be ptrunc and if bround is true the "sizes" have
+// to be integer multiplaiers of the next parameter.
 //
 // April 16, 2014, Zdenek Matej
 //------------------------------------------------------------------------
@@ -15604,37 +15704,93 @@ void lognormDistribDopita(CrystVector_REAL &x, CrystVector_REAL &p,
     }
   } // xmin, xmax
 
+  // if bround xmin>=multiplier
+  if (bround && xmin<multiplier) xmin = multiplier;
+
   // test
   REAL ymin = 1./sqrt(2.*M_PI)/fS/xmin*exp(-(log(xmin/fM)*log(xmin/fM))/(2.*fS*fS));
   REAL ymax = 1./sqrt(2.*M_PI)/fS/xmax*exp(-(log(xmax/fM)*log(xmax/fM))/(2.*fS*fS));
   REAL xm = fM*exp(-fS*fS); // pdf maximum (x-value)
   REAL pmax = 1./sqrt(2.*M_PI)/fS/xm*exp(-(log(xm/fM)*log(xm/fM))/(2.*fS*fS));
 
-  cout << "xmin: (" << xmin << ", " << ymin/pmax << ")\n";
-  cout << "xmax: (" << xmax << ", " << ymax/pmax << ")\n";
-
   // nbins must be odd
   if (!(nbins & 1))
     throw ObjCrystException("lognormDistribDopita: Number of bins must be odd!");
 
+  // bins mean will be divisible by multiplayer
+  REAL xmean = (bround) ? round(mean/multiplier)*multiplier : mean;
+
+  //  nb. of intervals below and above the mean value
+  int n1, n2;
+
+  // if bround we must check for real nb. of bins
+  if (bround) {
+    // bins xmin, xmax will be divisible by multiplayer
+    xmin = round(xmin/multiplier)*multiplier;
+    xmax = round(xmax/multiplier)*multiplier;
+    // the highest possible nb. of intervals
+    n1 = round( (xmean-xmin)/multiplier );
+    n2 = round( (xmax-xmean)/multiplier );
+    // get the smaller number
+    if(n1>(nbins-1)/2) n1 = (nbins-1)/2;
+    if(n2>(nbins-1)/2) n2 = (nbins-1)/2;
+  } else {
+    // we use the same nb. intervals below and above the mean
+    n1 = (nbins-1)/2;
+    n2 = (nbins-1)/2;
+  }
+  
   // generate x-grid
-  x.resize( nbins );
-  p.resize( nbins );
+  x.resize( n1+n2+1 );
+  p.resize( n1+n2+1 );
 
   // xSmall
-  for(int k=0; k<=(nbins-1)/2; k++) {
-    x(k) = xmin + (mean-xmin)/((nbins-1)/2)*k;
+  for(int k=0; k<=n1; k++) {
+    x(k) = xmin + (xmean-xmin)/n1*k;
   }
   // xBigg
-  for(int k=1; k<=(nbins-1)/2; k++) {
-    x((nbins-1)/2+k) = mean + (xmax-mean)/((nbins-1)/2)*k;
+  for(int k=1; k<=n2; k++) {
+    x(n1+k) = xmean + (xmax-xmean)/n2*k;
   }
 
   if (bround)
-    for(int k=0; k<x.numElements(); k++)
+    for(int k=0; k<x.numElements(); k++) {
       x(k) = round(x(k)/multiplier)*multiplier;
+    }
 
-  cout << x << "\n";
+  // set distribution values
+  REAL *p1 = x.data();
+  REAL *p2 = p.data();
+  REAL sum = 0;
+  REAL dx;
+  // Small
+  dx = (x(n1)-x(0))/n1;
+  for(int k=0; k<n1; k++) {
+    // *p2 = 1./sqrt(2.*M_PI)/fS/(*p1)*exp(-(log((*p1)/fM)*log((*p1)/fM))/(2.*fS*fS));
+    *p2 = (*p1-dx/2.>0.) ? 0.5*(erf(log((*p1+dx/2.)/fM)/fS/sqrt(2.))-erf(log((*p1-dx/2.)/fM)/fS/sqrt(2.)))
+                         : 0.5*(1.+erf(log((*p1+dx/2.)/fM)/fS/sqrt(2.)));
+    sum += *p2;
+    p1++; p2++;
+  }
+  // Mean
+  *p2 = -0.5*erf(log((*p1-dx/2.)/fM)/fS/sqrt(2.));
+  dx = (x(n1+n2)-x(n1))/n2;
+  *p2 += 0.5*erf(log((*p1+dx/2.)/fM)/fS/sqrt(2.));
+  sum += *p2;
+  p1++; p2++;
+  // Bigg
+  for(int k=n1; k<n1+n2; k++) {
+    // *p2 = 1./sqrt(2.*M_PI)/fS/(*p1)*exp(-(log((*p1)/fM)*log((*p1)/fM))/(2.*fS*fS));
+    *p2 = 0.5*(erf(log((*p1+dx/2.)/fM)/fS/sqrt(2.))-erf(log((*p1-dx/2.)/fM)/fS/sqrt(2.)));
+    sum += *p2;
+    p1++; p2++;
+  }
+  p *= 1./sum; // distribution normalisation
+
+  cout << setw(16) << "size(A)" << setw(16) << "p" << "\n";
+  for(int k=0; k<x.numElements(); k++) {
+    cout << setw(16) << x(k) << setw(16) << p(k) << "\n";
+  }
 }
 
 // void interp1(x,y,xi,yi) - interpolate (x,y) data at xi points
@@ -15645,11 +15801,6 @@ void lognormDistribDopita(CrystVector_REAL &x, CrystVector_REAL &p,
 //------------------------------------------------------------------------
 void interp1(const CrystVector_REAL &x, const CrystVector_REAL &y, const CrystVector_REAL &xi, CrystVector_REAL &yi)
 {
-  cout << "interp1: xi.numElements(): " << xi.numElements() << "\n";
-  cout << "interp1: yi.numElements(): " << yi.numElements() << "\n";
-  cout << "interp1: x(0), x(end): " << x(0) << ", " << x(x.numElements()-1) << "\n";
-  cout << "interp1: xi(0), xi(end): " << xi(0) << ", " << xi(xi.numElements()-1) << "\n";
-
   const long nx = x.numElements();
   const long nxi = xi.numElements();
   yi.resize(nxi);
@@ -15673,7 +15824,6 @@ void interp1(const CrystVector_REAL &x, const CrystVector_REAL &y, const CrystVe
   while(ixi<nxi && (*pxi)<=(*(x.data()+nx-1))) {
     // bound x(i) by x0 and x1
     while((*pxi)>(*px1) && ix<nx) { px0++; px1++; py0++; py1++; ix++; }
-    cout << "xi: " << *pxi << ", x0: " << *px0 << ", x1: " << *px1 << "\n";
     // xi bounded by x0 nad x1
     *pyi = *py0 + (*pxi-*px0)/(*px1-*px0)*(*py1-*py0);
     pxi++; pyi++; ixi++;

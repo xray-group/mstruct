@@ -59,10 +59,11 @@ using namespace ObjCryst;
 
 namespace MStruct {
 
-#define BACKGROUND_INTERPOLATED    0
-#define BACKGROUND_INVX            1
-#define BACKGROUND_CHEBYSHEV       2
-#define BACKGROUND_CHEBYSHEV_LOCAL 3
+#define BACKGROUND_INTERPOLATED        0
+#define BACKGROUND_INVX                1
+#define BACKGROUND_CHEBYSHEV           2
+#define BACKGROUND_CHEBYSHEV_LOCAL     3
+#define BACKGROUND_TURBOSTRATIC_CARBON 4
 
 class PowderPatternBackground : public ObjCryst::PowderPatternBackground {
 public:
@@ -371,8 +372,52 @@ int main (int argc, char *argv[])
    	 	 	   	
    	 	 	   	 btype_not_found = false;
    	 	 	 } // local chebyshev background
+			 
+			 if ( btype_not_found && str==string("noncrystallinephase") ) { // noncrystallinePhase
+			   // effect type and name
+			   string effect_type, effect_name;
+			   cout << "effect type(tubostraticCarbonWB,...), effect name" << endl;
+			   read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+			   ccin >> effect_type >> effect_name;
+			   for_each( effect_type.begin() , effect_type.end() , char2lower() );
+			   if ( effect_type.compare("tubostraticcarbonwb")==0 ) { // tubostraticCarbonWB
+			     // graphitic layer parameters
+			     cout << "La(nm), varLa(nm^2), a0(A), BISOa(A)" << endl;
+			     REAL La, varLa, a0, BISOa;
+			     read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+			     ccin >> La >> varLa >> a0 >> BISOa;
+			     // inter-layer parameters
+			     cout << "Lc(nm), varLc(nm^2), c0(A), BISOc(A)" << endl;
+			     REAL Lc, varLc, c0, BISOc;
+			     read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+			     ccin >> Lc >> varLc >> c0 >> BISOc;
+			     // random fraction
+			     cout << "fraction of non-organized atoms (kdiso=0...none)" << endl;
+			     REAL kdiso;
+			     read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+			     ccin >> kdiso;
+
+			     // model parameters (La, varLa, a0, BISOa, Lc, varLc, c0, BISOc, kdiso)
+			     CrystVector_REAL mparams(9);
+			     mparams(0) = La; mparams(1) = varLa; mparams(2) = a0; mparams(3) = BISOa;
+			     mparams(4) = Lc; mparams(5) = varLc; mparams(6) = c0; mparams(7) = BISOc;
+			     mparams(8) = kdiso;
+			     
+			     // set model configuration
+			     v_bkg_type_ids.push_back( BACKGROUND_TURBOSTRATIC_CARBON );
+			     v_bkg_strings.push_back( effect_name ); // effect name
+			     v_bkg_type_ints.push_back( 0 ); // model type 
+			     v_bkg_params.push_back( mparams ); // basic model params
+			     CrystVector_long flags( mparams.numElements() );
+			     flags = 0;
+			     v_bkg_params_flags.push_back( flags );
+			   } else
+			     cerr << "< main(...) (Warning) Unknown nonCrystalline effect type: "<<effect_type<<" >"<<endl;
+			     
+			   btype_not_found = false;
+   	 	 	 } // turbostratic
    	 	 	 
-   	 	 	// Type of the given broadening not found
+   	 	 	// Type of the given background component not found
  			 if(btype_not_found) {
  			 	cout << "Warning: Type of the given background component not recognised!" << endl;
  			 	continue;
@@ -415,7 +460,7 @@ int main (int argc, char *argv[])
   // wavelength type and monochromator factor
    string wavelength_type;
    REAL pol_rate = 0.;
-	 cout << "wavelength type (Cu,CuA1), linear poalrization rate (A=0.8,f=(1-A)/(1+A)=0.36 graphite mon.,f=0. unmonochromatized)" << endl;
+	 cout << "wavelength type (Cu,CuA1), linear polarization rate (A=0.8,f=(1-A)/(1+A)=0.36 graphite mon.,f=0. unmonochromatized)" << endl;
 	 read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
 	 ccin >> wavelength_type >> pol_rate;
    data.SetWavelength(wavelength_type);
@@ -493,7 +538,33 @@ int main (int argc, char *argv[])
    			 bkgData->UseVariableSlitIntensityCorr(omega*RAD2DEG<=-1.999);
    			 vBackgroundComponents.push_back(bkgData);
    	 	   }
-   	 	   break;  
+   	 	   break; 
+	         case BACKGROUND_TURBOSTRATIC_CARBON:
+		   {
+		     cout << "TODO:: carbonWB" << endl;
+		     MStruct::TurbostraticHexStructWB * turboStructEffect = new MStruct::TurbostraticHexStructWB;
+		     turboStructEffect->SetName(v_bkg_strings[icomp]);
+		     data.AddPowderPatternComponent(*turboStructEffect);   		      
+   			 
+		     //turboStructEffect->SetXFunctionType(v_bkg_type_ints[icomp]);
+		     turboStructEffect->UseVariableSlitIntensityCorr(omega*RAD2DEG<=-1.999);
+		     vBackgroundComponents.push_back(turboStructEffect);
+
+		     // set model parameters
+		     REAL La = v_bkg_params[icomp](0), varLa = v_bkg_params[icomp](1);
+		     REAL a0 = v_bkg_params[icomp](2), BISOa = v_bkg_params[icomp](3);
+		     turboStructEffect->SetLayerParameters(La,varLa,a0,BISOa);
+		     REAL Lc = v_bkg_params[icomp](4), varLc = v_bkg_params[icomp](5);
+		     REAL c0 = v_bkg_params[icomp](6), BISOc = v_bkg_params[icomp](7);
+		     turboStructEffect->SetInterLayerParameters(Lc,varLc,c0,BISOc);
+		     REAL fracDisor = v_bkg_params[icomp](8);
+		     turboStructEffect->SetFractionDisorder(fracDisor);
+
+		     // set TotalScattering phase Polarization and Absorption corrections parameters
+		     // thickness = 1.e6 nm (1cm), depth = 0, absfactor = 9.2 1/cm , omega = -1 deg
+		     turboStructEffect->mAbsorptionCorr.SetAbsorptionCorrParams( 1.e6, 0., 9.2, -1.*DEG2RAD); // TODO:: set correct values
+		   }
+		   break;
    	 	 default:
    	 	   cerr << "< main(...)\n";
 				 cerr << "Program logical error during creating background objects.\n >" << endl; 
@@ -1746,6 +1817,13 @@ int main (int argc, char *argv[])
    	 	   	 cout << "Use '" << string("Scale_"+vBackgroundComponents[icomp]->GetName()) << "' to adjust/fit data." << endl;
    	 	   }
    	 	   break;
+	         case BACKGROUND_TURBOSTRATIC_CARBON:
+		   {
+		     cout << "tubostraticCarbonWB background component: " << vBackgroundComponents[icomp]->GetName() << endl;
+		     cout << "This background component is scalable and has also other parameters. Use standard methods to set/refine them.\n";
+		     cout << "Use '" << string("Scale_"+vBackgroundComponents[icomp]->GetName()) << "' to adjust/fit data." << endl;
+		   }
+		   break;
    	 	 default:
    	 	 	 cerr << "< main(...)\n";
 				 cerr << "Program logical error during setting refinement status of background points.\n >" << endl; 
@@ -2300,7 +2378,7 @@ int main (int argc, char *argv[])
     */
    }
 
-   if(1) { // sV
+   if(1 && vDiffData.size()>0) { // sV
   // Save calculated intensities
    ofstream f("phase1_par.txt");
    vDiffData[0]->PrintHKLInfo(f);

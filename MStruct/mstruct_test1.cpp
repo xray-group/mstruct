@@ -936,7 +936,7 @@ int mstruct_test10(int argc, char* argv[], std::istream &iss)
   
   {
     std::ofstream s1("mstruct-TurbostraticHexStructWB-hist.txt");
-    turboStructEffect.mi0Calculator.AccumHist2d( 20.0, true, true );
+    turboStructEffect.mi0Calculator.AccumHist2d( 20.0, true, 1., true );
     turboStructEffect.mi0Calculator.PrintHistogram(s1);
     s1.close();
   }

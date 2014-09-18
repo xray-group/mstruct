@@ -446,6 +446,10 @@ private:
   REAL mRuland_dqmax;
   REAL mRuland_b; // (A)
   REAL mRuland_D;
+  // I00l calculated intensity for the current params set
+  mutable CrystVector_REAL mi00lstore;
+  // (Average) number of atoms in each layer for the current params set
+  mutable REAL mNatoms; 
 
 public:
   /// Constructor
@@ -460,6 +464,12 @@ public:
   void SetQ(const CrystVector_REAL &Q);
   /// (Re)Calculate totaly scattered intensity (including corrections) on internal Q-vector
   const CrystVector_REAL & CalcItotalScatt()const;
+  /// Set carbon layer parameters (mean size La(nm), its variance, lattice parameter(A) and temperature factor)
+  void SetLayerParameters(const REAL La, const REAL varLa=0.0, const REAL lattA=2.461, const REAL BISOa=0.3948);
+  /// Set interlayer parameters (mean size Lc(nm), its variance, lattice parameter(A) and temperature factor)
+  void SetInterLayerParameters(const REAL Lc, const REAL varLc=0.0, const REAL lattC=6.88, const REAL BISOc=0.3948);
+  /// Set (volume) fraction of non-organized (carbon) atoms (0...no disordered atoms)
+  void SetFractionDisorder(const REAL fracDisorder);
 protected:
   /// Calc powder pattern.
   virtual void CalcPowderPattern()const;
@@ -533,8 +543,10 @@ protected:
     REAL mdr;
     /// number of histogram bins
     unsigned int mNbins;
-    /// accumulated histogram of interatomic distances
-    unsigned int *mHist;
+    /// accumulated histogram of interatomic distances (scaled, normalised per atom)
+    REAL *mHist;
+    /// accumulated histogram of interatomic distances (auxilliary, unscaled)
+    unsigned int *mHistAuxUnScaled;
     /// i(0) intensity is calaculated in these Q-points
     CrystVector_REAL mQ;
     /// Calculated i(0) intensity
@@ -599,7 +611,7 @@ protected:
     void PrintI00l(std::ostream &s) const;
   public:
     /// Clocks when structure parameters (lattC, La, Lc) have been changed last time
-    ObjCryst::RefinableObjClock mClockInterLayersParams;
+    mutable ObjCryst::RefinableObjClock mClockInterLayerParams;
   private:
     /// Q = (2 pi * s) grid for calculation
     CrystVector_REAL mQ;
@@ -610,7 +622,7 @@ protected:
     /// Number of layers
     unsigned int mM;
     /// Clocks i00l pattern was calculated last time
-    ObjCryst::RefinableObjClock mClockPatternCalc;
+    mutable ObjCryst::RefinableObjClock mClockPatternCalc;
     /// Actual LattC-parameter used for calculation
     REAL musedLattC;
     /// Actual La-size used for calclation
