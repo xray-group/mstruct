@@ -1968,11 +1968,16 @@ int main (int argc, char *argv[])
    bool need_refParList_update = false;
    read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
 
-   while( ccin.str().length()>0 && ccin.str()[0] == '@' ) {
+   while( ccin.str().length()>0 ) {
+     
+     if( ccin.str()[0] != '@' ) {
+       read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+       continue;
+     }
      
      string keyword;
      ccin >> keyword;
-     
+
      // @end
      if( keyword=="@end" || keyword=="@END" || keyword=="@End" )
        break;
@@ -2025,6 +2030,21 @@ int main (int argc, char *argv[])
      if( strncmp(keyword.c_str(),"@local_bkg_chebyshev",19)==0 ) {
        // not implemented
      } // if @local_bkg_chebyshev
+
+     // @PowderPattern:SetWavelength
+     if( strncmp(keyword.c_str(),"@PowderPattern:SetWavelength",28)==0 ) {
+       // change radiation for PowderPattern Object (string and ratio)
+       // usage: @PowderPattern:SetWavelength Cu 0.13
+       std::string str;
+       REAL ratio;
+       ccin >> str;
+       ccin >> ratio;
+       data.SetWavelength( str.c_str(), ratio );
+
+       cout << keyword.c_str() << " ... " << data.GetName() << ":" << data.GetRadiation().GetClassName() << " is now ...\n";
+       data.GetRadiation().XMLOutput( cout, 0);
+       cout << "\n";
+     } // if @PowderPattern:SetWavelength
 
      read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
    }
