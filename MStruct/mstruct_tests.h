@@ -43,7 +43,8 @@ int mstruct_test7(int argc, char* argv[], std::istream &is);
 int mstruct_test8(int argc, char* argv[], std::istream &is);
 int mstruct_test9(int argc, char* argv[], std::istream &is);
 int mstruct_test10(int argc, char* argv[], std::istream &is);
-
+int mstruct_test11(int argc, char* argv[], std::istream &is);
+ 
 } // namespace MStruct
 
 // unary function to convert char to lowercase

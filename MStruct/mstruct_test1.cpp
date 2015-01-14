@@ -35,6 +35,8 @@
 #include "cctbx/sgtbx/rot_mx_info.h"
 #include "scitbx/vec3.h"
 
+#include "cctbx/eltbx/xray_scattering.h"
+
 #include "ObjCryst/IO.h"
 #include "Quirks/VFNStreamFormat.h"
 
@@ -1042,6 +1044,59 @@ int mstruct_test10(int argc, char* argv[], std::istream &iss)
   return 0;
 } // mstruct_test10
 
+int mstruct_test11(int argc, char* argv[], std::istream &iss)
+{
+  // StructureFactor test
+
+  cout << "Running test no. 11" << endl;
+
+  cout << " StructureFactor Test" << endl;
+	
+  // input-string-stream to which the input is translated to ignore comments etc. 
+  istringstream ccin;
+  
+  // input filename
+  /*  string filename;
+  cout << "input file name" << endl;
+  read_line (ccin, iss); // read a line (ignoring all comments, etc.)
+  ccin >> filename;*/
+
+  const string atomName("Au");
+  
+  cctbx::eltbx::xray_scattering::wk1995 wk95t(atomName);
+  cctbx::eltbx::xray_scattering::gaussian gaussian = cctbx::eltbx::xray_scattering::gaussian(wk95t.fetch());
+
+  // scattering data (for calculation of the resonant scattering factor)
+  ObjCryst::DiffractionDataSingleCrystal scattData;
+  scattData.SetWavelength("CuA1");
+
+  // scattering atom
+  ObjCryst::ScatteringPowerAtom scattPowAtom(atomName,atomName,0.); // Biso=0.
+  
+  // resonant scattering factor
+  REAL S_resonantReal = scattPowAtom.GetResonantScattFactReal(scattData)(0);
+  REAL S_resonantImag = scattPowAtom.GetResonantScattFactImag(scattData)(0);
+  
+  const REAL stolmax = 0.8;
+  cout << setprecision(3) << fixed << showpoint;
+  for(int i=0; i<=20; i++) {
+    REAL stol = i*stolmax/20;
+    REAL f = gaussian.at_stol( stol );
+    cout << setw(14) << stol << setw(14) << f << '\n';
+  }
+
+  cout << " S_resonant_re: " << S_resonantReal << '\n';
+  cout << " S_resonant_im: " << S_resonantImag << '\n';
+
+  REAL stol = sin(38.174/2.*DEG2RAD)/scattData.GetWavelength()(0);
+  REAL f = gaussian.at_stol( stol );
+  cout << setw(14) << stol << setw(14) << f << setw(14) << (f+S_resonantReal) << setw(14) << (f+S_resonantReal)*exp(-stol*stol) <<'\n';
+      
+  cout << " End of program." << endl ;
+
+  return 0;
+} // mstruct_test11
+  
 } // namespace MStruct
 
 
