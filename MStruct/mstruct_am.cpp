@@ -31,7 +31,7 @@
 //#define program_version "0.39-(Fox-r1221)-testing-WCfaults+ExternalLSQConstraints"
 //#define program_version "0.104-(Fox-r1221)-develop-EllipRodsGamma(testing)" // EllipRodsGamma
 //#define program_version "0.96-(Fox-r1221)-develop"
-#define program_version "0.134-(Fox-r1221)-develop-carbonWB(withoutScale)"
+#define program_version "0.136-(Fox-r1221)-develop-carbonWB(withoutScale)"
 
 #include "MStruct.h"
 
@@ -472,13 +472,16 @@ int main (int argc, char *argv[])
    if ( wavelength_type.length()>0 && (isdigit(wavelength_type[0]) || wavelength_type[0]=='.') ) {
      // wavelength value specified, check if not energy (eV, keV)
      boost::algorithm::to_lower(wavelength_type);
-     if (wavelength_type.compare(wavelength_type.length()-2,string::npos,"ev")==0)
-       if (wavelength_type.compare(wavelength_type.length()-3,string::npos,"kev")==0)
+     if (wavelength_type.length()>2 && wavelength_type.compare(wavelength_type.length()-2,string::npos,"ev")==0)
+       if (wavelength_type.length()>3 && wavelength_type.compare(wavelength_type.length()-3,string::npos,"kev")==0)
 	 data.SetEnergy( atof(wavelength_type.substr(0,wavelength_type.length()-3).c_str()) ); // [keV]
        else
 	 data.SetEnergy( atof(wavelength_type.substr(0,wavelength_type.length()-2).c_str())/1.e3 ); // [eV]
      else
+	 {
+		 cout << "going to set: " <<  atof(wavelength_type.c_str()) << "\n";
        data.SetWavelength( atof(wavelength_type.c_str()) ); // [A]
+	 }
    } else
      data.SetWavelength(wavelength_type); // Cu, CuA1, ...
    // set polarization rate
