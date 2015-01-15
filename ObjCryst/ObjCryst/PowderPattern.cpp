@@ -1856,6 +1856,12 @@ void PowderPattern::SetWavelength(const string &XRayTubeElementName,const REAL a
    mRadiation.SetWavelength(XRayTubeElementName,alpha12ratio);
 }
 
+void PowderPattern::SetEnergy(const REAL energy)
+{
+   VFN_DEBUG_MESSAGE("PowderPattern::SetEnergy(energy)",3)
+   mRadiation.SetWavelength( 12.398/energy );
+}
+
 REAL PowderPattern::GetWavelength()const{return mRadiation.GetWavelength()(0);}
 
 const CrystVector_REAL& PowderPattern::GetPowderPatternCalc()const

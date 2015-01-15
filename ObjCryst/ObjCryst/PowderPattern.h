@@ -592,7 +592,7 @@ class PowderPattern : public RefinableObj
          */
          void SetWavelength(const string &XRayTubeElementName,const REAL alpha12ratio=0.5);
 
-         /// Set the energy of the experiment [in keV, lambda(A)=12398/E(keV)].
+         /// Set the energy of the experiment [in keV, lambda(A)=12.398/E(keV)].
          void SetEnergy(const REAL energy);
          /// wavelength of the experiment (in Angstroems)
          REAL GetWavelength()const;
