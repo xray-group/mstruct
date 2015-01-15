@@ -478,10 +478,7 @@ int main (int argc, char *argv[])
        else
 	 data.SetEnergy( atof(wavelength_type.substr(0,wavelength_type.length()-2).c_str())/1.e3 ); // [eV]
      else
-	 {
-		 cout << "going to set: " <<  atof(wavelength_type.c_str()) << "\n";
        data.SetWavelength( atof(wavelength_type.c_str()) ); // [A]
-	 }
    } else
      data.SetWavelength(wavelength_type); // Cu, CuA1, ...
    // set polarization rate
