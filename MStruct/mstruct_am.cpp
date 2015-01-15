@@ -4,7 +4,7 @@
  * MStruct++ - Object-Oriented computer program/library for MicroStructure analysis
  * 					   from powder diffraction data.
  * 
- * Copyright (C) 2009-2013  Zdenek Matej
+ * Copyright (C) 2009-2015  Zdenek Matej
  * 
  * This file is part of MStruct++.
  * 
@@ -15,7 +15,7 @@
  *
  * MStruct++ is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -31,7 +31,7 @@
 //#define program_version "0.39-(Fox-r1221)-testing-WCfaults+ExternalLSQConstraints"
 //#define program_version "0.104-(Fox-r1221)-develop-EllipRodsGamma(testing)" // EllipRodsGamma
 //#define program_version "0.96-(Fox-r1221)-develop"
-#define program_version "0.130-(Fox-r1221)-develop-carbonWB(withoutScale)"
+#define program_version "0.134-(Fox-r1221)-develop-carbonWB(withoutScale)"
 
 #include "MStruct.h"
 
@@ -53,7 +53,7 @@
 #include <stdlib.h> // rand, srand
 #include <time.h> // time
 
-//#include <boost/algorithm/string.hpp>
+#include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/case_conv.hpp>
 
 using namespace ObjCryst;
@@ -122,7 +122,7 @@ int main (int argc, char *argv[])
    {
    		// print version and license information
       cout << "version: " << program_version << "\n";
-      cout << "mstruct  Copyright (C) 2009-2013 Zdenek Matej, Charles University in Prague\n";
+      cout << "mstruct  Copyright (C) 2009-2015 Zdenek Matej, Charles University in Prague\n";
       cout << "e-mail: matej@karlov.mff.cuni.cz\n";
       cout << "web: <http://xray.cz/mstruct/>\n";
       cout << "License GNU GPL: <http://gnu.org/licenses/gpl.html>.\n";
@@ -464,12 +464,26 @@ int main (int argc, char *argv[])
   // wavelength type and monochromator factor
    string wavelength_type;
    REAL pol_rate = 0.;
-	 cout << "wavelength type (Cu,CuA1), linear polarization rate (A=0.8,f=(1-A)/(1+A)=0.36 graphite mon.,f=0. unmonochromatized)" << endl;
-	 read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
-	 ccin >> wavelength_type >> pol_rate;
-   data.SetWavelength(wavelength_type);
-	 data.SetLinearPolarRate(pol_rate);
-
+   cout << "wavelength type (Cu,CuA1 or value), linear polarization rate (A=0.8,f=(1-A)/(1+A)=0.111 graphite mon.,f=0. unmonochromatized)" << endl;
+   read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+   ccin >> wavelength_type >> pol_rate;
+   // detect wavelength type (is the first character number or decimal?)
+   boost::trim(wavelength_type);
+   if ( wavelength_type.length()>0 && (isdigit(wavelength_type[0]) || wavelength_type[0]=='.') ) {
+     // wavelength value specified, check if not energy (eV, keV)
+     boost::algorithm::to_lower(wavelength_type);
+     if (wavelength_type.compare(wavelength_type.length()-2,string::npos,"ev")==0)
+       if (wavelength_type.compare(wavelength_type.length()-3,string::npos,"kev")==0)
+	 data.SetEnergy( atof(wavelength_type.substr(0,wavelength_type.length()-3).c_str()) ); // [keV]
+       else
+	 data.SetEnergy( atof(wavelength_type.substr(0,wavelength_type.length()-2).c_str())/1.e3 ); // [eV]
+     else
+       data.SetWavelength( atof(wavelength_type.c_str()) ); // [A]
+   } else
+     data.SetWavelength(wavelength_type); // Cu, CuA1, ...
+   // set polarization rate
+   data.SetLinearPolarRate(pol_rate);
+   
   // Import measured data
    if(data_type==0)
      data.ImportPowderPattern2ThetaObs(data_filename.c_str());
