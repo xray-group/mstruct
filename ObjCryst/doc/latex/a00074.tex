@@ -1,5 +1,5 @@
-\subsection{Obj\-Cryst\-:\-:Quaternion Class Reference}
-\label{a00074}\index{Obj\-Cryst\-::\-Quaternion@{Obj\-Cryst\-::\-Quaternion}}
+\subsection{Obj\+Cryst\+:\+:Quaternion Class Reference}
+\label{a00074}\index{Obj\+Cryst\+::\+Quaternion@{Obj\+Cryst\+::\+Quaternion}}
 
 
 A quaternion class, used to represent the orientation of the molecule.  
@@ -11,10 +11,10 @@ A quaternion class, used to represent the orientation of the molecule.
 {\bf Quaternion} ()\label{a00074_af5260414dcf9aaeb479370b55542ad58}
 
 \begin{DoxyCompactList}\small\item\em Default constructor, yields q=(1,0,0,0) \end{DoxyCompactList}\item 
-{\bf Quaternion} (const R\-E\-A\-L q0, const R\-E\-A\-L q1, const R\-E\-A\-L q2, const R\-E\-A\-L q3, bool unit=true)\label{a00074_a7adfabaa48d3f0a8aa056977f8a40492}
+{\bf Quaternion} (const R\+E\+A\+L q0, const R\+E\+A\+L q1, const R\+E\+A\+L q2, const R\+E\+A\+L q3, bool unit=true)\label{a00074_a7adfabaa48d3f0a8aa056977f8a40492}
 
 \begin{DoxyCompactList}\small\item\em Creates a unit quaternion from its components (normalized automatically) \end{DoxyCompactList}\item 
-{\bf Quaternion} {\bf Get\-Conjugate} () const \label{a00074_a45d3304cc7790cc8d6f3beb46a407c8a}
+{\bf Quaternion} {\bf Get\+Conjugate} () const \label{a00074_a45d3304cc7790cc8d6f3beb46a407c8a}
 
 \begin{DoxyCompactList}\small\item\em Get the conjugate of this quaternion (== the inverse if unit quaternion) \end{DoxyCompactList}\item 
 {\bf Quaternion} {\bf operator$\ast$} (const {\bf Quaternion} \&q) const \label{a00074_a5f3244aba238d4aedc4dbb45a4fa2d69}
@@ -23,65 +23,65 @@ A quaternion class, used to represent the orientation of the molecule.
 void {\bfseries operator$\ast$=} (const {\bf Quaternion} \&q)\label{a00074_ac01783b00149b154f0c6701403d72055}
 
 \item 
-void {\bfseries X\-M\-L\-Output} (ostream \&os, int indent=0) const \label{a00074_a709cb217017604ca0796350b2ae644e3}
+void {\bfseries X\+M\+L\+Output} (ostream \&os, int indent=0) const \label{a00074_a709cb217017604ca0796350b2ae644e3}
 
 \item 
-void {\bfseries X\-M\-L\-Input} (istream \&is, const {\bf X\-M\-L\-Cryst\-Tag} \&tag)\label{a00074_afea1afc8fed0f18668374b7e7bd11dce}
+void {\bfseries X\+M\+L\+Input} (istream \&is, const {\bf X\+M\+L\+Cryst\+Tag} \&tag)\label{a00074_afea1afc8fed0f18668374b7e7bd11dce}
 
 \item 
-void {\bf Rotate\-Vector} (R\-E\-A\-L \&v1, R\-E\-A\-L \&v2, R\-E\-A\-L \&v3) const \label{a00074_a50b7dd9fc29bf102e19ca55991a8f657}
+void {\bf Rotate\+Vector} (R\+E\+A\+L \&v1, R\+E\+A\+L \&v2, R\+E\+A\+L \&v3) const \label{a00074_a50b7dd9fc29bf102e19ca55991a8f657}
 
 \begin{DoxyCompactList}\small\item\em Rotate vector v=(v1,v2,v3). The rotated components are directly written. \end{DoxyCompactList}\item 
 void {\bf Normalize} () const 
 \begin{DoxyCompactList}\small\item\em Re-\/normalize the quaternion to unity. \end{DoxyCompactList}\item 
-R\-E\-A\-L {\bfseries Get\-Norm} () const \label{a00074_a39beed5204c7398e670ae93aefb1c31a}
+R\+E\+A\+L {\bfseries Get\+Norm} () const \label{a00074_a39beed5204c7398e670ae93aefb1c31a}
 
 \item 
-const R\-E\-A\-L \& {\bfseries Q0} () const \label{a00074_a66fc89c6cca64bd1e94789b8aef7e5cc}
+const R\+E\+A\+L \& {\bfseries Q0} () const \label{a00074_a66fc89c6cca64bd1e94789b8aef7e5cc}
 
 \item 
-const R\-E\-A\-L \& {\bfseries Q1} () const \label{a00074_a53b3e3206e570719493a51ffe4ff9587}
+const R\+E\+A\+L \& {\bfseries Q1} () const \label{a00074_a53b3e3206e570719493a51ffe4ff9587}
 
 \item 
-const R\-E\-A\-L \& {\bfseries Q2} () const \label{a00074_af438a7e1af4cc4d2d8b91feb93b6f3a9}
+const R\+E\+A\+L \& {\bfseries Q2} () const \label{a00074_af438a7e1af4cc4d2d8b91feb93b6f3a9}
 
 \item 
-const R\-E\-A\-L \& {\bfseries Q3} () const \label{a00074_adaff60b4982079b9290a84f581bdcc92}
+const R\+E\+A\+L \& {\bfseries Q3} () const \label{a00074_adaff60b4982079b9290a84f581bdcc92}
 
 \item 
-R\-E\-A\-L \& {\bfseries Q0} ()\label{a00074_ae7f96ecf853de39a78844c1202dba317}
+R\+E\+A\+L \& {\bfseries Q0} ()\label{a00074_ae7f96ecf853de39a78844c1202dba317}
 
 \item 
-R\-E\-A\-L \& {\bfseries Q1} ()\label{a00074_a7afb9ac56760fc5b4eea48ca052add44}
+R\+E\+A\+L \& {\bfseries Q1} ()\label{a00074_a7afb9ac56760fc5b4eea48ca052add44}
 
 \item 
-R\-E\-A\-L \& {\bfseries Q2} ()\label{a00074_af2f2c9dfbb6440ee42a51066ddc0231a}
+R\+E\+A\+L \& {\bfseries Q2} ()\label{a00074_af2f2c9dfbb6440ee42a51066ddc0231a}
 
 \item 
-R\-E\-A\-L \& {\bfseries Q3} ()\label{a00074_a493592f09ec8f02dfafd1bf4c5c9bc56}
+R\+E\+A\+L \& {\bfseries Q3} ()\label{a00074_a493592f09ec8f02dfafd1bf4c5c9bc56}
 
 \end{DoxyCompactItemize}
 \subsubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static {\bf Quaternion} {\bf Rotation\-Quaternion} (const R\-E\-A\-L ang, const R\-E\-A\-L v1, const R\-E\-A\-L v2, const R\-E\-A\-L v3)\label{a00074_a2cf209c3cc21ed46a52aec7a5f106cce}
+static {\bf Quaternion} {\bf Rotation\+Quaternion} (const R\+E\+A\+L ang, const R\+E\+A\+L v1, const R\+E\+A\+L v2, const R\+E\+A\+L v3)\label{a00074_a2cf209c3cc21ed46a52aec7a5f106cce}
 
 \begin{DoxyCompactList}\small\item\em Create a rotation quaternion around a given vector for a given angle. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-R\-E\-A\-L {\bf m\-Q0}
+R\+E\+A\+L {\bf m\+Q0}
 \begin{DoxyCompactList}\small\item\em The components of the quaternion z=(q0,v) with v=(q1,q2,q3) \end{DoxyCompactList}\item 
-R\-E\-A\-L {\bfseries m\-Q1}\label{a00074_ad8a0a4af3b87af3ff7fa9f429b29d538}
+R\+E\+A\+L {\bfseries m\+Q1}\label{a00074_ad8a0a4af3b87af3ff7fa9f429b29d538}
 
 \item 
-R\-E\-A\-L {\bfseries m\-Q2}\label{a00074_a8e0d3fd6e900716fd19dd4ca970bbd12}
+R\+E\+A\+L {\bfseries m\+Q2}\label{a00074_a8e0d3fd6e900716fd19dd4ca970bbd12}
 
 \item 
-R\-E\-A\-L {\bfseries m\-Q3}\label{a00074_a7d70b76441a54466bd783a9ac121d173}
+R\+E\+A\+L {\bfseries m\+Q3}\label{a00074_a7d70b76441a54466bd783a9ac121d173}
 
 \item 
-bool {\bfseries m\-Is\-Uni\-Quaternion}\label{a00074_a51dbd4da0bd28b4054ea2482e10a26f3}
+bool {\bfseries m\+Is\+Uni\+Quaternion}\label{a00074_a51dbd4da0bd28b4054ea2482e10a26f3}
 
 \end{DoxyCompactItemize}
 
@@ -92,9 +92,9 @@ A quaternion class, used to represent the orientation of the molecule.
 It may or may not be a unit quaternion. 
 
 \subsubsection{Member Function Documentation}
-\index{Obj\-Cryst\-::\-Quaternion@{Obj\-Cryst\-::\-Quaternion}!Normalize@{Normalize}}
-\index{Normalize@{Normalize}!ObjCryst::Quaternion@{Obj\-Cryst\-::\-Quaternion}}
-\paragraph[{Normalize}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-Quaternion\-::\-Normalize (
+\index{Obj\+Cryst\+::\+Quaternion@{Obj\+Cryst\+::\+Quaternion}!Normalize@{Normalize}}
+\index{Normalize@{Normalize}!Obj\+Cryst\+::\+Quaternion@{Obj\+Cryst\+::\+Quaternion}}
+\paragraph[{Normalize}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\+Cryst\+::\+Quaternion\+::\+Normalize (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
@@ -108,15 +108,15 @@ This should not be useful, except on individual component input, or after long c
 This is markerd const because we use only unit quaternions 
 
 \subsubsection{Member Data Documentation}
-\index{Obj\-Cryst\-::\-Quaternion@{Obj\-Cryst\-::\-Quaternion}!m\-Q0@{m\-Q0}}
-\index{m\-Q0@{m\-Q0}!ObjCryst::Quaternion@{Obj\-Cryst\-::\-Quaternion}}
-\paragraph[{m\-Q0}]{\setlength{\rightskip}{0pt plus 5cm}R\-E\-A\-L Obj\-Cryst\-::\-Quaternion\-::m\-Q0\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}\label{a00074_a4f13c62b89627afaa8f4e08727dbdcdb}
+\index{Obj\+Cryst\+::\+Quaternion@{Obj\+Cryst\+::\+Quaternion}!m\+Q0@{m\+Q0}}
+\index{m\+Q0@{m\+Q0}!Obj\+Cryst\+::\+Quaternion@{Obj\+Cryst\+::\+Quaternion}}
+\paragraph[{m\+Q0}]{\setlength{\rightskip}{0pt plus 5cm}R\+E\+A\+L Obj\+Cryst\+::\+Quaternion\+::m\+Q0\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}\label{a00074_a4f13c62b89627afaa8f4e08727dbdcdb}
 
 
 The components of the quaternion z=(q0,v) with v=(q1,q2,q3) 
 
 These are mutable so that the quaternion can be normalized in a const method. 
 
-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-Molecule.\-h\end{DoxyCompactItemize}
+Molecule.\+h\end{DoxyCompactItemize}

@@ -1,11 +1,11 @@
-\subsection{Obj\-Cryst\-:\-:Restraint Class Reference}
-\label{a00087}\index{Obj\-Cryst\-::\-Restraint@{Obj\-Cryst\-::\-Restraint}}
+\subsection{Obj\+Cryst\+:\+:Restraint Class Reference}
+\label{a00087}\index{Obj\+Cryst\+::\+Restraint@{Obj\+Cryst\+::\+Restraint}}
 
 
-\doxyref{Restraint}{p.}{a00087}\-: generic class for a restraint of a given model.  
+\doxyref{Restraint}{p.}{a00087}\+: generic class for a restraint of a given model.  
 
 
-Inheritance diagram for Obj\-Cryst\-:\-:Restraint\-:\begin{figure}[H]
+Inheritance diagram for Obj\+Cryst\+:\+:Restraint\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=1.573034cm]{a00087}
@@ -16,36 +16,36 @@ Inheritance diagram for Obj\-Cryst\-:\-:Restraint\-:\begin{figure}[H]
 \item 
 {\bf Restraint} ()\label{a00087_ac916c489ee14891b38bf9a877d9e0d03}
 
-\begin{DoxyCompactList}\small\item\em Default constructor, sets \doxyref{Ref\-Par\-Type}{p.}{a00086} to gp\-Ref\-Par\-Type\-Obj\-Cryst. \end{DoxyCompactList}\item 
-{\bf Restraint} (const {\bf Ref\-Par\-Type} $\ast$type)\label{a00087_a5fd37c4a5f20a41dcacb78b0af3b8a7d}
+\begin{DoxyCompactList}\small\item\em Default constructor, sets \doxyref{Ref\+Par\+Type}{p.}{a00086} to gp\+Ref\+Par\+Type\+Obj\+Cryst. \end{DoxyCompactList}\item 
+{\bf Restraint} (const {\bf Ref\+Par\+Type} $\ast$type)\label{a00087_a5fd37c4a5f20a41dcacb78b0af3b8a7d}
 
 \begin{DoxyCompactList}\small\item\em constructor specifying the type \end{DoxyCompactList}\item 
-virtual const {\bf Ref\-Par\-Type} $\ast$ {\bfseries Get\-Type} () const \label{a00087_aaa8b94f207f2e77f58754236af929a57}
+virtual const {\bf Ref\+Par\+Type} $\ast$ {\bfseries Get\+Type} () const \label{a00087_aaa8b94f207f2e77f58754236af929a57}
 
 \item 
-virtual void {\bfseries Set\-Type} (const {\bf Ref\-Par\-Type} $\ast$type)\label{a00087_ab9dc55ae087d99cd30e9915ffb6e5371}
+virtual void {\bfseries Set\+Type} (const {\bf Ref\+Par\+Type} $\ast$type)\label{a00087_ab9dc55ae087d99cd30e9915ffb6e5371}
 
 \item 
-virtual R\-E\-A\-L {\bf Get\-Log\-Likelihood} () const \label{a00087_adac7d5d594f6d0c26aa7a15b0bb1c73c}
+virtual R\+E\+A\+L {\bf Get\+Log\+Likelihood} () const \label{a00087_adac7d5d594f6d0c26aa7a15b0bb1c73c}
 
 \begin{DoxyCompactList}\small\item\em Get -\/ln(likelihood) for this restraint. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-const {\bf Ref\-Par\-Type} $\ast$ {\bfseries mp\-Ref\-Par\-Type}\label{a00087_a4f87437f4e2e44c1f3ca2039c54b202f}
+const {\bf Ref\+Par\+Type} $\ast$ {\bfseries mp\+Ref\+Par\+Type}\label{a00087_a4f87437f4e2e44c1f3ca2039c54b202f}
 
 \end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-\doxyref{Restraint}{p.}{a00087}\-: generic class for a restraint of a given model. 
+\doxyref{Restraint}{p.}{a00087}\+: generic class for a restraint of a given model. 
 
-This defines only the category (\doxyref{Ref\-Par\-Type}{p.}{a00086}) of restraint, and the function to access the log(likelihood) associated to this restraint and the current model.
+This defines only the category (\doxyref{Ref\+Par\+Type}{p.}{a00086}) of restraint, and the function to access the log(likelihood) associated to this restraint and the current model.
 
-By default\-: -\/log(likelihood)=0, and the function must be overloaded for \char`\"{}real\char`\"{} restraints.
+By default\+: -\/log(likelihood)=0, and the function must be overloaded for \char`\"{}real\char`\"{} restraints.
 
 \begin{DoxyNote}{Note}
-the log(likelihood) {\itshape must} always include the normalization term, so that variances can also optimized during the maximum likelihood optimization. e.\-g.\-:
+the log(likelihood) {\itshape must} always include the normalization term, so that variances can also optimized during the maximum likelihood optimization. e.\+g.\+:
 \begin{DoxyItemize}
 \item $ P=\frac{1}{\sqrt{2\pi\sigma^2}}e^{\frac{-(calc-expected)^2}{\sigma^2}}$
 \item $ -\log(P)= \log\left(\sqrt{2\pi\sigma^2}\right) + \left(\frac{calc-expected}{\sigma} \right)^2$
@@ -53,6 +53,6 @@ the log(likelihood) {\itshape must} always include the normalization term, so th
 \end{DoxyNote}
 forgetting the normalization term would result in making the optimization diverge towards infinite variances. 
 
-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-Refinable\-Obj.\-h\end{DoxyCompactItemize}
+Refinable\+Obj.\+h\end{DoxyCompactItemize}

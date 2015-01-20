@@ -1,11 +1,11 @@
-\subsection{Obj\-Cryst\-:\-:W\-X\-Field\-Par\-Base Class Reference}
-\label{a00130}\index{Obj\-Cryst\-::\-W\-X\-Field\-Par\-Base@{Obj\-Cryst\-::\-W\-X\-Field\-Par\-Base}}
+\subsection{Obj\+Cryst\+:\+:W\+X\+Field\+Par\+Base Class Reference}
+\label{a00130}\index{Obj\+Cryst\+::\+W\+X\+Field\+Par\+Base@{Obj\+Cryst\+::\+W\+X\+Field\+Par\+Base}}
 
 
 A field for a parameter.  
 
 
-Inheritance diagram for Obj\-Cryst\-:\-:W\-X\-Field\-Par\-Base\-:\begin{figure}[H]
+Inheritance diagram for Obj\+Cryst\+:\+:W\+X\+Field\+Par\+Base\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=4.000000cm]{a00130}
@@ -14,77 +14,77 @@ Inheritance diagram for Obj\-Cryst\-:\-:W\-X\-Field\-Par\-Base\-:\begin{figure}[
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bf W\-X\-Field\-Par\-Base} (wx\-Window $\ast$parent, const string \&label, const int field\-\_\-id, const int hsize=65)\label{a00130_af26d6a51ca7128eb9ef9bd86120aa681}
+{\bf W\+X\+Field\+Par\+Base} (wx\+Window $\ast$parent, const string \&label, const int field\+\_\+id, const int hsize=65)\label{a00130_af26d6a51ca7128eb9ef9bd86120aa681}
 
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
-void {\bf On\-Enter} (wx\-Command\-Event \&W\-X\-U\-N\-U\-S\-E\-D(event))
+void {\bf On\+Enter} (wx\+Command\+Event \&W\+X\+U\+N\+U\+S\+E\+D(event))
 \begin{DoxyCompactList}\small\item\em When a new value is entered (must type it and then hit the 'enter' key). \end{DoxyCompactList}\item 
-void {\bf On\-Text} (wx\-Command\-Event \&W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00130_af3b3b3085791ee0aba673e8ee2636d7e}
+void {\bf On\+Text} (wx\+Command\+Event \&W\+X\+U\+N\+U\+S\+E\+D(event))\label{a00130_af3b3b3085791ee0aba673e8ee2636d7e}
 
 \begin{DoxyCompactList}\small\item\em Records when text is entered (either from self-\/updating or user input) \end{DoxyCompactList}\item 
-virtual void {\bf Cryst\-Update} (const bool update\-U\-I=false, const bool mutexlock=false)=0\label{a00130_a25b17ac92c4e3c618a6184c1c86a411a}
+virtual void {\bf Cryst\+Update} (const bool update\+U\+I=false, const bool mutexlock=false)=0\label{a00130_a25b17ac92c4e3c618a6184c1c86a411a}
 
 \begin{DoxyCompactList}\small\item\em This gets a new value from the parameter. \end{DoxyCompactList}\item 
 virtual void {\bf Revert} ()=0\label{a00130_a27fd5066d2f6b6e87e213439fd8f7311}
 
 \begin{DoxyCompactList}\small\item\em After a user entry, this allows to go back to the last value, if for some reason the entry was rejected (because the object is currently busy, ...) \end{DoxyCompactList}\item 
-virtual void {\bf Validate\-User\-Input} ()\label{a00130_a78e31ae088744a9ccab23b8f0eaf59af}
+virtual void {\bf Validate\+User\+Input} ()\label{a00130_a78e31ae088744a9ccab23b8f0eaf59af}
 
 \begin{DoxyCompactList}\small\item\em This function shall be called when a new value has been entered. \end{DoxyCompactList}\item 
-virtual void {\bf Set\-Tool\-Tip} (const wx\-String \&tip)\label{a00130_a9e4f9e8147d522bb2d4dd9903d8aa376}
+virtual void {\bf Set\+Tool\+Tip} (const wx\+String \&tip)\label{a00130_a9e4f9e8147d522bb2d4dd9903d8aa376}
 
 \begin{DoxyCompactList}\small\item\em Set tooltip for this window. It will be activated when going over the entry field. \end{DoxyCompactList}\item 
-void {\bf Set\-Format} (const wx\-String \&format)\label{a00130_af695c4844533513136249b7568f36183}
+void {\bf Set\+Format} (const wx\+String \&format)\label{a00130_af695c4844533513136249b7568f36183}
 
 \begin{DoxyCompactList}\small\item\em Set Format. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-virtual void {\bf Read\-New\-Value} ()=0\label{a00130_ae8a24ee708e2a61f42e2cc64566d3537}
+virtual void {\bf Read\+New\+Value} ()=0\label{a00130_ae8a24ee708e2a61f42e2cc64566d3537}
 
 \begin{DoxyCompactList}\small\item\em Reads the new value when the Enter key is hit. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-wx\-Text\-Ctrl $\ast$ {\bf mp\-Field}\label{a00130_adf1902af28299a952220fa257e7cb296}
+wx\+Text\+Ctrl $\ast$ {\bf mp\+Field}\label{a00130_adf1902af28299a952220fa257e7cb296}
 
 \begin{DoxyCompactList}\small\item\em The field in which the value is written. \end{DoxyCompactList}\item 
-bool {\bf m\-Is\-Self\-Updating}
-\begin{DoxyCompactList}\small\item\em Set to true if the Field is being updated, so that no 'E\-V\-T\-\_\-\-T\-E\-X\-T' is understood as user input. \end{DoxyCompactList}\item 
-wx\-String {\bf m\-Format}\label{a00130_aa2fad972045faa5c4fa460e6115ff1cc}
+bool {\bf m\+Is\+Self\+Updating}
+\begin{DoxyCompactList}\small\item\em Set to true if the Field is being updated, so that no 'E\+V\+T\+\_\+\+T\+E\+X\+T' is understood as user input. \end{DoxyCompactList}\item 
+wx\+String {\bf m\+Format}\label{a00130_aa2fad972045faa5c4fa460e6115ff1cc}
 
-\begin{DoxyCompactList}\small\item\em Format to be used, default = \-\_\-\-T(\char`\"{}\%8f\char`\"{}) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Format to be used, default = \+\_\+\+T(\char`\"{}\%8f\char`\"{}) \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
 A field for a parameter. 
 
-This is a an abstract bas class, which can handle events (the real classes to use is the templated \doxyref{W\-X\-Field\-Par}{p.}{a00129} class). If the parameter is a \doxyref{Refinable\-Par}{p.}{a00079}, use \doxyref{W\-X\-Field\-Ref\-Par}{p.}{a00131}. 
+This is a an abstract bas class, which can handle events (the real classes to use is the templated \doxyref{W\+X\+Field\+Par}{p.}{a00129} class). If the parameter is a \doxyref{Refinable\+Par}{p.}{a00079}, use \doxyref{W\+X\+Field\+Ref\+Par}{p.}{a00131}. 
 
 \subsubsection{Member Function Documentation}
-\index{Obj\-Cryst\-::\-W\-X\-Field\-Par\-Base@{Obj\-Cryst\-::\-W\-X\-Field\-Par\-Base}!On\-Enter@{On\-Enter}}
-\index{On\-Enter@{On\-Enter}!ObjCryst::WXFieldParBase@{Obj\-Cryst\-::\-W\-X\-Field\-Par\-Base}}
-\paragraph[{On\-Enter}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-W\-X\-Field\-Par\-Base\-::\-On\-Enter (
+\index{Obj\+Cryst\+::\+W\+X\+Field\+Par\+Base@{Obj\+Cryst\+::\+W\+X\+Field\+Par\+Base}!On\+Enter@{On\+Enter}}
+\index{On\+Enter@{On\+Enter}!Obj\+Cryst\+::\+W\+X\+Field\+Par\+Base@{Obj\+Cryst\+::\+W\+X\+Field\+Par\+Base}}
+\paragraph[{On\+Enter}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\+Cryst\+::\+W\+X\+Field\+Par\+Base\+::\+On\+Enter (
 \begin{DoxyParamCaption}
-\item[{wx\-Command\-Event \&}]{W\-X\-U\-N\-U\-S\-E\-Devent}
+\item[{wx\+Command\+Event \&}]{W\+X\+U\+N\+U\+S\+E\+Devent}
 \end{DoxyParamCaption}
 )}\label{a00130_a5c7c59452cada97c926f53b294a06e27}
 
 
 When a new value is entered (must type it and then hit the 'enter' key). 
 
-The Field reads the new value, and directly changes the \doxyref{Refinable\-Par}{p.}{a00079} value (contrary to what happens for \doxyref{W\-X\-Field\-Name}{p.}{a00127})by using \doxyref{Refinable\-Par\-::\-Set\-Human\-Value()}{p.}{a00079_a6bb727ce1de6de9e56c46be1ba75f8b9}. 
+The Field reads the new value, and directly changes the \doxyref{Refinable\+Par}{p.}{a00079} value (contrary to what happens for \doxyref{W\+X\+Field\+Name}{p.}{a00127})by using \doxyref{Refinable\+Par\+::\+Set\+Human\+Value()}{p.}{a00079_a6bb727ce1de6de9e56c46be1ba75f8b9}. 
 
 \subsubsection{Member Data Documentation}
-\index{Obj\-Cryst\-::\-W\-X\-Field\-Par\-Base@{Obj\-Cryst\-::\-W\-X\-Field\-Par\-Base}!m\-Is\-Self\-Updating@{m\-Is\-Self\-Updating}}
-\index{m\-Is\-Self\-Updating@{m\-Is\-Self\-Updating}!ObjCryst::WXFieldParBase@{Obj\-Cryst\-::\-W\-X\-Field\-Par\-Base}}
-\paragraph[{m\-Is\-Self\-Updating}]{\setlength{\rightskip}{0pt plus 5cm}bool Obj\-Cryst\-::\-W\-X\-Field\-Par\-Base\-::m\-Is\-Self\-Updating\hspace{0.3cm}{\ttfamily [protected]}}\label{a00130_a07aea47e860f14581b698ab91c7ac3f0}
+\index{Obj\+Cryst\+::\+W\+X\+Field\+Par\+Base@{Obj\+Cryst\+::\+W\+X\+Field\+Par\+Base}!m\+Is\+Self\+Updating@{m\+Is\+Self\+Updating}}
+\index{m\+Is\+Self\+Updating@{m\+Is\+Self\+Updating}!Obj\+Cryst\+::\+W\+X\+Field\+Par\+Base@{Obj\+Cryst\+::\+W\+X\+Field\+Par\+Base}}
+\paragraph[{m\+Is\+Self\+Updating}]{\setlength{\rightskip}{0pt plus 5cm}bool Obj\+Cryst\+::\+W\+X\+Field\+Par\+Base\+::m\+Is\+Self\+Updating\hspace{0.3cm}{\ttfamily [protected]}}\label{a00130_a07aea47e860f14581b698ab91c7ac3f0}
 
 
-Set to true if the Field is being updated, so that no 'E\-V\-T\-\_\-\-T\-E\-X\-T' is understood as user input. 
+Set to true if the Field is being updated, so that no 'E\+V\+T\+\_\+\+T\+E\+X\+T' is understood as user input. 
 
 
 
-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-wx\-Cryst.\-h\end{DoxyCompactItemize}
+wx\+Cryst.\+h\end{DoxyCompactItemize}

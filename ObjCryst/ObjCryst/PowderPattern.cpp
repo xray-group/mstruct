@@ -716,7 +716,7 @@ void PowderPatternDiffraction::GenHKLFullSpace()
       stol=mpParentPowderPattern->X2STOL(mpParentPowderPattern->GetPowderPatternXMin());
    else
       stol=mpParentPowderPattern->X2STOL(mpParentPowderPattern->GetPowderPatternXMax());
-   if(stol>1) stol=1; // Do not go beyond 0.5 A resolution (mostly for TOF data)
+   //if(stol>1) stol=1; // Do not go beyond 0.5 A resolution (mostly for TOF data) - This is a joke? (Zdenek)
    this->ScatteringData::GenHKLFullSpace2(stol,true);
    if((mExtractionMode) && (mFhklObsSq.numElements()!=this->GetNbRefl()))
    {// Reflections changed, so ScatteringData::PrepareHKLarrays() probably reseted mFhklObsSq
@@ -4451,6 +4451,7 @@ void PowderPattern::Prepare()
    VFN_DEBUG_MESSAGE("PowderPattern::Prepare()",5);
    for(int i=0;i<mPowderPatternComponentRegistry.GetNb();i++)
    {
+      cout << "PowderPattern::Prepare>mMaxSinThetaOvLambda:" << mMaxSinThetaOvLambda << "\n";
       mPowderPatternComponentRegistry.GetObj(i).SetMaxSinThetaOvLambda(mMaxSinThetaOvLambda);
       mPowderPatternComponentRegistry.GetObj(i).Prepare();
    }

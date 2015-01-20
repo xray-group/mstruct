@@ -31,7 +31,7 @@
 //#define program_version "0.39-(Fox-r1221)-testing-WCfaults+ExternalLSQConstraints"
 //#define program_version "0.104-(Fox-r1221)-develop-EllipRodsGamma(testing)" // EllipRodsGamma
 //#define program_version "0.96-(Fox-r1221)-develop"
-#define program_version "0.136-(Fox-r1221)-develop-carbonWB(withoutScale)"
+#define program_version "0.138-(Fox-r1221)-develop-carbonWB(withoutScale)"
 
 #include "MStruct.h"
 
@@ -663,7 +663,7 @@ int main (int argc, char *argv[])
      vDiffData[iphase]->SetCrystal(*crystal);
     // Add crystalline phase
      data.AddPowderPatternComponent(*vDiffData[iphase]);
-
+     
     // Set absorption and texture corr. params.
      REAL thickness, depth, afactor;
      cout << "absorp corr params: thickness(nm),depth(nm),abs.factor" << endl;
@@ -2423,12 +2423,12 @@ int main (int argc, char *argv[])
    f.close();
    /*ofstream f1("phase2_par.txt");
    vDiffData[1]->PrintHKLInfo(f1);
-   f1.close();
+   f1.close();*/
    //
-   ofstream f2("phase1_par_2.txt");
-   vDiffData[0]->PrintHKLInfo2(f2,0.001);
+   /*ofstream f2("phase1_par_2.txt");
+     vDiffData[0]->PrintHKLInfo2(f2,0.001);*/
    //vDiffData[1]->PrintHKLInfo(f2);
-   f2.close();*/
+   f2.close();
   // Save the powder pattern in text format
    //data.SavePowderPattern("tio2.dat");
   // Save everything in xml so that we can reload it later

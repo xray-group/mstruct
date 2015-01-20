@@ -1,160 +1,160 @@
-\subsection{Obj\-Cryst\-:\-:C\-I\-F\-Data Class Reference}
-\label{a00025}\index{Obj\-Cryst\-::\-C\-I\-F\-Data@{Obj\-Cryst\-::\-C\-I\-F\-Data}}
+\subsection{Obj\+Cryst\+:\+:C\+I\+F\+Data Class Reference}
+\label{a00025}\index{Obj\+Cryst\+::\+C\+I\+F\+Data@{Obj\+Cryst\+::\+C\+I\+F\+Data}}
 
 
-The \doxyref{C\-I\-F\-Data}{p.}{a00025} class holds all the information from a {\itshape single} data\-\_\- block from a cif file.  
+The \doxyref{C\+I\+F\+Data}{p.}{a00025} class holds all the information from a {\itshape single} data\+\_\+ block from a cif file.  
 
 
 \subsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-struct {\bf C\-I\-F\-Atom}
+struct {\bf C\+I\+F\+Atom}
 \begin{DoxyCompactList}\small\item\em \doxyref{Atom}{p.}{a00014} record. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void {\bf Extract\-All} (const bool verbose=false)
+void {\bf Extract\+All} (const bool verbose=false)
 \begin{DoxyCompactList}\small\item\em Extract lattice parameters, spacegroup (symbol or number), atomic positions, chemical name and formula if available. \end{DoxyCompactList}\item 
-void {\bf Extract\-Name} (const bool verbose=false)\label{a00025_a57e9ec3f37cfe8c272cc102280f08d66}
+void {\bf Extract\+Name} (const bool verbose=false)\label{a00025_a57e9ec3f37cfe8c272cc102280f08d66}
 
 \begin{DoxyCompactList}\small\item\em Extract name \& formula for the crystal. \end{DoxyCompactList}\item 
-void {\bf Extract\-Unit\-Cell} (const bool verbose=false)\label{a00025_ab0ea11e45199961a3af2981a5ba335c5}
+void {\bf Extract\+Unit\+Cell} (const bool verbose=false)\label{a00025_ab0ea11e45199961a3af2981a5ba335c5}
 
 \begin{DoxyCompactList}\small\item\em Extract unit cell. \end{DoxyCompactList}\item 
-void {\bf Extract\-Spacegroup} (const bool verbose=false)\label{a00025_a9aa5afcbe90a074c4ace30ac5149526d}
+void {\bf Extract\+Spacegroup} (const bool verbose=false)\label{a00025_a9aa5afcbe90a074c4ace30ac5149526d}
 
 \begin{DoxyCompactList}\small\item\em Extract spacegroup number or symbol. \end{DoxyCompactList}\item 
-void {\bf Extract\-Atomic\-Positions} (const bool verbose=false)
+void {\bf Extract\+Atomic\+Positions} (const bool verbose=false)
 \begin{DoxyCompactList}\small\item\em Extract all atomic positions. \end{DoxyCompactList}\item 
-void {\bf Extract\-Powder\-Pattern} (const bool verbose=false)
-\begin{DoxyCompactList}\small\item\em Extract Powder Diffraction data, with Iobs, sigma(\-Iobs) and either 2theta or time-\/of-\/flight position. \end{DoxyCompactList}\item 
-void {\bf Extract\-Single\-Crystal\-Data} (const bool verbose=false)\label{a00025_aafcf8bbd95432172cca533d4a713729e}
+void {\bf Extract\+Powder\+Pattern} (const bool verbose=false)
+\begin{DoxyCompactList}\small\item\em Extract Powder Diffraction data, with Iobs, sigma(\+Iobs) and either 2theta or time-\/of-\/flight position. \end{DoxyCompactList}\item 
+void {\bf Extract\+Single\+Crystal\+Data} (const bool verbose=false)\label{a00025_aafcf8bbd95432172cca533d4a713729e}
 
-\begin{DoxyCompactList}\small\item\em Extract single crystal data, with Iobs, sigma(\-Iobs) and h,k,l. \end{DoxyCompactList}\item 
-void {\bf Cartesian2\-Fractional\-Coord} ()\label{a00025_abe437ee4b2bbda8bf7a2861f9207a8ee}
+\begin{DoxyCompactList}\small\item\em Extract single crystal data, with Iobs, sigma(\+Iobs) and h,k,l. \end{DoxyCompactList}\item 
+void {\bf Cartesian2\+Fractional\+Coord} ()\label{a00025_abe437ee4b2bbda8bf7a2861f9207a8ee}
 
-\begin{DoxyCompactList}\small\item\em Generate fractional coordinates from cartesian ones for all atoms \doxyref{C\-I\-F\-Data\-::\-Calc\-Matrices()}{p.}{a00025_a51e099b2881e73eb776855177aed4ca9} must be called first. \end{DoxyCompactList}\item 
-void {\bf Fractional2\-Cartesian\-Coord} ()\label{a00025_a8217fa94ba5f6291b566d43123162d9c}
+\begin{DoxyCompactList}\small\item\em Generate fractional coordinates from cartesian ones for all atoms \doxyref{C\+I\+F\+Data\+::\+Calc\+Matrices()}{p.}{a00025_a51e099b2881e73eb776855177aed4ca9} must be called first. \end{DoxyCompactList}\item 
+void {\bf Fractional2\+Cartesian\+Coord} ()\label{a00025_a8217fa94ba5f6291b566d43123162d9c}
 
-\begin{DoxyCompactList}\small\item\em Generate cartesian coordinates from fractional ones for all atoms \doxyref{C\-I\-F\-Data\-::\-Calc\-Matrices()}{p.}{a00025_a51e099b2881e73eb776855177aed4ca9} must be called first. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Generate cartesian coordinates from fractional ones for all atoms \doxyref{C\+I\+F\+Data\+::\+Calc\+Matrices()}{p.}{a00025_a51e099b2881e73eb776855177aed4ca9} must be called first. \end{DoxyCompactList}\item 
 void {\bf f2c} (float \&x, float \&y, float \&z)\label{a00025_af3944cb99e637a65eda526c469c04ece}
 
-\begin{DoxyCompactList}\small\item\em Convert from fractional to cartesian coordinates \doxyref{C\-I\-F\-Data\-::\-Calc\-Matrices()}{p.}{a00025_a51e099b2881e73eb776855177aed4ca9} must be called first. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Convert from fractional to cartesian coordinates \doxyref{C\+I\+F\+Data\+::\+Calc\+Matrices()}{p.}{a00025_a51e099b2881e73eb776855177aed4ca9} must be called first. \end{DoxyCompactList}\item 
 void {\bf c2f} (float \&x, float \&y, float \&z)\label{a00025_a980aafed986df9367c94a5731d215645}
 
-\begin{DoxyCompactList}\small\item\em Convert from cartesia to fractional coordinates \doxyref{C\-I\-F\-Data\-::\-Calc\-Matrices()}{p.}{a00025_a51e099b2881e73eb776855177aed4ca9} must be called first. \end{DoxyCompactList}\item 
-void {\bf Calc\-Matrices} (const bool verbose=false)\label{a00025_a51e099b2881e73eb776855177aed4ca9}
+\begin{DoxyCompactList}\small\item\em Convert from cartesia to fractional coordinates \doxyref{C\+I\+F\+Data\+::\+Calc\+Matrices()}{p.}{a00025_a51e099b2881e73eb776855177aed4ca9} must be called first. \end{DoxyCompactList}\item 
+void {\bf Calc\+Matrices} (const bool verbose=false)\label{a00025_a51e099b2881e73eb776855177aed4ca9}
 
 \begin{DoxyCompactList}\small\item\em Calculate real space transformation matrices requires unit cell parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-std\-::list$<$ std\-::string $>$ {\bf mv\-Comment}\label{a00025_a9408fb91caf78518c74b0de53a7c4d38}
+std\+::list$<$ std\+::string $>$ {\bf mv\+Comment}\label{a00025_a9408fb91caf78518c74b0de53a7c4d38}
 
-\begin{DoxyCompactList}\small\item\em Comments from \doxyref{C\-I\-F}{p.}{a00023} file, in the order they were read. \end{DoxyCompactList}\item 
-std\-::map$<$ ci\-\_\-string, std\-::string $>$ {\bf mv\-Item}\label{a00025_a50f7e91571f28b3a3a66675a564496a6}
+\begin{DoxyCompactList}\small\item\em Comments from \doxyref{C\+I\+F}{p.}{a00023} file, in the order they were read. \end{DoxyCompactList}\item 
+std\+::map$<$ ci\+\_\+string, std\+::string $>$ {\bf mv\+Item}\label{a00025_a50f7e91571f28b3a3a66675a564496a6}
 
-\begin{DoxyCompactList}\small\item\em Individual \doxyref{C\-I\-F}{p.}{a00023} items. \end{DoxyCompactList}\item 
-std\-::map$<$ std\-::set$<$ ci\-\_\-string $>$\\*
-, std\-::map$<$ ci\-\_\-string, \\*
-std\-::vector$<$ std\-::string $>$ $>$ $>$ {\bf mv\-Loop}\label{a00025_aebd5e242b7771f184f29647527fcab5a}
+\begin{DoxyCompactList}\small\item\em Individual \doxyref{C\+I\+F}{p.}{a00023} items. \end{DoxyCompactList}\item 
+std\+::map$<$ std\+::set$<$ ci\+\_\+string $>$\\*
+, std\+::map$<$ ci\+\_\+string, \\*
+std\+::vector$<$ std\+::string $>$ $>$ $>$ {\bf mv\+Loop}\label{a00025_aebd5e242b7771f184f29647527fcab5a}
 
-\begin{DoxyCompactList}\small\item\em \doxyref{C\-I\-F}{p.}{a00023} Loop data. \end{DoxyCompactList}\item 
-std\-::vector$<$ float $>$ {\bf mv\-Lattice\-Par}
+\begin{DoxyCompactList}\small\item\em \doxyref{C\+I\+F}{p.}{a00023} Loop data. \end{DoxyCompactList}\item 
+std\+::vector$<$ float $>$ {\bf mv\+Lattice\+Par}
 \begin{DoxyCompactList}\small\item\em Lattice parameters, in ansgtroem and degrees -\/ vector size is 0 if no parameters have been obtained yet. \end{DoxyCompactList}\item 
-std\-::string {\bf m\-Spacegroup\-Number\-I\-T}\label{a00025_a3ee9d402a5d06f95e06851d9975aa079}
+std\+::string {\bf m\+Spacegroup\+Number\+I\+T}\label{a00025_a3ee9d402a5d06f95e06851d9975aa079}
 
-\begin{DoxyCompactList}\small\item\em Spacegroup number from International Tables (\-\_\-space\-\_\-group\-\_\-\-I\-T\-\_\-number), or -\/1. \end{DoxyCompactList}\item 
-std\-::string {\bf m\-Spacegroup\-Symbol\-Hall}\label{a00025_aa7e1eb93e694dc809a925e2abfb50700}
+\begin{DoxyCompactList}\small\item\em Spacegroup number from International Tables (\+\_\+space\+\_\+group\+\_\+\+I\+T\+\_\+number), or -\/1. \end{DoxyCompactList}\item 
+std\+::string {\bf m\+Spacegroup\+Symbol\+Hall}\label{a00025_aa7e1eb93e694dc809a925e2abfb50700}
 
-\begin{DoxyCompactList}\small\item\em Spacegroup Hall symbol (or empty string) (\-\_\-space\-\_\-group\-\_\-name\-\_\-\-Hall) \end{DoxyCompactList}\item 
-std\-::string {\bf m\-Spacegroup\-Hermann\-Mauguin}\label{a00025_aa76770c71d42d48e8d6a83468acd341b}
+\begin{DoxyCompactList}\small\item\em Spacegroup Hall symbol (or empty string) (\+\_\+space\+\_\+group\+\_\+name\+\_\+\+Hall) \end{DoxyCompactList}\item 
+std\+::string {\bf m\+Spacegroup\+Hermann\+Mauguin}\label{a00025_aa76770c71d42d48e8d6a83468acd341b}
 
-\begin{DoxyCompactList}\small\item\em Spacegroup Hermann-\/\-Mauguin symbol (or empty string) (\-\_\-space\-\_\-group\-\_\-name\-\_\-\-H-\/\-M\-\_\-alt) \end{DoxyCompactList}\item 
-std\-::set$<$ string $>$ {\bf mv\-Symmetry\-\_\-equiv\-\_\-pos\-\_\-as\-\_\-xyz}\label{a00025_a2946588a8b6408e51393ac42f7a84193}
+\begin{DoxyCompactList}\small\item\em Spacegroup Hermann-\/\+Mauguin symbol (or empty string) (\+\_\+space\+\_\+group\+\_\+name\+\_\+\+H-\/\+M\+\_\+alt) \end{DoxyCompactList}\item 
+std\+::set$<$ string $>$ {\bf mv\+Symmetry\+\_\+equiv\+\_\+pos\+\_\+as\+\_\+xyz}\label{a00025_a2946588a8b6408e51393ac42f7a84193}
 
-\begin{DoxyCompactList}\small\item\em Map of \-\_\-symmetry\-\_\-equiv\-\_\-pos\-\_\-as\-\_\-xyz strings. \end{DoxyCompactList}\item 
-std\-::string {\bf m\-Name}\label{a00025_a89e040b33c74bb6f95a5e5f34ff04117}
+\begin{DoxyCompactList}\small\item\em Map of \+\_\+symmetry\+\_\+equiv\+\_\+pos\+\_\+as\+\_\+xyz strings. \end{DoxyCompactList}\item 
+std\+::string {\bf m\+Name}\label{a00025_a89e040b33c74bb6f95a5e5f34ff04117}
 
 \begin{DoxyCompactList}\small\item\em \doxyref{Crystal}{p.}{a00026} name. Or empty string if none is available. \end{DoxyCompactList}\item 
-std\-::string {\bf m\-Formula}\label{a00025_a128df79c59d0506958f49ae4ceab71f6}
+std\+::string {\bf m\+Formula}\label{a00025_a128df79c59d0506958f49ae4ceab71f6}
 
 \begin{DoxyCompactList}\small\item\em Formula. Or empty string if none is available. \end{DoxyCompactList}\item 
-std\-::vector$<$ {\bf C\-I\-F\-Atom} $>$ {\bf mv\-Atom}\label{a00025_a7319626ead0beb560cdd5e2f6429692a}
+std\+::vector$<$ {\bf C\+I\+F\+Atom} $>$ {\bf mv\+Atom}\label{a00025_a7319626ead0beb560cdd5e2f6429692a}
 
 \begin{DoxyCompactList}\small\item\em Atoms, if any are found. \end{DoxyCompactList}\item 
-float {\bf m\-Orth\-Matrix} [3][3]\label{a00025_a6d680299792c5a5be2f9123f8eeac5a3}
+float {\bf m\+Orth\+Matrix} [3][3]\label{a00025_a6d680299792c5a5be2f9123f8eeac5a3}
 
-\begin{DoxyCompactList}\small\item\em Fractionnal2\-Cartesian matrix. \end{DoxyCompactList}\item 
-float {\bf m\-Orth\-Matrix\-Invert} [3][3]\label{a00025_ab34517457046873079c27b468ca9eb14}
+\begin{DoxyCompactList}\small\item\em Fractionnal2\+Cartesian matrix. \end{DoxyCompactList}\item 
+float {\bf m\+Orth\+Matrix\+Invert} [3][3]\label{a00025_ab34517457046873079c27b468ca9eb14}
 
-\begin{DoxyCompactList}\small\item\em Cartesian2\-Fractionnal matrix. \end{DoxyCompactList}\item 
-std\-::vector$<$ float $>$ {\bf m\-Powder\-Pattern\-Obs}\label{a00025_a3698447e71c48990af7313ab8fc19f6b}
+\begin{DoxyCompactList}\small\item\em Cartesian2\+Fractionnal matrix. \end{DoxyCompactList}\item 
+std\+::vector$<$ float $>$ {\bf m\+Powder\+Pattern\+Obs}\label{a00025_a3698447e71c48990af7313ab8fc19f6b}
 
 \begin{DoxyCompactList}\small\item\em Powder pattern data. \end{DoxyCompactList}\item 
-std\-::vector$<$ float $>$ {\bfseries m\-Powder\-Pattern\-X}\label{a00025_a227ae97aa4442a7f579bc0f23bd64181}
+std\+::vector$<$ float $>$ {\bfseries m\+Powder\+Pattern\+X}\label{a00025_a227ae97aa4442a7f579bc0f23bd64181}
 
 \item 
-std\-::vector$<$ float $>$ {\bfseries m\-Powder\-Pattern\-Sigma}\label{a00025_ad6ae3c67de0030819a3eeea861e4ba99}
+std\+::vector$<$ float $>$ {\bfseries m\+Powder\+Pattern\+Sigma}\label{a00025_ad6ae3c67de0030819a3eeea861e4ba99}
 
 \item 
-Cryst\-Vector\-\_\-long {\bf m\-H}\label{a00025_a49fa1a8ae167c7c96822fbae5d8af9e8}
+Cryst\+Vector\+\_\+long {\bf m\+H}\label{a00025_a49fa1a8ae167c7c96822fbae5d8af9e8}
 
 \begin{DoxyCompactList}\small\item\em Single crystal data. \end{DoxyCompactList}\item 
-Cryst\-Vector\-\_\-long {\bfseries m\-K}\label{a00025_acd4fd8612a1b0c7a53d0b1b09ef56b71}
+Cryst\+Vector\+\_\+long {\bfseries m\+K}\label{a00025_acd4fd8612a1b0c7a53d0b1b09ef56b71}
 
 \item 
-Cryst\-Vector\-\_\-long {\bfseries m\-L}\label{a00025_ad4adc3dc03d37e9a7ee0a224edb69929}
+Cryst\+Vector\+\_\+long {\bfseries m\+L}\label{a00025_ad4adc3dc03d37e9a7ee0a224edb69929}
 
 \item 
-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf m\-Iobs}\label{a00025_a1834128eaf7946e021a05461e3f37a7f}
+Cryst\+Vector\+\_\+\+R\+E\+A\+L {\bf m\+Iobs}\label{a00025_a1834128eaf7946e021a05461e3f37a7f}
 
 \begin{DoxyCompactList}\small\item\em Single crystal data. \end{DoxyCompactList}\item 
-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bfseries m\-Sigma}\label{a00025_a4fd94532ba94bec1910dd1c3335c2fa6}
+Cryst\+Vector\+\_\+\+R\+E\+A\+L {\bfseries m\+Sigma}\label{a00025_a4fd94532ba94bec1910dd1c3335c2fa6}
 
 \item 
-{\bf Wavelength\-Type} {\bf m\-Data\-Type}\label{a00025_a0f9d41853a8805a2ef1730271d71f65f}
+{\bf Wavelength\+Type} {\bf m\+Data\+Type}\label{a00025_a0f9d41853a8805a2ef1730271d71f65f}
 
-\begin{DoxyCompactList}\small\item\em Is this X-\/\-Ray 2theta, time-\/of-\/flight ? \end{DoxyCompactList}\item 
-float {\bf m\-Wavelength}\label{a00025_ac0fdaf92f8599951e0ba5dd3bf5d4b3a}
+\begin{DoxyCompactList}\small\item\em Is this X-\/\+Ray 2theta, time-\/of-\/flight ? \end{DoxyCompactList}\item 
+float {\bf m\+Wavelength}\label{a00025_ac0fdaf92f8599951e0ba5dd3bf5d4b3a}
 
 \begin{DoxyCompactList}\small\item\em Wavelength. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-The \doxyref{C\-I\-F\-Data}{p.}{a00025} class holds all the information from a {\itshape single} data\-\_\- block from a cif file. 
+The \doxyref{C\+I\+F\+Data}{p.}{a00025} class holds all the information from a {\itshape single} data\+\_\+ block from a cif file. 
 
 It is a placeholder for all comments, item and loop data, as raw strings copied from a cif file.
 
-It is also used to interpret this data to extract parts of the cif data, i.\-e. only part of the core cif dictionnary are recognized. \doxyref{C\-I\-F}{p.}{a00023} tags currently recognized include (\char`\"{}tag1 $>$ tag2\char`\"{} means tag1 is preferred to tag2 when extracting the info, only one is reported)\-:
+It is also used to interpret this data to extract parts of the cif data, i.\+e. only part of the core cif dictionnary are recognized. \doxyref{C\+I\+F}{p.}{a00023} tags currently recognized include (\char`\"{}tag1 $>$ tag2\char`\"{} means tag1 is preferred to tag2 when extracting the info, only one is reported)\+:
 \begin{DoxyItemize}
-\item crystal name\-: {\itshape chemical\-\_\-name\-\_\-systematic $>$ \-\_\-chemical\-\_\-name\-\_\-mineral $>$ \-\_\-chemical\-\_\-name\-\_\-structure\-\_\-type $>$ \-\_\-chemical\-\_\-name\-\_\-common}
-\item {\itshape crystal formula\-: \-\_\-chemical\-\_\-formula\-\_\-analytical $>$ \-\_\-chemical\-\_\-formula\-\_\-structural $>$ \-\_\-chemical\-\_\-formula\-\_\-iupac $>$ \-\_\-chemical\-\_\-formula\-\_\-moiety}
-\item {\itshape unit cell\-: \-\_\-cell\-\_\-length}\{a,b,c\} ; {\itshape cell\-\_\-angle}\{alpha,beta,gamma\}
-\item spacegroup number\-: {\itshape space\-\_\-group\-\_\-\-I\-T\-\_\-number $>$ \-\_\-symmetry\-\_\-\-Int\-\_\-\-Tables\-\_\-number}
-\item {\itshape spacegroup Hall symbol\-: \-\_\-space\-\_\-group\-\_\-name\-\_\-\-Hall $>$ \-\_\-symmetry\-\_\-space\-\_\-group\-\_\-name\-\_\-\-Hall}
-\item {\itshape spacegroup Hermann-\/\-Mauguin symbol\-:\-\_\-space\-\_\-group\-\_\-name\-\_\-\-H-\/\-M\-\_\-alt $>$ \-\_\-symmetry\-\_\-space\-\_\-group\-\_\-name\-\_\-\-H-\/\-M}
-\item {\itshape atom coordinates\-: \-\_\-atom\-\_\-site\-\_\-fract}\{x\} ; {\itshape atom\-\_\-site\-\_\-\-Cartn}\{x,y,z\}
-\item atom occupancy\-: \-\_\-atom\-\_\-site\-\_\-occupancy
-\item atom label \& symbol\-: \-\_\-atom\-\_\-site\-\_\-type\-\_\-symbol ; \-\_\-atom\-\_\-site\-\_\-label
+\item crystal name\+: {\itshape chemical\+\_\+name\+\_\+systematic $>$ \+\_\+chemical\+\_\+name\+\_\+mineral $>$ \+\_\+chemical\+\_\+name\+\_\+structure\+\_\+type $>$ \+\_\+chemical\+\_\+name\+\_\+common}
+\item {\itshape crystal formula\+: \+\_\+chemical\+\_\+formula\+\_\+analytical $>$ \+\_\+chemical\+\_\+formula\+\_\+structural $>$ \+\_\+chemical\+\_\+formula\+\_\+iupac $>$ \+\_\+chemical\+\_\+formula\+\_\+moiety}
+\item {\itshape unit cell\+: \+\_\+cell\+\_\+length}\{a,b,c\} ; {\itshape cell\+\_\+angle}\{alpha,beta,gamma\}
+\item spacegroup number\+: {\itshape space\+\_\+group\+\_\+\+I\+T\+\_\+number $>$ \+\_\+symmetry\+\_\+\+Int\+\_\+\+Tables\+\_\+number}
+\item {\itshape spacegroup Hall symbol\+: \+\_\+space\+\_\+group\+\_\+name\+\_\+\+Hall $>$ \+\_\+symmetry\+\_\+space\+\_\+group\+\_\+name\+\_\+\+Hall}
+\item {\itshape spacegroup Hermann-\/\+Mauguin symbol\+:\+\_\+space\+\_\+group\+\_\+name\+\_\+\+H-\/\+M\+\_\+alt $>$ \+\_\+symmetry\+\_\+space\+\_\+group\+\_\+name\+\_\+\+H-\/\+M}
+\item {\itshape atom coordinates\+: \+\_\+atom\+\_\+site\+\_\+fract}\{x\} ; {\itshape atom\+\_\+site\+\_\+\+Cartn}\{x,y,z\}
+\item atom occupancy\+: \+\_\+atom\+\_\+site\+\_\+occupancy
+\item atom label \& symbol\+: \+\_\+atom\+\_\+site\+\_\+type\+\_\+symbol ; \+\_\+atom\+\_\+site\+\_\+label
 \end{DoxyItemize}
 
 Cartesian coordinates are stored in Angstroems, angles in radians.
 
-To import \doxyref{Powder\-Pattern}{p.}{a00068} data, the following tags are used\-:
+To import \doxyref{Powder\+Pattern}{p.}{a00068} data, the following tags are used\+:
 \begin{DoxyItemize}
-\item observed intensity\-: {\itshape pd\-\_\-meas\-\_\-counts\-\_\-total $>$ \-\_\-pd\-\_\-meas\-\_\-intensity\-\_\-total $>$ \-\_\-pd\-\_\-proc\-\_\-intensity\-\_\-total $>$ \-\_\-pd\-\_\-proc\-\_\-intensity\-\_\-net}
-\item {\itshape uncertainty on intensity\-: deducted from \-\_\-pd\-\_\-proc\-\_\-ls\-\_\-weight or square root of intensity}
-\item {\itshape coordinates\-: \-\_\-pd\-\_\-proc\-\_\-2theta\-\_\-corrected $>$ \-\_\-pd\-\_\-meas\-\_\-angle\-\_\-2theta $>$ \-\_\-pd\-\_\-meas\-\_\-time\-\_\-of\-\_\-flight $>$ \-\_\-pd\-\_\-proc\-\_\-2theta\-\_\-range}\{min,max,inc\}
-\item intensity normalizer (optional)\-: \-\_\-pd\-\_\-meas\-\_\-intensity\-\_\-monitor $>$ \-\_\-pd\-\_\-meas\-\_\-step\-\_\-count\-\_\-time
+\item observed intensity\+: {\itshape pd\+\_\+meas\+\_\+counts\+\_\+total $>$ \+\_\+pd\+\_\+meas\+\_\+intensity\+\_\+total $>$ \+\_\+pd\+\_\+proc\+\_\+intensity\+\_\+total $>$ \+\_\+pd\+\_\+proc\+\_\+intensity\+\_\+net}
+\item {\itshape uncertainty on intensity\+: deducted from \+\_\+pd\+\_\+proc\+\_\+ls\+\_\+weight or square root of intensity}
+\item {\itshape coordinates\+: \+\_\+pd\+\_\+proc\+\_\+2theta\+\_\+corrected $>$ \+\_\+pd\+\_\+meas\+\_\+angle\+\_\+2theta $>$ \+\_\+pd\+\_\+meas\+\_\+time\+\_\+of\+\_\+flight $>$ \+\_\+pd\+\_\+proc\+\_\+2theta\+\_\+range}\{min,max,inc\}
+\item intensity normalizer (optional)\+: \+\_\+pd\+\_\+meas\+\_\+intensity\+\_\+monitor $>$ \+\_\+pd\+\_\+meas\+\_\+step\+\_\+count\+\_\+time
 \end{DoxyItemize}
 
-If another data field is needed, it is possible to directly access the string data (\doxyref{C\-I\-F\-Data\-::mv\-Comment}{p.}{a00025_a9408fb91caf78518c74b0de53a7c4d38} , \doxyref{C\-I\-F\-Data\-::mv\-Item}{p.}{a00025_a50f7e91571f28b3a3a66675a564496a6} and \doxyref{C\-I\-F\-Data\-::mv\-Loop}{p.}{a00025_aebd5e242b7771f184f29647527fcab5a}) to search for the correct tags. 
+If another data field is needed, it is possible to directly access the string data (\doxyref{C\+I\+F\+Data\+::mv\+Comment}{p.}{a00025_a9408fb91caf78518c74b0de53a7c4d38} , \doxyref{C\+I\+F\+Data\+::mv\+Item}{p.}{a00025_a50f7e91571f28b3a3a66675a564496a6} and \doxyref{C\+I\+F\+Data\+::mv\+Loop}{p.}{a00025_aebd5e242b7771f184f29647527fcab5a}) to search for the correct tags. 
 
 \subsubsection{Member Function Documentation}
-\index{Obj\-Cryst\-::\-C\-I\-F\-Data@{Obj\-Cryst\-::\-C\-I\-F\-Data}!Extract\-All@{Extract\-All}}
-\index{Extract\-All@{Extract\-All}!ObjCryst::CIFData@{Obj\-Cryst\-::\-C\-I\-F\-Data}}
-\paragraph[{Extract\-All}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-C\-I\-F\-Data\-::\-Extract\-All (
+\index{Obj\+Cryst\+::\+C\+I\+F\+Data@{Obj\+Cryst\+::\+C\+I\+F\+Data}!Extract\+All@{Extract\+All}}
+\index{Extract\+All@{Extract\+All}!Obj\+Cryst\+::\+C\+I\+F\+Data@{Obj\+Cryst\+::\+C\+I\+F\+Data}}
+\paragraph[{Extract\+All}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\+Cryst\+::\+C\+I\+F\+Data\+::\+Extract\+All (
 \begin{DoxyParamCaption}
 \item[{const bool}]{verbose = {\ttfamily false}}
 \end{DoxyParamCaption}
@@ -163,9 +163,9 @@ If another data field is needed, it is possible to directly access the string da
 
 Extract lattice parameters, spacegroup (symbol or number), atomic positions, chemical name and formula if available. 
 
-All other data is ignored \index{Obj\-Cryst\-::\-C\-I\-F\-Data@{Obj\-Cryst\-::\-C\-I\-F\-Data}!Extract\-Atomic\-Positions@{Extract\-Atomic\-Positions}}
-\index{Extract\-Atomic\-Positions@{Extract\-Atomic\-Positions}!ObjCryst::CIFData@{Obj\-Cryst\-::\-C\-I\-F\-Data}}
-\paragraph[{Extract\-Atomic\-Positions}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-C\-I\-F\-Data\-::\-Extract\-Atomic\-Positions (
+All other data is ignored \index{Obj\+Cryst\+::\+C\+I\+F\+Data@{Obj\+Cryst\+::\+C\+I\+F\+Data}!Extract\+Atomic\+Positions@{Extract\+Atomic\+Positions}}
+\index{Extract\+Atomic\+Positions@{Extract\+Atomic\+Positions}!Obj\+Cryst\+::\+C\+I\+F\+Data@{Obj\+Cryst\+::\+C\+I\+F\+Data}}
+\paragraph[{Extract\+Atomic\+Positions}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\+Cryst\+::\+C\+I\+F\+Data\+::\+Extract\+Atomic\+Positions (
 \begin{DoxyParamCaption}
 \item[{const bool}]{verbose = {\ttfamily false}}
 \end{DoxyParamCaption}
@@ -174,29 +174,29 @@ All other data is ignored \index{Obj\-Cryst\-::\-C\-I\-F\-Data@{Obj\-Cryst\-::\-
 
 Extract all atomic positions. 
 
-Will generate cartesian from fractional coordinates or vice-\/versa if only cartesian coordinates are available. \index{Obj\-Cryst\-::\-C\-I\-F\-Data@{Obj\-Cryst\-::\-C\-I\-F\-Data}!Extract\-Powder\-Pattern@{Extract\-Powder\-Pattern}}
-\index{Extract\-Powder\-Pattern@{Extract\-Powder\-Pattern}!ObjCryst::CIFData@{Obj\-Cryst\-::\-C\-I\-F\-Data}}
-\paragraph[{Extract\-Powder\-Pattern}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-C\-I\-F\-Data\-::\-Extract\-Powder\-Pattern (
+Will generate cartesian from fractional coordinates or vice-\/versa if only cartesian coordinates are available. \index{Obj\+Cryst\+::\+C\+I\+F\+Data@{Obj\+Cryst\+::\+C\+I\+F\+Data}!Extract\+Powder\+Pattern@{Extract\+Powder\+Pattern}}
+\index{Extract\+Powder\+Pattern@{Extract\+Powder\+Pattern}!Obj\+Cryst\+::\+C\+I\+F\+Data@{Obj\+Cryst\+::\+C\+I\+F\+Data}}
+\paragraph[{Extract\+Powder\+Pattern}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\+Cryst\+::\+C\+I\+F\+Data\+::\+Extract\+Powder\+Pattern (
 \begin{DoxyParamCaption}
 \item[{const bool}]{verbose = {\ttfamily false}}
 \end{DoxyParamCaption}
 )}\label{a00025_a10ae5869370e46547334730a1daabe5e}
 
 
-Extract Powder Diffraction data, with Iobs, sigma(\-Iobs) and either 2theta or time-\/of-\/flight position. 
+Extract Powder Diffraction data, with Iobs, sigma(\+Iobs) and either 2theta or time-\/of-\/flight position. 
 
 
 
 \subsubsection{Member Data Documentation}
-\index{Obj\-Cryst\-::\-C\-I\-F\-Data@{Obj\-Cryst\-::\-C\-I\-F\-Data}!mv\-Lattice\-Par@{mv\-Lattice\-Par}}
-\index{mv\-Lattice\-Par@{mv\-Lattice\-Par}!ObjCryst::CIFData@{Obj\-Cryst\-::\-C\-I\-F\-Data}}
-\paragraph[{mv\-Lattice\-Par}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$float$>$ Obj\-Cryst\-::\-C\-I\-F\-Data\-::mv\-Lattice\-Par}\label{a00025_a4ac7768cf84a45cd6dd9f2d9eb43cc83}
+\index{Obj\+Cryst\+::\+C\+I\+F\+Data@{Obj\+Cryst\+::\+C\+I\+F\+Data}!mv\+Lattice\+Par@{mv\+Lattice\+Par}}
+\index{mv\+Lattice\+Par@{mv\+Lattice\+Par}!Obj\+Cryst\+::\+C\+I\+F\+Data@{Obj\+Cryst\+::\+C\+I\+F\+Data}}
+\paragraph[{mv\+Lattice\+Par}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$float$>$ Obj\+Cryst\+::\+C\+I\+F\+Data\+::mv\+Lattice\+Par}\label{a00025_a4ac7768cf84a45cd6dd9f2d9eb43cc83}
 
 
 Lattice parameters, in ansgtroem and degrees -\/ vector size is 0 if no parameters have been obtained yet. 
 
 
 
-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-C\-I\-F.\-h\end{DoxyCompactItemize}
+C\+I\+F.\+h\end{DoxyCompactItemize}

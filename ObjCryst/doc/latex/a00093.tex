@@ -1,40 +1,40 @@
-\subsection{Obj\-Cryst\-:\-:Scattering\-Component\-List Class Reference}
-\label{a00093}\index{Obj\-Cryst\-::\-Scattering\-Component\-List@{Obj\-Cryst\-::\-Scattering\-Component\-List}}
+\subsection{Obj\+Cryst\+:\+:Scattering\+Component\+List Class Reference}
+\label{a00093}\index{Obj\+Cryst\+::\+Scattering\+Component\+List@{Obj\+Cryst\+::\+Scattering\+Component\+List}}
 
 
-list of scattering positions in a crystal, associated with the corresponding occupancy and a pointer to the \doxyref{Scattering\-Power}{p.}{a00096}.  
+list of scattering positions in a crystal, associated with the corresponding occupancy and a pointer to the \doxyref{Scattering\+Power}{p.}{a00096}.  
 
 
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries Scattering\-Component\-List} (const long nb\-Component)\label{a00093_a5d75cfe634f123de9c84c928dfea1eaa}
+{\bfseries Scattering\+Component\+List} (const long nb\+Component)\label{a00093_a5d75cfe634f123de9c84c928dfea1eaa}
 
 \item 
-{\bfseries Scattering\-Component\-List} (const {\bf Scattering\-Component\-List} \&old)\label{a00093_ac1b58052220493fab0712ebc9d8bc481}
+{\bfseries Scattering\+Component\+List} (const {\bf Scattering\+Component\+List} \&old)\label{a00093_ac1b58052220493fab0712ebc9d8bc481}
 
 \item 
 void {\bf Reset} ()
 \begin{DoxyCompactList}\small\item\em Reset the list. \end{DoxyCompactList}\item 
-const {\bf Scattering\-Component} \& {\bf operator()} (const long i) const \label{a00093_ac5245c446a41fd40ee1e312480023536}
+const {\bf Scattering\+Component} \& {\bf operator()} (const long i) const \label{a00093_ac5245c446a41fd40ee1e312480023536}
 
 \begin{DoxyCompactList}\small\item\em Access to a component. \end{DoxyCompactList}\item 
-{\bf Scattering\-Component} \& {\bfseries operator()} (const long i)\label{a00093_a414a8c4bfcdc598826ca04720ce576a5}
+{\bf Scattering\+Component} \& {\bfseries operator()} (const long i)\label{a00093_a414a8c4bfcdc598826ca04720ce576a5}
 
 \item 
-long {\bf Get\-Nb\-Component} () const \label{a00093_a94c1375420b97a79594af7859cb968a6}
+long {\bf Get\+Nb\+Component} () const \label{a00093_a94c1375420b97a79594af7859cb968a6}
 
 \begin{DoxyCompactList}\small\item\em Number of components. \end{DoxyCompactList}\item 
-void {\bf operator=} (const {\bf Scattering\-Component\-List} \&rhs)\label{a00093_a93c5514484bd8d32a346e1c4a155a4a3}
+void {\bf operator=} (const {\bf Scattering\+Component\+List} \&rhs)\label{a00093_a93c5514484bd8d32a346e1c4a155a4a3}
 
 \begin{DoxyCompactList}\small\item\em Assignement operator. \end{DoxyCompactList}\item 
-bool {\bf operator==} (const {\bf Scattering\-Component\-List} \&rhs) const \label{a00093_ada4b582d2e62c807e99417c5cee4a8ce}
+bool {\bf operator==} (const {\bf Scattering\+Component\+List} \&rhs) const \label{a00093_ada4b582d2e62c807e99417c5cee4a8ce}
 
 \begin{DoxyCompactList}\small\item\em Compare two lists. \end{DoxyCompactList}\item 
-void {\bf operator+=} (const {\bf Scattering\-Component\-List} \&rhs)\label{a00093_a423df65157ec66cda8f5542116bc63f8}
+void {\bf operator+=} (const {\bf Scattering\+Component\+List} \&rhs)\label{a00093_a423df65157ec66cda8f5542116bc63f8}
 
 \begin{DoxyCompactList}\small\item\em Add another list of components. \end{DoxyCompactList}\item 
-void {\bf operator+=} (const {\bf Scattering\-Component} \&rhs)\label{a00093_a36ea90b4b48c473af0bee85402479f82}
+void {\bf operator+=} (const {\bf Scattering\+Component} \&rhs)\label{a00093_a36ea90b4b48c473af0bee85402479f82}
 
 \begin{DoxyCompactList}\small\item\em Add component. \end{DoxyCompactList}\item 
 void {\bf operator++} ()\label{a00093_a8524c2bc3633441b2a808b2908ce99ec}
@@ -49,18 +49,18 @@ void {\bf Print} () const \label{a00093_a3e7855dd6cbc411de63cbe14feef70cf}
 \subsubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-vector$<$ {\bf Scattering\-Component} $>$ {\bf mv\-Scatt\-Comp}\label{a00093_a191cb4df412bb4294a4e300313e35c3f}
+vector$<$ {\bf Scattering\+Component} $>$ {\bf mv\+Scatt\+Comp}\label{a00093_a191cb4df412bb4294a4e300313e35c3f}
 
 \begin{DoxyCompactList}\small\item\em The vector of components. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-list of scattering positions in a crystal, associated with the corresponding occupancy and a pointer to the \doxyref{Scattering\-Power}{p.}{a00096}. 
+list of scattering positions in a crystal, associated with the corresponding occupancy and a pointer to the \doxyref{Scattering\+Power}{p.}{a00096}. 
 
 \subsubsection{Member Function Documentation}
-\index{Obj\-Cryst\-::\-Scattering\-Component\-List@{Obj\-Cryst\-::\-Scattering\-Component\-List}!Reset@{Reset}}
-\index{Reset@{Reset}!ObjCryst::ScatteringComponentList@{Obj\-Cryst\-::\-Scattering\-Component\-List}}
-\paragraph[{Reset}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-Scattering\-Component\-List\-::\-Reset (
+\index{Obj\+Cryst\+::\+Scattering\+Component\+List@{Obj\+Cryst\+::\+Scattering\+Component\+List}!Reset@{Reset}}
+\index{Reset@{Reset}!Obj\+Cryst\+::\+Scattering\+Component\+List@{Obj\+Cryst\+::\+Scattering\+Component\+List}}
+\paragraph[{Reset}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\+Cryst\+::\+Scattering\+Component\+List\+::\+Reset (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
@@ -71,6 +71,6 @@ Reset the list.
 
 This does {\bfseries not} free the memory, but simply forgets that there already are some entries. 
 
-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-Scattering\-Power.\-h\end{DoxyCompactItemize}
+Scattering\+Power.\+h\end{DoxyCompactItemize}

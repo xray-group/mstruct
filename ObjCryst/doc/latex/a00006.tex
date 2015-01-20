@@ -1,21 +1,21 @@
 \begin{DoxyParagraph}{Reusability }
-The {\bfseries encapsulation} of data and {\bfseries inheritance} (and other features such as templates) allows a much better reusability of the code\-: adding new procedures does not require to understand how other function works, since these are only accessed through the object interface. And inheritance allows to create new object types (say new diffraction experiments) while re-\/using computing code from the base object\-: for example all diffraction analysis involves the computing of geometrical structure factors ( geometrical meaning before taking scattering power into account), so that different diffraction ( X-\/\-Ray, neutron, electron, single crystal or powder) can re-\/use this code. See \doxyref{The Design of Obj\-Cryst++}{p.}{a00008} for examples on how to use inheritance to create new classes using inheritance.
+The {\bfseries encapsulation} of data and {\bfseries inheritance} (and other features such as templates) allows a much better reusability of the code\+: adding new procedures does not require to understand how other function works, since these are only accessed through the object interface. And inheritance allows to create new object types (say new diffraction experiments) while re-\/using computing code from the base object\+: for example all diffraction analysis involves the computing of geometrical structure factors ( geometrical meaning before taking scattering power into account), so that different diffraction ( X-\/\+Ray, neutron, electron, single crystal or powder) can re-\/use this code. See \doxyref{The Design of Obj\+Cryst++}{p.}{a00008} for examples on how to use inheritance to create new classes using inheritance.
 \end{DoxyParagraph}
 \begin{DoxyParagraph}{Philosophy}
 Re-\/usability in Object-\/oriented programming can be achieved by designing a base class interface which can be re-\/used for all derived classes using inheritance. It is much better than having isolated functions or small classes, since not only old code can be re-\/used, but the new code is compatible with the old because it has a common interface.. (of course the base interface must be well written and that is delicate to achieve... Hope I did not do too bad a job of it...).
 \end{DoxyParagraph}
 \begin{DoxyParagraph}{Performance }
-Although it has long been considered that the price of O\-O\-P was a slower execution speed, modern scientific \& computing libraries have made that wrong, and c++ is now widely used for large-\/scale computations. A short explanation is that c++ is both a high-\/level language (object-\/oriented), and low-\/level since it uses pointers and thus programming can be very close to assembly. This latter point is a boon for numerically-\/intensive programs. 
+Although it has long been considered that the price of O\+O\+P was a slower execution speed, modern scientific \& computing libraries have made that wrong, and c++ is now widely used for large-\/scale computations. A short explanation is that c++ is both a high-\/level language (object-\/oriented), and low-\/level since it uses pointers and thus programming can be very close to assembly. This latter point is a boon for numerically-\/intensive programs. 
 \end{DoxyParagraph}
 \begin{DoxyParagraph}{}
-For good examples of numerically intensive calculations using c++, you take a look at\-: 
+For good examples of numerically intensive calculations using c++, you take a look at\+: 
 \end{DoxyParagraph}
 \begin{DoxyParagraph}{}
--\/$>$ The home page for Scientific Computing in Object-\/\-Oriented Languages\-: {\tt http\-://www.\-oonumerics.\-org/} 
+-\/$>$ The home page for Scientific Computing in Object-\/\+Oriented Languages\+: {\tt http\+://www.\+oonumerics.\+org/} 
 \end{DoxyParagraph}
 \begin{DoxyParagraph}{}
--\/$>$ {\bfseries P\-O\-O\-M\-A} ({\tt http\-://www.\-acl.\-lanl.\-gov/pooma/})Parallel Object-\/\-Oriented Methods and Applications 
+-\/$>$ {\bfseries P\+O\+O\+M\+A} ({\tt http\+://www.\+acl.\+lanl.\+gov/pooma/})Parallel Object-\/\+Oriented Methods and Applications 
 \end{DoxyParagraph}
 \begin{DoxyParagraph}{}
--\/$>$ {\bfseries Blitz++} home page ({\tt http\-://www.\-oonumerics.\-org/blitz/})\-: a 'smart' array computing library which yields performance on par with that of fortran. 
+-\/$>$ {\bfseries Blitz++} home page ({\tt http\+://www.\+oonumerics.\+org/blitz/})\+: a 'smart' array computing library which yields performance on par with that of fortran. 
 \end{DoxyParagraph}

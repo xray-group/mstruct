@@ -1,11 +1,11 @@
-\subsection{Obj\-Cryst\-:\-:Stretch\-Mode\-Twist Struct Reference}
-\label{a00108}\index{Obj\-Cryst\-::\-Stretch\-Mode\-Twist@{Obj\-Cryst\-::\-Stretch\-Mode\-Twist}}
+\subsection{Obj\+Cryst\+:\+:Stretch\+Mode\+Twist Struct Reference}
+\label{a00108}\index{Obj\+Cryst\+::\+Stretch\+Mode\+Twist@{Obj\+Cryst\+::\+Stretch\+Mode\+Twist}}
 
 
 Atoms moved {\itshape between} two other atoms, using a \char`\"{}twist\char`\"{} of their positions -\/ only small twists of their positions are allowed to avoid breaking restraints too much.  
 
 
-Inheritance diagram for Obj\-Cryst\-:\-:Stretch\-Mode\-Twist\-:\begin{figure}[H]
+Inheritance diagram for Obj\+Cryst\+:\+:Stretch\+Mode\+Twist\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{a00108}
@@ -14,30 +14,30 @@ Inheritance diagram for Obj\-Cryst\-:\-:Stretch\-Mode\-Twist\-:\begin{figure}[H]
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bf Stretch\-Mode\-Twist} ({\bf Mol\-Atom} \&at1, {\bf Mol\-Atom} \&at2)\label{a00108_a6ed224b06c93f630ccb7bf7920f054a9}
+{\bf Stretch\+Mode\+Twist} ({\bf Mol\+Atom} \&at1, {\bf Mol\+Atom} \&at2)\label{a00108_a6ed224b06c93f630ccb7bf7920f054a9}
 
-\begin{DoxyCompactList}\small\item\em Constructor If p\-Dihedral\-Angle!=0, the dihedral angle length restraint is respected. \end{DoxyCompactList}\item 
-virtual void {\bf Calc\-Deriv} (const bool derivllk=true) const 
+\begin{DoxyCompactList}\small\item\em Constructor If p\+Dihedral\+Angle!=0, the dihedral angle length restraint is respected. \end{DoxyCompactList}\item 
+virtual void {\bf Calc\+Deriv} (const bool derivllk=true) const 
 \begin{DoxyCompactList}\small\item\em Calculate the derivative of the \doxyref{Molecule}{p.}{a00053}'s Log(likelihood) and atomic positions versus a change of the bond length. \end{DoxyCompactList}\item 
 virtual void {\bf Print} (ostream \&os, bool full=true) const \label{a00108_a6bd2ea406272adfbaa047e49079893b7}
 
 \begin{DoxyCompactList}\small\item\em Print one-\/line list of atoms moved. \end{DoxyCompactList}\item 
-virtual void {\bf Stretch} (const R\-E\-A\-L change)\label{a00108_a9eb2c84a7567bd022677f5ded0d18a84}
+virtual void {\bf Stretch} (const R\+E\+A\+L change)\label{a00108_a9eb2c84a7567bd022677f5ded0d18a84}
 
 \begin{DoxyCompactList}\small\item\em Move the atoms according to this mode. \end{DoxyCompactList}\item 
-virtual void {\bf Random\-Stretch} (const R\-E\-A\-L amplitude)\label{a00108_af38a4c05e360733d48039c3becbcb3bd}
+virtual void {\bf Random\+Stretch} (const R\+E\+A\+L amplitude)\label{a00108_af38a4c05e360733d48039c3becbcb3bd}
 
 \begin{DoxyCompactList}\small\item\em Move the atoms according to this mode, randomly. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-{\bf Mol\-Atom} $\ast$ {\bf mp\-Atom1}\label{a00108_ad744e9f68b07367752ed7c03d381a30c}
+{\bf Mol\+Atom} $\ast$ {\bf mp\+Atom1}\label{a00108_ad744e9f68b07367752ed7c03d381a30c}
 
 \begin{DoxyCompactList}\small\item\em The first atom. \end{DoxyCompactList}\item 
-{\bf Mol\-Atom} $\ast$ {\bf mp\-Atom2}\label{a00108_a36180a825c130a18a59c6cfe1a44398c}
+{\bf Mol\+Atom} $\ast$ {\bf mp\+Atom2}\label{a00108_a36180a825c130a18a59c6cfe1a44398c}
 
 \begin{DoxyCompactList}\small\item\em The second atom. \end{DoxyCompactList}\item 
-set$<$ {\bf Mol\-Atom} $\ast$ $>$ {\bf mv\-Rotated\-Atom\-List}\label{a00108_a5b3c7f8a0bf81c04ca39fcc88e596f22}
+set$<$ {\bf Mol\+Atom} $\ast$ $>$ {\bf mv\+Rotated\+Atom\+List}\label{a00108_a5b3c7f8a0bf81c04ca39fcc88e596f22}
 
 \begin{DoxyCompactList}\small\item\em The set of atoms that are to be rotated around at1-\/at2. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
@@ -48,9 +48,9 @@ Atoms moved {\itshape between} two other atoms, using a \char`\"{}twist\char`\"{
 Also, the atoms in the middle between the two reference atoms are more displaced than the one closer, to help avoid breaking restraints. 
 
 \subsubsection{Member Function Documentation}
-\index{Obj\-Cryst\-::\-Stretch\-Mode\-Twist@{Obj\-Cryst\-::\-Stretch\-Mode\-Twist}!Calc\-Deriv@{Calc\-Deriv}}
-\index{Calc\-Deriv@{Calc\-Deriv}!ObjCryst::StretchModeTwist@{Obj\-Cryst\-::\-Stretch\-Mode\-Twist}}
-\paragraph[{Calc\-Deriv}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-Stretch\-Mode\-Twist\-::\-Calc\-Deriv (
+\index{Obj\+Cryst\+::\+Stretch\+Mode\+Twist@{Obj\+Cryst\+::\+Stretch\+Mode\+Twist}!Calc\+Deriv@{Calc\+Deriv}}
+\index{Calc\+Deriv@{Calc\+Deriv}!Obj\+Cryst\+::\+Stretch\+Mode\+Twist@{Obj\+Cryst\+::\+Stretch\+Mode\+Twist}}
+\paragraph[{Calc\+Deriv}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\+Cryst\+::\+Stretch\+Mode\+Twist\+::\+Calc\+Deriv (
 \begin{DoxyParamCaption}
 \item[{const bool}]{derivllk = {\ttfamily true}}
 \end{DoxyParamCaption}
@@ -59,7 +59,7 @@ Also, the atoms in the middle between the two reference atoms are more displaced
 
 Calculate the derivative of the \doxyref{Molecule}{p.}{a00053}'s Log(likelihood) and atomic positions versus a change of the bond length. 
 
-The result is stored in m\-L\-L\-K\-Deriv and m\-L\-L\-K\-Deriv\-X\-Y\-Z, as well as in the various lists of restraints broken by this mode.
+The result is stored in m\+L\+L\+K\+Deriv and m\+L\+L\+K\+Deriv\+X\+Y\+Z, as well as in the various lists of restraints broken by this mode.
 
 
 \begin{DoxyParams}{Parameters}
@@ -68,10 +68,10 @@ The result is stored in m\-L\-L\-K\-Deriv and m\-L\-L\-K\-Deriv\-X\-Y\-Z, as wel
 \end{DoxyParams}
 
 
-Implements {\bf Obj\-Cryst\-::\-Stretch\-Mode} \doxyref{}{p.}{a00103_a5b5ab5f9819c047a49719a330722d419}.
+Implements {\bf Obj\+Cryst\+::\+Stretch\+Mode} \doxyref{}{p.}{a00103_a5b5ab5f9819c047a49719a330722d419}.
 
 
 
-The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-Molecule.\-h\end{DoxyCompactItemize}
+Molecule.\+h\end{DoxyCompactItemize}

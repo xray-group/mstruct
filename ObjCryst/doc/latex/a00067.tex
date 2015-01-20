@@ -1,11 +1,11 @@
-\subsection{Obj\-Cryst\-:\-:Polarization\-Corr Class Reference}
-\label{a00067}\index{Obj\-Cryst\-::\-Polarization\-Corr@{Obj\-Cryst\-::\-Polarization\-Corr}}
+\subsection{Obj\+Cryst\+:\+:Polarization\+Corr Class Reference}
+\label{a00067}\index{Obj\+Cryst\+::\+Polarization\+Corr@{Obj\+Cryst\+::\+Polarization\+Corr}}
 
 
 Polarization Correction.  
 
 
-Inheritance diagram for Obj\-Cryst\-:\-:Polarization\-Corr\-:\begin{figure}[H]
+Inheritance diagram for Obj\+Cryst\+:\+:Polarization\+Corr\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{a00067}
@@ -14,25 +14,25 @@ Inheritance diagram for Obj\-Cryst\-:\-:Polarization\-Corr\-:\begin{figure}[H]
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries Polarization\-Corr} (const {\bf Scattering\-Data} \&data)\label{a00067_a2a4847d1595188d8023f20c9c9d0d4ce}
+{\bfseries Polarization\+Corr} (const {\bf Scattering\+Data} \&data)\label{a00067_a2a4847d1595188d8023f20c9c9d0d4ce}
 
 \item 
-virtual const string \& {\bf Get\-Name} () const \label{a00067_a6bfca1f83186379f77e2ee2ef5e65ac5}
+virtual const string \& {\bf Get\+Name} () const \label{a00067_a6bfca1f83186379f77e2ee2ef5e65ac5}
 
 \begin{DoxyCompactList}\small\item\em Get the name of this object. \end{DoxyCompactList}\item 
-virtual const string \& {\bf Get\-Class\-Name} () const \label{a00067_ae298bdf956280d610cc18aad4acb1af7}
+virtual const string \& {\bf Get\+Class\+Name} () const \label{a00067_ae298bdf956280d610cc18aad4acb1af7}
 
 \begin{DoxyCompactList}\small\item\em Get the name of the class. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-virtual void {\bf Calc\-Corr} () const \label{a00067_a3030bd67935be0434c1cebfd385b82a2}
+virtual void {\bf Calc\+Corr} () const \label{a00067_a3030bd67935be0434c1cebfd385b82a2}
 
 \begin{DoxyCompactList}\small\item\em Do the computation of corrected intensities. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-R\-E\-A\-L {\bfseries m\-Polar\-Afactor}\label{a00067_a8a0115cf6d539ede891056f94b6887cf}
+R\+E\+A\+L {\bfseries m\+Polar\+Afactor}\label{a00067_a8a0115cf6d539ede891056f94b6887cf}
 
 \end{DoxyCompactItemize}
 
@@ -40,14 +40,14 @@ R\-E\-A\-L {\bfseries m\-Polar\-Afactor}\label{a00067_a8a0115cf6d539ede891056f94
 \subsubsection{Detailed Description}
 Polarization Correction. 
 
-So far, it only considers the correction for equatorial diffraction\-: $ P = \frac{1}{1+A}\left(1+A\cos^2(2\theta)\right) $ (Polarization factor), with $ A = \frac{1-f}{1+f} $, where f is the polarization rate of the incident beam in the plane which (i) includes the incident beam, and (ii) is perpendicular to the diffracting plane. For an X-\/\-Ray Tube without monochromator, A=1, and if there is a monochromator \-: $ A = \cos^2(2\theta_{mono}) $
+So far, it only considers the correction for equatorial diffraction\+: $ P = \frac{1}{1+A}\left(1+A\cos^2(2\theta)\right) $ (Polarization factor), with $ A = \frac{1-f}{1+f} $, where f is the polarization rate of the incident beam in the plane which (i) includes the incident beam, and (ii) is perpendicular to the diffracting plane. For an X-\/\+Ray Tube without monochromator, A=1, and if there is a monochromator \+: $ A = \cos^2(2\theta_{mono}) $
 
 Currently, the linear polarization factor is directly read from the radiation object, and the linear polarization (if any) is assumed to be perpendicular to the diffracting plane (standard synchrotron geometry).
 
 \begin{DoxyRefDesc}{Todo}
-\item[{\bf Todo}]\-: extend this to take into account other diffracting \& monochromatic geometries. \end{DoxyRefDesc}
+\item[{\bf Todo}]\+: extend this to take into account other diffracting \& monochromatic geometries. \end{DoxyRefDesc}
 
 
-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-Scattering\-Corr.\-h\end{DoxyCompactItemize}
+Scattering\+Corr.\+h\end{DoxyCompactItemize}

@@ -1,5 +1,5 @@
-\subsection{Obj\-Cryst\-:\-:Rigid\-Group Class Reference}
-\label{a00088}\index{Obj\-Cryst\-::\-Rigid\-Group@{Obj\-Cryst\-::\-Rigid\-Group}}
+\subsection{Obj\+Cryst\+:\+:Rigid\+Group Class Reference}
+\label{a00088}\index{Obj\+Cryst\+::\+Rigid\+Group@{Obj\+Cryst\+::\+Rigid\+Group}}
 
 
 Rigid groups of atoms inside a molecule.  
@@ -7,57 +7,57 @@ Rigid groups of atoms inside a molecule.
 
 
 
-Inherits set$<$ Mol\-Atom $\ast$ $>$.
+Inherits set$<$ Mol\+Atom $\ast$ $>$.
 
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-std\-::string {\bfseries Get\-Name} () const \label{a00088_ae16707c1aa4b50c7df8a468d9d8dd751}
+std\+::string {\bfseries Get\+Name} () const \label{a00088_ae16707c1aa4b50c7df8a468d9d8dd751}
 
 \end{DoxyCompactItemize}
 \subsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-{\bf Quaternion} {\bf m\-Quat}
+{\bf Quaternion} {\bf m\+Quat}
 \begin{DoxyCompactList}\small\item\em The unit quaternion defining the orientation -\/ this is used during optimizations to rotate all atoms as a group. \end{DoxyCompactList}\item 
-R\-E\-A\-L {\bf m\-X}
+R\+E\+A\+L {\bf m\+X}
 \begin{DoxyCompactList}\small\item\em The translation of all the atoms as a group The values will be resetted whenever entering or leaving an optimization. \end{DoxyCompactList}\item 
-R\-E\-A\-L {\bfseries m\-Y}\label{a00088_a941525a36f26bb426fbbde9c1752c930}
+R\+E\+A\+L {\bfseries m\+Y}\label{a00088_a941525a36f26bb426fbbde9c1752c930}
 
 \item 
-R\-E\-A\-L {\bfseries m\-Z}\label{a00088_ac0d6341c324838a1868a6bf34e25d64d}
+R\+E\+A\+L {\bfseries m\+Z}\label{a00088_ac0d6341c324838a1868a6bf34e25d64d}
 
 \item 
-std\-::set$<$ unsigned int $>$ {\bf mv\-Idx}\label{a00088_a5c24037c1724aa2e0060c9432f0ec907}
+std\+::set$<$ unsigned int $>$ {\bf mv\+Idx}\label{a00088_a5c24037c1724aa2e0060c9432f0ec907}
 
-\begin{DoxyCompactList}\small\item\em Temporary list of the atoms indices in the molecule, used during optimization This is created in \doxyref{Molecule\-::\-Begin\-Optimization()}{p.}{a00053_a5fbdadb37966f382a6e33150285819dc} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Temporary list of the atoms indices in the molecule, used during optimization This is created in \doxyref{Molecule\+::\+Begin\+Optimization()}{p.}{a00053_a5fbdadb37966f382a6e33150285819dc} \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
 Rigid groups of atoms inside a molecule. 
 
 These atoms can be moved as a group using one rotation and one translation. \begin{DoxyWarning}{Warning}
-\-: the rotation (quaternion) and translation parameters are not saved or displayed, so any time this must be done \doxyref{Molecule\-::\-Reset\-Rigid\-Groups\-Par()}{p.}{a00053_a9daa98a9b4a992d56e0dba41b104b291} {\bfseries must} be called beforehand -\/ this will use the rotation and translation parameters to generate the final atomic coordinates, and reset m\-Quat,m\-X,m\-Y and m\-Z. 
+\+: the rotation (quaternion) and translation parameters are not saved or displayed, so any time this must be done \doxyref{Molecule\+::\+Reset\+Rigid\+Groups\+Par()}{p.}{a00053_a9daa98a9b4a992d56e0dba41b104b291} {\bfseries must} be called beforehand -\/ this will use the rotation and translation parameters to generate the final atomic coordinates, and reset m\+Quat,m\+X,m\+Y and m\+Z. 
 \end{DoxyWarning}
 
 
 \subsubsection{Member Data Documentation}
-\index{Obj\-Cryst\-::\-Rigid\-Group@{Obj\-Cryst\-::\-Rigid\-Group}!m\-Quat@{m\-Quat}}
-\index{m\-Quat@{m\-Quat}!ObjCryst::RigidGroup@{Obj\-Cryst\-::\-Rigid\-Group}}
-\paragraph[{m\-Quat}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Quaternion} Obj\-Cryst\-::\-Rigid\-Group\-::m\-Quat\hspace{0.3cm}{\ttfamily [mutable]}}\label{a00088_a65b5f08946d861618286787ac67ec2fb}
+\index{Obj\+Cryst\+::\+Rigid\+Group@{Obj\+Cryst\+::\+Rigid\+Group}!m\+Quat@{m\+Quat}}
+\index{m\+Quat@{m\+Quat}!Obj\+Cryst\+::\+Rigid\+Group@{Obj\+Cryst\+::\+Rigid\+Group}}
+\paragraph[{m\+Quat}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Quaternion} Obj\+Cryst\+::\+Rigid\+Group\+::m\+Quat\hspace{0.3cm}{\ttfamily [mutable]}}\label{a00088_a65b5f08946d861618286787ac67ec2fb}
 
 
 The unit quaternion defining the orientation -\/ this is used during optimizations to rotate all atoms as a group. 
 
-The quaternion does not give an absolute position -\/ its value will be resetted whenever entering or leaving an optimization. \index{Obj\-Cryst\-::\-Rigid\-Group@{Obj\-Cryst\-::\-Rigid\-Group}!m\-X@{m\-X}}
-\index{m\-X@{m\-X}!ObjCryst::RigidGroup@{Obj\-Cryst\-::\-Rigid\-Group}}
-\paragraph[{m\-X}]{\setlength{\rightskip}{0pt plus 5cm}R\-E\-A\-L Obj\-Cryst\-::\-Rigid\-Group\-::m\-X\hspace{0.3cm}{\ttfamily [mutable]}}\label{a00088_abda5125459a21cc5534c90d9516312e9}
+The quaternion does not give an absolute position -\/ its value will be resetted whenever entering or leaving an optimization. \index{Obj\+Cryst\+::\+Rigid\+Group@{Obj\+Cryst\+::\+Rigid\+Group}!m\+X@{m\+X}}
+\index{m\+X@{m\+X}!Obj\+Cryst\+::\+Rigid\+Group@{Obj\+Cryst\+::\+Rigid\+Group}}
+\paragraph[{m\+X}]{\setlength{\rightskip}{0pt plus 5cm}R\+E\+A\+L Obj\+Cryst\+::\+Rigid\+Group\+::m\+X\hspace{0.3cm}{\ttfamily [mutable]}}\label{a00088_abda5125459a21cc5534c90d9516312e9}
 
 
 The translation of all the atoms as a group The values will be resetted whenever entering or leaving an optimization. 
 
 
 
-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-Molecule.\-h\end{DoxyCompactItemize}
+Molecule.\+h\end{DoxyCompactItemize}

@@ -1,11 +1,11 @@
-\subsection{Obj\-Cryst\-:\-:Scattering\-Corr Class Reference}
-\label{a00094}\index{Obj\-Cryst\-::\-Scattering\-Corr@{Obj\-Cryst\-::\-Scattering\-Corr}}
+\subsection{Obj\+Cryst\+:\+:Scattering\+Corr Class Reference}
+\label{a00094}\index{Obj\+Cryst\+::\+Scattering\+Corr@{Obj\+Cryst\+::\+Scattering\+Corr}}
 
 
-Base class to compute all kind of corrections to intensities\-: Lorentz, Polar, absorption, texcture, extinction, etc...  
+Base class to compute all kind of corrections to intensities\+: Lorentz, Polar, absorption, texcture, extinction, etc...  
 
 
-Inheritance diagram for Obj\-Cryst\-:\-:Scattering\-Corr\-:\begin{figure}[H]
+Inheritance diagram for Obj\+Cryst\+:\+:Scattering\+Corr\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=1.056604cm]{a00094}
@@ -14,51 +14,51 @@ Inheritance diagram for Obj\-Cryst\-:\-:Scattering\-Corr\-:\begin{figure}[H]
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bf Scattering\-Corr} (const {\bf Scattering\-Data} \&data)\label{a00094_ac1e37a73b0a107f66d1b1d75b9db9c47}
+{\bf Scattering\+Corr} (const {\bf Scattering\+Data} \&data)\label{a00094_ac1e37a73b0a107f66d1b1d75b9db9c47}
 
-\begin{DoxyCompactList}\small\item\em Constructor, with the associated \doxyref{Scattering\-Data}{p.}{a00095} object. \end{DoxyCompactList}\item 
-virtual const string \& {\bf Get\-Name} () const =0\label{a00094_adb2782d4e32cbcb89e2e69b3c8ad66fb}
+\begin{DoxyCompactList}\small\item\em Constructor, with the associated \doxyref{Scattering\+Data}{p.}{a00095} object. \end{DoxyCompactList}\item 
+virtual const string \& {\bf Get\+Name} () const =0\label{a00094_adb2782d4e32cbcb89e2e69b3c8ad66fb}
 
 \begin{DoxyCompactList}\small\item\em Get the name of this object. \end{DoxyCompactList}\item 
-virtual const string \& {\bf Get\-Class\-Name} () const =0\label{a00094_a6d72e7a6ffff0c16d86930d9e72c6673}
+virtual const string \& {\bf Get\+Class\+Name} () const =0\label{a00094_a6d72e7a6ffff0c16d86930d9e72c6673}
 
 \begin{DoxyCompactList}\small\item\em Get the name of the class. \end{DoxyCompactList}\item 
-const Cryst\-Vector\-\_\-\-R\-E\-A\-L \& {\bf Get\-Corr} () const 
+const Cryst\+Vector\+\_\+\+R\+E\+A\+L \& {\bf Get\+Corr} () const 
 \begin{DoxyCompactList}\small\item\em Get the vector of corrections for all reflections. \end{DoxyCompactList}\item 
-const {\bf Refinable\-Obj\-Clock} \& {\bf Get\-Clock\-Corr} () const \label{a00094_a4c5bead3a47202db88495e3d123c5927}
+const {\bf Refinable\+Obj\+Clock} \& {\bf Get\+Clock\+Corr} () const \label{a00094_a4c5bead3a47202db88495e3d123c5927}
 
 \begin{DoxyCompactList}\small\item\em Get the value of the clock corresponding to the last time the correction was actually computed. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-virtual void {\bf Calc\-Corr} () const =0\label{a00094_a437a916156f6d88c76cb01ca4c748c89}
+virtual void {\bf Calc\+Corr} () const =0\label{a00094_a437a916156f6d88c76cb01ca4c748c89}
 
 \begin{DoxyCompactList}\small\item\em Do the computation of corrected intensities. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-const {\bf Scattering\-Data} $\ast$ {\bf mp\-Data}\label{a00094_a0fa066328104835ff72ddf98687c8513}
+const {\bf Scattering\+Data} $\ast$ {\bf mp\+Data}\label{a00094_a0fa066328104835ff72ddf98687c8513}
 
-\begin{DoxyCompactList}\small\item\em The associated \doxyref{Scattering\-Data}{p.}{a00095} object. \end{DoxyCompactList}\item 
-Cryst\-Vector\-\_\-\-R\-E\-A\-L {\bf m\-Corr}\label{a00094_a7669922ac4bbdfb826748148d4016088}
+\begin{DoxyCompactList}\small\item\em The associated \doxyref{Scattering\+Data}{p.}{a00095} object. \end{DoxyCompactList}\item 
+Cryst\+Vector\+\_\+\+R\+E\+A\+L {\bf m\+Corr}\label{a00094_a7669922ac4bbdfb826748148d4016088}
 
 \begin{DoxyCompactList}\small\item\em The vector of correction to intensities. \end{DoxyCompactList}\item 
-{\bf Refinable\-Obj\-Clock} {\bf m\-Clock\-Corr\-Calc}\label{a00094_aa969418138a9d1867797857318d6f303}
+{\bf Refinable\+Obj\+Clock} {\bf m\+Clock\+Corr\+Calc}\label{a00094_aa969418138a9d1867797857318d6f303}
 
 \begin{DoxyCompactList}\small\item\em The clock marking the last time the correction was calculated. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-Base class to compute all kind of corrections to intensities\-: Lorentz, Polar, absorption, texcture, extinction, etc... 
+Base class to compute all kind of corrections to intensities\+: Lorentz, Polar, absorption, texcture, extinction, etc... 
 
-The computed intensities are to be multiplied by all the \doxyref{Scattering\-Corr}{p.}{a00094} calculated.
+The computed intensities are to be multiplied by all the \doxyref{Scattering\+Corr}{p.}{a00094} calculated.
 
 This is an abstract base class. 
 
 \subsubsection{Member Function Documentation}
-\index{Obj\-Cryst\-::\-Scattering\-Corr@{Obj\-Cryst\-::\-Scattering\-Corr}!Get\-Corr@{Get\-Corr}}
-\index{Get\-Corr@{Get\-Corr}!ObjCryst::ScatteringCorr@{Obj\-Cryst\-::\-Scattering\-Corr}}
-\paragraph[{Get\-Corr}]{\setlength{\rightskip}{0pt plus 5cm}const Cryst\-Vector\-\_\-\-R\-E\-A\-L\& Obj\-Cryst\-::\-Scattering\-Corr\-::\-Get\-Corr (
+\index{Obj\+Cryst\+::\+Scattering\+Corr@{Obj\+Cryst\+::\+Scattering\+Corr}!Get\+Corr@{Get\+Corr}}
+\index{Get\+Corr@{Get\+Corr}!Obj\+Cryst\+::\+Scattering\+Corr@{Obj\+Cryst\+::\+Scattering\+Corr}}
+\paragraph[{Get\+Corr}]{\setlength{\rightskip}{0pt plus 5cm}const Cryst\+Vector\+\_\+\+R\+E\+A\+L\& Obj\+Cryst\+::\+Scattering\+Corr\+::\+Get\+Corr (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
@@ -69,6 +69,6 @@ Get the vector of corrections for all reflections.
 
 Calculated values must be multiplied by these values. 
 
-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-Scattering\-Corr.\-h\end{DoxyCompactItemize}
+Scattering\+Corr.\+h\end{DoxyCompactItemize}

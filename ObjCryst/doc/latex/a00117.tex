@@ -1,11 +1,11 @@
-\subsection{Obj\-Cryst\-:\-:W\-X\-Atom Class Reference}
-\label{a00117}\index{Obj\-Cryst\-::\-W\-X\-Atom@{Obj\-Cryst\-::\-W\-X\-Atom}}
+\subsection{Obj\+Cryst\+:\+:W\+X\+Atom Class Reference}
+\label{a00117}\index{Obj\+Cryst\+::\+W\+X\+Atom@{Obj\+Cryst\+::\+W\+X\+Atom}}
 
 
-wx\-Cryst class for Atoms  
+wx\+Cryst class for Atoms  
 
 
-Inheritance diagram for Obj\-Cryst\-:\-:W\-X\-Atom\-:\begin{figure}[H]
+Inheritance diagram for Obj\+Cryst\+:\+:W\+X\+Atom\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=5.000000cm]{a00117}
@@ -14,33 +14,33 @@ Inheritance diagram for Obj\-Cryst\-:\-:W\-X\-Atom\-:\begin{figure}[H]
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries W\-X\-Atom} (wx\-Window $\ast$parent, {\bf Atom} $\ast$)\label{a00117_ad5013fde76bd65b8327976ee3d7b4538}
+{\bfseries W\+X\+Atom} (wx\+Window $\ast$parent, {\bf Atom} $\ast$)\label{a00117_ad5013fde76bd65b8327976ee3d7b4538}
 
 \item 
-void {\bfseries On\-Change\-Scatt\-Pow} (wx\-Command\-Event \&W\-X\-U\-N\-U\-S\-E\-D(event))\label{a00117_a761d4b22d56c314568884ce001ae53d5}
+void {\bfseries On\+Change\+Scatt\+Pow} (wx\+Command\+Event \&W\+X\+U\+N\+U\+S\+E\+D(event))\label{a00117_a761d4b22d56c314568884ce001ae53d5}
 
 \item 
-virtual void {\bf Update\-U\-I} (const bool mutexlock=false)
+virtual void {\bf Update\+U\+I} (const bool mutexlock=false)
 \begin{DoxyCompactList}\small\item\em Update the User Interface, if necessary. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-{\bf Atom} $\ast$ {\bfseries mp\-Atom}\label{a00117_ab4e8f3bee82f37e9ba24138d6015df04}
+{\bf Atom} $\ast$ {\bfseries mp\+Atom}\label{a00117_ab4e8f3bee82f37e9ba24138d6015df04}
 
 \item 
-{\bf W\-X\-Field\-Choice} $\ast$ {\bfseries mp\-Field\-Scatt\-Power}\label{a00117_a9dd98ddab95fa288885099d719d22084}
+{\bf W\+X\+Field\+Choice} $\ast$ {\bfseries mp\+Field\+Scatt\+Power}\label{a00117_a9dd98ddab95fa288885099d719d22084}
 
 \end{DoxyCompactItemize}
 \subsubsection*{Additional Inherited Members}
 
 
 \subsubsection{Detailed Description}
-wx\-Cryst class for Atoms 
+wx\+Cryst class for Atoms 
 
 \subsubsection{Member Function Documentation}
-\index{Obj\-Cryst\-::\-W\-X\-Atom@{Obj\-Cryst\-::\-W\-X\-Atom}!Update\-U\-I@{Update\-U\-I}}
-\index{Update\-U\-I@{Update\-U\-I}!ObjCryst::WXAtom@{Obj\-Cryst\-::\-W\-X\-Atom}}
-\paragraph[{Update\-U\-I}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\-Cryst\-::\-W\-X\-Atom\-::\-Update\-U\-I (
+\index{Obj\+Cryst\+::\+W\+X\+Atom@{Obj\+Cryst\+::\+W\+X\+Atom}!Update\+U\+I@{Update\+U\+I}}
+\index{Update\+U\+I@{Update\+U\+I}!Obj\+Cryst\+::\+W\+X\+Atom@{Obj\+Cryst\+::\+W\+X\+Atom}}
+\paragraph[{Update\+U\+I}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Obj\+Cryst\+::\+W\+X\+Atom\+::\+Update\+U\+I (
 \begin{DoxyParamCaption}
 \item[{const bool}]{mutexlock = {\ttfamily false}}
 \end{DoxyParamCaption}
@@ -54,12 +54,12 @@ Update the User Interface, if necessary.
 {\em mutexlock} & if true, a Mutex will be used to lock the data shared between main and background thread.\\
 \hline
 \end{DoxyParams}
-The idea is to only use a few Mutexes to lock data from the top objects (wx\-Refinable\-Obj,...), when calling \doxyref{Cryst\-Update()}{p.}{a00149_a13e4f37ac098de756b27cdb91d6a0551} and \doxyref{Update\-U\-I()}{p.}{a00117_a5509a746fb1a6d918b6cbde8453d6a44}. As sub-\/objects (\doxyref{W\-X\-Field}{p.}{a00125},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
+The idea is to only use a few Mutexes to lock data from the top objects (wx\+Refinable\+Obj,...), when calling \doxyref{Cryst\+Update()}{p.}{a00149_a13e4f37ac098de756b27cdb91d6a0551} and \doxyref{Update\+U\+I()}{p.}{a00117_a5509a746fb1a6d918b6cbde8453d6a44}. As sub-\/objects (\doxyref{W\+X\+Field}{p.}{a00125},...) are only updated from within a top object, the mutex lock in the top object will also lock the data in the sub-\/objects. 
 
-Reimplemented from {\bf Obj\-Cryst\-::\-W\-X\-Refinable\-Obj} \doxyref{}{p.}{a00149_a19a1d057eecafd48710d9a3b770c1b28}.
+Reimplemented from {\bf Obj\+Cryst\+::\+W\+X\+Refinable\+Obj} \doxyref{}{p.}{a00149_a19a1d057eecafd48710d9a3b770c1b28}.
 
 
 
-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-wx\-Atom.\-h\end{DoxyCompactItemize}
+wx\+Atom.\+h\end{DoxyCompactItemize}

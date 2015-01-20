@@ -1,60 +1,60 @@
-\subsection{Obj\-Cryst\-:\-:C\-I\-F Class Reference}
-\label{a00023}\index{Obj\-Cryst\-::\-C\-I\-F@{Obj\-Cryst\-::\-C\-I\-F}}
+\subsection{Obj\+Cryst\+:\+:C\+I\+F Class Reference}
+\label{a00023}\index{Obj\+Cryst\+::\+C\+I\+F@{Obj\+Cryst\+::\+C\+I\+F}}
 
 
-Main \doxyref{C\-I\-F}{p.}{a00023} class -\/ parses the stream and separates data blocks, comments, items, loops.  
+Main \doxyref{C\+I\+F}{p.}{a00023} class -\/ parses the stream and separates data blocks, comments, items, loops.  
 
 
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bf C\-I\-F} (std\-::istream \&in, const bool interpret=true, const bool verbose=false)
-\begin{DoxyCompactList}\small\item\em Creates the \doxyref{C\-I\-F}{p.}{a00023} object from a stream. \end{DoxyCompactList}\item 
-void {\bf Parse} (std\-::stringstream \&in)
+{\bf C\+I\+F} (std\+::istream \&in, const bool interpret=true, const bool verbose=false)
+\begin{DoxyCompactList}\small\item\em Creates the \doxyref{C\+I\+F}{p.}{a00023} object from a stream. \end{DoxyCompactList}\item 
+void {\bf Parse} (std\+::stringstream \&in)
 \begin{DoxyCompactList}\small\item\em Separate the file in data blocks and parse them to sort tags, loops and comments. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-std\-::map$<$ std\-::string, {\bf C\-I\-F\-Data} $>$ {\bf mv\-Data}\label{a00023_adc6341fa5bbfaf7257752959317a2b57}
+std\+::map$<$ std\+::string, {\bf C\+I\+F\+Data} $>$ {\bf mv\+Data}\label{a00023_adc6341fa5bbfaf7257752959317a2b57}
 
 \begin{DoxyCompactList}\small\item\em The data blocks, after parsing. The key is the name of the data block. \end{DoxyCompactList}\item 
-std\-::list$<$ std\-::string $>$ {\bf mv\-Comment}\label{a00023_ac0cd3903198ad04595488047a046e470}
+std\+::list$<$ std\+::string $>$ {\bf mv\+Comment}\label{a00023_ac0cd3903198ad04595488047a046e470}
 
 \begin{DoxyCompactList}\small\item\em Global comments, outside and data block. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-Main \doxyref{C\-I\-F}{p.}{a00023} class -\/ parses the stream and separates data blocks, comments, items, loops. 
+Main \doxyref{C\+I\+F}{p.}{a00023} class -\/ parses the stream and separates data blocks, comments, items, loops. 
 
-All values are stored as string, and Each \doxyref{C\-I\-F}{p.}{a00023} block is stored in a separate \doxyref{C\-I\-F\-Data}{p.}{a00025} object. No interpretaion is made here -\/ this must be done from all \doxyref{C\-I\-F\-Data}{p.}{a00025} objects. 
+All values are stored as string, and Each \doxyref{C\+I\+F}{p.}{a00023} block is stored in a separate \doxyref{C\+I\+F\+Data}{p.}{a00025} object. No interpretaion is made here -\/ this must be done from all \doxyref{C\+I\+F\+Data}{p.}{a00025} objects. 
 
 \subsubsection{Constructor \& Destructor Documentation}
-\index{Obj\-Cryst\-::\-C\-I\-F@{Obj\-Cryst\-::\-C\-I\-F}!C\-I\-F@{C\-I\-F}}
-\index{C\-I\-F@{C\-I\-F}!ObjCryst::CIF@{Obj\-Cryst\-::\-C\-I\-F}}
-\paragraph[{C\-I\-F}]{\setlength{\rightskip}{0pt plus 5cm}Obj\-Cryst\-::\-C\-I\-F\-::\-C\-I\-F (
+\index{Obj\+Cryst\+::\+C\+I\+F@{Obj\+Cryst\+::\+C\+I\+F}!C\+I\+F@{C\+I\+F}}
+\index{C\+I\+F@{C\+I\+F}!Obj\+Cryst\+::\+C\+I\+F@{Obj\+Cryst\+::\+C\+I\+F}}
+\paragraph[{C\+I\+F}]{\setlength{\rightskip}{0pt plus 5cm}Obj\+Cryst\+::\+C\+I\+F\+::\+C\+I\+F (
 \begin{DoxyParamCaption}
-\item[{std\-::istream \&}]{in, }
+\item[{std\+::istream \&}]{in, }
 \item[{const bool}]{interpret = {\ttfamily true}, }
 \item[{const bool}]{verbose = {\ttfamily false}}
 \end{DoxyParamCaption}
 )}\label{a00023_ad570039a62026b01b0fdbcd9f9480d7a}
 
 
-Creates the \doxyref{C\-I\-F}{p.}{a00023} object from a stream. 
+Creates the \doxyref{C\+I\+F}{p.}{a00023} object from a stream. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em interpret} & if true, interpret all data blocks. See \doxyref{C\-I\-F\-Data\-::\-Extract\-All()}{p.}{a00025_a406e1448ca864b4d679edde83c6351ab} \\
+{\em interpret} & if true, interpret all data blocks. See \doxyref{C\+I\+F\+Data\+::\+Extract\+All()}{p.}{a00025_a406e1448ca864b4d679edde83c6351ab} \\
 \hline
 \end{DoxyParams}
 
 
 \subsubsection{Member Function Documentation}
-\index{Obj\-Cryst\-::\-C\-I\-F@{Obj\-Cryst\-::\-C\-I\-F}!Parse@{Parse}}
-\index{Parse@{Parse}!ObjCryst::CIF@{Obj\-Cryst\-::\-C\-I\-F}}
-\paragraph[{Parse}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-C\-I\-F\-::\-Parse (
+\index{Obj\+Cryst\+::\+C\+I\+F@{Obj\+Cryst\+::\+C\+I\+F}!Parse@{Parse}}
+\index{Parse@{Parse}!Obj\+Cryst\+::\+C\+I\+F@{Obj\+Cryst\+::\+C\+I\+F}}
+\paragraph[{Parse}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\+Cryst\+::\+C\+I\+F\+::\+Parse (
 \begin{DoxyParamCaption}
-\item[{std\-::stringstream \&}]{in}
+\item[{std\+::stringstream \&}]{in}
 \end{DoxyParamCaption}
 )}\label{a00023_ad3d151ac993f8afcf4e5f22773df2e0c}
 
@@ -63,6 +63,6 @@ Separate the file in data blocks and parse them to sort tags, loops and comments
 
 All is stored in the original strings. 
 
-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-C\-I\-F.\-h\end{DoxyCompactItemize}
+C\+I\+F.\+h\end{DoxyCompactItemize}

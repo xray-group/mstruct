@@ -1,51 +1,51 @@
-\subsection{Obj\-Cryst\-:\-:Rec\-Unit\-Cell Class Reference}
-\label{a00076}\index{Obj\-Cryst\-::\-Rec\-Unit\-Cell@{Obj\-Cryst\-::\-Rec\-Unit\-Cell}}
+\subsection{Obj\+Cryst\+:\+:Rec\+Unit\+Cell Class Reference}
+\label{a00076}\index{Obj\+Cryst\+::\+Rec\+Unit\+Cell@{Obj\+Cryst\+::\+Rec\+Unit\+Cell}}
 
 
-Lightweight class describing the reciprocal unit cell, for the fast computation of d$\ast$\-\_\-hkl$^\wedge$2.  
+Lightweight class describing the reciprocal unit cell, for the fast computation of d$\ast$\+\_\+hkl$^\wedge$2.  
 
 
 \subsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries Rec\-Unit\-Cell} (const float zero=0, const float par0=0, const float par1=0, const float par2=0, const float par3=0, const float par4=0, const float par5=0, {\bf Crystal\-System} lattice=C\-U\-B\-I\-C, const Crystal\-Centering cent=L\-A\-T\-T\-I\-C\-E\-\_\-\-P)\label{a00076_a547acefb4b824862c0dddb82c8977bea}
+{\bfseries Rec\+Unit\+Cell} (const float zero=0, const float par0=0, const float par1=0, const float par2=0, const float par3=0, const float par4=0, const float par5=0, {\bf Crystal\+System} lattice=C\+U\+B\+I\+C, const Crystal\+Centering cent=L\+A\+T\+T\+I\+C\+E\+\_\+\+P)\label{a00076_a547acefb4b824862c0dddb82c8977bea}
 
 \item 
-{\bfseries Rec\-Unit\-Cell} (const {\bf Rec\-Unit\-Cell} \&old)\label{a00076_aa9c6ed37f40ded76feb05ef9abc13eb6}
+{\bfseries Rec\+Unit\+Cell} (const {\bf Rec\+Unit\+Cell} \&old)\label{a00076_aa9c6ed37f40ded76feb05ef9abc13eb6}
 
 \item 
-void {\bfseries operator=} (const {\bf Rec\-Unit\-Cell} \&rhs)\label{a00076_a317806844b8bb03f4d5a940465e76975}
+void {\bfseries operator=} (const {\bf Rec\+Unit\+Cell} \&rhs)\label{a00076_a317806844b8bb03f4d5a940465e76975}
 
 \item 
-float {\bf hkl2d} (const float h, const float k, const float l, R\-E\-A\-L $\ast$derivpar=N\-U\-L\-L, const unsigned int derivhkl=0) const 
+float {\bf hkl2d} (const float h, const float k, const float l, R\+E\+A\+L $\ast$derivpar=N\+U\+L\+L, const unsigned int derivhkl=0) const 
 \begin{DoxyCompactList}\small\item\em Compute d$\ast$$^\wedge$2 for hkl reflection if deriv != -\/1, compute derivate versus the corresponding parameter. \end{DoxyCompactList}\item 
-void {\bf hkl2d\-\_\-delta} (const float h, const float k, const float l, const {\bf Rec\-Unit\-Cell} \&delta, float \&dmin, float \&dmax) const 
-\begin{DoxyCompactList}\small\item\em Compute d$\ast$$^\wedge$2 for one hkl reflection\-: this functions computes a d$\ast$$^\wedge$2 range (min,max) for a given range of unit cell parameter (given in the delta parameter) around the current parameters. \end{DoxyCompactList}\item 
-std\-::vector$<$ float $>$ {\bf Direct\-Unit\-Cell} (const bool equiv=false) const 
+void {\bf hkl2d\+\_\+delta} (const float h, const float k, const float l, const {\bf Rec\+Unit\+Cell} \&delta, float \&dmin, float \&dmax) const 
+\begin{DoxyCompactList}\small\item\em Compute d$\ast$$^\wedge$2 for one hkl reflection\+: this functions computes a d$\ast$$^\wedge$2 range (min,max) for a given range of unit cell parameter (given in the delta parameter) around the current parameters. \end{DoxyCompactList}\item 
+std\+::vector$<$ float $>$ {\bf Direct\+Unit\+Cell} (const bool equiv=false) const 
 \begin{DoxyCompactList}\small\item\em Compute real space unit cell from reciprocal one. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-R\-E\-A\-L {\bf par} [7]
-\begin{DoxyCompactList}\small\item\em The 6 parameters defining 1/d\-\_\-hkl$^\wedge$2 = d$\ast$\-\_\-hkl$^\wedge$2, for different crystal classes, from\-: d$\ast$\-\_\-hkl$^\wedge$2 = zero + a$\ast$$^\wedge$2 h$^\wedge$2 + b$\ast$$^\wedge$2 k$^\wedge$2 + c$\ast$$^\wedge$2 l$^\wedge$2 + 2 a$\ast$.b$\ast$ hk + 2 b$\ast$.c$\ast$ kl + 2 a$\ast$.c$\ast$ hl. \end{DoxyCompactList}\item 
+R\+E\+A\+L {\bf par} [7]
+\begin{DoxyCompactList}\small\item\em The 6 parameters defining 1/d\+\_\+hkl$^\wedge$2 = d$\ast$\+\_\+hkl$^\wedge$2, for different crystal classes, from\+: d$\ast$\+\_\+hkl$^\wedge$2 = zero + a$\ast$$^\wedge$2 h$^\wedge$2 + b$\ast$$^\wedge$2 k$^\wedge$2 + c$\ast$$^\wedge$2 l$^\wedge$2 + 2 a$\ast$.b$\ast$ hk + 2 b$\ast$.c$\ast$ kl + 2 a$\ast$.c$\ast$ hl. \end{DoxyCompactList}\item 
 float {\bfseries zero}\label{a00076_accd778c87bc4c93b7d259b65b9c6d794}
 
 \item 
-{\bf Crystal\-System} {\bfseries mlattice}\label{a00076_ab751018126adbc0306ec2bc5f582547a}
+{\bf Crystal\+System} {\bfseries mlattice}\label{a00076_ab751018126adbc0306ec2bc5f582547a}
 
 \item 
-Crystal\-Centering {\bfseries m\-Centering}\label{a00076_a203d74dc8d3b23a592230be7685f45b9}
+Crystal\+Centering {\bfseries m\+Centering}\label{a00076_a203d74dc8d3b23a592230be7685f45b9}
 
 \end{DoxyCompactItemize}
 
 
 \subsubsection{Detailed Description}
-Lightweight class describing the reciprocal unit cell, for the fast computation of d$\ast$\-\_\-hkl$^\wedge$2. 
+Lightweight class describing the reciprocal unit cell, for the fast computation of d$\ast$\+\_\+hkl$^\wedge$2. 
 
 \subsubsection{Member Function Documentation}
-\index{Obj\-Cryst\-::\-Rec\-Unit\-Cell@{Obj\-Cryst\-::\-Rec\-Unit\-Cell}!Direct\-Unit\-Cell@{Direct\-Unit\-Cell}}
-\index{Direct\-Unit\-Cell@{Direct\-Unit\-Cell}!ObjCryst::RecUnitCell@{Obj\-Cryst\-::\-Rec\-Unit\-Cell}}
-\paragraph[{Direct\-Unit\-Cell}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$float$>$ Obj\-Cryst\-::\-Rec\-Unit\-Cell\-::\-Direct\-Unit\-Cell (
+\index{Obj\+Cryst\+::\+Rec\+Unit\+Cell@{Obj\+Cryst\+::\+Rec\+Unit\+Cell}!Direct\+Unit\+Cell@{Direct\+Unit\+Cell}}
+\index{Direct\+Unit\+Cell@{Direct\+Unit\+Cell}!Obj\+Cryst\+::\+Rec\+Unit\+Cell@{Obj\+Cryst\+::\+Rec\+Unit\+Cell}}
+\paragraph[{Direct\+Unit\+Cell}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$float$>$ Obj\+Cryst\+::\+Rec\+Unit\+Cell\+::\+Direct\+Unit\+Cell (
 \begin{DoxyParamCaption}
 \item[{const bool}]{equiv = {\ttfamily false}}
 \end{DoxyParamCaption}
@@ -59,14 +59,14 @@ Compute real space unit cell from reciprocal one.
 {\em equiv} & if true, return real unit cell {\itshape equivalent} to the one computed from the reciprocal one, so that alpha, beta and gamma are larger or equal to pi/2, and minimum. This is done by adding multiples of {\bfseries a} to {\bfseries b} and multiples of {\bfseries a} and {\bfseries b} to {\bfseries c}. \\
 \hline
 \end{DoxyParams}
-\index{Obj\-Cryst\-::\-Rec\-Unit\-Cell@{Obj\-Cryst\-::\-Rec\-Unit\-Cell}!hkl2d@{hkl2d}}
-\index{hkl2d@{hkl2d}!ObjCryst::RecUnitCell@{Obj\-Cryst\-::\-Rec\-Unit\-Cell}}
-\paragraph[{hkl2d}]{\setlength{\rightskip}{0pt plus 5cm}float Obj\-Cryst\-::\-Rec\-Unit\-Cell\-::hkl2d (
+\index{Obj\+Cryst\+::\+Rec\+Unit\+Cell@{Obj\+Cryst\+::\+Rec\+Unit\+Cell}!hkl2d@{hkl2d}}
+\index{hkl2d@{hkl2d}!Obj\+Cryst\+::\+Rec\+Unit\+Cell@{Obj\+Cryst\+::\+Rec\+Unit\+Cell}}
+\paragraph[{hkl2d}]{\setlength{\rightskip}{0pt plus 5cm}float Obj\+Cryst\+::\+Rec\+Unit\+Cell\+::hkl2d (
 \begin{DoxyParamCaption}
 \item[{const float}]{h, }
 \item[{const float}]{k, }
 \item[{const float}]{l, }
-\item[{R\-E\-A\-L $\ast$}]{derivpar = {\ttfamily NULL}, }
+\item[{R\+E\+A\+L $\ast$}]{derivpar = {\ttfamily NULL}, }
 \item[{const unsigned int}]{derivhkl = {\ttfamily 0}}
 \end{DoxyParamCaption}
 ) const}\label{a00076_ac71ccf881e231fa1853ba628b48ce915}
@@ -74,34 +74,34 @@ Compute real space unit cell from reciprocal one.
 
 Compute d$\ast$$^\wedge$2 for hkl reflection if deriv != -\/1, compute derivate versus the corresponding parameter. 
 
-If derivhkl=1,2,3, compute derivative versus h,k or l. \index{Obj\-Cryst\-::\-Rec\-Unit\-Cell@{Obj\-Cryst\-::\-Rec\-Unit\-Cell}!hkl2d\-\_\-delta@{hkl2d\-\_\-delta}}
-\index{hkl2d\-\_\-delta@{hkl2d\-\_\-delta}!ObjCryst::RecUnitCell@{Obj\-Cryst\-::\-Rec\-Unit\-Cell}}
-\paragraph[{hkl2d\-\_\-delta}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\-Cryst\-::\-Rec\-Unit\-Cell\-::hkl2d\-\_\-delta (
+If derivhkl=1,2,3, compute derivative versus h,k or l. \index{Obj\+Cryst\+::\+Rec\+Unit\+Cell@{Obj\+Cryst\+::\+Rec\+Unit\+Cell}!hkl2d\+\_\+delta@{hkl2d\+\_\+delta}}
+\index{hkl2d\+\_\+delta@{hkl2d\+\_\+delta}!Obj\+Cryst\+::\+Rec\+Unit\+Cell@{Obj\+Cryst\+::\+Rec\+Unit\+Cell}}
+\paragraph[{hkl2d\+\_\+delta}]{\setlength{\rightskip}{0pt plus 5cm}void Obj\+Cryst\+::\+Rec\+Unit\+Cell\+::hkl2d\+\_\+delta (
 \begin{DoxyParamCaption}
 \item[{const float}]{h, }
 \item[{const float}]{k, }
 \item[{const float}]{l, }
-\item[{const {\bf Rec\-Unit\-Cell} \&}]{delta, }
+\item[{const {\bf Rec\+Unit\+Cell} \&}]{delta, }
 \item[{float \&}]{dmin, }
 \item[{float \&}]{dmax}
 \end{DoxyParamCaption}
 ) const}\label{a00076_a29ed2d05b37b3a9344e8d95d3344651e}
 
 
-Compute d$\ast$$^\wedge$2 for one hkl reflection\-: this functions computes a d$\ast$$^\wedge$2 range (min,max) for a given range of unit cell parameter (given in the delta parameter) around the current parameters. 
+Compute d$\ast$$^\wedge$2 for one hkl reflection\+: this functions computes a d$\ast$$^\wedge$2 range (min,max) for a given range of unit cell parameter (given in the delta parameter) around the current parameters. 
 
-Used for Dic\-Vol algorithm 
+Used for Dic\+Vol algorithm 
 
 \subsubsection{Member Data Documentation}
-\index{Obj\-Cryst\-::\-Rec\-Unit\-Cell@{Obj\-Cryst\-::\-Rec\-Unit\-Cell}!par@{par}}
-\index{par@{par}!ObjCryst::RecUnitCell@{Obj\-Cryst\-::\-Rec\-Unit\-Cell}}
-\paragraph[{par}]{\setlength{\rightskip}{0pt plus 5cm}R\-E\-A\-L Obj\-Cryst\-::\-Rec\-Unit\-Cell\-::par[7]}\label{a00076_a624fa31d8c012440df7a3d7637dae182}
+\index{Obj\+Cryst\+::\+Rec\+Unit\+Cell@{Obj\+Cryst\+::\+Rec\+Unit\+Cell}!par@{par}}
+\index{par@{par}!Obj\+Cryst\+::\+Rec\+Unit\+Cell@{Obj\+Cryst\+::\+Rec\+Unit\+Cell}}
+\paragraph[{par}]{\setlength{\rightskip}{0pt plus 5cm}R\+E\+A\+L Obj\+Cryst\+::\+Rec\+Unit\+Cell\+::par[7]}\label{a00076_a624fa31d8c012440df7a3d7637dae182}
 
 
-The 6 parameters defining 1/d\-\_\-hkl$^\wedge$2 = d$\ast$\-\_\-hkl$^\wedge$2, for different crystal classes, from\-: d$\ast$\-\_\-hkl$^\wedge$2 = zero + a$\ast$$^\wedge$2 h$^\wedge$2 + b$\ast$$^\wedge$2 k$^\wedge$2 + c$\ast$$^\wedge$2 l$^\wedge$2 + 2 a$\ast$.b$\ast$ hk + 2 b$\ast$.c$\ast$ kl + 2 a$\ast$.c$\ast$ hl. 
+The 6 parameters defining 1/d\+\_\+hkl$^\wedge$2 = d$\ast$\+\_\+hkl$^\wedge$2, for different crystal classes, from\+: d$\ast$\+\_\+hkl$^\wedge$2 = zero + a$\ast$$^\wedge$2 h$^\wedge$2 + b$\ast$$^\wedge$2 k$^\wedge$2 + c$\ast$$^\wedge$2 l$^\wedge$2 + 2 a$\ast$.b$\ast$ hk + 2 b$\ast$.c$\ast$ kl + 2 a$\ast$.c$\ast$ hl. 
 
-for triclinic\-: d$\ast$\-\_\-hkl$^\wedge$2 = par[0] + par[1] h$^\wedge$2 + par[1] k$^\wedge$2 + par[2]$^\wedge$2 l$^\wedge$2 + par[3] hk + par[4] kl + par[5] hl for monoclinic\-: d$\ast$\-\_\-hkl$^\wedge$2 = zero + par[0]$^\wedge$2 h$^\wedge$2 + par[1]$^\wedge$2 k$^\wedge$2 + par[2]$^\wedge$2 l$^\wedge$2 + par[0]$\ast$par[2]$\ast$par[3] hl for orthorombic\-: d$\ast$\-\_\-hkl$^\wedge$2 = zero + par[0]$^\wedge$2 h$^\wedge$2 + par[1]$^\wedge$2 k$^\wedge$2 + par[2]$^\wedge$2 l$^\wedge$2 for hexagonal\-: d$\ast$\-\_\-hkl$^\wedge$2 = zero + par[0]$^\wedge$2 h$^\wedge$2 + par[0]$^\wedge$2 k$^\wedge$2 + par[2]$^\wedge$2 l$^\wedge$2 + sqrt(3)/2$\ast$par[0]$^\wedge$2 hk for rhomboedral\-: d$\ast$\-\_\-hkl$^\wedge$2 = zero + par[0]$^\wedge$2 h$^\wedge$2 + par[1]$^\wedge$2 k$^\wedge$2 + par[2]$^\wedge$2 l$^\wedge$2 + par[3] (hk + kl + hl) for quadratic\-: d$\ast$\-\_\-hkl$^\wedge$2 = zero + par[0]$^\wedge$2 h$^\wedge$2 + par[0]$^\wedge$2 k$^\wedge$2 + par[1]$^\wedge$2 l$^\wedge$2 for cubic d$\ast$\-\_\-hkl$^\wedge$2 = zero + par[0]$^\wedge$2 (h$^\wedge$2 + k$^\wedge$2 + l$^\wedge$2) 
+for triclinic\+: d$\ast$\+\_\+hkl$^\wedge$2 = par[0] + par[1] h$^\wedge$2 + par[1] k$^\wedge$2 + par[2]$^\wedge$2 l$^\wedge$2 + par[3] hk + par[4] kl + par[5] hl for monoclinic\+: d$\ast$\+\_\+hkl$^\wedge$2 = zero + par[0]$^\wedge$2 h$^\wedge$2 + par[1]$^\wedge$2 k$^\wedge$2 + par[2]$^\wedge$2 l$^\wedge$2 + par[0]$\ast$par[2]$\ast$par[3] hl for orthorombic\+: d$\ast$\+\_\+hkl$^\wedge$2 = zero + par[0]$^\wedge$2 h$^\wedge$2 + par[1]$^\wedge$2 k$^\wedge$2 + par[2]$^\wedge$2 l$^\wedge$2 for hexagonal\+: d$\ast$\+\_\+hkl$^\wedge$2 = zero + par[0]$^\wedge$2 h$^\wedge$2 + par[0]$^\wedge$2 k$^\wedge$2 + par[2]$^\wedge$2 l$^\wedge$2 + sqrt(3)/2$\ast$par[0]$^\wedge$2 hk for rhomboedral\+: d$\ast$\+\_\+hkl$^\wedge$2 = zero + par[0]$^\wedge$2 h$^\wedge$2 + par[1]$^\wedge$2 k$^\wedge$2 + par[2]$^\wedge$2 l$^\wedge$2 + par[3] (hk + kl + hl) for quadratic\+: d$\ast$\+\_\+hkl$^\wedge$2 = zero + par[0]$^\wedge$2 h$^\wedge$2 + par[0]$^\wedge$2 k$^\wedge$2 + par[1]$^\wedge$2 l$^\wedge$2 for cubic d$\ast$\+\_\+hkl$^\wedge$2 = zero + par[0]$^\wedge$2 (h$^\wedge$2 + k$^\wedge$2 + l$^\wedge$2) 
 
-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-Indexing.\-h\end{DoxyCompactItemize}
+Indexing.\+h\end{DoxyCompactItemize}
