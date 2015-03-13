@@ -1669,6 +1669,7 @@ private:
 	mutable REAL mQ1;
 	mutable REAL mQ2;
 	bool mUseMWilk;
+	bool mUseChklABC;
 	int mFormula;
 	int mArgument;
 	REAL mKaganerEta0;
@@ -1677,6 +1678,8 @@ private:
 	bool mIsIntialised;
 public:
 	DislocationBroadeningEffectSvB();
+	/// Name of this class (MStruct::DislocationBroadeningEffectSvB)
+	virtual const string& GetClassName()const;
 	void SetParentReflectionProfile(ReflectionProfile &);
 	CrystVector_REAL GetProfile(const CrystVector_REAL &x,
 			      const REAL xcenter,
@@ -1691,6 +1694,7 @@ public:
 					   const REAL q1 = 0., const REAL q2 = 0.);
 	
 	void SetUseMWilk(const bool useMWilk);
+	void SetChklChoiceABC(const bool useABC);
 	void SetFormula(const int formula, const int arg);
 
 	/*	unsigned int GetNbLSQConstraints() const;

@@ -1192,6 +1192,7 @@ int main (int argc, char *argv[])
 	  }
 
 	  strainEffect->SetUseMWilk( useMWilk==1 );
+	  strainEffect->SetChklChoiceABC( false );
 	  strainEffect->SetFormula( formulaType , argType );
 
        	 // parameters
@@ -1991,7 +1992,7 @@ int main (int argc, char *argv[])
        read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
        continue;
      }
-     
+      
      string keyword;
      ccin >> keyword;
 
@@ -2062,6 +2063,29 @@ int main (int argc, char *argv[])
        data.GetRadiation().XMLOutput( cout, 0);
        cout << "\n";
      } // if @PowderPattern:SetWavelength
+
+    // @DislocationBroadeningEffectSvB:SetChklChoiceABC
+     if( strncmp(keyword.c_str(),"@DislocationBroadeningEffectSvB:SetChklChoiceABC",48)==0 ) {
+       // set parameters type (Cg0,q1,12 vs. A,B,C) for Chkl in DislocationBroadeningEffectSvB
+       // usage: @DislocationBroadeningEffectSvB:SetChklChoiceABC strainProfWC true
+       std::string effname; // effect name
+       std::string choice; // choice
+       ccin >> effname;
+       ccin >> choice;
+       // find dislocation broadening effect object with given name
+       MStruct::DislocationBroadeningEffectSvB *dislEff = NULL;
+       {
+	 RefinableObj &obj = gRefinableObjRegistry.GetObj(effname.c_str(),"MStruct::DislocationBroadeningEffectSvB");
+	 dislEff = &(dynamic_cast<MStruct::DislocationBroadeningEffectSvB&>(obj));
+       }
+       if( strncmp(choice.c_str(),"1",1)==0 || strncmp(choice.c_str(),"true",4)==0 ) {
+	 cout << "Option: Setting Chkl choice to ABC for " << dislEff->GetName() << "\n";
+	 dislEff->SetChklChoiceABC(true);
+       } else {
+	 cout << "Option: Setting Chkl choice to Cg0,q1,q2 for " << dislEff->GetName() << "\n";
+	 dislEff->SetChklChoiceABC(false);
+       }
+     } // if @DislocationBroadeningEffectSvB:SetChklChoiceABC
 
      read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
    }
@@ -2428,7 +2452,7 @@ int main (int argc, char *argv[])
    /*ofstream f2("phase1_par_2.txt");
      vDiffData[0]->PrintHKLInfo2(f2,0.001);*/
    //vDiffData[1]->PrintHKLInfo(f2);
-   f2.close();
+   //f2.close();
   // Save the powder pattern in text format
    //data.SavePowderPattern("tio2.dat");
   // Save everything in xml so that we can reload it later

@@ -7911,12 +7911,18 @@ bool IsAnisotropic()const
 
 // DislocationBroadeningEffectSvB
 DislocationBroadeningEffectSvB::DislocationBroadeningEffectSvB()
-  :mReOrMWilk(100.), mRou(0.0001), mCg0(1.), mQ1(0.), mQ2(0.), mUseMWilk(false), mFormula(0),
-   mArgument(0), mKaganerEta0(2.2), mKaganerEta1(0.), mCellType(MSTRUCT_NONE), mACr(1.)
+  :mReOrMWilk(100.), mRou(0.0001), mCg0(1.), mQ1(0.), mQ2(0.), mUseMWilk(false), mUseChklABC(false),
+   mFormula(0), mArgument(0), mKaganerEta0(2.2), mKaganerEta1(0.), mCellType(MSTRUCT_NONE), mACr(1.)
 {
   InitParameters(false);
 }
 
+const string& DislocationBroadeningEffectSvB::GetClassName()const
+{
+  static const string className = "MStruct::DislocationBroadeningEffectSvB";
+  return className;
+}
+  
 void DislocationBroadeningEffectSvB::SetParentReflectionProfile(ReflectionProfile &s)
 {
   // Call the superclass method to ensure functionality.
@@ -8122,12 +8128,15 @@ REAL DislocationBroadeningEffectSvB::GetApproxFWHM(const REAL xcenter,
     }
 
     // Calculation
-    const double y = sqrt(rou*Chkl)*re*mb*s0;
-    // numerical approximation with absolute precision app. 1e-3 in the range y from the interval (0.,5.)
-    // MSVC have no erf(REAl) hence the identity erf(x) = 1 - erfc(x) is used (erfc() is implemented in ObjCryst++) 
-    fwhm = 1.8865 * 0.5 * (y*(1.-erfc(sqrt(M_LN2)*y/0.5622)) + 0.5622/sqrt(M_LN2*M_PI)*(exp(-M_LN2*pow(y/0.5622,2))-1.)) +
-      1.2343 * M_1_PI * (y*atan(y/2.3364) - 0.5 * 2.3364 * log(1. + pow(y/2.3364,2)));
-    fwhm /= re; // (1/A)
+    if( (rou*Chkl)>0. ) {
+      const double y = sqrt(rou*Chkl)*re*mb*s0;
+      // numerical approximation with absolute precision app. 1e-3 in the range y from the interval (0.,5.)
+      // MSVC have no erf(REAl) hence the identity erf(x) = 1 - erfc(x) is used (erfc() is implemented in ObjCryst++) 
+      fwhm = 1.8865 * 0.5 * (y*(1.-erfc(sqrt(M_LN2)*y/0.5622)) + 0.5622/sqrt(M_LN2*M_PI)*(exp(-M_LN2*pow(y/0.5622,2))-1.)) +
+	1.2343 * M_1_PI * (y*atan(y/2.3364) - 0.5 * 2.3364 * log(1. + pow(y/2.3364,2)));
+      fwhm /= re; // (1/A)
+    } else
+      fwhm = 0.;
   }
 	
   catch(std::exception &e) {
@@ -8176,13 +8185,13 @@ void DislocationBroadeningEffectSvB::PrepareCalcAuxParams(const REAL xcenter, co
   switch(mCellType) {
   case MSTRUCT_FCC:
   case MSTRUCT_BCC:
-  case MSTRUCT_SC: {
+  case MSTRUCT_SC:
     t = REAL((h*h)*(k*k)+(k*k)*(l*l)+(l*l)*(h*h))/pow(h*h+k*k+l*l,2);
-    Chkl = mCg0*(1. + mQ1*t); }
+    Chkl = (mUseChklABC) ? mCg0+mQ1*t : mCg0*(1. + mQ1*t); // A=mCg0, B=mQ1
     break;
   case MSTRUCT_HCP:
-    t = 0.5*(l*l)/((h*h)+(h*k)+(k*k)+(mACr*mACr)*(l*l)); 
-    Chkl = mCg0*(1. + mQ1*t + mQ2*(t*t));
+    t = 0.5*(l*l)/((h*h)+(h*k)+(k*k)+0.75*(mACr*mACr)*(l*l)); 
+    Chkl = (mUseChklABC) ? mCg0+(mQ1+mQ2*t)*t : mCg0*(1. + mQ1*t + mQ2*(t*t)); // A=mCg0, B=mQ1, C=mQ2
     break;
   case MSTRUCT_NONE:
     Chkl = mCg0;
@@ -8209,6 +8218,13 @@ void DislocationBroadeningEffectSvB::SetProfilePar(const REAL reOrRou, const REA
 void DislocationBroadeningEffectSvB::SetUseMWilk(const bool useMWilk)
 {
   mUseMWilk = useMWilk;
+  InitParameters(true);
+  mClockMaster.Click();
+}
+
+void DislocationBroadeningEffectSvB::SetChklChoiceABC(const bool useABC)
+{
+  mUseChklABC = useABC;
   InitParameters(true);
   mClockMaster.Click();
 }
@@ -8358,7 +8374,7 @@ void DislocationBroadeningEffectSvB::SetAuxParameters()const
     else if (sgnb == 194 || sgnb == 187) {
       // hexagonal cell
       const REAL aa = uc.GetLatticePar(0);
-      const REAL cc = uc.GetLatticePar(3);
+      const REAL cc = uc.GetLatticePar(2);
       // P 6_3 / m m c (typical hcp group)
       mCellType = MSTRUCT_HCP;
       mb = aa;
@@ -11035,6 +11051,10 @@ REAL ReflectionProfile::GetFullProfileWidth (const REAL relativeIntensity,
   CrystVector_REAL x(nb);
   REAL n=10.0; // 5.0
   const REAL fwhm=GetApproxFWHM(xcenter,h,k,l);
+  if(fwhm<=FLT_EPSILON) {
+    VFN_DEBUG_EXIT("\MStruct::ReflectionProfile::GetFullProfileWidth():"<<0.,10)
+    return 0.;
+  }
   CrystVector_REAL prof;
   while(true)
   {
@@ -11088,9 +11108,10 @@ REAL ReflectionProfile::GetIntegralWidth (const REAL xcenter,
 {
   // profile is normalised to unity - just find a value in the maximum
   // it is not possible to simply calculate the value in one point
-  // hence it is necessary calc the whole profile
+  // hence it is necessary to calc the whole profile
   
   const REAL fullwidth = this->GetFullProfileWidth(0.001,xcenter,h,k,l);
+  if(fullwidth<FLT_EPSILON) return 0.;
   const int n = 511; // 1023
   const REAL dx = fullwidth/(n-1);
   CrystVector_REAL x(n);
