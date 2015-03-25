@@ -31,7 +31,7 @@
 //#define program_version "0.39-(Fox-r1221)-testing-WCfaults+ExternalLSQConstraints"
 //#define program_version "0.104-(Fox-r1221)-develop-EllipRodsGamma(testing)" // EllipRodsGamma
 //#define program_version "0.96-(Fox-r1221)-develop"
-#define program_version "0.138-(Fox-r1221)-develop-carbonWB(withoutScale)"
+#define program_version "0.141-(Fox-r1221)-develop-carbonWB(withoutScale)"
 
 #include "MStruct.h"
 
@@ -122,14 +122,16 @@ int main (int argc, char *argv[])
    {
    		// print version and license information
       cout << "version: " << program_version << "\n";
-      cout << "mstruct  Copyright (C) 2009-2015 Zdenek Matej, Charles University in Prague\n";
-      cout << "e-mail: matej@karlov.mff.cuni.cz\n";
+      cout << "mstruct Copyright\n";
+      cout << "(C) 2009-2015 Zdenek Matej, Charles University in Prague\n";
+      cout << "(C) 2014-2015 Zdenek Matej, MAX IV Laboratory, Lund University\n";
+      cout << "e-mail: <matej@karlov.mff.cuni.cz>\n";
       cout << "web: <http://xray.cz/mstruct/>\n";
       cout << "License GNU GPL: <http://gnu.org/licenses/gpl.html>.\n";
       cout << "This program comes with ABSOLUTELY NO WARRANTY;\n";
       cout << "This is free software, and you are welcome to redistribute it.\n";
       cout << flush;
-	  return 0;
+      return 0;
    }
 
    cout << " Beginning program ...." << endl ;
@@ -1192,6 +1194,7 @@ int main (int argc, char *argv[])
 	  }
 
 	  strainEffect->SetUseMWilk( useMWilk==1 );
+	  strainEffect->SetChklChoiceABC( false );
 	  strainEffect->SetFormula( formulaType , argType );
 
        	 // parameters
@@ -1991,7 +1994,7 @@ int main (int argc, char *argv[])
        read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
        continue;
      }
-     
+      
      string keyword;
      ccin >> keyword;
 
@@ -2062,6 +2065,29 @@ int main (int argc, char *argv[])
        data.GetRadiation().XMLOutput( cout, 0);
        cout << "\n";
      } // if @PowderPattern:SetWavelength
+
+    // @DislocationBroadeningEffectSvB:SetChklChoiceABC
+     if( strncmp(keyword.c_str(),"@DislocationBroadeningEffectSvB:SetChklChoiceABC",48)==0 ) {
+       // set parameters type (Cg0,q1,12 vs. A,B,C) for Chkl in DislocationBroadeningEffectSvB
+       // usage: @DislocationBroadeningEffectSvB:SetChklChoiceABC strainProfWC true
+       std::string effname; // effect name
+       std::string choice; // choice
+       ccin >> effname;
+       ccin >> choice;
+       // find dislocation broadening effect object with given name
+       MStruct::DislocationBroadeningEffectSvB *dislEff = NULL;
+       {
+	 RefinableObj &obj = gRefinableObjRegistry.GetObj(effname.c_str(),"MStruct::DislocationBroadeningEffectSvB");
+	 dislEff = &(dynamic_cast<MStruct::DislocationBroadeningEffectSvB&>(obj));
+       }
+       if( strncmp(choice.c_str(),"1",1)==0 || strncmp(choice.c_str(),"true",4)==0 ) {
+	 cout << "Option: Setting Chkl choice to ABC for " << dislEff->GetName() << "\n";
+	 dislEff->SetChklChoiceABC(true);
+       } else {
+	 cout << "Option: Setting Chkl choice to Cg0,q1,q2 for " << dislEff->GetName() << "\n";
+	 dislEff->SetChklChoiceABC(false);
+       }
+     } // if @DislocationBroadeningEffectSvB:SetChklChoiceABC
 
      read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
    }
