@@ -517,9 +517,9 @@ int main (int argc, char *argv[])
    			 bkgData->ImportUserBackground(bkg_filename.c_str());
 			 
    			 if(bkg_type==0)
-     		   bkgData->SetInterpolationModel(string("linear"));
+     		   bkgData->SetInterpolationModel(string("Linear"));
    			 else if(bkg_type==1)
-     		   bkgData->SetInterpolationModel(string("cubic spline"));
+     		   bkgData->SetInterpolationModel(string("Spline"));
      		 
      		 vBackgroundComponents.push_back(bkgData);   	 
    	 	   }

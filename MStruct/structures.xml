@@ -189,7 +189,7 @@
       <RGBColour>1 1 1</RGBColour>
     </ScatteringPowerAtom>
 
-    <Atom Name="Si" ScattPow="Si">
+    <Atom Name="Si1" ScattPow="Si">
       <Par Refined="0" Limited="0" Min="0" Max="1" Name="x">0.125</Par>
       <Par Refined="0" Limited="0" Min="0" Max="1" Name="y">0.125</Par>
       <Par Refined="0" Limited="0" Min="0" Max="1" Name="z">0.125</Par>
