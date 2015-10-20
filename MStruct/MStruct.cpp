@@ -11462,6 +11462,7 @@ REAL CalcUnitCellMass(const ObjCryst::Crystal& crystal)
       // TODO:: Atom scatter population could be calculated also using Dynamical populacy correction without
       //        calling SpaceGroup::GetAllSymmetrics(...) method but DynPopCorr looks working wrongly
       //        in the case of an one atom crystal (e.g. Al, Cu, Mg, etc.)
+      // Note: Be very careful with setting special positions (e.g. 0.33333333 or 0.6666666667)
       ///const REAL popu = sc_list(icomp).mOccupancy*sc_list(icomp).mDynPopCorr;
 							
       // find atom in the periodic table to get its atomic weight 
@@ -11471,7 +11472,7 @@ REAL CalcUnitCellMass(const ObjCryst::Crystal& crystal)
 								      sc_list(icomp).mZ,false,false,true).rows(); 
       //cout << "Scatterer nb. " << icomp << ", symbol: " << pScattPowAtom->GetSymbol();
       //cout << ", x, y, z: " << sc_list(icomp).mX << ", " << sc_list(icomp).mY << ", " << sc_list(icomp).mZ << ", sym: " << nb_sym_pos;
-      //cout << ", occ: " << sc_list(icomp).mOccupancy << ", DynPopCorr: " << sc_list(icomp).mDynPopCorr << ", popu: " << popu << ", weight: " << tpse.weight() << endl;
+      //cout << ", occ: " << sc_list(icomp).mOccupancy << ", DynPopCorr: " << sc_list(icomp).mDynPopCorr << ", weight: " << tpse.weight() << endl;
 					
       // atomic mass constant (ref: http://physics.nist.gov/cuu)
       // m_u = 1.660 538 782 x 10^-27 kg
@@ -11483,7 +11484,7 @@ REAL CalcUnitCellMass(const ObjCryst::Crystal& crystal)
       mass += t * tpse.weight();
     }
   } // for icomp
-  
+
   mass *= 1.660538782; // (1e-24 g)
 
   return mass; // (1e-24 g)
@@ -11556,6 +11557,8 @@ const complex< REAL > & RefractionPositionCorr::GetChi0(const bool forceReCalc)c
 							const ObjCryst::ScatteringPowerAtom * pScattPowAtom = dynamic_cast<const ObjCryst::ScatteringPowerAtom*>(pScattPow);
 							// TODO:: Atom scatter population could be calculated also using Dynamical populacy correction without calling
 							//          SpaceGroup::GetAllSymmetrics(...) method but DynPopCorr looks working wrongly in the case of an one atom crystal (e.g. Al, Cu, Mg, etc.)
+							//        Note no.2: Be careful with setting properly special positions (e.g. 0.666666667, 0.3333333),
+							//        their wrong identification can result in bad nb_sym_pos and unit cell mass
 							const REAL popu = sc_list(icomp).mOccupancy*sc_list(icomp).mDynPopCorr;
 							
 							// find atom in the periodic table to get its atomic weight 
