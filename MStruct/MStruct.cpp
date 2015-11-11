@@ -4,8 +4,9 @@
  * MStruct++ - Object-Oriented computer program/library for MicroStructure analysis
  * 					   from powder diffraction data.
  * 
- * Copyright (C) 2009-2015  Zdenek Matej
- * 
+ * Copyright (C) 2009-2014  Zdenek Matej, Charles University in Prague
+ * Copyright (C) 2014-2015  Zdenek Matej, MAX IV Laboratory, Lund University
+ *
  * This file is part of MStruct++.
  * 
  * MStruct++ is free software: you can redistribute it and/or modify
@@ -9954,6 +9955,102 @@ void PseudoVoigtBroadeningEffectA::InitParameters()
   }
 }
 
+////////////////////////////////////////////////////////////////////////
+//
+//    ProfilePerspectiveA
+//
+////////////////////////////////////////////////////////////////////////
+
+// constructor
+ProfilePerspectiveA::ProfilePerspectiveA():
+mEta(0.), mGamma(0.1*DEG2RAD)
+{
+  InitParameters();
+}
+
+CrystVector_REAL ProfilePerspectiveA::GetProfile(const CrystVector_REAL &x,
+						 const REAL xcenter,
+						 const REAL h, const REAL k, const REAL l)
+{
+  const int nbPoints = x.numElements(); 
+  CrystVector_REAL profile(nbPoints);
+
+  // get radiation and wavelength
+  const Radiation &rad = GetParentReflectionProfile().
+    GetParentPowderPatternDiffraction().GetRadiation();
+  const REAL Lambda = rad.GetWavelength()(0);
+
+  const REAL factor = cos(xcenter/2)/Lambda;
+  
+  REAL hwhm = GetApproxFWHM(xcenter,h,k,l)/2.*factor;
+
+  // calc Four. coefs
+  // ref: P.Scardi,L.Matteo,J.Appl.Cryst.(1999).32,671-682:Fourier modelling...
+  // size effect
+
+  const REAL *p1 = x.data();
+  REAL *p2 = profile.data();
+
+  const REAL factorPhi = 1./sqrt(M_PI*M_LN2); // ? should I use this ???
+  const REAL w = (abs(mEta)<FLT_EPSILON) ? 0. : 1./(1.+factorPhi*(1.-mEta)/mEta);
+
+  const REAL factorGsq = M_PI*M_PI*hwhm*hwhm/log(2.);
+  const REAL factorC   = 2.*M_PI*hwhm;
+
+  for(int i=0;i<nbPoints;i++) {
+    double L = *p1++; L = abs(L);
+    *p2++ = REAL((1.-w)*exp(-factorGsq*L*L)+w*exp(-factorC*L));
+  }
+  
+  return profile;
+}
+  
+REAL ProfilePerspectiveA::GetApproxFWHM(const REAL xcenter,
+					const REAL h, const REAL k, const REAL l)const
+{
+  // get incidence angle for the current 2Theta position
+  const REAL omega = this->GetParentReflectionProfile().GetIncidenceAngle(xcenter);
+
+  REAL fwhm = 0.;
+  if (xcenter>omega && omega>0.) {
+    fwhm = mGamma * sin(xcenter-omega)/sin(omega);
+  }
+  
+  return fwhm;
+}
+
+bool ProfilePerspectiveA::IsRealSpaceType()const {
+  return true;
+}
+
+void ProfilePerspectiveA::SetProfilePar(const REAL gamma, const REAL eta)
+{
+  mGamma=gamma*DEG2RAD;
+  mEta=eta;
+  mClockMaster.Click();
+}
+
+void ProfilePerspectiveA::InitParameters()
+{
+  {
+    RefinablePar tmp("Gamma",&mGamma,0.,20.*DEG2RAD,
+		     gpRefParTypeScattDataProfileWidth,
+		     REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false,
+		     RAD2DEG);
+    tmp.AssignClock(mClockMaster);
+    tmp.SetDerivStep(1e-7);
+    this->AddPar(tmp);
+  }
+  {
+    RefinablePar tmp("Eta",&mEta,0,1.,
+		     gpRefParTypeScattDataProfileType,
+		     REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false);
+    tmp.AssignClock(mClockMaster);
+    tmp.SetDerivStep(1e-4);
+    this->AddPar(tmp);
+  }
+}
+    
 // HKLPseudoVoigtBroadeningEffectA
 HKLPseudoVoigtBroadeningEffectA::HKLPseudoVoigtBroadeningEffectA()
   :mParamsFileName(""), mpLocalBkgComponent(NULL)

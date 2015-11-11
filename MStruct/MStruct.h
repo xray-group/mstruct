@@ -5,6 +5,7 @@
  * 					   from powder diffraction data.
  * 
  * Copyright (C) 2009-2014  Zdenek Matej, Charles University in Prague
+ * Copyright (C) 2014-2015  Zdenek Matej, MAX IV Laboratory, Lund University
  * 
  * This file is part of MStruct++.
  * 
@@ -1942,6 +1943,8 @@ public:
 		      const REAL fwhmCagliotiV=0,
 		      const REAL eta0=0.5, const REAL eta1=0.);
 	void SetAsymXMax(const REAL asymXMax);
+protected:
+  MStruct::PowderPatternDiffraction* mpParentPowderPatternDiffraction;
 private:
   void 	InitParameters ();
 }; // class PseudoVoigtBroadeningEffectA
@@ -1963,6 +1966,52 @@ public:
   void SetAsymXMax(const REAL asymXMax);
 }; // class PseudoVoigtBroadeningEffect
 
+ /** ProfilePerspectiveA: Model for diffraction line broadening related
+ *   to geometrical effects of irradiated sample area and a sample perspective
+ *   angle for a detector in parallel beam geometry.
+ * 
+ * In reflection geometry irradaited sample area is inversly proportional
+ * to sin of incidence angle. Simultaneously there is a linear relation
+ * between the acceptance angle of a virtual point detector and sin of
+ * exit angle. This gives for peak width due to this effect
+ *
+ *     width(deg) = beamWidth/L * sin(alpha_f)/sin(alpha_i) * 180./pi,
+ * 
+ * where alpha_i is the incidence angle, alpha_f is an exit angle. ration of beam
+ * width and detector distance L defines a gamma parameter for this model:
+ *
+ *     gamma(deg) = beamWidth/L * 180./pi.
+ *
+ * An additional phenomenological parameter eta defines a shape of this instrumental
+ * broadening component (0 ... Gaussian).
+ * 
+ * The effect is calaculated in real space for faster convolution with other broadening
+ * components. It is connected to the parent Diffraction profiles and handles assymetry angles.
+ *
+ * [1] Z. Matej, L. Nichtova, R. Kuzel, Coplanar grazing exit X-ray diffraction on thin
+ * polycrystalline films, Z. Kristallogr. Suppl. 30 (2009) 157-162 / DOI 10.1524/zksu.2009.0022
+ *
+ */
+class ProfilePerspectiveA: public ReflectionProfileComponent {
+ private:
+  /// profile shape parameter (0...Gaussian, 1...Lorentzian)
+  REAL mEta;
+  /// (angular) model parameter - peak width (rad)
+  REAL mGamma;
+ public:
+  ProfilePerspectiveA();
+  CrystVector_REAL GetProfile(const CrystVector_REAL &x,
+			      const REAL xcenter,
+			      const REAL h, const REAL k, const REAL l);
+  REAL GetApproxFWHM(const REAL xcenter,
+		     const REAL h, const REAL k, const REAL l)const;
+  bool IsRealSpaceType()const;
+  /// Set model parameters gamma(deg) and eta
+  void SetProfilePar(const REAL gamma, const REAL eta=0.);
+ private:
+  void InitParameters();
+}; // ProfilePerspectiveA
+ 
 class HKLPseudoVoigtBroadeningEffectA: public ReflectionProfileComponent {
 public:
   class HKLProfilePar {
@@ -2194,8 +2243,7 @@ public:
  * [1] Hart ...
  * [2] G.Lim,W.Parrish,C.Ortiz,M.Bellotto,M.Hart, J. Mater.Res. (1987) 2, 471
  * [3] P.Colombi,P.Zanola,E.Bontempi,L.E.Depero, Spectrochimica Acta B (2007) 62, 554
- *   
- * blab, bla, bla
+ *
  */
 class RefractionPositionCorr: public ReflectionPositionCorrBase
 {

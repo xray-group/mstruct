@@ -4,7 +4,8 @@
  * MStruct++ - Object-Oriented computer program/library for MicroStructure analysis
  * 					   from powder diffraction data.
  * 
- * Copyright (C) 2009-2015  Zdenek Matej
+ * Copyright (C) 2009-2014  Zdenek Matej, Charles University in Prague
+ * Copyright (C) 2014-2015  Zdenek Matej, MAX IV Laboratory, Lund University
  * 
  * This file is part of MStruct++.
  * 
@@ -1418,7 +1419,7 @@ int main (int argc, char *argv[])
      	 		btype_not_found = false;
      	 }
      	 // Residual Stress reflection position correction
-     	 		if(btype_not_found && btype==string("StressSimple")) {
+	 if(btype_not_found && btype==string("StressSimple")) {
      	 	 	MStruct::ResidualStressPositionCorrection * stressCorr
        			 = new MStruct::ResidualStressPositionCorrection;
        		stressCorr->SetName(bname);
@@ -1579,6 +1580,26 @@ int main (int argc, char *argv[])
        	  
      	 		btype_not_found = false;
      	 }
+	 // Geometrical broadening in parallel beam geometry with finite irradated area and slit acceptance
+     	 if(btype_not_found && btype==string("instrGeomPBslit")) {
+	   MStruct::ProfilePerspectiveA * perspectiveEffect = new MStruct::ProfilePerspectiveA;
+	   perspectiveEffect->SetName(bname);
+	   vReflProfComponents.push_back(perspectiveEffect);
+       		
+	   // parameters
+	   REAL gamma, eta;
+	   cout << "gamma(deg), eta (0/1...Gaussian/Loretzian)" << endl;
+	   read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+	   ccin >> gamma >> eta;
+
+	   // set parameters
+	   perspectiveEffect->SetProfilePar(gamma, eta);
+
+	   btype_not_found = false;
+	 } // InstrGeomPBslit
+
+
+	 
  			// Type of the given broadening not found
  			 if(btype_not_found) {
  			 		cout << "Warning: Type of the given broadening effect not recognised!" << endl;
