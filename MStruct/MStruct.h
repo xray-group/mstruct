@@ -989,6 +989,8 @@ public:
   virtual const CrystVector_REAL& GetLSQDeriv(const unsigned int n, ObjCryst::RefinablePar &par);
   void PrintHKLInfo (ostream &s);
   void PrintHKLInfo2 (ostream &s, const REAL accur=-1.) const;
+  /// Set parameters (min. relative intensity and multiplication width factor) affecting profile calculations
+  void SetReflProfCalcParams(const REAL minRelIntensity=0.001, const REAL factor=2.);
 protected:
   void CalcIntensityCorr () const;
 }; // class PowderPatternDiffraction

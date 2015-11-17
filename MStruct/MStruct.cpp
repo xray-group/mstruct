@@ -5259,6 +5259,12 @@ void PowderPatternDiffraction::CalcIntensityCorr () const
   VFN_DEBUG_MESSAGE("PowderPatternDiffraction::CalcIntensityCorr():finished",10)
 }
 
+void PowderPatternDiffraction::SetReflProfCalcParams(const REAL minRelIntensity, const REAL factor)
+{
+  mReflProfFact = factor;
+  mReflProfMinRelIntensity = minRelIntensity;
+}
+
 // ReflectionProfileComponent
 ReflectionProfileComponent::ReflectionProfileComponent():
 mpParentReflectionProfile(0)

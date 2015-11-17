@@ -32,7 +32,7 @@
 //#define program_version "0.39-(Fox-r1221)-testing-WCfaults+ExternalLSQConstraints"
 //#define program_version "0.104-(Fox-r1221)-develop-EllipRodsGamma(testing)" // EllipRodsGamma
 //#define program_version "0.96-(Fox-r1221)-develop"
-#define program_version "0.141-(Fox-r1221)-develop-carbonWB(withoutScale)"
+#define program_version "0.146-(Fox-r1221)-develop-carbonWB(withoutScale)-instrGeomPB-splineBkg"
 
 #include "MStruct.h"
 
@@ -236,6 +236,7 @@ int main (int argc, char *argv[])
    
   // background fileaname (2th, bkg), background type (linear, cubic spline)
    string bkg_filename;
+   bool settings_overwrite_bgr = false;
    int bkg_type;
    cout << "background filename (2th,bkg),background type (0-linear,1-cubic spline)" << endl;
    read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
@@ -2110,6 +2111,36 @@ int main (int argc, char *argv[])
        }
      } // if @DislocationBroadeningEffectSvB:SetChklChoiceABC
 
+    // @PowderPatternDiffraction:SetReflProfCalcParams
+     if( strncmp(keyword.c_str(),"@PowderPatternDiffraction:SetReflProfCalcParams",47)==0 ) {
+       // set parameters for reflection profile calculations (minRelativeIntensity and factor)
+       // usage: @PowderPatternDiffraction:SetReflProfCalcParams diffObjectName 0.001  2.0
+       std::string name; // phase name
+       REAL minRelIntensity, factor;
+       ccin >> name >> minRelIntensity >> factor;
+       // find PowderPatternDiffraction object with given name
+       MStruct::PowderPatternDiffraction *diffObj = NULL;
+       try {
+	 RefinableObj &obj = gRefinableObjRegistry.GetObj(name.c_str(),"MStruct::PowderPatternDiffraction");
+	 diffObj = &(dynamic_cast<MStruct::PowderPatternDiffraction&>(obj));
+       }
+       catch (exception& e) {
+	 cerr << "< Application: Can not find MStruct::PowderPatternDiffraction with name: " << name << "\n";
+	 throw ObjCrystException("Application: Wrong option parameter.");
+       }
+       if (diffObj) {
+	 cout << "Option: setting minRelIntensity = " << minRelIntensity << " and factor = " << factor;
+	 cout << " for phase: " << diffObj->GetName() << "\n";
+	 diffObj->SetReflProfCalcParams(minRelIntensity, factor);
+       }
+       
+     } // if @PowderPattern:SetReflProfCalcParams
+
+    // @overwrite_bgr_file
+     if( strncmp(keyword.c_str(),"@overwrite_bgr_file",19)==0 ) {
+       settings_overwrite_bgr = true;
+     } // if @overwrite_bgr_file
+     
      read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
    }
    
@@ -2408,7 +2439,7 @@ int main (int argc, char *argv[])
 
    if( lsqCompiledObj.GetNbLSQConstraints() > 0 )
      lsqCompiledObj.PrintExternalConstraintsStatistics();
-
+   
    } // if(1)
 
   // print values of Scale factors
@@ -2484,6 +2515,24 @@ int main (int argc, char *argv[])
 
    if(using_file == true) supplied_input_file.close();
 
+  // Save interpolated background
+   if( settings_overwrite_bgr )
+     for(int icomp=0; icomp<(int)v_bkg_type_ids.size(); icomp++)
+       if (v_bkg_type_ids[icomp]==BACKGROUND_INTERPOLATED) {
+	 string bkg_filename = v_bkg_strings[icomp];
+	 cout << "Saving interpolated background: " << bkg_filename << "\n";
+	 // get diffraction background component
+	 const MStruct::PowderPatternBackground * bkgData = dynamic_cast<const MStruct::PowderPatternBackground*>(vBackgroundComponents[icomp]);
+	 std::ofstream f(bkg_filename.c_str());
+	 f << std::fixed;
+	 const std::pair< const CrystVector_REAL *, const CrystVector_REAL * > 	points = bkgData->GetInterpPoints();
+	 for(int ipoint=0; ipoint<points.first->numElements(); ipoint++) {
+	   f << std::setw(10) << std::setprecision(3) << *(points.first->data()+ipoint) * RAD2DEG << "  ";
+	   f << std::setw(12) << std::setprecision(3) << *(points.second->data()+ipoint) << "\n";
+	 }
+	 f.close();
+       }
+   
    cout << " End of program." << endl ;
    /*for(int i=0; i<gRefinableObjRegistry.GetNb(); i++) {
 		const RefinableObj &obj = gRefinableObjRegistry.GetObj(i);
