@@ -32,7 +32,7 @@
 //#define program_version "0.39-(Fox-r1221)-testing-WCfaults+ExternalLSQConstraints"
 //#define program_version "0.104-(Fox-r1221)-develop-EllipRodsGamma(testing)" // EllipRodsGamma
 //#define program_version "0.96-(Fox-r1221)-develop"
-#define program_version "0.146-(Fox-r1221)-develop-carbonWB(withoutScale)-instrGeomPB-splineBkg"
+#define program_version "0.147-(Fox-r1221)-develop-carbonWB(withoutScale)-instrGeomPB-splineBkg"
 
 #include "MStruct.h"
 

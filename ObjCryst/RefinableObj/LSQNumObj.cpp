@@ -45,7 +45,7 @@ using namespace std;
  *   B = V * Sigma2 * [0, R] * Q'
  *
  *   eR = [0, R] ;
- *   r = rank([A; B]) ; k = rank(B) ; l = r-k ;
+ *   r = rank([A; B]) ; k = r-l ; l = rank(B) ;
  */
 void GSVD(const Matrix &A, const Matrix &B,
 	  Matrix &Sigma1, Matrix &Sigma2,
@@ -563,6 +563,12 @@ void LSQNumObj::Refine (int nbCycle,bool useLevenbergMarquardt,
 	  for(int i=0; i<ind.size(); i++) cout<<" "<<ind[i];
 	  cout<<"\n";
 	  cout<<" --- Dscale ---"<<"\n"<<newmatDscale;
+	  cout<<"This can happen when there is a strong correlation. Check following sets of parameters:\n";
+	  for(int j=0; j<(newmatA.Ncols()-k-l); j++) {
+	    for(int i=0; i<newmatQ.Nrows(); i++)
+	      if (abs(newmatQ(i+1,j+1))>1.e-6) cout << "  " << mRefParList.GetParNotFixed(i).GetName();
+	    cout <<"\n";
+	  }
 	  cout<<flush;
 	  exit(0);
 	  //throw ObjCrystException("LSQNumObj::Refine():caught a newmat exception when performing GSVD !");

@@ -70,7 +70,7 @@ using std::vector;
  *   B = V * Sigma2 * [0, R] * Q'
  *
  *   eR = [0, R] ;
- *   r = rank([A; B]) ; k = rank(B) ; l = r-k ;
+ *   r = rank([A; B]) ; k = r-l ; l = rank(B) ;
  */
 void GSVD(const Matrix &A, const Matrix &B,
 	  Matrix &Sigma1, Matrix &Sigma2,
