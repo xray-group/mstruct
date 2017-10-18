@@ -1,2 +1,0 @@
-n_gaussian_raw.o: cctbx/eltbx/xray_scattering/n_gaussian_raw.cpp \
- include/cctbx/eltbx/xray_scattering/n_gaussian_raw.h
