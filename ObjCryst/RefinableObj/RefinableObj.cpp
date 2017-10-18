@@ -1835,7 +1835,6 @@ REAL RefinableObj::GetLogLikelihood()const
 const CrystVector_REAL& RefinableObj::GetLSQCalc(const unsigned int) const
 {
    throw ObjCrystException("Error: called RefinableObj::GetLSQCalc()");
-   cout < "called\n";
    CrystVector_REAL *noWarning=new CrystVector_REAL;
    return *noWarning;
 }
