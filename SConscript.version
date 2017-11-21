@@ -1,0 +1,64 @@
+import os
+import string
+
+Import('env')
+
+
+def get_version_or_die():
+    from libobjcrystbuildutils import getversion
+    try:
+        rv = getversion()
+    except RuntimeError as e:
+        print(e)
+        Exit(1)
+    return rv
+
+
+def build_VersionCode(target, source, env):
+    tplcode = source[0].get_text_contents()
+    numversion = gver['major']
+    numversion = 1000 * numversion + gver['minor']
+    numversion = 1000 * numversion + gver['micro']
+    numversion = 1000 * numversion + gver['patchnumber']
+    # verify that formulas in version.tpl work as advertised
+    emsg = "Inconsistent value of LIBOBJCRYST_VERSION = %i" % numversion
+    assert numversion // 1000000000 == gver['major'], emsg
+    assert numversion // 1000000 % 1000 == gver['minor'], emsg
+    assert numversion // 1000 % 1000 == gver['micro'], emsg
+    assert numversion % 500 == gver['patchnumber'], emsg
+    libversion = str(numversion) + "LL"
+    if gver['prerelease']:
+        libversion = "(-500 + %s)" % libversion
+    flds = {
+        'LIBOBJCRYST_VERSION' : libversion,
+        'LIBOBJCRYST_VERSION_MAJOR' : gver['major'],
+        'LIBOBJCRYST_VERSION_MINOR' : gver['minor'],
+        'LIBOBJCRYST_VERSION_MICRO' : gver['micro'],
+        'LIBOBJCRYST_VERSION_PATCH' : gver['patchnumber'],
+        'LIBOBJCRYST_VERSION_STR' : gver['version'],
+        'LIBOBJCRYST_VERSION_DATE' : gver['date'],
+        'LIBOBJCRYST_GIT_SHA' : gver['commit'],
+    }
+    versiontemplate = string.Template(tplcode)
+    versioncode = versiontemplate.safe_substitute(flds)
+    with open(target[0].path, 'w') as fp:
+        fp.write(versioncode)
+    return None
+
+env.Append(BUILDERS={'BuildVersionCode' :
+        Builder(action=build_VersionCode, suffix='.h', src_suffix='.tpl')})
+
+# Targets --------------------------------------------------------------------
+
+vhpp = File('ObjCryst/version.h')
+
+# If version.h does not exists, build it from git metadata
+if not os.path.isfile(str(vhpp.srcnode())):
+    vtpl = File('ObjCryst/version.tpl')
+    gver = get_version_or_die()
+    vhpp, = env.BuildVersionCode(['ObjCryst/version.h'], vtpl)
+    env.Depends(vhpp, env.Value(gver['version'] + gver['commit']))
+
+env['lib_includes'] += [vhpp]
+
+# vim: ft=python

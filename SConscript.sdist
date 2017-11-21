@@ -1,0 +1,70 @@
+import os
+from libobjcrystbuildutils import gitinfo
+
+Import('env')
+
+
+def add_version_and_compress(target, source, env):
+    import tarfile
+    import gzip
+    tfin = tarfile.open(target[0].path)
+    fpout = gzip.GzipFile(target[0].path + '.gz', 'w', mtime=0)
+    tfout = tarfile.open(fileobj=fpout, mode='w')
+    # copy archive members up to the ObjCryst/version.cpp member.
+    tiiter = (t for t in tfin if not t.name.endswith('/version.tpl'))
+    for ti in tiiter:
+        tfout.addfile(ti, tfin.extractfile(ti))
+        if ti.name.endswith('src/ObjCryst/version.cpp'):
+            break
+    assert ti.name.endswith('version.cpp'), \
+        "src/ObjCryst/version.cpp not found in tar archive."
+    # add the generated version.h file to the archive.
+    vp = source[0].path
+    ti.name = ti.name[:-4] + '.h'
+    ti.size = os.path.getsize(vp)
+    tfout.addfile(ti, open(vp, 'rb'))
+    # finally copy the remaining members in the input tar file.
+    for ti in tiiter:
+        tfout.addfile(ti, tfin.extractfile(ti))
+    tfout.close()
+    fpout.close()
+    tfin.close()
+    return
+
+
+def die_without_git(target, source, env):
+    print('sdist  must be built from a git repository.')
+    Exit(1)
+    return
+
+
+def generate_sdist_actions(target, source, env, for_signature):
+    env.SetDefault(SDIST_ATTRIBUTES='site_scons/.gitattributes')
+    ginfo = gitinfo()
+    if not ginfo:
+        return [die_without_git]
+    actions = []
+    actions.append('echo "gitarchive.cfg -export-subst" > $SDIST_ATTRIBUTES')
+    prefix = 'libobjcryst-%(version)s/' % ginfo
+    gitcmd = ('git -c tar.umask=0022 archive '
+              '--worktree-attributes '
+              '--prefix=%s --output=$TARGET HEAD') % prefix
+    actions.append(gitcmd)
+    actions.append(Delete('$SDIST_ATTRIBUTES'))
+    actions.append(add_version_and_compress)
+    actions.append(Delete('$TARGET'))
+    dst = '${TARGET.base}-%(version)s${TARGET.suffix}.gz' % ginfo
+    actions.append(Move(dst, '${TARGET}.gz'))
+    return actions
+
+
+env.Append(BUILDERS={'BuildSourceDistribution' :
+    Builder(generator=generate_sdist_actions, suffix='.tar')})
+
+# build node for version.hpp
+vh = [f for f in env['lib_includes'] if str(f).endswith('ObjCryst/version.h')]
+
+sdist = Alias('sdist', env.BuildSourceDistribution('#/libobjcryst', vh))
+AlwaysBuild(sdist)
+
+# vim: ft=python
