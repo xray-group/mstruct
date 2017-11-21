@@ -136,7 +136,7 @@ int mstruct_test7(int argc, char* argv[], std::istream &is)
 int main(int argc, char* argv[])
 {
   mstruct_test7(argc, argv, cin);
-  std::cout << "Using of ObjCryst shared library works!\n";
+  std::cout << "Using of ObjCryst/MStruct shared library works!\n";
   return 0;
 }
 
