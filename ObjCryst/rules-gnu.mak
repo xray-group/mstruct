@@ -223,11 +223,15 @@ endif
 else
 libwx:
 endif
-     
+
+#cctbx-src-dir
+$(BUILD_DIR)/cctbx:
+	bunzip2 -c -k $(BUILD_DIR)/cctbx.tar.bz2 | tar -C $(BUILD_DIR) -xzv
+
 #cctbx
-$(DIR_STATIC_LIBS)/lib/libcctbx.a:
+$(DIR_STATIC_LIBS)/lib/libcctbx.a: $(BUILD_DIR)/cctbx
 	mkdir -p $(DIR_STATIC_LIBS)/lib/ $(DIR_STATIC_LIBS)/include/
-	#cd $(BUILD_DIR) && tar -xjf cctbx.tar.bz2
+	#cd $(BUILD_DIR) && tar -xjf cctbx.tar.bz2		
 	$(MAKE) -f gnu.mak -C $(BUILD_DIR)/cctbx install
 	#ln -sf $(BUILD_DIR)/boost $(DIR_STATIC_LIBS)/include/
 	#rm -Rf $(BUILD_DIR)/cctbx
