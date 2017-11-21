@@ -5,6 +5,8 @@ Import('env')
 
 
 def get_version_or_die():
+    rv = {'patchnumber': 28, 'major': 2017, 'micro': 1, 'version': '2017.1.1.post28', 'prerelease': None, 'date': '2017-10-26 16:55:47 -0400', 'commit': '60bae12a9055bb3b847657a9d89317465f6a5fe5', 'minor': 1}
+    return rv
     from libobjcrystbuildutils import getversion
     try:
         rv = getversion()

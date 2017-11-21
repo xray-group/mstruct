@@ -71,6 +71,13 @@ vars.Add(BoolVariable(
 vars.Update(env)
 env.Help(MY_SCONS_HELP % vars.GenerateHelpText(env))
 
+env.Append( CPPPATH=['ObjCryst'] )
+env.Append( CXXFLAGS=['-D__ZDENEK__'] )
+
+# Unpack cctbx sources if needed
+if not os.path.isdir("./../cctbx"):
+    os.system("bunzip2 -c -k ./../cctbx.tar.bz2 | tar -C ./.. -xzv")
+
 builddir = env.Dir('build/%s-%s' % (env['build'], platform.machine()))
 
 Export('env')
@@ -78,6 +85,6 @@ Export('env')
 if os.path.isfile('sconscript.local'):
     env.SConscript('sconscript.local')
 
-SConscript("src/SConscript", variant_dir=builddir)
+SConscript("../SConscript", variant_dir=builddir)
 
 # vim: ft=python
