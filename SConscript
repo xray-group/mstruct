@@ -56,12 +56,14 @@ if env['profile']:
 env['newmatobjs'] = []
 env['cctbxobjs'] = []
 env['objcrystobjs'] = []
+env['mstructobjs'] = []
 env['lib_includes'] = []
+env['libmstruct_includes'] = []
 
 # Subsidiary SConscripts -----------------------------------------------------
 
 # These will create the built objects and header file lists.
-SConscript(["SConscript.cctbx", "SConscript.newmat", "SConscript.objcryst"])
+SConscript(["SConscript.cctbx", "SConscript.newmat", "SConscript.objcryst", "SConscript.mstruct"])
 
 # Define sdist target for creating source distribution bundle
 # Do so only if required to avoid extra git executions.
@@ -75,6 +77,7 @@ if 'sdist' in COMMAND_LINE_TARGETS:
 newmatobjs = env["newmatobjs"]
 cctbxobjs = env["cctbxobjs"]
 objcrystobjs = env["objcrystobjs"]
+mstructobjs = env["mstructobjs"]
 
 # This builds the shared library
 libobjcryst = env.SharedLibrary("libObjCryst",
@@ -82,6 +85,10 @@ libobjcryst = env.SharedLibrary("libObjCryst",
 lib = Alias('lib', [libobjcryst, env['lib_includes']])
 Default(lib)
 
+# This builds the shared MStruct library
+libmstruct = env.SharedLibrary("libMStruct", mstructobjs)
+libms = Alias('libmstruct', [libmstruct, env['libmstruct_includes']])
+	
 # Installation targets.
 
 prefix = env['prefix']

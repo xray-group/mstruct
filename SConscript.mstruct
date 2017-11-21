@@ -1,0 +1,36 @@
+Import('env')
+
+# Define the what we need to install objcryst
+mstructenv = env.Clone()
+
+# Source directories
+mstructenv.PrependUnique(CPPPATH = ["./MStruct"])
+
+# Idenfity the required source files
+#srcfiles  = Glob("./MStruct/*.cpp")
+srcfiles  = [File("./MStruct/MStruct.cpp")]
+#srcfiles += [File("./MStruct/mstruct_test1.cpp")]
+
+
+# Determine library version from the git data.
+#SConscript("./../SConscript.version")
+#srcfiles += [File("ObjCryst/version.cpp")]
+
+# Make shared objects
+objects = mstructenv.SharedObject(srcfiles)
+# Put VFNDebug.os first to define debug level constants
+objects.sort(key=lambda o: not o.name.startswith('VFNDebug'))
+Clean(objects, "ObjCryst")
+
+# Put this back into the global environment
+env["mstructobjs"] = objects
+
+# Record headers
+#env['libmstruct_includes'] += Glob("./MStruct/*.h")
+env['libmstruct_includes'] += [File("./MStruct/MStruct.h")]
+# these headers are not included from any other headers
+#excluded_quirks = set(['Chronometer.h', 'VFNStreamFormat.h', 'sse_mathfun.h'])
+#env['libmstruct_includes'] += [f for f in Glob("./ObjCryst/Quirks/*.h")
+#        if not f.name in excluded_quirks]
+
+# vim: ft=python
