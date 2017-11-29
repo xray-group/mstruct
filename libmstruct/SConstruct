@@ -75,7 +75,7 @@ env.Help(MY_SCONS_HELP % vars.GenerateHelpText(env))
 if not os.path.isdir("./../cctbx"):
     os.system("bunzip2 -c -k ./../cctbx.tar.bz2 | tar -C ./.. -xzv")
 
-env.Append( CPPPATH=['.','ObjCryst','MStruct','cctbx/include'] )
+env.Append( CPPPATH=['.','ObjCryst','MStruct','cctbx/include','/usr/include/python2.7'] )
 env.Append( CXXFLAGS=['-D__ZDENEK__'] )
 
 builddir = env.Dir('build/%s-%s' % (env['build'], platform.machine()))

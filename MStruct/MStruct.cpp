@@ -48,6 +48,7 @@
 
 #include <boost/math/special_functions/gamma.hpp>
 #include <boost/algorithm/string.hpp>
+#include <boost/python.hpp>
 
 #define _USE_MATH_DEFINES
 
@@ -16216,3 +16217,16 @@ i=1,...,n, then the returned value y=P(x). */
 
 } // namespace NR
 /* ------------------------------------------------------------------------------------------------ */
+
+char const* greet()
+{
+   return "hello, world";
+}
+
+BOOST_PYTHON_MODULE(libMStruct)
+{
+
+  using namespace boost::python;
+  def("greet", greet);
+
+}

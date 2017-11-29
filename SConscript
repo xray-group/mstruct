@@ -86,7 +86,9 @@ lib = Alias('lib', [libobjcryst, env['lib_includes']])
 Default(lib)
 
 # This builds the shared MStruct library
-libmstruct = env.SharedLibrary("libMStruct", mstructobjs)
+MStructlibs = ['boost_python', 'python2.7']
+MStructlibpaths = ['/usr/lib']
+libmstruct = env.SharedLibrary("libMStruct", mstructobjs, LIBS=MStructlibs, LIBPATH=MStructlibpaths)
 libms = Alias('libmstruct', [libmstruct, env['libmstruct_includes']])
 	
 # Installation targets.
