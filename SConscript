@@ -1,4 +1,5 @@
 import os
+import platform
 
 Import('env')
 
@@ -52,6 +53,9 @@ if env['profile']:
     env.AppendUnique(CCFLAGS='-pg')
     env.AppendUnique(LINKFLAGS='-pg')
 
+env.AppendUnique(LINKFLAGS='-lm')
+env.AppendUnique(LINKFLAGS='-llapack')
+
 # Lists for storing built objects and header files
 env['newmatobjs'] = []
 env['cctbxobjs'] = []
@@ -86,8 +90,8 @@ lib = Alias('lib', [libobjcryst, env['lib_includes']])
 Default(lib)
 
 # This builds the shared MStruct library
-MStructlibs = ['boost_python', 'python2.7']
-MStructlibpaths = ['/usr/lib']
+MStructlibs = ['fftw3', 'gsl', 'ObjCryst', 'boost_python', 'python2.7']
+MStructlibpaths = ['/usr/lib', env.Dir('../../../libobjcryst/build/%s-%s' % (env['build'], platform.machine()))]
 libmstruct = env.SharedLibrary("libMStruct", mstructobjs, LIBS=MStructlibs, LIBPATH=MStructlibpaths)
 libms = Alias('libmstruct', [libmstruct, env['libmstruct_includes']])
 	
