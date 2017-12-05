@@ -53,6 +53,10 @@ if env['profile']:
     env.AppendUnique(CCFLAGS='-pg')
     env.AppendUnique(LINKFLAGS='-pg')
 
+# REAL=double needed for pyobjcryst
+env.AppendUnique(CCFLAGS='-DREAL=double')
+
+# Additional library dependencies for ObjCryst
 env.AppendUnique(LINKFLAGS='-lm')
 env.AppendUnique(LINKFLAGS='-llapack')
 

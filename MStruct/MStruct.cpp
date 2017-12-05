@@ -2502,7 +2502,7 @@ const CrystMatrix_REAL & TurbostraticHexStructWB::i00lCalculator::CalcIq(const u
     float rmax = sqrt( La*La + rmin*rmin );
     struct WBIntegParams params = { rmin, La };
 
-    float *sinint = (float*)( (not_float) ? sinintbuf : (miq.data()+(q-1)*nQ) );
+    float *sinint = (not_float) ? sinintbuf : reinterpret_cast<float*>(miq.data()+(q-1)*nQ); // reinterpret_cast has never any effect
 
     NR::vdftint( &WBIntegFn, (void*)&params, rmin, rmax, Q, nQ, cosint, sinint, true, mabSteps*mDFToversampl, mabSteps);
     // note: there is not "true" only in case when solely Q (Qmax) was changed
