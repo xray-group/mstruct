@@ -20,23 +20,24 @@
 #include <typeinfo>
 #include <iomanip>
 #include <fstream>
-
+#include <cstring>
 #include <stdio.h> //for sprintf()
 
 
 #include "cctbx/eltbx/xray_scattering.h"
 #include "cctbx/eltbx/tiny_pse.h"
 #include "cctbx/eltbx/icsd_radii.h"
+#include "cctbx/eltbx/covalent_radii.h"
 #include "cctbx/eltbx/henke.h"
 #include "cctbx/eltbx/neutron.h"
 
-#include "ObjCryst/ScatteringPower.h"
-#include "Quirks/VFNStreamFormat.h"
-#include "Quirks/VFNDebug.h"
-#include "ObjCryst/Colours.h" 
+#include "ObjCryst/ObjCryst/ScatteringPower.h"
+#include "ObjCryst/Quirks/VFNStreamFormat.h"
+#include "ObjCryst/Quirks/VFNDebug.h"
+#include "ObjCryst/ObjCryst/Colours.h"
 
 #ifdef __WX__CRYST__
-   #include "wxCryst/wxScatteringPower.h"
+   #include "ObjCryst/wxCryst/wxScatteringPower.h"
 #endif
 
 namespace ObjCryst
@@ -50,15 +51,50 @@ const RefParType *gpRefParTypeScattPowTemperatureAniso=0;
 long NiftyStaticGlobalObjectsInitializer_ScatteringPower::mCount=0;
 //######################################################################
 //
+//      Bij to Betaij conversion
+//
+//######################################################################
+CrystMatrix_REAL Bij2Betaij(const CrystVector_REAL &Bij, const UnitCell &cell)
+{
+   // Willis & Pryor,p 101: (betaij) = 2*pi^2 * transpose(cell.Bmatrix) * (Bij) * cell.Bmatrix
+   // :TODO: this needs to be checked before being used
+   const REAL B11=Bij(0);
+   const REAL B22=Bij(1);
+   const REAL B33=Bij(2);
+   const REAL B12=Bij(3);
+   const REAL B13=Bij(4);
+   const REAL B23=Bij(5);
+   CrystMatrix_REAL B(3,3);
+   B(0,0)=B11;
+   B(0,1)=B12;
+   B(0,1)=B13;
+   B(1,0)=B12;
+   B(1,1)=B22;
+   B(1,1)=B23;
+   B(2,0)=B13;
+   B(2,1)=B23;
+   B(2,1)=B33;
+   CrystMatrix_REAL b(3,3);
+   b=cell.GetBMatrix().transpose().Mult(B.Mult(cell.GetBMatrix()));
+   b*=2*M_PI*M_PI;
+   return b;
+}
+
+//######################################################################
+//
 //      SCATTERING POWER
 //
 //######################################################################
 ObjRegistry<ScatteringPower> gScatteringPowerRegistry("Global ScatteringPower Registry");
 
 ScatteringPower::ScatteringPower():mDynPopCorrIndex(0),mBiso(1.0),mIsIsotropic(true),
-mMaximumLikelihoodNbGhost(0),mFormalCharge(0.0),mBeta(6)
+mMaximumLikelihoodNbGhost(0),mFormalCharge(0.0)
 {
    VFN_DEBUG_MESSAGE("ScatteringPower::ScatteringPower():"<<mName,5)
+   mBeta.resize(6);
+   mBeta = 0;
+   mB.resize(6);
+   mB = 0;
    gScatteringPowerRegistry.Register(*this);
    this->Init();
    mClockMaster.AddChild(mClock);
@@ -66,7 +102,7 @@ mMaximumLikelihoodNbGhost(0),mFormalCharge(0.0),mBeta(6)
 }
 ScatteringPower::ScatteringPower(const ScatteringPower& old):
 mDynPopCorrIndex(old.mDynPopCorrIndex),mBiso(old.mBiso),mIsIsotropic(old.mIsIsotropic),
-mBeta(old.mBeta),
+mBeta(old.mBeta),mB(old.mB),
 mFormalCharge(old.mFormalCharge)
 {
    VFN_DEBUG_MESSAGE("ScatteringPower::ScatteringPower(&old):"<<mName,5)
@@ -96,6 +132,22 @@ void ScatteringPower::operator=(const ScatteringPower& rhs)
    mBiso=rhs.mBiso;
    mIsIsotropic=rhs.mIsIsotropic;
    mBeta=rhs.mBeta;
+   mB=rhs.mB;
+}
+
+bool ScatteringPower::operator==(const ScatteringPower& rhs) const
+{
+   if(mBiso!=rhs.GetBiso()) return false;
+   for(unsigned int i=0;i<6;i++)
+      if(this->GetBij(i) != rhs.GetBij(i)) return false;
+   if(this->GetClassName() != rhs.GetClassName()) return false;
+   if(this->GetSymbol() != rhs.GetSymbol()) return false;
+   return true;
+}
+
+bool ScatteringPower::operator!=(const ScatteringPower& rhs) const
+{
+   return !(*this == rhs);
 }
 
 bool ScatteringPower::IsScatteringFactorAnisotropic()const{return false;}
@@ -121,11 +173,10 @@ REAL ScatteringPower::GetBij(const size_t &i, const size_t &j) const
 }
 REAL ScatteringPower::GetBij(const size_t &idx) const
 {
-    return mBeta(idx);
+    return mB(idx);
 }
 void ScatteringPower::SetBij(const size_t &i, const size_t &j, const REAL newB)
 {
-    mClock.Click();
     size_t idx = 0;
     if(i == j)
     {
@@ -139,8 +190,9 @@ void ScatteringPower::SetBij(const size_t &i, const size_t &j, const REAL newB)
 }
 void ScatteringPower::SetBij(const size_t &idx, const REAL newB)
 {
+    mClock.Click();
     mIsIsotropic=false;
-    mBeta(idx) = newB;
+    mB(idx) = newB;
 }
 bool ScatteringPower::IsIsotropic() const {return mIsIsotropic;}
 long ScatteringPower::GetDynPopCorrIndex() const {return mDynPopCorrIndex;}
@@ -176,13 +228,13 @@ void ScatteringPower::GetGeneGroup(const RefinableObj &obj,
          }
 }
 
-REAL ScatteringPower::GetMaximumLikelihoodPositionError()const 
+REAL ScatteringPower::GetMaximumLikelihoodPositionError()const
 {return mMaximumLikelihoodPositionError;}
 
 const RefinableObjClock& ScatteringPower::GetMaximumLikelihoodParClock()const
 {return mMaximumLikelihoodParClock;}
 
-void ScatteringPower::SetMaximumLikelihoodPositionError(const REAL mle) 
+void ScatteringPower::SetMaximumLikelihoodPositionError(const REAL mle)
 {
    if(mle!=mMaximumLikelihoodPositionError)
    {
@@ -228,7 +280,7 @@ void ScatteringPower::InitRGBColour()
          break;
       }
       i++;
-      if(gPOVRayColours[i].mName=="")
+      if(strncmp(gPOVRayColours[i].mName,"",3)==0)
       {//could not find colour !
          cout << "Could not find colour:"<<mColourName<<" for ScatteringPower "<<mName<<endl;
          mColourRGB[0]=1;
@@ -245,7 +297,7 @@ void ScatteringPower::InitRGBColour()
 //      SCATTERING POWER ATOM
 //
 //######################################################################
-ObjRegistry<ScatteringPowerAtom> 
+ObjRegistry<ScatteringPowerAtom>
    gScatteringPowerAtomRegistry("Global ScatteringPowerAtom Registry");
 
 ScatteringPowerAtom::ScatteringPowerAtom():
@@ -289,6 +341,13 @@ const string& ScatteringPowerAtom::GetClassName() const
    return className;
 }
 
+// Disable the base-class function.
+void ScatteringPowerAtom::Init()
+{
+   // This should be never called.
+   abort();
+}
+
 void ScatteringPowerAtom::Init(const string &name,const string &symbol,const REAL bIso)
 {
    VFN_DEBUG_MESSAGE("ScatteringPowerAtom::Init(n,s,b)"<<mName,4)
@@ -310,130 +369,120 @@ void ScatteringPowerAtom::Init(const string &name,const string &symbol,const REA
 
       cctbx::eltbx::icsd_radii::table ticsd(mSymbol);
       mRadius= ticsd.radius();
+      cctbx::eltbx::covalent_radii::table tcov(mSymbol);
+      mCovalentRadius=tcov.radius();
    }
-   catch(cctbx::error)
+   catch(exception &err)
    {
       cout << "WARNING: could not interpret Symbol name !"<<mSymbol<<endl
            << "         Reverting to H !"<<endl;
       (*fpObjCrystInformUser)("Symbol not understood:"+mSymbol);
       this->Init(name,"H",bIso);
    }
-   
-   
+
+
    VFN_DEBUG_MESSAGE("ScatteringPowerAtom::Init():/Name="<<this->GetName() \
       <<" /Symbol="<<mSymbol<<" /Atomic Number=" << mAtomicNumber,4)
-   
+
    mDynPopCorrIndex=mAtomicNumber;
 
-   //Init default atom colours for POVRay
-   switch(mAtomicNumber)
-   {
-      case   1: mColourName="White";           break;   //hydrogen    
-      case   2: mColourName="White";           break;   //helium      
-      case   3: mColourName="White";           break;   //lithium     
-      case   4: mColourName="White";           break;   //beryllium   
-      case   5: mColourName="White";           break;   //boron       
-      case   6: mColourName="Gray50";          break;   //carbon      
-      case   7: mColourName="DarkGreen";           break;   //nitrogen    
-      case   8: mColourName="Red";             break;   //oxygen      
-      case   9: mColourName="White";           break;   //fluorine    
-      case  10: mColourName="White";           break;   //neon        
-      case  11: mColourName="White";           break;   //sodium      
-      case  12: mColourName="White";           break;   //magnesium   
-      case  13: mColourName="White";           break;   //aluminium   
-      case  14: mColourName="White";           break;   //silicon     
-      case  15: mColourName="White";           break;   //phosphorus  
-      case  16: mColourName="Yellow";          break;   //sulphur     
-      case  17: mColourName="SeaGreen";        break;   //chlorine    
-      case  18: mColourName="White";           break;   //argon       
-      case  19: mColourName="White";           break;   //potassium   
-      case  20: mColourName="White";           break;   //calcium     
-      case  21: mColourName="White";           break;   //scandium    
-      case  22: mColourName="White";           break;   //titanium    
-      case  23: mColourName="White";           break;   //vanadium    
-      case  24: mColourName="Gray20";          break;   //chromium    
-      case  25: mColourName="MediumWood";      break;   //manganese   
-      case  26: mColourName="Orange";          break;   //iron        
-      case  27: mColourName="Pink";            break;   //cobalt      
-      case  28: mColourName="Green";           break;   //nickel      
-      case  29: mColourName="Copper";          break;   //copper      
-      case  30: mColourName="Gray80";          break;   //zinc        
-      case  31: mColourName="White";           break;   //gallium     
-      case  32: mColourName="White";           break;   //germanium   
-      case  33: mColourName="White";           break;   //arsenic     
-      case  34: mColourName="Flesh";           break;   //selenium    
-      case  35: mColourName="White";           break;   //bromine     
-      case  36: mColourName="White";           break;   //krypton     
-      case  37: mColourName="White";           break;   //rubidium    
-      case  38: mColourName="White";           break;   //strontium   
-      case  39: mColourName="White";           break;   //yttrium     
-      case  40: mColourName="White";           break;   //zirconium   
-      case  41: mColourName="White";           break;   //niobium     
-      case  42: mColourName="White";           break;   //molybdenum  
-      case  43: mColourName="White";           break;   //technetium  
-      case  44: mColourName="White";           break;   //ruthenium   
-      case  45: mColourName="White";           break;   //rhodium     
-      case  46: mColourName="White";           break;   //palladium   
-      case  47: mColourName="Silver";          break;   //silver      
-      case  48: mColourName="White";           break;   //cadmium     
-      case  49: mColourName="White";           break;   //indium      
-      case  50: mColourName="White";           break;   //tin         
-      case  51: mColourName="White";           break;   //antimony    
-      case  52: mColourName="White";           break;   //tellurium   
-      case  53: mColourName="OrangeRed";       break;   //iodine      
-      case  54: mColourName="White";           break;   //xenon       
-      case  55: mColourName="White";           break;   //caesium     
-      case  56: mColourName="White";           break;   //barium      
-      case  57: mColourName="White";           break;   //lanthanum   
-      case  58: mColourName="White";           break;   //cerium      
-      case  59: mColourName="White";           break;   //praseodymium
-      case  60: mColourName="CornflowerBlue";  break;   //neodymium   
-      case  61: mColourName="White";           break;   //promethium  
-      case  62: mColourName="White";           break;   //samarium    
-      case  63: mColourName="White";           break;   //europium    
-      case  64: mColourName="White";           break;   //gadolinium  
-      case  65: mColourName="White";           break;   //terbium     
-      case  66: mColourName="White";           break;   //dysprosium  
-      case  67: mColourName="White";           break;   //holmium     
-      case  68: mColourName="SkyBlue";           break;   //erbium      
-      case  69: mColourName="White";           break;   //thulium     
-      case  70: mColourName="White";           break;   //ytterbium   
-      case  71: mColourName="White";           break;   //lutetium    
-      case  72: mColourName="White";           break;   //hafnium     
-      case  73: mColourName="Blue";            break;   //tantalum    
-      case  74: mColourName="White";           break;   //tungsten    
-      case  75: mColourName="White";           break;   //rhenium     
-      case  76: mColourName="White";           break;   //osmium      
-      case  77: mColourName="ForestGreen";     break;   //iridium     
-      case  78: mColourName="White";           break;   //platinum    
-      case  79: mColourName="Gold";            break;   //gold        
-      case  80: mColourName="VioletRed";       break;   //mercury     
-      case  81: mColourName="White";           break;   //thallium    
-      case  82: mColourName="White";           break;   //lead        
-      case  83: mColourName="White";           break;   //bismuth     
-      case  84: mColourName="White";           break;   //polonium    
-      case  85: mColourName="White";           break;   //astatine    
-      case  86: mColourName="White";           break;   //radon       
-      case  87: mColourName="White";           break;   //francium    
-      case  88: mColourName="White";           break;   //radium      
-      case  89: mColourName="White";           break;   //actinium    
-      case  90: mColourName="White";           break;   //thorium     
-      case  91: mColourName="White";           break;   //protactinium
-      case  92: mColourName="White";           break;   //uranium     
-      case  93: mColourName="White";           break;   //neptunium   
-      case  94: mColourName="White";           break;   //plutonium   
-      case  95: mColourName="White";           break;   //americium   
-      case  96: mColourName="White";           break;   //curium      
-      case  97: mColourName="White";           break;   //berkelium   
-      case  98: mColourName="White";           break;   //californium 
-      case  99: mColourName="White";           break;   //einsteinium 
-      case 100: mColourName="White";           break;   //fermium     
-      case 101: mColourName="White";           break;   //mendelevium 
-      case 102: mColourName="White";           break;   //nobelium    
-      case 103: mColourName="White";           break;   //lawrencium  
-      default : mColourName="White";           break;   
-   }
+   //Init default atom colours for POVRay/GUI
+   cctbx::eltbx::tiny_pse::table tpse(mSymbol);
+   mColourName= tpse.symbol();
    this->InitRGBColour();
+   switch(mAtomicNumber)
+   {// Values from OpenBabel element.txt
+      case 0: mMaxCovBonds=0;break;break;break;//Xx
+      case 1: mMaxCovBonds=1;break;break;break;//H
+      case 2: mMaxCovBonds=0;break;break;break;//He
+      case 3: mMaxCovBonds=1;break;break;break;//Li
+      case 4: mMaxCovBonds=2;break;//Be
+      case 5: mMaxCovBonds=4;break;//B
+      case 6: mMaxCovBonds=4;break;//C
+      case 7: mMaxCovBonds=4;break;//N
+      case 8: mMaxCovBonds=2;break;//O
+      case 9: mMaxCovBonds=1;break;//F
+      case 10: mMaxCovBonds=0;break;//Ne
+      case 11: mMaxCovBonds=1;break;//Na
+      case 12: mMaxCovBonds=2;break;//Mg
+      case 13: mMaxCovBonds=6;break;//Al
+      case 14: mMaxCovBonds=6;break;//Si
+      case 15: mMaxCovBonds=6;break;//P
+      case 16: mMaxCovBonds=6;break;//S
+      case 17: mMaxCovBonds=1;break;//Cl
+      case 18: mMaxCovBonds=0;break;//Ar
+      case 19: mMaxCovBonds=1;break;//K
+      case 20: mMaxCovBonds=2;break;//Ca
+      case 21: mMaxCovBonds=6;break;//Sc
+      case 22: mMaxCovBonds=6;break;//Ti
+      case 23: mMaxCovBonds=6;break;//V
+      case 24: mMaxCovBonds=6;break;//Cr
+      case 25: mMaxCovBonds=8;break;//Mn
+      case 26: mMaxCovBonds=6;break;//Fe
+      case 27: mMaxCovBonds=6;break;//Co
+      case 28: mMaxCovBonds=6;break;//Ni
+      case 29: mMaxCovBonds=6;break;//Cu
+      case 30: mMaxCovBonds=6;break;//Zn
+      case 31: mMaxCovBonds=3;break;//Ga
+      case 32: mMaxCovBonds=4;break;//Ge
+      case 33: mMaxCovBonds=3;break;//As
+      case 34: mMaxCovBonds=2;break;//Se
+      case 35: mMaxCovBonds=1;break;//Br
+      case 36: mMaxCovBonds=0;break;//Kr
+      case 37: mMaxCovBonds=1;break;//Rb
+      case 38: mMaxCovBonds=2;break;//Sr
+      case 39: mMaxCovBonds=6;break;//Y
+      case 40: mMaxCovBonds=6;break;//Zr
+      case 41: mMaxCovBonds=6;break;//Nb
+      case 42: mMaxCovBonds=6;break;//Mo
+      case 43: mMaxCovBonds=6;break;//Tc
+      case 44: mMaxCovBonds=6;break;//Ru
+      case 45: mMaxCovBonds=6;break;//Rh
+      case 46: mMaxCovBonds=6;break;//Pd
+      case 47: mMaxCovBonds=6;break;//Ag
+      case 48: mMaxCovBonds=6;break;//Cd
+      case 49: mMaxCovBonds=3;break;//In
+      case 50: mMaxCovBonds=4;break;//Sn
+      case 51: mMaxCovBonds=3;break;//Sb
+      case 52: mMaxCovBonds=2;break;//Te
+      case 53: mMaxCovBonds=1;break;//I
+      case 54: mMaxCovBonds=0;break;//Xe
+      case 55: mMaxCovBonds=1;break;//Cs
+      case 56: mMaxCovBonds=2;break;//Ba
+      case 57: mMaxCovBonds=12;break;//La
+      case 58: mMaxCovBonds=6;break;//Ce
+      case 59: mMaxCovBonds=6;break;//Pr
+      case 60: mMaxCovBonds=6;break;//Nd
+      case 61: mMaxCovBonds=6;break;//Pm
+      case 62: mMaxCovBonds=6;break;//Sm
+      case 63: mMaxCovBonds=6;break;//Eu
+      case 64: mMaxCovBonds=6;break;//Gd
+      case 65: mMaxCovBonds=6;break;//Tb
+      case 66: mMaxCovBonds=6;break;//Dy
+      case 67: mMaxCovBonds=6;break;//Ho
+      case 68: mMaxCovBonds=6;break;//Er
+      case 69: mMaxCovBonds=6;break;//Tm
+      case 70: mMaxCovBonds=6;break;//Yb
+      case 71: mMaxCovBonds=6;break;//Lu
+      case 72: mMaxCovBonds=6;break;//Hf
+      case 73: mMaxCovBonds=6;break;//Ta
+      case 74: mMaxCovBonds=6;break;//W
+      case 75: mMaxCovBonds=6;break;//Re
+      case 76: mMaxCovBonds=6;break;//Os
+      case 77: mMaxCovBonds=6;break;//Ir
+      case 78: mMaxCovBonds=6;break;//Pt
+      case 79: mMaxCovBonds=6;break;//Au
+      case 80: mMaxCovBonds=6;break;//Hg
+      case 81: mMaxCovBonds=3;break;//Tl
+      case 82: mMaxCovBonds=4;break;//Pb
+      case 83: mMaxCovBonds=3;break;//Bi
+      case 84: mMaxCovBonds=2;break;//Po
+      case 85: mMaxCovBonds=1;break;//At
+      case 86: mMaxCovBonds=0;break;//Rn
+      case 87: mMaxCovBonds=1;break;//Fr
+      case 88: mMaxCovBonds=2;break;//Ra
+      default: mMaxCovBonds=6;break;
+   }
 
    VFN_DEBUG_MESSAGE("ScatteringPowerAtom::Init(n,s,b):End",3)
 }
@@ -473,8 +522,10 @@ CrystVector_REAL ScatteringPowerAtom::GetScatteringFactor(const ScatteringData &
             const long nb=data.GetSinThetaOverLambda().numElements();
             const REAL *pstol=data.GetSinThetaOverLambda().data();
             for(long i=0;i<nb;i++)
+            {
                sf(i)=(z-mpGaussian->at_stol(*pstol))/(*pstol * *pstol);
                pstol++;
+            }
          }
          else sf=1.0;//:KLUDGE:  Should never happen
          break;
@@ -486,7 +537,7 @@ CrystVector_REAL ScatteringPowerAtom::GetScatteringFactor(const ScatteringData &
 
 REAL ScatteringPowerAtom::GetForwardScatteringFactor(const RadiationType type) const
 {
-   REAL sf;
+   REAL sf = 0;
    switch(type)
    {
       case(RAD_NEUTRON):
@@ -504,27 +555,36 @@ REAL ScatteringPowerAtom::GetForwardScatteringFactor(const RadiationType type) c
       case(RAD_ELECTRON):
       {
          const REAL z=this->GetAtomicNumber();
-         (z-mpGaussian->at_stol(0.0001))/(.0001 * .0001);
+         sf=(z-mpGaussian->at_stol(0.0001))/(.0001 * .0001);
       }
    }
    VFN_DEBUG_MESSAGE("ScatteringPower::GetScatteringFactor(&data):End",3)
    return sf;
 }
 
+static bool warnADP=true;
 CrystVector_REAL ScatteringPowerAtom::GetTemperatureFactor(const ScatteringData &data,
                                                              const int spgSymPosIndex) const
 {
    VFN_DEBUG_MESSAGE("ScatteringPower::GetTemperatureFactor(&data):"<<mName,3)
    CrystVector_REAL sf(data.GetNbRefl());
-   if(mIsIsotropic)
+   if((mIsIsotropic==false) && warnADP)
+   {  // Warn once
+      cout<<"========================== WARNING ========================="<<endl
+          <<"   In ScatteringPowerAtom::GetTemperatureFactor():"<<endl
+          <<"   Anisotropic Displacement Parameters are not currently properly handled"<<endl
+          <<"   for Debye-Waller calculations (no symmetry handling for ADPs)."<<endl
+          <<"   =>The Debye-Waller calculations will instead use only isotropic DPs"<<endl<<endl;
+      warnADP=false;
+   }
+
+   if(true)//(mIsIsotropic)
    {
-      // :NOTE: can't use 'return exp(-mBiso*pow2(diffData.GetSinThetaOverLambda()))'
-      //using kcc (OK with gcc)
       CrystVector_REAL stolsq(data.GetNbRefl());
       const CrystVector_REAL stol=data.GetSinThetaOverLambda();
       stolsq=stol;
       stolsq*=stol;
-      
+
       #ifdef __VFN_VECTOR_USE_BLITZ__
          #define SF sf
          #define STOLSQ stolsq
@@ -538,9 +598,9 @@ CrystVector_REAL ScatteringPowerAtom::GetTemperatureFactor(const ScatteringData 
          for(long ii=0;ii<sf.numElements();ii++)
          {
       #endif
-      
+
          SF=exp(-mBiso*STOLSQ);
-         
+
       #ifdef __VFN_VECTOR_USE_BLITZ__
 
       #else
@@ -553,14 +613,13 @@ CrystVector_REAL ScatteringPowerAtom::GetTemperatureFactor(const ScatteringData 
       #undef STOLSQ
    }
    else
-   {
+   {// :TODO: handle ADP - requires taking into account symmetries...
       const REAL b11=mBeta(0);
       const REAL b22=mBeta(1);
       const REAL b33=mBeta(2);
       const REAL b12=mBeta(3);
       const REAL b13=mBeta(4);
       const REAL b23=mBeta(5);
-      
       #ifdef __VFN_VECTOR_USE_BLITZ__
          #define HH data.H()
          #define KK data.K()
@@ -580,14 +639,14 @@ CrystVector_REAL ScatteringPowerAtom::GetTemperatureFactor(const ScatteringData 
          for(long ii=0;ii<sf.numElements();ii++)
          {
       #endif
-   
+
       SF=   exp( -b11*pow(HH,2)
                  -b22*pow(KK,2)
                  -b33*pow(LL,2)
                  -2*b12*HH*KK
                  -2*b13*HH*LL
                  -2*b23*KK*LL);
-                 
+
       #ifdef __VFN_VECTOR_USE_BLITZ__
 
       #else
@@ -723,6 +782,8 @@ string ScatteringPowerAtom::GetElementName() const
 
 int ScatteringPowerAtom::GetAtomicNumber() const {return mAtomicNumber;}
 REAL ScatteringPowerAtom::GetRadius() const {return mRadius;}
+REAL ScatteringPowerAtom::GetCovalentRadius() const {return mCovalentRadius;}
+unsigned int ScatteringPowerAtom::GetMaxCovBonds()const{ return mMaxCovBonds;}
 
 void ScatteringPowerAtom::Print()const
 {
@@ -748,7 +809,7 @@ void ScatteringPowerAtom::InitAtNeutronScattCoeffs()
    {
       cout << "WARNING: could not interpret symbol for neutron coeefs:"<<mSymbol<<endl;
    }
-   
+
    VFN_DEBUG_MESSAGE("ScatteringPowerAtom::InitAtNeutronScattCoeffs():End",3)
 }
 
@@ -763,6 +824,57 @@ void ScatteringPowerAtom::InitRefParList()
       tmp.SetGlobalOptimStep(.5);
       tmp.AssignClock(mClock);
       this->AddPar(tmp);
+   }
+   {
+      REAL* bdata = (REAL*) mB.data();
+
+      RefinablePar B11("B11",&bdata[0],0.1,5.,
+              gpRefParTypeScattPowTemperatureAniso,REFPAR_DERIV_STEP_ABSOLUTE,
+              true,true,false,false);
+      B11.SetDerivStep(1e-3);
+      B11.SetGlobalOptimStep(.5);
+      B11.AssignClock(mClock);
+      this->AddPar(B11);
+
+      RefinablePar B22("B22",&bdata[1],0.1,5.,
+              gpRefParTypeScattPowTemperatureAniso,REFPAR_DERIV_STEP_ABSOLUTE,
+              true,true,false,false);
+      B22.SetDerivStep(1e-3);
+      B22.SetGlobalOptimStep(.5);
+      B22.AssignClock(mClock);
+      this->AddPar(B22);
+
+      RefinablePar B33("B33",&bdata[2],0.1,5.,
+              gpRefParTypeScattPowTemperatureAniso,REFPAR_DERIV_STEP_ABSOLUTE,
+              true,true,false,false);
+      B33.SetDerivStep(1e-3);
+      B33.SetGlobalOptimStep(.5);
+      B33.AssignClock(mClock);
+      this->AddPar(B33);
+
+      RefinablePar B12("B12",&bdata[3],-5,5.,
+              gpRefParTypeScattPowTemperatureAniso,REFPAR_DERIV_STEP_ABSOLUTE,
+              true,true,false,false);
+      B12.SetDerivStep(1e-3);
+      B12.SetGlobalOptimStep(.5);
+      B12.AssignClock(mClock);
+      this->AddPar(B12);
+
+      RefinablePar B13("B13",&bdata[4],-5,5.,
+              gpRefParTypeScattPowTemperatureAniso,REFPAR_DERIV_STEP_ABSOLUTE,
+              true,true,false,false);
+      B13.SetDerivStep(1e-3);
+      B13.SetGlobalOptimStep(.5);
+      B13.AssignClock(mClock);
+      this->AddPar(B13);
+
+      RefinablePar B23("B23",&bdata[5],-5,5.,
+              gpRefParTypeScattPowTemperatureAniso,REFPAR_DERIV_STEP_ABSOLUTE,
+              true,true,false,false);
+      B23.SetDerivStep(1e-3);
+      B23.SetGlobalOptimStep(.5);
+      B23.AssignClock(mClock);
+      this->AddPar(B23);
    }
    {
       RefinablePar tmp("ML Error",&mMaximumLikelihoodPositionError,0.,1.,
@@ -896,7 +1008,7 @@ bool ScatteringComponentList::operator==(const ScatteringComponentList &rhs)cons
 
 void ScatteringComponentList::operator+=(const ScatteringComponentList &rhs)
 {
-   for(long i=0;i<rhs.GetNbComponent();i++) 
+   for(long i=0;i<rhs.GetNbComponent();i++)
       mvScattComp.push_back(rhs(i));
 }
 void ScatteringComponentList::operator+=(const ScatteringComponent &rhs)

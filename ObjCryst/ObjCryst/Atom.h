@@ -23,12 +23,12 @@
 #ifndef _OBJCRYST_ATOM_H_
 #define _OBJCRYST_ATOM_H_
 
-#include "CrystVector/CrystVector.h"
+#include "ObjCryst/CrystVector/CrystVector.h"
 
-#include "ObjCryst/General.h"
+#include "ObjCryst/ObjCryst/General.h"
 
-#include "ObjCryst/ScatteringPower.h"
-#include "ObjCryst/Scatterer.h"
+#include "ObjCryst/ObjCryst/ScatteringPower.h"
+#include "ObjCryst/ObjCryst/Scatterer.h"
 
 //#include <stdlib.h>
 #include <string>
@@ -100,7 +100,7 @@ class Atom: public Scatterer
       void Init(const REAL x, const REAL y, const REAL z,
             const string &name, const ScatteringPower *pow,
             const REAL popu=1);
-      
+
       virtual int GetNbComponent() const;
       virtual const ScatteringComponentList& GetScatteringComponentList() const;
       virtual string GetComponentName(const int i) const;
@@ -126,12 +126,18 @@ class Atom: public Scatterer
       */
       virtual ostream& POVRayDescription(ostream &os,
                                          const CrystalPOVRayOptions &options)const;
-      virtual void GLInitDisplayList(const bool onlyIndependentAtoms=false,
+
+#ifdef OBJCRYST_GL
+      virtual void GLInitDisplayList(const bool noSymmetrics=false,
                                      const REAL xMin=-.1,const REAL xMax=1.1,
                                      const REAL yMin=-.1,const REAL yMax=1.1,
                                      const REAL zMin=-.1,const REAL zMax=1.1,
                                      const bool displayEnantiomer=false,
-                                     const bool displayNames=false)const;
+                                     const bool displayNames=false,
+                                     const bool hideHydrogens=false,
+                                     const REAL fadeDistance=0,
+                                     const bool fullMoleculeInLimits=false)const;
+#endif    // OBJCRYST_GL
 
       /// Is this a dummy atom ? (ie no ScatteringPower)
       /// Dummy atoms should not exist !
@@ -142,14 +148,16 @@ class Atom: public Scatterer
       //virtual void XMLInputOld(istream &is,const IOCrystTag &tag);
       /// Get the ScatteringPowerAtom corresponding to this atom.
       const ScatteringPower& GetScatteringPower()const;
-      virtual void GetGeneGroup(const RefinableObj &obj, 
+      /// Change the ScatteringPower for this atom
+      void SetScatteringPower(const ScatteringPower &pow);
+      virtual void GetGeneGroup(const RefinableObj &obj,
                                 CrystVector_uint & groupIndex,
                                 unsigned int &firstGroup) const;
    protected:
    private:
       /// Prepare refinable parameters for the scatterer object
       virtual void InitRefParList();
-   
+
       /// The list of scattering components.
       mutable ScatteringComponentList mScattCompList;
       /// The ScatteringPowerAtom associated to that atom
@@ -164,6 +172,6 @@ class Atom: public Scatterer
 }//namespace Objcryst
 
 // do we need this ?
-#include "ObjCryst/Crystal.h"
+#include "ObjCryst/ObjCryst/Crystal.h"
 
 #endif //_OBJCRYST_ATOM_H_

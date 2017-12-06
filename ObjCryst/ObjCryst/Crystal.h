@@ -22,13 +22,13 @@
 #ifndef _OBJCRYST_CRYSTAL_H_
 #define _OBJCRYST_CRYSTAL_H_
 
-#include "CrystVector/CrystVector.h"
+#include "ObjCryst/CrystVector/CrystVector.h"
 
-#include "ObjCryst/General.h"
-#include "RefinableObj/RefinableObj.h"
-#include "ObjCryst/UnitCell.h"
-#include "ObjCryst/ScatteringPower.h"
-#include "ObjCryst/Scatterer.h"
+#include "ObjCryst/ObjCryst/General.h"
+#include "ObjCryst/RefinableObj/RefinableObj.h"
+#include "ObjCryst/ObjCryst/UnitCell.h"
+#include "ObjCryst/ObjCryst/ScatteringPower.h"
+#include "ObjCryst/ObjCryst/Scatterer.h"
 
 //#include <stdlib.h>
 #include <string>
@@ -73,7 +73,7 @@ static NiftyStaticGlobalObjectsInitializer_Crystal NiftyStaticGlobalObjectsIniti
 * is a list of the ScttaringPower used by all the scatterers of this crystal.
 *
 * The crystal is capable of giving a list of all scattering components
-* (ie the list of all unique scattering 'points' (ScatteringComponent, ie atoms) 
+* (ie the list of all unique scattering 'points' (ScatteringComponent, ie atoms)
 * in the unit cell, each associated to a ScatteringPower).
 *
 * When those scattering components are on a special position or overlapping with
@@ -112,7 +112,7 @@ class Crystal:public UnitCell
       */
       Crystal(const REAL a, const REAL b, const REAL c, const REAL alpha,
               const REAL beta, const REAL gamma,const string &SpaceGroupId);
-              
+
       /// Crystal copy constructor
       Crystal(const Crystal &oldCryst);
       /// Crystal destructor
@@ -133,7 +133,7 @@ class Crystal:public UnitCell
       void AddScatterer(Scatterer *scatt);
       /// Remove a Scatterer. This also deletes the scatterer unless del=false.
       void RemoveScatterer(Scatterer *scatt, const bool del=true);
-      
+
       /// Number of scatterers in the crystal
       long GetNbScatterer()const;
       /** \brief Provides an access to the scatterers
@@ -156,7 +156,7 @@ class Crystal:public UnitCell
       * \param scattIndex the number of the scatterer to access
       */
       const Scatterer & GetScatt(const long scattIndex) const;
-      
+
       /// Get the registry of scatterers
       ObjRegistry<Scatterer>& GetScattererRegistry();
       /// Get the registry of scatterers
@@ -178,7 +178,7 @@ class Crystal:public UnitCell
       const ScatteringPower& GetScatteringPower(const string &name)const;
       /// Get the clock which reports all changes in ScatteringPowers
       const RefinableObjClock& GetMasterClockScatteringPower()const;
-      
+
       /** \brief Get the list of all scattering components
       */
       virtual const ScatteringComponentList& GetScatteringComponentList()const;
@@ -189,19 +189,19 @@ class Crystal:public UnitCell
       /// \todo one function to print on one line and a PrintLong() function
       /// \param os the stream to which the information is outputed (default=cout)
       void Print(ostream &os=cout) const;
-            
+
       /** \brief Minimum interatomic distance between all scattering components (atoms) in
       * the crystal.
       *
-      * This will return a symmetrical matrix with NbComp rows and cols, where 
-      * NbComp is the number of independent scattering components in the unit cell. 
+      * This will return a symmetrical matrix with NbComp rows and cols, where
+      * NbComp is the number of independent scattering components in the unit cell.
       * All distances are given in Angstroems.
       *
       * Note that the distance of a given atom with 'itself' is not generally equal
-      * to 0 (except full special position), but equal to the min distance with its 
+      * to 0 (except full special position), but equal to the min distance with its
       * symmetrics.
-      * 
-      * \param minDistance : atoms who are less distant than (minDistance,in Angstroems) 
+      *
+      * \param minDistance : atoms who are less distant than (minDistance,in Angstroems)
       * are considered equivalent. So the smallest distance between any atoms will
       * be at least minDistance.
       */
@@ -223,7 +223,8 @@ class Crystal:public UnitCell
       * \param os the stream to which the information is outputed (default=cout)
       */
       ostream& POVRayDescription(ostream &os,const CrystalPOVRayOptions &options)const;
-      
+
+#ifdef OBJCRYST_GL
       /** Create an OpenGL DisplayList of the crystal.
       * \param onlyIndependentAtoms if false (the default), then all symmetrics
       * are displayed within the given limits
@@ -233,13 +234,20 @@ class Crystal:public UnitCell
       * \param displayNames: if true, only the names of the scatterers will be displayed,
       * at the position of the scatterers (to actually see them, they will have to
       * be translated with respect to the drawing of the scatterers).
+      * \param hideHydrogens: if true, do not display hydrogens/deuterium and their bonds
+      * \param fadeDistance: atoms which are beyond the display limits are still showm, but
+      * with transparency which is progressively fading up to a certain distance.
       */
       virtual void GLInitDisplayList(const bool onlyIndependentAtoms=false,
                                      const REAL xMin=-.1,const REAL xMax=1.1,
                                      const REAL yMin=-.1,const REAL yMax=1.1,
                                      const REAL zMin=-.1,const REAL zMax=1.1,
-                                     const bool displayNames=false)const;
-      
+                                     const bool displayNames=false,
+                                     const bool hideHydrogens=false,
+                                     const REAL fadeDistance=0,
+                                     const bool fullMoleculeInLimits=false)const;
+#endif  // OBJCRYST_GL
+
       /** \internal \brief Compute the 'Dynamical population correction for all atoms.
       * Atoms which are considered "equivalent" (ie currently with the same Z number)
       * and which are overlapping see their Dynamical occupancy changed so that when they
@@ -252,7 +260,7 @@ class Crystal:public UnitCell
       * 1 to 1/nbAtomOverlapping, progressively as the distance falls from \e overlapDist
       * to \e mergeDist.
       *\param mergeDist : distance below which atoms are considered fully overlapping.
-      * If 3 atoms are 'fully' overlapping, then all have a dynamical population 
+      * If 3 atoms are 'fully' overlapping, then all have a dynamical population
       * correction equal to 1/3
       *
       * This is const since ScatteringComponent::mDynPopCorr is mutable.
@@ -263,6 +271,10 @@ class Crystal:public UnitCell
       void CalcDynPopCorr(const REAL overlapDist=1., const REAL mergeDist=.0)const ;
       /// Reset Dynamical Population Correction factors (ie set it to 1)
       void ResetDynPopCorr()const ;
+      /** Access the Dynamical Occupancy Correction for a given component (atom)
+      * in a given Scatterer
+      */
+      REAL GetDynPopCorr(const Scatterer* pscatt, unsigned int component)const;
       /** Set the use of dynamical population correction (Crystal::mUseDynPopCorr).
       * Atoms which are considered "equivalent" (ie currently with the same Z number)
       * and which are overlapping see their Dynamical occupancy changed so that when they
@@ -276,13 +288,17 @@ class Crystal:public UnitCell
       * \param use set to 1 to use, 0 not to use it.
       */
       void SetUseDynPopCorr(const int use);
+      /** Get dynamical population correction setting.
+      * See SetUseDynPopCorr.
+      */
+      int GetUseDynPopCorr() const;
       /** Get the Anti-bumping/pro-Merging cost function. Only works (ie returnes a non-null
       * value) if you have added antibump distances using Crystal::SetBumpMergeDistance().
       *
       */
       REAL GetBumpMergeCost() const;
       /** Set the Anti-bumping distance between two scattering types
-      * 
+      *
       */
       void SetBumpMergeDistance(const ScatteringPower &scatt1,
                                 const ScatteringPower &scatt2, const REAL dist=1.5);
@@ -294,7 +310,7 @@ class Crystal:public UnitCell
       /// Remove an Anti-bumping distance between two scattering types.
       void RemoveBumpMergeDistance(const ScatteringPower &scatt1,
                                    const ScatteringPower &scatt2);
-      
+
       /// Storage for anti-bump/merge parameters
       struct BumpMergePar
       {
@@ -309,31 +325,33 @@ class Crystal:public UnitCell
          /// Can the two atoms completely overlap ?
          bool mCanOverlap;
       };
-      
+
       /// Anti-bump parameters. Each atom type (ScatteringPower is referenced
       /// using a reference number)
       typedef std::map<pair<const ScatteringPower*, const ScatteringPower*>,Crystal::BumpMergePar > VBumpMergePar;
-      const VBumpMergePar& GetBumpMergeParList()const;      
-      VBumpMergePar& GetBumpMergeParList();      
+      const VBumpMergePar& GetBumpMergeParList()const;
+      VBumpMergePar& GetBumpMergeParList();
       /// When was the list of scatterers last changed ?
       const RefinableObjClock& GetClockScattererList()const;
-         
+
       virtual void XMLOutput(ostream &os,int indent=0)const;
       virtual void XMLInput(istream &is,const XMLCrystTag &tag);
       //virtual void XMLInputOld(istream &is,const IOCrystTag &tag);
-      
+
       virtual void GlobalOptRandomMove(const REAL mutationAmplitude,
                                        const RefParType *type=gpRefParTypeObjCryst);
       virtual REAL GetLogLikelihood()const;
       /** \brief output Crystal structure as a cif file (EXPERIMENTAL !)
+      *  \param mindist : minimum distance between atoms to consider them
+      *  overlapping. Overlapping atoms are only included as comments in the
+      *  CIF file.
       *
-      * \warning This is very crude and EXPERIMENTAL so far: only isotropic scattering power
-      * are supported, and there is not much information beside atom
-      * positions... 
+      * \warning This is very crude and EXPERIMENTAL so far:  there is not much
+      * information beside atom positions...
       */
-      virtual void CIFOutput(ostream &os)const;
-      
-      virtual void GetGeneGroup(const RefinableObj &obj, 
+      virtual void CIFOutput(ostream &os, double mindist = 0.5)const;
+
+      virtual void GetGeneGroup(const RefinableObj &obj,
                                 CrystVector_uint & groupIndex,
                                 unsigned int &firstGroup) const;
       virtual void BeginOptimization(const bool allowApproximations=false,
@@ -360,18 +378,36 @@ class Crystal:public UnitCell
        * destructor. By default these sub-objects are deleted.
       */
       void SetDeleteSubObjInDestructor(const bool b);
-
+      /** Convert as much as possible the crystal's atoms to molecule(s).
+      *
+      * \param min_relat_dist, max_relat_dist: this compares all interatomic distances with the sum of atomic covalent radii d_cov,
+      *if d_cov*min_relat_dist < d < d_cov*max_relat_dist, the atoms are assumed to be connected by a bond.
+      * This function only works if the Crystal contains only atoms.
+      * \param warnuser_fail: if true, will pass a message to the end user that auto-creating at least one Molecule failed.
+      * \warning: experimental, unstable
+      */
+      void ConnectAtoms(const REAL min_relat_dist=0.4, const REAL max_relat_dist=1.3, const bool warnuser_fail=false);
+      /** Merge all equal scattering powers
+      *
+      * \param oneScatteringPowerPerElement: if true, all scattering powers corresponding to the same elemnt of the periodic
+      * classification will be merged into one, with the averaged isotropic Debye-Waller factor. Otherwise, the scattering
+      * powers will be merged only if the Debye Waller factors (isotropic and anisotropic, if any) are identical.
+      *
+      * \warning: this currently only works if the Crystal is only made of Atoms and ScatteringPowerAtoms (it is used at the end
+      * of a CIF import).
+      */
+      void MergeEqualScatteringPowers(const bool oneScatteringPowerPerElement);
    private:
       /** Init options.
       *
       * Need only be done once per Crystal.
       */
       void InitOptions();
-      
+
       /// Find a scatterer (its index # in mpScatterrer[]) with a given name
       /// \warning There should be no duplicate names !!! :TODO: test in AddScatterer()
       int FindScatterer(const string &scattName)const;
-            
+
       /** \internal \brief Compute the distance Table (mDistTable) for all scattering components
       * \param fast : if true, the distance calculations will be made using
       * integers, thus with a lower precision but faster. Less atoms will also
@@ -388,12 +424,12 @@ class Crystal:public UnitCell
       * Use a global option instead of asymUnitMargin.
       */
       void CalcDistTable(const bool fast)const;
-      
+
       /** Calculate all Bond Valences.
       *
       */
       void CalcBondValenceSum()const;
-      
+
       /// The registry of scatterers for this UnitCell
       ObjRegistry<Scatterer> mScattererRegistry ;
 
@@ -408,16 +444,16 @@ class Crystal:public UnitCell
       /// Bump-merge scale factor
       REAL mBumpMergeScale;
 
-      
+
       /// Interatomic distance for a given neighbour
       struct Neighbour
       {
          Neighbour(const unsigned long neighbourIndex,const int sym,
                    const REAL dist2);
-         /// The number associated to the neighbour 
+         /// The number associated to the neighbour
          /// (its index in the Crystal's scattering component list)
          unsigned long mNeighbourIndex;
-         /// The symmetry position associated to the neighbour 
+         /// The symmetry position associated to the neighbour
          /// (its index in the Crystal's scattering component list)
          unsigned int mNeighbourSymmetryIndex;
          /// The squared distance, in square Angstroems
@@ -428,7 +464,7 @@ class Crystal:public UnitCell
       {
          /// Index of the atom in the scattering component list
          unsigned long mIndex;
-         /// Index of the symmetry operation for the chosen unique position in the 
+         /// Index of the symmetry operation for the chosen unique position in the
          /// (pseudo) asymmetric unit
          unsigned int mUniquePosSymmetryIndex;
          /// List of neighbours
@@ -442,19 +478,19 @@ class Crystal:public UnitCell
       mutable RefinableObjClock mDistTableClock;
       /// The distance up to which the distance table & neighbours needs to be calculated
       mutable REAL mDistTableMaxDistance;
-      
+
       /// The list of all scattering components in the crystal
       mutable ScatteringComponentList mScattCompList;
-         
+
       /// Clock for lattice paramaters.
       RefinableObjClock mLatticeClock;
       /// Use Dynamical population correction (ScatteringComponent::mDynPopCorr) during Structure
       /// factor calculation ?
       RefObjOpt mUseDynPopCorr;
-      
+
       /// The registry of ScatteringPower for this Crystal.
       ObjRegistry<ScatteringPower> mScatteringPowerRegistry;
-      
+
       //Clocks
       /// Last time the list of Scatterers was changed
       RefinableObjClock mClockScattererList;
@@ -466,7 +502,7 @@ class Crystal:public UnitCell
       mutable RefinableObjClock mClockDynPopCorr;
       /// master clock recording every change in Scattering Powers
       RefinableObjClock mMasterClockScatteringPower;
-      
+
       /// Display the enantiomeric (mirror along x) structure in 3D? This can
       /// be helpful for non-centrosymmetric structure which have been solved using
       /// powder diffraction (which only gives the relative configuration).

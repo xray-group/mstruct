@@ -9,27 +9,27 @@
 #include <map>
 #include <set>
 
-#include "Quirks/ci_string.h"
+#include "ObjCryst/Quirks/ci_string.h"
 namespace ObjCryst
 {// Forward declaration
    class CIF;
 }
-#include "ObjCryst/PowderPattern.h" // For CreatePowderPatternFromCIF only.
-#include "ObjCryst/DiffractionDataSingleCrystal.h" // For CreateSingleCrystalDataFromCIF only.
-#include "ObjCryst/Crystal.h" // For CreateCrystalFromCIF only.
-#include "ObjCryst/General.h" // TO identify wavelength type in CIFData::ExtractPowderPattern.
+#include "ObjCryst/ObjCryst/PowderPattern.h" // For CreatePowderPatternFromCIF only.
+#include "ObjCryst/ObjCryst/DiffractionDataSingleCrystal.h" // For CreateSingleCrystalDataFromCIF only.
+#include "ObjCryst/ObjCryst/Crystal.h" // For CreateCrystalFromCIF only.
+#include "ObjCryst/ObjCryst/General.h" // TO identify wavelength type in CIFData::ExtractPowderPattern.
 
 namespace ObjCryst
 {
 /// Convert one CIF value to a floating-point value
 /// Return 0 if no value can be converted (e.g. if '.' or '?' is encountered)
-float CIFNumeric2Float(const std::string &s);
+REAL CIFNumeric2REAL(const std::string &s);
 /// Convert one CIF value to a floating-point value
 /// Return 0 if no value can be converted (e.g. if '.' or '?' is encountered)
 int CIFNumeric2Int(const std::string &s);
 
 /** The CIFData class holds all the information from a \e single data_ block from a cif file.
-* 
+*
 * It is a placeholder for all comments, item and loop data, as raw strings copied from
 * a cif file.
 *
@@ -45,6 +45,8 @@ int CIFNumeric2Int(const std::string &s);
 *  - atom coordinates: _atom_site_fract_{x} ; _atom_site_Cartn_{x,y,z}
 *  - atom occupancy: _atom_site_occupancy
 *  - atom label & symbol: _atom_site_type_symbol ; _atom_site_label
+*  - atom adps: _atom_site_aniso_{U,B}_{11,22,33,12,13,23} > _atom_site_{U,B}_iso_or_equiv
+*
 *
 * Cartesian coordinates are stored in Angstroems, angles in radians.
 *
@@ -54,14 +56,14 @@ int CIFNumeric2Int(const std::string &s);
 * - coordinates: _pd_proc_2theta_corrected > _pd_meas_angle_2theta > _pd_meas_time_of_flight > _pd_proc_2theta_range_{min,max,inc}
 * - intensity normalizer (optional): _pd_meas_intensity_monitor > _pd_meas_step_count_time
 *
-* If another data field is needed, it is possible to directly access the string data 
+* If another data field is needed, it is possible to directly access the string data
 * (CIFData::mvComment , CIFData::mvItem and CIFData::mvLoop) to search for the correct tags.
 */
 class CIFData
 {
    public:
       CIFData();
-      
+
       /// Extract lattice parameters, spacegroup (symbol or number), atomic positions,
       /// chemical name and formula if available.
       /// All other data is ignored
@@ -75,6 +77,9 @@ class CIFData
       /// Extract all atomic positions. Will generate cartesian from fractional
       /// coordinates or vice-versa if only cartesian coordinates are available.
       void ExtractAtomicPositions(const bool verbose=false);
+      /// Extract anisotropic atomic displacement parameters. Isotropic ADPs
+      //  may be extracted in ExtractAtomicPositions. This takes prescedent.
+      void ExtractAnisotropicADPs(const bool verbose=false);
       /// Extract Powder Diffraction data, with Iobs, sigma(Iobs) and either 2theta
       /// or time-of-flight position.
       void ExtractPowderPattern(const bool verbose=false);
@@ -88,10 +93,10 @@ class CIFData
       void Fractional2CartesianCoord();
       /// Convert from fractional to cartesian coordinates
       /// CIFData::CalcMatrices() must be called first
-      void f2c(float &x,float &y, float &z);
+      void f2c(REAL &x,REAL &y, REAL &z);
       /// Convert from cartesia to fractional coordinates
       /// CIFData::CalcMatrices() must be called first
-      void c2f(float &x,float &y, float &z);
+      void c2f(REAL &x,REAL &y, REAL &z);
       /// Calculate real space transformation matrices
       /// requires unit cell parameters
       void CalcMatrices(const bool verbose=false);
@@ -103,7 +108,7 @@ class CIFData
       std::map<std::set<ci_string>,std::map<ci_string,std::vector<std::string> > > mvLoop;
       /// Lattice parameters, in ansgtroem and degrees - vector size is 0 if no
       /// parameters have been obtained yet.
-      std::vector<float> mvLatticePar;
+      std::vector<REAL> mvLatticePar;
       /// Spacegroup number from International Tables (_space_group_IT_number), or -1.
       std::string mSpacegroupNumberIT;
       /// Spacegroup Hall symbol (or empty string) (_space_group_name_Hall)
@@ -116,7 +121,7 @@ class CIFData
       std::string mName;
       /// Formula. Or empty string if none is available.
       std::string mFormula;
-      /// Atom record 
+      /// Atom record
       struct CIFAtom
       {
          CIFAtom();
@@ -125,22 +130,28 @@ class CIFData
          /// Symbol of the atom, or empty string (_atom_type_symbol or _atom_site_type_symbol).
          std::string mSymbol;
          /// Fractionnal coordinates (_atom_site_fract_{x,y,z}) or empty vector.
-         std::vector<float> mCoordFrac;
+         std::vector<REAL> mCoordFrac;
          /// Cartesian coordinates in Angstroem (_atom_site_Cartn_{x,y,z}) or empty vector.
-         /// Transformation to fractionnal coordinates currently assumes 
+         /// Transformation to fractionnal coordinates currently assumes
          /// "a parallel to x; b in the plane of y and z" (see _atom_sites_Cartn_transform_axes)
-         std::vector<float> mCoordCart;
+         std::vector<REAL> mCoordCart;
          /// Site occupancy, or -1
-         float mOccupancy;
+         REAL mOccupancy;
+
+         /// ADP tensor
+         std::vector<REAL> mBeta;
+
+         /// Biso
+         REAL mBiso;
       };
       /// Atoms, if any are found
       std::vector<CIFAtom> mvAtom;
       /// Fractionnal2Cartesian matrix
-      float mOrthMatrix[3][3];
+      REAL mOrthMatrix[3][3];
       /// Cartesian2Fractionnal matrix
-      float mOrthMatrixInvert[3][3];
+      REAL mOrthMatrixInvert[3][3];
       /// Powder pattern data
-      std::vector<float> mPowderPatternObs,mPowderPatternX,mPowderPatternSigma;
+      std::vector<REAL> mPowderPatternObs,mPowderPatternX,mPowderPatternSigma;
       /// Single crystal data
       CrystVector_long mH,mK,mL;
       /// Single crystal data
@@ -148,7 +159,7 @@ class CIFData
       /// Is this X-Ray 2theta, time-of-flight ?
       WavelengthType mDataType;
       /// Wavelength
-      float mWavelength;
+      REAL mWavelength;
 };
 
 /** Main CIF class - parses the stream and separates data blocks, comments, items, loops.
@@ -185,6 +196,25 @@ class PowderPattern;
 * setting by trying different ones using cctbx
 */
 Crystal* CreateCrystalFromCIF(CIF &cif,const bool verbose=true,const bool checkSymAsXYZ=true);
+
+/** Extract Crystal object(s) from a CIF, if possible.
+* Returns a null pointer if no crystal structure could be extracted
+* (the minimum data is the unit cell parameters).
+*
+* \param checkSymAsXYZ: if true, and the CIF file does not have a Hall symbol
+* but has a list of symmetry_equiv_pos_as_xyz, check we have the correct
+* setting by trying different ones using cctbx
+* \param oneScatteringPowerPerElement: if false (the default), then there will be as many
+* ScatteringPowerAtom created as there are different elements. If true,
+* only one will be created per element, avoiding a large number of scattering powers
+* e.g. when importing CIFs obtained from single crystal data refinement.
+* \param connectAtoms: if true, call Crystal::ConnectAtoms to try to create as many Molecules
+* as possible from the list of imported atoms.
+* \warning The behaviour of oneScatteringPowerPerElement has changed [2016/11/11]:
+* when set to false, it will return one scattering power per atom, where as prior to this
+* change, scattering powers where identical for identical Debye-Waller factors.
+*/
+Crystal* CreateCrystalFromCIF(CIF &cif,const bool verbose,const bool checkSymAsXYZ, const bool oneScatteringPowerPerElement, const bool connectAtoms);
 
 /// Create PowderPattern object(s) from a CIF, if possible.
 /// Returns a null pointer if no pattern could be extracted.

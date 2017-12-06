@@ -36,7 +36,7 @@
 #elif defined(_MSC_VER) || defined(__ICL) // MS and VC++ compiler
    #define RESTRICT __restrict
 #else
-   #define RESTRICT 
+   #define RESTRICT
 #endif
 
 //profiling
@@ -48,7 +48,7 @@
 #include "Profile/Profiler.h"
 #else
 
-#define TAU_PROFILE(name, type, group) 
+#define TAU_PROFILE(name, type, group)
 #define TAU_PROFILE_START(var)
 #define TAU_PROFILE_TIMER(var, name, type, group)
 #define TAU_PROFILE_STOP(var)
@@ -61,7 +61,7 @@
 
 #endif
 
-#include "Quirks/VFNDebug.h"
+#include "ObjCryst/Quirks/VFNDebug.h"
 
 using namespace std;
 /** The namespace which includes all objects (crystallographic and
@@ -80,36 +80,12 @@ namespace ObjCryst
 #define DEG2RAD (M_PI/180.)
 #define RAD2DEG (180./M_PI)
 
-#ifndef REAL
 #define REAL float
-#endif
 
-// forward declarations... These should be removed...
-   //class AsymmetricUnit;
-   //class Atom;
-   //class Crystal ;
-   //class IOCrystTag;
-   //class PowderPattern;
-   //class RefinableObj;
-   //class RefinableObjClock;
-   //template<class T> class ObjRegistry;
-   //class RefinablePar;
-   //class Scatterer ;
-   //class ScatteringComponent;
-   //class ScatteringComponentList;
-   //class ScatteringData ;
-   //class ScatteringPower;
-   //class ScatteringPowerAtom;
-   //class SpaceGroup;
-   //class ZPolyhedron ;
-   //class ZScatterer ;
-   #ifdef __WX__CRYST__
-   //class WXCrystObj;
-   //class WXRefinableObj;
-   //class WXCrystRegistry;
-   #endif
-/*
-*/
+// Implemented in IO.cpp
+/// Function to convert a substring to a floating point value, imposing a C locale (using '.' as decimal separator).
+/// This is used for input/output from data file, which are only using the C locale, contrary to the GUI.
+float string2floatC(const string &s);
 
 //######################################################################
 
@@ -149,7 +125,7 @@ class ObjCrystException
 
       static bool verbose;
       string message;
-      
+
    protected:
    private:
 };
@@ -166,7 +142,7 @@ void ObjCrystInformUserStdOut(const string &);
 * This function pointer is by default assigned to ObjCrystInformUserStdOut,
 * which outputs the message to the standard output. If a user interface is
 * used (eg in Fox), this pointer should be reassigned at the beginning of the
-* application to a more user-suitable function. 
+* application to a more user-suitable function.
 */
 extern void (*fpObjCrystInformUser)(const string &);
 
@@ -202,7 +178,23 @@ struct CrystalPOVRayOptions
    REAL mXmin, mXmax, mYmin, mYmax, mZmin, mZmax;
    /// Show labels ?
    bool mShowLabel;
+   /// Show hydrogens ?
+   bool mShowHydrogens;
 };
+
+/// This class only serves to temporarilly set the LC_NUMERIC C locale to "C",
+/// in order to use '.' as the decimal separator.
+/// Just creating one object of type tmp_C_Numeric_locale will switch to the C locale,
+/// and when the object gets destroyed it will restore the old locale.
+class tmp_C_Numeric_locale
+{// Implemented in SpaceGroup.cpp
+    public:
+        tmp_C_Numeric_locale();
+        ~tmp_C_Numeric_locale();
+    private:
+        std::string mLocale;
+};
+
 }//Namespace
 
 #endif //_VFN_OBJCRYST_H_

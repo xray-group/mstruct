@@ -19,9 +19,9 @@
 #ifndef _OBJCRYST_SCATTPOWER_H_
 #define _OBJCRYST_SCATTPOWER_H_
 
-#include "CrystVector/CrystVector.h"
-#include "ObjCryst/General.h"
-#include "RefinableObj/RefinableObj.h"
+#include "ObjCryst/CrystVector/CrystVector.h"
+#include "ObjCryst/ObjCryst/General.h"
+#include "ObjCryst/RefinableObj/RefinableObj.h"
 
 
 //#include <stdlib.h>
@@ -32,7 +32,7 @@
 //#include <fstream>
 //#include <ctime>
 
-// forward declaration to avoid including boost headers 
+// forward declaration to avoid including boost headers
 namespace cctbx { namespace eltbx { namespace xray_scattering {class gaussian;}}}
 
 namespace ObjCryst
@@ -103,6 +103,8 @@ static NiftyStaticGlobalObjectsInitializer_ScatteringPower NiftyStaticGlobalObje
 * TemperatureFactor, ScatteringFactor, and ResonantScatteringFactor. In any way
 * the design of this class should not evolve, so that code using the ScatteringPower
 * interface will remain compatible whatever modifications are made.
+* \warning: there is currently a storage for Anisotropic Displacement Parameters,
+* but Debye-Waller calculation is \e only isotropic.
 */
 //######################################################################
 class ScatteringPower:virtual public RefinableObj
@@ -113,7 +115,15 @@ class ScatteringPower:virtual public RefinableObj
       virtual ~ScatteringPower();
       virtual const string& GetClassName() const;
       virtual void operator=(const ScatteringPower& rhs);
-      /** \brief Get the Scattering factor for all reflections of a given 
+      /** Comparison operator. Two scattering powers are equal if they have the same
+      * displacement parameter, correspond to same element, and are of the same class.
+      */
+      virtual bool operator==(const ScatteringPower& rhs) const;
+      /** Comparison operator. Two scattering powers are equal if they have the same
+      * displacement parameter, correspond to same element, and are of the same class.
+      */
+      virtual bool operator!=(const ScatteringPower& rhs) const;
+      /** \brief Get the Scattering factor for all reflections of a given
       * ScatteringData object.
       *
       * \return a vector with the scattering factor for all reflections, in the same
@@ -132,7 +142,7 @@ class ScatteringPower:virtual public RefinableObj
       /// Get the scattering factor at (0,0,0). Used for scatterer (electron, nucleus)
       /// density generation.
       virtual REAL GetForwardScatteringFactor(const RadiationType) const=0;
-      /** \brief Get the temperature factor for all reflections of a given 
+      /** \brief Get the temperature factor for all reflections of a given
       * ScatteringData object.
       *
       * \return a vector with the temperature factor for all reflections, in the same
@@ -205,6 +215,7 @@ class ScatteringPower:virtual public RefinableObj
       virtual void SetBiso(const REAL newB);
       /** \brief Returns the anisotropic temperature B factor for (i, j) pair.
       *
+      * \warning: this is ambiguous, as it is Beta_ij which are stored, and not Bij...
       */
       REAL GetBij(const size_t &i, const size_t &j) const;
       /** \brief Returns the anisotropic temperature B factor for given index.
@@ -216,10 +227,12 @@ class ScatteringPower:virtual public RefinableObj
       * 4 -> (1, 3)
       * 5 -> (2, 3)
       *
+      * \warning: this is ambiguous, as it is Beta_ij which are stored, and not Bij...
       */
       REAL GetBij(const size_t &idx) const;
       /** \brief Sets the anisotropic temperature B factor for (i, j) pair.
       *
+      * \warning: this is ambiguous, as it is Beta_ij which are stored, and not Bij...
       */
       virtual void SetBij(const size_t &i, const size_t &j, const REAL newB);
       /** \brief Sets the anisotropic temperature B factor for given index.
@@ -231,6 +244,7 @@ class ScatteringPower:virtual public RefinableObj
       * 4 -> (1, 3)
       * 5 -> (2, 3)
       *
+      * \warning: this is ambiguous, as it is Beta_ij which are stored, and not Bij...
       */
       virtual void SetBij(const size_t &idx, const REAL newB);
       /** \brief Returns true if the scattering power is isotropic, else false.
@@ -256,7 +270,7 @@ class ScatteringPower:virtual public RefinableObj
       /// Return the physical radius of this type of scatterer (for 3D display purposes).
       /// \warning this may be removed later.
       virtual REAL GetRadius()const=0;
-      virtual void GetGeneGroup(const RefinableObj &obj, 
+      virtual void GetGeneGroup(const RefinableObj &obj,
                                 CrystVector_uint & groupIndex,
                                 unsigned int &firstGroup) const;
       /// Maximum Likelihood: get the estimated error (sigma) on the positions
@@ -287,8 +301,14 @@ class ScatteringPower:virtual public RefinableObj
       REAL mBiso;
       /// Is the scattering isotropic ?
       bool mIsIsotropic;
-      /// Anisotropic Beta(ij)
-      CrystVector_REAL mBeta;
+      /** Anisotropic Beta(ij)
+      *
+      * \internal
+      * These are stored temporarily, and derived from the Bij
+      */
+      mutable CrystVector_REAL mBeta;
+      /// Anisotropic B(ij)
+      CrystVector_REAL mB;
       /// Clock.
       RefinableObjClock mClock;
       /// Colour for this ScatteringPower (from POVRay)
@@ -298,7 +318,7 @@ class ScatteringPower:virtual public RefinableObj
       // Maximum Likelihood
          /// estimated error (sigma) on the positions for this type of element.
          REAL mMaximumLikelihoodPositionError;
-         /// 
+         ///
          RefinableObjClock mMaximumLikelihoodParClock;
          /// Number of ghost atoms in the asymmetric unit.
          /// These contribute to the variance of the structure factor, but not to the structure
@@ -363,8 +383,12 @@ class ScatteringPowerAtom:virtual public ScatteringPower
       string GetElementName() const;
       ///Atomic number for this atom
       int GetAtomicNumber() const;
-      ///Atomic radius for this atom, in Angstroems
+      /// Atomic radius for this atom or ion, in Angstroems (ICSD table from cctbx)
       REAL GetRadius() const;
+      /// Covalent Radius for this atom, in Angstroems (from cctbx)
+      REAL GetCovalentRadius() const;
+      /// Maximum number of covalent bonds (from openbabel element.txt)
+      unsigned int GetMaxCovBonds() const;
       virtual void Print()const;
       virtual void XMLOutput(ostream &os,int indent=0)const;
       virtual void XMLInput(istream &is,const XMLCrystTag &tag);
@@ -388,12 +412,12 @@ class ScatteringPowerAtom:virtual public ScatteringPower
       string mSymbol;
       /// atomic number (Z) for the atom
       int mAtomicNumber;
-      
+
       /** Pointer to cctbx's gaussian describing the thomson x-ray
       * scattering factor.
       */
       cctbx::eltbx::xray_scattering::gaussian *mpGaussian;
-      
+
       /** \brief Neutron Bond Coherent Scattering lengths
       *
       *Real and imaginary (for atoms who have an imaginary part)
@@ -401,10 +425,14 @@ class ScatteringPowerAtom:virtual public ScatteringPower
       *Reference : Neutron News, Vol. 3, No. 3, 1992, pp. 29-37.
       */
       REAL mNeutronScattLengthReal,mNeutronScattLengthImag;
-      
-      /// Radius of the atom, in Angstroems
+
+      /// Radius of the atom or ion, in Angstroems (ICSD table from cctbx)
       REAL mRadius;
-      
+      /// Covalent Radius for this atom, in Angstroems (from cctbx)
+      REAL mCovalentRadius;
+      /// Maximum number of covalent bonds
+      unsigned int mMaxCovBonds;
+
       /** \brief Neutron Absorption cross section (barn)
       *
       *For 2200 m/s neutrons.
@@ -413,6 +441,8 @@ class ScatteringPowerAtom:virtual public ScatteringPower
       */
       REAL mNeutronAbsCrossSection;
    private:
+      // Avoid compiler warnings.  Explicitly hide the base-class method.
+      void Init();
    #ifdef __WX__CRYST__
    public:
       virtual WXCrystObjBasic* WXCreate(wxWindow*);
@@ -426,7 +456,7 @@ extern ObjRegistry<ScatteringPowerAtom> gScatteringPowerAtomRegistry;
 //
 //      SCATTERING COMPONENT
 /** \brief A scattering position in a crystal, associated with the corresponding
-* occupancy and a pointer to the ScatteringPower. Also given is the 
+* occupancy and a pointer to the ScatteringPower. Also given is the
 *
 */
 //######################################################################
@@ -444,12 +474,12 @@ struct ScatteringComponent
    const ScatteringPower *mpScattPow;
    /// Dynamical Population Correction.
    ///
-   /// The population of any atom is given by mOccupancy*mDynPopCorr. 
-   /// mPopu is the \e real mOccupancy (0<.<1), and should be the only one 
-   /// used during a refinement. However during a \e model \e search for the structure, 
-   /// atoms may fall unexpectedly in a special position or with an overlap of 
-   /// two atoms (the shared oxygen between two polyhedras, for example). In these 
-   /// cases it is necessary to dynamically correct the population during the 
+   /// The population of any atom is given by mOccupancy*mDynPopCorr.
+   /// mPopu is the \e real mOccupancy (0<.<1), and should be the only one
+   /// used during a refinement. However during a \e model \e search for the structure,
+   /// atoms may fall unexpectedly in a special position or with an overlap of
+   /// two atoms (the shared oxygen between two polyhedras, for example). In these
+   /// cases it is necessary to dynamically correct the population during the
    /// generation of structural models.
    /// See also Crystal::CalcDynPopCorr
    ///
@@ -502,6 +532,6 @@ class ScatteringComponentList
 };
 
 }//namespace
-#include "ObjCryst/ScatteringData.h"
+#include "ObjCryst/ObjCryst/ScatteringData.h"
 
 #endif //_OBJCRYST_SCATTPOWER_H_
