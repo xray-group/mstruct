@@ -1391,6 +1391,181 @@ CrystVector_REAL CubicSpline::operator()(const REAL xmin,const REAL xstep, const
    return y;
 }
 
+REAL CubicSpline::Derivative(const REAL x) const
+{
+   //:TODO: faster!
+   //:TODO: take into account beginning and end derivatives for out-of-bounds points
+   long i;
+   if(x<mX(0)) return 0.;
+   for(i=0;i<(mX.numElements()-1);i++)
+      if(x<mX(i+1))
+      {
+         VFN_DEBUG_MESSAGE("CubicSpline::operator()(x):"<<x<<":"<<mX(i+1)<<":"<<i,0)
+         const REAL e=mX(i+1)-mX(i);
+         const REAL a=(mX(i+1)-x)/e;
+         const REAL b=1.-a;
+         const REAL c=-0.16666666666666666*(3.*a*a-1.)*e;
+         const REAL d= 0.16666666666666666*(3.*b*b-1.)*e;
+	 const REAL f = (mY(i+1)-mY(i))/e;
+         return f+c*mYsecond(i)+d*mYsecond(i+1);
+      }
+   return 0.;
+}
+
+CrystVector_REAL CubicSpline::Derivative(const CrystVector_REAL &x) const
+{
+   const long nb=x.numElements();
+   CrystVector_REAL y(nb);
+   //for(long i=0;i<nb;++i)y(i)=(*this)(x(i));
+   //return y;
+   const REAL *px=x.data();
+   long i=0;
+   REAL *py=y.data();
+   const REAL *pX=mX.data();
+   const REAL *pY=mY.data();
+   const REAL *pY2=mYsecond.data();
+   while((*px<*pX)&&(i<nb))
+   {
+      *py++=0.;px++;i++;
+   }
+   
+   for(long j=0;j<(mX.numElements()-1);j++)
+   {
+      while((*px<*(pX+1))&&(i<nb))
+      {
+         const REAL e= *(pX+1) - *pX;
+         const REAL a= (*(pX+1)- *px)/e;
+         const REAL b=1.-a;
+	 const REAL c=-0.16666666666666666*(3.*a*a-1.)*e;
+         const REAL d= 0.16666666666666666*(3.*b*b-1.)*e;
+	 const REAL f=(*(pY+1) - *pY)/e;
+         *py++ = f+c* *pY2 +d* *(pY2+1);
+         px++;i++;
+      }
+      pX++;pY++;pY2++;
+      if(i==nb) break;
+   }
+   for(;i<nb;++i) *py++ = 0.;
+   return y;
+}
+
+CrystVector_REAL CubicSpline::Derivative(const REAL xmin,const REAL xstep, const long nb) const
+{
+   CrystVector_REAL y(nb);
+   REAL x=xmin;
+   long i=0;
+   REAL *py=y.data();
+   const REAL *pX=mX.data();
+   const REAL *pY=mY.data();
+   const REAL *pY2=mYsecond.data();
+   while((x<*pX)&&(i<nb))
+   {
+      *py++=0.;x += xstep;i++;
+   }
+   
+   for(long j=0;j<(mX.numElements()-1);j++)
+   {
+      while((x<*(pX+1))&&(i<nb))
+      {
+         const REAL e= *(pX+1) - *pX;
+         const REAL a= (*(pX+1)- x)/e;
+         const REAL b=1.-a;
+         const REAL c=-0.16666666666666666*(3.*a*a-1.)*e;
+         const REAL d= 0.16666666666666666*(3.*b*b-1.)*e;
+	 const REAL f=(*(pY+1) - *pY)/e;
+         *py++ = f +c* *pY2 +d* *(pY2+1);
+         x+=xstep;i++;
+      }
+      pX++;pY++;pY2++;
+      if(i==nb) break;
+   }
+   for(;i<nb;++i) *py++ = 0.;
+   return y;
+}
+
+REAL CubicSpline::SecondDerivative(const REAL x) const
+{
+   //:TODO: faster!
+   //:TODO: take into account beginning and end derivatives for out-of-bounds points
+   long i;
+   if(x<mX(0)) return 0.;
+   for(i=0;i<(mX.numElements()-1);i++)
+      if(x<mX(i+1))
+      {
+         VFN_DEBUG_MESSAGE("CubicSpline::operator()(x):"<<x<<":"<<mX(i+1)<<":"<<i,0)
+         const REAL e=mX(i+1)-mX(i);
+         const REAL a=(mX(i+1)-x)/e;
+         const REAL b=1.-a;
+         return a*mYsecond(i)+b*mYsecond(i+1);
+      }
+   return 0.;
+}
+
+CrystVector_REAL CubicSpline::SecondDerivative(const CrystVector_REAL &x) const
+{
+   const long nb=x.numElements();
+   CrystVector_REAL y(nb);
+   //for(long i=0;i<nb;++i)y(i)=(*this)(x(i));
+   //return y;
+   const REAL *px=x.data();
+   long i=0;
+   REAL *py=y.data();
+   const REAL *pX=mX.data();
+   const REAL *pY=mY.data();
+   const REAL *pY2=mYsecond.data();
+   while((*px<*pX)&&(i<nb))
+   {
+      *py++=0.;px++;i++;
+   }
+   
+   for(long j=0;j<(mX.numElements()-1);j++)
+   {
+      while((*px<*(pX+1))&&(i<nb))
+      {
+         const REAL e= *(pX+1) - *pX;
+         const REAL a= (*(pX+1)- *px)/e;
+         const REAL b=1.-a;
+         *py++ = a* *pY2 +b* *(pY2+1);
+         px++;i++;
+      }
+      pX++;pY++;pY2++;
+      if(i==nb) break;
+   }
+   for(;i<nb;++i) *py++ = 0.;
+   return y;
+}
+
+CrystVector_REAL CubicSpline::SecondDerivative(const REAL xmin,const REAL xstep, const long nb) const
+{
+   CrystVector_REAL y(nb);
+   REAL x=xmin;
+   long i=0;
+   REAL *py=y.data();
+   const REAL *pX=mX.data();
+   const REAL *pY=mY.data();
+   const REAL *pY2=mYsecond.data();
+   while((x<*pX)&&(i<nb))
+   {
+      *py++=0.;x += xstep;i++;
+   }
+   
+   for(long j=0;j<(mX.numElements()-1);j++)
+   {
+      while((x<*(pX+1))&&(i<nb))
+      {
+         const REAL e= *(pX+1) - *pX;
+         const REAL a= (*(pX+1)- x)/e;
+         const REAL b=1.-a;
+         *py++ = a* *pY2 +b* *(pY2+1);
+         x+=xstep;i++;
+      }
+      pX++;pY++;pY2++;
+      if(i==nb) break;
+   }
+   for(;i<nb;++i) *py++ = 0.;
+   return y;
+}
+
 void CubicSpline::InitSpline(const REAL yp0, const REAL ypn)
 {
    const long n=mX.numElements();
