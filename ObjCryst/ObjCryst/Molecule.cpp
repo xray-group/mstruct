@@ -25,6 +25,10 @@
 #include <algorithm>
 #include <iomanip>
 
+#ifdef _MSC_VER // for time identifier
+#include <time.h>
+#endif
+
 #include "ObjCryst/Quirks/VFNStreamFormat.h"
 #include "ObjCryst/ObjCryst/Molecule.h"
 #include "ObjCryst/RefinableObj/GlobalOptimObj.h"
