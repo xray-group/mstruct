@@ -1,4 +1,4 @@
-/* 
+/*
 * ObjCryst++ : a Crystallographic computing library in C++
 *         http://objcryst.sourceforge.net
 *         http://www.ccp14.ac.uk/ccp/web-mirrors/objcryst/
@@ -13,15 +13,15 @@
 #ifndef _OBJCRYST_DIFFDATA_SINGLECRYSTAL_H_
 #define _OBJCRYST_DIFFDATA_SINGLECRYSTAL_H_
 
-#include "CrystVector/CrystVector.h"
+#include "ObjCryst/CrystVector/CrystVector.h"
 
-#include "ObjCryst/General.h"
+#include "ObjCryst/ObjCryst/General.h"
 
-#include "ObjCryst/ScatteringPower.h"
-#include "ObjCryst/Crystal.h"
-#include "ObjCryst/ScatteringData.h"
-//#include "ObjCryst/SpaceGroup.h"
-//#include "ObjCryst/Scatterer.h"
+#include "ObjCryst/ObjCryst/ScatteringPower.h"
+#include "ObjCryst/ObjCryst/Crystal.h"
+#include "ObjCryst/ObjCryst/ScatteringData.h"
+//#include "ObjCryst/ObjCryst/SpaceGroup.h"
+//#include "ObjCryst/ObjCryst/Scatterer.h"
 
 //#include <stdlib.h>
 #include <string>
@@ -71,7 +71,7 @@ class DiffractionDataSingleCrystal:public ScatteringData
       ~DiffractionDataSingleCrystal();
       virtual DiffractionDataSingleCrystal* CreateCopy()const;
       virtual const string& GetClassName() const;
-      
+
       /**  \brief returns the calculated diffracted intensity.
       *
       * This is an array of calculated intensities for each reflections in the
@@ -79,25 +79,27 @@ class DiffractionDataSingleCrystal:public ScatteringData
       * for powder diffraction.
       */
       const CrystVector_REAL& GetIcalc() const;
+      /// \todo
+      std::map<RefinablePar*, CrystVector_REAL> & GetIcalc_FullDeriv(std::set<RefinablePar *> &vPar);
 
       /// Return the array of observed intensities for all peaks
       const CrystVector_REAL& GetIobs() const;
       /// Return the array of observed intensities for all peaks
       void SetIobs(const CrystVector_REAL&);
-      
+
       /// Return the array of sigmas for observed intensities, for all peaks.
       const CrystVector_REAL& GetSigma() const;
       /// Return the array of sigmas for observed intensities, for all peaks.
       void SetSigma(const CrystVector_REAL&);
-      
+
       /// Set Iobs to current values of Icalc. Mostly used for tests.
       void SetIobsToIcalc();
-      
+
       /// Return the weights (for each reflection) used for computing Rw.
       const CrystVector_REAL& GetWeight() const;
       /// Change the weights (for each reflection) used for computing Rw.
       void SetWeight(const CrystVector_REAL&);
-      
+
       /** \brief input H,K,L, Iobs and Sigma
       *
       * \param h,k,l: REAL arrays (vectors with NbRefl elements -same size)
@@ -111,7 +113,7 @@ class DiffractionDataSingleCrystal:public ScatteringData
                       const CrystVector_long &l,
                       const CrystVector_REAL &iObs,
                       const CrystVector_REAL &sigma);
-      
+
       /** \brief Import h,k,l,I from a file
       *
       *The file is assumed to correspond to a single crystal diffraction file.
@@ -130,6 +132,20 @@ class DiffractionDataSingleCrystal:public ScatteringData
       *  \param skipLines The number of lines to skip at the beginning of the file.
       */
       void ImportHklIobsSigma(const string &fileName,const long nbRefl,const int skipLines=0);
+      /** \brief Import h,k,l,I,Sigma from a file using shelx HKLF 4 format
+      *
+      *The file is assumed to correspond to a single crystal diffraction file.This file
+      * should be formatted with H,k,l, Iobs and Sigma using a strict formatting 3I4+2F8,
+      * and the last line should contain 0 0 0 for hkl values.
+      *  \param fileName The name of the data file.
+      */
+      void ImportShelxHKLF4(const string &fileName);
+      /** \brief Import diffraction data from a CIF file
+      *
+      *The file is assumed to correspond to a single crystal diffraction file.
+      *  \param fileName The name of the data file.
+      */
+      void ImportCIF(const string &fileName);
       /** \brief Import h,k,l,I,Sigma from a Jana98 '*.m91' file
       *
       *The file is assumed to correspond to a single crystal diffraction file.
@@ -144,15 +160,15 @@ class DiffractionDataSingleCrystal:public ScatteringData
       *  \param skipLines The number of lines to skip at the beginning of the file.
       *
       * File format (the reflection which has an intensity entry marks the end of the group)
-      * h   k   l    Igroup    
-      * -2   4   2                            
+      * h   k   l    Igroup
+      * -2   4   2
       * -2  -4   2   100.4
-      *  2  -4   1                           
+      *  2  -4   1
       *  2   4   1   193.2
       *  ...
       */
       void ImportHklIobsGroup(const string &fileName,const unsigned int skipLines=0);
-      
+
       /** \brief  Return the Crystal R-factor (weighted)
       *
       * \return \f$ R_{w}= \sqrt {\frac{\sum_i w_i\left( I_i^{obs}-I_i^{calc} \right)^2}
@@ -165,7 +181,7 @@ class DiffractionDataSingleCrystal:public ScatteringData
       * {\sum_i (I_i^{obs})^2} }\f$
       */
       virtual REAL GetR()const;
-      
+
       /** \brief  Return  conventionnal Chi^2
       *
        \return \f$ \chi^2 = \sum_i w_i \left(I_i^{obs}-I_i^{calc} \right)^2
@@ -173,14 +189,14 @@ class DiffractionDataSingleCrystal:public ScatteringData
       */
       // \return \f$ \chi^2 = \sum_i \left( \frac{ y_i^{obs}-y_i^{calc}}{\sigma_i} \right)^2
       virtual REAL GetChi2()const;
-      
+
       /* \brief  Return  Goodness of Fit
       *
       * \return \f$ GoF =  \frac{\sum_i w_i\left( y_i^{obs}-y_i^{calc} \right)^2}
       * {N_{obs}-N_{indep.par}} \f$
       virtual REAL GoF()const;
       */
-      
+
       /** Compute the best scale factor minimising Rw.
       *
       * The computed scale factor is \e immediatly applied to Icalc
@@ -203,9 +219,12 @@ class DiffractionDataSingleCrystal:public ScatteringData
       *
       *For sigmas which are smaller than minRelatSigma times the max value of sigma,
       *the output weight is set to 0.
+      *
+      * For reflections where the intensity is below minIobsSigmaRatio*sigma, the weight is set to zero
+      * so that this reflection is ignored.
       */
-      virtual void SetWeightToInvSigma2(const REAL minRelatSigma=1e-4);
-      
+      virtual void SetWeightToInvSigma2(const REAL minRelatSigma=1e-4, const REAL minIobsSigmaRatio=0);
+
       /// Scale factor (applied to Icalc to match Iobs)
       REAL GetScaleFactor()const;
       // Set the Scale factor (applied to Icalc to match Iobs)
@@ -220,9 +239,9 @@ class DiffractionDataSingleCrystal:public ScatteringData
       *
       */
       virtual void PrintObsCalcData()const;
-      
+
       virtual void SetUseOnlyLowAngleData(const bool useOnlyLowAngle,const REAL angle=0.);
-      
+
       ///Save H,K,L Iobs Icalc to a file, text format, 3 columns theta Iobs Icalc.
       ///If Iobs is missing, the column is omitted.
       void SaveHKLIobsIcalc(const string &filename="hklIobsIcalc.out");
@@ -234,6 +253,7 @@ class DiffractionDataSingleCrystal:public ScatteringData
          virtual const CrystVector_REAL& GetLSQCalc(const unsigned int) const;
          virtual const CrystVector_REAL& GetLSQObs(const unsigned int) const;
          virtual const CrystVector_REAL& GetLSQWeight(const unsigned int) const;
+         virtual std::map<RefinablePar*, CrystVector_REAL> & GetLSQ_FullDeriv(const unsigned int,std::set<RefinablePar *> &vPar);
       virtual void XMLOutput(ostream &os,int indent=0)const;
       virtual void XMLInput(istream &is,const XMLCrystTag &tag);
       //virtual void XMLInputOld(istream &is,const IOCrystTag &tag);
@@ -246,17 +266,17 @@ class DiffractionDataSingleCrystal:public ScatteringData
       /** \ brief Set X-Ray tube radiation.
       *
       *\param XRayTubeElementName : name of the anticathode element name. Known
-      *ones are Cr, Fe, Cu, Mo, Ag. 
+      *ones are Cr, Fe, Cu, Mo, Ag.
       *\param alpha2Alpha2ratio: Kalpha2/Kalpha1 ratio (0.5 by default)
       *
       *the average wavelength is calculated
-      *using the alpha2/alpha1 weight. All structure factors computation are made 
+      *using the alpha2/alpha1 weight. All structure factors computation are made
       *using the average wavelength, and for powder diffraction, profiles are output
       *at the alpha1 and alpha2 ratio for the calculated pattern.
       *
-      *NOTE : if the name of the wavelength is generic (eg"Cu"), 
-      *then the program considers that 
-      *there are both Alpha1 and Alpha2, and thus automatically changes the WavelengthType 
+      *NOTE : if the name of the wavelength is generic (eg"Cu"),
+      *then the program considers that
+      *there are both Alpha1 and Alpha2, and thus automatically changes the WavelengthType
       *to WAVELENGTH_ALPHA12. If instead either alpha1 or alpha2 (eg "CuA1") is asked for,
       *the WavelengthType is set to WAVELENGTH_MONOCHROMATIC. In both cases,
       * the radiation type is set to X-Ray.
@@ -264,17 +284,18 @@ class DiffractionDataSingleCrystal:public ScatteringData
       void SetWavelength(const string &XRayTubeElementName,const REAL alpha2Alpha2ratio=0.5);
       /// Set the (monochromatic) energy of the beam.
       void SetEnergy(const REAL );
-      
+
    protected:
    private:
       virtual void InitRefParList();
       /// Calc intensities
       void CalcIcalc() const;
+      void CalcIcalc_FullDeriv(std::set<RefinablePar *> &vPar);
       virtual CrystVector_long SortReflectionBySinThetaOverLambda(const REAL maxTheta=-1.);
       /// Init options (currently only twinning).
       void InitOptions();
       /// Determine the index of reflections to be summed because of twinning (GroupOption==1)
-      /// The reflections \e must have been sorted by increasing theta beforehand. 
+      /// The reflections \e must have been sorted by increasing theta beforehand.
       void PrepareTwinningCalc() const;
       /// Are there observed intensities ?
       bool mHasObservedData;
@@ -284,13 +305,15 @@ class DiffractionDataSingleCrystal:public ScatteringData
       * In the single crystal case, this is a list of intensity corresponding to (h,k,l).
       * For a powder sample, this is a list of all peaks intensities.
       */
-      CrystVector_REAL mObsIntensity ;  
+      CrystVector_REAL mObsIntensity ;
       /// Sigma for observed intensities (either individual reflections or spectrum)
       CrystVector_REAL mObsSigma ;
       /// weight for computing R-Factor, for each observed value.
       CrystVector_REAL mWeight ;
       /// Calculated intensities
-      mutable CrystVector_REAL mCalcIntensity ;  
+      mutable CrystVector_REAL mCalcIntensity ;
+      ///
+      mutable std::map<RefinablePar*, CrystVector_REAL> mCalcIntensity_FullDeriv;
       /// Scale factor. It is applied when computing intensities. The scale
       ///applies to intensities
       mutable REAL mScaleFactor;
@@ -306,37 +329,38 @@ class DiffractionDataSingleCrystal:public ScatteringData
       // Grouped reflections
          /// Option for the type of grouping (0:no, 1:by theta values (twinning), 2:user-supplied groups)
          RefObjOpt mGroupOption;
-         /// The observed intensities summed on all reflections that are (or could be) 
+         /// The observed intensities summed on all reflections that are (or could be)
          /// overlapped dur to a twinning
          mutable CrystVector_REAL mGroupIobs;
          /// The uncertainty on observed grouped intensities.
          mutable CrystVector_REAL mGroupSigma;
          /// The calculated intensities summed on all reflections that are grouped
          mutable CrystVector_REAL mGroupIcalc;
+         mutable std::map<RefinablePar*, CrystVector_REAL> mGroupIcalc_FullDeriv;
          /// The weight on each reflection sum in case of grouped reflections. The sum is the
          /// inverse of the sum of all sigma^2
          mutable CrystVector_REAL mGroupWeight;
          /** The index of reflections which need to be summed. They must have been sorted
-         * by increasing theta values. Each entry (the reflection index) marks the beginning 
+         * by increasing theta values. Each entry (the reflection index) marks the beginning
          * of a new batch of reflections to be summed.
          *
          * Here only the groups of reflections are \e roughly sorted by sin(theta)/lambda.
          * It is assumed, howver, that grouped reflections are of approximately the same
          * d_hkl. After ScatteringData::GetNbReflBelowMaxSinThetaOvLambda(),
-         * the number of groups for which *all* reflections are below the limit are 
+         * the number of groups for which *all* reflections are below the limit are
          * taken into account for the statistics.
          *
          * Note that \before DiffractionDataSingleCrystal::SortReflectionBySinThetaOverLambda()
-         * is called (i.e. immediately after importing the reflections) 
+         * is called (i.e. immediately after importing the reflections)
          **/
          mutable CrystVector_long mGroupIndex;
          /// Number of groups
          mutable long mNbGroup;
           /// Number of groups below max[sin(theta)/lambda]
          mutable long mNbGroupUsed;
-        /// Clock for twinning, when the preparation of twinning correction was last made.
+         /// Clock for twinning, when the preparation of twinning correction was last made.
          mutable RefinableObjClock mClockPrepareTwinningCorr;
-         
+
       // The Radiation for this object
       Radiation mRadiation;
    #ifdef __WX__CRYST__

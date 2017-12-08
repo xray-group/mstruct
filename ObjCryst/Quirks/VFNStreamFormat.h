@@ -25,9 +25,9 @@
 #include <iostream>
 #include <vector>
 
-#include "CrystVector/CrystVector.h"
+#include "ObjCryst/CrystVector/CrystVector.h"
 
-/** output a number as a formatted integer: 
+/** output a number as a formatted integer:
 *
 * \code os << FormatInt(mynumber,5);\endcode
 *
@@ -56,7 +56,7 @@ class FormatFloat
    public:
       FormatFloat(const REAL num,const int width=10,const int precision=4);
       ~FormatFloat();
-      
+
    //private:
       const REAL mValue;
       const int mWidth;
@@ -66,7 +66,7 @@ class FormatFloat
 std::ostream& operator<< (std::ostream& os, const FormatFloat &fFloat);
 
 /** output a string with a fixed length (adding necessary space or removing
-* excess characters) : 
+* excess characters) :
 *
 * \code os << FormatString(myString,15);\endcode
 */
@@ -83,9 +83,9 @@ class FormatString
 
 std::ostream& operator<< (std::ostream& os, const FormatString& fStr);
 
-/** output one or several vectors as (a) column(s): 
+/** output one or several vectors as (a) column(s):
 *
-* \code 
+* \code
 *  os << FormatVertVector<REAL>(vect,8,3);
 *  os << FormatVertVector<REAL>(vect1,vect2,vetc3,12,6);
 *  // For 7 vectors with width 12 and precision 4,
@@ -98,29 +98,34 @@ template<class T> class FormatVertVector
    public:
       FormatVertVector( const CrystVector<T> &fVect,
                         const int width=10,
-                        const int precision=4);
+                        const int precision=4,
+                        const int nb=0);
       FormatVertVector( const CrystVector<T> &fVect1,
                         const CrystVector<T> &fVect2,
                         const int width=10,
-                        const int precision=4);
+                        const int precision=4,
+                        const int nb=0);
       FormatVertVector( const CrystVector<T> &fVect1,
                         const CrystVector<T> &fVect2,
                         const CrystVector<T> &fVect3,
                         const int width=10,
-                        const int precision=4);
+                        const int precision=4,
+                        const int nb=0);
       FormatVertVector( const CrystVector<T> &fVect1,
                         const CrystVector<T> &fVect2,
                         const CrystVector<T> &fVect3,
                         const CrystVector<T> &fVect4,
                         const int width=10,
-                        const int precision=4);
+                        const int precision=4,
+                        const int nb=0);
       FormatVertVector( const CrystVector<T> &fVect1,
                         const CrystVector<T> &fVect2,
                         const CrystVector<T> &fVect3,
                         const CrystVector<T> &fVect4,
                         const CrystVector<T> &fVect5,
                         const int width=10,
-                        const int precision=4);
+                        const int precision=4,
+                        const int nb=0);
       FormatVertVector( const CrystVector<T> &fVect1,
                         const CrystVector<T> &fVect2,
                         const CrystVector<T> &fVect3,
@@ -128,23 +133,30 @@ template<class T> class FormatVertVector
                         const CrystVector<T> &fVect5,
                         const CrystVector<T> &fVect6,
                         const int width=10,
-                        const int precision=4);
+                        const int precision=4,
+                        const int nb=0);
       FormatVertVector( const CrystVector<T> *pVect,
                         const int nbVect,
                         const int width=10,
-                        const int precision=4);
+                        const int precision=4,
+                        const int nb=0);
       FormatVertVector( const CrystVector<T> &fVect1,
                         const CrystVector<T> *pVect,
                         const int nbVect,
                         const int width=10,
-                        const int precision=4);
+                        const int precision=4,
+                        const int nb=0);
+      FormatVertVector( std::vector<const CrystVector<T> *>& v,
+                        const int width=10,
+                        const int precision=4,
+                        const int nb=0);
       ~FormatVertVector();
       //int length() const;
    //private:
-      const CrystVector<T> **mpVectors;
-      const int mNbVectors;
+      std::vector<const CrystVector<T> *>mvpVectors;
       const int mWidth;
       const int mPrecision;
+      const int mNb;
 };
 
 template<class T> std::ostream& operator<< (std::ostream &os, const FormatVertVector<T> &fVect);
@@ -180,20 +192,23 @@ template<class T>class FormatVertVectorHKLFloats
                                  const CrystVector<T> &k,
                                  const CrystVector<T> &l,
                                  const int width=10,
-                                 const int precision=4);
+                                 const int precision=4,
+                                 const int nb=0);
       FormatVertVectorHKLFloats( const CrystVector<T> &h,
                                  const CrystVector<T> &k,
                                  const CrystVector<T> &l,
                                  const CrystVector<T> &m,
                                  const int width=10,
-                                 const int precision=4);
+                                 const int precision=4,
+                                 const int nb=0);
       FormatVertVectorHKLFloats( const CrystVector<T> &h,
                                  const CrystVector<T> &k,
                                  const CrystVector<T> &l,
                                  const CrystVector<T> &m,
                                  const CrystVector<T> &n,
                                  const int width=10,
-                                 const int precision=4);
+                                 const int precision=4,
+                                 const int nb=0);
       FormatVertVectorHKLFloats( const CrystVector<T> &h,
                                  const CrystVector<T> &k,
                                  const CrystVector<T> &l,
@@ -201,7 +216,8 @@ template<class T>class FormatVertVectorHKLFloats
                                  const CrystVector<T> &n,
                                  const CrystVector<T> &o,
                                  const int width=10,
-                                 const int precision=4);
+                                 const int precision=4,
+                                 const int nb=0);
       FormatVertVectorHKLFloats( const CrystVector<T> &h,
                                  const CrystVector<T> &k,
                                  const CrystVector<T> &l,
@@ -210,7 +226,8 @@ template<class T>class FormatVertVectorHKLFloats
                                  const CrystVector<T> &o,
                                  const CrystVector<T> &p,
                                  const int width=10,
-                                 const int precision=4);
+                                 const int precision=4,
+                                 const int nb=0);
       FormatVertVectorHKLFloats( const CrystVector<T> &h,
                                  const CrystVector<T> &k,
                                  const CrystVector<T> &l,
@@ -220,7 +237,8 @@ template<class T>class FormatVertVectorHKLFloats
                                  const CrystVector<T> &p,
                                  const CrystVector<T> &q,
                                  const int width=10,
-                                 const int precision=4);
+                                 const int precision=4,
+                                 const int nb=0);
       FormatVertVectorHKLFloats( const CrystVector<T> &h,
                                  const CrystVector<T> &k,
                                  const CrystVector<T> &l,
@@ -231,7 +249,8 @@ template<class T>class FormatVertVectorHKLFloats
                                  const CrystVector<T> &q,
                                  const CrystVector<T> &r,
                                  const int width=10,
-                                 const int precision=4);
+                                 const int precision=4,
+                                 const int nb=0);
       FormatVertVectorHKLFloats( const CrystVector<T> &h,
                                  const CrystVector<T> &k,
                                  const CrystVector<T> &l,
@@ -243,7 +262,8 @@ template<class T>class FormatVertVectorHKLFloats
                                  const CrystVector<T> &r,
                                  const CrystVector<T> &s,
                                  const int width=10,
-                                 const int precision=4);
+                                 const int precision=4,
+                                 const int nb=0);
       FormatVertVectorHKLFloats( const CrystVector<T> &h,
                                  const CrystVector<T> &k,
                                  const CrystVector<T> &l,
@@ -256,7 +276,8 @@ template<class T>class FormatVertVectorHKLFloats
                                  const CrystVector<T> &s,
                                  const CrystVector<T> &t,
                                  const int width=10,
-                                 const int precision=4);
+                                 const int precision=4,
+                                 const int nb=0);
       FormatVertVectorHKLFloats( const CrystVector<T> &h,
                                  const CrystVector<T> &k,
                                  const CrystVector<T> &l,
@@ -270,21 +291,22 @@ template<class T>class FormatVertVectorHKLFloats
                                  const CrystVector<T> &t,
                                  const CrystVector<T> &u,
                                  const int width=10,
-                                 const int precision=4);
+                                 const int precision=4,
+                                 const int nb=0);
       FormatVertVectorHKLFloats( std::vector<const CrystVector<T> *>& v,
                                  const int width=10,
-                                 const int precision=4);
+                                 const int precision=4,
+                                 const int nb=0);
       ~FormatVertVectorHKLFloats();
       //int length() const;
    //private:
       std::vector<const CrystVector<T> *>mvpVectors;
       const int mWidth;
       const int mPrecision;
-   
+      const int mNb;
 };
 
 template<class T> std::ostream& operator<< (std::ostream& os, const FormatVertVectorHKLFloats<T> &fStr);
 
 
 #endif
-

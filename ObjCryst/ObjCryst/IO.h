@@ -23,8 +23,8 @@
 #define _OBJCRYST_IOCRYST_H_
 #endif //_OBJCRYST_IOCRYST_H_
 
-#include "RefinableObj/IO.h"
-#include "RefinableObj/RefinableObj.h"
+#include "ObjCryst/RefinableObj/IO.h"
+#include "ObjCryst/RefinableObj/RefinableObj.h"
 
 
 namespace ObjCryst
@@ -32,7 +32,7 @@ namespace ObjCryst
 /** \brief Save all Objcryst++ objects.
 *
 * This saves all Crystal, PowderPattern, DiffDataSingleCrystal and GlobalOptimObj objects,
-* using the global registries for these classes. All other objects (Scatterer, 
+* using the global registries for these classes. All other objects (Scatterer,
 * ScatteringPower, PowderPatternComponent are saved as well since they are sub-objects
 * of Crystal or PowderPattern objects).
 *
@@ -42,7 +42,7 @@ void XMLCrystFileSaveGlobal(const string & filename);
 /** \brief Save all Objcryst++ objects.
 *
 * This saves all Crystal, PowderPattern, DiffDataSingleCrystal and GlobalOptimObj objects,
-* using the global registries for these classes. All other objects (Scatterer, 
+* using the global registries for these classes. All other objects (Scatterer,
 * ScatteringPower, PowderPatternComponent are saved as well since they are sub-objects
 * of Crystal or PowderPattern objects).
 *

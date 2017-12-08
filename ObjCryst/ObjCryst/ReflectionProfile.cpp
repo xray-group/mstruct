@@ -21,10 +21,14 @@
 *
 */
 #include <limits>
-#include "ObjCryst/ReflectionProfile.h"
-#include "Quirks/VFNStreamFormat.h"
+#include "ObjCryst/ObjCryst/ReflectionProfile.h"
+#include "ObjCryst/Quirks/VFNStreamFormat.h"
 #ifdef __WX__CRYST__
-   #include "wxCryst/wxPowderPattern.h"
+   #include "ObjCryst/wxCryst/wxPowderPattern.h"
+#endif
+
+#ifdef HAVE_SSE_MATHFUN
+#include "ObjCryst/Quirks/sse_mathfun.h"
 #endif
 
 namespace ObjCryst
@@ -67,7 +71,7 @@ ObjRegistry<ReflectionProfile>
    gReflectionProfileRegistry("List of all ReflectionProfile types");;
 ////////////////////////////////////////////////////////////////////////
 //
-//    ReflectionProfile    
+//    ReflectionProfile
 //
 ////////////////////////////////////////////////////////////////////////
 ReflectionProfile::ReflectionProfile():
@@ -81,13 +85,13 @@ bool ReflectionProfile::IsAnisotropic()const
 {return false;}
 ////////////////////////////////////////////////////////////////////////
 //
-//    ReflectionProfilePseudoVoigt    
+//    ReflectionProfilePseudoVoigt
 //
 ////////////////////////////////////////////////////////////////////////
 ReflectionProfilePseudoVoigt::ReflectionProfilePseudoVoigt():
 ReflectionProfile(),
 mCagliotiU(0),mCagliotiV(0),mCagliotiW(.01*DEG2RAD*DEG2RAD),
-mPseudoVoigtEta0(0.0),mPseudoVoigtEta1(0.0),
+mPseudoVoigtEta0(0.5),mPseudoVoigtEta1(0.0),
 mAsymBerarBaldinozziA0(0.0),mAsymBerarBaldinozziA1(0.0),
 mAsymBerarBaldinozziB0(0.0),mAsymBerarBaldinozziB1(0.0),
 mAsym0(1.0),mAsym1(0.0),mAsym2(0.0)
@@ -131,7 +135,7 @@ const string& ReflectionProfilePseudoVoigt::GetClassName()const
 }
 
 CrystVector_REAL ReflectionProfilePseudoVoigt::GetProfile(const CrystVector_REAL &x,
-							  const REAL center,const REAL h, const REAL k, const REAL l) // Zdenek (const)
+                            const REAL center,const REAL h, const REAL k, const REAL l)const
 {
    VFN_DEBUG_ENTRY("ReflectionProfilePseudoVoigt::GetProfile(),c="<<center,2)
    REAL fwhm= mCagliotiW
@@ -139,17 +143,23 @@ CrystVector_REAL ReflectionProfilePseudoVoigt::GetProfile(const CrystVector_REAL
              +mCagliotiU*pow(tan(center/2.0),2);
    if(fwhm<=0)
    {
-      cout<<"ReflectionProfilePseudoVoigt::GetProfile(): fwhm**2<0 ! "
-          <<h<<","<<k<<","<<l<<":"<<center<<","<<mCagliotiU<<","<<mCagliotiV<<","<<","<<mCagliotiW<<":"<<fwhm<<endl;
+      VFN_DEBUG_MESSAGE("ReflectionProfilePseudoVoigt::GetProfile(): fwhm**2<0 ! "
+          <<h<<","<<k<<","<<l<<":"<<center<<","<<mCagliotiU<<","<<mCagliotiV<<","<<","<<mCagliotiW<<":"<<fwhm,10);
       fwhm=1e-6;
    }
    else fwhm=sqrt(fwhm);
    CrystVector_REAL profile,tmpV;
    const REAL asym=mAsym0+mAsym1/sin(center)+mAsym2/pow((REAL)sin(center),(REAL)2.0);
    profile=PowderProfileGauss(x,fwhm,center,asym);
-   profile *= 1-(mPseudoVoigtEta0+center*mPseudoVoigtEta1);
+
+   // Eta for gaussian/lorentzian mix. Make sure 0<=eta<=1, else profiles could be <0 !
+   REAL eta=mPseudoVoigtEta0+center*mPseudoVoigtEta1;
+   if(eta>1) eta=1;
+   if(eta<0) eta=0;
+
+   profile *= 1-eta;
    tmpV=PowderProfileLorentz(x,fwhm,center,asym);
-   tmpV *= mPseudoVoigtEta0+center*mPseudoVoigtEta1;
+   tmpV *= eta;
    profile += tmpV;
    //profile *= AsymmetryBerarBaldinozzi(x,fwhm,center,
    //                                    mAsymBerarBaldinozziA0,mAsymBerarBaldinozziA1,
@@ -189,10 +199,12 @@ REAL ReflectionProfilePseudoVoigt::GetFullProfileWidth(const REAL relativeIntens
    CrystVector_REAL prof;
    while(true)
    {
+      //Create an X array with 100 elements reaching +/- n*FWHM/2
       REAL *p=x.data();
       const REAL tmp=fwhm*n/nb;
       for(int i=0;i<nb;i++) *p++ = tmp*(i-halfnb);
       x+=center;
+
       prof=this->GetProfile(x,center,0,0,0);
       const REAL max=prof.max();
       const REAL test=max*relativeIntensity;
@@ -317,37 +329,37 @@ void ReflectionProfilePseudoVoigt::XMLOutput(ostream &os,int indent)const
 
    this->GetPar(&mCagliotiU).XMLOutput(os,"U",indent);
    os <<endl;
-   
+
    this->GetPar(&mCagliotiV).XMLOutput(os,"V",indent);
    os <<endl;
-   
+
    this->GetPar(&mCagliotiW).XMLOutput(os,"W",indent);
    os <<endl;
-   
+
    this->GetPar(&mPseudoVoigtEta0).XMLOutput(os,"Eta0",indent);
    os <<endl;
-   
+
    this->GetPar(&mPseudoVoigtEta1).XMLOutput(os,"Eta1",indent);
    os <<endl;
-   
+
    this->GetPar(&mAsym0).XMLOutput(os,"Asym0",indent);
    os <<endl;
-   
+
    this->GetPar(&mAsym1).XMLOutput(os,"Asym1",indent);
    os <<endl;
-   
+
    this->GetPar(&mAsym2).XMLOutput(os,"Asym2",indent);
    os <<endl;
    #if 0
    this->GetPar(&mAsymBerarBaldinozziA0).XMLOutput(os,"AsymA0",indent);
    os <<endl;
-   
+
    this->GetPar(&mAsymBerarBaldinozziA1).XMLOutput(os,"AsymA1",indent);
    os <<endl;
-   
+
    this->GetPar(&mAsymBerarBaldinozziB0).XMLOutput(os,"AsymB0",indent);
    os <<endl;
-   
+
    this->GetPar(&mAsymBerarBaldinozziB1).XMLOutput(os,"AsymB1",indent);
    os <<endl;
    #endif
@@ -448,7 +460,7 @@ void ReflectionProfilePseudoVoigt::XMLInput(istream &is,const XMLCrystTag &tagg)
       if("Option"==tag.GetName())
       {
          for(unsigned int i=0;i<tag.GetNbAttribute();i++)
-            if("Name"==tag.GetAttributeName(i)) 
+            if("Name"==tag.GetAttributeName(i))
                mOptionRegistry.GetObj(tag.GetAttributeValue(i)).XMLInput(is,tag);
          continue;
       }
@@ -467,7 +479,506 @@ WXCrystObjBasic* ReflectionProfilePseudoVoigt::WXCreate(wxWindow* parent)
 
 ////////////////////////////////////////////////////////////////////////
 //
-//    ReflectionProfileDoubleExponentialPseudoVoigt    
+//    ReflectionProfilePseudoVoigtAnisotropic
+//
+////////////////////////////////////////////////////////////////////////
+
+ReflectionProfilePseudoVoigtAnisotropic::ReflectionProfilePseudoVoigtAnisotropic():
+mCagliotiU(0),mCagliotiV(0),mCagliotiW(.01*DEG2RAD*DEG2RAD),mScherrerP(0),mLorentzX(0),mLorentzY(0),
+mLorentzGammaHH(0),mLorentzGammaKK(0),mLorentzGammaLL(0),mLorentzGammaHK(0),mLorentzGammaHL(0),mLorentzGammaKL(0),
+mPseudoVoigtEta0(0.5),mPseudoVoigtEta1(0),mAsym0(1.0),mAsym1(0),mAsym2(0)
+{
+   this->InitParameters();
+}
+
+ReflectionProfilePseudoVoigtAnisotropic::ReflectionProfilePseudoVoigtAnisotropic(const ReflectionProfilePseudoVoigtAnisotropic &old):
+mCagliotiU(old.mCagliotiU),mCagliotiV(old.mCagliotiV),mCagliotiW(old.mCagliotiW),mScherrerP(old.mScherrerP),mLorentzX(old.mLorentzX),mLorentzY(old.mLorentzY),
+mLorentzGammaHH(old.mLorentzGammaHH),mLorentzGammaKK(old.mLorentzGammaKK),mLorentzGammaLL(old.mLorentzGammaLL),mLorentzGammaHK(old.mLorentzGammaHK),mLorentzGammaHL(old.mLorentzGammaHL),mLorentzGammaKL(old.mLorentzGammaKL),
+mPseudoVoigtEta0(old.mPseudoVoigtEta0),mPseudoVoigtEta1(old.mPseudoVoigtEta1),mAsym0(old.mAsym0),mAsym1(old.mAsym1),mAsym2(old.mAsym2)
+{
+   this->InitParameters();
+}
+ReflectionProfilePseudoVoigtAnisotropic::~ReflectionProfilePseudoVoigtAnisotropic()
+{
+   #ifdef __WX__CRYST__
+   if(mpWXCrystObj!=0)
+   {
+      delete mpWXCrystObj;
+      mpWXCrystObj=0;
+   }
+   #endif
+}
+
+ReflectionProfilePseudoVoigtAnisotropic*   ReflectionProfilePseudoVoigtAnisotropic::CreateCopy()const
+{
+   return new ReflectionProfilePseudoVoigtAnisotropic(*this);
+}
+
+const string& ReflectionProfilePseudoVoigtAnisotropic::GetClassName()const
+{
+   static string className="ReflectionProfilePseudoVoigtAnisotropic";
+   return className;
+}
+
+CrystVector_REAL ReflectionProfilePseudoVoigtAnisotropic::GetProfile(const CrystVector_REAL &x, const REAL center,
+                            const REAL h, const REAL k, const REAL l)const
+{
+   VFN_DEBUG_ENTRY("ReflectionProfilePseudoVoigtAnisotropic::GetProfile()",2)
+   const REAL tantheta=tan(center/2.0);
+   const REAL costheta=cos(center/2.0);
+   const REAL sintheta=sin(center/2.0);
+   const REAL fwhmG=sqrt(abs( mCagliotiW+mCagliotiV*tantheta+mCagliotiU*tantheta*tantheta+mScherrerP/(costheta*costheta)));
+   const REAL gam=mLorentzGammaHH*h*h+mLorentzGammaKK*k*k+mLorentzGammaLL*l*l+2*mLorentzGammaHK*h*k+2*mLorentzGammaHL*h*l+2*mLorentzGammaKL*k*l;
+   const REAL fwhmL= mLorentzX/costheta+(mLorentzY+gam/(sintheta*sintheta))*tantheta;
+   // Eta for gaussian/lorentzian mix. Make sure 0<=eta<=1, else profiles could be <0 !
+   REAL eta=mPseudoVoigtEta0+center*mPseudoVoigtEta1;
+   if(eta>1) eta=1;
+   if(eta<0) eta=0;
+
+   CrystVector_REAL profile(x.numElements()),tmpV(x.numElements());
+   const REAL asym=mAsym0+mAsym1/sin(center)+mAsym2/pow((REAL)sin(center),(REAL)2.0);
+   VFN_DEBUG_MESSAGE("ReflectionProfilePseudoVoigtAnisotropic::GetProfile():("<<int(h)<<","<<int(k)<<","<<int(l)<<"),fwhmG="<<fwhmG<<",fwhmL="<<fwhmL<<",gam="<<gam<<",asym="<<asym<<",center="<<center<<",eta="<<eta, 2)
+   if(fwhmG>0)
+   {
+      profile=PowderProfileGauss(x,fwhmG,center,asym);
+      profile *= 1-eta;
+   }
+   else profile=0;
+   if(fwhmL>0)
+   {
+      tmpV=PowderProfileLorentz(x,fwhmL,center,asym);
+      tmpV *= eta;
+      profile += tmpV;
+   }
+   VFN_DEBUG_MESSAGE(FormatVertVector<REAL>(x,profile),1)
+   VFN_DEBUG_EXIT("ReflectionProfilePseudoVoigtAnisotropic::GetProfile()",2)
+   return profile;
+}
+
+void ReflectionProfilePseudoVoigtAnisotropic::SetProfilePar(const REAL fwhmCagliotiW,
+                   const REAL fwhmCagliotiU,
+                   const REAL fwhmCagliotiV,
+                   const REAL fwhmGaussP,
+                   const REAL fwhmLorentzX,
+                   const REAL fwhmLorentzY,
+                   const REAL fwhmLorentzGammaHH,
+                   const REAL fwhmLorentzGammaKK,
+                   const REAL fwhmLorentzGammaLL,
+                   const REAL fwhmLorentzGammaHK,
+                   const REAL fwhmLorentzGammaHL,
+                   const REAL fwhmLorentzGammaKL,
+                   const REAL pseudoVoigtEta0,
+                   const REAL pseudoVoigtEta1,
+                   const REAL asymA0,
+                   const REAL asymA1,
+                   const REAL asymA2
+                   )
+{
+   mCagliotiU=fwhmCagliotiU;
+   mCagliotiV=fwhmCagliotiV;
+   mCagliotiW=fwhmCagliotiW;
+   mLorentzX=fwhmLorentzX;
+   mLorentzY=fwhmLorentzY;
+   mLorentzGammaHH=fwhmLorentzGammaHH;
+   mLorentzGammaKK=fwhmLorentzGammaKK;
+   mLorentzGammaLL=fwhmLorentzGammaLL;
+   mLorentzGammaHK=fwhmLorentzGammaHK;
+   mLorentzGammaHL=fwhmLorentzGammaHL;
+   mLorentzGammaKL=fwhmLorentzGammaKL;
+   mPseudoVoigtEta0=pseudoVoigtEta0;
+   mPseudoVoigtEta1=pseudoVoigtEta1;
+   mAsym0=asymA0;
+   mAsym1=asymA1;
+   mAsym2=asymA2;
+   mClockMaster.Click();
+}
+
+REAL ReflectionProfilePseudoVoigtAnisotropic::GetFullProfileWidth(const REAL relativeIntensity, const REAL center,
+                                 const REAL h, const REAL k, const REAL l)
+{
+   VFN_DEBUG_ENTRY("ReflectionProfilePseudoVoigt::GetFullProfileWidth()",2)
+   const int nb=100;
+   const int halfnb=nb/2;
+   CrystVector_REAL x(nb);
+   REAL n=5.0;
+   const REAL tantheta=tan(center/2.0);
+   const REAL costheta=cos(center/2.0);
+   const REAL sintheta=sin(center/2.0);
+   const REAL fwhmG=sqrt(abs( mCagliotiW+mCagliotiV*tantheta+mCagliotiU*tantheta*tantheta+mScherrerP/(costheta*costheta)));
+   const REAL gam=mLorentzGammaHH*h*h+mLorentzGammaKK*k*k+mLorentzGammaLL*l*l+2*mLorentzGammaHK*h*k+2*mLorentzGammaHL*h*l+2*mLorentzGammaKL*k*l;
+   const REAL fwhmL= mLorentzX/costheta+(mLorentzY+gam/(sintheta*sintheta))*tantheta;
+   const REAL eta=mPseudoVoigtEta0+mPseudoVoigtEta1*center;
+   // Obviously this is not the REAL FWHM, just a _very_ crude starting approximation
+   REAL fwhm=fwhmL*eta+fwhmG*(1-eta);
+   if(fwhm<=0) fwhm=1e-3;
+   CrystVector_REAL prof;
+   while(true)
+   {
+      //Create an X array with 100 elements reaching +/- n*FWHM/2
+      REAL *p=x.data();
+      const REAL tmp=fwhm*n/nb;
+      for(int i=0;i<nb;i++) *p++ = tmp*(i-halfnb);
+      x+=center;
+      prof=this->GetProfile(x,center,h,k,l);
+      const REAL max=prof.max();
+      const REAL test=max*relativeIntensity;
+      int n1=0,n2=0;
+      if((prof(0)<test)&&(prof(nb-1)<test))
+      {
+         p=prof.data();
+         while(*p<test){ p++; n1++;n2++;}
+         n1--;
+         while(*p>test){ p++; n2++;}
+         VFN_DEBUG_EXIT("ReflectionProfilePseudoVoigtAnisotropic::GetFullProfileWidth():"<<x(n2)-x(n1),2)
+         return x(n2)-x(n1);
+      }
+      VFN_DEBUG_MESSAGE("ReflectionProfilePseudoVoigtAnisotropic::GetFullProfileWidth():"<<relativeIntensity<<","
+                        <<fwhm<<","<<center<<","<<h<<","<<k<<","<<l<<","<<max<<","<<test,2)
+      VFN_DEBUG_MESSAGE(FormatVertVector<REAL>(x,prof),1)
+      n*=2.0;
+   }
+}
+
+bool ReflectionProfilePseudoVoigtAnisotropic::IsAnisotropic()const
+{
+   return true;
+}
+
+void ReflectionProfilePseudoVoigtAnisotropic::XMLOutput(ostream &os,int indent)const
+{
+   VFN_DEBUG_ENTRY("ReflectionProfilePseudoVoigtAnisotropic::XMLOutput():"<<this->GetName(),5)
+   for(int i=0;i<indent;i++) os << "  " ;
+   XMLCrystTag tag("ReflectionProfilePseudoVoigtAnisotropic");
+   os <<tag<<endl;
+   indent++;
+
+   this->GetPar(&mCagliotiU).XMLOutput(os,"U",indent);
+   os <<endl;
+
+   this->GetPar(&mCagliotiV).XMLOutput(os,"V",indent);
+   os <<endl;
+
+   this->GetPar(&mCagliotiW).XMLOutput(os,"W",indent);
+   os <<endl;
+
+   this->GetPar(&mScherrerP).XMLOutput(os,"P",indent);
+   os <<endl;
+
+   this->GetPar(&mLorentzX).XMLOutput(os,"X",indent);
+   os <<endl;
+
+   this->GetPar(&mLorentzY).XMLOutput(os,"Y",indent);
+   os <<endl;
+
+   this->GetPar(&mLorentzGammaHH).XMLOutput(os,"G_HH",indent);
+   os <<endl;
+
+   this->GetPar(&mLorentzGammaKK).XMLOutput(os,"G_KK",indent);
+   os <<endl;
+
+   this->GetPar(&mLorentzGammaLL).XMLOutput(os,"G_LL",indent);
+   os <<endl;
+
+   this->GetPar(&mLorentzGammaHK).XMLOutput(os,"G_HK",indent);
+   os <<endl;
+
+   this->GetPar(&mLorentzGammaHL).XMLOutput(os,"G_HL",indent);
+   os <<endl;
+
+   this->GetPar(&mLorentzGammaKL).XMLOutput(os,"G_KL",indent);
+   os <<endl;
+
+   this->GetPar(&mPseudoVoigtEta0).XMLOutput(os,"Eta0",indent);
+   os <<endl;
+
+   this->GetPar(&mPseudoVoigtEta1).XMLOutput(os,"Eta1",indent);
+   os <<endl;
+
+   this->GetPar(&mAsym0).XMLOutput(os,"Asym0",indent);
+   os <<endl;
+
+   this->GetPar(&mAsym1).XMLOutput(os,"Asym1",indent);
+   os <<endl;
+
+   this->GetPar(&mAsym2).XMLOutput(os,"Asym2",indent);
+   os <<endl;
+   indent--;
+   tag.SetIsEndTag(true);
+   for(int i=0;i<indent;i++) os << "  " ;
+   os <<tag<<endl;
+   VFN_DEBUG_EXIT("ReflectionProfilePseudoVoigtAnisotropic::XMLOutput():"<<this->GetName(),5)
+}
+
+void ReflectionProfilePseudoVoigtAnisotropic::XMLInput(istream &is,const XMLCrystTag &tagg)
+{
+   VFN_DEBUG_ENTRY("ReflectionProfilePseudoVoigtAnisotropic::XMLInput():"<<this->GetName(),5)
+   for(unsigned int i=0;i<tagg.GetNbAttribute();i++)
+   {
+      if("Name"==tagg.GetAttributeName(i)) this->SetName(tagg.GetAttributeValue(i));
+   }
+   while(true)
+   {
+      XMLCrystTag tag(is);
+      if(("ReflectionProfilePseudoVoigtAnisotropic"==tag.GetName())&&tag.IsEndTag())
+      {
+         this->UpdateDisplay();
+         VFN_DEBUG_EXIT("ReflectionProfilePseudoVoigtAnisotropic::Exit():"<<this->GetName(),5)
+         return;
+      }
+      if("Par"==tag.GetName())
+      {
+         for(unsigned int i=0;i<tag.GetNbAttribute();i++)
+         {
+            if("Name"==tag.GetAttributeName(i))
+            {
+               if("U"==tag.GetAttributeValue(i))
+               {
+                  this->GetPar(&mCagliotiU).XMLInput(is,tag);
+                  break;
+               }
+               if("V"==tag.GetAttributeValue(i))
+               {
+                  this->GetPar(&mCagliotiV).XMLInput(is,tag);
+                  break;
+               }
+               if("W"==tag.GetAttributeValue(i))
+               {
+                  this->GetPar(&mCagliotiW).XMLInput(is,tag);
+                  break;
+               }
+               if("P"==tag.GetAttributeValue(i))
+               {
+                  this->GetPar(&mScherrerP).XMLInput(is,tag);
+                  break;
+               }
+               if("X"==tag.GetAttributeValue(i))
+               {
+                  this->GetPar(&mLorentzX).XMLInput(is,tag);
+                  break;
+               }
+               if("Y"==tag.GetAttributeValue(i))
+               {
+                  this->GetPar(&mLorentzY).XMLInput(is,tag);
+                  break;
+               }
+               if("G_HH"==tag.GetAttributeValue(i))
+               {
+                  this->GetPar(&mLorentzGammaHH).XMLInput(is,tag);
+                  break;
+               }
+               if("G_KK"==tag.GetAttributeValue(i))
+               {
+                  this->GetPar(&mLorentzGammaKK).XMLInput(is,tag);
+                  break;
+               }
+               if("G_LL"==tag.GetAttributeValue(i))
+               {
+                  this->GetPar(&mLorentzGammaLL).XMLInput(is,tag);
+                  break;
+               }
+               if("G_HK"==tag.GetAttributeValue(i))
+               {
+                  this->GetPar(&mLorentzGammaHK).XMLInput(is,tag);
+                  break;
+               }
+               if("G_HL"==tag.GetAttributeValue(i))
+               {
+                  this->GetPar(&mLorentzGammaHL).XMLInput(is,tag);
+                  break;
+               }
+               if("G_KL"==tag.GetAttributeValue(i))
+               {
+                  this->GetPar(&mLorentzGammaKL).XMLInput(is,tag);
+                  break;
+               }
+               if("Eta0"==tag.GetAttributeValue(i))
+               {
+                  this->GetPar(&mPseudoVoigtEta0).XMLInput(is,tag);
+                  break;
+               }
+               if("Eta1"==tag.GetAttributeValue(i))
+               {
+                  this->GetPar(&mPseudoVoigtEta1).XMLInput(is,tag);
+                  break;
+               }
+               if("Asym0"==tag.GetAttributeValue(i))
+               {
+                  this->GetPar(&mAsym0).XMLInput(is,tag);
+                  break;
+               }
+               if("Asym1"==tag.GetAttributeValue(i))
+               {
+                  this->GetPar(&mAsym1).XMLInput(is,tag);
+                  break;
+               }
+               if("Asym2"==tag.GetAttributeValue(i))
+               {
+                  this->GetPar(&mAsym2).XMLInput(is,tag);
+                  break;
+               }
+            }
+         }
+         continue;
+      }
+      if("Option"==tag.GetName())
+      {
+         for(unsigned int i=0;i<tag.GetNbAttribute();i++)
+            if("Name"==tag.GetAttributeName(i))
+               mOptionRegistry.GetObj(tag.GetAttributeValue(i)).XMLInput(is,tag);
+         continue;
+      }
+   }
+}
+
+void ReflectionProfilePseudoVoigtAnisotropic::InitParameters()
+{
+   {
+      RefinablePar tmp("U",&mCagliotiU,-1/RAD2DEG/RAD2DEG,1./RAD2DEG/RAD2DEG,
+                       gpRefParTypeScattDataProfileWidth,
+                       REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false,RAD2DEG*RAD2DEG);
+      tmp.AssignClock(mClockMaster);
+      tmp.SetDerivStep(1e-9);
+      this->AddPar(tmp);
+   }
+   {
+      RefinablePar tmp("V",&mCagliotiV,-1/RAD2DEG/RAD2DEG,1./RAD2DEG/RAD2DEG,
+                       gpRefParTypeScattDataProfileWidth,
+                       REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false,RAD2DEG*RAD2DEG);
+      tmp.AssignClock(mClockMaster);
+      tmp.SetDerivStep(1e-9);
+      this->AddPar(tmp);
+   }
+   {
+      RefinablePar tmp("W",&mCagliotiW,0,1./RAD2DEG/RAD2DEG,
+                       gpRefParTypeScattDataProfileWidth,
+                       REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false,RAD2DEG*RAD2DEG);
+      tmp.AssignClock(mClockMaster);
+      tmp.SetDerivStep(1e-9);
+      this->AddPar(tmp);
+   }
+   {
+      RefinablePar tmp("P",&mScherrerP,-1./RAD2DEG/RAD2DEG,1./RAD2DEG/RAD2DEG,
+                       gpRefParTypeScattDataProfileWidth,
+                       REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false,RAD2DEG*RAD2DEG);
+      tmp.AssignClock(mClockMaster);
+      tmp.SetDerivStep(1e-9);
+      this->AddPar(tmp);
+   }
+   {
+      RefinablePar tmp("X",&mLorentzX,0,1./RAD2DEG,
+                       gpRefParTypeScattDataProfileWidth,
+                       REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false,RAD2DEG);
+      tmp.AssignClock(mClockMaster);
+      tmp.SetDerivStep(1e-9);
+      this->AddPar(tmp);
+   }
+   {
+      RefinablePar tmp("Y",&mLorentzY,-1./RAD2DEG,1./RAD2DEG,
+                       gpRefParTypeScattDataProfileWidth,
+                       REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false,RAD2DEG);
+      tmp.AssignClock(mClockMaster);
+      tmp.SetDerivStep(1e-9);
+      this->AddPar(tmp);
+   }
+   {
+      RefinablePar tmp("G_HH",&mLorentzGammaHH,-1./RAD2DEG,1./RAD2DEG,
+                       gpRefParTypeScattDataProfileWidth,
+                       REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false,RAD2DEG);
+      tmp.AssignClock(mClockMaster);
+      tmp.SetDerivStep(1e-9);
+      this->AddPar(tmp);
+   }
+   {
+      RefinablePar tmp("G_KK",&mLorentzGammaKK,-1./RAD2DEG,1./RAD2DEG,
+                       gpRefParTypeScattDataProfileWidth,
+                       REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false,RAD2DEG);
+      tmp.AssignClock(mClockMaster);
+      tmp.SetDerivStep(1e-9);
+      this->AddPar(tmp);
+   }
+   {
+      RefinablePar tmp("G_LL",&mLorentzGammaLL,-1./RAD2DEG,1./RAD2DEG,
+                       gpRefParTypeScattDataProfileWidth,
+                       REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false,RAD2DEG);
+      tmp.AssignClock(mClockMaster);
+      tmp.SetDerivStep(1e-9);
+      this->AddPar(tmp);
+   }
+   {
+      RefinablePar tmp("G_HK",&mLorentzGammaHK,-1./RAD2DEG,1./RAD2DEG,
+                       gpRefParTypeScattDataProfileWidth,
+                       REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false,RAD2DEG);
+      tmp.AssignClock(mClockMaster);
+      tmp.SetDerivStep(1e-9);
+      this->AddPar(tmp);
+   }
+   {
+      RefinablePar tmp("G_HL",&mLorentzGammaHL,-1./RAD2DEG,1./RAD2DEG,
+                       gpRefParTypeScattDataProfileWidth,
+                       REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false,RAD2DEG);
+      tmp.AssignClock(mClockMaster);
+      tmp.SetDerivStep(1e-9);
+      this->AddPar(tmp);
+   }
+   {
+      RefinablePar tmp("G_KL",&mLorentzGammaKL,-1./RAD2DEG,1./RAD2DEG,
+                       gpRefParTypeScattDataProfileWidth,
+                       REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false,RAD2DEG);
+      tmp.AssignClock(mClockMaster);
+      tmp.SetDerivStep(1e-9);
+      this->AddPar(tmp);
+   }
+   {
+      RefinablePar tmp("Eta0",&mPseudoVoigtEta0,0,1.,gpRefParTypeScattDataProfileType,
+                       REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false);
+      tmp.AssignClock(mClockMaster);
+      tmp.SetDerivStep(1e-4);
+      this->AddPar(tmp);
+   }
+   {
+      RefinablePar tmp("Eta1",&mPseudoVoigtEta1,-1,1.,gpRefParTypeScattDataProfileType,
+                       REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false);
+      tmp.AssignClock(mClockMaster);
+      tmp.SetDerivStep(1e-4);
+      this->AddPar(tmp);
+   }
+   {
+      RefinablePar tmp("Asym0",&mAsym0,0.01,10.0,gpRefParTypeScattDataProfileAsym,
+                       REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false);
+      tmp.AssignClock(mClockMaster);
+      tmp.SetDerivStep(1e-4);
+      this->AddPar(tmp);
+   }
+   {
+      RefinablePar tmp("Asym1",&mAsym1,-1.0,1.0,gpRefParTypeScattDataProfileAsym,
+                       REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false);
+      tmp.AssignClock(mClockMaster);
+      tmp.SetDerivStep(1e-4);
+      this->AddPar(tmp);
+   }
+   {
+      RefinablePar tmp("Asym2",&mAsym2,-1.0,1.0,gpRefParTypeScattDataProfileAsym,
+                       REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false);
+      tmp.AssignClock(mClockMaster);
+      tmp.SetDerivStep(1e-4);
+      this->AddPar(tmp);
+   }
+}
+
+#ifdef __WX__CRYST__
+WXCrystObjBasic* ReflectionProfilePseudoVoigtAnisotropic::WXCreate(wxWindow* parent)
+{
+   VFN_DEBUG_ENTRY("ReflectionProfilePseudoVoigt::WXCreate()",6)
+   if(mpWXCrystObj==0)
+      mpWXCrystObj=new WXProfilePseudoVoigtAnisotropic(parent,this);
+   VFN_DEBUG_EXIT("ReflectionProfilePseudoVoigt::WXCreate()",6)
+   return mpWXCrystObj;
+}
+#endif
+
+////////////////////////////////////////////////////////////////////////
+//
+//    ReflectionProfileDoubleExponentialPseudoVoigt
 //
 ////////////////////////////////////////////////////////////////////////
 ReflectionProfileDoubleExponentialPseudoVoigt::ReflectionProfileDoubleExponentialPseudoVoigt():
@@ -551,7 +1062,7 @@ const string& ReflectionProfileDoubleExponentialPseudoVoigt::GetClassName()const
 
 CrystVector_REAL ReflectionProfileDoubleExponentialPseudoVoigt
    ::GetProfile(const CrystVector_REAL &x, const REAL center,
-                const REAL h, const REAL k, const REAL l) // Zdenek (const)
+                const REAL h, const REAL k, const REAL l)const
 {
    VFN_DEBUG_ENTRY("ReflectionProfileDoubleExponentialPseudoVoigt::GetProfile()",4)
    REAL dcenter=0;
@@ -603,10 +1114,10 @@ CrystVector_REAL ReflectionProfileDoubleExponentialPseudoVoigt
       // Use asymptotic value for erfc(x) = 1/(sqrt(pi)*x*exp(x^2)) [A&S 7.1.23]
       if(z>10.0) expnu_erfcz=exp(nu-z*z)/(z*sqrt(M_PI));
       else expnu_erfcz=exp(nu)*erfc(z);
-      
+
       if(y>10.0) expu_erfcy=exp(u-y*y)/(y*sqrt(M_PI));
       else expu_erfcy=exp(u)*erfc(y);
-      
+
       #if 0
       double tmp=(1-eta)*alpha*beta/(2*(alpha+beta))*(expu_erfcy+expnu_erfcz)
            -eta*alpha*beta/(M_PI*(alpha+beta))*(e1p.imag()+e1q.imag());
@@ -724,7 +1235,8 @@ REAL ReflectionProfileDoubleExponentialPseudoVoigt
       n*=2.0;
       //if(n>200) exit(0);
    }
-   VFN_DEBUG_EXIT("ReflectionProfileDoubleExponentialPseudoVoigt::GetFullProfileWidth()",5)
+   // unreachable code.
+   // VFN_DEBUG_EXIT("ReflectionProfileDoubleExponentialPseudoVoigt::GetFullProfileWidth()",5)
 }
 
 bool ReflectionProfileDoubleExponentialPseudoVoigt
@@ -741,34 +1253,34 @@ void ReflectionProfileDoubleExponentialPseudoVoigt
 
    this->GetPar(&mInstrumentAlpha0).XMLOutput(os,"Alpha0",indent);
    os <<endl;
-   
+
    this->GetPar(&mInstrumentAlpha1).XMLOutput(os,"Alpha1",indent);
    os <<endl;
-   
+
    this->GetPar(&mInstrumentBeta0).XMLOutput(os,"Beta0",indent);
    os <<endl;
-   
+
    this->GetPar(&mInstrumentBeta1).XMLOutput(os,"Beta1",indent);
    os <<endl;
-   
+
    this->GetPar(&mGaussianSigma0).XMLOutput(os,"GaussianSigma0",indent);
    os <<endl;
-   
+
    this->GetPar(&mGaussianSigma1).XMLOutput(os,"GaussianSigma1",indent);
    os <<endl;
-   
+
    this->GetPar(&mGaussianSigma2).XMLOutput(os,"GaussianSigma2",indent);
    os <<endl;
-   
+
    this->GetPar(&mLorentzianGamma0).XMLOutput(os,"LorentzianGamma0",indent);
    os <<endl;
-   
+
    this->GetPar(&mLorentzianGamma1).XMLOutput(os,"LorentzianGamma1",indent);
    os <<endl;
-   
+
    this->GetPar(&mLorentzianGamma2).XMLOutput(os,"LorentzianGamma2",indent);
    os <<endl;
-   
+
    indent--;
    tag.SetIsEndTag(true);
    for(int i=0;i<indent;i++) os << "  " ;
@@ -807,7 +1319,7 @@ void ReflectionProfileDoubleExponentialPseudoVoigt
       if("Option"==tag.GetName())
       {
          for(unsigned int i=0;i<tag.GetNbAttribute();i++)
-            if("Name"==tag.GetAttributeName(i)) 
+            if("Name"==tag.GetAttributeName(i))
                mOptionRegistry.GetObj(tag.GetAttributeValue(i)).XMLInput(is,tag);
          continue;
       }
@@ -935,15 +1447,54 @@ CrystVector_REAL PowderProfileGauss  (const CrystVector_REAL ttheta,const REAL f
       for(i=0;i<nbPoints;i++){ *p++ *= c1;if(*pt++>center) break;}
       i++;
       for(   ;i<nbPoints;i++)  *p++ *= c2;
-   }   p=result.data();
+   }
+   p=result.data();
    #ifdef _MSC_VER
    // Bug from Hell (in MSVC++) !
    // The *last* point ends up sometimes with an arbitrary large value...
    for(long i=0;i<nbPoints;i++) { *p = pow((float)2.71828182846,(float)*p) ; p++ ;}
    #else
-   for(long i=0;i<nbPoints;i++) { *p = exp(*p) ; p++ ;}
+   long i=nbPoints;
+   for(;i>3;i-=4)
+   {
+     #ifdef HAVE_SSE_MATHFUN
+     v4sf x=_mm_loadu_ps(p);
+     _mm_storeu_ps(p,exp_ps(x));
+     p+=4;
+     #else
+     for(unsigned int j=0;j<4;++j)
+     {// Fixed-length loop enables vectorization
+       *p = exp(*p) ;
+       p++ ;
+     }
+     #endif
+   }
+   for(;i>0;i--) { *p = exp(*p) ; p++ ;}
    #endif
-   
+
+#if 0
+   #if 1 //def _MSC_VER
+   // Bug from Hell (in MSVC++) !
+   // The *last* point ends up sometimes with an arbitrary large value...
+   long i=0;
+   for(;i<nbPoints;i+=4)
+      for(unsigned int j=0;j<4;++j)
+      {// Fixed-length loop enables vectorization
+        *p = pow((float)2.71828182846,(float)*p) ;
+        p++ ;
+      }
+   #else
+   long i=0;
+   for(;i<nbPoints;i+=1)
+   {
+     //for(unsigned int j=0;j<4;++j)
+     {// Fixed-length loop enables vectorization
+       *p = exp(*p) ;
+       p++ ;
+     }
+   }
+   #endif
+#endif
    result *= 2. / fwhm * sqrt(log(2.)/M_PI);
    return result;
 }
@@ -1000,7 +1551,7 @@ CrystVector_REAL AsymmetryBerarBaldinozzi(const CrystVector_REAL x,
    const REAL a=a0/tan(center/2)+a1/tan(center);
    const REAL b=b0/tan(center/2)+b1/tan(center);
    for(long i=0;i<nbPoints;i++)
-   { 
+   {
       *p = 1+*p * exp(-*p * *p)*(2*a+b*(8* *p * *p-12));
       p++ ;
    }

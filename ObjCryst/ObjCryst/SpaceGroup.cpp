@@ -30,16 +30,34 @@
 #include "cctbx/miller/sym_equiv.h"
 #include "boost/rational.hpp"
 
-#include "ObjCryst/SpaceGroup.h"
-#include "Quirks/VFNStreamFormat.h" //simple formatting of integers, REALs..
-#include "ObjCryst/GeomStructFactor.h" //Geometrical Struct Factor definitions
-#include "Quirks/VFNDebug.h"
+#include "ObjCryst/ObjCryst/SpaceGroup.h"
+#include "ObjCryst/Quirks/VFNStreamFormat.h" //simple formatting of integers, REALs..
+#include "ObjCryst/ObjCryst/GeomStructFactor.h" //Geometrical Struct Factor definitions
+#include "ObjCryst/Quirks/VFNDebug.h"
 
 
 #include <fstream>
 
+#define POSSIBLY_UNUSED(expr) (void)(expr)
+
 namespace ObjCryst
 {
+
+#include "ObjCryst/Quirks/VFNDebug.h"
+
+// We need to force the C locale when using cctbx (when interpreting xyz strings)
+tmp_C_Numeric_locale::tmp_C_Numeric_locale()
+{
+   char *old;
+   old=setlocale(LC_NUMERIC,NULL);
+   mLocale=old;
+   setlocale(LC_NUMERIC,"C");
+}
+
+tmp_C_Numeric_locale::~tmp_C_Numeric_locale()
+{
+   setlocale(LC_NUMERIC,mLocale.c_str());
+}
 
 ////////////////////////////////////////////////////////////////////////
 //
@@ -71,6 +89,7 @@ AsymmetricUnit::~AsymmetricUnit()
 void AsymmetricUnit::SetSpaceGroup(const SpaceGroup &spg)
 {
    VFN_DEBUG_MESSAGE("AsymmetricUnit::SetSpaceGroup(SpGroup)",5)
+   tmp_C_Numeric_locale tmploc;
    # if 0
    TAU_PROFILE("(AsymmetricUnit::SetSpaceGroup)","void (SpaceGroup)",TAU_DEFAULT);
    mXmin=0.;
@@ -96,19 +115,19 @@ void AsymmetricUnit::SetSpaceGroup(const SpaceGroup &spg)
             }
    }
    testPoints += 0.01;
-   
+
    CrystVector_REAL vert(8);//vertices limits
    vert(0)=1/8.; vert(1)=1/6.; vert(2)=1/4.; vert(3)=1/3.;
    vert(4)=1/2.; vert(5)=2/3.; vert(6)=3/4.; vert(7)=1.;
-   
+
    const int NbStep=vert.numElements();
-                
+
    CrystMatrix_REAL coords;
-   
+
    double junk;
-   
+
    REAL minVolume=1.;
-   
+
    bool allPtsInAsym,tmp;
    for(long nx=0;nx<NbStep;nx++)
       for(long ny=0;ny<NbStep;ny++)
@@ -169,7 +188,7 @@ void AsymmetricUnit::SetSpaceGroup(const SpaceGroup &spg)
    mXmax=boost::rational_cast<REAL,int>(b(0,1).value());
    mYmax=boost::rational_cast<REAL,int>(b(1,1).value());
    mZmax=boost::rational_cast<REAL,int>(b(2,1).value());
-   
+
    #endif
 }
 
@@ -188,7 +207,7 @@ REAL AsymmetricUnit::Zmax() const {return mZmax;}
 
 ////////////////////////////////////////////////////////////////////////
 //
-//    SpaceGroup 
+//    SpaceGroup
 //
 ////////////////////////////////////////////////////////////////////////
 
@@ -233,7 +252,7 @@ int SpaceGroup::GetSpaceGroupNumber()const
 {
    return mSpgNumber;
 }
-      
+
 bool SpaceGroup::IsCentrosymmetric()const
 {
    return mHasInversionCenter;
@@ -243,12 +262,16 @@ int SpaceGroup::GetNbTranslationVectors()const
 {
    return mNbTrans;
 }
-      
+
 const std::vector<SpaceGroup::TRx>& SpaceGroup::GetTranslationVectors()const
 {
    return mvTrans;
 }
 
+const std::vector<SpaceGroup::SMx>& SpaceGroup::GetSymmetryOperations()const
+{
+   return mvSym;
+}
 
 CrystMatrix_REAL SpaceGroup::GetAllSymmetrics(const REAL x, const REAL y, const REAL z,
                                 const bool noCenter,const bool noTransl,
@@ -260,11 +283,11 @@ CrystMatrix_REAL SpaceGroup::GetAllSymmetrics(const REAL x, const REAL y, const 
    nbMatrix=this->GetCCTbxSpg().n_smx();
    nbTrans=this->GetNbTranslationVectors();
    if(this->IsCentrosymmetric()) coeffInvert=2 ; else coeffInvert=1;
-   
+
    if(noCenter==true) coeffInvert=1;   //skip center of symmetry
    if(noTransl==true) nbTrans=1; //skip translation operations
    CrystMatrix_REAL coords(nbMatrix*nbTrans*coeffInvert,3);
-   
+
    k=0;
    for(i=0;i<nbTrans;i++)
    {
@@ -300,26 +323,25 @@ CrystMatrix_REAL SpaceGroup::GetAllSymmetrics(const REAL x, const REAL y, const 
          coords(i+shift,2)=dz-coords(i,2);
       }
    }
-   //for(i=0;i<nbTrans*nbMatrix*coeffInvert;i++) 
+   //for(i=0;i<nbTrans*nbMatrix*coeffInvert;i++)
    //cout <<FormatFloat(coords(0,i))<<FormatFloat(coords(1,i))<<FormatFloat(coords(2,i))<<endl;
    //if(noTransl==false) cout <<coords<<endl;
-   
+
    if(true==noIdentical)
    {
       VFN_DEBUG_MESSAGE("SpaceGroup::GetAllSymmetrics():Removing identical atoms",5)
       //Bring back all coordinates to [0;1[
-      const REAL eps=1e-5; // Zdenek L324 -> L311
       REAL *p=coords.data();
       double junk;
       for(long i=0;i<coords.numElements();i++)
       {
          *p = modf(*p,&junk);
-         if(*p<-eps/2) *p += 1.; // Zdenek 0 -> -eps/2
+         if(*p<0) *p += 1.;
          p++;
       }
       CrystMatrix_REAL newCoords;
       newCoords=coords;
-      //const REAL eps=1e-5; // Zdenek L324 -> L311
+      const REAL eps=1e-5;
       long nbKeep=0;
       for(long i=0;i<coords.rows();i++)
       {
@@ -342,6 +364,55 @@ CrystMatrix_REAL SpaceGroup::GetAllSymmetrics(const REAL x, const REAL y, const 
    }
    VFN_DEBUG_MESSAGE("SpaceGroup::GetAllSymmetrics():End",0)
    return coords;
+}
+void SpaceGroup::GetSymmetric(unsigned int idx, REAL &x, REAL &y, REAL &z,
+                              const bool noCenter,const bool noTransl,
+                              const bool derivative) const
+{
+   int coeffInvert;
+   const int nbMatrix=this->GetCCTbxSpg().n_smx();
+   int nbTrans=this->GetNbTranslationVectors();  POSSIBLY_UNUSED(nbTrans);
+   if(this->IsCentrosymmetric()) coeffInvert=2 ; else coeffInvert=1;
+
+   if(noCenter==true) coeffInvert=1;   //skip center of symmetry
+   if(noTransl==true) nbTrans=1; //skip translation operations
+
+   const int i=idx/nbMatrix;//translation index
+   const int j=idx%nbMatrix;
+
+   const REAL ltr_den=1/(REAL)(this->GetCCTbxSpg().ltr(i).den());
+   const REAL tx=this->GetCCTbxSpg().ltr(i)[0]*ltr_den;
+   const REAL ty=this->GetCCTbxSpg().ltr(i)[1]*ltr_den;
+   const REAL tz=this->GetCCTbxSpg().ltr(i)[2]*ltr_den;
+   const cctbx::sgtbx::rt_mx *pMatrix=&(this->GetCCTbxSpg().smx(j));
+   const cctbx::sgtbx::rot_mx *pRot=&(pMatrix->r());
+   const cctbx::sgtbx::tr_vec *pTrans=&(pMatrix->t());
+   const REAL r_den=1/(REAL)(pMatrix->r().den());
+   const REAL t_den=1/(REAL)(pMatrix->t().den());
+   const REAL x1= ((*pRot)[0]*x+(*pRot)[1]*y+(*pRot)[2]*z)*r_den;
+   const REAL y1= ((*pRot)[3]*x+(*pRot)[4]*y+(*pRot)[5]*z)*r_den;
+   const REAL z1= ((*pRot)[6]*x+(*pRot)[7]*y+(*pRot)[8]*z)*r_den;
+   if(derivative==false)
+   {
+      x=x1+(*pTrans)[0]*t_den+tx;
+      y=y1+(*pTrans)[1]*t_den+ty;
+      z=z1+(*pTrans)[2]*t_den+tz;
+   }
+   else
+   {
+      x=x1;
+      y=y1;
+      z=z1;
+   }
+   if(coeffInvert==2) //inversion center not in ListSeitzMx, but to be applied
+   {
+      const REAL dx=((REAL)this->GetCCTbxSpg().inv_t()[0])/(REAL)this->GetCCTbxSpg().inv_t().den();//inversion not at the origin
+      const REAL dy=((REAL)this->GetCCTbxSpg().inv_t()[1])/(REAL)this->GetCCTbxSpg().inv_t().den();
+      const REAL dz=((REAL)this->GetCCTbxSpg().inv_t()[2])/(REAL)this->GetCCTbxSpg().inv_t().den();
+      x=dx-x;
+      y=dy-y;
+      z=dz-z;
+   }
 }
 
 int SpaceGroup::GetNbSymmetrics(const bool noCenter,const bool noTransl)const
@@ -386,7 +457,7 @@ void SpaceGroup::Print() const
                         << this->GetCCTbxSpg().ltr(i)[1]/(REAL)this->GetCCTbxSpg().ltr(i).den()<<","
                         << this->GetCCTbxSpg().ltr(i)[2]/(REAL)this->GetCCTbxSpg().ltr(i).den()<<endl;
    }
-   cout<<"Extension (origin choice, rhomboedral/hexagonal):"<<(mExtension!='\0' ? mExtension : ' ')<<endl; // Zdenek
+   cout<<"Extension (origin choice, rhomboedral/hexagonal):"<<mExtension<<endl;
 }
 bool SpaceGroup::HasInversionCenter() const {return mHasInversionCenter;}
 bool SpaceGroup::IsInversionCenterAtOrigin() const {return mIsInversionCenterAtOrigin;}
@@ -397,6 +468,14 @@ const RefinableObjClock& SpaceGroup::GetClockSpaceGroup() const{return mClock;}
 unsigned int SpaceGroup::GetUniqueAxis()const{return mUniqueAxisId;}
 
 char SpaceGroup::GetExtension()const{return mExtension;}
+
+CrystVector_REAL SpaceGroup::GetInversionCenter()const {
+   CrystVector_REAL center(3);
+   center(0) =((REAL)this->GetCCTbxSpg().inv_t()[0])/(REAL)this->GetCCTbxSpg().inv_t().den();//inversion not at the origin
+   center(1) =((REAL)this->GetCCTbxSpg().inv_t()[1])/(REAL)this->GetCCTbxSpg().inv_t().den();
+   center(2) =((REAL)this->GetCCTbxSpg().inv_t()[2])/(REAL)this->GetCCTbxSpg().inv_t().den();
+   return center;
+}
 
 unsigned int SpaceGroup::AreReflEquiv(const REAL h1, const REAL k1, const REAL l1,
                                       const REAL h2, const REAL k2, const REAL l2)const
@@ -412,8 +491,10 @@ unsigned int SpaceGroup::AreReflEquiv(const REAL h1, const REAL k1, const REAL l
    cctbx::miller::sym_equiv_indices sei(this->GetCCTbxSpg(),k0);
    int equiv=0;
    //cout<<h0.as_string()<<" - "<<k0.as_string()<<","<<sei.f_mates(false)<<","<<sei.f_mates(true)<<endl;
-   for(std::size_t i_indices=0;i_indices<sei.indices().size();i_indices++)
-      for(std::size_t i_mate=0;i_mate<sei.f_mates(false);i_mate++)
+   for(size_t i_indices=0;i_indices<sei.indices().size();i_indices++)
+   {
+      const size_t sfm = sei.f_mates(false);
+      for(size_t i_mate = 0; i_mate < sfm; i_mate++)
       {
          cctbx::miller::index<long> k = sei(i_mate, i_indices).h();
          //cout<<" ->("<<i_indices<<","<<i_mate<<")"<<k.as_string()<<endl;
@@ -424,6 +505,7 @@ unsigned int SpaceGroup::AreReflEquiv(const REAL h1, const REAL k1, const REAL l
             break;
          }
       }
+   }
    VFN_DEBUG_MESSAGE("SpaceGroup::AreReflEquiv("<<ih1<<","<<ik1<<","<<il1<<"),("<<ih2<<","<<ik2<<","<<il2<<"):"<<equiv,2)
    return equiv;
 }
@@ -501,60 +583,73 @@ void SpaceGroup::InitSpaceGroup(const string &spgId)
       mpCCTbxSpaceGroup=0;
       mpCCTbxSpaceGroup = new cctbx::sgtbx::space_group(sgs);
    }
-   catch(cctbx::error)
+   catch(exception &ex1)
    {
       try
       {
-         cout<<"Failed lookup symbol, try Hall symbol ?"<<endl;
+         (*fpObjCrystInformUser)("Failed lookup symbol ! try Hall symbol ?");
          if(mpCCTbxSpaceGroup!=0) delete mpCCTbxSpaceGroup;
          mpCCTbxSpaceGroup=0;
          mpCCTbxSpaceGroup = new cctbx::sgtbx::space_group(spgId);
       }
-      catch(cctbx::error)
+      catch(exception &ex2)
       {
-         cout << "WARNING: Could not interpret Spacegroup name:"<<spgId<<endl;
          (*fpObjCrystInformUser)("Could not interpret Spacegroup Symbol:"+spgId);
+         (*fpObjCrystInformUser)("Reverting to spacegroup symbol:"+mId);
          this->InitSpaceGroup(mId);
-         VFN_DEBUG_EXIT("SpaceGroup::InitSpaceGroup():"<<spgId,8)
+         VFN_DEBUG_EXIT("SpaceGroup::InitSpaceGroup() could not interpret spacegroup:"<<spgId<<":"<<ex1.what()<<":"<<ex2.what(),8)
          return;
       }
    }
-   
-      
-   //Inversion center
-   if(this->GetCCTbxSpg().f_inv() == 2)
+
+   try
    {
-      mHasInversionCenter=true ;
-      if( (this->GetCCTbxSpg().inv_t()[0] !=0) || 
-          (this->GetCCTbxSpg().inv_t()[1] !=0) || 
-          (this->GetCCTbxSpg().inv_t()[2] !=0)   ) mIsInversionCenterAtOrigin=false;
-      else mIsInversionCenterAtOrigin=true;
+      //Inversion center
+      if(this->GetCCTbxSpg().f_inv() == 2)
+      {
+         mHasInversionCenter=true ;
+         if( (this->GetCCTbxSpg().inv_t()[0] !=0) ||
+            (this->GetCCTbxSpg().inv_t()[1] !=0) ||
+            (this->GetCCTbxSpg().inv_t()[2] !=0)   ) mIsInversionCenterAtOrigin=false;
+         else mIsInversionCenterAtOrigin=true;
+      }
+      else
+      {
+         mHasInversionCenter=false ;
+         mIsInversionCenterAtOrigin=true;
+      }
+
+      //initialize asymmetric unit
+      mAsymmetricUnit.SetSpaceGroup(*this);
+
+      mUniqueAxisId=0;
+      if(  (this->GetCCTbxSpg().type().number() >2)
+         &&(this->GetCCTbxSpg().type().number() <16))
+      {
+         string ch=this->GetCCTbxSpg().match_tabulated_settings().hall();
+         if(ch.find("x")!=std::string::npos) {mUniqueAxisId=0;}
+         else
+            if(ch.find("y")!=std::string::npos) {mUniqueAxisId=1;}
+            else mUniqueAxisId=2;
+      }
+
+      mNbSym    =this->GetCCTbxSpg().n_smx();
+      mNbTrans  =this->GetCCTbxSpg().n_ltr();
+      mSpgNumber=this->GetCCTbxSpg().type().number();
+
+      mExtension='\0'; //this->GetCCTbxSpg().type().extension();
    }
-   else
+   catch(exception &ex)
    {
-      mHasInversionCenter=false ;
-      mIsInversionCenterAtOrigin=true;
-   }   
-   
-   //initialize asymmetric unit
-   mAsymmetricUnit.SetSpaceGroup(*this);
-   
-   mUniqueAxisId=0;
-   if(  (this->GetCCTbxSpg().match_tabulated_settings().number() >2) 
-      &&(this->GetCCTbxSpg().match_tabulated_settings().number() <16))
-   {
-      string ch=this->GetCCTbxSpg().match_tabulated_settings().hall();
-      if(ch.find("x")!=std::string::npos) {mUniqueAxisId=0;}
-      if(ch.find("y")!=std::string::npos) {mUniqueAxisId=1;}
-      if(ch.find("z")!=std::string::npos) {mUniqueAxisId=2;}
+      (*fpObjCrystInformUser)("Error initializing spacegroup (Incorrect Hall symbol ?):"+spgId);
+      this->InitSpaceGroup(mId);
+      (*fpObjCrystInformUser)("Reverting to spacegroup symbol:"+mId);
+      VFN_DEBUG_EXIT("SpaceGroup::InitSpaceGroup() could not interpret spacegroup:"<<spgId<<":"<<ex.what(),8)
+      return;
    }
 
-   mNbSym    =this->GetCCTbxSpg().n_smx();
-   mNbTrans  =this->GetCCTbxSpg().n_ltr();
-   mSpgNumber=this->GetCCTbxSpg().match_tabulated_settings().number();
-   
    mExtension=this->GetCCTbxSpg().match_tabulated_settings().extension();
-   
+
    // Force using the H-M symbol
    if(mExtension=='\0') mId=this->GetCCTbxSpg().match_tabulated_settings().hermann_mauguin();
    else                 mId=this->GetCCTbxSpg().match_tabulated_settings().hermann_mauguin()+":"+mExtension;
@@ -587,7 +682,7 @@ void SpaceGroup::InitSpaceGroup(const string &spgId)
    if(mExtension=='R') extension=" (Using Rhombohedral cell)";
    if(mExtension=='H') extension=" (Using Hexagonal cell)";
    #ifdef __DEBUG__
-  (*fpObjCrystInformUser)("Initialized spacegroup: "+spgId+extension);
+  (*fpObjCrystInformUser)("Initialized spacegroup, HM: "+spgId+extension+" , Hall:"+this->GetCCTbxSpg().type().hall_symbol());
    #endif
    VFN_DEBUG_EXIT("SpaceGroup::InitSpaceGroup():"<<spgId,8)
 }

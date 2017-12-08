@@ -20,10 +20,10 @@
 #define _OBJCRYST_REFLECTIONPROFILE_H_
 
 #include <complex>
-#include "CrystVector/CrystVector.h"
-#include "ObjCryst/General.h"
-#include "ObjCryst/UnitCell.h"
-#include "RefinableObj/RefinableObj.h"
+#include "ObjCryst/CrystVector/CrystVector.h"
+#include "ObjCryst/ObjCryst/General.h"
+#include "ObjCryst/ObjCryst/UnitCell.h"
+#include "ObjCryst/RefinableObj/RefinableObj.h"
 
 namespace ObjCryst
 {
@@ -32,12 +32,12 @@ namespace ObjCryst
 //######################################################################
 
 ///Gaussian, normalized (ie integral is equal to 1), as a function of theta
-/// and of the FWHM. The input is an array of the theta values. The maximum of the 
+/// and of the FWHM. The input is an array of the theta values. The maximum of the
 ///function is in theta=center. If asymmetry is used, negative tth values must be first.
 CrystVector_REAL PowderProfileGauss  (const CrystVector_REAL theta,
                                       const REAL fwhm, const REAL center, const REAL asym=1.0);
 ///Lorentzian, normalized (ie integral is equal to 1), as a function of theta
-/// and of the FWHM. The input is an array of the theta values. The maximum of the 
+/// and of the FWHM. The input is an array of the theta values. The maximum of the
 ///function is in theta=center. If asymmetry is used, negative tth values must be first.
 CrystVector_REAL PowderProfileLorentz(const CrystVector_REAL theta,
                                       const REAL fwhm, const REAL center, const REAL asym=1.0);
@@ -54,14 +54,14 @@ CrystVector_REAL AsymmetryBerarBaldinozzi(const CrystVector_REAL theta,
 template <class T> std::complex<T>ExponentialIntegral1(const complex<T> z);
 /** E1(z)*exp(z)
 *
-* This can be computed for large z values to avoid floating-point exceptions. 
+* This can be computed for large z values to avoid floating-point exceptions.
 */
 template <class T> std::complex<T>ExponentialIntegral1_ExpZ(const complex<T> z);
 
 /** Abstract base class for reflection profiles.
 *
 */
-class ReflectionProfile: virtual public RefinableObj
+class ReflectionProfile:public RefinableObj
 {
    public:
       ReflectionProfile();
@@ -78,8 +78,8 @@ class ReflectionProfile: virtual public RefinableObj
       * the constructor so that they can use ObjCryst::UnitCell::MillerToOrthonormalCoords()
       */
       virtual CrystVector_REAL GetProfile(const CrystVector_REAL &x, const REAL xcenter,
-                                  const REAL h, const REAL k, const REAL l)=0;
-      /// Get the (approximate) full profile width at a given percentage 
+                                  const REAL h, const REAL k, const REAL l)const=0;
+      /// Get the (approximate) full profile width at a given percentage
       /// of the profile maximum (e.g. FWHM=GetFullProfileWidth(0.5)).
       virtual REAL GetFullProfileWidth(const REAL relativeIntensity, const REAL xcenter,
                                        const REAL h, const REAL k, const REAL l)=0;
@@ -106,7 +106,7 @@ class ReflectionProfilePseudoVoigt:public ReflectionProfile
       virtual ReflectionProfilePseudoVoigt* CreateCopy()const;
       virtual const string& GetClassName()const;
       CrystVector_REAL GetProfile(const CrystVector_REAL &x, const REAL xcenter,
-                                  const REAL h, const REAL k, const REAL l); // Zdenek (const)
+                                  const REAL h, const REAL k, const REAL l)const;
       /** Set reflection profile parameters
       *
       * \param fwhmCagliotiW,fwhmCagliotiU,fwhmCagliotiV : these are the U,V and W
@@ -141,13 +141,109 @@ class ReflectionProfilePseudoVoigt:public ReflectionProfile
       REAL mAsymBerarBaldinozziA0,mAsymBerarBaldinozziA1,
            mAsymBerarBaldinozziB0,mAsymBerarBaldinozziB1;
       /** Asymmetry parameters, following the analytical function for asymmetric pseudo-voigt
-      * given by (e.g.) Toraya in J. Appl. Cryst 23(1990),485-491
+      * given by Toraya in J. Appl. Cryst 23(1990),485-491
+      *
+      * Asymmetric coefficient:
+      * \f[ A=A_0+A_1/\sin(2\vartheta)+A_2/\sin^2(2\vartheta) \f]
+      *
+      * Asymmetric profile:
+      * \f[ Prof(\vartheta-\vartheta_{max}<=0)=Prof_0(\frac{1+A}{A})(\vartheta-\vartheta_{max})) \f]
+      * \f[ Prof(\vartheta-\vartheta_{max}>=0)=Prof_0((1+A)         (\vartheta-\vartheta_{max})) \f]
       */
       REAL mAsym0,mAsym1,mAsym2;
 #ifdef __WX__CRYST__
    public:
       virtual WXCrystObjBasic* WXCreate(wxWindow* parent);
 #endif
+};
+
+/** Pseudo-Voigt reflection profile, with 6-parameters anisotropic Lorentzian broadening and Toraya asymmetric modelling.
+ *
+ */
+class ReflectionProfilePseudoVoigtAnisotropic:public ReflectionProfile
+{
+   public:
+      ReflectionProfilePseudoVoigtAnisotropic();
+      ReflectionProfilePseudoVoigtAnisotropic(const ReflectionProfilePseudoVoigtAnisotropic &old);
+      virtual ~ReflectionProfilePseudoVoigtAnisotropic();
+      virtual ReflectionProfilePseudoVoigtAnisotropic* CreateCopy()const;
+      virtual const string& GetClassName()const;
+      CrystVector_REAL GetProfile(const CrystVector_REAL &x, const REAL xcenter,
+                                  const REAL h, const REAL k, const REAL l)const;
+      /** Set reflection profile parameters
+       *
+       * if only W is given, the width is constant
+       *
+       * See documentation for mCagliotiU,mCagliotiV,mCagliotiW,mScherrerP,mLorentzX,mLorentzY,
+       * mLorentzGammaHH,mLorentzGammaKK,mLorentzGammaLL,mLorentzGammaHK,mLorentzGammaHL,mLorentzGammaKL
+       * mAsym0,mAsym1,mAsym2.
+       */
+      void SetProfilePar(const REAL fwhmCagliotiW,
+                         const REAL fwhmCagliotiU=0,
+                         const REAL fwhmCagliotiV=0,
+                         const REAL fwhmGaussP=0,
+                         const REAL fwhmLorentzX=0,
+                         const REAL fwhmLorentzY=0,
+                         const REAL fwhmLorentzGammaHH=0,
+                         const REAL fwhmLorentzGammaKK=0,
+                         const REAL fwhmLorentzGammaLL=0,
+                         const REAL fwhmLorentzGammaHK=0,
+                         const REAL fwhmLorentzGammaHL=0,
+                         const REAL fwhmLorentzGammaKL=0,
+                         const REAL pseudoVoigtEta0=0,
+                         const REAL pseudoVoigtEta1=0,
+                         const REAL asymA0=0,
+                         const REAL asymA1=0,
+                         const REAL asymA2=0
+                         );
+      virtual REAL GetFullProfileWidth(const REAL relativeIntensity, const REAL xcenter,
+                                       const REAL h, const REAL k, const REAL l);
+      bool IsAnisotropic()const;
+      virtual void XMLOutput(ostream &os,int indent=0)const;
+      virtual void XMLInput(istream &is,const XMLCrystTag &tag);
+   private:
+      /// Initialize parameters
+      void InitParameters();
+      /** FWHM parameters:
+       *
+       * Profile:\f$ Prof(\vartheta) = \eta Lorentz(\vartheta) + (1-\eta) Gauss(\vartheta) \f$
+       *
+       * This pseudo-Voigt profile is the linear combination of a Gaussian and a Lorentzian:
+       * \f[ Profile(\vartheta)= Lorentz(\vartheta) + Gauss(\vartheta)\f]
+       *
+       * Gaussian FWHM parameters, following Caglioti's law and Scherrer broadening coefficient:
+       * \f[ fwhm_g^2= U \tan^2(\theta) + V \tan(\theta) +W +\frac{P}{\cos^2\vartheta} \f]
+       * See Cagliotti, Pauletti & Ricci, Nucl. Instrum. 3 (1958), 223.
+       *
+       * Lorentzian FWHM parameters
+       *
+       * \f[ fwhm_l= \frac{X}{\cos\vartheta} +(Y + \frac{\gamma_L}{\sin^2\vartheta})\tan\vartheta \f]
+       * with anisotropic broadening factor:
+       * \f[ \gamma_L = \gamma_{HH}h^2 + \gamma_{KK}k^2 + \gamma_{LL}l^2 + 2\gamma_{HK}hk + 2\gamma_{hl} + 2\gamma_{kl}kl\f]
+       *
+       * \note: in the above formula we use \f$ \frac{\gamma_L}{\sin^2\vartheta} \f$ rather than the more usual\f$ \gamma_L d^2 \f$
+       * for computing purposes (the model being purely phenomenological).
+       */
+      REAL mCagliotiU,mCagliotiV,mCagliotiW,mScherrerP,mLorentzX,mLorentzY,
+           mLorentzGammaHH,mLorentzGammaKK,mLorentzGammaLL,mLorentzGammaHK,mLorentzGammaHL,mLorentzGammaKL;
+      ///Pseudo-Voigt mixing parameter : \f$ \eta=\eta_0 +2*\vartheta*\eta_1\f$
+      /// eta=1 -> pure Lorentzian ; eta=0 -> pure Gaussian
+      REAL mPseudoVoigtEta0,mPseudoVoigtEta1;
+      /** Asymmetry parameters, following the analytical function for asymmetric pseudo-voigt
+       * given by Toraya in J. Appl. Cryst 23(1990),485-491
+       *
+       * Asymmetric coefficient:
+       * \f[ A=A_0+A_1/\sin(2\vartheta)+A_2/\sin^2(2\vartheta) \f]
+       *
+       * Asymmetric profile:
+       * \f[ Prof(\vartheta-\vartheta_{max}<=0)=Prof_0(\frac{1+A}{A})(\vartheta-\vartheta_{max})) \f]
+       * \f[ Prof(\vartheta-\vartheta_{max}>=0)=Prof_0((1+A)         (\vartheta-\vartheta_{max})) \f]
+       */
+      REAL mAsym0,mAsym1,mAsym2;
+   #ifdef __WX__CRYST__
+   public:
+      virtual WXCrystObjBasic* WXCreate(wxWindow* parent);
+   #endif
 };
 
 /** Double-Exponential Pseudo-Voigt profile for TOF.
@@ -169,7 +265,7 @@ class ReflectionProfileDoubleExponentialPseudoVoigt:public ReflectionProfile
       virtual ReflectionProfileDoubleExponentialPseudoVoigt* CreateCopy()const;
       virtual const string& GetClassName()const;
       CrystVector_REAL GetProfile(const CrystVector_REAL &x, const REAL xcenter,
-                                  const REAL h, const REAL k, const REAL l); // Zdenek (const)
+                                  const REAL h, const REAL k, const REAL l)const;
       /** Set reflection profile parameters
       *
       */
