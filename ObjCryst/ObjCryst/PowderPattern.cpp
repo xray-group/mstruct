@@ -728,7 +728,8 @@ PowderPatternDiffraction::PowderPatternDiffraction():
 mpReflectionProfile(0),
 mCorrLorentz(*this),mCorrPolar(*this),mCorrSlitAperture(*this),
 mCorrTextureMarchDollase(*this),mCorrTextureEllipsoid(*this),mCorrTOF(*this),mExtractionMode(false),
-mpLeBailData(0),mFrozenLatticePar(6),mFreezeLatticePar(false),mFrozenBMatrix(3,3)
+mpLeBailData(0),mFrozenLatticePar(6),mFreezeLatticePar(false),mFrozenBMatrix(3,3),
+mReflProfFact(5.0),mReflProfMinRelIntensity(0.04) // 0.04
 {
    VFN_DEBUG_MESSAGE("PowderPatternDiffraction::PowderPatternDiffraction()",10)
    mIsScalable=true;
@@ -748,7 +749,8 @@ PowderPatternDiffraction::PowderPatternDiffraction(const PowderPatternDiffractio
 mpReflectionProfile(0),
 mCorrLorentz(*this),mCorrPolar(*this),mCorrSlitAperture(*this),
 mCorrTextureMarchDollase(*this),mCorrTextureEllipsoid(*this),mCorrTOF(*this),mExtractionMode(false),
-mpLeBailData(0),mFrozenLatticePar(6),mFreezeLatticePar(old.FreezeLatticePar()),mFrozenBMatrix(3,3)
+mpLeBailData(0),mFrozenLatticePar(6),mFreezeLatticePar(old.FreezeLatticePar()),mFrozenBMatrix(3,3),
+mReflProfFact(old.mReflProfFact),mReflProfMinRelIntensity(old.mReflProfMinRelIntensity) // Zdenek
 {
    this->AddSubRefObj(mCorrTextureMarchDollase);
    this->AddSubRefObj(mCorrTextureEllipsoid);
@@ -816,7 +818,13 @@ void PowderPatternDiffraction::SetReflectionProfilePar(const ReflectionProfileTy
                                                        const REAL eta0, const REAL eta1)
 {
    VFN_DEBUG_MESSAGE("PowderPatternDiffraction::SetReflectionProfilePar()",5)
-   ReflectionProfilePseudoVoigt* p=new ReflectionProfilePseudoVoigt();
+   if(mpReflectionProfile!=0) // Zdenek
+   {
+      this->RemoveSubRefObj(*mpReflectionProfile);
+      delete mpReflectionProfile; // Zdenek ??? I think it is correct only if the profile was allocated here in this method
+      mpReflectionProfile=0;
+   }
+   ReflectionProfilePseudoVoigt* p=new ReflectionProfilePseudoVoigt(); // not Zdenek Q: only PseudoVoigt is used now?
    p->SetProfilePar(w,u,v,eta0,eta1);
    this->SetProfile(p);
 }
@@ -827,7 +835,7 @@ void PowderPatternDiffraction::SetProfile(ReflectionProfile *p)
    if(mpReflectionProfile!=0)
    {
       this->RemoveSubRefObj(*mpReflectionProfile);
-      delete mpReflectionProfile;
+      delete mpReflectionProfile; // not Zdenek Q: I think it is correct only if the profile was allocated here in this method
    }
    mpReflectionProfile= p;
    this->AddSubRefObj(*mpReflectionProfile);
@@ -860,7 +868,7 @@ void PowderPatternDiffraction::GenHKLFullSpace()
       stol=mpParentPowderPattern->X2STOL(mpParentPowderPattern->GetPowderPatternXMin());
    else
       stol=mpParentPowderPattern->X2STOL(mpParentPowderPattern->GetPowderPatternXMax());
-   if(stol>1) stol=1; // Do not go beyond 0.5 A resolution (mostly for TOF data)
+   //if(stol>1) stol=1; // Do not go beyond 0.5 A resolution (mostly for TOF data) - This is a joke? (Zdenek)
    this->ScatteringData::GenHKLFullSpace2(stol,true);
    if((mExtractionMode) && (mFhklObsSq.numElements()!=this->GetNbRefl()))
    {// Reflections changed, so ScatteringData::PrepareHKLarrays() probably reseted mFhklObsSq
@@ -1734,8 +1742,8 @@ Computing all Profiles",5)
          }
          else center=mpParentPowderPattern->X2XCorr(x0);
          REAL fact=1.0;
-         if(!mUseFastLessPreciseFunc) fact=5.0;
-         const REAL halfwidth=mpReflectionProfile->GetFullProfileWidth(0.04,center,mH(i),mK(i),mL(i))*fact;
+         if(!mUseFastLessPreciseFunc) fact=mReflProfFact; // Zdenek 5.0
+         const REAL halfwidth=mpReflectionProfile->GetFullProfileWidth(mReflProfMinRelIntensity,center,mH(i),mK(i),mL(i))*fact; // Zdenek 0.04
          if(line==0)
          {
             // For an X-Ray tube, label on first (strongest) of reflections lines (Kalpha1)
@@ -2602,6 +2610,12 @@ void PowderPattern::SetWavelength(const string &XRayTubeElementName,const REAL a
 {
    VFN_DEBUG_MESSAGE("PowderPattern::SetWavelength(wavelength)",3)
    mRadiation.SetWavelength(XRayTubeElementName,alpha12ratio);
+}
+
+void PowderPattern::SetEnergy(const REAL energy)
+{
+   VFN_DEBUG_MESSAGE("PowderPattern::SetEnergy(energy)",3)
+   mRadiation.SetWavelength( 12.398/energy );
 }
 
 REAL PowderPattern::GetWavelength()const{return mRadiation.GetWavelength()(0);}
@@ -4677,8 +4691,8 @@ void PowderPattern::FitScaleFactorForRw()const
             unsigned long l=0;
             for(int k=0;k<nbExclude;k++)
             {
-               min=(unsigned long)floor(this->X2Pixel(mExcludedRegionMinX(j)));
-               max=(unsigned long)ceil (this->X2Pixel(mExcludedRegionMaxX(j)));
+               min=(unsigned long)floor(this->X2Pixel(mExcludedRegionMinX(k))); // Zdenek j->k
+               max=(unsigned long)ceil (this->X2Pixel(mExcludedRegionMaxX(k))); // Zdenek j->k
                if(min>mNbPointUsed) break;
                if(max>mNbPointUsed)max=mNbPointUsed;
                //! min is the *beginning* of the excluded region
@@ -5238,6 +5252,7 @@ void PowderPattern::Prepare()
    VFN_DEBUG_MESSAGE("PowderPattern::Prepare()",5);
    for(int i=0;i<mPowderPatternComponentRegistry.GetNb();i++)
    {
+      cout << "PowderPattern::Prepare>mMaxSinThetaOvLambda:" << mMaxSinThetaOvLambda << "\n";
       mPowderPatternComponentRegistry.GetObj(i).SetMaxSinThetaOvLambda(mMaxSinThetaOvLambda);
       mPowderPatternComponentRegistry.GetObj(i).Prepare();
    }

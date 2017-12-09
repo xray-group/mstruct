@@ -408,7 +408,7 @@ class PowderPatternDiffraction : virtual public PowderPatternComponent,public Sc
       /// for a given list of refinable parameters
       void CalcPowderReflProfile_FullDeriv(std::set<RefinablePar *> &vPar);
       /// \internal Calc Lorentz-Polarisation-Aperture correction
-      void CalcIntensityCorr()const;
+      virtual void CalcIntensityCorr()const; // Zdenek
       /// \internal Compute the intensity for all reflections (taking into account
       /// corrections, but not the multiplicity)
       virtual void CalcIhkl() const;
@@ -520,6 +520,10 @@ class PowderPatternDiffraction : virtual public PowderPatternComponent,public Sc
       bool mFreezeLatticePar;
       /// Local B Matrix, used if mFreezeLatticePar is true
       mutable CrystMatrix_REAL mFrozenBMatrix;
+      /// Range in which reflection profiles are calcualted is enlarged by this factor 
+      REAL mReflProfFact; // Zdenek
+      /// Minimum relative intensity for reflection profile calculation
+      REAL mReflProfMinRelIntensity; // Zdenek
    #ifdef __WX__CRYST__
    public:
       virtual WXCrystObjBasic* WXCreate(wxWindow*);
@@ -646,7 +650,7 @@ class PowderPattern : public RefinableObj
          */
          void SetWavelength(const string &XRayTubeElementName,const REAL alpha12ratio=0.5);
 
-         /// Set the energy of the experiment [in keV, lambda(A)=12398/E(keV)].
+         /// Set the energy of the experiment [in keV, lambda(A)=12.398/E(keV)].
          void SetEnergy(const REAL energy);
          /// wavelength of the experiment (in Angstroems)
          REAL GetWavelength()const;
