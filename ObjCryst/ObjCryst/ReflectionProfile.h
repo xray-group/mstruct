@@ -61,7 +61,7 @@ template <class T> std::complex<T>ExponentialIntegral1_ExpZ(const complex<T> z);
 /** Abstract base class for reflection profiles.
 *
 */
-class ReflectionProfile:public RefinableObj
+class ReflectionProfile: virtual public RefinableObj
 {
    public:
       ReflectionProfile();
@@ -78,7 +78,7 @@ class ReflectionProfile:public RefinableObj
       * the constructor so that they can use ObjCryst::UnitCell::MillerToOrthonormalCoords()
       */
       virtual CrystVector_REAL GetProfile(const CrystVector_REAL &x, const REAL xcenter,
-                                  const REAL h, const REAL k, const REAL l)const=0;
+                                  const REAL h, const REAL k, const REAL l)=0;
       /// Get the (approximate) full profile width at a given percentage
       /// of the profile maximum (e.g. FWHM=GetFullProfileWidth(0.5)).
       virtual REAL GetFullProfileWidth(const REAL relativeIntensity, const REAL xcenter,
@@ -106,7 +106,7 @@ class ReflectionProfilePseudoVoigt:public ReflectionProfile
       virtual ReflectionProfilePseudoVoigt* CreateCopy()const;
       virtual const string& GetClassName()const;
       CrystVector_REAL GetProfile(const CrystVector_REAL &x, const REAL xcenter,
-                                  const REAL h, const REAL k, const REAL l)const;
+                                  const REAL h, const REAL k, const REAL l); // Zdenek (const)
       /** Set reflection profile parameters
       *
       * \param fwhmCagliotiW,fwhmCagliotiU,fwhmCagliotiV : these are the U,V and W
@@ -169,7 +169,7 @@ class ReflectionProfilePseudoVoigtAnisotropic:public ReflectionProfile
       virtual ReflectionProfilePseudoVoigtAnisotropic* CreateCopy()const;
       virtual const string& GetClassName()const;
       CrystVector_REAL GetProfile(const CrystVector_REAL &x, const REAL xcenter,
-                                  const REAL h, const REAL k, const REAL l)const;
+                                  const REAL h, const REAL k, const REAL l); // Zdenek (const)
       /** Set reflection profile parameters
        *
        * if only W is given, the width is constant
@@ -265,7 +265,7 @@ class ReflectionProfileDoubleExponentialPseudoVoigt:public ReflectionProfile
       virtual ReflectionProfileDoubleExponentialPseudoVoigt* CreateCopy()const;
       virtual const string& GetClassName()const;
       CrystVector_REAL GetProfile(const CrystVector_REAL &x, const REAL xcenter,
-                                  const REAL h, const REAL k, const REAL l)const;
+                                  const REAL h, const REAL k, const REAL l); // Zdenek (const)
       /** Set reflection profile parameters
       *
       */
