@@ -16223,10 +16223,27 @@ char const* greet()
    return "hello, world";
 }
 
+void _SetWavelength(PowderPattern& self, const REAL wavelength)
+{
+  self.SetWavelength(wavelength);
+}
+
+
 BOOST_PYTHON_MODULE(libMStruct)
 {
 
   using namespace boost::python;
   def("greet", greet);
+
+  class_<PowderPattern>("PowderPattern")
+      .def(init<>())
+      .def("SetWavelength", &_SetWavelength);
+
+  class_<MStruct::RefractionPositionCorr>("RefractionPositionCorr")  
+      .def(init<>());
+
+  class_<PowderPatternDiffraction>("PowderPatternDiffraction")
+      .def(init<>())
+      .def("SetCrystal", &PowderPatternDiffraction::SetCrystal);
 
 }
