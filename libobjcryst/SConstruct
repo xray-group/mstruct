@@ -76,7 +76,7 @@ env.Append( CXXFLAGS=['-D__ZDENEK__'] )
 
 # Unpack cctbx sources if needed
 if not os.path.isdir("./../cctbx"):
-    os.system("bunzip2 -c -k ./../cctbx.tar.bz2 | tar -C ./.. -xzv")
+    os.system("bunzip2 -c -k ./../cctbx.tar.bz2 | tar -C ./.. -xv")
 
 builddir = env.Dir('build/%s-%s' % (env['build'], platform.machine()))
 
