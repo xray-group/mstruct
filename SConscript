@@ -88,8 +88,9 @@ objcrystobjs = env["objcrystobjs"]
 mstructobjs = env["mstructobjs"]
 
 # This builds the shared library
+ObjCrystFlags = ['-Wl,--no-undefined']
 libobjcryst = env.SharedLibrary("libObjCryst",
-        objcrystobjs + cctbxobjs + newmatobjs)
+        objcrystobjs + cctbxobjs + newmatobjs, LINKFLAGS=ObjCrystFlags)
 lib = Alias('lib', [libobjcryst, env['lib_includes']])
 Default(lib)
 

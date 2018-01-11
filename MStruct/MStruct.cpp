@@ -49,6 +49,8 @@
 #include <boost/math/special_functions/gamma.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/python.hpp>
+//Includes for Python API
+#include <ObjCryst/ObjCryst/IO.h>
 
 #define _USE_MATH_DEFINES
 
@@ -16223,10 +16225,117 @@ char const* greet()
    return "hello, world";
 }
 
+void _SetWavelength(MStruct::PowderPattern& self, const REAL wavelength)
+{
+  self.SetWavelength(wavelength);
+}
+
+void _SetWavelength_string(MStruct::PowderPattern& self, const string wavelength)
+{
+  self.SetWavelength(wavelength);
+}
+
+
+void _DiffractionDataSingleCrystal_SetWavelength(DiffractionDataSingleCrystal& self,string wavelength)
+{
+  self.SetWavelength(wavelength);
+}
+
+void _AddPowderPatternComponent(MStruct::PowderPattern& self, MStruct::PowderPatternDiffraction& powdif)
+{
+  self.AddPowderPatternComponent(powdif);
+}
+
+void _SetProfile(MStruct::PowderPatternDiffraction& self, MStruct::ReflectionProfile& profile)
+{
+  profile.SetParentPowderPatternDiffraction(self);
+  self.SetProfile(&profile);
+}
+
+// Component should be general
+void _AddComponent_Refraction(MStruct::ReflectionProfile& self, MStruct::RefractionPositionCorr& refCorr)
+{
+  self.AddReflectionProfileComponent(refCorr);
+  refCorr.SetParentReflectionProfile(self);
+}
+
+ObjCryst::Radiation _Get_Radiation_Diff(DiffractionDataSingleCrystal& self)
+{
+  return self.GetRadiation();
+}
+
+ObjCryst::Radiation _Get_Radiation(MStruct::PowderPattern& self)
+{
+  return self.GetRadiation();
+}
+
+ObjCryst::Crystal * _Create_Crystal()
+{
+    return new ObjCryst::Crystal;
+}
+
+ObjCryst::Crystal * _XMLLoadCrystal(const std::string& file_name, const std::string& crystal_name)
+{
+  ObjCryst::Crystal * crystal;
+  ObjCryst::XMLCrystFileLoadObject(file_name,"Crystal", crystal_name, crystal);
+  ObjCryst::RefinableObj &obj = ObjCryst::gRefinableObjRegistry.GetObj(crystal_name, "Crystal");
+  crystal = &(dynamic_cast<ObjCryst::Crystal&>(obj));
+  return crystal;
+
+}
+/*
+MStruct::ReflectionProfile * _Create_ReflectionProfile(ObjCryst::Crystal* crystal, PowderPattern* pattern)
+{
+  MStruct::ReflectionProfile * profile =
+    new MStruct::ReflectionProfile(*crystal, pattern->GetRadiation());
+    return profile;
+}
+*/
+
+
 BOOST_PYTHON_MODULE(libMStruct)
 {
 
   using namespace boost::python;
   def("greet", greet);
+  def("CreateCrystalFromXML", &_XMLLoadCrystal, return_value_policy<manage_new_object>());
+  //def("Create_ReflectionProfile", &_Create_ReflectionProfile);
+
+  class_<MStruct::PowderPattern>("PowderPattern")
+      .def(init<>())
+      .def("SetIncidenceAngle", &MStruct::PowderPattern::SetIncidenceAngle)
+      .def("SetWavelength", &_SetWavelength)
+      .def("SetWavelength", &_SetWavelength_string)
+      .def("GetRadiation", &_Get_Radiation)
+      .def("AddPowderPatternComponent", &PowderPattern::AddPowderPatternComponent)
+      .def("AddPowderPatternComponent", &_AddPowderPatternComponent);
+
+  class_<ObjCryst::Crystal>("Crystal");
+
+  //class_<ReflectionProfile, boost::noncopyable>("ReflectionProfile", no_init);
+  class_<MStruct::ReflectionProfile>("ReflectionProfile", init<ObjCryst::Crystal&, ObjCryst::Radiation&>())
+      .def("AddComponent", &_AddComponent_Refraction)
+      .def("SetIncidenceAngle", &MStruct::ReflectionProfile::SetIncidenceAngle);
+
+  class_<MStruct::RefractionPositionCorr>("RefractionPositionCorr")  
+      .def(init<>())
+      .def("GetPositionCorr", &MStruct::RefractionPositionCorr::GetPositionCorr)
+      .def("SetCrystal", &MStruct::RefractionPositionCorr::SetCrystal);
+
+  class_<ObjCryst::Radiation>("Radiation", init<const std::string, REAL>())
+      //.def("GetWavelength", &ObjCryst::Radiation::GetWavelength)
+      .def("Print", &ObjCryst::Radiation::Print);
+
+  class_<MStruct::PowderPatternDiffraction>("PowderPatternDiffraction")
+      .def(init<>())
+      .def("SetProfile", &_SetProfile)
+      .def("SetIsIgnoringImagScattFact", &MStruct::PowderPatternDiffraction::SetIsIgnoringImagScattFact)
+      .def("SetCrystal", &MStruct::PowderPatternDiffraction::SetCrystal);
+
+  class_<ObjCryst::DiffractionDataSingleCrystal>("DiffractionDataSingleCrystal", init<ObjCryst::Crystal*>())
+      .def("SetWavelength", &_DiffractionDataSingleCrystal_SetWavelength)
+      .def("SetHKL", &DiffractionDataSingleCrystal::SetHKL)
+      .def("GetRadiation", &_Get_Radiation_Diff)
+      .def("SetIsIgnoringImagScattFact", &DiffractionDataSingleCrystal::SetIsIgnoringImagScattFact);
 
 }
