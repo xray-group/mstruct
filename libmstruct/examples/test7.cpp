@@ -125,8 +125,8 @@ int mstruct_test7(int argc, char* argv[], std::istream &is)
   
   // --- cleanup ---  
   ///  if(pattern != 0) delete pattern;
-  //if(scattDataPowder != 0) delete scattDataPowder;
-  if(crystal != 0) delete crystal;
+  ///if(scattDataPowder != 0) delete scattDataPowder;
+  ///if(crystal != 0) delete crystal;
         
   cout << " End of test." << endl ;
 	
