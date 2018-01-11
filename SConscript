@@ -53,6 +53,9 @@ if env['profile']:
     env.AppendUnique(CCFLAGS='-pg')
     env.AppendUnique(LINKFLAGS='-pg')
 
+# link warnings
+env.AppendUnique(LINKFLAGS='-Wl,--no-undefined')
+	
 # REAL=double needed for pyobjcryst
 env.AppendUnique(CCFLAGS='-DREAL=double')
 
@@ -88,9 +91,8 @@ objcrystobjs = env["objcrystobjs"]
 mstructobjs = env["mstructobjs"]
 
 # This builds the shared library
-ObjCrystFlags = ['-Wl,--no-undefined']
 libobjcryst = env.SharedLibrary("libObjCryst",
-        objcrystobjs + cctbxobjs + newmatobjs, LINKFLAGS=ObjCrystFlags)
+        objcrystobjs + cctbxobjs + newmatobjs)
 lib = Alias('lib', [libobjcryst, env['lib_includes']])
 Default(lib)
 
