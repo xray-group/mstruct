@@ -213,6 +213,9 @@ int main (int argc, char *argv[])
 		        case 21:
 			        val = MStruct::mstruct_test11(argc, argv, imp_file);
 				break;
+			case 22:
+			        val = MStruct::mstruct_test12(argc, argv, imp_file);
+				break;
 			default:
 				cout << "Job/test type not recognised!" << endl;
 				break;

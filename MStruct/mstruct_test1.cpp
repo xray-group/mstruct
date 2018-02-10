@@ -4,7 +4,8 @@
  * MStruct++ - Object-Oriented computer program/library for MicroStructure analysis
  * 					   from powder diffraction data.
  * 
- * Copyright (C) 2009  Zdenek Matej
+ * Copyright (C) 2009-2014  Zdenek Matej, Charles University in Prague
+ * Copyright (C) 2014-2018  Zdenek Matej, MAX IV Laboratory, Lund University
  * 
  * This file is part of MStruct++.
  * 
@@ -1096,7 +1097,97 @@ int mstruct_test11(int argc, char* argv[], std::istream &iss)
 
   return 0;
 } // mstruct_test11
+
+int mstruct_test12(int argc, char* argv[], std::istream &iss)
+{
+  // Basic Powder Pattern simulation
+
+  cout << "Running test no. 12" << endl;
+
+  cout << " Basic Powder Patter Test" << endl;
+	
+  // input-string-stream to which the input is translated to ignore comments etc. 
+  istringstream ccin;
   
+  // input filename
+  /*  string filename;
+  cout << "input file name" << endl;
+  read_line (ccin, iss); // read a line (ignoring all comments, etc.)
+  ccin >> filename;*/
+
+  const string crystal_name("Strontium Dodecairon(III) Oxide");
+
+  // load crystal from structures file
+  ObjCryst::Crystal * crystal;
+  XMLCrystFileLoadObject("examples/HexaFerit01.xml","Crystal",crystal_name,crystal);
+  /* Unfortunatelly there is a clear shortage in ObjCryst:
+     T*obj in XMLCrystFileLoadObject function is not referenced as
+     a reference or double pointer, hence the value of created
+     T*obj si not returned to a calling scope */
+  //if(crystal==NULL) throw ObjCrystException("Crystal Not Found!");
+  {	
+    RefinableObj &obj = gRefinableObjRegistry.GetObj(crystal_name,"Crystal");
+    crystal = &(dynamic_cast<ObjCryst::Crystal&>(obj));
+  }
+
+  // create Instrumental Profile
+  MStruct::PseudoVoigtBroadeningEffect * instrProf = new MStruct::PseudoVoigtBroadeningEffect;
+  	
+  // create all structures like in a normal powder pattern simulation
+	
+  // create PowderPatternDiffraction Object
+  ObjCryst::PowderPatternDiffraction * scattDataPowder = new ObjCryst::PowderPatternDiffraction;
+  // add Crystal
+  scattDataPowder->SetCrystal(*crystal);
+	
+  // create PowderPattern Object
+  MStruct::PowderPattern * pattern = new MStruct::PowderPattern;
+  // set radiation
+  pattern->SetWavelength("CuA1");
+
+  //pattern->GetRadiation().SetLinearPolarRate(0.0); // no monochromator - no polarization
+  //cout << "Lambda: " << std::fixed << std::setprecision(7) << pattern->GetRadiation().GetWavelength()(0) << "\n";
+  //REAL tthmono = 28.*DEG2RAD; // LiF (monochromator)->45., Milan->28.
+  //REAL A = cos(tthmono)*cos(tthmono);
+  //REAL f = (1.-A)/(1.+A);
+  //pattern->GetRadiation().SetLinearPolarRate(f);
+  
+  // add Crystalline phase
+  pattern->AddPowderPatternComponent(*scattDataPowder);
+	
+  // create ReflectionProfile Object
+  MStruct::ReflectionProfile * profile =
+    new MStruct::ReflectionProfile(*crystal,pattern->GetRadiation()); // (stupid constructor)
+	
+  // set profile
+  profile->SetParentPowderPatternDiffraction(*scattDataPowder);
+  scattDataPowder->SetProfile(profile); // this can be done in SetParentPowderPatternDiffraction ???
+  
+  // add profile-component(s)
+
+  profile->AddReflectionProfileComponent(*instrProf);
+  instrProf->SetParentReflectionProfile(*profile);
+  
+  pattern->SetPowderPatternPar(10.0*M_PI/180., 0.05*M_PI/180., int((150.-10.)/0.05)+1);
+  {
+    CrystVector_REAL t(pattern->GetNbPoint());
+    t = 0.;
+    pattern->SetPowderPatternObs(t);
+  }
+  pattern->SetWeightToUnit();
+  //pattern->SetScaleFactor(turboStructEffect, 1.0);
+
+  pattern->Prepare();
+  pattern->GetPowderPatternCalc();
+
+  pattern->SavePowderPattern("powderPattern.dat");
+      
+  cout << " End of program." << endl ;
+  
+  return 0;
+} // mstruct_test12
+
+
 } // namespace MStruct
 
 
