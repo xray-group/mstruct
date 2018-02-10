@@ -1,8 +1,7 @@
 #!/bin/bash
 
 # absolute path to the MStruct directory
-#mstruct_dir=~/tmp/Fox-mstruct/MStruct
-mstruct_dir=~/prac/Fox/MStruct
+mstruct_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 answer='';
 echo -n "Clean all ObjCryst + MStruct project? (y/n): ";
