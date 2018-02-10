@@ -5,7 +5,9 @@
  * 					   from powder diffraction data.
  * 
  * Copyright (C) 2009-2014  Zdenek Matej, Charles University in Prague
- * Copyright (C) 2014-2015  Zdenek Matej, MAX IV Laboratory, Lund University
+ * Copyright (C) 2014-2018  Zdenek Matej, MAX IV Laboratory, Lund University
+ * Copyright (C) 2016-2018  Milan Dopita, Jan Endres, Charles University in Prague
+ * Copyright (C) 2017-2018  Jiri Wollman, Charles University in Prague
  *
  * This file is part of MStruct++.
  * 
@@ -48,9 +50,12 @@
 
 #include <boost/math/special_functions/gamma.hpp>
 #include <boost/algorithm/string.hpp>
+
+#ifdef __PYMSTRUCT_TEST__
 #include <boost/python.hpp>
 //Includes for Python API
 #include <ObjCryst/ObjCryst/IO.h>
+#endif /* __PYMSTRUCT_TEST__ */
 
 #define _USE_MATH_DEFINES
 
@@ -16220,6 +16225,8 @@ i=1,...,n, then the returned value y=P(x). */
 } // namespace NR
 /* ------------------------------------------------------------------------------------------------ */
 
+#ifdef __PYMSTRUCT_TEST__
+
 char const* greet()
 {
    return "hello, world";
@@ -16292,7 +16299,6 @@ MStruct::ReflectionProfile * _Create_ReflectionProfile(ObjCryst::Crystal* crysta
 }
 */
 
-
 BOOST_PYTHON_MODULE(libMStruct)
 {
 
@@ -16339,3 +16345,5 @@ BOOST_PYTHON_MODULE(libMStruct)
       .def("SetIsIgnoringImagScattFact", &DiffractionDataSingleCrystal::SetIsIgnoringImagScattFact);
 
 }
+
+#endif /* #ifdef __PYMSTRUCT_TEST__ */
