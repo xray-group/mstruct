@@ -16243,6 +16243,7 @@ void _SetWavelength_string(MStruct::PowderPattern& self, const string wavelength
   self.SetWavelength(wavelength);
 }
 
+
 CrystVector_REAL* NumpyArrayToCrystVector_Real(const boost::python::numpy::ndarray& vector)
 {
   const long array_length = vector.get_nd();
@@ -16262,7 +16263,8 @@ void _SetPowderPatternObs(MStruct::PowderPattern& self, const boost::python::num
   self.SetPowderPatternObs(*crystalvector);
 }
 
-void _DiffractionDataSingleCrystal_SetWavelength(DiffractionDataSingleCrystal& self,string wavelength)
+void _DiffractionDataSingleCrystal_SetWavelength(DiffractionDataSingleCrystal& self, string wavelength)
+
 {
   self.SetWavelength(wavelength);
 }
@@ -16283,6 +16285,23 @@ void _AddComponent_Refraction(MStruct::ReflectionProfile& self, MStruct::Refract
 {
   self.AddReflectionProfileComponent(refCorr);
   refCorr.SetParentReflectionProfile(self);
+}
+
+void _PseudoVoigtBroadeningEffect_SetParentProfile(MStruct::PseudoVoigtBroadeningEffect& self, MStruct::ReflectionProfile& refProfile)
+{
+    refProfile.AddReflectionProfileComponent(self);
+    self.SetParentReflectionProfile(refProfile);
+}
+
+void _RefractionPossitionCorr_SetParentProfile(MStruct::RefractionPositionCorr& self, MStruct::ReflectionProfile& refProfile)
+{
+    refProfile.AddReflectionProfileComponent(self);
+    self.SetParentReflectionProfile(refProfile);
+} 
+
+void _SavePowderPattern(MStruct::PowderPattern& self, const string & filename)
+{
+    self.SavePowderPattern(filename);
 }
 
 ObjCryst::Radiation _Get_Radiation_Diff(DiffractionDataSingleCrystal& self)
@@ -16307,7 +16326,24 @@ ObjCryst::Crystal * _XMLLoadCrystal(const std::string& file_name, const std::str
   ObjCryst::RefinableObj &obj = ObjCryst::gRefinableObjRegistry.GetObj(crystal_name, "Crystal");
   crystal = &(dynamic_cast<ObjCryst::Crystal&>(obj));
   return crystal;
+}
 
+void _PowderPattern_SetObsToZero(MStruct::PowderPattern& self)
+{
+    CrystVector_REAL obs(self.GetNbPoint());
+    obs = 0.;
+    self.SetPowderPatternObs(obs);
+}
+
+// TODO:: return array later
+void _GetPowderPatternCalc(MStruct::PowderPattern& self){
+    self.GetPowderPatternCalc();
+}
+
+void _ReflectionProfile_SetParentPowderPatternDiffraction(MStruct::ReflectionProfile& self,
+                                                          MStruct::PowderPatternDiffraction& scattData)
+{
+    self.SetParentPowderPatternDiffraction(scattData);
 }
 
 /*
@@ -16330,7 +16366,6 @@ void test_numpy(const boost::python::numpy::ndarray& test_array)
 
 BOOST_PYTHON_MODULE(libMStruct)
 {
-
   using namespace boost::python;
   numpy::initialize();
   def("greet", greet);
@@ -16341,23 +16376,35 @@ BOOST_PYTHON_MODULE(libMStruct)
   class_<MStruct::PowderPattern>("PowderPattern")
       .def(init<>())
       .def("SetPowderPatternObs", &_SetPowderPatternObs)
+      .def("SetWeightToUnit", &MStruct::PowderPattern::SetWeightToUnit)
+      .def("Prepare", &MStruct::PowderPattern::Prepare)
+      .def("SetObsToZero", &_PowderPattern_SetObsToZero)
+      .def("SavePowderPattern", &_SavePowderPattern)
+      .def("SetPar", &MStruct::PowderPattern::SetPowderPatternPar)
       .def("SetIncidenceAngle", &MStruct::PowderPattern::SetIncidenceAngle)
       .def("SetWavelength", &_SetWavelength)
       .def("SetWavelength", &_SetWavelength_string)
       .def("GetRadiation", &_Get_Radiation)
-      .def("AddPowderPatternComponent", &PowderPattern::AddPowderPatternComponent)
-      .def("AddPowderPatternComponent", &_AddPowderPatternComponent);
+      .def("GetCalc", &_GetPowderPatternCalc)
+      .def("AddComponent", &PowderPattern::AddPowderPatternComponent)
+      .def("AddComponent", &_AddPowderPatternComponent);
+
+  class_<MStruct::PseudoVoigtBroadeningEffect>("PseudoVoigtBroadeningEffect")
+      .def(init<>())
+      .def("SetParentProfile", &_PseudoVoigtBroadeningEffect_SetParentProfile);
 
   class_<ObjCryst::Crystal>("Crystal");
 
   //class_<ReflectionProfile, boost::noncopyable>("ReflectionProfile", no_init);
   class_<MStruct::ReflectionProfile>("ReflectionProfile", init<ObjCryst::Crystal&, ObjCryst::Radiation&>())
       .def("AddComponent", &_AddComponent_Refraction)
+      .def("SetParentPowderPatternDiffraction", &_ReflectionProfile_SetParentPowderPatternDiffraction)
       .def("SetIncidenceAngle", &MStruct::ReflectionProfile::SetIncidenceAngle);
 
   class_<MStruct::RefractionPositionCorr>("RefractionPositionCorr")  
       .def(init<>())
       .def("GetPositionCorr", &MStruct::RefractionPositionCorr::GetPositionCorr)
+      .def("SetParentProfile", &_RefractionPossitionCorr_SetParentProfile)
       .def("SetCrystal", &MStruct::RefractionPositionCorr::SetCrystal);
 
   class_<ObjCryst::Radiation>("Radiation", init<const std::string, REAL>())
@@ -16375,7 +16422,6 @@ BOOST_PYTHON_MODULE(libMStruct)
       .def("SetHKL", &DiffractionDataSingleCrystal::SetHKL)
       .def("GetRadiation", &_Get_Radiation_Diff)
       .def("SetIsIgnoringImagScattFact", &DiffractionDataSingleCrystal::SetIsIgnoringImagScattFact);
-
 }
 
 #endif /* #ifdef __PYMSTRUCT_TEST__ */
