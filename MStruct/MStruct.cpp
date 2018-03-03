@@ -53,6 +53,7 @@
 
 #ifdef __PYMSTRUCT_TEST__
 #include <boost/python.hpp>
+#include <boost/python/numpy.hpp>
 //Includes for Python API
 #include <ObjCryst/ObjCryst/IO.h>
 #endif /* __PYMSTRUCT_TEST__ */
@@ -16242,6 +16243,24 @@ void _SetWavelength_string(MStruct::PowderPattern& self, const string wavelength
   self.SetWavelength(wavelength);
 }
 
+CrystVector_REAL* NumpyArrayToCrystVector_Real(const boost::python::numpy::ndarray& vector)
+{
+  const long array_length = vector.get_nd();
+  CrystVector_REAL* crystvector = new CrystVector_REAL(array_length);
+  for (int i=0; i<array_length; i++)
+  {
+    crystvector[i] = boost::python::extract<REAL>(vector[i]);
+  }
+
+  return crystvector;
+
+}
+
+void _SetPowderPatternObs(MStruct::PowderPattern& self, const boost::python::numpy::ndarray& vector)
+{
+  CrystVector_REAL* crystalvector = NumpyArrayToCrystVector_Real(vector);
+  self.SetPowderPatternObs(*crystalvector);
+}
 
 void _DiffractionDataSingleCrystal_SetWavelength(DiffractionDataSingleCrystal& self,string wavelength)
 {
@@ -16290,6 +16309,7 @@ ObjCryst::Crystal * _XMLLoadCrystal(const std::string& file_name, const std::str
   return crystal;
 
 }
+
 /*
 MStruct::ReflectionProfile * _Create_ReflectionProfile(ObjCryst::Crystal* crystal, PowderPattern* pattern)
 {
@@ -16299,16 +16319,28 @@ MStruct::ReflectionProfile * _Create_ReflectionProfile(ObjCryst::Crystal* crysta
 }
 */
 
+void test_numpy(const boost::python::numpy::ndarray& test_array)
+{
+  std::cout << "In test_numpy" << endl;;
+  int var = boost::python::extract<int>(test_array[0]);
+  std::cout << var << endl;
+}
+
+
+
 BOOST_PYTHON_MODULE(libMStruct)
 {
 
   using namespace boost::python;
+  numpy::initialize();
   def("greet", greet);
+  def("test_numpy", test_numpy);
   def("CreateCrystalFromXML", &_XMLLoadCrystal, return_value_policy<manage_new_object>());
   //def("Create_ReflectionProfile", &_Create_ReflectionProfile);
 
   class_<MStruct::PowderPattern>("PowderPattern")
       .def(init<>())
+      .def("SetPowderPatternObs", &_SetPowderPatternObs)
       .def("SetIncidenceAngle", &MStruct::PowderPattern::SetIncidenceAngle)
       .def("SetWavelength", &_SetWavelength)
       .def("SetWavelength", &_SetWavelength_string)
