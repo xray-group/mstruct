@@ -16228,11 +16228,6 @@ i=1,...,n, then the returned value y=P(x). */
 
 #ifdef __PYMSTRUCT_TEST__
 
-char const* greet()
-{
-   return "hello, world";
-}
-
 void _SetWavelength(MStruct::PowderPattern& self, const REAL wavelength)
 {
   self.SetWavelength(wavelength);
@@ -16347,7 +16342,6 @@ void _PowderPattern_SetObsToZero(MStruct::PowderPattern& self)
     self.SetPowderPatternObs(obs);
 }
 
-// TODO:: return array later
 boost::python::numpy::ndarray _GetPowderPatternCalc(MStruct::PowderPattern& self){
     CrystVector_REAL crystvector = self.GetPowderPatternCalc();
     return CrystVector_REAL_to_NumpyArray(crystvector);
@@ -16381,7 +16375,6 @@ BOOST_PYTHON_MODULE(libMStruct)
 {
   using namespace boost::python;
   numpy::initialize();
-  def("greet", greet);
   def("test_numpy", test_numpy);
   def("CreateCrystalFromXML", &_XMLLoadCrystal, return_value_policy<manage_new_object>());
   //def("Create_ReflectionProfile", &_Create_ReflectionProfile);
