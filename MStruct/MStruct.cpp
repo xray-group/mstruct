@@ -16254,7 +16254,19 @@ CrystVector_REAL* NumpyArrayToCrystVector_Real(const boost::python::numpy::ndarr
   }
 
   return crystvector;
+}
 
+boost::python::numpy::ndarray CrystVector_REAL_to_NumpyArray(const CrystVector_REAL vector)
+{
+  const uint length = vector.numElements();
+  boost::python::tuple shape = boost::python::make_tuple(length);
+  boost::python::numpy::dtype dt = boost::python::numpy::dtype::get_builtin<REAL>();
+  boost::python::numpy::ndarray array = boost::python::numpy::zeros(shape, dt);
+  for (int i=0; i<length; i++)
+  {
+    array[i] = vector(i);
+  }
+  return array;
 }
 
 void _SetPowderPatternObs(MStruct::PowderPattern& self, const boost::python::numpy::ndarray& vector)
@@ -16336,8 +16348,9 @@ void _PowderPattern_SetObsToZero(MStruct::PowderPattern& self)
 }
 
 // TODO:: return array later
-void _GetPowderPatternCalc(MStruct::PowderPattern& self){
-    self.GetPowderPatternCalc();
+boost::python::numpy::ndarray _GetPowderPatternCalc(MStruct::PowderPattern& self){
+    CrystVector_REAL crystvector = self.GetPowderPatternCalc();
+    return CrystVector_REAL_to_NumpyArray(crystvector);
 }
 
 void _ReflectionProfile_SetParentPowderPatternDiffraction(MStruct::ReflectionProfile& self,
