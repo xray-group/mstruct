@@ -4217,7 +4217,7 @@ const CrystVector_REAL&  ScatteringCorr::GetCorr(bool needRecalc)const
 
 // AbsorptionCorr
 AbsorptionCorr::AbsorptionCorr(const ScatteringData & data):
-ScatteringCorr(data),mOmega(-1.),mAbsFactor(0.),mThickness(-1.),mDepth(0.)
+ScatteringCorr(data),mOmega(-1.),mAbsFactor(100.e-8),mThickness(-1.),mDepth(0.)
 {}
 
 AbsorptionCorr::~AbsorptionCorr()
@@ -4263,8 +4263,7 @@ void AbsorptionCorr::CalcCorr() const
    for(long i=0;i<mpData->GetNbRefl();i++) {
      REAL omega = (mOmega>0.) ? mOmega : (*theta)(i);
      REAL tp = 1./(1./sin(omega) + 1./sin(2.*((*theta)(i))-omega))/mAbsFactor;
-     REAL corr = (mThickness>=0.) ? tp*(1.-exp(-mThickness/tp))*exp(-mDepth/tp)
-     															: tp*                         exp(-mDepth/tp);
+     REAL corr = (mThickness>=0.) ? tp*(1.-exp(-mThickness/tp))*exp(-mDepth/tp) : tp*exp(-mDepth/tp);
      #ifdef __DEBUG__
      s<<setw(10)<<omega*RAD2DEG<<setw(15)<<tp/10.;
      s<<setw(15)<<exp(-mDepth/tp)<<setw(15)<<( (mThickness>=0.) ? (1.-exp(-mThickness/tp)) : 0. );
