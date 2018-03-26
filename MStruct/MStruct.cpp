@@ -16246,7 +16246,7 @@ ObjCryst::Radiation _Get_Radiation(T& self)
   return self.GetRadiation();
 }
 
-CrystVector_REAL* NumpyArrayToCrystVector_Real(const boost::python::numpy::ndarray& vector)
+CrystVector_REAL* NumpyArrayToCrystVector_REAL(const boost::python::numpy::ndarray& vector)
 {
   const long array_length = vector.get_nd();
   CrystVector_REAL* crystvector = new CrystVector_REAL(array_length);
@@ -16273,7 +16273,7 @@ boost::python::numpy::ndarray CrystVector_REAL_to_NumpyArray(const CrystVector_R
 
 void _SetPowderPatternObs(MStruct::PowderPattern& self, const boost::python::numpy::ndarray& vector)
 {
-  CrystVector_REAL* crystalvector = NumpyArrayToCrystVector_Real(vector);
+  CrystVector_REAL* crystalvector = NumpyArrayToCrystVector_REAL(vector);
   self.SetPowderPatternObs(*crystalvector);
 }
 
@@ -16298,6 +16298,11 @@ void _AddComponent_Refraction(MStruct::ReflectionProfile& self, MStruct::Refract
 void _SavePowderPattern(MStruct::PowderPattern& self, const string & filename)
 {
     self.SavePowderPattern(filename);
+}
+
+boost::python::numpy::ndarray _GetPowderPatternX(MStruct::PowderPattern& self)
+{
+  return CrystVector_REAL_to_NumpyArray(self.GetPowderPatternX());
 }
 
 ObjCryst::Crystal * _Create_Crystal()
@@ -16370,6 +16375,7 @@ BOOST_PYTHON_MODULE(libMStruct)
       .def("SetWavelength", &_SetWavelength<MStruct::PowderPattern, REAL>)
       .def("GetRadiation", &_Get_Radiation<MStruct::PowderPattern>)
       .def("GetCalc", &_GetPowderPatternCalc)
+      .def("GetPowderPatternX", &_GetPowderPatternX)
       .def("AddComponent", &PowderPattern::AddPowderPatternComponent)
       .def("AddComponent", &_AddPowderPatternComponent);
 
