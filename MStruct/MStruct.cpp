@@ -16241,6 +16241,12 @@ void _SetParentProfile(s& self, T& refProfile)
 }
 
 template<typename T>
+ObjCryst::RefinablePar& _GetPar(T& self, const string & name)
+{
+    return self.GetPar(name);
+}
+
+template<typename T>
 ObjCryst::Radiation _Get_Radiation(T& self)
 {
   return self.GetRadiation();
@@ -16337,6 +16343,9 @@ void _ReflectionProfile_SetParentPowderPatternDiffraction(MStruct::ReflectionPro
     self.SetParentPowderPatternDiffraction(scattData);
 }
 
+
+
+
 /*
 MStruct::ReflectionProfile * _Create_ReflectionProfile(ObjCryst::Crystal* crystal, PowderPattern* pattern)
 {
@@ -16376,8 +16385,14 @@ BOOST_PYTHON_MODULE(libMStruct)
       .def("GetRadiation", &_Get_Radiation<MStruct::PowderPattern>)
       .def("GetCalc", &_GetPowderPatternCalc)
       .def("GetPowderPatternX", &_GetPowderPatternX)
+      .def("GetPar", &_GetPar<MStruct::PowderPattern>, return_value_policy<reference_existing_object>())
+      .def("Print", &MStruct::PowderPattern::Print) 
       .def("AddComponent", &PowderPattern::AddPowderPatternComponent)
       .def("AddComponent", &_AddPowderPatternComponent);
+
+  class_<ObjCryst::RefinablePar>("RefinablePar")
+      .def("SetHumanValue", &ObjCryst::RefinablePar::SetHumanValue)
+      .def("Print", &ObjCryst::RefinablePar::Print); 
 
   class_<MStruct::PseudoVoigtBroadeningEffect>("PseudoVoigtBroadeningEffect")
       .def(init<>())
@@ -16388,12 +16403,15 @@ BOOST_PYTHON_MODULE(libMStruct)
   //class_<ReflectionProfile, boost::noncopyable>("ReflectionProfile", no_init);
   class_<MStruct::ReflectionProfile>("ReflectionProfile", init<ObjCryst::Crystal&, ObjCryst::Radiation&>())
       .def("AddComponent", &_AddComponent_Refraction)
+      .def("GetPar", &_GetPar<MStruct::ReflectionProfile>, return_value_policy<reference_existing_object>())
       .def("SetParentPowderPatternDiffraction", &_ReflectionProfile_SetParentPowderPatternDiffraction)
       .def("SetIncidenceAngle", &MStruct::ReflectionProfile::SetIncidenceAngle);
 
   class_<MStruct::RefractionPositionCorr>("RefractionPositionCorr")  
       .def(init<>())
       .def("GetPositionCorr", &MStruct::RefractionPositionCorr::GetPositionCorr)
+      .def("SetParams", &MStruct::RefractionPositionCorr::SetParams)
+      .def("GetPar", &_GetPar<MStruct::RefractionPositionCorr>, return_value_policy<reference_existing_object>())
       .def("SetParentProfile", &_SetParentProfile<MStruct::RefractionPositionCorr, MStruct::ReflectionProfile>)
       .def("SetCrystal", &MStruct::RefractionPositionCorr::SetCrystal);
 
