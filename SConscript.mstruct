@@ -8,7 +8,7 @@ mstructenv.PrependUnique(CPPPATH = ["./MStruct"])
 
 # Idenfity the required source files
 #srcfiles  = Glob("./MStruct/*.cpp")
-srcfiles  = [File("./MStruct/MStruct.cpp")]
+srcfiles  = [File("./MStruct/libmstruct.cpp")]
 #srcfiles += [File("./MStruct/mstruct_test1.cpp")]
 
 
