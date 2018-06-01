@@ -1,4 +1,4 @@
-#include "MStruct.cpp"
+#include "MStruct.h"
 #ifdef __PYMSTRUCT_TEST__
 #include <boost/python.hpp>
 #include <boost/python/numpy.hpp>
@@ -165,7 +165,7 @@ BOOST_PYTHON_MODULE(libMStruct)
       .def("GetPowderPatternX", &_GetPowderPatternX)
       .def("GetPar", &_GetPar<MStruct::PowderPattern>, return_value_policy<reference_existing_object>())
       .def("Print", &MStruct::PowderPattern::Print) 
-      .def("AddComponent", &PowderPattern::AddPowderPatternComponent)
+      .def("AddComponent", &MStruct::PowderPattern::AddPowderPatternComponent)
       .def("AddComponent", &_AddPowderPatternComponent);
 
   class_<ObjCryst::RefinablePar>("RefinablePar")
@@ -206,9 +206,9 @@ BOOST_PYTHON_MODULE(libMStruct)
   class_<ObjCryst::DiffractionDataSingleCrystal>("DiffractionDataSingleCrystal", init<ObjCryst::Crystal*>())
       .def("SetWavelength", &_SetWavelength<ObjCryst::DiffractionDataSingleCrystal, string>)
       .def("SetWavelength", &_SetWavelength<ObjCryst::DiffractionDataSingleCrystal, REAL>)
-      .def("SetHKL", &DiffractionDataSingleCrystal::SetHKL)
+      .def("SetHKL", &ObjCryst::DiffractionDataSingleCrystal::SetHKL)
       .def("GetRadiation", &_Get_Radiation<ObjCryst::DiffractionDataSingleCrystal>)
-      .def("SetIsIgnoringImagScattFact", &DiffractionDataSingleCrystal::SetIsIgnoringImagScattFact);
+      .def("SetIsIgnoringImagScattFact", &ObjCryst::DiffractionDataSingleCrystal::SetIsIgnoringImagScattFact);
 }
 
 #endif /* #ifdef __PYMSTRUCT_TEST__ */

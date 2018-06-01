@@ -51,13 +51,6 @@
 #include <boost/math/special_functions/gamma.hpp>
 #include <boost/algorithm/string.hpp>
 
-#ifdef __PYMSTRUCT_TEST__
-#include <boost/python.hpp>
-#include <boost/python/numpy.hpp>
-//Includes for Python API
-#include <ObjCryst/ObjCryst/IO.h>
-#endif /* __PYMSTRUCT_TEST__ */
-
 #define _USE_MATH_DEFINES
 
 #include <math.h> // <cmath>
