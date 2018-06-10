@@ -4,8 +4,8 @@
  * MStruct++ - Object-Oriented computer program/library for MicroStructure analysis
  * 					   from powder diffraction data.
  * 
- * Copyright (C) 2009-2014  Zdenek Matej, Charles University in Prague
- * Copyright (C) 2014-2015  Zdenek Matej, MAX IV Laboratory, Lund University
+ * Copyright (C) 2009-2018  Zdenek Matej, Charles University in Prague
+ * Copyright (C) 2014-2018  Zdenek Matej, MAX IV Laboratory, Lund University
  * 
  * This file is part of MStruct++.
  * 
@@ -32,7 +32,7 @@
 //#define program_version "0.39-(Fox-r1221)-testing-WCfaults+ExternalLSQConstraints"
 //#define program_version "0.104-(Fox-r1221)-develop-EllipRodsGamma(testing)" // EllipRodsGamma
 //#define program_version "0.96-(Fox-r1221)-develop"
-#define program_version "0.147-(Fox-r1221)-develop-carbonWB(withoutScale)-instrGeomPB-splineBkg"
+#define program_version "0.148"
 
 #include "MStruct.h"
 
@@ -124,9 +124,9 @@ int main (int argc, char *argv[])
    		// print version and license information
       cout << "version: " << program_version << "\n";
       cout << "mstruct Copyright\n";
-      cout << "(C) 2009-2015 Zdenek Matej, Charles University in Prague\n";
-      cout << "(C) 2014-2015 Zdenek Matej, MAX IV Laboratory, Lund University\n";
-      cout << "e-mail: <matej@karlov.mff.cuni.cz>\n";
+      cout << "(C) 2009-2018 Charles University in Prague\n";
+      cout << "(C) 2014-2018 Zdenek Matej, MAX IV Laboratory, Lund University\n";
+      cout << "e-mail: <zdenek.matej@maxiv.lu.se>\n";
       cout << "web: <http://xray.cz/mstruct/>\n";
       cout << "License GNU GPL: <http://gnu.org/licenses/gpl.html>.\n";
       cout << "This program comes with ABSOLUTELY NO WARRANTY;\n";
