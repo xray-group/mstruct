@@ -96,8 +96,24 @@ libobjcryst = env.SharedLibrary("libObjCryst",
 lib = Alias('lib', [libobjcryst, env['lib_includes']])
 Default(lib)
 
+
+def find_library(possible_library_names, conf):
+    """
+    Searches for library with possible different names under different versions.
+    """
+    proper_library_name = ''
+    for name in possible_library_names:
+        if conf.CheckLib(name):
+            return name
+    raise RuntimeError('Unable to find appropriate library name.', possible_library_names)
+
+conf = Configure(env)
+boost_python_libs = []
+boost_python_possible_names = ['boost_python27','boost_python']
+boost_numpy_possible_names = ['boost_numpy27', 'boost_numpy']
+boost_python_libs.extend((find_library(boost_python_possible_names, conf), find_library(boost_numpy_possible_names, conf)))
 # This builds the shared MStruct library
-MStructlibs = ['fftw3', 'gsl', 'ObjCryst', 'boost_python', 'python2.7', 'boost_numpy']
+MStructlibs = ['fftw3', 'gsl', 'ObjCryst', 'python2.7']+boost_python_libs
 MStructlibpaths = ['/usr/lib', env.Dir('../../../libobjcryst/build/%s-%s' % (env['build'], platform.machine()))]
 libmstruct = env.SharedLibrary("libMStruct", mstructobjs, LIBS=MStructlibs, LIBPATH=MStructlibpaths)
 libms = Alias('libmstruct', [libmstruct, env['libmstruct_includes']])
