@@ -109,6 +109,8 @@ def find_library(possible_library_names, conf):
 
 conf = Configure(env)
 boost_python_libs = []
+#There are many possible names of libraries due to different boost versions.
+#TODO: recognise python version and apply correct version names.
 boost_python_possible_names = ['boost_python27','boost_python']
 boost_numpy_possible_names = ['boost_numpy27', 'boost_numpy']
 boost_python_libs.extend((find_library(boost_python_possible_names, conf), find_library(boost_numpy_possible_names, conf)))
