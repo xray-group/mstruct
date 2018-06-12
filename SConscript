@@ -1,4 +1,5 @@
 import os
+import sys
 import platform
 
 Import('env')
@@ -109,13 +110,15 @@ def find_library(possible_library_names, conf):
 
 conf = Configure(env)
 boost_python_libs = []
+python_libs = []
 #There are many possible names of libraries due to different boost versions.
-#TODO: recognise python version and apply correct version names.
-boost_python_possible_names = ['boost_python27','boost_python']
-boost_numpy_possible_names = ['boost_numpy27', 'boost_numpy']
+boost_python_possible_names = ['boost_python%d%d' % env['python_version'],'boost_python']
+boost_numpy_possible_names = ['boost_numpy%d%d' % env['python_version'], 'boost_numpy']
+python_library_possible_names = ['python%d.%d' % env['python_version'], 'python%d.%dm' % env['python_version']]
+python_libs.extend((find_library(python_library_possible_names, conf),))
 boost_python_libs.extend((find_library(boost_python_possible_names, conf), find_library(boost_numpy_possible_names, conf)))
 # This builds the shared MStruct library
-MStructlibs = ['fftw3', 'gsl', 'ObjCryst', 'python2.7']+boost_python_libs
+MStructlibs = ['fftw3', 'gsl', 'ObjCryst']+python_libs+boost_python_libs
 MStructlibpaths = ['/usr/lib', env.Dir('../../../libobjcryst/build/%s-%s' % (env['build'], platform.machine()))]
 libmstruct = env.SharedLibrary("libMStruct", mstructobjs, LIBS=MStructlibs, LIBPATH=MStructlibpaths)
 libms = Alias('libmstruct', [libmstruct, env['libmstruct_includes']])

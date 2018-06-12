@@ -17,6 +17,7 @@ SCons construction environment can be customized in sconscript.local script.
 """
 
 import os
+import sys
 import platform
 
 def subdictionary(d, keyset):
@@ -35,6 +36,29 @@ env = DefaultEnvironment().Clone()
 
 # Variables definitions below work only with 0.98.1 or later.
 env.EnsureSConsVersion(0, 98, 1)
+
+#Adds option for selecting desired python version
+AddOption('--python-version', dest='python_version', type='string', help="Python version to build libmstruct against."\
+    " Expected format is: X.Y, example: scons --python-version=2.7. Automatically set to default system python version.")
+
+def get_default_python_version():
+    return sys.version_info[:2]
+def get_python_version():
+    version_option = GetOption('python_version')
+    if version_option != None:
+        try:
+            version_option = version_option.split('.')
+            assert len(version_option)==2
+            python_version = (int(version_option[0]), int(version_option[1]))
+        except:
+            python_version = get_default_python_version()
+    else:
+        python_version = get_default_python_version()
+    return python_version
+
+python_version = get_python_version()
+
+env.Append(python_version = python_version)
 
 # Customizable compile variables
 vars = Variables('sconsvars.py')
@@ -75,7 +99,7 @@ env.Help(MY_SCONS_HELP % vars.GenerateHelpText(env))
 if not os.path.isdir("./../cctbx"):
     os.system("bunzip2 -c -k ./../cctbx.tar.bz2 | tar -C ./.. -xzv")
 
-env.Append( CPPPATH=['.','ObjCryst','MStruct','cctbx/include','/usr/include/python2.7'] )
+env.Append( CPPPATH=['.','ObjCryst','MStruct','cctbx/include', '/usr/include/python%d.%d' % env['python_version']] )
 env.Append( CXXFLAGS=['-D__ZDENEK__'] )
 env.Append( CXXFLAGS=['-D__PYMSTRUCT_TEST__'] )
 
