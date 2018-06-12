@@ -34,6 +34,8 @@ SConscript automatically determines your system default python version and build
 ```
 scons -j4 --python-version=3.6 libmstruct
 ```
+WARNING: You need Boost Python libraries to be built against the python version you want to use.
+
 Next, you need to add path to your newly built libMStruct. One option is following.
 *As next commands are going to modify your environment (that you may use for 
 building) I suggest opening a new shell, e.g. by bash.*
