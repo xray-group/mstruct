@@ -11,7 +11,16 @@ env.MergeFlags([os.environ.get(n, '') for n in flagnames])
 
 # Insert LIBRARY_PATH explicitly because some compilers
 # ignore it in the system environment.
-env.PrependUnique(LIBPATH=env['ENV'].get('LIBRARY_PATH', '').split(':'))
+if env['PLATFORM'] != 'win32':
+    env.PrependUnique(LIBPATH=env['ENV'].get('LIBRARY_PATH', '').split(':'))
+else:
+    env.PrependUnique(LIBPATH=env['ENV'].get('LIBRARY_PATH', '').split(';'))
+
+# Windows specific enviroment
+if env['PLATFORM'] == 'win32':
+    env.PrependUnique(CPATH=env['ENV'].get('CPATH', '').split(';'))
+    env.PrependUnique(CPPPATH=env['ENV'].get('CPPPATH', '').split(';'))
+    env['ENV']['TMP'] = os.environ['TMP']
 
 # Use Intel C++ compiler if requested by the user.
 icpc = None
@@ -22,7 +31,10 @@ if env['tool'] == 'intelc':
         Exit(1)
     env.Tool('intelc', topdir=icpc[:icpc.rfind('/bin')])
 
-fast_linkflags = ['-s']
+if env['PLATFORM'] != 'win32':
+    fast_linkflags = ['-s']
+else:
+    fast_linkflags = []
 
 # Platform specific intricacies.
 if env['PLATFORM'] == 'darwin':
@@ -54,14 +66,19 @@ if env['profile']:
     env.AppendUnique(LINKFLAGS='-pg')
 
 # link warnings
-env.AppendUnique(LINKFLAGS='-Wl,--no-undefined')
+if env['PLATFORM'] != 'win32':
+    env.AppendUnique(LINKFLAGS='-Wl,--no-undefined')
 	
 # REAL=double needed for pyobjcryst
 env.AppendUnique(CCFLAGS='-DREAL=double')
 
-# Additional library dependencies for ObjCryst
-env.AppendUnique(LINKFLAGS='-lm')
-env.AppendUnique(LINKFLAGS='-llapack')
+# required for boost with MSVC
+if env['PLATFORM'] == 'win32':
+    env.AppendUnique(CPPFLAGS=['/EHsc','/MD','-DBOOST_DYN_LINK','-D_DLL'])
+
+# link flags for MSVC
+if env['PLATFORM'] == 'win32':
+    env.AppendUnique(LINKFLAGS=['/NODEFAULTLIB:library'])
 
 # Lists for storing built objects and header files
 env['newmatobjs'] = []
@@ -91,14 +108,27 @@ objcrystobjs = env["objcrystobjs"]
 mstructobjs = env["mstructobjs"]
 
 # This builds the shared library
-libobjcryst = env.SharedLibrary("libObjCryst",
-        objcrystobjs + cctbxobjs + newmatobjs)
+if env['PLATFORM'] != 'win32':
+    # Additional library dependencies for ObjCryst
+    ObjCrystlibs = ['lapack','m']
+    ObjCrystlibpaths = []
+else:
+    # Additional library dependencies for ObjCryst
+    ObjCrystlibs = ['clapack','libf2c','blas'] # Additional library dependencies for ObjCryst
+    ObjCrystlibpaths = []
+    env.AppendUnique(LIBPATH=[env.Dir('../../../clapack-prebuild/lib/x64')])
+libobjcryst = env.Library("libObjCryst",
+        objcrystobjs + cctbxobjs + newmatobjs,
+        LIBS=ObjCrystlibs) # LIBPATH=ObjCrystlibpaths
 lib = Alias('lib', [libobjcryst, env['lib_includes']])
 Default(lib)
 
 # This builds the shared MStruct library
-MStructlibs = ['fftw3', 'gsl', 'ObjCryst', 'boost_python', 'python2.7', 'boost_numpy']
-MStructlibpaths = ['/usr/lib', env.Dir('../../../libobjcryst/build/%s-%s' % (env['build'], platform.machine()))]
+if env['PLATFORM'] != 'win32':
+    MStructlibs = ['fftw3', 'gsl', 'ObjCryst', 'boost_python', 'python2.7', 'boost_numpy']
+else:
+    MStructlibs = ['fftw3', 'gslx', 'libObjCryst','boost_python3', 'python3', 'boost_numpy3','clapack','libf2c','blas']
+MStructlibpaths = env['LIBPATH'] + ['/usr/lib', env.Dir('../../../libobjcryst/build/%s-%s' % (env['build'], platform.machine()))]
 libmstruct = env.SharedLibrary("libMStruct", mstructobjs, LIBS=MStructlibs, LIBPATH=MStructlibpaths)
 libms = Alias('libmstruct', [libmstruct, env['libmstruct_includes']])
 	
@@ -118,15 +148,47 @@ if env['PLATFORM'] == 'posix' and WhereIs('ldconfig'):
     if os.getuid() != 0:  opts = '-n'
     env.AddPostAction(libinstall,
             'ldconfig %s $TARGET.dir' % opts)
-Alias('install-lib', libinstall)
+if env['PLATFORM'] != 'win32':
+    libinstall = env.Install(env['libdir'], libmstruct)
+else:
+    libinstall = env.Install(env['libdir'], [f for f in libmstruct if f.get_suffix()=='.lib'])
+if env['PLATFORM'] == 'darwin':
+    # DARWIN_INSTALL_NAME can be pre-set in sconscript.local
+    env.SetDefault(DARWIN_INSTALL_NAME='$TARGET.abspath')
+    env.AddPostAction(libinstall,
+            'install_name_tool -id $DARWIN_INSTALL_NAME $TARGET')
+if env['PLATFORM'] == 'posix' and WhereIs('ldconfig'):
+    opts = ''
+    if os.getuid() != 0:  opts = '-n'
+    env.AddPostAction(libinstall,
+            'ldconfig %s $TARGET.dir' % opts)
+# runtime dll for Windows
+dllinstall = []
+if env['PLATFORM'] == 'win32':
+    dllinstall = env.Install(prefix+'/bin',  [f for f in libmstruct if f.get_suffix()=='.dll'])
+    for  f in libmstruct:
+        if f.get_suffix()=='.dll':
+            link_source = os.path.normpath( os.path.join(env['modulepath'], f.rstr()[:-3]+'pyd') )
+            link_target = os.path.normpath( os.path.join(prefix+'/bin', f.rstr()) )
+            env.AddPostAction(dllinstall, 'mklink /H ' + link_source + ' ' +  link_target)
+Alias('install-lib', libinstall + dllinstall)
+
+# install-bin
+bininstall = []
+Alias('install-bin', bininstall)
+
+# install-python
+pyinstall = []
+Alias('install-modules', pyinstall)
 
 # install-includes
 ninc = len(Dir('.').path) + 1
 inc_target_path = lambda f: os.path.join(env['includedir'], f.path[ninc:])
 include_targets = [inc_target_path(f) for f in env['lib_includes']]
-Alias('install-include', InstallAs(include_targets, env['lib_includes']))
+include_targets = include_targets + [inc_target_path(f) for f in env['libmstruct_includes']]
+Alias('install-include', InstallAs(include_targets, env['lib_includes']+ env['libmstruct_includes']))
 
 # install
-Alias('install', ['install-lib', 'install-include'])
+Alias('install', ['install-lib', 'install-include', 'install-bin','install-modules'])
 
 # vim: ft=python
