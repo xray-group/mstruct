@@ -170,6 +170,7 @@ if env['PLATFORM'] == 'win32':
         if f.get_suffix()=='.dll':
             link_source = os.path.normpath( os.path.join(env['modulepath'], f.rstr()[:-3]+'pyd') )
             link_target = os.path.normpath( os.path.join(prefix+'/bin', f.rstr()) )
+            env.AddPostAction(dllinstall, 'del ' + link_source + ' 2>NUL')
             env.AddPostAction(dllinstall, 'mklink /H ' + link_source + ' ' +  link_target)
 Alias('install-lib', libinstall + dllinstall)
 
