@@ -49,9 +49,13 @@ def get_python_version():
         try:
             version_option = version_option.split('.')
             assert len(version_option)==2
+            assert len(version_option[0]) == 1
+            assert len(version_option[1]) == 1
+            assert isinstance(version_option[0], int)
+            assert isinstance(version_option[1], int)
             python_version = (int(version_option[0]), int(version_option[1]))
         except:
-            python_version = get_default_python_version()
+            raise Exception("Invalid python version.")
     else:
         python_version = get_default_python_version()
     return python_version

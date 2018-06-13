@@ -3,13 +3,10 @@ MStruct is a free computer program for MicroStructure analysis from powder diffr
 ## Getting Started
 
 ### Prerequisites
-Boost version >=1.63
-
-GSL
-
-FFTW3
-
-LAPACK
+* Boost version >=1.63
+* [gsl](https://www.gnu.org/software/gsl/)
+* [fftw3](http://www.fftw.org/)
+* lapack
 
 MStruct carries the rest of the dependencies so far, might be changed in the future.
 
