@@ -82,6 +82,10 @@ env.Help(MY_SCONS_HELP % vars.GenerateHelpText(env))
 if not os.path.isdir("./../cctbx"):
     os.system("bunzip2 -c -k ./../cctbx.tar.bz2 | tar -C ./.. -xv")
 
+# Unpack win-prebuild if needed
+if env['PLATFORM'] == 'win32' and not os.path.isdir("./../win-prebuild"):
+    os.system("bunzip2 -c -k ./../win-prebuild.tar.bz2 | tar -C ./.. -xv")
+    
 env.Append( CPPPATH=['.','ObjCryst','MStruct','cctbx/include','/usr/include/python2.7'] )
 env.Append( CXXFLAGS=['-D__ZDENEK__'] )
 env.Append( CXXFLAGS=['-D__PYMSTRUCT_TEST__'] )
