@@ -44,7 +44,7 @@ CrystVector_REAL* NumpyArrayToCrystVector_REAL(const boost::python::numpy::ndarr
 
 boost::python::numpy::ndarray CrystVector_REAL_to_NumpyArray(const CrystVector_REAL vector)
 {
-  const uint length = vector.numElements();
+  const unsigned int length = vector.numElements();
   boost::python::tuple shape = boost::python::make_tuple(length);
   boost::python::numpy::dtype dt = boost::python::numpy::dtype::get_builtin<REAL>();
   boost::python::numpy::ndarray array = boost::python::numpy::zeros(shape, dt);

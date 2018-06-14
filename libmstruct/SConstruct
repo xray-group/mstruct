@@ -4,9 +4,12 @@ Usage: scons [target] [var=value]
 
 Targets:
 
-libmstruct          build the shared library object [default]
+mstruct             build the mstruct binary [default]
+libmstruct          build the shared library object
 install             install everything under prefix directory
 install-lib         install the shared library object
+install-scripts     install program scripts
+install-modules     install python modules
 install-include     install the C++ header files
 sdist               create source distribution tarball from git repository
 
@@ -17,6 +20,7 @@ SCons construction environment can be customized in sconscript.local script.
 """
 
 import os
+import sys
 import platform
 
 def subdictionary(d, keyset):
@@ -24,7 +28,7 @@ def subdictionary(d, keyset):
 
 # copy system environment variables related to compilation
 DefaultEnvironment(ENV=subdictionary(os.environ, '''
-    PATH CPATH CPLUS_INCLUDE_PATH LIBRARY_PATH LD_RUN_PATH
+    PATH CPATH CPPPATH CPLUS_INCLUDE_PATH LIBRARY_PATH LD_RUN_PATH
     LD_LIBRARY_PATH DYLD_LIBRARY_PATH DYLD_FALLBACK_LIBRARY_PATH
     MACOSX_DEPLOYMENT_TARGET
     '''.split())
@@ -35,6 +39,31 @@ env = DefaultEnvironment().Clone()
 
 # Variables definitions below work only with 0.98.1 or later.
 env.EnsureSConsVersion(0, 98, 1)
+
+#Adds option for selecting desired python version
+AddOption('--python-version', dest='python_version', type='string', help="Python version to build libmstruct against."\
+    " Expected format is: X.Y, example: scons --python-version=2.7. Automatically set to default system python version.")
+
+def get_default_python_version():
+    return sys.version_info[:2]
+def get_python_version():
+    version_option = GetOption('python_version')
+    if version_option != None:
+        try:
+            version_option = version_option.split('.')
+            assert len(version_option)==2
+            assert len(version_option[0]) == 1
+            assert len(version_option[1]) == 1
+            python_version = (int(version_option[0]), int(version_option[1]))
+        except:
+            raise Exception("Invalid python version.")
+    else:
+        python_version = get_default_python_version()
+    return python_version
+
+python_version = get_python_version()
+
+env.Append(python_version = python_version)
 
 # Customizable compile variables
 vars = Variables('sconsvars.py')
@@ -48,6 +77,11 @@ vars.Add(PathVariable(
     'libdir',
     'installation directory for compiled library [prefix/lib]',
     env['prefix'] + '/lib',
+    PathVariable.PathAccept))
+vars.Add(PathVariable(
+    'modulepath',
+    'installation directory for python modules (site-pacakges)',
+    env['prefix'] + '/lib/python%d.%d/site-packages' % python_version,
     PathVariable.PathAccept))
 vars.Add(PathVariable(
     'includedir',
@@ -73,9 +107,16 @@ env.Help(MY_SCONS_HELP % vars.GenerateHelpText(env))
 
 # Unpack cctbx sources if needed
 if not os.path.isdir("./../cctbx"):
-    os.system("bunzip2 -c -k ./../cctbx.tar.bz2 | tar -C ./.. -xzv")
+    os.system("bunzip2 -c -k ./../cctbx.tar.bz2 | tar -C ./.. -xv")
+# Unpack newmat sources if needed
+if not os.path.isdir("./../newmat"):
+    os.system("bunzip2 -c -k ./../newmat.tar.bz2 | tar -C ./.. -xv")
+# Unpack win-prebuild if needed
+if env['PLATFORM'] == 'win32' and not os.path.isdir("./../win-prebuild"):
+    os.system("bunzip2 -c -k ./../win-prebuild.tar.bz2 | tar -C ./.. -xv")
 
-env.Append( CPPPATH=['.','ObjCryst','MStruct','cctbx/include','/usr/include/python2.7'] )
+env.Append( CPPPATH=['.','ObjCryst','MStruct','cctbx/include', '/usr/include/python%d.%d' % env['python_version']] )    
+
 env.Append( CXXFLAGS=['-D__ZDENEK__'] )
 env.Append( CXXFLAGS=['-D__PYMSTRUCT_TEST__'] )
 
