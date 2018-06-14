@@ -85,8 +85,10 @@ env['newmatobjs'] = []
 env['cctbxobjs'] = []
 env['objcrystobjs'] = []
 env['mstructobjs'] = []
+env['binmstructobjs'] = []
 env['lib_includes'] = []
 env['libmstruct_includes'] = []
+env['binmstruct_includes'] = []
 
 # Subsidiary SConscripts -----------------------------------------------------
 
@@ -106,6 +108,7 @@ newmatobjs = env["newmatobjs"]
 cctbxobjs = env["cctbxobjs"]
 objcrystobjs = env["objcrystobjs"]
 mstructobjs = env["mstructobjs"]
+binmstructobjs = env["binmstructobjs"]
 
 # This builds the shared library
 if env['PLATFORM'] != 'win32':
@@ -116,7 +119,7 @@ else:
     # Additional library dependencies for ObjCryst
     ObjCrystlibs = ['clapack','libf2c','blas'] # Additional library dependencies for ObjCryst
     ObjCrystlibpaths = []
-    env.AppendUnique(LIBPATH=[env.Dir('../../../clapack-prebuild/lib/x64')])
+    env.AppendUnique(LIBPATH=[env.Dir('../../../win-prebuild/lib/x64')])
 libobjcryst = env.Library("libObjCryst",
         objcrystobjs + cctbxobjs + newmatobjs,
         LIBS=ObjCrystlibs) # LIBPATH=ObjCrystlibpaths
@@ -127,11 +130,15 @@ Default(lib)
 if env['PLATFORM'] != 'win32':
     MStructlibs = ['fftw3', 'gsl', 'ObjCryst', 'boost_python', 'python2.7', 'boost_numpy']
 else:
-    MStructlibs = ['fftw3', 'gslx', 'libObjCryst','boost_python3', 'python3', 'boost_numpy3','clapack','libf2c','blas']
+    MStructlibs = ['fftw3', 'gsl-1.16', 'libObjCryst','boost_python3', 'python3', 'boost_numpy3','clapack-3.1.1-md','libf2c-3.1.1-md','blas-3.1.1-md']
 MStructlibpaths = env['LIBPATH'] + ['/usr/lib', env.Dir('../../../libobjcryst/build/%s-%s' % (env['build'], platform.machine()))]
 libmstruct = env.SharedLibrary("libMStruct", mstructobjs, LIBS=MStructlibs, LIBPATH=MStructlibpaths)
-libms = Alias('libmstruct', [libmstruct, env['libmstruct_includes']])
-	
+libms = Alias('libmstruct', [libmstruct,] + env['libmstruct_includes'])
+
+# This builds mstruct binary executable
+binmstruct = env.Program("mstruct", binmstructobjs, LIBS=MStructlibs, LIBPATH=MStructlibpaths)
+binms = Alias('mstruct', [binmstruct,] + env['binmstruct_includes'])
+
 # Installation targets.
 
 prefix = env['prefix']
@@ -175,7 +182,7 @@ if env['PLATFORM'] == 'win32':
 Alias('install-lib', libinstall + dllinstall)
 
 # install-bin
-bininstall = []
+bininstall = env.Install(prefix+'/bin', binmstruct)
 Alias('install-bin', bininstall)
 
 # install-python
