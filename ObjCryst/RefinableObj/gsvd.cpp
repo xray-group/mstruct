@@ -39,6 +39,9 @@ extern "C" int dggsvd_(char *jobu, char *jobv, char *jobq, integer *m,
 
 #ifdef _MSC_VER
 
+/* define max macro */
+#define max(a,b) ((a)>=(b)) ? (a) : (b)
+
 #ifdef __USE_FAKED_GSVD__
 
 /* dummy dggsvd_(...) function */
