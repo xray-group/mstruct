@@ -68,7 +68,7 @@ if env['profile']:
 
 # link warnings
 if env['PLATFORM'] != 'win32' and env['PLATFORM'] != 'darwin':
-    env.AppendUnique(LINKFLAGS='-Wl,--')
+    env.AppendUnique(LINKFLAGS=['']) # '-Wl,--' does not work with gcc4.8
 	
 # REAL=double needed for pyobjcryst
 env.AppendUnique(CCFLAGS='-DREAL=double')
@@ -142,7 +142,7 @@ def find_library(possible_library_names, conf,):
     for name in possible_library_names:
         if conf.CheckLib(name):
             return name
-    raise RuntimeError('Unable to find appropriate library name.', possible_library_names)
+    raise RuntimeError('Unable to find appropriate library name (but please check ./config.log)', possible_library_names)
 
 boost_python_libs = []
 python_libs = []
@@ -158,10 +158,9 @@ boost_python_libs.extend((find_library(boost_python_possible_names, conf), find_
 
 # This builds the shared MStruct library
 if env['PLATFORM'] != 'win32':
-    MStructlibs = ['fftw3', 'gsl', 'ObjCryst']  + python_libs+boost_python_libs
+    MStructlibs = ['fftw3', 'gsl', 'lapack', 'ObjCryst']  + python_libs+boost_python_libs
 else:
     MStructlibs = ['fftw3', 'gsl-1.16', 'libObjCryst', 'clapack-3.1.1-md','libf2c-3.1.1-md','blas-3.1.1-md'] + python_libs+boost_python_libs
-#MStructlibpaths = env['LIBPATH'] + ['/usr/lib', env.Dir('../../../libobjcryst/build/%s-%s' % (env['build'], platform.machine()))]
 MStructlibpaths = env['LIBPATH'] + ['/usr/lib', env.Dir('.')]
 libmstruct = env.SharedLibrary("libMStruct", mstructobjs, LIBS=MStructlibs, LIBPATH=MStructlibpaths)
 libms = Alias('libmstruct', [libmstruct,] + env['libmstruct_includes'])
@@ -207,6 +206,15 @@ if env['PLATFORM'] == 'darwin':
     for  f in libmstruct:
         if f.get_suffix()=='.dylib':
             link_target = os.path.normpath( os.path.join(env['modulepath'], f.rstr()[:-5]+'so') )
+            link_source = os.path.normpath( os.path.join(env['libdir'], f.rstr()) )
+            env.AddPostAction(libinstall, 'rm -f ' + link_target + ' 2>/dev/null')
+            env.AddPostAction(libinstall, 'ln -s ' + link_source + ' ' +  link_target)
+# link site-packages/python*/*.so -> *.so to allow python import
+if env['PLATFORM'] == 'posix':
+    for  f in libmstruct:
+    	 if f.get_suffix()=='.so':
+	    print(f.rstr())
+	    link_target = os.path.normpath( os.path.join(env['modulepath'], f.rstr()) )
             link_source = os.path.normpath( os.path.join(env['libdir'], f.rstr()) )
             env.AddPostAction(libinstall, 'rm -f ' + link_target + ' 2>/dev/null')
             env.AddPostAction(libinstall, 'ln -s ' + link_source + ' ' +  link_target)
