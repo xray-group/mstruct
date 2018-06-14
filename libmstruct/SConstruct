@@ -81,7 +81,7 @@ vars.Add(PathVariable(
 vars.Add(PathVariable(
     'modulepath',
     'installation directory for python modules (site-pacakges)',
-    env['prefix'] + '/lib/python3.6/site-packages',
+    env['prefix'] + '/lib/python%d.%d/site-packages' % python_version,
     PathVariable.PathAccept))
 vars.Add(PathVariable(
     'includedir',
@@ -108,6 +108,9 @@ env.Help(MY_SCONS_HELP % vars.GenerateHelpText(env))
 # Unpack cctbx sources if needed
 if not os.path.isdir("./../cctbx"):
     os.system("bunzip2 -c -k ./../cctbx.tar.bz2 | tar -C ./.. -xv")
+# Unpack newmat sources if needed
+if not os.path.isdir("./../newmat"):
+    os.system("bunzip2 -c -k ./../newmat.tar.bz2 | tar -C ./.. -xv")
 # Unpack win-prebuild if needed
 if env['PLATFORM'] == 'win32' and not os.path.isdir("./../win-prebuild"):
     os.system("bunzip2 -c -k ./../win-prebuild.tar.bz2 | tar -C ./.. -xv")

@@ -7,7 +7,7 @@ Import('env')
 # Build environment configuration --------------------------------------------
 
 # Apply CFLAGS, CXXFLAGS, LDFLAGS from the system environment.
-flagnames = 'CFLAGS CXXFLAGS LDFLAGS'.split()
+flagnames = 'CFLAGS CPPFLAGS CXXFLAGS LDFLAGS'.split()
 env.MergeFlags([os.environ.get(n, '') for n in flagnames])
 
 # Insert LIBRARY_PATH explicitly because some compilers
@@ -67,8 +67,8 @@ if env['profile']:
     env.AppendUnique(LINKFLAGS='-pg')
 
 # link warnings
-if env['PLATFORM'] != 'win32':
-    env.AppendUnique(LINKFLAGS='-Wl,--no-undefined')
+if env['PLATFORM'] != 'win32' and env['PLATFORM'] != 'darwin':
+    env.AppendUnique(LINKFLAGS='-Wl,--')
 	
 # REAL=double needed for pyobjcryst
 env.AppendUnique(CCFLAGS='-DREAL=double')
@@ -116,14 +116,17 @@ if env['PLATFORM'] != 'win32':
     # Additional library dependencies for ObjCryst
     ObjCrystlibs = ['lapack','m']
     ObjCrystlibpaths = []
+    libobjcryst = env.SharedLibrary("libObjCryst",
+            objcrystobjs + cctbxobjs + newmatobjs,
+            LIBS=ObjCrystlibs) # LIBPATH=ObjCrystlibpaths
 else:
     # Additional library dependencies for ObjCryst
-    ObjCrystlibs = ['clapack','libf2c','blas'] # Additional library dependencies for ObjCryst
+    ObjCrystlibs = [] # Additional library dependencies for ObjCryst
     ObjCrystlibpaths = []
     env.AppendUnique(LIBPATH=[env.Dir('../../../win-prebuild/lib/x64')])
-libobjcryst = env.Library("libObjCryst",
-        objcrystobjs + cctbxobjs + newmatobjs,
-        LIBS=ObjCrystlibs) # LIBPATH=ObjCrystlibpaths
+    libobjcryst = env.Library("libObjCryst",
+            objcrystobjs + cctbxobjs + newmatobjs,
+            LIBS=ObjCrystlibs) # LIBPATH=ObjCrystlibpaths
 lib = Alias('lib', [libobjcryst, env['lib_includes']])
 Default(lib)
 
@@ -131,7 +134,7 @@ conf = Configure(env)
 
 # Boost configuration ----------------------------------------------------------
 
-def find_library(possible_library_names, conf):
+def find_library(possible_library_names, conf,):
     """
     Searches for library with possible different names under different versions.
     """
@@ -157,13 +160,16 @@ boost_python_libs.extend((find_library(boost_python_possible_names, conf), find_
 if env['PLATFORM'] != 'win32':
     MStructlibs = ['fftw3', 'gsl', 'ObjCryst']  + python_libs+boost_python_libs
 else:
-    MStructlibs = ['fftw3', 'gsl-1.16', 'libObjCryst','boost_python3', 'python3', 'boost_numpy3','clapack-3.1.1-md','libf2c-3.1.1-md','blas-3.1.1-md']
-MStructlibpaths = env['LIBPATH'] + ['/usr/lib', env.Dir('../../../libobjcryst/build/%s-%s' % (env['build'], platform.machine()))]
+    MStructlibs = ['fftw3', 'gsl-1.16', 'libObjCryst', 'clapack-3.1.1-md','libf2c-3.1.1-md','blas-3.1.1-md'] + python_libs+boost_python_libs
+#MStructlibpaths = env['LIBPATH'] + ['/usr/lib', env.Dir('../../../libobjcryst/build/%s-%s' % (env['build'], platform.machine()))]
+MStructlibpaths = env['LIBPATH'] + ['/usr/lib', env.Dir('.')]
 libmstruct = env.SharedLibrary("libMStruct", mstructobjs, LIBS=MStructlibs, LIBPATH=MStructlibpaths)
 libms = Alias('libmstruct', [libmstruct,] + env['libmstruct_includes'])
+#if env['PLATFORM'] != 'win32':
+#    Depends(libmstruct, lib)
 
 # This builds mstruct binary executable
-binmstruct = env.Program("mstruct", binmstructobjs, LIBS=MStructlibs, LIBPATH=MStructlibpaths)
+binmstruct = env.Program("mstruct_am", binmstructobjs, LIBS=MStructlibs, LIBPATH=MStructlibpaths)
 binms = Alias('mstruct', [binmstruct,] + env['binmstruct_includes'])
 
 # Installation targets.
@@ -183,7 +189,7 @@ if env['PLATFORM'] == 'posix' and WhereIs('ldconfig'):
     env.AddPostAction(libinstall,
             'ldconfig %s $TARGET.dir' % opts)
 if env['PLATFORM'] != 'win32':
-    libinstall = env.Install(env['libdir'], libmstruct)
+    libinstall = env.Install(env['libdir'], libmstruct+libobjcryst)
 else:
     libinstall = env.Install(env['libdir'], [f for f in libmstruct if f.get_suffix()=='.lib'])
 if env['PLATFORM'] == 'darwin':
@@ -196,6 +202,14 @@ if env['PLATFORM'] == 'posix' and WhereIs('ldconfig'):
     if os.getuid() != 0:  opts = '-n'
     env.AddPostAction(libinstall,
             'ldconfig %s $TARGET.dir' % opts)
+# link *.dylib -> *.so to allow python import
+if env['PLATFORM'] == 'darwin':
+    for  f in libmstruct:
+        if f.get_suffix()=='.dylib':
+            link_target = os.path.normpath( os.path.join(env['modulepath'], f.rstr()[:-5]+'so') )
+            link_source = os.path.normpath( os.path.join(env['libdir'], f.rstr()) )
+            env.AddPostAction(libinstall, 'rm -f ' + link_target + ' 2>/dev/null')
+            env.AddPostAction(libinstall, 'ln -s ' + link_source + ' ' +  link_target)
 # runtime dll for Windows
 dllinstall = []
 if env['PLATFORM'] == 'win32':
@@ -209,7 +223,7 @@ if env['PLATFORM'] == 'win32':
 Alias('install-lib', libinstall + dllinstall)
 
 # install-bin
-bininstall = env.Install(prefix+'/bin', binmstruct)
+bininstall = env.InstallAs(prefix+'/bin/mstruct', binmstruct)
 Alias('install-bin', bininstall)
 
 # install-python
