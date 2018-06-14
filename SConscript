@@ -145,9 +145,9 @@ boost_python_libs = []
 python_libs = []
 
 # Possible boost/numpy library names
-boost_python_possible_names = ['boost_python%d%d' % env['python_version'],'boost_python']
-boost_numpy_possible_names = ['boost_numpy%d%d' % env['python_version'], 'boost_numpy']
-python_library_possible_names = ['python%d.%d' % env['python_version'], 'python%d.%dm' % env['python_version']]
+boost_python_possible_names = ['boost_python%d%d' % env['python_version'], 'boost_python%d' % env['python_version'][0],'boost_python']
+boost_numpy_possible_names = ['boost_numpy%d%d' % env['python_version'], 'boost_numpy%d' % env['python_version'][0], 'boost_numpy']
+python_library_possible_names = ['python%d.%d' % env['python_version'], 'python%d.%dm' % env['python_version'], 'python%d%d' % env['python_version']]
 python_libs.extend((find_library(python_library_possible_names, conf),))
 boost_python_libs.extend((find_library(boost_python_possible_names, conf), find_library(boost_numpy_possible_names, conf)))
 
