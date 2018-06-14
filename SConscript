@@ -10,12 +10,17 @@ Import('env')
 flagnames = 'CFLAGS CPPFLAGS CXXFLAGS LDFLAGS'.split()
 env.MergeFlags([os.environ.get(n, '') for n in flagnames])
 
-# Insert LIBRARY_PATH explicitly because some compilers
-# ignore it in the system environment.
+# Insert LIBRARY_PATH explicitly
 if env['PLATFORM'] != 'win32':
     env.PrependUnique(LIBPATH=env['ENV'].get('LIBRARY_PATH', '').split(':'))
 else:
     env.PrependUnique(LIBPATH=env['ENV'].get('LIBRARY_PATH', '').split(';'))
+
+# Insert CPPPATH explicitly
+if env['PLATFORM'] != 'win32':
+    env.PrependUnique(CPPPATH=env['ENV'].get('CPPPATH', '').split(':'))
+else:
+    env.PrependUnique(CPPPATH=env['ENV'].get('CPPPATH', '').split(';'))
 
 # Windows specific enviroment
 if env['PLATFORM'] == 'win32':
@@ -213,7 +218,6 @@ if env['PLATFORM'] == 'darwin':
 if env['PLATFORM'] == 'posix':
     for  f in libmstruct:
     	 if f.get_suffix()=='.so':
-	    print(f.rstr())
 	    link_target = os.path.normpath( os.path.join(env['modulepath'], f.rstr()) )
             link_source = os.path.normpath( os.path.join(env['libdir'], f.rstr()) )
             env.AddPostAction(libinstall, 'rm -f ' + link_target + ' 2>/dev/null')
