@@ -1,5 +1,7 @@
 # MStruct
 
+software/library for MicroStructure analysis by powder diffraction 
+
 ## Installation
 
 ### Introduction
@@ -64,13 +66,119 @@ for free from [Microsoft support web](https://www.visualstudio.com/downloads/). 
 	- [VS2017 runtime x86](https://aka.ms/vs/15/release/VC_redist.x86.exe)
 	- [VS2017 runtime x64](https://aka.ms/vs/15/release/VC_redist.x64.exe)
 
+#### Obtaining source
+
+MStruct is a free open source software. The source code can be obtained from the public
+[MSTRUCT GitHub repo](https://github.com/xray-group/mstruct).
+
+```bash
+# clone it
+git clone https://github.com/xray-group/mstruct.git
+
+# or download as zip, manually: top right green button
+```
+
 #### Compiling with Anaconda
+
+##### Installing Anaconda
+
+[Anaconda](https://www.anaconda.com) is a popular Python data science platform and
+scientific software for personal computers with Windows, MacOS or Linux.
+
+The most straighforward way is to get a graphical [installer](https://www.anaconda.com/download/)
+- no need to sign (web download)
+- administrative rights not required for a personal installation
+- no need to add to PATH (installation option)
+- preferred choice to Register Anaconda as a system Python (installation option), good
+choice if you do not have any or do not care
+
+screenshots
 
 ##### Windows with Anaconda
 
+For Windows **Python3 (x64) is strongly adviced!**
 
+```bash
+# add 'conda-forge' channel
+conda config --add channels conda-forge
+# install required packages
+# not there was (June 2018) a bug in boost-1.67 for Windows
+conda install boost=1.66 lapack fftw gsl scons bzip2 git
+
+# git clone or download ZIP
+# git clone https://github.com/xray-group/mstruct.git
+# wget https://github.com/xray-group/mstruct/archive/r0.15.zip
+
+# swith to project directory
+cd mstruct/libmstruct
+
+# set prefix path %P% where your Anaconda environment is installed
+# do not forget the name='mst' at the end
+set P=C:/..../Anaconda3/envs/mst
+# set environment variables
+set CPPPATH=%P%/Library/include;%P%/include
+set LIBRARY_PATH=%P%/libs;%P%/Library/lib
+
+# build and install everything
+scons -j4 install prefix=%P%/Library modulepath=%P%/Lib/site-packages
+```
+
+**Test**
+
+```bash
+# type "mstruct"
+mstruct
+# you should see text (CTRL+C to exit)
+ Beginning program ....
+job type (0-data refinement,1-grid refinement)
+```
 
 ##### MacOS with Anaconda
+
+```bash
+# setup environment, e.g. name='mst'
+# see instructions using Anaconda Navigator for Windows
+# or cmd-line instruction for Linux
+
+# activate environment name='mst'
+source activate mst
+
+# install required packages
+conda install boost lapack fftw gsl scons bzip2
+
+# resolve the prefix directory P of the active Anaconda environment
+P="$(conda info --json | grep default_prefix | cut -d\" -f4)"
+# use it to setup environment variables
+export CPPPATH=$P/include
+export LIBRARY_PATH=$P/lib
+export LDFLAGS=-Wl,-rpath,$P/lib
+
+# git clone or download ZIP
+# git clone https://github.com/xray-group/mstruct.git
+# wget https://github.com/xray-group/mstruct/archive/r0.15.zip
+
+# swith to project directory
+cd mstruct/libmstruct
+
+# build library
+scons -j4 libmstruct
+
+# build mstruct
+scons -j4 mstruct
+
+# (optional) build and install everything   
+scons -j4 install prefix=$P
+```
+
+**Test**
+
+```bash
+# type "mstruct"
+mstruct
+# you should see text (CTRL+C to exit)
+ Beginning program ....
+job type (0-data refinement,1-grid refinement)
+```
 
 ##### Linux with Anaconda
 
@@ -89,7 +197,7 @@ conda config --add channels conda-forge
 # gls, fftw3, lapack, scons are required
 conda install boost=1.66=py27_1 lapack fftw gsl scons bzip2
 # note:
-# - check if e.g. python is not upgraded from python2.7->python3.6
+# - check if e.g. python is not upgraded from python2.7 -> python3.6
 # - prefer builds that are close to your current environment
 
 # get source, git-clone or download and unpack the source
@@ -100,7 +208,7 @@ cd mstruct/libmstruct
 
 # resolve the prefix directory P of the active Anaconda environment
 P="$(conda info --json | grep default_prefix | cut -d\" -f4)"
-export CPATH=$P/include
+export CPPPATH=$P/include
 export LIBRARY_PATH=$P/lib
 export LD_LIBRARY_PATH=$P/lib
 
@@ -112,6 +220,16 @@ scons -j4 mstruct
 
 # (optional) build and install everything   
 scons -j4 install prefix=$P
+```
+
+**Test**
+
+```bash
+# type "mstruct"
+mstruct
+# you should see text (CTRL+C to exit)
+ Beginning program ....
+job type (0-data refinement,1-grid refinement)
 ```
 
 #### Linux native compilation
@@ -140,10 +258,20 @@ scons -j4 mstruct
 # (optional) build and install everything
 scons -j4 install prefix=$P
 
-# (optional) we may want to activate installation
+# (optional) we may want to activate the installation
 export PATH=$P/bin:$PATH
 export PYTHONPATH=$P/lib/python2.7/site-packages:$PYTHONATH
 export LD_LIBRARY_PATH=$P/lib:$LD_LIBRARY_PATH
+```
+
+**Test**
+
+```bash
+# type "mstruct" (if you activated the installation as indicated above)
+mstruct
+# you should see text (CTRL+C to exit)
+ Beginning program ....
+job type (0-data refinement,1-grid refinement)
 ```
 
 ## Course - Struktura 2018
@@ -160,9 +288,9 @@ export LD_LIBRARY_PATH=$P/lib:$LD_LIBRARY_PATH
 	- *Copper-Gold nano-spheres*: Using individual peak parameters with instrumental
 	correction
 
-- Wed June 20, 2018, 17:30 - 19:30. (optional): **hands on own data**
+- Wed June 20, 2018, 17:30 - 19:30. (optional): **Hands on own data** (Milan, Zdenek)
 
-- Thu June 20, 2018, 14:00 --. (optional): **individual discussions**
+- Thu June 20, 2018, 14:00 --. (optional): **Individual discussions** (Zdenek)
 	- *amorphous content determination*
 	- *texture*
 

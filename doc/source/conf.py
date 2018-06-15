@@ -19,8 +19,8 @@
 # -- Project information -----------------------------------------------------
 
 project = u'MStruct'
-copyright = u'2018, xray-group'
-author = u'xray-group'
+copyright = u'2018, x-ray group'
+author = u'x-ray group'
 
 # The short X.Y version
 version = u''
