@@ -56,10 +56,10 @@ mstruct.exe* in the same directory!
 
 **Troubleshouting**
 
-In case *an Error Message appears with the double click*
-- if *libfftw3-3.dll is missing* copy/overwright *both* `mstruct.exe` and `libfftw3-3.dll` with
-a pair from one of `x64` and `Win32` directories. Do not mix the pairs!
-- if *MSVCP140.dll is missing* you need a set of Microsoft runtime libraries (so called *Microsoft
+If *an Error Message appears with the double click*
+- in case *libfftw3-3.dll is missing* copy/overwright *both* `mstruct.exe` and `libfftw3-3.dll` with
+an appropriate pair from one of `x64` and `Win32` directories. Do not mix the pairs!
+- in case *MSVCP140.dll is missing* you need a set of Microsoft runtime libraries (so called *Microsoft
 Visual C++ 2017 Redistributable*). It is not a compiler! You can get a version for your system
 for free from [Microsoft support web](https://www.visualstudio.com/downloads/). (x86=Win32, x64=Win64)
 
@@ -92,7 +92,22 @@ The most straighforward way is to get a graphical [installer](https://www.anacon
 - preferred choice to Register Anaconda as a system Python (installation option), good
 choice if you do not have any or do not care
 
-screenshots
+
+**Anaconda Navigator** in Windows menu:
+
+![Anaconda Navigator in Windows menu](https://raw.githubusercontent.com/xray-group/mstruct/doc/doc/source/figs/installation-anaconda-menu.png "Anaconda Navigator in Windows menu")
+
+**Creating Anaconda environment** with name='mst':
+
+![Creating Anaconda environment](https://raw.githubusercontent.com/xray-group/mstruct/doc/doc/source/figs/installation-anaconda-create-env.png "Creating Anaconda environment")
+
+**Activating Anaconda environment** name='mst':
+
+![Activating Anaconda environment](https://raw.githubusercontent.com/xray-group/mstruct/doc/doc/source/figs/installation-anaconda-open-env.png "Activating Anaconda environment")
+
+**Installing sw in Anaconda environment**:
+
+![Installing sw with Anaconda](https://raw.githubusercontent.com/xray-group/mstruct/doc/doc/source/figs/installation-anaconda-conda-install.png "Installing sw with Anaconda")
 
 ##### Windows with Anaconda
 
@@ -232,6 +247,10 @@ mstruct
 job type (0-data refinement,1-grid refinement)
 ```
 
+##### Anaconda tips and tricks
+
+tricks from Honza
+
 #### Linux native compilation
 
 ```bash
@@ -274,7 +293,23 @@ mstruct
 job type (0-data refinement,1-grid refinement)
 ```
 
+#### Text editors
+
+some advices to text editors
+
+#### Plotting tools
+
+links to plotting tools
+
 ## Course - Struktura 2018
+
+### Instructions
+
+You should have `mstruct` binary running on your laptop. It should be pretty straighforward
+for Windows, unfortunately for MacOS or Linux you need to compile the source. *No stress in
+case you fail, we will make it working at the beginning of the course.*
+
+### Time plan
 
 - Mon June 18, 2018, 20:00 - 21:30. **Real structure analysis: The basics** (Zdenek)
     - *Nanocrystallie TiO2 powders for catalytic applications*: spherical crystallites,
