@@ -12,7 +12,7 @@ Windows, MacOS and Linux are all supported. However the level of intagration is 
 See the table below for a quick overview.
 
 
-|                 | Windows       | MacOS     | Linux     |
+|     xxxx         | Windows       | MacOS     | Linux     |
 |:--------------- |:-------------:|:---------:|:---------:|
 | native binaries | available     | -         | -         |
 | native source   | ask authors   | -         | available |
