@@ -17,6 +17,9 @@ srcfiles  = [File("./MStruct/libmstruct.cpp"),File("./MStruct/MStruct.cpp")]
 #SConscript("./../SConscript.version")
 #srcfiles += [File("ObjCryst/version.cpp")]
 
+# Determine version
+SConscript("./SConscript.mstruct.version")
+
 # Make shared objects
 objects = mstructenv.SharedObject(srcfiles)
 # Put VFNDebug.os first to define debug level constants

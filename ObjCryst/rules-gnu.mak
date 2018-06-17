@@ -179,7 +179,7 @@ $(DIR_STATIC_LIBS)/lib/libnewmat.a:
 	#rm -Rf $(BUILD_DIR)/newmat
 
 ifneq ($(shared-newmat),1)
-libnewmat: $(DIR_STATIC_LIBS)/lib/libnewmat.a
+libnewmat: $(BUILD_DIR)/newmat $(DIR_STATIC_LIBS)/lib/libnewmat.a
 else
 libnewmat:
 endif
@@ -224,9 +224,13 @@ else
 libwx:
 endif
 
+#newmat-src-dir
+$(BUILD_DIR)/newmat:
+	bunzip2 -c -k $(BUILD_DIR)/newmat.tar.bz2 | tar -C $(BUILD_DIR) -xv
+
 #cctbx-src-dir
 $(BUILD_DIR)/cctbx:
-	bunzip2 -c -k $(BUILD_DIR)/cctbx.tar.bz2 | tar -C $(BUILD_DIR) -xzv
+	bunzip2 -c -k $(BUILD_DIR)/cctbx.tar.bz2 | tar -C $(BUILD_DIR) -xv
 
 #cctbx
 $(DIR_STATIC_LIBS)/lib/libcctbx.a: $(BUILD_DIR)/cctbx

@@ -147,7 +147,7 @@ def find_library(possible_library_names, conf,):
     for name in possible_library_names:
         if conf.CheckLib(name):
             return name
-    raise RuntimeError('Unable to find appropriate library name (but please check ./config.log)', possible_library_names)
+    raise RuntimeError('Unable to check availability of library name (note this may also indicate other configuration problems, please check ./config.log)', possible_library_names)
 
 boost_python_libs = []
 python_libs = []
@@ -158,8 +158,6 @@ boost_numpy_possible_names = ['boost_numpy%d%d' % env['python_version'], 'boost_
 python_library_possible_names = ['python%d.%d' % env['python_version'], 'python%d.%dm' % env['python_version'], 'python%d%d' % env['python_version']]
 python_libs.extend((find_library(python_library_possible_names, conf),))
 boost_python_libs.extend((find_library(boost_python_possible_names, conf), find_library(boost_numpy_possible_names, conf)))
-
-# End of Boost configuration ---------------------------------------------------
 
 # This builds the shared MStruct library
 if env['PLATFORM'] != 'win32':

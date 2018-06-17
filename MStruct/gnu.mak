@@ -1,6 +1,9 @@
 BUILD_DIR=$(CURDIR)/..
 include $(BUILD_DIR)/ObjCryst/rules.mak
 
+# extract VERSION_STR from ../libmstruct/SConstruct
+VERSION_STR := $(shell grep -e "env\['version_str'\] =" ../libmstruct/SConstruct | rev | cut -d " " -f1 | rev | tr -d \")
+
 OBJ= $@.o
 
 %.o : %.cpp
@@ -9,8 +12,15 @@ OBJ= $@.o
 
 -include $(OBJ:.o=.dep)
 
-mstruct_am: mstruct_am.o MStruct.o mstruct_test1.o libCrystVector libQuirks libRefinableObj libcctbx libCryst libnewmat
+mstruct_am: config.h mstruct_am.o MStruct.o mstruct_test1.o libCrystVector libQuirks libRefinableObj libcctbx libCryst libnewmat
 	${LINKER} ${CRYST_LDFLAGS} -o $@ ${filter-out %.a %.so lib%, $^} ${LOADLIBES} -lfftw3
+
+config.h: FORCE
+	cp config.h.in config.h
+	sed -i -e "s/%(version_str)s/$(VERSION_STR)/g" config.h
+	@echo VERSION=$(VERSION_STR)
+
+FORCE:
 
 # target for making everything
 .PHONY : all

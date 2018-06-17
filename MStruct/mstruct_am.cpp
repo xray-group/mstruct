@@ -29,13 +29,9 @@
  *
  */
 
-//#define program_version "0.39-(Fox-r1221)-testing-WCfaults+ExternalLSQConstraints"
-//#define program_version "0.104-(Fox-r1221)-develop-EllipRodsGamma(testing)" // EllipRodsGamma
-//#define program_version "0.96-(Fox-r1221)-develop"
-#define program_version "0.148"
 
+#include "config.h"
 #include "MStruct.h"
-
 #include "mstruct_tests.h"
 
 #include <fstream>
@@ -122,7 +118,7 @@ int main (int argc, char *argv[])
 	if(argc>=2 && (string(argv[1])==string("-v") || string(argv[1])==string("--version"))) //print version
    {
    		// print version and license information
-      cout << "version: " << program_version << "\n";
+      cout << "version: " << mstruct_version_str << "\n";
       cout << "mstruct Copyright\n";
       cout << "(C) 2009-2018 Charles University in Prague\n";
       cout << "(C) 2014-2018 Zdenek Matej, MAX IV Laboratory, Lund University\n";
