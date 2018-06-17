@@ -2,7 +2,7 @@ BUILD_DIR=$(CURDIR)/..
 include $(BUILD_DIR)/ObjCryst/rules.mak
 
 # extract VERSION_STR from ../libmstruct/SConstruct
-VERSION_STR := $(shell grep -e 'version_str =' ../libmstruct/SConstruct | rev | cut -d " " -f1 | rev | tr -d \")
+VERSION_STR := $(shell grep -e "env\['version_str'\] =" ../libmstruct/SConstruct | rev | cut -d " " -f1 | rev | tr -d \")
 
 OBJ= $@.o
 

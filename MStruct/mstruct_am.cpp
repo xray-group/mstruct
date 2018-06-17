@@ -118,7 +118,7 @@ int main (int argc, char *argv[])
 	if(argc>=2 && (string(argv[1])==string("-v") || string(argv[1])==string("--version"))) //print version
    {
    		// print version and license information
-      cout << "version: " << version_str << "\n";
+      cout << "version: " << mstruct_version_str << "\n";
       cout << "mstruct Copyright\n";
       cout << "(C) 2009-2018 Charles University in Prague\n";
       cout << "(C) 2014-2018 Zdenek Matej, MAX IV Laboratory, Lund University\n";

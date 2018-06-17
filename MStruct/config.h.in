@@ -1,1 +1,7 @@
-#define version_str "%(version_str)s"
+#ifndef __MSTRUCT_CONFIG_H__
+#define __MSTRUCT_CONFIG_H__
+
+#define mstruct_version_str "%(version_str)s"
+
+#endif /* __MSTRUCT_CONFIG_H__ */
+

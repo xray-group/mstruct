@@ -34,14 +34,13 @@ DefaultEnvironment(ENV=subdictionary(os.environ, '''
     '''.split())
 )
 
-# libMStruct and mstruct version
-version_str = "0.15.5"
-
 # Create construction environment
 env = DefaultEnvironment().Clone()
 
 # Variables definitions below work only with 0.98.1 or later.
 env.EnsureSConsVersion(0, 98, 1)
+
+env['version_str'] = "0.15.5"
 
 #Adds option for selecting desired python version
 AddOption('--python-version', dest='python_version', type='string', help="Python version to build libmstruct against."\
