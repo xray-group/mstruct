@@ -26,7 +26,7 @@ Download this repository
 git clone https://github.com/xray-group/mstruct.git
 ```
 
-`libMStruct` or `mstruct` can be build using the following commands:
+libMStruct or mstruct can be build using the following commands:
 ```bash
 cd mstruct/libmstruct
 
@@ -34,13 +34,13 @@ scons -j4 libmstruct
 scons -j4 mstruct
 ```
 
-`libMStruct`, `libObjCryst` and `mstruct` can be installed as:
+libMStruct, libObjCryst and mstruct can be installed as:
 ```bash
 scons -j4 install prefix=~/.local
 ```
 
-SConscript automatically determines your system default python version and builds `libMStruct`
-againts this python version. If you want to build `libMStruct` against different python version,
+SConscript automatically determines your system default python version and builds libMStruct
+againts this python version. If you want to build libMStruct against different python version,
 you can use `python-version=X.Y` option for example:
 ```bash
 scons -j4 libmstruct python-version=3.6
@@ -55,7 +55,7 @@ to modify the environment in order to use MSTRUCT easily:
 ```bash
 # let's assume an installation prefix $P
 export P=~/.local
-# modify environment for using sw
+# modify environment for using binary and python module
 export PATH=$P/bin:$PATH
 export LD_LIBRARY_PATH=$P/lib:$LD_LIBRARY_PATH
 export PYTHONPATH=$P/lib/python2.7/site-packages:$PYTHONPATH
