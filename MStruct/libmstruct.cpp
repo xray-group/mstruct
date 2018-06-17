@@ -1,9 +1,15 @@
 #include "MStruct.h"
+#include "config.h"
 #ifdef __PYMSTRUCT_TEST__
 #include <boost/python.hpp>
 #include <boost/python/numpy.hpp>
 //Includes for Python API
 #include <ObjCryst/ObjCryst/IO.h>
+
+char version()
+{
+  std::cout << "Python version of libMStruct is: "<< python_version_str << "." << std::endl;
+}
 
 template<typename s,typename T>
 void _SetWavelength(s& self, const T wavelength)
@@ -145,6 +151,7 @@ BOOST_PYTHON_MODULE(libMStruct)
 {
   using namespace boost::python;
   numpy::initialize();
+  def("version", version);
   def("test_numpy", test_numpy);
   def("CreateCrystalFromXML", &_XMLLoadCrystal, return_value_policy<manage_new_object>());
   //def("Create_ReflectionProfile", &_Create_ReflectionProfile);

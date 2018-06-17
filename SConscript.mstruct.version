@@ -6,6 +6,7 @@ Import('env')
 def config_h_build(target, source, env):
 
     config_h_defines = env.Dictionary()
+    print config_h_defines['version_str']
 
     for a_target, a_source in zip(target, source):
         config_h = file(str(a_target), "w")
