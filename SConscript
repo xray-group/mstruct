@@ -159,6 +159,8 @@ python_library_possible_names = ['python%d.%d' % env['python_version'], 'python%
 python_libs.extend((find_library(python_library_possible_names, conf),))
 boost_python_libs.extend((find_library(boost_python_possible_names, conf), find_library(boost_numpy_possible_names, conf)))
 
+env = conf.Finish()
+
 # This builds the shared MStruct library
 if env['PLATFORM'] != 'win32':
     MStructlibs = ['fftw3', 'gsl', 'lapack', 'ObjCryst']  + python_libs+boost_python_libs
