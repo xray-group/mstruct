@@ -147,7 +147,7 @@ def find_library(possible_library_names, conf,):
     for name in possible_library_names:
         if conf.CheckLib(name):
             return name
-    raise RuntimeError('Unable to find appropriate library name (but please check ./config.log)', possible_library_names)
+    raise RuntimeError('Unable to check availability of library name (note this may also indicate other configuration problems, please check ./config.log)', possible_library_names)
 
 boost_python_libs = []
 python_libs = []
