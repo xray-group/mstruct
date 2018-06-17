@@ -1,0 +1,1 @@
+#define version_str "%(version_str)s"
