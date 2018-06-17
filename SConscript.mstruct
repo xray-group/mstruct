@@ -31,7 +31,7 @@ env["mstructobjs"] = objects
 
 # Record headers
 #env['libmstruct_includes'] += Glob("./MStruct/*.h")
-env['libmstruct_includes'] += [File("./MStruct/MStruct.h"),File("./MStruct/config.h")]
+env['libmstruct_includes'] += [File("./MStruct/MStruct.h")]
 # these headers are not included from any other headers
 #excluded_quirks = set(['Chronometer.h', 'VFNStreamFormat.h', 'sse_mathfun.h'])
 #env['libmstruct_includes'] += [f for f in Glob("./ObjCryst/Quirks/*.h")
@@ -50,6 +50,6 @@ Clean(objects, "ObjCryst")
 env["binmstructobjs"] = objects
 
 # mstruct binary headers
-env['binmstruct_includes'] = env['libmstruct_includes'] + [File("./MStruct/MStruct.h"),File("./MStruct/mstruct_tests.h"),File("./MStruct/config.h")]
+env['binmstruct_includes'] = env['libmstruct_includes'] + [File("./MStruct/MStruct.h"),File("./MStruct/mstruct_tests.h")]
 
 # vim: ft=python
