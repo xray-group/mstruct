@@ -18,6 +18,7 @@ mstruct_am: config.h mstruct_am.o MStruct.o mstruct_test1.o libCrystVector libQu
 config.h: FORCE
 	cp config.h.in config.h
 	sed -i -e "s/%(version_str)s/$(VERSION_STR)/g" config.h
+	sed -i -e "s/%(python_version_str)s/none/g" config.h
 	@echo VERSION=$(VERSION_STR)
 
 FORCE:

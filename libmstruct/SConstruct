@@ -66,6 +66,7 @@ def get_python_version():
 python_version = get_python_version()
 
 env.Append(python_version = python_version)
+env.Append(python_version_str = '%d.%d' % env['python_version'])
 
 # Customizable compile variables
 vars = Variables('sconsvars.py')
