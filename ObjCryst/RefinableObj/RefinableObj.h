@@ -375,6 +375,11 @@ class RefinablePar:public Restraint
          string GetName()const;
          /// Set the name of the parameter. It should be unique in the RefinableObj.
          void SetName(const string&);
+         
+         /// Get the parameter's extended name
+         string GetExtName()const;
+         /// Set the extended name of the parameter. It should be unique in the RefinableObj.
+         void SetExtName(const string&);
       
          void Print() const;
          
@@ -503,6 +508,8 @@ class RefinablePar:public Restraint
       void Click();
       ///name of the refinable parameter
       string mName;
+      ///extended name of the refinable parameter
+      string mExtName;
       /// Pointer to the refinable value
       REAL *mpValue;
       /// Hard lower and upper limits.

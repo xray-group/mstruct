@@ -903,7 +903,7 @@ void LSQNumObj::PrintRefResults() const
    cout << "Chi-Square: " << mChiSq-mChiSqReg<<endl;
    cout << "GoF: " << mRw/mRex<<endl; // Zdenek
    #endif
-   cout << "Variable information : Initial, last cycle , current values and sigma"<<endl;
+   cout << "Variable information : Initial, last cycle , current values and sigma  + dp = (Initial - current value), (dp / initial), (dp / sigma), extended parameter name"<<endl;
    for (int i=0;i<mRefParList.GetNbPar();i++)
    {
       if( (true==mRefParList.GetPar(i).IsFixed()) 
@@ -913,6 +913,19 @@ void LSQNumObj::PrintRefResults() const
       cout << FormatFloat((mRefParList.GetParamSet(mIndexValuesSetLast))(i)*mRefParList.GetPar(i).GetHumanScale(),15,8) << "  " ;
       cout << FormatFloat(mRefParList.GetPar(i).GetHumanValue(),15,8) << "  " ;
       cout << FormatFloat(mRefParList.GetPar(i).GetHumanSigma(),15,8) << "  " ;
+      double initial = (mRefParList.GetParamSet(mIndexValuesSetInitial))(i) * mRefParList.GetPar(i).GetHumanScale();
+      double fitted = mRefParList.GetPar(i).GetHumanValue();
+      double sigma = mRefParList.GetPar(i).GetHumanSigma();
+      double change_initial = initial - fitted;
+      double change_initial_rel = fabs(change_initial) / initial * 100.;
+      if (initial < 1e-30) change_initial_rel = 0.0;
+      double change_sigma_rel = fabs(change_initial) / sigma * 100.;
+      if (sigma < 1e-30) change_sigma_rel = 0.0;
+      cout << "    " << FormatFloat(change_initial, 16, 10) << "  " ;
+      cout << FormatFloat(change_initial_rel, 7, 2) << "%  " ;
+      cout << FormatFloat(change_sigma_rel, 7, 2) << "%  " ;
+      cout << FormatString(mRefParList.GetPar(i).GetExtName(),50);
+      //
       //cout << FormatFloat(mRefParList(i).DerivStep(),16,12) << "  ";
       //cout << varNames[i] << "  " << var0(i) << "  " << varLast(i) 
       //cout<< "  " << varCurrent(i)<< "  " << sigmaValues(i)<<endl;

@@ -2689,7 +2689,9 @@ RefinablePar& get_par(const string &extended_name, RefinableObj &ref_obj)
 		string::size_type loc = extended_name.find( ':', 0 );
    	if( loc == string::npos ) {
     	// this is not a composed extended name - simple case
-    	return ref_obj.GetPar(extended_name.c_str());
+    	ref_obj.GetPar(extended_name.c_str()).SetExtName(extended_name);
+    cout << "ext_name = " << extended_name << " : " << ref_obj.GetPar(extended_name.c_str()).GetExtName() << endl;
+    return ref_obj.GetPar(extended_name.c_str());
    	} else {
    		// a composed extended name 
    	
@@ -2719,6 +2721,8 @@ RefinablePar& get_par(const string &extended_name, RefinableObj &ref_obj)
    		// get the parameter 'name' from the found object by its name
    		RefinablePar &par = obj->GetPar(par_name);
    		
+    par.SetExtName(extended_name);
+    cout << "ext_name = " << extended_name << " : " << par.GetExtName() << "  ->  " << par_name << endl;
 			// the found parameter 'par' will be returned as a result
 			return par;
    	}
