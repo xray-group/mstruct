@@ -3446,16 +3446,29 @@ void TextureCalculator::SetTextureParams(const CrystVector_REAL& params,
               mpCrystal->GetLatticePar(2); // a/c
 
     // Normalise the list of the main texture axis
-    const REAL sm = sqrt(params(6)*params(6)+params(7)*params(7)+ac*ac*params(8)*params(8));
-    mnmtaHKL /= sm;
+    //const REAL sm = sqrt(params(6)*params(6)+params(7)*params(7)+ac*ac*params(8)*params(8));
+    //mnmtaHKL /= sm;
+    mpCrystal->MillerToOrthonormalCoords(mnmtaHKL(0,0), mnmtaHKL(0,1), mnmtaHKL(0,2));
+    REAL sm = sqrt(mnmtaHKL(0,0)*mnmtaHKL(0,0) + mnmtaHKL(0,1)*mnmtaHKL(0,1) + mnmtaHKL(0,2)*mnmtaHKL(0,2));
+    mnmtaHKL(0,0) /= sm;
+    mnmtaHKL(0,1) /= sm;
+    mnmtaHKL(0,2) /= sm;
     
     // Create list of all equivalent reflections to the secondary {HKL} texture axis
     mnstaHKL = CrystMatrix_REAL(mnmtaHKL.rows(),mnmtaHKL.cols());
 
     // Calculate the normalisation factor for the list of the secondary texture axis
-    const REAL ss = sqrt(params(9)*params(9)+params(10)*params(10)+ac*ac*params(11)*params(11));
+    //const REAL ss = sqrt(params(9)*params(9)+params(10)*params(10)+ac*ac*params(11)*params(11));
  
-    mnstaHKL(0,0) = params(9)/ss; mnstaHKL(0,1) = params(10)/ss; mnstaHKL(0,2) = params(11)/ss;
+    //mnstaHKL(0,0) = params(9)/ss; mnstaHKL(0,1) = params(10)/ss; mnstaHKL(0,2) = params(11)/ss;
+    mnstaHKL(0,0) = params(9);
+    mnstaHKL(0,1) = params(10);
+    mnstaHKL(0,2) = params(11);
+    mpCrystal->MillerToOrthonormalCoords(mnstaHKL(0,0), mnstaHKL(0,1), mnstaHKL(0,2));
+    REAL ss = sqrt(mnstaHKL(0,0)*mnstaHKL(0,0) +mnstaHKL(0,1)*mnstaHKL(0,1) + mnstaHKL(0,2)*mnstaHKL(0,2));
+    mnstaHKL(0,0) /= ss;
+    mnstaHKL(0,1) /= ss;
+    mnstaHKL(0,2) /= ss;
     
     // Rotation matrix of the original main texture axis
     CrystMatrix_REAL AA1(3,3);
@@ -3474,7 +3487,12 @@ void TextureCalculator::SetTextureParams(const CrystVector_REAL& params,
     }
 
     for(int ihkl=1; ihkl<tamultiplicity; ihkl++) {
-      
+      mpCrystal->MillerToOrthonormalCoords(mnmtaHKL(ihkl,0), mnmtaHKL(ihkl,1), mnmtaHKL(ihkl,2));
+      sm = sqrt(mnmtaHKL(ihkl,0)*mnmtaHKL(ihkl,0) + mnmtaHKL(ihkl,1)*mnmtaHKL(ihkl,1) + mnmtaHKL(ihkl,2)*mnmtaHKL(ihkl,2));
+      mnmtaHKL(ihkl,0) /= sm;
+      mnmtaHKL(ihkl,1) /= sm;
+      mnmtaHKL(ihkl,2) /= sm;
+    
       // Create inversion of an appropriate rotation matrix of qn equivalent reflection
       CrystMatrix_REAL AA2i(3,3);
 
@@ -3534,15 +3552,31 @@ void TextureCalculator::SetTextureParams(const CrystVector_REAL& params,
               mpCrystal->GetLatticePar(2); // a/c
 
     // Normalization facor
-    const REAL sm = sqrt(params(6)*params(6)+params(7)*params(7)+ac*ac*params(8)*params(8));
+    //const REAL sm = sqrt(params(6)*params(6)+params(7)*params(7)+ac*ac*params(8)*params(8));
  
-    mnmtaHKL(0,0) = params(6)/sm; mnmtaHKL(0,1) = params(7)/sm; mnmtaHKL(0,2) = params(8)/sm;
+    //mnmtaHKL(0,0) = params(6)/sm; mnmtaHKL(0,1) = params(7)/sm; mnmtaHKL(0,2) = params(8)/sm;
+    mnmtaHKL(0,0) = params(6);
+    mnmtaHKL(0,1) = params(7);
+    mnmtaHKL(0,2) = params(8);
+    mpCrystal->MillerToOrthonormalCoords(mnmtaHKL(0,0), mnmtaHKL(0,1), mnmtaHKL(0,2));
+    REAL sm = sqrt(mnmtaHKL(0,0)*mnmtaHKL(0,0) + mnmtaHKL(0,1)*mnmtaHKL(0,1) + mnmtaHKL(0,2)*mnmtaHKL(0,2));
+    mnmtaHKL(0,0) /= sm;
+    mnmtaHKL(0,1) /= sm;
+    mnmtaHKL(0,2) /= sm;
 
     // Normalization facor
-    const REAL ss = sqrt(params(9)*params(9)+params(10)*params(10)+ac*ac*params(11)*params(11));
+    //const REAL ss = sqrt(params(9)*params(9)+params(10)*params(10)+ac*ac*params(11)*params(11));
  
-    mnstaHKL(0,0) = params(9)/ss; mnstaHKL(0,1) = params(10)/ss; mnstaHKL(0,2) = params(11)/ss;
+    //mnstaHKL(0,0) = params(9)/ss; mnstaHKL(0,1) = params(10)/ss; mnstaHKL(0,2) = params(11)/ss;
     
+    mnstaHKL(0,0) = params(9);
+    mnstaHKL(0,1) = params(10);
+    mnstaHKL(0,2) = params(11);
+    mpCrystal->MillerToOrthonormalCoords(mnstaHKL(0,0), mnstaHKL(0,1), mnstaHKL(0,2));
+    REAL ss = sqrt(mnstaHKL(0,0)*mnstaHKL(0,0) +mnstaHKL(0,1)*mnstaHKL(0,1) + mnstaHKL(0,2)*mnstaHKL(0,2));
+    mnstaHKL(0,0) /= ss;
+    mnstaHKL(0,1) /= ss;
+    mnstaHKL(0,2) /= ss;
   }
 
   // calc norm. factor of the ODF function
