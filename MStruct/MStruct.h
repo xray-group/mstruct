@@ -1036,6 +1036,55 @@ private:
   void InitParameters();
 }; // class SizeBroadeningEffect
 
+
+class EllipSizeBroadeningEffect: public ReflectionProfileComponent {
+private:
+  /// Diameter of ellipsoid perpendicular to revolution axis (in angstroms)
+  REAL mDiameterA;
+  /// Diameter of ellipsoid parallel to revolution axis (in angstroms)
+  REAL mDiameterC;
+  /// Ellipticity of the ellipsoid (epsilon = C / A)
+  REAL mEpsilon;
+  /// log-normal distribution Scale parameter
+  REAL mSigma;
+  /// Reciprocal (hkl) direction of the revolution axis
+  CrystVector_REAL mHKLAxis;
+
+  /// Model parameter set-option
+  int mParamSetOption;
+public:
+  /// Flags for parameters set options
+  static const int PARAM_SET_UNDEFINED = 0; // undefined
+  static const int PARAM_SET_AC        = 1; // model params.: A-diameter, C-diameter
+  static const int PARAM_SET_AE        = 2; // model params.: A-diameter, E-epsilon
+  static const int PARAM_SET_CE        = 3; // model params.: C-diameter, E-epsilon
+public:
+  /// Constructor
+  EllipSizeBroadeningEffect();
+  
+  CrystVector_REAL GetProfile(const CrystVector_REAL &x,
+			      const REAL xcenter,
+			      const REAL h, const REAL k, const REAL l);
+  REAL GetApproxFWHM(const REAL xcenter,
+		     const REAL h, const REAL k, const REAL l)const;
+  bool IsRealSpaceType()const;
+  bool IsAnisotropic ()const;
+
+  /// Set model parameters-set option (1-AC, 2-AE, 3-CE)
+  void SetModelParSet(const int parSetOption);
+  /// Set direction as a ellipsoid revolution axis
+  void SetEllipAxis(const REAL axisH, const REAL axisK, const REAL axisL);
+  /// Set ellipsoid mean diameter (in nanometers) perpendicular to revolution axis and diameter scale parameter of log-normal distribution
+  void SetEllipDiameterA(const REAL diameterA, const REAL sigma = 0.3);
+  /// Set ellipsoid mean diameter (in nanometers) parallel to revolution axis and diameter scale parameter of log-normal distribution
+  void SetEllipDiameterC(const REAL diameterC, const REAL sigma = 0.3);
+  /// Set ratio of diameter c and a
+  void SetEllipticity(const REAL epsilon);
+private:
+  /// (Re)initialise RefinableObj parameters
+  void InitParameters();
+}; // EllipSizeBroadeningEffect
+
 /**   \brief Class implementing size broadening from circular (nano)rods.
    * 
    * It si assumed that crystallites have shape of rods with Length L and circular basis

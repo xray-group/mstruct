@@ -5391,6 +5391,315 @@ void SizeBroadeningEffect::InitParameters()
 
 ////////////////////////////////////////////////////////////////////////
 //
+//    EllipSizeBroadeningEffect
+//
+////////////////////////////////////////////////////////////////////////
+
+EllipSizeBroadeningEffect::EllipSizeBroadeningEffect()
+  :mDiameterA(100.), mDiameterC(100.), mSigma(0.3), mEpsilon(1.), mParamSetOption(0)
+{
+  // Set default name
+  this->SetName("EllipSize");
+
+  mHKLAxis = CrystVector_REAL(3);
+  mHKLAxis(2) = 1.0; // (0,0,1)
+
+  this->InitParameters();
+}
+
+void EllipSizeBroadeningEffect::SetModelParSet(const int parSetOption)
+{
+  mParamSetOption = parSetOption;
+  this->InitParameters();
+}
+
+void EllipSizeBroadeningEffect::SetEllipAxis(const REAL axisH, const REAL axisK, const REAL axisL)
+{
+  mHKLAxis = CrystVector_REAL(3);
+  mHKLAxis(0) = axisH; mHKLAxis(1) = axisK; mHKLAxis(2) = axisL; 
+  mClockMaster.Reset();
+}
+
+void EllipSizeBroadeningEffect::SetEllipDiameterA(const REAL diameterA, const REAL sigma)
+{
+  if(mParamSetOption==PARAM_SET_UNDEFINED)
+    throw ObjCrystException("EllipSizeBroadeningEffect: Model parameters-set undefined!");
+  
+  switch ( mParamSetOption ) {
+  case PARAM_SET_AC:
+    mDiameterA = 10.*diameterA;
+    mEpsilon = mDiameterC/mDiameterA;
+    mSigma = sigma;
+    break;
+  case PARAM_SET_AE:
+  case PARAM_SET_CE: 
+    mDiameterA = 10.*diameterA;
+    mDiameterC = mEpsilon*mDiameterA;
+    mSigma = sigma;
+    break;
+  default:
+    throw ObjCrystException("EllipsSizeBroadeningEffect: Model parameters-set unknown!");
+  }
+  mClockMaster.Reset();
+}
+
+void EllipSizeBroadeningEffect::SetEllipDiameterC(const REAL diameterC, const REAL sigma)
+{
+  if(mParamSetOption==PARAM_SET_UNDEFINED)
+    throw ObjCrystException("EllipSizeBroadeningEffect: Model parameters-set undefined!");
+  
+  switch ( mParamSetOption ) {
+  case PARAM_SET_AC:
+    mDiameterC = 10.*diameterC;
+    mEpsilon = mDiameterC/mDiameterA;
+    mSigma = sigma;
+    break;
+  case PARAM_SET_AE:
+  case PARAM_SET_CE:
+    mDiameterC = 10.*diameterC;
+    mDiameterA= mDiameterC/mEpsilon;
+    mSigma = sigma;
+    break;
+  default:
+    throw ObjCrystException("EllipSizeBroadeningEffect: Model parameters-set unknown!");
+  }
+  mClockMaster.Reset();
+}
+
+void EllipSizeBroadeningEffect::SetEllipticity(const REAL epsilon)
+{
+  if(mParamSetOption==PARAM_SET_UNDEFINED)
+    throw ObjCrystException("EllipSizeBroadeningEffect: Model parameters-set undefined!");
+  
+  switch ( mParamSetOption ) {
+  case PARAM_SET_AC:
+    throw ObjCrystException("EllipSizeBroadeningEffect: Can not set Epsilon when using AC-set option!");
+    break;
+  case PARAM_SET_AE:
+    mEpsilon = epsilon;
+    mDiameterC = mEpsilon*mDiameterA;
+  case PARAM_SET_CE:
+    mEpsilon = epsilon;
+    mDiameterA= mDiameterC/mEpsilon;
+    break;
+  default:
+    throw ObjCrystException("EllipSizeBroadeningEffect: Model parameters-set unknown!");
+  }
+  mClockMaster.Reset();
+}
+
+CrystVector_REAL EllipSizeBroadeningEffect::GetProfile(const CrystVector_REAL &x,
+							   const REAL xcenter,
+							   const REAL h, const REAL k, const REAL l)
+// calc Four. coefs
+// ref: G.Ribarik,T.Ungar,J.Gubicza,J.Appl.Cryst.(2001).34,669-676:MWP-fit
+// size effect
+{
+  //CrystVector_REAL result(x.numElements());
+  int nbPoints = x.numElements(); 
+  CrystVector_REAL profile(nbPoints);
+  
+  if(mParamSetOption==PARAM_SET_UNDEFINED) {
+    profile = 1.0; // unknown model - no broadening
+    return profile;
+  }
+
+  // actualise model parametrs
+  switch ( mParamSetOption ) {
+  case PARAM_SET_AC:
+    mEpsilon = mDiameterC/mDiameterA;
+    break;
+  case PARAM_SET_AE:
+    mDiameterC = mEpsilon*mDiameterA;
+  case PARAM_SET_CE:
+    mDiameterA= mDiameterC/mEpsilon;
+    break;
+  default:
+    throw ObjCrystException("EllipSizeBroadeningEffect: Model parameters-set unknown!");
+  }
+
+  const Radiation &r = GetParentReflectionProfile().
+    GetParentPowderPatternDiffraction().GetRadiation();
+  
+  // calculate projection of (hkl) vector on rod axis
+  REAL cosAlpha, mhkl;
+  { 
+    const Crystal &crystal = GetParentReflectionProfile().GetParentPowderPatternDiffraction().GetCrystal();
+    REAL xAxis = mHKLAxis(0), yAxis = mHKLAxis(1), zAxis = mHKLAxis(2);
+    //crystal.MillerToOrthonormalCoords(xAxis,yAxis,zAxis);
+    REAL xhkl = h, yhkl = k, zhkl = l;
+    crystal.MillerToOrthonormalCoords(xhkl,yhkl,zhkl);
+    cosAlpha = (xAxis*xhkl + yAxis*yhkl + zAxis*zhkl) / sqrt(xAxis*xAxis + yAxis*yAxis + zAxis*zAxis) / sqrt(xhkl*xhkl + yhkl*yhkl + zhkl*zhkl);
+    mhkl = mDiameterA / sqrt(1. + (1./mEpsilon/mEpsilon - 1.)*cosAlpha*cosAlpha);
+    //cout << boost::format("# Axis = (% 5.3e, % 5.3e, % 5.3e)\n") % xAxis % yAxis % zAxis;
+    //cout << boost::format("# hkl  = (% 2d, % 2d, % 2d)\n") % h % k % l;
+    //cout << boost::format("# ohkl = (% 5.3e, % 5.3e, % 5.3e)\n") % xhkl % yhkl % zhkl;
+    //cout << boost::format("# cosAlpha = % 5.3e,  alpha = % 7.3f\n") % cosAlpha % (acos(cosAlpha) * 180. / M_PI);
+    //cout << boost::format("# mhkl = % 7.3f\n") % (mhkl / 10.);
+    //cout << endl;
+  }
+  
+  const REAL *p1 = x.data();
+  REAL *p2 = profile.data();
+  for(int i=0;i<nbPoints;i++) {
+    double L = *p1++; L = abs(L);
+    if (L<1.e-4)
+      *p2++ = 1.0;
+    else {
+      double ln = M_SQRT1_2*log(L/mhkl)/mSigma;
+      double A = L*L*L*erfc(ln);
+      A -= 3*exp(2*mSigma*mSigma)*L*mhkl*mhkl*erfc(ln-M_SQRT2*mSigma);
+      A += 2*exp(4.5*mSigma*mSigma)*mhkl*mhkl*mhkl*erfc(ln-3*M_SQRT1_2*mSigma);
+      A *= exp(-4.5*mSigma*mSigma)/(4*mhkl*mhkl*mhkl);
+      *p2++ = (REAL) A;
+    } 
+  }
+  
+  if (bsavecalc && xcenter>=xcenterlimits[0] && xcenter<=xcenterlimits[1]) {
+    ofstream F("profileASrods.dat");
+    F<<"# a="<<mDiameterA<<",epsilon="<<mEpsilon<<",c="<<mDiameterC<<",sigma="<<mSigma;
+    F<<",axisHKL="<<mHKLAxis(0)<<","<<mHKLAxis(1)<<","<<mHKLAxis(2);
+    F<<",cos="<<cosAlpha<<",mhkl="<<mhkl;
+    F<<",xcenter="<<xcenter*RAD2DEG<<",h="<<h<<",k="<<k<<",l="<<l<<endl;
+    for(int i=0;i<nbPoints;i++)
+      F<<setw(18)<<x(i)<<setw(18)<<profile(i)<<endl;
+    F.close();
+  }
+
+  return profile;
+}
+
+REAL EllipSizeBroadeningEffect::GetApproxFWHM(const REAL xcenter,
+						  const REAL h, const REAL k, const REAL l) const
+{
+  if(mParamSetOption==PARAM_SET_UNDEFINED) {
+    return 0.0; // unknown model - no broadening
+  }
+
+  // get actual model parametrs
+  REAL diameterA, diameterC;
+  switch ( mParamSetOption ) {
+  case PARAM_SET_AC:
+    diameterA = mDiameterA;
+    diameterC = mDiameterC;
+    break;
+  case PARAM_SET_AE:
+    diameterA = mDiameterA;
+    diameterC = mEpsilon*mDiameterA;
+  case PARAM_SET_CE:
+    diameterC = mDiameterC;
+    diameterA= mDiameterC/mEpsilon;
+    break;
+  default:
+    throw ObjCrystException("EllipSizeBroadeningEffect: Model parameters-set unknown!");
+  }
+
+  const Radiation &r = GetParentReflectionProfile().
+    GetParentPowderPatternDiffraction().GetRadiation();
+  
+  // calculate projection of (hkl) vector on rod axis
+  REAL cosAlpha, mhkl;
+  { 
+    const Crystal &crystal = GetParentReflectionProfile().GetParentPowderPatternDiffraction().GetCrystal();
+    REAL xAxis = mHKLAxis(0), yAxis = mHKLAxis(1), zAxis = mHKLAxis(2);
+    //crystal.MillerToOrthonormalCoords(xAxis,yAxis,zAxis);
+    REAL xhkl = h, yhkl = k, zhkl = l;
+    crystal.MillerToOrthonormalCoords(xhkl,yhkl,zhkl);
+    cosAlpha = (xAxis*xhkl + yAxis*yhkl + zAxis*zhkl) / sqrt(xAxis*xAxis + yAxis*yAxis + zAxis*zAxis) / sqrt(xhkl*xhkl + yhkl*yhkl + zhkl*zhkl);
+    mhkl = mDiameterA / sqrt(1. + (1./mEpsilon/mEpsilon - 1.)*cosAlpha*cosAlpha);
+  }
+
+  return 1.3*r.GetWavelength()(0)/mhkl/cos(0.5*xcenter);
+}
+
+bool EllipSizeBroadeningEffect::IsRealSpaceType() const
+{
+  return true;
+}
+
+bool EllipSizeBroadeningEffect::IsAnisotropic () const
+{
+  return true;
+}
+
+void EllipSizeBroadeningEffect::InitParameters()
+{
+  { // Parameters-set maybe changed - remove an old parameters set
+    try {
+      long ii = this->GetParIndex (&mDiameterA, true);
+      if (ii != -1) {
+	ObjCryst::RefinablePar &par = this->GetPar(ii);
+	this->RemovePar(&par);
+      }
+      ii = this->GetParIndex (&mDiameterC, true);
+      if (ii != -1) {
+	ObjCryst::RefinablePar &par = this->GetPar(ii);
+	this->RemovePar(&par);
+      }
+      ii = this->GetParIndex (&mSigma, true);
+      if (ii != -1) {
+	ObjCryst::RefinablePar &par = this->GetPar(ii);
+	this->RemovePar(&par);
+      }
+      ii = this->GetParIndex (&mEpsilon, true);
+      if (ii != -1) {
+	ObjCryst::RefinablePar &par = this->GetPar(ii);
+	this->RemovePar(&par);
+      }
+    }
+    catch (std::exception &e) {
+      cerr << "< MStruct::EllipSizeBroadeningEffect::InitParameters()\n";
+      cerr << "Unexpected exception: " << e.what() << "\n";
+      cerr << "Unexpected exception thrown during removing old parameters from the object.\n >" << endl; 
+      throw ObjCrystException("MStruct::EllipSizeBroadeningEffect::InitParameters(): Program error.");
+    }
+  } // removing old parametrs
+
+  // DiameterA
+  if (mParamSetOption==PARAM_SET_AC || mParamSetOption==PARAM_SET_AE) {
+    RefinablePar tmp("DA", &mDiameterA, 2.0, 1.e4,
+                     gpRefParTypeScattDataProfileWidth,
+                     REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false,0.1);
+    tmp.AssignClock(mClockMaster);
+    tmp.SetDerivStep(0.5);
+    this->AddPar(tmp);
+  }
+
+  // DiameterC
+  if (mParamSetOption==PARAM_SET_AC || mParamSetOption==PARAM_SET_CE) {
+    RefinablePar tmp("DC", &mDiameterC, 2.0, 1.e4,
+                     gpRefParTypeScattDataProfileWidth,
+                     REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false,0.1);
+    tmp.AssignClock(mClockMaster);
+    tmp.SetDerivStep(0.5);
+    this->AddPar(tmp);
+  }
+
+  // Sigma
+  {
+    RefinablePar tmp("Sigma", &mSigma, 0.01, 1.0,
+                     gpRefParTypeScattDataProfileWidth,
+                     REFPAR_DERIV_STEP_ABSOLUTE,true,true,true,false,1.0);
+    tmp.AssignClock(mClockMaster);
+    tmp.SetDerivStep(0.03);
+    this->AddPar(tmp);
+  }
+  
+  // Epsilon
+  if (mParamSetOption==PARAM_SET_AE || mParamSetOption==PARAM_SET_CE) {
+    RefinablePar tmp("Epsilon", &mEpsilon, 1.e-4, 1.e2,
+                     gpRefParTypeScattDataProfileWidth,
+                     REFPAR_DERIV_STEP_RELATIVE,true,true,true,false,1.0);
+    tmp.AssignClock(mClockMaster);
+    tmp.SetDerivStep(0.03);
+    this->AddPar(tmp);
+  }
+
+  mClockMaster.Reset();
+}
+
+////////////////////////////////////////////////////////////////////////
+//
 //    CircRodsGammaBroadeningEffect
 //
 ////////////////////////////////////////////////////////////////////////

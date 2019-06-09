@@ -1012,6 +1012,63 @@ int main (int argc, char *argv[])
 	   //reflProfile->AddReflectionProfileComponent(*sizeEffect);
 	   btype_not_found = false;
      	 }
+	 
+	 
+	// Size broadening from ellipsoids with log-normal distribution
+	 if(btype_not_found && ( btype==string("EllipSize") ) ) {
+	   MStruct::EllipSizeBroadeningEffect * sizeEffect
+	     = new MStruct::EllipSizeBroadeningEffect;
+	   sizeEffect->SetName(bname);
+	   vReflProfComponents.push_back(sizeEffect);
+
+	  // rod axis
+	   REAL hh, kk, ll;
+	   cout << "(hkl) indices of the ellipsoid revolution axis (i.e. indices of the plane perpendiculat to revolution axis)" << endl;
+	   read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+	   ccin >> hh >> kk >> ll;
+	   sizeEffect->SetEllipAxis(hh,kk,ll);
+
+	  // model parameters-set
+	   string paramset;
+	   cout << "choice of parameters set (AC, AE, CE)" << endl;
+	   read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+	   ccin >> paramset;
+
+	   boost::algorithm::to_lower(paramset);
+	   if(paramset==string("ac")) {
+	     sizeEffect->SetModelParSet(MStruct::EllipSizeBroadeningEffect::PARAM_SET_AC);
+	     REAL diameterA, sigma, diameterC;
+	     cout << "diameterA (nm), sigma, diameterC (nm)" << endl;
+	     read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+	     ccin >> diameterA >> sigma >> diameterC;
+	     sizeEffect->SetEllipDiameterA(diameterA, sigma);
+	     sizeEffect->SetEllipDiameterC(diameterC, sigma);
+	   }
+	   else if(paramset==string("ae")) {
+	     sizeEffect->SetModelParSet(MStruct::EllipSizeBroadeningEffect::PARAM_SET_AE);
+	     REAL diameterA, sigma, epsilon;
+	     cout << "diameterA (nm), sigma, epsilon" << endl;
+	     read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+	     ccin >> diameterA >> sigma >> epsilon;
+	     sizeEffect->SetEllipDiameterA(diameterA,sigma);
+	     sizeEffect->SetEllipticity(epsilon);
+	   }
+	   else if(paramset==string("ce")) {
+	     sizeEffect->SetModelParSet(MStruct::EllipSizeBroadeningEffect::PARAM_SET_CE);
+	     REAL diameterC, sigma, epsilon;
+	     cout << "diameterC (nm), sigma, epsilon" << endl;
+	     read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
+	     ccin >> diameterC >> sigma >> epsilon;
+	     sizeEffect->SetEllipDiameterC(diameterC,sigma);
+	     sizeEffect->SetEllipticity(epsilon);
+	   }
+	   else
+	     throw ObjCrystException("Unknown model parameters-set option for CircRodsGamma broadening effect!");
+	   
+	   btype_not_found = false;
+	 }
+	 
+	 
 	// Size broadening from circular rods with Gamma distribution
 	 if(btype_not_found && ( btype==string("CircRodsGamma") ) ) {
 	   MStruct::CircRodsGammaBroadeningEffect * sizeEffect
