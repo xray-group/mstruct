@@ -74,7 +74,7 @@ if env['profile']:
 # link warnings
 if env['PLATFORM'] != 'win32' and env['PLATFORM'] != 'darwin':
     env.AppendUnique(LINKFLAGS=['']) # '-Wl,--' does not work with gcc4.8
-	
+
 # REAL=double needed for pyobjcryst
 env.AppendUnique(CCFLAGS='-DREAL=double')
 
@@ -217,8 +217,8 @@ if env['PLATFORM'] == 'darwin':
 # link site-packages/python*/*.so -> *.so to allow python import
 if env['PLATFORM'] == 'posix':
     for  f in libmstruct:
-    	 if f.get_suffix()=='.so':
-	    link_target = os.path.normpath( os.path.join(env['modulepath'], f.rstr()) )
+        if f.get_suffix()=='.so':
+            link_target = os.path.normpath( os.path.join(env['modulepath'], f.rstr()) )
             link_source = os.path.normpath( os.path.join(env['libdir'], f.rstr()) )
             env.AddPostAction(libinstall, 'rm -f ' + link_target + ' 2>/dev/null')
             env.AddPostAction(libinstall, 'ln -s ' + link_source + ' ' +  link_target)
