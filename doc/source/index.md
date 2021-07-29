@@ -105,7 +105,7 @@ choice if you do not have any or do not care
 
 ![Activating Anaconda environment](https://raw.githubusercontent.com/xray-group/mstruct/doc/doc/source/figs/installation-anaconda-open-env.png "Activating Anaconda environment")
 
-**Installing sw in Anaconda environment**:
+**Installing sw in Conda environment**:
 
 ![Installing sw with Anaconda](https://raw.githubusercontent.com/xray-group/mstruct/doc/doc/source/figs/installation-anaconda-conda-install.png "Installing sw with Anaconda")
 
@@ -148,7 +148,7 @@ mstruct
 job type (0-data refinement,1-grid refinement)
 ```
 
-##### MacOS with Anaconda
+##### MacOS with Conda
 
 ```bash
 # setup environment, e.g. name='mst'
@@ -195,7 +195,7 @@ mstruct
 job type (0-data refinement,1-grid refinement)
 ```
 
-##### Linux with Anaconda
+##### Linux with Conda
 
 ```bash
 # (optional block)
@@ -206,13 +206,11 @@ conda info --envs
 conda create -n mst
 # activating evironment name='mst'
 source activate mst
-# adding conda-forge installation channel
-conda config --add channels conda-forge
 
 # gls, fftw3, lapack, scons are required
-conda install boost=1.66=py27_1 lapack fftw gsl scons bzip2
+conda install -c conda-forge boost=1.72 lapack fftw gsl scons bzip2
 # note:
-# - check if e.g. python is not upgraded from python2.7 -> python3.6
+# - check if you like the python version and if it is consitent across the packages
 # - prefer builds that are close to your current environment
 
 # get source, git-clone or download and unpack the source
@@ -247,7 +245,7 @@ mstruct
 job type (0-data refinement,1-grid refinement)
 ```
 
-##### Anaconda tips and tricks
+##### Conda tips and tricks
 
 tricks from Honza
 
