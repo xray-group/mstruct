@@ -4,8 +4,10 @@
  * MStruct++ - Object-Oriented computer program/library for MicroStructure analysis
  * 					   from powder diffraction data.
  * 
- * Copyright (C) 2009-2018  Zdenek Matej, Charles University in Prague
- * Copyright (C) 2014-2018  Zdenek Matej, MAX IV Laboratory, Lund University
+ * Copyright (C) 2009-2014  Zdenek Matej, Charles University in Prague
+ * Copyright (C) 2014-2021  Zdenek Matej, MAX IV Laboratory, Lund University
+ * Copyright (C) 2016-2019  Milan Dopita, Jan Endres, Charles University in Prague
+ * Copyright (C) 2017-2018  Jiri Wollman, Charles University in Prague
  * 
  * This file is part of MStruct++.
  * 
