@@ -198,11 +198,6 @@ job type (0-data refinement,1-grid refinement)
 Note unfortunatelly you need to set the `LD_LIBRARY_PATH` evry time you activate
 the environment.
 
-```bash
-P="$(conda info --json | grep default_prefix | cut -d\" -f4)"
-export LD_LIBRARY_PATH=$P/lib
-```
-
 ##### Linux with Conda
 
 ```bash
