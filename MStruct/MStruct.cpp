@@ -761,25 +761,6 @@ void PowderPatternBackgroundInvX::CalcPowderPattern()const
 	VFN_DEBUG_MESSAGE("MStruct::PowderPatternBackgroundInvX::CalcPowderPattern():End",3);	
 }
 
-void PowderPatternBackgroundInvX::XMLOutput(ostream &os,int indent)const
-{
-    VFN_DEBUG_ENTRY("PowderPatternBackgroundInvX::XMLOutput():Begin"<<this->GetName(),11)
-    for(int i=0; i<indent; i++) os << "  ";
-    XMLCrystTag tag("PowderPatternBackgroundInvX");
-    tag.AddAttribute("Name", this->GetName());
-    os << tag << endl;
-    indent++;
-
-    mXFunctionType.XMLOutput(os,indent);
-    os << endl;
-    
-    indent--;
-    tag.SetIsEndTag(true);
-    for(int i=0; i<indent; i++) os << "  ";
-    os << tag << endl;
-    VFN_DEBUG_ENTRY("PowderPatternBackgroundInvX::XMLOutput():Begin"<<this->GetName(),11)
-}
-
 ////////////////////////////////////////////////////////////////////////
 //
 //    PowderPatternBackgroundChebyshev
@@ -1100,35 +1081,6 @@ void PowderPatternBackgroundChebyshev::Init()
 		//tmp.SetGlobalOptimStep(.05);
 		this->AddPar(tmp);
   }
-}
-
-void PowderPatternBackgroundChebyshev::XMLOutput(ostream &os,int indent)const
-{
-    VFN_DEBUG_ENTRY("PowderPatternBackgroundChebyshev::XMLOutput():Begin"<<this->GetName(),11)
-    for(int i=0; i<indent; i++) os << "  ";
-    XMLCrystTag tag("PowderPatternBackgroundChebyshev");
-    tag.AddAttribute("Name", this->GetName());
-    tag.AddAttribute("Polynomial_degree", std::to_string(mChebyshevCoef.numElements()-1));
-    os << tag << endl;
-    indent++;
-
-    mXFunctionType.XMLOutput(os,indent);
-    os << endl;
-    
-    // save coefficients of the Chebyshev polynomials
-    const REAL* coefs = (const REAL*) mChebyshevCoef.data();
-    for(int i=0; i<mChebyshevCoef.numElements(); i++) {
-        ostringstream ss;
-        ss << "Background_Coef_" << i;
-        this->GetPar(&coefs[i]).XMLOutput(os,ss.str(),indent);
-        os<<endl;
-    }
-    
-    indent--;
-    tag.SetIsEndTag(true);
-    for(int i=0; i<indent; i++) os << "  ";
-    os << tag << endl;
-    VFN_DEBUG_ENTRY("PowderPatternBackgroundChebyshev::XMLOutput():Begin"<<this->GetName(),11)
 }
 
 void printDataXY(std::ostream &s, const CrystVector_REAL &x, const CrystVector_REAL &y)

@@ -10,7 +10,7 @@ mstructenv.PrependUnique(CPPPATH = ["./MStruct"])
 
 # Idenfity the required source files
 #srcfiles  = Glob("./MStruct/*.cpp")
-srcfiles  = [File("./MStruct/libmstruct.cpp"),File("./MStruct/MStruct.cpp")]
+srcfiles  = [File("./MStruct/libmstruct.cpp"),File("./MStruct/MStruct.cpp"),File("./MStruct/IO.cpp")]
 #srcfiles += [File("./MStruct/mstruct_test1.cpp")]
 
 # Determine library version from the git data.
