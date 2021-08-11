@@ -654,15 +654,35 @@ void PowderPatternBackgroundBase::Prepare()
 ////////////////////////////////////////////////////////////////////////
 
 PowderPatternBackgroundInvX::PowderPatternBackgroundInvX()
-:mXFunctionType(FUNCTION_OF_X)
+{
+    this->InitOptions();
+	mIsScalable = true;
+    mXFunctionType.SetChoice(FUNCTION_OF_X);
+}
+
+PowderPatternBackgroundInvX::PowderPatternBackgroundInvX(const PowderPatternBackgroundInvX &old)
+:PowderPatternBackgroundBase(old),mXFunctionType(old.mXFunctionType)
 {
 	mIsScalable = true;
 }
 
-PowderPatternBackgroundInvX::PowderPatternBackgroundInvX(const PowderPatternBackgroundInvX &old)
-:PowderPatternBackgroundBase(old)
+void PowderPatternBackgroundInvX::InitOptions()
 {
-	mIsScalable = true;
+    static string XFunctionTypeName;
+    static string XFunctionTypeChoices[2];
+    
+    static bool needInitNames = true;
+    if(true==needInitNames)
+    {
+        XFunctionTypeName = "X-func.type";
+        XFunctionTypeChoices[FUNCTION_OF_X] = "X";
+        XFunctionTypeChoices[FUNCTION_OF_SIN_TH] = "sin(Th)";
+
+        needInitNames = false; //Only once for the class
+    }
+    
+    mXFunctionType.Init(2,&XFunctionTypeName,XFunctionTypeChoices);
+    this->AddOption(&mXFunctionType);
 }
 
 const string& PowderPatternBackgroundInvX::GetClassName()const
@@ -679,7 +699,7 @@ void PowderPatternBackgroundInvX::SetXFunctionType(const int type)
 		throw ObjCrystException("MStruct::PowderPatternBackgroundInvX::SetXFunctionType(int): Bad input argument.");
 	}
 	
-	mXFunctionType = type;
+    mXFunctionType.SetChoice(type);
 	mClockMaster.Click();
 }
 
@@ -699,7 +719,7 @@ void PowderPatternBackgroundInvX::CalcPowderPattern()const
 	REAL *p2 = mPowderPatternCalc.data();
 	
 	try {
-		if(mXFunctionType==FUNCTION_OF_X) {
+		if(mXFunctionType.GetChoice()==FUNCTION_OF_X) {
 			const REAL *p1 = mpParentPowderPattern->GetPowderPatternX().data();
 			if(!mUseVariableSlitIntensityCorr)
 				for(unsigned long i=0; i<nb; i++) { *p2 = 1./(*p1); p1++; p2++; }
@@ -707,7 +727,7 @@ void PowderPatternBackgroundInvX::CalcPowderPattern()const
 				const REAL *p3 = GetPowderPatternSinTheta().data();
 				for(unsigned long i=0; i<nb; i++) { *p2 = (abs(*p1)<1e-6) ? 0.5*(1.-pow(*p1,2)/6.) : (*p3)/(*p1); p1++; p2++; p3++; }
 			}
-		} else if(mXFunctionType==FUNCTION_OF_SIN_TH) {
+		} else if(mXFunctionType.GetChoice()==FUNCTION_OF_SIN_TH) {
 			if(!mUseVariableSlitIntensityCorr) {
 				const REAL *p3 = GetPowderPatternSinTheta().data();
 				for(unsigned long i=0; i<nb; i++) { *p2 = 1./(*p3); p2++; p3++; }
@@ -715,7 +735,7 @@ void PowderPatternBackgroundInvX::CalcPowderPattern()const
 				for(unsigned long i=0; i<nb; i++) { *p2 = 1.; p2++; }
 		} else {
 			cerr << "< MStruct::PowderPatternBackgroundInvX::CalcPowderPattern()\n";
-			cerr << "Unexpected/unsupported x-function type: "<< mXFunctionType <<".\n >" << endl; 
+			cerr << "Unexpected/unsupported x-function type: "<< mXFunctionType.GetChoice() <<".\n >" << endl;
 			throw ObjCrystException("MStruct::PowderPatternBackgroundInvX::CalcPowderPattern(): Program error.");
 		}
 	}
@@ -741,6 +761,25 @@ void PowderPatternBackgroundInvX::CalcPowderPattern()const
 	VFN_DEBUG_MESSAGE("MStruct::PowderPatternBackgroundInvX::CalcPowderPattern():End",3);	
 }
 
+void PowderPatternBackgroundInvX::XMLOutput(ostream &os,int indent)const
+{
+    VFN_DEBUG_ENTRY("PowderPatternBackgroundInvX::XMLOutput():Begin"<<this->GetName(),11)
+    for(int i=0; i<indent; i++) os << "  ";
+    XMLCrystTag tag("PowderPatternBackgroundInvX");
+    tag.AddAttribute("Name", this->GetName());
+    os << tag << endl;
+    indent++;
+
+    mXFunctionType.XMLOutput(os,indent);
+    os << endl;
+    
+    indent--;
+    tag.SetIsEndTag(true);
+    for(int i=0; i<indent; i++) os << "  ";
+    os << tag << endl;
+    VFN_DEBUG_ENTRY("PowderPatternBackgroundInvX::XMLOutput():Begin"<<this->GetName(),11)
+}
+
 ////////////////////////////////////////////////////////////////////////
 //
 //    PowderPatternBackgroundChebyshev
@@ -750,15 +789,36 @@ void PowderPatternBackgroundInvX::CalcPowderPattern()const
 PowderPatternBackgroundChebyshev::PowderPatternBackgroundChebyshev()
 :mChebyshevCoef(0), mChebyshevPolynomials(0,0)
 {
-  mIsScalable = false;	
+  this->InitOptions();
+  mIsScalable = false;
+  mXFunctionType.SetChoice(FUNCTION_OF_X);
   Init();
 }
 
 PowderPatternBackgroundChebyshev::PowderPatternBackgroundChebyshev(const PowderPatternBackgroundChebyshev &old)
-:PowderPatternBackgroundBase(old),mChebyshevCoef(old.mChebyshevCoef),mChebyshevPolynomials(0,0)
+:PowderPatternBackgroundBase(old),mChebyshevCoef(old.mChebyshevCoef),mChebyshevPolynomials(0,0),mXFunctionType(old.mXFunctionType)
 {
   mIsScalable = false;
   Init();
+}
+
+void PowderPatternBackgroundChebyshev::InitOptions()
+{
+    static string XFunctionTypeName;
+    static string XFunctionTypeChoices[2];
+    
+    static bool needInitNames = true;
+    if(true==needInitNames)
+    {
+        XFunctionTypeName = "X-func.type";
+        XFunctionTypeChoices[FUNCTION_OF_X] = "X";
+        XFunctionTypeChoices[FUNCTION_OF_SIN_TH] = "sin(Th)";
+
+        needInitNames = false; //Only once for the class
+    }
+    
+    mXFunctionType.Init(2,&XFunctionTypeName,XFunctionTypeChoices);
+    this->AddOption(&mXFunctionType);
 }
 
 const string& PowderPatternBackgroundChebyshev::GetClassName()const
@@ -817,7 +877,7 @@ void PowderPatternBackgroundChebyshev::SetXFunctionType(const int type)
 		throw ObjCrystException("MStruct::PowderPatternBackgroundChebyshev::SetXFunctionType(int): Bad input argument.");
 	}
 	
-	mXFunctionType = type;
+	mXFunctionType.SetChoice(type);
 	mClockMaster.Click();
 	// Order of the Chebyshev polynomials changed - force Chebyshev polynomials values recalc
 	mClockChebyshevPolynomialsCalc.Reset();
@@ -920,7 +980,7 @@ void PowderPatternBackgroundChebyshev::CalcChebyshevPolynomials()const
   	if (M>1) {
   		// the first order (x)
   		{
-  			if(mXFunctionType==FUNCTION_OF_X) {
+  			if(mXFunctionType.GetChoice()==FUNCTION_OF_X) {
   				const REAL min = 0.; //mpParentPowderPattern->GetPowderPatternX().GetXMin()/2;
   				const REAL max = 2*M_PI; //mpParentPowderPattern->GetPowderPatternX().GetXMax()/2;
   				// TODO:: make usable also for TOF data
@@ -929,13 +989,13 @@ void PowderPatternBackgroundChebyshev::CalcChebyshevPolynomials()const
   				const REAL *p1 = mpParentPowderPattern->GetPowderPatternX().data();
  					REAL *p2 = mChebyshevPolynomials.data();
   				for(unsigned long i=0; i<nb; i++) { *p2 = ((*p1)-x0)/s; p1++; p2++; }
-  			}	else if(mXFunctionType==FUNCTION_OF_SIN_TH) {
+  			}	else if(mXFunctionType.GetChoice()==FUNCTION_OF_SIN_TH) {
   				const REAL *p1 = GetPowderPatternSinTheta().data();
  					REAL *p2 = mChebyshevPolynomials.data();
   				for(unsigned long i=0; i<nb; i++) { *p2 = (*p1); p1++; p2++; }
   			} else {
   				cerr << "< MStruct::PowderPatternBackgroundChebyshev::CalcChebyshevPolynomials()\n";
-					cerr << "Unexpected/unsupported x-function type: "<< mXFunctionType <<".\n >" << endl; 
+					cerr << "Unexpected/unsupported x-function type: "<< mXFunctionType.GetChoice() <<".\n >" << endl;
 					throw ObjCrystException("MStruct::PowderPatternBackgroundChebyshev::CalcChebyshevPolynomials(): Program error.");
   			}
   		}
@@ -1040,6 +1100,35 @@ void PowderPatternBackgroundChebyshev::Init()
 		//tmp.SetGlobalOptimStep(.05);
 		this->AddPar(tmp);
   }
+}
+
+void PowderPatternBackgroundChebyshev::XMLOutput(ostream &os,int indent)const
+{
+    VFN_DEBUG_ENTRY("PowderPatternBackgroundChebyshev::XMLOutput():Begin"<<this->GetName(),11)
+    for(int i=0; i<indent; i++) os << "  ";
+    XMLCrystTag tag("PowderPatternBackgroundChebyshev");
+    tag.AddAttribute("Name", this->GetName());
+    tag.AddAttribute("Polynomial_degree", std::to_string(mChebyshevCoef.numElements()-1));
+    os << tag << endl;
+    indent++;
+
+    mXFunctionType.XMLOutput(os,indent);
+    os << endl;
+    
+    // save coefficients of the Chebyshev polynomials
+    const REAL* coefs = (const REAL*) mChebyshevCoef.data();
+    for(int i=0; i<mChebyshevCoef.numElements(); i++) {
+        ostringstream ss;
+        ss << "Background_Coef_" << i;
+        this->GetPar(&coefs[i]).XMLOutput(os,ss.str(),indent);
+        os<<endl;
+    }
+    
+    indent--;
+    tag.SetIsEndTag(true);
+    for(int i=0; i<indent; i++) os << "  ";
+    os << tag << endl;
+    VFN_DEBUG_ENTRY("PowderPatternBackgroundChebyshev::XMLOutput():Begin"<<this->GetName(),11)
 }
 
 void printDataXY(std::ostream &s, const CrystVector_REAL &x, const CrystVector_REAL &y)

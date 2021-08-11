@@ -232,11 +232,15 @@ public:
 	static const int FUNCTION_OF_SIN_TH = 1;
 	/// Set type of the argument of the 'InvX=1/X' function. (X or sin(Theta))
 	void SetXFunctionType(const int type = FUNCTION_OF_X);
+
+    virtual void XMLOutput(ostream &os, int indent=0)const;
 protected:
 	/// Calc the powder pattern.
 	virtual void CalcPowderPattern()const;
 	/// Argument 'X' of the 'InvX=1/X' function. (X or sin(Theta))
-	int mXFunctionType;
+    ObjCryst::RefObjOpt mXFunctionType;
+private:
+    void InitOptions();
 };
 
 /** PowderPatternBackgroundChebyshev : class to represent a Chebyshev polynomial background.
@@ -269,6 +273,8 @@ public:
   void SetXFunctionType(const int type = FUNCTION_OF_X);
   /// Get the first derivative values for the LSQ function, for a given parameter.
   virtual const CrystVector_REAL& GetLSQDeriv(const unsigned int, ObjCryst::RefinablePar &);
+    
+  virtual void XMLOutput(ostream &os, int indent=0)const;
 protected:
   /// Calc values of the Chebyshev polynomials. (Update mChebyshevPolynomials matrix.)
   void CalcChebyshevPolynomials()const;
@@ -284,7 +290,9 @@ protected:
   /// When were values of the used Chebyshev polynomials last computed ?
   mutable ObjCryst::RefinableObjClock mClockChebyshevPolynomialsCalc;
   /// Argument 'X' of the Chebyshev polynomial T_n(X) functions. (X or sin(Theta))
-  int mXFunctionType;
+  ObjCryst::RefObjOpt mXFunctionType;
+private:
+  void InitOptions();
 };
 
 /** LocalBackgroundChebyshev : class to represent a noncontinuous piecewice Chebyshev polynomial background.
