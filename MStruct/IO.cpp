@@ -97,5 +97,196 @@ void PowderPatternBackgroundChebyshev::XMLOutput(ostream &os,int indent)const
     VFN_DEBUG_ENTRY("PowderPatternBackgroundChebyshev::XMLOutput():Begin"<<this->GetName(),11)
 }
 
+////////////////////////////////////////////////////////////////////////
+//
+//    SizeBroadeningEffect
+//
+////////////////////////////////////////////////////////////////////////
+
+void SizeBroadeningEffect::XMLOutput(ostream &os,int indent)const
+{
+    VFN_DEBUG_ENTRY("SizeBroadeningEffect::XMLOutput():Begin"<<this->GetName(),11)
+    for(int i=0; i<indent; i++) os << "  ";
+    XMLCrystTag tag("SizeLn");
+    tag.AddAttribute("Name", this->GetName());
+    os << tag << endl;
+    indent++;
+
+	this->GetPar("M").XMLOutput(os,"M",indent);
+	os << endl;
+	this->GetPar("Sigma").XMLOutput(os,"Sigma",indent);
+    os << endl;
+	
+    indent--;
+    tag.SetIsEndTag(true);
+    for(int i=0; i<indent; i++) os << "  ";
+    os << tag << endl;
+    VFN_DEBUG_ENTRY("SizeBroadeningEffect::XMLOutput():Begin"<<this->GetName(),11)
+}
+
+////////////////////////////////////////////////////////////////////////
+//
+//    PseudoVoigtBroadeningEffectA
+//
+////////////////////////////////////////////////////////////////////////
+void PseudoVoigtBroadeningEffectA::XMLOutput(ostream &os,int indent)const
+{
+    VFN_DEBUG_ENTRY("PseudoVoigtBroadeningEffectA::XMLOutput():Begin"<<this->GetName(),11)
+    for(int i=0; i<indent; i++) os << "  ";
+    XMLCrystTag tag("pVoigtA");
+    tag.AddAttribute("Name", this->GetName());
+    os << tag << endl;
+    indent++;
+
+	this->GetPar("U").XMLOutput(os,"U",indent);
+	os << endl;
+	this->GetPar("V").XMLOutput(os,"V",indent);
+    os << endl;
+	this->GetPar("W").XMLOutput(os,"W",indent);
+	os << endl;
+	this->GetPar("Eta0").XMLOutput(os,"Eta0",indent);
+    os << endl;
+	this->GetPar("Eta1").XMLOutput(os,"Eta1",indent);
+	os << endl;
+	this->GetPar("Asym0").XMLOutput(os,"Asym0",indent);
+    os << endl;
+	this->GetPar("Asym1").XMLOutput(os,"Asym1",indent);
+	os << endl;
+	this->GetPar("Asym2").XMLOutput(os,"Asym2",indent);
+    os << endl;
+	
+    indent--;
+    tag.SetIsEndTag(true);
+    for(int i=0; i<indent; i++) os << "  ";
+    os << tag << endl;
+    VFN_DEBUG_ENTRY("PseudoVoigtBroadeningEffectA::XMLOutput():Begin"<<this->GetName(),11)
+}
+
+////////////////////////////////////////////////////////////////////////
+//
+//    RefractionPositionCorr
+//
+////////////////////////////////////////////////////////////////////////
+
+void RefractionPositionCorr::XMLOutput(ostream &os,int indent)const
+{
+    VFN_DEBUG_ENTRY("RefractionPositionCorr::XMLOutput():Begin"<<this->GetName(),11)
+    for(int i=0; i<indent; i++) os << "  ";
+    XMLCrystTag tag("RefractionCorr");
+    tag.AddAttribute("Name", this->GetName());
+    os << tag << endl;
+    indent++;
+
+	// --- options ---
+    mChi0ValueChoice.XMLOutput(os,indent);
+    os << endl;
+	
+	// --- refinable parameters ---
+	this->GetPar("Density").XMLOutput(os,"relDensity",indent);
+	os << endl;
+	
+    indent--;
+    tag.SetIsEndTag(true);
+    for(int i=0; i<indent; i++) os << "  ";
+    os << tag << endl;
+    VFN_DEBUG_ENTRY("RefractionPositionCorr::XMLOutput():Begin"<<this->GetName(),11)
+}
+
+////////////////////////////////////////////////////////////////////////
+//
+//    XECsReussVoigt
+//
+////////////////////////////////////////////////////////////////////////
+void XECsReussVoigt::XMLOutput(ostream &os,int indent)const
+{
+    VFN_DEBUG_ENTRY("XECsReussVoigt::XMLOutput():Begin"<<this->GetName(),11)
+    for(int i=0; i<indent; i++) os << "  ";
+    XMLCrystTag tag("XECsReussVoigt");
+    tag.AddAttribute("Name", this->GetName());
+    os << tag << endl;
+    indent++;
+	
+	// Stiffness constants
+	const vector< string > & cij_names = this->GetStiffnessConstantsNames();
+	for(int i=0; i<cij_names.size(); i++) {
+		for(int i=0; i<indent; i++) os << "  ";
+		XMLCrystTag tag("StiffnessConstant");
+		tag.AddAttribute("Name", cij_names[i]);
+		os << tag << mCijValues(i);
+		tag.SetIsEndTag(true);
+		os << tag << endl;
+	}
+	
+	// model weight (0..Reuss,1..Voigt)
+	this->GetPar("RV_weight").XMLOutput(os,"RV_weight",indent);
+	os << endl;
+	
+    indent--;
+    tag.SetIsEndTag(true);
+    for(int i=0; i<indent; i++) os << "  ";
+    os << tag << endl;
+    VFN_DEBUG_ENTRY("XECsReussVoigt::XMLOutput():Begin"<<this->GetName(),11)
+}
+
+////////////////////////////////////////////////////////////////////////
+//
+//    ResidualStressPositionCorrection
+//
+////////////////////////////////////////////////////////////////////////
+
+void ResidualStressPositionCorrection::XMLOutput(ostream &os,int indent)const
+{
+    VFN_DEBUG_ENTRY("ResidualStressPositionCorrection::XMLOutput():Begin"<<this->GetName(),11)
+    for(int i=0; i<indent; i++) os << "  ";
+    XMLCrystTag tag("StressSimple");
+    tag.AddAttribute("Name", this->GetName());
+    os << tag << endl;
+    indent++;
+
+	// XECs object
+	if(pXECsObj != NULL)
+		pXECsObj->XMLOutput(os,indent);
+	
+	// stress value
+	this->GetPar(&mStress).XMLOutput(os,"Stress",indent);
+	os << endl;
+	
+    indent--;
+    tag.SetIsEndTag(true);
+    for(int i=0; i<indent; i++) os << "  ";
+    os << tag << endl;
+    VFN_DEBUG_ENTRY("ResidualStressPositionCorrection::XMLOutput():Begin"<<this->GetName(),11)
+}
+
+////////////////////////////////////////////////////////////////////////
+//
+//    ReflectionProfile
+//
+////////////////////////////////////////////////////////////////////////
+
+void ReflectionProfile::XMLOutput(ostream &os,int indent)const
+{
+    VFN_DEBUG_ENTRY("MStruct::ReflectionProfile::XMLOutput():Begin"<<this->GetName(),11)
+    for(int i=0; i<indent; i++) os << "  ";
+    XMLCrystTag tag("ReflectionProfile");
+    tag.AddAttribute("Name", this->GetName());
+    os << tag << endl;
+    indent++;
+
+	// XMLOutput for all components
+	for(int icomp=0; icomp<this->GetReflectionProfileComponentNb(); icomp++) {
+		this->GetReflectionProfileComponent(icomp).XMLOutput(os,indent);
+		os << endl;
+	}
+    
+    indent--;
+    tag.SetIsEndTag(true);
+    for(int i=0; i<indent; i++) os << "  ";
+    os << tag << endl;
+    VFN_DEBUG_ENTRY("MStruct::ReflectionProfile::XMLOutput():Begin"<<this->GetName(),11)
+}
+
 } // namespace MStruct
 /* ------------------------------------------------------------------------------------------------ */
+
+//void XMLOutput(ostream &os, int indent=0) const;

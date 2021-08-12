@@ -6718,7 +6718,7 @@ void SizeDistribPowderPatternDiffraction::Prepare ()
   if(this->GetProfile().GetClassName()==string("MStruct::ReflectionProfile")) {
     MStruct::ReflectionProfile & reflProf = dynamic_cast<MStruct::ReflectionProfile &>(this->GetProfile());
     vector<long> ind;
-    for(long i=0; i<reflProf.GeReflectionProfileComponentNb(); i++)
+    for(long i=0; i<reflProf.GetReflectionProfileComponentNb(); i++)
       if(reflProf.GetReflectionProfileComponent(i).GetClassName()==string("MStruct::SizeDistribBroadeningEffect"))
 	ind.push_back(i);
     if(ind.size()>0) {
@@ -10720,7 +10720,7 @@ void ReflectionProfile::AddReflectionProfileComponent(ReflectionProfileComponent
   VFN_DEBUG_EXIT("ReflectionProfile::AddReflectionProfileComponent():"<<comp.GetName(),11)
 }
 
-long ReflectionProfile::GeReflectionProfileComponentNb() const
+long ReflectionProfile::GetReflectionProfileComponentNb() const
 { return mReflectionProfileComponentRegistry.GetNb(); }
 const ReflectionProfileComponent &  ReflectionProfile::GetReflectionProfileComponent (long n) const
 { return mReflectionProfileComponentRegistry.GetObj(n); }
@@ -10770,7 +10770,7 @@ void ReflectionProfile::RegisterHKLDisabledComponents (long h,long k,long l,REAL
       const bool not_instr = effect.compare("all_not_instr")==0; // also 'not_instr'?
       const ReflectionProfileComponent *pInstrComp = (not_instr) ? &( GetReflectionProfileComponent("instrProfile") ) : NULL; // auxiliary pointer
       // for all components
-      for(int icomp=0; icomp<GeReflectionProfileComponentNb(); icomp++) {
+      for(int icomp=0; icomp<GetReflectionProfileComponentNb(); icomp++) {
 	const ReflectionProfileComponent *pComp = &( GetReflectionProfileComponent(icomp) );
 	// except registering component
 	if( (ObjCryst::RefinableObj*)pComp == pRegisteringObj ) continue;
@@ -11471,9 +11471,11 @@ REAL ReflectionPositionCorrBase::GetPositionCorr(const REAL xcenter,
 ////////////////////////////////////////////////////////////////////////
 
 RefractionPositionCorr::RefractionPositionCorr()
-:mDensity(1.),mpCrystal(NULL),mAbsDensity(0.),mChi0ValueChoice(CHI0_VALUE),mConsiderCrystalFixed(true),mChi0(0.,0.),
+:mDensity(1.),mpCrystal(NULL),mAbsDensity(0.),mConsiderCrystalFixed(true),mChi0(0.,0.),
 mInitializationFlag(0)
 {
+	InitOptions();
+	mChi0ValueChoice.SetChoice(CHI0_VALUE);
 	InitParameters();
 	mClockMaster.AddChild(mClockChi0);
 }
@@ -11484,9 +11486,29 @@ mChi0ValueChoice(old.mChi0ValueChoice),mConsiderCrystalFixed(true),mChi0(old.mCh
 mInitializationFlag(old.mInitializationFlag)
 {
 	InitParameters();
-	if ( old.mChi0ValueChoice==CHI0_CRYSTAL && old.mpCrystal!=NULL )
+	if ( old.mChi0ValueChoice.GetChoice()==CHI0_CRYSTAL && old.mpCrystal!=NULL )
 		SetCrystal(*old.mpCrystal,old.mConsiderCrystalFixed);
 	mClockMaster.AddChild(mClockChi0);
+}
+
+void RefractionPositionCorr::InitOptions()
+{
+    static string chi0ValueChoiceName;
+    static string chi0ValueChoiceChoices[3];
+    
+    static bool needInitNames = true;
+    if(true==needInitNames)
+    {
+        chi0ValueChoiceName = "chi0.source";
+        chi0ValueChoiceChoices[CHI0_VALUE] = "value";
+        chi0ValueChoiceChoices[CHI0_CRYSTAL] = "crystal";
+		chi0ValueChoiceChoices[CHI0_CHEM_FORMULA] = "chem.formula";
+
+        needInitNames = false; //Only once for the class
+    }
+    
+    mChi0ValueChoice.Init(3,&chi0ValueChoiceName,chi0ValueChoiceChoices);
+    this->AddOption(&mChi0ValueChoice);
 }
 
 /*RefractionPositionCorr::~RefractionPositionCorr()
@@ -11533,7 +11555,7 @@ void RefractionPositionCorr::SetCrystal(const ObjCryst::Crystal & crystal, const
 		mpCrystal = &crystal;
 		mClockChi0.Reset();
   	mConsiderCrystalFixed = fixed;
-  	mChi0ValueChoice = CHI0_CRYSTAL;
+  	mChi0ValueChoice.SetChoice(CHI0_CRYSTAL);
   	mInitializationFlag = 0;
 	}
 	catch (std::exception &e) {
@@ -11574,7 +11596,7 @@ void RefractionPositionCorr::SetChemicalFormula(const string & formula, const RE
 		mInitializationFlag = 0;
 		mChi0 = complex<REAL>(0.,0.);
 		
-		mChi0ValueChoice = CHI0_CHEM_FORMULA;
+		mChi0ValueChoice.SetChoice(CHI0_CHEM_FORMULA);
 		
 		mFormula.SetFormula(formula,cout);
 		
@@ -11643,7 +11665,7 @@ void RefractionPositionCorr::SetChi0(const complex<REAL> & chi0)
 	mConsiderCrystalFixed = true;
 	mInitializationFlag = 0;
 	
-	mChi0ValueChoice = CHI0_VALUE;
+	mChi0ValueChoice.SetChoice(CHI0_VALUE);
 	
 	mChi0 = chi0;
 	mClockChi0.Click();
@@ -11653,7 +11675,7 @@ const complex< REAL > & RefractionPositionCorr::GetChi0(const bool forceReCalc)c
 {
 	try {
 		
-		switch (mChi0ValueChoice) {
+		switch (mChi0ValueChoice.GetChoice()) {
 			
 			case CHI0_VALUE:
 				// chi0 value set directly - nothing to do
@@ -11842,7 +11864,7 @@ const complex< REAL > & RefractionPositionCorr::GetChi0(const bool forceReCalc)c
 					
 			default:
 				cerr << "< MStruct::RefractionPositionCorr::GetChi0(...)\n";
-				cerr << "  Can not recognise method how Chi0 value should be calculated. Choice: " << mChi0ValueChoice << "\n";
+				cerr << "  Can not recognise method how Chi0 value should be calculated. Choice: " << mChi0ValueChoice.GetChoice() << "\n";
 				cerr << ">" << endl;
 				throw ObjCrystException("MStruct::RefractionPositionCorr::GetChi0(...): Unexpected error.");
 				break;

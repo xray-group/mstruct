@@ -1042,6 +1042,7 @@ public:
 		     const REAL h, const REAL k, const REAL l)const;
   bool IsRealSpaceType()const;
   void SetProfilePar(const REAL m, const REAL sigma);
+  void XMLOutput(ostream &os, int indent=0)const;
 private:
   void InitParameters();
 }; // class SizeBroadeningEffect
@@ -1954,7 +1955,8 @@ public:
   void SetProfilePar (const REAL fwhmCagliotiW, const REAL fwhmCagliotiU=0,
 		      const REAL fwhmCagliotiV=0,
 		      const REAL eta0=0.5, const REAL eta1=0.);
-	void SetAsymXMax(const REAL asymXMax);
+  void SetAsymXMax(const REAL asymXMax);
+  void XMLOutput(ostream &os, int indent=0) const;
 protected:
   MStruct::PowderPatternDiffraction* mpParentPowderPatternDiffraction;
 private:
@@ -2109,7 +2111,7 @@ public:
   virtual const string& GetClassName()const;
 
   void AddReflectionProfileComponent(ReflectionProfileComponent &);
-  long GeReflectionProfileComponentNb() const;
+  long GetReflectionProfileComponentNb() const;
   const ReflectionProfileComponent & GetReflectionProfileComponent (long ) const;
   ReflectionProfileComponent & GetReflectionProfileComponent (long );
   const ReflectionProfileComponent & GetReflectionProfileComponent (const string &objName) const;
@@ -2130,7 +2132,7 @@ public:
   virtual REAL GetFullProfileWidth (const REAL relativeIntensity, const REAL xcenter,
 				    const REAL h, const REAL k, const REAL l);
   REAL GetIntegralWidth (const REAL xcenter,const REAL h,const REAL k,const REAL l); 
-  void XMLOutput (ostream &os, int indent=0) const {};
+  void XMLOutput (ostream &os, int indent=0) const;
   void XMLInput (istream &is, const ObjCryst::XMLCrystTag &tag) {};
   void SetIncidenceAngle(const REAL omega);
   REAL GetIncidenceAngle(const REAL xcenter) const;
@@ -2394,6 +2396,8 @@ public:
 		/// When the chemical formula was set/changed for the last time?
 		ObjCryst::RefinableObjClock mClock;
 	}; // ChemicalFormula
+	/// XMLOutput
+	void XMLOutput(ostream &os, int indent=0) const;
 protected:
 	/// Relative density of material
 	REAL mDensity;
@@ -2405,7 +2409,7 @@ protected:
 	ChemicalFormula mFormula;
 	/// Choice flag how chi0 value is specified (if a value is specified directly
 	/// or calculated from Crystal structure or chemical formula and absolute density)
-	int mChi0ValueChoice;
+	ObjCryst::RefObjOpt mChi0ValueChoice;
 	/// Flag if the Crystal (structure + unit cell) should be considered as nonchanging
 	bool mConsiderCrystalFixed;
 	/// Chi0 value (directly specified or computed from Crystal or chemical formula and absolute density)
@@ -2416,6 +2420,8 @@ protected:
 	mutable int mInitializationFlag;
 	/// Initialise object parameters (internal auxilliary function)
 	void InitParameters();
+private:
+	void InitOptions();
 }; // RefractionPositionCorr
 
 /** XECsObj : This calculates x-ray elastic constants (XECs).
@@ -2513,6 +2519,8 @@ public:
 	void SetXECsObj(XECsObj & );
 	/// Set value of the Stress parameter (GPa)
 	void SetParams(const REAL stress);
+	/// XMLOutput
+	void XMLOutput(ostream &os, int indent=0) const;
 protected:
 	/// Stress value
 	REAL mStress;
@@ -2654,6 +2662,8 @@ public:
 	static const int LAUE_CUBIC             = 10; // cubic m-3, m-3m
 	/// Set model parameters (Reuss-Voigt model weigth)
 	void SetParams(const REAL weight);
+	/// XMLOutput
+	void XMLOutput(ostream &os, int indent=0) const;
 protected:
 	/// Reuss/Voigt model weight (0..Reuss, 1..Voigt)
 	REAL mWeight;
