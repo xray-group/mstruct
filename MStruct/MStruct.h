@@ -2533,6 +2533,8 @@ public:
 	void SetParams(const REAL stress);
 	/// XMLOutput
 	void XMLOutput(ostream &os, int indent=0) const;
+	/// XMLInput
+	void XMLInput(istream &is,const ObjCryst::XMLCrystTag &tag);
 protected:
 	/// Stress value
 	REAL mStress;
@@ -2676,6 +2678,8 @@ public:
 	void SetParams(const REAL weight);
 	/// XMLOutput
 	void XMLOutput(ostream &os, int indent=0) const;
+	/// XMLInput
+	void XMLInput(istream &is,const ObjCryst::XMLCrystTag &tag);
 protected:
 	/// Reuss/Voigt model weight (0..Reuss, 1..Voigt)
 	REAL mWeight;

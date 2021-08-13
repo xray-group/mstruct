@@ -179,7 +179,7 @@ void PowderPatternDiffraction::XMLInput(istream &is,const XMLCrystTag &tagg)
 		if(("PowderPatternCrystal"==tag.GetName())&&tag.IsEndTag())
 		{
 			this->UpdateDisplay();
-			VFN_DEBUG_EXIT("MStruct::PowderPatternDiffraction::Exit():"<<this->GetName(),11)
+			VFN_DEBUG_EXIT("MStruct::PowderPatternDiffraction::XMLInput():"<<this->GetName(),11)
 			return;
 		}
 		if("Par"==tag.GetName())
@@ -310,8 +310,8 @@ void PowderPatternDiffraction::XMLInput(istream &is,const XMLCrystTag &tagg)
 		{
 			if(mpReflectionProfile==0)
 			{
-				mpReflectionProfile
-					= new MStruct::ReflectionProfile(this->GetCrystal(),this->GetRadiation());
+				mpReflectionProfile = new MStruct::ReflectionProfile(this->GetCrystal(),this->GetRadiation());
+				//this->SetProfile(new ReflectionProfile(this->GetCrystal(),this->GetRadiation()));
 			}
 			else
 				if(mpReflectionProfile->GetClassName()!="MStruct::ReflectionProfile")
@@ -563,7 +563,7 @@ void PowderPattern::XMLInput(istream &is,const XMLCrystTag &tagg)
       if(("PowderPattern"==tag.GetName())&&tag.IsEndTag())
       {
          this->UpdateDisplay();
-         VFN_DEBUG_EXIT("MStruct::PowderPattern::Exit():"<<this->GetName(),5)
+         VFN_DEBUG_EXIT("MStruct::PowderPattern::XMLInput():"<<this->GetName(),5)
          return;
       }
       if("Radiation"==tag.GetName()) mRadiation.XMLInput(is,tag);
@@ -1192,6 +1192,62 @@ void XECsReussVoigt::XMLOutput(ostream &os,int indent)const
     VFN_DEBUG_EXIT("XECsReussVoigt::XMLOutput():"<<this->GetName(),11)
 }
 
+void XECsReussVoigt::XMLInput(istream &is,const XMLCrystTag &tagg)
+{
+	VFN_DEBUG_ENTRY("XECsReussVoigt::XMLInput():"<<this->GetName(),11)
+	for(unsigned int i=0;i<tagg.GetNbAttribute();i++)
+	{
+		if("Name"==tagg.GetAttributeName(i)) this->SetName(tagg.GetAttributeValue(i));
+	}
+	map<string, REAL> mapCijValues;
+	while(true)
+	{
+		XMLCrystTag tag(is);
+		if(("XECsReussVoigt"==tag.GetName())&&tag.IsEndTag())
+		{
+			this->SetStiffnessConstants(mapCijValues);
+			this->UpdateDisplay();
+			VFN_DEBUG_EXIT("XECsReussVoigt::XMLInput():"<<this->GetName(),11)
+			return;
+		}
+		/*if("Option"==tag.GetName())
+		{
+			for(unsigned int i=0;i<tag.GetNbAttribute();i++)
+				if("Name"==tag.GetAttributeName(i))
+					mOptionRegistry.GetObj(tag.GetAttributeValue(i)).XMLInput(is,tag);
+			continue;
+		}*/
+		if("Par"==tag.GetName())
+		{
+			for(unsigned int i=0;i<tag.GetNbAttribute();i++)
+			{
+				if("Name"==tag.GetAttributeName(i))
+				{
+					this->GetPar(tag.GetAttributeValue(i)).XMLInput(is,tag);
+					break;
+				}
+			}
+			continue;
+		}
+		if("StiffnessConstant"==tag.GetName())
+		{
+			for(unsigned int i=0;i<tag.GetNbAttribute();i++)
+			{
+				if("Name"==tag.GetAttributeName(i))
+				{
+					const string & cij_name = tag.GetAttributeValue(i);
+					REAL cij_value;
+					is >> cij_value;
+					XMLCrystTag junk(is);
+					mapCijValues[cij_name] = cij_value;
+					break;
+				}
+			}
+			continue;
+		}
+	}
+}
+
 ////////////////////////////////////////////////////////////////////////
 //
 //    I/O ResidualStressPositionCorrection
@@ -1220,6 +1276,73 @@ void ResidualStressPositionCorrection::XMLOutput(ostream &os,int indent)const
     for(int i=0; i<indent; i++) os << "  ";
     os << tag << endl;
     VFN_DEBUG_EXIT("ResidualStressPositionCorrection::XMLOutput():"<<this->GetName(),11)
+}
+
+void ResidualStressPositionCorrection::XMLInput(istream &is,const XMLCrystTag &tagg)
+{
+	VFN_DEBUG_ENTRY("ResidualStressPositionCorrection::XMLInput():"<<this->GetName(),11)
+	for(unsigned int i=0;i<tagg.GetNbAttribute();i++)
+	{
+		if("Name"==tagg.GetAttributeName(i)) this->SetName(tagg.GetAttributeValue(i));
+	}
+	while(true)
+	{
+		XMLCrystTag tag(is);
+		if(("StressSimple"==tag.GetName())&&tag.IsEndTag())
+		{
+			this->UpdateDisplay();
+			VFN_DEBUG_EXIT("ResidualStressPositionCorrection::XMLInput():"<<this->GetName(),11)
+			return;
+		}
+		/*if("Option"==tag.GetName())
+		{
+			for(unsigned int i=0;i<tag.GetNbAttribute();i++)
+				if("Name"==tag.GetAttributeName(i))
+					mOptionRegistry.GetObj(tag.GetAttributeValue(i)).XMLInput(is,tag);
+			continue;
+		}*/
+		if("Par"==tag.GetName())
+		{
+			for(unsigned int i=0;i<tag.GetNbAttribute();i++)
+			{
+				if("Name"==tag.GetAttributeName(i))
+				{
+					this->GetPar(tag.GetAttributeValue(i)).XMLInput(is,tag);
+					break;
+				}
+			}
+			continue;
+		}
+        if("XECsReussVoigt"==tag.GetName())
+        {
+           MStruct::XECsReussVoigt *XECsModel=new XECsReussVoigt();
+		   cout << "Constructor done" << endl;
+      	   // set crystal for XECs Object
+		   MStruct::ReflectionProfile& reflProf = this->GetParentReflectionProfile();
+		   cout << "got reflProf" << endl;
+		   MStruct::PowderPatternDiffraction& diffData = reinterpret_cast<MStruct::PowderPatternDiffraction&>(reflProf.GetParentPowderPatternDiffraction());
+		   cout << "got diffraction" << endl;
+		   const ObjCryst::Crystal& crystal = diffData.GetCrystal();
+		   cout << "got crystal" << endl;
+      	   XECsModel->SetUnitCell(crystal);
+		   cout << "unit cell set" << endl;
+		   // XML input
+           XECsModel->XMLInput(is,tag);
+	 // get Cij matrix
+		const CrystMatrix_REAL & matrixCij = XECsModel->GetCijMatrix();
+
+		cout << "Stiffness tensor in the Voigt notation (GPa):" << endl;
+		for(int i=0; i<6; i++) {
+			cout << "\t";
+			for(int j=0; j<6; j++)
+				cout << setw(10) << matrixCij(i,j);
+			cout << endl;
+		}
+		   // set the XECs model
+      	   this->SetXECsObj(*XECsModel);
+           continue;
+        }
+	}
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -1303,6 +1426,14 @@ void ReflectionProfile::XMLInput(istream &is,const XMLCrystTag &tagg)
 		if("RefractionCorr"==tag.GetName())
 		{
 			MStruct::RefractionPositionCorr * t = new MStruct::RefractionPositionCorr();
+			t->SetParentReflectionProfile(*this);
+			this->AddReflectionProfileComponent(*t);
+			t->XMLInput(is,tag);
+			continue;
+		}
+		if("StressSimple"==tag.GetName())
+		{
+			MStruct::ResidualStressPositionCorrection * t = new MStruct::ResidualStressPositionCorrection();
 			t->SetParentReflectionProfile(*this);
 			this->AddReflectionProfileComponent(*t);
 			t->XMLInput(is,tag);
