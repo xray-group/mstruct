@@ -1051,6 +1051,7 @@ public:
   bool IsRealSpaceType()const;
   void SetProfilePar(const REAL m, const REAL sigma);
   void XMLOutput(ostream &os, int indent=0)const;
+  void XMLInput(istream &is,const ObjCryst::XMLCrystTag &tag);
 private:
   void InitParameters();
 }; // class SizeBroadeningEffect
@@ -1965,6 +1966,7 @@ public:
 		      const REAL eta0=0.5, const REAL eta1=0.);
   void SetAsymXMax(const REAL asymXMax);
   void XMLOutput(ostream &os, int indent=0) const;
+  void XMLInput(istream &is,const ObjCryst::XMLCrystTag &tag);
 protected:
   MStruct::PowderPatternDiffraction* mpParentPowderPatternDiffraction;
 private:
@@ -2141,7 +2143,7 @@ public:
 				    const REAL h, const REAL k, const REAL l);
   REAL GetIntegralWidth (const REAL xcenter,const REAL h,const REAL k,const REAL l); 
   void XMLOutput (ostream &os, int indent=0) const;
-  void XMLInput (istream &is, const ObjCryst::XMLCrystTag &tag) {};
+  void XMLInput(istream &is,const ObjCryst::XMLCrystTag &tag);
   void SetIncidenceAngle(const REAL omega);
   REAL GetIncidenceAngle(const REAL xcenter) const;
   virtual REAL GetPositionCorr (const REAL xcenter,
@@ -2406,6 +2408,8 @@ public:
 	}; // ChemicalFormula
 	/// XMLOutput
 	void XMLOutput(ostream &os, int indent=0) const;
+	/// XMLInput
+	void XMLInput(istream &is,const ObjCryst::XMLCrystTag &tag);
 protected:
 	/// Relative density of material
 	REAL mDensity;

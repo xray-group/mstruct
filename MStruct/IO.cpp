@@ -304,6 +304,21 @@ void PowderPatternDiffraction::XMLInput(istream &is,const XMLCrystTag &tagg)
 			mpReflectionProfile->XMLInput(is,tag);
 			continue;
 		}
+		if("ReflectionProfile"==tag.GetName())
+		{
+			if(mpReflectionProfile==0)
+			{
+				mpReflectionProfile
+					= new MStruct::ReflectionProfile(this->GetCrystal(),this->GetRadiation());
+			}
+			else
+				if(mpReflectionProfile->GetClassName()!="MStruct::ReflectionProfile")
+				{
+					this->SetProfile(new ReflectionProfile(this->GetCrystal(),this->GetRadiation()));
+				}
+			mpReflectionProfile->XMLInput(is,tag);
+			continue;
+		}
 		if("FhklObsSq"==tag.GetName())
 		{// old-style extracted data
 			long nbrefl=0;
@@ -957,6 +972,44 @@ void SizeBroadeningEffect::XMLOutput(ostream &os,int indent)const
     VFN_DEBUG_EXIT("SizeBroadeningEffect::XMLOutput():"<<this->GetName(),11)
 }
 
+void SizeBroadeningEffect::XMLInput(istream &is,const XMLCrystTag &tagg)
+{
+	VFN_DEBUG_ENTRY("SizeBroadeningEffect::XMLInput():"<<this->GetName(),11)
+	for(unsigned int i=0;i<tagg.GetNbAttribute();i++)
+	{
+		if("Name"==tagg.GetAttributeName(i)) this->SetName(tagg.GetAttributeValue(i));
+	}
+	while(true)
+	{
+		XMLCrystTag tag(is);
+		if(("SizeLn"==tag.GetName())&&tag.IsEndTag())
+		{
+			this->UpdateDisplay();
+			VFN_DEBUG_EXIT("SizeBroadeningEffect::XMLInput():"<<this->GetName(),11)
+			return;
+		}
+		/*if("Option"==tag.GetName())
+		{
+			for(unsigned int i=0;i<tag.GetNbAttribute();i++)
+				if("Name"==tag.GetAttributeName(i))
+					mOptionRegistry.GetObj(tag.GetAttributeValue(i)).XMLInput(is,tag);
+			continue;
+		}*/
+		if("Par"==tag.GetName())
+		{
+			for(unsigned int i=0;i<tag.GetNbAttribute();i++)
+			{
+				if("Name"==tag.GetAttributeName(i))
+				{
+					this->GetPar(tag.GetAttributeValue(i)).XMLInput(is,tag);
+					break;
+				}
+			}
+			continue;
+		}
+	}
+}
+
 ////////////////////////////////////////////////////////////////////////
 //
 //    I/O PseudoVoigtBroadeningEffectA
@@ -995,6 +1048,44 @@ void PseudoVoigtBroadeningEffectA::XMLOutput(ostream &os,int indent)const
     VFN_DEBUG_EXIT("PseudoVoigtBroadeningEffectA::XMLOutput():"<<this->GetName(),11)
 }
 
+void PseudoVoigtBroadeningEffectA::XMLInput(istream &is,const XMLCrystTag &tagg)
+{
+	VFN_DEBUG_ENTRY("PseudoVoigtBroadeningEffectA::XMLInput():"<<this->GetName(),11)
+	for(unsigned int i=0;i<tagg.GetNbAttribute();i++)
+	{
+		if("Name"==tagg.GetAttributeName(i)) this->SetName(tagg.GetAttributeValue(i));
+	}
+	while(true)
+	{
+		XMLCrystTag tag(is);
+		if(("pVoigtA"==tag.GetName())&&tag.IsEndTag())
+		{
+			this->UpdateDisplay();
+			VFN_DEBUG_EXIT("PseudoVoigtBroadeningEffectA::XMLInput():"<<this->GetName(),11)
+			return;
+		}
+		/*if("Option"==tag.GetName())
+		{
+			for(unsigned int i=0;i<tag.GetNbAttribute();i++)
+				if("Name"==tag.GetAttributeName(i))
+					mOptionRegistry.GetObj(tag.GetAttributeValue(i)).XMLInput(is,tag);
+			continue;
+		}*/
+		if("Par"==tag.GetName())
+		{
+			for(unsigned int i=0;i<tag.GetNbAttribute();i++)
+			{
+				if("Name"==tag.GetAttributeName(i))
+				{
+					this->GetPar(tag.GetAttributeValue(i)).XMLInput(is,tag);
+					break;
+				}
+			}
+			continue;
+		}
+	}
+}
+
 ////////////////////////////////////////////////////////////////////////
 //
 //    I/O RefractionPositionCorr
@@ -1023,6 +1114,44 @@ void RefractionPositionCorr::XMLOutput(ostream &os,int indent)const
     for(int i=0; i<indent; i++) os << "  ";
     os << tag << endl;
     VFN_DEBUG_EXIT("RefractionPositionCorr::XMLOutput():"<<this->GetName(),11)
+}
+
+void RefractionPositionCorr::XMLInput(istream &is,const XMLCrystTag &tagg)
+{
+	VFN_DEBUG_ENTRY("RefractionPositionCorr::XMLInput():"<<this->GetName(),11)
+	for(unsigned int i=0;i<tagg.GetNbAttribute();i++)
+	{
+		if("Name"==tagg.GetAttributeName(i)) this->SetName(tagg.GetAttributeValue(i));
+	}
+	while(true)
+	{
+		XMLCrystTag tag(is);
+		if(("RefractionCorr"==tag.GetName())&&tag.IsEndTag())
+		{
+			this->UpdateDisplay();
+			VFN_DEBUG_EXIT("RefractionPositionCorr::XMLInput():"<<this->GetName(),11)
+			return;
+		}
+		if("Option"==tag.GetName())
+		{
+			for(unsigned int i=0;i<tag.GetNbAttribute();i++)
+				if("Name"==tag.GetAttributeName(i))
+					mOptionRegistry.GetObj(tag.GetAttributeValue(i)).XMLInput(is,tag);
+			continue;
+		}
+		if("Par"==tag.GetName())
+		{
+			for(unsigned int i=0;i<tag.GetNbAttribute();i++)
+			{
+				if("Name"==tag.GetAttributeName(i) && "relDensity"==tag.GetAttributeValue(i))
+				{
+					this->GetPar("Density").XMLInput(is,tag);
+					break;
+				}
+			}
+			continue;
+		}
+	}
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -1117,6 +1246,67 @@ void ReflectionProfile::XMLOutput(ostream &os,int indent)const
     for(int i=0; i<indent; i++) os << "  ";
     os << tag << endl;
     VFN_DEBUG_EXIT("MStruct::ReflectionProfile::XMLOutput():"<<this->GetName(),11)
+}
+
+void ReflectionProfile::XMLInput(istream &is,const XMLCrystTag &tagg)
+{
+	VFN_DEBUG_ENTRY("ReflectionProfile::XMLInput():"<<this->GetName(),11)
+	for(unsigned int i=0;i<tagg.GetNbAttribute();i++)
+	{
+		if("Name"==tagg.GetAttributeName(i)) this->SetName(tagg.GetAttributeValue(i));
+	}
+	while(true)
+	{
+		XMLCrystTag tag(is);
+		if(("ReflectionProfile"==tag.GetName())&&tag.IsEndTag())
+		{
+			this->UpdateDisplay();
+			VFN_DEBUG_EXIT("ReflectionProfile::XMLInput():"<<this->GetName(),11)
+			return;
+		}
+		if("Option"==tag.GetName())
+		{
+			for(unsigned int i=0;i<tag.GetNbAttribute();i++)
+				if("Name"==tag.GetAttributeName(i))
+					mOptionRegistry.GetObj(tag.GetAttributeValue(i)).XMLInput(is,tag);
+			continue;
+		}
+		if("Par"==tag.GetName())
+		{
+			for(unsigned int i=0;i<tag.GetNbAttribute();i++)
+			{
+				if("Name"==tag.GetAttributeName(i))
+				{
+					this->GetPar(tag.GetAttributeValue(i)).XMLInput(is,tag);
+					break;
+				}
+			}
+		}
+		if("pVoigtA"==tag.GetName())
+		{
+			MStruct::PseudoVoigtBroadeningEffectA * t = new MStruct::PseudoVoigtBroadeningEffectA();
+			t->SetParentReflectionProfile(*this);
+			this->AddReflectionProfileComponent(*t);
+			t->XMLInput(is,tag);
+			continue;
+		}
+		if("SizeLn"==tag.GetName())
+		{
+			MStruct::SizeBroadeningEffect * t = new MStruct::SizeBroadeningEffect();
+			t->SetParentReflectionProfile(*this);
+			this->AddReflectionProfileComponent(*t);
+			t->XMLInput(is,tag);
+			continue;
+		}
+		if("RefractionCorr"==tag.GetName())
+		{
+			MStruct::RefractionPositionCorr * t = new MStruct::RefractionPositionCorr();
+			t->SetParentReflectionProfile(*this);
+			this->AddReflectionProfileComponent(*t);
+			t->XMLInput(is,tag);
+			continue;
+		}
+	}
 }
 
 ////////////////////////////////////////////////////////////////////////
