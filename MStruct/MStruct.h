@@ -8,8 +8,6 @@
  * Copyright (C) 2014-2021  Zdenek Matej, MAX IV Laboratory, Lund University
  * Copyright (C) 2016-2019  Milan Dopita, Jan Endres, Charles University in Prague
  * Copyright (C) 2017-2018  Jiri Wollman, Charles University in Prague
- *
- * Special credit to Vincent Favre Nicolin & ObjCryst++ for a part of I/O code.
  * 
  * This file is part of MStruct++.
  * 
