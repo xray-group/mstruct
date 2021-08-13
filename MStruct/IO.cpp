@@ -84,15 +84,6 @@ void PowderPatternDiffraction::XMLOutput(ostream &os,int indent)const
    }
 
    mCorrTextureEllipsoid.XMLOutput(os,indent);
-
-   // Geometry - Omega
-   {
-	   XMLCrystTag t("Geometry");
-	   t.AddAttribute("Omega", (boost::format("%f")%(mOmega*180./M_PI)).str() );
-	   t.SetIsEmptyTag(true);
-	   for(int i=0;i<indent;i++) os << "  " ;
-	   os<<t<<endl;
-   }
    
    mCorrAbsorption.XMLOutput(os,indent);
    
@@ -131,11 +122,416 @@ void PowderPatternDiffraction::XMLOutput(ostream &os,int indent)const
    VFN_DEBUG_EXIT("MStruct::PowderPatternDiffraction::XMLOutput():"<<this->GetName(),5)
 }
 
+void PowderPatternDiffraction::XMLInput(istream &is,const XMLCrystTag &tagg)
+{
+	VFN_DEBUG_ENTRY("MStruct::PowderPatternDiffraction::XMLInput():"<<this->GetName(),11)
+	for(unsigned int i=0;i<tagg.GetNbAttribute();i++)
+	{
+		if("Name"==tagg.GetAttributeName(i)) this->SetName(tagg.GetAttributeValue(i));
+		if("Crystal"==tagg.GetAttributeName(i))
+			this->SetCrystal(gCrystalRegistry.GetObj(tagg.GetAttributeValue(i)));
+		if("NeedLorentzCorr"==tagg.GetAttributeName(i))
+		{
+			stringstream ss(tagg.GetAttributeValue(i));
+			bool b;
+			ss>>b;
+			//mNeedLorentzCorr=b;
+			//mClockLorentzPolarSlitCorrPar.Reset();
+		}
+		if("NeedPolarCorr"==tagg.GetAttributeName(i))
+		{
+			stringstream ss(tagg.GetAttributeValue(i));
+			bool b;
+			ss>>b;
+			//mNeedPolarCorr=b;
+			//mClockLorentzPolarSlitCorrPar.Reset();
+		}
+		if("Polar_AFactor"==tagg.GetAttributeName(i))
+		{
+			stringstream ss(tagg.GetAttributeValue(i));
+			float b;
+			ss>>b;
+			//mPolarAfactor=b;
+			//mClockLorentzPolarSlitCorrPar.Reset();
+		}
+		if("NeedSlitApertureCorr"==tagg.GetAttributeName(i))
+		{
+			stringstream ss(tagg.GetAttributeValue(i));
+			bool b;
+			ss>>b;
+			//mNeedSlitApertureCorr=b;
+			//mClockLorentzPolarSlitCorrPar.Reset();
+		}
+		if("IgnoreImagScattFact"==tagg.GetAttributeName(i))
+		{
+			stringstream ss(tagg.GetAttributeValue(i));
+			bool b;
+			ss>>b;
+			this->SetIsIgnoringImagScattFact(b);
+			mClockLorentzPolarSlitCorrPar.Reset();
+		}
+	}
+	while(true)
+	{
+		XMLCrystTag tag(is);
+		if(("PowderPatternCrystal"==tag.GetName())&&tag.IsEndTag())
+		{
+			this->UpdateDisplay();
+			VFN_DEBUG_EXIT("MStruct::PowderPatternDiffraction::Exit():"<<this->GetName(),11)
+			return;
+		}
+		if("Par"==tag.GetName())
+		{
+			for(unsigned int i=0;i<tag.GetNbAttribute();i++)
+			{
+				if("Name"==tag.GetAttributeName(i))
+				{
+					if("globalBiso"==tag.GetAttributeValue(i))
+					{
+						this->GetPar(&mGlobalBiso).XMLInput(is,tag);
+						break;
+					}
+					if("U"==tag.GetAttributeValue(i))
+					{
+						mpReflectionProfile->GetPar("U").XMLInput(is,tag);
+						break;
+					}
+					if("V"==tag.GetAttributeValue(i))
+					{
+						mpReflectionProfile->GetPar("V").XMLInput(is,tag);
+						break;
+					}
+					if("W"==tag.GetAttributeValue(i))
+					{
+						mpReflectionProfile->GetPar("W").XMLInput(is,tag);
+						break;
+					}
+					if("Eta0"==tag.GetAttributeValue(i))
+					{
+						mpReflectionProfile->GetPar("Eta0").XMLInput(is,tag);
+						break;
+					}
+					if("Eta1"==tag.GetAttributeValue(i))
+					{
+						mpReflectionProfile->GetPar("Eta1").XMLInput(is,tag);
+						break;
+					}
+					if("W0"==tag.GetAttributeValue(i))
+					{
+						//:TODO: mpReflectionProfile->GetPar("Eta0").XMLInput(is,tag);
+						break;
+					}
+					if("W1"==tag.GetAttributeValue(i))
+					{
+						//:TODO: mpReflectionProfile->GetPar("Eta1").XMLInput(is,tag);
+						break;
+					}
+					if("W2"==tag.GetAttributeValue(i))
+					{
+						//:TODO: mpReflectionProfile->GetPar("Eta2").XMLInput(is,tag);
+						break;
+					}
+				}
+			}
+			continue;
+		}
+		if("Option"==tag.GetName())
+		{
+			for(unsigned int i=0;i<tag.GetNbAttribute();i++)
+			{
+				if("Name"==tag.GetAttributeName(i))
+				{
+					if("Profile Type"!=tag.GetAttributeValue(i))
+						mOptionRegistry.GetObj(tag.GetAttributeValue(i)).XMLInput(is,tag);
+				}
+			}
+			continue;
+		}
+		if("TextureMarchDollase"==tag.GetName())
+		{
+			mCorrTextureMarchDollase.XMLInput(is,tag);
+			continue;
+		}
+		if("TextureEllipsoid"==tag.GetName())
+		{
+			mCorrTextureEllipsoid.XMLInput(is,tag);
+			continue;
+		}
+		if("AbsorptionCorr"==tag.GetName())
+		{
+			mCorrAbsorption.XMLInput(is,tag);
+		}
+		if("ReflectionProfilePseudoVoigt"==tag.GetName())
+		{
+			if(mpReflectionProfile==0)
+			{
+				mpReflectionProfile=new ReflectionProfilePseudoVoigt;
+			}
+			else
+				if(mpReflectionProfile->GetClassName()!="ReflectionProfilePseudoVoigt")
+				{
+					this->SetProfile(new ReflectionProfilePseudoVoigt);
+				}
+			mpReflectionProfile->XMLInput(is,tag);
+			continue;
+		}
+		if("ReflectionProfilePseudoVoigtAnisotropic"==tag.GetName())
+		{
+			if(mpReflectionProfile==0)
+			{
+				mpReflectionProfile=new ReflectionProfilePseudoVoigtAnisotropic;
+			}
+			else
+				if(mpReflectionProfile->GetClassName()!="ReflectionProfilePseudoVoigtAnisotropic")
+				{
+					this->SetProfile(new ReflectionProfilePseudoVoigtAnisotropic);
+				}
+			mpReflectionProfile->XMLInput(is,tag);
+			continue;
+		}
+		if("ReflectionProfileDoubleExponentialPseudoVoigt"==tag.GetName())
+		{
+			if(mpReflectionProfile==0)
+			{
+				mpReflectionProfile
+					=new ReflectionProfileDoubleExponentialPseudoVoigt(this->GetCrystal());
+			}
+			else
+				if(mpReflectionProfile->GetClassName()!="ReflectionProfileDoubleExponentialPseudoVoigt")
+				{
+					this->SetProfile(new ReflectionProfileDoubleExponentialPseudoVoigt(this->GetCrystal()));
+				}
+			mpReflectionProfile->XMLInput(is,tag);
+			continue;
+		}
+		if("FhklObsSq"==tag.GetName())
+		{// old-style extracted data
+			long nbrefl=0;
+			CrystVector_REAL iobs(100),sigma;
+			CrystVector_long h(100),k(100),l(100);
+			mFhklObsSq.resize(100);
+			do
+			{
+				is >>h(nbrefl)>>k(nbrefl)>>l(nbrefl)>>iobs(nbrefl);
+				nbrefl++;
+				if(nbrefl==h.numElements())
+				{
+					h.resizeAndPreserve(nbrefl+100);
+					k.resizeAndPreserve(nbrefl+100);
+					l.resizeAndPreserve(nbrefl+100);
+					iobs.resizeAndPreserve(nbrefl+100);
+				}
+				while(0==isgraph(is.peek())) is.get();
+			}
+			while(is.peek()!='<');//until next tag
+			XMLCrystTag junkEndTag(is);
+			h.resizeAndPreserve(nbrefl);
+			k.resizeAndPreserve(nbrefl);
+			l.resizeAndPreserve(nbrefl);
+			iobs.resizeAndPreserve(nbrefl);
+			sigma.resizeAndPreserve(nbrefl);
+			sigma=1;
+
+			if(mpLeBailData==0)  mpLeBailData=new DiffractionDataSingleCrystal(this->GetCrystal(),false);
+
+			mpLeBailData->SetHklIobs(h,k,l,iobs,sigma);
+			mpLeBailData->SetWavelength(this->GetRadiation().GetWavelength()(0));
+			mpLeBailData->SetRadiationType(this->GetRadiation().GetRadiationType());
+
+			// Estimate resolution
+			const REAL min=iobs.max()*1e-6;
+			unsigned long iresol=0;
+			for(long i=0;i<nbrefl;++i) if(iobs(i)>min) iresol=i;
+			char buf[200];
+			sprintf(buf,"LeBail (d=%4.2fA?):",1/(2*abs(mpLeBailData->GetSinThetaOverLambda()(iresol))+1e-6));
+			mpLeBailData->SetName(string(buf)+this->GetCrystal().GetName());
+			//mpLeBailData->SetName(string("LeBail (resol=?):")+this->GetCrystal().GetName());
+		}
+		if("DiffractionDataSingleCrystal"==tag.GetName())
+		{// Le Bail data
+			if(mpLeBailData==0) mpLeBailData=new DiffractionDataSingleCrystal(this->GetCrystal(),false);
+			mpLeBailData->XMLInput(is,tag);
+		}
+		if("FrozenLatticePar"==tag.GetName())
+		{
+			this->FreezeLatticePar(true);
+			for(unsigned int i=0;i<tag.GetNbAttribute();i++)
+			{
+				if("a"==tag.GetAttributeName(i))
+				{
+					stringstream ss(tag.GetAttributeValue(i));
+					//ss.imbue(std::locale::classic());
+					float v;
+					ss>>v;
+					this->SetFrozenLatticePar(0,v);
+				}
+				if("b"==tag.GetAttributeName(i))
+				{
+					stringstream ss(tag.GetAttributeValue(i));
+					//ss.imbue(std::locale::classic());
+					float v;
+					ss>>v;
+					this->SetFrozenLatticePar(1,v);
+				}
+				if("c"==tag.GetAttributeName(i))
+				{
+					stringstream ss(tag.GetAttributeValue(i));
+					//ss.imbue(std::locale::classic());
+					float v;
+					ss>>v;
+					this->SetFrozenLatticePar(2,v);
+				}
+				if("alpha"==tag.GetAttributeName(i))
+				{
+					stringstream ss(tag.GetAttributeValue(i));
+					//ss.imbue(std::locale::classic());
+					float v;
+					ss>>v;
+					this->SetFrozenLatticePar(3,v*M_PI/180);
+				}
+				if("beta"==tag.GetAttributeName(i))
+				{
+					stringstream ss(tag.GetAttributeValue(i));
+					//ss.imbue(std::locale::classic());
+					float v;
+					ss>>v;
+					this->SetFrozenLatticePar(4,v*M_PI/180);
+				}
+				if("gamma"==tag.GetAttributeName(i))
+				{
+					stringstream ss(tag.GetAttributeValue(i));
+					//ss.imbue(std::locale::classic());
+					float v;
+					ss>>v;
+					this->SetFrozenLatticePar(5,v*M_PI/180);
+				}
+			}
+		}
+	}
+}
+
 ////////////////////////////////////////////////////////////////////////
 //
 //    I/O PowderPattern
 //
 ////////////////////////////////////////////////////////////////////////
+
+void PowderPattern::XMLOutput(ostream &os,int indent)const
+{
+	VFN_DEBUG_ENTRY("MStruct::PowderPattern::XMLOutput():"<<this->GetName(),11)
+	for(int i=0;i<indent;i++) os << "  " ;
+	XMLCrystTag tag("PowderPattern");
+	tag.AddAttribute("Name",mName);
+	os <<tag<<endl;
+	indent++;
+
+	this->GetPar(&mXZero).XMLOutput(os,"Zero",indent);
+	os <<endl;
+	if(this->GetRadiation().GetWavelengthType()==WAVELENGTH_TOF)
+	{
+		this->GetPar(&mDIFC).XMLOutput(os,"TOF-DIFC",indent);
+		os <<endl;
+
+		this->GetPar(&mDIFA).XMLOutput(os,"TOF-DIFA",indent);
+		os <<endl;
+	}
+	else
+	{
+		this->GetPar(&m2ThetaDisplacement).XMLOutput(os,"2ThetaDisplacement",indent);
+		os <<endl;
+
+		this->GetPar(&m2ThetaTransparency).XMLOutput(os,"2ThetaTransparency",indent);
+		os <<endl;
+	}
+
+	for(unsigned int i=0;i<this->GetNbOption();i++)
+	{
+		this->GetOption(i).XMLOutput(os,indent);
+		os <<endl<<endl;
+	}
+
+	mRadiation.XMLOutput(os,indent);
+	os <<endl;
+	{
+		for(int i=0;i<indent;i++) os << "  " ;
+		XMLCrystTag tag2("MaxSinThetaOvLambda");
+		os << tag2<< mMaxSinThetaOvLambda;
+		tag2.SetIsEndTag(true);
+		os << tag2<<endl<<endl;
+	}
+
+    // Geometry - Omega
+    {
+ 	   XMLCrystTag t("Geometry");
+ 	   t.AddAttribute("Omega", (boost::format("%f")%(mOmega*RAD2DEG)).str() );
+ 	   t.SetIsEmptyTag(true);
+ 	   for(int i=0;i<indent;i++) os << "  " ;
+ 	   os<<t<<endl;
+    }
+	
+	os << endl;
+	
+	for(int j=0;j<mPowderPatternComponentRegistry.GetNb();j++)
+	{
+		mPowderPatternComponentRegistry.GetObj(j).XMLOutput(os,indent);
+		XMLCrystTag tagg("PowderPatternComponent",false,true);
+		{
+			stringstream ss;
+			ss<<mScaleFactor(j);
+			tagg.AddAttribute("Scale",ss.str());
+		}
+		tagg.AddAttribute("Name",mPowderPatternComponentRegistry.GetObj(j).GetName());
+		os<<endl;
+		for(int i=0;i<indent;i++) os << "  " ;
+		os<<tagg<<endl<<endl;
+	}
+	XMLCrystTag tag2("XIobsSigmaWeightList");
+		for(int i=0;i<indent;i++) os << "  " ;
+		os<<tag2<<endl;
+
+		REAL scale=1.0;
+		if(this->GetRadiation().GetWavelengthType()!=WAVELENGTH_TOF)
+			scale=RAD2DEG;
+
+		for(unsigned long j=0;j<this->GetNbPoint();j++)
+		{
+			for(int i=0;i<=indent;i++) os << "  " ;
+			os << scale*mX(j) <<" "
+				<< mPowderPatternObs(j) <<" "
+				<< mPowderPatternObsSigma(j) <<" "
+				<< mPowderPatternWeight(j) <<" "
+				<<endl;
+		}
+		tag2.SetIsEndTag(true);
+		for(int i=0;i<indent;i++) os << "  " ;
+		os<<tag2<<endl;
+
+	for(int j=0;j<mExcludedRegionMinX.numElements();j++){
+		XMLCrystTag tag3("ExcludeX");
+		for(int i=0;i<indent;i++) os << "  " ;
+		if(this->GetRadiation().GetWavelengthType()==WAVELENGTH_TOF)
+		{
+			os << tag3
+				<< mExcludedRegionMinX(j) <<" "
+				<< mExcludedRegionMaxX(j) ;
+		}
+		else
+		{
+			os << tag3
+				<< mExcludedRegionMinX(j)*RAD2DEG <<" "
+				<< mExcludedRegionMaxX(j)*RAD2DEG ;
+		}
+		tag3.SetIsEndTag(true);
+		os<<tag3<<endl;
+	}
+
+
+	indent--;
+	tag.SetIsEndTag(true);
+	for(int i=0;i<indent;i++) os << "  " ;
+	os <<tag<<endl;
+	VFN_DEBUG_EXIT("MStruct::PowderPattern::XMLOutput():"<<this->GetName(),11)
+}
 
 void PowderPattern::XMLInput(istream &is,const XMLCrystTag &tagg)
 {
@@ -159,6 +555,17 @@ void PowderPattern::XMLInput(istream &is,const XMLCrystTag &tagg)
          is>>mMaxSinThetaOvLambda;
          XMLCrystTag junk(is);
       }
+	  if("Geometry"==tag.GetName())
+	  {
+		  for(unsigned int i=0;i<tag.GetNbAttribute();i++)
+		  {
+			  if("Omega"==tag.GetAttributeName(i))
+			  {
+				  REAL omega = atof(tag.GetAttributeValue(i).c_str()) * DEG2RAD;
+				  this->SetIncidenceAngle(omega);
+			  }
+		  }
+	  }
       if("Par"==tag.GetName())
       {
          for(unsigned int i=0;i<tag.GetNbAttribute();i++)
@@ -224,7 +631,7 @@ void PowderPattern::XMLInput(istream &is,const XMLCrystTag &tagg)
       }
       if("PowderPatternCrystal"==tag.GetName())
       {
-         PowderPatternDiffraction *comp=new PowderPatternDiffraction;
+         MStruct::PowderPatternDiffraction *comp=new MStruct::PowderPatternDiffraction;
          comp->SetParentPowderPattern(*this);
          comp->XMLInput(is,tag);
          continue;
@@ -380,6 +787,19 @@ void AbsorptionCorr::XMLOutput(ostream &os,int indent)const
     os << tag << endl;
     
     VFN_DEBUG_EXIT("MStruct::AbsorptionCorr::XMLOutput():"<<this->GetName(),11)
+}
+
+void AbsorptionCorr::XMLInput(istream &is,const XMLCrystTag &tagg)
+{
+	VFN_DEBUG_ENTRY("AbsorptionCorr::XMLInput():"<<this->GetName(),11)
+	for(unsigned int i=0;i<tagg.GetNbAttribute();i++)
+	{
+		//if("Name"==tagg.GetAttributeName(i)) this->SetName(tagg.GetAttributeValue(i));
+		if("Thickness"==tagg.GetAttributeName(i)) mThickness = atof(tagg.GetAttributeValue(i).c_str())*10.;
+		if("Depth"==tagg.GetAttributeName(i)) mDepth = atof(tagg.GetAttributeValue(i).c_str())*10.;
+		if("AbsorptionFactor"==tagg.GetAttributeName(i)) mAbsFactor = atof(tagg.GetAttributeValue(i).c_str())*1e-8;
+	}
+	VFN_DEBUG_EXIT("AbsorptionCorr::XMLInput():"<<this->GetName(),11)
 }
 
 ////////////////////////////////////////////////////////////////////////

@@ -34,6 +34,7 @@
 #include "config.h"
 #include "MStruct.h"
 #include "IO.h"
+#include "ObjCryst/IO.h"
 
 //#include <fstream>
 //#include <iomanip>
@@ -77,5 +78,7 @@ int main (int argc, char *argv[])
 	   
 	MStruct::XMLCrystFileLoadAllObject(argv[1]);
 	
+	ObjCryst::XMLCrystFileSaveGlobal("xray_out.xml");
+		
 	return 0;
 }

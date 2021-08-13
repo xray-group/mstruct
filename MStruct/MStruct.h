@@ -792,6 +792,7 @@ public:
 			 const bool enableRestraints=false);
 	void AddAdditionalLSQObj(ObjCryst::RefinableObj& obj);
 	void RemoveAdditionalLSQObj(ObjCryst::RefinableObj& obj);
+	void XMLOutput(ostream &os, int indent=0) const;
 	void XMLInput(istream &is,const ObjCryst::XMLCrystTag &tag);
 protected:
 	REAL mOmega;
@@ -895,6 +896,7 @@ public:
   void SetAbsorptionCorrParams(REAL thickness, REAL depth, REAL absfactor,
 			       REAL omega);
   void XMLOutput(ostream &os, int indent=0) const;
+  void XMLInput(istream &is,const ObjCryst::XMLCrystTag &tag);
 protected:
   virtual void CalcCorr() const;
 private:
@@ -1006,6 +1008,7 @@ public:
   /// Set parameters (min. relative intensity and multiplication width factor) affecting profile calculations
   void SetReflProfCalcParams(const REAL minRelIntensity=0.001, const REAL factor=2.);
   void XMLOutput(ostream &os, int indent=0) const;
+  void XMLInput(istream &is,const ObjCryst::XMLCrystTag &tag);
 protected:
   void CalcIntensityCorr () const;
 }; // class PowderPatternDiffraction
