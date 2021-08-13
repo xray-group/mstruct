@@ -233,7 +233,8 @@ public:
 	/// Set type of the argument of the 'InvX=1/X' function. (X or sin(Theta))
 	void SetXFunctionType(const int type = FUNCTION_OF_X);
 
-    virtual void XMLOutput(ostream &os, int indent=0)const;
+    void XMLOutput(ostream &os, int indent=0)const;
+	void XMLInput(istream &is,const ObjCryst::XMLCrystTag &tag);
 protected:
 	/// Calc the powder pattern.
 	virtual void CalcPowderPattern()const;
@@ -275,6 +276,7 @@ public:
   virtual const CrystVector_REAL& GetLSQDeriv(const unsigned int, ObjCryst::RefinablePar &);
     
   virtual void XMLOutput(ostream &os, int indent=0)const;
+  void XMLInput(istream &is,const ObjCryst::XMLCrystTag &tag);
 protected:
   /// Calc values of the Chebyshev polynomials. (Update mChebyshevPolynomials matrix.)
   void CalcChebyshevPolynomials()const;
@@ -790,6 +792,7 @@ public:
 			 const bool enableRestraints=false);
 	void AddAdditionalLSQObj(ObjCryst::RefinableObj& obj);
 	void RemoveAdditionalLSQObj(ObjCryst::RefinableObj& obj);
+	void XMLInput(istream &is,const ObjCryst::XMLCrystTag &tag);
 protected:
 	REAL mOmega;
   mutable CrystVector_REAL mLSQCalcNotExcluded;
@@ -891,6 +894,7 @@ public:
   virtual const string & GetClassName() const;
   void SetAbsorptionCorrParams(REAL thickness, REAL depth, REAL absfactor,
 			       REAL omega);
+  void XMLOutput(ostream &os, int indent=0) const;
 protected:
   virtual void CalcCorr() const;
 private:
@@ -1001,6 +1005,7 @@ public:
   void PrintHKLInfo2 (ostream &s, const REAL accur=-1.) const;
   /// Set parameters (min. relative intensity and multiplication width factor) affecting profile calculations
   void SetReflProfCalcParams(const REAL minRelIntensity=0.001, const REAL factor=2.);
+  void XMLOutput(ostream &os, int indent=0) const;
 protected:
   void CalcIntensityCorr () const;
 }; // class PowderPatternDiffraction

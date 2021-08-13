@@ -5070,6 +5070,7 @@ void PowderPatternDiffraction::PrintHKLInfo (ostream &s)
 
     s<<"\n";
   }
+  //this->PrintFhklCalc(s);
 }
 
 // TODO: many routines shoul be const
