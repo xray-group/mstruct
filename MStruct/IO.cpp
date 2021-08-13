@@ -308,15 +308,19 @@ void PowderPatternDiffraction::XMLInput(istream &is,const XMLCrystTag &tagg)
 		}
 		if("ReflectionProfile"==tag.GetName())
 		{
+			MStruct::ReflectionProfile * reflProf = NULL;
 			if(mpReflectionProfile==0)
 			{
-				mpReflectionProfile = new MStruct::ReflectionProfile(this->GetCrystal(),this->GetRadiation());
-				//this->SetProfile(new ReflectionProfile(this->GetCrystal(),this->GetRadiation()));
+				reflProf = new MStruct::ReflectionProfile(this->GetCrystal(),this->GetRadiation());
+				reflProf->SetParentPowderPatternDiffraction(*this);
+				mpReflectionProfile = reflProf;
 			}
 			else
 				if(mpReflectionProfile->GetClassName()!="MStruct::ReflectionProfile")
 				{
-					this->SetProfile(new ReflectionProfile(this->GetCrystal(),this->GetRadiation()));
+					reflProf = new MStruct::ReflectionProfile(this->GetCrystal(),this->GetRadiation());
+					reflProf->SetParentPowderPatternDiffraction(*this);
+					this->SetProfile(reflProf);
 				}
 			mpReflectionProfile->XMLInput(is,tag);
 			continue;
@@ -1316,28 +1320,12 @@ void ResidualStressPositionCorrection::XMLInput(istream &is,const XMLCrystTag &t
         if("XECsReussVoigt"==tag.GetName())
         {
            MStruct::XECsReussVoigt *XECsModel=new XECsReussVoigt();
-		   cout << "Constructor done" << endl;
       	   // set crystal for XECs Object
-		   MStruct::ReflectionProfile& reflProf = this->GetParentReflectionProfile();
-		   cout << "got reflProf" << endl;
-		   MStruct::PowderPatternDiffraction& diffData = reinterpret_cast<MStruct::PowderPatternDiffraction&>(reflProf.GetParentPowderPatternDiffraction());
-		   cout << "got diffraction" << endl;
-		   const ObjCryst::Crystal& crystal = diffData.GetCrystal();
-		   cout << "got crystal" << endl;
-      	   XECsModel->SetUnitCell(crystal);
-		   cout << "unit cell set" << endl;
+		   const MStruct::PowderPatternDiffraction& diffData = reinterpret_cast<MStruct::PowderPatternDiffraction&>
+			   								(this->GetParentReflectionProfile().GetParentPowderPatternDiffraction());
+      	   XECsModel->SetUnitCell(diffData.GetCrystal());
 		   // XML input
            XECsModel->XMLInput(is,tag);
-	 // get Cij matrix
-		const CrystMatrix_REAL & matrixCij = XECsModel->GetCijMatrix();
-
-		cout << "Stiffness tensor in the Voigt notation (GPa):" << endl;
-		for(int i=0; i<6; i++) {
-			cout << "\t";
-			for(int j=0; j<6; j++)
-				cout << setw(10) << matrixCij(i,j);
-			cout << endl;
-		}
 		   // set the XECs model
       	   this->SetXECsObj(*XECsModel);
            continue;
@@ -1436,6 +1424,7 @@ void ReflectionProfile::XMLInput(istream &is,const XMLCrystTag &tagg)
 			MStruct::ResidualStressPositionCorrection * t = new MStruct::ResidualStressPositionCorrection();
 			t->SetParentReflectionProfile(*this);
 			this->AddReflectionProfileComponent(*t);
+			cout << "ParentReflectionProfile_test: " << this->GetParentPowderPatternDiffraction().GetName() << endl;
 			t->XMLInput(is,tag);
 			continue;
 		}

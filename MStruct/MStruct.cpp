@@ -2925,6 +2925,12 @@ PowderPattern::PowderPattern()
   mOptProfileIntegration.SetChoice(1);
 }
 
+const string& PowderPattern::GetClassName()const
+{
+	static const string className = "MStruct::PowderPattern";
+	return className;
+}
+
 const CrystVector_REAL& PowderPattern::GetLSQCalc(const unsigned int n) const
 {
   const long nbExclude=mExcludedRegionMinX.numElements();

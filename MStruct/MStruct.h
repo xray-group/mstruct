@@ -780,6 +780,7 @@ class PowderPattern: public ObjCryst::PowderPattern {
 public:
   PowderPattern();
   PowderPattern(const PowderPattern &old):ObjCryst::PowderPattern(old) {};
+  const string& GetClassName()const;
   const CrystVector_REAL& GetLSQCalc(const unsigned int n) const;
   const CrystVector_REAL& GetLSQObs(const unsigned int n) const;
   const CrystVector_REAL& GetLSQWeight(const unsigned int n) const;

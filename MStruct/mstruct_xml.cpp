@@ -78,6 +78,16 @@ int main (int argc, char *argv[])
 	   
 	MStruct::XMLCrystFileLoadAllObject(argv[1]);
 	
+	// Get PowderPattern object
+	ObjCryst::RefinableObj &obj = ObjCryst::gRefinableObjRegistry.GetObj("pattern0","MStruct::PowderPattern");
+ 	MStruct::PowderPattern &data = dynamic_cast<MStruct::PowderPattern&>(obj);
+
+   	// Prepare data
+    data.Prepare();
+    //data.FitScaleFactorForRw();
+	
+	data.SavePowderPattern("pattern0_xml.dat");
+	
 	ObjCryst::XMLCrystFileSaveGlobal("xray_out.xml");
 		
 	return 0;
