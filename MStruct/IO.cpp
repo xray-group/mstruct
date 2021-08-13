@@ -9,6 +9,8 @@
  * Copyright (C) 2016-2018  Milan Dopita, Jan Endres, Charles University in Prague
  * Copyright (C) 2017-2018  Jiri Wollman, Charles University in Prague
  *
+ * Special credit to Vincent Favre Nicolin & ObjCryst++ for a part of I/O code.
+ *
  * This file is part of MStruct++.
  * 
  * MStruct++ is free software: you can redistribute it and/or modify
