@@ -1416,6 +1416,9 @@ void ReflectionProfile::XMLInput(istream &is,const XMLCrystTag &tagg)
 			MStruct::RefractionPositionCorr * t = new MStruct::RefractionPositionCorr();
 			t->SetParentReflectionProfile(*this);
 			this->AddReflectionProfileComponent(*t);
+ 		   	const MStruct::PowderPatternDiffraction& diffData = reinterpret_cast<MStruct::PowderPatternDiffraction&>
+ 			   								(this->GetParentPowderPatternDiffraction());
+			t->SetCrystal(diffData.GetCrystal(),true);
 			t->XMLInput(is,tag);
 			continue;
 		}
