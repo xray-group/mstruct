@@ -22,19 +22,20 @@ jobs:
       run: |
         source $CONDA/etc/profile.d/conda.sh
         conda activate mstruct
-        conda list
         P="$(conda info --json | grep default_prefix | cut -d\" -f4)"
-        echo "CONDA:" $CONDA
-        echo "P:" $P
         export CPPPATH=$P/include
         export LIBRARY_PATH=$P/lib
         export LD_LIBRARY_PATH=$P/lib
-        pwd
+        which gcc
+        echo $CC
         cd libmstruct
         scons -j4 mstruct
         scons -j4 install prefix=$P
-    - name: Test
-      run: mstruct
+    - name: Test MStruct
+      run: |
+        source $CONDA/etc/profile.d/conda.sh
+        conda activate mstruct
+        mstruct -v
     - name: Make distribution
       run: |
         mkdir -p dist
