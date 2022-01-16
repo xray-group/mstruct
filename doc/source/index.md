@@ -130,6 +130,8 @@ cd mstruct/libmstruct
 # set prefix path %P% where your Anaconda environment is installed
 # do not forget the name='mst' at the end
 set P=C:/..../Anaconda3/envs/mst
+# alternatively
+set P=conda info --json | grep default_prefix | cut -d '"' -f4
 # set environment variables
 set CPPPATH=%P%/Library/include;%P%/include
 set LIBRARY_PATH=%P%/libs;%P%/Library/lib
