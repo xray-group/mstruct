@@ -22,7 +22,7 @@ jobs:
       run: |
         source $CONDA/etc/profile.d/conda.sh
         conda activate mstruct
- 	conda list
+        conda list
         P="$(conda info --json | grep default_prefix | cut -d\" -f4)"
         echo "CONDA:" $CONDA
         echo "P:" $P
