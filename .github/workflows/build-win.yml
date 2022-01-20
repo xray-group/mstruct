@@ -57,7 +57,7 @@ jobs:
         mkdir -p dist
         cp $P/Library/bin/mstruct.exe dist
         cp $P/Library/bin/mstruct_xml.exe dist        
-	cp $P/Library/bin/fftw3.dll dist
+        cp $P/Library/bin/fftw3.dll dist
         cp $P/python36.dll dist
         cp $P/Library/bin/boost_python3.dll dist
         cp $P/Library/bin/boost_numpy3.dll dist
