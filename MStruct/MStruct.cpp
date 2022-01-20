@@ -5,8 +5,8 @@
  * 					   from powder diffraction data.
  * 
  * Copyright (C) 2009-2014  Zdenek Matej, Charles University in Prague
- * Copyright (C) 2014-2018  Zdenek Matej, MAX IV Laboratory, Lund University
- * Copyright (C) 2016-2018  Milan Dopita, Jan Endres, Charles University in Prague
+ * Copyright (C) 2014-2021  Zdenek Matej, MAX IV Laboratory, Lund University
+ * Copyright (C) 2016-2019  Milan Dopita, Jan Endres, Charles University in Prague
  * Copyright (C) 2017-2018  Jiri Wollman, Charles University in Prague
  *
  * This file is part of MStruct++.
@@ -654,15 +654,35 @@ void PowderPatternBackgroundBase::Prepare()
 ////////////////////////////////////////////////////////////////////////
 
 PowderPatternBackgroundInvX::PowderPatternBackgroundInvX()
-:mXFunctionType(FUNCTION_OF_X)
+{
+    this->InitOptions();
+	mIsScalable = true;
+    mXFunctionType.SetChoice(FUNCTION_OF_X);
+}
+
+PowderPatternBackgroundInvX::PowderPatternBackgroundInvX(const PowderPatternBackgroundInvX &old)
+:PowderPatternBackgroundBase(old),mXFunctionType(old.mXFunctionType)
 {
 	mIsScalable = true;
 }
 
-PowderPatternBackgroundInvX::PowderPatternBackgroundInvX(const PowderPatternBackgroundInvX &old)
-:PowderPatternBackgroundBase(old)
+void PowderPatternBackgroundInvX::InitOptions()
 {
-	mIsScalable = true;
+    static string XFunctionTypeName;
+    static string XFunctionTypeChoices[2];
+    
+    static bool needInitNames = true;
+    if(true==needInitNames)
+    {
+        XFunctionTypeName = "X-func.type";
+        XFunctionTypeChoices[FUNCTION_OF_X] = "X";
+        XFunctionTypeChoices[FUNCTION_OF_SIN_TH] = "sin(Th)";
+
+        needInitNames = false; //Only once for the class
+    }
+    
+    mXFunctionType.Init(2,&XFunctionTypeName,XFunctionTypeChoices);
+    this->AddOption(&mXFunctionType);
 }
 
 const string& PowderPatternBackgroundInvX::GetClassName()const
@@ -679,7 +699,7 @@ void PowderPatternBackgroundInvX::SetXFunctionType(const int type)
 		throw ObjCrystException("MStruct::PowderPatternBackgroundInvX::SetXFunctionType(int): Bad input argument.");
 	}
 	
-	mXFunctionType = type;
+    mXFunctionType.SetChoice(type);
 	mClockMaster.Click();
 }
 
@@ -699,7 +719,7 @@ void PowderPatternBackgroundInvX::CalcPowderPattern()const
 	REAL *p2 = mPowderPatternCalc.data();
 	
 	try {
-		if(mXFunctionType==FUNCTION_OF_X) {
+		if(mXFunctionType.GetChoice()==FUNCTION_OF_X) {
 			const REAL *p1 = mpParentPowderPattern->GetPowderPatternX().data();
 			if(!mUseVariableSlitIntensityCorr)
 				for(unsigned long i=0; i<nb; i++) { *p2 = 1./(*p1); p1++; p2++; }
@@ -707,7 +727,7 @@ void PowderPatternBackgroundInvX::CalcPowderPattern()const
 				const REAL *p3 = GetPowderPatternSinTheta().data();
 				for(unsigned long i=0; i<nb; i++) { *p2 = (abs(*p1)<1e-6) ? 0.5*(1.-pow(*p1,2)/6.) : (*p3)/(*p1); p1++; p2++; p3++; }
 			}
-		} else if(mXFunctionType==FUNCTION_OF_SIN_TH) {
+		} else if(mXFunctionType.GetChoice()==FUNCTION_OF_SIN_TH) {
 			if(!mUseVariableSlitIntensityCorr) {
 				const REAL *p3 = GetPowderPatternSinTheta().data();
 				for(unsigned long i=0; i<nb; i++) { *p2 = 1./(*p3); p2++; p3++; }
@@ -715,7 +735,7 @@ void PowderPatternBackgroundInvX::CalcPowderPattern()const
 				for(unsigned long i=0; i<nb; i++) { *p2 = 1.; p2++; }
 		} else {
 			cerr << "< MStruct::PowderPatternBackgroundInvX::CalcPowderPattern()\n";
-			cerr << "Unexpected/unsupported x-function type: "<< mXFunctionType <<".\n >" << endl; 
+			cerr << "Unexpected/unsupported x-function type: "<< mXFunctionType.GetChoice() <<".\n >" << endl;
 			throw ObjCrystException("MStruct::PowderPatternBackgroundInvX::CalcPowderPattern(): Program error.");
 		}
 	}
@@ -750,15 +770,36 @@ void PowderPatternBackgroundInvX::CalcPowderPattern()const
 PowderPatternBackgroundChebyshev::PowderPatternBackgroundChebyshev()
 :mChebyshevCoef(0), mChebyshevPolynomials(0,0)
 {
-  mIsScalable = false;	
+  this->InitOptions();
+  mIsScalable = false;
+  mXFunctionType.SetChoice(FUNCTION_OF_X);
   Init();
 }
 
 PowderPatternBackgroundChebyshev::PowderPatternBackgroundChebyshev(const PowderPatternBackgroundChebyshev &old)
-:PowderPatternBackgroundBase(old),mChebyshevCoef(old.mChebyshevCoef),mChebyshevPolynomials(0,0)
+:PowderPatternBackgroundBase(old),mChebyshevCoef(old.mChebyshevCoef),mChebyshevPolynomials(0,0),mXFunctionType(old.mXFunctionType)
 {
   mIsScalable = false;
   Init();
+}
+
+void PowderPatternBackgroundChebyshev::InitOptions()
+{
+    static string XFunctionTypeName;
+    static string XFunctionTypeChoices[2];
+    
+    static bool needInitNames = true;
+    if(true==needInitNames)
+    {
+        XFunctionTypeName = "X-func.type";
+        XFunctionTypeChoices[FUNCTION_OF_X] = "X";
+        XFunctionTypeChoices[FUNCTION_OF_SIN_TH] = "sin(Th)";
+
+        needInitNames = false; //Only once for the class
+    }
+    
+    mXFunctionType.Init(2,&XFunctionTypeName,XFunctionTypeChoices);
+    this->AddOption(&mXFunctionType);
 }
 
 const string& PowderPatternBackgroundChebyshev::GetClassName()const
@@ -817,7 +858,7 @@ void PowderPatternBackgroundChebyshev::SetXFunctionType(const int type)
 		throw ObjCrystException("MStruct::PowderPatternBackgroundChebyshev::SetXFunctionType(int): Bad input argument.");
 	}
 	
-	mXFunctionType = type;
+	mXFunctionType.SetChoice(type);
 	mClockMaster.Click();
 	// Order of the Chebyshev polynomials changed - force Chebyshev polynomials values recalc
 	mClockChebyshevPolynomialsCalc.Reset();
@@ -920,7 +961,7 @@ void PowderPatternBackgroundChebyshev::CalcChebyshevPolynomials()const
   	if (M>1) {
   		// the first order (x)
   		{
-  			if(mXFunctionType==FUNCTION_OF_X) {
+  			if(mXFunctionType.GetChoice()==FUNCTION_OF_X) {
   				const REAL min = 0.; //mpParentPowderPattern->GetPowderPatternX().GetXMin()/2;
   				const REAL max = 2*M_PI; //mpParentPowderPattern->GetPowderPatternX().GetXMax()/2;
   				// TODO:: make usable also for TOF data
@@ -929,13 +970,13 @@ void PowderPatternBackgroundChebyshev::CalcChebyshevPolynomials()const
   				const REAL *p1 = mpParentPowderPattern->GetPowderPatternX().data();
  					REAL *p2 = mChebyshevPolynomials.data();
   				for(unsigned long i=0; i<nb; i++) { *p2 = ((*p1)-x0)/s; p1++; p2++; }
-  			}	else if(mXFunctionType==FUNCTION_OF_SIN_TH) {
+  			}	else if(mXFunctionType.GetChoice()==FUNCTION_OF_SIN_TH) {
   				const REAL *p1 = GetPowderPatternSinTheta().data();
  					REAL *p2 = mChebyshevPolynomials.data();
   				for(unsigned long i=0; i<nb; i++) { *p2 = (*p1); p1++; p2++; }
   			} else {
   				cerr << "< MStruct::PowderPatternBackgroundChebyshev::CalcChebyshevPolynomials()\n";
-					cerr << "Unexpected/unsupported x-function type: "<< mXFunctionType <<".\n >" << endl; 
+					cerr << "Unexpected/unsupported x-function type: "<< mXFunctionType.GetChoice() <<".\n >" << endl;
 					throw ObjCrystException("MStruct::PowderPatternBackgroundChebyshev::CalcChebyshevPolynomials(): Program error.");
   			}
   		}
@@ -2882,6 +2923,12 @@ PowderPattern::PowderPattern()
   mClockMaster.AddChild(mClockScaleFactor);
   // Set Integration Option - not Integrated
   mOptProfileIntegration.SetChoice(1);
+}
+
+const string& PowderPattern::GetClassName()const
+{
+	static const string className = "MStruct::PowderPattern";
+	return className;
 }
 
 const CrystVector_REAL& PowderPattern::GetLSQCalc(const unsigned int n) const
@@ -5029,6 +5076,7 @@ void PowderPatternDiffraction::PrintHKLInfo (ostream &s)
 
     s<<"\n";
   }
+  //this->PrintFhklCalc(s);
 }
 
 // TODO: many routines shoul be const
@@ -6677,7 +6725,7 @@ void SizeDistribPowderPatternDiffraction::Prepare ()
   if(this->GetProfile().GetClassName()==string("MStruct::ReflectionProfile")) {
     MStruct::ReflectionProfile & reflProf = dynamic_cast<MStruct::ReflectionProfile &>(this->GetProfile());
     vector<long> ind;
-    for(long i=0; i<reflProf.GeReflectionProfileComponentNb(); i++)
+    for(long i=0; i<reflProf.GetReflectionProfileComponentNb(); i++)
       if(reflProf.GetReflectionProfileComponent(i).GetClassName()==string("MStruct::SizeDistribBroadeningEffect"))
 	ind.push_back(i);
     if(ind.size()>0) {
@@ -10679,7 +10727,7 @@ void ReflectionProfile::AddReflectionProfileComponent(ReflectionProfileComponent
   VFN_DEBUG_EXIT("ReflectionProfile::AddReflectionProfileComponent():"<<comp.GetName(),11)
 }
 
-long ReflectionProfile::GeReflectionProfileComponentNb() const
+long ReflectionProfile::GetReflectionProfileComponentNb() const
 { return mReflectionProfileComponentRegistry.GetNb(); }
 const ReflectionProfileComponent &  ReflectionProfile::GetReflectionProfileComponent (long n) const
 { return mReflectionProfileComponentRegistry.GetObj(n); }
@@ -10729,7 +10777,7 @@ void ReflectionProfile::RegisterHKLDisabledComponents (long h,long k,long l,REAL
       const bool not_instr = effect.compare("all_not_instr")==0; // also 'not_instr'?
       const ReflectionProfileComponent *pInstrComp = (not_instr) ? &( GetReflectionProfileComponent("instrProfile") ) : NULL; // auxiliary pointer
       // for all components
-      for(int icomp=0; icomp<GeReflectionProfileComponentNb(); icomp++) {
+      for(int icomp=0; icomp<GetReflectionProfileComponentNb(); icomp++) {
 	const ReflectionProfileComponent *pComp = &( GetReflectionProfileComponent(icomp) );
 	// except registering component
 	if( (ObjCryst::RefinableObj*)pComp == pRegisteringObj ) continue;
@@ -11430,9 +11478,11 @@ REAL ReflectionPositionCorrBase::GetPositionCorr(const REAL xcenter,
 ////////////////////////////////////////////////////////////////////////
 
 RefractionPositionCorr::RefractionPositionCorr()
-:mDensity(1.),mpCrystal(NULL),mAbsDensity(0.),mChi0ValueChoice(CHI0_VALUE),mConsiderCrystalFixed(true),mChi0(0.,0.),
+:mDensity(1.),mpCrystal(NULL),mAbsDensity(0.),mConsiderCrystalFixed(true),mChi0(0.,0.),
 mInitializationFlag(0)
 {
+	InitOptions();
+	mChi0ValueChoice.SetChoice(CHI0_VALUE);
 	InitParameters();
 	mClockMaster.AddChild(mClockChi0);
 }
@@ -11443,9 +11493,29 @@ mChi0ValueChoice(old.mChi0ValueChoice),mConsiderCrystalFixed(true),mChi0(old.mCh
 mInitializationFlag(old.mInitializationFlag)
 {
 	InitParameters();
-	if ( old.mChi0ValueChoice==CHI0_CRYSTAL && old.mpCrystal!=NULL )
+	if ( old.mChi0ValueChoice.GetChoice()==CHI0_CRYSTAL && old.mpCrystal!=NULL )
 		SetCrystal(*old.mpCrystal,old.mConsiderCrystalFixed);
 	mClockMaster.AddChild(mClockChi0);
+}
+
+void RefractionPositionCorr::InitOptions()
+{
+    static string chi0ValueChoiceName;
+    static string chi0ValueChoiceChoices[3];
+    
+    static bool needInitNames = true;
+    if(true==needInitNames)
+    {
+        chi0ValueChoiceName = "chi0.source";
+        chi0ValueChoiceChoices[CHI0_VALUE] = "value";
+        chi0ValueChoiceChoices[CHI0_CRYSTAL] = "crystal";
+		chi0ValueChoiceChoices[CHI0_CHEM_FORMULA] = "chem.formula";
+
+        needInitNames = false; //Only once for the class
+    }
+    
+    mChi0ValueChoice.Init(3,&chi0ValueChoiceName,chi0ValueChoiceChoices);
+    this->AddOption(&mChi0ValueChoice);
 }
 
 /*RefractionPositionCorr::~RefractionPositionCorr()
@@ -11492,7 +11562,7 @@ void RefractionPositionCorr::SetCrystal(const ObjCryst::Crystal & crystal, const
 		mpCrystal = &crystal;
 		mClockChi0.Reset();
   	mConsiderCrystalFixed = fixed;
-  	mChi0ValueChoice = CHI0_CRYSTAL;
+  	mChi0ValueChoice.SetChoice(CHI0_CRYSTAL);
   	mInitializationFlag = 0;
 	}
 	catch (std::exception &e) {
@@ -11533,7 +11603,7 @@ void RefractionPositionCorr::SetChemicalFormula(const string & formula, const RE
 		mInitializationFlag = 0;
 		mChi0 = complex<REAL>(0.,0.);
 		
-		mChi0ValueChoice = CHI0_CHEM_FORMULA;
+		mChi0ValueChoice.SetChoice(CHI0_CHEM_FORMULA);
 		
 		mFormula.SetFormula(formula,cout);
 		
@@ -11602,7 +11672,7 @@ void RefractionPositionCorr::SetChi0(const complex<REAL> & chi0)
 	mConsiderCrystalFixed = true;
 	mInitializationFlag = 0;
 	
-	mChi0ValueChoice = CHI0_VALUE;
+	mChi0ValueChoice.SetChoice(CHI0_VALUE);
 	
 	mChi0 = chi0;
 	mClockChi0.Click();
@@ -11612,7 +11682,7 @@ const complex< REAL > & RefractionPositionCorr::GetChi0(const bool forceReCalc)c
 {
 	try {
 		
-		switch (mChi0ValueChoice) {
+		switch (mChi0ValueChoice.GetChoice()) {
 			
 			case CHI0_VALUE:
 				// chi0 value set directly - nothing to do
@@ -11801,7 +11871,7 @@ const complex< REAL > & RefractionPositionCorr::GetChi0(const bool forceReCalc)c
 					
 			default:
 				cerr << "< MStruct::RefractionPositionCorr::GetChi0(...)\n";
-				cerr << "  Can not recognise method how Chi0 value should be calculated. Choice: " << mChi0ValueChoice << "\n";
+				cerr << "  Can not recognise method how Chi0 value should be calculated. Choice: " << mChi0ValueChoice.GetChoice() << "\n";
 				cerr << ">" << endl;
 				throw ObjCrystException("MStruct::RefractionPositionCorr::GetChi0(...): Unexpected error.");
 				break;

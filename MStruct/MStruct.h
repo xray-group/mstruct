@@ -5,7 +5,9 @@
  * 					   from powder diffraction data.
  * 
  * Copyright (C) 2009-2014  Zdenek Matej, Charles University in Prague
- * Copyright (C) 2014-2015  Zdenek Matej, MAX IV Laboratory, Lund University
+ * Copyright (C) 2014-2021  Zdenek Matej, MAX IV Laboratory, Lund University
+ * Copyright (C) 2016-2019  Milan Dopita, Jan Endres, Charles University in Prague
+ * Copyright (C) 2017-2018  Jiri Wollman, Charles University in Prague
  * 
  * This file is part of MStruct++.
  * 
@@ -230,11 +232,16 @@ public:
 	static const int FUNCTION_OF_SIN_TH = 1;
 	/// Set type of the argument of the 'InvX=1/X' function. (X or sin(Theta))
 	void SetXFunctionType(const int type = FUNCTION_OF_X);
+
+    void XMLOutput(ostream &os, int indent=0)const;
+	void XMLInput(istream &is,const ObjCryst::XMLCrystTag &tag);
 protected:
 	/// Calc the powder pattern.
 	virtual void CalcPowderPattern()const;
 	/// Argument 'X' of the 'InvX=1/X' function. (X or sin(Theta))
-	int mXFunctionType;
+    ObjCryst::RefObjOpt mXFunctionType;
+private:
+    void InitOptions();
 };
 
 /** PowderPatternBackgroundChebyshev : class to represent a Chebyshev polynomial background.
@@ -267,6 +274,9 @@ public:
   void SetXFunctionType(const int type = FUNCTION_OF_X);
   /// Get the first derivative values for the LSQ function, for a given parameter.
   virtual const CrystVector_REAL& GetLSQDeriv(const unsigned int, ObjCryst::RefinablePar &);
+    
+  virtual void XMLOutput(ostream &os, int indent=0)const;
+  void XMLInput(istream &is,const ObjCryst::XMLCrystTag &tag);
 protected:
   /// Calc values of the Chebyshev polynomials. (Update mChebyshevPolynomials matrix.)
   void CalcChebyshevPolynomials()const;
@@ -282,7 +292,9 @@ protected:
   /// When were values of the used Chebyshev polynomials last computed ?
   mutable ObjCryst::RefinableObjClock mClockChebyshevPolynomialsCalc;
   /// Argument 'X' of the Chebyshev polynomial T_n(X) functions. (X or sin(Theta))
-  int mXFunctionType;
+  ObjCryst::RefObjOpt mXFunctionType;
+private:
+  void InitOptions();
 };
 
 /** LocalBackgroundChebyshev : class to represent a noncontinuous piecewice Chebyshev polynomial background.
@@ -768,6 +780,7 @@ class PowderPattern: public ObjCryst::PowderPattern {
 public:
   PowderPattern();
   PowderPattern(const PowderPattern &old):ObjCryst::PowderPattern(old) {};
+  const string& GetClassName()const;
   const CrystVector_REAL& GetLSQCalc(const unsigned int n) const;
   const CrystVector_REAL& GetLSQObs(const unsigned int n) const;
   const CrystVector_REAL& GetLSQWeight(const unsigned int n) const;
@@ -780,6 +793,8 @@ public:
 			 const bool enableRestraints=false);
 	void AddAdditionalLSQObj(ObjCryst::RefinableObj& obj);
 	void RemoveAdditionalLSQObj(ObjCryst::RefinableObj& obj);
+	void XMLOutput(ostream &os, int indent=0) const;
+	void XMLInput(istream &is,const ObjCryst::XMLCrystTag &tag);
 protected:
 	REAL mOmega;
   mutable CrystVector_REAL mLSQCalcNotExcluded;
@@ -881,6 +896,8 @@ public:
   virtual const string & GetClassName() const;
   void SetAbsorptionCorrParams(REAL thickness, REAL depth, REAL absfactor,
 			       REAL omega);
+  void XMLOutput(ostream &os, int indent=0) const;
+  void XMLInput(istream &is,const ObjCryst::XMLCrystTag &tag);
 protected:
   virtual void CalcCorr() const;
 private:
@@ -991,6 +1008,8 @@ public:
   void PrintHKLInfo2 (ostream &s, const REAL accur=-1.) const;
   /// Set parameters (min. relative intensity and multiplication width factor) affecting profile calculations
   void SetReflProfCalcParams(const REAL minRelIntensity=0.001, const REAL factor=2.);
+  void XMLOutput(ostream &os, int indent=0) const;
+  void XMLInput(istream &is,const ObjCryst::XMLCrystTag &tag);
 protected:
   void CalcIntensityCorr () const;
 }; // class PowderPatternDiffraction
@@ -1032,6 +1051,8 @@ public:
 		     const REAL h, const REAL k, const REAL l)const;
   bool IsRealSpaceType()const;
   void SetProfilePar(const REAL m, const REAL sigma);
+  void XMLOutput(ostream &os, int indent=0)const;
+  void XMLInput(istream &is,const ObjCryst::XMLCrystTag &tag);
 private:
   void InitParameters();
 }; // class SizeBroadeningEffect
@@ -1944,7 +1965,9 @@ public:
   void SetProfilePar (const REAL fwhmCagliotiW, const REAL fwhmCagliotiU=0,
 		      const REAL fwhmCagliotiV=0,
 		      const REAL eta0=0.5, const REAL eta1=0.);
-	void SetAsymXMax(const REAL asymXMax);
+  void SetAsymXMax(const REAL asymXMax);
+  void XMLOutput(ostream &os, int indent=0) const;
+  void XMLInput(istream &is,const ObjCryst::XMLCrystTag &tag);
 protected:
   MStruct::PowderPatternDiffraction* mpParentPowderPatternDiffraction;
 private:
@@ -2099,7 +2122,7 @@ public:
   virtual const string& GetClassName()const;
 
   void AddReflectionProfileComponent(ReflectionProfileComponent &);
-  long GeReflectionProfileComponentNb() const;
+  long GetReflectionProfileComponentNb() const;
   const ReflectionProfileComponent & GetReflectionProfileComponent (long ) const;
   ReflectionProfileComponent & GetReflectionProfileComponent (long );
   const ReflectionProfileComponent & GetReflectionProfileComponent (const string &objName) const;
@@ -2120,8 +2143,8 @@ public:
   virtual REAL GetFullProfileWidth (const REAL relativeIntensity, const REAL xcenter,
 				    const REAL h, const REAL k, const REAL l);
   REAL GetIntegralWidth (const REAL xcenter,const REAL h,const REAL k,const REAL l); 
-  void XMLOutput (ostream &os, int indent=0) const {};
-  void XMLInput (istream &is, const ObjCryst::XMLCrystTag &tag) {};
+  void XMLOutput (ostream &os, int indent=0) const;
+  void XMLInput(istream &is,const ObjCryst::XMLCrystTag &tag);
   void SetIncidenceAngle(const REAL omega);
   REAL GetIncidenceAngle(const REAL xcenter) const;
   virtual REAL GetPositionCorr (const REAL xcenter,
@@ -2384,6 +2407,10 @@ public:
 		/// When the chemical formula was set/changed for the last time?
 		ObjCryst::RefinableObjClock mClock;
 	}; // ChemicalFormula
+	/// XMLOutput
+	void XMLOutput(ostream &os, int indent=0) const;
+	/// XMLInput
+	void XMLInput(istream &is,const ObjCryst::XMLCrystTag &tag);
 protected:
 	/// Relative density of material
 	REAL mDensity;
@@ -2395,7 +2422,7 @@ protected:
 	ChemicalFormula mFormula;
 	/// Choice flag how chi0 value is specified (if a value is specified directly
 	/// or calculated from Crystal structure or chemical formula and absolute density)
-	int mChi0ValueChoice;
+	ObjCryst::RefObjOpt mChi0ValueChoice;
 	/// Flag if the Crystal (structure + unit cell) should be considered as nonchanging
 	bool mConsiderCrystalFixed;
 	/// Chi0 value (directly specified or computed from Crystal or chemical formula and absolute density)
@@ -2406,6 +2433,8 @@ protected:
 	mutable int mInitializationFlag;
 	/// Initialise object parameters (internal auxilliary function)
 	void InitParameters();
+private:
+	void InitOptions();
 }; // RefractionPositionCorr
 
 /** XECsObj : This calculates x-ray elastic constants (XECs).
@@ -2503,6 +2532,10 @@ public:
 	void SetXECsObj(XECsObj & );
 	/// Set value of the Stress parameter (GPa)
 	void SetParams(const REAL stress);
+	/// XMLOutput
+	void XMLOutput(ostream &os, int indent=0) const;
+	/// XMLInput
+	void XMLInput(istream &is,const ObjCryst::XMLCrystTag &tag);
 protected:
 	/// Stress value
 	REAL mStress;
@@ -2644,6 +2677,10 @@ public:
 	static const int LAUE_CUBIC             = 10; // cubic m-3, m-3m
 	/// Set model parameters (Reuss-Voigt model weigth)
 	void SetParams(const REAL weight);
+	/// XMLOutput
+	void XMLOutput(ostream &os, int indent=0) const;
+	/// XMLInput
+	void XMLInput(istream &is,const ObjCryst::XMLCrystTag &tag);
 protected:
 	/// Reuss/Voigt model weight (0..Reuss, 1..Voigt)
 	REAL mWeight;
