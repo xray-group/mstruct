@@ -42,20 +42,27 @@ jobs:
         cd libmstruct
         call scons -j4 install prefix=%P%/Library modulepath=%P%/Lib/site-packages
     - name: Test MStruct
+      shell: cmd
+      run: |
+        set CONDA=C:\Miniconda
+        call %CONDA%\condabin\conda_hook.bat
+        call conda activate mstruct-env
+        mstruct -v
+    - name: Make distribution
       shell: bash
       run: |
         source $CONDA/etc/profile.d/conda.sh
         conda activate mstruct
         P="$(conda info --json | grep default_prefix | cut -d\" -f4)"
-        export LD_LIBRARY_PATH=$P/lib
-        mstruct -v
-        ldd $(which mstruct)
-    - name: Make distribution
-      shell: bash
-      run: |
         mkdir -p dist
+        cp $P/Library/bin/mstruct.exe dist
+        cp $P/Library/bin/mstruct_xml.exe dist        
+	cp $P/Library/bin/fftw3.dll dist
+        cp $P/python36.dll dist
+        cp $P/Library/bin/boost_python3.dll dist
+        cp $P/Library/bin/boost_numpy3.dll dist
     - name: Archive distribution
       uses: actions/upload-artifact@v2
       with:
         name: dist
-        path: dist
+        path: dist-win
