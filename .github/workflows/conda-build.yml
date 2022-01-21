@@ -17,11 +17,11 @@ jobs:
     - name: Prepare conda environment
       run: |
         source $CONDA/etc/profile.d/conda.sh
-        conda create -n mstruct -y -c conda-forge python=3.9 libblas=*=*mkl boost=1.76 lapack fftw gsl scons bzip2 git gcc_linux-64 gxx_linux-64
+        conda create -n mstruct-env -y -c conda-forge python=3.9 libblas=*=*mkl boost=1.76 lapack fftw gsl scons bzip2 git gcc_linux-64 gxx_linux-64
     - name: Build MStruct
       run: |
         source $CONDA/etc/profile.d/conda.sh
-        conda activate mstruct
+        conda activate mstruct-env
         P="$(conda info --json | grep default_prefix | cut -d\" -f4)"
         export CPPPATH=$P/include
         export LIBRARY_PATH=$P/lib
@@ -35,16 +35,19 @@ jobs:
     - name: Test MStruct
       run: |
         source $CONDA/etc/profile.d/conda.sh
-        conda activate mstruct
+        conda activate mstruct-env
         P="$(conda info --json | grep default_prefix | cut -d\" -f4)"
         export LD_LIBRARY_PATH=$P/lib
         mstruct -v
-        ldd $(which mstruct)
     - name: Make distribution
       run: |
+        source $CONDA/etc/profile.d/conda.sh
+        conda activate mstruct-env
+        P="$(conda info --json | grep default_prefix | cut -d\" -f4)"
         mkdir -p dist
+        cp $P/bin/mstruct dist
     - name: Archive distribution
       uses: actions/upload-artifact@v2
       with:
-        name: dist
+        name: dist-linux
         path: dist
