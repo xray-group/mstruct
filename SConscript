@@ -241,7 +241,10 @@ if env['PLATFORM'] == 'win32':
 Alias('install-lib', libinstall + dllinstall)
 
 # install-bin
-bininstall = env.InstallAs(prefix+'/bin/mstruct', binmstruct) + env.InstallAs(prefix+'/bin/mstruct_xml', binxmlmstruct)
+if env['PLATFORM'] == 'win32':
+   bininstall = env.InstallAs(prefix+'/bin/mstruct.exe', binmstruct) + env.InstallAs(prefix+'/bin/mstruct_xml.exe', binxmlmstruct)
+else:
+   bininstall = env.InstallAs(prefix+'/bin/mstruct', binmstruct) + env.InstallAs(prefix+'/bin/mstruct_xml', binxmlmstruct)
 Alias('install-bin', bininstall)
 
 # install-python
