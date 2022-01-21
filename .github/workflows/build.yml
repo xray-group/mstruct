@@ -1,4 +1,4 @@
-name: Windows build and test with Conda
+name: Build and test with Conda
 
 on:
   push:
