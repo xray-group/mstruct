@@ -48,6 +48,7 @@ jobs:
         call %CONDA%\condabin\conda_hook.bat
         call conda activate mstruct-env
         call mstruct -v
+        call mstruct_xml -v
     - name: Make distribution
       shell: bash
       run: |
@@ -61,6 +62,7 @@ jobs:
         cp $P/python36.dll dist
         cp $P/Library/bin/boost_python3.dll dist
         cp $P/Library/bin/boost_numpy3.dll dist
+        cp $P/Library/bin/libMStruct.dll dist
     - name: Archive distribution
       uses: actions/upload-artifact@v2
       with:
