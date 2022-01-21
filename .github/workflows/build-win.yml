@@ -55,14 +55,14 @@ jobs:
         source $CONDA/etc/profile.d/conda.sh
         conda activate mstruct-env
         P="$(conda info --json | grep default_prefix | cut -d\" -f4)"
-        mkdir -p dist
-        cp $P/Library/bin/mstruct.exe dist
-        cp $P/Library/bin/mstruct_xml.exe dist        
-        cp $P/Library/bin/fftw3.dll dist
-        cp $P/python36.dll dist
-        cp $P/Library/bin/boost_python3.dll dist
-        cp $P/Library/bin/boost_numpy3.dll dist
-        cp $P/Library/bin/libMStruct.dll dist
+        mkdir -p dist/mstruct
+        cp $P/Library/bin/mstruct.exe dist/mstruct
+        cp $P/Library/bin/mstruct_xml.exe dist/mstruct       
+        cp $P/Library/bin/fftw3.dll dist/mstruct
+        cp $P/python36.dll dist/mstruct
+        cp $P/Library/bin/boost_python3.dll dist/mstruct
+        cp $P/Library/bin/boost_numpy3.dll dist/mstruct
+        cp $P/Library/bin/libMStruct.dll dist/mstruct
     - name: Archive distribution
       uses: actions/upload-artifact@v2
       with:
