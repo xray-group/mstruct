@@ -250,7 +250,7 @@ REAL Restraint::GetLogLikelihood()const{return 0.;}
 
 RefinablePar::RefinablePar():
 Restraint(),
-mName(""),mpValue(0),mMin(0),mMax(0),
+mName(""),mExtName(""),mpValue(0),mMin(0),mMax(0),
 mHasLimits(false),mIsFixed(true),mIsUsed(true),mIsPeriodic(false),
 mPeriod(0.),mHumanScale(1.),mHasAssignedClock(false),mpClock(0)
 #ifdef __WX__CRYST__
@@ -271,7 +271,7 @@ RefinablePar::RefinablePar(  const string &name,
                      const REAL humanScale,
                      REAL period):
 Restraint(type),
-mName(name),mpValue(refPar),mMin(min),mMax(max),
+mName(name),mExtName(""),mpValue(refPar),mMin(min),mMax(max),
 mHasLimits(hasLimits),mIsFixed(isFixed),mIsUsed(isUsed),mIsPeriodic(isPeriodic),mPeriod(period),
 mGlobalOptimStep((max-min)/100.),mDerivStep(1e-5),mRefParDerivStepModel(derivMode),
 mSigma(0.),mHumanScale(humanScale),
@@ -319,6 +319,7 @@ void RefinablePar::Init(const string &name,
    mRefParDerivStepModel=derivMode;
    mSigma=0.;
    mHumanScale=humanScale;
+   mExtName="";
    #if 0
    mUseEquation=false;
    mEquationNbRefPar=0;
@@ -342,6 +343,7 @@ Restraint(old)
 void RefinablePar::CopyAttributes(const RefinablePar&old)
 {
    mName=old.mName;
+   mExtName=old.mExtName;
    mMin=old.GetMin();
    mMax=old.GetMax();
    mHasLimits=old.mHasLimits;
@@ -570,6 +572,9 @@ void RefinablePar::Print() const
 
 string RefinablePar::GetName()const {return mName;}
 void RefinablePar::SetName(const string &name) {mName=name;}
+
+string RefinablePar::GetExtName()const {return mExtName;}
+void RefinablePar::SetExtName(const string &extname) {mExtName=extname;}
 
 bool RefinablePar::IsFixed()const {return mIsFixed;}
 void RefinablePar::SetIsFixed(const bool b)
