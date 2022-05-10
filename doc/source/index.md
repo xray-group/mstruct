@@ -105,7 +105,7 @@ choice if you do not have any or do not care
 
 ![Activating Anaconda environment](https://raw.githubusercontent.com/xray-group/mstruct/doc/doc/source/figs/installation-anaconda-open-env.png "Activating Anaconda environment")
 
-**Installing sw in Anaconda environment**:
+**Installing sw in Conda environment**:
 
 ![Installing sw with Anaconda](https://raw.githubusercontent.com/xray-group/mstruct/doc/doc/source/figs/installation-anaconda-conda-install.png "Installing sw with Anaconda")
 
@@ -130,6 +130,8 @@ cd mstruct/libmstruct
 # set prefix path %P% where your Anaconda environment is installed
 # do not forget the name='mst' at the end
 set P=C:/..../Anaconda3/envs/mst
+# alternatively
+set P=conda info --json | grep default_prefix | cut -d '"' -f4
 # set environment variables
 set CPPPATH=%P%/Library/include;%P%/include
 set LIBRARY_PATH=%P%/libs;%P%/Library/lib
@@ -148,7 +150,7 @@ mstruct
 job type (0-data refinement,1-grid refinement)
 ```
 
-##### MacOS with Anaconda
+##### MacOS with Conda
 
 ```bash
 # setup environment, e.g. name='mst'
@@ -195,7 +197,10 @@ mstruct
 job type (0-data refinement,1-grid refinement)
 ```
 
-##### Linux with Anaconda
+Note unfortunatelly you need to set the `LD_LIBRARY_PATH` every time you activate
+the environment.
+
+##### Linux with Conda
 
 ```bash
 # (optional block)
@@ -206,13 +211,11 @@ conda info --envs
 conda create -n mst
 # activating evironment name='mst'
 source activate mst
-# adding conda-forge installation channel
-conda config --add channels conda-forge
 
 # gls, fftw3, lapack, scons are required
-conda install boost=1.66=py27_1 lapack fftw gsl scons bzip2
+conda install -c conda-forge boost=1.72 lapack fftw gsl scons bzip2
 # note:
-# - check if e.g. python is not upgraded from python2.7 -> python3.6
+# - check if you like the python version and if it is consitent across the packages
 # - prefer builds that are close to your current environment
 
 # get source, git-clone or download and unpack the source
@@ -247,7 +250,12 @@ mstruct
 job type (0-data refinement,1-grid refinement)
 ```
 
-##### Anaconda tips and tricks
+```bash
+P="$(conda info --json | grep default_prefix | cut -d\" -f4)"
+export LD_LIBRARY_PATH=$P/lib
+```
+
+##### Conda tips and tricks
 
 tricks from Honza
 
