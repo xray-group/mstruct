@@ -197,7 +197,7 @@ mstruct
 job type (0-data refinement,1-grid refinement)
 ```
 
-Note unfortunatelly you need to set the `LD_LIBRARY_PATH` evry time you activate
+Note unfortunatelly you need to set the `LD_LIBRARY_PATH` every time you activate
 the environment.
 
 ##### Linux with Conda
