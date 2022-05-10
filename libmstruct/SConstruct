@@ -5,6 +5,7 @@ Usage: scons [target] [var=value]
 Targets:
 
 mstruct             build the mstruct binary [default]
+mstruct_xml.        build the mstruct_xml binary
 libmstruct          build the shared library object
 install             install everything under prefix directory
 install-lib         install the shared library object
@@ -22,6 +23,7 @@ SCons construction environment can be customized in sconscript.local script.
 import os
 import sys
 import platform
+from distutils.sysconfig import get_python_inc
 
 def subdictionary(d, keyset):
     return dict(kv for kv in d.items() if kv[0] in keyset)
@@ -118,7 +120,7 @@ if not os.path.isdir("./../newmat"):
 if env['PLATFORM'] == 'win32' and not os.path.isdir("./../win-prebuild"):
     os.system("bunzip2 -c -k ./../win-prebuild.tar.bz2 | tar -C ./.. -xv")
 
-env.Append( CPPPATH=['.','ObjCryst','MStruct','cctbx/include', '/usr/include/python%d.%d' % env['python_version']] )    
+env.Append( CPPPATH=['.','ObjCryst','MStruct','cctbx/include', get_python_inc()] )
 
 env.Append( CXXFLAGS=['-D__ZDENEK__'] )
 env.Append( CXXFLAGS=['-D__PYMSTRUCT_TEST__'] )

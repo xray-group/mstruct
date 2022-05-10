@@ -64,7 +64,7 @@ if env['build'] == 'debug':
     env.Append(CCFLAGS='-g')
 elif env['build'] == 'fast':
     env.AppendUnique(CCFLAGS=['-O3'] + fast_optimflags)
-    env.AppendUnique(CPPDEFINES={'NDEBUG' : None})
+    #env.AppendUnique(CPPDEFINES={'NDEBUG' : None})
     env.AppendUnique(LINKFLAGS=fast_linkflags)
 
 if env['profile']:
@@ -92,6 +92,7 @@ env['cctbxobjs'] = []
 env['objcrystobjs'] = []
 env['mstructobjs'] = []
 env['binmstructobjs'] = []
+env['binxmlmstructobjs'] = []
 env['lib_includes'] = []
 env['libmstruct_includes'] = []
 env['binmstruct_includes'] = []
@@ -115,6 +116,7 @@ cctbxobjs = env["cctbxobjs"]
 objcrystobjs = env["objcrystobjs"]
 mstructobjs = env["mstructobjs"]
 binmstructobjs = env["binmstructobjs"]
+binxmlmstructobjs = env["binxmlmstructobjs"]
 
 # This builds the shared library
 if env['PLATFORM'] != 'win32':
@@ -176,6 +178,10 @@ libms = Alias('libmstruct', [libmstruct,] + env['libmstruct_includes'])
 binmstruct = env.Program("mstruct_am", binmstructobjs, LIBS=MStructlibs, LIBPATH=MStructlibpaths)
 binms = Alias('mstruct', [binmstruct,] + env['binmstruct_includes'])
 
+# This builds mstruct_xml binary executable
+binxmlmstruct = env.Program("mstruct_xml", binxmlmstructobjs, LIBS=MStructlibs, LIBPATH=MStructlibpaths)
+binms_xml = Alias('mstruct_xml', [binxmlmstruct,] + env['binmstruct_includes'])
+
 # Installation targets.
 
 prefix = env['prefix']
@@ -235,7 +241,10 @@ if env['PLATFORM'] == 'win32':
 Alias('install-lib', libinstall + dllinstall)
 
 # install-bin
-bininstall = env.InstallAs(prefix+'/bin/mstruct', binmstruct)
+if env['PLATFORM'] == 'win32':
+   bininstall = env.InstallAs(prefix+'/bin/mstruct.exe', binmstruct) + env.InstallAs(prefix+'/bin/mstruct_xml.exe', binxmlmstruct)
+else:
+   bininstall = env.InstallAs(prefix+'/bin/mstruct', binmstruct) + env.InstallAs(prefix+'/bin/mstruct_xml', binxmlmstruct)
 Alias('install-bin', bininstall)
 
 # install-python

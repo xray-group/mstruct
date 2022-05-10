@@ -9,6 +9,7 @@
 char version()
 {
   std::cout << "Python version of libMStruct is: "<< python_version_str << "." << std::endl;
+  return '\0';
 }
 
 template<typename s,typename T>
