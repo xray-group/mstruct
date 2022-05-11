@@ -64,10 +64,15 @@ int main (int argc, char *argv[])
       ("output-data,O", po::value<string>(&output_dat), "output data file, [pattern0_xml.dat]")
       ("debug-level", po::value<int>(), "debug level")
       ;
+
+    po::positional_options_description p;
+    p.add("input", 1);
+    p.add("output", 1);
     
-    po::variables_map vm;        
-    po::store(po::parse_command_line(argc, argv, desc), vm);
-    po::notify(vm);    
+    po::variables_map vm;
+    po::store(po::command_line_parser(argc, argv).
+	      options(desc).positional(p).run(), vm);
+    po::notify(vm);
 
     if (vm.count("help")) {
       cout << desc << "\n";
@@ -126,6 +131,7 @@ int main (int argc, char *argv[])
 
   data.SavePowderPattern(output_dat.c_str());
 
+  cout << "Output file: " << output_file << "\n";
   ObjCryst::XMLCrystFileSaveGlobal(output_file.c_str());
 
   return 0;
