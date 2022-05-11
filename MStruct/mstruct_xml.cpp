@@ -5,7 +5,7 @@
  * 					   from powder diffraction data.
  * 
  * Copyright (C) 2009-2014  Zdenek Matej, Charles University in Prague
- * Copyright (C) 2014-2021  Zdenek Matej, MAX IV Laboratory, Lund University
+ * Copyright (C) 2014-2022  Zdenek Matej, MAX IV Laboratory, Lund University
  * Copyright (C) 2016-2019  Milan Dopita, Jan Endres, Charles University in Prague
  * Copyright (C) 2017-2018  Jiri Wollman, Charles University in Prague
  * 
@@ -51,7 +51,7 @@ int main (int argc, char *argv[])
 		cout << "version: " << mstruct_version_str << "\n";
 		cout << "mstruct Copyright\n";
 		cout << "(C) 2009-2018 Charles University in Prague\n";
-		cout << "(C) 2014-2021 Zdenek Matej, MAX IV Laboratory, Lund University\n";
+		cout << "(C) 2014-2022 Zdenek Matej, MAX IV Laboratory, Lund University\n";
 		cout << "e-mail: <zdenek.matej@maxiv.lu.se>\n";
 		cout << "web: <https://xray.cz/mstruct/>\n";
 		cout << "License GNU GPL: <https://gnu.org/licenses/gpl.html>.\n";
@@ -83,8 +83,8 @@ int main (int argc, char *argv[])
  	MStruct::PowderPattern &data = dynamic_cast<MStruct::PowderPattern&>(obj);
 
    	// Prepare data
-    data.Prepare();
-    //data.FitScaleFactorForRw();
+	data.Prepare();
+	//data.FitScaleFactorForRw();
 	
 	data.SavePowderPattern("pattern0_xml.dat");
 	
