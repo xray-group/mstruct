@@ -36,46 +36,85 @@
 #include "IO.h"
 #include "ObjCryst/IO.h"
 
+#include <boost/program_options.hpp>
+namespace po = boost::program_options;
+
 //#include <fstream>
 //#include <iomanip>
 //#include <cstring>
 
 using std::cout;
 using std::flush;
+using std::string;
 
 int main (int argc, char *argv[])
 {
-  if(argc>=2 && (string(argv[1])==string("-v") || string(argv[1])==string("--version"))) // print version
-  {
-    // print version and license information
-    cout << "version: " << mstruct_version_str << "\n";
-    cout << "mstruct Copyright\n";
-    cout << "(C) 2009-2018 Charles University in Prague\n";
-    cout << "(C) 2014-2022 Zdenek Matej, MAX IV Laboratory, Lund University\n";
-    cout << "e-mail: <zdenek.matej@maxiv.lu.se>\n";
-    cout << "web: <https://xray.cz/mstruct/>\n";
-    cout << "License GNU GPL: <https://gnu.org/licenses/gpl.html>.\n";
-    cout << "This program comes with ABSOLUTELY NO WARRANTY;\n";
-    cout << "This is free software, and you are welcome to redistribute it.\n";
-    cout << flush;
-    return 0;
-  }
+  string input_file;
+  string output_file("xray_out.xml");
+  string output_dat("pattern0_xml.dat");
+  
+  try {
+    
+    po::options_description desc("Allowed options");
+    desc.add_options()
+      ("help,h", "print help message")
+      ("version,v", "print version message")
+      ("input,i", po::value<string>(), "input file")
+      ("output,o", po::value<string>(&output_file), "output file, [xray_out.xml]")
+      ("output-data,O", po::value<string>(&output_dat), "output data file, [pattern0_xml.dat]")
+      ("debug-level", po::value<int>(), "debug level")
+      ;
+    
+    po::variables_map vm;        
+    po::store(po::parse_command_line(argc, argv, desc), vm);
+    po::notify(vm);    
 
-  if(argc<2) { // not enough arguments: print usage
-    cout << "Not enough arguments.\n";
-    cout << "Usage: mstruct_xml sample.xml\n";
-    cout << flush;
-    return 0;
-  }   
+    if (vm.count("help")) {
+      cout << desc << "\n";
+      cout << "Usage: mstruct_xml sample.xml\n";
+      return 0;
+    }
 
-  int level=12;
-  if(argc>=3) { // debug level hase been supplied
-    level=atoi(argv[2]);
+    if (vm.count("debug-level")) {
+      int level = vm["debug-level"].as<int>();
+      cout << "Setting debug level: " << level << "\n";
+      VFN_DEBUG_GLOBAL_LEVEL(level);
+    }
+
+    if (vm.count("version")) {
+      // print version and license information
+      cout << "version: " << mstruct_version_str << "\n";
+      cout << "mstruct Copyright\n";
+      cout << "(C) 2009-2018 Charles University in Prague\n";
+      cout << "(C) 2014-2022 Zdenek Matej, MAX IV Laboratory, Lund University\n";
+      cout << "e-mail: <zdenek.matej@maxiv.lu.se>\n";
+      cout << "web: <https://xray.cz/mstruct/>\n";
+      cout << "License GNU GPL: <https://gnu.org/licenses/gpl.html>.\n";
+      cout << "This program comes with ABSOLUTELY NO WARRANTY;\n";
+      cout << "This is free software, and you are welcome to redistribute it.\n";
+      cout << flush;
+      return 0;
+    }
+
+    if (vm.count("input")) {
+      input_file = vm["input"].as<string>();
+    } else {
+      cout << "Not enough arguments.\n";
+      cout << "Usage: mstruct_xml sample.xml\n";
+      cout << flush;                                                                                                                                                                                                                                                         
+      return 1;
+    }
+    
   }
-  cout << "Setting debug level: " << level << "\n";
-  VFN_DEBUG_GLOBAL_LEVEL(level);
+  catch(exception& e) {
+    cerr << "error: " << e.what() << "\n";
+    return 1;
+  }
+  catch(...) {
+    cerr << "Exception of unknown type!\n";
+  }
 	   
-  MStruct::XMLCrystFileLoadAllObject(argv[1]);
+  MStruct::XMLCrystFileLoadAllObject(input_file.c_str());
 
   // Get PowderPattern object
   ObjCryst::RefinableObj &obj = ObjCryst::gRefinableObjRegistry.GetObj("pattern0","MStruct::PowderPattern");
@@ -85,9 +124,9 @@ int main (int argc, char *argv[])
   data.Prepare();
   //data.FitScaleFactorForRw();
 
-  data.SavePowderPattern("pattern0_xml.dat");
+  data.SavePowderPattern(output_dat.c_str());
 
-  ObjCryst::XMLCrystFileSaveGlobal("xray_out.xml");
+  ObjCryst::XMLCrystFileSaveGlobal(output_file.c_str());
 
   return 0;
 }
