@@ -45,50 +45,49 @@ using std::flush;
 
 int main (int argc, char *argv[])
 {
-	if(argc>=2 && (string(argv[1])==string("-v") || string(argv[1])==string("--version"))) // print version
-	{
-		// print version and license information
-		cout << "version: " << mstruct_version_str << "\n";
-		cout << "mstruct Copyright\n";
-		cout << "(C) 2009-2018 Charles University in Prague\n";
-		cout << "(C) 2014-2022 Zdenek Matej, MAX IV Laboratory, Lund University\n";
-		cout << "e-mail: <zdenek.matej@maxiv.lu.se>\n";
-		cout << "web: <https://xray.cz/mstruct/>\n";
-		cout << "License GNU GPL: <https://gnu.org/licenses/gpl.html>.\n";
-		cout << "This program comes with ABSOLUTELY NO WARRANTY;\n";
-		cout << "This is free software, and you are welcome to redistribute it.\n";
-		cout << flush;
-		return 0;
-	}
-    
-	if(argc<2) { // not enough arguments: print usage
-		cout << "Not enough arguments.\n";
-		cout << "Usage: mstruct_xml sample.xml\n";
-		cout << flush;
-		return 0;
-	}   
+  if(argc>=2 && (string(argv[1])==string("-v") || string(argv[1])==string("--version"))) // print version
+  {
+    // print version and license information
+    cout << "version: " << mstruct_version_str << "\n";
+    cout << "mstruct Copyright\n";
+    cout << "(C) 2009-2018 Charles University in Prague\n";
+    cout << "(C) 2014-2022 Zdenek Matej, MAX IV Laboratory, Lund University\n";
+    cout << "e-mail: <zdenek.matej@maxiv.lu.se>\n";
+    cout << "web: <https://xray.cz/mstruct/>\n";
+    cout << "License GNU GPL: <https://gnu.org/licenses/gpl.html>.\n";
+    cout << "This program comes with ABSOLUTELY NO WARRANTY;\n";
+    cout << "This is free software, and you are welcome to redistribute it.\n";
+    cout << flush;
+    return 0;
+  }
 
-	int level =12;
-	if(argc>=3) // debug level hase been supplied
-	{
-		level=atoi(argv[2]);
-	}
-	cout << "Setting debug level: " << level << "\n";
-	VFN_DEBUG_GLOBAL_LEVEL(level);
+  if(argc<2) { // not enough arguments: print usage
+    cout << "Not enough arguments.\n";
+    cout << "Usage: mstruct_xml sample.xml\n";
+    cout << flush;
+    return 0;
+  }   
+
+  int level=12;
+  if(argc>=3) { // debug level hase been supplied
+    level=atoi(argv[2]);
+  }
+  cout << "Setting debug level: " << level << "\n";
+  VFN_DEBUG_GLOBAL_LEVEL(level);
 	   
-	MStruct::XMLCrystFileLoadAllObject(argv[1]);
-	
-	// Get PowderPattern object
-	ObjCryst::RefinableObj &obj = ObjCryst::gRefinableObjRegistry.GetObj("pattern0","MStruct::PowderPattern");
- 	MStruct::PowderPattern &data = dynamic_cast<MStruct::PowderPattern&>(obj);
+  MStruct::XMLCrystFileLoadAllObject(argv[1]);
 
-   	// Prepare data
-	data.Prepare();
-	//data.FitScaleFactorForRw();
-	
-	data.SavePowderPattern("pattern0_xml.dat");
-	
-	ObjCryst::XMLCrystFileSaveGlobal("xray_out.xml");
-		
-	return 0;
+  // Get PowderPattern object
+  ObjCryst::RefinableObj &obj = ObjCryst::gRefinableObjRegistry.GetObj("pattern0","MStruct::PowderPattern");
+  MStruct::PowderPattern &data = dynamic_cast<MStruct::PowderPattern&>(obj);
+
+  // Prepare data
+  data.Prepare();
+  //data.FitScaleFactorForRw();
+
+  data.SavePowderPattern("pattern0_xml.dat");
+
+  ObjCryst::XMLCrystFileSaveGlobal("xray_out.xml");
+
+  return 0;
 }
