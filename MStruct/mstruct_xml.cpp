@@ -60,8 +60,8 @@ int main (int argc, char *argv[])
       ("help,h", "print help message")
       ("version,v", "print version message")
       ("input,i", po::value<string>(), "input file")
-      ("output,o", po::value<string>(&output_file), "output file, [xray_out.xml]")
-      ("output-data,O", po::value<string>(&output_dat), "output data file, [pattern0_xml.dat]")
+      ("output,o", po::value<string>(&output_file), "output file (xray_out.xml)")
+      ("output-data,O", po::value<string>(&output_dat), "output data file (pattern0_xml.dat)")
       ("debug-level", po::value<int>(), "debug level")
       ;
 
@@ -75,8 +75,8 @@ int main (int argc, char *argv[])
     po::notify(vm);
 
     if (vm.count("help")) {
+      cout << "Usage: mstruct_xml input.xml\n";
       cout << desc << "\n";
-      cout << "Usage: mstruct_xml sample.xml\n";
       return 0;
     }
 
