@@ -5,15 +5,15 @@
  * 					   from powder diffraction data.
  * 
  * Copyright (C) 2009-2014  Zdenek Matej, Charles University in Prague
- * Copyright (C) 2014-2021  Zdenek Matej, MAX IV Laboratory, Lund University
+ * Copyright (C) 2014-2022  Zdenek Matej, MAX IV Laboratory, Lund University
  * Copyright (C) 2016-2019  Milan Dopita, Jan Endres, Charles University in Prague
  * Copyright (C) 2017-2018  Jiri Wollman, Charles University in Prague
- * x
+ * 
  * This file is part of MStruct++.
  * 
  * MStruct++ is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
+ * the Free Software Foundation, either version 2 of the License, or
  * (at your option) any later version.
  *
  * MStruct++ is distributed in the hope that it will be useful,
@@ -22,7 +22,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with MStruct++.  If not, see <http://www.gnu.org/licenses/>.
+ * along with MStruct++.  If not, see <https://www.gnu.org/licenses/>.
  * 
  */
  
@@ -123,10 +123,10 @@ int main (int argc, char *argv[])
       cout << "version: " << mstruct_version_str << "\n";
       cout << "mstruct Copyright\n";
       cout << "(C) 2009-2018 Charles University in Prague\n";
-      cout << "(C) 2014-2018 Zdenek Matej, MAX IV Laboratory, Lund University\n";
+      cout << "(C) 2014-2022 Zdenek Matej, MAX IV Laboratory, Lund University\n";
       cout << "e-mail: <zdenek.matej@maxiv.lu.se>\n";
-      cout << "web: <http://xray.cz/mstruct/>\n";
-      cout << "License GNU GPL: <http://gnu.org/licenses/gpl.html>.\n";
+      cout << "web: <https://xray.cz/mstruct/>\n";
+      cout << "License GNU GPL: <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>.\n";
       cout << "This program comes with ABSOLUTELY NO WARRANTY;\n";
       cout << "This is free software, and you are welcome to redistribute it.\n";
       cout << flush;

@@ -13,7 +13,7 @@
  * 
  * MStruct++ is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
+ * the Free Software Foundation, either version 2 of the License, or
  * (at your option) any later version.
  *
  * MStruct++ is distributed in the hope that it will be useful,
@@ -22,7 +22,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with MStruct++. If not, see <http://www.gnu.org/licenses/>.
+ * along with MStruct++. If not, see <https://www.gnu.org/licenses/>.
  * 
  */
  
@@ -100,7 +100,7 @@ int main (int argc, char *argv[])
       cout << "(C) 2014-2022 Zdenek Matej, MAX IV Laboratory, Lund University\n";
       cout << "e-mail: <zdenek.matej@maxiv.lu.se>\n";
       cout << "web: <https://xray.cz/mstruct/>\n";
-      cout << "License GNU GPL: <https://gnu.org/licenses/gpl.html>.\n";
+      cout << "License GNU GPL: <https://www.gnu.org/licenses/gpl-2.0.html>.\n";
       cout << "This program comes with ABSOLUTELY NO WARRANTY;\n";
       cout << "This is free software, and you are welcome to redistribute it.\n";
       cout << flush;
