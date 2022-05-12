@@ -84,7 +84,7 @@ if env['PLATFORM'] == 'win32':
 
 # link flags for MSVC
 if env['PLATFORM'] == 'win32':
-    env.AppendUnique(LINKFLAGS=['/NODEFAULTLIB:library'])
+    env.AppendUnique(LINKFLAGS=['/MD','/NODEFAULTLIB:library'])
 
 # Lists for storing built objects and header files
 env['newmatobjs'] = []
