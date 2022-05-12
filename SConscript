@@ -80,7 +80,7 @@ env.AppendUnique(CCFLAGS='-DREAL=double')
 
 # required for boost with MSVC
 if env['PLATFORM'] == 'win32':
-    env.AppendUnique(CPPFLAGS=['/EHsc','/MD','-DBOOST_DYN_LINK','-D_DLL'])
+    env.AppendUnique(CPPFLAGS=['/EHsc','/MD','-DBOOST_ALL_DYN_LINK','-D_DLL'])
 
 # link flags for MSVC
 if env['PLATFORM'] == 'win32':
