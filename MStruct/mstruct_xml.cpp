@@ -49,13 +49,15 @@ using std::cerr;
 using std::flush;
 using std::string;
 
+int pattern_refine_simple(int niter, MStruct::PowderPattern &data);
+
 int main (int argc, char *argv[])
 {
   string input_file;
   string output_file("xray_out.xml");
   string output_dat("pattern0_xml.dat");
-  int niter = -1;
-  bool fit_scale_factor = false;
+  int niter = 0;
+  bool fit_scale_factor = true;
   
   try {
     
@@ -68,7 +70,7 @@ int main (int argc, char *argv[])
       ("output-data,O", po::value<string>(&output_dat), "output data file (pattern0_xml.dat)")
       ("debug-level", po::value<int>(), "debug level")
       ("niteraction,n", po::value<int>(&niter), "number of refinement iteractions")
-      ("fit-scale-factor,n", po::value<bool>(&fit_scale_factor), "fit scale factor minimising Rw (before refinement)")
+      ("keep-scale-factor", "do not fit scale factor minimising Rw (before refinement)")
       ;
 
     po::positional_options_description p;
@@ -116,8 +118,8 @@ int main (int argc, char *argv[])
       return 1;
     }
 
-    if (vm.count("niterations") && (niter>0) && (vm.count("fit-scale-factor")==0)) {
-      fit_scale_factor = true; // switch default if refinement enabled
+    if (vm.count("keep-scale-factor")) {
+      fit_scale_factor = false;
     }
       
   }
@@ -137,13 +139,36 @@ int main (int argc, char *argv[])
 
   // Prepare data
   data.Prepare();
+  // Fit scale factoe
   if (fit_scale_factor)
     data.FitScaleFactorForRw();
-
+  // Run refinement
+  if(niter>0)
+    pattern_refine_simple(niter, data);
+  
   data.SavePowderPattern(output_dat.c_str());
 
   cout << "Output file: " << output_file << "\n";
   ObjCryst::XMLCrystFileSaveGlobal(output_file.c_str());
+
+  return 0;
+}
+
+int pattern_refine_simple(int niter, MStruct::PowderPattern &data)
+{
+  // Create the LSQ optimization object
+  MStruct::LSQNumObj lsqOptObj("lsqOptObj");
+  lsqOptObj.SetRefinedObj(data,0,true,true);
+  lsqOptObj.AddRefinableObj(data);
+
+  lsqOptObj.ObjCryst::LSQNumObj::PrepareRefParList(false);
+  ObjCryst::RefinableObj & lsqCompiledObj = lsqOptObj.GetCompiledRefinedObj();
+  lsqCompiledObj.PrepareForRefinement();
+   
+  bool useLevenbergMarquardt=true;
+  bool silent=false;
+   
+  lsqOptObj.Refine(-niter,useLevenbergMarquardt,silent,true,0.001);
 
   return 0;
 }
