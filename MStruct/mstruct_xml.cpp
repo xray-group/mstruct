@@ -40,10 +40,12 @@
 namespace po = boost::program_options;
 
 //#include <fstream>
-//#include <iomanip>
+#include <iostream>
+#include <iomanip>
 //#include <cstring>
 
 using std::cout;
+using std::cerr;
 using std::flush;
 using std::string;
 
@@ -52,6 +54,8 @@ int main (int argc, char *argv[])
   string input_file;
   string output_file("xray_out.xml");
   string output_dat("pattern0_xml.dat");
+  int niter = -1;
+  bool fit_scale_factor = false;
   
   try {
     
@@ -63,6 +67,8 @@ int main (int argc, char *argv[])
       ("output,o", po::value<string>(&output_file), "output file (xray_out.xml)")
       ("output-data,O", po::value<string>(&output_dat), "output data file (pattern0_xml.dat)")
       ("debug-level", po::value<int>(), "debug level")
+      ("niteraction,n", po::value<int>(&niter), "number of refinement iteractions")
+      ("fit-scale-factor,n", po::value<bool>(&fit_scale_factor), "fit scale factor minimising Rw (before refinement)")
       ;
 
     po::positional_options_description p;
@@ -109,9 +115,13 @@ int main (int argc, char *argv[])
       cout << flush;                                                                                                                                                                                                                                                         
       return 1;
     }
-    
+
+    if (vm.count("niterations") && (niter>0) && (vm.count("fit-scale-factor")==0)) {
+      fit_scale_factor = true; // switch default if refinement enabled
+    }
+      
   }
-  catch(exception& e) {
+  catch(std::exception& e) {
     cerr << "error: " << e.what() << "\n";
     return 1;
   }
@@ -127,7 +137,8 @@ int main (int argc, char *argv[])
 
   // Prepare data
   data.Prepare();
-  //data.FitScaleFactorForRw();
+  if (fit_scale_factor)
+    data.FitScaleFactorForRw();
 
   data.SavePowderPattern(output_dat.c_str());
 
