@@ -314,6 +314,7 @@ void PowderPatternDiffraction::XMLInput(istream &is,const XMLCrystTag &tagg)
 				reflProf = new MStruct::ReflectionProfile(this->GetCrystal(),this->GetRadiation());
 				reflProf->SetParentPowderPatternDiffraction(*this);
 				mpReflectionProfile = reflProf;
+				reflProf->SetIncidenceAngle(mOmega);
 			}
 			else
 				if(mpReflectionProfile->GetClassName()!="MStruct::ReflectionProfile")
@@ -321,6 +322,7 @@ void PowderPatternDiffraction::XMLInput(istream &is,const XMLCrystTag &tagg)
 					reflProf = new MStruct::ReflectionProfile(this->GetCrystal(),this->GetRadiation());
 					reflProf->SetParentPowderPatternDiffraction(*this);
 					this->SetProfile(reflProf);
+					reflProf->SetIncidenceAngle(mOmega);
 				}
 			mpReflectionProfile->XMLInput(is,tag);
 			continue;
@@ -495,16 +497,27 @@ void PowderPattern::XMLOutput(ostream &os,int indent)const
 	for(int j=0;j<mPowderPatternComponentRegistry.GetNb();j++)
 	{
 		mPowderPatternComponentRegistry.GetObj(j).XMLOutput(os,indent);
-		XMLCrystTag tagg("PowderPatternComponent",false,true);
-		{
-			stringstream ss;
-			ss<<mScaleFactor(j);
-			tagg.AddAttribute("Scale",ss.str());
+		os << endl;
+		if(mPowderPatternComponentRegistry.GetObj(j).IsScalable()) {
+			XMLCrystTag tag("PowderPatternComponent");
+			tag.AddAttribute("Name", mPowderPatternComponentRegistry.GetObj(j).GetName());
+			for(int i=0; i<indent; i++) os << "  ";
+			os << tag << endl;
+			indent++;
+			// --- refinable parameters ---
+			this->GetPar(&(mScaleFactor(j))).XMLOutput(os,"Scale",indent);
+			os << endl;
+			indent--;
+			tag.SetIsEndTag(true);
+			for(int i=0; i<indent; i++) os << "  ";
+			os << tag << endl;
+		} else {
+			XMLCrystTag tag("PowderPatternComponent",false,true);
+			tag.AddAttribute("Name",mPowderPatternComponentRegistry.GetObj(j).GetName());
+			for(int i=0; i<indent; i++) os << "  ";
+			os << tag << endl;
 		}
-		tagg.AddAttribute("Name",mPowderPatternComponentRegistry.GetObj(j).GetName());
-		os<<endl;
-		for(int i=0;i<indent;i++) os << "  " ;
-		os<<tagg<<endl<<endl;
+		os << endl;
 	}
 	XMLCrystTag tag2("XIobsSigmaWeightList");
 		for(int i=0;i<indent;i++) os << "  " ;
@@ -654,26 +667,43 @@ void PowderPattern::XMLInput(istream &is,const XMLCrystTag &tagg)
       {
          MStruct::PowderPatternDiffraction *comp=new MStruct::PowderPatternDiffraction;
          comp->SetParentPowderPattern(*this);
+				 comp->SetIncidenceAngle(mOmega);
          comp->XMLInput(is,tag);
          continue;
       }
       if("PowderPatternComponent"==tag.GetName())
       {
-         REAL scale=1.0;
          string name;
          for(unsigned int i=0;i<tag.GetNbAttribute();i++)
          {
-            if("Scale"==tag.GetAttributeName(i))
-            {
-               stringstream ss(tag.GetAttributeValue(i));
-               ss>>scale;
-               continue;
-            }
             if("Name"==tag.GetAttributeName(i)) name=tag.GetAttributeValue(i);
          }
          this->AddPowderPatternComponent(gPowderPatternComponentRegistry.GetObj(name));
-         mScaleFactor(mPowderPatternComponentRegistry.GetNb()-1)=scale;
-         VFN_DEBUG_MESSAGE("->Adding Component :"<<name<<"with scale="<<scale,8);
+         mScaleFactor(mPowderPatternComponentRegistry.GetNb()-1)=1.0;
+         if(!tag.IsEmptyTag())
+				    while(true)
+				 		{
+							XMLCrystTag tagg(is);
+							if(("PowderPatternComponent"==tagg.GetName()) && tagg.IsEndTag())
+								break;
+							if("Par"==tagg.GetName())
+							{
+								for(unsigned int i=0;i<tagg.GetNbAttribute();i++)
+								{
+									if("Name"==tagg.GetAttributeName(i))
+									{
+										if("Scale"==tagg.GetAttributeValue(i))
+										{
+											this->GetPar(&mScaleFactor(mPowderPatternComponentRegistry.GetNb()-1)).XMLInput(is,tagg);
+											break;
+										}
+									}
+								}
+								continue;
+							}
+						}
+				 cout << "->Adding Component :"<<name<<" with scale="<<mScaleFactor(mPowderPatternComponentRegistry.GetNb()-1)<<"\n";
+         VFN_DEBUG_MESSAGE("->Adding Component :"<<name<<" with scale="<<mScaleFactor(mPowderPatternComponentRegistry.GetNb()-1),8);
          continue;
       }
       if("ExcludeX"==tag.GetName())
@@ -797,17 +827,17 @@ void PowderPattern::XMLInput(istream &is,const XMLCrystTag &tagg)
 
 void AbsorptionCorr::XMLOutput(ostream &os,int indent)const
 {
-    VFN_DEBUG_ENTRY("MStruct::AbsorptionCorr::XMLOutput():"<<this->GetName(),11)
-    for(int i=0; i<indent; i++) os << "  ";
-    XMLCrystTag tag("AbsorptionCorr");
-    tag.AddAttribute("Name", this->GetName());
+	VFN_DEBUG_ENTRY("MStruct::AbsorptionCorr::XMLOutput():"<<this->GetName(),11)
+	for(int i=0; i<indent; i++) os << "  ";
+	XMLCrystTag tag("AbsorptionCorr");
+	tag.AddAttribute("Name", this->GetName());
 	tag.AddAttribute("Thickness", (boost::format("%f")%(mThickness/10.)).str());
 	tag.AddAttribute("Depth", (boost::format("%f")%(mDepth/10.)).str());
 	tag.AddAttribute("AbsorptionFactor", (boost::format("%f")%(mAbsFactor*1e8)).str());
 	tag.SetIsEmptyTag(true);
-    os << tag << endl;
-    
-    VFN_DEBUG_EXIT("MStruct::AbsorptionCorr::XMLOutput():"<<this->GetName(),11)
+	os << tag << endl;
+
+	VFN_DEBUG_EXIT("MStruct::AbsorptionCorr::XMLOutput():"<<this->GetName(),11)
 }
 
 void AbsorptionCorr::XMLInput(istream &is,const XMLCrystTag &tagg)
@@ -1431,7 +1461,7 @@ void ReflectionProfile::XMLInput(istream &is,const XMLCrystTag &tagg)
 			t->XMLInput(is,tag);
 			continue;
 		}
-	}
+	} 
 }
 
 ////////////////////////////////////////////////////////////////////////

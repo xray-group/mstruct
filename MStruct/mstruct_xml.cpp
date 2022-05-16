@@ -151,6 +151,19 @@ int main (int argc, char *argv[])
   cout << "Output file: " << output_file << "\n";
   ObjCryst::XMLCrystFileSaveGlobal(output_file.c_str());
 
+  for(int icomp=0; icomp<data.GetNbPowderPatternComponent(); icomp++) {
+    if(data.GetPowderPatternComponent(icomp).GetClassName()=="MStruct::PowderPatternDiffraction") {
+      //string name = data.GetPowderPatternComponent(icomp).GetName();
+      //cout << name << "\n";
+      //ObjCryst::RefinableObj & obj = ObjCryst::gRefinableObjRegistry.GetObj(name);
+      //MStruct::PowderPatternDiffraction & diffData = dynamic_cast<MStruct::PowderPatternDiffraction&>(obj);
+      MStruct::PowderPatternDiffraction & diffData = dynamic_cast<MStruct::PowderPatternDiffraction&>(data.GetPowderPatternComponent(icomp));
+      ofstream f("phase1_par.txt");
+      diffData.PrintHKLInfo(f);
+      break;
+    }
+  }
+
   return 0;
 }
 
@@ -169,6 +182,6 @@ int pattern_refine_simple(int niter, MStruct::PowderPattern &data)
   bool silent=false;
    
   lsqOptObj.Refine(-niter,useLevenbergMarquardt,silent,true,0.001);
-
+  
   return 0;
 }
