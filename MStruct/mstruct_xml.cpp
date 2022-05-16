@@ -57,7 +57,7 @@ int main (int argc, char *argv[])
   string output_file("xray_out.xml");
   string output_dat("pattern0_xml.dat");
   int niter = 0;
-  bool fit_scale_factor = true;
+  bool fit_scale_factors = false;
   
   try {
     
@@ -70,7 +70,7 @@ int main (int argc, char *argv[])
       ("output-data,O", po::value<string>(&output_dat), "output data file (pattern0_xml.dat)")
       ("debug-level", po::value<int>(), "debug level")
       ("niteraction,n", po::value<int>(&niter), "number of refinement iteractions")
-      ("keep-scale-factor", "do not fit scale factor minimising Rw (before refinement)")
+      ("fit-scale-factors", "optimize scale factors minimising Rw (before refinement)")
       ;
 
     po::positional_options_description p;
@@ -118,8 +118,8 @@ int main (int argc, char *argv[])
       return 1;
     }
 
-    if (vm.count("keep-scale-factor")) {
-      fit_scale_factor = false;
+    if (vm.count("fit-scale-factors")) {
+      fit_scale_factors = true;
     }
       
   }
@@ -140,7 +140,7 @@ int main (int argc, char *argv[])
   // Prepare data
   data.Prepare();
   // Fit scale factoe
-  if (fit_scale_factor)
+  if(fit_scale_factors)
     data.FitScaleFactorForRw();
   // Run refinement
   if(niter>0)
