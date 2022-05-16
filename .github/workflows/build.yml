@@ -62,6 +62,8 @@ jobs:
         cp $P/python36.dll dist/mstruct
         cp $P/Library/bin/boost_python3.dll dist/mstruct
         cp $P/Library/bin/boost_numpy3.dll dist/mstruct
+        cp $P/Library/bin/boost_program_options.dll dist/mstruct
+        cp $P/Library/bin/boost_date_time.dll dist/mstruct
         cp $P/Library/bin/libMStruct.dll dist/mstruct
     - name: Archive distribution
       uses: actions/upload-artifact@v2
