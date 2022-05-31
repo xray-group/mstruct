@@ -52,7 +52,7 @@ jobs:
     - name: Make distribution
       shell: cmd
       run: |
-	set CONDA=C:\Miniconda
+        set CONDA=C:\Miniconda
         call %CONDA%\condabin\conda_hook.bat
         call conda activate mstruct-env
         rem Get conda env prefix
