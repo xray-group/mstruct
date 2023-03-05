@@ -50,19 +50,29 @@ jobs:
         call mstruct -v
         call mstruct_xml -v
     - name: Make distribution
-      shell: bash
+      shell: cmd
       run: |
-        source $CONDA/etc/profile.d/conda.sh
-        conda activate mstruct-env
-        P="$(conda info --json | grep default_prefix | cut -d\" -f4)"
-        mkdir -p dist/mstruct
-        cp $P/Library/bin/mstruct.exe dist/mstruct
-        cp $P/Library/bin/mstruct_xml.exe dist/mstruct       
-        cp $P/Library/bin/fftw3.dll dist/mstruct
-        cp $P/python36.dll dist/mstruct
-        cp $P/Library/bin/boost_python3.dll dist/mstruct
-        cp $P/Library/bin/boost_numpy3.dll dist/mstruct
-        cp $P/Library/bin/libMStruct.dll dist/mstruct
+        set CONDA=C:\Miniconda
+        call %CONDA%\condabin\conda_hook.bat
+        call conda activate mstruct-env
+        rem Get conda env prefix
+        call conda info --json | grep default_prefix > _tmp_path1.txt
+        (for /f tokens^=3^,4^,*^ delims^=^" %%a in (_tmp_path1.txt) do echo %%b) > _tmp_path2.txt
+        for /f "usebackq tokens=*" %%i in (`cat _tmp_path2.txt`) do (
+          set P=%%i
+        )
+        set P=%P:\\=\%
+        echo conda_prefix: %P%
+        mkdir dist\mstruct
+        copy %P%\Library\bin\mstruct.exe dist\mstruct
+        copy %P%\Library\bin\mstruct_xml.exe dist\mstruct       
+        copy %P%\Library\bin\fftw3.dll dist\mstruct
+        copy %P%\python36.dll dist\mstruct
+        copy %P%\Library\bin\boost_python3.dll dist\mstruct
+        copy %P%\Library\bin\boost_numpy3.dll dist\mstruct
+        copy %P%\Library\bin\boost_program_options.dll dist\mstruct
+        copy %P%\Library\bin\boost_date_time.dll dist\mstruct
+        copy %P%\Library\bin\libMStruct.dll dist\mstruct
     - name: Archive distribution
       uses: actions/upload-artifact@v2
       with:

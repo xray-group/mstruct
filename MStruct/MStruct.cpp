@@ -4310,6 +4310,12 @@ const string & AbsorptionCorr::GetClassName() const
    return className;
 }
 
+void AbsorptionCorr::SetIncidenceAngle(REAL omega)
+{
+  mOmega = omega;
+  mClockCorrCalc.Reset();
+}
+
 void AbsorptionCorr::SetAbsorptionCorrParams(REAL thickness, REAL depth,
 					     REAL absfactor, REAL omega)
 {
@@ -4899,6 +4905,15 @@ void PowderPatternDiffraction::SetCrystal(ObjCryst::Crystal &crystal)
 {
   ObjCryst::PowderPatternDiffraction::SetCrystal(crystal);
   mCorrTexture.SetCrystal(crystal);
+}
+
+void PowderPatternDiffraction::SetIncidenceAngle(REAL omega)
+{
+  mOmega = omega;
+  mCorrAbsorption.SetIncidenceAngle(omega);
+  mCorrTexture.SetTextureCorrParams(omega);
+  mClockIntensityCorr.Reset();
+  mClockIhklCalc.Reset();
 }
 
 void PowderPatternDiffraction::SetAbsorptionCorrParams(REAL thickness,

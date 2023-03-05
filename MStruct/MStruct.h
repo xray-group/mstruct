@@ -894,6 +894,7 @@ public:
   virtual ~AbsorptionCorr();
   virtual const string & GetName() const;
   virtual const string & GetClassName() const;
+  void SetIncidenceAngle(REAL omega);
   void SetAbsorptionCorrParams(REAL thickness, REAL depth, REAL absfactor,
 			       REAL omega);
   void XMLOutput(ostream &os, int indent=0) const;
@@ -994,6 +995,7 @@ public:
   virtual PowderPatternDiffraction* CreateCopy()const;
   virtual const string& GetClassName()const;
   virtual void SetCrystal(ObjCryst::Crystal &crystal);
+  void SetIncidenceAngle(REAL omega);
   void SetAbsorptionCorrParams(REAL thickness, REAL depth, REAL absfactor,REAL omega);
   void SetTextureCorrParams(REAL omega);
   void AddTextureCorrPhase(REAL fraction,const CrystVector_REAL& params, bool bForceTextureSymmetry=false);

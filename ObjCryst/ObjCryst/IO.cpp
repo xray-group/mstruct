@@ -1583,8 +1583,7 @@ void PowderPatternBackground::XMLInput(istream &is,const XMLCrystTag &tagg)
          bckgd.resizeAndPreserve(nbPoint);
          if(this->GetParentPowderPattern().GetRadiation().GetWavelengthType()!=WAVELENGTH_TOF)
             bckgd2Theta*= DEG2RAD;
-         this->SetInterpPoints(bckgd2Theta,bckgd);
-         this->InitRefParList();
+         this->SetInterpPoints(bckgd2Theta,bckgd,fix);
          //read closing tag
          XMLCrystTag junkEndTag(is);
       }
