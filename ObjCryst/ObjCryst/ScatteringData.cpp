@@ -722,6 +722,13 @@ const CrystVector_REAL& ScatteringData::GetFhklCalcSq() const
    return mFhklCalcSq;
 }
 
+const CrystVector_int& ScatteringData::GetMultiplicity() const
+{
+   VFN_DEBUG_ENTRY("ScatteringData::GetMultiplicity()",2)
+   VFN_DEBUG_EXIT("ScatteringData::GetMultiplicity()",2)
+   return mMultiplicity;
+}
+
 std::map<RefinablePar*, CrystVector_REAL>& ScatteringData::GetFhklCalcSq_FullDeriv(std::set<RefinablePar *> &vPar)
 {
    TAU_PROFILE("ScatteringData::GetFhklCalcSq_FullDeriv()","void ()",TAU_DEFAULT);
