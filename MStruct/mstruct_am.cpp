@@ -740,6 +740,7 @@ int main (int argc, char *argv[])
      vHKLChoicePrint.push_back(0);
      read_line (ccin, imp_file); // read a line (ignoring all comments, etc.)
      ccin >> vHKLChoice[iphase];
+     vDiffData[iphase]->SetHKLIntensityCorrChoice(vHKLChoice[iphase]);
      if (vHKLChoice[iphase]>0) ccin >> vHKLChoicePrint[iphase];
      if(vHKLChoice[iphase]>0 && vHKLChoice[iphase]<3) {
        REAL level= (vHKLChoice[iphase]==2) ? 0.04 : -1.;

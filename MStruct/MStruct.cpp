@@ -4689,11 +4689,16 @@ void TextureCorr::InitParameters()
 // HKLIntensityCorr
 HKLIntensityCorr::HKLIntensityCorr(const ScatteringData & data):
 ScatteringCorr(data)
-{}
+{
+  InitOptions();
+  mConfigChoice.SetChoice(HKL_INTENSITY_CORRECTION_NONE);
+}
 
 HKLIntensityCorr::HKLIntensityCorr(const HKLIntensityCorr & old):
 ScatteringCorr(*old.mpData)
 {
+  InitOptions();
+  mConfigChoice.SetChoice(old.mConfigChoice.GetChoice());
   mReflStore.clear();
   for(int i=0;i<old.mReflStore.size();i++) {
     IntensityCorrData *pNewData = new IntensityCorrData;
@@ -4701,6 +4706,27 @@ ScatteringCorr(*old.mpData)
     *pNewData = *((IntensityCorrData*)d.data);
     mReflStore.add(d.H,d.K,d.L,d.x,(void*)pNewData);
   }
+}
+
+void HKLIntensityCorr::InitOptions()
+{
+  static string cfgChoiceName;
+  static string cfgChoiceChoices[4];
+
+  static bool needInitNames = true;
+  if(true==needInitNames)
+  {
+    cfgChoiceName = "ArbitraryTexture.choice";
+    cfgChoiceChoices[HKL_INTENSITY_CORRECTION_NONE] = "None";
+    cfgChoiceChoices[HKL_INTENSITY_CORRECTION_GENERATE] = "Generate";
+    cfgChoiceChoices[HKL_INTENSITY_CORRECTION_FREE_ALL] = "Free all";
+    cfgChoiceChoices[HKL_INTENSITY_CORRECTION_READ] = "Read";
+
+    needInitNames = false; //Only once for the class
+  }
+
+  mConfigChoice.Init(4,&cfgChoiceName,cfgChoiceChoices);
+  this->AddOption(&mConfigChoice);
 }
 
 HKLIntensityCorr::~HKLIntensityCorr()
@@ -4716,8 +4742,6 @@ HKLIntensityCorr::~HKLIntensityCorr()
 
 const string & HKLIntensityCorr::GetName() const
 {
-   //So far, we do not need a personalized name...
-   const static string mName="HKLIntensityCorr";
    return mName;
 }
 
@@ -4859,6 +4883,37 @@ const ReflStore& HKLIntensityCorr::GetReflStore()const
   return mReflStore;
 }
 
+void HKLIntensityCorr::SetChoice(const int choice)
+{
+  mConfigChoice.SetChoice(choice);
+  mClockCorrCalc.Reset();
+}
+
+int HKLIntensityCorr::GetChoice()const
+{
+  return mConfigChoice.GetChoice(); 
+}
+
+void HKLIntensityCorr::GenerateHKLIntensityCorrForAllReflections(const REAL relIntensity)
+{
+  CrystVector_REAL intensity = mpData->GetFhklCalcSq();
+  const CrystVector_int multiplicity = mpData->GetMultiplicity();
+  const CrystVector_REAL &H = mpData->GetH();
+  const CrystVector_REAL &K = mpData->GetK();
+  const CrystVector_REAL &L = mpData->GetL();
+  int nbRefl = mpData->GetNbRefl();
+  for(int i=0;i<nbRefl;i++)
+    intensity(i) *= multiplicity(i);
+  REAL averageIntensity = intensity.sum()/nbRefl;
+  if(nbRefl>0) {
+    //cout << "[BLBLAX]" << intensity.
+    for(int i=0;i<nbRefl;i++) {
+      bool fixed = relIntensity<0. || intensity(i)<relIntensity*averageIntensity;
+      SetHKLIntensityCorr((int)H(i),(int)K(i),(int)L(i),1.,fixed);
+    }
+  }
+}
+
 // PowderPatternDiffraction
 PowderPatternDiffraction::PowderPatternDiffraction()
 :mOmega(-1.),mCorrAbsorption(*this),mCorrTexture(*this),
@@ -4905,6 +4960,7 @@ void PowderPatternDiffraction::SetCrystal(ObjCryst::Crystal &crystal)
 {
   ObjCryst::PowderPatternDiffraction::SetCrystal(crystal);
   mCorrTexture.SetCrystal(crystal);
+  mCorrHKLIntensity.SetName("HKLIntensityCorr_" + crystal.GetName());
 }
 
 void PowderPatternDiffraction::SetIncidenceAngle(REAL omega)
@@ -4937,6 +4993,25 @@ void PowderPatternDiffraction::AddTextureCorrPhase(REAL fraction,
 					   const CrystVector_REAL& params, bool bForceTextureSymmetry)
 {
   mCorrTexture.AddPhase(fraction,params,bForceTextureSymmetry);
+}
+
+void PowderPatternDiffraction::SetHKLIntensityCorrChoice(int choice)
+{
+  mCorrHKLIntensity.SetChoice(choice);
+  mClockIntensityCorr.Reset();
+  mClockIhklCalc.Reset();
+}
+
+void PowderPatternDiffraction::ResetHKLIntensityCorr()
+{
+  mCorrHKLIntensity.Reset();
+  mClockIntensityCorr.Reset();
+  mClockIhklCalc.Reset();
+}
+
+int PowderPatternDiffraction::GetHKLIntensityCorrChoice() const
+{
+  return mCorrHKLIntensity.GetChoice();
 }
 
 void PowderPatternDiffraction::SetHKLIntensityCorrParams(int h, int k, int l,
@@ -11867,7 +11942,7 @@ void RefractionPositionCorr::InitOptions()
         chi0ValueChoiceName = "chi0.source";
         chi0ValueChoiceChoices[CHI0_VALUE] = "value";
         chi0ValueChoiceChoices[CHI0_CRYSTAL] = "crystal";
-		chi0ValueChoiceChoices[CHI0_CHEM_FORMULA] = "chem.formula";
+        chi0ValueChoiceChoices[CHI0_CHEM_FORMULA] = "chem.formula";
 
         needInitNames = false; //Only once for the class
     }

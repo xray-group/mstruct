@@ -407,6 +407,8 @@ class ScatteringData: virtual public RefinableObj
 
       ///  Returns the Array of calculated |F(hkl)|^2 for all reflections.
       const CrystVector_REAL& GetFhklCalcSq() const;
+      ///  Returns the Array of multiplicities for all reflections.
+      const CrystVector_int& GetMultiplicity() const;
       std::map<RefinablePar*, CrystVector_REAL> & GetFhklCalcSq_FullDeriv(std::set<RefinablePar *> &vPar);
       /// Access to real part of F(hkl)calc
       const CrystVector_REAL& GetFhklCalcReal() const;
