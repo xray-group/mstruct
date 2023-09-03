@@ -35,6 +35,7 @@
 #include "MStruct.h"
 #include "IO.h"
 #include "ObjCryst/IO.h"
+#include "ObjCryst/ObjCryst/CIF.h"
 
 #include <boost/program_options.hpp>
 namespace po = boost::program_options;
@@ -58,6 +59,7 @@ int main (int argc, char *argv[])
   string output_dat("pattern0_xml.dat");
   int niter = 0;
   bool fit_scale_factors = false;
+  bool cif_to_xml = false;
   
   try {
     
@@ -71,6 +73,7 @@ int main (int argc, char *argv[])
       ("debug-level", po::value<int>(), "debug level")
       ("niteraction,n", po::value<int>(&niter), "number of refinement iteractions")
       ("fit-scale-factors", "optimize scale factors minimising Rw (before refinement)")
+      ("cif-to-xml", "convert cif to xml (assuming cif-file as input)")
       ;
 
     po::positional_options_description p;
@@ -121,7 +124,10 @@ int main (int argc, char *argv[])
     if (vm.count("fit-scale-factors")) {
       fit_scale_factors = true;
     }
-      
+
+    if (vm.count("cif-to-xml")) {
+      cif_to_xml = true;
+    }
   }
   catch(std::exception& e) {
     cerr << "error: " << e.what() << "\n";
@@ -130,7 +136,19 @@ int main (int argc, char *argv[])
   catch(...) {
     cerr << "Exception of unknown type!\n";
   }
-	   
+
+  // special task: convert cif input, store xml output and exit
+  if(cif_to_xml) {
+    cout << "Importing CIF: " << input_file << "\n";
+    ifstream in(input_file.c_str());
+    bool verbose = true;
+    ObjCryst::CIF cif(in, true, verbose); // in, interpret, verbose
+    ObjCryst::Crystal* crystal = ObjCryst::CreateCrystalFromCIF(cif, verbose, true, true, false); // cif, verbose, checkSymAsXYZ, oneScatteringPowerPerElement, connectAtoms
+    cout << "Output file: " << output_file << "\n";
+    ObjCryst::XMLCrystFileSaveGlobal(output_file.c_str());
+    return 0;
+  }
+
   MStruct::XMLCrystFileLoadAllObject(input_file.c_str());
 
   // Get PowderPattern object
