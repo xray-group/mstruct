@@ -68,9 +68,10 @@ jobs:
         copy %P%\Library\bin\mstruct.exe dist\mstruct
         copy %P%\Library\bin\mstruct_xml.exe dist\mstruct       
         copy %P%\Library\bin\fftw3.dll dist\mstruct
-        copy %P%\python36.dll dist\mstruct
-        copy %P%\Library\bin\boost_python3.dll dist\mstruct
-        copy %P%\Library\bin\boost_numpy3.dll dist\mstruct
+        copy %P%\Library\bin\gsl-25.dll dist\mstruct
+        copy %P%\python39.dll dist\mstruct
+        copy %P%\Library\bin\boost_python39.dll dist\mstruct
+        copy %P%\Library\bin\boost_numpy39.dll dist\mstruct
         copy %P%\Library\bin\boost_program_options.dll dist\mstruct
         copy %P%\Library\bin\boost_date_time.dll dist\mstruct
         copy %P%\Library\bin\libMStruct.dll dist\mstruct
