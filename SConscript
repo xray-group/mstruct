@@ -167,7 +167,8 @@ env = conf.Finish()
 if env['PLATFORM'] != 'win32':
     MStructlibs = ['fftw3', 'gsl', 'lapack', 'ObjCryst']  + python_libs + boost_python_libs + ['boost_program_options',]
 else:
-    MStructlibs = ['fftw3', 'gsl', 'libObjCryst', 'clapack','libf2c','blas'] + python_libs + boost_python_libs + ['boost_program_options',]
+#    MStructlibs = ['fftw3', 'gsl', 'libObjCryst', 'clapack','libf2c','blas'] + python_libs + boost_python_libs + ['boost_program_options',]
+    MStructlibs = ['fftw3', 'gsl', 'libObjCryst', 'lapack'] + python_libs + boost_python_libs + ['boost_program_options',]
 MStructlibpaths = env['LIBPATH'] + ['/usr/lib', env.Dir('.')]
 libmstruct = env.SharedLibrary("libMStruct", mstructobjs, LIBS=MStructlibs, LIBPATH=MStructlibpaths)
 libms = Alias('libmstruct', [libmstruct,] + env['libmstruct_includes'])
