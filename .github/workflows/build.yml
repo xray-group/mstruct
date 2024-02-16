@@ -10,7 +10,7 @@ on:
 jobs:
   build-and-test-win:
 
-    runs-on: windows-2019
+    runs-on: windows-2022
 
     steps:
     - name: Checkout repository
@@ -22,7 +22,7 @@ jobs:
         rem Source conda hook
         set CONDA=C:\Miniconda
         call %CONDA%\condabin\conda_hook.bat
-        call conda create -n mstruct-env -y -c conda-forge python=3.6 libblas=*=*mkl boost=1.66 lapack fftw gsl scons bzip2 git vs2019_win-64 
+        call conda create -n mstruct-env -y -c conda-forge python=3.6 libblas=*=*mkl boost=1.66 lapack fftw gsl scons bzip2 git vs2022_win-64 
     - name: Build MStruct
       shell: cmd
       run: |
