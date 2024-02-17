@@ -76,7 +76,8 @@ jobs:
         copy %P%\Library\bin\boost_numpy311.dll dist\mstruct
         copy %P%\Library\bin\boost_program_options.dll dist\mstruct
         copy %P%\Library\bin\boost_date_time.dll dist\mstruct
-        copy %P%\Library\bin\libMStruct.dll dist\mstruct
+        copy %P%\Library\bin\mkl_intel_thread.2.dll dist\mstruct
+        copy %P%\Library\bin\libMStruct.dll dist\mstruct\libMStruct.pyd
     - name: Archive distribution
       uses: actions/upload-artifact@v4
       with:
