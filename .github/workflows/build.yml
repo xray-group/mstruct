@@ -125,6 +125,7 @@ jobs:
         cp $P/bin/mstruct dist/mstruct
         cp $P/bin/mstruct_xml dist/mstruct
         cp $P/lib/libMStruct.so dist/mstruct
+        cp $P/lib/libObjCryst.so dist/mstruct
     - name: Archive distribution
       uses: actions/upload-artifact@v4
       with:
