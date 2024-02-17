@@ -70,6 +70,7 @@ jobs:
         copy %P%\Library\bin\fftw3.dll dist\mstruct
         copy %P%\Library\bin\gsl-25.dll dist\mstruct
         copy %P%\Library\bin\libcblas.dll dist\mstruct
+        copy %P%\Library\bin\zlib.dll dist\mstruct
         copy %P%\python39.dll dist\mstruct
         copy %P%\Library\bin\boost_python39.dll dist\mstruct
         copy %P%\Library\bin\boost_numpy39.dll dist\mstruct
