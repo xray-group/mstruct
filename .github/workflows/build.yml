@@ -22,7 +22,7 @@ jobs:
         rem Source conda hook
         set CONDA=C:\Miniconda
         call %CONDA%\condabin\conda_hook.bat
-        call conda create -n mstruct-env -y -c conda-forge python=3.9 libblas=*=*mkl boost=1.76 lapack fftw gsl scons bzip2 git vs2022_win-64
+        call conda create -n mstruct-env -y -c conda-forge python=3.11 libblas=*=*mkl boost=1.78 lapack fftw gsl scons bzip2 git vs2022_win-64
     - name: Build MStruct
       shell: cmd
       run: |
@@ -71,9 +71,9 @@ jobs:
         copy %P%\Library\bin\gsl-25.dll dist\mstruct
         copy %P%\Library\bin\libcblas.dll dist\mstruct
         copy %P%\Library\bin\zlib.dll dist\mstruct
-        copy %P%\python39.dll dist\mstruct
-        copy %P%\Library\bin\boost_python39.dll dist\mstruct
-        copy %P%\Library\bin\boost_numpy39.dll dist\mstruct
+        copy %P%\python311.dll dist\mstruct
+        copy %P%\Library\bin\boost_python311.dll dist\mstruct
+        copy %P%\Library\bin\boost_numpy311.dll dist\mstruct
         copy %P%\Library\bin\boost_program_options.dll dist\mstruct
         copy %P%\Library\bin\boost_date_time.dll dist\mstruct
         copy %P%\Library\bin\libMStruct.dll dist\mstruct
