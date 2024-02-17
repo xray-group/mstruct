@@ -123,7 +123,7 @@ int main (int argc, char *argv[])
       cout << "version: " << mstruct_version_str << "\n";
       cout << "mstruct Copyright\n";
       cout << "(C) 2009-2018 Charles University in Prague\n";
-      cout << "(C) 2014-2022 Zdenek Matej, MAX IV Laboratory, Lund University\n";
+      cout << "(C) 2014-2024 Zdenek Matej, MAX IV Laboratory, Lund University\n";
       cout << "e-mail: <zdenek.matej@maxiv.lu.se>\n";
       cout << "web: <https://xray.cz/mstruct/>\n";
       cout << "License GNU GPL: <https://www.gnu.org/licenses/old-licenses/gpl-2.0.html>.\n";
