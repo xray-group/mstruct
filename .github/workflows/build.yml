@@ -94,7 +94,7 @@ jobs:
     - name: Prepare conda environment
       run: |
         source $CONDA/etc/profile.d/conda.sh
-        conda create -n mstruct-env -y -c conda-forge python=3.9 libblas=*=*mkl boost=1.76 lapack fftw gsl scons bzip2 git gcc_linux-64 gxx_linux-64
+        conda create -n mstruct-env -y -c conda-forge python=3.11 libblas=*=*mkl boost=1.78 lapack fftw gsl scons bzip2 git gcc_linux-64 gxx_linux-64
     - name: Build MStruct
       run: |
         source $CONDA/etc/profile.d/conda.sh
