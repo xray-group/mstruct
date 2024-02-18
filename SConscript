@@ -57,6 +57,7 @@ if icpc:
 else:
     # g++ options
     env.PrependUnique(CCFLAGS=['-Wall'])
+    env.PrependUnique(CXXFLAGS=['-std=c++11'])
     fast_optimflags = ['-ffast-math']
 
 # Configure build variants

@@ -2542,7 +2542,7 @@ const CrystMatrix_REAL & TurbostraticHexStructWB::i00lCalculator::CalcIq(const u
     
     float rmin = q * lattC/2.;
     float rmax = sqrt( La*La + rmin*rmin );
-    struct WBIntegParams params = { rmin, La };
+    struct WBIntegParams params = { (float)rmin, (float)La };
 
     float *sinint = (not_float) ? sinintbuf : reinterpret_cast<float*>(miq.data()+(q-1)*nQ); // reinterpret_cast has never any effect
 
