@@ -38,7 +38,7 @@ env['libmstruct_includes'] += [File("./MStruct/MStruct.h"),File("./MStruct/IO.h"
 #        if not f.name in excluded_quirks]
 
 # mstruct binary
-_srcfiles = srcfiles + [File("./MStruct/mstruct_am.cpp"),File("./MStruct/mstruct_test1.cpp")]
+_srcfiles = [File("./MStruct/mstruct_am.cpp"),File("./MStruct/mstruct_test1.cpp"),File("./MStruct/MStruct.cpp"),File("./MStruct/IO.cpp")]
 
 # Make objects
 objects = mstructenv.Object(_srcfiles)
@@ -53,7 +53,7 @@ env["binmstructobjs"] = objects
 env['binmstruct_includes'] = env['libmstruct_includes'] + [File("./MStruct/MStruct.h"),File("./MStruct/mstruct_tests.h")]
 
 # mstruct_xml binary
-_srcfiles = srcfiles + [File("./MStruct/mstruct_xml.cpp")]
+_srcfiles = [File("./MStruct/mstruct_xml.cpp"),File("./MStruct/MStruct.cpp"),File("./MStruct/IO.cpp")]
 
 # Make objects
 objects = mstructenv.Object(_srcfiles)
