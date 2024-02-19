@@ -6,10 +6,9 @@
 //Includes for Python API
 #include <ObjCryst/ObjCryst/IO.h>
 
-char version()
+string version()
 {
-  std::cout << "Python version of libMStruct is: "<< python_version_str << "." << std::endl;
-  return '\0';
+  return mstruct_version_str + string("-python") + python_version_str;
 }
 
 template<typename s,typename T>
@@ -151,6 +150,7 @@ void test_numpy(const boost::python::numpy::ndarray& test_array)
 BOOST_PYTHON_MODULE(libMStruct)
 {
   using namespace boost::python;
+  Py_Initialize();
   numpy::initialize();
   def("version", version);
   def("test_numpy", test_numpy);
