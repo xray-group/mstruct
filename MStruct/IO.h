@@ -42,7 +42,7 @@ namespace MStruct {
 *
 * \param file: the filename from which the objects will be loaded.
 */
-void XMLCrystFileLoadAllObject(const string & file);
+void XMLCrystFileLoadAllObject(const std::string & file);
 /** \brief Load all 'top' objects from a file (Crystal, PowderPattern, DiffDataSingleCrystal
 *  and GlobalOptimObj objects). All objects are directly allocated, and can be accessed through
 * their respective global registry (eg gCrystalRegistry fro a Crysta, etc...)
