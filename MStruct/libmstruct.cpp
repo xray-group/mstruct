@@ -147,11 +147,6 @@ MStruct::ReflectionProfile * _Create_ReflectionProfile(ObjCryst::Crystal* crysta
 }
 */
 
-void _XMLCrystFileLoadAllObject(const std::string& file_name)
-{
-  MStruct::XMLCrystFileLoadAllObject(file_name);
-}
-
 MStruct::PowderPattern& _gRefinableObjRegistry_GetPowderpattern(const std::string& name)
 {
   // Get PowderPattern object
@@ -242,7 +237,6 @@ BOOST_PYTHON_MODULE(libMStruct)
   def("version", version);
   def("test_numpy", test_numpy);
   def("CreateCrystalFromXML", &_XMLLoadCrystal, return_value_policy<manage_new_object>());
-  //def("XMLCrystFileLoadAllObject", _XMLCrystFileLoadAllObject);
   def("XMLCrystFileLoadAllObject", (void (*)(const std::string&)) &MStruct::XMLCrystFileLoadAllObject, (bp::arg("name")));
   def("XMLCrystFileSaveGlobal", (void (*)(const std::string&)) &ObjCryst::XMLCrystFileSaveGlobal, (bp::arg("name")));
   def("GetPowderPattern", _gRefinableObjRegistry_GetPowderpattern, return_value_policy<reference_existing_object>());
