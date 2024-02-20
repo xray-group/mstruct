@@ -1,10 +1,13 @@
-#include "MStruct.h"
 #include "config.h"
 #ifdef __PYMSTRUCT_TEST__
 #include <boost/python.hpp>
 #include <boost/python/numpy.hpp>
 //Includes for Python API
 #include <ObjCryst/ObjCryst/IO.h>
+#include "MStruct.h"
+#include "IO.h"
+
+namespace bp = boost::python;
 
 string version()
 {
@@ -95,6 +98,11 @@ boost::python::numpy::ndarray _GetPowderPatternX(MStruct::PowderPattern& self)
   return CrystVector_REAL_to_NumpyArray(self.GetPowderPatternX());
 }
 
+boost::python::numpy::ndarray _GetPowderPatternObs(MStruct::PowderPattern& self)
+{
+  return CrystVector_REAL_to_NumpyArray(self.GetPowderPatternObs());
+}
+
 ObjCryst::Crystal * _Create_Crystal()
 {
     return new ObjCryst::Crystal;
@@ -139,6 +147,85 @@ MStruct::ReflectionProfile * _Create_ReflectionProfile(ObjCryst::Crystal* crysta
 }
 */
 
+void _XMLCrystFileLoadAllObject(const std::string& file_name)
+{
+  MStruct::XMLCrystFileLoadAllObject(file_name);
+}
+
+MStruct::PowderPattern& _gRefinableObjRegistry_GetPowderpattern(const std::string& name)
+{
+  // Get PowderPattern object
+  ObjCryst::RefinableObj &obj = ObjCryst::gRefinableObjRegistry.GetObj(name, "MStruct::PowderPattern");
+  MStruct::PowderPattern &data = dynamic_cast<MStruct::PowderPattern&>(obj);
+  return data;
+}
+
+// credit: @vincefn, https://github.com/diffpy/pyobjcryst/blob/main/src/extensions/lsq_ext.cpp
+
+/*bool _LSQ_SafeRefine(MStruct::LSQNumObj & lsq, REAL maxChi2factor, int nbCycle, bool useLevenbergMarquardt,
+                 const bool silent, const bool callBeginEndOptimization,const float minChi2var)
+{
+    //CaptureStdOut gag;
+    //if(!silent) gag.release();
+
+    std::list<ObjCryst::RefinablePar*> vnewpar;
+    std::list<const ObjCryst::RefParType*> vnewpartype;
+    return lsq.SafeRefine(vnewpar, vnewpartype, nbCycle, useLevenbergMarquardt, silent,
+                          callBeginEndOptimization, minChi2var);
+}*/
+
+ObjCryst::RefinablePar& _RefinableObj_GetParString(ObjCryst::RefinableObj& obj, const string& s)
+{
+    obj.SetDeleteRefParInDestructor(0);
+    return obj.GetPar(s);
+}
+
+// extended get parameter function: the 'extended_name' must be a composed
+// extended name. i.e. containi a deliminator ':' as e.g. Anatase:a.
+// Functions tries to find the specified parameter in the specified
+// object in the global refinable object registry and return a reference to it.
+// (e.g. for 'Anatase:a' function scours the refinable object called 'Anatase'
+// for a parameter called 'a') 
+ObjCryst::RefinablePar& _GetParExtString(const string &extended_name)
+{
+		// separete object and parameter name
+		string::size_type loc = extended_name.find( ':', 0 );
+   	if( loc == string::npos ) {
+    	// this is not a composed extended name - simple case
+       throw std::invalid_argument("this is not a composed extended name");
+   	} else {
+   		// a composed extended name 
+   	
+   		// split the name
+   		string par_name;
+   		vector<string> obj_names;
+   		
+   		obj_names.push_back( extended_name.substr(0,loc) );
+   		
+   		string::size_type loc1 = extended_name.find( ':', loc+1 );
+   		
+   		while( loc1 != string::npos ) {
+   			
+   			obj_names.push_back( extended_name.substr(loc+1,loc1-loc-1) );
+   			loc = loc1;
+   			loc1 = extended_name.find( ':', loc+1 );
+   			
+   		}
+   		
+   		par_name.assign( extended_name, loc+1, extended_name.length() - loc -1);
+   		
+   		// get the first (topmost) object 'obj_name' from a global refinable object registry by its name
+   		ObjCryst::RefinableObj * obj = & ObjCryst::gRefinableObjRegistry.GetObj(obj_names[0]);
+   		// and continue getting objects recursively from its SubObjRegistry
+   		for(unsigned int i=1; i<obj_names.size(); i++) obj = & obj->GetSubObjRegistry().GetObj(obj_names[i]);
+   		
+   		// get the parameter 'name' from the found object by its name
+   		ObjCryst::RefinablePar &par = obj->GetPar(par_name);
+   		
+		return par;
+   	}
+}
+
 void test_numpy(const boost::python::numpy::ndarray& test_array)
 {
   std::cout << "In test_numpy" << endl;;
@@ -155,9 +242,40 @@ BOOST_PYTHON_MODULE(libMStruct)
   def("version", version);
   def("test_numpy", test_numpy);
   def("CreateCrystalFromXML", &_XMLLoadCrystal, return_value_policy<manage_new_object>());
+  def("XMLCrystFileLoadAllObject", _XMLCrystFileLoadAllObject);
+  def("XMLCrystFileSaveGlobal", (void (*)(const std::string&)) &ObjCryst::XMLCrystFileSaveGlobal, (bp::arg("name")));
+  def("GetPowderPattern", _gRefinableObjRegistry_GetPowderpattern, return_value_policy<reference_existing_object>());
+  def("GetPar", _GetParExtString, return_value_policy<reference_existing_object>());
   //def("Create_ReflectionProfile", &_Create_ReflectionProfile);
 
-  class_<MStruct::PowderPattern>("PowderPattern")
+  class_<ObjCryst::Restraint, boost::noncopyable>("Restraint");
+
+  class_<ObjCryst::RefinableObjClock>("RefinableObjClock")
+    .def("Reset", &ObjCryst::RefinableObjClock::Reset, "Reset a Clock to 0, to force an update")
+    ;
+  
+  // credit: @vincefn, https://github.com/diffpy/pyobjcryst/blob/main/src/extensions/lsq_ext.cpp
+  // Class for holding RefinablePar instances created in c++. This should not
+  // be exported to the pyobjcryst namespace
+  class_<ObjCryst::RefinablePar, bases<ObjCryst::Restraint> > ("_RefinablePar", no_init)
+      .def("SetHumanValue", &ObjCryst::RefinablePar::SetHumanValue)
+      .def("Print", &ObjCryst::RefinablePar::Print)
+      // Python-only attributes
+      //.def("__str__", &__str__<ObjCryst::RefinablePar>)
+      .add_property("value", &ObjCryst::RefinablePar::GetValue, &ObjCryst::RefinablePar::SetValue)
+      ;
+
+  class_<ObjCryst::RefinableObj, boost::noncopyable>("RefinableObj")
+      .def(init<bool>())
+      .def("GetPar", &_RefinableObj_GetParString,
+            return_internal_reference<>())
+      .def("GetClockMaster", &ObjCryst::RefinableObj::GetClockMaster,
+            return_value_policy<copy_const_reference>())
+      .def("PrepareForRefinement", &ObjCryst::RefinableObj::PrepareForRefinement)
+      .def("Print", &ObjCryst::RefinableObj::Print)
+      ;
+     
+  class_<MStruct::PowderPattern, bases<ObjCryst::RefinableObj> >("PowderPattern")
       .def(init<>())
       .def("SetPowderPatternObs", &_SetPowderPatternObs)
       .def("SetWeightToUnit", &MStruct::PowderPattern::SetWeightToUnit)
@@ -171,14 +289,12 @@ BOOST_PYTHON_MODULE(libMStruct)
       .def("GetRadiation", &_Get_Radiation<MStruct::PowderPattern>)
       .def("GetCalc", &_GetPowderPatternCalc)
       .def("GetPowderPatternX", &_GetPowderPatternX)
+      .def("GetPowderPatternObs", &_GetPowderPatternObs)
       .def("GetPar", &_GetPar<MStruct::PowderPattern>, return_value_policy<reference_existing_object>())
       .def("Print", &MStruct::PowderPattern::Print) 
       .def("AddComponent", &MStruct::PowderPattern::AddPowderPatternComponent)
-      .def("AddComponent", &_AddPowderPatternComponent);
-
-  class_<ObjCryst::RefinablePar>("RefinablePar")
-      .def("SetHumanValue", &ObjCryst::RefinablePar::SetHumanValue)
-      .def("Print", &ObjCryst::RefinablePar::Print); 
+      .def("AddComponent", &_AddPowderPatternComponent)
+      .def("FitScaleFactorForRw", &MStruct::PowderPattern::FitScaleFactorForRw);
 
   class_<MStruct::PseudoVoigtBroadeningEffect>("PseudoVoigtBroadeningEffect")
       .def(init<>())
@@ -216,7 +332,70 @@ BOOST_PYTHON_MODULE(libMStruct)
       .def("SetWavelength", &_SetWavelength<ObjCryst::DiffractionDataSingleCrystal, REAL>)
       .def("SetHKL", &ObjCryst::DiffractionDataSingleCrystal::SetHKL)
       .def("GetRadiation", &_Get_Radiation<ObjCryst::DiffractionDataSingleCrystal>)
-      .def("SetIsIgnoringImagScattFact", &ObjCryst::DiffractionDataSingleCrystal::SetIsIgnoringImagScattFact);
+      .def("SetIsIgnoringImagScattFact", &ObjCryst::DiffractionDataSingleCrystal::SetIsIgnoringImagScattFact)
+    ;
+
+  // credit: @vincefn, https://github.com/diffpy/pyobjcryst/blob/main/src/extensions/lsq_ext.cpp
+  class_<MStruct::LSQNumObj>("LSQ")
+      /// LSQNumObj::PrepareRefParList() must be called first!
+      .def("SetParIsFixed",
+              (void (MStruct::LSQNumObj::*)(const std::string&, const bool))
+              &ObjCryst::LSQNumObj::SetParIsFixed,
+              (bp::arg("parName"), bp::arg("fix")))
+      .def("SetParIsFixed",
+              (void (MStruct::LSQNumObj::*)(const ObjCryst::RefParType *, const bool))
+              &ObjCryst::LSQNumObj::SetParIsFixed,
+              (bp::arg("type"), bp::arg("fix")))
+      .def("SetParIsFixed",
+              (void (MStruct::LSQNumObj::*)(ObjCryst::RefinablePar &, const bool))
+              &ObjCryst::LSQNumObj::SetParIsFixed,
+              (bp::arg("par"), bp::arg("fix")))
+      //void SetParIsFixed(RefinableObj &obj, const bool fix);
+      .def("UnFixAllPar", &ObjCryst::LSQNumObj::UnFixAllPar)
+      //void SetParIsUsed(const std::string& parName, const bool use);
+      //void SetParIsUsed(const RefParType *type, const bool use);
+      .def("Refine", &MStruct::LSQNumObj::Refine,
+              (bp::arg("nbCycle")=1,
+               bp::arg("useLevenbergMarquardt")=false,
+               bp::arg("silent")=false,
+               bp::arg("callBeginEndOptimization")=true,
+               bp::arg("minChi2var")=0.01))
+      /*.def("SafeRefine", &_LSQ_SafeRefine,
+              (bp::arg("maxChi2factor")=1.01,bp::arg("nbCycle")=1,
+               bp::arg("useLevenbergMarquardt")=false,
+               bp::arg("silent")=false,
+               bp::arg("callBeginEndOptimization")=true,
+               bp::arg("minChi2var")=0.01))*/
+      .def("Rfactor", &MStruct::LSQNumObj::Rfactor)
+      .def("RwFactor", &MStruct::LSQNumObj::RwFactor)
+      .def("ChiSquare", &MStruct::LSQNumObj::ChiSquare)
+      .def("SetRefinedObj", &MStruct::LSQNumObj::SetRefinedObj,
+              (bp::arg("obj"), bp::arg("LSQFuncIndex")=0,
+               bp::arg("init")=true, bp::arg("recursive")=false),
+               with_custodian_and_ward<1,2>())
+      .def("AddRefinableObj", &ObjCryst::OptimizationObj::AddRefinableObj,
+              (bp::arg("obj")))             
+      .def("GetCompiledRefinedObj",
+              (ObjCryst::RefinableObj& (MStruct::LSQNumObj::*)())
+              &MStruct::LSQNumObj::GetCompiledRefinedObj,
+              with_custodian_and_ward_postcall<0,1,return_internal_reference<> >())
+      .def("PrintRefResults", &MStruct::LSQNumObj::PrintRefResults)
+      .def("PrepareRefParList", &ObjCryst::LSQNumObj::PrepareRefParList,
+              (bp::arg("copy_param")=false))
+      .def("GetLSQCalc", &MStruct::LSQNumObj::GetLSQCalc,
+              return_value_policy<copy_const_reference>())
+      .def("GetLSQObs", &MStruct::LSQNumObj::GetLSQObs,
+              return_value_policy<copy_const_reference>())
+      .def("GetLSQWeight", &MStruct::LSQNumObj::GetLSQWeight,
+              return_value_policy<copy_const_reference>())
+      .def("GetLSQDeriv", &MStruct::LSQNumObj::GetLSQDeriv,
+              bp::arg("par"),
+              return_value_policy<copy_const_reference>())
+      .def("BeginOptimization", &ObjCryst::LSQNumObj::BeginOptimization,
+              (bp::arg("allowApproximations")=false,
+               bp::arg("enableRestraints")=false))
+      .def("EndOptimization", &ObjCryst::LSQNumObj::EndOptimization)
+      ;
 }
 
 #endif /* #ifdef __PYMSTRUCT_TEST__ */
