@@ -33,7 +33,7 @@ In short:
   2-3 GBs. However you may use it also for something else. You will need to
   compile MStruct yourself, short instructions are provided, we tested it but
   some issues are hard to exluclude with any effort (just try it).
-  There is a less demanding *Miniconda* alternative.
+  There is a less demanding **Miniconda** alternative.
 - **Linux native compilation** will give you all features and will not use
   much space. Compilation process is similar to Anaconda. Use of Anaconda is still
   adviced mainly in order to protect your system against dirty MStruct features :-)
