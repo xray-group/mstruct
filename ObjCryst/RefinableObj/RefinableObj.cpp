@@ -2168,7 +2168,9 @@ template void RefObjRegisterRecursive(RefinableObj &obj,ObjRegistry<RefinableObj
 #include "ObjCryst/RefinableObj/GlobalOptimObj.h"
 #include "ObjCryst/RefinableObj/IO.h"
 #include "ObjCryst/ObjCryst/ReflectionProfile.h"
-using namespace ObjCryst;
+
+namespace ObjCryst {
+
 template class ObjRegistry<RefObjOpt>;
 template class ObjRegistry<RefinableObj>;
 template class ObjRegistry<Crystal>;
@@ -2199,3 +2201,4 @@ template class RefObjOption<PowderPatternDiffraction>;
 //template class RefObjOption<GlobalOptimObj>;
 //template class RefObjOption<IOCrystTag>;
 
+}   // namespace ObjCryst

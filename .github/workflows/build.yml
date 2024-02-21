@@ -5,15 +5,16 @@ on:
     branches: [ develop ]
   pull_request:
     branches: [ develop ]
+  workflow_dispatch:
 
 jobs:
   build-and-test-win:
 
-    runs-on: windows-2019
+    runs-on: windows-2022
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
     - name: Prepare conda environment
       shell: cmd
       run: |
@@ -21,7 +22,7 @@ jobs:
         rem Source conda hook
         set CONDA=C:\Miniconda
         call %CONDA%\condabin\conda_hook.bat
-        call conda create -n mstruct-env -y -c conda-forge python=3.6 libblas=*=*mkl boost=1.66 lapack fftw gsl scons bzip2 git vs2019_win-64 
+        call conda create -n mstruct-env -y -c conda-forge python=3.11 libblas=*=*mkl boost=1.78 lapack fftw gsl scons bzip2 git vs2022_win-64
     - name: Build MStruct
       shell: cmd
       run: |
@@ -67,14 +68,16 @@ jobs:
         copy %P%\Library\bin\mstruct.exe dist\mstruct
         copy %P%\Library\bin\mstruct_xml.exe dist\mstruct       
         copy %P%\Library\bin\fftw3.dll dist\mstruct
-        copy %P%\python36.dll dist\mstruct
-        copy %P%\Library\bin\boost_python3.dll dist\mstruct
-        copy %P%\Library\bin\boost_numpy3.dll dist\mstruct
+        copy %P%\Library\bin\gsl-25.dll dist\mstruct
+        copy %P%\Library\bin\libcblas.dll dist\mstruct
+        copy %P%\Library\bin\zlib.dll dist\mstruct
+        copy %P%\Library\bin\boost_python311.dll dist\mstruct
+        copy %P%\Library\bin\boost_numpy311.dll dist\mstruct
         copy %P%\Library\bin\boost_program_options.dll dist\mstruct
         copy %P%\Library\bin\boost_date_time.dll dist\mstruct
-        copy %P%\Library\bin\libMStruct.dll dist\mstruct
+        copy %P%\Library\bin\libMStruct.dll dist\mstruct\libMStruct.pyd
     - name: Archive distribution
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: dist-win
         path: dist
@@ -85,11 +88,11 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
     - name: Prepare conda environment
       run: |
         source $CONDA/etc/profile.d/conda.sh
-        conda create -n mstruct-env -y -c conda-forge python=3.9 libblas=*=*mkl boost=1.76 lapack fftw gsl scons bzip2 git gcc_linux-64 gxx_linux-64
+        conda create -n mstruct-env -y -c conda-forge python=3.11 libblas=*=*mkl boost=1.78 lapack fftw gsl scons bzip2 git gcc_linux-64 gxx_linux-64
     - name: Build MStruct
       run: |
         source $CONDA/etc/profile.d/conda.sh
@@ -121,8 +124,9 @@ jobs:
         cp $P/bin/mstruct dist/mstruct
         cp $P/bin/mstruct_xml dist/mstruct
         cp $P/lib/libMStruct.so dist/mstruct
+        cp $P/lib/libObjCryst.so dist/mstruct
     - name: Archive distribution
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: dist-linux
         path: dist

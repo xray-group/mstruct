@@ -5259,7 +5259,7 @@ void PowderPattern::Prepare()
    VFN_DEBUG_MESSAGE("PowderPattern::Prepare()",5);
    for(int i=0;i<mPowderPatternComponentRegistry.GetNb();i++)
    {
-      cout << "PowderPattern::Prepare>mMaxSinThetaOvLambda:" << mMaxSinThetaOvLambda << "\n";
+      VFN_DEBUG_MESSAGE("PowderPattern::Prepare()mMaxSinThetaOvLambda:"<<mMaxSinThetaOvLambda,11);
       mPowderPatternComponentRegistry.GetObj(i).SetMaxSinThetaOvLambda(mMaxSinThetaOvLambda);
       mPowderPatternComponentRegistry.GetObj(i).Prepare();
    }
