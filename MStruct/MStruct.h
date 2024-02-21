@@ -14,7 +14,7 @@
  * MStruct++ is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * (at your option) any later version.;
  *
  * MStruct++ is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -894,6 +894,7 @@ public:
   virtual ~AbsorptionCorr();
   virtual const string & GetName() const;
   virtual const string & GetClassName() const;
+  void SetIncidenceAngle(REAL omega);
   void SetAbsorptionCorrParams(REAL thickness, REAL depth, REAL absfactor,
 			       REAL omega);
   void XMLOutput(ostream &os, int indent=0) const;
@@ -909,7 +910,7 @@ private:
 
 // TextureCorr
 class TextureCorr:public ScatteringCorr,
-                  public ObjCryst::RefinableObj {
+                  virtual public ObjCryst::RefinableObj {
 public:
   class TexturePhase {
   public:
@@ -955,7 +956,7 @@ private:
 
 // HKLIntensityCorr
 class HKLIntensityCorr:public ScatteringCorr,
-                       public ObjCryst::RefinableObj {
+                       virtual public ObjCryst::RefinableObj {
 public:
   class IntensityCorrData {
   public:
@@ -972,11 +973,23 @@ public:
   virtual void BeginOptimization(const bool allowApproximations=false,
 				 const bool enableRestraints=false);
   const ReflStore& GetReflStore()const;
+  void XMLOutput(ostream &os, int indent=0) const;
+  void XMLInput(istream &is, const ObjCryst::XMLCrystTag &tag);
+  static const int HKL_INTENSITY_CORRECTION_NONE     = 0;
+  static const int HKL_INTENSITY_CORRECTION_GENERATE = 1;
+  static const int HKL_INTENSITY_CORRECTION_FREE_ALL = 2;
+  static const int HKL_INTENSITY_CORRECTION_READ     = 3;
+  void SetChoice(const int choice);
+  int GetChoice() const;
+  void GenerateHKLIntensityCorrForAllReflections(const REAL relIntensity=-1.);
 protected:
   virtual void CalcCorr() const;
 protected:
   mutable ObjCryst::RefinableObjClock mClockIndexesCalc;
   ReflStore mReflStore;
+  ObjCryst::RefObjOpt mConfigChoice;
+private:
+  void InitOptions();
 }; // HKLIntensityCorr()
 
 // PowderPatternDiffraction
@@ -994,9 +1007,13 @@ public:
   virtual PowderPatternDiffraction* CreateCopy()const;
   virtual const string& GetClassName()const;
   virtual void SetCrystal(ObjCryst::Crystal &crystal);
+  void SetIncidenceAngle(REAL omega);
   void SetAbsorptionCorrParams(REAL thickness, REAL depth, REAL absfactor,REAL omega);
   void SetTextureCorrParams(REAL omega);
   void AddTextureCorrPhase(REAL fraction,const CrystVector_REAL& params, bool bForceTextureSymmetry=false);
+  void SetHKLIntensityCorrChoice(int choice);
+  void ResetHKLIntensityCorr();
+  int GetHKLIntensityCorrChoice() const;
   void SetHKLIntensityCorrParams(int h, int k, int l, REAL val, bool fixed=false);
   void GenerateHKLIntensityCorrForAllReflections(const REAL relIntensity=-1.);
   void PrintHKLIntensityCorr(ostream& s)const;

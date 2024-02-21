@@ -13,7 +13,7 @@ MStruct projects provides two main components:
 Windows, MacOS and Linux are all supported. However the level of intagration is varying.
 See the table below for a quick overview.
 
-|                 | Windows       | MacOS     | Linux     |
+|                 | Windows       | macOS     | Linux     |
 |:--------------- |:-------------:|:---------:|:---------:|
 | native binaries | available     | -         | -         |
 | native source   | ask authors   | -         | available |
@@ -117,8 +117,7 @@ For Windows **Python3 (x64) is strongly adviced!**
 # add 'conda-forge' channel
 conda config --add channels conda-forge
 # install required packages
-# not there was (June 2018) a bug in boost-1.67 for Windows
-conda install boost=1.66 lapack fftw gsl scons bzip2 git
+conda install python=3.11 boost=1.78 lapack fftw gsl scons bzip2 git blas=*=*mkl
 
 # git clone or download ZIP
 # git clone https://github.com/xray-group/mstruct.git
@@ -150,7 +149,7 @@ mstruct
 job type (0-data refinement,1-grid refinement)
 ```
 
-##### MacOS with Conda
+##### macOS with Conda
 
 ```bash
 # setup environment, e.g. name='mst'
@@ -161,7 +160,7 @@ job type (0-data refinement,1-grid refinement)
 source activate mst
 
 # install required packages
-conda install boost lapack fftw gsl scons bzip2
+conda install python=3.11 boost=1.78 lapack fftw gsl scons bzip2
 
 # resolve the prefix directory P of the active Anaconda environment
 P="$(conda info --json | grep default_prefix | cut -d\" -f4)"
@@ -213,7 +212,7 @@ conda create -n mst
 source activate mst
 
 # gls, fftw3, lapack, scons are required
-conda install -c conda-forge boost=1.72 lapack fftw gsl scons bzip2
+conda install -c conda-forge python=3.11 boost=1.78 lapack fftw gsl scons bzip2 blas=*=*mkl
 # note:
 # - check if you like the python version and if it is consitent across the packages
 # - prefer builds that are close to your current environment

@@ -46,6 +46,7 @@ else:
 if env['PLATFORM'] == 'darwin':
     env.Append(SHLINKFLAGS=['-install_name', '$TARGET.abspath'])
     env.AppendUnique(SHLINKFLAGS='-headerpad_max_install_names')
+    env.AppendUnique(SHLINKFLAGS=['-undefined', 'dynamic_lookup'])
     fast_linkflags[:] = []
 
 # Compiler specific options
@@ -57,6 +58,7 @@ if icpc:
 else:
     # g++ options
     env.PrependUnique(CCFLAGS=['-Wall'])
+    env.PrependUnique(CXXFLAGS=['-std=c++11'])
     fast_optimflags = ['-ffast-math']
 
 # Configure build variants
@@ -80,7 +82,7 @@ env.AppendUnique(CCFLAGS='-DREAL=double')
 
 # required for boost with MSVC
 if env['PLATFORM'] == 'win32':
-    env.AppendUnique(CPPFLAGS=['/EHsc','/MD','-DBOOST_DYN_LINK','-D_DLL'])
+    env.AppendUnique(CPPFLAGS=['/EHsc','/MD','-DBOOST_ALL_DYN_LINK','-D_DLL'])
 
 # link flags for MSVC
 if env['PLATFORM'] == 'win32':
@@ -158,28 +160,32 @@ python_libs = []
 boost_python_possible_names = ['boost_python%d%d' % env['python_version'], 'boost_python%d' % env['python_version'][0],'boost_python']
 boost_numpy_possible_names = ['boost_numpy%d%d' % env['python_version'], 'boost_numpy%d' % env['python_version'][0], 'boost_numpy']
 python_library_possible_names = ['python%d.%d' % env['python_version'], 'python%d.%dm' % env['python_version'], 'python%d%d' % env['python_version']]
-python_libs.extend((find_library(python_library_possible_names, conf),))
+if env['PLATFORM'] != 'darwin':
+    python_libs.extend((find_library(python_library_possible_names, conf),))
 boost_python_libs.extend((find_library(boost_python_possible_names, conf), find_library(boost_numpy_possible_names, conf)))
 
 env = conf.Finish()
 
-# This builds the shared MStruct library
 if env['PLATFORM'] != 'win32':
-    MStructlibs = ['fftw3', 'gsl', 'lapack', 'ObjCryst']  + python_libs + boost_python_libs + ['boost_program_options',]
+    binMStructlibs = ['fftw3', 'gsl', 'lapack', 'ObjCryst'] + ['boost_program_options',]
+    libMStructlibs = ['fftw3', 'gsl', 'lapack', 'ObjCryst'] + python_libs + boost_python_libs
 else:
-    MStructlibs = ['fftw3', 'gsl-1.16', 'libObjCryst', 'clapack-3.1.1-md','libf2c-3.1.1-md','blas-3.1.1-md'] + python_libs + boost_python_libs + ['boost_program_options',]
+    binMStructlibs = ['fftw3', 'gsl', 'libObjCryst', 'clapack-3.1.1-md','libf2c-3.1.1-md','blas-3.1.1-md'] + python_libs + boost_python_libs + ['boost_program_options',]
+    libMStructlibs = ['fftw3', 'gsl', 'libObjCryst', 'clapack-3.1.1-md','libf2c-3.1.1-md','blas-3.1.1-md'] + python_libs + boost_python_libs + ['boost_program_options',]
 MStructlibpaths = env['LIBPATH'] + ['/usr/lib', env.Dir('.')]
-libmstruct = env.SharedLibrary("libMStruct", mstructobjs, LIBS=MStructlibs, LIBPATH=MStructlibpaths)
+
+# This builds the shared MStruct library
+libmstruct = env.SharedLibrary("libMStruct", mstructobjs, LIBS=libMStructlibs, LIBPATH=MStructlibpaths)
 libms = Alias('libmstruct', [libmstruct,] + env['libmstruct_includes'])
 #if env['PLATFORM'] != 'win32':
 #    Depends(libmstruct, lib)
 
 # This builds mstruct binary executable
-binmstruct = env.Program("mstruct_am", binmstructobjs, LIBS=MStructlibs, LIBPATH=MStructlibpaths)
+binmstruct = env.Program("mstruct_am", binmstructobjs, LIBS=binMStructlibs, LIBPATH=MStructlibpaths)
 binms = Alias('mstruct', [binmstruct,] + env['binmstruct_includes'])
 
 # This builds mstruct_xml binary executable
-binxmlmstruct = env.Program("mstruct_xml", binxmlmstructobjs, LIBS=MStructlibs, LIBPATH=MStructlibpaths)
+binxmlmstruct = env.Program("mstruct_xml", binxmlmstructobjs, LIBS=binMStructlibs, LIBPATH=MStructlibpaths)
 binms_xml = Alias('mstruct_xml', [binxmlmstruct,] + env['binmstruct_includes'])
 
 # Installation targets.

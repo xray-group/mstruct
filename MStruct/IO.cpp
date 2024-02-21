@@ -91,7 +91,7 @@ void PowderPatternDiffraction::XMLOutput(ostream &os,int indent)const
    
    //mCorrTexture.XMLOutput(os,indent);
    
-   //mCorrHKLIntensity.XMLOutput(os,indent);
+   mCorrHKLIntensity.XMLOutput(os,indent);
 	   
    #if 0
    if(mFhklObsSq.numElements()>0)
@@ -178,6 +178,7 @@ void PowderPatternDiffraction::XMLInput(istream &is,const XMLCrystTag &tagg)
 		XMLCrystTag tag(is);
 		if(("PowderPatternCrystal"==tag.GetName())&&tag.IsEndTag())
 		{
+			// Note: HKLIntensity corrections are generated later in PowderPattern if needed, as at that time sinTh/lambda is already known
 			this->UpdateDisplay();
 			VFN_DEBUG_EXIT("MStruct::PowderPatternDiffraction::XMLInput():"<<this->GetName(),11)
 			return;
@@ -263,6 +264,10 @@ void PowderPatternDiffraction::XMLInput(istream &is,const XMLCrystTag &tagg)
 		{
 			mCorrAbsorption.XMLInput(is,tag);
 		}
+		if("ArbitraryTexture"==tag.GetName())
+		{
+			mCorrHKLIntensity.XMLInput(is,tag);
+		}
 		if("ReflectionProfilePseudoVoigt"==tag.GetName())
 		{
 			if(mpReflectionProfile==0)
@@ -314,6 +319,7 @@ void PowderPatternDiffraction::XMLInput(istream &is,const XMLCrystTag &tagg)
 				reflProf = new MStruct::ReflectionProfile(this->GetCrystal(),this->GetRadiation());
 				reflProf->SetParentPowderPatternDiffraction(*this);
 				mpReflectionProfile = reflProf;
+				reflProf->SetIncidenceAngle(mOmega);
 			}
 			else
 				if(mpReflectionProfile->GetClassName()!="MStruct::ReflectionProfile")
@@ -321,6 +327,7 @@ void PowderPatternDiffraction::XMLInput(istream &is,const XMLCrystTag &tagg)
 					reflProf = new MStruct::ReflectionProfile(this->GetCrystal(),this->GetRadiation());
 					reflProf->SetParentPowderPatternDiffraction(*this);
 					this->SetProfile(reflProf);
+					reflProf->SetIncidenceAngle(mOmega);
 				}
 			mpReflectionProfile->XMLInput(is,tag);
 			continue;
@@ -495,16 +502,27 @@ void PowderPattern::XMLOutput(ostream &os,int indent)const
 	for(int j=0;j<mPowderPatternComponentRegistry.GetNb();j++)
 	{
 		mPowderPatternComponentRegistry.GetObj(j).XMLOutput(os,indent);
-		XMLCrystTag tagg("PowderPatternComponent",false,true);
-		{
-			stringstream ss;
-			ss<<mScaleFactor(j);
-			tagg.AddAttribute("Scale",ss.str());
+		os << endl;
+		if(mPowderPatternComponentRegistry.GetObj(j).IsScalable()) {
+			XMLCrystTag tag("PowderPatternComponent");
+			tag.AddAttribute("Name", mPowderPatternComponentRegistry.GetObj(j).GetName());
+			for(int i=0; i<indent; i++) os << "  ";
+			os << tag << endl;
+			indent++;
+			// --- refinable parameters ---
+			this->GetPar(&(mScaleFactor(j))).XMLOutput(os,"Scale",indent);
+			os << endl;
+			indent--;
+			tag.SetIsEndTag(true);
+			for(int i=0; i<indent; i++) os << "  ";
+			os << tag << endl;
+		} else {
+			XMLCrystTag tag("PowderPatternComponent",false,true);
+			tag.AddAttribute("Name",mPowderPatternComponentRegistry.GetObj(j).GetName());
+			for(int i=0; i<indent; i++) os << "  ";
+			os << tag << endl;
 		}
-		tagg.AddAttribute("Name",mPowderPatternComponentRegistry.GetObj(j).GetName());
-		os<<endl;
-		for(int i=0;i<indent;i++) os << "  " ;
-		os<<tagg<<endl<<endl;
+		os << endl;
 	}
 	XMLCrystTag tag2("XIobsSigmaWeightList");
 		for(int i=0;i<indent;i++) os << "  " ;
@@ -566,6 +584,20 @@ void PowderPattern::XMLInput(istream &is,const XMLCrystTag &tagg)
       XMLCrystTag tag(is);
       if(("PowderPattern"==tag.GetName())&&tag.IsEndTag())
       {
+         // Generate HKLIntensity corrections
+         for(int icomp=0; icomp<GetNbPowderPatternComponent(); icomp++) {
+           if(GetPowderPatternComponent(icomp).GetClassName().compare("MStruct::PowderPatternDiffraction") != 0)
+              continue;
+           MStruct::PowderPatternDiffraction & comp = dynamic_cast<MStruct::PowderPatternDiffraction&>(GetPowderPatternComponent(icomp));
+           int choice = comp.GetHKLIntensityCorrChoice();
+           // reset all parameters if choice is different from HKL_INTENSITY_CORRECTION_READ
+           if(choice != HKLIntensityCorr::HKL_INTENSITY_CORRECTION_READ)
+              comp.ResetHKLIntensityCorr();
+           if((choice == HKLIntensityCorr::HKL_INTENSITY_CORRECTION_GENERATE) || (choice == HKLIntensityCorr::HKL_INTENSITY_CORRECTION_FREE_ALL)) {
+              REAL level = (choice==HKLIntensityCorr::HKL_INTENSITY_CORRECTION_FREE_ALL) ? 0.04 : -1.;
+              comp.GenerateHKLIntensityCorrForAllReflections(level);
+           }
+         }
          this->UpdateDisplay();
          VFN_DEBUG_EXIT("MStruct::PowderPattern::XMLInput():"<<this->GetName(),5)
          return;
@@ -654,26 +686,43 @@ void PowderPattern::XMLInput(istream &is,const XMLCrystTag &tagg)
       {
          MStruct::PowderPatternDiffraction *comp=new MStruct::PowderPatternDiffraction;
          comp->SetParentPowderPattern(*this);
+         comp->SetIncidenceAngle(mOmega);
          comp->XMLInput(is,tag);
          continue;
       }
       if("PowderPatternComponent"==tag.GetName())
       {
-         REAL scale=1.0;
          string name;
          for(unsigned int i=0;i<tag.GetNbAttribute();i++)
          {
-            if("Scale"==tag.GetAttributeName(i))
-            {
-               stringstream ss(tag.GetAttributeValue(i));
-               ss>>scale;
-               continue;
-            }
             if("Name"==tag.GetAttributeName(i)) name=tag.GetAttributeValue(i);
          }
          this->AddPowderPatternComponent(gPowderPatternComponentRegistry.GetObj(name));
-         mScaleFactor(mPowderPatternComponentRegistry.GetNb()-1)=scale;
-         VFN_DEBUG_MESSAGE("->Adding Component :"<<name<<"with scale="<<scale,8);
+         mScaleFactor(mPowderPatternComponentRegistry.GetNb()-1)=1.0;
+         if(!tag.IsEmptyTag())
+				    while(true)
+				 		{
+							XMLCrystTag tagg(is);
+							if(("PowderPatternComponent"==tagg.GetName()) && tagg.IsEndTag())
+								break;
+							if("Par"==tagg.GetName())
+							{
+								for(unsigned int i=0;i<tagg.GetNbAttribute();i++)
+								{
+									if("Name"==tagg.GetAttributeName(i))
+									{
+										if("Scale"==tagg.GetAttributeValue(i))
+										{
+											this->GetPar(&mScaleFactor(mPowderPatternComponentRegistry.GetNb()-1)).XMLInput(is,tagg);
+											break;
+										}
+									}
+								}
+								continue;
+							}
+						}
+				 cout << "->Adding Component :"<<name<<" with scale="<<mScaleFactor(mPowderPatternComponentRegistry.GetNb()-1)<<"\n";
+         VFN_DEBUG_MESSAGE("->Adding Component :"<<name<<" with scale="<<mScaleFactor(mPowderPatternComponentRegistry.GetNb()-1),8);
          continue;
       }
       if("ExcludeX"==tag.GetName())
@@ -797,17 +846,17 @@ void PowderPattern::XMLInput(istream &is,const XMLCrystTag &tagg)
 
 void AbsorptionCorr::XMLOutput(ostream &os,int indent)const
 {
-    VFN_DEBUG_ENTRY("MStruct::AbsorptionCorr::XMLOutput():"<<this->GetName(),11)
-    for(int i=0; i<indent; i++) os << "  ";
-    XMLCrystTag tag("AbsorptionCorr");
-    tag.AddAttribute("Name", this->GetName());
+	VFN_DEBUG_ENTRY("MStruct::AbsorptionCorr::XMLOutput():"<<this->GetName(),11)
+	for(int i=0; i<indent; i++) os << "  ";
+	XMLCrystTag tag("AbsorptionCorr");
+	tag.AddAttribute("Name", this->GetName());
 	tag.AddAttribute("Thickness", (boost::format("%f")%(mThickness/10.)).str());
 	tag.AddAttribute("Depth", (boost::format("%f")%(mDepth/10.)).str());
 	tag.AddAttribute("AbsorptionFactor", (boost::format("%f")%(mAbsFactor*1e8)).str());
 	tag.SetIsEmptyTag(true);
-    os << tag << endl;
-    
-    VFN_DEBUG_EXIT("MStruct::AbsorptionCorr::XMLOutput():"<<this->GetName(),11)
+	os << tag << endl;
+
+	VFN_DEBUG_EXIT("MStruct::AbsorptionCorr::XMLOutput():"<<this->GetName(),11)
 }
 
 void AbsorptionCorr::XMLInput(istream &is,const XMLCrystTag &tagg)
@@ -821,6 +870,177 @@ void AbsorptionCorr::XMLInput(istream &is,const XMLCrystTag &tagg)
 		if("AbsorptionFactor"==tagg.GetAttributeName(i)) mAbsFactor = atof(tagg.GetAttributeValue(i).c_str())*1e-8;
 	}
 	VFN_DEBUG_EXIT("AbsorptionCorr::XMLInput():"<<this->GetName(),11)
+}
+
+////////////////////////////////////////////////////////////////////////
+//
+//    I/O HKLIntensityCorr
+//
+////////////////////////////////////////////////////////////////////////
+
+void HKLIntensityCorr::XMLOutput(ostream &os,int indent)const
+{
+	VFN_DEBUG_ENTRY("MStruct::HKLIntensityCorr::XMLOutput():"<<this->GetName(),11)
+	for(int i=0; i<indent; i++) os << "  ";
+	XMLCrystTag tag("ArbitraryTexture");
+	tag.AddAttribute("Name", this->GetName());
+	tag.AddAttribute("Tag", "Current");
+	tag.SetIsEmptyTag(false);
+	os << tag << endl;
+    indent++;
+
+    // --- options ---
+    mConfigChoice.XMLOutput(os,indent);
+    os << endl;
+
+    // --- reflections ---
+    if(mpData != NULL)
+        mpData->GetFhklCalcSq();
+
+    for(int irefl=0; irefl<mReflStore.size(); irefl++) {
+        for(int i=0; i<indent; i++) os << "  ";
+        XMLCrystTag tag("Par");
+        tag.SetIsEmptyTag(false);
+        const HKLIntensityCorr::IntensityCorrData *data =
+            (const HKLIntensityCorr::IntensityCorrData*)mReflStore.at(irefl).data;
+        const ObjCryst::RefinablePar & par = this->GetPar(&(data->val));
+        // Refined
+        tag.AddAttribute("Refined", (boost::format("%d") % !par.IsFixed()).str());
+        // Limited
+        tag.AddAttribute("Limited", (boost::format("%d") % par.IsLimited()).str());
+        // Min
+        tag.AddAttribute("Min", (boost::format("%g") % par.GetHumanMin()).str());
+        // Max
+        tag.AddAttribute("Max", (boost::format("%g") % par.GetHumanMax()).str());
+        // Name
+        tag.AddAttribute("Name", par.GetName());
+        // Position: 2Theta(deg)
+        REAL pos = (((data->i)>=0) && ((data->i)<mpData->GetNbRefl())) ? (2*mpData->GetTheta()(data->i)*RAD2DEG) : (-1);
+        tag.AddAttribute("2Theta", (boost::format("%.3f") % pos).str());
+        // SFactSqMult: |Fhkl|^2 * mult
+        REAL sFactSqMult = (((data->i)>=0) && ((data->i)<mpData->GetNbRefl())) ? (mpData->GetFhklCalcSq()(data->i)*mpData->GetMultiplicity()(data->i)) : (-1);
+        tag.AddAttribute("SFactSqMult", (boost::format("%.2e") % sFactSqMult).str());
+        // H
+        tag.AddAttribute("H", (boost::format("%d") % mReflStore.at(irefl).H).str());
+        // K
+        tag.AddAttribute("K", (boost::format("%d") % mReflStore.at(irefl).K).str());
+        // L
+        tag.AddAttribute("L", (boost::format("%d") % mReflStore.at(irefl).L).str());
+        // Value
+        os << tag <<  (boost::format("%g") % data->val).str();
+        // EndTag
+        tag.SetIsEndTag(true);
+        os << tag << endl;
+    } // irefl
+
+    indent--;
+    tag.SetIsEndTag(true);
+    for(int i=0; i<indent; i++) os << "  ";
+    os << tag << endl;
+
+	VFN_DEBUG_EXIT("MStruct::HKLIntensityCorr::XMLOutput():"<<this->GetName(),11)
+}
+
+void HKLIntensityCorr::XMLInput(istream &is,const XMLCrystTag &tagg)
+{
+	VFN_DEBUG_ENTRY("MStruct::HKLIntensityCorr::XMLInput():"<<this->GetName(),11)
+    string _name("HKLIntensityCorr");
+    string _tag("");
+	for(unsigned int i=0;i<tagg.GetNbAttribute();i++)
+	{
+		if("Name"==tagg.GetAttributeName(i)) _name = tagg.GetAttributeValue(i);
+		if("Tag"==tagg.GetAttributeName(i)) _tag = tagg.GetAttributeValue(i);
+	}
+    int _h, _k, _l;
+    REAL _min, _max;
+    bool _fixed, _limited;
+    int _choice = HKL_INTENSITY_CORRECTION_READ;
+    if(_tag=="Current") {
+        this->SetName(_name);
+    	while(true)
+    	{
+    		XMLCrystTag tag(is);
+    		if(("ArbitraryTexture"==tag.GetName())&&tag.IsEndTag())
+    		{
+    			// Note: HKLIntensity corrections are generated later in PowderPattern if needed, as at that time sinTh/lambda is already known
+    			this->UpdateDisplay();
+    			VFN_DEBUG_EXIT("MStruct::HKLIntensityCorr::XMLInput()"<<this->GetName(),11)
+    			return;
+    		}
+    		if("Option"==tag.GetName())
+    		{
+    			for(unsigned int i=0;i<tag.GetNbAttribute();i++)
+    				if("Name"==tag.GetAttributeName(i))
+    					mOptionRegistry.GetObj(tag.GetAttributeValue(i)).XMLInput(is,tag);
+    			_choice = mConfigChoice.GetChoice();
+    			continue;
+    		}
+    		if("Par"==tag.GetName())
+    		{
+    			for(unsigned int i=0;i<tag.GetNbAttribute();i++)
+    			{
+    				if("H"==tag.GetAttributeName(i))
+    				{
+    					_h = atoi( tag.GetAttributeValue(i).c_str() );
+    					continue;
+    				}
+    				if("K"==tag.GetAttributeName(i))
+    				{
+    					_k = atoi( tag.GetAttributeValue(i).c_str() );
+    					continue;
+    				}
+    				if("L"==tag.GetAttributeName(i))
+    				{
+    					_l = atoi( tag.GetAttributeValue(i).c_str() );
+    					continue;
+    				}
+    				if("Refined"==tag.GetAttributeName(i))
+    				{
+    					_fixed = atoi( tag.GetAttributeValue(i).c_str() ) != 1;
+    					continue;
+    				}
+    				if("Limited"==tag.GetAttributeName(i))
+    				{
+    					_limited = atoi( tag.GetAttributeValue(i).c_str() ) == 1;
+    					continue;
+    				}
+    				if("Max"==tag.GetAttributeName(i))
+    				{
+                        istringstream istr( tag.GetAttributeValue(i) + " " );
+    					_max = InputFloat(istr,' ');
+    					continue;
+    				}
+    				if("Min"==tag.GetAttributeName(i))
+    				{
+                        istringstream istr( tag.GetAttributeValue(i) + " " );
+    					_min = InputFloat(istr,' ');
+    					continue;
+    				}
+    			}
+                REAL f = InputFloat(is,'<');
+                if(ISNAN_OR_INF(f)) f = 1.0;
+                if(_choice == HKL_INTENSITY_CORRECTION_READ) {
+                    this->SetHKLIntensityCorr(_h,_k,_l,f,_fixed);
+                    // limited, min, max
+                    int ind = mReflStore.find(_h,_k,_l,0.); // try to find (hkl) reflection in the "store"
+                    if(ind>=0) {
+                      const IntensityCorrData * pData = (const IntensityCorrData*) mReflStore.at(ind).data;
+                      RefinablePar &par = this->GetPar(&(pData->val));
+                      par.SetIsLimited(_limited);
+                      par.SetMin(_min);
+                      par.SetMax(_max);
+                    } else {
+                        cerr << "[Warning:ArbitraryTexture] Could not set limits for reflection: " << mpData->GetName();
+                        cerr << " (" << _h << "," << _k << "," << _l << ")\n";
+                    }
+                }
+                //read end tag
+                XMLCrystTag junk(is);
+    			continue;
+    		}
+    	}
+    }
+	VFN_DEBUG_EXIT("MStruct::HKLIntensityCorr::XMLInput():"<<this->GetName(),11)
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -1427,11 +1647,10 @@ void ReflectionProfile::XMLInput(istream &is,const XMLCrystTag &tagg)
 			MStruct::ResidualStressPositionCorrection * t = new MStruct::ResidualStressPositionCorrection();
 			t->SetParentReflectionProfile(*this);
 			this->AddReflectionProfileComponent(*t);
-			cout << "ParentReflectionProfile_test: " << this->GetParentPowderPatternDiffraction().GetName() << endl;
 			t->XMLInput(is,tag);
 			continue;
 		}
-	}
+	} 
 }
 
 ////////////////////////////////////////////////////////////////////////

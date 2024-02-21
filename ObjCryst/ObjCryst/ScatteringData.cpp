@@ -415,7 +415,7 @@ void Radiation::InitOptions()
       this->AddPar(tmp);
    }
    {//Fixed by default
-      RefinablePar tmp("XRayTubeDeltaLambda",&mXRayTubeDeltaLambda,0.01,20.,
+      RefinablePar tmp("XRayTubeDeltaLambda",&mXRayTubeDeltaLambda,0.0005,20.,
                        gpRefParTypeRadiationWavelength,REFPAR_DERIV_STEP_ABSOLUTE,
                        true,true,true,false,1.0);
       tmp.SetDerivStep(1e-4);
@@ -720,6 +720,13 @@ const CrystVector_REAL& ScatteringData::GetFhklCalcSq() const
    mClockStructFactorSq.Click();
    VFN_DEBUG_EXIT("ScatteringData::GetFhklCalcSq()",2)
    return mFhklCalcSq;
+}
+
+const CrystVector_int& ScatteringData::GetMultiplicity() const
+{
+   VFN_DEBUG_ENTRY("ScatteringData::GetMultiplicity()",2)
+   VFN_DEBUG_EXIT("ScatteringData::GetMultiplicity()",2)
+   return mMultiplicity;
 }
 
 std::map<RefinablePar*, CrystVector_REAL>& ScatteringData::GetFhklCalcSq_FullDeriv(std::set<RefinablePar *> &vPar)

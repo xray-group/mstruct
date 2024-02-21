@@ -282,7 +282,8 @@ Error opening file for input:"+filename);
    VFN_DEBUG_MESSAGE("PowderPatternBackground::ImportUserBackground():finished",5)
 }
 void PowderPatternBackground::SetInterpPoints(const CrystVector_REAL tth,
-                                              const CrystVector_REAL backgd)
+                                              const CrystVector_REAL backgd,
+					      const CrystVector_bool refined)
 {
    VFN_DEBUG_ENTRY("PowderPatternBackground::SetInterpPoints():",5)
    if(  (tth.numElements()!=backgd.numElements())
@@ -304,6 +305,11 @@ number of points differ or less than 2 points !");
       mBackgroundInterpPointIntensity(i)=backgd(subs(i));
    }
    this->InitRefParList();
+   if(refined.numElements()>0) {
+     for(long i=0;i<mBackgroundNbPoint;++i) {
+       this->GetPar(&mBackgroundInterpPointIntensity(i)).SetIsFixed(!refined(subs(i)));
+     }
+   }
    mClockBackgroundPoint.Click();
    VFN_DEBUG_EXIT("PowderPatternBackground::SetInterpPoints()",5)
 }
@@ -5253,7 +5259,7 @@ void PowderPattern::Prepare()
    VFN_DEBUG_MESSAGE("PowderPattern::Prepare()",5);
    for(int i=0;i<mPowderPatternComponentRegistry.GetNb();i++)
    {
-      cout << "PowderPattern::Prepare>mMaxSinThetaOvLambda:" << mMaxSinThetaOvLambda << "\n";
+      VFN_DEBUG_MESSAGE("PowderPattern::Prepare()mMaxSinThetaOvLambda:"<<mMaxSinThetaOvLambda,11);
       mPowderPatternComponentRegistry.GetObj(i).SetMaxSinThetaOvLambda(mMaxSinThetaOvLambda);
       mPowderPatternComponentRegistry.GetObj(i).Prepare();
    }
