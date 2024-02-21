@@ -266,7 +266,7 @@ sudo apt-get install libgsl-dev libfftw3-dev liblapack-dev libpython3.11-dev sco
 
 # (optional) boost>=1.63 is required, we may want to use a specific one
 export B=~/sw/boost_1_78_0
-export CPPPATH=$B/include:$CPPPATH/
+export CPPPATH=$B/include:$CPPPATH
 export LIBRARY_PATH=$B/lib:$LIBRARY_PATH
 export LD_LIBRARY_PATH=$B/lib:$LD_LIBRARY_PATH
 
