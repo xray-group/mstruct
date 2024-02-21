@@ -15,8 +15,8 @@ See the table below for a quick overview.
 
 |                 | Windows       | macOS     | Linux     |
 |:--------------- |:-------------:|:---------:|:---------:|
-| native binaries | available     | -         | -         |
-| native source   | ask authors   | -         | available |
+| native binaries | available     | -         | avaikable |
+| native source   | depricated    | -         | available |
 | Anaconda        | available     | available | available |
 
 <!--
