@@ -27,13 +27,13 @@ See the table below for a quick overview.
 !-->
 
 In short:
-- **Windows binaries** are small (few MBs), easy to download and run but you will
-  miss the Python module. Maybe you do not care.
+- **Windows binaries** are small (few MBs), easy to download and run.
 - **Anaconda** is the most universal. You will get all MStruct features without
   limitations but you need to have Anaconda enviroment. Anaconda occupies around
   2-3 GBs. However you may use it also for something else. You will need to
   compile MStruct yourself, short instructions are provided, we tested it but
   some issues are hard to exluclude with any effort (just try it).
+  There is a less demanding *Miniconda* alternative.
 - **Linux native compilation** will give you all features and will not use
   much space. Compilation process is similar to Anaconda. Use of Anaconda is still
   adviced mainly in order to protect your system against dirty MStruct features :-)
