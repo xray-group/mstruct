@@ -10,7 +10,7 @@ MStruct projects provides two main components:
 - **mstruct** program for powder diffraction data refinement
 - **python module** for either interactive or automated powder diffraction analysis
 
-Windows, MacOS and Linux are all supported. However the level of intagration is varying.
+Windows, macOS and Linux are all supported. However the level of intagration is varying.
 See the table below for a quick overview.
 
 |                 | Windows       | macOS     | Linux     |
@@ -20,7 +20,7 @@ See the table below for a quick overview.
 | Anaconda        | available     | available | available |
 
 <!--
-|                 | Windows       | MacOS     | Linux     |
+|                 | Windows       | macOS     | Linux     |
 | native binaries | available     | -         | -         |
 | native source   | ask authors   | -         | available |
 | Anaconda        | available     | available | available |
@@ -83,7 +83,7 @@ git clone https://github.com/xray-group/mstruct.git
 ##### Installing Anaconda
 
 [Anaconda](https://www.anaconda.com) is a popular Python data science platform and
-scientific software for personal computers with Windows, MacOS or Linux.
+scientific software for personal computers with Windows, macOS or Linux.
 
 The most straighforward way is to get a graphical [installer](https://www.anaconda.com/download/)
 - no need to sign (web download)
@@ -313,7 +313,7 @@ links to plotting tools
 ### Instructions
 
 You should have `mstruct` binary running on your laptop. It should be pretty straighforward
-for Windows, unfortunately for MacOS or Linux you need to compile the source. *No stress in
+for Windows, unfortunately for macOS or Linux you need to compile the source. *No stress in
 case you fail, we will make it working at the beginning of the course.*
 
 ### Time plan
