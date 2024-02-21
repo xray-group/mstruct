@@ -262,10 +262,10 @@ tricks from Honza
 
 ```bash
 # (optional) gls, fftw3, lapack, python and scons are required
-sudo apt-get install libgsl-dev fftw3-dev liblapack-dev python-dev scons
+sudo apt-get install libgsl-dev libfftw3-dev liblapack-dev libpython3.11-dev scons
 
 # (optional) boost>=1.63 is required, we may want to use a specific one
-export B=~/sw/boost_1_67_0
+export B=~/sw/boost_1_78_0
 export CPPPATH=$B/include:$CPPPATH/
 export LIBRARY_PATH=$B/lib:$LIBRARY_PATH
 export LD_LIBRARY_PATH=$B/lib:$LD_LIBRARY_PATH
@@ -273,7 +273,7 @@ export LD_LIBRARY_PATH=$B/lib:$LD_LIBRARY_PATH
 # (optional) prepare user env for installation (define prefix)
 export P=~/.local
 # (optional) make sure we have place for python modules
-mkdir -p $P/lib/python2.7/site-packages
+mkdir -p $P/lib/python3.11/site-packages
 
 # build library
 scons -j4 libmstruct
@@ -286,7 +286,7 @@ scons -j4 install prefix=$P
 
 # (optional) we may want to activate the installation
 export PATH=$P/bin:$PATH
-export PYTHONPATH=$P/lib/python2.7/site-packages:$PYTHONATH
+export PYTHONPATH=$P/lib/python3.11/site-packages:$PYTHONATH
 export LD_LIBRARY_PATH=$P/lib:$LD_LIBRARY_PATH
 ```
 
