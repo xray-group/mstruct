@@ -10,30 +10,30 @@ MStruct projects provides two main components:
 - **mstruct** program for powder diffraction data refinement
 - **python module** for either interactive or automated powder diffraction analysis
 
-Windows, MacOS and Linux are all supported. However the level of intagration is varying.
+Windows, macOS and Linux are all supported. However the level of intagration is varying.
 See the table below for a quick overview.
 
 |                 | Windows       | macOS     | Linux     |
 |:--------------- |:-------------:|:---------:|:---------:|
-| native binaries | available     | -         | -         |
-| native source   | ask authors   | -         | available |
+| native binaries | available     | -         | available |
+| native source   | depricated    | -         | available |
 | Anaconda        | available     | available | available |
 
 <!--
-|                 | Windows       | MacOS     | Linux     |
+|                 | Windows       | macOS     | Linux     |
 | native binaries | available     | -         | -         |
 | native source   | ask authors   | -         | available |
 | Anaconda        | available     | available | available |
 !-->
 
 In short:
-- **Windows binaries** are small (few MBs), easy to download and run but you will
-  miss the Python module. Maybe you do not care.
+- **Windows binaries** are small (few MBs), easy to download and run.
 - **Anaconda** is the most universal. You will get all MStruct features without
   limitations but you need to have Anaconda enviroment. Anaconda occupies around
   2-3 GBs. However you may use it also for something else. You will need to
   compile MStruct yourself, short instructions are provided, we tested it but
   some issues are hard to exluclude with any effort (just try it).
+  There is a less demanding **Miniconda** alternative.
 - **Linux native compilation** will give you all features and will not use
   much space. Compilation process is similar to Anaconda. Use of Anaconda is still
   adviced mainly in order to protect your system against dirty MStruct features :-)
@@ -83,7 +83,7 @@ git clone https://github.com/xray-group/mstruct.git
 ##### Installing Anaconda
 
 [Anaconda](https://www.anaconda.com) is a popular Python data science platform and
-scientific software for personal computers with Windows, MacOS or Linux.
+scientific software for personal computers with Windows, macOS or Linux.
 
 The most straighforward way is to get a graphical [installer](https://www.anaconda.com/download/)
 - no need to sign (web download)
@@ -262,18 +262,18 @@ tricks from Honza
 
 ```bash
 # (optional) gls, fftw3, lapack, python and scons are required
-sudo apt-get install libgsl-dev fftw3-dev liblapack-dev python-dev scons
+sudo apt-get install libgsl-dev libfftw3-dev liblapack-dev libpython3.11-dev scons
 
 # (optional) boost>=1.63 is required, we may want to use a specific one
-export B=~/sw/boost_1_67_0
-export CPPPATH=$B/include:$CPPPATH/
+export B=~/sw/boost_1_78_0
+export CPPPATH=$B/include:$CPPPATH
 export LIBRARY_PATH=$B/lib:$LIBRARY_PATH
 export LD_LIBRARY_PATH=$B/lib:$LD_LIBRARY_PATH
 
 # (optional) prepare user env for installation (define prefix)
 export P=~/.local
 # (optional) make sure we have place for python modules
-mkdir -p $P/lib/python2.7/site-packages
+mkdir -p $P/lib/python3.11/site-packages
 
 # build library
 scons -j4 libmstruct
@@ -286,7 +286,7 @@ scons -j4 install prefix=$P
 
 # (optional) we may want to activate the installation
 export PATH=$P/bin:$PATH
-export PYTHONPATH=$P/lib/python2.7/site-packages:$PYTHONATH
+export PYTHONPATH=$P/lib/python3.11/site-packages:$PYTHONATH
 export LD_LIBRARY_PATH=$P/lib:$LD_LIBRARY_PATH
 ```
 
@@ -313,7 +313,7 @@ links to plotting tools
 ### Instructions
 
 You should have `mstruct` binary running on your laptop. It should be pretty straighforward
-for Windows, unfortunately for MacOS or Linux you need to compile the source. *No stress in
+for Windows, unfortunately for macOS or Linux you need to compile the source. *No stress in
 case you fail, we will make it working at the beginning of the course.*
 
 ### Time plan
