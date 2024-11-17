@@ -47,6 +47,7 @@ if env['PLATFORM'] == 'darwin':
     env.Append(SHLINKFLAGS=['-install_name', '$TARGET.abspath'])
     env.AppendUnique(SHLINKFLAGS='-headerpad_max_install_names')
     env.AppendUnique(SHLINKFLAGS=['-undefined', 'dynamic_lookup'])
+    env.AppendUnique(LINKFLAGS=['-Wl,-rpath,@loader_path/../lib'])
     fast_linkflags[:] = []
 
 # Compiler specific options
@@ -180,6 +181,14 @@ libms = Alias('libmstruct', [libmstruct,] + env['libmstruct_includes'])
 #if env['PLATFORM'] != 'win32':
 #    Depends(libmstruct, lib)
 
+# Make sure we have @rpath/libObjCryst.dylib instead of an absolute path on Darwin
+if env['PLATFORM'] == 'darwin':
+    for  f in libmstruct:
+        if f.get_suffix()=='.dylib':
+            target_name = os.path.normpath( os.path.join('build', env['build']+'-'+env['HOST_ARCH'], f.rstr()) )
+            env.AddPostAction(libmstruct,
+                    'install_name_tool -change `otool -L ' + target_name + ' | grep libObjCryst.dylib | tail -n1 | tr -d "\\t" | cut -f1 -d " "` @rpath/libObjCryst.dylib ' + target_name)
+
 # This builds mstruct binary executable
 binmstruct = env.Program("mstruct_am", binmstructobjs, LIBS=binMStructlibs, LIBPATH=MStructlibpaths)
 binms = Alias('mstruct', [binmstruct,] + env['binmstruct_includes'])
@@ -188,17 +197,20 @@ binms = Alias('mstruct', [binmstruct,] + env['binmstruct_includes'])
 binxmlmstruct = env.Program("mstruct_xml", binxmlmstructobjs, LIBS=binMStructlibs, LIBPATH=MStructlibpaths)
 binms_xml = Alias('mstruct_xml', [binxmlmstruct,] + env['binmstruct_includes'])
 
+# Make sure we have @rpath/libObjCryst.dylib and @rpath/libMStruct.dylib in binaries
+if env['PLATFORM'] == 'darwin':
+    for build_obj, name in zip([binmstruct, binxmlmstruct],['mstruct_am','mstruct_xml']): 
+        target_name = os.path.normpath( os.path.join('build', env['build']+'-'+env['HOST_ARCH'], name) )
+        for libname in ['libObjCryst.dylib']:
+            env.AddPostAction(build_obj,
+                    'install_name_tool -change `otool -L ' + target_name + ' | grep ' + libname + ' | tail -n1 | tr -d "\\t" | cut -f1 -d " "` @rpath/' + libname + ' ' + target_name)
+
 # Installation targets.
 
 prefix = env['prefix']
 
 # install-lib
 libinstall = env.Install(env['libdir'], libobjcryst)
-if env['PLATFORM'] == 'darwin':
-    # DARWIN_INSTALL_NAME can be pre-set in sconscript.local
-    env.SetDefault(DARWIN_INSTALL_NAME='$TARGET.abspath')
-    env.AddPostAction(libinstall,
-            'install_name_tool -id $DARWIN_INSTALL_NAME $TARGET')
 if env['PLATFORM'] == 'posix' and WhereIs('ldconfig'):
     opts = ''
     if os.getuid() != 0:  opts = '-n'
@@ -208,11 +220,6 @@ if env['PLATFORM'] != 'win32':
     libinstall = env.Install(env['libdir'], libmstruct+libobjcryst)
 else:
     libinstall = env.Install(env['libdir'], [f for f in libmstruct if f.get_suffix()=='.lib'])
-if env['PLATFORM'] == 'darwin':
-    # DARWIN_INSTALL_NAME can be pre-set in sconscript.local
-    env.SetDefault(DARWIN_INSTALL_NAME='$TARGET.abspath')
-    env.AddPostAction(libinstall,
-            'install_name_tool -id $DARWIN_INSTALL_NAME $TARGET')
 if env['PLATFORM'] == 'posix' and WhereIs('ldconfig'):
     opts = ''
     if os.getuid() != 0:  opts = '-n'
@@ -248,9 +255,14 @@ Alias('install-lib', libinstall + dllinstall)
 
 # install-bin
 if env['PLATFORM'] == 'win32':
-   bininstall = env.InstallAs(prefix+'/bin/mstruct.exe', binmstruct) + env.InstallAs(prefix+'/bin/mstruct_xml.exe', binxmlmstruct)
+    bininstall = env.InstallAs(prefix+'/bin/mstruct.exe', binmstruct) + env.InstallAs(prefix+'/bin/mstruct_xml.exe', binxmlmstruct)
 else:
-   bininstall = env.InstallAs(prefix+'/bin/mstruct', binmstruct) + env.InstallAs(prefix+'/bin/mstruct_xml', binxmlmstruct)
+    bininstall = env.InstallAs(prefix+'/bin/mstruct', binmstruct) + env.InstallAs(prefix+'/bin/mstruct_xml', binxmlmstruct)
+if env['PLATFORM'] == 'darwin':
+    # DARWIN_INSTALL_NAME can be pre-set in sconscript.local
+    env.SetDefault(DARWIN_INSTALL_NAME='$TARGET.abspath')
+    env.AddPostAction(bininstall,
+            'install_name_tool -id $DARWIN_INSTALL_NAME $TARGET')
 Alias('install-bin', bininstall)
 
 # install-python
