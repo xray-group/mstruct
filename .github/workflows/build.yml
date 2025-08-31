@@ -68,7 +68,7 @@ jobs:
         copy %P%\Library\bin\mstruct.exe dist\mstruct
         copy %P%\Library\bin\mstruct_xml.exe dist\mstruct       
         copy %P%\Library\bin\fftw3.dll dist\mstruct
-        copy %P%\Library\bin\gsl-25.dll dist\mstruct
+        copy %P%\Library\bin\gsl-*.dll dist\mstruct
         copy %P%\Library\bin\libcblas.dll dist\mstruct
         copy %P%\Library\bin\zlib.dll dist\mstruct
         copy %P%\Library\bin\boost_python311.dll dist\mstruct
