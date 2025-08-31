@@ -73,6 +73,7 @@ jobs:
         copy %P%\Library\bin\zlib.dll dist\mstruct
         copy %P%\Library\bin\boost_python311.dll dist\mstruct
         copy %P%\Library\bin\boost_numpy311.dll dist\mstruct
+        copy %P%\Library\bin\mkl_rt*.dll dist\mstruct
         copy %P%\Library\bin\boost_program_options.dll dist\mstruct
         copy %P%\Library\bin\boost_date_time.dll dist\mstruct
         copy %P%\Library\bin\libMStruct.dll dist\mstruct\libMStruct.pyd
