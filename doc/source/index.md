@@ -117,7 +117,7 @@ For Windows **Python3 (x64) is strongly adviced!**
 # add 'conda-forge' channel
 conda config --add channels conda-forge
 # install required packages
-conda install python=3.11 boost=1.78 lapack fftw gsl scons bzip2 git blas=*=*mkl
+conda install python=3.11 boost=1.78 lapack fftw gsl scons bzip2 git blas=*=*mkl gcc gxx
 
 # git clone or download ZIP
 # git clone https://github.com/xray-group/mstruct.git

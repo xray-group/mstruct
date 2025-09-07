@@ -68,14 +68,16 @@ jobs:
         copy %P%\Library\bin\mstruct.exe dist\mstruct
         copy %P%\Library\bin\mstruct_xml.exe dist\mstruct       
         copy %P%\Library\bin\fftw3.dll dist\mstruct
-        copy %P%\Library\bin\gsl-25.dll dist\mstruct
+        copy %P%\Library\bin\gsl-*.dll dist\mstruct
         copy %P%\Library\bin\libcblas.dll dist\mstruct
         copy %P%\Library\bin\zlib.dll dist\mstruct
         copy %P%\Library\bin\boost_python311.dll dist\mstruct
         copy %P%\Library\bin\boost_numpy311.dll dist\mstruct
+        copy %P%\Library\bin\mkl_rt*.dll dist\mstruct
         copy %P%\Library\bin\boost_program_options.dll dist\mstruct
         copy %P%\Library\bin\boost_date_time.dll dist\mstruct
         copy %P%\Library\bin\libMStruct.dll dist\mstruct\libMStruct.pyd
+        copy %P%\Library\bin\mkl_intel_thread.2.dll dist\mstruct
     - name: Archive distribution
       uses: actions/upload-artifact@v4
       with:
@@ -84,7 +86,7 @@ jobs:
 
   build-and-test-linux:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
     - name: Checkout repository
@@ -125,6 +127,13 @@ jobs:
         cp $P/bin/mstruct_xml dist/mstruct
         cp $P/lib/libMStruct.so dist/mstruct
         cp $P/lib/libObjCryst.so dist/mstruct
+        cp $P/lib/libfftw3.so.3 dist/mstruct
+        cp $P/lib/libgsl.so.28 dist/mstruct
+        cp $P/lib/libcblas.so.3 dist/mstruct
+        cp $P/lib/libmkl_rt.so.2 dist/mstruct
+        cp $P/lib/libboost_python311.so.1.78.0 dist/mstruct
+        cp $P/lib/libboost_numpy311.so.1.78.0 dist/mstruct
+        cp $P/lib/libboost_program_options.so.1.78.0 dist/mstruct
     - name: Archive distribution
       uses: actions/upload-artifact@v4
       with:
