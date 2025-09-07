@@ -147,12 +147,20 @@ MStruct::ReflectionProfile * _Create_ReflectionProfile(ObjCryst::Crystal* crysta
 }
 */
 
-MStruct::PowderPattern& _gRefinableObjRegistry_GetPowderpattern(const std::string& name)
+MStruct::PowderPattern& _gRefinableObjRegistry_GetPowderPattern(const std::string& name)
 {
   // Get PowderPattern object
   ObjCryst::RefinableObj &obj = ObjCryst::gRefinableObjRegistry.GetObj(name, "MStruct::PowderPattern");
   MStruct::PowderPattern &data = dynamic_cast<MStruct::PowderPattern&>(obj);
   return data;
+}
+
+ObjCryst::Crystal& _gRefinableObjRegistry_GetCrystal(const std::string& name)
+{
+  // Get Crystal object
+  ObjCryst::RefinableObj &obj = ObjCryst::gRefinableObjRegistry.GetObj(name, "Crystal");
+  ObjCryst::Crystal &crystal = dynamic_cast<ObjCryst::Crystal&>(obj);
+  return crystal;
 }
 
 // credit: @vincefn, https://github.com/diffpy/pyobjcryst/blob/main/src/extensions/lsq_ext.cpp
@@ -239,8 +247,10 @@ BOOST_PYTHON_MODULE(libMStruct)
   def("CreateCrystalFromXML", &_XMLLoadCrystal, return_value_policy<manage_new_object>());
   def("XMLCrystFileLoadAllObject", (void (*)(const std::string&)) &MStruct::XMLCrystFileLoadAllObject, (bp::arg("name")));
   def("XMLCrystFileSaveGlobal", (void (*)(const std::string&)) &ObjCryst::XMLCrystFileSaveGlobal, (bp::arg("name")));
-  def("GetPowderPattern", _gRefinableObjRegistry_GetPowderpattern, return_value_policy<reference_existing_object>());
+  def("GetPowderPattern", _gRefinableObjRegistry_GetPowderPattern, return_value_policy<reference_existing_object>());
+  def("GetCrystal", _gRefinableObjRegistry_GetCrystal, return_value_policy<reference_existing_object>());
   def("GetPar", _GetParExtString, return_value_policy<reference_existing_object>());
+  def("CalcUnitCellMass", (REAL (*)(const ObjCryst::Crystal&)) &MStruct::CalcUnitCellMass, (bp::arg("crystal")));
   //def("Create_ReflectionProfile", &_Create_ReflectionProfile);
 
   class_<ObjCryst::Restraint, boost::noncopyable>("Restraint");
@@ -268,12 +278,36 @@ BOOST_PYTHON_MODULE(libMStruct)
             return_value_policy<copy_const_reference>())
       .def("PrepareForRefinement", &ObjCryst::RefinableObj::PrepareForRefinement)
       .def("Print", &ObjCryst::RefinableObj::Print)
-      ;
-     
+       // Virtual
+      .def("GetClassName", &ObjCryst::RefinableObj::GetClassName,
+            &ObjCryst::RefinableObj::GetClassName,
+            return_value_policy<copy_const_reference>())
+      .def("GetName", &ObjCryst::RefinableObj::GetName,
+            &ObjCryst::RefinableObj::GetName,
+            return_value_policy<copy_const_reference>());
+
+  class_<ObjCryst::ScatteringData, bases<ObjCryst::RefinableObj>, boost::noncopyable>(
+            "ScatteringData", no_init)
+      .def("GetCrystal", (ObjCryst::Crystal& (ObjCryst::ScatteringData::*)()) &ObjCryst::ScatteringData::GetCrystal,
+        return_internal_reference<>())
+      .def("HasCrystal", &ObjCryst::ScatteringData::HasCrystal);
+
+  class_<ObjCryst::PowderPatternComponent, bases<ObjCryst::RefinableObj>, boost::noncopyable>
+        ("_ObjCryst::PowderPatternComponent", no_init)
+      .def("GetParentPowderPattern",
+        (ObjCryst::PowderPattern& (ObjCryst::PowderPatternComponent::*)())
+        &ObjCryst::PowderPatternComponent::GetParentPowderPattern,
+          return_internal_reference<>());
+
+  class_<ObjCryst::PowderPatternDiffraction, bases<ObjCryst::PowderPatternComponent, ObjCryst::ScatteringData> >(
+                "_Obj_Cryst_PowderPatternDiffraction", no_init);
+
   class_<MStruct::PowderPattern, bases<ObjCryst::RefinableObj> >("PowderPattern")
       .def(init<>())
       .def("SetPowderPatternObs", &_SetPowderPatternObs)
       .def("SetWeightToUnit", &MStruct::PowderPattern::SetWeightToUnit)
+      .def("SetSigmaToSqrtIobs", &MStruct::PowderPattern::SetSigmaToSqrtIobs)
+      .def("SetWeightToInvSigmaSq", &MStruct::PowderPattern::SetWeightToInvSigmaSq)
       .def("Prepare", &MStruct::PowderPattern::Prepare)
       .def("SetObsToZero", &_PowderPattern_SetObsToZero)
       .def("SavePowderPattern", &_SavePowderPattern)
@@ -289,13 +323,20 @@ BOOST_PYTHON_MODULE(libMStruct)
       .def("Print", &MStruct::PowderPattern::Print) 
       .def("AddComponent", &MStruct::PowderPattern::AddPowderPatternComponent)
       .def("AddComponent", &_AddPowderPatternComponent)
-      .def("FitScaleFactorForRw", &MStruct::PowderPattern::FitScaleFactorForRw);
+      .def("GetNbPowderPatternComponent", &ObjCryst::PowderPattern::GetNbPowderPatternComponent)
+      .def("GetPowderPatternComponent", (ObjCryst::PowderPatternComponent& (ObjCryst::PowderPattern::*) (const int))
+        &ObjCryst::PowderPattern::GetPowderPatternComponent, return_internal_reference<>())
+      .def("FitScaleFactorForRw", &MStruct::PowderPattern::FitScaleFactorForRw)
+      .def("GetScaleFactor", (REAL (MStruct::PowderPattern::*) (const int) const) &ObjCryst::PowderPattern::GetScaleFactor)
+      .def("GetScaleFactor", (REAL (MStruct::PowderPattern::*) (const ObjCryst::PowderPatternComponent&) const) &ObjCryst::PowderPattern::GetScaleFactor)
+      .def("SetScaleFactor", (void (MStruct::PowderPattern::*) (const int, REAL)) &ObjCryst::PowderPattern::SetScaleFactor);
 
   class_<MStruct::PseudoVoigtBroadeningEffect>("PseudoVoigtBroadeningEffect")
       .def(init<>())
       .def("SetParentProfile", &_SetParentProfile<MStruct::PseudoVoigtBroadeningEffect, MStruct::ReflectionProfile>);
 
-  class_<ObjCryst::Crystal>("Crystal");
+  class_<ObjCryst::Crystal, bases<ObjCryst::RefinableObj> >("Crystal")
+      .def("GetVolume", (REAL (ObjCryst::Crystal::*) () const) &ObjCryst::Crystal::GetVolume);
 
   //class_<ReflectionProfile, boost::noncopyable>("ReflectionProfile", no_init);
   class_<MStruct::ReflectionProfile>("ReflectionProfile", init<ObjCryst::Crystal&, ObjCryst::Radiation&>())
@@ -315,8 +356,8 @@ BOOST_PYTHON_MODULE(libMStruct)
   class_<ObjCryst::Radiation>("Radiation", init<const std::string, REAL>())
       //.def("GetWavelength", &ObjCryst::Radiation::GetWavelength)
       .def("Print", &ObjCryst::Radiation::Print);
-
-  class_<MStruct::PowderPatternDiffraction>("PowderPatternDiffraction")
+  
+  class_<MStruct::PowderPatternDiffraction, bases<ObjCryst::PowderPatternDiffraction> >("PowderPatternDiffraction")
       .def(init<>())
       .def("SetProfile", &_SetProfile)
       .def("SetIsIgnoringImagScattFact", &MStruct::PowderPatternDiffraction::SetIsIgnoringImagScattFact)
