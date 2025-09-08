@@ -31,21 +31,55 @@ MStruct GUI requires for its function a configuration file **MStructGUI.properti
 
 #### Windows
 
-Windows installer copies the required resources in Documents folder and the starter icon on the Desktop will start MStruct GUI in that folder. So no additional actions is required.
+Windows installer copies the required resources in Documents folder and the starter icon on the Desktop starts MStruct GUI in that folder. So no additional actions are required.
 
 ##### Know issues
 
 MStruct GUI does not function properly on localized (non-English) Windows. However it is quite easy to switch between languages in Win 10/11. Type "Language set..." in the search field to get to the Windows language settings. A new login will be requred after changing the language to English.
 
-An alternative is to use Windows subsystem for linux (WSL) and install one of the Linux packeges instead.
+An alternative is to use Windows Subsystem for Linux (WSL) and install one of the Linux packeges.
 
 #### Linux
 
-blabla
+The default Linux installation location is `/opt/xray-group/mstruct`. The user specific resources can be found in the `shared` folder. So ideally copy them to a user writable space and start MStruct GUI.
+
+```bash
+cp -R /opt/xray-group/mstruct/shared/mstruct-gui .   # copy resources
+cd msttruct-gui                                      # change working directory
+mstruct-gui                                          # start mstruct gui
+````
+
+Beside GUI the installation provides an environment script with mstruct CLI and Python API available:
+
+```bash
+source /opt/xray-group/mstruct/source_me.bash
+mstruct_xml --version
+````
 
 #### macOS
 
-blablabla
+The default macOS installation location is `/Applications/MStruct_GUI`. The user specific resources can be found in the `shared` folder. So ideally copy them to a user writable space and start MStruct GUI.
+
+```bash
+cp -R /Applications/MStruct_GUI/shared/mstruct-gui .  # copy resources
+cd msttruct-gui                                       # change working directory
+mstruct-gui                                           # start mstruct gui
+````
+
+Beside GUI the installation provides an environment script with mstruct CLI and Python API available:
+
+```bash
+source /Applications/MStruct_GUI/source_me.bash
+mstruct_xml --version
+````
+
+The MStruct GUI or an mstruct terminal can be also started by double clicking on the command-starters. However remmeber to copy **MStructGUI.properties** to your home folder for a proper function of MStruct GUI.
+
+##### Know issues
+
+Rescaling MStruct GUI window with modal dialogues may make it cumberstone to work with MStruct. It may help to change the *Dock* System Settings.
+
+On newer (Sequoia v15) macOS versions go to *System Settings* and type *Desktop & Dock*. Scroll down to *Windows* section and select **Prefer tabs when opening documents** **Never**. On more earlier versions (Monterey v12) look for this option in the *General* Tab.
 
 ### MStruct CLI introduction
 
