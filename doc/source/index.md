@@ -6,15 +6,14 @@ software/library for MicroStructure analysis by powder diffraction
 
 ### MStruct and MStruct GUI
 
-The software for micro-structure analysis from powder diffraction data presented here has two
-parts:
-- **MStruct-cli** is the original command line interface extended with Python API nowadays
-- **MStruct GUI** is a Java based user intrface using the **MStruct-cli** as a computing backend
+MStruct software for micro-structure analysis from powder diffraction data has two parts nowadyas:
+- **MStruct-cli** - the original command line interface extended with Python API
+- **MStruct GUI** - a Java based user intrface using the **MStruct-cli** as a computing backend
 
 Credit for **MStruct GUI** goes to Jakub Vojtisek, Milan Dopita and Lukas Horak (MFF, Charles University, Prague).
 
-The binary distributions for the MStruct software can be downloaded from
-[the public Dropbox folder](https://www.dropbox.com/scl/fo/4v3m7v401vg689frq0lnw/AMe6l_ygImbikjbyuymWUyg?rlkey=t7qjttvlrwd51ij5t0iclx3ck&dl=0) (MStructGUI-0.4 + mstruct-0.15.10).
+The binary distributions for the MStruct software can be downloaded from the
+[shared Dropbox folder](https://www.dropbox.com/scl/fo/4v3m7v401vg689frq0lnw/AMe6l_ygImbikjbyuymWUyg?rlkey=t7qjttvlrwd51ij5t0iclx3ck&dl=0) (MStructGUI-0.4 + mstruct-0.15.10).
 
 | OS                    | name                            | md5                              |
 |:----------------------|:-------------------------------:|:--------------------------------:|
@@ -23,7 +22,32 @@ The binary distributions for the MStruct software can be downloaded from
 | Linux (rhel, amd64)   | [mstruct-gui-0.4-1.x86_64.rpm](https://www.dropbox.com/scl/fi/l271ptfo01xgtdef1lnfr/mstruct-gui-0.4-1.x86_64.rpm?rlkey=oka933c5w7mzr6jazzqf5jtpc&dl=0)    | -                                |
 | macOS (amd64)         | [MStruct GUI - 0.4(amd64).pkg](https://www.dropbox.com/scl/fi/u7912fykj40rq5pkrn4kt/MStruct-GUI-0.4-amd64.pkg?rlkey=bpd86h3849m2gjv2jp3w6iht6&dl=0)    | -                                |
 | macOS (aarch64)       | [MStruct GUI - 0.4(aarch64).pkg](https://www.dropbox.com/scl/fi/8ngabqimf4sodc596zu44/MStruct-GUI-0.4-aarch64.pkg?rlkey=je9g3eqdw5j078wyhh5523b0f&dl=0)  | -                                |
-### Introduction
+
+The first installation step is running the intaller. It is strongly recomended to install into a default location.
+
+Installers provide both the CLI and GUI. One starter is named *GUI*. The other one like *Prompt*. The *Prompt* provides a command line terminal with MStruct CLI and Python module available.
+
+MStruct GUI requires for its function a configuration file **MStructGUI.properties**. This file contains beside others the path to the MStruct CLI. It may be good to copy this file with some additional resources into the *user space*. Please follow the OS specific instructions below for this step.
+
+#### Windows
+
+Windows installer copies the required resources in Documents folder and the starter icon on the Desktop will start MStruct GUI in that folder. So no additional actions is required.
+
+##### Know issues
+
+MStruct GUI does not function properly on localized (non-English) Windows. However it is quite easy to switch between languages in Win 10/11. Type "Language set..." in the search field to get to the Windows language settings. A new login will be requred after changing the language to English.
+
+An alternative is to use Windows subsystem for linux (WSL) and install one of the Linux packeges instead.
+
+#### Linux
+
+blabla
+
+#### macOS
+
+blablabla
+
+### MStruct CLI introduction
 
 MStruct projects provides two main components:	
 - **mstruct** program for powder diffraction data refinement
