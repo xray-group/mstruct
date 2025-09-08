@@ -19,13 +19,13 @@
 # -- Project information -----------------------------------------------------
 
 project = u'MStruct'
-copyright = u'2018, x-ray group'
+copyright = u'2018-2025, x-ray group'
 author = u'x-ray group'
 
 # The short X.Y version
 version = u''
 # The full version, including alpha/beta/rc tags
-release = u'0.14'
+release = u'0.15'
 
 
 # -- General configuration ---------------------------------------------------

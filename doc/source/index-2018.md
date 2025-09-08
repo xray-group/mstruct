@@ -4,25 +4,6 @@ software/library for MicroStructure analysis by powder diffraction
 
 ## Installation
 
-### MStruct and MStruct GUI
-
-The software for micro-structure analysis from powder diffraction data presented here has two
-parts:
-- **MStruct-cli** is the original command line interface extended with Python API nowadays
-- **MStruct GUI** is a Java based user intrface using the **MStruct-cli** as a computing backend
-
-Credit for **MStruct GUI** goes to Jakub Vojtisek, Milan Dopita and Lukas Horak (MFF, Charles University, Prague).
-
-The binary distributions for the MStruct software can be downloaded from
-[the public Dropbox folder](https://www.dropbox.com/scl/fo/4v3m7v401vg689frq0lnw/AMe6l_ygImbikjbyuymWUyg?rlkey=t7qjttvlrwd51ij5t0iclx3ck&dl=0) (MStructGUI-0.4 + mstruct-0.15.10).
-
-| OS                    | name                            | md5                              |
-|:----------------------|:-------------------------------:|:--------------------------------:|
-| Windows (x64)         | [MStruct Installer-0.4 (x64).msi](https://www.dropbox.com/scl/fi/93nbz9v9qfg8ncd16stle/MStruct-Installer-0.4-x64.msi?rlkey=7g4v4a65rcbp8931pimljmmzv&dl=0) | 1e2950e959dc83f8717c60700c23a28a |
-| Linux (ubuntu, amd64) | [mstruct-gui_0.4_amd64.deb](https://www.dropbox.com/scl/fi/uwm8e9kl70gdznzsis4l6/mstruct-gui_0.4_amd64.deb?rlkey=ty7uv53h46ietwn9qvn51k7yw&dl=0)       | -                                |
-| Linux (rhel, amd64)   | [mstruct-gui-0.4-1.x86_64.rpm](https://www.dropbox.com/scl/fi/l271ptfo01xgtdef1lnfr/mstruct-gui-0.4-1.x86_64.rpm?rlkey=oka933c5w7mzr6jazzqf5jtpc&dl=0)    | -                                |
-| macOS (amd64)         | [MStruct GUI - 0.4(amd64).pkg](https://www.dropbox.com/scl/fi/u7912fykj40rq5pkrn4kt/MStruct-GUI-0.4-amd64.pkg?rlkey=bpd86h3849m2gjv2jp3w6iht6&dl=0)    | -                                |
-| macOS (aarch64)       | [MStruct GUI - 0.4(aarch64).pkg](https://www.dropbox.com/scl/fi/8ngabqimf4sodc596zu44/MStruct-GUI-0.4-aarch64.pkg?rlkey=je9g3eqdw5j078wyhh5523b0f&dl=0)  | -                                |
 ### Introduction
 
 MStruct projects provides two main components:	
@@ -327,7 +308,7 @@ some advices to text editors
 
 links to plotting tools
 
-## Course - Struktura 2025
+## Course - Struktura 2018
 
 ### Instructions
 
