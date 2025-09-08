@@ -393,33 +393,29 @@ You should have `mstruct` binary running on your laptop. It should be pretty str
 for Windows, unfortunately for macOS or Linux you need to compile the source. *No stress in
 case you fail, we will make it working at the beginning of the course.*
 
-### Time plan
+### (prelliminary) Time plan
 
-- Mon June 18, 2018, 20:00 - 21:30. **Real structure analysis: The basics** (Zdenek)
+- Mon Sep 8th, 2025, 17:50 - 18:30. **Installation of MStruct GUI** (Zdenek, Milan, Lukas)
+- Mon Sep 8th, 2025, 18:30 - 19:30. **MStruct overview: The basics** (optional talk by Zdenek)
+- Mon Sep 8th, 2025, 20:30 - 21:30. **Real structure analysis: The basics** (Milan, Lukas Zdenek)
+	  - *Residual stress in thin TiO2 films*: residual stress and refraction correction
     - *Nanocrystallie TiO2 powders for catalytic applications*: spherical crystallites,
 	crystallite size distribution, isotropic phenomenological microstrain, crystal
 	structure parameters, quantitative phase analysis
-	- *Residual stress in thin TiO2 films*: residual stress and refraction correction
-
-- Tue June 19, 2018, 17:10 - 19:40. **Challenging samples: Advanced analysis** (Milan)
+    - *Instrumental profile - "Fitovacka"* (Lukas)
+    - *Python API* (Zdenek)
+- Mon Sep 8th, 2025, 21:30 - 19:40. **Challenging samples: Advanced analysis** (Milan)
     - *Ultrathin Pt nanocrystalline films*: refraction correction, thin film correction,
 	microstrain, stacking faults
-	- *Copper-Gold nano-spheres*: Using individual peak parameters with instrumental
+	  - *Copper-Gold nano-spheres*: Using individual peak parameters with instrumental
 	correction
-
-- Wed June 20, 2018, 17:30 - 19:30. (optional): **Hands on own data** (Milan, Zdenek)
-
-- Thu June 20, 2018, 14:00 --. (optional): **Individual discussions** (Zdenek)
-	- *amorphous content determination*
-	- *texture*
+- Fri Sep 12, 2025, 9:30 -- (optional): **Hands on data** (Milan, Lukas, Zdenek)
 
 ## References
 
-1. [MSTRUCT Home page](http://www.xray.cz/mstruct/)
-2. [Basic MSTRUCT Tutorial](http://www.xray.cz/mstruct/mstruct-basic-ex.html)
-3. [MSTRUCT prezentation (2013)](http://www.xray.cz/mstruct/mstruct-pres-2013.pdf)
-4. [MSTRUCT on GitHub](https://github.com/xray-group/mstruct)
-5. [DOI: 10.1017/S0885715614000852](http://dx.doi.org/10.1017/S0885715614000852)
-
-
-
+1. [MSTRUCT materials and tutorial data](https://github.com/xray-group/mstruct-materials)
+2. [MSTRUCT Home page](https://www.xray.cz/mstruct/)
+3. [Basic MSTRUCT Tutorial](https://www.xray.cz/mstruct/mstruct-basic-ex.html)
+4. [MSTRUCT prezentation (2013)](https://www.xray.cz/mstruct/mstruct-pres-2013.pdf)
+5. [MSTRUCT on GitHub](https://github.com/xray-group/mstruct)
+6. [DOI: 10.1017/S0885715614000852](http://dx.doi.org/10.1017/S0885715614000852)
