@@ -414,8 +414,9 @@ case you fail, we will make it working at the beginning of the course.*
 ## References
 
 1. [MSTRUCT materials and tutorial data](https://github.com/xray-group/mstruct-materials)
-2. [MSTRUCT Home page](https://www.xray.cz/mstruct/)
-3. [Basic MSTRUCT Tutorial](https://www.xray.cz/mstruct/mstruct-basic-ex.html)
-4. [MSTRUCT prezentation (2013)](https://www.xray.cz/mstruct/mstruct-pres-2013.pdf)
-5. [MSTRUCT on GitHub](https://github.com/xray-group/mstruct)
-6. [DOI: 10.1017/S0885715614000852](http://dx.doi.org/10.1017/S0885715614000852)
+2. [video: basic demo example](https://www.dropbox.com/scl/fi/bhapl43yz97m1goe3gqpg/mstruct-v1.mov?rlkey=9ja9cpef3ds5ry7rs4vqok4za&dl=0)
+3. [MSTRUCT Home page](https://www.xray.cz/mstruct/)
+4. [Basic MSTRUCT Tutorial](https://www.xray.cz/mstruct/mstruct-basic-ex.html)
+5. [MSTRUCT prezentation (2013)](https://www.xray.cz/mstruct/mstruct-pres-2013.pdf)
+6. [MSTRUCT on GitHub](https://github.com/xray-group/mstruct)
+7. [DOI: 10.1017/S0885715614000852](http://dx.doi.org/10.1017/S0885715614000852)
